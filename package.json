@@ -1,0 +1,21 @@
+{
+  "name": "pawchat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pawchat/pawchat.git",
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "GPLv3",
+  "private": true,
+  "scripts": {
+    "test": "ts-node test/client.ts"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "snowpack": "^3.5.9",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.3"
+  }
+}
