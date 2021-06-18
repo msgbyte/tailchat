@@ -1,25 +1,40 @@
 import { io } from 'socket.io-client';
 
-const socket = io('http://127.0.0.1:3000', {
+const uri = 'http://127.0.0.1:3000';
+const options = {
   transports: ['websocket'],
   forceNew: true,
-});
+  auth: {
+    token: 'just for test',
+  },
+};
 
-// client-side
-socket.on('connect', () => {
-  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+for (let i = 0; i < 100; i++) {
+  const socket = io(uri, options);
 
-  socket.emit('aaa', 'ddd');
-});
+  // client-side
+  socket.on('connect', () => {
+    console.log(`[${i}]`, socket.id); // x8WIv7-mJelg7on_ALbx
 
-socket.on('disconnect', () => {
-  console.log(socket.id); // undefined
-});
+    socket.emit('aaa', 'ddd');
+  });
 
-socket.on('connect_error', (err) => {
-  console.log('connect_error', err.message);
-});
+  socket.on('disconnect', () => {
+    console.log(socket.id); // undefined
+  });
 
-socket.io.on('error', () => {
-  console.log('error');
-});
+  socket.on('connect_error', (err) => {
+    console.log('connect_error', err.message);
+  });
+
+  socket.io.on('error', () => {
+    console.log('error');
+  });
+
+  socket.onAny((eventName: string, eventData: unknown) => {
+    console.log(`[${i}]`, {
+      eventName,
+      eventData,
+    });
+  });
+}
