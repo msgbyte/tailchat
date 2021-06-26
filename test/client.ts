@@ -1,22 +1,30 @@
 import { io } from 'socket.io-client';
+import fetch from 'node-fetch';
 
-const uri = 'http://127.0.0.1:3000';
-const options = {
-  transports: ['websocket'],
-  forceNew: true,
-  auth: {
-    token: 'just for test',
-  },
-};
+const uri = 'http://127.0.0.1:11000';
 
-for (let i = 0; i < 100; i++) {
-  const socket = io(uri, options);
+function createIO(authToken: string) {
+  const socket = io(uri, {
+    transports: ['websocket'],
+    forceNew: true,
+    auth: {
+      token: authToken,
+    },
+  });
 
   // client-side
   socket.on('connect', () => {
-    console.log(`[${i}]`, socket.id); // x8WIv7-mJelg7on_ALbx
+    console.log('socket.id:', socket.id); // x8WIv7-mJelg7on_ALbx
 
-    socket.emit('aaa', 'ddd');
+    socket.emit(
+      'test.echo',
+      {
+        name: 'moonrailgun',
+      },
+      (d) => {
+        console.log(d);
+      }
+    );
   });
 
   socket.on('disconnect', () => {
@@ -32,9 +40,30 @@ for (let i = 0; i < 100; i++) {
   });
 
   socket.onAny((eventName: string, eventData: unknown) => {
-    console.log(`[${i}]`, {
+    console.log({
       eventName,
       eventData,
     });
   });
 }
+
+fetch('http://127.0.0.1:11000/api/user/login', {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    username: 'asd',
+    password: 'asd',
+  }),
+  method: 'post',
+})
+  .then((res: any) => res.json())
+  .then((data: any) => {
+    const token = data.user.token;
+    createIO(token);
+  });
+
+// createIO();
+// for (let i = 0; i < 100; i++) {
+//   createIO(i)
+// }
