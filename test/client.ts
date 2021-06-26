@@ -17,7 +17,7 @@ function createIO(authToken: string) {
     console.log('socket.id:', socket.id); // x8WIv7-mJelg7on_ALbx
 
     socket.emit(
-      'test.echo',
+      'debug.echo',
       {
         name: 'moonrailgun',
       },
