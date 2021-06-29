@@ -3,7 +3,9 @@
     "target": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "isolatedModules": true,
     "lib": ["DOM"],
+    "jsx": "react",
     "typeRoots": ["./node_modules/@types", "./types"]
   }
 }
