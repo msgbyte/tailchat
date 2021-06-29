@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["DOM"],
+    "typeRoots": ["./node_modules/@types", "./types"]
+  }
+}

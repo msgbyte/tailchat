@@ -1,12 +1,7 @@
 {
-  "name": "pawchat",
+  "name": "pawchat-shared",
   "version": "1.0.0",
   "main": "index.js",
-  "workspaces": [
-    "web",
-    "shared",
-    "app"
-  ],
   "repository": "https://github.com/pawchat/pawchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "GPLv3",

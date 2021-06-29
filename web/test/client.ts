@@ -14,8 +14,6 @@ function createIO(authToken: string) {
 
   // client-side
   socket.on('connect', () => {
-    console.log('socket.id:', socket.id); // x8WIv7-mJelg7on_ALbx
-
     socket.emit(
       'debug.echo',
       {
@@ -59,6 +57,7 @@ fetch('http://127.0.0.1:11000/api/user/login', {
 })
   .then((res: any) => res.json())
   .then((data: any) => {
+    console.log('data', data);
     const token = data.user.token;
     createIO(token);
   });
