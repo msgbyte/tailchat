@@ -7,7 +7,8 @@
   "license": "GPLv3",
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "NODE_ENV=development webpack serve"
   },
   "dependencies": {
     "linaria": "^3.0.0-beta.2",
@@ -21,6 +22,7 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^3.11.4",
     "autoprefixer": "^10.2.6",
     "css-loader": "^5.2.6",
     "esbuild-loader": "^2.13.1",

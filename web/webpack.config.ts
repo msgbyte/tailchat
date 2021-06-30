@@ -2,7 +2,8 @@
  * Reference: https://webpack.js.org/configuration/configuration-languages/
  */
 
-import { Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
+import type WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
@@ -10,7 +11,17 @@ const ROOT_PATH = path.resolve(__dirname, './');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
+declare module 'webpack' {
+  interface Configuration {
+    devServer?: WebpackDevServer.Configuration;
+  }
+}
+
+const mode =
+  process.env.NODE_ENV === 'development' ? 'development' : 'production';
+
 const config: Configuration = {
+  mode,
   entry: {
     app: './src/index.tsx',
   },
@@ -18,6 +29,9 @@ const config: Configuration = {
     path: DIST_PATH,
     filename: '[name].[contenthash].js',
     publicPath: ASSET_PATH,
+  },
+  devServer: {
+    port: 11011,
   },
   module: {
     rules: [
