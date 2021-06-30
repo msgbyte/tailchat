@@ -6,6 +6,7 @@ import type { Configuration } from 'webpack';
 import type WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const ROOT_PATH = path.resolve(__dirname, './');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
@@ -17,8 +18,8 @@ declare module 'webpack' {
   }
 }
 
-const mode =
-  process.env.NODE_ENV === 'development' ? 'development' : 'production';
+const isDev = process.env.NODE_ENV === 'development';
+const mode = isDev ? 'development' : 'production';
 
 const config: Configuration = {
   mode,
@@ -47,8 +48,15 @@ const config: Configuration = {
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: process.env.NODE_ENV !== 'production',
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -71,6 +79,7 @@ const config: Configuration = {
       hash: true,
       template: path.resolve(ROOT_PATH, './assets/template.html'),
     }),
+    new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
   ],
 };
 

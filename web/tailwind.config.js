@@ -8,8 +8,16 @@ module.exports = {
   },
   darkMode: 'class', // or 'media'
   theme: {
-    extend: {},
+    extend: {
+      borderRadius: {
+        "1/2": '50%'
+      }
+    },
   },
-  variants: {},
+  variants: {
+    extend: {
+      borderRadius: ['hover'],
+    },
+  },
   plugins: [],
 };
