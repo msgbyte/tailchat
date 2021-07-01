@@ -8,9 +8,17 @@ module.exports = {
   },
   darkMode: 'class', // or 'media'
   theme: {
+    screens: {
+      'lg': {'min': '1024px'},
+      'md': {'max': '767px'},
+      'sm': {'max': '639px'},
+    },
     extend: {
       borderRadius: {
         "1/2": '50%'
+      },
+      spacing: {
+        "142": "35.5rem"
       }
     },
   },

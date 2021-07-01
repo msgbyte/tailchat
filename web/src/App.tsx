@@ -22,7 +22,7 @@ export const App: React.FC = React.memo(() => {
 
   return (
     <div
-      className={clsx({
+      className={clsx('h-screen w-screen', {
         dark: darkMode,
       })}
     >

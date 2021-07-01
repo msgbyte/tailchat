@@ -68,6 +68,14 @@ const config: Configuration = {
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: 'assets/[name].[hash:7].[ext]',
+        },
+      },
     ],
   },
   resolve: {
