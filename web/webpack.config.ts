@@ -33,6 +33,7 @@ const config: Configuration = {
   },
   devServer: {
     port: 11011,
+    historyApiFallback: true,
   },
   module: {
     rules: [

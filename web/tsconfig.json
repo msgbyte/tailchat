@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "isolatedModules": true,
     "lib": ["DOM"],
     "jsx": "react",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types", "./types"]
   }
 }

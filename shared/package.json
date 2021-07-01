@@ -1,9 +1,20 @@
 {
   "name": "pawchat-shared",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.tsx",
   "repository": "https://github.com/pawchat/pawchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "GPLv3",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.170"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
 }

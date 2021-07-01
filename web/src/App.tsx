@@ -1,50 +1,38 @@
 import React from 'react';
-import { Icon } from '@iconify/react';
-import clsx, { ClassValue } from 'clsx';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { useStorage } from 'pawchat-shared';
+import clsx from 'clsx';
+import { Loadable } from './components/Loadable';
 
-const NavItem: React.FC<{
-  className?: ClassValue;
-}> = React.memo((props) => {
-  return (
-    <div
-      className={clsx(
-        'w-10 h-10 hover:rounded-sm bg-gray-300 mb-2 transition-all rounded-1/2 cursor-pointer flex items-center justify-center',
-        props.className
-      )}
-    >
-      {props.children}
-    </div>
-  );
+const MainRoute = Loadable(() =>
+  import('./routes/Main').then((module) => module.MainRoute)
+);
+
+const EntryRoute = Loadable(() =>
+  import('./routes/Entry').then((module) => module.EntryRoute)
+);
+
+const AppProvider: React.FC = React.memo((props) => {
+  return <BrowserRouter>{props.children}</BrowserRouter>;
 });
+AppProvider.displayName = 'AppProvider';
 
 export const App: React.FC = React.memo(() => {
+  const [darkMode] = useStorage('darkMode', true);
+
   return (
-    <div className="flex h-screen w-screen">
-      <div className="w-16 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">
-        {/* Navbar */}
-        <div className="flex-1">
-          <NavItem />
-          <div className="h-px w-full bg-white mt-4 mb-4"></div>
-          <NavItem />
-          <NavItem />
-          <NavItem />
-          <NavItem />
-          <NavItem className="bg-green-500">
-            <Icon className="text-3xl text-white" icon="mdi-plus" />
-          </NavItem>
-        </div>
-        <div>
-          <Icon
-            className="text-3xl text-white cursor-pointer"
-            icon="mdi-dots-horizontal"
-          />
-        </div>
-      </div>
-      <div className="w-56 bg-gray-800">
-        {/* Sidebar */}
-        <div className="w-full h-10 hover:bg-white bg-opacity-40">目标</div>
-      </div>
-      <div className="flex-auto bg-gray-700">{/* Main Content */}</div>
+    <div
+      className={clsx({
+        dark: darkMode,
+      })}
+    >
+      <AppProvider>
+        <Switch>
+          <Route path="/entry" component={EntryRoute} />
+          <Route path="/main" component={MainRoute} />
+          <Redirect to="/entry" />
+        </Switch>
+      </AppProvider>
     </div>
   );
 });
