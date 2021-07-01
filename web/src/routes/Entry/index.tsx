@@ -4,6 +4,7 @@ import { LoginView } from './LoginView';
 import bgImage from '../../../assets/images/bg.jpg';
 import clsx from 'clsx';
 import styles from './index.module.less';
+import loginPatternUrl from '../../../assets/images/login-pattern.svg';
 
 export const EntryRoute = React.memo(() => {
   return (
@@ -11,8 +12,9 @@ export const EntryRoute = React.memo(() => {
       <div
         className={clsx(
           styles.entryLeft,
-          'entry-left w-142 sm:w-full bg-gray-600 h-full flex items-center justify-center'
+          'entry-left w-142 sm:w-full pt-40 bg-gray-600 min-h-full flex justify-center bg-repeat-y'
         )}
+        style={{ backgroundImage: `url(${loginPatternUrl})` }}
       >
         <Switch>
           <Route path="/entry/login" component={LoginView} />
@@ -21,7 +23,7 @@ export const EntryRoute = React.memo(() => {
       </div>
       <div
         className="flex-1 sm:hidden bg-center bg-cover bg-no-repeat"
-        // style={{ backgroundImage: `url(${bgImage})` }}
+        style={{ backgroundImage: `url(${bgImage})`, zIndex: -1 }}
       />
     </div>
   );

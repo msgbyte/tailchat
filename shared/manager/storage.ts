@@ -32,7 +32,7 @@ export function useStorage<T>(
     getStorage()
       .get(key)
       .then((data: T) => {
-        setValue(data);
+        setValue(data ?? defaultValue);
       });
   }, [key]);
 
