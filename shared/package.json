@@ -7,8 +7,10 @@
   "license": "GPLv3",
   "private": true,
   "dependencies": {
+    "formik": "^2.2.9",
     "lodash": "^4.17.21",
-    "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1"
+    "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.170"
