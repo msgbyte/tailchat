@@ -7,8 +7,8 @@
   "license": "GPLv3",
   "private": true,
   "scripts": {
-    "build": "TS_NODE_PROJECT='tsconfig.node.json' webpack",
-    "dev": "TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve"
+    "build": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack",
+    "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve"
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.2",
@@ -37,6 +37,7 @@
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.4",
     "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "esbuild-loader": "^2.13.1",
     "file-loader": "^6.2.0",
