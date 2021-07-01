@@ -47,7 +47,7 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.(less|css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -55,6 +55,11 @@ const config: Configuration = {
           {
             loader: 'css-loader',
             options: {
+              // https://github.com/webpack-contrib/css-loader#auto
+              modules: {
+                auto: /\.module\.\w+$/i,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
               sourceMap: process.env.NODE_ENV !== 'production',
             },
           },
@@ -65,6 +70,9 @@ const config: Configuration = {
                 config: path.resolve(ROOT_PATH, 'postcss.config.js'),
               },
             },
+          },
+          {
+            loader: 'less-loader',
           },
         ],
       },
