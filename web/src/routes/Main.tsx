@@ -1,6 +1,8 @@
 import { Icon } from '@iconify/react';
 import clsx, { ClassValue } from 'clsx';
 import React, { useLayoutEffect } from 'react';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+import { useEnsureSocket } from '../hooks/useEnsureSocket';
 
 const NavbarNavItem: React.FC<{
   className?: ClassValue;
@@ -18,6 +20,16 @@ const NavbarNavItem: React.FC<{
 });
 
 export const MainRoute: React.FC = React.memo(() => {
+  const { loading } = useEnsureSocket();
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center bg-gray-700 text-white text-xl">
+        <LoadingSpinner tip="正在连接到聊天服务器..." />
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full">
       <div className="w-16 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">

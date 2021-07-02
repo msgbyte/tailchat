@@ -9,7 +9,7 @@ import { RegisterView } from './RegisterView';
 
 export const EntryRoute = React.memo(() => {
   return (
-    <div className={'h-full flex flex-row'}>
+    <div className="h-full flex flex-row">
       <div
         className={clsx(
           styles.entryLeft,

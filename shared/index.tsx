@@ -1,5 +1,6 @@
 // api
 export { buildStorage } from './api/buildStorage';
+export { createSocket } from './api/socket';
 
 // components
 export { FastForm } from './components/FastForm/index';
