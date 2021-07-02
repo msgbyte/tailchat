@@ -25,7 +25,7 @@ export const [getStorage, setStorage] =
 export function useStorage<T>(
   key: string,
   defaultValue?: T
-): [T, (v: T) => void] {
+): [T, { set: (v: T) => void; save: (v: T) => void }] {
   const [value, setValue] = useState<T>(defaultValue);
 
   useLayoutEffect(() => {

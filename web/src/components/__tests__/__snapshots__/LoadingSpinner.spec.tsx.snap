@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingSpinner render 1`] = `
+<div>
+  <div>
+    <span />
+    Processing
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner render with text 1`] = `
+<div>
+  <div>
+    <span />
+    加载中...
+  </div>
+</div>
+`;
