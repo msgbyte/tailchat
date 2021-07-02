@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import clsx, { ClassValue } from 'clsx';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 
 const NavbarNavItem: React.FC<{
   className?: ClassValue;
@@ -8,7 +8,7 @@ const NavbarNavItem: React.FC<{
   return (
     <div
       className={clsx(
-        'w-10 h-10 hover:rounded-sm bg-gray-300 transition-all rounded-1/2 cursor-pointer flex items-center justify-center',
+        'w-10 h-10 hover:rounded-lg bg-gray-300 transition-all rounded-1/2 cursor-pointer flex items-center justify-center',
         props.className
       )}
     >
@@ -42,9 +42,11 @@ export const MainRoute: React.FC = React.memo(() => {
           />
         </div>
       </div>
-      <div className="w-56 bg-gray-800">
+      <div className="w-56 bg-gray-800 p-2">
         {/* Sidebar */}
-        <div className="w-full h-10 hover:bg-white bg-opacity-40">目标</div>
+        <div className="w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded p-2">
+          目标
+        </div>
       </div>
       <div className="flex-auto bg-gray-700">{/* Main Content */}</div>
     </div>
