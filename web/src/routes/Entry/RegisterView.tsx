@@ -4,6 +4,7 @@ import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { Icon } from '@iconify/react';
 import { useHistory } from 'react-router';
+import { setUserJWT } from '../../utils/jwt-helper';
 
 /**
  * 注册视图
@@ -26,8 +27,8 @@ export const RegisterView: React.FC = React.memo(() => {
 
     const data = await registerWithEmail(email, password);
 
-    // TODO
-    console.log(data);
+    await setUserJWT(data.token);
+    history.push('/main');
   }, [email, password]);
 
   const toLoginView = useCallback(() => {

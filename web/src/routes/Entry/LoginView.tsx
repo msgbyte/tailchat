@@ -5,6 +5,7 @@ import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useHistory } from 'react-router';
+import { setUserJWT } from '../../utils/jwt-helper';
 
 /**
  * TODO:
@@ -42,10 +43,11 @@ export const LoginView: React.FC = React.memo(() => {
       .required('密码不能为空')
       .validate(password);
 
-    await loginWithEmail(email, password);
+    const data = await loginWithEmail(email, password);
 
-    // TODO
-  }, [email, password]);
+    await setUserJWT(data.token);
+    history.push('/main');
+  }, [email, password, history]);
 
   const toRegisterView = useCallback(() => {
     history.push('/entry/register');

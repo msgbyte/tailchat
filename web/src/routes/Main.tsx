@@ -19,7 +19,7 @@ const NavbarNavItem: React.FC<{
 
 export const MainRoute: React.FC = React.memo(() => {
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <div className="w-16 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">
         {/* Navbar */}
         <div className="flex-1">
