@@ -16,6 +16,7 @@
     "@loadable/component": "^5.15.0",
     "antd": "^4.16.6",
     "clsx": "^1.1.1",
+    "jwt-decode": "^3.1.2",
     "p-min-delay": "^4.0.0",
     "pawchat-shared": "*",
     "react": "^17.0.2",

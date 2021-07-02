@@ -1,15 +1,15 @@
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
-import { useAsyncFn } from 'pawchat-shared';
+import { loginWithEmail, useAsyncFn } from 'pawchat-shared';
 import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 
 /**
+ * TODO:
  * 第三方登录
  */
 const OAuthLoginView: React.FC = React.memo(() => {
-  // TODO
   return (
     <>
       <Divider>或</Divider>
@@ -42,11 +42,7 @@ export const LoginView: React.FC = React.memo(() => {
       .required('密码不能为空')
       .validate(password);
 
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve('');
-      }, 2000);
-    });
+    await loginWithEmail(email, password);
   }, [email, password]);
 
   return (
