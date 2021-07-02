@@ -5,6 +5,7 @@ import bgImage from '../../../assets/images/bg.jpg';
 import clsx from 'clsx';
 import styles from './index.module.less';
 import loginPatternUrl from '../../../assets/images/login-pattern.svg';
+import { RegisterView } from './RegisterView';
 
 export const EntryRoute = React.memo(() => {
   return (
@@ -18,6 +19,7 @@ export const EntryRoute = React.memo(() => {
       >
         <Switch>
           <Route path="/entry/login" component={LoginView} />
+          <Route path="/entry/register" component={RegisterView} />
           <Redirect to="/entry/login" />
         </Switch>
       </div>

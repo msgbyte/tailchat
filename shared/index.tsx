@@ -23,4 +23,4 @@ export { getStorage, setStorage, useStorage } from './manager/storage';
 export { setTokenGetter } from './manager/request';
 
 // model
-export { loginWithEmail } from './model/user';
+export { loginWithEmail, registerWithEmail } from './model/user';

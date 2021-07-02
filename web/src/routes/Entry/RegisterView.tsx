@@ -1,37 +1,19 @@
-import { Icon } from '@iconify/react';
-import { Divider } from 'antd';
-import { loginWithEmail, useAsyncFn } from 'pawchat-shared';
+import { registerWithEmail, useAsyncFn } from 'pawchat-shared';
 import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
+import { Icon } from '@iconify/react';
 import { useHistory } from 'react-router';
 
 /**
- * TODO:
- * 第三方登录
+ * 注册视图
  */
-const OAuthLoginView: React.FC = React.memo(() => {
-  return (
-    <>
-      <Divider>或</Divider>
-
-      <div className="bg-gray-400 w-1/3 px-4 py-1 text-3xl text-center rounded-md cursor-pointer shadow-md">
-        <Icon className="mx-auto" icon="mdi-github" />
-      </div>
-    </>
-  );
-});
-OAuthLoginView.displayName = 'OAuthLoginView';
-
-/**
- * 登录视图
- */
-export const LoginView: React.FC = React.memo(() => {
+export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
 
-  const [{ loading, error }, handleLogin] = useAsyncFn(async () => {
+  const [{ loading, error }, handleRegister] = useAsyncFn(async () => {
     await string()
       .email('邮箱格式不正确')
       .required('邮箱不能为空')
@@ -42,24 +24,25 @@ export const LoginView: React.FC = React.memo(() => {
       .required('密码不能为空')
       .validate(password);
 
-    await loginWithEmail(email, password);
+    const data = await registerWithEmail(email, password);
 
     // TODO
+    console.log(data);
   }, [email, password]);
 
-  const toRegisterView = useCallback(() => {
-    history.push('/entry/register');
+  const toLoginView = useCallback(() => {
+    history.push('/entry/login');
   }, [history]);
 
   return (
     <div className="w-96 text-white">
-      <div className="mb-4 text-2xl">登录 Paw Chat</div>
+      <div className="mb-4 text-2xl">注册账号</div>
 
       <div>
         <div className="mb-4">
           <div className="mb-2">邮箱</div>
           <input
-            name="login-email"
+            name="reg-email"
             className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
             placeholder="name@example.com"
             type="text"
@@ -70,7 +53,7 @@ export const LoginView: React.FC = React.memo(() => {
         <div className="mb-4">
           <div className="mb-2">密码</div>
           <input
-            name="login-password"
+            name="reg-password"
             className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
             type="password"
             placeholder="******"
@@ -82,24 +65,24 @@ export const LoginView: React.FC = React.memo(() => {
         {error && <p className="text-red-500 text-sm mb-4">{error.message}</p>}
 
         <button
-          className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
           disabled={loading}
-          onClick={handleLogin}
+          onClick={handleRegister}
         >
           {loading && <Spinner />}
-          登录
+          注册账号
         </button>
 
         <button
-          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+          className="w-full py-2 px-4 border border-transparent text-sm text-left font-medium text-white disabled:opacity-50"
           disabled={loading}
-          onClick={toRegisterView}
+          onClick={toLoginView}
         >
-          注册账号
-          <Icon icon="mdi-arrow-right" className="ml-1 inline" />
+          <Icon icon="mdi-arrow-left" className="mr-1 inline" />
+          返回登录
         </button>
       </div>
     </div>
   );
 });
-LoginView.displayName = 'LoginView';
+RegisterView.displayName = 'RegisterView';
