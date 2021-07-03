@@ -12,11 +12,36 @@
   "license": "GPLv3",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "test": "jest"
   },
+  "lint-staged": {
+    "src/*.{json,less}": [
+      "prettier --write --config ./.prettierrc.json"
+    ],
+    "**/*.js": [
+      "prettier --write --config ./.prettierrc.json"
+    ],
+    "**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --config ./.prettierrc.json"
+    ]
+  },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "commitlint": "^12.1.4",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.0",
     "jest": "^27.0.6",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
     "ts-jest": "^27.0.3"
   }
 }
