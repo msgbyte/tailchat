@@ -48,5 +48,3 @@ export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
   );
 });
 Avatar.displayName = 'Avatar';
-
-export default Avatar;

@@ -3,6 +3,7 @@ import { request } from '../api/request';
 export interface UserLoginInfo {
   _id: string;
   email: string;
+  nickname: string;
   password: string;
   token: string;
   avatar: string | null;
