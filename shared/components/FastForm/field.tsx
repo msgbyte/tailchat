@@ -19,9 +19,8 @@ export interface FastFormFieldProps extends FastFormFieldCommon {
 /**
  * 字段组件
  */
-export type FastFormFieldComponent<T = {}> = React.ComponentType<
-  FastFormFieldProps & T
->;
+export type FastFormFieldComponent<T = Record<string, unknown>> =
+  React.ComponentType<FastFormFieldProps & T>;
 
 const fieldMap = new Map<string, FastFormFieldComponent>();
 

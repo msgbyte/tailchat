@@ -13,6 +13,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "test": "jest"
   },
   "lint-staged": {

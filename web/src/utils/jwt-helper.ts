@@ -1,7 +1,5 @@
 import _isObject from 'lodash/isObject';
-import _get from 'lodash/get';
 import _isNull from 'lodash/isNull';
-import _isNil from 'lodash/isNil';
 import jwtDecode from 'jwt-decode';
 import { getStorage } from 'pawchat-shared';
 
