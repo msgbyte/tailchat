@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import clsx, { ClassValue } from 'clsx';
 import React, { useLayoutEffect } from 'react';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { MainProvider } from '../components/MainProvider';
 import { useEnsureSocket } from '../hooks/useEnsureSocket';
 
 const NavbarNavItem: React.FC<{
@@ -20,47 +21,39 @@ const NavbarNavItem: React.FC<{
 });
 
 export const MainRoute: React.FC = React.memo(() => {
-  const { loading } = useEnsureSocket();
-
-  if (loading) {
-    return (
-      <div className="w-screen h-screen flex items-center justify-center bg-gray-700 text-white text-xl">
-        <LoadingSpinner tip="正在连接到聊天服务器..." />
-      </div>
-    );
-  }
-
   return (
     <div className="flex h-full">
-      <div className="w-16 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">
-        {/* Navbar */}
-        <div className="flex-1">
-          <NavbarNavItem />
-          <div className="h-px w-full bg-white mt-4 mb-4"></div>
-          <div className="space-y-2">
+      <MainProvider>
+        <div className="w-16 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">
+          {/* Navbar */}
+          <div className="flex-1">
             <NavbarNavItem />
-            <NavbarNavItem />
-            <NavbarNavItem />
-            <NavbarNavItem />
-            <NavbarNavItem className="bg-green-500">
-              <Icon className="text-3xl text-white" icon="mdi-plus" />
-            </NavbarNavItem>
+            <div className="h-px w-full bg-white mt-4 mb-4"></div>
+            <div className="space-y-2">
+              <NavbarNavItem />
+              <NavbarNavItem />
+              <NavbarNavItem />
+              <NavbarNavItem />
+              <NavbarNavItem className="bg-green-500">
+                <Icon className="text-3xl text-white" icon="mdi-plus" />
+              </NavbarNavItem>
+            </div>
+          </div>
+          <div>
+            <Icon
+              className="text-3xl text-white cursor-pointer"
+              icon="mdi-dots-horizontal"
+            />
           </div>
         </div>
-        <div>
-          <Icon
-            className="text-3xl text-white cursor-pointer"
-            icon="mdi-dots-horizontal"
-          />
+        <div className="w-56 bg-gray-800 p-2">
+          {/* Sidebar */}
+          <div className="w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded p-2">
+            目标
+          </div>
         </div>
-      </div>
-      <div className="w-56 bg-gray-800 p-2">
-        {/* Sidebar */}
-        <div className="w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded p-2">
-          目标
-        </div>
-      </div>
-      <div className="flex-auto bg-gray-700">{/* Main Content */}</div>
+        <div className="flex-auto bg-gray-700">{/* Main Content */}</div>
+      </MainProvider>
     </div>
   );
 });

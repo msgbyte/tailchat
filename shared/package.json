@@ -7,10 +7,12 @@
   "license": "GPLv3",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1",
+    "redux": "^4.1.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

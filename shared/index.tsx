@@ -1,6 +1,7 @@
 // api
 export { buildStorage } from './api/buildStorage';
 export { createSocket } from './api/socket';
+export type { AppSocket } from './api/socket';
 
 // components
 export { FastForm } from './components/FastForm/index';
@@ -25,3 +26,8 @@ export { setTokenGetter } from './manager/request';
 
 // model
 export { loginWithEmail, registerWithEmail } from './model/user';
+
+// redux
+export { setupRedux } from './redux/setup';
+export { createStore } from './redux/store';
+export type { AppStore, AppDispatch } from './redux/store';

@@ -5,13 +5,21 @@ import { getUserJWT } from '../utils/jwt-helper';
  * 创建全局Socket
  */
 export function useEnsureSocket() {
-  const { loading, error } = useAsync(async () => {
+  const {
+    value: socket,
+    loading,
+    error,
+  } = useAsync(async () => {
     const token = await getUserJWT();
-    if (typeof token === 'string') {
-      await createSocket(token);
-      console.log('当前socket连接成功'); // TODO
+    if (typeof token !== 'string') {
+      throw new Error('Token不合法');
     }
+
+    const socket = await createSocket(token);
+    console.log('当前socket连接成功');
+
+    return socket;
   }, []);
 
-  return { loading, error };
+  return { loading, error, socket };
 }
