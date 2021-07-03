@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { UserLoginInfo } from '../../model/user';
+import type { UserBaseInfo, UserLoginInfo } from '../../model/user';
 
 interface UserState {
   info: UserLoginInfo | null;
+  friends: UserBaseInfo[];
 }
 
-const initialState: UserState = { info: null };
+const initialState: UserState = { info: null, friends: [] };
 
 const userSlice = createSlice({
   name: 'user',

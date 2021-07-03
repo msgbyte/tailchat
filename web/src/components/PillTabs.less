@@ -1,0 +1,34 @@
+.pill-tabs.ant-tabs.ant-tabs-card {
+  // color: ${(props) => props.theme.color.textNormal};
+  @apply text-gray-100;
+
+  .ant-tabs-nav {
+    @apply px-2 py-3 m-0 text-base;
+
+    &::before {
+      @apply border-0;
+    }
+
+    .ant-tabs-tab {
+      border: 0;
+      margin: 2px;
+      padding: 2px 8px;
+      @apply text-gray-200 bg-opacity-0 bg-white;
+
+      &.ant-tabs-tab-active,
+      &:hover,
+      &:active {
+        @apply rounded bg-opacity-20;
+
+        .ant-tabs-tab-btn {
+          @apply text-white;
+        }
+      }
+    }
+  }
+
+  .ant-tabs-content-holder {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

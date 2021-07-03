@@ -1,12 +1,14 @@
 import { request } from '../api/request';
 
-export interface UserLoginInfo {
+export interface UserBaseInfo {
   _id: string;
   email: string;
   nickname: string;
-  password: string;
-  token: string;
   avatar: string | null;
+}
+
+export interface UserLoginInfo extends UserBaseInfo {
+  token: string;
   createdAt: string;
 }
 
