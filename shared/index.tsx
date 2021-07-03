@@ -28,6 +28,7 @@ export { setTokenGetter } from './manager/request';
 export { loginWithEmail, registerWithEmail } from './model/user';
 
 // redux
+export { userActions } from './redux/slices';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';
 export type { AppStore, AppDispatch } from './redux/store';

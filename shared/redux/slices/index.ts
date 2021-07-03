@@ -6,3 +6,5 @@ export const appReducer = combineReducers({
 });
 
 export type AppState = ReturnType<typeof appReducer>;
+
+export { userActions } from './user';

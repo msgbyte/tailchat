@@ -6,6 +6,7 @@ import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
+import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 
 /**
  * TODO:
@@ -45,6 +46,7 @@ export const LoginView: React.FC = React.memo(() => {
 
     const data = await loginWithEmail(email, password);
 
+    setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
     history.push('/main');
   }, [email, password, history]);

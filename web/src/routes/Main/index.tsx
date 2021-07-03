@@ -1,9 +1,7 @@
 import { Icon } from '@iconify/react';
 import clsx, { ClassValue } from 'clsx';
-import React, { useLayoutEffect } from 'react';
-import { LoadingSpinner } from '../components/LoadingSpinner';
-import { MainProvider } from '../components/MainProvider';
-import { useEnsureSocket } from '../hooks/useEnsureSocket';
+import React from 'react';
+import { MainProvider } from './Provider';
 
 const NavbarNavItem: React.FC<{
   className?: ClassValue;

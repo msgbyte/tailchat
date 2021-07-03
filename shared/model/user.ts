@@ -1,6 +1,6 @@
 import { request } from '../api/request';
 
-interface UserLoginInfo {
+export interface UserLoginInfo {
   _id: string;
   email: string;
   password: string;
@@ -21,6 +21,18 @@ export async function loginWithEmail(
   const { data } = await request.post('/api/user/login', {
     email,
     password,
+  });
+
+  return data;
+}
+
+/**
+ * 使用 Token 登录
+ * @param token JWT令牌
+ */
+export async function loginWithToken(token: string): Promise<UserLoginInfo> {
+  const { data } = await request.post('/api/user/resolveToken', {
+    token,
   });
 
   return data;
