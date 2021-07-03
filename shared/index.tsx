@@ -31,3 +31,6 @@ export { loginWithEmail, registerWithEmail } from './model/user';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';
 export type { AppStore, AppDispatch } from './redux/store';
+
+// utils
+export { getTextColorHex } from './utils/string-helper';

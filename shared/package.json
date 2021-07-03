@@ -13,6 +13,8 @@
     "lodash": "^4.17.21",
     "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1",
     "redux": "^4.1.0",
+    "str2int": "^1.0.0",
+    "url-regex": "^5.0.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {
