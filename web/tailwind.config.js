@@ -9,22 +9,24 @@ module.exports = {
   darkMode: 'class', // or 'media'
   theme: {
     screens: {
-      'lg': {'min': '1024px'},
-      'md': {'max': '767px'},
-      'sm': {'max': '639px'},
+      lg: { min: '1024px' },
+      md: { max: '767px' },
+      sm: { max: '639px' },
     },
     extend: {
       borderRadius: {
-        "1/2": '50%'
+        '1/2': '50%',
       },
       spacing: {
-        "142": "35.5rem"
-      }
+        18: '4.5rem',
+        142: '35.5rem',
+      },
     },
   },
   variants: {
     extend: {
       opacity: ['disabled'],
+      display: ['group-hover'],
       borderRadius: ['hover'],
     },
   },
