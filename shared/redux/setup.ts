@@ -13,9 +13,7 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
   });
 
   // 获取好友邀请列表
-  socket
-    .request<FriendRequest[]>('friend.request.allRelatived')
-    .then((data) => {
-      store.dispatch(userActions.setFriendRequests(data));
-    });
+  socket.request<FriendRequest[]>('friend.request.allRelated').then((data) => {
+    store.dispatch(userActions.setFriendRequests(data));
+  });
 }
