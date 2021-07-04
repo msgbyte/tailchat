@@ -12,6 +12,12 @@ export interface UserLoginInfo extends UserBaseInfo {
   createdAt: string;
 }
 
+export interface FriendRequest {
+  from: string;
+  to: string;
+  message: string;
+}
+
 /**
  * 邮箱登录
  * @param email 邮箱
