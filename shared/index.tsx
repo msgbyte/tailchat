@@ -15,6 +15,9 @@ export { regField } from './components/FastForm/field';
 export { regFormContainer } from './components/FastForm/container';
 export type { FastFormContainerComponent } from './components/FastForm/container';
 
+// i18n
+export { t, setLanguage, useTranslation } from './i18n';
+
 // hooks
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';

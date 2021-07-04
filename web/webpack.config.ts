@@ -2,11 +2,14 @@
  * Reference: https://webpack.js.org/configuration/configuration-languages/
  */
 
-import type { Configuration } from 'webpack';
+import type { Configuration, WebpackPluginInstance } from 'webpack';
 import type WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
+
+require('../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
 
 const ROOT_PATH = path.resolve(__dirname, './');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
@@ -96,6 +99,14 @@ const config: Configuration = {
       hash: true,
       template: path.resolve(ROOT_PATH, './assets/template.html'),
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../locales'),
+          to: 'locales',
+        },
+      ],
+    }) as any,
     new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
   ],
 };

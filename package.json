@@ -13,6 +13,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "translation": "node build/script/scanTranslation.js",
     "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "test": "jest"
   },
@@ -39,10 +40,14 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
+    "fs-extra": "^10.0.0",
+    "gulp-sort": "^2.0.0",
     "husky": "^7.0.0",
+    "i18next-scanner": "^3.0.0",
     "jest": "^27.0.6",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3"
+    "ts-jest": "^27.0.3",
+    "vinyl-fs": "^3.0.3"
   }
 }

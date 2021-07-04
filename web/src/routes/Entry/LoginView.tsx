@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
-import { loginWithEmail, useAsyncFn } from 'pawchat-shared';
+import { loginWithEmail, t, useAsyncFn } from 'pawchat-shared';
 import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
@@ -61,7 +61,7 @@ export const LoginView: React.FC = React.memo(() => {
 
       <div>
         <div className="mb-4">
-          <div className="mb-2">邮箱</div>
+          <div className="mb-2">{t('邮箱')}</div>
           <input
             name="login-email"
             className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"

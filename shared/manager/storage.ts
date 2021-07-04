@@ -22,18 +22,16 @@ export const [getStorage, setStorage] =
  * @param key 存储键
  * @param defaultValue 默认值
  */
-export function useStorage<T>(
+export function useStorage<T = any>(
   key: string,
   defaultValue?: T
-): [T, { set: (v: T) => void; save: (v: T) => void }] {
-  const [value, setValue] = useState<T>(defaultValue);
+): [T | undefined, { set: (v: T) => void; save: (v: T) => void }] {
+  const [value, setValue] = useState<T | undefined>(defaultValue);
 
   useLayoutEffect(() => {
     getStorage()
       .get(key)
-      .then((data: T) => {
-        setValue(data ?? defaultValue);
-      });
+      .then((data: T) => setValue(data ?? defaultValue));
   }, [key]);
 
   const set = useCallback(
