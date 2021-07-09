@@ -1,11 +1,12 @@
 import { io, Socket } from 'socket.io-client';
 import { config } from '../config';
 import _isNil from 'lodash/isNil';
+import { getServerUrl } from '../manager/server';
 
 let socket: Socket;
 
 class SocketEventError extends Error {
-  name: 'SocketEventError';
+  name = 'SocketEventError';
 }
 
 type SocketEventRespones<T = unknown> =
@@ -55,7 +56,7 @@ export function createSocket(token: string): Promise<AppSocket> {
   }
 
   return new Promise((resolve, reject) => {
-    socket = io(config.serverUrl, {
+    socket = io(getServerUrl(), {
       transports: ['websocket'],
       auth: {
         token,

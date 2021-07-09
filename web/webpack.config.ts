@@ -3,6 +3,7 @@
  */
 
 import type { Configuration, WebpackPluginInstance } from 'webpack';
+import { DefinePlugin } from 'webpack';
 import type WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -93,6 +94,12 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        SERVER_URL: JSON.stringify(process.env.SERVER_URL),
+      },
+    }),
     new HtmlWebpackPlugin({
       title: 'PawChat',
       inject: true,
