@@ -26,7 +26,7 @@ export { useMountedState } from './hooks/useMountedState';
 // manager
 export { getStorage, setStorage, useStorage } from './manager/storage';
 export { setTokenGetter } from './manager/request';
-export { setServerUrl } from './manager/server';
+export { setServiceUrl } from './manager/service';
 
 // model
 export { loginWithEmail, registerWithEmail } from './model/user';

@@ -3,9 +3,8 @@ import _get from 'lodash/get';
 import _isString from 'lodash/isString';
 import _isNil from 'lodash/isNil';
 import _isFunction from 'lodash/isFunction';
-import { config } from '../config';
 import { getErrorHook, tokenGetter } from '../manager/request';
-import { getServerUrl } from '../manager/server';
+import { getServiceUrl } from '../manager/service';
 
 export type CommonRequestResult<T> =
   | ({
@@ -23,7 +22,7 @@ class RequestError extends Error {}
  */
 export function createRequest() {
   const ins = axios.create({
-    baseURL: getServerUrl(),
+    baseURL: getServiceUrl(),
   });
 
   ins.interceptors.request.use(async (val) => {

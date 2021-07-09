@@ -1,6 +1,6 @@
 import {
   buildStorage,
-  setServerUrl,
+  setServiceUrl,
   setStorage,
   setTokenGetter,
 } from 'pawchat-shared';
@@ -13,8 +13,8 @@ setTokenGetter(async () => {
   return await getUserJWT();
 });
 
-if (window.localStorage.getItem('serverUrl')) {
-  setServerUrl(() => String(window.localStorage.getItem('serverUrl')));
-} else if (process.env.SERVER_URL) {
-  setServerUrl(() => String(process.env.SERVER_URL));
+if (window.localStorage.getItem('serviceUrl')) {
+  setServiceUrl(() => String(window.localStorage.getItem('serviceUrl')));
+} else if (process.env.SERVICE_URL) {
+  setServiceUrl(() => String(process.env.SERVICE_URL));
 }

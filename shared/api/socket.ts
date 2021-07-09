@@ -1,7 +1,6 @@
 import { io, Socket } from 'socket.io-client';
-import { config } from '../config';
 import _isNil from 'lodash/isNil';
-import { getServerUrl } from '../manager/server';
+import { getServiceUrl } from '../manager/service';
 
 let socket: Socket;
 
@@ -56,7 +55,7 @@ export function createSocket(token: string): Promise<AppSocket> {
   }
 
   return new Promise((resolve, reject) => {
-    socket = io(getServerUrl(), {
+    socket = io(getServiceUrl(), {
       transports: ['websocket'],
       auth: {
         token,

@@ -95,10 +95,8 @@ const config: Configuration = {
   },
   plugins: [
     new DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        SERVER_URL: JSON.stringify(process.env.SERVER_URL),
-      },
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
     }),
     new HtmlWebpackPlugin({
       title: 'PawChat',
