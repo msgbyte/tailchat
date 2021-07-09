@@ -4,7 +4,7 @@ import _isString from 'lodash/isString';
 import _isNil from 'lodash/isNil';
 import _isFunction from 'lodash/isFunction';
 import { getErrorHook, tokenGetter } from '../manager/request';
-import { getServiceUrl } from '../manager/service';
+import { getServiceUrl, onServiceUrlChange } from '../manager/service';
 
 export type CommonRequestResult<T> =
   | ({
@@ -23,6 +23,10 @@ class RequestError extends Error {}
 export function createRequest() {
   const ins = axios.create({
     baseURL: getServiceUrl(),
+  });
+  onServiceUrlChange((getUrl) => {
+    // 重置请求地址
+    ins.defaults.baseURL = getUrl();
   });
 
   ins.interceptors.request.use(async (val) => {

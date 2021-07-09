@@ -1,10 +1,10 @@
 import _isFunction from 'lodash/isFunction';
 import _isEqual from 'lodash/isEqual';
+
 /**
  * 构建一对get set 方法
  * 用于在不同平台拥有统一方式调用体验
  */
-
 export function buildRegFn<F extends (...args: any[]) => any>(
   name: string,
   defaultFunc?: F
@@ -27,6 +27,27 @@ export function buildRegFn<F extends (...args: any[]) => any>(
   };
 
   return [get, set] as const;
+}
+
+/**
+ * 构建带事件监听的get set 方法
+ */
+export function buildRegFnWithEvent<F extends (...args: any[]) => any>(
+  name: string,
+  defaultFunc?: F
+) {
+  const [get, _set] = buildRegFn(name, defaultFunc);
+  const listenerList: ((v: F) => void)[] = [];
+  const onSet = (cb: (v: F) => void): void => {
+    listenerList.push(cb);
+  };
+
+  const set = (fn: F): void => {
+    _set(fn);
+    listenerList.forEach((listener) => listener(fn));
+  };
+
+  return [get, set, onSet] as const;
 }
 
 /**
