@@ -110,6 +110,10 @@ const config: Configuration = {
           from: path.resolve(__dirname, '../locales'),
           to: 'locales',
         },
+        {
+          from: path.resolve(__dirname, './assets/vercel.json'),
+          to: 'vercel.json',
+        },
       ],
     }) as any,
     new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
