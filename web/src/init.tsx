@@ -14,7 +14,7 @@ setTokenGetter(async () => {
 });
 
 if (window.localStorage.getItem('serverUrl')) {
-  setServerUrl(() => window.localStorage.getItem('serverUrl'));
+  setServerUrl(() => String(window.localStorage.getItem('serverUrl')));
 } else if (process.env.SERVER_URL) {
-  setServerUrl(() => process.env.SERVER_URL);
+  setServerUrl(() => String(process.env.SERVER_URL));
 }
