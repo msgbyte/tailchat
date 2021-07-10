@@ -5,13 +5,6 @@ import { useDrag } from 'react-use-gesture';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
 
-// const PageContentRoot = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   flex: 1;
-//   overflow: hidden;
-// `;
-
 // const ContentDetail = styled.div`
 //   flex: 1;
 //   background-color: ${(props) => props.theme.style.contentBackgroundColor};
@@ -24,15 +17,6 @@ import clsx from 'clsx';
 //     width: ${(props) => `calc(100vw - ${props.theme.style.navbarWidth})`};
 //     min-width: ${(props) => `calc(100vw - ${props.theme.style.navbarWidth})`};
 //   }
-// `;
-
-// const ContentDetailMask = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   z-index: 10;
 // `;
 
 // const SidebarContainer = styled.div<{
@@ -80,6 +64,8 @@ PageGestureWrapper.displayName = 'PageGestureWrapper';
 
 /**
  * 用于渲染实际页面的组件，即除了导航栏剩余的内容
+ *
+ * TODO: 移动端适配
  */
 export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
   const { sidebar, children } = props;
