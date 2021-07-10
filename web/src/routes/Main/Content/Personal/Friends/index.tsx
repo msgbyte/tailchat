@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
+import { AddFriend } from './AddFriend';
 
 /**
  * 主要内容组件
@@ -43,7 +44,7 @@ export const FriendPanel: React.FC = React.memo(() => {
           tab={<span className="text-green-400">添加好友</span>}
           key="4"
         >
-          添加好友
+          <AddFriend />
         </PillTabPane>
       </PillTabs>
     </div>
