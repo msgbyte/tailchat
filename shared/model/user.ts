@@ -4,6 +4,7 @@ export interface UserBaseInfo {
   _id: string;
   email: string;
   nickname: string;
+  discriminator: string;
   avatar: string | null;
 }
 
@@ -59,6 +60,20 @@ export async function registerWithEmail(
   const { data } = await request.post('/api/user/register', {
     email,
     password,
+  });
+
+  return data;
+}
+
+/**
+ * 使用唯一标识名搜索用户
+ * @param uniqueName 唯一标识用户昵称: 用户昵称#0000
+ */
+export async function searchUserWithUniqueName(
+  uniqueName: string
+): Promise<UserBaseInfo> {
+  const { data } = await request.post('/api/user/searchUserWithUniqueName', {
+    uniqueName,
   });
 
   return data;

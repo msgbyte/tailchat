@@ -43,6 +43,11 @@ export function createRequest() {
 
   ins.interceptors.response.use(
     (val) => {
+      /**
+       * 预处理返回的数据
+       */
+      val.data = _get(val.data, 'data', val.data);
+
       return val;
     },
     (err) => {

@@ -30,7 +30,12 @@ export { setTokenGetter } from './manager/request';
 export { setServiceUrl } from './manager/service';
 
 // model
-export { loginWithEmail, registerWithEmail } from './model/user';
+export type { UserBaseInfo } from './model/user';
+export {
+  loginWithEmail,
+  registerWithEmail,
+  searchUserWithUniqueName,
+} from './model/user';
 
 // redux
 export { userActions } from './redux/slices';
