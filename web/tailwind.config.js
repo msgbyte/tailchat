@@ -7,6 +7,7 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
   },
   darkMode: 'class', // or 'media'
+  important: '#app',
   theme: {
     screens: {
       lg: { min: '1024px' },
