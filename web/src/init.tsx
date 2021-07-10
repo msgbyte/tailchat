@@ -1,7 +1,10 @@
+import { message, Modal } from 'antd';
 import {
   buildStorage,
+  setAlert,
   setServiceUrl,
   setStorage,
+  setToasts,
   setTokenGetter,
 } from 'pawchat-shared';
 import { getUserJWT } from './utils/jwt-helper';
@@ -18,3 +21,22 @@ if (window.localStorage.getItem('serviceUrl')) {
 } else if (process.env.SERVICE_URL) {
   setServiceUrl(() => String(process.env.SERVICE_URL));
 }
+
+setToasts((msg, type = 'info') => {
+  message.open({
+    type,
+    duration: 30000,
+    content: String(msg),
+  });
+});
+
+setAlert((options) => {
+  Modal.confirm({
+    content: options.message,
+    onOk: async () => {
+      if (typeof options.onConfirm === 'function') {
+        await options.onConfirm();
+      }
+    },
+  });
+});

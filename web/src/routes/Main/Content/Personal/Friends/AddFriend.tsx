@@ -3,14 +3,19 @@ import { Highlight } from '@/components/Highlight';
 import { Button, Divider, Empty } from 'antd';
 import {
   searchUserWithUniqueName,
+  showErrorToasts,
   useAsyncFn,
   UserBaseInfo,
 } from 'pawchat-shared';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 const SearchFriendResult: React.FC<{
   result: UserBaseInfo | undefined | null;
 }> = React.memo(({ result }) => {
+  const handleAddFriend = useCallback((userId: string) => {
+    console.log(userId);
+  }, []);
+
   if (result === undefined) {
     return null;
   }
@@ -39,7 +44,11 @@ const SearchFriendResult: React.FC<{
           </div>
         </div>
 
-        <Button type="primary" className="bg-green-700 border-0">
+        <Button
+          type="primary"
+          className="bg-green-600 border-0"
+          onClick={() => handleAddFriend(result._id)}
+        >
           申请好友
         </Button>
       </div>
@@ -57,7 +66,7 @@ export const AddFriend: React.FC = React.memo(() => {
 
       return data;
     } catch (err) {
-      console.error(err);
+      showErrorToasts(err);
     }
   }, [uniqueName]);
 
@@ -68,7 +77,7 @@ export const AddFriend: React.FC = React.memo(() => {
         您可以使用完整的 <Highlight>用户昵称#标识</Highlight> 来添加好友
       </div>
 
-      <div className="px-4 my-3 flex border border-black border-opacity-30 rounded items-center">
+      <div className="px-4 my-3 flex border border-black border-opacity-30 rounded items-center bg-black bg-opacity-10">
         <input
           className="bg-transparent flex-1 text-base leading-13 outline-none"
           placeholder="用户昵称#0000"
@@ -77,7 +86,8 @@ export const AddFriend: React.FC = React.memo(() => {
 
         <Button
           type="primary"
-          className="bg-indigo-600 border-none"
+          className="bg-indigo-600 disabled:opacity-80 border-none"
+          disabled={uniqueName === ''}
           loading={loading}
           onClick={searchUser}
         >

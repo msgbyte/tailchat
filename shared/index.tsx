@@ -28,6 +28,13 @@ export { useRafState } from './hooks/useRafState';
 export { getStorage, setStorage, useStorage } from './manager/storage';
 export { setTokenGetter } from './manager/request';
 export { setServiceUrl } from './manager/service';
+export {
+  showToasts,
+  setToasts,
+  showAlert,
+  setAlert,
+  showErrorToasts,
+} from './manager/ui';
 
 // model
 export type { UserBaseInfo } from './model/user';

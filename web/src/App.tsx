@@ -4,8 +4,6 @@ import { useStorage } from 'pawchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 
-import './dark.less';
-
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
 );
