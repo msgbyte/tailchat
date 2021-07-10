@@ -22,6 +22,7 @@ export { t, setLanguage, useTranslation } from './i18n';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useMountedState } from './hooks/useMountedState';
+export { useRafState } from './hooks/useRafState';
 
 // manager
 export { getStorage, setStorage, useStorage } from './manager/storage';
@@ -39,3 +40,4 @@ export type { AppStore, AppDispatch } from './redux/store';
 
 // utils
 export { getTextColorHex } from './utils/string-helper';
+export { isBrowser, isNavigator } from './utils/environment';

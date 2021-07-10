@@ -1,8 +1,7 @@
 import React from 'react';
-import { Content } from './Content';
+import { MainContent } from './Content';
 import { Navbar } from './Navbar';
 import { MainProvider } from './Provider';
-import { Sidebar } from './Sidebar';
 
 export const MainRoute: React.FC = React.memo(() => {
   return (
@@ -10,9 +9,7 @@ export const MainRoute: React.FC = React.memo(() => {
       <MainProvider>
         <Navbar />
 
-        <Sidebar />
-
-        <Content />
+        <MainContent />
       </MainProvider>
     </div>
   );

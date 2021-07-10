@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx, { ClassValue } from 'clsx';
 import { Icon } from '@iconify/react';
-import { Avatar } from '../../components/Avatar';
+import { Avatar } from '@/components/Avatar';
 
 const SidebarItem: React.FC<{
   className?: ClassValue;
@@ -44,12 +44,11 @@ const SidebarSection: React.FC<{
 SidebarSection.displayName = 'SidebarSection';
 
 /**
- * 侧边栏组件
+ * 个人面板侧边栏组件
  */
 export const Sidebar: React.FC = React.memo(() => {
   return (
-    <div className="w-60 bg-gray-800 p-2">
-      {/* Sidebar */}
+    <>
       <SidebarItem icon={<Icon icon="mdi-account-multiple" />}>
         好友
       </SidebarItem>
@@ -81,7 +80,7 @@ export const Sidebar: React.FC = React.memo(() => {
       >
         用户1
       </SidebarItem>
-    </div>
+    </>
   );
 });
 Sidebar.displayName = 'Sidebar';

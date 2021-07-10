@@ -5,7 +5,7 @@ import {
   useAsync,
   userActions,
 } from 'pawchat-shared';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { Provider as ReduxProvider } from 'react-redux';
 import { getGlobalUserLoginInfo } from '../../utils/user-helper';
@@ -13,6 +13,7 @@ import _isNil from 'lodash/isNil';
 import { loginWithToken } from 'pawchat-shared/model/user';
 import { getUserJWT } from '../../utils/jwt-helper';
 import { useHistory } from 'react-router';
+import { SidebarContextProvider } from './SidebarContext';
 
 /**
  * 应用状态管理hooks
@@ -76,6 +77,10 @@ export const MainProvider: React.FC = React.memo((props) => {
     return <div>出现异常, Store 创建失败</div>;
   }
 
-  return <ReduxProvider store={store}>{props.children}</ReduxProvider>;
+  return (
+    <ReduxProvider store={store}>
+      <SidebarContextProvider>{props.children}</SidebarContextProvider>
+    </ReduxProvider>
+  );
 });
 MainProvider.displayName = 'MainProvider';

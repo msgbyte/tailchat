@@ -9,7 +9,9 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
+delete process.env.TS_NODE_PROJECT; // https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/32
 require('../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
 
 const ROOT_PATH = path.resolve(__dirname, './');
@@ -48,6 +50,7 @@ const config: Configuration = {
         options: {
           loader: 'tsx',
           target: 'es2015',
+          tsconfigRaw: require('./tsconfig.json'),
         },
       },
       {
@@ -92,6 +95,11 @@ const config: Configuration = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
+      }),
+    ],
   },
   plugins: [
     new DefinePlugin({
