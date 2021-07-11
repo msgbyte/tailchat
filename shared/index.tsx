@@ -38,7 +38,7 @@ export {
 
 // model
 export { addFriendRequest } from './model/friend';
-export type { UserBaseInfo } from './model/user';
+export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
   loginWithEmail,
   registerWithEmail,

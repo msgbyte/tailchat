@@ -1,4 +1,4 @@
-import { UserLoginInfo } from 'pawchat-shared/model/user';
+import type { UserLoginInfo } from 'pawchat-shared';
 
 let _userLoginInfo: UserLoginInfo;
 
