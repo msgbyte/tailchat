@@ -1,6 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 import _isNil from 'lodash/isNil';
 import { getServiceUrl } from '../manager/service';
+import { isDevelopment } from '../utils/environment';
 
 let socket: Socket;
 
@@ -42,6 +43,10 @@ export class AppSocket {
       });
     });
   }
+
+  listen(eventName: string, callback: (data: unknown) => void) {
+    this.socket.on(`notify:${eventName}`, callback);
+  }
 }
 
 /**
@@ -60,6 +65,7 @@ export function createSocket(token: string): Promise<AppSocket> {
       auth: {
         token,
       },
+      forceNew: true,
     });
     socket.once('connect', () => {
       // 连接成功
@@ -68,5 +74,11 @@ export function createSocket(token: string): Promise<AppSocket> {
     socket.once('error', () => {
       reject();
     });
+
+    if (isDevelopment) {
+      socket.onAny((...args) => {
+        console.log('Receive Notify:', args);
+      });
+    }
   });
 }
