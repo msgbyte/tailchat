@@ -2,8 +2,11 @@ import { Avatar } from '@/components/Avatar';
 import { Highlight } from '@/components/Highlight';
 import { Button, Divider, Empty } from 'antd';
 import {
+  addFriendRequest,
   searchUserWithUniqueName,
   showErrorToasts,
+  showToasts,
+  t,
   useAsyncFn,
   UserBaseInfo,
 } from 'pawchat-shared';
@@ -12,8 +15,15 @@ import React, { useCallback, useState } from 'react';
 const SearchFriendResult: React.FC<{
   result: UserBaseInfo | undefined | null;
 }> = React.memo(({ result }) => {
-  const handleAddFriend = useCallback((userId: string) => {
-    console.log(userId);
+  const [hasSentUserId, setHasSentUserId] = useState(''); // 记录已发送的
+  const handleAddFriend = useCallback(async (userId: string) => {
+    try {
+      await addFriendRequest(userId);
+      setHasSentUserId(userId);
+      showToasts(t('已发送申请'), 'success');
+    } catch (err) {
+      showErrorToasts(err);
+    }
   }, []);
 
   if (result === undefined) {
@@ -23,6 +33,8 @@ const SearchFriendResult: React.FC<{
   if (result === null) {
     return <Empty />;
   }
+
+  const hasSent = hasSentUserId === result._id;
 
   return (
     <div>
@@ -47,9 +59,10 @@ const SearchFriendResult: React.FC<{
         <Button
           type="primary"
           className="bg-green-600 border-0"
+          disabled={hasSent}
           onClick={() => handleAddFriend(result._id)}
         >
-          申请好友
+          {hasSent ? t('已申请') : t('申请好友')}
         </Button>
       </div>
     </div>

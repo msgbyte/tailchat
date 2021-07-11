@@ -25,7 +25,7 @@ if (window.localStorage.getItem('serviceUrl')) {
 setToasts((msg, type = 'info') => {
   message.open({
     type,
-    duration: 30000,
+    duration: 3,
     content: String(msg),
   });
 });

@@ -1,7 +1,8 @@
 import type { AppStore } from './store';
 import type { AppSocket } from '../api/socket';
 import { userActions } from './slices';
-import type { FriendRequest, UserBaseInfo } from '../model/user';
+import type { UserBaseInfo } from '../model/user';
+import type { FriendRequest } from '../model/friend';
 
 /**
  * 初始化Redux 上下文

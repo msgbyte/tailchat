@@ -37,6 +37,7 @@ export {
 } from './manager/ui';
 
 // model
+export { addFriendRequest } from './model/friend';
 export type { UserBaseInfo } from './model/user';
 export {
   loginWithEmail,
