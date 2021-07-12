@@ -1,7 +1,9 @@
 import React from 'react';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { AddFriend } from './AddFriend';
-import { useAppSelector } from 'pawchat-shared';
+import { t, useAppSelector } from 'pawchat-shared';
+import { RequestSend } from './RequestSend';
+import { RequestReceived } from './RequestReceived';
 
 /**
  * 主要内容组件
@@ -20,25 +22,15 @@ export const FriendPanel: React.FC = React.memo(() => {
             <div>{JSON.stringify(friends)}</div>
           </div>
         </PillTabPane>
-        <PillTabPane tab={'已发送'} key="2">
-          <div className="py-2.5 px-5">
-            <div>发送的好友请求</div>
-            <div>
-              {JSON.stringify(
-                friendRequests.filter((item) => item.from === userId)
-              )}
-            </div>
-          </div>
+        <PillTabPane tab={t('已发送')} key="2">
+          <RequestSend
+            requests={friendRequests.filter((item) => item.from === userId)}
+          />
         </PillTabPane>
-        <PillTabPane tab={'待处理'} key="3">
-          <div className="py-2.5 px-5">
-            <div>接受的好友请求</div>
-            <div>
-              {JSON.stringify(
-                friendRequests.filter((item) => item.to === userId)
-              )}
-            </div>
-          </div>
+        <PillTabPane tab={t('待处理')} key="3">
+          <RequestReceived
+            requests={friendRequests.filter((item) => item.to === userId)}
+          />
         </PillTabPane>
         <PillTabPane
           tab={<span className="text-green-400">添加好友</span>}

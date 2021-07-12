@@ -26,7 +26,10 @@ function reduxHookCacheFactory<T>(
 ) {
   const isFetchingDataIdQueue: string[] = []; // 正在请求的id列表
 
-  return function hook(id: string, options?: CacheHookOptions): Partial<T> {
+  return function useReduxCache(
+    id: string,
+    options?: CacheHookOptions
+  ): Partial<T> {
     const data = useAppSelector<T>(
       (state) => _get(state, ['cache', cacheScope, id]) as any
     );

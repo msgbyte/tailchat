@@ -38,6 +38,7 @@ export {
 
 // model
 export { addFriendRequest } from './model/friend';
+export type { FriendRequest } from './model/friend';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
   loginWithEmail,
