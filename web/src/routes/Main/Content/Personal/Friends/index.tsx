@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAppSelector } from '@/hooks/useAppSelector';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { AddFriend } from './AddFriend';
+import { useAppSelector } from 'pawchat-shared';
 
 /**
  * 主要内容组件

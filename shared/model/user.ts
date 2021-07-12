@@ -72,3 +72,17 @@ export async function searchUserWithUniqueName(
 
   return data;
 }
+
+/**
+ * 获取用户基本信息
+ * @param userId 用户ID
+ */
+export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
+  const { data } = await request.get('/api/user/getUserInfo', {
+    params: {
+      userId,
+    },
+  });
+
+  return data;
+}
