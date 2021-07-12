@@ -1,5 +1,5 @@
 import { DependencyList, useCallback, useRef, useState } from 'react';
-import { FunctionReturningPromise, PromiseType } from '../types';
+import type { FunctionReturningPromise, PromiseType } from '../types';
 import { useMountedState } from './useMountedState';
 
 // Reference: https://github.com/streamich/react-use/blob/master/src/useAsyncFn.ts

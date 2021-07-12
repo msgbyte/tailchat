@@ -21,6 +21,7 @@ export { t, setLanguage, useTranslation } from './i18n';
 // hooks
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
+export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useMountedState } from './hooks/useMountedState';
 export { useRafState } from './hooks/useRafState';
 
@@ -37,7 +38,12 @@ export {
 } from './manager/ui';
 
 // model
-export { addFriendRequest } from './model/friend';
+export {
+  addFriendRequest,
+  cancelFriendRequest,
+  acceptFriendRequest,
+  denyFriendRequest,
+} from './model/friend';
 export type { FriendRequest } from './model/friend';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
