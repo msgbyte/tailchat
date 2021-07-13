@@ -26,7 +26,7 @@ export async function addFriendRequest(
  * @param requestId 好友请求ID
  */
 export async function acceptFriendRequest(requestId: string): Promise<void> {
-  request.post('/api/friend/request/accept', {
+  await request.post('/api/friend/request/accept', {
     requestId,
   });
 }
@@ -36,7 +36,7 @@ export async function acceptFriendRequest(requestId: string): Promise<void> {
  * @param requestId 好友请求ID
  */
 export async function denyFriendRequest(requestId: string): Promise<void> {
-  request.post('/api/friend/request/deny', {
+  await request.post('/api/friend/request/deny', {
     requestId,
   });
 }
@@ -46,7 +46,7 @@ export async function denyFriendRequest(requestId: string): Promise<void> {
  * @param requestId 好友请求ID
  */
 export async function cancelFriendRequest(requestId: string): Promise<void> {
-  request.post('/api/friend/request/cancel', {
+  await request.post('/api/friend/request/cancel', {
     requestId,
   });
 }
