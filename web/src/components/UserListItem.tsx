@@ -3,7 +3,7 @@ import { Avatar } from './Avatar';
 import _isNil from 'lodash/isNil';
 import { Skeleton, Space } from 'antd';
 // import { openUserProfile } from './modals/UserProfile';
-import { useUserInfo } from 'pawchat-shared';
+import { useCachedUserInfo } from 'pawchat-shared';
 
 // const UserAvatar = styled(Avatar)`
 //   cursor: pointer !important;
@@ -21,7 +21,7 @@ interface UserListItemProps {
 }
 export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
   const { actions = [] } = props;
-  const userInfo = useUserInfo(props.userId);
+  const userInfo = useCachedUserInfo(props.userId);
   const userName = userInfo.nickname;
 
   const handleClick = useCallback(() => {

@@ -44,7 +44,7 @@ export class AppSocket {
     });
   }
 
-  listen(eventName: string, callback: (data: unknown) => void) {
+  listen<T>(eventName: string, callback: (data: T) => void) {
     this.socket.on(`notify:${eventName}`, callback);
   }
 }

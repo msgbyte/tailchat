@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
 
-function buildCacheFactory<T>(
+function buildUseCacheFactory<T>(
   scope: string,
   fetcher: (id: string) => Promise<T>
 ) {
@@ -11,7 +11,7 @@ function buildCacheFactory<T>(
   };
 }
 
-export const useUserInfo = buildCacheFactory<UserBaseInfo>(
+export const useCachedUserInfo = buildUseCacheFactory<UserBaseInfo>(
   'user',
   fetchUserInfo
 );

@@ -1,13 +1,7 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
-const queryClient = new QueryClient();
+import { CacheProvider } from '../cache/Provider';
 
 export const PawProvider: React.FC = React.memo((props) => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      {props.children}
-    </QueryClientProvider>
-  );
+  return <CacheProvider>{props.children}</CacheProvider>;
 });
 PawProvider.displayName = 'PawProvider';

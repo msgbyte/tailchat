@@ -3,6 +3,10 @@ export { buildStorage } from './api/buildStorage';
 export { createSocket } from './api/socket';
 export type { AppSocket } from './api/socket';
 
+// cache
+export { getCachedUserInfo } from './cache/cache';
+export { useCachedUserInfo } from './cache/useCache';
+
 // components
 export { FastForm } from './components/FastForm/index';
 export { CustomField } from './components/FastForm/CustomField';
@@ -23,7 +27,6 @@ export { t, setLanguage, useTranslation } from './i18n';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
-export { useUserInfo } from './hooks/useCache';
 export { useMountedState } from './hooks/useMountedState';
 export { useRafState } from './hooks/useRafState';
 

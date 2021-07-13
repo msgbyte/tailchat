@@ -26,6 +26,13 @@ const userSlice = createSlice({
     setFriendRequests(state, action: PayloadAction<FriendRequest[]>) {
       state.friendRequests = action.payload;
     },
+    appendFriend(state, action: PayloadAction<UserBaseInfo>) {
+      if (state.friends.some(({ _id }) => _id === action.payload._id)) {
+        return;
+      }
+
+      state.friends.push(action.payload);
+    },
   },
 });
 
