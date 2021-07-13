@@ -53,7 +53,7 @@ export function buildRegFnWithEvent<F extends (...args: any[]) => any>(
 /**
  * 缓存版本的buildRegFn
  */
-export function buildCachedRegFn<F extends (...args: any) => any>(
+export function buildCachedRegFn<F extends (...args: any) => Promise<any>>(
   name: string,
   defaultFunc?: F
 ) {
@@ -62,12 +62,12 @@ export function buildCachedRegFn<F extends (...args: any) => any>(
   let _result: any = null; // 缓存的返回值
   let _lastArgs: any;
 
-  const cachedGet = (...args: any) => {
+  const cachedGet = async (...args: any) => {
     if (_result !== null && _isEqual(args, _lastArgs)) {
       // 当有缓存的返回值且两次参数一致
       return _result;
     } else {
-      const result = get(...args);
+      const result = await get(...args);
       _result = result ?? null;
       _lastArgs = args;
       return result;
