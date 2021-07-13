@@ -1,12 +1,13 @@
 import { Avatar } from '@/components/Avatar';
 import { Highlight } from '@/components/Highlight';
-import { Button, Divider, Empty } from 'antd';
+import { Button, Divider, Empty, Typography } from 'antd';
 import {
   addFriendRequest,
   searchUserWithUniqueName,
   showErrorToasts,
   showToasts,
   t,
+  useAppSelector,
   useAsyncFn,
   UserBaseInfo,
 } from 'pawchat-shared';
@@ -70,6 +71,25 @@ const SearchFriendResult: React.FC<{
 });
 SearchFriendResult.displayName = 'SearchFriendResult';
 
+const SelfIdentify: React.FC = React.memo(() => {
+  const userInfo = useAppSelector((state) => state.user.info);
+  const uniqueName = `${userInfo?.nickname}#${userInfo?.discriminator}`;
+
+  return (
+    <div>
+      <Divider />
+
+      <div className="rounded-md border border-black border-opacity-30 px-4 py-3 bg-black bg-opacity-10 text-center">
+        <div>您的个人唯一标识</div>
+        <Typography.Title level={4} copyable={true}>
+          {uniqueName}
+        </Typography.Title>
+      </div>
+    </div>
+  );
+});
+SelfIdentify.displayName = 'SelfIdentify';
+
 export const AddFriend: React.FC = React.memo(() => {
   const [uniqueName, setUniqueName] = useState('');
   const [{ loading, value }, searchUser] = useAsyncFn(async () => {
@@ -108,7 +128,11 @@ export const AddFriend: React.FC = React.memo(() => {
         </Button>
       </div>
 
-      <SearchFriendResult result={value} />
+      {Array.isArray(value) ? (
+        <SearchFriendResult result={value} />
+      ) : (
+        <SelfIdentify />
+      )}
     </div>
   );
 });
