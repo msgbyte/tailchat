@@ -14,6 +14,7 @@ export type {
 export { regField } from './components/FastForm/field';
 export { regFormContainer } from './components/FastForm/container';
 export type { FastFormContainerComponent } from './components/FastForm/container';
+export { PawProvider } from './components/Provider';
 
 // i18n
 export { t, setLanguage, useTranslation } from './i18n';
@@ -22,6 +23,7 @@ export { t, setLanguage, useTranslation } from './i18n';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
+export { useUserInfo } from './hooks/useCache';
 export { useMountedState } from './hooks/useMountedState';
 export { useRafState } from './hooks/useRafState';
 
@@ -54,10 +56,6 @@ export {
 
 // redux
 export { useAppSelector, useAppDispatch } from './redux/hooks/useAppSelector';
-export {
-  useCachedUserInfo,
-  useCachedUserInfoList,
-} from './redux/hooks/useReduxCache';
 export { userActions } from './redux/slices';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';

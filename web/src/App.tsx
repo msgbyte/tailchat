@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { useStorage } from 'pawchat-shared';
+import { PawProvider, useStorage } from 'pawchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 
@@ -13,7 +13,11 @@ const EntryRoute = Loadable(() =>
 );
 
 const AppProvider: React.FC = React.memo((props) => {
-  return <BrowserRouter>{props.children}</BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <PawProvider>{props.children}</PawProvider>
+    </BrowserRouter>
+  );
 });
 AppProvider.displayName = 'AppProvider';
 
