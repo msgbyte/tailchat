@@ -110,4 +110,17 @@ describe('buildCachedRegFn should be ok', () => {
     get();
     expect(fn.mock.calls.length).toBe(3);
   });
+
+  test('should cache promise fn', () => {
+    const [get, set] = buildCachedRegFn('test');
+    const fn = jest.fn(async () => undefined);
+    set(fn);
+
+    get();
+    get();
+    get();
+    expect(fn.mock.calls.length).toBe(1);
+    get(1);
+    expect(fn.mock.calls.length).toBe(2);
+  });
 });

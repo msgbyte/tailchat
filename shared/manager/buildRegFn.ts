@@ -1,5 +1,6 @@
 import _isFunction from 'lodash/isFunction';
 import _isEqual from 'lodash/isEqual';
+import { isPromise } from '../utils/is-promise';
 
 /**
  * 构建一对get set 方法
@@ -53,7 +54,7 @@ export function buildRegFnWithEvent<F extends (...args: any[]) => any>(
 /**
  * 缓存版本的buildRegFn
  */
-export function buildCachedRegFn<F extends (...args: any) => Promise<any>>(
+export function buildCachedRegFn<F extends (...args: any) => any>(
   name: string,
   defaultFunc?: F
 ) {
@@ -62,17 +63,33 @@ export function buildCachedRegFn<F extends (...args: any) => Promise<any>>(
   let _result: any = null; // 缓存的返回值
   let _lastArgs: any;
 
-  const cachedGet = async (...args: any) => {
-    if (_result !== null && _isEqual(args, _lastArgs)) {
-      // 当有缓存的返回值且两次参数一致
-      return _result;
-    } else {
-      const result = await get(...args);
-      _result = result ?? null;
-      _lastArgs = args;
-      return result;
-    }
-  };
+  function isSame(args: any[]) {
+    // 当有缓存的返回值且两次参数一致
+    return _result !== null && _isEqual(args, _lastArgs);
+  }
+
+  // 根据是否为 promise 做区分
+  const cachedGet: any = isPromise(get)
+    ? async (...args: any) => {
+        if (isSame(args)) {
+          return _result;
+        } else {
+          const result = await get(...args);
+          _result = result ?? null;
+          _lastArgs = args;
+          return result;
+        }
+      }
+    : (...args: any) => {
+        if (isSame(args)) {
+          return _result;
+        } else {
+          const result = get(...args);
+          _result = result ?? null;
+          _lastArgs = args;
+          return result;
+        }
+      };
 
   const refreshCache = () => {
     _result = null;
