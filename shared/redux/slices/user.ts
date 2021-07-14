@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type {
-  FriendRequest,
-  UserBaseInfo,
-  UserLoginInfo,
-} from '../../model/user';
+import type { UserLoginInfo } from '../../model/user';
+import type { FriendRequest } from '../../model/friend';
 
 interface UserState {
   info: UserLoginInfo | null;
-  friends: UserBaseInfo[];
+  friends: string[]; // 好友的id列表
   friendRequests: FriendRequest[];
 }
 
@@ -20,14 +17,14 @@ const userSlice = createSlice({
     setUserInfo(state, action: PayloadAction<UserLoginInfo>) {
       state.info = action.payload;
     },
-    setFriendList(state, action: PayloadAction<UserBaseInfo[]>) {
+    setFriendList(state, action: PayloadAction<string[]>) {
       state.friends = action.payload;
     },
     setFriendRequests(state, action: PayloadAction<FriendRequest[]>) {
       state.friendRequests = action.payload;
     },
-    appendFriend(state, action: PayloadAction<UserBaseInfo>) {
-      if (state.friends.some(({ _id }) => _id === action.payload._id)) {
+    appendFriend(state, action: PayloadAction<string>) {
+      if (state.friends.some((id) => id === action.payload)) {
         return;
       }
 

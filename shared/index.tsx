@@ -43,6 +43,7 @@ export {
 } from './manager/ui';
 
 // model
+export { createDMConverse } from './model/converse';
 export {
   addFriendRequest,
   cancelFriendRequest,

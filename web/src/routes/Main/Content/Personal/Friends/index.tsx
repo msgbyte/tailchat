@@ -4,12 +4,12 @@ import { AddFriend } from './AddFriend';
 import { t, useAppSelector } from 'pawchat-shared';
 import { RequestSend } from './RequestSend';
 import { RequestReceived } from './RequestReceived';
+import { FriendList } from './FriendList';
 
 /**
  * 主要内容组件
  */
 export const FriendPanel: React.FC = React.memo(() => {
-  const friends = useAppSelector((state) => state.user.friends);
   const friendRequests = useAppSelector((state) => state.user.friendRequests);
   const userId = useAppSelector((state) => state.user.info?._id);
 
@@ -17,10 +17,7 @@ export const FriendPanel: React.FC = React.memo(() => {
     <div className="w-full">
       <PillTabs>
         <PillTabPane tab={'全部'} key="1">
-          <div className="py-2.5 px-5">
-            <div>好友列表</div>
-            <div>{JSON.stringify(friends)}</div>
-          </div>
+          <FriendList />
         </PillTabPane>
         <PillTabPane tab={t('已发送')} key="2">
           <RequestSend
