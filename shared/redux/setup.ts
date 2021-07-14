@@ -24,4 +24,15 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
     }
     store.dispatch(userActions.appendFriend(userId));
   });
+
+  socket.listen<FriendRequest>('friend.request.add', (request) => {
+    store.dispatch(userActions.appendFriendRequest(request));
+  });
+
+  socket.listen<{ requestId: string }>(
+    'friend.request.remove',
+    ({ requestId }) => {
+      store.dispatch(userActions.removeFriendRequest(requestId));
+    }
+  );
 }
