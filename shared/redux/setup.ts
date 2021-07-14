@@ -7,6 +7,8 @@ import type { FriendRequest } from '../model/friend';
  * 初始化Redux 上下文
  */
 export function setupRedux(socket: AppSocket, store: AppStore) {
+  console.log('初始化Redux上下文...');
+
   // 获取好友列表
   socket.request<string[]>('friend.getAllFriends').then((data) => {
     store.dispatch(userActions.setFriendList(data));

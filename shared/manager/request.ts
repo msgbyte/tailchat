@@ -1,4 +1,4 @@
-import { buildRegFn, buildCachedRegFn } from './buildRegFn';
+import { buildRegFn, buildCachedRegFnAsync } from './buildRegFn';
 
 export const [getErrorHook, setErrorHook] = buildRegFn<(err: any) => boolean>(
   'requestErrorHook',
@@ -6,4 +6,4 @@ export const [getErrorHook, setErrorHook] = buildRegFn<(err: any) => boolean>(
 );
 
 export const [tokenGetter, setTokenGetter] =
-  buildCachedRegFn<() => Promise<string>>('requestTokenGetter');
+  buildCachedRegFnAsync<() => Promise<string>>('requestTokenGetter');

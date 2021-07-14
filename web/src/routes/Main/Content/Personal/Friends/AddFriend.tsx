@@ -12,6 +12,7 @@ import {
   UserBaseInfo,
 } from 'pawchat-shared';
 import React, { useCallback, useState } from 'react';
+import _isNil from 'lodash/isNil';
 
 const SearchFriendResult: React.FC<{
   result: UserBaseInfo | undefined | null;
@@ -128,11 +129,7 @@ export const AddFriend: React.FC = React.memo(() => {
         </Button>
       </div>
 
-      {Array.isArray(value) ? (
-        <SearchFriendResult result={value} />
-      ) : (
-        <SelfIdentify />
-      )}
+      {_isNil(value) ? <SelfIdentify /> : <SearchFriendResult result={value} />}
     </div>
   );
 });
