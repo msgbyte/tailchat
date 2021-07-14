@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Avatar as AntdAvatar } from 'antd';
+import { Avatar as AntdAvatar, Badge } from 'antd';
 import _head from 'lodash/head';
 import _upperCase from 'lodash/upperCase';
 import _isNil from 'lodash/isNil';
@@ -10,6 +10,7 @@ import { getTextColorHex } from 'pawchat-shared';
 
 interface AvatarProps extends AntdAvatarProps {
   name?: string;
+  isOnline?: boolean;
 }
 export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
   const src = typeof props.src !== 'string' ? props.src : undefined;
@@ -41,10 +42,33 @@ export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
     style.fontSize = props.size * 0.4;
   }
 
-  return (
+  const inner = (
     <AntdAvatar {...props} src={src} style={style}>
       {name}
     </AntdAvatar>
   );
+
+  if (typeof props.isOnline === 'boolean') {
+    const style = {
+      bottom: 0,
+      top: 'auto',
+    };
+
+    if (props.isOnline === true) {
+      return (
+        <Badge dot={true} color="green" style={style}>
+          {inner}
+        </Badge>
+      );
+    } else {
+      return (
+        <Badge dot={true} color="#999" style={style}>
+          {inner}
+        </Badge>
+      );
+    }
+  }
+
+  return inner;
 });
 Avatar.displayName = 'Avatar';

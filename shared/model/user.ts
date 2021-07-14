@@ -86,3 +86,21 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
 
   return data;
 }
+
+/**
+ * 获取用户在线状态
+ */
+export async function getUserOnlineStatus(
+  userIds: string[]
+): Promise<boolean[]> {
+  const { data } = await request.get<boolean[]>(
+    '/api/gateway/checkUserOnline',
+    {
+      params: {
+        userIds,
+      },
+    }
+  );
+
+  return data;
+}
