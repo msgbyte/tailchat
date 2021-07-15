@@ -46,7 +46,7 @@ export function is(it: string) {
  * 根据文本内容返回一个内置色卡的颜色
  * @param text 文本
  */
-export function getTextColorHex(text: string): string {
+export function getTextColorHex(text: unknown): string {
   if (!text || !_isString(text)) {
     return '#ffffff'; // 如果获取不到文本，则返回白色
   }

@@ -12,7 +12,8 @@ interface AvatarProps extends AntdAvatarProps {
   name?: string;
   isOnline?: boolean;
 }
-export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
+export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
+  const { isOnline, ...props } = _props;
   const src = typeof props.src !== 'string' ? props.src : undefined;
 
   const name = useMemo(() => _upperCase(_head(props.name)), [props.name]);
@@ -21,7 +22,7 @@ export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
     () =>
       // 如果src为空 且 icon为空 则给个固定颜色
       _isEmpty(src) && _isNil(props.icon)
-        ? getTextColorHex(props.name!)
+        ? getTextColorHex(props.name)
         : undefined,
     [src, props.icon, props.name]
   );
@@ -48,13 +49,13 @@ export const Avatar: React.FC<AvatarProps> = React.memo((props) => {
     </AntdAvatar>
   );
 
-  if (typeof props.isOnline === 'boolean') {
+  if (typeof isOnline === 'boolean') {
     const style = {
       bottom: 0,
       top: 'auto',
     };
 
-    if (props.isOnline === true) {
+    if (isOnline === true) {
       return (
         <Badge dot={true} color="green" style={style}>
           {inner}
