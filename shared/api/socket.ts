@@ -23,7 +23,22 @@ type SocketEventRespones<T = unknown> =
  * 封装后的 Socket
  */
 export class AppSocket {
-  constructor(private socket: Socket) {}
+  listener: [string, (data: unknown) => void][] = [];
+
+  constructor(private socket: Socket) {
+    socket.onAny((eventName: string, data: unknown) => {
+      const matched = this.listener.filter(([ev]) => ev === eventName); // 匹配到的监听器列表
+      if (matched.length === 0) {
+        // 没有匹配到任何处理函数
+        console.warn(`[Socket IO] Unhandler event: ${eventName}`);
+        return;
+      }
+
+      matched.forEach(([, cb]) => {
+        cb(data);
+      });
+    });
+  }
 
   get connected(): boolean {
     return socket.connected;
@@ -44,8 +59,11 @@ export class AppSocket {
     });
   }
 
+  /**
+   * 监听远程通知
+   */
   listen<T>(eventName: string, callback: (data: T) => void) {
-    this.socket.on(`notify:${eventName}`, callback);
+    this.listener.push([`notify:${eventName}`, callback as any]);
   }
 }
 
