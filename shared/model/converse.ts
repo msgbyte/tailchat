@@ -1,6 +1,6 @@
 import { request } from '../api/request';
 
-interface ConverseInfo {
+export interface ChatConverseInfo {
   _id: string;
   name: string;
   type: 'DM' | 'Group';
@@ -13,7 +13,7 @@ interface ConverseInfo {
  */
 export async function createDMConverse(
   targetId: string
-): Promise<ConverseInfo> {
+): Promise<ChatConverseInfo> {
   const { data } = await request.post('/api/chat/converse/createDMConverse', {
     targetId,
   });

@@ -8,7 +8,11 @@ interface UserState {
   friendRequests: FriendRequest[];
 }
 
-const initialState: UserState = { info: null, friends: [], friendRequests: [] };
+const initialState: UserState = {
+  info: null,
+  friends: [],
+  friendRequests: [],
+};
 
 const userSlice = createSlice({
   name: 'user',
