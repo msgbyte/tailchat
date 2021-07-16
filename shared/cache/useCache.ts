@@ -4,6 +4,7 @@ import {
   getUserOnlineStatus,
   UserBaseInfo,
 } from '../model/user';
+import { isValidStr } from '../utils/string-helper';
 
 /**
  * 用户缓存
@@ -12,10 +13,20 @@ export function useCachedUserInfo(
   userId: string,
   refetch = false
 ): UserBaseInfo | Record<string, never> {
-  const { data } = useQuery(['user', userId], () => fetchUserInfo(userId), {
-    staleTime: 2 * 60 * 60 * 1000, // 缓存2小时
-    refetchOnMount: refetch ? 'always' : true,
-  });
+  const { data } = useQuery(
+    ['user', userId],
+    () => {
+      if (!isValidStr(userId)) {
+        return {};
+      }
+
+      return fetchUserInfo(userId);
+    },
+    {
+      staleTime: 2 * 60 * 60 * 1000, // 缓存2小时
+      refetchOnMount: refetch ? 'always' : true,
+    }
+  );
 
   return data ?? {};
 }

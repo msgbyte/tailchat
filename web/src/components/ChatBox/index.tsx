@@ -3,6 +3,7 @@ import React from 'react';
 import { useConverseMessage } from 'pawchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatInputBox } from './ChatInputBox';
+import { ChatMessageList } from './ChatMessageList';
 
 const ChatBoxPlaceholder: React.FC = React.memo(() => {
   return (
@@ -39,7 +40,8 @@ export const ChatBox: React.FC<{
 
   return (
     <div>
-      <div>消息数据: {JSON.stringify(messages)}</div>
+      <ChatMessageList messages={messages} />
+
       <ChatInputBox
         onSendMsg={(msg) =>
           handleSendMessage({

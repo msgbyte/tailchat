@@ -51,6 +51,7 @@ export {
   denyFriendRequest,
 } from './model/friend';
 export type { FriendRequest } from './model/friend';
+export type { ChatMessage } from './model/message';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
   loginWithEmail,
