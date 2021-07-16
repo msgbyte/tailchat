@@ -16,6 +16,12 @@ export interface ChatMessage {
   updatedAt?: string;
 }
 
+export interface SendMessagePayload {
+  groupId?: string;
+  converseId: string;
+  content: string;
+}
+
 /**
  * 获取会话消息
  * @param converseId 会话ID
@@ -31,6 +37,18 @@ export async function fetchConverseMessage(
       startId,
     },
   });
+
+  return data;
+}
+
+/**
+ * 发送消息
+ * @param payload 消息体
+ */
+export async function sendMessage(
+  payload: SendMessagePayload
+): Promise<ChatMessage> {
+  const { data } = await request.post('/api/chat/message/sendMessage', payload);
 
   return data;
 }

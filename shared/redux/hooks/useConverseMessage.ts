@@ -1,6 +1,12 @@
+import { useCallback } from 'react';
 import { getCachedConverseInfo } from '../../cache/cache';
 import { useAsync } from '../../hooks/useAsync';
-import { fetchConverseMessage } from '../../model/message';
+import { showErrorToasts } from '../../manager/ui';
+import {
+  fetchConverseMessage,
+  sendMessage,
+  SendMessagePayload,
+} from '../../model/message';
 import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
 
@@ -27,5 +33,21 @@ export function useConverseMessage(converseId: string) {
     }
   }, [converse, converseId]);
 
-  return { messages, loading, error };
+  const handleSendMessage = useCallback(async (payload: SendMessagePayload) => {
+    // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
+
+    try {
+      const message = await sendMessage(payload);
+      dispatch(
+        chatActions.appendConverseMessage({
+          converseId,
+          messages: [message],
+        })
+      );
+    } catch (err) {
+      showErrorToasts(err);
+    }
+  }, []);
+
+  return { messages, loading, error, handleSendMessage };
 }

@@ -2,6 +2,7 @@ import { Skeleton } from 'antd';
 import React from 'react';
 import { useConverseMessage } from 'pawchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
+import { ChatInputBox } from './ChatInputBox';
 
 const ChatBoxPlaceholder: React.FC = React.memo(() => {
   return (
@@ -24,7 +25,9 @@ ChatBoxPlaceholder.displayName = 'ChatBoxPlaceholder';
 export const ChatBox: React.FC<{
   converseId: string;
 }> = React.memo((props) => {
-  const { messages, loading, error } = useConverseMessage(props.converseId);
+  const { messages, loading, error, handleSendMessage } = useConverseMessage(
+    props.converseId
+  );
 
   if (loading) {
     return <ChatBoxPlaceholder />;
@@ -34,6 +37,18 @@ export const ChatBox: React.FC<{
     return <AlertErrorView error={error} />;
   }
 
-  return <div>消息数据: {JSON.stringify(messages)}</div>;
+  return (
+    <div>
+      <div>消息数据: {JSON.stringify(messages)}</div>
+      <ChatInputBox
+        onSendMsg={(msg) =>
+          handleSendMessage({
+            converseId: props.converseId,
+            content: msg,
+          })
+        }
+      />
+    </div>
+  );
 });
 ChatBox.displayName = 'ChatBox';
