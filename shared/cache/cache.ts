@@ -1,3 +1,4 @@
+import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
 import { queryClient } from './index';
 
@@ -17,4 +18,9 @@ function buildCacheFactory<T>(
 export const getCachedUserInfo = buildCacheFactory<UserBaseInfo>(
   'user',
   fetchUserInfo
+);
+
+export const getCachedConverseInfo = buildCacheFactory<ChatConverseInfo>(
+  'converse',
+  fetchConverseInfo
 );

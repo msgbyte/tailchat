@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 
 interface UserConversePanelParams {
-  converseUUID: string;
+  converseId: string;
 }
 
 export const ConversePanel: React.FC = React.memo(() => {
@@ -11,8 +11,7 @@ export const ConversePanel: React.FC = React.memo(() => {
 
   return (
     <div className="w-full h-full overflow-hidden">
-      <div>{params.converseUUID}</div>
-      <ChatBox />
+      <ChatBox converseId={params.converseId} />
     </div>
   );
 });

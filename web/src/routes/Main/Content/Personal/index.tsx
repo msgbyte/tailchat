@@ -15,7 +15,7 @@ export const Personal: React.FC = React.memo(() => {
         <Route path="/main/personal/plugins" component={IsDeveloping} />
 
         <Route
-          path="/main/personal/converse/:converseUUID"
+          path="/main/personal/converse/:converseId"
           component={ConversePanel}
         />
 

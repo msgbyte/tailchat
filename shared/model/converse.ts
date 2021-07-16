@@ -20,3 +20,19 @@ export async function createDMConverse(
 
   return data;
 }
+
+/**
+ * 获取会话信息
+ * @param converseId 会话ID
+ */
+export async function fetchConverseInfo(
+  converseId: string
+): Promise<ChatConverseInfo> {
+  const { data } = await request.get('/api/chat/converse/findConverseInfo', {
+    params: {
+      converseId,
+    },
+  });
+
+  return data;
+}
