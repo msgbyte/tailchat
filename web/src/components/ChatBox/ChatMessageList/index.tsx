@@ -8,7 +8,7 @@ interface ChatMessageListProps {
 export const ChatMessageList: React.FC<ChatMessageListProps> = React.memo(
   (props) => {
     return (
-      <div>
+      <div className="flex-1 overflow-y-scroll">
         {props.messages.map((message) => (
           <ChatMessageItem
             key={message._id}
