@@ -2,7 +2,7 @@
  * Reference: https://webpack.js.org/configuration/configuration-languages/
  */
 
-import type { Configuration, WebpackPluginInstance } from 'webpack';
+import type { Configuration } from 'webpack';
 import { DefinePlugin } from 'webpack';
 import type WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
@@ -11,12 +11,16 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
+
 delete process.env.TS_NODE_PROJECT; // https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/32
 require('../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
 
 const ROOT_PATH = path.resolve(__dirname, './');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
 const ASSET_PATH = process.env.ASSET_PATH || '/';
+const PORT = Number(process.env.PORT || 11011);
 
 declare module 'webpack' {
   interface Configuration {
@@ -38,7 +42,7 @@ const config: Configuration = {
     publicPath: ASSET_PATH,
   },
   devServer: {
-    port: 11011,
+    port: PORT,
     historyApiFallback: true,
   },
   module: {
