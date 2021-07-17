@@ -10,7 +10,7 @@ import { isValidStr } from '../utils/string-helper';
  * 用户缓存
  */
 export function useCachedUserInfo(
-  userId: string,
+  userId: string | null,
   refetch = false
 ): UserBaseInfo | Record<string, never> {
   const { data } = useQuery(

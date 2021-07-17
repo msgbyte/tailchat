@@ -4,7 +4,7 @@ import type { ChatMessage } from '../../model/message';
 import _uniqBy from 'lodash/uniqBy';
 import _orderBy from 'lodash/orderBy';
 
-interface ChatConverseState extends ChatConverseInfo {
+export interface ChatConverseState extends ChatConverseInfo {
   messages: ChatMessage[];
 }
 

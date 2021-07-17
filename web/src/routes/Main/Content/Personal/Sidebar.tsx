@@ -1,6 +1,8 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { SidebarItem } from '../SidebarItem';
+import { useDMConverseList } from 'pawchat-shared';
+import { SidebarDMItem } from './SidebarDMItem';
 
 const SidebarSection: React.FC<{
   action: React.ReactNode;
@@ -22,6 +24,8 @@ SidebarSection.displayName = 'SidebarSection';
  * 个人面板侧边栏组件
  */
 export const Sidebar: React.FC = React.memo(() => {
+  const converseList = useDMConverseList();
+
   return (
     <>
       <SidebarItem
@@ -37,11 +41,9 @@ export const Sidebar: React.FC = React.memo(() => {
 
       <SidebarSection action={<Icon icon="mdi-plus" />}>私信</SidebarSection>
 
-      <SidebarItem
-        name="用户1"
-        action={<Icon icon="mdi-close" />}
-        to={`/main/personal/converse/${'uuid'}`}
-      />
+      {converseList.map((converse) => {
+        return <SidebarDMItem key={converse._id} converse={converse} />;
+      })}
     </>
   );
 });
