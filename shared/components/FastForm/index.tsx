@@ -74,7 +74,7 @@ export const FastForm: React.FC<FastFormProps> = React.memo((props) => {
             {...fieldMeta}
             value={value}
             error={error}
-            onChange={(val) => setFieldValue(fieldName, val)}
+            onChange={(val: any) => setFieldValue(fieldName, val)}
           />
         );
       }

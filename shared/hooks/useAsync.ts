@@ -1,5 +1,5 @@
 import { DependencyList, useEffect } from 'react';
-import { FunctionReturningPromise } from '../types';
+import type { FunctionReturningPromise } from '../types';
 import { useAsyncFn } from './useAsyncFn';
 
 // Reference: https://github.com/streamich/react-use/blob/master/src/useAsync.ts

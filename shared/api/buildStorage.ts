@@ -78,7 +78,7 @@ export function buildStorage(backend: any) {
       }
       return res;
     },
-    remove: async (key) => {
+    remove: async (key: string) => {
       await storage.remove({ key });
     },
     /**
