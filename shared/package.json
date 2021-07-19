@@ -10,6 +10,7 @@
     "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "crc": "^3.8.0",
+    "dayjs": "^1.10.6",
     "formik": "^2.2.9",
     "i18next": "^20.3.2",
     "i18next-http-backend": "^1.2.6",
