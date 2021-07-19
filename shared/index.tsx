@@ -71,5 +71,10 @@ export { createStore } from './redux/store';
 export type { AppStore, AppDispatch } from './redux/store';
 
 // utils
-export { getTextColorHex } from './utils/string-helper';
+export {
+  shouldShowMessageTime,
+  getMessageTimeDiff,
+  formatShortTime,
+} from './utils/date-helper';
 export { isBrowser, isNavigator } from './utils/environment';
+export { getTextColorHex } from './utils/string-helper';

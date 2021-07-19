@@ -12,7 +12,7 @@ dayjs.locale('zh-cn');
 /**
  * 是否为当天
  */
-export function isToday(date: Date): boolean {
+export function isToday(date: dayjs.ConfigType): boolean {
   return dayjs(date).isSame(dayjs(), 'd');
 }
 
@@ -22,9 +22,24 @@ export function isToday(date: Date): boolean {
 export function getMessageTimeDiff(input: Date): string {
   const date = dayjs(input);
 
-  if (isToday(input)) {
+  if (isToday(date)) {
     return date.fromNow();
   } else {
     return date.format('YYYY-MM-DD HH:mm:ss');
   }
+}
+
+/**
+ * 是否应该显示消息时间
+ * 间隔时间大于十五分钟则显示
+ */
+export function shouldShowMessageTime(date1: Date, date2: Date): boolean {
+  return Math.abs(date1.valueOf() - date2.valueOf()) > 15 * 60 * 1000;
+}
+
+/**
+ * 格式化为 小时:分钟
+ */
+export function formatShortTime(date: dayjs.ConfigType): string {
+  return dayjs(date).format('HH:mm');
 }
