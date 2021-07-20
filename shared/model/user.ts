@@ -14,6 +14,14 @@ export interface UserLoginInfo extends UserBaseInfo {
 }
 
 /**
+ * 用户私信列表
+ */
+export interface UserDMList {
+  userId: string;
+  converseIds: string[];
+}
+
+/**
  * 邮箱登录
  * @param email 邮箱
  * @param password 密码
@@ -99,6 +107,21 @@ export async function getUserOnlineStatus(
       params: {
         userIds,
       },
+    }
+  );
+
+  return data;
+}
+
+/**
+ * 将会话添加到用户私信列表
+ * 如果已添加则后端忽略
+ */
+export async function appendUserDMConverse(converseId: string) {
+  const { data } = await request.post<UserDMList>(
+    '/api/user/dmlist/addConverse',
+    {
+      converseId,
     }
   );
 

@@ -1,7 +1,10 @@
 import type { AppStore } from './store';
 import type { AppSocket } from '../api/socket';
-import { userActions } from './slices';
+import { chatActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
+import type { UserDMList } from '../model/user';
+import { fetchConverseInfo } from '../model/converse';
+import { getCachedConverseInfo } from '../cache/cache';
 
 /**
  * 初始化Redux 上下文
@@ -18,6 +21,17 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
   socket.request<FriendRequest[]>('friend.request.allRelated').then((data) => {
     store.dispatch(userActions.setFriendRequests(data));
   });
+
+  socket.request<UserDMList>('user.dmlist.getAllConverse').then((data) => {
+    data.converseIds.forEach(async (converseId) => {
+      // TODO: 待优化, 可以在后端一次性返回
+
+      const converse = await getCachedConverseInfo(converseId);
+      store.dispatch(chatActions.setConverseInfo(converse));
+    });
+  });
+
+  // ------------------ 通知
 
   socket.listen<{ userId: string }>('friend.add', ({ userId }) => {
     if (typeof userId !== 'string') {

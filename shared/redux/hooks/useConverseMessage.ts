@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { getCachedConverseInfo } from '../../cache/cache';
+import { ensureDMConverse } from '../../helper/converse-helper';
 import { useAsync } from '../../hooks/useAsync';
 import { showErrorToasts } from '../../manager/ui';
 import {
@@ -20,9 +20,13 @@ export function useConverseMessage(converseId: string) {
 
   const { loading, error } = useAsync(async () => {
     if (!converse) {
-      const converse = await getCachedConverseInfo(converseId);
+      // 如果是一个新会话(或者当前会话列表中没有)
+
+      // Step 1. 创建会话 并确保私信列表中存在该会话
+      const converse = await ensureDMConverse(converseId);
       dispatch(chatActions.setConverseInfo(converse));
 
+      // Step 2. 拉取消息
       const messages = await fetchConverseMessage(converseId);
       dispatch(
         chatActions.appendConverseMessage({
