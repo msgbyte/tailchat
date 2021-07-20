@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IsDeveloping render 1`] = `
+<div>
+  <div
+    class="text-white w-full h-full flex items-center justify-center flex-col"
+  >
+    <span />
+    <p
+      class="text-2xl"
+    >
+      该功能暂未开放
+    </p>
+  </div>
+</div>
+`;

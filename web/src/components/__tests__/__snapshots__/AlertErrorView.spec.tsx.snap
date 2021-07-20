@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertErrorView render 1`] = `
+<div>
+  <div
+    class="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon"
+    data-show="true"
+    role="alert"
+  >
+    <div
+      class="ant-alert-content"
+    >
+      <div
+        class="ant-alert-message"
+      >
+        Error
+      </div>
+      <div
+        class="ant-alert-description"
+      >
+        Dummy Error
+      </div>
+    </div>
+  </div>
+</div>
+`;

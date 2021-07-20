@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Highlight render 1`] = `
+<div>
+  <span
+    class="bg-black bg-opacity-20 rounded py-1 px-2"
+  >
+    Any Text
+  </span>
+</div>
+`;

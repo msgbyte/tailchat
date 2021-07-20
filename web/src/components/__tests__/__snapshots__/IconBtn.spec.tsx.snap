@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconBtn render 1`] = `
+<div>
+  <button
+    class="ant-btn ant-btn-circle ant-btn-icon-only border-0 bg-black bg-opacity-30 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+    type="button"
+  >
+    <span />
+  </button>
+</div>
+`;

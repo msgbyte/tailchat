@@ -44,6 +44,7 @@
     "gulp-sort": "^2.0.0",
     "husky": "^7.0.0",
     "i18next-scanner": "^3.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
