@@ -2,8 +2,8 @@ import {
   ChatConverseState,
   useCachedUserInfo,
   useUserId,
-} from 'pawchat-shared';
-import { isValidStr } from 'pawchat-shared/utils/string-helper';
+} from 'tailchat-shared';
+import { isValidStr } from 'tailchat-shared/utils/string-helper';
 import React, { useMemo } from 'react';
 import { SidebarItem } from '../SidebarItem';
 

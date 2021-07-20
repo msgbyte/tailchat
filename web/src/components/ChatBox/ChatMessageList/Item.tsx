@@ -3,7 +3,7 @@ import {
   ChatMessage,
   formatShortTime,
   useCachedUserInfo,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import clsx from 'clsx';
 

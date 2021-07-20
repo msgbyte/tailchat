@@ -6,7 +6,7 @@ import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
 import _isNumber from 'lodash/isNumber';
 import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
-import { getTextColorHex } from 'pawchat-shared';
+import { getTextColorHex } from 'tailchat-shared';
 
 interface AvatarProps extends AntdAvatarProps {
   name?: string;

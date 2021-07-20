@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Form } from 'antd';
-import type { FastFormFieldComponent } from 'pawchat-shared';
+import type { FastFormFieldComponent } from 'tailchat-shared';
 import { getValidateStatus } from '../utils';
 
 export const FastFormPassword: FastFormFieldComponent = React.memo((props) => {

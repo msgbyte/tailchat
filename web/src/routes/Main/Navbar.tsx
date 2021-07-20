@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from 'pawchat-shared';
+import { useAppSelector } from 'tailchat-shared';
 import { Icon } from '@iconify/react';
 import clsx, { ClassValue } from 'clsx';
 import { Avatar } from '../../components/Avatar';

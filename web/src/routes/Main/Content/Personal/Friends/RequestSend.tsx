@@ -6,7 +6,7 @@ import {
   FriendRequest,
   t,
   useAsyncFn,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import React from 'react';
 
 export const RequestSend: React.FC<{

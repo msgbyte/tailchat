@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Select, Form } from 'antd';
 import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
-import type { FastFormFieldComponent } from 'pawchat-shared';
+import type { FastFormFieldComponent } from 'tailchat-shared';
 
 const Option = Select.Option;
 

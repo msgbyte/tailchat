@@ -1,4 +1,4 @@
-import type { UserLoginInfo } from 'pawchat-shared';
+import type { UserLoginInfo } from 'tailchat-shared';
 
 let _userLoginInfo: UserLoginInfo;
 

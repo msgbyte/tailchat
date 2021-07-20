@@ -4,7 +4,7 @@ import {
   regField,
   FastFormContainerComponent,
   regFormContainer,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import { Form, Button } from 'antd';
 
 import { FastFormText } from './types/Text';

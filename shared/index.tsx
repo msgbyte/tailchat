@@ -18,7 +18,7 @@ export type {
 export { regField } from './components/FastForm/field';
 export { regFormContainer } from './components/FastForm/container';
 export type { FastFormContainerComponent } from './components/FastForm/container';
-export { PawProvider } from './components/Provider';
+export { TcProvider } from './components/Provider';
 
 // i18n
 export { t, setLanguage, useTranslation } from './i18n';

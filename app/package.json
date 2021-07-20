@@ -1,8 +1,8 @@
 {
-  "name": "pawchat-app",
+  "name": "tailchat-app",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/pawchat/pawchat.git",
+  "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "GPLv3",
   "private": true

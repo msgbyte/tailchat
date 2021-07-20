@@ -1,4 +1,4 @@
-import { isBrowser, useRafState } from 'pawchat-shared';
+import { isBrowser, useRafState } from 'tailchat-shared';
 import { useEffect } from 'react';
 
 // Reference: https://github.com/streamich/react-use/blob/master/src/useWindowSize.ts

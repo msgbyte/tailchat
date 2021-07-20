@@ -5,8 +5,8 @@ import _isNil from 'lodash/isNil';
 import type {
   FastFormFieldComponent,
   FastFormFieldProps,
-} from 'pawchat-shared';
-import { CustomField } from 'pawchat-shared';
+} from 'tailchat-shared';
+import { CustomField } from 'tailchat-shared';
 
 export const FastFormCustom: FastFormFieldComponent<{
   render: (props: FastFormFieldProps) => React.ReactNode;

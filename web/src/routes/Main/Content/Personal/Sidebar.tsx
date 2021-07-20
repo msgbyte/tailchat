@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { SidebarItem } from '../SidebarItem';
-import { useDMConverseList } from 'pawchat-shared';
+import { useDMConverseList } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 
 const SidebarSection: React.FC<{

@@ -10,7 +10,7 @@ import {
   useAppSelector,
   useAsyncFn,
   UserBaseInfo,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import React, { useCallback, useState } from 'react';
 import _isNil from 'lodash/isNil';
 

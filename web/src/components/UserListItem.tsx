@@ -3,7 +3,7 @@ import { Avatar } from './Avatar';
 import _isEmpty from 'lodash/isEmpty';
 import { Skeleton, Space } from 'antd';
 // import { openUserProfile } from './modals/UserProfile';
-import { useCachedUserInfo } from 'pawchat-shared';
+import { useCachedUserInfo } from 'tailchat-shared';
 import { useCachedOnlineStatus } from '../../../shared/cache/useCache';
 
 // const UserAvatar = styled(Avatar)`

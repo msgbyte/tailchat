@@ -3,7 +3,7 @@ import {
   ChatMessage,
   getMessageTimeDiff,
   shouldShowMessageTime,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import { ChatMessageItem } from './Item';
 import { Divider } from 'antd';
 

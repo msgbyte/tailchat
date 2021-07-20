@@ -1,7 +1,7 @@
 import _isObject from 'lodash/isObject';
 import _isNull from 'lodash/isNull';
 import jwtDecode from 'jwt-decode';
-import { getStorage } from 'pawchat-shared';
+import { getStorage } from 'tailchat-shared';
 
 /**
  * 获取完整jwt字符串的载荷信息(尝试解析json)

@@ -1,6 +1,6 @@
 import { Skeleton } from 'antd';
 import React from 'react';
-import { useConverseMessage } from 'pawchat-shared';
+import { useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList } from './ChatMessageList';

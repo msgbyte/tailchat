@@ -1,4 +1,4 @@
-import { registerWithEmail, useAsyncFn } from 'pawchat-shared';
+import { registerWithEmail, useAsyncFn } from 'tailchat-shared';
 import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';

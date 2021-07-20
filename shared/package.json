@@ -1,8 +1,8 @@
 {
-  "name": "pawchat-shared",
+  "name": "tailchat-shared",
   "version": "1.0.0",
   "main": "index.tsx",
-  "repository": "https://github.com/pawchat/pawchat.git",
+  "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "GPLv3",
   "private": true,

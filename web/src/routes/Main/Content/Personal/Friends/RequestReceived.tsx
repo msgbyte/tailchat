@@ -7,7 +7,7 @@ import {
   acceptFriendRequest,
   denyFriendRequest,
   useAsyncRequest,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import React from 'react';
 
 export const RequestReceived: React.FC<{

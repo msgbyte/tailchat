@@ -1,7 +1,7 @@
 import React from 'react';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { AddFriend } from './AddFriend';
-import { t, useAppSelector } from 'pawchat-shared';
+import { t, useAppSelector } from 'tailchat-shared';
 import { RequestSend } from './RequestSend';
 import { RequestReceived } from './RequestReceived';
 import { FriendList } from './FriendList';

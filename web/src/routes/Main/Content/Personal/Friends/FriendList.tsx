@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { createDMConverse, t, useAppSelector } from 'pawchat-shared';
+import { createDMConverse, t, useAppSelector } from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
 import { Tooltip } from 'antd';

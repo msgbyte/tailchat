@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { PawProvider, useStorage } from 'pawchat-shared';
+import { TcProvider, useStorage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 
@@ -15,7 +15,7 @@ const EntryRoute = Loadable(() =>
 const AppProvider: React.FC = React.memo((props) => {
   return (
     <BrowserRouter>
-      <PawProvider>{props.children}</PawProvider>
+      <TcProvider>{props.children}</TcProvider>
     </BrowserRouter>
   );
 });

@@ -1,4 +1,4 @@
-import type { AppState } from 'pawchat-shared/redux/slices';
+import type { AppState } from 'tailchat-shared/redux/slices';
 import { useSelector, useDispatch } from 'react-redux';
 
 export function useAppSelector<T>(

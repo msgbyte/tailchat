@@ -1,5 +1,5 @@
 /**
- * Pawchat 共享配置
+ * TailChat 共享配置
  */
 
 export const config = {

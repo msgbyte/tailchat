@@ -6,7 +6,7 @@ import {
   setStorage,
   setToasts,
   setTokenGetter,
-} from 'pawchat-shared';
+} from 'tailchat-shared';
 import { getUserJWT } from './utils/jwt-helper';
 
 const webStorage = buildStorage(window.localStorage);

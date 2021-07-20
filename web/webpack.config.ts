@@ -111,7 +111,7 @@ const config: Configuration = {
       'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
     }),
     new HtmlWebpackPlugin({
-      title: 'PawChat',
+      title: 'TailChat',
       inject: true,
       hash: true,
       template: path.resolve(ROOT_PATH, './assets/template.html'),

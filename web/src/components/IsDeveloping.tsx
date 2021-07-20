@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { t } from 'pawchat-shared';
+import { t } from 'tailchat-shared';
 import React from 'react';
 
 /**

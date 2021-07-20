@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
-import { loginWithEmail, t, useAsyncFn } from 'pawchat-shared';
+import { loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
@@ -57,7 +57,7 @@ export const LoginView: React.FC = React.memo(() => {
 
   return (
     <div className="w-96 text-white">
-      <div className="mb-4 text-2xl">登录 Paw Chat</div>
+      <div className="mb-4 text-2xl">登录 Tail Chat</div>
 
       <div>
         <div className="mb-4">
