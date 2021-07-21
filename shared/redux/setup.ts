@@ -3,13 +3,20 @@ import type { AppSocket } from '../api/socket';
 import { chatActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
 import type { UserDMList } from '../model/user';
-import { fetchConverseInfo } from '../model/converse';
 import { getCachedConverseInfo } from '../cache/cache';
 
 /**
  * 初始化Redux 上下文
  */
 export function setupRedux(socket: AppSocket, store: AppStore) {
+  initial(socket, store);
+  listenNotify(socket, store);
+}
+
+/**
+ * 初始化数据
+ */
+function initial(socket: AppSocket, store: AppStore) {
   console.log('初始化Redux上下文...');
 
   // 获取好友列表
@@ -30,9 +37,12 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
       store.dispatch(chatActions.setConverseInfo(converse));
     });
   });
+}
 
-  // ------------------ 通知
-
+/**
+ * 监听远程通知
+ */
+function listenNotify(socket: AppSocket, store: AppStore) {
   socket.listen<{ userId: string }>('friend.add', ({ userId }) => {
     if (typeof userId !== 'string') {
       console.error('错误的信息', userId);
