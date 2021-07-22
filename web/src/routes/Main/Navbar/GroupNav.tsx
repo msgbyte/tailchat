@@ -1,5 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import { openModal } from '@/components/Modal';
+import { ModalCreateGroup } from '@/components/modals/CreateGroup';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo } from 'react';
 import { GroupInfo, useAppSelector } from 'tailchat-shared';
@@ -17,7 +18,7 @@ export const GroupNav: React.FC = React.memo(() => {
   const groups = useGroups();
 
   const handleCreateGroup = useCallback(() => {
-    openModal(<div className="w-60 h-48">新增群组</div>);
+    openModal(<ModalCreateGroup />);
   }, []);
 
   return (

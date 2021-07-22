@@ -9,11 +9,9 @@ import { PortalAdd, PortalRemove } from './Portal';
 import { Typography } from 'antd';
 import { Icon } from '@iconify/react';
 import { CSSTransition } from 'react-transition-group';
-// import { animated, useSpring } from 'react-spring';
-// import { easeQuadInOut } from 'd3-ease';
-// import { Iconfont } from './Iconfont';
 
 import './Modal.less';
+import clsx from 'clsx';
 
 const transitionEndListener = (node: HTMLElement, done: () => void) =>
   node.addEventListener('transitionend', done, false);
@@ -82,13 +80,13 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
       appear={true}
     >
       <div
-        className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center"
+        className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-60 flex justify-center items-center"
         onClick={handleClose}
       >
         <ModalContext.Provider value={{ closeModal: handleClose }}>
           {/* Inner */}
           <div
-            className="modal-inner bg-gray-800 rounded overflow-auto relative"
+            className="modal-inner bg-gray-700 rounded overflow-auto relative"
             style={{ maxHeight: '80vh', maxWidth: '80vw' }}
             onClick={stopPropagation}
           >
@@ -163,25 +161,22 @@ export function useModalContext() {
 /**
  * 标准模态框包装器
  */
-// const ModalWrapperContainer = styled.div`
-//   padding: 16px;
-//   min-width: 300px;
-//   ${(props) => props.theme.mixins.desktop('min-width: 420px;')}
-// `;
 export const ModalWrapper: React.FC<{
   title?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }> = React.memo((props) => {
   const title = _isString(props.title) ? (
-    <Typography.Title
-      level={4}
-      style={{ textAlign: 'center', marginBottom: 16 }}
-    >
+    <Typography.Title level={4} className="text-center mb-4">
       {props.title}
     </Typography.Title>
   ) : null;
 
   return (
-    <div className="p-4" style={{ minWidth: 300 }}>
+    <div
+      className={clsx('p-4', props.className)}
+      style={{ minWidth: 300, ...props.style }}
+    >
       {title}
       {props.children}
     </div>
