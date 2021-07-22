@@ -15,6 +15,12 @@
       "options": {
         "parser": "typescript"
       }
+    },
+    {
+      "files": "*.less",
+      "options": {
+        "parser": "less"
+      }
     }
   ]
 }
