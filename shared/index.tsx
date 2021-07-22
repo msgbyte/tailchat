@@ -54,7 +54,8 @@ export {
   denyFriendRequest,
 } from './model/friend';
 export type { FriendRequest } from './model/friend';
-export type { GroupInfo } from './model/group';
+export { GroupPanelType } from './model/group';
+export type { GroupPanel, GroupInfo } from './model/group';
 export type { ChatMessage } from './model/message';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {

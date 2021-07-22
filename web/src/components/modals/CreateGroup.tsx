@@ -1,15 +1,76 @@
 import { Button, Divider, Input, Typography } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
+import { GroupPanelType } from 'tailchat-shared';
+import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
 import { ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
 
+const panelTemplate: {
+  key: string;
+  label: string;
+  panels: GroupPanel[];
+}[] = [
+  {
+    key: 'default',
+    label: '默认群组',
+    panels: [
+      {
+        id: '00',
+        name: '文字频道',
+        type: GroupPanelType.GROUP,
+      },
+      {
+        id: '01',
+        name: '大厅',
+        parentId: '00',
+        type: GroupPanelType.TEXT,
+      },
+    ],
+  },
+  {
+    key: 'work',
+    label: '工作协同',
+    panels: [
+      {
+        id: '00',
+        name: '公共',
+        type: GroupPanelType.GROUP,
+      },
+      {
+        id: '01',
+        name: '全员',
+        parentId: '00',
+        type: GroupPanelType.TEXT,
+      },
+      {
+        id: '10',
+        name: '临时会议',
+        type: GroupPanelType.GROUP,
+      },
+      {
+        id: '11',
+        name: '会议室1',
+        parentId: '10',
+        type: GroupPanelType.TEXT,
+      },
+      {
+        id: '11',
+        name: '会议室2',
+        parentId: '10',
+        type: GroupPanelType.TEXT,
+      },
+    ],
+  },
+];
+
 export const ModalCreateGroup: React.FC = React.memo(() => {
   const slidesRef = useRef<SlidesRef>(null);
+  const [panels, setPanels] = useState<GroupPanel[]>([]);
   const [name, setName] = useState('');
 
-  const handleSelectTemplate = useCallback(() => {
-    // TODO
+  const handleSelectTemplate = useCallback((panels: GroupPanel[]) => {
+    setPanels(panels);
     slidesRef.current?.next();
   }, []);
 
@@ -18,8 +79,8 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
   }, []);
 
   const handleCreate = useCallback(() => {
-    console.log({ name });
-  }, [name]);
+    console.log({ name, panels });
+  }, [name, panels]);
 
   return (
     <ModalWrapper style={{ width: 440 }}>
@@ -33,11 +94,16 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
             选择以下模板, 开始创建属于自己的群组吧!
           </Typography.Paragraph>
 
-          <div
-            className="w-full border rounded text-base py-2 px-3 cursor-pointer font-bold hover:bg-white hover:bg-opacity-10"
-            onClick={handleSelectTemplate}
-          >
-            默认群组
+          <div className="space-y-2.5">
+            {panelTemplate.map((template) => (
+              <div
+                key={template.key}
+                className="w-full border rounded text-base py-2 px-3 cursor-pointer font-bold hover:bg-white hover:bg-opacity-10"
+                onClick={() => handleSelectTemplate(template.panels)}
+              >
+                {template.label}
+              </div>
+            ))}
           </div>
         </div>
 
