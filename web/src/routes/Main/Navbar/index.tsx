@@ -1,24 +1,9 @@
 import React from 'react';
 import { useAppSelector } from 'tailchat-shared';
 import { Icon } from '@iconify/react';
-import clsx, { ClassValue } from 'clsx';
-import { Avatar } from '../../components/Avatar';
-
-const NavbarNavItem: React.FC<{
-  className?: ClassValue;
-}> = React.memo((props) => {
-  return (
-    <div
-      className={clsx(
-        'w-12 h-12 hover:rounded-lg bg-gray-300 transition-all rounded-1/2 cursor-pointer flex items-center justify-center overflow-hidden',
-        props.className
-      )}
-    >
-      {props.children}
-    </div>
-  );
-});
-NavbarNavItem.displayName = 'NavbarNavItem';
+import { Avatar } from '@/components/Avatar';
+import { NavbarNavItem } from './NavItem';
+import { GroupNav } from './GroupNav';
 
 /**
  * 导航栏组件
@@ -39,15 +24,8 @@ export const Navbar: React.FC = React.memo(() => {
           />
         </NavbarNavItem>
         <div className="h-px w-full bg-white mt-4 mb-4"></div>
-        <div className="space-y-2">
-          <NavbarNavItem />
-          <NavbarNavItem />
-          <NavbarNavItem />
-          <NavbarNavItem />
-          <NavbarNavItem className="bg-green-500">
-            <Icon className="text-3xl text-white" icon="mdi-plus" />
-          </NavbarNavItem>
-        </div>
+
+        <GroupNav />
       </div>
       <div>
         <Icon

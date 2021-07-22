@@ -1,12 +1,14 @@
 import type { AppStore } from './store';
 import type { AppSocket } from '../api/socket';
-import { chatActions, userActions } from './slices';
+import { chatActions, groupActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
 import type { UserDMList } from '../model/user';
 import { getCachedConverseInfo } from '../cache/cache';
+import type { GroupInfo } from '../model/group';
 
 /**
- * 初始化Redux 上下文
+ * 初始化 Redux 上下文
+ * 该文件用于处理远程数据与本地 Redux 状态的交互
  */
 export function setupRedux(socket: AppSocket, store: AppStore) {
   initial(socket, store);
@@ -36,6 +38,10 @@ function initial(socket: AppSocket, store: AppStore) {
       const converse = await getCachedConverseInfo(converseId);
       store.dispatch(chatActions.setConverseInfo(converse));
     });
+  });
+
+  socket.request<GroupInfo[]>('group.getUserGroups').then((groups) => {
+    store.dispatch(groupActions.appendGroups(groups));
   });
 }
 
