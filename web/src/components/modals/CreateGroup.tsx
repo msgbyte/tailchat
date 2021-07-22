@@ -1,20 +1,20 @@
-import { Button, Carousel, Divider, Input, Typography } from 'antd';
-import type { CarouselRef } from 'antd/lib/carousel';
+import { Button, Divider, Input, Typography } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { Avatar } from '../Avatar';
 import { ModalWrapper } from '../Modal';
+import { Slides, SlidesRef } from '../Slides';
 
 export const ModalCreateGroup: React.FC = React.memo(() => {
-  const carouselRef = useRef<CarouselRef>(null);
+  const slidesRef = useRef<SlidesRef>(null);
   const [name, setName] = useState('');
 
   const handleSelectTemplate = useCallback(() => {
     // TODO
-    carouselRef.current?.next();
+    slidesRef.current?.next();
   }, []);
 
   const handleBack = useCallback(() => {
-    carouselRef.current?.prev();
+    slidesRef.current?.prev();
   }, []);
 
   const handleCreate = useCallback(() => {
@@ -23,7 +23,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
 
   return (
     <ModalWrapper style={{ width: 440 }}>
-      <Carousel ref={carouselRef} dots={false}>
+      <Slides ref={slidesRef}>
         <div>
           <Typography.Title level={4} className="text-center mb-4">
             创建群组
@@ -81,7 +81,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
             </Button>
           </div>
         </div>
-      </Carousel>
+      </Slides>
     </ModalWrapper>
   );
 });
