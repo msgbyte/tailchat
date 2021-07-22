@@ -1,6 +1,7 @@
 import { Avatar } from '@/components/Avatar';
+import { openModal } from '@/components/Modal';
 import { Icon } from '@iconify/react';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { GroupInfo, useAppSelector } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 
@@ -14,6 +15,10 @@ function useGroups(): GroupInfo[] {
 
 export const GroupNav: React.FC = React.memo(() => {
   const groups = useGroups();
+
+  const handleCreateGroup = useCallback(() => {
+    openModal(<div className="w-60 h-48">新增群组</div>);
+  }, []);
 
   return (
     <div className="space-y-2">
@@ -30,7 +35,7 @@ export const GroupNav: React.FC = React.memo(() => {
         ))}
 
       {/* 创建群组 */}
-      <NavbarNavItem className="bg-green-500">
+      <NavbarNavItem className="bg-green-500" onClick={handleCreateGroup}>
         <Icon className="text-3xl text-white" icon="mdi-plus" />
       </NavbarNavItem>
     </div>

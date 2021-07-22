@@ -8,16 +8,19 @@ export { getCachedUserInfo } from './cache/cache';
 export { useCachedUserInfo } from './cache/useCache';
 
 // components
-export { FastForm } from './components/FastForm/index';
-export { CustomField } from './components/FastForm/CustomField';
+export {
+  FastForm,
+  CustomField,
+  regField,
+  regFormContainer,
+} from './components/FastForm/index';
 export type {
   FastFormFieldComponent,
   FastFormFieldProps,
   FastFormFieldMeta,
-} from './components/FastForm/field';
-export { regField } from './components/FastForm/field';
-export { regFormContainer } from './components/FastForm/container';
-export type { FastFormContainerComponent } from './components/FastForm/container';
+  FastFormContainerComponent,
+} from './components/FastForm/index';
+export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 
 // i18n

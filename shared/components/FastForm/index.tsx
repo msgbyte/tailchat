@@ -6,7 +6,12 @@ import _isFunction from 'lodash/isFunction';
 import _isEmpty from 'lodash/isEmpty';
 import type { ObjectSchema } from 'yup';
 import { FastFormContext } from './context';
-import { FastFormFieldMeta, getField } from './field';
+import { getField, regField } from './field';
+import type {
+  FastFormFieldComponent,
+  FastFormFieldProps,
+  FastFormFieldMeta,
+} from './field';
 import { getFormContainer } from './container';
 
 /**
@@ -99,3 +104,9 @@ FastForm.displayName = 'FastForm';
 FastForm.defaultProps = {
   submitLabel: '提交',
 };
+
+export { CustomField } from './CustomField';
+export type { FastFormFieldComponent, FastFormFieldProps, FastFormFieldMeta };
+export { regField };
+export { regFormContainer } from './container';
+export type { FastFormContainerComponent } from './container';

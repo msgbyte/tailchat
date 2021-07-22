@@ -1,0 +1,37 @@
+.modal-anim {
+  &-appear {
+    opacity: 0;
+
+    .modal-inner {
+      margin-top: -40px;
+    }
+  }
+  &-appear-active,
+  &-appear-done {
+    opacity: 1;
+    transition: opacity 200ms;
+
+    .modal-inner {
+      transition: margin-top 200ms;
+      margin-top: 0px;
+    }
+  }
+
+  &-exit {
+    opacity: 1;
+
+    .modal-inner {
+      margin-top: 0px;
+    }
+  }
+  &-exit-active,
+  &-exit-done {
+    opacity: 0;
+    transition: opacity 200ms;
+
+    .modal-inner {
+      transition: margin-top 200ms;
+      margin-top: -40px;
+    }
+  }
+}
