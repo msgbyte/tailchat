@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slides render 1`] = `
+<div>
+  <div
+    class="ant-carousel"
+  >
+    <div
+      class="slick-slider slides slick-initialized"
+      dir="ltr"
+    >
+      <div
+        class="slick-list"
+        style="height: 0px;"
+      >
+        <div
+          class="slick-track"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+        >
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active slick-current"
+            data-index="0"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <div
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+              >
+                <h1>
+                  1
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-hidden="true"
+            class="slick-slide"
+            data-index="1"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <div
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+              >
+                <h1>
+                  2
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-hidden="true"
+            class="slick-slide"
+            data-index="2"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
+          >
+            <div>
+              <div
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+              >
+                <h1>
+                  3
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
