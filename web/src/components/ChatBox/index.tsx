@@ -39,7 +39,7 @@ export const ChatBox: React.FC<{
   }
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-screen flex flex-col select-text">
       <ChatMessageList messages={messages} />
 
       <ChatInputBox

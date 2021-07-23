@@ -26,7 +26,7 @@ export const App: React.FC = React.memo(() => {
 
   return (
     <div
-      className={clsx('h-screen w-screen min-h-screen', {
+      className={clsx('h-screen w-screen min-h-screen select-none', {
         dark: darkMode,
       })}
     >
