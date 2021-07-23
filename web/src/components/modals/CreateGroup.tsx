@@ -1,10 +1,16 @@
 import { Button, Divider, Input, Typography } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
-import { GroupPanelType } from 'tailchat-shared';
+import {
+  createGroup,
+  GroupPanelType,
+  useAppDispatch,
+  useAsyncRequest,
+} from 'tailchat-shared';
 import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
-import { ModalWrapper } from '../Modal';
+import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
+import { groupActions } from '../../../../shared/redux/slices';
 
 const panelTemplate: {
   key: string;
@@ -68,6 +74,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
   const slidesRef = useRef<SlidesRef>(null);
   const [panels, setPanels] = useState<GroupPanel[]>([]);
   const [name, setName] = useState('');
+  const dispatch = useAppDispatch();
 
   const handleSelectTemplate = useCallback((panels: GroupPanel[]) => {
     setPanels(panels);
@@ -78,8 +85,12 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
     slidesRef.current?.prev();
   }, []);
 
-  const handleCreate = useCallback(() => {
-    console.log({ name, panels });
+  const [{ loading }, handleCreate] = useAsyncRequest(async () => {
+    const data = await createGroup(name, panels);
+
+    dispatch(groupActions.appendGroups([data]));
+
+    closeModal();
   }, [name, panels]);
 
   return (
@@ -142,7 +153,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
             >
               返回
             </Button>
-            <Button type="primary" onClick={handleCreate}>
+            <Button type="primary" loading={loading} onClick={handleCreate}>
               确认创建
             </Button>
           </div>

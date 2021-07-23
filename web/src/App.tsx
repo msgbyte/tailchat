@@ -3,7 +3,6 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { TcProvider, useStorage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
-import { PortalHost } from './components/Portal';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -16,9 +15,7 @@ const EntryRoute = Loadable(() =>
 const AppProvider: React.FC = React.memo((props) => {
   return (
     <BrowserRouter>
-      <TcProvider>
-        <PortalHost>{props.children}</PortalHost>
-      </TcProvider>
+      <TcProvider>{props.children}</TcProvider>
     </BrowserRouter>
   );
 });
