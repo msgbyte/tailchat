@@ -82,7 +82,7 @@ const SelfIdentify: React.FC = React.memo(() => {
 
       <div className="rounded-md border border-black border-opacity-30 px-4 py-3 bg-black bg-opacity-10 text-center">
         <div>您的个人唯一标识</div>
-        <Typography.Title level={4} copyable={true}>
+        <Typography.Title level={4} copyable={true} className="select-text">
           {uniqueName}
         </Typography.Title>
       </div>

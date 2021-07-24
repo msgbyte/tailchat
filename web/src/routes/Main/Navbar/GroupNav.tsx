@@ -3,7 +3,6 @@ import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo } from 'react';
-import { useHistory } from 'react-router';
 import { GroupInfo, useAppSelector } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 
@@ -17,11 +16,6 @@ function useGroups(): GroupInfo[] {
 
 export const GroupNav: React.FC = React.memo(() => {
   const groups = useGroups();
-  const history = useHistory();
-
-  const handleToGroup = useCallback((groupId: string) => {
-    history.push(`/main/group/${groupId}`);
-  }, []);
 
   const handleCreateGroup = useCallback(() => {
     openModal(<ModalCreateGroup />);
@@ -31,10 +25,7 @@ export const GroupNav: React.FC = React.memo(() => {
     <div className="space-y-2">
       {Array.isArray(groups) &&
         groups.map((group) => (
-          <NavbarNavItem
-            key={group._id}
-            onClick={() => handleToGroup(group._id)}
-          >
+          <NavbarNavItem key={group._id} to={`/main/group/${group._id}`}>
             <Avatar
               shape="square"
               size={48}
