@@ -23,6 +23,7 @@ export function useConverseMessage(context: ConverseContext) {
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
 
+  // NOTICE: 该hook只会在第一次执行
   const { loading, error } = useAsync(async () => {
     if (!converse) {
       // 如果是一个新会话(或者当前会话列表中没有)
@@ -53,7 +54,7 @@ export function useConverseMessage(context: ConverseContext) {
         })
       );
     }
-  }, [converse, converseId, isGroup]);
+  }, []);
 
   const handleSendMessage = useCallback(async (payload: SendMessagePayload) => {
     // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
