@@ -69,7 +69,7 @@ export {
 export { useAppSelector, useAppDispatch } from './redux/hooks/useAppSelector';
 export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';
-export { useGroupInfo } from './redux/hooks/useGroup';
+export { useGroupInfo, useGroupPanel } from './redux/hooks/useGroup';
 export { useUserId } from './redux/hooks/useUserInfo';
 export { userActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
