@@ -11,7 +11,7 @@ export const ConversePanel: React.FC = React.memo(() => {
 
   return (
     <div className="w-full h-full overflow-hidden">
-      <ChatBox converseId={params.converseId} />
+      <ChatBox converseId={params.converseId} isGroup={false} />
     </div>
   );
 });

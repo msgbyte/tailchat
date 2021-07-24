@@ -17,7 +17,7 @@ export const GroupPanelRender: React.FC = React.memo(() => {
   }
 
   if (panelInfo.type === GroupPanelType.TEXT) {
-    return <TextPanel panelId={panelInfo.id} />;
+    return <TextPanel groupId={groupId} panelId={panelInfo.id} />;
   }
 
   return <Alert message="未知的面板类型" />;

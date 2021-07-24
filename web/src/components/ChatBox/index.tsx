@@ -23,12 +23,23 @@ const ChatBoxPlaceholder: React.FC = React.memo(() => {
 });
 ChatBoxPlaceholder.displayName = 'ChatBoxPlaceholder';
 
-export const ChatBox: React.FC<{
-  converseId: string;
-}> = React.memo((props) => {
-  const { messages, loading, error, handleSendMessage } = useConverseMessage(
-    props.converseId
-  );
+type ChatBoxProps =
+  | {
+      converseId: string;
+      isGroup: false;
+      groupId?: string;
+    }
+  | {
+      converseId: string;
+      isGroup: true;
+      groupId: string;
+    };
+export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
+  const { converseId, isGroup } = props;
+  const { messages, loading, error, handleSendMessage } = useConverseMessage({
+    converseId,
+    isGroup,
+  });
 
   if (loading) {
     return <ChatBoxPlaceholder />;
@@ -46,6 +57,7 @@ export const ChatBox: React.FC<{
         onSendMsg={(msg) =>
           handleSendMessage({
             converseId: props.converseId,
+            groupId: props.groupId,
             content: msg,
           })
         }

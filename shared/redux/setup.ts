@@ -31,8 +31,8 @@ function initial(socket: AppSocket, store: AppStore) {
     store.dispatch(userActions.setFriendRequests(data));
   });
 
-  socket.request<UserDMList>('user.dmlist.getAllConverse').then((data) => {
-    data.converseIds.forEach(async (converseId) => {
+  socket.request<string[]>('user.dmlist.getAllConverse').then((data) => {
+    (data ?? []).forEach(async (converseId) => {
       // TODO: 待优化, 可以在后端一次性返回
 
       const converse = await getCachedConverseInfo(converseId);
