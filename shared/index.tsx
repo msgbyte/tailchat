@@ -60,6 +60,7 @@ export type { ChatMessage } from './model/message';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
   loginWithEmail,
+  loginWithToken,
   registerWithEmail,
   searchUserWithUniqueName,
 } from './model/user';

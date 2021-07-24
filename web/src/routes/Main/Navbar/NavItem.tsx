@@ -9,7 +9,7 @@ export const NavbarNavItem: React.FC<{
   return (
     <div
       className={clsx(
-        'w-12 h-12 hover:rounded-lg bg-gray-300 transition-all rounded-1/2 cursor-pointer flex items-center justify-center overflow-hidden',
+        'w-12 h-12 hover:rounded-lg transition-all rounded-1/2 cursor-pointer flex items-center justify-center overflow-hidden',
         props.className
       )}
       onClick={props.onClick}
