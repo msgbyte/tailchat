@@ -5,6 +5,7 @@ import type { FriendRequest } from '../model/friend';
 import type { UserDMList } from '../model/user';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
+import { fetchConverseMessage } from '../model/message';
 
 /**
  * 初始化 Redux 上下文
@@ -31,6 +32,7 @@ function initial(socket: AppSocket, store: AppStore) {
     store.dispatch(userActions.setFriendRequests(data));
   });
 
+  // 获取所有的当前用户会话列表
   socket.request<string[]>('user.dmlist.getAllConverse').then((data) => {
     (data ?? []).forEach(async (converseId) => {
       // TODO: 待优化, 可以在后端一次性返回

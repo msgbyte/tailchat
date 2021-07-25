@@ -6,6 +6,7 @@ import _orderBy from 'lodash/orderBy';
 
 export interface ChatConverseState extends ChatConverseInfo {
   messages: ChatMessage[];
+  hasFetchedHistory: boolean;
 }
 
 interface ChatState {
@@ -16,7 +17,7 @@ const initialState: ChatState = {
   converses: {},
 };
 
-const userSlice = createSlice({
+const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
@@ -28,6 +29,7 @@ const userSlice = createSlice({
 
       state.converses[converseId] = {
         messages: [],
+        hasFetchedHistory: false,
         ...action.payload,
       };
     },
@@ -58,8 +60,33 @@ const userSlice = createSlice({
 
       state.converses[converseId].messages = newMessages;
     },
+
+    initialHistoryMessage(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        historyMessages: ChatMessage[];
+      }>
+    ) {
+      const { converseId, historyMessages } = action.payload;
+      if (!state.converses[converseId]) {
+        // 没有会话信息, 请先设置会话信息
+        console.error('没有会话信息, 请先设置会话信息');
+        return;
+      }
+
+      chatSlice.caseReducers.appendConverseMessage(
+        state,
+        chatSlice.actions.appendConverseMessage({
+          converseId,
+          messages: [...historyMessages],
+        })
+      );
+
+      state.converses[converseId].hasFetchedHistory = true;
+    },
   },
 });
 
-export const chatActions = userSlice.actions;
-export const chatReducer = userSlice.reducer;
+export const chatActions = chatSlice.actions;
+export const chatReducer = chatSlice.reducer;

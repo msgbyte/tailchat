@@ -9,6 +9,7 @@ import {
 } from '../../model/message';
 import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
+import _isNil from 'lodash/isNil';
 
 /**
  * 会话消息管理
@@ -48,11 +49,27 @@ export function useConverseMessage(context: ConverseContext) {
       // Step 2. 拉取消息
       const messages = await fetchConverseMessage(converseId);
       dispatch(
-        chatActions.appendConverseMessage({
+        chatActions.initialHistoryMessage({
           converseId,
-          messages,
+          historyMessages: messages,
         })
       );
+    } else {
+      // 已存在
+      if (!converse.hasFetchedHistory) {
+        // 没有获取过历史消息
+        // 拉取历史消息
+        const startId = _isNil(converse.messages[0])
+          ? undefined
+          : converse.messages[0]._id;
+        const messages = await fetchConverseMessage(converseId, startId);
+        dispatch(
+          chatActions.initialHistoryMessage({
+            converseId,
+            historyMessages: messages,
+          })
+        );
+      }
     }
   }, []);
 
