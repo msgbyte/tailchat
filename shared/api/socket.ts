@@ -87,7 +87,9 @@ export function createSocket(token: string): Promise<AppSocket> {
     });
     socket.once('connect', () => {
       // 连接成功
-      resolve(new AppSocket(socket));
+      const appSocket = new AppSocket(socket);
+      appSocket.request('chat.converse.findAndJoinRoom'); // 立即请求加入房间
+      resolve(appSocket);
     });
     socket.once('error', () => {
       reject();

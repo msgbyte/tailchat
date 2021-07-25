@@ -55,7 +55,7 @@ export function useConverseMessage(context: ConverseContext) {
         })
       );
     } else {
-      // 已存在
+      // 已存在会话
       if (!converse.hasFetchedHistory) {
         // 没有获取过历史消息
         // 拉取历史消息
