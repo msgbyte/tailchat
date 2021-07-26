@@ -77,7 +77,7 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
 
   const sidebarEl = _isNil(sidebar) ? null : (
     <div
-      className={clsx('bg-gray-800 p-2 flex-shrink-0', {
+      className={clsx('bg-gray-800 flex-shrink-0', {
         'w-60': showSidebar,
       })}
     >

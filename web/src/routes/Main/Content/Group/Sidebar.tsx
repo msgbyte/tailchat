@@ -5,6 +5,7 @@ import { useLocation, useParams } from 'react-router';
 import { Badge, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { GroupHeader } from './GroupHeader';
 
 interface GroupParams {
   groupId: string;
@@ -91,22 +92,26 @@ export const Sidebar: React.FC = React.memo(() => {
 
   return (
     <div>
-      {groupPanels
-        .filter((panel) => panel.type === GroupPanelType.GROUP)
-        .map((group) => (
-          <GroupSection key={group.id} header={group.name}>
-            {groupPanels
-              .filter((panel) => panel.parentId === group.id)
-              .map((panel) => (
-                <GroupPanelItem
-                  key={panel.id}
-                  name={panel.name}
-                  icon={<div>#</div>}
-                  to={`/main/group/${groupId}/${panel.id}`}
-                />
-              ))}
-          </GroupSection>
-        ))}
+      <GroupHeader groupId={groupId} />
+
+      <div className="p-2">
+        {groupPanels
+          .filter((panel) => panel.type === GroupPanelType.GROUP)
+          .map((group) => (
+            <GroupSection key={group.id} header={group.name}>
+              {groupPanels
+                .filter((panel) => panel.parentId === group.id)
+                .map((panel) => (
+                  <GroupPanelItem
+                    key={panel.id}
+                    name={panel.name}
+                    icon={<div>#</div>}
+                    to={`/main/group/${groupId}/${panel.id}`}
+                  />
+                ))}
+            </GroupSection>
+          ))}
+      </div>
     </div>
   );
 });
