@@ -1,5 +1,6 @@
 // api
 export { buildStorage } from './api/buildStorage';
+export { request } from './api/request';
 export { createSocket } from './api/socket';
 export type { AppSocket } from './api/socket';
 
@@ -83,5 +84,5 @@ export {
   getMessageTimeDiff,
   formatShortTime,
 } from './utils/date-helper';
-export { isBrowser, isNavigator } from './utils/environment';
+export { isBrowser, isNavigator, isDevelopment } from './utils/environment';
 export { getTextColorHex } from './utils/string-helper';
