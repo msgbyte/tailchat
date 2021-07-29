@@ -106,14 +106,18 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
           </Typography.Paragraph>
 
           <div className="space-y-2.5">
-            {panelTemplate.map((template) => (
-              <div
-                key={template.key}
-                className="w-full border rounded text-base py-2 px-3 cursor-pointer font-bold hover:bg-white hover:bg-opacity-10"
-                onClick={() => handleSelectTemplate(template.panels)}
-              >
-                {template.label}
-              </div>
+            {panelTemplate.map((template, index) => (
+              <>
+                {/* Hardcode: 将第一个模板与之后的模板区分开 */}
+                {index === 1 && <Divider />}
+                <div
+                  key={template.key}
+                  className="w-full border rounded text-base py-2 px-3 cursor-pointer font-bold hover:bg-white hover:bg-opacity-10"
+                  onClick={() => handleSelectTemplate(template.panels)}
+                >
+                  {template.label}
+                </div>
+              </>
             ))}
           </div>
         </div>
