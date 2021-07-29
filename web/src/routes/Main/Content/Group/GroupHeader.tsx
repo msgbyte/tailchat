@@ -30,16 +30,9 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
       <Menu.Item key="0" onClick={() => console.log('查看详情')}>
         {t('查看详情')}
       </Menu.Item>
-      {/* <Menu.Item onClick={handleShowGroupInfo}>{t('查看详情')}</Menu.Item> */}
-      {/* {isGroupManager && (
-        <Menu.Item onClick={handleShowInvite}>{t('邀请成员')}</Menu.Item>
-      )}
-      {isGroupManager && (
-        <Menu.Item onClick={handleCreateGroupPanel}>{t('创建面板')}</Menu.Item>
-      )}
-      <Menu.Item danger={true} onClick={handleQuitGroup}>
-        {currentUserUUID === groupInfo.owner_uuid ? t('解散团') : t('退出团')}
-      </Menu.Item> */}
+      <Menu.Item key="1" onClick={() => console.log('邀请用户')}>
+        {t('邀请用户')}
+      </Menu.Item>
     </Menu>
   );
 
