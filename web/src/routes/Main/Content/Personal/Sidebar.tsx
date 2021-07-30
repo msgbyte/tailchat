@@ -27,7 +27,7 @@ export const Sidebar: React.FC = React.memo(() => {
   const converseList = useDMConverseList();
 
   return (
-    <>
+    <div className="p-2">
       <SidebarItem
         name="好友"
         icon={<Icon icon="mdi-account-multiple" />}
@@ -44,7 +44,7 @@ export const Sidebar: React.FC = React.memo(() => {
       {converseList.map((converse) => {
         return <SidebarDMItem key={converse._id} converse={converse} />;
       })}
-    </>
+    </div>
   );
 });
 Sidebar.displayName = 'Sidebar';
