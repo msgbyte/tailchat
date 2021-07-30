@@ -64,6 +64,9 @@ module.exports = {
       boxShadow: {
         ...customTheme.boxShadow,
       },
+      transitionProperty: {
+        width: 'width',
+      },
     },
   },
   variants: {

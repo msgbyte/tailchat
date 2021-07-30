@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import { Avatar } from '@/components/Avatar';
 import { NavbarNavItem } from './NavItem';
 import { GroupNav } from './GroupNav';
+import { MobileMenuBtn } from './MobileMenuBtn';
 
 /**
  * 导航栏组件
@@ -13,6 +14,8 @@ export const Navbar: React.FC = React.memo(() => {
 
   return (
     <div className="w-18 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4 p-1">
+      <MobileMenuBtn />
+
       {/* Navbar */}
       <div className="flex-1">
         <NavbarNavItem to={'/main/personal'}>
