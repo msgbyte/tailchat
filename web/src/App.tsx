@@ -13,6 +13,10 @@ const EntryRoute = Loadable(() =>
   import('./routes/Entry').then((module) => module.EntryRoute)
 );
 
+const InviteRoute = Loadable(() =>
+  import('./routes/Invite').then((module) => module.InviteRoute)
+);
+
 const AppProvider: React.FC = React.memo((props) => {
   const getPopupContainer = useCallback(
     (triggerNode: HTMLElement): HTMLElement => {
@@ -52,6 +56,7 @@ export const App: React.FC = React.memo(() => {
         <Switch>
           <Route path="/entry" component={EntryRoute} />
           <Route path="/main" component={MainRoute} />
+          <Route path="/invite/:inviteCode" component={InviteRoute} />
           <Redirect to="/entry" />
         </Switch>
       </AppProvider>
