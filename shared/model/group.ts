@@ -27,6 +27,12 @@ export interface GroupInfo {
   panels: GroupPanel[];
 }
 
+export interface GroupInvite {
+  code: string;
+  groupId: string;
+  expiredAt?: Date;
+}
+
 /**
  * 创建群组
  * @param name 群组名
@@ -39,6 +45,21 @@ export async function createGroup(
   const { data } = await request.post('/api/group/createGroup', {
     name,
     panels,
+  });
+
+  return data;
+}
+
+/**
+ * 创建群组邀请码
+ * 邀请码默认 7天有效期
+ * @param groupId 群组id
+ */
+export async function createGroupInviteCode(
+  groupId: string
+): Promise<GroupInvite> {
+  const { data } = await request.post('/api/group/invite/createGroupInvite', {
+    groupId,
   });
 
   return data;
