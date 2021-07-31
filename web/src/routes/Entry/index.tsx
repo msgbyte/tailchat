@@ -1,10 +1,10 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoginView } from './LoginView';
-import bgImage from '../../../assets/images/bg.jpg';
+import bgImage from '@assets/images/bg.jpg';
 import clsx from 'clsx';
 import styles from './index.module.less';
-import loginPatternUrl from '../../../assets/images/login-pattern.svg';
+import loginPatternUrl from '@assets/images/login-pattern.svg';
 import { RegisterView } from './RegisterView';
 
 export const EntryRoute = React.memo(() => {

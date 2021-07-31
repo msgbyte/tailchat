@@ -5,7 +5,7 @@ export { createSocket } from './api/socket';
 export type { AppSocket } from './api/socket';
 
 // cache
-export { getCachedUserInfo } from './cache/cache';
+export { getCachedUserInfo, getCachedGroupInviteInfo } from './cache/cache';
 export { useCachedUserInfo } from './cache/useCache';
 
 // components
@@ -59,8 +59,9 @@ export {
   GroupPanelType,
   createGroup,
   createGroupInviteCode,
+  getGroupBasicInfo,
 } from './model/group';
-export type { GroupPanel, GroupInfo } from './model/group';
+export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
 export type { ChatMessage } from './model/message';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
@@ -87,6 +88,8 @@ export {
   shouldShowMessageTime,
   getMessageTimeDiff,
   formatShortTime,
+  datetimeToNow,
+  datetimeFromNow,
 } from './utils/date-helper';
 export { isBrowser, isNavigator, isDevelopment } from './utils/environment';
 export { getTextColorHex } from './utils/string-helper';

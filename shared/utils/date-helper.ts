@@ -43,3 +43,23 @@ export function shouldShowMessageTime(date1: Date, date2: Date): boolean {
 export function formatShortTime(date: dayjs.ConfigType): string {
   return dayjs(date).format('HH:mm');
 }
+
+/**
+ * 返回当前实例到现在的相对时间。
+ * @example
+ * dayjs('1999-01-01').toNow() // 22 年后
+ */
+export function datetimeToNow(input: dayjs.ConfigType): string {
+  const date = dayjs(input);
+  return date.toNow();
+}
+
+/**
+ * 返回当前实例到现在的相对时间。
+ * @example
+ * dayjs('1999-01-01').toNow() // 22 年前
+ */
+export function datetimeFromNow(input: dayjs.ConfigType): string {
+  const date = dayjs(input);
+  return date.fromNow();
+}

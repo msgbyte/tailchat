@@ -1,4 +1,5 @@
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
+import { findGroupInviteByCode, GroupInvite } from '../model/group';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
 import { queryClient } from './index';
 
@@ -16,6 +17,7 @@ export async function getCachedUserInfo(
       staleTime: refetch ? 0 : 2 * 60 * 60 * 1000, // 缓存2小时
     }
   );
+
   return data;
 }
 
@@ -28,5 +30,19 @@ export async function getCachedConverseInfo(
   const data = await queryClient.fetchQuery(['converse', converseId], () =>
     fetchConverseInfo(converseId)
   );
+
+  return data;
+}
+
+/**
+ * 获取缓存的邀请码信息
+ */
+export async function getCachedGroupInviteInfo(
+  inviteCode: string
+): Promise<GroupInvite | null> {
+  const data = await queryClient.fetchQuery(['groupInvite', inviteCode], () =>
+    findGroupInviteByCode(inviteCode)
+  );
+
   return data;
 }

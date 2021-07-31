@@ -1,8 +1,8 @@
-import { Button, Divider, Input, Typography } from 'antd';
-import React, { useCallback, useState } from 'react';
+import { Button, Typography } from 'antd';
+import React, { useState } from 'react';
 import {
   createGroupInviteCode,
-  useAsyncFn,
+  useAsyncRequest,
   useGroupInfo,
 } from 'tailchat-shared';
 import { isValidStr } from '../../../../shared/utils/string-helper';
@@ -25,8 +25,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
   //   console.log('searchName', searchName);
   // }, []);
 
-  const [{ loading }, handleCreateInviteLink] = useAsyncFn(async () => {
-    console.log('handleCreateInviteLink');
+  const [{ loading }, handleCreateInviteLink] = useAsyncRequest(async () => {
     const invite = await createGroupInviteCode(groupId);
     setInviteLink(`${location.origin}/invite/${invite.code}`);
   }, [groupId]);
@@ -63,7 +62,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
             >
               {inviteLink}
             </Typography.Title>
-            <p className="text-gray-500 text-sm">该邀请连接将会于7天后过期</p>
+            <p className="text-gray-500 text-sm">该邀请链接将会于7天后过期</p>
           </div>
         ) : (
           <Button

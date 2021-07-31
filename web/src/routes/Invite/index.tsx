@@ -1,6 +1,9 @@
 import { Button, Divider } from 'antd';
 import React, { useCallback } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { InviteInfo } from './InviteInfo';
+import bgImage from '@assets/images/bg.jpg';
+import { t } from 'tailchat-shared';
 
 /**
  * 邀请界面路由
@@ -22,19 +25,33 @@ export const InviteRoute: React.FC = React.memo(() => {
   }, []);
 
   return (
-    <div className="h-full w-full">
-      <div className="w-96 h-72">
-        <div>{inviteCode}</div>
-        <div>xxx 邀请您加入</div>
-        <div>[群组名]</div>
-        <div>成员数: </div>
+    <div
+      className="h-full w-full bg-gray-600 flex justify-center items-center bg-center bg-cover bg-no-repeat"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div className="w-96 p-4 rounded-lg shadow-lg bg-black bg-opacity-60 text-center">
+        <InviteInfo inviteCode={inviteCode} />
 
         <Divider />
 
         {isLogin ? (
-          <Button onClick={handleJoinGroup}>加入群组</Button>
+          <Button
+            block={true}
+            type="primary"
+            size="large"
+            onClick={handleJoinGroup}
+          >
+            {t('加入群组')}
+          </Button>
         ) : (
-          <Button onClick={handleRegister}>立即注册</Button>
+          <Button
+            block={true}
+            type="primary"
+            size="large"
+            onClick={handleRegister}
+          >
+            {t('立即注册')}
+          </Button>
         )}
       </div>
     </div>
