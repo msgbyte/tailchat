@@ -49,15 +49,30 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
 
       <Divider>或者创建链接并发送给外部好友</Divider> */}
 
-      <div>创建链接并发送给外部好友</div>
+      <div className="text-gray-400 font-bold text-lg mb-2">
+        创建链接并发送给外部好友
+      </div>
 
       <div>
         {isValidStr(inviteLink) ? (
-          <Typography.Text copyable={true} className="select-text">
-            {inviteLink}
-          </Typography.Text>
+          <div>
+            <Typography.Title
+              className="bg-black bg-opacity-30 px-2 py-1 select-text text-lg rounded border border-black border-opacity-20"
+              level={4}
+              copyable={true}
+            >
+              {inviteLink}
+            </Typography.Title>
+            <p className="text-gray-500 text-sm">该邀请连接将会于7天后过期</p>
+          </div>
         ) : (
-          <Button loading={loading} onClick={handleCreateInviteLink}>
+          <Button
+            block={true}
+            size="large"
+            type="primary"
+            loading={loading}
+            onClick={handleCreateInviteLink}
+          >
             创建链接
           </Button>
         )}

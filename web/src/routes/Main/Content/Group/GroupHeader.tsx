@@ -4,6 +4,7 @@ import _isNil from 'lodash/isNil';
 // import { useGroupHeaderAction } from './useGroupHeaderAction';
 import { useGroupInfo, useTranslation } from 'tailchat-shared';
 import { SectionHeader } from '@/components/SectionHeader';
+import { useGroupHeaderAction } from './useGroupHeaderAction';
 
 interface GroupHeaderProps {
   groupId: string;
@@ -13,12 +14,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
   const groupInfo = useGroupInfo(groupId);
   const { t } = useTranslation();
 
-  // const {
-  //   handleShowGroupInfo,
-  //   handleShowInvite,
-  //   handleCreateGroupPanel,
-  //   handleQuitGroup,
-  // } = useGroupHeaderAction(groupInfo!);
+  const { handleInviteUser } = useGroupHeaderAction(groupId);
 
   if (_isNil(groupInfo)) {
     return null;
@@ -26,11 +22,10 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
 
   const menu = (
     <Menu>
-      {/* TODO */}
       <Menu.Item key="0" onClick={() => console.log('查看详情')}>
         {t('查看详情')}
       </Menu.Item>
-      <Menu.Item key="1" onClick={() => console.log('邀请用户')}>
+      <Menu.Item key="1" onClick={handleInviteUser}>
         {t('邀请用户')}
       </Menu.Item>
     </Menu>
