@@ -3,7 +3,7 @@ import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo } from 'react';
-import { GroupInfo, useAppSelector } from 'tailchat-shared';
+import { GroupInfo, t, useAppSelector } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 
 function useGroups(): GroupInfo[] {
@@ -25,7 +25,11 @@ export const GroupNav: React.FC = React.memo(() => {
     <div className="space-y-2">
       {Array.isArray(groups) &&
         groups.map((group) => (
-          <NavbarNavItem key={group._id} to={`/main/group/${group._id}`}>
+          <NavbarNavItem
+            key={group._id}
+            name={group.name}
+            to={`/main/group/${group._id}`}
+          >
             <Avatar
               shape="square"
               size={48}
@@ -36,7 +40,11 @@ export const GroupNav: React.FC = React.memo(() => {
         ))}
 
       {/* 创建群组 */}
-      <NavbarNavItem className="bg-green-500" onClick={handleCreateGroup}>
+      <NavbarNavItem
+        className="bg-green-500"
+        name={t('创建群组')}
+        onClick={handleCreateGroup}
+      >
         <Icon className="text-3xl text-white" icon="mdi-plus" />
       </NavbarNavItem>
     </div>

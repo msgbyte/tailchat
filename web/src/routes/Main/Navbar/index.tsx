@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from 'tailchat-shared';
+import { t, useAppSelector } from 'tailchat-shared';
 import { Icon } from '@iconify/react';
 import { Avatar } from '@/components/Avatar';
 import { NavbarNavItem } from './NavItem';
@@ -18,7 +18,7 @@ export const Navbar: React.FC = React.memo(() => {
 
       {/* Navbar */}
       <div className="flex-1">
-        <NavbarNavItem to={'/main/personal'}>
+        <NavbarNavItem name={t('我')} to={'/main/personal'}>
           <Avatar
             shape="square"
             size={48}
