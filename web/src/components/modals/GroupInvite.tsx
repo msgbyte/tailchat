@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import { Button, Typography } from 'antd';
 import React, { useState } from 'react';
 import {
@@ -47,6 +48,11 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
       </div>
 
       <Divider>或者创建链接并发送给外部好友</Divider> */}
+
+      <Icon
+        className="text-6xl block m-auto opacity-30 mb-4 mt-2"
+        icon="mdi-email-edit-outline"
+      />
 
       <div className="text-gray-400 font-bold text-lg mb-2">
         创建链接并发送给外部好友
