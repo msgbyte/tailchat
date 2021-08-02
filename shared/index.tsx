@@ -69,6 +69,7 @@ export {
   loginWithToken,
   registerWithEmail,
   searchUserWithUniqueName,
+  checkTokenValid,
 } from './model/user';
 
 // redux

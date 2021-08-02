@@ -1,4 +1,5 @@
 import { request } from '../api/request';
+import { buildCachedRequest } from '../cache/utils';
 
 export interface UserBaseInfo {
   _id: string;
@@ -117,7 +118,9 @@ export async function getUserOnlineStatus(
  * 将会话添加到用户私信列表
  * 如果已添加则后端忽略
  */
-export async function appendUserDMConverse(converseId: string) {
+export async function appendUserDMConverse(
+  converseId: string
+): Promise<UserDMList> {
   const { data } = await request.post<UserDMList>(
     '/api/user/dmlist/addConverse',
     {
@@ -127,3 +130,17 @@ export async function appendUserDMConverse(converseId: string) {
 
   return data;
 }
+
+/**
+ * 检查Token是否可用
+ */
+export const checkTokenValid = buildCachedRequest(
+  'tokenValid',
+  async (token: string): Promise<boolean> => {
+    const { data } = await request.post<boolean>('/api/user/checkTokenValid', {
+      token,
+    });
+
+    return data;
+  }
+);

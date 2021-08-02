@@ -1,23 +1,15 @@
-import { Button, Divider } from 'antd';
+import { Divider } from 'antd';
 import React, { useCallback } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { InviteInfo } from './InviteInfo';
 import bgImage from '@assets/images/bg.jpg';
-import { t } from 'tailchat-shared';
+import { JoinBtn } from './JoinBtn';
 
 /**
  * 邀请界面路由
  */
 export const InviteRoute: React.FC = React.memo(() => {
-  const history = useHistory();
   const { inviteCode } = useParams<{ inviteCode: string }>();
-  const isLogin = true;
-
-  const handleRegister = useCallback(() => {
-    history.push(
-      `/entry/register?redirect=${encodeURIComponent(location.pathname)}`
-    );
-  }, []);
 
   const handleJoinGroup = useCallback(() => {
     // TODO
@@ -34,25 +26,7 @@ export const InviteRoute: React.FC = React.memo(() => {
 
         <Divider />
 
-        {isLogin ? (
-          <Button
-            block={true}
-            type="primary"
-            size="large"
-            onClick={handleJoinGroup}
-          >
-            {t('加入群组')}
-          </Button>
-        ) : (
-          <Button
-            block={true}
-            type="primary"
-            size="large"
-            onClick={handleRegister}
-          >
-            {t('立即注册')}
-          </Button>
-        )}
+        <JoinBtn onJoinGroup={handleJoinGroup} />
       </div>
     </div>
   );

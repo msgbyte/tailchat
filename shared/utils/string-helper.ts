@@ -57,7 +57,7 @@ export function getTextColorHex(text: unknown): string {
 }
 
 /**
- * 是一个可用的字符串
+ * 是否一个可用的字符串
  * 定义为有长度的字符串
  */
 export function isValidStr(str: unknown): str is string {
