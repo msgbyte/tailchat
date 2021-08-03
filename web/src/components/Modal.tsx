@@ -50,13 +50,17 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
   } = props;
   const [showing, setShowing] = useState(true);
 
+  const closeModal = useCallback(() => {
+    setShowing(false);
+  }, []);
+
   const handleClose = useCallback(() => {
     if (maskClosable === false) {
       return;
     }
 
-    setShowing(false);
-  }, [maskClosable]);
+    closeModal();
+  }, [maskClosable, closeModal]);
 
   const stopPropagation = useCallback((e: React.BaseSyntheticEvent) => {
     e.stopPropagation();
@@ -83,7 +87,7 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
         className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-60 flex justify-center items-center"
         onClick={handleClose}
       >
-        <ModalContext.Provider value={{ closeModal: handleClose }}>
+        <ModalContext.Provider value={{ closeModal }}>
           {/* Inner */}
           <div
             className="modal-inner bg-gray-700 rounded overflow-auto relative"
@@ -128,7 +132,7 @@ export function closeModal(key?: number): void {
  */
 export function openModal(
   content: React.ReactNode,
-  props?: Pick<ModalProps, 'closable'>
+  props?: Pick<ModalProps, 'closable' | 'maskClosable'>
 ): number {
   const key = PortalAdd(
     <Modal

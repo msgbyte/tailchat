@@ -4,6 +4,7 @@ import { TcProvider, useStorage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
+import { PortalHost } from './components/Portal';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -34,7 +35,7 @@ const AppProvider: React.FC = React.memo((props) => {
     <BrowserRouter>
       <TcProvider>
         <AntdProvider getPopupContainer={getPopupContainer}>
-          {props.children}
+          <PortalHost>{props.children}</PortalHost>
         </AntdProvider>
       </TcProvider>
     </BrowserRouter>

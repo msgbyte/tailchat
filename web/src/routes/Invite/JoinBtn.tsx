@@ -1,11 +1,21 @@
+import { openModal } from '@/components/Modal';
 import { getUserJWT } from '@/utils/jwt-helper';
 import { Button } from 'antd';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router';
-import { checkTokenValid, t, useAsync } from 'tailchat-shared';
+import {
+  applyGroupInvite,
+  checkTokenValid,
+  getCachedGroupInviteInfo,
+  showToasts,
+  t,
+  useAsync,
+  useAsyncRequest,
+} from 'tailchat-shared';
+import { SuccessModal } from './SuccessModal';
 
 interface Props {
-  onJoinGroup: () => void;
+  inviteCode: string;
 }
 export const JoinBtn: React.FC<Props> = React.memo((props) => {
   const history = useHistory();
@@ -14,6 +24,7 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
     const isTokenValid = await checkTokenValid(token);
     return isTokenValid;
   });
+  const [isJoined, setIsJoined] = useState(false);
 
   const handleRegister = useCallback(() => {
     history.push(
@@ -21,8 +32,27 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
     );
   }, []);
 
+  const [{ loading: joinLoading }, handleJoinGroup] =
+    useAsyncRequest(async () => {
+      await applyGroupInvite(props.inviteCode);
+
+      const invite = await getCachedGroupInviteInfo(props.inviteCode);
+      openModal(<SuccessModal groupId={invite?.groupId ?? ''} />, {
+        maskClosable: false,
+      });
+      setIsJoined(true);
+    }, [props.inviteCode]);
+
   if (loading) {
     return null;
+  }
+
+  if (isJoined) {
+    return (
+      <Button block={true} type="primary" size="large" disabled={true}>
+        {t('已加入')}
+      </Button>
+    );
   }
 
   return isTokenValid ? (
@@ -30,7 +60,8 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
       block={true}
       type="primary"
       size="large"
-      onClick={props.onJoinGroup}
+      loading={joinLoading}
+      onClick={handleJoinGroup}
     >
       {t('加入群组')}
     </Button>

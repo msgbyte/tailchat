@@ -43,7 +43,7 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
   }
 
   if (!value) {
-    return <div>群组信息加载失败</div>;
+    return <div>{t('群组信息加载失败')}</div>;
   }
 
   return (

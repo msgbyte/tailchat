@@ -106,3 +106,13 @@ export async function findGroupInviteByCode(
 
   return data;
 }
+
+/**
+ * 使用群组邀请
+ * 即通过群组邀请加入群组
+ */
+export async function applyGroupInvite(inviteCode: string): Promise<void> {
+  await request.post('/api/group/invite/applyInvite', {
+    code: inviteCode,
+  });
+}

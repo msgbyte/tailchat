@@ -11,11 +11,6 @@ import { JoinBtn } from './JoinBtn';
 export const InviteRoute: React.FC = React.memo(() => {
   const { inviteCode } = useParams<{ inviteCode: string }>();
 
-  const handleJoinGroup = useCallback(() => {
-    // TODO
-    console.log('TODO');
-  }, []);
-
   return (
     <div
       className="h-full w-full bg-gray-600 flex justify-center items-center bg-center bg-cover bg-no-repeat"
@@ -26,7 +21,7 @@ export const InviteRoute: React.FC = React.memo(() => {
 
         <Divider />
 
-        <JoinBtn onJoinGroup={handleJoinGroup} />
+        <JoinBtn inviteCode={inviteCode} />
       </div>
     </div>
   );

@@ -60,6 +60,7 @@ export {
   createGroup,
   createGroupInviteCode,
   getGroupBasicInfo,
+  applyGroupInvite,
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
 export type { ChatMessage } from './model/message';

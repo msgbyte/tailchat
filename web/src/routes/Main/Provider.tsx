@@ -14,7 +14,6 @@ import _isNil from 'lodash/isNil';
 import { getUserJWT } from '../../utils/jwt-helper';
 import { useHistory } from 'react-router';
 import { SidebarContextProvider } from './SidebarContext';
-import { PortalHost } from '@/components/Portal';
 
 /**
  * 应用状态管理hooks
@@ -80,9 +79,7 @@ export const MainProvider: React.FC = React.memo((props) => {
 
   return (
     <ReduxProvider store={store}>
-      <PortalHost>
-        <SidebarContextProvider>{props.children}</SidebarContextProvider>
-      </PortalHost>
+      <SidebarContextProvider>{props.children}</SidebarContextProvider>
     </ReduxProvider>
   );
 });
