@@ -6,6 +6,8 @@ import { Icon } from '@iconify/react';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
+import { useSearchParam } from '@/hooks/useSearchParam';
+import { isValidStr } from '../../../../shared/utils/string-helper';
 
 /**
  * 注册视图
@@ -14,6 +16,7 @@ export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const navRedirect = useSearchParam('redirect');
 
   const [{ loading, error }, handleRegister] = useAsyncFn(async () => {
     await string()
@@ -30,8 +33,13 @@ export const RegisterView: React.FC = React.memo(() => {
 
     setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
-    history.push('/main');
-  }, [email, password]);
+
+    if (isValidStr(navRedirect)) {
+      history.push(decodeURIComponent(navRedirect));
+    } else {
+      history.push('/main');
+    }
+  }, [email, password, navRedirect]);
 
   const toLoginView = useCallback(() => {
     history.push('/entry/login');
