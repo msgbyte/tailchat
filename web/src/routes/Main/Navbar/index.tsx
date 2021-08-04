@@ -1,10 +1,10 @@
 import React from 'react';
 import { t, useAppSelector } from 'tailchat-shared';
-import { Icon } from '@iconify/react';
 import { Avatar } from '@/components/Avatar';
 import { NavbarNavItem } from './NavItem';
 import { GroupNav } from './GroupNav';
 import { MobileMenuBtn } from './MobileMenuBtn';
+import { SettingBtn } from './SettingBtn';
 
 /**
  * 导航栏组件
@@ -30,11 +30,9 @@ export const Navbar: React.FC = React.memo(() => {
 
         <GroupNav />
       </div>
+
       <div>
-        <Icon
-          className="text-3xl text-white cursor-pointer"
-          icon="mdi-dots-horizontal"
-        />
+        <SettingBtn />
       </div>
     </div>
   );
