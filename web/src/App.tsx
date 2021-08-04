@@ -35,7 +35,7 @@ const AppProvider: React.FC = React.memo((props) => {
     <BrowserRouter>
       <TcProvider>
         <AntdProvider getPopupContainer={getPopupContainer}>
-          <PortalHost>{props.children}</PortalHost>
+          {props.children}
         </AntdProvider>
       </TcProvider>
     </BrowserRouter>
