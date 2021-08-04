@@ -30,7 +30,7 @@ export class AppSocket {
       const matched = this.listener.filter(([ev]) => ev === eventName); // 匹配到的监听器列表
       if (matched.length === 0) {
         // 没有匹配到任何处理函数
-        console.warn(`[Socket IO] Unhandler event: ${eventName}`);
+        console.warn(`[Socket IO] Unhandler event: ${eventName}`, data);
         return;
       }
 

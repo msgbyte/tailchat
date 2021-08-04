@@ -23,6 +23,14 @@ const groupSlice = createSlice({
         };
       }
     },
+    updateGroup(state, action: PayloadAction<GroupInfo>) {
+      const group = action.payload;
+      const groupId = group._id;
+      state.groups[groupId] = {
+        ...state.groups[groupId],
+        ...group,
+      };
+    },
   },
 });
 

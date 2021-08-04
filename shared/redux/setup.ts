@@ -69,4 +69,8 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       store.dispatch(userActions.removeFriendRequest(requestId));
     }
   );
+
+  socket.listen<GroupInfo>('group.updateInfo', (groupInfo) => {
+    store.dispatch(groupActions.updateGroup(groupInfo));
+  });
 }
