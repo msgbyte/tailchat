@@ -74,6 +74,7 @@ module.exports = {
       opacity: ['disabled'],
       display: ['group-hover'],
       borderRadius: ['hover'],
+      borderWidth: ['last'],
     },
   },
   plugins: [tailchat],
