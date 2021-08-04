@@ -111,7 +111,9 @@ const config: Configuration = {
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
-      'process.env.VERSION': JSON.stringify(packageJson.version),
+      'process.env.VERSION': JSON.stringify(
+        process.env.VERSION || packageJson.version
+      ),
     }),
     new HtmlWebpackPlugin({
       title: 'TailChat',
