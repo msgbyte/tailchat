@@ -16,6 +16,8 @@ require('dotenv').config();
 
 delete process.env.TS_NODE_PROJECT; // https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/32
 require('../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageJson = require('./package.json');
 
 const ROOT_PATH = path.resolve(__dirname, './');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
@@ -109,6 +111,7 @@ const config: Configuration = {
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
+      'process.env.VERSION': JSON.stringify(packageJson.version),
     }),
     new HtmlWebpackPlugin({
       title: 'TailChat',

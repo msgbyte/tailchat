@@ -93,5 +93,10 @@ export {
   datetimeToNow,
   datetimeFromNow,
 } from './utils/date-helper';
-export { isBrowser, isNavigator, isDevelopment } from './utils/environment';
+export {
+  isBrowser,
+  isNavigator,
+  isDevelopment,
+  version,
+} from './utils/environment';
 export { getTextColorHex } from './utils/string-helper';
