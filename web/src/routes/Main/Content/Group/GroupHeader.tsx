@@ -14,7 +14,8 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
   const groupInfo = useGroupInfo(groupId);
   const { t } = useTranslation();
 
-  const { handleInviteUser } = useGroupHeaderAction(groupId);
+  const { handleShowGroupDetail, handleInviteUser } =
+    useGroupHeaderAction(groupId);
 
   if (_isNil(groupInfo)) {
     return null;
@@ -22,7 +23,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="0" onClick={() => console.log('查看详情')}>
+      <Menu.Item key="0" onClick={handleShowGroupDetail}>
         {t('查看详情')}
       </Menu.Item>
       <Menu.Item key="1" onClick={handleInviteUser}>
