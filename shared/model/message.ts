@@ -11,6 +11,8 @@ export interface ChatMessage {
 
   converseId: string;
 
+  reactions?: any[];
+
   createdAt?: string;
 
   updatedAt?: string;

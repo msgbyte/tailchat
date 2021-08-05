@@ -2,10 +2,9 @@ import type { AppStore } from './store';
 import type { AppSocket } from '../api/socket';
 import { chatActions, groupActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
-import type { UserDMList } from '../model/user';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
-import { fetchConverseMessage } from '../model/message';
+import type { ChatMessage } from '../model/message';
 
 /**
  * 初始化 Redux 上下文
@@ -69,6 +68,15 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       store.dispatch(userActions.removeFriendRequest(requestId));
     }
   );
+
+  socket.listen<ChatMessage>('chat.message.add', (message) => {
+    store.dispatch(
+      chatActions.appendConverseMessage({
+        converseId: message.converseId,
+        messages: [message],
+      })
+    );
+  });
 
   socket.listen<GroupInfo>('group.updateInfo', (groupInfo) => {
     store.dispatch(groupActions.updateGroup(groupInfo));
