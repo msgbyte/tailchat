@@ -1,4 +1,4 @@
-import i18next, { TFunction } from 'i18next';
+import i18next, { TFunction, TOptionsBase } from 'i18next';
 import {
   useTranslation as useI18NTranslation,
   initReactI18next,
@@ -30,7 +30,7 @@ i18next
 export const t: TFunction = (
   key: string,
   defaultValue?: string,
-  options?: any
+  options?: TOptionsBase
 ) => {
   try {
     const hashKey = `k${crc32(key).toString(16)}`;
