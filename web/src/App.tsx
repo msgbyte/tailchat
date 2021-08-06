@@ -49,7 +49,7 @@ export const App: React.FC = React.memo(() => {
   return (
     <div
       id="tailchat-app"
-      className={clsx('h-screen w-screen min-h-screen select-none', {
+      className={clsx('absolute inset-0 select-none', {
         dark: darkMode,
       })}
     >

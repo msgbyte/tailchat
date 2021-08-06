@@ -50,7 +50,7 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col select-text">
+    <div className="w-full h-full flex flex-col select-text">
       <ChatMessageList messages={messages} />
 
       <ChatInputBox

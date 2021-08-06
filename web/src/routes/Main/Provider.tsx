@@ -68,7 +68,7 @@ export const MainProvider: React.FC = React.memo((props) => {
 
   if (loading) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center bg-gray-700 text-white text-xl">
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-700 text-white text-xl">
         <LoadingSpinner tip="正在连接到聊天服务器..." />
       </div>
     );
