@@ -1,5 +1,5 @@
 import { Button, Divider, Input, Typography } from 'antd';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { Fragment, useCallback, useRef, useState } from 'react';
 import {
   createGroup,
   GroupPanelType,
@@ -108,7 +108,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
 
           <div className="space-y-2.5">
             {panelTemplate.map((template, index) => (
-              <>
+              <Fragment key={template.key}>
                 {/* Hardcode: 将第一个模板与之后的模板区分开 */}
                 {index === 1 && <Divider />}
                 <div
@@ -118,7 +118,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
                 >
                   {template.label}
                 </div>
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
@@ -133,7 +133,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
           </Typography.Paragraph>
 
           <div className="text-center mb-2">
-            {/* TODO */}
+            {/* TODO: update avatar */}
             <Avatar size={80} name={name} />
           </div>
 
