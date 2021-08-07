@@ -49,6 +49,7 @@ module.exports = {
       lg: { min: '1024px' },
       md: { max: '767px' },
       sm: { max: '639px' },
+      mobile: { max: '639px' }, // alias
     },
     extend: {
       borderRadius: {

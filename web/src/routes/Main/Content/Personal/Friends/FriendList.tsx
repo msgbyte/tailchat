@@ -1,5 +1,10 @@
-import React, { useCallback } from 'react';
-import { createDMConverse, t, useAppSelector } from 'tailchat-shared';
+import React from 'react';
+import {
+  createDMConverse,
+  t,
+  useAppSelector,
+  useAsyncRequest,
+} from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
 import { Tooltip } from 'antd';
@@ -12,11 +17,10 @@ export const FriendList: React.FC = React.memo(() => {
   const friends = useAppSelector((state) => state.user.friends);
   const history = useHistory();
 
-  const handleCreateConverse = useCallback(
-    (targetId: string) => {
-      createDMConverse(targetId).then((converse) => {
-        history.push(`/main/personal/converse/${converse._id}`);
-      });
+  const [, handleCreateConverse] = useAsyncRequest(
+    async (targetId: string) => {
+      const converse = await createDMConverse(targetId);
+      history.push(`/main/personal/converse/${converse._id}`);
     },
     [history]
   );

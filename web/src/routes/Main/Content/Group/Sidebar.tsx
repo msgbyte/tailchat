@@ -61,7 +61,7 @@ const GroupPanelItem: React.FC<{
         className={clsx(
           'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded px-1 h-8 flex items-center text-base group',
           {
-            'bg-opacity-20': isActive,
+            'bg-white bg-opacity-20': isActive,
           }
         )}
       >
