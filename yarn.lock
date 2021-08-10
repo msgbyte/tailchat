@@ -8546,10 +8546,10 @@ static-extend@^0.1.1:
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
-str2int@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/str2int/-/str2int-1.0.0.tgz#2bff996bdd7c8aa16891b5677b865608a0330dff"
-  integrity sha512-rhRV56wlT7fE+zUtVUAgnr3LCDLfkmmeoVCtggjHezi0JbXmtdcbAXp6KV3LegP5nFXSqBaGy9VDvc3vvHb/Sg==
+str2int@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.nlark.com/str2int/download/str2int-1.1.0.tgz#f055bec26f782921e0544f0c97c009ff466f13e5"
+  integrity sha1-8FW+wm94KSHgVE8Ml8AJ/0ZvE+U=
 
 stream-shift@^1.0.0:
   version "1.0.1"

@@ -7,7 +7,7 @@ import { config } from '../config';
  * 判断一个字符串是否可用()
  * @param str 要判断的字符串
  */
-export function isAvailableString(str: any): boolean {
+export function isAvailableString(str: unknown): boolean {
   return typeof str === 'string' && str.length > 0;
 }
 
