@@ -2,6 +2,7 @@ import { FullModal } from '@/components/FullModal';
 import { SidebarView, SidebarViewMenuType } from '@/components/SidebarView';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
+import { GroupPanel } from './Panel';
 import { GroupSummary } from './Summary';
 
 interface SettingsViewProps {
@@ -28,6 +29,11 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('概述'),
             content: <GroupSummary groupId={props.groupId} />,
+          },
+          {
+            type: 'item',
+            title: t('面板'),
+            content: <GroupPanel groupId={props.groupId} />,
           },
         ],
       },
