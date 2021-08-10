@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   ChatMessage,
   getMessageTimeDiff,
@@ -12,8 +12,25 @@ interface ChatMessageListProps {
 }
 export const ChatMessageList: React.FC<ChatMessageListProps> = React.memo(
   (props) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const len = props.messages.length;
+
+    useEffect(() => {
+      // 当会话消息增加时, 滚动到底部
+      requestAnimationFrame(() => {
+        if (ref.current === null) {
+          return;
+        }
+
+        ref.current.scrollTo({
+          top: ref.current.clientHeight,
+          behavior: 'smooth',
+        });
+      });
+    }, [len]);
+
     return (
-      <div className="flex-1 overflow-y-scroll">
+      <div className="flex-1 overflow-y-scroll" ref={ref}>
         {props.messages.map((message, index, arr) => {
           let showDate = true;
           let showAvatar = true;
