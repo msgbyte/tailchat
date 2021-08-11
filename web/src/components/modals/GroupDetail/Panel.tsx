@@ -1,17 +1,19 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   GroupPanelType,
   useGroupInfo,
   GroupPanel as GroupPanelInfo,
   showToasts,
+  t,
 } from 'tailchat-shared';
-import { Tree } from 'antd';
+import { Button, Tree } from 'antd';
 import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
 import type { DataNode, EventDataNode } from 'antd/lib/tree';
 import type { Key } from 'rc-tree/lib/interface';
 import type { AllowDrop } from 'rc-tree/lib/Tree';
 import _cloneDeep from 'lodash/cloneDeep';
 import _isNil from 'lodash/isNil';
+import _isEqual from 'lodash/isEqual';
 
 /**
  * 将一维的面板列表构筑成立体的数组
@@ -83,12 +85,22 @@ const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
 
   const handleAllowDrop = useCallback(
     ({ dropNode, dropPosition }: Parameters<AllowDrop>[0]) => {
-      if (dropPosition === 0 && draggingNode.current?.isLeaf === false) {
-        // 不允许容器之间产生父子节点
-        return false;
-      }
+      if (draggingNode.current?.isLeaf === true) {
+        // 如果正在拖拽的节点是面板
+        if (dropPosition === 0) {
+          return !dropNode.isLeaf;
+        }
+        return true;
+      } else {
+        // 正在拖拽的节点是分组
+        if (dropPosition === 0) {
+          // 不允许容器之间产生父子节点
+          return false;
+        }
 
-      return dropNode.isLeaf === draggingNode.current?.isLeaf;
+        // 仅允许拖拽到分组的上下
+        return !dropNode.isLeaf;
+      }
     },
     []
   );
@@ -116,8 +128,8 @@ const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
       );
 
       if (draggingNode.current?.isLeaf === true && info.node.isLeaf === true) {
-        // 如果是面板且目标也是面板
-        // 则更新它的父节点id
+        // 如果拖拽节点是面板且目标也是面板
+        // 则更新它的父节点id为目标节点的父节点id
         info.dragNodesKeys
           // 获取所有的移动节点的位置
           .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
@@ -125,6 +137,21 @@ const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
           .filter((index) => index !== -1)
           .forEach((pos) => {
             newGroupPanels[pos].parentId = dropGroupPanel.parentId;
+          });
+      } else if (
+        draggingNode.current?.isLeaf === true &&
+        info.dropToGap === false &&
+        info.node.isLeaf === false
+      ) {
+        // 拖拽节点是面板拖动到组节点上
+        // 则更新它的父节点id为目标节点的id
+        info.dragNodesKeys
+          // 获取所有的移动节点的位置
+          .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
+          // 过滤掉没找到的
+          .filter((index) => index !== -1)
+          .forEach((pos) => {
+            newGroupPanels[pos].parentId = dropGroupPanel.id;
           });
       }
 
@@ -172,14 +199,28 @@ export const GroupPanel: React.FC<{
   const groupId = props.groupId;
   const groupInfo = useGroupInfo(groupId);
   const groupPanels = groupInfo?.panels ?? [];
+  const [editingGroupPanels, setEditingGroupPanels] = useState(groupPanels);
 
   const handleChange = useCallback((newGroupPanels: GroupPanelInfo[]) => {
-    console.log('newGroupPanels', newGroupPanels);
+    setEditingGroupPanels(newGroupPanels);
   }, []);
+
+  const handleSave = useCallback(() => {
+    console.log('editingGroupPanels', editingGroupPanels);
+  }, [editingGroupPanels]);
 
   return (
     <div>
-      <GroupPanelTree groupPanels={groupPanels} onChange={handleChange} />
+      <GroupPanelTree
+        groupPanels={editingGroupPanels}
+        onChange={handleChange}
+      />
+
+      {!_isEqual(groupPanels, editingGroupPanels) && (
+        <Button className="mt-2" onClick={handleSave}>
+          {t('保存')}
+        </Button>
+      )}
     </div>
   );
 });
