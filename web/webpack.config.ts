@@ -10,6 +10,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import fs from 'fs';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -120,6 +121,11 @@ const config: Configuration = {
       inject: true,
       hash: true,
       template: path.resolve(ROOT_PATH, './assets/template.html'),
+      preloadImage: `data:image/svg+xml;base64,${Buffer.from(
+        fs.readFileSync(path.resolve(ROOT_PATH, './assets/images/ripple.svg'), {
+          encoding: 'utf-8',
+        })
+      ).toString('base64')}`,
     }),
     new CopyPlugin({
       patterns: [
