@@ -29,12 +29,13 @@ export const Sidebar: React.FC = React.memo(() => {
               {groupPanels
                 .filter((panel) => panel.parentId === group.id)
                 .map((panel) => (
-                  <GroupPanelItem
-                    key={panel.id}
-                    name={panel.name}
-                    icon={<div>#</div>}
-                    to={`/main/group/${groupId}/${panel.id}`}
-                  />
+                  <div key={panel.id}>
+                    <GroupPanelItem
+                      name={panel.name}
+                      icon={<div>#</div>}
+                      to={`/main/group/${groupId}/${panel.id}`}
+                    />
+                  </div>
                 ))}
             </GroupSection>
           ))}

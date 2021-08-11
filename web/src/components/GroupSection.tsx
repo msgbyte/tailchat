@@ -10,7 +10,7 @@ export const GroupSection: React.FC<{
   return (
     <div>
       <div
-        className="flex items-center cursor-pointer py-1"
+        className="flex items-center cursor-pointer py-1 text-xs"
         onClick={switchShow}
       >
         <Icon
@@ -21,7 +21,7 @@ export const GroupSection: React.FC<{
         <div>{props.header}</div>
       </div>
       <div
-        className="transition-all overflow-hidden"
+        className="transition-all overflow-hidden space-y-0.5"
         style={{
           maxHeight: isShow ? 'var(--max-height)' : 0,
         }}

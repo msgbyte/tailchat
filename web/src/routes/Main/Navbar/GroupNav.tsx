@@ -25,18 +25,16 @@ export const GroupNav: React.FC = React.memo(() => {
     <div className="space-y-2">
       {Array.isArray(groups) &&
         groups.map((group) => (
-          <NavbarNavItem
-            key={group._id}
-            name={group.name}
-            to={`/main/group/${group._id}`}
-          >
-            <Avatar
-              shape="square"
-              size={48}
-              name={group.name}
-              src={group.avatar}
-            />
-          </NavbarNavItem>
+          <div key={group._id}>
+            <NavbarNavItem name={group.name} to={`/main/group/${group._id}`}>
+              <Avatar
+                shape="square"
+                size={48}
+                name={group.name}
+                src={group.avatar}
+              />
+            </NavbarNavItem>
+          </div>
         ))}
 
       {/* 创建群组 */}
