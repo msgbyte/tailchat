@@ -10,18 +10,21 @@ export function buildTreeDataWithGroupPanel(
   groupPanels: GroupPanelInfo[]
 ): DataNode[] {
   return groupPanels
-    .filter((panel) => panel.type === GroupPanelType.GROUP)
+    .filter((panel) => _isNil(panel.parentId))
     .map<DataNode>((section) => ({
       key: section.id,
       title: section.name,
-      isLeaf: false,
-      children: groupPanels
-        .filter((panel) => panel.parentId === section.id)
-        .map<DataNode>((panel) => ({
-          key: panel.id,
-          title: panel.name,
-          isLeaf: true,
-        })),
+      isLeaf: section.type !== GroupPanelType.GROUP,
+      children:
+        section.type === GroupPanelType.GROUP
+          ? groupPanels
+              .filter((panel) => panel.parentId === section.id)
+              .map<DataNode>((panel) => ({
+                key: panel.id,
+                title: panel.name,
+                isLeaf: true,
+              }))
+          : undefined,
     }));
 }
 

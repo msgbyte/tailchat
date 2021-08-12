@@ -38,7 +38,7 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
       if (draggingNode.current?.isLeaf === true) {
         // 如果正在拖拽的节点是面板
         if (dropPosition === 0) {
-          return !dropNode.isLeaf;
+          return !dropNode.isLeaf; // 如果为分组则允许拖动
         }
         return true;
       } else {
@@ -77,52 +77,68 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
         (panel) => panel.id === info.dragNode.key
       );
 
-      if (draggingNode.current?.isLeaf === true && info.node.isLeaf === true) {
+      if (draggingNode.current?.isLeaf === true) {
         // 如果拖拽节点是面板且目标也是面板
-        // 则更新它的父节点id为目标节点的父节点id
-        info.dragNodesKeys
-          // 获取所有的移动节点的位置
-          .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
-          // 过滤掉没找到的
-          .filter((index) => index !== -1)
-          .forEach((pos) => {
-            newGroupPanels[pos].parentId = dropGroupPanel.parentId;
-          });
-      } else if (
-        draggingNode.current?.isLeaf === true &&
-        info.dropToGap === false &&
-        info.node.isLeaf === false
-      ) {
-        // 拖拽节点是面板拖动到组节点上
-        // 则更新它的父节点id为目标节点的id
-        info.dragNodesKeys
-          // 获取所有的移动节点的位置
-          .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
-          // 过滤掉没找到的
-          .filter((index) => index !== -1)
-          .forEach((pos) => {
-            newGroupPanels[pos].parentId = dropGroupPanel.id;
-          });
+        if (info.node.isLeaf === true) {
+          // 如果目标也是面板
+          // 则更新它的父节点id为目标节点的父节点id
+          info.dragNodesKeys
+            // 获取所有的移动节点的位置
+            .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
+            // 过滤掉没找到的
+            .filter((index) => index !== -1)
+            .forEach((pos) => {
+              newGroupPanels[pos].parentId = dropGroupPanel.parentId;
+            });
+        } else if (info.dropToGap === false && info.node.isLeaf === false) {
+          // 如果目标是组节点且拖动到内部
+          // 则更新它的父节点id为目标节点的id
+          info.dragNodesKeys
+            // 获取所有的移动节点的位置
+            .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
+            // 过滤掉没找到的
+            .filter((index) => index !== -1)
+            .forEach((pos) => {
+              newGroupPanels[pos].parentId = dropGroupPanel.id;
+            });
+        } else if (info.dropToGap === true && info.node.isLeaf === false) {
+          // 如果目标是组节点但是拖动到兄弟节点
+          // 则更新它的父节点id为空
+          info.dragNodesKeys
+            // 获取所有的移动节点的位置
+            .map((key) => newGroupPanels.findIndex((panel) => panel.id === key))
+            // 过滤掉没找到的
+            .filter((index) => index !== -1)
+            .forEach((pos) => {
+              newGroupPanels[pos].parentId = undefined;
+            });
+        }
       }
 
+      const fromPos = dragPanelPos;
+      let toPos: number;
       if (info.node.dragOverGapTop === true) {
         // 移动到目标节点之前
-        newGroupPanels.splice(
-          dropNodePos,
-          0,
-          newGroupPanels.splice(dragPanelPos, 1)[0]
-        );
-      } else if (info.node.dragOverGapBottom === true) {
-        // 移动到目标节点之后
-        newGroupPanels.splice(
-          dragPanelPos,
-          0,
-          newGroupPanels.splice(dropNodePos, 1)[0]
-        );
+        toPos = dropNodePos;
+      } else {
+        // 移动到目标节点之后或之内
+        toPos = dropNodePos + 1;
+      }
+
+      // 应用移动, 先添加再删除
+      if (fromPos < toPos) {
+        // 如果是将数组中前面的数拿到后面
+        newGroupPanels.splice(toPos, 0, newGroupPanels[fromPos]);
+        newGroupPanels.splice(fromPos, 1);
+      } else if (fromPos > toPos) {
+        // 把后面的数拿到前面
+        const [tmp] = newGroupPanels.splice(fromPos, 1);
+        newGroupPanels.splice(toPos, 0, tmp);
       }
 
       if (typeof props.onChange === 'function') {
-        props.onChange(rebuildGroupPanelOrder(newGroupPanels));
+        const res = rebuildGroupPanelOrder(newGroupPanels);
+        props.onChange(res);
       }
     },
     [props.groupPanels, props.onChange]
