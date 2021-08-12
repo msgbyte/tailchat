@@ -1,19 +1,16 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
   GroupPanelType,
-  useGroupInfo,
   GroupPanel as GroupPanelInfo,
   showToasts,
-  t,
 } from 'tailchat-shared';
-import { Button, Tree } from 'antd';
+import { Tree } from 'antd';
 import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
 import type { DataNode, EventDataNode } from 'antd/lib/tree';
 import type { Key } from 'rc-tree/lib/interface';
 import type { AllowDrop } from 'rc-tree/lib/Tree';
 import _cloneDeep from 'lodash/cloneDeep';
 import _isNil from 'lodash/isNil';
-import _isEqual from 'lodash/isEqual';
 
 /**
  * 将一维的面板列表构筑成立体的数组
@@ -65,7 +62,7 @@ interface GroupPanelTree {
 /**
  * 仅同层级相互拉的树形结构
  */
-const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
+export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
   const draggingNode = useRef<DataNode | null>(null);
   const treeData: DataNode[] = useMemo(
     () => buildTreeDataWithGroupPanel(props.groupPanels),
@@ -192,36 +189,3 @@ const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
   );
 });
 GroupPanelTree.displayName = 'GroupPanelTree';
-
-export const GroupPanel: React.FC<{
-  groupId: string;
-}> = React.memo((props) => {
-  const groupId = props.groupId;
-  const groupInfo = useGroupInfo(groupId);
-  const groupPanels = groupInfo?.panels ?? [];
-  const [editingGroupPanels, setEditingGroupPanels] = useState(groupPanels);
-
-  const handleChange = useCallback((newGroupPanels: GroupPanelInfo[]) => {
-    setEditingGroupPanels(newGroupPanels);
-  }, []);
-
-  const handleSave = useCallback(() => {
-    console.log('editingGroupPanels', editingGroupPanels);
-  }, [editingGroupPanels]);
-
-  return (
-    <div>
-      <GroupPanelTree
-        groupPanels={editingGroupPanels}
-        onChange={handleChange}
-      />
-
-      {!_isEqual(groupPanels, editingGroupPanels) && (
-        <Button className="mt-2" onClick={handleSave}>
-          {t('保存')}
-        </Button>
-      )}
-    </div>
-  );
-});
-GroupPanel.displayName = 'GroupPanel';
