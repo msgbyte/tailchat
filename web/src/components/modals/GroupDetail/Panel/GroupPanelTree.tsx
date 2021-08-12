@@ -37,7 +37,7 @@ function buildTreeDataWithGroupPanel(
 /**
  * 重新构建面板顺序
  */
-function rebuildGroupPanelOrder(
+export function rebuildGroupPanelOrder(
   groupPanels: GroupPanelInfo[]
 ): GroupPanelInfo[] {
   const originGroupPanels = _cloneDeep(groupPanels);
