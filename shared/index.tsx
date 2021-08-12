@@ -100,3 +100,4 @@ export {
   version,
 } from './utils/environment';
 export { getTextColorHex } from './utils/string-helper';
+export { sleep } from './utils/utils';
