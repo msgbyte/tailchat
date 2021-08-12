@@ -2,7 +2,7 @@ jest.mock('tailchat-shared/i18n');
 import { render } from '@testing-library/react';
 import React from 'react';
 import { GroupPanel, GroupPanelType } from 'tailchat-shared';
-import { GroupPanelTree, rebuildGroupPanelOrder } from '../GroupPanelTree';
+import { GroupPanelTree } from '../GroupPanelTree';
 
 const testGroupPanels: GroupPanel[] = [
   {
@@ -49,50 +49,5 @@ describe('GroupPanelTree', () => {
     );
 
     expect(wrapper.container).toMatchSnapshot();
-  });
-});
-
-describe('rebuildGroupPanelOrder', () => {
-  test('ref is changed', () => {
-    expect(rebuildGroupPanelOrder(testGroupPanels)).not.toBe(testGroupPanels);
-    expect(rebuildGroupPanelOrder(testGroupPanels)[0]).not.toBe(
-      testGroupPanels[0]
-    );
-  });
-
-  test('keep order if right', () => {
-    expect(rebuildGroupPanelOrder(testGroupPanels)).toEqual(testGroupPanels);
-  });
-
-  test('child should after parent', () => {
-    expect(
-      rebuildGroupPanelOrder([testGroupPanels[1], testGroupPanels[0]])
-    ).toEqual([testGroupPanels[0], testGroupPanels[1]]);
-  });
-
-  test('switch position should keep origin order', () => {
-    expect(
-      rebuildGroupPanelOrder([
-        testGroupPanels[1],
-        testGroupPanels[2],
-        testGroupPanels[0],
-      ])
-    ).toEqual([testGroupPanels[0], testGroupPanels[1], testGroupPanels[2]]);
-  });
-
-  test('switch position should keep origin order(group)', () => {
-    expect(
-      rebuildGroupPanelOrder([
-        testGroupPanels[1],
-        testGroupPanels[2],
-        testGroupPanels[0],
-        testGroupPanels[3],
-      ])
-    ).toEqual([
-      testGroupPanels[0],
-      testGroupPanels[1],
-      testGroupPanels[2],
-      testGroupPanels[3],
-    ]);
   });
 });
