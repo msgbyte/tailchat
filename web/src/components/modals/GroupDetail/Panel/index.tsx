@@ -1,5 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { useGroupInfo, GroupPanel as GroupPanelInfo, t } from 'tailchat-shared';
+import {
+  useGroupInfo,
+  GroupPanel as GroupPanelInfo,
+  t,
+  modifyGroupField,
+  useAsyncRequest,
+  showToasts,
+} from 'tailchat-shared';
 import { Button } from 'antd';
 import _isEqual from 'lodash/isEqual';
 import { GroupPanelTree } from './GroupPanelTree';
@@ -16,8 +23,9 @@ export const GroupPanel: React.FC<{
     setEditingGroupPanels(newGroupPanels);
   }, []);
 
-  const handleSave = useCallback(() => {
-    console.log('editingGroupPanels', editingGroupPanels);
+  const [{ loading }, handleSave] = useAsyncRequest(async () => {
+    await modifyGroupField(groupId, 'panels', editingGroupPanels);
+    showToasts(t('保存成功'), 'success');
   }, [editingGroupPanels]);
 
   return (
@@ -28,7 +36,7 @@ export const GroupPanel: React.FC<{
       />
 
       {!_isEqual(groupPanels, editingGroupPanels) && (
-        <Button className="mt-2" onClick={handleSave}>
+        <Button className="mt-2" loading={loading} onClick={handleSave}>
           {t('保存')}
         </Button>
       )}

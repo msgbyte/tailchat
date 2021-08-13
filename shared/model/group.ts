@@ -77,6 +77,25 @@ export async function getGroupBasicInfo(
 }
 
 /**
+ * 修改群组属性
+ * @param groupId 群组ID
+ * @param fieldName 要修改的群组属性
+ * @param fieldValue 要修改的属性的值
+ */
+type AllowedModifyField = 'name' | 'avatar' | 'panels' | 'roles';
+export async function modifyGroupField(
+  groupId: string,
+  fieldName: AllowedModifyField,
+  fieldValue: unknown
+) {
+  await request.post('/api/group/updateGroupField', {
+    groupId,
+    fieldName,
+    fieldValue,
+  });
+}
+
+/**
  * 创建群组邀请码
  * 邀请码默认 7天有效期
  * @param groupId 群组id
