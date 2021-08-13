@@ -3,6 +3,7 @@ import { SidebarView, SidebarViewMenuType } from '@/components/SidebarView';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
 import { SettingsAbout } from './About';
+import { SettingsStatus } from './Status';
 
 interface SettingsViewProps {
   onClose: () => void;
@@ -23,6 +24,11 @@ export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
         type: 'group',
         title: t('通用'),
         children: [
+          {
+            type: 'item',
+            title: t('服务状态'),
+            content: <SettingsStatus />,
+          },
           {
             type: 'item',
             title: t('关于'),

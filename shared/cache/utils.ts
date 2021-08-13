@@ -14,10 +14,10 @@ import { queryClient } from './';
 export function buildCachedRequest<
   R extends any,
   F extends (...args: any) => Promise<R>
->(prefix: string, fn: F, options?: FetchQueryOptions): F {
+>(name: string, fn: F, options?: FetchQueryOptions): F {
   return ((...args: any) => {
     return queryClient.fetchQuery(
-      [prefix, JSON.stringify(args)],
+      [name, JSON.stringify(args)],
       () => fn(...args),
       options
     );

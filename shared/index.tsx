@@ -47,6 +47,7 @@ export {
 } from './manager/ui';
 
 // model
+export { fetchAvailableServices } from './model/common';
 export { createDMConverse } from './model/converse';
 export {
   addFriendRequest,
