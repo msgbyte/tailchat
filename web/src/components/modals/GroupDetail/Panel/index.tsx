@@ -30,6 +30,8 @@ export const GroupPanel: React.FC<{
 
   return (
     <div>
+      <div className="text-xl font-bold mb-4">{t('面板管理')}</div>
+
       <GroupPanelTree
         groupPanels={editingGroupPanels}
         onChange={handleChange}
