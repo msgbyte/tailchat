@@ -1,4 +1,32 @@
 .dark {
+  --antd-primary-border: #165996;
+  --antd-primary-color: #177ddc;
+  --antd-primary-color-hover: #095cb5;
+
+
+  // 按钮
+  .ant-btn {
+    color: rgba(255,255,255,0.65);
+    border-color: #434343;
+    background: transparent;
+
+    &:hover, &:focus {
+      color: var(--antd-primary-border);
+      border-color: var(--antd-primary-border);
+    }
+
+    &.ant-btn-primary {
+      color: #fff;
+      border-color: var(--antd-primary-color);
+      background: var(--antd-primary-color);
+
+      &:hover {
+        border-color: var(--antd-primary-color-hover);
+        background: var(--antd-primary-color-hover);
+      }
+    }
+  }
+
   // 表单
   .ant-form-item-label > label {
     color: white;
@@ -19,7 +47,18 @@
   .ant-input {
     color: rgba(255,255,255,0.65);
     background-color: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.12);
+
+    &:hover {
+      border-color: #165996;
+      border-right-width: 1px !important;
+    }
+
+    &:focus, &.ant-input-focused {
+      border-color: #177ddc;
+      border-right-width: 1px !important;
+      box-shadow: 0 0 0 2px rgb(23 125 220 / 20%);
+    }
   }
 
   // 走马灯
@@ -53,6 +92,52 @@
       &:hover {
         background-color: rgba(255,255,255,0.08);
       }
+    }
+  }
+
+  // 空状态
+  .ant-empty {
+    .ant-empty-img-default-ellipse {
+      fill: #fff;
+      fill-opacity: .08
+    }
+
+    .ant-empty-img-default-path-1 {
+      fill: #262626
+    }
+
+    .ant-empty-img-default-path-2 {
+      fill: url(#linearGradient-1)
+    }
+
+    .ant-empty-img-default-path-3 {
+      fill: #595959
+    }
+
+    .ant-empty-img-default-path-4 {
+      fill: #434343
+    }
+
+    .ant-empty-img-default-path-5 {
+      fill: #595959
+    }
+
+    .ant-empty-img-default-g {
+      fill: #434343
+    }
+
+    .ant-empty-img-simple-ellipse {
+      fill: #fff;
+      fill-opacity: .08
+    }
+
+    .ant-empty-img-simple-g {
+      stroke: #434343
+    }
+
+    .ant-empty-img-simple-path {
+      fill: #262626;
+      stroke: #434343
     }
   }
 }

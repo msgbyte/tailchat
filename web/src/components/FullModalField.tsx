@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import _isString from 'lodash/isString';
 import _isNil from 'lodash/isNil';
-import { Button, Input } from 'antd';
+import { Button, Input, Space } from 'antd';
 import { Icon } from '@iconify/react';
 
 export type FullModalFieldEditorRenderComponent = React.FC<{
@@ -67,7 +67,7 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
     const EditorComponent = props.renderEditor;
 
     return (
-      <div className="flex w-full items-end">
+      <Space className="flex w-full">
         {isEditing && !_isNil(EditorComponent) ? (
           <EditorComponent value={editingValue} onChange={setEditingValue} />
         ) : (
@@ -92,7 +92,7 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
             onClick={handleSave}
           />
         )}
-      </div>
+      </Space>
     );
   }
 );
@@ -107,11 +107,11 @@ export const FullModalField: React.FC<FullModalFieldProps> = React.memo(
     return (
       <div className="mb-4">
         <div className="text-xs text-gray-400 mb-2">{props.title}</div>
-        <div className="h-10 text-base truncate" title={valueTitle}>
+        <div className="h-10 text-base truncate">
           {allowEditor === true ? (
             <FullModalFieldEditor {...props} />
           ) : (
-            <span>{props.content ?? props.value}</span>
+            <span title={valueTitle}>{props.content ?? props.value}</span>
           )}
         </div>
       </div>
