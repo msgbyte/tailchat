@@ -51,7 +51,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
 
       <Icon
         className="text-6xl block m-auto opacity-30 mb-4 mt-2"
-        icon="mdi-email-edit-outline"
+        icon="mdi:email-edit-outline"
       />
 
       <div className="text-gray-400 font-bold text-lg mb-2">

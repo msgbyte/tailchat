@@ -9,7 +9,7 @@ import React from 'react';
 export const IsDeveloping: React.FC = React.memo(() => {
   return (
     <div className="text-white w-full h-full flex items-center justify-center flex-col">
-      <Icon className="text-9xl" icon="mdi-code-braces" />
+      <Icon className="text-9xl" icon="mdi:code-braces" />
       <p className="text-2xl">{t('该功能暂未开放')}</p>
     </div>
   );

@@ -36,7 +36,7 @@ export const SidebarDMItem: React.FC<SidebarDMItemProps> = React.memo(
         key={converse._id}
         name={name}
         // TODO
-        // action={<Icon icon="mdi-close" />}
+        // action={<Icon icon="mdi:close" />}
         to={`/main/personal/converse/${converse._id}`}
       />
     );

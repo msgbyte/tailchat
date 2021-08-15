@@ -37,7 +37,7 @@ export const FriendList: React.FC = React.memo(() => {
               <Tooltip key="message" title={t('发送消息')}>
                 <div>
                   <IconBtn
-                    icon="mdi-message-text-outline"
+                    icon="mdi:message-text-outline"
                     onClick={() => handleCreateConverse(friendId)}
                   />
                 </div>

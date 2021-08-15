@@ -30,16 +30,16 @@ export const Sidebar: React.FC = React.memo(() => {
     <div className="p-2">
       <SidebarItem
         name="好友"
-        icon={<Icon icon="mdi-account-multiple" />}
+        icon={<Icon icon="mdi:account-multiple" />}
         to="/main/personal/friends"
       />
       <SidebarItem
         name="插件中心"
-        icon={<Icon icon="mdi-puzzle" />}
+        icon={<Icon icon="mdi:puzzle" />}
         to="/main/personal/plugins"
       />
 
-      <SidebarSection action={<Icon icon="mdi-plus" />}>私信</SidebarSection>
+      <SidebarSection action={<Icon icon="mdi:plus" />}>私信</SidebarSection>
 
       {converseList.map((converse) => {
         return <SidebarDMItem key={converse._id} converse={converse} />;

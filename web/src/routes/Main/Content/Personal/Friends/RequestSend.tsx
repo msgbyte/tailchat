@@ -28,7 +28,7 @@ export const RequestSend: React.FC<{
               <Tooltip key="cancel" title={t('取消')}>
                 <div>
                   <IconBtn
-                    icon="mdi-close"
+                    icon="mdi:close"
                     disabled={loading}
                     onClick={() => handleCancel(_id)}
                   />

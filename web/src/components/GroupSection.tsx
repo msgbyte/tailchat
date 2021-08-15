@@ -15,7 +15,7 @@ export const GroupSection: React.FC<{
       >
         <Icon
           className="mr-1"
-          icon="mdi-chevron-right"
+          icon="mdi:chevron-right"
           rotate={isShow ? 45 : 0}
         />
         <div>{props.header}</div>

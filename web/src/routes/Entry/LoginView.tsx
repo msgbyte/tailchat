@@ -18,7 +18,7 @@ const OAuthLoginView: React.FC = React.memo(() => {
       <Divider>或</Divider>
 
       <div className="bg-gray-400 w-1/3 px-4 py-1 text-3xl text-center rounded-md cursor-pointer shadow-md">
-        <Icon className="mx-auto" icon="mdi-github" />
+        <Icon className="mx-auto" icon="mdi:github" />
       </div>
     </>
   );
@@ -100,7 +100,7 @@ export const LoginView: React.FC = React.memo(() => {
           onClick={toRegisterView}
         >
           注册账号
-          <Icon icon="mdi-arrow-right" className="ml-1 inline" />
+          <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
       </div>
     </div>

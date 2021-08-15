@@ -89,7 +89,7 @@ export const RegisterView: React.FC = React.memo(() => {
           disabled={loading}
           onClick={toLoginView}
         >
-          <Icon icon="mdi-arrow-left" className="mr-1 inline" />
+          <Icon icon="mdi:arrow-left" className="mr-1 inline" />
           返回登录
         </button>
       </div>

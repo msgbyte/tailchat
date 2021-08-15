@@ -4,7 +4,7 @@ import { IconBtn } from '../IconBtn';
 
 describe('IconBtn', () => {
   test('render', () => {
-    const wrapper = render(<IconBtn icon="mdi-close" />);
+    const wrapper = render(<IconBtn icon="mdi:close" />);
     expect(wrapper.container).toMatchSnapshot();
   });
 });

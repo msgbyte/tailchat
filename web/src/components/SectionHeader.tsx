@@ -25,7 +25,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
                 className={clsx('text-2xl transition-transform transform', {
                   'rotate-180': visible,
                 })}
-                icon="mdi-chevron-down"
+                icon="mdi:chevron-down"
               >
                 &#xe60f;
               </Icon>

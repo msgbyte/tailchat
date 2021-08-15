@@ -11,7 +11,7 @@ export const SettingBtn: React.FC = React.memo(() => {
   return (
     <Icon
       className="text-3xl text-white cursor-pointer"
-      icon="mdi-dots-horizontal"
+      icon="mdi:dots-horizontal"
       onClick={handleClick}
     />
   );

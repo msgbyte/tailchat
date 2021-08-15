@@ -41,7 +41,7 @@ export const RequestReceived: React.FC<{
               <Tooltip key="accept" title={t('接受')}>
                 <div>
                   <IconBtn
-                    icon="mdi-check"
+                    icon="mdi:check"
                     disabled={loading}
                     onClick={() => handleAccept(_id)}
                   />
@@ -50,7 +50,7 @@ export const RequestReceived: React.FC<{
               <Tooltip key="deny" title={t('拒绝')}>
                 <div>
                   <IconBtn
-                    icon="mdi-close"
+                    icon="mdi:close"
                     disabled={loading}
                     onClick={() => handleDeny(_id)}
                   />
