@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Button } from 'antd';
 import clsx from 'clsx';
+import { t } from 'tailchat-shared';
 
 /**
  * 用于接口错误显示的组件
@@ -20,7 +21,7 @@ export const AlertErrorView: React.FC<{
         type="link"
         onClick={() => setShow(true)}
       >
-        显示详情
+        {t('显示详情')}
       </Button>
       {show && <pre>{String(error.stack)}</pre>}
     </div>

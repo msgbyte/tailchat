@@ -3,7 +3,7 @@
 exports[`AlertErrorView render 1`] = `
 <div>
   <div
-    class="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon"
+    class="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon w-full h-full select-text"
     data-show="true"
     role="alert"
   >
@@ -18,7 +18,19 @@ exports[`AlertErrorView render 1`] = `
       <div
         class="ant-alert-description"
       >
-        Dummy Error
+        <div>
+          <span>
+            Dummy Error
+          </span>
+          <button
+            class="ant-btn ant-btn-link"
+            type="button"
+          >
+            <span>
+              显示详情
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
