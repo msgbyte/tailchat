@@ -3,6 +3,8 @@ import _isString from 'lodash/isString';
 import _isNil from 'lodash/isNil';
 import { Button, Input, Space } from 'antd';
 import { Icon } from '@iconify/react';
+import { t } from 'tailchat-shared';
+import { DelayTip } from './DelayTip';
 
 export type FullModalFieldEditorRenderComponent = React.FC<{
   value: string;
@@ -44,12 +46,20 @@ interface FullModalFieldProps {
 }
 
 /**
+ * 计算要显示的title
+ */
+function useTitle(value?: string) {
+  return _isString(value) ? value : undefined;
+}
+
+/**
  * 字段编辑器
  */
 const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
   (props) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editingValue, setEditingValue] = useState(props.value ?? '');
+    const valueTitle = useTitle(props.value);
 
     useEffect(() => {
       setEditingValue(props.value ?? '');
@@ -71,26 +81,32 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
         {isEditing && !_isNil(EditorComponent) ? (
           <EditorComponent value={editingValue} onChange={setEditingValue} />
         ) : (
-          <span>{props.content ?? props.value}</span>
+          <span title={valueTitle}>{props.content ?? props.value}</span>
         )}
 
-        <Button
-          icon={
-            isEditing ? (
-              <Icon className="anticon" icon="mdi:close" />
-            ) : (
-              <Icon className="anticon" icon="mdi:square-edit-outline" />
-            )
-          }
-          onClick={handleEditing}
-        />
-
-        {isEditing && (
-          <Button
-            type="primary"
-            icon={<Icon className="anticon" icon="mdi:check" />}
-            onClick={handleSave}
-          />
+        {!isEditing ? (
+          <DelayTip title={t('编辑')}>
+            <Button
+              icon={<Icon className="anticon" icon="mdi:square-edit-outline" />}
+              onClick={handleEditing}
+            />
+          </DelayTip>
+        ) : (
+          <>
+            <DelayTip title={t('取消')}>
+              <Button
+                icon={<Icon className="anticon" icon="mdi:close" />}
+                onClick={handleEditing}
+              />
+            </DelayTip>
+            <DelayTip title={t('保存变更')}>
+              <Button
+                type="primary"
+                icon={<Icon className="anticon" icon="mdi:check" />}
+                onClick={handleSave}
+              />
+            </DelayTip>
+          </>
         )}
       </Space>
     );
@@ -100,7 +116,7 @@ FullModalFieldEditor.displayName = 'FullModalFieldEditor';
 
 export const FullModalField: React.FC<FullModalFieldProps> = React.memo(
   (props) => {
-    const valueTitle = _isString(props.value) ? props.value : undefined;
+    const valueTitle = useTitle(props.value);
 
     const allowEditor = props.editable === true && !_isNil(props.renderEditor);
 
