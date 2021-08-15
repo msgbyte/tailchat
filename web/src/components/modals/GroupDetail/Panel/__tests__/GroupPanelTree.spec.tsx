@@ -1,4 +1,3 @@
-jest.mock('tailchat-shared/i18n');
 import { render } from '@testing-library/react';
 import React from 'react';
 import { GroupPanel, GroupPanelType } from 'tailchat-shared';

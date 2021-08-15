@@ -1,3 +1,6 @@
+// mock
+jest.mock('tailchat-shared/i18n');
+
 // https://github.com/testing-library/react-testing-library#suppressing-unnecessary-warnings-on-react-dom-168
 const originalError = console.error;
 console.error = (...args) => {
