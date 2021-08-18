@@ -6447,6 +6447,11 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
+normalize-wheel@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/normalize-wheel/download/normalize-wheel-1.0.1.tgz#aec886affdb045070d856447df62ecf86146ec45"
+  integrity sha1-rsiGr/2wRQcNhWRH32Ls+GFG7EU=
+
 now-and-later@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/now-and-later/-/now-and-later-2.0.1.tgz#8e579c8685764a7cc02cb680380e94f43ccb1f7c"
@@ -7597,6 +7602,14 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-easy-crop@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.nlark.com/react-easy-crop/download/react-easy-crop-3.5.2.tgz#1fc65249e82db407c8c875159589a8029a9b7a06"
+  integrity sha1-H8ZSSegttAfIyHUVlYmoApqbegY=
+  dependencies:
+    normalize-wheel "^1.0.1"
+    tslib "2.0.1"
 
 react-error-boundary@^3.1.0:
   version "3.1.3"
@@ -9090,6 +9103,11 @@ tsconfig-paths@^3.9.0:
     json5 "^1.0.1"
     minimist "^1.2.0"
     strip-bom "^3.0.0"
+
+tslib@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.nlark.com/tslib/download/tslib-2.0.1.tgz?cache=0&sync_timestamp=1628722556410&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha1-QQ6w0RPltjVkkO7HSWA3JbAhtD4=
 
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"

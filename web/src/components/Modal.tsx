@@ -98,7 +98,7 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
               <Icon
                 className="absolute right-2.5 top-3.5 text-xl z-10"
                 icon="mdi:close"
-                onClick={handleClose}
+                onClick={closeModal}
               />
             )}
             {props.children}
