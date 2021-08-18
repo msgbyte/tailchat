@@ -102,4 +102,5 @@ export {
   version,
 } from './utils/environment';
 export { getTextColorHex } from './utils/string-helper';
+export { uploadFile } from './utils/upload-helper';
 export { sleep } from './utils/utils';
