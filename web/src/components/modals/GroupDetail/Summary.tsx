@@ -3,7 +3,7 @@ import { AvatarUploader } from '@/components/AvatarUploader';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
-} from '@/components/FullModalField';
+} from '@/components/FullModal/Field';
 import { NoData } from '@/components/NoData';
 import React from 'react';
 import {

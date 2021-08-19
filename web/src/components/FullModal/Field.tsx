@@ -4,7 +4,7 @@ import _isNil from 'lodash/isNil';
 import { Button, Input, Space } from 'antd';
 import { Icon } from '@iconify/react';
 import { t } from 'tailchat-shared';
-import { DelayTip } from './DelayTip';
+import { DelayTip } from '../DelayTip';
 
 export type FullModalFieldEditorRenderComponent = React.FC<{
   value: string;
