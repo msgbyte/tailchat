@@ -2,6 +2,8 @@ import { io, Socket } from 'socket.io-client';
 import _isNil from 'lodash/isNil';
 import { getServiceUrl } from '../manager/service';
 import { isDevelopment } from '../utils/environment';
+import { showToasts } from '../manager/ui';
+import { t } from '../i18n';
 
 let socket: Socket;
 
@@ -88,7 +90,13 @@ export function createSocket(token: string): Promise<AppSocket> {
     socket.once('connect', () => {
       // 连接成功
       const appSocket = new AppSocket(socket);
-      appSocket.request('chat.converse.findAndJoinRoom'); // 立即请求加入房间
+      appSocket.request('chat.converse.findAndJoinRoom').catch((err) => {
+        console.error(err);
+        showToasts(
+          t('无法加入房间, 您将无法获取到最新的信息, 请刷新页面后重试'),
+          'error'
+        );
+      }); // 立即请求加入房间
       resolve(appSocket);
     });
     socket.once('error', () => {

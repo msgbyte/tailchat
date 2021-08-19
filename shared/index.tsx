@@ -33,6 +33,7 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useMountedState } from './hooks/useMountedState';
 export { useRafState } from './hooks/useRafState';
+export { useUpdateRef } from './hooks/useUpdateRef';
 
 // manager
 export { getStorage, setStorage, useStorage } from './manager/storage';

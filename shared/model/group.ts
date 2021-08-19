@@ -135,3 +135,22 @@ export async function applyGroupInvite(inviteCode: string): Promise<void> {
     code: inviteCode,
   });
 }
+
+/**
+ * 创建群组面板
+ */
+export async function createGroupPanel(
+  groupId: string,
+  options: {
+    name: string;
+    type: number;
+    parentId?: string;
+    provider?: string;
+    meta?: Record<string, unknown>;
+  }
+) {
+  await request.post('/api/group/createGroupPanel', {
+    ...options,
+    groupId,
+  });
+}

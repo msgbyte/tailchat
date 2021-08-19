@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   useGroupInfo,
   GroupPanel as GroupPanelInfo,
@@ -11,7 +11,7 @@ import { Button } from 'antd';
 import _isEqual from 'lodash/isEqual';
 import { GroupPanelTree } from './GroupPanelTree';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
-import { openModal } from '@/components/Modal';
+import { closeModal, openModal } from '@/components/Modal';
 import { ModalCreateGroupPanel } from '../../CreateGroupPanel';
 
 export const GroupPanel: React.FC<{
@@ -21,34 +21,50 @@ export const GroupPanel: React.FC<{
   const groupInfo = useGroupInfo(groupId);
   const groupPanels = groupInfo?.panels ?? [];
   const [editingGroupPanels, setEditingGroupPanels] = useState(groupPanels);
+  const isEditingRef = useRef(false);
+
+  useEffect(() => {
+    // 如果不处于编辑状态, 则一直更新最新的面板
+    if (isEditingRef.current === true) {
+      return;
+    }
+
+    setEditingGroupPanels(groupPanels);
+  }, [groupPanels]);
 
   const handleChange = useCallback((newGroupPanels: GroupPanelInfo[]) => {
+    isEditingRef.current = true;
     setEditingGroupPanels(newGroupPanels);
   }, []);
 
   const [{ loading }, handleSave] = useAsyncRequest(async () => {
     await modifyGroupField(groupId, 'panels', editingGroupPanels);
+    isEditingRef.current = false;
     showToasts(t('保存成功'), 'success');
   }, [editingGroupPanels]);
 
-  const [{ loading: createLoading }, handleCreatePanel] =
-    useAsyncRequest(async () => {
-      // TODO
-    }, []);
+  const handleReset = useCallback(() => {
+    setEditingGroupPanels(groupPanels);
+    isEditingRef.current = false;
+  }, [groupPanels]);
 
   const handleOpenCreatePanelModal = useCallback(() => {
-    openModal(<ModalCreateGroupPanel groupId={groupId} />);
-  }, [handleCreatePanel]);
+    const key = openModal(
+      <ModalCreateGroupPanel
+        groupId={groupId}
+        onCreateSuccess={() => {
+          closeModal(key);
+          isEditingRef.current = false;
+        }}
+      />
+    );
+  }, []);
 
   return (
     <div>
       <FullModalCommonTitle
         extra={
-          <Button
-            type="primary"
-            loading={createLoading}
-            onClick={handleOpenCreatePanelModal}
-          >
+          <Button type="primary" onClick={handleOpenCreatePanelModal}>
             {t('创建面板')}
           </Button>
         }
@@ -62,9 +78,12 @@ export const GroupPanel: React.FC<{
       />
 
       {!_isEqual(groupPanels, editingGroupPanels) && (
-        <Button className="mt-2" loading={loading} onClick={handleSave}>
-          {t('保存')}
-        </Button>
+        <div className="space-x-1 mt-2">
+          <Button type="primary" loading={loading} onClick={handleSave}>
+            {t('保存')}
+          </Button>
+          <Button onClick={handleReset}>{t('重置')}</Button>
+        </div>
       )}
     </div>
   );
