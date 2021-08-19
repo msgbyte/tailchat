@@ -1,5 +1,6 @@
 import { Avatar } from '@/components/Avatar';
 import { AvatarUploader } from '@/components/AvatarUploader';
+import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
@@ -41,21 +42,25 @@ export const GroupSummary: React.FC<{
   }
 
   return (
-    <div className="flex">
-      <div className="w-1/3">
-        <AvatarUploader onUploadSuccess={handleGroupAvatarChange}>
-          <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />
-        </AvatarUploader>
-      </div>
+    <div>
+      <FullModalCommonTitle>{t('群组概述')}</FullModalCommonTitle>
 
-      <div className="w-2/3">
-        <FullModalField
-          title={t('群组名')}
-          value={groupInfo.name}
-          editable={true}
-          renderEditor={DefaultFullModalInputEditorRender}
-          onSave={handleUpdateGroupName}
-        />
+      <div className="flex">
+        <div className="w-1/3">
+          <AvatarUploader onUploadSuccess={handleGroupAvatarChange}>
+            <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />
+          </AvatarUploader>
+        </div>
+
+        <div className="w-2/3">
+          <FullModalField
+            title={t('群组名')}
+            value={groupInfo.name}
+            editable={true}
+            renderEditor={DefaultFullModalInputEditorRender}
+            onSave={handleUpdateGroupName}
+          />
+        </div>
       </div>
     </div>
   );

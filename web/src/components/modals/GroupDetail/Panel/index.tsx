@@ -10,6 +10,9 @@ import {
 import { Button } from 'antd';
 import _isEqual from 'lodash/isEqual';
 import { GroupPanelTree } from './GroupPanelTree';
+import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
+import { openModal } from '@/components/Modal';
+import { ModalCreateGroupPanel } from '../../CreateGroupPanel';
 
 export const GroupPanel: React.FC<{
   groupId: string;
@@ -28,9 +31,30 @@ export const GroupPanel: React.FC<{
     showToasts(t('保存成功'), 'success');
   }, [editingGroupPanels]);
 
+  const [{ loading: createLoading }, handleCreatePanel] =
+    useAsyncRequest(async () => {
+      // TODO
+    }, []);
+
+  const handleOpenCreatePanelModal = useCallback(() => {
+    openModal(<ModalCreateGroupPanel groupId={groupId} />);
+  }, [handleCreatePanel]);
+
   return (
     <div>
-      <div className="text-xl font-bold mb-4">{t('面板管理')}</div>
+      <FullModalCommonTitle
+        extra={
+          <Button
+            type="primary"
+            loading={createLoading}
+            onClick={handleOpenCreatePanelModal}
+          >
+            {t('创建面板')}
+          </Button>
+        }
+      >
+        {t('面板管理')}
+      </FullModalCommonTitle>
 
       <GroupPanelTree
         groupPanels={editingGroupPanels}
