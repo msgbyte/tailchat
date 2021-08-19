@@ -6,7 +6,7 @@ import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
 import _isNumber from 'lodash/isNumber';
 import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
-import { getTextColorHex } from 'tailchat-shared';
+import { getTextColorHex, isValidStr } from 'tailchat-shared';
 
 interface AvatarProps extends AntdAvatarProps {
   name?: string;
@@ -14,7 +14,7 @@ interface AvatarProps extends AntdAvatarProps {
 }
 export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
   const { isOnline, ...props } = _props;
-  const src = typeof props.src !== 'string' ? props.src : undefined;
+  const src = isValidStr(props.src) ? props.src : undefined;
 
   const name = useMemo(() => _upperCase(_head(props.name)), [props.name]);
 

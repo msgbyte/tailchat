@@ -1,4 +1,5 @@
 import { Avatar } from '@/components/Avatar';
+import { AvatarUploader } from '@/components/AvatarUploader';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
@@ -7,7 +8,9 @@ import { NoData } from '@/components/NoData';
 import React from 'react';
 import {
   modifyGroupField,
+  showToasts,
   t,
+  UploadFileResult,
   useAsyncRequest,
   useGroupInfo,
 } from 'tailchat-shared';
@@ -20,6 +23,15 @@ export const GroupSummary: React.FC<{
   const [, handleUpdateGroupName] = useAsyncRequest(
     async (newName: string) => {
       await modifyGroupField(groupId, 'name', newName);
+      showToasts(t('修改群组名成功'), 'success');
+    },
+    [groupId]
+  );
+
+  const [, handleGroupAvatarChange] = useAsyncRequest(
+    async (fileInfo: UploadFileResult) => {
+      await modifyGroupField(groupId, 'avatar', fileInfo.url);
+      showToasts(t('修改群组头像成功'), 'success');
     },
     [groupId]
   );
@@ -30,11 +42,13 @@ export const GroupSummary: React.FC<{
 
   return (
     <div className="flex">
-      <div className="w-1/2">
-        <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />
+      <div className="w-1/3">
+        <AvatarUploader onUploadSuccess={handleGroupAvatarChange}>
+          <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />
+        </AvatarUploader>
       </div>
 
-      <div className="w-1/2">
+      <div className="w-2/3">
         <FullModalField
           title={t('群组名')}
           value={groupInfo.name}

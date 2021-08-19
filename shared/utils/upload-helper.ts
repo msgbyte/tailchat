@@ -3,7 +3,7 @@ import { request } from '../api/request';
 interface UploadFileOptions {
   onProgress?: (percent: number, progressEvent: unknown) => void;
 }
-interface UploadFileResult {
+export interface UploadFileResult {
   etag: string;
   path: string;
   url: string;
@@ -19,7 +19,7 @@ export async function uploadFile(
   const form = new FormData();
   form.append('file', file);
 
-  const { data } = await request.post('/file/v2/image/upload', form, {
+  const { data } = await request.post('/upload', form, {
     onUploadProgress(progressEvent) {
       if (progressEvent.lengthComputable) {
         if (typeof options.onProgress === 'function') {
