@@ -23,7 +23,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = React.memo(
         }
 
         ref.current.scrollTo({
-          top: ref.current.clientHeight,
+          top: ref.current.scrollHeight,
           behavior: 'smooth',
         });
       });

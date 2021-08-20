@@ -30,7 +30,14 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
           )}
         </div>
         <div className="flex flex-col">
-          {showAvatar && <div className="font-bold">{userInfo.nickname}</div>}
+          {showAvatar && (
+            <div className="flex items-center">
+              <div className="font-bold">{userInfo.nickname}</div>
+              <div className="hidden group-hover:block opacity-40 ml-1 text-sm">
+                {formatShortTime(payload.createdAt)}
+              </div>
+            </div>
+          )}
 
           <div className="leading-6">{payload.content}</div>
         </div>
