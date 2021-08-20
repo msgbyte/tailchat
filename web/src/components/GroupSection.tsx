@@ -21,7 +21,7 @@ export const GroupSection: React.FC<{
         <div>{props.header}</div>
       </div>
       <div
-        className="transition-all overflow-hidden space-y-0.5"
+        className="transition-all overflow-hidden space-y-0.5 pl-2 ml-1 border-l-4 border-opacity-40"
         style={{
           maxHeight: isShow ? 'var(--max-height)' : 0,
         }}

@@ -15,7 +15,7 @@ export const GroupPanelItem: React.FC<{
   const isActive = location.pathname.startsWith(to);
 
   return (
-    <Link to={to}>
+    <Link className="block" to={to}>
       <div
         className={clsx(
           'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded px-1 h-8 flex items-center text-base group',
