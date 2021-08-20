@@ -47,6 +47,7 @@ const config: Configuration = {
   devServer: {
     port: PORT,
     historyApiFallback: true,
+    contentBase: './dist',
   },
   module: {
     rules: [

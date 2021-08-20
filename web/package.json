@@ -18,6 +18,7 @@
     "clsx": "^1.1.1",
     "is-hotkey": "^0.2.0",
     "jwt-decode": "^3.1.2",
+    "mini-star": "^0.0.24",
     "p-min-delay": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
