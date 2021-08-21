@@ -1,7 +1,7 @@
 import React from 'react';
 import { regGroupPanel, useCurrentGroupPanelInfo } from '@capital/common';
 
-const PLUGIN_NAME = 'com.msgbyte.webpanel';
+const PLUGIN_NAME = 'com.msgbyte.webview';
 
 const GroupWebPanelRender = () => {
   const groupPanelInfo = useCurrentGroupPanelInfo();

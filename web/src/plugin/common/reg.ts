@@ -6,7 +6,7 @@ import { buildRegList, FastFormFieldMeta } from 'tailchat-shared';
 export interface PluginGroupPanel {
   /**
    * 面板唯一标识
-   * @example com.msgbyte.webpanel/grouppanel
+   * @example com.msgbyte.webview/grouppanel
    */
   name: string;
 

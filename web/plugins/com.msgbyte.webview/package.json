@@ -1,5 +1,5 @@
 {
-  "name": "@plugins/com.msgbyte.webpanel",
+  "name": "@plugins/com.msgbyte.webview",
   "main": "src/index.tsx",
   "version": "0.0.0",
   "private": true,

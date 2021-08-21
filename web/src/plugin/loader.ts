@@ -10,8 +10,8 @@ export function initPlugins(): Promise<void> {
   return initMiniStar({
     plugins: [
       {
-        name: 'com.msgbyte.webpanel',
-        url: '/plugins/com.msgbyte.webpanel/index.js',
+        name: 'com.msgbyte.webview',
+        url: '/plugins/com.msgbyte.webview/index.js',
       },
     ],
   });
