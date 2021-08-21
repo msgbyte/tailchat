@@ -20,7 +20,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
       <div
         className={clsx('flex px-2 group hover:bg-black hover:bg-opacity-10')}
       >
-        <div className="w-18 flex items-center justify-center">
+        <div className="w-18 flex items-start justify-center pt-0.5">
           {showAvatar ? (
             <Avatar size={40} src={userInfo.avatar} name={userInfo.nickname} />
           ) : (
@@ -29,7 +29,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             </div>
           )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1 overflow-auto">
           {showAvatar && (
             <div className="flex items-center">
               <div className="font-bold">{userInfo.nickname}</div>
@@ -39,7 +39,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             </div>
           )}
 
-          <div className="leading-6">{payload.content}</div>
+          <div className="leading-6 break-words">{payload.content}</div>
         </div>
       </div>
     );
