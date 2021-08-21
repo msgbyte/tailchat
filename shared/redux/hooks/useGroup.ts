@@ -15,11 +15,11 @@ export function useGroupInfo(groupId: string): GroupInfo | undefined {
 export function useGroupPanel(
   groupId: string,
   panelId: string
-): GroupPanel | undefined {
+): GroupPanel | null {
   const groupInfo = useGroupInfo(groupId);
 
   return useMemo(
-    () => groupInfo?.panels.find((p) => p.id === panelId),
+    () => groupInfo?.panels.find((p) => p.id === panelId) ?? null,
     [groupInfo, panelId]
   );
 }

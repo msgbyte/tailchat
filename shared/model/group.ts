@@ -16,6 +16,9 @@ export interface GroupPanel {
   name: string;
   parentId?: string;
   type: GroupPanelType;
+  provider?: string; // 面板提供者
+  pluginPanelName?: string; // 插件面板名
+  meta?: Record<string, unknown>;
 }
 
 export interface GroupInfo {
@@ -146,6 +149,7 @@ export async function createGroupPanel(
     type: number;
     parentId?: string;
     provider?: string;
+    pluginPanelName?: string;
     meta?: Record<string, unknown>;
   }
 ) {

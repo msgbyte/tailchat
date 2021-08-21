@@ -36,6 +36,8 @@ export { useRafState } from './hooks/useRafState';
 export { useUpdateRef } from './hooks/useUpdateRef';
 
 // manager
+export { buildRegList } from './manager/buildRegList';
+export { buildRegMap } from './manager/buildRegMap';
 export { getStorage, setStorage, useStorage } from './manager/storage';
 export { setTokenGetter } from './manager/request';
 export { setServiceUrl } from './manager/service';
@@ -64,6 +66,7 @@ export {
   getGroupBasicInfo,
   applyGroupInvite,
   modifyGroupField,
+  createGroupPanel,
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
 export type { ChatMessage } from './model/message';

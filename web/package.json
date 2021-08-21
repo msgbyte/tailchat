@@ -8,7 +8,9 @@
   "private": true,
   "scripts": {
     "build": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack",
-    "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve"
+    "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve",
+    "plugins:all": "ministar buildPlugin all",
+    "plugins:watch": "ministar watchPlugin all"
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.2",

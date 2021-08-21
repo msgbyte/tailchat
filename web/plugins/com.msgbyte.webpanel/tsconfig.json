@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "rootDir": "./src",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "paths": {
+      "@capital/*": ["../../../src/plugin/*"],
+    }
   }
 }

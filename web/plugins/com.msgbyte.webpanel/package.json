@@ -1,6 +1,6 @@
 {
   "name": "@plugins/com.msgbyte.webpanel",
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "version": "0.0.0",
   "private": true,
   "dependencies": {}
