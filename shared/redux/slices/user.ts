@@ -21,6 +21,16 @@ const userSlice = createSlice({
     setUserInfo(state, action: PayloadAction<UserLoginInfo>) {
       state.info = action.payload;
     },
+    setUserInfoField(
+      state,
+      action: PayloadAction<{ fieldName: keyof UserLoginInfo; fieldValue: any }>
+    ) {
+      const { fieldName, fieldValue } = action.payload;
+      if (state.info === null) {
+        return;
+      }
+      state.info[fieldName] = fieldValue;
+    },
     setFriendList(state, action: PayloadAction<string[]>) {
       state.friends = action.payload;
     },

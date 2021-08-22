@@ -132,6 +132,24 @@ export async function appendUserDMConverse(
 }
 
 /**
+ * 修改用户属性
+ * @param fieldName 要修改的属性名
+ * @param fieldValue 要修改的属性的值
+ */
+type AllowedModifyField = 'nickname' | 'avatar';
+export async function modifyUserField(
+  fieldName: AllowedModifyField,
+  fieldValue: unknown
+): Promise<UserBaseInfo> {
+  const { data } = await request.post('/api/user/updateUserField', {
+    fieldName,
+    fieldValue,
+  });
+
+  return data;
+}
+
+/**
  * 检查Token是否可用
  */
 export const checkTokenValid = buildCachedRequest(
