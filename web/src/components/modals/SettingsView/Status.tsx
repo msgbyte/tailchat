@@ -31,6 +31,10 @@ const SERVICES = [
     name: 'group.invite',
     label: t('群组邀请服务'),
   },
+  {
+    name: 'file',
+    label: t('文件服务'),
+  },
 ];
 
 /**
