@@ -24,7 +24,7 @@ let _userJWT: string | null = null;
 /**
  * 设置用户登录标识
  */
-export async function setUserJWT(jwt: string): Promise<void> {
+export async function setUserJWT(jwt: string | null): Promise<void> {
   _userJWT = jwt; // 更新内存中的缓存
 
   await getStorage().set('jsonwebtoken', jwt);

@@ -1,6 +1,7 @@
 import 'regenerator-runtime/runtime'; // react-native-storage 需要, 确保其存在
 import Storage, { NotFoundError } from 'react-native-storage';
 import _isNil from 'lodash/isNil';
+import _isUndefined from 'lodash/isUndefined';
 
 /**
  * 构建一个存储对象
@@ -36,7 +37,7 @@ export function buildStorage(backend: any) {
   const rnStorage = {
     set: async (key: string, data: any) => {
       try {
-        if (!!key && typeof key === 'string' && !_isNil(data)) {
+        if (!!key && typeof key === 'string' && !_isUndefined(data)) {
           await storage.save({ key, data });
         }
       } catch (e) {
@@ -51,7 +52,7 @@ export function buildStorage(backend: any) {
      */
     setWithExpires: async (key: string, data: any, expires: number) => {
       try {
-        if (!!key && typeof key === 'string' && !_isNil(data)) {
+        if (!!key && typeof key === 'string' && !_isUndefined(data)) {
           await storage.save({ key, data, expires });
         }
       } catch (e) {
@@ -83,11 +84,10 @@ export function buildStorage(backend: any) {
     },
     /**
      * 持久化存储, 永不过期
-     * TODO: 移除key允许为对象的写法
      */
     save: async (key: string, data: any) => {
       try {
-        if (!!key && typeof key === 'string' && !_isNil(data)) {
+        if (!!key && typeof key === 'string' && !_isUndefined(data)) {
           await storage.save({
             key,
             data,

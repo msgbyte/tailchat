@@ -4,7 +4,10 @@ import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
-import React from 'react';
+import { getUserJWT, setUserJWT } from '@/utils/jwt-helper';
+import { Button, Divider } from 'antd';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router';
 import {
   modifyUserField,
   showToasts,
@@ -19,6 +22,7 @@ import {
 export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const [, handleUserAvatarChange] = useAsyncRequest(
     async (fileInfo: UploadFileResult) => {
@@ -48,25 +52,40 @@ export const SettingsAccount: React.FC = React.memo(() => {
     []
   );
 
+  // 登出
+  const handleLogout = useCallback(async () => {
+    await setUserJWT(null);
+    history.push('/');
+  }, []);
+
   if (!userInfo) {
     return null;
   }
 
   return (
-    <div className="flex">
-      <div className="w-1/3">
-        <AvatarUploader onUploadSuccess={handleUserAvatarChange}>
-          <Avatar size={128} src={userInfo.avatar} name={userInfo.nickname} />
-        </AvatarUploader>
+    <div>
+      <div className="flex">
+        <div className="w-1/3">
+          <AvatarUploader onUploadSuccess={handleUserAvatarChange}>
+            <Avatar size={128} src={userInfo.avatar} name={userInfo.nickname} />
+          </AvatarUploader>
+        </div>
+        <div className="w-2/3">
+          <FullModalField
+            title={t('用户昵称')}
+            value={userInfo.nickname}
+            editable={true}
+            renderEditor={DefaultFullModalInputEditorRender}
+            onSave={handleUpdateNickName}
+          />
+        </div>
       </div>
-      <div className="w-2/3">
-        <FullModalField
-          title={t('用户昵称')}
-          value={userInfo.nickname}
-          editable={true}
-          renderEditor={DefaultFullModalInputEditorRender}
-          onSave={handleUpdateNickName}
-        />
+      <Divider />
+
+      <div>
+        <Button type="primary" danger={true} onClick={handleLogout}>
+          {t('退出登录')}
+        </Button>
       </div>
     </div>
   );

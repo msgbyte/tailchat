@@ -2,7 +2,8 @@
   --antd-primary-border: #165996;
   --antd-primary-color: #177ddc;
   --antd-primary-color-hover: #095cb5;
-
+  --antd-primary-dangerous-color: #a61d24;
+  --antd-primary-dangerous-color-hover: #800f19;
 
   // 按钮
   .ant-btn {
@@ -23,6 +24,16 @@
       &:hover {
         border-color: var(--antd-primary-color-hover);
         background: var(--antd-primary-color-hover);
+      }
+
+      &.ant-btn-dangerous {
+        border-color: var(--antd-primary-dangerous-color);
+        background: var(--antd-primary-dangerous-color);
+
+        &:hover {
+          border-color: var(--antd-primary-dangerous-color-hover);
+          background: var(--antd-primary-dangerous-color-hover);
+        }
       }
     }
   }
