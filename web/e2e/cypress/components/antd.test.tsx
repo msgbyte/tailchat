@@ -21,16 +21,18 @@ describe('antd dark', () => {
       .should('have.css', 'color', 'rgba(255, 255, 255, 0.65)')
       .should('have.css', 'border-color', 'rgb(67, 67, 67)')
       .should('have.css', 'background-color', 'rgba(0, 0, 0, 0)')
-      .matchImageSnapshot();
+      .matchImageSnapshot('default');
 
     cy.get('[data-testid=primary]')
       .should('have.css', 'color', 'rgb(255, 255, 255)')
       .should('have.css', 'border-color', 'rgb(23, 125, 220)')
-      .should('have.css', 'background-color', 'rgb(23, 125, 220)');
+      .should('have.css', 'background-color', 'rgb(23, 125, 220)')
+      .matchImageSnapshot('primary');
 
     cy.get('[data-testid=primary-danger]')
       .should('have.css', 'color', 'rgb(255, 255, 255)')
       .should('have.css', 'border-color', 'rgb(166, 29, 36)')
-      .should('have.css', 'background-color', 'rgb(166, 29, 36)');
+      .should('have.css', 'background-color', 'rgb(166, 29, 36)')
+      .matchImageSnapshot('primary-danger');
   });
 });

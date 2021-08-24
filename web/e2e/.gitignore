@@ -5,3 +5,6 @@ cypress/fixtures
 # 未启用的代码
 cypress/screenshots
 cypress/snapshots
+
+# video
+cypress/videos
