@@ -70,6 +70,7 @@ export {
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
 export type { ChatMessage } from './model/message';
+export type { PluginManifest } from './model/plugin';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
   loginWithEmail,
