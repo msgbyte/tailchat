@@ -1,0 +1,7 @@
+# 临时忽略， 这些是自动生成的代码
+cypress/integration
+cypress/fixtures
+
+# 未启用的代码
+cypress/screenshots
+cypress/snapshots

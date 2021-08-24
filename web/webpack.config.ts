@@ -31,7 +31,9 @@ declare module 'webpack' {
   }
 }
 
-const isDev = process.env.NODE_ENV === 'development';
+const NODE_ENV = process.env.NODE_ENV ?? 'production';
+
+const isDev = NODE_ENV === 'development';
 const mode = isDev ? 'development' : 'production';
 
 const config: Configuration = {
@@ -111,7 +113,7 @@ const config: Configuration = {
   },
   plugins: [
     new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
       'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
       'process.env.VERSION': JSON.stringify(
         process.env.VERSION || packageJson.version

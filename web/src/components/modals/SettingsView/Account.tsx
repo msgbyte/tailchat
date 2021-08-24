@@ -4,7 +4,7 @@ import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
-import { getUserJWT, setUserJWT } from '@/utils/jwt-helper';
+import { setUserJWT } from '@/utils/jwt-helper';
 import { Button, Divider } from 'antd';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';

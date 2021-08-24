@@ -1,0 +1,21 @@
+{
+  "name": "tailchat-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:open-ct": "cypress open-ct",
+    "cypress:run-ct": "cypress run-ct"
+  },
+  "devDependencies": {
+    "@cypress/react": "^5.9.4",
+    "@cypress/webpack-dev-server": "^1.4.0",
+    "@types/cypress-image-snapshot": "^3.1.6",
+    "cypress": "^8.3.0",
+    "cypress-image-snapshot": "^4.0.1"
+  }
+}
