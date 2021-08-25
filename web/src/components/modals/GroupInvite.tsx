@@ -36,7 +36,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
   }
 
   return (
-    <ModalWrapper style={{ width: '440px' }}>
+    <ModalWrapper>
       {/* <div>邀请好友加入群组 {groupInfo.name}</div>
 
       <div>

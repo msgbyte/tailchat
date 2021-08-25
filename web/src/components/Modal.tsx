@@ -9,9 +9,10 @@ import { PortalAdd, PortalRemove } from './Portal';
 import { Typography } from 'antd';
 import { Icon } from '@iconify/react';
 import { CSSTransition } from 'react-transition-group';
+import clsx from 'clsx';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 import './Modal.less';
-import clsx from 'clsx';
 
 const transitionEndListener = (node: HTMLElement, done: () => void) =>
   node.addEventListener('transitionend', done, false);
@@ -170,6 +171,8 @@ export const ModalWrapper: React.FC<{
   className?: string;
   style?: React.CSSProperties;
 }> = React.memo((props) => {
+  const isMobile = useIsMobile();
+
   const title = _isString(props.title) ? (
     <Typography.Title level={4} className="text-center mb-4">
       {props.title}
@@ -179,7 +182,7 @@ export const ModalWrapper: React.FC<{
   return (
     <div
       className={clsx('p-4', props.className)}
-      style={{ minWidth: 300, ...props.style }}
+      style={{ minWidth: isMobile ? 300 : 420, ...props.style }}
     >
       {title}
       {props.children}

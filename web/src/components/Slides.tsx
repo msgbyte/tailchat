@@ -39,6 +39,7 @@ export const Slides = React.forwardRef<SlidesRef, CarouselProps>(
         ref={carouselRef}
         {...props}
         dots={false}
+        swipe={false}
         adaptiveHeight={true}
         infinite={false}
         beforeChange={(current, next) => {
