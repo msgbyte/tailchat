@@ -26,10 +26,18 @@ const groupSlice = createSlice({
     updateGroup(state, action: PayloadAction<GroupInfo>) {
       const group = action.payload;
       const groupId = group._id;
-      state.groups[groupId] = {
-        ...state.groups[groupId],
-        ...group,
-      };
+
+      if (state.groups[groupId]) {
+        // NOTICE: updateGroup 只会去更新，不会去添加新的
+        state.groups[groupId] = {
+          ...state.groups[groupId],
+          ...group,
+        };
+      }
+    },
+    removeGroup(state, action: PayloadAction<string>) {
+      const groupId = action.payload;
+      delete state.groups[groupId];
     },
   },
 });

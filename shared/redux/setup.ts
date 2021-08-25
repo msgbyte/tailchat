@@ -81,4 +81,8 @@ function listenNotify(socket: AppSocket, store: AppStore) {
   socket.listen<GroupInfo>('group.updateInfo', (groupInfo) => {
     store.dispatch(groupActions.updateGroup(groupInfo));
   });
+
+  socket.listen<{ groupId: string }>('group.remove', ({ groupId }) => {
+    store.dispatch(groupActions.removeGroup(groupId));
+  });
 }

@@ -99,6 +99,17 @@ export async function modifyGroupField(
 }
 
 /**
+ * 退出群组(群组拥有者是解散群组)
+ * 这里必须是一个socket请求因为后端需要进行房间的退出操作
+ * @param groupId 群组ID
+ */
+export async function quitGroup(groupId: string) {
+  await request.post('/api/group/quitGroup', {
+    groupId,
+  });
+}
+
+/**
  * 创建群组邀请码
  * 邀请码默认 7天有效期
  * @param groupId 群组id

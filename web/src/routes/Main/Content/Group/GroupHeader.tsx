@@ -14,7 +14,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
   const groupInfo = useGroupInfo(groupId);
   const { t } = useTranslation();
 
-  const { handleShowGroupDetail, handleInviteUser } =
+  const { isOwner, handleShowGroupDetail, handleInviteUser, handleQuitGroup } =
     useGroupHeaderAction(groupId);
 
   if (_isNil(groupInfo)) {
@@ -23,11 +23,20 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="0" onClick={handleShowGroupDetail}>
-        {t('查看详情')}
-      </Menu.Item>
-      <Menu.Item key="1" onClick={handleInviteUser}>
-        {t('邀请用户')}
+      {isOwner && (
+        <Menu.Item key="0" onClick={handleShowGroupDetail}>
+          {t('查看详情')}
+        </Menu.Item>
+      )}
+
+      {isOwner && (
+        <Menu.Item key="1" onClick={handleInviteUser}>
+          {t('邀请用户')}
+        </Menu.Item>
+      )}
+
+      <Menu.Item key="2" danger={true} onClick={handleQuitGroup}>
+        {t('退出群组')}
       </Menu.Item>
     </Menu>
   );

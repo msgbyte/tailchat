@@ -64,6 +64,7 @@ export {
   createGroup,
   createGroupInviteCode,
   getGroupBasicInfo,
+  quitGroup,
   applyGroupInvite,
   modifyGroupField,
   createGroupPanel,
@@ -85,7 +86,11 @@ export {
 export { useAppSelector, useAppDispatch } from './redux/hooks/useAppSelector';
 export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';
-export { useGroupInfo, useGroupPanel } from './redux/hooks/useGroup';
+export {
+  useGroupInfo,
+  useGroupPanel,
+  useIsGroupOwner,
+} from './redux/hooks/useGroup';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { userActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
