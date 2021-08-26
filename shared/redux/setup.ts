@@ -78,6 +78,10 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     );
   });
 
+  socket.listen<GroupInfo>('group.add', (groupInfo) => {
+    store.dispatch(groupActions.appendGroups([groupInfo]));
+  });
+
   socket.listen<GroupInfo>('group.updateInfo', (groupInfo) => {
     store.dispatch(groupActions.updateGroup(groupInfo));
   });
