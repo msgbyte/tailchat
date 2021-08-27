@@ -10,6 +10,7 @@ module.exports = {
     // 'src/shared/i18n/__internal__/__scan__.ts',
     // Use ! to filter out files or directories
     '!src/**/*.spec.{js,jsx,ts,tsx}',
+    '!web/e2e/**/*.test.{ts,tsx}',
     // '!src/shared/i18n/**',
     '!**/node_modules/**',
   ],
