@@ -1,12 +1,13 @@
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
-import { loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
+import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useCallback, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
+import { useSearchParam } from '@/hooks/useSearchParam';
 
 /**
  * TODO:
@@ -15,7 +16,7 @@ import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 const OAuthLoginView: React.FC = React.memo(() => {
   return (
     <>
-      <Divider>或</Divider>
+      <Divider>{t('或')}</Divider>
 
       <div className="bg-gray-400 w-1/3 px-4 py-1 text-3xl text-center rounded-md cursor-pointer shadow-md">
         <Icon className="mx-auto" icon="mdi:github" />
@@ -32,32 +33,42 @@ export const LoginView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const navRedirect = useSearchParam('redirect');
 
   const [{ loading, error }, handleLogin] = useAsyncFn(async () => {
     await string()
-      .email('邮箱格式不正确')
-      .required('邮箱不能为空')
+      .email(t('邮箱格式不正确'))
+      .required(t('邮箱不能为空'))
       .validate(email);
 
     await string()
-      .min(6, '密码不能低于6位')
-      .required('密码不能为空')
+      .min(6, t('密码不能低于6位'))
+      .required(t('密码不能为空'))
       .validate(password);
 
     const data = await loginWithEmail(email, password);
 
     setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
-    history.push('/main');
-  }, [email, password, history]);
+
+    if (isValidStr(navRedirect)) {
+      history.push(decodeURIComponent(navRedirect));
+    } else {
+      history.push('/main');
+    }
+  }, [email, password, history, navRedirect]);
 
   const toRegisterView = useCallback(() => {
-    history.push('/entry/register');
+    // 携带上下文切换路由
+    history.push({
+      ...history.location,
+      pathname: '/entry/register',
+    });
   }, [history]);
 
   return (
     <div className="w-96 text-white">
-      <div className="mb-4 text-2xl">登录 Tail Chat</div>
+      <div className="mb-4 text-2xl">{t('登录 Tail Chat')}</div>
 
       <div>
         <div className="mb-4">
@@ -72,7 +83,7 @@ export const LoginView: React.FC = React.memo(() => {
           />
         </div>
         <div className="mb-4">
-          <div className="mb-2">密码</div>
+          <div className="mb-2">{t('密码')}</div>
           <input
             name="login-password"
             className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
@@ -91,7 +102,7 @@ export const LoginView: React.FC = React.memo(() => {
           onClick={handleLogin}
         >
           {loading && <Spinner />}
-          登录
+          {t('登录')}
         </button>
 
         <button
@@ -99,7 +110,7 @@ export const LoginView: React.FC = React.memo(() => {
           disabled={loading}
           onClick={toRegisterView}
         >
-          注册账号
+          {t('注册账号')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
       </div>
