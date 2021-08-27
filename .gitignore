@@ -1,5 +1,6 @@
 locales
 .vercel
+.DS_Store
 
 # Logs
 logs

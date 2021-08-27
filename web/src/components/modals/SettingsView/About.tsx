@@ -1,12 +1,20 @@
 import { Typography } from 'antd';
 import React from 'react';
 import { version } from 'tailchat-shared';
+import logoUrl from '@assets/images/logo.svg';
 
 const { Paragraph, Text } = Typography;
 
 export const SettingsAbout: React.FC = React.memo(() => {
   return (
     <div className="select-text">
+      <img
+        className="float-right select-none"
+        width={128}
+        height={128}
+        src={logoUrl}
+      />
+
       <Paragraph>
         <Text className="font-bold">TailChat</Text>
         <Text>: 属于所有人的开源聊天工具</Text>

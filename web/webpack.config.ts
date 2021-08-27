@@ -123,6 +123,7 @@ const config: Configuration = {
       title: 'TailChat',
       inject: true,
       hash: true,
+      favicon: path.resolve(ROOT_PATH, './assets/images/logo.svg'),
       template: path.resolve(ROOT_PATH, './assets/template.html'),
       preloadImage: `data:image/svg+xml;base64,${Buffer.from(
         fs.readFileSync(path.resolve(ROOT_PATH, './assets/images/ripple.svg'), {
