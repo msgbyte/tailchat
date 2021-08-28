@@ -42,8 +42,8 @@ const SearchFriendResult: React.FC<{
     <div>
       <Divider />
 
-      <div className="rounded-md border border-black border-opacity-30 px-4 py-3 bg-black bg-opacity-10 flex justify-between items-center">
-        <div>
+      <div className="rounded-md border border-black border-opacity-30 px-4 py-3 bg-black bg-opacity-10 flex justify-between items-center mobile:flex-col">
+        <div className="mobile:w-full mobile:mb-1">
           <Avatar
             className="mb-3"
             size={60}
@@ -60,7 +60,7 @@ const SearchFriendResult: React.FC<{
 
         <Button
           type="primary"
-          className="bg-green-600 border-0"
+          className="bg-green-600 border-0 mobile:w-full"
           disabled={hasSent}
           onClick={() => handleAddFriend(result._id)}
         >
@@ -81,7 +81,7 @@ const SelfIdentify: React.FC = React.memo(() => {
       <Divider />
 
       <div className="rounded-md border border-black border-opacity-30 px-4 py-3 bg-black bg-opacity-10 text-center">
-        <div>您的个人唯一标识</div>
+        <div>{t('您的个人唯一标识')}</div>
         <Typography.Title level={4} copyable={true} className="select-text">
           {uniqueName}
         </Typography.Title>
@@ -106,26 +106,26 @@ export const AddFriend: React.FC = React.memo(() => {
 
   return (
     <div className="px-8 py-2">
-      <div className="text-lg my-2">添加好友</div>
+      <div className="text-lg my-2">{t('添加好友')}</div>
       <div className="my-1">
         您可以使用完整的 <Highlight>用户昵称#标识</Highlight> 来添加好友
       </div>
 
-      <div className="px-4 my-3 flex border border-black border-opacity-30 rounded items-center bg-black bg-opacity-10">
+      <div className="px-4 py-2 my-3 flex border border-black border-opacity-30 rounded items-center bg-black bg-opacity-10 mobile:flex-col">
         <input
-          className="bg-transparent flex-1 text-base leading-13 outline-none"
-          placeholder="用户昵称#0000"
+          className="bg-transparent flex-1 text-base leading-9 outline-none mobile:w-full mobile:mb-1"
+          placeholder={t('用户昵称#0000')}
           onChange={(e) => setUniqueName(e.target.value)}
         />
 
         <Button
           type="primary"
-          className="bg-indigo-600 disabled:opacity-80 border-none"
+          className="bg-indigo-600 disabled:opacity-80 border-none mobile:w-full"
           disabled={uniqueName === ''}
           loading={loading}
           onClick={searchUser}
         >
-          查找好友
+          {t('查找好友')}
         </Button>
       </div>
 
