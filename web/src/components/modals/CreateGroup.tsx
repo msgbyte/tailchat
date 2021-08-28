@@ -95,7 +95,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
   }, [name, panels]);
 
   return (
-    <ModalWrapper>
+    <ModalWrapper style={{ maxWidth: 440 }}>
       <Slides ref={slidesRef}>
         <div>
           <Typography.Title level={4} className="text-center mb-4">

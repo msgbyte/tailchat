@@ -1,4 +1,4 @@
-import { PluginGroupPanel, pluginGroupPanel } from '@/plugin/common';
+import { pluginGroupPanel } from '@/plugin/common';
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 import React, { useMemo, useState } from 'react';
 import {
@@ -7,6 +7,8 @@ import {
   t,
   useAsyncRequest,
   createGroupPanel,
+  createFastFormSchema,
+  fieldSchema,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../Modal';
 import { WebFastForm } from '../WebFastForm';
@@ -39,6 +41,14 @@ const baseFields: FastFormFieldMeta[] = [
     ],
   },
 ];
+
+const schema = createFastFormSchema({
+  name: fieldSchema
+    .string()
+    .required(t('面板名不能为空'))
+    .max(20, t('面板名过长')),
+  type: fieldSchema.string().required(t('面板类型不能为空')),
+});
 
 /**
  * 创建群组面板
@@ -95,8 +105,9 @@ export const ModalCreateGroupPanel: React.FC<{
   }, [currentValues]);
 
   return (
-    <ModalWrapper title={t('创建群组面板')} style={{ width: 440 }}>
+    <ModalWrapper title={t('创建群组面板')} style={{ maxWidth: 440 }}>
       <WebFastForm
+        schema={schema}
         fields={field}
         onChange={setValues}
         onSubmit={handleSubmit}

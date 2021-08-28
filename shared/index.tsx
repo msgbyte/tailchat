@@ -21,6 +21,10 @@ export type {
   FastFormFieldMeta,
   FastFormContainerComponent,
 } from './components/FastForm/index';
+export {
+  createFastFormSchema,
+  fieldSchema,
+} from './components/FastForm/schema';
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 
