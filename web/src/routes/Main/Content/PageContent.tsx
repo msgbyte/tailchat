@@ -1,35 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 import _isNil from 'lodash/isNil';
 import { useDrag } from 'react-use-gesture';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
-
-// const ContentDetail = styled.div`
-//   flex: 1;
-//   background-color: ${(props) => props.theme.style.contentBackgroundColor};
-//   display: flex;
-//   flex-direction: column;
-//   position: relative;
-//   overflow: hidden;
-
-//   @media (max-width: 768px) {
-//     width: ${(props) => `calc(100vw - ${props.theme.style.navbarWidth})`};
-//     min-width: ${(props) => `calc(100vw - ${props.theme.style.navbarWidth})`};
-//   }
-// `;
-
-// const SidebarContainer = styled.div<{
-//   showSidebar: boolean;
-// }>`
-//   ${(props) => props.theme.mixins.transition('width', 0.2)};
-//   width: ${(props) => (props.showSidebar ? props.theme.style.sidebarWidth : 0)};
-//   background-color: ${(props) => props.theme.style.sidebarBackgroundColor};
-//   overflow: hidden;
-//   display: flex;
-//   flex-direction: column;
-//   flex: none;
-// `;
 
 const PageContentRoot: React.FC = (props) => (
   <div className="flex flex-row flex-1 overflow-hidden">{props.children}</div>
@@ -64,8 +38,6 @@ PageGestureWrapper.displayName = 'PageGestureWrapper';
 
 /**
  * 用于渲染实际页面的组件，即除了导航栏剩余的内容
- *
- * TODO: 移动端适配
  */
 export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
   const { sidebar, children } = props;
@@ -74,6 +46,13 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
   const handleHideSidebar = useCallback(() => {
     setShowSidebar(false);
   }, []);
+
+  useEffect(() => {
+    if (isMobile === false) {
+      // 如果不为移动端, 则一定显示侧边栏
+      setShowSidebar(true);
+    }
+  }, [isMobile]);
 
   const sidebarEl = _isNil(sidebar) ? null : (
     <div
