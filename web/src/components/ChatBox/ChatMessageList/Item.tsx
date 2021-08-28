@@ -6,6 +6,7 @@ import {
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import clsx from 'clsx';
+import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 
 interface ChatMessageItemProps {
   showAvatar: boolean;
@@ -29,7 +30,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             </div>
           )}
         </div>
-        <div className="flex flex-col flex-1 overflow-auto">
+        <div className="flex flex-col flex-1 overflow-auto group">
           {showAvatar && (
             <div className="flex items-center">
               <div className="font-bold">{userInfo.nickname}</div>
@@ -39,7 +40,12 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             </div>
           )}
 
-          <div className="leading-6 break-words">{payload.content}</div>
+          <div className="leading-6 break-words">
+            <span>{payload.content}</span>
+
+            {/* 解释器按钮 */}
+            {useRenderPluginMessageInterpreter(payload.content)}
+          </div>
         </div>
       </div>
     );

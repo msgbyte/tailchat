@@ -32,3 +32,15 @@ export interface PluginGroupPanel {
 }
 export const [pluginGroupPanel, regGroupPanel] =
   buildRegList<PluginGroupPanel>();
+
+export interface PluginMessageInterpreter {
+  name?: string;
+  explainMessage: (message: string) => React.ReactElement | null;
+}
+
+/**
+ * 消息解释器
+ * 即用于解释消息内容, 并把结果渲染到消息下面
+ */
+export const [messageInterpreter, regMessageInterpreter] =
+  buildRegList<PluginMessageInterpreter>();

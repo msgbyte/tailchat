@@ -1,0 +1,9 @@
+{
+  "label": "喵语言",
+  "name": "com.msgbyte.miaolang",
+  "url": "/plugins/com.msgbyte.miaolang/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "为聊天提供喵语言对话功能",
+  "requireRestart": true
+}
