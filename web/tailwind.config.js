@@ -50,6 +50,7 @@ module.exports = {
       md: { max: '767px' },
       sm: { max: '639px' },
       mobile: { max: '639px' }, // alias
+      desktop: { min: '640px' }, // alias
     },
     extend: {
       borderRadius: {
