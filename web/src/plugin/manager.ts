@@ -1,4 +1,8 @@
-import { getStorage, PluginManifest } from 'tailchat-shared';
+import {
+  getCachedRegistryPlugins,
+  getStorage,
+  PluginManifest,
+} from 'tailchat-shared';
 import { initMiniStar, loadSinglePlugin } from 'mini-star';
 import _once from 'lodash/once';
 import { builtinPlugins } from './builtin';
@@ -7,7 +11,7 @@ class PluginManager {
   /**
    * 存储插件列表的Key常量
    */
-  static STORE_KEY = '__installed_plugins';
+  static STORE_KEY = '$TailchatInstalledPlugins';
 
   /**
    * 初始化插件
@@ -38,6 +42,13 @@ class PluginManager {
     );
 
     return plugins;
+  }
+
+  /**
+   * 获取所有插件列表
+   */
+  async getRegistryPlugins(): Promise<PluginManifest[]> {
+    return await getCachedRegistryPlugins();
   }
 
   /**

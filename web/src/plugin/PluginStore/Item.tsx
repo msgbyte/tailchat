@@ -15,9 +15,9 @@ import { pluginManager } from '../manager';
 export const PluginStoreItem: React.FC<{
   manifest: PluginManifest;
   installed: boolean;
-  builtin: boolean;
+  builtin?: boolean;
 }> = React.memo((props) => {
-  const { manifest, builtin } = props;
+  const { manifest, builtin = false } = props;
   const [installed, setInstalled] = useState(props.installed);
 
   const [{ loading }, handleInstallPlugin] = useAsyncRequest(async () => {

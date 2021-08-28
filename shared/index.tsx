@@ -5,7 +5,11 @@ export { createSocket } from './api/socket';
 export type { AppSocket } from './api/socket';
 
 // cache
-export { getCachedUserInfo, getCachedGroupInviteInfo } from './cache/cache';
+export {
+  getCachedUserInfo,
+  getCachedGroupInviteInfo,
+  getCachedRegistryPlugins,
+} from './cache/cache';
 export { useCachedUserInfo } from './cache/useCache';
 
 // components

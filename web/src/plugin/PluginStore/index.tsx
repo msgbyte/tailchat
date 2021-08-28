@@ -11,14 +11,30 @@ import { builtinPlugins } from '../builtin';
 import { pluginManager } from '../manager';
 import { PluginStoreItem } from './Item';
 
-export const PluginStore: React.FC = React.memo(() => {
-  const { loading, value: installedPluginList = [] } = useAsync(
+function usePluginStoreData() {
+  const { loading: loading1, value: installedPluginList = [] } = useAsync(
     async () => pluginManager.getInstalledPlugins(),
     []
   );
+  const { loading: loading2, value: allPlugins = [] } = useAsync(
+    async () => pluginManager.getRegistryPlugins(),
+    []
+  );
+
+  const loading = loading1 || loading2;
+
+  return {
+    loading,
+    installedPluginList,
+    allPlugins,
+  };
+}
+
+export const PluginStore: React.FC = React.memo(() => {
+  const { loading, installedPluginList, allPlugins } = usePluginStoreData();
 
   if (loading) {
-    return <LoadingSpinner tip={t('正在加载已安装插件')} />;
+    return <LoadingSpinner tip={t('正在加载插件列表')} />;
   }
 
   const installedPluginNameList = installedPluginList.map((p) => p.name);
@@ -43,7 +59,16 @@ export const PluginStore: React.FC = React.memo(() => {
 
           <Divider orientation="left">{t('插件中心')}</Divider>
 
-          {/* TODO: 插件中心 */}
+          <div className="flex flex-wrap">
+            {allPlugins.map((plugin) => (
+              <div key={plugin.name} className="m-1">
+                <PluginStoreItem
+                  manifest={plugin}
+                  installed={installedPluginNameList.includes(plugin.name)}
+                />
+              </div>
+            ))}
+          </div>
         </PillTabPane>
 
         <PillTabPane key="2" tab={t('已安装')}>

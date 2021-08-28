@@ -1,3 +1,5 @@
+import { request } from '../api/request';
+
 export interface PluginManifest {
   /**
    * 插件用于显示的名称
@@ -45,4 +47,10 @@ export interface PluginManifest {
    * 是否需要重启才能应用插件
    */
   requireRestart: boolean;
+}
+
+export async function fetchRegistryPlugins(): Promise<PluginManifest[]> {
+  const { data } = await request.get('/api/plugin/registry/list');
+
+  return data;
 }
