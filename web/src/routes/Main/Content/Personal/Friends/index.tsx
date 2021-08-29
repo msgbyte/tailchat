@@ -5,6 +5,7 @@ import { t, useAppSelector } from 'tailchat-shared';
 import { RequestSend } from './RequestSend';
 import { RequestReceived } from './RequestReceived';
 import { FriendList } from './FriendList';
+import { Badge } from 'antd';
 
 /**
  * 主要内容组件
@@ -13,21 +14,34 @@ export const FriendPanel: React.FC = React.memo(() => {
   const friendRequests = useAppSelector((state) => state.user.friendRequests);
   const userId = useAppSelector((state) => state.user.info?._id);
 
+  const send = friendRequests.filter((item) => item.from === userId);
+  const received = friendRequests.filter((item) => item.to === userId);
+
   return (
     <div className="w-full">
       <PillTabs>
         <PillTabPane tab={'全部'} key="1">
           <FriendList />
         </PillTabPane>
-        <PillTabPane tab={t('已发送')} key="2">
-          <RequestSend
-            requests={friendRequests.filter((item) => item.from === userId)}
-          />
+        <PillTabPane
+          tab={
+            <Badge className="text-white" size="small" count={send.length}>
+              {t('已发送')}
+            </Badge>
+          }
+          key="2"
+        >
+          <RequestSend requests={send} />
         </PillTabPane>
-        <PillTabPane tab={t('待处理')} key="3">
-          <RequestReceived
-            requests={friendRequests.filter((item) => item.to === userId)}
-          />
+        <PillTabPane
+          tab={
+            <Badge className="text-white" size="small" count={received.length}>
+              {t('待处理')}
+            </Badge>
+          }
+          key="3"
+        >
+          <RequestReceived requests={received} />
         </PillTabPane>
         <PillTabPane
           tab={<span className="text-green-400">添加好友</span>}
