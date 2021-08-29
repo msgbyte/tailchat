@@ -32,7 +32,7 @@ export function useRenderPluginMessageInterpreter(message: string) {
               <p key={i + (ai.name ?? '')}>
                 {ai.name && (
                   <span>
-                    {t('来自')} {ai.name} :{' '}
+                    {t('来自')} <span className="font-bold">{ai.name}</span> :{' '}
                   </span>
                 )}
                 {ai.render}
