@@ -1,6 +1,5 @@
 import _isFunction from 'lodash/isFunction';
 import _isEqual from 'lodash/isEqual';
-import { isPromise } from '../utils/is-promise';
 
 /**
  * 构建一对get set 方法

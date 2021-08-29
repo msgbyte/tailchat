@@ -5,5 +5,5 @@ export const [getErrorHook, setErrorHook] = buildRegFn<(err: any) => boolean>(
   () => true
 );
 
-export const [tokenGetter, setTokenGetter] =
+export const [tokenGetter, setTokenGetter, refreshTokenGetter] =
   buildCachedRegFnAsync<() => Promise<string>>('requestTokenGetter');

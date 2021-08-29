@@ -1,7 +1,7 @@
 import _isObject from 'lodash/isObject';
 import _isNull from 'lodash/isNull';
 import jwtDecode from 'jwt-decode';
-import { getStorage } from 'tailchat-shared';
+import { getStorage, refreshTokenGetter } from 'tailchat-shared';
 
 /**
  * 获取完整jwt字符串的载荷信息(尝试解析json)
@@ -28,6 +28,7 @@ export async function setUserJWT(jwt: string | null): Promise<void> {
   _userJWT = jwt; // 更新内存中的缓存
 
   await getStorage().set('jsonwebtoken', jwt);
+  refreshTokenGetter();
 }
 
 /**
@@ -36,6 +37,7 @@ export async function setUserJWT(jwt: string | null): Promise<void> {
 export async function getUserJWT(): Promise<string> {
   if (_isNull(_userJWT)) {
     const jwt = await getStorage().get('jsonwebtoken');
+
     _userJWT = jwt; // 将其缓存到内存中
 
     return jwt;

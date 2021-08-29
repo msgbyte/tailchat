@@ -47,7 +47,7 @@ export { useUpdateRef } from './hooks/useUpdateRef';
 export { buildRegList } from './manager/buildRegList';
 export { buildRegMap } from './manager/buildRegMap';
 export { getStorage, setStorage, useStorage } from './manager/storage';
-export { setTokenGetter } from './manager/request';
+export { setTokenGetter, refreshTokenGetter } from './manager/request';
 export { setServiceUrl } from './manager/service';
 export {
   showToasts,
