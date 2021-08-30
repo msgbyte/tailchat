@@ -7,6 +7,7 @@ import {
 import { Avatar } from '@/components/Avatar';
 import clsx from 'clsx';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
+import { getMessageRender } from '@/plugin/common';
 
 interface ChatMessageItemProps {
   showAvatar: boolean;
@@ -41,7 +42,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
           )}
 
           <div className="leading-6 break-words">
-            <span>{payload.content}</span>
+            <span>{getMessageRender(payload.content)}</span>
 
             {/* 解释器按钮 */}
             {useRenderPluginMessageInterpreter(payload.content)}

@@ -1,4 +1,4 @@
-import { buildRegList, FastFormFieldMeta } from 'tailchat-shared';
+import { buildRegFn, buildRegList, FastFormFieldMeta } from 'tailchat-shared';
 
 /**
  * 注册群组面板
@@ -44,3 +44,11 @@ export interface PluginMessageInterpreter {
  */
 export const [messageInterpreter, regMessageInterpreter] =
   buildRegList<PluginMessageInterpreter>();
+
+/**
+ * 消息渲染器
+ * 输入消息，返回渲染节点
+ */
+export const [getMessageRender, regMessageRender] = buildRegFn<
+  (message: string) => React.ReactNode
+>('message-render', (message) => message);

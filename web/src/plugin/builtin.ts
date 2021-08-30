@@ -15,4 +15,13 @@ export const builtinPlugins: PluginManifest[] = [
     description: '为群组提供创建网页面板的功能',
     requireRestart: false,
   },
+  {
+    label: 'BBCode',
+    name: 'com.msgbyte.bbcode',
+    url: '/plugins/com.msgbyte.bbcode/index.js',
+    version: '0.0.0',
+    author: 'msgbyte',
+    description: 'BBCode 格式消息内容解析',
+    requireRestart: true,
+  },
 ];

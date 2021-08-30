@@ -1,0 +1,9 @@
+{
+  "label": "BBCode 消息解释器",
+  "name": "com.msgbyte.bbcode",
+  "url": "/plugins/com.msgbyte.miaolang/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "消息解释器，渲染BBCode类型的消息",
+  "requireRestart": true
+}

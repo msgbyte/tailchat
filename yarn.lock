@@ -809,6 +809,13 @@
     magic-string "^0.25.7"
     resolve "^1.17.0"
 
+"@rollup/plugin-json@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.npm.taobao.org/@rollup/plugin-json/download/@rollup/plugin-json-4.1.0.tgz#54e09867ae6963c593844d8bd7a9c718294496f3"
+  integrity sha1-VOCYZ65pY8WThE2L16nHGClElvM=
+  dependencies:
+    "@rollup/pluginutils" "^3.0.8"
+
 "@rollup/plugin-node-resolve@^13.0.0":
   version "13.0.4"
   resolved "https://registry.nlark.com/@rollup/plugin-node-resolve/download/@rollup/plugin-node-resolve-13.0.4.tgz#b10222f4145a019740acb7738402130d848660c0"
@@ -830,7 +837,7 @@
     make-dir "^3.1.0"
     mime "^2.4.6"
 
-"@rollup/pluginutils@^3.1.0":
+"@rollup/pluginutils@^3.0.8", "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.nlark.com/@rollup/pluginutils/download/@rollup/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
   integrity sha1-cGtFJO5tyLEDs8mVUz5a1oDAK5s=
@@ -6751,12 +6758,13 @@ mini-css-extract-plugin@^1.6.2:
     schema-utils "^3.0.0"
     webpack-sources "^1.1.0"
 
-mini-star@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.nlark.com/mini-star/download/mini-star-0.0.24.tgz#93eca283ac2cb45ab6b61ea43f4afe234c1ffb4c"
-  integrity sha1-k+yig6wstFq2th6kP0r+I0wf+0w=
+mini-star@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/mini-star/download/mini-star-1.0.0.tgz#927e2f87c198b73c169b6137c7313bfffad821cd"
+  integrity sha1-kn4vh8GYtzwWm2E3xzE7//rYIc0=
   dependencies:
     "@rollup/plugin-commonjs" "^19.0.0"
+    "@rollup/plugin-json" "^4.1.0"
     "@rollup/plugin-node-resolve" "^13.0.0"
     "@rollup/plugin-url" "^6.0.0"
     cosmiconfig "^7.0.0"

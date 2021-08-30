@@ -1,0 +1,10 @@
+{
+  "name": "@plugins/com.msgbyte.bbcode",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@bbob/parser": "^2.7.0",
+    "url-regex": "^5.0.0"
+  }
+}

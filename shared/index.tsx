@@ -44,6 +44,7 @@ export { useRafState } from './hooks/useRafState';
 export { useUpdateRef } from './hooks/useUpdateRef';
 
 // manager
+export { buildRegFn } from './manager/buildRegFn';
 export { buildRegList } from './manager/buildRegList';
 export { buildRegMap } from './manager/buildRegMap';
 export { getStorage, setStorage, useStorage } from './manager/storage';
