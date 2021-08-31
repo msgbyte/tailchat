@@ -6,12 +6,12 @@ import {
   t,
   useAppDispatch,
   useAsyncRequest,
+  groupActions,
 } from 'tailchat-shared';
 import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
 import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
-import { groupActions } from '../../../../shared/redux/slices';
 
 const panelTemplate: {
   key: string;

@@ -3,8 +3,7 @@ import { Avatar } from './Avatar';
 import _isEmpty from 'lodash/isEmpty';
 import { Skeleton, Space } from 'antd';
 // import { openUserProfile } from './modals/UserProfile';
-import { useCachedUserInfo } from 'tailchat-shared';
-import { useCachedOnlineStatus } from '../../../shared/cache/useCache';
+import { useCachedUserInfo, useCachedOnlineStatus } from 'tailchat-shared';
 
 // const UserAvatar = styled(Avatar)`
 //   cursor: pointer !important;

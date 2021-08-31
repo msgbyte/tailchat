@@ -5,8 +5,8 @@ import {
   createGroupInviteCode,
   useAsyncRequest,
   useGroupInfo,
+  isValidStr,
 } from 'tailchat-shared';
-import { isValidStr } from '../../../../shared/utils/string-helper';
 import { ModalWrapper } from '../Modal';
 
 /**

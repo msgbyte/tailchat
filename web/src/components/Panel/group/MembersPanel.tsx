@@ -1,6 +1,6 @@
 import { UserListItem } from '@/components/UserListItem';
 import React from 'react';
-import { useGroupInfo } from '../../../../../shared';
+import { useGroupInfo } from 'tailchat-shared';
 
 interface MembersPanelProps {
   groupId: string;

@@ -10,7 +10,7 @@ export {
   getCachedGroupInviteInfo,
   getCachedRegistryPlugins,
 } from './cache/cache';
-export { useCachedUserInfo } from './cache/useCache';
+export { useCachedUserInfo, useCachedOnlineStatus } from './cache/useCache';
 
 // components
 export {
@@ -101,7 +101,7 @@ export {
   useIsGroupOwner,
 } from './redux/hooks/useGroup';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
-export { userActions } from './redux/slices';
+export { userActions, groupActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';
