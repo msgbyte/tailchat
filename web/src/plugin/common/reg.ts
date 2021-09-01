@@ -52,3 +52,10 @@ export const [messageInterpreter, regMessageInterpreter] =
 export const [getMessageRender, regMessageRender] = buildRegFn<
   (message: string) => React.ReactNode
 >('message-render', (message) => message);
+
+interface ChatInputAction {
+  label: string;
+  onClick: () => void;
+}
+export const [chatInputActions, regChatInputAction] =
+  buildRegList<ChatInputAction>();

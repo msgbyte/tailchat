@@ -2,6 +2,7 @@ import { isEnterHotkey } from '@/utils/hot-key';
 import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { t } from 'tailchat-shared';
+import { ChatInputAddon } from './Addon';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string) => void;
@@ -27,14 +28,20 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
 
   return (
     <div className="px-4 py-2">
-      <Input
-        ref={inputRef}
-        className="outline-none shadow-none border-0 bg-gray-600 py-2.5 px-4 rounded-md"
-        placeholder={t('输入一些什么')}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+      <div className="bg-gray-600 flex rounded-md items-center">
+        <Input
+          ref={inputRef}
+          className="outline-none shadow-none border-0 py-2.5 px-4 flex-1"
+          placeholder={t('输入一些什么')}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+
+        <div className="px-2">
+          <ChatInputAddon />
+        </div>
+      </div>
     </div>
   );
 });
