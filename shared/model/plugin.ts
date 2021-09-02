@@ -54,3 +54,16 @@ export async function fetchRegistryPlugins(): Promise<PluginManifest[]> {
 
   return data;
 }
+
+/**
+ * 获取官方Github注册表文件
+ */
+export async function fetchGithubStaticRegistryPlugins(): Promise<
+  PluginManifest[]
+> {
+  const data = await fetch(
+    'https://raw.githubusercontent.com/msgbyte/tailchat/master/registry.json'
+  );
+
+  return await data.json();
+}

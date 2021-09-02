@@ -1,6 +1,10 @@
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { findGroupInviteByCode, GroupInvite } from '../model/group';
-import { fetchRegistryPlugins } from '../model/plugin';
+import {
+  fetchGithubStaticRegistryPlugins,
+  fetchRegistryPlugins,
+  PluginManifest,
+} from '../model/plugin';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
 import { queryClient } from './index';
 
@@ -51,10 +55,14 @@ export async function getCachedGroupInviteInfo(
 /**
  * 获取缓存的插件列表
  */
-export async function getCachedRegistryPlugins() {
+export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
   const data = await queryClient.fetchQuery(
     ['pluginRegistry'],
-    () => fetchRegistryPlugins(),
+    () =>
+      Promise.all([
+        fetchRegistryPlugins(),
+        fetchGithubStaticRegistryPlugins(),
+      ]).then(([a, b]) => [...a, ...b]),
     {
       staleTime: 2 * 60 * 60 * 1000, // 缓存2小时
     }
