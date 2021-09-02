@@ -1,3 +1,4 @@
+import type { ChatInputActionContextProps } from '@/components/ChatBox/ChatInputBox/context';
 import { buildRegFn, buildRegList, FastFormFieldMeta } from 'tailchat-shared';
 
 /**
@@ -55,7 +56,8 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
 
 interface ChatInputAction {
   label: string;
-  onClick: () => void;
+  onClick: (actions: ChatInputActionContextProps) => void;
 }
+export type { ChatInputActionContextProps };
 export const [chatInputActions, regChatInputAction] =
   buildRegList<ChatInputAction>();

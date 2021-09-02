@@ -8,3 +8,4 @@ export {
   useGroupPanelParams,
   useCurrentGroupPanelInfo,
 } from '@/routes/Main/Content/Group/utils';
+export { openModal, ModalWrapper, useModalContext } from '@/components/Modal';

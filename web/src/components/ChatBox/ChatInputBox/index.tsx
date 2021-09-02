@@ -3,6 +3,7 @@ import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { t } from 'tailchat-shared';
 import { ChatInputAddon } from './Addon';
+import { ChatInputActionContext } from './context';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string) => void;
@@ -27,22 +28,24 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   );
 
   return (
-    <div className="px-4 py-2">
-      <div className="bg-gray-600 flex rounded-md items-center">
-        <Input
-          ref={inputRef}
-          className="outline-none shadow-none border-0 py-2.5 px-4 flex-1"
-          placeholder={t('输入一些什么')}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+    <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>
+      <div className="px-4 py-2">
+        <div className="bg-gray-600 flex rounded-md items-center">
+          <Input
+            ref={inputRef}
+            className="outline-none shadow-none border-0 py-2.5 px-4 flex-1"
+            placeholder={t('输入一些什么')}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
 
-        <div className="px-2">
-          <ChatInputAddon />
+          <div className="px-2">
+            <ChatInputAddon />
+          </div>
         </div>
       </div>
-    </div>
+    </ChatInputActionContext.Provider>
   );
 });
 ChatInputBox.displayName = 'ChatInputBox';

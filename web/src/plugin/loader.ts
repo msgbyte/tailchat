@@ -17,4 +17,5 @@ function registerDependencies() {
 
 function registerModules() {
   regSharedModule('@capital/common', () => import('./common/index'));
+  regSharedModule('@capital/component', () => import('./component/index'));
 }
