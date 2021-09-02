@@ -9,3 +9,5 @@ export {
   useCurrentGroupPanelInfo,
 } from '@/routes/Main/Content/Group/utils';
 export { openModal, ModalWrapper, useModalContext } from '@/components/Modal';
+export { getGlobalState } from '@/utils/global-state-helper';
+export { getCachedUserInfo, getCachedConverseInfo } from 'tailchat-shared';

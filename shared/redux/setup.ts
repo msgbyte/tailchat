@@ -5,6 +5,7 @@ import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
 import type { ChatMessage } from '../model/message';
+import { socketEventListeners } from '../manager/socket';
 
 /**
  * 初始化 Redux 上下文
@@ -88,5 +89,10 @@ function listenNotify(socket: AppSocket, store: AppStore) {
 
   socket.listen<{ groupId: string }>('group.remove', ({ groupId }) => {
     store.dispatch(groupActions.removeGroup(groupId));
+  });
+
+  // 其他的额外的通知
+  socketEventListeners.forEach(({ eventName, eventFn }) => {
+    socket.listen(eventName, eventFn);
   });
 }

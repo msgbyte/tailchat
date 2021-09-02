@@ -24,4 +24,13 @@ export const builtinPlugins: PluginManifest[] = [
     description: 'BBCode 格式消息内容解析',
     requireRestart: true,
   },
+  {
+    label: '消息通知插件',
+    name: 'com.msgbyte.notify',
+    url: '/plugins/com.msgbyte.notify/index.js',
+    version: '0.0.0',
+    author: 'msgbyte',
+    description: '为应用增加通知的能力',
+    requireRestart: true,
+  },
 ];

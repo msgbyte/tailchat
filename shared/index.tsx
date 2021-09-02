@@ -7,6 +7,7 @@ export type { AppSocket } from './api/socket';
 // cache
 export {
   getCachedUserInfo,
+  getCachedConverseInfo,
   getCachedGroupInviteInfo,
   getCachedRegistryPlugins,
 } from './cache/cache';
@@ -47,9 +48,10 @@ export { useUpdateRef } from './hooks/useUpdateRef';
 export { buildRegFn } from './manager/buildRegFn';
 export { buildRegList } from './manager/buildRegList';
 export { buildRegMap } from './manager/buildRegMap';
-export { getStorage, setStorage, useStorage } from './manager/storage';
-export { setTokenGetter, refreshTokenGetter } from './manager/request';
 export { setServiceUrl } from './manager/service';
+export { setTokenGetter, refreshTokenGetter } from './manager/request';
+export { regSocketEventListener } from './manager/socket';
+export { getStorage, setStorage, useStorage } from './manager/storage';
 export {
   showToasts,
   setToasts,
@@ -105,7 +107,7 @@ export { userActions, groupActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';
-export type { AppStore, AppDispatch } from './redux/store';
+export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // utils
 export {

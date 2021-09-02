@@ -1,5 +1,10 @@
 import type { ChatInputActionContextProps } from '@/components/ChatBox/ChatInputBox/context';
-import { buildRegFn, buildRegList, FastFormFieldMeta } from 'tailchat-shared';
+import {
+  buildRegFn,
+  buildRegList,
+  FastFormFieldMeta,
+  regSocketEventListener,
+} from 'tailchat-shared';
 
 /**
  * 注册群组面板
@@ -61,3 +66,5 @@ interface ChatInputAction {
 export type { ChatInputActionContextProps };
 export const [chatInputActions, regChatInputAction] =
   buildRegList<ChatInputAction>();
+
+export { regSocketEventListener };
