@@ -2,14 +2,34 @@ import { Typography } from 'antd';
 import React from 'react';
 import { version } from 'tailchat-shared';
 import logoUrl from '@assets/images/logo.svg';
+import { Icon } from '@iconify/react';
 
-const { Paragraph, Text } = Typography;
+const { Paragraph, Text, Link } = Typography;
+
+const LogoLink: React.FC<{
+  src: string;
+  icon: React.ReactNode | string;
+}> = React.memo((props) => {
+  const { src, icon } = props;
+
+  return (
+    <a
+      className="p-2.5 hover:bg-black hover:bg-opacity-20 rounded"
+      href={src}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {typeof icon === 'string' ? <Icon icon={icon} /> : icon}
+    </a>
+  );
+});
+LogoLink.displayName = 'LogoLink';
 
 export const SettingsAbout: React.FC = React.memo(() => {
   return (
     <div className="select-text">
       <img
-        className="float-right select-none"
+        className="float-right select-none bg-black rounded-2xl bg-opacity-40 p-2"
         width={128}
         height={128}
         src={logoUrl}
@@ -32,6 +52,40 @@ export const SettingsAbout: React.FC = React.memo(() => {
       </Paragraph>
 
       <Paragraph>当前版本: {version}</Paragraph>
+
+      <div className="text-8xl flex flex-wrap space-x-4 bg-black p-4 rounded-md bg-opacity-20">
+        <LogoLink
+          src="https://github.com/msgbyte/tailchat"
+          icon="logos:github-octocat"
+        />
+        <LogoLink
+          src="https://en.wikipedia.org/wiki/Open_source"
+          icon="logos:opensource"
+        />
+        <LogoLink src="https://www.docker.com/" icon="logos:docker-icon" />
+        <LogoLink
+          src="https://ministar.moonrailgun.com/"
+          icon={
+            <img
+              className="w-24 h-24"
+              src="https://ministar.moonrailgun.com/img/logo.svg"
+            />
+          }
+        />
+        <LogoLink src="https://zh-hans.reactjs.org/" icon="logos:react" />
+        <LogoLink src="https://redux.js.org/" icon="logos:redux" />
+        <LogoLink
+          src="https://www.typescriptlang.org/"
+          icon="logos:typescript-icon"
+        />
+      </div>
+
+      <Paragraph className="mt-4">
+        开源地址:{' '}
+        <Link href="https://github.com/msgbyte/tailchat" target="_blank">
+          https://github.com/msgbyte/tailchat
+        </Link>
+      </Paragraph>
     </div>
   );
 });
