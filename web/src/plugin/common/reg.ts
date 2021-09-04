@@ -41,7 +41,7 @@ export const [pluginGroupPanel, regGroupPanel] =
 
 export interface PluginMessageInterpreter {
   name?: string;
-  explainMessage: (message: string) => React.ReactElement | null;
+  explainMessage: (message: string) => React.ReactNode;
 }
 
 /**
