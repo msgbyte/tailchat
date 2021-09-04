@@ -1,9 +1,9 @@
 import { Skeleton } from 'antd';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatInputBox } from './ChatInputBox';
-import { ChatMessageList } from './ChatMessageList';
+import { ChatMessageList, ChatMessageListRef } from './ChatMessageList';
 
 const ChatBoxPlaceholder: React.FC = React.memo(() => {
   return (
@@ -40,6 +40,7 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
     converseId,
     isGroup,
   });
+  const chatMessageListRef = useRef<ChatMessageListRef>(null);
 
   if (loading) {
     return <ChatBoxPlaceholder />;
@@ -51,16 +52,18 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
 
   return (
     <div className="w-full h-full flex flex-col select-text">
-      <ChatMessageList messages={messages} />
+      <ChatMessageList ref={chatMessageListRef} messages={messages} />
 
       <ChatInputBox
-        onSendMsg={(msg) =>
+        onSendMsg={(msg) => {
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
             content: msg,
-          })
-        }
+          }).then(() => {
+            chatMessageListRef.current?.scrollToBottom();
+          });
+        }}
       />
     </div>
   );
