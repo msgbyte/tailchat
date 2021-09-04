@@ -1,9 +1,13 @@
 import { blobUrlToFile } from '@/utils/file-helper';
+import { Icon } from '@iconify/react';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import { uploadFile, UploadFileResult, useAsyncRequest } from 'tailchat-shared';
 import { AvatarPicker } from './AvatarPicker';
 
 export const AvatarUploader: React.FC<{
+  circle?: boolean;
+  className?: string;
   onUploadSuccess: (fileInfo: UploadFileResult) => void;
 }> = React.memo((props) => {
   const [uploadProgress, setUploadProgress] = useState(0); // 0 - 100
@@ -31,13 +35,26 @@ export const AvatarUploader: React.FC<{
       disabled={loading}
       onChange={handlePickImage}
     >
-      {props.children}
-      {loading && (
+      <div className={clsx('group', props.className)}>
+        {props.children}
+        {loading && (
+          <div
+            className="absolute bottom-0 left-0 h-1"
+            style={{ width: `${uploadProgress}%` }}
+          />
+        )}
+
         <div
-          className="absolute bottom-0 left-0 h-1"
-          style={{ width: `${uploadProgress}%` }}
-        />
-      )}
+          className={clsx(
+            'absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition opacity-0 group-hover:opacity-100',
+            {
+              'rounded-1/2': props.circle,
+            }
+          )}
+        >
+          <Icon icon="mdi:camera-outline" />
+        </div>
+      </div>
     </AvatarPicker>
   );
 });

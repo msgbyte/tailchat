@@ -47,7 +47,11 @@ export const GroupSummary: React.FC<{
 
       <div className="flex">
         <div className="w-1/3">
-          <AvatarUploader onUploadSuccess={handleGroupAvatarChange}>
+          <AvatarUploader
+            className="text-4xl"
+            circle={true}
+            onUploadSuccess={handleGroupAvatarChange}
+          >
             <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />
           </AvatarUploader>
         </div>
