@@ -1,5 +1,7 @@
-const fs = require('fs');
+const fs = require('fs-extra');
+const path = require('path');
 const { crc32 } = require('crc');
+const esbuild = require('esbuild');
 
 console.log('Scanning Translation in src folder...');
 
@@ -37,20 +39,42 @@ module.exports = {
       suffix: '}}',
     },
   },
-  transform: function customTransform(file, enc, done) {
+  transform: async function customTransform(file, enc, done) {
     //自己通过该函数来加工key或value
     'use strict';
     const parser = this.parser;
-    const content = fs.readFileSync(file.path, enc);
+    const content = await fs.readFile(file.path, enc);
+
     parser.parseFuncFromString(
       content,
       { list: ['lang', 't'] },
       (key, options) => {
         options.defaultValue = key;
-        let hashKey = `k${crc32(key).toString(16)}`;
+        const hashKey = `k${crc32(key).toString(16)}`;
         parser.set(hashKey, options);
       }
     );
+
+    // 如果是 tsx 文件，则使用esbuild转换成jsx后再输入
+    if (path.extname(file.path) === '.tsx') {
+      const { code } = await esbuild.transform(content, {
+        jsx: 'preserve',
+        loader: 'tsx',
+      });
+      parser.parseTransFromString(
+        code,
+        { component: 'Trans', i18nKey: 'i18nKey' },
+        (key, options) => {
+          // 如果不是手动给, 则使用defaultValue 作为key
+          if (key === '') {
+            key = options.defaultValue;
+          }
+          let hashKey = `k${crc32(key).toString(16)}`;
+          parser.set(hashKey, options);
+        }
+      );
+    }
+
     done();
   },
 };
