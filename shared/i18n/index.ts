@@ -22,6 +22,13 @@ i18next
         console.log('缺少翻译:', ...args);
       },
     },
+    react: {
+      // Reference: https://react.i18next.com/latest/trans-component#i-18-next-options
+      hashTransKey(defaultValue: string) {
+        // return a key based on defaultValue or if you prefer to just remind you should set a key return false and throw an error
+        return `k${crc32(defaultValue).toString(16)}`;
+      },
+    },
   } as any);
 
 /**
@@ -30,7 +37,7 @@ i18next
 export const t: TFunction = (
   key: string,
   defaultValue?: string,
-  options?: TOptionsBase
+  options?: TOptionsBase & Record<string, unknown>
 ) => {
   try {
     const hashKey = `k${crc32(key).toString(16)}`;

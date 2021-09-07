@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from 'tailchat-shared';
 import { Spinner } from './Spinner';
 
 interface LoadingSpinnerProps {
@@ -9,7 +10,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = React.memo(
     return (
       <div>
         <Spinner />
-        {props.tip ?? 'Processing'}
+        {props.tip ?? t('加载中...')}
       </div>
     );
   }

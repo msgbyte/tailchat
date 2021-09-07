@@ -65,11 +65,18 @@ module.exports = {
         code,
         { component: 'Trans', i18nKey: 'i18nKey' },
         (key, options) => {
-          // 如果不是手动给, 则使用defaultValue 作为key
-          if (key === '') {
-            key = options.defaultValue;
-          }
-          let hashKey = `k${crc32(key).toString(16)}`;
+          /**
+           * 处理scanner与react-i18next算法不一致导致的问题
+           * Reference: https://github.com/i18next/i18next-scanner/issues/125
+           */
+          let sentence = options.defaultValue;
+          // remove <Tag> surrounding interopations to match i18next simpilied result
+          // @see https://github.com/i18next/react-i18next/blob/master/CHANGELOG.md#800
+          sentence = sentence.replace(/<(\d+)>{{(\w+)}}<\/\1>/g, '{{$2}}');
+          sentence = sentence.replace(/\s+/g, ' ');
+          options.defaultValue = sentence;
+
+          const hashKey = `k${crc32(key || sentence).toString(16)}`;
           parser.set(hashKey, options);
         }
       );

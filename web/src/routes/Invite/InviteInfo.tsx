@@ -8,6 +8,7 @@ import {
   getGroupBasicInfo,
   showErrorToasts,
   t,
+  Trans,
   useAsync,
 } from 'tailchat-shared';
 
@@ -67,9 +68,13 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
 
       {value.expired && (
         <div>
-          该邀请将于{' '}
-          <span className="font-bold">{datetimeFromNow(value.expired)}</span>{' '}
-          过期
+          <Trans>
+            该邀请将于{' '}
+            <span className="font-bold">
+              {{ date: datetimeFromNow(value.expired) }}
+            </span>{' '}
+            过期
+          </Trans>
         </div>
       )}
     </div>
