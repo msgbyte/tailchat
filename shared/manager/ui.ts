@@ -12,7 +12,7 @@ export const [showToasts, setToasts] =
  * 一个封装方法, 用于直接抛出错误
  * @param error 错误信息
  */
-export function showErrorToasts(error: Error) {
+export function showErrorToasts(error: unknown) {
   let msg = '';
   if (error instanceof Error) {
     msg = error.message;

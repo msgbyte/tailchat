@@ -44,6 +44,13 @@ const userSlice = createSlice({
 
       state.friends.push(action.payload);
     },
+    removeFriend(state, action: PayloadAction<string>) {
+      const friendId = action.payload;
+      const index = state.friends.indexOf(friendId);
+      if (index >= 0) {
+        state.friends.splice(index, 1);
+      }
+    },
     appendFriendRequest(state, action: PayloadAction<FriendRequest>) {
       if (state.friendRequests.some(({ _id }) => _id === action.payload._id)) {
         return;

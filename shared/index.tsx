@@ -69,6 +69,7 @@ export {
   cancelFriendRequest,
   acceptFriendRequest,
   denyFriendRequest,
+  removeFriend,
 } from './model/friend';
 export type { FriendRequest } from './model/friend';
 export {

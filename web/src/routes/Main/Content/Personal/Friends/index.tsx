@@ -20,7 +20,7 @@ export const FriendPanel: React.FC = React.memo(() => {
   return (
     <div className="w-full">
       <PillTabs>
-        <PillTabPane tab={'全部'} key="1">
+        <PillTabPane tab={t('全部')} key="1">
           <FriendList />
         </PillTabPane>
         <PillTabPane
@@ -44,7 +44,7 @@ export const FriendPanel: React.FC = React.memo(() => {
           <RequestReceived requests={received} />
         </PillTabPane>
         <PillTabPane
-          tab={<span className="text-green-400">添加好友</span>}
+          tab={<span className="text-green-400">{t('添加好友')}</span>}
           key="4"
         >
           <AddFriend />

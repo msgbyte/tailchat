@@ -50,3 +50,12 @@ export async function cancelFriendRequest(requestId: string): Promise<void> {
     requestId,
   });
 }
+
+/**
+ * 移除好友(单项)
+ */
+export async function removeFriend(friendUserId: string): Promise<void> {
+  await request.post('/api/friend/removeFriend', {
+    friendUserId,
+  });
+}
