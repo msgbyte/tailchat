@@ -8,6 +8,11 @@ import { languageDetector } from './language';
 import { useState, useEffect } from 'react';
 import HttpApi from 'i18next-http-backend'; // https://github.com/i18next/i18next-http-backend
 
+/**
+ * 允许出现的语言
+ */
+type AllowedLanguage = 'zh-CN' | 'en-US';
+
 i18next
   .use(languageDetector)
   .use(HttpApi)
@@ -56,7 +61,7 @@ export const t: TFunction = (
 /**
  * 设置i18next的语言
  */
-export async function setLanguage(lang: string): Promise<void> {
+export async function setLanguage(lang: AllowedLanguage): Promise<void> {
   return new Promise((resolve, reject) => {
     i18next.changeLanguage(lang, (err) => {
       if (err) {
@@ -66,6 +71,13 @@ export async function setLanguage(lang: string): Promise<void> {
       }
     });
   });
+}
+
+/**
+ * 监听语言变更
+ */
+export function onLanguageChange(cb: (lang: string) => void) {
+  i18next.on('languageChanged', cb);
 }
 
 /**

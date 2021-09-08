@@ -1,13 +1,22 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'; // 导入插件
 import 'dayjs/locale/zh-cn'; // 导入本地化语言
+import { onLanguageChange } from '../i18n';
 
 /**
  * Reference: https://day.js.org/
  */
 
 dayjs.extend(relativeTime);
-dayjs.locale('zh-cn');
+dayjs.locale('zh-cn'); // 默认使用中文
+onLanguageChange((lang) => {
+  if (lang === 'en-US') {
+    dayjs.locale('en');
+    return;
+  }
+
+  dayjs.locale('zh-cn');
+});
 
 /**
  * 是否为当天
