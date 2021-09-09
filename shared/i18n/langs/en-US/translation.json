@@ -1,5 +1,6 @@
 {
   "k10c018fe": "Teamwork",
+  "k162e37f1": "Plugin is successfully uninstalled, and it needs to be restarted to take effect",
   "k1704ea49": "Install",
   "k18c716ce": "Password cannot be less than 6 digits",
   "k19885be1": "Panel name is too long",
@@ -87,6 +88,7 @@
   "kc1afdd08": "Don't worry, you can make changes anytime after this",
   "kc625cd59": "Summary",
   "kc654b275": "Email",
+  "kc6f6df4": "Do you want to uninstall the plugin",
   "kc7cc96c8": "From",
   "kcb8e662f": "Converse Service",
   "kceea83fc": "Join Group",
