@@ -56,9 +56,11 @@ export { getStorage, setStorage, useStorage } from './manager/storage';
 export {
   showToasts,
   setToasts,
+  showErrorToasts,
   showAlert,
   setAlert,
-  showErrorToasts,
+  showGlobalLoading,
+  setGlobalLoading,
 } from './manager/ui';
 
 // model

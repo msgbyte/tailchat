@@ -29,3 +29,13 @@ interface AlertOptions {
 }
 export const [showAlert, setAlert] =
   buildRegFn<(options: AlertOptions) => void>('alert');
+
+/**
+ * 全局Loading提示
+ * 返回移除函数
+ */
+export const [showGlobalLoading, setGlobalLoading] = buildRegFn<
+  (text: string) => () => void
+>('global-loading', () => {
+  return () => {};
+});

@@ -2,6 +2,7 @@ import { message, Modal } from 'antd';
 import {
   buildStorage,
   setAlert,
+  setGlobalLoading,
   setServiceUrl,
   setStorage,
   setToasts,
@@ -39,4 +40,10 @@ setAlert((options) => {
       }
     },
   });
+});
+
+setGlobalLoading((text) => {
+  const hide = message.loading(text, 0);
+
+  return hide;
 });

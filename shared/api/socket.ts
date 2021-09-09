@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client';
 import _isNil from 'lodash/isNil';
 import { getServiceUrl } from '../manager/service';
 import { isDevelopment } from '../utils/environment';
-import { showToasts } from '../manager/ui';
+import { showErrorToasts, showGlobalLoading, showToasts } from '../manager/ui';
 import { t } from '../i18n';
 
 let socket: Socket;
@@ -67,6 +67,62 @@ export class AppSocket {
   listen<T>(eventName: string, callback: (data: T) => void) {
     this.listener.push([`notify:${eventName}`, callback as any]);
   }
+
+  /**
+   * 初始Socket状态管理提示
+   */
+  closeFn: unknown = null; // 全局loading关闭函数
+  setupSocketStatusTip() {
+    const socket = this.socket;
+
+    const showConnecting = () => {
+      if (this.closeFn) {
+        return;
+      }
+      this.closeFn = showGlobalLoading(t('正在重新链接'));
+    };
+
+    const closeConnecting = () => {
+      if (this.closeFn && typeof this.closeFn === 'function') {
+        this.closeFn();
+      }
+    };
+
+    // 网络状态管理
+    socket.on('connect', () => {
+      console.log('连接成功');
+      closeConnecting();
+    });
+    socket.on('connecting', (data) => {
+      console.log('正在连接');
+
+      showConnecting();
+    });
+    socket.on('reconnect', (data) => {
+      console.log('重连成功');
+
+      closeConnecting();
+    });
+    socket.on('reconnecting', (data) => {
+      console.log('重连中...');
+      showConnecting();
+    });
+    socket.on('disconnect', (data) => {
+      console.log('与服务器的链接已断开');
+      showErrorToasts(t('与服务器的链接已断开'));
+      closeConnecting();
+    });
+    socket.on('connect_failed', (data) => {
+      console.log('连接失败');
+      showErrorToasts(t('连接失败'));
+      closeConnecting();
+    });
+    socket.on('error', (data) => {
+      console.log('网络出现异常', data);
+      showErrorToasts(t('网络出现异常'));
+      closeConnecting();
+    });
+  }
 }
 
 /**
@@ -90,6 +146,7 @@ export function createSocket(token: string): Promise<AppSocket> {
     socket.once('connect', () => {
       // 连接成功
       const appSocket = new AppSocket(socket);
+      appSocket.setupSocketStatusTip();
       appSocket.request('chat.converse.findAndJoinRoom').catch((err) => {
         console.error(err);
         showToasts(
