@@ -11,10 +11,12 @@ export interface ChatConverseState extends ChatConverseInfo {
 
 interface ChatState {
   converses: Record<string, ChatConverseState>;
+  ack: Record<string, string>;
 }
 
 const initialState: ChatState = {
   converses: {},
+  ack: {},
 };
 
 const chatSlice = createSlice({
@@ -84,6 +86,20 @@ const chatSlice = createSlice({
       );
 
       state.converses[converseId].hasFetchedHistory = true;
+    },
+
+    /**
+     * 设置已读消息
+     */
+    setConverseAck(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        lastMessageId: string;
+      }>
+    ) {
+      const { converseId, lastMessageId } = action.payload;
+      state.ack[converseId] = lastMessageId;
     },
   },
 });

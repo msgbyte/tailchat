@@ -41,6 +41,7 @@ export { Trans } from './i18n/Trans';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
+export { useDebounce } from './hooks/useDebounce';
 export { useMountedState } from './hooks/useMountedState';
 export { useRafState } from './hooks/useRafState';
 export { useUpdateRef } from './hooks/useUpdateRef';
@@ -65,7 +66,7 @@ export {
 
 // model
 export { fetchAvailableServices } from './model/common';
-export { createDMConverse } from './model/converse';
+export { createDMConverse, updateAck } from './model/converse';
 export {
   addFriendRequest,
   cancelFriendRequest,

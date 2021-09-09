@@ -47,11 +47,11 @@ export function useConverseMessage(context: ConverseContext) {
       }
 
       // Step 2. 拉取消息
-      const messages = await fetchConverseMessage(converseId);
+      const historyMessages = await fetchConverseMessage(converseId);
       dispatch(
         chatActions.initialHistoryMessage({
           converseId,
-          historyMessages: messages,
+          historyMessages,
         })
       );
     } else {

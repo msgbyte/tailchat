@@ -1,14 +1,21 @@
-import React, { useImperativeHandle, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import {
   ChatMessage,
   getMessageTimeDiff,
   shouldShowMessageTime,
+  useUpdateRef,
 } from 'tailchat-shared';
 import { ChatMessageItem } from './Item';
 import { Divider } from 'antd';
 
 interface ChatMessageListProps {
   messages: ChatMessage[];
+  onUpdateReadedMessage: (lastMessageId: string) => void;
 }
 export interface ChatMessageListRef {
   scrollToBottom: () => void;
@@ -34,10 +41,29 @@ export const ChatMessageList = React.forwardRef<
     },
   }));
 
+  const onUpdateReadedMessageRef = useUpdateRef(props.onUpdateReadedMessage);
+  useEffect(() => {
+    if (containerRef.current?.scrollTop === 0) {
+      // 当前列表在最低
+      onUpdateReadedMessageRef.current(
+        props.messages[props.messages.length - 1]._id
+      );
+    }
+  }, [props.messages.length]);
+
+  const handleScroll = useCallback(() => {
+    if (containerRef.current?.scrollTop === 0) {
+      onUpdateReadedMessageRef.current(
+        props.messages[props.messages.length - 1]._id
+      );
+    }
+  }, [props.messages]);
+
   return (
     <div
       className="flex-1 overflow-y-scroll flex flex-col-reverse"
       ref={containerRef}
+      onScroll={handleScroll}
     >
       <div>
         {props.messages.map((message, index, arr) => {

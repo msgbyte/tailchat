@@ -36,3 +36,12 @@ export async function fetchConverseInfo(
 
   return data;
 }
+
+/**
+ * 更新会话已读
+ * @param converseId 会话ID
+ * @param lastMessageId 最后一条消息ID
+ */
+export async function updateAck(converseId: string, lastMessageId: string) {
+  await request.post('/api/chat/ack/update', { converseId, lastMessageId });
+}

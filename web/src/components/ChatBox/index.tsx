@@ -4,6 +4,7 @@ import { useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList, ChatMessageListRef } from './ChatMessageList';
+import { useMessageAck } from './useMessageAck';
 
 const ChatBoxPlaceholder: React.FC = React.memo(() => {
   return (
@@ -41,6 +42,7 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
     isGroup,
   });
   const chatMessageListRef = useRef<ChatMessageListRef>(null);
+  const { updateConverseAck } = useMessageAck(converseId, messages);
 
   if (loading) {
     return <ChatBoxPlaceholder />;
@@ -52,10 +54,15 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
 
   return (
     <div className="w-full h-full flex flex-col select-text">
-      <ChatMessageList ref={chatMessageListRef} messages={messages} />
+      <ChatMessageList
+        ref={chatMessageListRef}
+        messages={messages}
+        onUpdateReadedMessage={updateConverseAck}
+      />
 
       <ChatInputBox
         onSendMsg={(msg) => {
+          // 发送消息后滚动到底部
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
