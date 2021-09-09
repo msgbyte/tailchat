@@ -57,7 +57,7 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
           className={clsx(
             'transition-all overflow-hidden border-l border-black border-opacity-20',
             {
-              'w-96': rightPanel,
+              'w-96 mobile:w-full': rightPanel,
               'w-0': !rightPanel,
             }
           )}
