@@ -73,6 +73,20 @@ class PluginManager {
       url: manifest.url,
     });
   }
+
+  /**
+   * 卸载插件
+   */
+  async uninstallPlugin(pluginName: string) {
+    const plugins: PluginManifest[] = await getStorage().get(
+      PluginManager.STORE_KEY
+    );
+    const index = plugins.findIndex((plugin) => plugin.name === pluginName);
+    if (index >= 0) {
+      plugins.splice(index, 1);
+      await getStorage().save(PluginManager.STORE_KEY, plugins);
+    }
+  }
 }
 
 export const pluginManager = new PluginManager();

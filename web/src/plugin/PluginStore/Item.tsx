@@ -1,8 +1,9 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   PluginManifest,
+  showAlert,
   showToasts,
   t,
   useAsyncRequest,
@@ -30,6 +31,16 @@ export const PluginStoreItem: React.FC<{
     setInstalled(true);
   }, [manifest]);
 
+  const handleUninstallPlugin = useCallback(() => {
+    showAlert({
+      message: t('是否要卸载插件'),
+      onConfirm: async () => {
+        await pluginManager.uninstallPlugin(manifest.name);
+        showToasts(t('插件卸载成功, 需要重启后生效'), 'success');
+      },
+    });
+  }, [manifest]);
+
   return (
     <div className="rounded-md flex w-80 h-36 bg-black bg-opacity-40 py-2 px-3">
       <div className="flex w-full">
@@ -49,10 +60,12 @@ export const PluginStoreItem: React.FC<{
           <div className="mt-1 text-right">
             {builtin ? (
               <Button type="primary" disabled={true}>
-                {t('已安装')}
+                {t('内置插件')}
               </Button>
             ) : installed ? (
-              <Button type="primary">{t('已安装')}</Button>
+              <Button type="primary" onClick={handleUninstallPlugin}>
+                {t('已安装')}
+              </Button>
             ) : (
               <Button
                 type="primary"
