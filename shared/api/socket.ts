@@ -147,13 +147,6 @@ export function createSocket(token: string): Promise<AppSocket> {
       // 连接成功
       const appSocket = new AppSocket(socket);
       appSocket.setupSocketStatusTip();
-      appSocket.request('chat.converse.findAndJoinRoom').catch((err) => {
-        console.error(err);
-        showToasts(
-          t('无法加入房间, 您将无法获取到最新的信息, 请刷新页面后重试'),
-          'error'
-        );
-      }); // 立即请求加入房间
       resolve(appSocket);
     });
     socket.once('error', () => {

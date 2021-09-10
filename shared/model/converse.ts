@@ -45,3 +45,18 @@ export async function fetchConverseInfo(
 export async function updateAck(converseId: string, lastMessageId: string) {
   await request.post('/api/chat/ack/update', { converseId, lastMessageId });
 }
+
+interface AckInfo {
+  userId: string;
+  converseId: string;
+  lastMessageId: string;
+}
+
+/**
+ * 获取用户存储在远程的会话信息
+ */
+export async function fetchUserAck(): Promise<AckInfo[]> {
+  const { data } = await request.get('/api/chat/ack/all');
+
+  return data;
+}

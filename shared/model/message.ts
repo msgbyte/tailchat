@@ -54,3 +54,19 @@ export async function sendMessage(
 
   return data;
 }
+
+/**
+ * 基于会话id获取会话最后一条消息的id
+ */
+export async function fetchConverseLastMessages(
+  converseIds: string[]
+): Promise<{ converseId: string; lastMessageId: string }[]> {
+  const { data } = await request.post(
+    '/api/chat/message/fetchConverseLastMessages',
+    {
+      converseIds,
+    }
+  );
+
+  return data;
+}

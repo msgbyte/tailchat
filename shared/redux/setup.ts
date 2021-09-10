@@ -4,8 +4,11 @@ import { chatActions, groupActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
-import type { ChatMessage } from '../model/message';
+import { ChatMessage, fetchConverseLastMessages } from '../model/message';
 import { socketEventListeners } from '../manager/socket';
+import { showToasts } from '../manager/ui';
+import { t } from '../i18n';
+import { fetchUserAck } from '../model/converse';
 
 /**
  * 初始化 Redux 上下文
@@ -21,6 +24,46 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
  */
 function initial(socket: AppSocket, store: AppStore) {
   console.log('初始化Redux上下文...');
+
+  // 立即请求加入房间
+  const conversesP = socket
+    .request<{
+      dmConverseIds: string[];
+      groupIds: string[];
+      panelIds: string[];
+    }>('chat.converse.findAndJoinRoom')
+    .catch((err) => {
+      console.error(err);
+      showToasts(
+        t('无法加入房间, 您将无法获取到最新的信息, 请刷新页面后重试'),
+        'error'
+      );
+      throw new Error('findAndJoinRoom failed');
+    });
+
+  Promise.all([conversesP, fetchUserAck()]).then(
+    ([{ dmConverseIds, panelIds }, acks]) => {
+      /**
+       * TODO: 这里的逻辑还需要优化
+       * 可能ack和lastMessageMap可以无关？
+       */
+
+      // 设置已读消息
+      acks.forEach((ackInfo) => {
+        store.dispatch(
+          chatActions.setConverseAck({
+            converseId: ackInfo.converseId,
+            lastMessageId: ackInfo.lastMessageId,
+          })
+        );
+      });
+
+      const converseIds = [...dmConverseIds, ...panelIds];
+      fetchConverseLastMessages(converseIds).then((list) => {
+        store.dispatch(chatActions.setLastMessageMap(list));
+      });
+    }
+  );
 
   // 获取好友列表
   socket.request<string[]>('friend.getAllFriends').then((data) => {
@@ -42,6 +85,9 @@ function initial(socket: AppSocket, store: AppStore) {
     });
   });
 
+  /**
+   * 获取用户群组列表
+   */
   socket.request<GroupInfo[]>('group.getUserGroups').then((groups) => {
     store.dispatch(groupActions.appendGroups(groups));
   });

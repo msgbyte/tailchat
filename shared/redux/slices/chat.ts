@@ -10,13 +10,15 @@ export interface ChatConverseState extends ChatConverseInfo {
 }
 
 interface ChatState {
-  converses: Record<string, ChatConverseState>;
-  ack: Record<string, string>;
+  converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
+  ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>
+  lastMessageMap: Record<string, string>; // <会话Id, 远程最后一条会话Id>
 }
 
 const initialState: ChatState = {
   converses: {},
   ack: {},
+  lastMessageMap: {},
 };
 
 const chatSlice = createSlice({
@@ -100,6 +102,25 @@ const chatSlice = createSlice({
     ) {
       const { converseId, lastMessageId } = action.payload;
       state.ack[converseId] = lastMessageId;
+    },
+
+    /**
+     * 设置远程的最后一条会话的id
+     */
+    setLastMessageMap(
+      state,
+      action: PayloadAction<
+        {
+          converseId: string;
+          lastMessageId: string;
+        }[]
+      >
+    ) {
+      const list = action.payload;
+
+      list.forEach((item) => {
+        state.lastMessageMap[item.converseId] = item.lastMessageId;
+      });
     },
   },
 });
