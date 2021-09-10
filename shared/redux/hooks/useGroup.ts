@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import type { GroupInfo, GroupPanel } from '../../model/group';
+import { GroupInfo, GroupPanel, GroupPanelType } from '../../model/group';
 import { isValidStr } from '../../utils/string-helper';
 import { useAppSelector } from './useAppSelector';
+import { useUnread } from './useUnread';
 import { useUserId } from './useUserInfo';
 
 /**
@@ -40,4 +41,29 @@ export function useIsGroupOwner(groupId: string, userId?: string): boolean {
   } else {
     return typeof selfUserId === 'string' && groupInfo?.owner === selfUserId;
   }
+}
+
+/**
+ * 检查群组是否有未读消息
+ * @param groupId 群组id
+ */
+export function useGroupUnread(groupId: string): boolean {
+  const group = useGroupInfo(groupId);
+  const groupTextPanelIds = (group?.panels ?? [])
+    .filter((panel) => panel.type === GroupPanelType.TEXT)
+    .map((p) => p.id);
+
+  const unread = useUnread(groupTextPanelIds);
+
+  return unread.some((u) => u === true);
+}
+
+/**
+ * 检查群组聊天面板是否有未读消息
+ * @param textPanelId 文字面板id
+ */
+export function useGroupTextPanelUnread(textPanelId: string): boolean {
+  const unread = useUnread([textPanelId]);
+
+  return unread[0];
 }

@@ -106,6 +106,8 @@ export {
   useGroupInfo,
   useGroupPanel,
   useIsGroupOwner,
+  useGroupUnread,
+  useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { userActions, groupActions } from './redux/slices';

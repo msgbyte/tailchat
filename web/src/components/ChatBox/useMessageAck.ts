@@ -31,7 +31,7 @@ export function useMessageAck(converseId: string, messages: ChatMessage[]) {
           lastMessageIdRef.current = lastMessageId;
         },
         1000,
-        { leading: false, trailing: true }
+        { leading: true, trailing: true }
       ),
     []
   );

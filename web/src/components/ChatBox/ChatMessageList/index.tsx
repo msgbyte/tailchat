@@ -43,6 +43,10 @@ export const ChatMessageList = React.forwardRef<
 
   const onUpdateReadedMessageRef = useUpdateRef(props.onUpdateReadedMessage);
   useEffect(() => {
+    if (props.messages.length === 0) {
+      return;
+    }
+
     if (containerRef.current?.scrollTop === 0) {
       // 当前列表在最低
       onUpdateReadedMessageRef.current(
@@ -52,6 +56,10 @@ export const ChatMessageList = React.forwardRef<
   }, [props.messages.length]);
 
   const handleScroll = useCallback(() => {
+    if (props.messages.length === 0) {
+      return;
+    }
+
     if (containerRef.current?.scrollTop === 0) {
       onUpdateReadedMessageRef.current(
         props.messages[props.messages.length - 1]._id
