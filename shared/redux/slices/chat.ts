@@ -3,6 +3,8 @@ import type { ChatConverseInfo } from '../../model/converse';
 import type { ChatMessage } from '../../model/message';
 import _uniqBy from 'lodash/uniqBy';
 import _orderBy from 'lodash/orderBy';
+import _last from 'lodash/last';
+import { isValidStr } from '../../utils/string-helper';
 
 export interface ChatConverseState extends ChatConverseInfo {
   messages: ChatMessage[];
@@ -10,12 +12,14 @@ export interface ChatConverseState extends ChatConverseInfo {
 }
 
 interface ChatState {
+  currentConverseId: string | null; // 当前活跃的会话id
   converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
   ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>
   lastMessageMap: Record<string, string>; // <会话Id, 远程最后一条会话Id>
 }
 
 const initialState: ChatState = {
+  currentConverseId: null,
   converses: {},
   ack: {},
   lastMessageMap: {},
@@ -25,6 +29,10 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
+    updateCurrentConverseId(state, action: PayloadAction<string | null>) {
+      state.currentConverseId = action.payload;
+    },
+
     /**
      * 设置会话信息
      */
@@ -58,11 +66,18 @@ const chatSlice = createSlice({
 
       const newMessages = _orderBy(
         _uniqBy([...state.converses[converseId].messages, ...messages], '_id'),
-        'createdAt',
+        '_id',
         'asc'
       );
 
       state.converses[converseId].messages = newMessages;
+
+      if (state.currentConverseId !== converseId) {
+        const lastMessageId = _last(messages)?._id;
+        if (isValidStr(lastMessageId)) {
+          state.lastMessageMap[converseId] = lastMessageId;
+        }
+      }
     },
 
     initialHistoryMessage(

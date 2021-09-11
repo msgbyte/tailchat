@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ensureDMConverse } from '../../helper/converse-helper';
 import { useAsync } from '../../hooks/useAsync';
 import { showErrorToasts } from '../../manager/ui';
@@ -23,6 +23,14 @@ export function useConverseMessage(context: ConverseContext) {
   const converse = useAppSelector((state) => state.chat.converses[converseId]);
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
+
+  useEffect(() => {
+    dispatch(chatActions.updateCurrentConverseId(converseId));
+
+    return () => {
+      dispatch(chatActions.updateCurrentConverseId(null));
+    };
+  }, [converseId]);
 
   // NOTICE: 该hook只会在converseId变化时执行
   const { loading, error } = useAsync(async () => {
