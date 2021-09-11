@@ -3,8 +3,24 @@ import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo } from 'react';
-import { GroupInfo, t, useAppSelector } from 'tailchat-shared';
+import { GroupInfo, t, useAppSelector, useGroupUnread } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
+
+const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
+  const hasUnread = useGroupUnread(group._id);
+
+  return (
+    <NavbarNavItem
+      name={group.name}
+      to={`/main/group/${group._id}`}
+      showPill={true}
+      badge={hasUnread}
+    >
+      <Avatar shape="square" size={48} name={group.name} src={group.avatar} />
+    </NavbarNavItem>
+  );
+});
+GroupNavItem.displayName = 'GroupNavItem';
 
 function useGroups(): GroupInfo[] {
   const groups = useAppSelector((state) => state.group.groups);
@@ -26,18 +42,7 @@ export const GroupNav: React.FC = React.memo(() => {
       {Array.isArray(groups) &&
         groups.map((group) => (
           <div key={group._id}>
-            <NavbarNavItem
-              name={group.name}
-              to={`/main/group/${group._id}`}
-              showPill={true}
-            >
-              <Avatar
-                shape="square"
-                size={48}
-                name={group.name}
-                src={group.avatar}
-              />
-            </NavbarNavItem>
+            <GroupNavItem group={group} />
           </div>
         ))}
 

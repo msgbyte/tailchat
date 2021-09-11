@@ -1,4 +1,4 @@
-import { Tooltip } from 'antd';
+import { Tooltip, Badge } from 'antd';
 import type { ClassValue } from 'clsx';
 import clsx from 'clsx';
 import React from 'react';
@@ -10,9 +10,10 @@ export const NavbarNavItem: React.FC<{
   className?: ClassValue;
   to?: string;
   showPill?: boolean;
+  badge?: boolean;
   onClick?: () => void;
 }> = React.memo((props) => {
-  const { name, className, to, showPill = false } = props;
+  const { name, className, to, showPill = false, badge = false } = props;
   const location = useLocation();
   const isActive = typeof to === 'string' && location.pathname.startsWith(to);
 
@@ -60,6 +61,14 @@ export const NavbarNavItem: React.FC<{
         </div>
       )}
       {inner}
+
+      <div className="absolute right-0 bottom-0">
+        {badge === true ? (
+          <Badge status="error" />
+        ) : (
+          <Badge count={Number(badge) || 0} />
+        )}
+      </div>
     </div>
   );
 });
