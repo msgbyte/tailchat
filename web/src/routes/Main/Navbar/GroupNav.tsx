@@ -26,7 +26,11 @@ export const GroupNav: React.FC = React.memo(() => {
       {Array.isArray(groups) &&
         groups.map((group) => (
           <div key={group._id}>
-            <NavbarNavItem name={group.name} to={`/main/group/${group._id}`}>
+            <NavbarNavItem
+              name={group.name}
+              to={`/main/group/${group._id}`}
+              showPill={true}
+            >
               <Avatar
                 shape="square"
                 size={48}
