@@ -36,6 +36,7 @@ export { TcProvider } from './components/Provider';
 // i18n
 export { t, setLanguage, useTranslation } from './i18n';
 export { Trans } from './i18n/Trans';
+export { useLanguage } from './i18n/language';
 
 // hooks
 export { useAsync } from './hooks/useAsync';

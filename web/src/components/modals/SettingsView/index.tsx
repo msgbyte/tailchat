@@ -5,6 +5,7 @@ import { t } from 'tailchat-shared';
 import { SettingsAbout } from './About';
 import { SettingsAccount } from './Account';
 import { SettingsStatus } from './Status';
+import { SettingsSystem } from './System';
 
 interface SettingsViewProps {
   onClose: () => void;
@@ -29,6 +30,11 @@ export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('账户信息'),
             content: <SettingsAccount />,
+          },
+          {
+            type: 'item',
+            title: t('系统设置'),
+            content: <SettingsSystem />,
           },
           {
             type: 'item',
