@@ -2,10 +2,8 @@ import { io, Socket } from 'socket.io-client';
 import _isNil from 'lodash/isNil';
 import { getServiceUrl } from '../manager/service';
 import { isDevelopment } from '../utils/environment';
-import { showErrorToasts, showGlobalLoading, showToasts } from '../manager/ui';
+import { showErrorToasts, showGlobalLoading } from '../manager/ui';
 import { t } from '../i18n';
-
-let socket: Socket;
 
 class SocketEventError extends Error {
   name = 'SocketEventError';
@@ -43,7 +41,7 @@ export class AppSocket {
   }
 
   get connected(): boolean {
-    return socket.connected;
+    return this.socket.connected;
   }
 
   async request<T = unknown>(
@@ -75,7 +73,7 @@ export class AppSocket {
   /**
    * 初始Socket状态管理提示
    */
-  closeFn: unknown = null; // 全局loading关闭函数
+  private closeFn: unknown = null; // 全局loading关闭函数
   setupSocketStatusTip() {
     const socket = this.socket;
 
@@ -129,36 +127,37 @@ export class AppSocket {
   }
 }
 
+let _socket: Socket;
 /**
  * 创建Socket连接
  * 如果已经有Socket连接则关闭上一个
  * @param token Token
  */
 export function createSocket(token: string): Promise<AppSocket> {
-  if (!_isNil(socket)) {
-    socket.close();
+  if (!_isNil(_socket)) {
+    _socket.close();
   }
 
   return new Promise((resolve, reject) => {
-    socket = io(getServiceUrl(), {
+    _socket = io(getServiceUrl(), {
       transports: ['websocket'],
       auth: {
         token,
       },
       forceNew: true,
     });
-    socket.once('connect', () => {
+    _socket.once('connect', () => {
       // 连接成功
-      const appSocket = new AppSocket(socket);
+      const appSocket = new AppSocket(_socket);
       appSocket.setupSocketStatusTip();
       resolve(appSocket);
     });
-    socket.once('error', () => {
+    _socket.once('error', () => {
       reject();
     });
 
     if (isDevelopment) {
-      socket.onAny((...args) => {
+      _socket.onAny((...args) => {
         console.log('Receive Notify:', args);
       });
     }

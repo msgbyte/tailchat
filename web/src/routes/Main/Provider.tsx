@@ -5,6 +5,7 @@ import {
   useAsync,
   userActions,
   loginWithToken,
+  t,
 } from 'tailchat-shared';
 import React from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
@@ -72,7 +73,7 @@ export const MainProvider: React.FC = React.memo((props) => {
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-700 text-white text-xl">
-        <LoadingSpinner tip="正在连接到聊天服务器..." />
+        <LoadingSpinner tip={t('正在连接到聊天服务器...')} />
       </div>
     );
   }
