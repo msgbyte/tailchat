@@ -4,6 +4,7 @@ import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
+import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { Button, Divider } from 'antd';
 import React, { useCallback } from 'react';
@@ -55,6 +56,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
   // 登出
   const handleLogout = useCallback(async () => {
     await setUserJWT(null);
+    getGlobalSocket()?.close();
     history.push('/');
   }, []);
 

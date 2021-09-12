@@ -68,6 +68,10 @@ export class AppSocket {
     this.listener.push([`notify:${eventName}`, callback as any]);
   }
 
+  close() {
+    this.socket.close();
+  }
+
   /**
    * 初始Socket状态管理提示
    */

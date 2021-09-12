@@ -15,7 +15,7 @@ import { getUserJWT } from '../../utils/jwt-helper';
 import { useHistory } from 'react-router';
 import { SidebarContextProvider } from './SidebarContext';
 import { PortalHost } from '@/components/Portal';
-import { setGlobalStore } from '@/utils/global-state-helper';
+import { setGlobalSocket, setGlobalStore } from '@/utils/global-state-helper';
 
 /**
  * 应用状态管理hooks
@@ -48,6 +48,7 @@ function useAppState() {
 
     // 创建 websocket 连接
     const socket = await createSocket(userLoginInfo.token);
+    setGlobalSocket(socket);
 
     // 初始化Redux
     setupRedux(socket, store);
