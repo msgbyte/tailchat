@@ -11,6 +11,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import fs from 'fs';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -140,6 +141,36 @@ const config: Configuration = {
       ],
     }) as any,
     new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
+
+      // Do not precache images
+      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+
+      // Define runtime caching rules.
+      runtimeCaching: [
+        {
+          // Match any request that ends with .png, .jpg, .jpeg or .svg.
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+
+          // Apply a cache-first strategy.
+          handler: 'CacheFirst',
+
+          options: {
+            // Use a custom cache name.
+            cacheName: 'images',
+
+            // Only cache 10 images.
+            expiration: {
+              maxEntries: 10,
+            },
+          },
+        },
+      ],
+    }),
   ],
 };
 

@@ -1,5 +1,7 @@
 {
   "k10c018fe": "Teamwork",
+  "k1141d649": "Version update",
+  "k131598d0": "A new version is detected, whether to refresh immediately to upgrade to the latest content",
   "k162e37f1": "Plugin is successfully uninstalled, and it needs to be restarted to take effect",
   "k1704ea49": "Install",
   "k1885734a": "Effective after refreshing the page",
@@ -10,6 +12,7 @@
   "k2426e452": "Friend Service",
   "k2488f9ee": "Friend Request",
   "k249e23b9": "E-mail format is incorrect",
+  "k24ccd723": "Refresh now",
   "k267cc491": "Me",
   "k2d6cfb27": "Chat Channel",
   "k3172297b": "This feature is not yet open",
