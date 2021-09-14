@@ -1,8 +1,12 @@
+import { closeModal, openModal } from '@/components/Modal';
+import { ImageUploadPreviewer } from '@/components/modals/ImageUploadPreviewer';
+import { fileToDataUrl } from '@/utils/file-helper';
 import { isEnterHotkey } from '@/utils/hot-key';
 import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
-import { t } from 'tailchat-shared';
+import { t, uploadFile } from 'tailchat-shared';
 import { ChatInputAddon } from './Addon';
+import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
 
 interface ChatInputBoxProps {
@@ -27,6 +31,33 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
     [handleSendMsg]
   );
 
+  const handlePaste = useCallback(
+    (e: React.ClipboardEvent<HTMLDivElement>) => {
+      const helper = new ClipboardHelper(e);
+      const image = helper.hasImage();
+      if (image) {
+        // 上传图片
+        e.preventDefault();
+        fileToDataUrl(image).then((imageLocalUrl) => {
+          const key = openModal(
+            <ImageUploadPreviewer
+              imageUrl={imageLocalUrl}
+              onConfirm={async () => {
+                const fileInfo = await uploadFile(image);
+                const imageRemoteUrl = fileInfo.url;
+
+                // TODO: not good
+                props.onSendMsg(`[img]${imageRemoteUrl}[/img]`);
+                closeModal(key);
+              }}
+            />
+          );
+        });
+      }
+    },
+    [props.onSendMsg]
+  );
+
   return (
     <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>
       <div className="px-4 py-2">
@@ -38,6 +69,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
+            onPaste={handlePaste}
           />
 
           <div className="px-2">
