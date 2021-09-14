@@ -7,6 +7,6 @@ export const ImgTag: React.FC<TagProps> = React.memo((props) => {
   const text = node.content.join('');
   const url = node.attrs.url ?? text;
 
-  return <Image preview={true} src={url} />;
+  return <Image style={{ maxHeight: 320 }} preview={true} src={url} />;
 });
 ImgTag.displayName = 'ImgTag';
