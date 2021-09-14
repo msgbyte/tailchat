@@ -142,6 +142,7 @@ const config: Configuration = {
     }) as any,
     new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
     new WorkboxPlugin.GenerateSW({
+      // https://developers.google.com/web/tools/workbox
       // these options encourage the ServiceWorkers to get in there fast
       // and not allow any straggling "old" SWs to hang around
       clientsClaim: true,
@@ -166,6 +167,17 @@ const config: Configuration = {
             // Only cache 10 images.
             expiration: {
               maxEntries: 10,
+            },
+          },
+        },
+        {
+          // 匹配内置 plugins 以加速
+          urlPattern: /plugins\/com\.msgbyte(.*?)\.js/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'builtin-plugins',
+            expiration: {
+              maxAgeSeconds: 1 * 60 * 60, // 1h
             },
           },
         },
