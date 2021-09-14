@@ -5,6 +5,9 @@ const esbuild = require('esbuild');
 
 console.log('Scanning Translation in src folder...');
 
+// 扫描语言
+const lngs = ['zh-CN', 'en-US'];
+
 module.exports = {
   input: [
     'web/**/*.{ts,tsx}',
@@ -22,7 +25,7 @@ module.exports = {
     sort: true,
     func: false,
     trans: false,
-    lngs: ['zh-CN', 'en-US'],
+    lngs,
     defaultLng: 'zh-CN',
     resource: {
       loadPath: './src/shared/i18n/langs/{{lng}}/{{ns}}.json', //输入路径
