@@ -14,7 +14,7 @@ export const Navbar: React.FC = React.memo(() => {
   const userInfo = useAppSelector((state) => state.user.info);
 
   return (
-    <div className="w-18 bg-gray-900 flex flex-col justify-start items-center pt-4 pb-4">
+    <div className="w-18 bg-navbar-light dark:bg-navbar-dark flex flex-col justify-start items-center pt-4 pb-4">
       <MobileMenuBtn />
 
       {/* Navbar */}

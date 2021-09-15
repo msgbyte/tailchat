@@ -56,10 +56,13 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
 
   const sidebarEl = _isNil(sidebar) ? null : (
     <div
-      className={clsx('bg-gray-800 flex-shrink-0 transition-width', {
-        'w-60': showSidebar,
-        'w-0': !showSidebar,
-      })}
+      className={clsx(
+        'bg-sidebar-light dark:bg-sidebar-dark flex-shrink-0 transition-width',
+        {
+          'w-60': showSidebar,
+          'w-0': !showSidebar,
+        }
+      )}
     >
       {props.sidebar}
     </div>
@@ -82,7 +85,7 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
     <>
       {sidebarEl}
 
-      <div className="flex flex-auto bg-gray-700 relative overflow-auto">
+      <div className="flex flex-auto bg-content-light dark:bg-content-dark relative overflow-auto">
         {contentMaskEl}
         {contentEl}
       </div>

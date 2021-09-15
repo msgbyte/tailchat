@@ -3,6 +3,7 @@
 // 默认配置文件: https://unpkg.com/browse/tailwindcss@2.2.7/stubs/defaultConfig.stub.js
 
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 const customTheme = {
   boxShadow: {
@@ -53,6 +54,20 @@ module.exports = {
       desktop: { min: '640px' }, // alias
     },
     extend: {
+      colors: {
+        navbar: {
+          light: colors.coolGray[300],
+          dark: colors.coolGray[900],
+        },
+        sidebar: {
+          light: colors.coolGray[200],
+          dark: colors.coolGray[800],
+        },
+        content: {
+          light: colors.coolGray[100],
+          dark: colors.coolGray[700],
+        },
+      },
       borderRadius: {
         '1/2': '50%',
       },
