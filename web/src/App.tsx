@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { TcProvider, useStorage } from 'tailchat-shared';
+import { TcProvider, useDarkMode, useStorage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
@@ -43,8 +43,8 @@ const AppProvider: React.FC = React.memo((props) => {
 });
 AppProvider.displayName = 'AppProvider';
 
-export const App: React.FC = React.memo(() => {
-  const [darkMode] = useStorage('darkMode', true);
+export const AppContainer: React.FC = React.memo((props) => {
+  const { darkMode } = useDarkMode();
 
   return (
     <div
@@ -53,15 +53,24 @@ export const App: React.FC = React.memo(() => {
         dark: darkMode,
       })}
     >
-      <AppProvider>
+      {props.children}
+    </div>
+  );
+});
+AppContainer.displayName = 'AppContainer';
+
+export const App: React.FC = React.memo(() => {
+  return (
+    <AppProvider>
+      <AppContainer>
         <Switch>
           <Route path="/entry" component={EntryRoute} />
           <Route path="/main" component={MainRoute} />
           <Route path="/invite/:inviteCode" component={InviteRoute} />
           <Redirect to="/entry" />
         </Switch>
-      </AppProvider>
-    </div>
+      </AppContainer>
+    </AppProvider>
   );
 });
 App.displayName = 'App';

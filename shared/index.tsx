@@ -33,6 +33,9 @@ export {
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 
+// contexts
+export { useDarkMode } from './contexts/DarkModeContext';
+
 // i18n
 export { t, setLanguage, useTranslation } from './i18n';
 export { Trans } from './i18n/Trans';
