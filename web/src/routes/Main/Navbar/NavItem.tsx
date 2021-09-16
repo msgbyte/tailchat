@@ -51,7 +51,7 @@ export const NavbarNavItem: React.FC<{
         >
           <span
             className={clsx(
-              'bg-white w-2 h-2 rounded transition-all duration-300',
+              'bg-gray-400 dark:bg-white w-2 h-2 rounded transition-all duration-300',
               {
                 'h-2 group-hover:h-5': !isActive,
                 'h-10': isActive,

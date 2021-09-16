@@ -1,11 +1,13 @@
+import DevContainer from '@/components/DevContainer';
 import { FullModalField } from '@/components/FullModal/Field';
-import { Select } from 'antd';
+import { Select, Switch } from 'antd';
 import React, { useCallback } from 'react';
-import { showToasts, t } from 'tailchat-shared';
+import { showToasts, t, useDarkMode } from 'tailchat-shared';
 import { useLanguage } from 'tailchat-shared';
 
 export const SettingsSystem: React.FC = React.memo(() => {
   const { language, setLanguage } = useLanguage();
+  const { darkMode, setDarkMode } = useDarkMode();
 
   const handleChangeLanguage = useCallback(
     (newLang: string) => {
@@ -31,6 +33,18 @@ export const SettingsSystem: React.FC = React.memo(() => {
           </Select>
         }
       />
+
+      <DevContainer>
+        <FullModalField
+          title={t('暗黑模式')}
+          content={
+            <Switch
+              checked={darkMode}
+              onChange={(checked) => setDarkMode(checked)}
+            />
+          }
+        />
+      </DevContainer>
     </div>
   );
 });

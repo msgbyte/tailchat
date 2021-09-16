@@ -34,7 +34,7 @@ export const FullModal: React.FC<FullModalProps> = React.memo((props) => {
   return (
     <div
       className={clsx(
-        'fixed left-0 right-0 top-0 bottom-0 z-10 bg-gray-800 flex justify-center items-center',
+        'fixed left-0 right-0 top-0 bottom-0 z-10 bg-content-light dark:bg-content-dark flex justify-center items-center',
         {
           'opacity-0': !visible,
         }
@@ -48,7 +48,10 @@ export const FullModal: React.FC<FullModalProps> = React.memo((props) => {
           className="absolute right-8 top-8 cursor-pointer flex flex-col"
           onClick={handleClose}
         >
-          <Icon className="text-2xl border-2 rounded-1/2" icon="mdi:close" />
+          <Icon
+            className="text-2xl border-2 rounded-1/2 border-gray-900 dark:border-gray-100"
+            icon="mdi:close"
+          />
           <span className="text-center mt-0.5 font-bold">ESC</span>
         </div>
       )}

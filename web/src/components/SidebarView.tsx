@@ -33,9 +33,9 @@ const SidebarViewMenuItemTitle: React.FC<{
 }> = (props) => (
   <div
     className={clsx(
-      'rounded-sm px-1.5 py-2.5 mb-1 text-gray-300 cursor-pointer  hover:bg-black hover:bg-opacity-10 hover:text-gray-200',
+      'rounded-sm px-1.5 py-2.5 mb-1 text-gray-700 dark:text-gray-300 cursor-pointer  hover:bg-black hover:bg-opacity-10 hover:text-gray-800 dark:hover:text-gray-200',
       {
-        'bg-black bg-opacity-10 text-white': props.active,
+        'bg-black bg-opacity-10 text-gray-900 dark:text-white': props.active,
         'text-red-500': props.isDanger,
       }
     )}

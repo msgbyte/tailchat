@@ -1,5 +1,5 @@
 .pill-tabs.ant-tabs.ant-tabs-card {
-  @apply text-gray-100;
+  @apply text-gray-900 dark:text-gray-100;
 
   .ant-tabs-nav {
     @apply px-2 py-3 m-0 text-base;
@@ -12,7 +12,7 @@
       border: 0;
       margin: 2px;
       padding: 2px 8px;
-      @apply text-gray-200 bg-opacity-0 bg-white;
+      @apply text-gray-800 dark:text-gray-200 bg-opacity-0 bg-black dark:bg-white;
 
       &.ant-tabs-tab-active,
       &:hover,
@@ -20,7 +20,7 @@
         @apply rounded bg-opacity-20;
 
         .ant-tabs-tab-btn {
-          @apply text-white;
+          @apply text-black dark:text-white ;
         }
       }
     }

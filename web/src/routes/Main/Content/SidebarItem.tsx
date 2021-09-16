@@ -21,7 +21,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = React.memo((props) => {
     <Link to={to}>
       <div
         className={clsx(
-          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded px-2 h-11 flex items-center text-base group mb-0.5',
+          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-gray-900 dark:text-white rounded px-2 h-11 flex items-center text-base group mb-0.5',
           {
             'bg-white bg-opacity-20': isActive,
           }
@@ -35,7 +35,10 @@ export const SidebarItem: React.FC<SidebarItemProps> = React.memo((props) => {
           )}
         </div>
 
-        <Typography.Text className="flex-1 text-white" ellipsis={true}>
+        <Typography.Text
+          className="flex-1 text-gray-900 dark:text-white"
+          ellipsis={true}
+        >
           {name}
         </Typography.Text>
 

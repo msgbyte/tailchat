@@ -25,7 +25,11 @@ export const FriendPanel: React.FC = React.memo(() => {
         </PillTabPane>
         <PillTabPane
           tab={
-            <Badge className="text-white" size="small" count={send.length}>
+            <Badge
+              className="text-black dark:text-white"
+              size="small"
+              count={send.length}
+            >
               {t('已发送')}
             </Badge>
           }
@@ -35,7 +39,11 @@ export const FriendPanel: React.FC = React.memo(() => {
         </PillTabPane>
         <PillTabPane
           tab={
-            <Badge className="text-white" size="small" count={received.length}>
+            <Badge
+              className="text-black dark:text-white"
+              size="small"
+              count={received.length}
+            >
               {t('待处理')}
             </Badge>
           }
