@@ -30,7 +30,7 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
   }, []);
 
   return (
-    <div className="flex items-center h-14 px-2.5 rounded group bg-white bg-opacity-0 hover:bg-opacity-20">
+    <div className="flex items-center h-14 px-2.5 rounded group bg-black bg-opacity-0 hover:bg-opacity-20 dark:bg-white dark:bg-opacity-0 dark:hover:bg-opacity-20">
       <Skeleton
         loading={_isEmpty(userInfo)}
         avatar={true}
@@ -40,9 +40,9 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
         <div className="mr-2" onClick={handleClick}>
           <Avatar src={userInfo.avatar} name={userName} isOnline={isOnline} />
         </div>
-        <div className="flex-1 text-white">
+        <div className="flex-1 text-gray-900 dark:text-white">
           <span>{userName}</span>
-          <span className="text-gray-300 opacity-0 group-hover:opacity-100">
+          <span className="text-gray-500 dark:text-gray-300 opacity-0 group-hover:opacity-100">
             #{userInfo.discriminator}
           </span>
         </div>
