@@ -169,3 +169,15 @@ export async function createGroupPanel(
     groupId,
   });
 }
+
+/**
+ * 删除群组面板
+ * @param groupId 群组Id
+ * @param panelId 面板Id
+ */
+export async function deleteGroupPanel(groupId: string, panelId: string) {
+  await request.post('/api/group/deleteGroupPanel', {
+    groupId,
+    panelId,
+  });
+}

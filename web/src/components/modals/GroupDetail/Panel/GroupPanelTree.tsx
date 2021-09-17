@@ -1,14 +1,22 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { GroupPanel as GroupPanelInfo, showToasts } from 'tailchat-shared';
-import { Tree } from 'antd';
+import {
+  deleteGroupPanel,
+  GroupPanel as GroupPanelInfo,
+  showAlert,
+  showToasts,
+  t,
+} from 'tailchat-shared';
+import { Button, Tree } from 'antd';
 import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
 import type { DataNode, EventDataNode } from 'antd/lib/tree';
 import type { Key } from 'rc-tree/lib/interface';
 import type { AllowDrop } from 'rc-tree/lib/Tree';
 import _cloneDeep from 'lodash/cloneDeep';
 import { buildTreeDataWithGroupPanel, rebuildGroupPanelOrder } from './utils';
+import { Icon } from '@iconify/react';
 
 interface GroupPanelTree {
+  groupId: string;
   groupPanels: GroupPanelInfo[];
   onChange: (newGroupPanels: GroupPanelInfo[]) => void;
 }
@@ -20,6 +28,49 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
   const treeData: DataNode[] = useMemo(
     () => buildTreeDataWithGroupPanel(props.groupPanels),
     [props.groupPanels]
+  );
+
+  const handleDeletePanel = useCallback(
+    (panelId: string, panelName: string, isGroup: boolean) => {
+      showAlert({
+        message: isGroup
+          ? t('确定要删除面板组 【{{name}}】 以及下级的所有面板么', {
+              name: panelName,
+            })
+          : t('确定要删除面板 【{{name}}】 么', { name: panelName }),
+        onConfirm: async () => {
+          await deleteGroupPanel(props.groupId, panelId);
+        },
+      });
+    },
+    [props.groupId]
+  );
+
+  const titleRender = useCallback(
+    (node: DataNode): React.ReactNode => {
+      return (
+        <div className="flex group">
+          <span>{node.title}</span>
+          <div className="opacity-0 group-hover:opacity-100">
+            <Button
+              type="text"
+              size="small"
+              icon={<Icon className="anticon" icon="mdi:trash-can-outline" />}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleDeletePanel(
+                  String(node.key),
+                  String(node.title),
+                  !node.isLeaf
+                );
+              }}
+            />
+          </div>
+        </div>
+      );
+    },
+    [handleDeletePanel]
   );
 
   const handleDragStart = useCallback(
@@ -148,7 +199,9 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
     <Tree
       treeData={treeData}
       defaultExpandAll={true}
+      blockNode={true}
       draggable={true}
+      titleRender={titleRender}
       onDrop={handleDrop}
       // TODO: 待简化 https://github.com/react-component/tree/pull/482
       onDragStart={handleDragStart}

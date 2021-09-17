@@ -14,6 +14,7 @@
   "k249e23b9": "E-mail format is incorrect",
   "k24ccd723": "Refresh now",
   "k267cc491": "Me",
+  "k28fd9e24": "Are you sure you want to delete the panel group {{name}} and all subordinate panels",
   "k2d6cfb27": "Chat Channel",
   "k3172297b": "This feature is not yet open",
   "k31a9d6a3": "The connect to the server is broken",
@@ -133,5 +134,6 @@
   "kf7d829eb": "Wait to process",
   "kf87f3059": "Plugin Store",
   "kfa01c850": "No private message found",
-  "kfaddd61d": "Chat Service"
+  "kfaddd61d": "Chat Service",
+  "kffafc3b3": "Are you sure you want to delete the panel {{name}}"
 }

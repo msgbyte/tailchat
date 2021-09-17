@@ -73,6 +73,7 @@ export const GroupPanel: React.FC<{
       </FullModalCommonTitle>
 
       <GroupPanelTree
+        groupId={groupId}
         groupPanels={editingGroupPanels}
         onChange={handleChange}
       />
