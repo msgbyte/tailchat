@@ -154,7 +154,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
             <Button
               type="link"
               onClick={handleBack}
-              className="text-white font-bold"
+              className="text-gray-600 dark:text-white font-bold"
             >
               {t('返回')}
             </Button>

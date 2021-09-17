@@ -42,7 +42,7 @@ export const PluginStoreItem: React.FC<{
   }, [manifest]);
 
   return (
-    <div className="rounded-md flex w-80 h-36 bg-black bg-opacity-40 py-2 px-3">
+    <div className="rounded-md flex w-80 h-36 bg-white dark:bg-black bg-opacity-40 shadow py-2 px-3">
       <div className="flex w-full">
         <div className="mr-2">
           <Avatar shape="square" src={manifest.icon} name={manifest.label} />
@@ -51,7 +51,7 @@ export const PluginStoreItem: React.FC<{
         <div className="flex flex-col flex-1">
           <div className="font-bold">{manifest.label}</div>
 
-          <div className="text-xs text-gray-300 text-opacity-50">
+          <div className="text-xs text-gray-700 dark:text-gray-300 text-opacity-50">
             {manifest.name}
           </div>
 

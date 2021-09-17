@@ -61,7 +61,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   return (
     <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>
       <div className="px-4 py-2">
-        <div className="bg-gray-600 flex rounded-md items-center">
+        <div className="bg-white dark:bg-gray-600 flex rounded-md items-center">
           <Input
             ref={inputRef}
             className="outline-none shadow-none border-0 py-2.5 px-4 flex-1"

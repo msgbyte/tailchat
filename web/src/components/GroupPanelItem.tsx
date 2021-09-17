@@ -18,7 +18,7 @@ export const GroupPanelItem: React.FC<{
     <Link className="block" to={to}>
       <div
         className={clsx(
-          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-white rounded px-1 h-8 flex items-center text-base group',
+          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-gray-900 dark:text-white rounded px-1 h-8 flex items-center text-base group',
           {
             'bg-white bg-opacity-20': isActive,
           }
@@ -26,7 +26,10 @@ export const GroupPanelItem: React.FC<{
       >
         <div className="flex items-center justify-center px-1 mr-1">{icon}</div>
 
-        <Typography.Text className="flex-1 text-white" ellipsis={true}>
+        <Typography.Text
+          className="flex-1 text-gray-900 dark:text-white"
+          ellipsis={true}
+        >
           {name}
         </Typography.Text>
 
