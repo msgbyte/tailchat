@@ -44,7 +44,11 @@ describe('GroupPanelTree', () => {
   test('simple render snapshot', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <GroupPanelTree groupPanels={testGroupPanels} onChange={onChange} />
+      <GroupPanelTree
+        groupId={'fakeGroupId'}
+        groupPanels={testGroupPanels}
+        onChange={onChange}
+      />
     );
 
     expect(wrapper.container).toMatchSnapshot();

@@ -3,7 +3,7 @@
 exports[`GroupPanelTree simple render snapshot 1`] = `
 <div>
   <div
-    class="ant-tree ant-tree-icon-hide"
+    class="ant-tree ant-tree-icon-hide ant-tree-block-node"
   >
     <div
       role="tree"
@@ -78,7 +78,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  section-1
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      section-1
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
@@ -105,7 +121,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  panel-01
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      panel-01
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
@@ -132,7 +164,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  panel-02
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      panel-02
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
@@ -175,7 +223,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  section-2
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      section-2
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
@@ -202,7 +266,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  panel-11
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      panel-11
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
@@ -229,7 +309,23 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 <span
                   class="ant-tree-title"
                 >
-                  panel-12
+                  <div
+                    class="flex group"
+                  >
+                    <span>
+                      panel-12
+                    </span>
+                    <div
+                      class="opacity-0 group-hover:opacity-100"
+                    >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
+                    </div>
+                  </div>
                 </span>
               </span>
             </div>
