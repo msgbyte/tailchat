@@ -1,13 +1,13 @@
 import DevContainer from '@/components/DevContainer';
 import { FullModalField } from '@/components/FullModal/Field';
-import { Select, Switch } from 'antd';
+import { Select } from 'antd';
 import React, { useCallback } from 'react';
-import { showToasts, t, useDarkMode } from 'tailchat-shared';
+import { showToasts, t, useColorScheme } from 'tailchat-shared';
 import { useLanguage } from 'tailchat-shared';
 
 export const SettingsSystem: React.FC = React.memo(() => {
   const { language, setLanguage } = useLanguage();
-  const { darkMode, setDarkMode } = useDarkMode();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   const handleChangeLanguage = useCallback(
     (newLang: string) => {
@@ -36,12 +36,18 @@ export const SettingsSystem: React.FC = React.memo(() => {
 
       <DevContainer>
         <FullModalField
-          title={t('暗黑模式')}
+          title={t('配色方案')}
           content={
-            <Switch
-              checked={darkMode}
-              onChange={(checked) => setDarkMode(checked)}
-            />
+            <Select
+              style={{ width: 300 }}
+              size="large"
+              value={colorScheme}
+              onChange={setColorScheme}
+            >
+              <Select.Option value="dark">{t('暗黑模式')}</Select.Option>
+              <Select.Option value="light">{t('亮色模式')}</Select.Option>
+              <Select.Option value="auto">{t('自动')}</Select.Option>
+            </Select>
           }
         />
       </DevContainer>

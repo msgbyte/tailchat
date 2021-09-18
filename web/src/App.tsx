@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { TcProvider, useDarkMode, useStorage } from 'tailchat-shared';
+import { TcProvider, useColorScheme } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
-import { PortalHost } from './components/Portal';
+import { parseColorScheme } from './utils/color-scheme-helper';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -44,14 +44,19 @@ const AppProvider: React.FC = React.memo((props) => {
 AppProvider.displayName = 'AppProvider';
 
 export const AppContainer: React.FC = React.memo((props) => {
-  const { darkMode } = useDarkMode();
+  const { colorScheme } = useColorScheme();
+  const { isDarkMode, extraSchemeName } = parseColorScheme(colorScheme);
 
   return (
     <div
       id="tailchat-app"
-      className={clsx('absolute inset-0 select-none', {
-        dark: darkMode,
-      })}
+      className={clsx(
+        'absolute inset-0 select-none',
+        {
+          dark: isDarkMode,
+        },
+        extraSchemeName
+      )}
     >
       {props.children}
     </div>
