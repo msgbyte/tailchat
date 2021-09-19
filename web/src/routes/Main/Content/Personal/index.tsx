@@ -4,11 +4,11 @@ import { PageContent } from '../PageContent';
 import { ConversePanel } from './Converse';
 import { FriendPanel } from './Friends';
 import { PluginsPanel } from './Plugins';
-import { Sidebar } from './Sidebar';
+import { PersonalSidebar } from './Sidebar';
 
 export const Personal: React.FC = React.memo(() => {
   return (
-    <PageContent sidebar={<Sidebar />}>
+    <PageContent sidebar={<PersonalSidebar />}>
       <Switch>
         <Route path="/main/personal/friends" component={FriendPanel} />
 

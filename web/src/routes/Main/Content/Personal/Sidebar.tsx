@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { SidebarItem } from '../SidebarItem';
-import { t, useDMConverseList } from 'tailchat-shared';
+import { showToasts, t, useDMConverseList } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 
 const SidebarSection: React.FC<{
@@ -23,7 +23,7 @@ SidebarSection.displayName = 'SidebarSection';
 /**
  * 个人面板侧边栏组件
  */
-export const Sidebar: React.FC = React.memo(() => {
+export const PersonalSidebar: React.FC = React.memo(() => {
   const converseList = useDMConverseList();
 
   return (
@@ -39,7 +39,14 @@ export const Sidebar: React.FC = React.memo(() => {
         to="/main/personal/plugins"
       />
 
-      <SidebarSection action={<Icon icon="mdi:plus" />}>
+      <SidebarSection
+        action={
+          <Icon
+            icon="mdi:plus"
+            onClick={() => showToasts('该功能正在开发中')}
+          />
+        }
+      >
         {t('私信')}
       </SidebarSection>
 
@@ -49,4 +56,4 @@ export const Sidebar: React.FC = React.memo(() => {
     </div>
   );
 });
-Sidebar.displayName = 'Sidebar';
+PersonalSidebar.displayName = 'PersonalSidebar';
