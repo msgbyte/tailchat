@@ -52,7 +52,7 @@ export const AvatarUploader: React.FC<{
             }
           )}
         >
-          <Icon icon="mdi:camera-outline" />
+          <Icon className="text-white opacity-80" icon="mdi:camera-outline" />
         </div>
       </div>
     </AvatarPicker>
