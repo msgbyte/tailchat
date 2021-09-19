@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { PageContent } from '../PageContent';
-import { ConversePanel } from './Converse';
+import { PersonalConverse } from './Converse';
 import { FriendPanel } from './Friends';
 import { PluginsPanel } from './Plugins';
 import { PersonalSidebar } from './Sidebar';
@@ -16,7 +16,7 @@ export const Personal: React.FC = React.memo(() => {
 
         <Route
           path="/main/personal/converse/:converseId"
-          component={ConversePanel}
+          component={PersonalConverse}
         />
 
         <Redirect to="/main/personal/friends" />

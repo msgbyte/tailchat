@@ -122,6 +122,7 @@ export { createStore } from './redux/store';
 export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // utils
+export { joinArray } from './utils/array-helper';
 export {
   shouldShowMessageTime,
   getMessageTimeDiff,

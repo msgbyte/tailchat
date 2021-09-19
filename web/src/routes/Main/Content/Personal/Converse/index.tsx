@@ -1,4 +1,4 @@
-import { ChatBox } from '@/components/ChatBox';
+import { ConversePanel } from '@/components/Panel/personal/ConversePanel';
 import React from 'react';
 import { useParams } from 'react-router';
 
@@ -6,13 +6,9 @@ interface UserConversePanelParams {
   converseId: string;
 }
 
-export const ConversePanel: React.FC = React.memo(() => {
+export const PersonalConverse: React.FC = React.memo(() => {
   const params = useParams<UserConversePanelParams>();
 
-  return (
-    <div className="w-full h-full overflow-hidden">
-      <ChatBox converseId={params.converseId} isGroup={false} />
-    </div>
-  );
+  return <ConversePanel converseId={params.converseId} />;
 });
-ConversePanel.displayName = 'ConversePanel';
+PersonalConverse.displayName = 'PersonalConverse';
