@@ -18,7 +18,7 @@ export const RequestSend: React.FC<{
 
   return (
     <div className="py-2.5 px-5">
-      <div>等待对方处理的好友请求</div>
+      <div>{t('等待对方处理的好友请求')}:</div>
       <div>
         {props.requests.map(({ _id, to }) => (
           <UserListItem

@@ -7,6 +7,7 @@ import {
   showErrorToasts,
   showToasts,
   t,
+  Trans,
   useAppSelector,
   useAsyncFn,
   UserBaseInfo,
@@ -108,7 +109,9 @@ export const AddFriend: React.FC = React.memo(() => {
     <div className="px-8 py-2">
       <div className="text-lg my-2">{t('添加好友')}</div>
       <div className="my-1">
-        您可以使用完整的 <Highlight>用户昵称#标识</Highlight> 来添加好友
+        <Trans>
+          您可以使用完整的 <Highlight>用户昵称#标识</Highlight> 来添加好友
+        </Trans>
       </div>
 
       <div className="px-4 py-2 my-3 flex border border-black border-opacity-30 rounded items-center bg-black bg-opacity-10 mobile:flex-col">
