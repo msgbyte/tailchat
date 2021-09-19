@@ -14,7 +14,6 @@
   "k249e23b9": "E-mail format is incorrect",
   "k24ccd723": "Refresh now",
   "k267cc491": "Me",
-  "k28fd9e24": "Are you sure you want to delete the panel group {{name}} and all subordinate panels",
   "k2d6cfb27": "Chat Channel",
   "k3172297b": "This feature is not yet open",
   "k31a9d6a3": "The connect to the server is broken",
@@ -88,6 +87,7 @@
   "kabb39529": "Save changes",
   "kabfe9512": "Save",
   "kad207008": "Edit",
+  "kaf403ef0": "Light Mode",
   "kb123dbb9": "Your personal unique identifier",
   "kb3390ae7": "Are you sure you want to leave the group?",
   "kb47a9aa4": "Password can not be empty",
@@ -98,8 +98,10 @@
   "kc1afdd08": "Don't worry, you can make changes anytime after this",
   "kc625cd59": "Summary",
   "kc654b275": "Email",
+  "kc6e50666": "Color Scheme",
   "kc6f6df4": "Do you want to uninstall the plugin",
   "kc7cc96c8": "From",
+  "kc9283683": "Are you sure you want to delete the panel [{{name}}]",
   "kc9cc6154": "Friends",
   "kcb8e662f": "Converse Service",
   "kceea83fc": "Join Group",
@@ -113,6 +115,7 @@
   "kdb57357d": "Connection failed",
   "kdc18deca": "Invite users",
   "kdc4b4f92": "Public",
+  "kdc8de4ff": "Auto",
   "kdd4c838c": "Jump to Group",
   "kdd6c18f8": "Service exception",
   "ke17b2c87": "Do not upload pictures that violate local laws and regulations",
@@ -135,5 +138,5 @@
   "kf87f3059": "Plugin Store",
   "kfa01c850": "No private message found",
   "kfaddd61d": "Chat Service",
-  "kffafc3b3": "Are you sure you want to delete the panel {{name}}"
+  "kfbecf2a7": "Are you sure you want to delete the panel group [{{name}}] and all subordinate panels"
 }
