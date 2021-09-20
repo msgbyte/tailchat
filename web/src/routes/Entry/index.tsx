@@ -6,8 +6,11 @@ import clsx from 'clsx';
 import styles from './index.module.less';
 import loginPatternUrl from '@assets/images/login-pattern.svg';
 import { RegisterView } from './RegisterView';
+import { useRecordMeasure } from '@/utils/measure-helper';
 
 export const EntryRoute = React.memo(() => {
+  useRecordMeasure('AppEntryRenderStart');
+
   return (
     <div className="h-full flex flex-row">
       <div

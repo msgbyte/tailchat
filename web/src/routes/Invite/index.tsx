@@ -5,12 +5,14 @@ import { InviteInfo } from './InviteInfo';
 import bgImage from '@assets/images/bg.jpg';
 import { JoinBtn } from './JoinBtn';
 import { PortalHost } from '@/components/Portal';
+import { useRecordMeasure } from '@/utils/measure-helper';
 
 /**
  * 邀请界面路由
  */
 export const InviteRoute: React.FC = React.memo(() => {
   const { inviteCode } = useParams<{ inviteCode: string }>();
+  useRecordMeasure('AppInviteRenderStart');
 
   return (
     <PortalHost>

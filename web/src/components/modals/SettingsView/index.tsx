@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
 import { SettingsAbout } from './About';
 import { SettingsAccount } from './Account';
+import { SettingsPerformance } from './Performance';
 import { SettingsStatus } from './Status';
 import { SettingsSystem } from './System';
 
@@ -40,6 +41,11 @@ export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('服务状态'),
             content: <SettingsStatus />,
+          },
+          {
+            type: 'item',
+            title: t('性能统计'),
+            content: <SettingsPerformance />,
           },
           {
             type: 'item',

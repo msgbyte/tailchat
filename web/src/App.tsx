@@ -6,6 +6,7 @@ import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
 import { parseColorScheme } from './utils/color-scheme-helper';
 import { Helmet } from 'react-helmet';
+import { useRecordMeasure } from './utils/measure-helper';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -44,7 +45,7 @@ const AppProvider: React.FC = React.memo((props) => {
 });
 AppProvider.displayName = 'AppProvider';
 
-export const AppContainer: React.FC = React.memo((props) => {
+const AppContainer: React.FC = React.memo((props) => {
   const { colorScheme } = useColorScheme();
   const { isDarkMode, extraSchemeName } = parseColorScheme(colorScheme);
 
@@ -77,6 +78,8 @@ const AppHeader: React.FC = React.memo(() => {
 AppHeader.displayName = 'AppHeader';
 
 export const App: React.FC = React.memo(() => {
+  useRecordMeasure('AppRenderStart');
+
   return (
     <AppProvider>
       <AppHeader />
