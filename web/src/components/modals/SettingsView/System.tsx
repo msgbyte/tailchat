@@ -34,23 +34,21 @@ export const SettingsSystem: React.FC = React.memo(() => {
         }
       />
 
-      <DevContainer>
-        <FullModalField
-          title={t('配色方案')}
-          content={
-            <Select
-              style={{ width: 300 }}
-              size="large"
-              value={colorScheme}
-              onChange={setColorScheme}
-            >
-              <Select.Option value="dark">{t('暗黑模式')}</Select.Option>
-              <Select.Option value="light">{t('亮色模式')}</Select.Option>
-              <Select.Option value="auto">{t('自动')}</Select.Option>
-            </Select>
-          }
-        />
-      </DevContainer>
+      <FullModalField
+        title={t('配色方案')}
+        content={
+          <Select
+            style={{ width: 300 }}
+            size="large"
+            value={colorScheme}
+            onChange={setColorScheme}
+          >
+            <Select.Option value="dark">{t('暗黑模式')}</Select.Option>
+            <Select.Option value="light">{t('亮色模式')}</Select.Option>
+            <Select.Option value="auto">{t('自动')}</Select.Option>
+          </Select>
+        }
+      />
     </div>
   );
 });
