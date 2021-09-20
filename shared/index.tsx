@@ -34,6 +34,10 @@ export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 
 // contexts
+export {
+  ChatBoxContextProvider,
+  useChatBoxContext,
+} from './contexts/ChatBoxContext';
 export { useColorScheme } from './contexts/ColorSchemeContext';
 
 // i18n

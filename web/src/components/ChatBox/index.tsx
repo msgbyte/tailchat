@@ -1,28 +1,11 @@
-import { Skeleton } from 'antd';
 import React, { useRef } from 'react';
-import { useConverseMessage } from 'tailchat-shared';
+import { ChatBoxContextProvider, useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
+import { ChatBoxPlaceholder } from './ChatBoxPlaceholder';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList, ChatMessageListRef } from './ChatMessageList';
+import { ChatReply } from './ChatReply';
 import { useMessageAck } from './useMessageAck';
-
-const ChatBoxPlaceholder: React.FC = React.memo(() => {
-  return (
-    <div className="px-2 w-2/3">
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-      <Skeleton className="mb-2" avatar={true} paragraph={{ rows: 1 }} />
-    </div>
-  );
-});
-ChatBoxPlaceholder.displayName = 'ChatBoxPlaceholder';
 
 type ChatBoxProps =
   | {
@@ -53,26 +36,30 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col select-text">
-      <ChatMessageList
-        ref={chatMessageListRef}
-        messages={messages}
-        onUpdateReadedMessage={updateConverseAck}
-      />
+    <ChatBoxContextProvider>
+      <div className="w-full h-full flex flex-col select-text">
+        <ChatMessageList
+          ref={chatMessageListRef}
+          messages={messages}
+          onUpdateReadedMessage={updateConverseAck}
+        />
 
-      <ChatInputBox
-        onSendMsg={(msg) => {
-          // 发送消息后滚动到底部
-          handleSendMessage({
-            converseId: props.converseId,
-            groupId: props.groupId,
-            content: msg,
-          }).then(() => {
-            chatMessageListRef.current?.scrollToBottom();
-          });
-        }}
-      />
-    </div>
+        <ChatReply />
+
+        <ChatInputBox
+          onSendMsg={(msg) => {
+            // 发送消息后滚动到底部
+            handleSendMessage({
+              converseId: props.converseId,
+              groupId: props.groupId,
+              content: msg,
+            }).then(() => {
+              chatMessageListRef.current?.scrollToBottom();
+            });
+          }}
+        />
+      </div>
+    </ChatBoxContextProvider>
   );
 });
 ChatBox.displayName = 'ChatBox';

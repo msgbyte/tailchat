@@ -2,12 +2,32 @@ import React from 'react';
 import {
   ChatMessage,
   formatShortTime,
+  t,
   useCachedUserInfo,
+  useChatBoxContext,
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
-import clsx from 'clsx';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
+import { Icon } from '@iconify/react';
+import { Dropdown, Menu } from 'antd';
+
+/**
+ * 消息的会话信息
+ */
+function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
+  const context = useChatBoxContext();
+
+  return (
+    <Menu>
+      {context.hasContext && (
+        <Menu.Item key="reply" onClick={() => context.setReplyMsg(payload)}>
+          {t('回复')}
+        </Menu.Item>
+      )}
+    </Menu>
+  );
+}
 
 interface ChatMessageItemProps {
   showAvatar: boolean;
@@ -18,10 +38,11 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
     const { showAvatar, payload } = props;
     const userInfo = useCachedUserInfo(payload.author ?? '');
 
+    const actions = useChatMessageItemAction(payload);
+
     return (
-      <div
-        className={clsx('flex px-2 group hover:bg-black hover:bg-opacity-10')}
-      >
+      <div className="flex px-2 group hover:bg-black hover:bg-opacity-10 relative">
+        {/* 头像 */}
         <div className="w-18 flex items-start justify-center pt-0.5">
           {showAvatar ? (
             <Avatar size={40} src={userInfo.avatar} name={userInfo.nickname} />
@@ -31,6 +52,8 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             </div>
           )}
         </div>
+
+        {/* 主体 */}
         <div className="flex flex-col flex-1 overflow-auto group">
           {showAvatar && (
             <div className="flex items-center">
@@ -48,6 +71,13 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
             {useRenderPluginMessageInterpreter(payload.content)}
           </div>
         </div>
+
+        {/* 操作 */}
+        <Dropdown overlay={actions} placement="bottomLeft" trigger={['click']}>
+          <div className="opacity-0 group-hover:opacity-100 bg-black bg-opacity-5 hover:bg-opacity-10 rounded px-0.5 absolute right-2 top-0.5 cursor-pointer">
+            <Icon icon="mdi:dots-horizontal" />
+          </div>
+        </Dropdown>
       </div>
     );
   }
