@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import _noop from 'lodash/noop';
-import type { ReplyMsgType } from '../utils/msg-helper';
+import type { ReplyMsgType } from '../utils/message-helper';
 
 /**
  * 一个消息盒的上下文

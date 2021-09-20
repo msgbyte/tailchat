@@ -10,6 +10,49 @@ import {
 import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
 import _isNil from 'lodash/isNil';
+import { useChatBoxContext } from '../..';
+import { MessageHelper } from '../../utils/message-helper';
+
+function useHandleSendMessage(context: ConverseContext) {
+  const { converseId } = context;
+  const dispatch = useAppDispatch();
+  const { hasContext, replyMsg, clearReplyMsg } = useChatBoxContext();
+
+  /**
+   * 发送消息
+   */
+  const handleSendMessage = useCallback(
+    async (payload: SendMessagePayload) => {
+      try {
+        if (hasContext === true) {
+          // 如果有上下文, 则组装payload
+          const msgHelper = new MessageHelper(payload);
+          if (!_isNil(replyMsg)) {
+            msgHelper.setReplyMsg(replyMsg);
+            clearReplyMsg();
+          }
+
+          payload = msgHelper.generatePayload();
+        }
+
+        // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
+
+        const message = await sendMessage(payload);
+        dispatch(
+          chatActions.appendConverseMessage({
+            converseId,
+            messages: [message],
+          })
+        );
+      } catch (err) {
+        showErrorToasts(err);
+      }
+    },
+    [converseId, hasContext, replyMsg, clearReplyMsg]
+  );
+
+  return handleSendMessage;
+}
 
 /**
  * 会话消息管理
@@ -81,21 +124,7 @@ export function useConverseMessage(context: ConverseContext) {
     }
   }, [converseId]);
 
-  const handleSendMessage = useCallback(async (payload: SendMessagePayload) => {
-    // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
-
-    try {
-      const message = await sendMessage(payload);
-      dispatch(
-        chatActions.appendConverseMessage({
-          converseId,
-          messages: [message],
-        })
-      );
-    } catch (err) {
-      showErrorToasts(err);
-    }
-  }, []);
+  const handleSendMessage = useHandleSendMessage(context);
 
   return { messages, loading, error, handleSendMessage };
 }

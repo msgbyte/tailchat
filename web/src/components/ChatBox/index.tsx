@@ -18,7 +18,7 @@ type ChatBoxProps =
       isGroup: true;
       groupId: string;
     };
-export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
+const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
   const { converseId, isGroup } = props;
   const { messages, loading, error, handleSendMessage } = useConverseMessage({
     converseId,
@@ -36,29 +36,36 @@ export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
   }
 
   return (
+    <div className="w-full h-full flex flex-col select-text">
+      <ChatMessageList
+        ref={chatMessageListRef}
+        messages={messages}
+        onUpdateReadedMessage={updateConverseAck}
+      />
+
+      <ChatReply />
+
+      <ChatInputBox
+        onSendMsg={(msg) => {
+          // 发送消息后滚动到底部
+          handleSendMessage({
+            converseId: props.converseId,
+            groupId: props.groupId,
+            content: msg,
+          }).then(() => {
+            chatMessageListRef.current?.scrollToBottom();
+          });
+        }}
+      />
+    </div>
+  );
+});
+ChatBoxInner.displayName = 'ChatBoxInner';
+
+export const ChatBox: React.FC<ChatBoxProps> = React.memo((props) => {
+  return (
     <ChatBoxContextProvider>
-      <div className="w-full h-full flex flex-col select-text">
-        <ChatMessageList
-          ref={chatMessageListRef}
-          messages={messages}
-          onUpdateReadedMessage={updateConverseAck}
-        />
-
-        <ChatReply />
-
-        <ChatInputBox
-          onSendMsg={(msg) => {
-            // 发送消息后滚动到底部
-            handleSendMessage({
-              converseId: props.converseId,
-              groupId: props.groupId,
-              content: msg,
-            }).then(() => {
-              chatMessageListRef.current?.scrollToBottom();
-            });
-          }}
-        />
-      </div>
+      <ChatBoxInner {...props} />
     </ChatBoxContextProvider>
   );
 });

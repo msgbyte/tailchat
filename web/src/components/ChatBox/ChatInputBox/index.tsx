@@ -46,7 +46,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
                 const fileInfo = await uploadFile(image);
                 const imageRemoteUrl = fileInfo.url;
 
-                // TODO: not good
+                // TODO: not good, should bind with plugin bbcode
                 props.onSendMsg(`[img]${imageRemoteUrl}[/img]`);
                 closeModal(key);
               }}

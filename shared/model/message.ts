@@ -13,15 +13,21 @@ export interface ChatMessage {
 
   reactions?: any[];
 
+  meta?: Record<string, unknown>;
+
   createdAt?: string;
 
   updatedAt?: string;
 }
 
-export interface SendMessagePayload {
+export interface SimpleMessagePayload {
   groupId?: string;
   converseId: string;
   content: string;
+}
+
+export interface SendMessagePayload extends SimpleMessagePayload {
+  meta?: Record<string, unknown>;
 }
 
 /**
