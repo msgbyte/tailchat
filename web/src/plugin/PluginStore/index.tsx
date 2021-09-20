@@ -76,12 +76,13 @@ export const PluginStore: React.FC = React.memo(() => {
 
           <div className="flex flex-wrap">
             {[...builtinPlugins, ...installedPluginList].map((plugin) => (
-              <PluginStoreItem
-                key={plugin.name}
-                manifest={plugin}
-                installed={true}
-                builtin={true}
-              />
+              <div key={plugin.name} className="m-1">
+                <PluginStoreItem
+                  manifest={plugin}
+                  installed={true}
+                  builtin={true}
+                />
+              </div>
             ))}
           </div>
         </PillTabPane>
