@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { TcProvider, useColorScheme } from 'tailchat-shared';
+import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
 import { parseColorScheme } from './utils/color-scheme-helper';
+import { Helmet } from 'react-helmet';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -64,9 +65,21 @@ export const AppContainer: React.FC = React.memo((props) => {
 });
 AppContainer.displayName = 'AppContainer';
 
+const AppHeader: React.FC = React.memo(() => {
+  const { language } = useLanguage();
+
+  return (
+    <Helmet>
+      <meta httpEquiv="Content-Language" content={language} />
+    </Helmet>
+  );
+});
+AppHeader.displayName = 'AppHeader';
+
 export const App: React.FC = React.memo(() => {
   return (
     <AppProvider>
+      <AppHeader />
       <AppContainer>
         <Switch>
           <Route path="/entry" component={EntryRoute} />
