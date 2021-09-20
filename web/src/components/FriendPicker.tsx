@@ -71,7 +71,9 @@ export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
       )}
 
       <div>
-        {t('已选择')}: {selectedIds.length}
+        {t('已选择 {{num}} 项', {
+          num: selectedIds.length,
+        })}
       </div>
 
       {_take(
@@ -88,7 +90,9 @@ export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
               <div className="flex items-center">
                 <Avatar size="small" name={info.nickname} src={info.avatar} />
 
-                <div className="ml-1 text-white">{info.nickname}</div>
+                <div className="ml-1 text-typography-light dark:text-typography-dark">
+                  {info.nickname}
+                </div>
               </div>
             </Checkbox>
           </div>

@@ -67,6 +67,10 @@ module.exports = {
           light: colors.coolGray[100],
           dark: colors.coolGray[700],
         },
+        typography: {
+          light: colors.coolGray[700],
+          dark: 'rgba(255, 255, 255, 0.85)',
+        },
       },
       borderRadius: {
         '1/2': '50%',

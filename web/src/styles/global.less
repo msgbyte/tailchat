@@ -1,5 +1,5 @@
 #tailchat-app {
-  @apply text-gray-700;
+  @apply text-typography-light;
 
   /* 滚动条 */
   ::-webkit-scrollbar {
@@ -35,7 +35,7 @@
 
   // 深色模式覆盖
   &.dark {
-    color: rgba(255, 255, 255, 0.85);
+    @apply text-typography-dark;
 
     ::-webkit-scrollbar-corner {
       background-color: transparent;
