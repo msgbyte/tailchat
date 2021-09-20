@@ -1,10 +1,5 @@
-import {
-  ChatConverseState,
-  useCachedUserInfo,
-  useUserId,
-} from 'tailchat-shared';
-import { isValidStr } from 'tailchat-shared/utils/string-helper';
-import React, { useMemo } from 'react';
+import { ChatConverseState, useDMConverseName } from 'tailchat-shared';
+import React from 'react';
 import { SidebarItem } from '../SidebarItem';
 
 interface SidebarDMItemProps {
@@ -13,23 +8,7 @@ interface SidebarDMItemProps {
 export const SidebarDMItem: React.FC<SidebarDMItemProps> = React.memo(
   (props) => {
     const converse = props.converse;
-    const userId = useUserId();
-    const otherMemberId = converse.members.find((m) => m !== userId);
-    const memberInfo = useCachedUserInfo(otherMemberId ?? null);
-    const memberSize = converse.members.length;
-
-    const name = useMemo(() => {
-      if (isValidStr(converse.name)) {
-        return converse.name;
-      }
-
-      let name = memberInfo.nickname;
-      if (memberSize >= 3) {
-        name += ' 等人的会话';
-      }
-
-      return name;
-    }, [converse.name, memberInfo.nickname, memberSize]);
+    const name = useDMConverseName(converse);
 
     return (
       <SidebarItem

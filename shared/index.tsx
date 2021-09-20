@@ -111,6 +111,7 @@ export {
 export { useAppSelector, useAppDispatch } from './redux/hooks/useAppSelector';
 export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';
+export { useDMConverseName } from './redux/hooks/useDMConverseName';
 export {
   useGroupInfo,
   useGroupPanel,

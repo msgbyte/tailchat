@@ -1,55 +1,43 @@
 import { ChatBox } from '@/components/ChatBox';
 import React from 'react';
-import { joinArray, Trans, useAppSelector, useUserId } from 'tailchat-shared';
+import {
+  ChatConverseState,
+  t,
+  useAppSelector,
+  useDMConverseName,
+} from 'tailchat-shared';
 import { PanelCommonHeader } from '../common/Header';
-import _without from 'lodash/without';
-import _take from 'lodash/take';
-import { UserName } from '@/components/UserName';
+import _isNil from 'lodash/isNil';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
-function useConverseTitle(converseId: string): React.ReactNode {
-  const members = useAppSelector(
-    (state) => state.chat.converses[converseId]?.members ?? []
-  );
-  const userId = useUserId();
-  const otherMembers = _without<string>(members, userId ?? '');
-  const len = otherMembers.length;
+const ConversePanelHeader: React.FC<{ converse: ChatConverseState }> =
+  React.memo(({ converse }) => {
+    const name = useDMConverseName(converse);
 
-  if (len === 1) {
     return (
-      <Trans>
-        与 <UserName userId={otherMembers[0]} /> 的会话
-      </Trans>
+      <PanelCommonHeader actions={[]}>
+        {t('与 {{name}} 的会话', { name })}
+      </PanelCommonHeader>
     );
-  } else if (len === 2) {
-    return (
-      <Trans>
-        与 <UserName userId={otherMembers[0]} /> 和{' '}
-        <UserName userId={otherMembers[1]} /> 的多人会话
-      </Trans>
-    );
-  } else {
-    const membersEl = joinArray(
-      _take(otherMembers, 2).map((uid) => <UserName key={uid} userId={uid} />),
-      <span>，</span>
-    );
-    return (
-      <Trans>
-        与 <span>{{ membersEl }}</span> 等人的多人会话
-      </Trans>
-    );
-  }
-}
+  });
+ConversePanelHeader.displayName = 'ConversePanelHeader';
 
 interface ConversePanelProps {
   converseId: string;
 }
 export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
   ({ converseId }) => {
-    const title = useConverseTitle(converseId);
+    const converse = useAppSelector(
+      (state) => state.chat.converses[converseId]
+    );
+
+    if (_isNil(converse)) {
+      return <LoadingSpinner />;
+    }
 
     return (
       <div className="flex flex-col overflow-hidden flex-1">
-        <PanelCommonHeader actions={[]}>{title}</PanelCommonHeader>
+        <ConversePanelHeader converse={converse} />
         <div className="flex-1 overflow-hidden">
           <ChatBox converseId={converseId} isGroup={false} />
         </div>
