@@ -1,8 +1,11 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { SidebarItem } from '../SidebarItem';
-import { showToasts, t, useDMConverseList } from 'tailchat-shared';
+import { t, useDMConverseList } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
+import { openModal } from '@/components/Modal';
+import { CreateDMCOnverse } from '@/components/modals/CreateDMConverse';
+import DevContainer from '@/components/DevContainer';
 
 const SidebarSection: React.FC<{
   action: React.ReactNode;
@@ -41,10 +44,12 @@ export const PersonalSidebar: React.FC = React.memo(() => {
 
       <SidebarSection
         action={
-          <Icon
-            icon="mdi:plus"
-            onClick={() => showToasts('该功能正在开发中')}
-          />
+          <DevContainer>
+            <Icon
+              icon="mdi:plus"
+              onClick={() => openModal(<CreateDMCOnverse />)}
+            />
+          </DevContainer>
         }
       >
         {t('私信')}
