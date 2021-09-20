@@ -141,6 +141,7 @@ export {
   version,
 } from './utils/environment';
 export { getTextColorHex, isValidStr } from './utils/string-helper';
+export { MessageHelper } from './utils/message-helper';
 export { uploadFile } from './utils/upload-helper';
 export type { UploadFileResult } from './utils/upload-helper';
 export { sleep } from './utils/utils';

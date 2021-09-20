@@ -5,6 +5,7 @@ import type {
 } from '../model/message';
 import _isNil from 'lodash/isNil';
 import _set from 'lodash/set';
+import _get from 'lodash/get';
 import _pick from 'lodash/pick';
 
 const replyMsgFields = ['_id', 'content', 'author'] as const;
@@ -15,6 +16,18 @@ export class MessageHelper {
 
   constructor(origin: SimpleMessagePayload) {
     this.payload = { ...origin };
+  }
+
+  /**
+   * 判断消息体内是否有回复信息
+   */
+  hasReply(): ReplyMsgType | false {
+    const reply = _get(this.payload, ['meta', 'reply']);
+    if (_isNil(reply)) {
+      return false;
+    }
+
+    return reply;
   }
 
   setReplyMsg(replyMsg: ReplyMsgType) {

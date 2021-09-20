@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   ChatMessage,
   formatShortTime,
@@ -11,6 +11,9 @@ import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInter
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Dropdown, Menu } from 'antd';
+import { MessageHelper } from 'tailchat-shared';
+import { UserName } from '@/components/UserName';
+import './item.less';
 
 /**
  * 消息的会话信息
@@ -29,6 +32,27 @@ function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
   );
 }
 
+const MessageQuote: React.FC<{ payload: ChatMessage }> = React.memo(
+  ({ payload }) => {
+    const quote = useMemo(
+      () => new MessageHelper(payload).hasReply(),
+      [payload]
+    );
+
+    if (quote === false) {
+      return null;
+    }
+
+    return (
+      <div className="chat-message-item_quote border-l-4 pl-2 opacity-80">
+        {t('回复')} <UserName userId={String(quote.author)} />:{' '}
+        <span>{getMessageRender(quote.content)}</span>
+      </div>
+    );
+  }
+);
+MessageQuote.displayName = 'MessageQuote';
+
 interface ChatMessageItemProps {
   showAvatar: boolean;
   payload: ChatMessage;
@@ -41,7 +65,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
     const actions = useChatMessageItemAction(payload);
 
     return (
-      <div className="flex px-2 group hover:bg-black hover:bg-opacity-10 relative">
+      <div className="chat-message-item flex px-2 group hover:bg-black hover:bg-opacity-10 relative">
         {/* 头像 */}
         <div className="w-18 flex items-start justify-center pt-0.5">
           {showAvatar ? (
@@ -65,6 +89,8 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
           )}
 
           <div className="leading-6 break-words">
+            <MessageQuote payload={payload} />
+
             <span>{getMessageRender(payload.content)}</span>
 
             {/* 解释器按钮 */}
