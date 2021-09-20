@@ -44,7 +44,7 @@ const MessageQuote: React.FC<{ payload: ChatMessage }> = React.memo(
     }
 
     return (
-      <div className="chat-message-item_quote border-l-4 pl-2 opacity-80">
+      <div className="chat-message-item_quote border-l-4 border-black border-opacity-20 pl-2 opacity-80">
         {t('回复')} <UserName userId={String(quote.author)} />:{' '}
         <span>{getMessageRender(quote.content)}</span>
       </div>
