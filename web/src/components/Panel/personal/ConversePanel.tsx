@@ -7,8 +7,6 @@ import {
   useDMConverseName,
 } from 'tailchat-shared';
 import { PanelCommonHeader } from '../common/Header';
-import _isNil from 'lodash/isNil';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 const ConversePanelHeader: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
