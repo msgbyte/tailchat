@@ -14,7 +14,7 @@ interface RightPanelType {
  */
 interface CommonPanelWrapperProps {
   header: React.ReactNode;
-  actions: (
+  actions?: (
     setRightPanel: (info: RightPanelType) => void
   ) => React.ReactElement[];
 }
@@ -26,7 +26,9 @@ export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
       <div className="w-full h-full flex">
         {/* 主面板 */}
         <div className="flex flex-col overflow-hidden flex-1">
-          <PanelCommonHeader actions={props.actions(setRightPanel)}>
+          <PanelCommonHeader
+            actions={props.actions && props.actions(setRightPanel)}
+          >
             {props.header}
           </PanelCommonHeader>
           <div className="flex-1 overflow-hidden">{props.children}</div>
