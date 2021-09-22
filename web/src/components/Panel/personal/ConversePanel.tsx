@@ -31,13 +31,10 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
       (state) => state.chat.converses[converseId]
     );
 
-    if (_isNil(converse)) {
-      return <LoadingSpinner />;
-    }
-
     return (
       <div className="flex flex-col overflow-hidden flex-1">
-        <ConversePanelHeader converse={converse} />
+        {converse && <ConversePanelHeader converse={converse} />}
+
         <div className="flex-1 overflow-hidden">
           <ChatBox converseId={converseId} isGroup={false} />
         </div>
