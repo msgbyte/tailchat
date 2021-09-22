@@ -12,10 +12,10 @@ export interface ChatConverseInfo {
  * 如果已创建则返回之前的
  */
 export async function createDMConverse(
-  targetId: string
+  memberIds: string[]
 ): Promise<ChatConverseInfo> {
   const { data } = await request.post('/api/chat/converse/createDMConverse', {
-    targetId,
+    memberIds,
   });
 
   return data;

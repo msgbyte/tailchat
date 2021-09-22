@@ -26,7 +26,7 @@ export const FriendList: React.FC = React.memo(() => {
 
   const [, handleCreateConverse] = useAsyncRequest(
     async (targetId: string) => {
-      const converse = await createDMConverse(targetId);
+      const converse = await createDMConverse([targetId]);
       history.push(`/main/personal/converse/${converse._id}`);
     },
     [history]

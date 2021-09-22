@@ -4,7 +4,7 @@ import { SidebarItem } from '../SidebarItem';
 import { t, useDMConverseList } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 import { openModal } from '@/components/Modal';
-import { CreateDMCOnverse } from '@/components/modals/CreateDMConverse';
+import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import DevContainer from '@/components/DevContainer';
 
 const SidebarSection: React.FC<{
@@ -47,7 +47,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
           <DevContainer>
             <Icon
               icon="mdi:plus"
-              onClick={() => openModal(<CreateDMCOnverse />)}
+              onClick={() => openModal(<CreateDMConverse />)}
             />
           </DevContainer>
         }

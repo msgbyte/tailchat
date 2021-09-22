@@ -1,8 +1,9 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import { t } from 'tailchat-shared';
+import { useHistory } from 'react-router';
+import { createDMConverse, t, useAsyncFn } from 'tailchat-shared';
 import { FriendPicker } from '../FriendPicker';
-import { ModalWrapper } from '../Modal';
+import { closeModal, ModalWrapper } from '../Modal';
 
 interface CreateDMCOnverseProps {
   /**
@@ -11,10 +12,17 @@ interface CreateDMCOnverseProps {
    */
   withoutUserIds?: string[];
 }
-export const CreateDMCOnverse: React.FC<CreateDMCOnverseProps> = React.memo(
+export const CreateDMConverse: React.FC<CreateDMCOnverseProps> = React.memo(
   (props) => {
     const { withoutUserIds = [] } = props;
     const [selectedFriendIds, setSelectedFriendIds] = useState<string[]>([]);
+    const history = useHistory();
+
+    const [{ loading }, handleCreate] = useAsyncFn(async () => {
+      const converse = await createDMConverse([...selectedFriendIds]);
+      closeModal();
+      history.push(`/main/personal/converse/${converse._id}`);
+    }, [selectedFriendIds]);
 
     return (
       <ModalWrapper title={t('创建多人会话')}>
@@ -25,10 +33,12 @@ export const CreateDMCOnverse: React.FC<CreateDMCOnverseProps> = React.memo(
         />
 
         <div className="text-right">
-          <Button type="primary">{t('创建')}</Button>
+          <Button type="primary" loading={loading} onClick={handleCreate}>
+            {t('创建')}
+          </Button>
         </div>
       </ModalWrapper>
     );
   }
 );
-CreateDMCOnverse.displayName = 'CreateDMCOnverse';
+CreateDMConverse.displayName = 'CreateDMConverse';
