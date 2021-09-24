@@ -1,9 +1,14 @@
 import { request } from '../api/request';
 
+export enum ChatConverseType {
+  DM = 'DM',
+  Group = 'Group',
+}
+
 export interface ChatConverseInfo {
   _id: string;
   name: string;
-  type: 'DM' | 'Group';
+  type: ChatConverseType;
   members: string[];
 }
 

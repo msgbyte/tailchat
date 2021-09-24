@@ -8,7 +8,12 @@ import { ChatMessage, fetchConverseLastMessages } from '../model/message';
 import { socketEventListeners } from '../manager/socket';
 import { showToasts } from '../manager/ui';
 import { t } from '../i18n';
-import { ChatConverseInfo, fetchUserAck } from '../model/converse';
+import {
+  ChatConverseInfo,
+  ChatConverseType,
+  fetchUserAck,
+} from '../model/converse';
+import { appendUserDMConverse } from '../model/user';
 
 /**
  * 初始化 Redux 上下文
@@ -117,12 +122,37 @@ function listenNotify(socket: AppSocket, store: AppStore) {
   );
 
   socket.listen<ChatMessage>('chat.message.add', (message) => {
-    store.dispatch(
-      chatActions.appendConverseMessage({
-        converseId: message.converseId,
-        messages: [message],
-      })
-    );
+    // 处理接受到的消息
+    const converseId = message.converseId;
+    const converse = store.getState().chat.converses[converseId];
+
+    // 添加消息到会话中
+    const appendMessage = () => {
+      store.dispatch(
+        chatActions.appendConverseMessage({
+          converseId: message.converseId,
+          messages: [message],
+        })
+      );
+    };
+
+    if (converse) {
+      appendMessage();
+    } else if (!message.groupId) {
+      // 获取会话信息后添加到会话消息中
+      getCachedConverseInfo(converseId).then((converse) => {
+        if (converse.type === ChatConverseType.DM) {
+          // 如果是私人会话, 则添加到dmlist
+          appendUserDMConverse(converse._id);
+        }
+
+        store.dispatch(chatActions.setConverseInfo(converse));
+
+        appendMessage();
+      });
+    } else {
+      console.warn('无法处理的新增会话内容', message);
+    }
   });
 
   socket.listen<ChatConverseInfo>(
