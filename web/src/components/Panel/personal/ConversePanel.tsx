@@ -1,8 +1,7 @@
 import { ChatBox } from '@/components/ChatBox';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { UserListItem } from '@/components/UserListItem';
 import { Icon } from '@iconify/react';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import React from 'react';
 import {
   ChatConverseState,
@@ -12,14 +11,16 @@ import {
 } from 'tailchat-shared';
 import { CommonPanelWrapper } from '../common/Wrapper';
 import _compact from 'lodash/compact';
+import { openModal } from '@/components/Modal';
+import { AppendDMConverseMembers } from '@/components/modals/AppendDMConverseMembers';
 
-const ConversePanelHeader: React.FC<{ converse: ChatConverseState }> =
+const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
     const name = useDMConverseName(converse);
 
     return t('与 {{name}} 的会话', { name });
   });
-ConversePanelHeader.displayName = 'ConversePanelHeader';
+ConversePanelTitle.displayName = 'ConversePanelTitle';
 
 const ConversePanelMembers: React.FC<{ members: string[] }> = React.memo(
   ({ members }) => {
@@ -45,30 +46,51 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
 
     return (
       <CommonPanelWrapper
-        header={converse && <ConversePanelHeader converse={converse} />}
+        header={converse && <ConversePanelTitle converse={converse} />}
         actions={(setRightPanel) => {
           if (!converse) {
             return [];
           }
 
           return _compact([
-            // 当成员数大于2时，显示成员列表按钮
-            converse.members.length > 2 && (
+            <Tooltip key="add" title={t('邀请成员')}>
               <Button
-                key="members"
                 icon={
                   <Icon
                     className="anticon text-2xl"
-                    icon="mdi:account-supervisor-outline"
+                    icon="mdi:account-multiple-plus-outline"
                   />
                 }
                 onClick={() =>
-                  setRightPanel({
-                    name: t('成员'),
-                    panel: <ConversePanelMembers members={converse.members} />,
-                  })
+                  openModal(
+                    <AppendDMConverseMembers
+                      converseId={converse._id}
+                      withoutUserIds={converse.members}
+                    />
+                  )
                 }
               />
+            </Tooltip>,
+            // 当成员数大于2时，显示成员列表按钮
+            converse.members.length > 2 && (
+              <Tooltip key="members" title={t('成员列表')}>
+                <Button
+                  icon={
+                    <Icon
+                      className="anticon text-2xl"
+                      icon="mdi:account-supervisor-outline"
+                    />
+                  }
+                  onClick={() =>
+                    setRightPanel({
+                      name: t('成员'),
+                      panel: (
+                        <ConversePanelMembers members={converse.members} />
+                      ),
+                    })
+                  }
+                />
+              </Tooltip>
             ),
           ]);
         }}

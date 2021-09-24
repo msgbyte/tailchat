@@ -74,7 +74,11 @@ export {
 
 // model
 export { fetchAvailableServices } from './model/common';
-export { createDMConverse, updateAck } from './model/converse';
+export {
+  createDMConverse,
+  appendDMConverseMembers,
+  updateAck,
+} from './model/converse';
 export {
   addFriendRequest,
   cancelFriendRequest,

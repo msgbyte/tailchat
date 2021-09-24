@@ -22,6 +22,24 @@ export async function createDMConverse(
 }
 
 /**
+ * 在多人会话中添加成员
+ */
+export async function appendDMConverseMembers(
+  converseId: string,
+  memberIds: string[]
+) {
+  const { data } = await request.post(
+    '/api/chat/converse/appendDMConverseMembers',
+    {
+      converseId,
+      memberIds,
+    }
+  );
+
+  return data;
+}
+
+/**
  * 获取会话信息
  * @param converseId 会话ID
  */

@@ -2,7 +2,7 @@ import React from 'react';
 import { t, useGroupPanel } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { Icon } from '@iconify/react';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { MembersPanel } from './MembersPanel';
 import { CommonPanelWrapper } from '../common/Wrapper';
 
@@ -25,21 +25,22 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
       <CommonPanelWrapper
         header={panelInfo.name}
         actions={(setRightPanel) => [
-          <Button
-            key="members"
-            icon={
-              <Icon
-                className="anticon text-2xl"
-                icon="mdi:account-supervisor-outline"
-              />
-            }
-            onClick={() =>
-              setRightPanel({
-                name: t('成员'),
-                panel: <MembersPanel groupId={props.groupId} />,
-              })
-            }
-          />,
+          <Tooltip key="members" title={t('成员列表')}>
+            <Button
+              icon={
+                <Icon
+                  className="anticon text-2xl"
+                  icon="mdi:account-supervisor-outline"
+                />
+              }
+              onClick={() =>
+                setRightPanel({
+                  name: t('成员'),
+                  panel: <MembersPanel groupId={props.groupId} />,
+                })
+              }
+            />
+          </Tooltip>,
         ]}
       >
         {props.children}

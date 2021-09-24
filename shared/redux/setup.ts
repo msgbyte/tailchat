@@ -8,7 +8,7 @@ import { ChatMessage, fetchConverseLastMessages } from '../model/message';
 import { socketEventListeners } from '../manager/socket';
 import { showToasts } from '../manager/ui';
 import { t } from '../i18n';
-import { fetchUserAck } from '../model/converse';
+import { ChatConverseInfo, fetchUserAck } from '../model/converse';
 
 /**
  * 初始化 Redux 上下文
@@ -124,6 +124,13 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       })
     );
   });
+
+  socket.listen<ChatConverseInfo>(
+    'chat.converse.updateDMConverse',
+    (converse) => {
+      store.dispatch(chatActions.setConverseInfo(converse));
+    }
+  );
 
   socket.listen<GroupInfo>('group.add', (groupInfo) => {
     store.dispatch(groupActions.appendGroups([groupInfo]));
