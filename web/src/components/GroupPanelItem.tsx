@@ -18,9 +18,9 @@ export const GroupPanelItem: React.FC<{
     <Link className="block" to={to}>
       <div
         className={clsx(
-          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-gray-900 dark:text-white rounded px-1 h-8 flex items-center text-base group',
+          'w-full hover:bg-black hover:bg-opacity-20 dark:hover:bg-white dark:hover:bg-opacity-20 cursor-pointer text-gray-900 dark:text-white rounded px-1 h-8 flex items-center text-base group',
           {
-            'bg-white bg-opacity-20': isActive,
+            'bg-black bg-opacity-20 dark:bg-white dark:bg-opacity-20': isActive,
           }
         )}
       >

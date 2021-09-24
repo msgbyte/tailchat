@@ -21,9 +21,9 @@ export const SidebarItem: React.FC<SidebarItemProps> = React.memo((props) => {
     <Link to={to}>
       <div
         className={clsx(
-          'w-full hover:bg-white hover:bg-opacity-20 cursor-pointer text-gray-700 dark:text-white rounded px-2 h-11 flex items-center text-base group mb-0.5',
+          'w-full hover:bg-black hover:bg-opacity-20 dark:hover:bg-white dark:hover:bg-opacity-20 cursor-pointer text-gray-700 dark:text-white rounded px-2 h-11 flex items-center text-base group mb-0.5',
           {
-            'bg-white bg-opacity-20': isActive,
+            'bg-black bg-opacity-20 dark:bg-white dark:bg-opacity-20': isActive,
           }
         )}
       >
