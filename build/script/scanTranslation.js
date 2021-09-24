@@ -10,6 +10,10 @@ const scannerConfig = require('../config/i18next-scanner.config');
 
 const output = path.resolve(__dirname, '../../');
 
+const originJson = fs.readJsonSync(
+  path.resolve(output, './shared/i18n/langs/zh-CN/translation.json')
+);
+
 // For main
 const mainstream = vfs
   .src([
@@ -35,7 +39,17 @@ const mainstream = vfs
 mainstream.on('finish', () => {
   // 主流完毕后进行插件生成
   // console.log('主项目翻译生成完毕, 开始进行子项目翻译生成...');
-  console.log('主项目翻译生成完毕!');
+  const transJson = fs.readJsonSync(
+    path.resolve(output, './shared/i18n/langs/zh-CN/translation.json')
+  );
+  const originKeys = Object.keys(originJson);
+  const transKeys = Object.keys(transJson);
+  const addedNum = _.without(transKeys, ...originKeys).length;
+  const deletededNum = _.without(originKeys, ...transKeys).length;
+
+  console.log(
+    `主项目翻译生成完毕! 新增翻译 ${addedNum} 条, 移除翻译 ${deletededNum} 条`
+  );
 
   // For plugins
   // utils.getPluginDirs().forEach((plugin) => {
