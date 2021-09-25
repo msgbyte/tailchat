@@ -66,8 +66,8 @@ export const SettingsAccount: React.FC = React.memo(() => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="w-1/3">
+      <div className="flex flex-wrap">
+        <div className="w-1/3 mobile:w-full">
           <AvatarUploader
             className="text-4xl"
             circle={true}
@@ -76,7 +76,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
             <Avatar size={128} src={userInfo.avatar} name={userInfo.nickname} />
           </AvatarUploader>
         </div>
-        <div className="w-2/3">
+        <div className="w-2/3 mobile:w-full">
           <FullModalField
             title={t('用户昵称')}
             value={userInfo.nickname}

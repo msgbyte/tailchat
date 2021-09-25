@@ -16,7 +16,7 @@ export const EntryRoute = React.memo(() => {
       <div
         className={clsx(
           styles.entryLeft,
-          'entry-left w-142 sm:w-full pt-40 bg-gray-600 min-h-full flex justify-center bg-repeat-y'
+          'entry-left w-142 sm:w-full pt-40 px-4 bg-gray-600 min-h-full flex justify-center bg-repeat-y'
         )}
         style={{ backgroundImage: `url(${loginPatternUrl})` }}
       >

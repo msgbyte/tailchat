@@ -11,7 +11,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
   (props) => {
     const [visible, setVisible] = useState(false);
     return (
-      <div className="h-12 relative flex items-center px-4 py-0 text-base font-bold flex-shrink-0 thin-line-bottom">
+      <div className="h-12 relative flex items-center py-0 text-base font-bold flex-shrink-0 thin-line-bottom">
         {React.isValidElement(props.menu) ? (
           <Dropdown
             onVisibleChange={setVisible}
@@ -20,7 +20,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
             trigger={['click']}
           >
             <div className="cursor-pointer flex flex-1">
-              <header className="flex-1 truncate">{props.children}</header>
+              <header className="flex-1 truncate px-4">{props.children}</header>
               <Icon
                 className={clsx('text-2xl transition-transform transform', {
                   'rotate-180': visible,
@@ -32,7 +32,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
             </div>
           </Dropdown>
         ) : (
-          <header className="flex-1 truncate">{props.children}</header>
+          <header className="flex-1 truncate px-4">{props.children}</header>
         )}
       </div>
     );
