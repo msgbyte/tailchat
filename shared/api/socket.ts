@@ -158,7 +158,7 @@ export function createSocket(token: string): Promise<AppSocket> {
 
     if (isDevelopment) {
       _socket.onAny((...args) => {
-        console.log('Receive Notify:', args);
+        console.debug('Receive Notify:', args);
       });
     }
   });
