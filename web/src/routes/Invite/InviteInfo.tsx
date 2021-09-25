@@ -48,7 +48,7 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
   }
 
   return (
-    <div>
+    <div className="text-white">
       <div>
         <Avatar
           className="mb-4"

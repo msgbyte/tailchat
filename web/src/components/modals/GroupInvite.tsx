@@ -6,6 +6,7 @@ import {
   useAsyncRequest,
   useGroupInfo,
   isValidStr,
+  t,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../Modal';
 
@@ -32,7 +33,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
   }, [groupId]);
 
   if (!groupInfo) {
-    return <div>异常</div>;
+    return <div>{t('异常')}</div>;
   }
 
   return (
@@ -55,20 +56,23 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
       />
 
       <div className="text-gray-400 font-bold text-lg mb-2">
-        创建链接并发送给外部好友
+        {t('创建链接并发送给外部好友')}
       </div>
 
       <div>
         {isValidStr(inviteLink) ? (
           <div>
             <Typography.Title
-              className="bg-black bg-opacity-30 px-2 py-1 select-text text-lg rounded border border-black border-opacity-20"
+              className="bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-30 px-2 py-1 select-text text-lg rounded border border-black border-opacity-20"
               level={4}
               copyable={true}
             >
               {inviteLink}
             </Typography.Title>
-            <p className="text-gray-500 text-sm">该邀请链接将会于7天后过期</p>
+            {/* TODO: 显示过期天数 */}
+            <p className="text-gray-500 text-sm">
+              {t('该邀请链接将会于7天后过期')}
+            </p>
           </div>
         ) : (
           <Button
@@ -78,7 +82,7 @@ export const GroupInvite: React.FC<GroupInviteProps> = React.memo((props) => {
             loading={loading}
             onClick={handleCreateInviteLink}
           >
-            创建链接
+            {t('创建链接')}
           </Button>
         )}
       </div>
