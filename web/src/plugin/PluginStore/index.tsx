@@ -10,6 +10,7 @@ import { t, useAsync } from 'tailchat-shared';
 import { builtinPlugins } from '../builtin';
 import { pluginManager } from '../manager';
 import { PluginStoreItem } from './Item';
+import { ManualInstall } from './ManualInstall';
 
 function usePluginStoreData() {
   const { loading: loading1, value: installedPluginList = [] } = useAsync(
@@ -85,6 +86,13 @@ export const PluginStore: React.FC = React.memo(() => {
               </div>
             ))}
           </div>
+        </PillTabPane>
+
+        <PillTabPane
+          tab={<span className="text-green-400">{t('手动安装')}</span>}
+          key="3"
+        >
+          <ManualInstall />
         </PillTabPane>
       </PillTabs>
     </div>

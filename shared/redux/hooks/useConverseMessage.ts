@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from './useAppSelector';
 import _isNil from 'lodash/isNil';
 import { useChatBoxContext } from '../..';
 import { MessageHelper } from '../../utils/message-helper';
+import { ChatConverseType } from '../../model/converse';
 
 function useHandleSendMessage(context: ConverseContext) {
   const { converseId } = context;
@@ -91,7 +92,7 @@ export function useConverseMessage(context: ConverseContext) {
           chatActions.setConverseInfo({
             _id: converseId,
             name: '',
-            type: 'Group',
+            type: ChatConverseType.Group,
             members: [],
           })
         );
