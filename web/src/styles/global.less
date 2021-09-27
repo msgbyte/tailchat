@@ -1,6 +1,13 @@
 #tailchat-app {
   @apply text-typography-light;
 
+  --tc-background-image: url(../../assets/images/bg.jpg);
+
+  .tc-background {
+    @apply bg-center bg-cover bg-no-repeat;
+    background-image: var(--tc-background-image);
+  }
+
   /* 滚动条 */
   ::-webkit-scrollbar {
     width: 16px;

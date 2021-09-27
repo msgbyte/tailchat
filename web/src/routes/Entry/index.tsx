@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoginView } from './LoginView';
-import bgImage from '@assets/images/bg.jpg';
 import clsx from 'clsx';
 import styles from './index.module.less';
 import loginPatternUrl from '@assets/images/login-pattern.svg';
@@ -26,10 +25,7 @@ export const EntryRoute = React.memo(() => {
           <Redirect to="/entry/login" />
         </Switch>
       </div>
-      <div
-        className="flex-1 sm:hidden bg-center bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url(${bgImage})`, zIndex: -1 }}
-      />
+      <div className="flex-1 sm:hidden tc-background" style={{ zIndex: -1 }} />
     </div>
   );
 });
