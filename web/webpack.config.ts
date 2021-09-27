@@ -179,6 +179,12 @@ const config: Configuration = {
             expiration: {
               maxAgeSeconds: 1 * 60 * 60, // 1h
             },
+            cacheableResponse: {
+              // 只缓存js, 防止404后台直接fallback到html
+              headers: {
+                'content-type': 'application/javascript; charset=utf-8',
+              },
+            },
           },
         },
       ],
