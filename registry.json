@@ -7,5 +7,14 @@
     "author": "msgbyte",
     "description": "为聊天提供喵语言对话功能",
     "requireRestart": true
+  },
+  {
+    "label": "Miku初音未来主题",
+    "name": "com.msgbyte.theme.miku",
+    "url": "/plugins/com.msgbyte.theme.miku/index.js",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "初音未来主题",
+    "requireRestart": true
   }
 ]

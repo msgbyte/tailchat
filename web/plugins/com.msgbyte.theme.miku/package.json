@@ -1,0 +1,7 @@
+{
+  "name": "@plugins/com.msgbyte.theme.miku",
+  "main": "src/index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {}
+}

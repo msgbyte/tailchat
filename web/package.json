@@ -11,6 +11,7 @@
     "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve",
     "serve": "npx http-server ./dist",
     "postinstall": "node plugins/install.js",
+    "plugins:new": "ministar createPlugin",
     "plugins:all": "ministar buildPlugin all",
     "plugins:watch": "ministar watchPlugin all"
   },
