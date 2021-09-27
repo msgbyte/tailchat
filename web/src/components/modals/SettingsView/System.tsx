@@ -1,4 +1,5 @@
 import { FullModalField } from '@/components/FullModal/Field';
+import { pluginColorScheme } from '@/plugin/common';
 import { Select } from 'antd';
 import React, { useCallback } from 'react';
 import { showToasts, t, useColorScheme } from 'tailchat-shared';
@@ -45,6 +46,11 @@ export const SettingsSystem: React.FC = React.memo(() => {
             <Select.Option value="dark">{t('暗黑模式')}</Select.Option>
             <Select.Option value="light">{t('亮色模式')}</Select.Option>
             <Select.Option value="auto">{t('自动')}</Select.Option>
+            {pluginColorScheme.map((pcs, i) => (
+              <Select.Option key={pcs.name + i} value={pcs.name}>
+                {pcs.label}
+              </Select.Option>
+            ))}
           </Select>
         }
       />

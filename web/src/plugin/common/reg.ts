@@ -68,3 +68,11 @@ export const [chatInputActions, regChatInputAction] =
   buildRegList<ChatInputAction>();
 
 export { regSocketEventListener };
+
+/**
+ * 注册配色方案
+ */
+export const [pluginColorScheme, regPluginColorScheme] = buildRegList<{
+  label: string;
+  name: string;
+}>();

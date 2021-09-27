@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
@@ -7,6 +7,7 @@ import { ConfigProvider as AntdProvider } from 'antd';
 import { parseColorScheme } from './utils/color-scheme-helper';
 import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
+import { getPopupContainer } from './utils/dom-helper';
 
 const MainRoute = Loadable(() =>
   import('./routes/Main').then((module) => module.MainRoute)
@@ -21,18 +22,6 @@ const InviteRoute = Loadable(() =>
 );
 
 const AppProvider: React.FC = React.memo((props) => {
-  const getPopupContainer = useCallback(
-    (triggerNode: HTMLElement): HTMLElement => {
-      const appRoot = document.querySelector<HTMLElement>('#tailchat-app');
-      if (appRoot) {
-        return appRoot;
-      }
-
-      return document.body;
-    },
-    []
-  );
-
   return (
     <BrowserRouter>
       <TcProvider>

@@ -1,6 +1,6 @@
 import { Button, Input } from 'antd';
 import React, { useMemo, useState } from 'react';
-import { isValidJson, t, useAsyncRequest } from 'tailchat-shared';
+import { isValidJson, showToasts, t, useAsyncRequest } from 'tailchat-shared';
 import { pluginManager } from '../manager';
 import { parsePluginManifest } from '../utils';
 
@@ -9,6 +9,7 @@ export const ManualInstall: React.FC = React.memo(() => {
 
   const [{ loading }, handleInstallPlugin] = useAsyncRequest(async () => {
     pluginManager.installPlugin(parsePluginManifest(json));
+    showToasts(t('安装成功'), 'success');
   }, [json]);
 
   const invalid = useMemo(() => !isValidJson(json), [json]);

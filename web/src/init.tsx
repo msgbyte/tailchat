@@ -8,6 +8,7 @@ import {
   setToasts,
   setTokenGetter,
 } from 'tailchat-shared';
+import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 
 const webStorage = buildStorage(window.localStorage);
@@ -39,6 +40,7 @@ setAlert((options) => {
         await options.onConfirm();
       }
     },
+    getContainer: getPopupContainer,
   });
 });
 
