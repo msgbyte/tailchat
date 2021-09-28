@@ -1,0 +1,26 @@
+{
+  "name": "TailChat Application",
+  "short_name": "TailChat",
+  "description": "A open source chat application",
+  "icons": [
+    {
+      "src": "/images/logo/logo@32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo/logo@192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo/logo@512.png",
+      "sizes": "512x512",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#374151",
+  "background_color": "#374151"
+}

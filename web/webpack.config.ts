@@ -138,6 +138,14 @@ const config: Configuration = {
           from: path.resolve(__dirname, '../locales'),
           to: 'locales',
         },
+        {
+          from: path.resolve(__dirname, './assets/pwa.webmanifest'),
+          to: 'pwa.webmanifest',
+        },
+        {
+          from: path.resolve(__dirname, './assets/images/logo/'),
+          to: 'images/logo/',
+        },
       ],
     }) as any,
     new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
