@@ -33,4 +33,13 @@ export const builtinPlugins: PluginManifest[] = [
     description: '为应用增加通知的能力',
     requireRestart: true,
   },
+  {
+    label: '初始引导插件',
+    name: 'com.msgbyte.intro',
+    url: '/plugins/com.msgbyte.intro/index.js',
+    version: '0.0.0',
+    author: 'msgbyte',
+    description: '为应用首次打开介绍应用的能力',
+    requireRestart: true,
+  },
 ];
