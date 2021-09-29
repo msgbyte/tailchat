@@ -10,7 +10,10 @@ import { PersonalNav } from './PersonalNav';
  */
 export const Navbar: React.FC = React.memo(() => {
   return (
-    <div className="w-18 bg-navbar-light dark:bg-navbar-dark flex flex-col justify-start items-center pt-4 pb-4">
+    <div
+      data-tc-role="navbar"
+      className="w-18 bg-navbar-light dark:bg-navbar-dark flex flex-col justify-start items-center pt-4 pb-4"
+    >
       <MobileMenuBtn />
 
       {/* Navbar */}
@@ -24,7 +27,7 @@ export const Navbar: React.FC = React.memo(() => {
         <GroupNav />
       </div>
 
-      <div>
+      <div data-tc-role="navbar-settings">
         <SettingBtn />
       </div>
     </div>

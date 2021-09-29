@@ -35,7 +35,7 @@ export const Sidebar: React.FC = React.memo(() => {
     );
 
   return (
-    <div>
+    <div data-tc-role="sidebar-group">
       <GroupHeader groupId={groupId} />
 
       <div className="p-2 space-y-1">

@@ -8,7 +8,7 @@ import { PersonalSidebar } from './Sidebar';
 
 export const Personal: React.FC = React.memo(() => {
   return (
-    <PageContent sidebar={<PersonalSidebar />}>
+    <PageContent data-tc-role="content-personal" sidebar={<PersonalSidebar />}>
       <Switch>
         <Route path="/main/personal/friends" component={FriendPanel} />
 

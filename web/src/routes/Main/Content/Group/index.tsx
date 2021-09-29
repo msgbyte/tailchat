@@ -7,7 +7,7 @@ import { Sidebar } from './Sidebar';
 
 export const Group: React.FC = React.memo(() => {
   return (
-    <PageContent sidebar={<Sidebar />}>
+    <PageContent data-tc-role="content-group" sidebar={<Sidebar />}>
       <Switch>
         <Route
           path="/main/group/:groupId/:panelId"

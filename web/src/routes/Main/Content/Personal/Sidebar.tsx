@@ -32,7 +32,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
 
   return (
-    <div>
+    <div data-tc-role="sidebar-personal">
       <SectionHeader>{userInfo?.nickname}</SectionHeader>
 
       <div className="p-2">

@@ -38,7 +38,7 @@ export const GroupNav: React.FC = React.memo(() => {
   }, []);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2" data-tc-role="navbar-groups">
       {Array.isArray(groups) &&
         groups.map((group) => (
           <div key={group._id}>

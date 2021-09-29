@@ -9,10 +9,6 @@ const PageContentRoot: React.FC = (props) => (
   <div className="flex flex-row flex-1 overflow-hidden">{props.children}</div>
 );
 
-interface PageContentProps {
-  sidebar?: React.ReactNode;
-}
-
 const PageGestureWrapper: React.FC = React.memo((props) => {
   const { setShowSidebar } = useSidebarContext();
 
@@ -36,6 +32,10 @@ const PageGestureWrapper: React.FC = React.memo((props) => {
 });
 PageGestureWrapper.displayName = 'PageGestureWrapper';
 
+interface PageContentProps {
+  sidebar?: React.ReactNode;
+  'data-tc-role'?: string;
+}
 /**
  * 用于渲染实际页面的组件，即除了导航栏剩余的内容
  */
@@ -85,7 +85,10 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
     <>
       {sidebarEl}
 
-      <div className="flex flex-auto bg-content-light dark:bg-content-dark relative overflow-auto">
+      <div
+        className="flex flex-auto bg-content-light dark:bg-content-dark relative overflow-auto"
+        data-tc-role={props['data-tc-role']}
+      >
         {contentMaskEl}
         {contentEl}
       </div>

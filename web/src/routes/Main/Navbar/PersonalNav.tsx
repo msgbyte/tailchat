@@ -16,19 +16,21 @@ export const PersonalNav: React.FC = React.memo(() => {
   const unread = usePersonalUnread();
 
   return (
-    <NavbarNavItem
-      name={t('我')}
-      to={'/main/personal'}
-      showPill={true}
-      badge={unread}
-    >
-      <Avatar
-        shape="square"
-        size={48}
-        name={userInfo?.nickname}
-        src={userInfo?.avatar}
-      />
-    </NavbarNavItem>
+    <div data-tc-role="navbar-personal">
+      <NavbarNavItem
+        name={t('我')}
+        to={'/main/personal'}
+        showPill={true}
+        badge={unread}
+      >
+        <Avatar
+          shape="square"
+          size={48}
+          name={userInfo?.nickname}
+          src={userInfo?.avatar}
+        />
+      </NavbarNavItem>
+    </div>
   );
 });
 PersonalNav.displayName = 'PersonalNav';
