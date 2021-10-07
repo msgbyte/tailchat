@@ -10,8 +10,10 @@ const GroupWebPanelRender = () => {
     return <div>加载失败, 面板信息不存在</div>;
   }
 
+  const url = groupPanelInfo.meta?.url;
+
   return (
-    <iframe className="w-full h-full bg-white" src={groupPanelInfo.meta?.url} />
+    <iframe key={String(url)} className="w-full h-full bg-white" src={url} />
   );
 };
 
