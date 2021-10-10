@@ -8,6 +8,10 @@ TailChat 是一款现代化开源的即时通讯聊天应用，基于 React + Ty
 
 后端仓库地址: [tailchat-server](https://github.com/msgbyte/tailchat-server)
 
+Nightly版 体验地址: [https://nightly.paw.msgbyte.com/](https://nightly.paw.msgbyte.com/)
+
+> Nightly版 为自动编译版本, 即每次提交代码都会自动编译。
+> 不保证数据的可靠性与稳定性 
 
 ## Feature
 
