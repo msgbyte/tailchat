@@ -37,7 +37,7 @@ export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
         {/* 右侧面板 */}
         <div
           className={clsx(
-            'transition-all overflow-hidden border-l border-black border-opacity-20',
+            'transition-all overflow-hidden border-l border-black border-opacity-20 flex flex-col',
             {
               'w-96 mobile:w-full': rightPanel,
               'w-0': !rightPanel,
@@ -56,7 +56,8 @@ export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
           >
             {rightPanel?.name}
           </PanelCommonHeader>
-          {rightPanel?.panel}
+
+          <div className="flex-1 overflow-y-auto">{rightPanel?.panel}</div>
         </div>
       </div>
     );
