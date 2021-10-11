@@ -27,7 +27,7 @@ let _userJWT: string | null = null;
 export async function setUserJWT(jwt: string | null): Promise<void> {
   _userJWT = jwt; // 更新内存中的缓存
 
-  await getStorage().set('jsonwebtoken', jwt);
+  await getStorage().save('jsonwebtoken', jwt);
   refreshTokenGetter();
 }
 

@@ -79,7 +79,7 @@ export const MainProvider: React.FC = React.memo((props) => {
   }
 
   if (_isNil(store)) {
-    return <div>出现异常, Store 创建失败</div>;
+    return <div>{t('出现异常, Store 创建失败')}</div>;
   }
 
   return (
