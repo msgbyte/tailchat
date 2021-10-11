@@ -25,7 +25,7 @@ export const EntryRoute = React.memo(() => {
           <Redirect to="/entry/login" />
         </Switch>
       </div>
-      <div className="flex-1 sm:hidden tc-background" style={{ zIndex: -1 }} />
+      <div className="flex-1 sm:hidden tc-background -z-1" />
     </div>
   );
 });

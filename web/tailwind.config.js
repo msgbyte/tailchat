@@ -89,6 +89,9 @@ module.exports = {
       transitionProperty: {
         width: 'width',
       },
+      zIndex: {
+        '-1': '-1',
+      },
     },
   },
   variants: {
