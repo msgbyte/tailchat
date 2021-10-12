@@ -13,6 +13,9 @@ const groupSlice = createSlice({
   name: 'group',
   initialState,
   reducers: {
+    /**
+     * 追加或更新群组信息
+     */
     appendGroups(state, action: PayloadAction<GroupInfo[]>) {
       const groups = action.payload;
 

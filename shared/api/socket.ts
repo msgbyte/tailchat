@@ -23,7 +23,7 @@ type SocketEventRespones<T = unknown> =
  * 封装后的 Socket
  */
 export class AppSocket {
-  listener: [string, (data: unknown) => void][] = [];
+  private listener: [string, (data: unknown) => void][] = [];
 
   constructor(private socket: Socket) {
     socket.onAny((eventName: string, data: unknown) => {
@@ -68,6 +68,13 @@ export class AppSocket {
 
   close() {
     this.socket.close();
+  }
+
+  /**
+   * 断线重连后触发
+   */
+  onReconnect(cb: () => void) {
+    this.socket.on('reconnect', cb);
   }
 
   /**

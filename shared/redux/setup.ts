@@ -22,6 +22,12 @@ import { appendUserDMConverse } from '../model/user';
 export function setupRedux(socket: AppSocket, store: AppStore) {
   initial(socket, store);
   listenNotify(socket, store);
+
+  // 断线重连重新初始化信息
+  socket.onReconnect(() => {
+    console.warn('因为断线重连触发重新同步远程数据');
+    initial(socket, store);
+  });
 }
 
 /**
