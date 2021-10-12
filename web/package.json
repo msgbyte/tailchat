@@ -48,7 +48,7 @@
     "@testing-library/react-hooks": "^7.0.1",
     "@types/copy-webpack-plugin": "^8.0.0",
     "@types/dts-generator": "^2.1.6",
-    "@types/is-hotkey": "^0.1.3",
+    "@types/is-hotkey": "^0.1.5",
     "@types/mini-css-extract-plugin": "^1.4.3",
     "@types/node": "^15.12.5",
     "@types/react": "^17.0.11",

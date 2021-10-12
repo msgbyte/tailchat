@@ -10,3 +10,10 @@ export function getPopupContainer() {
 
   return document.body;
 }
+
+/**
+ * 一个快捷方案用于直接在组件中执行 stopPropagation
+ */
+export function stopPropagation(e: React.BaseSyntheticEvent) {
+  e.stopPropagation();
+}

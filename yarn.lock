@@ -1936,10 +1936,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/is-hotkey@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@types/is-hotkey/-/is-hotkey-0.1.3.tgz#1e86be048d3af160e8e676d5cd463f6f7061589a"
-  integrity sha512-Hz+eHHpMWLBX1CpDXSuQre9nYXN2e2VGVHvkkldxDzo9eFtRpHm5iOlJlZvnNGvele5584cUSkRnFRQb+Wcu0w==
+"@types/is-hotkey@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.nlark.com/@types/is-hotkey/download/@types/is-hotkey-0.1.5.tgz#f3123ba21228c0408c10594abf378caddbb802f8"
+  integrity sha1-8xI7ohIowECMEFlKvzeMrdu4Avg=
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
@@ -6375,8 +6375,8 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@~4.0.1:
 
 is-hotkey@^0.2.0:
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.2.0.tgz#1835a68171a91e5c9460869d96336947c8340cef"
-  integrity sha512-UknnZK4RakDmTgz4PI1wIph5yxSs/mvChWs9ifnlXsKuXgWmOkY/hAE0H/k2MIqH0RlRye0i1oC07MCRSD28Mw==
+  resolved "https://registry.npm.taobao.org/is-hotkey/download/is-hotkey-0.2.0.tgz?cache=0&sync_timestamp=1616273570971&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-hotkey%2Fdownload%2Fis-hotkey-0.2.0.tgz#1835a68171a91e5c9460869d96336947c8340cef"
+  integrity sha1-GDWmgXGpHlyUYIadljNpR8g0DO8=
 
 is-interactive@^1.0.0:
   version "1.0.0"

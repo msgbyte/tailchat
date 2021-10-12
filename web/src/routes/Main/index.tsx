@@ -3,9 +3,11 @@ import React from 'react';
 import { MainContent } from './Content';
 import { Navbar } from './Navbar';
 import { MainProvider } from './Provider';
+import { useShortcuts } from './useShortcuts';
 
 export const MainRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppMainRenderStart');
+  useShortcuts();
 
   return (
     <div className="flex h-full">

@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 import './Modal.less';
+import { stopPropagation } from '@/utils/dom-helper';
 
 const transitionEndListener = (node: HTMLElement, done: () => void) =>
   node.addEventListener('transitionend', done, false);
@@ -62,10 +63,6 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
 
     closeModal();
   }, [maskClosable, closeModal]);
-
-  const stopPropagation = useCallback((e: React.BaseSyntheticEvent) => {
-    e.stopPropagation();
-  }, []);
 
   if (visible === false) {
     return null;
