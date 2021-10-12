@@ -4,6 +4,7 @@ import {
   isValidStr,
   updateAck,
   useAppDispatch,
+  useAppSelector,
   useUpdateRef,
 } from 'tailchat-shared';
 import { chatActions } from 'tailchat-shared/redux/slices';
@@ -12,7 +13,11 @@ import _debounce from 'lodash/debounce';
 export function useMessageAck(converseId: string, messages: ChatMessage[]) {
   const messagesRef = useUpdateRef(messages);
   const dispatch = useAppDispatch();
+
   const lastMessageIdRef = useRef('');
+  lastMessageIdRef.current = useAppSelector(
+    (state) => state.chat.ack[converseId] ?? ''
+  );
 
   const setConverseAck = useMemo(
     () =>
