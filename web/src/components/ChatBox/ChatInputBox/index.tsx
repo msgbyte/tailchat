@@ -1,13 +1,11 @@
-import { closeModal, openModal } from '@/components/Modal';
-import { ImageUploadPreviewer } from '@/components/modals/ImageUploadPreviewer';
-import { fileToDataUrl } from '@/utils/file-helper';
 import { isEnterHotkey } from '@/utils/hot-key';
 import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
-import { t, uploadFile } from 'tailchat-shared';
+import { t } from 'tailchat-shared';
 import { ChatInputAddon } from './Addon';
 import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
+import { uploadMessageImage } from './utils';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string) => void;
@@ -38,20 +36,9 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
       if (image) {
         // 上传图片
         e.preventDefault();
-        fileToDataUrl(image).then((imageLocalUrl) => {
-          const key = openModal(
-            <ImageUploadPreviewer
-              imageUrl={imageLocalUrl}
-              onConfirm={async () => {
-                const fileInfo = await uploadFile(image);
-                const imageRemoteUrl = fileInfo.url;
-
-                // TODO: not good, should bind with plugin bbcode
-                props.onSendMsg(`[img]${imageRemoteUrl}[/img]`);
-                closeModal(key);
-              }}
-            />
-          );
+        uploadMessageImage(image).then((imageRemoteUrl) => {
+          // TODO: not good, should bind with plugin bbcode
+          props.onSendMsg(`[img]${imageRemoteUrl}[/img]`);
         });
       }
     },

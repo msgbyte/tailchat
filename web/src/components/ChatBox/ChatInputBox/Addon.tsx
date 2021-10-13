@@ -1,23 +1,40 @@
-import { chatInputActions } from '@/plugin/common';
+import { FileSelector } from '@/components/FileSelector';
+import { pluginChatInputActions } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Dropdown, Menu } from 'antd';
 import React from 'react';
+import { t } from 'tailchat-shared';
 import { useChatInputActionContext } from './context';
+import { uploadMessageImage } from './utils';
 
 export const ChatInputAddon: React.FC = React.memo(() => {
   const actionContext = useChatInputActionContext();
-
-  if (chatInputActions.length === 0) {
-    return null;
-  }
-
   if (actionContext === null) {
     return null;
   }
 
+  const handleSendImage = (files: FileList) => {
+    // 发送图片
+    const image = files[0];
+    if (image) {
+      // 发送图片
+      uploadMessageImage(image).then((imageRemoteUrl) => {
+        // TODO: not good, should bind with plugin bbcode
+        actionContext.sendMsg(`[img]${imageRemoteUrl}[/img]`);
+      });
+    }
+  };
+
   const menu = (
     <Menu>
-      {chatInputActions.map((item, i) => (
+      <FileSelector
+        fileProps={{ accept: 'image/*' }}
+        onSelected={handleSendImage}
+      >
+        <Menu.Item>{t('发送图片')}</Menu.Item>
+      </FileSelector>
+
+      {pluginChatInputActions.map((item, i) => (
         <Menu.Item
           key={item.label + i}
           onClick={() => item.onClick(actionContext)}

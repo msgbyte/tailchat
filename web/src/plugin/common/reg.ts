@@ -64,7 +64,7 @@ interface ChatInputAction {
   onClick: (actions: ChatInputActionContextProps) => void;
 }
 export type { ChatInputActionContextProps };
-export const [chatInputActions, regChatInputAction] =
+export const [pluginChatInputActions, regChatInputAction] =
   buildRegList<ChatInputAction>();
 
 export { regSocketEventListener };
