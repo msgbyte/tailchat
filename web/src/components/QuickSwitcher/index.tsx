@@ -1,51 +1,15 @@
 import { stopPropagation } from '@/utils/dom-helper';
 import { Input } from 'antd';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { t } from 'tailchat-shared';
-import { PortalAdd, PortalRemove } from './Portal';
-import _take from 'lodash/take';
+import { PortalAdd, PortalRemove } from '../Portal';
 import clsx from 'clsx';
 import { useGlobalKeyDown } from '@/hooks/useGlobalKeyDown';
 import { isArrowDown, isArrowUp, isEnterHotkey } from '@/utils/hot-key';
-import { useHistory } from 'react-router';
+import { useQuickSwitcherActionContext } from './useQuickSwitcherActionContext';
+import { useQuickSwitcherFilteredActions } from './useQuickSwitcherFilteredActions';
 
 let currentQuickSwitcherKey: number | null = null;
-
-interface QuickActionContext {
-  navigate: (url: string) => void;
-}
-
-interface QuickAction {
-  key: string;
-  label: string;
-  action: (context: QuickActionContext) => void;
-}
-
-const builtinActions: QuickAction[] = [
-  {
-    key: 'personal',
-    label: t('个人主页'),
-    action({ navigate }) {
-      navigate('/main/personal/friends');
-    },
-  },
-  {
-    key: 'plugins',
-    label: t('插件中心'),
-    action({ navigate }) {
-      navigate('/main/personal/plugins');
-    },
-  },
-];
-
-function useQuickSwitcherActionContext(): QuickActionContext {
-  const history = useHistory();
-  return {
-    navigate: (url) => {
-      history.push(url);
-    },
-  };
-}
 
 const QuickSwitcher: React.FC = React.memo(() => {
   const [keyword, setKeyword] = useState('');
@@ -61,12 +25,7 @@ const QuickSwitcher: React.FC = React.memo(() => {
     currentQuickSwitcherKey = null;
   }, []);
 
-  const filteredActions = useMemo(() => {
-    return _take(
-      builtinActions.filter((action) => action.label.includes(keyword)),
-      5
-    );
-  }, [keyword]);
+  const filteredActions = useQuickSwitcherFilteredActions(keyword);
 
   useGlobalKeyDown((e) => {
     if (isArrowUp(e)) {
