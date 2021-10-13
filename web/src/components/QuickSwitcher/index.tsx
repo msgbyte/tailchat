@@ -5,7 +5,12 @@ import { t } from 'tailchat-shared';
 import { PortalAdd, PortalRemove } from '../Portal';
 import clsx from 'clsx';
 import { useGlobalKeyDown } from '@/hooks/useGlobalKeyDown';
-import { isArrowDown, isArrowUp, isEnterHotkey } from '@/utils/hot-key';
+import {
+  isArrowDown,
+  isArrowUp,
+  isEnterHotkey,
+  isEscHotkey,
+} from '@/utils/hot-key';
 import { useQuickSwitcherActionContext } from './useQuickSwitcherActionContext';
 import { useQuickSwitcherFilteredActions } from './useQuickSwitcherFilteredActions';
 
@@ -41,6 +46,8 @@ const QuickSwitcher: React.FC = React.memo(() => {
       const selectedAction = filteredActions[selectedIndex];
       typeof selectedAction.action === 'function' &&
         selectedAction.action(actionContext);
+      handleClose();
+    } else if (isEscHotkey(e)) {
       handleClose();
     }
   });
