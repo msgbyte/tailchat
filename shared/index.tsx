@@ -40,6 +40,8 @@ export {
 } from './contexts/ChatBoxContext';
 export { useColorScheme } from './contexts/ColorSchemeContext';
 
+export { getDMConverseName } from './helper/converse-helper';
+
 // i18n
 export { t, setLanguage, useTranslation } from './i18n';
 export { Trans } from './i18n/Trans';

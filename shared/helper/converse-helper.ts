@@ -1,4 +1,5 @@
-import { getCachedConverseInfo } from '../cache/cache';
+import { isValidStr } from '..';
+import { getCachedConverseInfo, getCachedUserInfo } from '../cache/cache';
 import { t } from '../i18n';
 import type { ChatConverseInfo } from '../model/converse';
 import { appendUserDMConverse } from '../model/user';
@@ -17,4 +18,32 @@ export async function ensureDMConverse(
   await appendUserDMConverse(converseId); // 添加到私人会话列表
 
   return converse;
+}
+
+/**
+ * 获取私信会话的会话名
+ * @param userId 当前用户的ID(即自己)
+ * @param converse 会话信息
+ */
+export async function getDMConverseName(
+  userId: string,
+  converse: Pick<ChatConverseInfo, 'name' | 'members'>
+): Promise<string> {
+  if (isValidStr(converse.name)) {
+    return converse.name;
+  }
+
+  const otherConverseMembers = converse.members.filter((m) => m !== userId); // 成员Id
+  const len = otherConverseMembers.length;
+  const otherMembersInfo = await Promise.all(
+    otherConverseMembers.map((memberId) => getCachedUserInfo(memberId))
+  );
+
+  if (len === 1) {
+    return otherMembersInfo[0]?.nickname ?? '';
+  } else if (len === 2) {
+    return `${otherMembersInfo[0]?.nickname}, ${otherMembersInfo[1]?.nickname}`;
+  } else {
+    return `${otherMembersInfo[0]?.nickname}, ${otherMembersInfo[1]?.nickname} ...`;
+  }
 }
