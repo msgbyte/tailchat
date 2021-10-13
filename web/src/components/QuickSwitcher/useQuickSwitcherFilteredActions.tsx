@@ -12,6 +12,7 @@ import { getDMConverseName } from 'tailchat-shared';
 
 interface QuickAction {
   key: string;
+  source: string;
   label: string;
   action: (context: QuickActionContext) => void;
 }
@@ -19,6 +20,7 @@ interface QuickAction {
 const builtinActions: QuickAction[] = [
   {
     key: 'personal',
+    source: 'core',
     label: t('个人主页'),
     action({ navigate }) {
       navigate('/main/personal/friends');
@@ -26,6 +28,7 @@ const builtinActions: QuickAction[] = [
   },
   {
     key: 'plugins',
+    source: 'core',
     label: t('插件中心'),
     action({ navigate }) {
       navigate('/main/personal/plugins');
@@ -49,6 +52,7 @@ function usePersonalConverseActions(): QuickAction[] {
           (converseName): QuickAction => ({
             key: `qs#converse#${converse._id}`,
             label: `${t('私信')} ${converseName}`,
+            source: 'core',
             action: ({ navigate }) => {
               navigate(`/main/personal/converse/${converse._id}`);
             },

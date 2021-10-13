@@ -84,7 +84,7 @@ const QuickSwitcher: React.FC = React.memo(() => {
                 'opacity-100': selectedIndex === i,
               })}
             >
-              {action.key}
+              {action.source}
             </div>
           </div>
         ))}
