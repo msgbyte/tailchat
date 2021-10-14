@@ -1,4 +1,4 @@
-import { initNotify } from 'notify';
+import { initNotify } from './notify';
 
 if ('Notification' in window) {
   initNotify();
