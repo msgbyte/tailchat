@@ -4,8 +4,7 @@
   "main": "index.js",
   "workspaces": [
     "web",
-    "shared",
-    "app"
+    "shared"
   ],
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
