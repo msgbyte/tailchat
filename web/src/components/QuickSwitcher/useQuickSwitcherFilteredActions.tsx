@@ -9,6 +9,7 @@ import _take from 'lodash/take';
 import { useDebugValue, useMemo } from 'react';
 import type { QuickActionContext } from './useQuickSwitcherActionContext';
 import { getDMConverseName } from 'tailchat-shared';
+import { ChatConverseType } from 'tailchat-shared/model/converse';
 
 interface QuickAction {
   key: string;
@@ -36,10 +37,12 @@ const builtinActions: QuickAction[] = [
   },
 ];
 
-function usePersonalConverseActions(): QuickAction[] {
+function useDMConverseActions(): QuickAction[] {
   const userId = useUserId();
-  const converses = useAppSelector((state) =>
-    Object.values(state.chat.converses)
+  const dmConverses = useAppSelector((state) =>
+    Object.values(state.chat.converses).filter(
+      (converse) => converse.type === ChatConverseType.DM
+    )
   );
   const { value: personalConverseActions = [] } = useAsync(async () => {
     if (!isValidStr(userId)) {
@@ -47,7 +50,7 @@ function usePersonalConverseActions(): QuickAction[] {
     }
 
     return Promise.all(
-      converses.map((converse) =>
+      dmConverses.map((converse) =>
         getDMConverseName(userId, converse).then(
           (converseName): QuickAction => ({
             key: `qs#converse#${converse._id}`,
@@ -60,7 +63,7 @@ function usePersonalConverseActions(): QuickAction[] {
         )
       )
     );
-  }, [userId, converses.map((converse) => converse._id).join(',')]);
+  }, [userId, dmConverses.map((converse) => converse._id).join(',')]);
 
   useDebugValue(personalConverseActions);
 
@@ -72,7 +75,7 @@ function usePersonalConverseActions(): QuickAction[] {
  * @param keyword 关键字
  */
 export function useQuickSwitcherFilteredActions(keyword: string) {
-  const allActions = [...builtinActions, ...usePersonalConverseActions()];
+  const allActions = [...builtinActions, ...useDMConverseActions()];
 
   const filteredActions = useMemo(() => {
     return _take(
