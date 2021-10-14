@@ -13,6 +13,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=100" />
     <link rel="manifest" href="/pwa.webmanifest">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script>
+      // vConsole DEBUG
+      if(location.search.indexOf('vconsole') >= 0) {
+        // 开启vconsole
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/vconsole/dist/vconsole.min.js';
+        script.addEventListener('load', () => {
+          var vConsole = new window.VConsole({maxLogNumber: 1000});
+        })
+        document.head.appendChild(script)
+      }
+    </script>
   </head>
   <body>
     <div id="app">
