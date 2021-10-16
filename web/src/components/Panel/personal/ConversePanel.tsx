@@ -15,6 +15,7 @@ import { openModal } from '@/components/Modal';
 import { AppendDMConverseMembers } from '@/components/modals/AppendDMConverseMembers';
 import { openInNewWindow, panelWindowManager } from '@/utils/window-helper';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
+import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -49,12 +50,7 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
     const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
       usePanelWindow(`/panel/personal/converse/${converseId}`);
     if (hasOpenedPanel) {
-      return (
-        <div>
-          <div>{t('面板已在独立窗口打开')}</div>
-          <Button onClick={closePanelWindow}>{t('关闭独立窗口')}</Button>
-        </div>
-      );
+      return <OpenedPanelTip onClosePanelWindow={closePanelWindow} />;
     }
 
     return (
