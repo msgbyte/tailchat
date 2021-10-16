@@ -126,7 +126,7 @@ export {
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
-export { userActions, groupActions } from './redux/slices';
+export { userActions, groupActions, uiActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
 export { createStore } from './redux/store';

@@ -2,7 +2,7 @@ import { ChatBox } from '@/components/ChatBox';
 import { UserListItem } from '@/components/UserListItem';
 import { Icon } from '@iconify/react';
 import { Button, Tooltip } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChatConverseState,
   t,
@@ -13,6 +13,8 @@ import { CommonPanelWrapper } from '../common/Wrapper';
 import _compact from 'lodash/compact';
 import { openModal } from '@/components/Modal';
 import { AppendDMConverseMembers } from '@/components/modals/AppendDMConverseMembers';
+import { openInNewWindow, panelWindowManager } from '@/utils/window-helper';
+import { usePanelWindow } from '@/hooks/usePanelWindow';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -44,6 +46,17 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
       (state) => state.chat.converses[converseId]
     );
 
+    const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
+      usePanelWindow(`/panel/personal/converse/${converseId}`);
+    if (hasOpenedPanel) {
+      return (
+        <div>
+          <div>{t('面板已在独立窗口打开')}</div>
+          <Button onClick={closePanelWindow}>{t('关闭独立窗口')}</Button>
+        </div>
+      );
+    }
+
     return (
       <CommonPanelWrapper
         header={converse && <ConversePanelTitle converse={converse} />}
@@ -53,6 +66,14 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
           }
 
           return _compact([
+            <Tooltip key="open" title={t('在新窗口打开')}>
+              <Button
+                icon={
+                  <Icon className="anticon text-2xl" icon="mdi:dock-window" />
+                }
+                onClick={openPanelWindow}
+              />
+            </Tooltip>,
             <Tooltip key="add" title={t('邀请成员')}>
               <Button
                 icon={
