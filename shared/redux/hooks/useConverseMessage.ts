@@ -10,7 +10,7 @@ import {
 import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
 import _isNil from 'lodash/isNil';
-import { useChatBoxContext } from '../..';
+import { t, useChatBoxContext } from '../..';
 import { MessageHelper } from '../../utils/message-helper';
 import { ChatConverseType } from '../../model/converse';
 
@@ -24,6 +24,13 @@ function useHandleSendMessage(context: ConverseContext) {
    */
   const handleSendMessage = useCallback(
     async (payload: SendMessagePayload) => {
+      payload.content = payload.content.trim();
+      // 输入合法性检测
+      if (payload.content === '') {
+        showErrorToasts(t('无法发送空消息'));
+        return;
+      }
+
       try {
         if (hasContext === true) {
           // 如果有上下文, 则组装payload

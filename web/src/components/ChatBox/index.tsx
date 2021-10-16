@@ -47,12 +47,12 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
 
       <ChatInputBox
         onSendMsg={(msg) => {
-          // 发送消息后滚动到底部
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
             content: msg,
           }).then(() => {
+            // 发送消息后滚动到底部
             chatMessageListRef.current?.scrollToBottom();
           });
         }}
