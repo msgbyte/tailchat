@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A IM application which easy to use and develop",
+    "githubUrl": "https://github.com/msgbyte/tailchat"
   }
 }
