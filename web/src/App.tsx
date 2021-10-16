@@ -17,6 +17,10 @@ const EntryRoute = Loadable(() =>
   import('./routes/Entry').then((module) => module.EntryRoute)
 );
 
+const PanelRoute = Loadable(() =>
+  import('./routes/Panel').then((module) => module.PanelRoute)
+);
+
 const InviteRoute = Loadable(() =>
   import('./routes/Invite').then((module) => module.InviteRoute)
 );
@@ -76,6 +80,7 @@ export const App: React.FC = React.memo(() => {
         <Switch>
           <Route path="/entry" component={EntryRoute} />
           <Route path="/main" component={MainRoute} />
+          <Route path="/panel" component={PanelRoute} />
           <Route path="/invite/:inviteCode" component={InviteRoute} />
           <Redirect to="/entry" />
         </Switch>
