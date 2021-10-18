@@ -7,7 +7,7 @@ import loginPatternUrl from '@assets/images/login-pattern.svg';
 import { RegisterView } from './RegisterView';
 import { useRecordMeasure } from '@/utils/measure-helper';
 
-export const EntryRoute = React.memo(() => {
+const EntryRoute = React.memo(() => {
   useRecordMeasure('AppEntryRenderStart');
 
   return (
@@ -30,3 +30,5 @@ export const EntryRoute = React.memo(() => {
   );
 });
 EntryRoute.displayName = 'EntryRoute';
+
+export default EntryRoute;

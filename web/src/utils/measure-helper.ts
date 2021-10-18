@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useLayoutEffect } from 'react';
 
 const records: Record<string, number> = {};
@@ -50,8 +51,10 @@ export const measure = {
       onloadTime: t.loadEventEnd - t.navigationStart,
     };
 
+    // @ts-ignore
     if ((t = performance.memory)) {
       // js内存使用占比
+      // @ts-ignore
       usage['jsHeapRatio'] = t.usedJSHeapSize / t.totalJSHeapSize;
     }
 

@@ -9,7 +9,7 @@ import { useRecordMeasure } from '@/utils/measure-helper';
 /**
  * 邀请界面路由
  */
-export const InviteRoute: React.FC = React.memo(() => {
+const InviteRoute: React.FC = React.memo(() => {
   const { inviteCode } = useParams<{ inviteCode: string }>();
   useRecordMeasure('AppInviteRenderStart');
 
@@ -28,3 +28,4 @@ export const InviteRoute: React.FC = React.memo(() => {
   );
 });
 InviteRoute.displayName = 'InviteRoute';
+export default InviteRoute;

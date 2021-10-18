@@ -6,7 +6,7 @@ import { t } from 'tailchat-shared';
 import { PersonalConverse } from '../Main/Content/Personal/Converse';
 import { GroupPanelRender } from '../Main/Content/Group/Panel';
 
-export const PanelRoute: React.FC = React.memo(() => {
+const PanelRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppRouteRenderStart');
 
   return (
@@ -31,3 +31,5 @@ export const PanelRoute: React.FC = React.memo(() => {
   );
 });
 PanelRoute.displayName = 'PanelRoute';
+
+export default PanelRoute;

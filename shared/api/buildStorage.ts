@@ -69,7 +69,7 @@ export function buildStorage(backend: any) {
           autoSync: true,
           syncInBackground: false,
         });
-      } catch (e) {
+      } catch (e: any) {
         if (!(e instanceof NotFoundError)) {
           // 过滤NotFoundError
           console.log(`get key ${key} error:`, e.toString());

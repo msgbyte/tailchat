@@ -6,5 +6,6 @@
       "@/*": ["./src/*"],
       "@assets/*": ["./assets/*"]
     }
-  }
+  },
+  "exclude": ["e2e", "plugins"]
 }

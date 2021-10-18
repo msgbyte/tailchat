@@ -5,7 +5,7 @@ import { Navbar } from './Navbar';
 import { MainProvider } from './Provider';
 import { useShortcuts } from './useShortcuts';
 
-export const MainRoute: React.FC = React.memo(() => {
+const MainRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppMainRenderStart');
   useShortcuts();
 
@@ -20,3 +20,5 @@ export const MainRoute: React.FC = React.memo(() => {
   );
 });
 MainRoute.displayName = 'MainRoute';
+
+export default MainRoute;

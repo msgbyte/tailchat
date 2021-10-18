@@ -9,21 +9,13 @@ import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
 import { getPopupContainer } from './utils/dom-helper';
 
-const MainRoute = Loadable(() =>
-  import('./routes/Main').then((module) => module.MainRoute)
-);
+const MainRoute = Loadable(() => import('./routes/Main'));
 
-const EntryRoute = Loadable(() =>
-  import('./routes/Entry').then((module) => module.EntryRoute)
-);
+const EntryRoute = Loadable(() => import('./routes/Entry'));
 
-const PanelRoute = Loadable(() =>
-  import('./routes/Panel').then((module) => module.PanelRoute)
-);
+const PanelRoute = Loadable(() => import('./routes/Panel'));
 
-const InviteRoute = Loadable(() =>
-  import('./routes/Invite').then((module) => module.InviteRoute)
-);
+const InviteRoute = Loadable(() => import('./routes/Invite'));
 
 const AppProvider: React.FC = React.memo((props) => {
   return (
