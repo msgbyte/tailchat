@@ -59,6 +59,18 @@ export const t: TFunction = (
 };
 
 /**
+ * 本地翻译
+ * @example
+ * localTrans({zh-CN: '你好', en-US: 'Hello'});
+ *
+ * @param trans 翻译对象
+ */
+export function localTrans(trans: Record<AllowedLanguage, string>) {
+  const lang = i18next.language as AllowedLanguage;
+  return trans[lang] ?? trans['zh-CN'] ?? trans['en-US'];
+}
+
+/**
  * 设置i18next的语言
  */
 export async function setLanguage(lang: AllowedLanguage): Promise<void> {

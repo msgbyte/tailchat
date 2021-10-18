@@ -43,7 +43,7 @@ export { useColorScheme } from './contexts/ColorSchemeContext';
 export { getDMConverseName } from './helper/converse-helper';
 
 // i18n
-export { t, setLanguage, useTranslation } from './i18n';
+export { t, localTrans, setLanguage, useTranslation } from './i18n';
 export { Trans } from './i18n/Trans';
 export { useLanguage } from './i18n/language';
 
