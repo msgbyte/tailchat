@@ -10,7 +10,7 @@ export const PanelRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppRouteRenderStart');
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full bg-content-light dark:bg-content-dark">
       <MainProvider>
         <Switch>
           <Route
