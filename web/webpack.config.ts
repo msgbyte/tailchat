@@ -50,7 +50,12 @@ const config: Configuration = {
   devServer: {
     port: PORT,
     historyApiFallback: true,
-    contentBase: './dist',
+    static: {
+      directory: path.resolve(__dirname, './dist'),
+    },
+    client: {
+      overlay: false,
+    },
   },
   module: {
     rules: [
