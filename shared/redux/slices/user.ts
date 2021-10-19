@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { UserLoginInfo } from '../../model/user';
 import type { FriendRequest } from '../../model/friend';
 
-interface UserState {
+export interface UserState {
   info: UserLoginInfo | null;
   friends: string[]; // 好友的id列表
   friendRequests: FriendRequest[];

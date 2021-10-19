@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { GroupInfo } from '../../model/group';
 
-interface GroupState {
+export interface GroupState {
   groups: Record<string, GroupInfo>;
 }
 

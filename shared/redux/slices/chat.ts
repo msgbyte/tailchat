@@ -11,7 +11,7 @@ export interface ChatConverseState extends ChatConverseInfo {
   hasFetchedHistory: boolean;
 }
 
-interface ChatState {
+export interface ChatState {
   currentConverseId: string | null; // 当前活跃的会话id
   converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
   ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>

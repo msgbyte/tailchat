@@ -72,7 +72,7 @@ export function buildStorage(backend: any) {
       } catch (e: any) {
         if (!(e instanceof NotFoundError)) {
           // 过滤NotFoundError
-          console.log(`get key ${key} error:`, e.toString());
+          console.log(`get key ${key} error:`, String(e));
         }
 
         res = _isNil(defaultVal) ? null : defaultVal;
