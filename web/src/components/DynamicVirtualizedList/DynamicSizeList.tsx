@@ -138,8 +138,12 @@ type OnScrollArgs = {
 };
 
 interface DynamicSizeListProps {
-  canLoadMorePosts: (id?: string) => void;
-  children: (info: { data: any; itemId: any; style?: any }) => JSX.Element;
+  canLoadMorePosts: () => void;
+  children: (info: {
+    data: any;
+    itemId: any;
+    style?: any;
+  }) => React.ReactElement;
   height: number;
   initRangeToRender: number[];
   initScrollToIndex: () => any;
