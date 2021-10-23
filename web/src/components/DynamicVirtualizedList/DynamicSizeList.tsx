@@ -1,4 +1,5 @@
 import memoizeOne from 'memoize-one';
+import React from 'react';
 import { createElement, PureComponent } from 'react';
 import { ItemMeasurer } from './ItemMeasurer';
 
@@ -129,13 +130,13 @@ const getItemSize = (props: any, index: any, listMetaData: any) => {
   return getItemMetadata(props, index, listMetaData).size;
 };
 
-type OnScrollArgs = {
+export interface OnScrollInfo {
   scrollDirection: 'backward' | 'forward';
   scrollOffset: number;
   scrollUpdateWasRequested: boolean;
   clientHeight: number;
   scrollHeight: number;
-};
+}
 
 interface DynamicSizeListProps {
   canLoadMorePosts: () => void;
@@ -149,17 +150,20 @@ interface DynamicSizeListProps {
   initScrollToIndex: () => any;
   initialScrollOffset?: number;
   innerRef: React.RefObject<any>;
-  innerTagName?: string;
-  outerTagName?: string;
   itemData: string[];
   onItemsRendered: (args: any) => void;
-  onScroll: (scrollArgs: OnScrollArgs) => void;
+  onScroll: (scrollArgs: OnScrollInfo) => void;
   overscanCountBackward: number;
   overscanCountForward: number;
   style: React.CSSProperties;
   width: number;
   outerRef?: any;
   className?: string;
+
+  /**
+   * 用于确保当滚动条处于底部时
+   * 增加新的项能确保滚动条处于聊天框最底部
+   */
   correctScrollToBottom?: boolean;
   innerListStyle?: React.CSSProperties;
   loaderId?: string;
@@ -194,13 +198,6 @@ export default class DynamicSizeList extends PureComponent<
   _mountingCorrections = 0;
   _correctedInstances = 0;
   innerRefWidth = 0;
-  static defaultProps = {
-    innerTagName: 'div',
-    itemData: undefined,
-    outerTagName: 'div',
-    overscanCountForward: 30,
-    overscanCountBackward: 10,
-  };
 
   state: DynamicSizeListState = {
     scrollDirection: 'backward',
@@ -416,39 +413,30 @@ export default class DynamicSizeList extends PureComponent<
   }
 
   render() {
-    const {
-      className,
-      innerRef,
-      innerTagName,
-      outerTagName,
-      style,
-      innerListStyle,
-    } = this.props;
+    const { className, innerRef, style, innerListStyle } = this.props;
 
     const onScroll = this._onScrollVertical;
 
     const items = this._renderItems();
 
-    return createElement(
-      outerTagName!,
-      {
-        className,
-        onScroll,
-        ref: this._outerRefSetter,
-        style: {
+    return (
+      <div
+        className={className}
+        onScroll={onScroll}
+        ref={this._outerRefSetter}
+        style={{
           WebkitOverflowScrolling: 'touch',
           overflowY: 'auto',
           overflowAnchor: 'none',
           willChange: 'transform',
           width: '100%',
           ...style,
-        },
-      },
-      createElement(innerTagName!, {
-        children: items,
-        ref: innerRef,
-        style: innerListStyle,
-      })
+        }}
+      >
+        <div ref={innerRef} style={innerListStyle}>
+          {items}
+        </div>
+      </div>
     );
   }
 
@@ -618,6 +606,9 @@ export default class DynamicSizeList extends PureComponent<
     return style;
   };
 
+  /**
+   * 获取渲染范围
+   */
   _getRangeToRender(scrollTop = 0): number[] {
     const { itemData, overscanCountForward, overscanCountBackward } =
       this.props;
@@ -709,9 +700,9 @@ export default class DynamicSizeList extends PureComponent<
   };
 
   _handleNewMeasurements = (
-    key: any,
-    newSize: any,
-    forceScrollCorrection: any
+    key: string,
+    newSize: number,
+    forceScrollCorrection: boolean
   ) => {
     const { itemSizeMap } = this._listMetaData;
     const { itemData } = this.props;
@@ -841,31 +832,26 @@ export default class DynamicSizeList extends PureComponent<
           isItemInLocalPosts ||
           isLoader
         ) {
-          const item = createElement(children, {
+          const item: React.ReactElement = createElement(children, {
             data: itemData,
             itemId,
           });
 
           // Always wrap children in a ItemMeasurer to detect changes in size.
           items.push(
-            createElement(ItemMeasurer, {
-              handleNewMeasurements: this._handleNewMeasurements,
-              index,
-              item,
-              key: itemId,
-              size,
-              itemId,
-              width,
-              onUnmount: this._onItemRowUnmount,
-            })
+            <ItemMeasurer
+              handleNewMeasurements={this._handleNewMeasurements}
+              index={index}
+              item={item}
+              key={itemId}
+              size={size}
+              itemId={itemId}
+              width={width}
+              onUnmount={this._onItemRowUnmount}
+            />
           );
         } else {
-          items.push(
-            createElement('div', {
-              key: itemId,
-              style,
-            })
-          );
+          items.push(<div key={itemId} style={style} />);
         }
       }
     }

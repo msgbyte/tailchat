@@ -1,6 +1,8 @@
-import DynamicSizeList from '@/components/DynamicVirtualizedList/DynamicSizeList';
+import DynamicSizeList, {
+  OnScrollInfo,
+} from '@/components/DynamicVirtualizedList/DynamicSizeList';
 import { Divider } from 'antd';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
   ChatMessage,
@@ -33,9 +35,15 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
   React.memo((props) => {
     const listRef = useRef<DynamicSizeList>(null);
     const postListRef = useRef<any>(null);
+    const [isBottom, setIsBottom] = useState(true);
 
-    const onScroll = (info: any) => {
+    const onScroll = (info: OnScrollInfo) => {
       console.log('onScroll', info);
+
+      if (info.clientHeight + info.scrollOffset === info.scrollHeight) {
+        // 当前滚动条位于底部
+        setIsBottom(true);
+      }
     };
 
     const initScrollToIndex = () => {
@@ -60,12 +68,12 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     };
 
     const renderRow = ({ data, itemId, style }: any) => {
-      const index = data.indexOf(itemId);
-      const message = props.messages.find((m) => m._id === itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
-
-      if (!message) {
+      const index = props.messages.findIndex((m) => m._id === itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
+      if (index === -1) {
         return <div />;
       }
+
+      const message = props.messages[index];
 
       let showDate = true;
       let showAvatar = true;
@@ -91,7 +99,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
       }
 
       return (
-        <div key={message._id}>
+        <div key={message._id} data-debug={JSON.stringify(index)}>
           {showDate && (
             <Divider className="text-sm opacity-40 px-6 font-normal select-none">
               {getMessageTimeDiff(messageCreatedAt)}
@@ -115,8 +123,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             ref={listRef}
             height={height}
             width={width}
-            className="post-list__dynamic"
-            itemData={props.messages.map((m) => m._id)}
+            itemData={props.messages.map((m) => m._id).reverse()}
             overscanCountForward={OVERSCAN_COUNT_FORWARD}
             overscanCountBackward={OVERSCAN_COUNT_BACKWARD}
             onScroll={onScroll}
@@ -127,7 +134,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             innerListStyle={postListStyle}
             initRangeToRender={initRangeToRender}
             // loaderId={PostListRowListIds.OLDER_MESSAGES_LOADER}
-            // correctScrollToBottom={this.props.atLatestPost}
+            correctScrollToBottom={isBottom}
             onItemsRendered={onItemsRendered}
             scrollToFailed={scrollToFailed}
           >

@@ -71,12 +71,16 @@ const expandScrollDelta = shrinkScrollDelta + 10;
 
 interface ItemMeasurerProps {
   size: number;
-  handleNewMeasurements: any;
-  itemId: any;
-  item: any;
+  handleNewMeasurements: (
+    key: string,
+    newSize: number,
+    forceScrollCorrection: boolean
+  ) => void;
+  itemId: string;
+  item: React.ReactElement;
   width: number;
-  onUnmount: any;
-  index: any;
+  onUnmount: (itemId: string, index: number) => void;
+  index: number;
 }
 
 export class ItemMeasurer extends Component<ItemMeasurerProps> {
@@ -141,9 +145,7 @@ export class ItemMeasurer extends Component<ItemMeasurerProps> {
     }
 
     const { onUnmount, itemId, index } = this.props;
-    if (onUnmount) {
-      onUnmount(itemId, index);
-    }
+    typeof onUnmount === 'function' && onUnmount(itemId, index);
   }
 
   scrollingDiv = (event: any) => {
@@ -164,7 +166,7 @@ export class ItemMeasurer extends Component<ItemMeasurerProps> {
     };
 
     const renderItem = (
-      <div style={{ position: 'relative' }}>
+      <div className="relative">
         {item}
         <div style={scrollableContainerStyles}>
           <div dir="ltr" style={scrollableWrapperStyle}>
@@ -195,7 +197,7 @@ export class ItemMeasurer extends Component<ItemMeasurerProps> {
     return this.renderItems();
   }
 
-  _measureItem = (forceScrollCorrection: any) => {
+  _measureItem = (forceScrollCorrection: boolean) => {
     const { handleNewMeasurements, size: oldSize, itemId } = this.props;
 
     const node = this._node;
