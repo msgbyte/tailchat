@@ -32,3 +32,13 @@ yarn install
 cd web
 yarn build
 ```
+
+使用任意方式代理 `web/dist` 目录即可。
+
+
+#### expo 打开移动端app
+```bash
+cd app
+yarn install
+yarn start
+```
