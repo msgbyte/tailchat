@@ -28,6 +28,13 @@ const virtListStyles: React.CSSProperties = {
 
 const dynamicListStyle: React.CSSProperties = {}; // TODO
 
+function findMessageIndexWithId(
+  messages: ChatMessage[],
+  messageId: string
+): number {
+  return messages.findIndex((m) => m._id === messageId);
+}
+
 interface VirtualizedMessageListProps {
   messages: ChatMessage[];
 }
@@ -68,7 +75,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     };
 
     const renderRow = ({ data, itemId, style }: any) => {
-      const index = props.messages.findIndex((m) => m._id === itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
+      const index = findMessageIndexWithId(props.messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
       if (index === -1) {
         return <div />;
       }
@@ -82,7 +89,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
         // 当不是第一条数据时
 
         // 进行时间合并
-        const prevMessage = data[index - 1];
+        const prevMessage = props.messages[index - 1];
         if (
           !shouldShowMessageTime(
             new Date(prevMessage.createdAt ?? ''),
