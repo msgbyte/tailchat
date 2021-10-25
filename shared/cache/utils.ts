@@ -7,7 +7,7 @@ import { queryClient } from './';
  * TODO: 这里的类型真的不好写, 先用any来过滤内部的, 只保证外部使用ok
  *
  * @example
- * const queryData = buildCachedRequest('key')((arg1, arg2) => {
+ * const queryData = buildCachedRequest('key', (arg1, arg2) => {
  *    return request.post(...)
  * })
  */
