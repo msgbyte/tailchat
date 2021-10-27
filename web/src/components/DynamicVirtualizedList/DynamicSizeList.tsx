@@ -446,13 +446,16 @@ export default class DynamicSizeList extends PureComponent<
       overscanStopIndex: number,
       visibleStartIndex: number,
       visibleStopIndex: number
-    ) =>
-      this.props.onItemsRendered({
-        overscanStartIndex,
-        overscanStopIndex,
-        visibleStartIndex,
-        visibleStopIndex,
-      })
+    ) => {
+      if (typeof this.props.onItemsRendered === 'function') {
+        this.props.onItemsRendered({
+          overscanStartIndex,
+          overscanStopIndex,
+          visibleStartIndex,
+          visibleStopIndex,
+        });
+      }
+    }
   );
 
   _callOnScroll = memoizeOne(
