@@ -145,9 +145,9 @@ interface DynamicSizeListProps {
   initRangeToRender: number[];
   initScrollToIndex: () => any;
   initialScrollOffset?: number;
-  innerRef: React.RefObject<any>;
+  innerRef: React.RefObject<HTMLDivElement>;
   itemData: string[];
-  onItemsRendered: (args: any) => void;
+  onItemsRendered?: (args: any) => void;
   onScroll: (scrollArgs: OnScrollInfo) => void;
   overscanCountBackward: number;
   overscanCountForward: number;
@@ -377,7 +377,11 @@ export default class DynamicSizeList extends PureComponent<
       this._dataChange(); // though this is not data change we are checking for first load change
     }
 
-    if (prevProps.width !== this.props.width && !!this.props.innerRef) {
+    if (
+      prevProps.width !== this.props.width &&
+      !!this.props.innerRef &&
+      !!this.props.innerRef.current
+    ) {
       this.innerRefWidth = this.props.innerRef.current.clientWidth;
       this._widthChange(prevProps.height, prevState.scrollOffset);
     }
@@ -895,7 +899,12 @@ export default class DynamicSizeList extends PureComponent<
   };
 
   _outerRefSetter = (ref: any) => {
+    if (!this.props.innerRef.current) {
+      return;
+    }
+
     const { outerRef } = this.props;
+
     this.innerRefWidth = this.props.innerRef.current.clientWidth;
     this._outerRef = ref;
 

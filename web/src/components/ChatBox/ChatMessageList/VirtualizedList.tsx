@@ -2,12 +2,13 @@ import DynamicSizeList, {
   OnScrollInfo,
 } from '@/components/DynamicVirtualizedList/DynamicSizeList';
 import { Divider } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
   ChatMessage,
   getMessageTimeDiff,
   shouldShowMessageTime,
+  useUpdateRef,
 } from 'tailchat-shared';
 import { ChatMessageItem } from './Item';
 
@@ -37,21 +38,37 @@ function findMessageIndexWithId(
 
 interface VirtualizedMessageListProps {
   messages: ChatMessage[];
+  onUpdateReadedMessage: (lastMessageId: string) => void;
 }
 export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
   React.memo((props) => {
     const listRef = useRef<DynamicSizeList>(null);
-    const postListRef = useRef<any>(null);
+    const postListRef = useRef<HTMLDivElement>(null);
     const [isBottom, setIsBottom] = useState(true);
 
     const onScroll = (info: OnScrollInfo) => {
-      console.log('onScroll', info);
-
       if (info.clientHeight + info.scrollOffset === info.scrollHeight) {
         // 当前滚动条位于底部
         setIsBottom(true);
+        props.onUpdateReadedMessage(
+          props.messages[props.messages.length - 1]._id
+        );
       }
     };
+
+    const onUpdateReadedMessageRef = useUpdateRef(props.onUpdateReadedMessage);
+    useEffect(() => {
+      if (props.messages.length === 0) {
+        return;
+      }
+
+      if (postListRef.current?.scrollTop === 0) {
+        // 当前列表在最低
+        onUpdateReadedMessageRef.current(
+          props.messages[props.messages.length - 1]._id
+        );
+      }
+    }, [props.messages.length]);
 
     const initScrollToIndex = () => {
       return {
@@ -60,20 +77,9 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
       };
     };
 
-    const onItemsRendered = ({ visibleStartIndex }: any) => {
-      // this.updateFloatingTimestamp(visibleStartIndex);
-      console.log('visibleStartIndex', visibleStartIndex);
-    };
-
-    const scrollToFailed = (index: number) => {
-      console.log('scrollToFailed', index);
-      // if (index === 0) {
-      //     this.props.actions.changeUnreadChunkTimeStamp('');
-      // } else {
-      //     this.props.actions.changeUnreadChunkTimeStamp(this.props.lastViewedAt);
-      // }
-    };
-
+    /**
+     * 渲染列表元素
+     */
     const renderRow = ({ data, itemId }: any) => {
       const messages = props.messages;
       const index = findMessageIndexWithId(messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
@@ -119,10 +125,10 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     };
 
     // 初始渲染范围
-    const initRangeToRender = [
-      props.messages.length - 50,
-      props.messages.length - 1,
-    ];
+    const initRangeToRender = useMemo(
+      () => [props.messages.length - 50, props.messages.length - 1],
+      []
+    );
 
     return (
       <AutoSizer>
@@ -143,8 +149,6 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             initRangeToRender={initRangeToRender}
             // loaderId={PostListRowListIds.OLDER_MESSAGES_LOADER}
             correctScrollToBottom={isBottom}
-            onItemsRendered={onItemsRendered}
-            scrollToFailed={scrollToFailed}
           >
             {renderRow}
           </DynamicSizeList>
