@@ -74,13 +74,14 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
       // }
     };
 
-    const renderRow = ({ data, itemId, style }: any) => {
-      const index = findMessageIndexWithId(props.messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
+    const renderRow = ({ data, itemId }: any) => {
+      const messages = props.messages;
+      const index = findMessageIndexWithId(messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
       if (index === -1) {
         return <div />;
       }
 
-      const message = props.messages[index];
+      const message = messages[index];
 
       let showDate = true;
       let showAvatar = true;
@@ -89,7 +90,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
         // 当不是第一条数据时
 
         // 进行时间合并
-        const prevMessage = props.messages[index - 1];
+        const prevMessage = messages[index - 1];
         if (
           !shouldShowMessageTime(
             new Date(prevMessage.createdAt ?? ''),

@@ -140,11 +140,7 @@ export interface OnScrollInfo {
 
 interface DynamicSizeListProps {
   canLoadMorePosts: () => void;
-  children: (info: {
-    data: any;
-    itemId: any;
-    style?: any;
-  }) => React.ReactElement;
+  children: (info: { data: any; itemId: any }) => React.ReactElement;
   height: number;
   initRangeToRender: number[];
   initScrollToIndex: () => any;
@@ -832,7 +828,7 @@ export default class DynamicSizeList extends PureComponent<
           isItemInLocalPosts ||
           isLoader
         ) {
-          const item: React.ReactElement = createElement(children, {
+          const item: React.ReactElement = children({
             data: itemData,
             itemId,
           });
