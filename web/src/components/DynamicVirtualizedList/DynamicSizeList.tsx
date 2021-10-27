@@ -5,7 +5,13 @@ import { ItemMeasurer } from './ItemMeasurer';
 
 type ScrollDirection = any;
 
-const getItemMetadata = (props: any, index: any, listMetaData: any) => {
+type ListItemAlign = 'start' | 'end' | 'center' | 'auto';
+
+const getItemMetadata = (
+  props: DynamicSizeListProps,
+  index: number,
+  listMetaData: any
+) => {
   const { itemOffsetMap, itemSizeMap } = listMetaData;
   const { itemData } = props;
   // If the specified item has not yet been measured,
@@ -23,14 +29,17 @@ const getItemMetadata = (props: any, index: any, listMetaData: any) => {
   return { offset, size };
 };
 
-const getItemOffset = (props: any, index: any, listMetaData: any) =>
-  getItemMetadata(props, index, listMetaData).offset;
+const getItemOffset = (
+  props: DynamicSizeListProps,
+  index: number,
+  listMetaData: any
+) => getItemMetadata(props, index, listMetaData).offset;
 
 const getOffsetForIndexAndAlignment = (
-  props: any,
-  index: any,
-  align: any,
-  scrollOffset: any,
+  props: DynamicSizeListProps,
+  index: number,
+  align: ListItemAlign,
+  scrollOffset: number,
   listMetaData: any
 ) => {
   const { height } = props;
@@ -66,7 +75,7 @@ const getOffsetForIndexAndAlignment = (
 };
 
 const findNearestItem = (
-  props: any,
+  props: DynamicSizeListProps,
   listMetaData: any,
   high: any,
   low: any,
@@ -98,7 +107,7 @@ const getStartIndexForOffset = (props: any, offset: any, listMetaData: any) => {
 };
 
 const getStopIndexForStartIndex = (
-  props: any,
+  props: DynamicSizeListProps,
   startIndex: any,
   scrollOffset: any,
   listMetaData: any
@@ -123,7 +132,11 @@ const getStopIndexForStartIndex = (
   return stopIndex;
 };
 
-const getItemSize = (props: any, index: any, listMetaData: any) => {
+const getItemSize = (
+  props: DynamicSizeListProps,
+  index: number,
+  listMetaData: any
+) => {
   // Do not hard-code item dimensions.
   // We don't know them initially.
   // Even once we do, changes in item content or list size should reflow.
@@ -140,10 +153,14 @@ export interface OnScrollInfo {
 
 interface DynamicSizeListProps {
   canLoadMorePosts: () => void;
-  children: (info: { data: any; itemId: any }) => React.ReactElement;
+  children: (info: { data: string[]; itemId: string }) => React.ReactElement;
   height: number;
   initRangeToRender: number[];
-  initScrollToIndex: () => any;
+  initScrollToIndex: () => {
+    index: number;
+    position?: ListItemAlign;
+    offset?: number;
+  };
   initialScrollOffset?: number;
   innerRef: React.RefObject<HTMLDivElement>;
   itemData: string[];
@@ -171,7 +188,7 @@ interface DynamicSizeListState {
   scrollUpdateWasRequested: boolean;
   scrollDelta: number;
   scrollHeight: number;
-  localOlderPostsToRender: any[];
+  localOlderPostsToRender: [number, number];
   scrolledToInitIndex?: boolean;
 }
 
@@ -190,7 +207,7 @@ export default class DynamicSizeList extends PureComponent<
   };
 
   _itemStyleCache: any = {};
-  _outerRef: any;
+  _outerRef: HTMLDivElement | undefined;
   _scrollCorrectionInProgress = false;
   _scrollByCorrection: number | null = null;
   _keepScrollPosition = false;
@@ -208,22 +225,26 @@ export default class DynamicSizeList extends PureComponent<
     scrollUpdateWasRequested: false,
     scrollDelta: 0,
     scrollHeight: 0,
-    localOlderPostsToRender: [],
+    localOlderPostsToRender: [] as any,
   };
 
   // Always use explicit constructor for React components.
   // It produces less code after transpilation. (#26)
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: any) {
+  constructor(props: DynamicSizeListProps) {
     super(props);
   }
 
-  static getDerivedStateFromProps(props: any, state: any) {
+  static getDerivedStateFromProps(props: DynamicSizeListProps) {
     validateProps(props);
     return null;
   }
 
   scrollBy = (scrollOffset: number, scrollBy?: number) => () => {
+    if (!this._outerRef) {
+      return;
+    }
+
     const element = this._outerRef;
     if (typeof element.scrollBy === 'function' && scrollBy) {
       element.scrollBy(0, scrollBy);
@@ -235,16 +256,16 @@ export default class DynamicSizeList extends PureComponent<
   };
 
   scrollTo(
-    scrollOffset: any,
+    scrollOffset: number,
     scrollByValue?: number,
     useAnimationFrame = false
   ) {
     this._scrollCorrectionInProgress = true;
 
-    this.setState((prevState) => ({
+    this.setState({
       scrollOffset,
       scrollUpdateWasRequested: true,
-    }));
+    });
 
     this.setState(
       (prevState) => ({
@@ -267,7 +288,11 @@ export default class DynamicSizeList extends PureComponent<
     this.forceUpdate();
   }
 
-  scrollToItem(index: number, align = 'auto', offset = 0) {
+  scrollToItem(index: number, align: ListItemAlign = 'auto', offset = 0) {
+    if (!this._outerRef) {
+      return;
+    }
+
     const { scrollOffset } = this.state;
 
     //Ideally the below scrollTo works fine but firefox has 6px issue and stays 6px from bottom when corrected
@@ -303,6 +328,10 @@ export default class DynamicSizeList extends PureComponent<
   }
 
   componentDidMount() {
+    if (!this._outerRef) {
+      return;
+    }
+
     const { initialScrollOffset } = this.props;
 
     if (typeof initialScrollOffset === 'number' && this._outerRef !== null) {
@@ -323,6 +352,10 @@ export default class DynamicSizeList extends PureComponent<
       prevState.localOlderPostsToRender[1] !==
         this.state.localOlderPostsToRender[1]
     ) {
+      if (!this._outerRef) {
+        return;
+      }
+
       const element = this._outerRef;
       const previousScrollTop = element.scrollTop;
       const previousScrollHeight = element.scrollHeight;
@@ -396,6 +429,10 @@ export default class DynamicSizeList extends PureComponent<
       prevState.localOlderPostsToRender[1] !==
         this.state.localOlderPostsToRender[1]
     ) {
+      if (!this._outerRef) {
+        return;
+      }
+
       const postlistScrollHeight = this._outerRef.scrollHeight;
 
       const scrollValue =
@@ -732,6 +769,9 @@ export default class DynamicSizeList extends PureComponent<
       return;
     }
 
+    if (!this._outerRef) {
+      return;
+    }
     const element = this._outerRef;
     const wasAtBottom =
       this.props.height + element.scrollTop >=
@@ -797,6 +837,10 @@ export default class DynamicSizeList extends PureComponent<
     if (!doesItemExist) {
       delete this._listMetaData.itemSizeMap[itemId];
       delete this._listMetaData.itemOffsetMap[itemId];
+
+      if (!this._outerRef) {
+        return;
+      }
       const element = this._outerRef;
 
       const atBottom =
@@ -868,7 +912,7 @@ export default class DynamicSizeList extends PureComponent<
     return items;
   };
 
-  _onScrollVertical = (event: any) => {
+  _onScrollVertical = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
     if (!this.state.scrolledToInitIndex) {
       return;
     }
@@ -908,7 +952,7 @@ export default class DynamicSizeList extends PureComponent<
     });
   };
 
-  _outerRefSetter = (ref: any) => {
+  _outerRefSetter = (ref: HTMLDivElement) => {
     if (!this.props.innerRef.current) {
       return;
     }
