@@ -36,7 +36,7 @@ function findMessageIndexWithId(
   return messages.findIndex((m) => m._id === messageId);
 }
 
-interface VirtualizedMessageListProps {
+export interface VirtualizedMessageListProps {
   messages: ChatMessage[];
   onUpdateReadedMessage: (lastMessageId: string) => void;
 }
