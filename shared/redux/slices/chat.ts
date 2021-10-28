@@ -9,6 +9,10 @@ import { isValidStr } from '../../utils/string-helper';
 export interface ChatConverseState extends ChatConverseInfo {
   messages: ChatMessage[];
   hasFetchedHistory: boolean;
+  /**
+   * 判定是否还有更多的信息
+   */
+  hasMoreMessage: boolean;
 }
 
 export interface ChatState {
@@ -42,12 +46,14 @@ const chatSlice = createSlice({
       state.converses[converseId] = {
         messages: [],
         hasFetchedHistory: false,
+        hasMoreMessage: true,
         ...action.payload,
       };
     },
 
     /**
      * 追加消息
+     * 会根据id进行一次排序以确保顺序
      */
     appendConverseMessage(
       state,
@@ -80,6 +86,9 @@ const chatSlice = createSlice({
       }
     },
 
+    /**
+     * 初始化历史信息
+     */
     initialHistoryMessage(
       state,
       action: PayloadAction<{
@@ -102,6 +111,37 @@ const chatSlice = createSlice({
         })
       );
 
+      state.converses[converseId].hasFetchedHistory = true;
+    },
+
+    /**
+     * 追加历史信息
+     */
+    appendHistoryMessage(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        historyMessages: ChatMessage[];
+      }>
+    ) {
+      const { converseId, historyMessages } = action.payload;
+      if (!state.converses[converseId]) {
+        // 没有会话信息, 请先设置会话信息
+        console.error('没有会话信息, 请先设置会话信息');
+        return;
+      }
+
+      chatSlice.caseReducers.appendConverseMessage(
+        state,
+        chatSlice.actions.appendConverseMessage({
+          converseId,
+          messages: [...historyMessages],
+        })
+      );
+
+      if (historyMessages.length === 0) {
+        state.converses[converseId].hasMoreMessage = false;
+      }
       state.converses[converseId].hasFetchedHistory = true;
     },
 

@@ -16,6 +16,7 @@ import { ChatMessageItem } from './Item';
 
 const OVERSCAN_COUNT_BACKWARD = 80;
 const OVERSCAN_COUNT_FORWARD = 80;
+const HEIGHT_TRIGGER_FOR_MORE_POSTS = 200; // 触发加载更多的方法
 
 const postListStyle = {
   padding: '14px 0px 7px',
@@ -38,7 +39,9 @@ function findMessageIndexWithId(
 
 export interface VirtualizedMessageListProps {
   messages: ChatMessage[];
+  isLoadingMore: boolean;
   onUpdateReadedMessage: (lastMessageId: string) => void;
+  onLoadMore: () => void;
 }
 export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
   React.memo((props) => {
@@ -46,8 +49,32 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     const postListRef = useRef<HTMLDivElement>(null);
     const [isBottom, setIsBottom] = useState(true);
 
-    const onScroll = (info: OnScrollInfo) => {
-      if (info.clientHeight + info.scrollOffset === info.scrollHeight) {
+    const handleScroll = (info: OnScrollInfo) => {
+      const {
+        clientHeight,
+        scrollOffset,
+        scrollHeight,
+        scrollDirection,
+        scrollUpdateWasRequested,
+      } = info;
+      if (scrollHeight <= 0) {
+        return;
+      }
+
+      const didUserScrollBackwards =
+        scrollDirection === 'backward' && !scrollUpdateWasRequested;
+      const isOffsetWithInRange = scrollOffset < HEIGHT_TRIGGER_FOR_MORE_POSTS;
+
+      if (
+        didUserScrollBackwards &&
+        isOffsetWithInRange &&
+        !props.isLoadingMore
+      ) {
+        // 加载更多历史信息
+        props.onLoadMore();
+      }
+
+      if (clientHeight + scrollOffset === scrollHeight) {
         // 当前滚动条位于底部
         setIsBottom(true);
         props.onUpdateReadedMessage(
@@ -140,7 +167,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             itemData={props.messages.map((m) => m._id).reverse()}
             overscanCountForward={OVERSCAN_COUNT_FORWARD}
             overscanCountBackward={OVERSCAN_COUNT_BACKWARD}
-            onScroll={onScroll}
+            onScroll={handleScroll}
             initScrollToIndex={initScrollToIndex}
             canLoadMorePosts={() => {}}
             innerRef={postListRef}

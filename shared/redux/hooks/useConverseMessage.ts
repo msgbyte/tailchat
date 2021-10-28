@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ensureDMConverse } from '../../helper/converse-helper';
 import { useAsync } from '../../hooks/useAsync';
 import { showErrorToasts } from '../../manager/ui';
@@ -9,8 +9,15 @@ import {
 } from '../../model/message';
 import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
+import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
-import { t, useChatBoxContext } from '../..';
+import {
+  ChatConverseState,
+  isValidStr,
+  t,
+  useAsyncRequest,
+  useChatBoxContext,
+} from '../..';
 import { MessageHelper } from '../../utils/message-helper';
 import { ChatConverseType } from '../../model/converse';
 
@@ -71,7 +78,10 @@ interface ConverseContext {
 }
 export function useConverseMessage(context: ConverseContext) {
   const { converseId, isGroup } = context;
-  const converse = useAppSelector((state) => state.chat.converses[converseId]);
+  const converse = useAppSelector<ChatConverseState | undefined>(
+    (state) => state.chat.converses[converseId]
+  );
+  const hasMoreMessage = converse?.hasMoreMessage;
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
 
@@ -132,7 +142,38 @@ export function useConverseMessage(context: ConverseContext) {
     }
   }, [converseId]);
 
+  // 加载更多消息
+  const [{ loading: isLoadingMore }, handleFetchMoreMessage] =
+    useAsyncRequest(async () => {
+      const firstMessageId = _get(messages, [0, '_id']);
+      if (!isValidStr(firstMessageId)) {
+        return;
+      }
+
+      if (hasMoreMessage === false) {
+        return;
+      }
+
+      const olderMessages = await fetchConverseMessage(
+        converseId,
+        firstMessageId
+      );
+      dispatch(
+        chatActions.appendHistoryMessage({
+          converseId,
+          historyMessages: olderMessages,
+        })
+      );
+    }, [converseId, hasMoreMessage, _get(messages, [0, '_id'])]);
+
   const handleSendMessage = useHandleSendMessage(context);
 
-  return { messages, loading, error, handleSendMessage };
+  return {
+    messages,
+    loading,
+    error,
+    isLoadingMore,
+    handleFetchMoreMessage,
+    handleSendMessage,
+  };
 }

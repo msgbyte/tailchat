@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ChatBoxContextProvider, useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatBoxPlaceholder } from './ChatBoxPlaceholder';
@@ -20,7 +20,14 @@ type ChatBoxProps =
     };
 const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
   const { converseId, isGroup } = props;
-  const { messages, loading, error, handleSendMessage } = useConverseMessage({
+  const {
+    messages,
+    loading,
+    error,
+    isLoadingMore,
+    handleFetchMoreMessage,
+    handleSendMessage,
+  } = useConverseMessage({
     converseId,
     isGroup,
   });
@@ -38,7 +45,9 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
     <div className="w-full h-full flex flex-col select-text">
       <ChatMessageList
         messages={messages}
+        isLoadingMore={isLoadingMore}
         onUpdateReadedMessage={updateConverseAck}
+        onLoadMore={handleFetchMoreMessage}
       />
 
       <ChatReply />
