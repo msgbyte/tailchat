@@ -81,7 +81,7 @@ export function useConverseMessage(context: ConverseContext) {
   const converse = useAppSelector<ChatConverseState | undefined>(
     (state) => state.chat.converses[converseId]
   );
-  const hasMoreMessage = converse?.hasMoreMessage;
+  const hasMoreMessage = converse?.hasMoreMessage ?? true;
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
 
@@ -173,6 +173,7 @@ export function useConverseMessage(context: ConverseContext) {
     loading,
     error,
     isLoadingMore,
+    hasMoreMessage,
     handleFetchMoreMessage,
     handleSendMessage,
   };

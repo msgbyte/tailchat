@@ -25,6 +25,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
     loading,
     error,
     isLoadingMore,
+    hasMoreMessage,
     handleFetchMoreMessage,
     handleSendMessage,
   } = useConverseMessage({
@@ -46,6 +47,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
       <ChatMessageList
         messages={messages}
         isLoadingMore={isLoadingMore}
+        hasMoreMessage={hasMoreMessage}
         onUpdateReadedMessage={updateConverseAck}
         onLoadMore={handleFetchMoreMessage}
       />

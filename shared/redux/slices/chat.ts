@@ -111,6 +111,10 @@ const chatSlice = createSlice({
         })
       );
 
+      if (historyMessages.length < 50) {
+        state.converses[converseId].hasMoreMessage = false;
+      }
+
       state.converses[converseId].hasFetchedHistory = true;
     },
 
@@ -139,7 +143,7 @@ const chatSlice = createSlice({
         })
       );
 
-      if (historyMessages.length === 0) {
+      if (historyMessages.length < 50) {
         state.converses[converseId].hasMoreMessage = false;
       }
       state.converses[converseId].hasFetchedHistory = true;

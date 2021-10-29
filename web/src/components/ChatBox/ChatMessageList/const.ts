@@ -1,0 +1,4 @@
+export const messageReverseItemId = {
+  OLDER_MESSAGES_LOADER: 'OLDER_MESSAGES_LOADER',
+  TEXT_CHANNEL_INTRO: 'TEXT_CHANNEL_INTRO',
+};

@@ -8,8 +8,10 @@ import {
   ChatMessage,
   getMessageTimeDiff,
   shouldShowMessageTime,
+  t,
   useUpdateRef,
 } from 'tailchat-shared';
+import { messageReverseItemId } from './const';
 import { ChatMessageItem } from './Item';
 
 // Reference: https://github.com/mattermost/mattermost-webapp/blob/master/components/post_view/post_list_virtualized/post_list_virtualized.jsx
@@ -40,6 +42,7 @@ function findMessageIndexWithId(
 export interface VirtualizedMessageListProps {
   messages: ChatMessage[];
   isLoadingMore: boolean;
+  hasMoreMessage: boolean;
   onUpdateReadedMessage: (lastMessageId: string) => void;
   onLoadMore: () => void;
 }
@@ -108,6 +111,20 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
      * 渲染列表元素
      */
     const renderRow = ({ data, itemId }: any) => {
+      if (itemId === messageReverseItemId.OLDER_MESSAGES_LOADER) {
+        return (
+          <div key={itemId} className="text-center text-gray-400">
+            {t('加载中...')}
+          </div>
+        );
+      } else if (itemId === messageReverseItemId.TEXT_CHANNEL_INTRO) {
+        return (
+          <div key={itemId} className="text-center text-gray-400">
+            {t('到顶了')}
+          </div>
+        );
+      }
+
       const messages = props.messages;
       const index = findMessageIndexWithId(messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
       if (index === -1) {
@@ -152,9 +169,16 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     };
 
     // 初始渲染范围
-    const initRangeToRender = useMemo(
-      () => [props.messages.length - 50, props.messages.length - 1],
-      []
+    const initRangeToRender = useMemo(() => [0, props.messages.length], []);
+
+    const itemData = useMemo(
+      () => [
+        ...props.messages.map((m) => m._id).reverse(),
+        props.hasMoreMessage
+          ? messageReverseItemId.OLDER_MESSAGES_LOADER
+          : messageReverseItemId.TEXT_CHANNEL_INTRO,
+      ],
+      [props.messages, props.hasMoreMessage]
     );
 
     return (
@@ -164,7 +188,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             ref={listRef}
             height={height}
             width={width}
-            itemData={props.messages.map((m) => m._id).reverse()}
+            itemData={itemData}
             overscanCountForward={OVERSCAN_COUNT_FORWARD}
             overscanCountBackward={OVERSCAN_COUNT_BACKWARD}
             onScroll={handleScroll}
@@ -174,7 +198,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             style={{ ...virtListStyles, ...dynamicListStyle }}
             innerListStyle={postListStyle}
             initRangeToRender={initRangeToRender}
-            // loaderId={PostListRowListIds.OLDER_MESSAGES_LOADER}
+            loaderId={messageReverseItemId.OLDER_MESSAGES_LOADER}
             correctScrollToBottom={isBottom}
           >
             {renderRow}

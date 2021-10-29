@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
 import React from 'react';
-import { createElement, PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { ItemMeasurer } from './ItemMeasurer';
 
 type ScrollDirection = any;
@@ -174,6 +174,10 @@ interface DynamicSizeListState {
   localOlderPostsToRender: any[];
   scrolledToInitIndex?: boolean;
 }
+
+/**
+ * 注意，该组件必须拥有一个loader
+ */
 export default class DynamicSizeList extends PureComponent<
   DynamicSizeListProps,
   DynamicSizeListState
@@ -652,8 +656,10 @@ export default class DynamicSizeList extends PureComponent<
       Math.min(itemCount - 1, startIndex + overscanForward)
     );
 
+    // 移除size为空的项
+    // 注意，这里必须要确保最上有一个保留项
     while (
-      !getItemSize(this.props, maxValue, this._listMetaData) &&
+      getItemSize(this.props, maxValue, this._listMetaData) === 0 &&
       maxValue > 0 &&
       this._listMetaData.totalMeasuredSize > this.props.height
     ) {
@@ -858,6 +864,7 @@ export default class DynamicSizeList extends PureComponent<
         }
       }
     }
+
     return items;
   };
 
