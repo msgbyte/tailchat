@@ -653,7 +653,7 @@ export default class DynamicSizeList extends PureComponent<
   /**
    * 获取渲染范围
    */
-  _getRangeToRender(scrollTop = 0): number[] {
+  _getRangeToRender(scrollTop?: number): number[] {
     const { itemData, overscanCountForward, overscanCountBackward } =
       this.props;
     const { scrollDirection, scrollOffset } = this.state;
@@ -662,7 +662,10 @@ export default class DynamicSizeList extends PureComponent<
     if (itemCount === 0) {
       return [0, 0, 0, 0];
     }
-    const scrollOffsetValue = scrollTop >= 0 ? scrollTop : scrollOffset;
+    const scrollOffsetValue =
+      typeof scrollTop === 'number' && scrollTop >= 0
+        ? scrollTop
+        : scrollOffset;
     const startIndex = getStartIndexForOffset(
       this.props,
       scrollOffsetValue,
