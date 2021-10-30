@@ -191,6 +191,10 @@ interface DynamicSizeListState {
   localOlderPostsToRender: [number, number];
   scrolledToInitIndex?: boolean;
 }
+type DynamicSizeListSnapshot = {
+  previousScrollTop: number;
+  previousScrollHeight: number;
+} | null;
 
 /**
  * 注意，该组件必须拥有一个loader
@@ -345,34 +349,35 @@ export default class DynamicSizeList extends PureComponent<
   getSnapshotBeforeUpdate(
     prevProps: DynamicSizeListProps,
     prevState: DynamicSizeListState
-  ) {
-    if (
-      prevState.localOlderPostsToRender[0] !==
-        this.state.localOlderPostsToRender[0] ||
-      prevState.localOlderPostsToRender[1] !==
-        this.state.localOlderPostsToRender[1]
-    ) {
-      if (!this._outerRef) {
-        return;
-      }
+  ): DynamicSizeListSnapshot {
+    if (this._outerRef) {
+      const isChangedLocalOlderPostsToRender =
+        prevState.localOlderPostsToRender[0] !==
+          this.state.localOlderPostsToRender[0] ||
+        prevState.localOlderPostsToRender[1] !==
+          this.state.localOlderPostsToRender[1];
 
-      const element = this._outerRef;
-      const previousScrollTop = element.scrollTop;
-      const previousScrollHeight = element.scrollHeight;
-      return {
-        previousScrollTop,
-        previousScrollHeight,
-      };
+      if (isChangedLocalOlderPostsToRender) {
+        const element = this._outerRef;
+        const previousScrollTop = element.scrollTop;
+        const previousScrollHeight = element.scrollHeight;
+        return {
+          previousScrollTop,
+          previousScrollHeight,
+        };
+      }
     }
+
     return null;
   }
 
   componentDidUpdate(
     prevProps: DynamicSizeListProps,
     prevState: DynamicSizeListState,
-    snapshot: any
+    snapshot: DynamicSizeListSnapshot
   ) {
     if (this.state.scrolledToInitIndex) {
+      // 如果一定滚动到初始位置
       const {
         scrollDirection,
         scrollOffset,
@@ -430,6 +435,9 @@ export default class DynamicSizeList extends PureComponent<
         this.state.localOlderPostsToRender[1]
     ) {
       if (!this._outerRef) {
+        return;
+      }
+      if (!snapshot) {
         return;
       }
 

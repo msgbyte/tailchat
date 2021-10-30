@@ -103,7 +103,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     const initScrollToIndex = () => {
       return {
         index: 0,
-        position: 'end',
+        position: 'end' as const,
       };
     };
 
