@@ -149,7 +149,10 @@ function findMessageIndexWithId(
 /**
  * 构造聊天项
  */
-export function buildItemRow(messages: ChatMessage[], messageId: string) {
+export function buildMessageItemRow(
+  messages: ChatMessage[],
+  messageId: string
+) {
   const index = findMessageIndexWithId(messages, messageId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
   if (index === -1) {
     return <div />;
@@ -181,7 +184,7 @@ export function buildItemRow(messages: ChatMessage[], messageId: string) {
   }
 
   return (
-    <div key={message._id} data-debug={JSON.stringify(index)}>
+    <div key={message._id}>
       {showDate && (
         <Divider className="text-sm opacity-40 px-6 font-normal select-none">
           {getMessageTimeDiff(messageCreatedAt)}

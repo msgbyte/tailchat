@@ -13,7 +13,7 @@ import React, {
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { ChatMessage, t, usePrevious, useUpdateRef } from 'tailchat-shared';
 import { messageReverseItemId } from './const';
-import { buildItemRow } from './Item';
+import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 
 // Reference: https://github.com/mattermost/mattermost-webapp/blob/master/components/post_view/post_list_virtualized/post_list_virtualized.jsx
@@ -114,7 +114,7 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         );
       }
 
-      return buildItemRow(props.messages, itemId);
+      return buildMessageItemRow(props.messages, itemId);
     };
 
     // 初始渲染范围
