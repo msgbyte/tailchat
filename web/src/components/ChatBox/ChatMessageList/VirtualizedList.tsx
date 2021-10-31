@@ -1,4 +1,6 @@
-import DynamicSizeList, {
+import {
+  DynamicSizeList,
+  DynamicSizeRenderInfo,
   OnScrollInfo,
 } from '@/components/DynamicVirtualizedList/DynamicSizeList';
 import { Divider } from 'antd';
@@ -118,7 +120,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
     /**
      * 渲染列表元素
      */
-    const renderRow = ({ itemId }: any) => {
+    const renderRow = ({ itemId }: DynamicSizeRenderInfo) => {
       if (itemId === messageReverseItemId.OLDER_MESSAGES_LOADER) {
         return (
           <div key={itemId} className="text-center text-gray-400">
@@ -197,6 +199,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             height={height}
             width={width}
             itemData={itemData}
+            renderItem={renderRow}
             overscanCountForward={OVERSCAN_COUNT_FORWARD}
             overscanCountBackward={OVERSCAN_COUNT_BACKWARD}
             onScroll={handleScroll}
@@ -208,9 +211,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
             initRangeToRender={initRangeToRender}
             loaderId={messageReverseItemId.OLDER_MESSAGES_LOADER}
             correctScrollToBottom={isBottom}
-          >
-            {renderRow}
-          </DynamicSizeList>
+          />
         )}
       </AutoSizer>
     );

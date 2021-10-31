@@ -151,9 +151,14 @@ export interface OnScrollInfo {
   scrollHeight: number;
 }
 
+export interface DynamicSizeRenderInfo {
+  data: string[];
+  itemId: string;
+}
+
 interface DynamicSizeListProps {
   canLoadMorePosts: () => void;
-  children: (info: { data: string[]; itemId: string }) => React.ReactElement;
+  renderItem: (info: DynamicSizeRenderInfo) => React.ReactElement;
   height: number;
   initRangeToRender: number[];
   initScrollToIndex: () => {
@@ -199,7 +204,7 @@ type DynamicSizeListSnapshot = {
 /**
  * 注意，该组件必须拥有一个loader
  */
-export default class DynamicSizeList extends PureComponent<
+export class DynamicSizeList extends PureComponent<
   DynamicSizeListProps,
   DynamicSizeListState
 > {
@@ -866,7 +871,7 @@ export default class DynamicSizeList extends PureComponent<
   };
 
   _renderItems = () => {
-    const { children, itemData, loaderId } = this.props;
+    const { renderItem, itemData, loaderId } = this.props;
     const width = this.innerRefWidth;
     const [startIndex, stopIndex] = this._getRangeToRender();
     const itemCount = itemData.length;
@@ -896,7 +901,7 @@ export default class DynamicSizeList extends PureComponent<
           isItemInLocalPosts ||
           isLoader
         ) {
-          const item: React.ReactElement = children({
+          const item: React.ReactElement = renderItem({
             data: itemData,
             itemId,
           });
@@ -991,18 +996,14 @@ export default class DynamicSizeList extends PureComponent<
 // I assume people already do this (render function returning a class component),
 // So my doing it would just unnecessarily double the wrappers.
 
-const validateProps = ({ children, itemSize }: any) => {
+const validateProps = ({ renderItem }: DynamicSizeListProps) => {
   if (process.env.NODE_ENV !== 'production') {
-    if (children == null) {
+    if (renderItem == null) {
       throw Error(
-        'An invalid "children" prop has been specified. ' +
+        'An invalid "renderItem" prop has been specified. ' +
           'Value should be a React component. ' +
-          `"${children === null ? 'null' : typeof children}" was specified.`
+          `"${renderItem === null ? 'null' : typeof renderItem}" was specified.`
       );
-    }
-
-    if (itemSize !== undefined) {
-      throw Error('An unexpected "itemSize" prop has been provided.');
     }
   }
 };
