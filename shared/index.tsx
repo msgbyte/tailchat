@@ -53,6 +53,7 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useDebounce } from './hooks/useDebounce';
 export { useMountedState } from './hooks/useMountedState';
+export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
 export { useUpdateRef } from './hooks/useUpdateRef';
 
