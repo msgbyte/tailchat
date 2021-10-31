@@ -3,7 +3,6 @@ import {
   DynamicSizeRenderInfo,
   OnScrollInfo,
 } from '@/components/DynamicVirtualizedList/DynamicSizeList';
-import { Divider } from 'antd';
 import React, {
   useEffect,
   useLayoutEffect,
@@ -12,16 +11,10 @@ import React, {
   useState,
 } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import {
-  ChatMessage,
-  getMessageTimeDiff,
-  shouldShowMessageTime,
-  t,
-  usePrevious,
-  useUpdateRef,
-} from 'tailchat-shared';
+import { ChatMessage, t, usePrevious, useUpdateRef } from 'tailchat-shared';
 import { messageReverseItemId } from './const';
-import { ChatMessageItem } from './Item';
+import { buildItemRow } from './Item';
+import type { MessageListProps } from './types';
 
 // Reference: https://github.com/mattermost/mattermost-webapp/blob/master/components/post_view/post_list_virtualized/post_list_virtualized.jsx
 
@@ -41,22 +34,8 @@ const virtListStyles: React.CSSProperties = {
 
 const dynamicListStyle: React.CSSProperties = {}; // TODO
 
-function findMessageIndexWithId(
-  messages: ChatMessage[],
-  messageId: string
-): number {
-  return messages.findIndex((m) => m._id === messageId);
-}
-
-export interface VirtualizedMessageListProps {
-  messages: ChatMessage[];
-  isLoadingMore: boolean;
-  hasMoreMessage: boolean;
-  onUpdateReadedMessage: (lastMessageId: string) => void;
-  onLoadMore: () => void;
-}
-export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
-  React.memo((props) => {
+export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
+  (props) => {
     const listRef = useRef<DynamicSizeList>(null);
     const postListRef = useRef<HTMLDivElement>(null);
     const [isBottom, setIsBottom] = useState(true);
@@ -135,47 +114,7 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
         );
       }
 
-      const messages = props.messages;
-      const index = findMessageIndexWithId(messages, itemId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
-      if (index === -1) {
-        return <div />;
-      }
-
-      const message = messages[index];
-
-      let showDate = true;
-      let showAvatar = true;
-      const messageCreatedAt = new Date(message.createdAt ?? '');
-      if (index > 0) {
-        // 当不是第一条数据时
-
-        // 进行时间合并
-        const prevMessage = messages[index - 1];
-        if (
-          !shouldShowMessageTime(
-            new Date(prevMessage.createdAt ?? ''),
-            messageCreatedAt
-          )
-        ) {
-          showDate = false;
-        }
-
-        // 进行头像合并(在同一时间块下 且发送者为同一人)
-        if (showDate === false) {
-          showAvatar = prevMessage.author !== message.author;
-        }
-      }
-
-      return (
-        <div key={message._id} data-debug={JSON.stringify(index)}>
-          {showDate && (
-            <Divider className="text-sm opacity-40 px-6 font-normal select-none">
-              {getMessageTimeDiff(messageCreatedAt)}
-            </Divider>
-          )}
-          <ChatMessageItem showAvatar={showAvatar} payload={message} />
-        </div>
-      );
+      return buildItemRow(props.messages, itemId);
     };
 
     // 初始渲染范围
@@ -215,7 +154,8 @@ export const VirtualizedMessageList: React.FC<VirtualizedMessageListProps> =
         )}
       </AutoSizer>
     );
-  });
+  }
+);
 VirtualizedMessageList.displayName = 'VirtualizedMessageList';
 
 /**

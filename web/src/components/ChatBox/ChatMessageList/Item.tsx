@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import {
   ChatMessage,
   formatShortTime,
+  getMessageTimeDiff,
+  shouldShowMessageTime,
   SYSTEM_USERID,
   t,
   useCachedUserInfo,
@@ -11,7 +13,7 @@ import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
-import { Dropdown, Menu } from 'antd';
+import { Divider, Dropdown, Menu } from 'antd';
 import { MessageHelper } from 'tailchat-shared';
 import { UserName } from '@/components/UserName';
 import './item.less';
@@ -128,13 +130,64 @@ interface ChatMessageItemProps {
   showAvatar: boolean;
   payload: ChatMessage;
 }
-export const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo(
-  (props) => {
-    if (props.payload.author === SYSTEM_USERID) {
-      return <SystemMessage {...props} />;
+const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
+  if (props.payload.author === SYSTEM_USERID) {
+    return <SystemMessage {...props} />;
+  }
+
+  return <NormalMessage {...props} />;
+});
+ChatMessageItem.displayName = 'ChatMessageItem';
+
+function findMessageIndexWithId(
+  messages: ChatMessage[],
+  messageId: string
+): number {
+  return messages.findIndex((m) => m._id === messageId);
+}
+
+/**
+ * 构造聊天项
+ */
+export function buildItemRow(messages: ChatMessage[], messageId: string) {
+  const index = findMessageIndexWithId(messages, messageId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
+  if (index === -1) {
+    return <div />;
+  }
+
+  const message = messages[index];
+
+  let showDate = true;
+  let showAvatar = true;
+  const messageCreatedAt = new Date(message.createdAt ?? '');
+  if (index > 0) {
+    // 当不是第一条数据时
+
+    // 进行时间合并
+    const prevMessage = messages[index - 1];
+    if (
+      !shouldShowMessageTime(
+        new Date(prevMessage.createdAt ?? ''),
+        messageCreatedAt
+      )
+    ) {
+      showDate = false;
     }
 
-    return <NormalMessage {...props} />;
+    // 进行头像合并(在同一时间块下 且发送者为同一人)
+    if (showDate === false) {
+      showAvatar = prevMessage.author !== message.author;
+    }
   }
-);
-ChatMessageItem.displayName = 'ChatMessageItem';
+
+  return (
+    <div key={message._id} data-debug={JSON.stringify(index)}>
+      {showDate && (
+        <Divider className="text-sm opacity-40 px-6 font-normal select-none">
+          {getMessageTimeDiff(messageCreatedAt)}
+        </Divider>
+      )}
+      <ChatMessageItem showAvatar={showAvatar} payload={message} />
+    </div>
+  );
+}
