@@ -17,11 +17,11 @@ import WorkboxPlugin from 'workbox-webpack-plugin';
 require('dotenv').config();
 
 delete process.env.TS_NODE_PROJECT; // https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/32
-require('../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
+require('../../build/script/buildPublicTranslation.js'); // 编译前先执行一下构建翻译的脚本
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require('./package.json');
+const packageJson = require('../package.json');
 
-const ROOT_PATH = path.resolve(__dirname, './');
+const ROOT_PATH = path.resolve(__dirname, '../');
 const DIST_PATH = path.resolve(ROOT_PATH, './dist');
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 const PORT = Number(process.env.PORT || 11011);
@@ -40,7 +40,7 @@ const mode = isDev ? 'development' : 'production';
 const config: Configuration = {
   mode,
   entry: {
-    app: './src/index.tsx',
+    app: path.resolve(ROOT_PATH, './src/index.tsx'),
   },
   output: {
     path: DIST_PATH,
@@ -51,7 +51,7 @@ const config: Configuration = {
     port: PORT,
     historyApiFallback: true,
     static: {
-      directory: path.resolve(__dirname, './dist'),
+      directory: path.resolve(ROOT_PATH, './dist'),
     },
     client: {
       overlay: false,
@@ -66,7 +66,7 @@ const config: Configuration = {
         options: {
           loader: 'tsx',
           target: 'es2015',
-          tsconfigRaw: require('./tsconfig.json'),
+          tsconfigRaw: require('../tsconfig.json'),
         },
       },
       {
@@ -140,15 +140,15 @@ const config: Configuration = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, '../locales'),
+          from: path.resolve(ROOT_PATH, '../locales'),
           to: 'locales',
         },
         {
-          from: path.resolve(__dirname, './assets/pwa.webmanifest'),
+          from: path.resolve(ROOT_PATH, './assets/pwa.webmanifest'),
           to: 'pwa.webmanifest',
         },
         {
-          from: path.resolve(__dirname, './assets/images/logo/'),
+          from: path.resolve(ROOT_PATH, './assets/images/logo/'),
           to: 'images/logo/',
         },
       ],
