@@ -12,6 +12,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import fs from 'fs';
 import WorkboxPlugin from 'workbox-webpack-plugin';
+import { workboxPluginPattern } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -185,7 +186,7 @@ const config: Configuration = {
         },
         {
           // 匹配内置 plugins 以加速
-          urlPattern: /plugins\/com\.msgbyte(.*?)\.js/,
+          urlPattern: workboxPluginPattern,
           handler: 'CacheFirst',
           options: {
             cacheName: 'builtin-plugins',
