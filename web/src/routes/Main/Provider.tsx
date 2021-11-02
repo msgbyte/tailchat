@@ -36,7 +36,9 @@ function useAppState() {
         userLoginInfo = await loginWithToken(token);
       } catch (e) {
         // 当前 Token 不存在或已过期
-        history.replace('/entry/login');
+        history.replace(
+          `/entry/login?redirect=${encodeURIComponent(location.pathname)}`
+        );
         return;
       }
     }
