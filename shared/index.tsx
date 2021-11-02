@@ -109,6 +109,7 @@ export {
   loginWithEmail,
   loginWithToken,
   registerWithEmail,
+  createTemporaryUser,
   searchUserWithUniqueName,
   checkTokenValid,
   modifyUserField,

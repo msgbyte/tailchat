@@ -1,13 +1,15 @@
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
 import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
+import { DevContainer } from '@/components/DevContainer';
+import { useNavToView } from './utils';
 
 /**
  * TODO:
@@ -58,13 +60,7 @@ export const LoginView: React.FC = React.memo(() => {
     }
   }, [email, password, history, navRedirect]);
 
-  const toRegisterView = useCallback(() => {
-    // 携带上下文切换路由
-    history.push({
-      ...history.location,
-      pathname: '/entry/register',
-    });
-  }, [history]);
+  const navToView = useNavToView();
 
   return (
     <div className="w-96 text-white">
@@ -109,11 +105,22 @@ export const LoginView: React.FC = React.memo(() => {
         <button
           className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
           disabled={loading}
-          onClick={toRegisterView}
+          onClick={() => navToView('/entry/register')}
         >
           {t('注册账号')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
+
+        <DevContainer>
+          <button
+            className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+            disabled={loading}
+            onClick={() => navToView('/entry/guest')}
+          >
+            {t('游客访问')}
+            <Icon icon="mdi:arrow-right" className="ml-1 inline" />
+          </button>
+        </DevContainer>
       </form>
     </div>
   );

@@ -69,6 +69,20 @@ export async function registerWithEmail(
 }
 
 /**
+ * 创建访客账号
+ * @param nickname 访客昵称
+ */
+export async function createTemporaryUser(
+  nickname: string
+): Promise<UserLoginInfo> {
+  const { data } = await request.post('/api/user/createTemporaryUser', {
+    nickname,
+  });
+
+  return data;
+}
+
+/**
  * 使用唯一标识名搜索用户
  * @param uniqueName 唯一标识用户昵称: 用户昵称#0000
  */

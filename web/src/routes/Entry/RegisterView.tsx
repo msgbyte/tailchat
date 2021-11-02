@@ -1,5 +1,5 @@
 import { isValidStr, registerWithEmail, t, useAsyncFn } from 'tailchat-shared';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { Icon } from '@iconify/react';
@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
+import { useNavToView } from './utils';
 
 /**
  * 注册视图
@@ -40,13 +41,7 @@ export const RegisterView: React.FC = React.memo(() => {
     }
   }, [email, password, navRedirect]);
 
-  const toLoginView = useCallback(() => {
-    // 携带上下文切换路由
-    history.push({
-      ...history.location,
-      pathname: '/entry/login',
-    });
-  }, [history]);
+  const navToView = useNavToView();
 
   return (
     <div className="w-96 text-white">
@@ -90,7 +85,7 @@ export const RegisterView: React.FC = React.memo(() => {
         <button
           className="w-full py-2 px-4 border border-transparent text-sm text-left font-medium text-white disabled:opacity-50"
           disabled={loading}
-          onClick={toLoginView}
+          onClick={() => navToView('/entry/login')}
         >
           <Icon icon="mdi:arrow-left" className="mr-1 inline" />
           {t('返回登录')}
