@@ -5,7 +5,7 @@ import { t, useDMConverseList, useUserInfo } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 import { openModal } from '@/components/Modal';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
-import DevContainer from '@/components/DevContainer';
+import { DevContainer } from '@/components/DevContainer';
 import { SectionHeader } from '@/components/SectionHeader';
 
 const SidebarSection: React.FC<{
