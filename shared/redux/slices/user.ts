@@ -29,6 +29,8 @@ const userSlice = createSlice({
       if (state.info === null) {
         return;
       }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       state.info[fieldName] = fieldValue;
     },
     setFriendList(state, action: PayloadAction<string[]>) {
