@@ -33,30 +33,29 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
 
       if (isGIF(pickedFile)) {
         updateAvatar(URL.createObjectURL(pickedFile));
-        return;
+      } else {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          if (reader.result) {
+            const key = openModal(
+              <ModalAvatarCropper
+                imageUrl={reader.result.toString()}
+                onConfirm={(croppedImageBlobUrl) => {
+                  closeModal(key);
+                  updateAvatar(croppedImageBlobUrl);
+                }}
+              />,
+              {
+                maskClosable: false,
+                closable: true,
+              }
+            );
+          } else {
+            showToasts(t('文件读取失败'), 'error');
+          }
+        });
+        reader.readAsDataURL(pickedFile);
       }
-
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        if (reader.result) {
-          const key = openModal(
-            <ModalAvatarCropper
-              imageUrl={reader.result.toString()}
-              onConfirm={(croppedImageBlobUrl) => {
-                closeModal(key);
-                updateAvatar(croppedImageBlobUrl);
-              }}
-            />,
-            {
-              maskClosable: false,
-              closable: true,
-            }
-          );
-        } else {
-          showToasts(t('文件读取失败'), 'error');
-        }
-      });
-      reader.readAsDataURL(pickedFile);
 
       // 清理选中状态
       e.target.files = null;
