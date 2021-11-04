@@ -4,6 +4,7 @@ import { showToasts, t } from 'tailchat-shared';
 import { Avatar } from 'antd';
 import { Icon } from '@iconify/react';
 import { ModalAvatarCropper } from './modals/AvatarCropper';
+import { isGIF } from '@/utils/filetype-helper';
 
 interface AvatarPickerProps {
   className?: string;
@@ -16,10 +17,25 @@ interface AvatarPickerProps {
  */
 export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [cropUrl, setCropUrl] = useState<string>(props.imageUrl || ''); // 裁剪后并使用的url
+  const [avatarUrl, setAvatarUrl] = useState<string>(props.imageUrl || ''); // 裁剪后并使用的url/或者未经裁剪的 gif url
+
+  const updateAvatar = (imageBlobUrl: string) => {
+    setAvatarUrl(imageBlobUrl);
+
+    if (typeof props.onChange === 'function') {
+      props.onChange(imageBlobUrl);
+    }
+  };
 
   const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
+      const pickedFile = e.target.files[0];
+
+      if (isGIF(pickedFile)) {
+        updateAvatar(URL.createObjectURL(pickedFile));
+        return;
+      }
+
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         if (reader.result) {
@@ -28,11 +44,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
               imageUrl={reader.result.toString()}
               onConfirm={(croppedImageBlobUrl) => {
                 closeModal(key);
-                setCropUrl(croppedImageBlobUrl);
-
-                if (typeof props.onChange === 'function') {
-                  props.onChange(croppedImageBlobUrl);
-                }
+                updateAvatar(croppedImageBlobUrl);
               }}
             />,
             {
@@ -44,7 +56,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
           showToasts(t('文件读取失败'), 'error');
         }
       });
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(pickedFile);
 
       // 清理选中状态
       e.target.files = null;
@@ -71,7 +83,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
           <Avatar
             size={64}
             icon={<Icon className="anticon" icon="mdi:account" />}
-            src={cropUrl}
+            src={avatarUrl}
           />
         )}
       </div>
