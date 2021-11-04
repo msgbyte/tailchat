@@ -21,7 +21,7 @@ export const GuestView: React.FC = React.memo(() => {
   const [nickname, setNickname] = useState('');
 
   const [{ loading }, handleCreateTemporaryUser] = useAsyncRequest(async () => {
-    await string().required(t('昵称不能为空')).validate(nickname);
+    await string().required(t('昵称不能为空')).max(16).validate(nickname);
 
     const data = await createTemporaryUser(nickname);
 

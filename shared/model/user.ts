@@ -7,6 +7,7 @@ export interface UserBaseInfo {
   nickname: string;
   discriminator: string;
   avatar: string | null;
+  temporary: boolean;
 }
 
 export interface UserLoginInfo extends UserBaseInfo {
@@ -77,6 +78,23 @@ export async function createTemporaryUser(
 ): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/createTemporaryUser', {
     nickname,
+  });
+
+  return data;
+}
+
+/**
+ * 认领访客账号
+ */
+export async function claimTemporaryUser(
+  userId: string,
+  email: string,
+  password: string
+): Promise<UserLoginInfo> {
+  const { data } = await request.post('/api/user/claimTemporaryUser', {
+    userId,
+    email,
+    password,
   });
 
   return data;

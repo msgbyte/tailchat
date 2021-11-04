@@ -110,6 +110,7 @@ export {
   loginWithToken,
   registerWithEmail,
   createTemporaryUser,
+  claimTemporaryUser,
   searchUserWithUniqueName,
   checkTokenValid,
   modifyUserField,
@@ -136,7 +137,7 @@ export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // utils
 export { joinArray } from './utils/array-helper';
-export { SYSTEM_USERID } from './utils/consts';
+export { NAME_REGEXP, SYSTEM_USERID } from './utils/consts';
 export {
   shouldShowMessageTime,
   getMessageTimeDiff,

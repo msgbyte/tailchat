@@ -1,3 +1,4 @@
+import { GlobalTemporaryTip } from '@/components/GlobalTemporaryTip';
 import { useRecordMeasure } from '@/utils/measure-helper';
 import React from 'react';
 import { MainContent } from './Content';
@@ -10,13 +11,17 @@ const MainRoute: React.FC = React.memo(() => {
   useShortcuts();
 
   return (
-    <div className="flex h-full">
-      <MainProvider>
-        <Navbar />
+    <MainProvider>
+      <div className="flex flex-col h-full">
+        <GlobalTemporaryTip />
 
-        <MainContent />
-      </MainProvider>
-    </div>
+        <div className="flex flex-1">
+          <Navbar />
+
+          <MainContent />
+        </div>
+      </div>
+    </MainProvider>
   );
 });
 MainRoute.displayName = 'MainRoute';
