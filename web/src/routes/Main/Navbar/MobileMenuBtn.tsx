@@ -17,7 +17,7 @@ export const MobileMenuBtn: React.FC = React.memo(() => {
 
   return (
     <Icon
-      className="text-5xl mb-4"
+      className="text-5xl mb-4 cursor-pointer"
       icon={showSidebar ? 'mdi:menu-open' : 'mdi:menu'}
       onClick={handleSwitchSidebar}
     />
