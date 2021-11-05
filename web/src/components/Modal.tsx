@@ -88,7 +88,7 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
         <ModalContext.Provider value={{ closeModal }}>
           {/* Inner */}
           <div
-            className="modal-inner bg-content-light dark:bg-content-dark rounded overflow-auto relative"
+            className="modal-inner bg-content-light dark:bg-content-dark rounded overflow-auto relative z-10"
             style={{ maxHeight: '80vh', maxWidth: '80vw' }}
             onClick={stopPropagation}
           >
