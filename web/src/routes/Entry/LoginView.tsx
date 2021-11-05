@@ -8,7 +8,6 @@ import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
-import { DevContainer } from '@/components/DevContainer';
 import { useNavToView } from './utils';
 
 /**
@@ -111,16 +110,14 @@ export const LoginView: React.FC = React.memo(() => {
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
 
-        <DevContainer>
-          <button
-            className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
-            disabled={loading}
-            onClick={() => navToView('/entry/guest')}
-          >
-            {t('游客访问')}
-            <Icon icon="mdi:arrow-right" className="ml-1 inline" />
-          </button>
-        </DevContainer>
+        <button
+          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+          disabled={loading}
+          onClick={() => navToView('/entry/guest')}
+        >
+          {t('游客访问')}
+          <Icon icon="mdi:arrow-right" className="ml-1 inline" />
+        </button>
       </form>
     </div>
   );
