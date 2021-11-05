@@ -4,7 +4,7 @@ import { showToasts, t } from 'tailchat-shared';
 import { Avatar } from 'antd';
 import { Icon } from '@iconify/react';
 import { ModalAvatarCropper } from './modals/AvatarCropper';
-import { isGIF } from '@/utils/filetype-helper';
+import { isGIF } from '@/utils/file-helper';
 
 interface AvatarPickerProps {
   className?: string;
