@@ -57,7 +57,7 @@ export const getBBCodeTag = (tagName: string): TagMapComponent => {
 class BBCodeParser {
   options = {
     onlyAllowTags: Object.keys(tagMap),
-    onError: (err) => {
+    onError: (err: any) => {
       console.warn(err.message, err.lineNumber, err.columnNumber);
     },
   };
