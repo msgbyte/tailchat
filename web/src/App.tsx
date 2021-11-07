@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
@@ -8,6 +8,7 @@ import { parseColorScheme } from './utils/color-scheme-helper';
 import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
 import { getPopupContainer } from './utils/dom-helper';
+import { LoadingSpinner } from './components/LoadingSpinner';
 
 const MainRoute = Loadable(() => import('./routes/Main'));
 
@@ -19,13 +20,15 @@ const InviteRoute = Loadable(() => import('./routes/Invite'));
 
 const AppProvider: React.FC = React.memo((props) => {
   return (
-    <BrowserRouter>
-      <TcProvider>
-        <AntdProvider getPopupContainer={getPopupContainer}>
-          {props.children}
-        </AntdProvider>
-      </TcProvider>
-    </BrowserRouter>
+    <Suspense fallback={<LoadingSpinner />}>
+      <BrowserRouter>
+        <TcProvider>
+          <AntdProvider getPopupContainer={getPopupContainer}>
+            {props.children}
+          </AntdProvider>
+        </TcProvider>
+      </BrowserRouter>
+    </Suspense>
   );
 });
 AppProvider.displayName = 'AppProvider';
