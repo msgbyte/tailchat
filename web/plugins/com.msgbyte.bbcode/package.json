@@ -5,6 +5,10 @@
   "private": true,
   "dependencies": {
     "@bbob/parser": "^2.7.0",
+    "react-highlight": "^0.14.0",
     "url-regex": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react-highlight": "^0.12.5"
   }
 }

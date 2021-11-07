@@ -3,6 +3,7 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "paths": {
       "@capital/*": ["../../../src/plugin/*"],
