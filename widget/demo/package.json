@@ -1,16 +1,19 @@
 {
-  "name": "tailchat-widget",
+  "name": "tailchat-widget-demo",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "source": "index.html",
+  "main": "dist/index.js",
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "watch": "tsc --watch",
-    "build": "tsc"
+    "start": "parcel serve index.html --no-cache"
   },
   "devDependencies": {
     "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "parcel": "^2.0.0"
   }
 }
