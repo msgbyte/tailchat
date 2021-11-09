@@ -5,26 +5,39 @@ interface TailchatWidgetOptions {
   host?: string;
   groupId: string;
   channelId: string;
-  style: Partial<CSSStyleDeclaration>;
+  widgetStyle?: Partial<CSSStyleDeclaration>;
+  iconStyle?: Partial<CSSStyleDeclaration>;
+  frameStyle?: Partial<CSSStyleDeclaration>;
 }
 
 const defaultTailchatWidgetOptions: Partial<TailchatWidgetOptions> = {
   host: 'https://nightly.paw.msgbyte.com/',
 };
 
-const containerSize = 48;
-const defaultTailchatWidgetStyle: Partial<CSSStyleDeclaration> = {
+const defaultWidgetStyle: Partial<CSSStyleDeclaration> = {
   position: 'absolute',
   right: '20px',
   bottom: '20px',
-  width: `${containerSize}px`,
-  height: `${containerSize}px`,
+};
+
+const iconContainerSize = 48;
+const defaultIconContainerStyle: Partial<CSSStyleDeclaration> = {
+  width: `${iconContainerSize}px`,
+  height: `${iconContainerSize}px`,
   boxShadow: '0 1px 4px rgba(0, 0, 0, 0.2)',
   borderRadius: '50%',
   cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+};
+
+const defaultFrameStyle: Partial<CSSStyleDeclaration> = {
+  width: '414px',
+  height: '736px',
+  border: '0',
+  borderRadius: '3px',
+  boxShadow: '0 1px 4px rgba(0, 0, 0, 0.2)',
 };
 
 const iconSize = 32;
@@ -38,17 +51,64 @@ export function createTailchatWidget(_options: TailchatWidgetOptions) {
 
   const url = `${options.host}${options.groupId}/${options.channelId}`;
 
+  // 容器
   const container = document.createElement('div');
+  applyStyle(container, {
+    ...defaultWidgetStyle,
+    ..._options.widgetStyle,
+  });
 
-  // 设置容器样式
-  const style = { ...defaultTailchatWidgetStyle, ..._options.style };
-  for (const key in style) {
-    const val = style[key];
-    if (typeof val === 'string') {
-      container.style[key] = val;
+  // 图标
+  const iconContainer = document.createElement('div');
+  applyStyle(iconContainer, {
+    ...defaultIconContainerStyle,
+    ..._options.iconStyle,
+  });
+  iconContainer.innerHTML = iconSvg;
+  container.appendChild(iconContainer);
+
+  // Iframe 容器
+  let frameContainer: HTMLDivElement | null = null;
+  iconContainer.addEventListener('click', () => {
+    // 展开iframe
+    if (!frameContainer) {
+      // 元素不存在
+
+      // 容器
+      const _frameContainer = document.createElement('div');
+      frameContainer = _frameContainer;
+
+      // Iframe
+      const frameEl = document.createElement('iframe');
+      frameEl.src = url;
+      applyStyle(frameEl, {
+        ...defaultFrameStyle,
+        ..._options.frameStyle,
+      });
+
+      _frameContainer.appendChild(frameEl);
+      container.appendChild(_frameContainer);
+    } else {
+      // 已创建
+      frameContainer.style.display = 'block';
     }
-  }
-  container.innerHTML = iconSvg;
+
+    iconContainer.style.display = 'none';
+  });
 
   document.body.appendChild(container);
+}
+
+/**
+ * 应用样式到元素
+ * @param el 元素
+ * @param styles 样式
+ */
+function applyStyle(el: HTMLElement, styles: Partial<CSSStyleDeclaration>) {
+  for (const key in styles) {
+    const val = styles[key];
+    if (typeof val === 'string') {
+      el.style[key] = val;
+    }
+  }
 }
