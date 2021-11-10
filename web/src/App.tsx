@@ -7,7 +7,7 @@ import { ConfigProvider as AntdProvider } from 'antd';
 import { parseColorScheme } from './utils/color-scheme-helper';
 import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
-import { getPopupContainer } from './utils/dom-helper';
+import { getPopupContainer, preventDefault } from './utils/dom-helper';
 import { LoadingSpinner } from './components/LoadingSpinner';
 
 const MainRoute = Loadable(() => import('./routes/Main'));
@@ -47,6 +47,7 @@ const AppContainer: React.FC = React.memo((props) => {
         },
         extraSchemeName
       )}
+      onContextMenu={preventDefault}
     >
       {props.children}
     </div>

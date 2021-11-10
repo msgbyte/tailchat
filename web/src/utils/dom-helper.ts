@@ -17,3 +17,10 @@ export function getPopupContainer() {
 export function stopPropagation(e: React.BaseSyntheticEvent) {
   e.stopPropagation();
 }
+
+/**
+ * 一个快捷方案用于直接在组件中执行 preventDefault
+ */
+export function preventDefault(e: React.BaseSyntheticEvent) {
+  e.preventDefault();
+}
