@@ -161,6 +161,14 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     }
   });
 
+  socket.listen<ChatMessage>('chat.message.update', (message) => {
+    store.dispatch(
+      chatActions.updateMessageInfo({
+        message,
+      })
+    );
+  });
+
   socket.listen<ChatConverseInfo>(
     'chat.converse.updateDMConverse',
     (converse) => {

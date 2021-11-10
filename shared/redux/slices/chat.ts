@@ -164,6 +164,32 @@ const chatSlice = createSlice({
     },
 
     /**
+     * 更新消息信息
+     */
+    updateMessageInfo(
+      state,
+      action: PayloadAction<{
+        message: ChatMessage;
+      }>
+    ) {
+      const { message } = action.payload;
+      const converseId = message.converseId;
+      const converse = state.converses[converseId];
+      if (!converse) {
+        console.warn('Not found converse,', converseId);
+        return;
+      }
+
+      const index = converse.messages.findIndex((m) => m._id === message._id);
+      if (index >= 0) {
+        converse.messages[index] = {
+          ...converse.messages[index],
+          ...message,
+        };
+      }
+    },
+
+    /**
      * 设置远程的最后一条会话的id
      */
     setLastMessageMap(
