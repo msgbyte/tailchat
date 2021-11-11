@@ -23,7 +23,7 @@ import { UserName } from '@/components/UserName';
 import './item.less';
 
 /**
- * 消息的会话信息
+ * 消息的会话操作
  */
 function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
   const context = useChatBoxContext();
@@ -35,11 +35,19 @@ function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
   return (
     <Menu>
       {context.hasContext && (
-        <Menu.Item key="reply" onClick={() => context.setReplyMsg(payload)}>
+        <Menu.Item
+          key="reply"
+          icon={<Icon icon="mdi:reply" />}
+          onClick={() => context.setReplyMsg(payload)}
+        >
           {t('回复')}
         </Menu.Item>
       )}
-      <Menu.Item key="recall" onClick={handleRecallMessage}>
+      <Menu.Item
+        key="recall"
+        icon={<Icon icon="mdi:restore" />}
+        onClick={handleRecallMessage}
+      >
         {t('撤回')}
       </Menu.Item>
     </Menu>
