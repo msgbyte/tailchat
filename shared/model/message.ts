@@ -13,6 +13,8 @@ export interface ChatMessage {
 
   reactions?: any[];
 
+  hasRecall?: boolean;
+
   meta?: Record<string, unknown>;
 
   createdAt?: string;
@@ -57,6 +59,18 @@ export async function sendMessage(
   payload: SendMessagePayload
 ): Promise<ChatMessage> {
   const { data } = await request.post('/api/chat/message/sendMessage', payload);
+
+  return data;
+}
+
+/**
+ * 撤回消息
+ * @param messageId 消息ID
+ */
+export async function recallMessage(messageId: string): Promise<ChatMessage> {
+  const { data } = await request.post('/api/chat/message/recallMessage', {
+    messageId,
+  });
 
   return data;
 }

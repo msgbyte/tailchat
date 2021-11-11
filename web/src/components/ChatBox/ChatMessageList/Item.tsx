@@ -8,13 +8,17 @@ import {
   t,
   useCachedUserInfo,
   useChatBoxContext,
+  MessageHelper,
+  recallMessage,
+  useAsync,
+  getCachedUserInfo,
+  useAsyncRequest,
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Divider, Dropdown, Menu } from 'antd';
-import { MessageHelper } from 'tailchat-shared';
 import { UserName } from '@/components/UserName';
 import './item.less';
 
@@ -24,6 +28,10 @@ import './item.less';
 function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
   const context = useChatBoxContext();
 
+  const [, handleRecallMessage] = useAsyncRequest(() => {
+    return recallMessage(payload._id);
+  }, [payload._id]);
+
   return (
     <Menu>
       {context.hasContext && (
@@ -31,6 +39,9 @@ function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
           {t('回复')}
         </Menu.Item>
       )}
+      <Menu.Item key="recall" onClick={handleRecallMessage}>
+        {t('撤回')}
+      </Menu.Item>
     </Menu>
   );
 }
@@ -126,13 +137,50 @@ const SystemMessage: React.FC<ChatMessageItemProps> = React.memo(
 );
 SystemMessage.displayName = 'SystemMessage';
 
+/**
+ * 带userId => nickname异步解析的SystemMessage 组件
+ */
+const SystemMessageWithNickname: React.FC<
+  ChatMessageItemProps & {
+    userIds: string[];
+    overwritePayload: (nicknameList: string[]) => ChatMessage;
+  }
+> = React.memo((props) => {
+  const { value: nicknameList = [] } = useAsync(() => {
+    return Promise.all(
+      props.userIds.map((userId) =>
+        getCachedUserInfo(userId).then((u) => u.nickname)
+      )
+    );
+  }, [props.userIds.join(',')]);
+
+  return (
+    <SystemMessage {...props} payload={props.overwritePayload(nicknameList)} />
+  );
+});
+SystemMessageWithNickname.displayName = 'SystemMessageWithNickname';
+
 interface ChatMessageItemProps {
   showAvatar: boolean;
   payload: ChatMessage;
 }
 const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
-  if (props.payload.author === SYSTEM_USERID) {
+  const payload = props.payload;
+  if (payload.author === SYSTEM_USERID) {
     return <SystemMessage {...props} />;
+  } else if (payload.hasRecall === true) {
+    return (
+      <SystemMessageWithNickname
+        {...props}
+        userIds={[payload.author ?? SYSTEM_USERID]}
+        overwritePayload={(nickname) => ({
+          ...payload,
+          content: t('{{nickname}} 撤回了一条消息', {
+            nickname: nickname[0] ?? '',
+          }),
+        })}
+      />
+    );
   }
 
   return <NormalMessage {...props} />;

@@ -1,5 +1,6 @@
 import { request } from '../api/request';
 import { buildCachedRequest } from '../cache/utils';
+import { SYSTEM_USERID } from '../utils/consts';
 
 export interface UserBaseInfo {
   _id: string;
@@ -14,6 +15,18 @@ export interface UserLoginInfo extends UserBaseInfo {
   token: string;
   createdAt: string;
 }
+
+// 内置用户信息
+const builtinUserInfo: Record<string, UserBaseInfo> = {
+  [SYSTEM_USERID]: {
+    _id: SYSTEM_USERID,
+    email: 'admin@msgbyte.com',
+    nickname: '系统',
+    discriminator: '0000',
+    avatar: null,
+    temporary: false,
+  },
+};
 
 /**
  * 用户私信列表
@@ -119,6 +132,10 @@ export async function searchUserWithUniqueName(
  * @param userId 用户ID
  */
 export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
+  if (builtinUserInfo[userId]) {
+    return builtinUserInfo[userId];
+  }
+
   const { data } = await request.get('/api/user/getUserInfo', {
     params: {
       userId,
