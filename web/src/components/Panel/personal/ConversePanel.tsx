@@ -2,7 +2,7 @@ import { ChatBox } from '@/components/ChatBox';
 import { UserListItem } from '@/components/UserListItem';
 import { Icon } from '@iconify/react';
 import { Button, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ChatConverseState,
   t,
@@ -13,7 +13,6 @@ import { CommonPanelWrapper } from '../common/Wrapper';
 import _compact from 'lodash/compact';
 import { openModal } from '@/components/Modal';
 import { AppendDMConverseMembers } from '@/components/modals/AppendDMConverseMembers';
-import { openInNewWindow, panelWindowManager } from '@/utils/window-helper';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 

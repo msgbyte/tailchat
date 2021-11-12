@@ -3,6 +3,7 @@ import { PanelCommonHeader } from '../common/Header';
 import { Icon } from '@iconify/react';
 import { Button } from 'antd';
 import clsx from 'clsx';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface RightPanelType {
   name: string;
@@ -21,9 +22,15 @@ interface CommonPanelWrapperProps {
 export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
   (props) => {
     const [rightPanel, setRightPanel] = useState<RightPanelType>();
+    const isMobile = useIsMobile();
 
     return (
-      <div className="w-full h-full flex">
+      <div
+        className="w-full h-full flex"
+        style={{
+          minWidth: isMobile && !rightPanel ? 'calc(100vw - 72px)' : 0,
+        }} // NOTICE: 72px为导航栏宽度
+      >
         {/* 主面板 */}
         <div className="flex flex-col overflow-hidden flex-1">
           <PanelCommonHeader

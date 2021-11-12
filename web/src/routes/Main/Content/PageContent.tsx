@@ -43,9 +43,14 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
   const { sidebar, children } = props;
   const { showSidebar, setShowSidebar } = useSidebarContext();
   const isMobile = useIsMobile();
-  const handleHideSidebar = useCallback(() => {
-    setShowSidebar(false);
-  }, []);
+  const handleHideSidebar = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setShowSidebar(false);
+    },
+    []
+  );
 
   useEffect(() => {
     if (isMobile === false) {
@@ -86,7 +91,13 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
       {sidebarEl}
 
       <div
-        className="flex flex-auto bg-content-light dark:bg-content-dark relative overflow-auto"
+        className={clsx(
+          'flex flex-auto bg-content-light dark:bg-content-dark relative',
+          {
+            'overflow-auto': !showMask,
+            'overflow-hidden': showMask,
+          }
+        )}
         data-tc-role={props['data-tc-role']}
       >
         {contentMaskEl}
