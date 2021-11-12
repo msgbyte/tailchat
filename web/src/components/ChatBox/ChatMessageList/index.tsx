@@ -1,7 +1,8 @@
 import React from 'react';
 import { NormalMessageList } from './NormalList';
 import type { MessageListProps } from './types';
-import { VirtualizedMessageList } from './VirtualizedList';
+// import { VirtualizedMessageList } from './VirtualizedList';
+import { VirtualizedMessageList } from './VirtualizedList.new';
 
 const useVirtualizedList = true; // 是否使用虚拟化列表
 
