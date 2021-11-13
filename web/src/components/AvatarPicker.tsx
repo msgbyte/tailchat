@@ -40,6 +40,9 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
             const key = openModal(
               <ModalAvatarCropper
                 imageUrl={reader.result.toString()}
+                onCancel={() => {
+                  closeModal(key);
+                }}
                 onConfirm={(croppedImageBlobUrl) => {
                   closeModal(key);
                   updateAvatar(croppedImageBlobUrl);
