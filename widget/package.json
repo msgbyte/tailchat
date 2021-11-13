@@ -1,6 +1,6 @@
 {
   "name": "tailchat-widget",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "main": "lib/index.js",
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
