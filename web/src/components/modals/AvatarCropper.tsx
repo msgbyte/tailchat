@@ -2,9 +2,11 @@ import Cropper from 'react-easy-crop';
 import type { Area } from 'react-easy-crop/types';
 import _isNil from 'lodash/isNil';
 import { showToasts, t } from 'tailchat-shared';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { ModalWrapper } from '../Modal';
+import { useGlobalKeyDown } from '@/hooks/useGlobalKeyDown';
+import { isEnterHotkey } from '@/utils/hot-key';
 
 const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -104,6 +106,12 @@ export const ModalAvatarCropper: React.FC<{
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [area, setArea] = useState<Area>({ width: 0, height: 0, x: 0, y: 0 });
+
+  useGlobalKeyDown((e) => {
+    if (isEnterHotkey(e)) {
+      handleConfirm();
+    }
+  });
 
   const handleConfirm = async () => {
     const blobUrl = await getCroppedImg(
