@@ -13,6 +13,9 @@ export function uploadMessageImage(image: File): Promise<string> {
       const key = openModal(
         <ImageUploadPreviewer
           imageUrl={imageLocalUrl}
+          onCancel={() => {
+            closeModal(key);
+          }}
           onConfirm={async () => {
             const fileInfo = await uploadFile(image);
             const imageRemoteUrl = fileInfo.url;

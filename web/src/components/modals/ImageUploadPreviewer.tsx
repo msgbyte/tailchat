@@ -2,10 +2,13 @@ import { ModalWrapper } from '@/plugin/common';
 import { Button } from '@/plugin/component';
 import React from 'react';
 import { t, useAsyncFn } from 'tailchat-shared';
+import { useGlobalKeyDown } from '../../hooks/useGlobalKeyDown';
+import { isEnterHotkey, isEscHotkey } from '../../utils/hot-key';
 
 interface ImageUploadPreviewerProps {
   imageUrl: string;
   onConfirm: () => void;
+  onCancel: () => void;
 }
 export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
   React.memo((props) => {
@@ -16,6 +19,14 @@ export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
         await Promise.resolve(props.onConfirm());
       }
     }, [props.onConfirm]);
+
+    useGlobalKeyDown((e) => {
+      if (isEnterHotkey(e)) {
+        handleConfirm();
+      } else if (isEscHotkey(e)) {
+        props.onCancel();
+      }
+    });
 
     return (
       <ModalWrapper style={{ maxHeight: '60vh', maxWidth: '60vw' }}>
