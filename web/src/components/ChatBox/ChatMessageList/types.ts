@@ -5,5 +5,5 @@ export interface MessageListProps {
   isLoadingMore: boolean;
   hasMoreMessage: boolean;
   onUpdateReadedMessage: (lastMessageId: string) => void;
-  onLoadMore: () => void;
+  onLoadMore: () => Promise<void>;
 }

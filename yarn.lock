@@ -2335,6 +2335,18 @@
     "@typescript-eslint/types" "4.28.1"
     eslint-visitor-keys "^2.0.0"
 
+"@virtuoso.dev/react-urx@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.npmmirror.com/@virtuoso.dev/react-urx/download/@virtuoso.dev/react-urx-0.2.8.tgz#344c5559dca3a7157f34eb9d9c5e7be6f6291d24"
+  integrity sha1-NExVWdyjpxV/NOudnF575vYpHSQ=
+  dependencies:
+    "@virtuoso.dev/urx" "^0.2.8"
+
+"@virtuoso.dev/urx@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.npmmirror.com/@virtuoso.dev/urx/download/@virtuoso.dev/urx-0.2.8.tgz#182884939b2a5420839c48e317059cf265210f84"
+  integrity sha1-GCiEk5sqVCCDnEjjFwWc8mUhD4Q=
+
 "@webassemblyjs/ast@1.11.0":
   version "1.11.0"
   resolved "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.11.0.tgz#a5aa679efdc9e51707a4207139da57920555961f"
@@ -9230,6 +9242,14 @@ react-virtualized@^9.22.3:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.4"
+
+react-virtuoso@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.npmmirror.com/react-virtuoso/download/react-virtuoso-2.2.7.tgz?cache=0&sync_timestamp=1636198122025&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-virtuoso%2Fdownload%2Freact-virtuoso-2.2.7.tgz#3aa7243ed79ec6257f0de30679f64e9614533d2e"
+  integrity sha1-OqckPteexiV/DeMGefZOlhRTPS4=
+  dependencies:
+    "@virtuoso.dev/react-urx" "^0.2.8"
+    "@virtuoso.dev/urx" "^0.2.8"
 
 react@^17.0.2:
   version "17.0.2"
