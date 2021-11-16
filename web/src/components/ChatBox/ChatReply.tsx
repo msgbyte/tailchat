@@ -15,7 +15,7 @@ export const ChatReply: React.FC = React.memo(() => {
   return (
     <div className="relative">
       <div className="absolute bottom-0 left-0 right-0 py-1 px-4">
-        <div className="rounded bg-white p-2 max-h-44 overflow-auto shadow-sm relative">
+        <div className="rounded bg-white dark:bg-gray-800 p-2 max-h-44 overflow-auto shadow-sm relative">
           <span className="align-top">
             {t('回复')}{' '}
             {replyMsg.author && <UserName userId={replyMsg.author} />}:{' '}
