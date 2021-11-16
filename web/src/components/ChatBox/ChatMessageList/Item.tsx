@@ -13,6 +13,9 @@ import {
   useAsync,
   getCachedUserInfo,
   useAsyncRequest,
+  deleteMessage,
+  useGroupInfoContext,
+  useUserInfo,
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
@@ -27,10 +30,19 @@ import './item.less';
  */
 function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
   const context = useChatBoxContext();
+  const groupInfo = useGroupInfoContext();
+  const userInfo = useUserInfo();
 
   const [, handleRecallMessage] = useAsyncRequest(() => {
     return recallMessage(payload._id);
   }, [payload._id]);
+
+  const [, handleDeleteMessage] = useAsyncRequest(() => {
+    return deleteMessage(payload._id);
+  }, [payload._id]);
+
+  const isGroupOwner = groupInfo && groupInfo.owner === userInfo?._id; //
+  const isMessageAuthor = payload.author === userInfo?._id;
 
   return (
     <Menu>
@@ -43,17 +55,35 @@ function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
           {t('回复')}
         </Menu.Item>
       )}
-      <Menu.Item
-        key="recall"
-        icon={<Icon icon="mdi:restore" />}
-        onClick={handleRecallMessage}
-      >
-        {t('撤回')}
-      </Menu.Item>
+
+      {(isGroupOwner || isMessageAuthor) && (
+        <Menu.Item
+          key="recall"
+          icon={<Icon icon="mdi:restore" />}
+          onClick={handleRecallMessage}
+        >
+          {t('撤回')}
+        </Menu.Item>
+      )}
+
+      {/* 仅群组管理员可见 */}
+      {isGroupOwner && (
+        <Menu.Item
+          key="delete"
+          danger={true}
+          icon={<Icon icon="mdi:delete-outline" />}
+          onClick={handleDeleteMessage}
+        >
+          {t('删除')}
+        </Menu.Item>
+      )}
     </Menu>
   );
 }
 
+/**
+ * 消息引用
+ */
 const MessageQuote: React.FC<{ payload: ChatMessage }> = React.memo(
   ({ payload }) => {
     const quote = useMemo(

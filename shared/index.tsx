@@ -39,6 +39,10 @@ export {
   useChatBoxContext,
 } from './contexts/ChatBoxContext';
 export { useColorScheme } from './contexts/ColorSchemeContext';
+export {
+  GroupInfoContextProvider,
+  useGroupInfoContext,
+} from './contexts/GroupInfoContext';
 
 export { getDMConverseName } from './helper/converse-helper';
 
@@ -102,7 +106,7 @@ export {
   deleteGroupPanel,
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
-export { recallMessage } from './model/message';
+export { recallMessage, deleteMessage } from './model/message';
 export type { ChatMessage } from './model/message';
 export type { PluginManifest } from './model/plugin';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';

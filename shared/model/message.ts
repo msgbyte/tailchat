@@ -75,6 +75,14 @@ export async function recallMessage(messageId: string): Promise<ChatMessage> {
   return data;
 }
 
+export async function deleteMessage(messageId: string): Promise<boolean> {
+  const { data } = await request.post('/api/chat/message/deleteMessage', {
+    messageId,
+  });
+
+  return data;
+}
+
 /**
  * 基于会话id获取会话最后一条消息的id
  */

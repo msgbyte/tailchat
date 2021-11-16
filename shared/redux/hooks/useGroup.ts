@@ -8,8 +8,8 @@ import { useUserId } from './useUserInfo';
 /**
  * 获取群组信息
  */
-export function useGroupInfo(groupId: string): GroupInfo | undefined {
-  return useAppSelector((state) => state.group.groups[groupId]);
+export function useGroupInfo(groupId: string): GroupInfo | null {
+  return useAppSelector((state) => state.group.groups[groupId]) ?? null;
 }
 
 /**
