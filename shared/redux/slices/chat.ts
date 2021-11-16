@@ -190,6 +190,29 @@ const chatSlice = createSlice({
     },
 
     /**
+     * 删除消息
+     */
+    deleteMessageById(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        messageId: string;
+      }>
+    ) {
+      const { converseId, messageId } = action.payload;
+      const converse = state.converses[converseId];
+      if (!converse) {
+        console.warn('Not found converse,', converseId);
+        return;
+      }
+
+      const index = converse.messages.findIndex((m) => m._id === messageId);
+      if (index >= 0) {
+        converse.messages.splice(index, 1);
+      }
+    },
+
+    /**
      * 设置远程的最后一条会话的id
      */
     setLastMessageMap(

@@ -169,6 +169,18 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     );
   });
 
+  socket.listen<{
+    converseId: string;
+    messageId: string;
+  }>('chat.message.delete', ({ converseId, messageId }) => {
+    store.dispatch(
+      chatActions.deleteMessageById({
+        converseId,
+        messageId,
+      })
+    );
+  });
+
   socket.listen<ChatConverseInfo>(
     'chat.converse.updateDMConverse',
     (converse) => {
