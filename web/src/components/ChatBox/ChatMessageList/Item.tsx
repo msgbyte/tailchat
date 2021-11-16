@@ -150,7 +150,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
 
       {/* 操作 */}
       <Dropdown overlay={actions} placement="bottomLeft" trigger={['click']}>
-        <div className="opacity-0 group-hover:opacity-100 bg-black bg-opacity-5 hover:bg-opacity-10 rounded px-0.5 absolute right-2 top-0.5 cursor-pointer">
+        <div className="opacity-0 group-hover:opacity-100 bg-white dark:bg-black bg-opacity-80 hover:bg-opacity-100 rounded px-0.5 absolute right-2 cursor-pointer w-6 h-6 -top-3 flex justify-center items-center shadow-sm">
           <Icon icon="mdi:dots-horizontal" />
         </div>
       </Dropdown>
