@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   ChatMessage,
   formatShortTime,
@@ -24,6 +24,7 @@ import { Icon } from '@iconify/react';
 import { Divider, Dropdown, Menu } from 'antd';
 import { UserName } from '@/components/UserName';
 import './item.less';
+import clsx from 'clsx';
 
 /**
  * 消息的会话操作
@@ -111,11 +112,17 @@ MessageQuote.displayName = 'MessageQuote';
 const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const { showAvatar, payload } = props;
   const userInfo = useCachedUserInfo(payload.author ?? '');
+  const [isActionBtnActive, setIsActionBtnActive] = useState(false);
 
   const actions = useChatMessageItemAction(payload);
 
   return (
-    <div className="chat-message-item flex px-2 group hover:bg-black hover:bg-opacity-10 relative">
+    <div
+      className={clsx('chat-message-item flex px-2 group relative', {
+        'bg-black bg-opacity-10': isActionBtnActive,
+        'hover:bg-black hover:bg-opacity-10': !isActionBtnActive,
+      })}
+    >
       {/* 头像 */}
       <div className="w-18 flex items-start justify-center pt-0.5">
         {showAvatar ? (
@@ -149,8 +156,22 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
       </div>
 
       {/* 操作 */}
-      <Dropdown overlay={actions} placement="bottomLeft" trigger={['click']}>
-        <div className="opacity-0 group-hover:opacity-100 bg-white dark:bg-black bg-opacity-80 hover:bg-opacity-100 rounded px-0.5 absolute right-2 cursor-pointer w-6 h-6 -top-3 flex justify-center items-center shadow-sm">
+      <Dropdown
+        overlay={actions}
+        placement="bottomLeft"
+        trigger={['click']}
+        onVisibleChange={setIsActionBtnActive}
+      >
+        <div
+          className={clsx(
+            'bg-white dark:bg-black rounded px-0.5 absolute right-2 cursor-pointer w-6 h-6 -top-3 flex justify-center items-center shadow-sm',
+            {
+              'opacity-0 group-hover:opacity-100 bg-opacity-80 hover:bg-opacity-100':
+                !isActionBtnActive,
+              'opacity-100 bg-opacity-100': isActionBtnActive,
+            }
+          )}
+        >
           <Icon icon="mdi:dots-horizontal" />
         </div>
       </Dropdown>
