@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "strict": true,
     "importsNotUsedAsValues": "error",
+    "resolveJsonModule": true,
     "typeRoots": ["./node_modules/@types", "../node_modules/@types", "./types"]
   }
 }

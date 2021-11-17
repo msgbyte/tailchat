@@ -7,80 +7,21 @@ import {
   SYSTEM_USERID,
   t,
   useCachedUserInfo,
-  useChatBoxContext,
   MessageHelper,
-  recallMessage,
   useAsync,
   getCachedUserInfo,
-  useAsyncRequest,
-  deleteMessage,
-  useGroupInfoContext,
-  useUserInfo,
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
-import { Divider, Dropdown, Menu } from 'antd';
+import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
 import './item.less';
 import clsx from 'clsx';
-
-/**
- * 消息的会话操作
- */
-function useChatMessageItemAction(payload: ChatMessage): React.ReactElement {
-  const context = useChatBoxContext();
-  const groupInfo = useGroupInfoContext();
-  const userInfo = useUserInfo();
-
-  const [, handleRecallMessage] = useAsyncRequest(() => {
-    return recallMessage(payload._id);
-  }, [payload._id]);
-
-  const [, handleDeleteMessage] = useAsyncRequest(() => {
-    return deleteMessage(payload._id);
-  }, [payload._id]);
-
-  const isGroupOwner = groupInfo && groupInfo.owner === userInfo?._id; //
-  const isMessageAuthor = payload.author === userInfo?._id;
-
-  return (
-    <Menu>
-      {context.hasContext && (
-        <Menu.Item
-          key="reply"
-          icon={<Icon icon="mdi:reply" />}
-          onClick={() => context.setReplyMsg(payload)}
-        >
-          {t('回复')}
-        </Menu.Item>
-      )}
-
-      {(isGroupOwner || isMessageAuthor) && (
-        <Menu.Item
-          key="recall"
-          icon={<Icon icon="mdi:restore" />}
-          onClick={handleRecallMessage}
-        >
-          {t('撤回')}
-        </Menu.Item>
-      )}
-
-      {/* 仅群组管理员可见 */}
-      {isGroupOwner && (
-        <Menu.Item
-          key="delete"
-          danger={true}
-          icon={<Icon icon="mdi:delete-outline" />}
-          onClick={handleDeleteMessage}
-        >
-          {t('删除')}
-        </Menu.Item>
-      )}
-    </Menu>
-  );
-}
+import { useChatMessageItemAction } from './useChatMessageItemAction';
+import { useChatMessageReaction } from './useChatMessageReaction';
+import { DevContainer } from '@/components/DevContainer';
 
 /**
  * 消息引用
@@ -106,6 +47,12 @@ const MessageQuote: React.FC<{ payload: ChatMessage }> = React.memo(
 );
 MessageQuote.displayName = 'MessageQuote';
 
+const MessageActionIcon: React.FC<{ icon: string }> = (props) => (
+  <div className="px-0.5 w-6 h-6 flex justify-center items-center opacity-60 hover:opacity-100">
+    <Icon icon={props.icon} />
+  </div>
+);
+
 /**
  * 普通消息
  */
@@ -114,7 +61,8 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const userInfo = useCachedUserInfo(payload.author ?? '');
   const [isActionBtnActive, setIsActionBtnActive] = useState(false);
 
-  const actions = useChatMessageItemAction(payload);
+  const emojiAction = useChatMessageReaction(payload);
+  const moreActions = useChatMessageItemAction(payload);
 
   return (
     <div
@@ -156,25 +104,40 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
       </div>
 
       {/* 操作 */}
-      <Dropdown
-        overlay={actions}
-        placement="bottomLeft"
-        trigger={['click']}
-        onVisibleChange={setIsActionBtnActive}
+      <div
+        className={clsx(
+          'bg-white dark:bg-black rounded absolute right-2 cursor-pointer -top-3 shadow-sm flex',
+          {
+            'opacity-0 group-hover:opacity-100 bg-opacity-80 hover:bg-opacity-100':
+              !isActionBtnActive,
+            'opacity-100 bg-opacity-100': isActionBtnActive,
+          }
+        )}
       >
-        <div
-          className={clsx(
-            'bg-white dark:bg-black rounded px-0.5 absolute right-2 cursor-pointer w-6 h-6 -top-3 flex justify-center items-center shadow-sm',
-            {
-              'opacity-0 group-hover:opacity-100 bg-opacity-80 hover:bg-opacity-100':
-                !isActionBtnActive,
-              'opacity-100 bg-opacity-100': isActionBtnActive,
-            }
-          )}
+        <DevContainer>
+          <Dropdown
+            overlay={emojiAction}
+            placement="bottomLeft"
+            trigger={['click']}
+            onVisibleChange={setIsActionBtnActive}
+          >
+            <div>
+              <MessageActionIcon icon="mdi:emoticon-happy-outline" />
+            </div>
+          </Dropdown>
+        </DevContainer>
+
+        <Dropdown
+          overlay={moreActions}
+          placement="bottomLeft"
+          trigger={['click']}
+          onVisibleChange={setIsActionBtnActive}
         >
-          <Icon icon="mdi:dots-horizontal" />
-        </div>
-      </Dropdown>
+          <div>
+            <MessageActionIcon icon="mdi:dots-horizontal" />
+          </div>
+        </Dropdown>
+      </div>
     </div>
   );
 });
