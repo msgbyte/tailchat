@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useStorage } from 'tailchat-shared';
+import { parseColorScheme } from '../../web/src/utils/color-scheme-helper';
 
 const ColorSchemeContext = React.createContext<{
   /**
@@ -28,5 +29,8 @@ export const ColorSchemeContextProvider: React.FC = React.memo((props) => {
 ColorSchemeContextProvider.displayName = 'ColorSchemeContextProvider';
 
 export function useColorScheme() {
-  return useContext(ColorSchemeContext);
+  const { colorScheme, setColorScheme } = useContext(ColorSchemeContext);
+  const { isDarkMode, extraSchemeName } = parseColorScheme(colorScheme);
+
+  return { colorScheme, setColorScheme, isDarkMode, extraSchemeName };
 }

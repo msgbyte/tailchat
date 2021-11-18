@@ -34,8 +34,7 @@ const AppProvider: React.FC = React.memo((props) => {
 AppProvider.displayName = 'AppProvider';
 
 const AppContainer: React.FC = React.memo((props) => {
-  const { colorScheme } = useColorScheme();
-  const { isDarkMode, extraSchemeName } = parseColorScheme(colorScheme);
+  const { isDarkMode, extraSchemeName } = useColorScheme();
 
   return (
     <div
