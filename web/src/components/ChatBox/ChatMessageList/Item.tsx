@@ -15,13 +15,14 @@ import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
-import { Divider, Dropdown } from 'antd';
+import { Divider, Dropdown, Popover } from 'antd';
 import { UserName } from '@/components/UserName';
 import './item.less';
 import clsx from 'clsx';
 import { useChatMessageItemAction } from './useChatMessageItemAction';
 import { useChatMessageReaction } from './useChatMessageReaction';
 import { DevContainer } from '@/components/DevContainer';
+import { TcPopover } from '@/components/TcPopover';
 
 /**
  * 消息引用
@@ -115,8 +116,9 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
         )}
       >
         <DevContainer>
-          <Dropdown
-            overlay={emojiAction}
+          <TcPopover
+            overlayClassName="chat-message-item_action-popover"
+            content={emojiAction}
             placement="bottomLeft"
             trigger={['click']}
             onVisibleChange={setIsActionBtnActive}
@@ -124,7 +126,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
             <div>
               <MessageActionIcon icon="mdi:emoticon-happy-outline" />
             </div>
-          </Dropdown>
+          </TcPopover>
         </DevContainer>
 
         <Dropdown

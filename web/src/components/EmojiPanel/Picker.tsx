@@ -1,57 +1,10 @@
 import React, { useCallback } from 'react';
-import { NimblePicker, Data, EmojiData } from 'emoji-mart';
-import data from 'emoji-mart/data/twitter.json';
+import { NimblePicker, EmojiData } from 'emoji-mart';
+import { isValidStr, useColorScheme } from 'tailchat-shared';
+import { emojiData } from './const';
 
 import 'emoji-mart/css/emoji-mart.css';
-import { isValidStr } from 'tailchat-shared';
-
-const emojiData: Data = {
-  compressed: true,
-  categories: [
-    {
-      id: 'people',
-      name: 'Smileys & People',
-      emojis: data.categories[0].emojis,
-    },
-    {
-      id: 'nature',
-      name: 'Animals & Nature',
-      emojis: data.categories[1].emojis,
-    },
-    {
-      id: 'foods',
-      name: 'Food & Drink',
-      emojis: data.categories[2].emojis,
-    },
-    {
-      id: 'activity',
-      name: 'Activities',
-      emojis: data.categories[3].emojis,
-    },
-    {
-      id: 'places',
-      name: 'Travel & Places',
-      emojis: data.categories[4].emojis,
-    },
-    {
-      id: 'objects',
-      name: 'Objects',
-      emojis: data.categories[5].emojis,
-    },
-    {
-      id: 'symbols',
-      name: 'Symbols',
-      emojis: data.categories[6].emojis,
-    },
-    {
-      id: 'flags',
-      name: 'Flags',
-      emojis: data.categories[7].emojis,
-    },
-  ],
-  emojis: data.emojis,
-  aliases: data.aliases,
-};
+import './Picker.less';
 
 interface EmojiPickerProps {
   onSelect: (code: string) => void;
@@ -61,6 +14,7 @@ interface EmojiPickerProps {
  * emoji表情面板
  */
 const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
+  const { isDarkMode } = useColorScheme();
   const handleSelect = useCallback(
     (emoji: EmojiData) => {
       const code = emoji.colons;
@@ -72,7 +26,17 @@ const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
   );
 
   return (
-    <NimblePicker set="twitter" data={emojiData} onSelect={handleSelect} />
+    <div className="emoji-picker">
+      <NimblePicker
+        set="twitter"
+        data={emojiData}
+        theme={isDarkMode ? 'dark' : 'light'}
+        showPreview={false}
+        showSkinTones={false}
+        emojiTooltip={false}
+        onSelect={handleSelect}
+      />
+    </div>
   );
 });
 EmojiPicker.displayName = 'EmojiPicker';
