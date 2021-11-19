@@ -1,4 +1,4 @@
-import { EmojiPanel } from '@/components/EmojiPanel';
+import { EmojiPanel } from '@/components/Emoji';
 import { useTcPopoverContext } from '@/components/TcPopover';
 import type { RenderFunction } from 'antd/lib/_util/getRenderPropValue';
 import React, { useMemo } from 'react';

@@ -1,12 +1,21 @@
 import React from 'react';
 import { Loadable } from '../Loadable';
 
+const Emoji = Loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'emoji' */ /* webpackPrefetch: true */ './Emoji'
+    )
+);
+
 const EmojiPicker = Loadable(
   () =>
     import(
       /* webpackChunkName: 'emoji-picker' */ /* webpackPrefetch: true */ './Picker'
     )
 );
+
+export { Emoji };
 
 /**
  * emoji表情面板

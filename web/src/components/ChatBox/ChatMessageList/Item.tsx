@@ -23,6 +23,7 @@ import { useChatMessageItemAction } from './useChatMessageItemAction';
 import { useChatMessageReaction } from './useChatMessageReaction';
 import { DevContainer } from '@/components/DevContainer';
 import { TcPopover } from '@/components/TcPopover';
+import { useMessageReactions } from './useMessageReactions';
 
 /**
  * 消息引用
@@ -61,6 +62,8 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const { showAvatar, payload } = props;
   const userInfo = useCachedUserInfo(payload.author ?? '');
   const [isActionBtnActive, setIsActionBtnActive] = useState(false);
+
+  const reactions = useMessageReactions(payload);
 
   const emojiAction = useChatMessageReaction(payload);
   const moreActions = useChatMessageItemAction(payload);
@@ -102,6 +105,8 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           {/* 解释器按钮 */}
           {useRenderPluginMessageInterpreter(payload.content)}
         </div>
+
+        {reactions}
       </div>
 
       {/* 操作 */}
