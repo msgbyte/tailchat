@@ -1,8 +1,13 @@
 import { EmojiPanel } from '@/components/EmojiPanel';
 import { useTcPopoverContext } from '@/components/TcPopover';
 import type { RenderFunction } from 'antd/lib/_util/getRenderPropValue';
-import React, { useCallback, useMemo } from 'react';
-import { ChatMessage, useUpdateRef } from 'tailchat-shared';
+import React, { useMemo } from 'react';
+import {
+  addReaction,
+  ChatMessage,
+  useAsyncRequest,
+  useUpdateRef,
+} from 'tailchat-shared';
 
 /**
  * 消息的反应信息操作
@@ -14,8 +19,8 @@ export function useChatMessageReaction(payload: ChatMessage): RenderFunction {
       (() => {
         const { closePopover } = useTcPopoverContext();
 
-        const handleSelect = useCallback((code: string) => {
-          console.log('code', code, payloadRef.current);
+        const [, handleSelect] = useAsyncRequest(async (code: string) => {
+          await addReaction(payloadRef.current._id, code);
           closePopover();
         }, []);
 

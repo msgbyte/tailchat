@@ -1,5 +1,10 @@
 import { request } from '../api/request';
 
+export interface ChatMessageReaction {
+  name: string;
+  author: string;
+}
+
 export interface ChatMessage {
   _id: string;
 
@@ -11,7 +16,7 @@ export interface ChatMessage {
 
   converseId: string;
 
-  reactions?: any[];
+  reactions?: ChatMessageReaction[];
 
   hasRecall?: boolean;
 
@@ -95,6 +100,21 @@ export async function fetchConverseLastMessages(
       converseIds,
     }
   );
+
+  return data;
+}
+
+/**
+ * 增加表情行为
+ */
+export async function addReaction(
+  messageId: string,
+  emoji: string
+): Promise<boolean> {
+  const { data } = await request.post('/api/chat/message/addReaction', {
+    messageId,
+    emoji,
+  });
 
   return data;
 }

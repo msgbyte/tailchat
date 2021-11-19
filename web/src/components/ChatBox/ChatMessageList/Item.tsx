@@ -15,7 +15,7 @@ import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
-import { Divider, Dropdown, Popover } from 'antd';
+import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
 import './item.less';
 import clsx from 'clsx';

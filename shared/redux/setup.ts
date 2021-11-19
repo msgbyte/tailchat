@@ -4,7 +4,11 @@ import { chatActions, groupActions, userActions } from './slices';
 import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
-import { ChatMessage, fetchConverseLastMessages } from '../model/message';
+import {
+  ChatMessage,
+  ChatMessageReaction,
+  fetchConverseLastMessages,
+} from '../model/message';
 import { socketEventListeners } from '../manager/socket';
 import { showToasts } from '../manager/ui';
 import { t } from '../i18n';
@@ -177,6 +181,20 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       chatActions.deleteMessageById({
         converseId,
         messageId,
+      })
+    );
+  });
+
+  socket.listen<{
+    converseId: string;
+    messageId: string;
+    reaction: ChatMessageReaction;
+  }>('chat.message.addReaction', ({ converseId, messageId, reaction }) => {
+    store.dispatch(
+      chatActions.appendMessageReaction({
+        converseId,
+        messageId,
+        reaction,
       })
     );
   });

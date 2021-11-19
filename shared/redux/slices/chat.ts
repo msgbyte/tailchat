@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { ChatConverseInfo } from '../../model/converse';
-import type { ChatMessage } from '../../model/message';
+import type { ChatMessage, ChatMessageReaction } from '../../model/message';
 import _uniqBy from 'lodash/uniqBy';
 import _orderBy from 'lodash/orderBy';
 import _last from 'lodash/last';
@@ -229,6 +229,37 @@ const chatSlice = createSlice({
       list.forEach((item) => {
         state.lastMessageMap[item.converseId] = item.lastMessageId;
       });
+    },
+
+    /**
+     * 追加消息反应
+     */
+    appendMessageReaction(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        messageId: string;
+        reaction: ChatMessageReaction;
+      }>
+    ) {
+      const { converseId, messageId, reaction } = action.payload;
+      const converse = state.converses[converseId];
+      if (!converse) {
+        console.warn('Not found converse,', converseId);
+        return;
+      }
+
+      const message = converse.messages.find((m) => m._id === messageId);
+      if (!message) {
+        console.warn('Not found message,', messageId);
+        return;
+      }
+
+      if (!Array.isArray(message.reactions)) {
+        message.reactions = [];
+      }
+
+      message.reactions.push(reaction);
     },
   },
 });
