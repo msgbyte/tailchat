@@ -7,6 +7,7 @@ import {
   VirtuosoGridHandle,
 } from 'react-virtuoso';
 import type { ChatMessage } from 'tailchat-shared';
+import _last from 'lodash/last';
 
 const PREPEND_OFFSET = 10 ** 7;
 
@@ -21,15 +22,34 @@ const virtuosoStyle: React.CSSProperties = {
 export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const listRef = useRef<VirtuosoGridHandle>();
-    const lastMessageId = useRef('');
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
 
     const handleLoadMore = () => {
-      lastMessageId.current = props.messages[0]._id;
-      props.onLoadMore();
+      if (props.isLoadingMore) {
+        return;
+      }
+
+      if (props.hasMoreMessage) {
+        props.onLoadMore();
+      }
     };
 
     const followOutput = (isAtBottom: boolean): FollowOutputScalarType => {
+      if (isAtBottom) {
+        // 更新最新查看的消息id
+        const lastMessage = _last(props.messages);
+        if (lastMessage) {
+          props.onUpdateReadedMessage(lastMessage._id);
+        }
+
+        setTimeout(() => {
+          // 这里 Virtuoso 有个动态渲染高度的bug, 因此需要异步再次滚动到底部
+          listRef.current?.scrollToIndex(
+            PREPEND_OFFSET - numItemsPrepended + props.messages.length - 1
+          );
+        }, 100);
+      }
+
       /**
        * 如果有新的内容，且当前处于最底部时, 保持在最底部
        */

@@ -196,8 +196,10 @@ interface ChatMessageItemProps {
 const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const payload = props.payload;
   if (payload.author === SYSTEM_USERID) {
+    // 系统消息
     return <SystemMessage {...props} />;
   } else if (payload.hasRecall === true) {
+    // 撤回消息
     return (
       <SystemMessageWithNickname
         {...props}
@@ -212,6 +214,7 @@ const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
     );
   }
 
+  // 普通消息
   return <NormalMessage {...props} />;
 });
 ChatMessageItem.displayName = 'ChatMessageItem';
