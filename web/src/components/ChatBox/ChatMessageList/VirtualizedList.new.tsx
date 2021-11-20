@@ -1,4 +1,4 @@
-import React, { useDebugValue, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 import {
@@ -23,13 +23,10 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
     const listRef = useRef<VirtuosoGridHandle>();
     const lastMessageId = useRef('');
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
-    useDebugValue(numItemsPrepended);
 
     const handleLoadMore = () => {
       lastMessageId.current = props.messages[0]._id;
-      props.onLoadMore().then(() => {
-        listRef.current?.scrollToIndex(50);
-      });
+      props.onLoadMore();
     };
 
     const followOutput = (isAtBottom: boolean): FollowOutputScalarType => {
@@ -52,11 +49,12 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
         initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
         totalCount={props.messages.length}
-        overscan={200}
+        overscan={20}
         itemContent={itemContent}
         alignToBottom={true}
         startReached={handleLoadMore}
         followOutput={followOutput}
+        defaultItemHeight={25}
       />
     );
   }
