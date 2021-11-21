@@ -204,10 +204,10 @@ const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
       <SystemMessageWithNickname
         {...props}
         userIds={[payload.author ?? SYSTEM_USERID]}
-        overwritePayload={(nickname) => ({
+        overwritePayload={(nicknameList) => ({
           ...payload,
           content: t('{{nickname}} 撤回了一条消息', {
-            nickname: nickname[0] ?? '',
+            nickname: nicknameList[0] || '',
           }),
         })}
       />
