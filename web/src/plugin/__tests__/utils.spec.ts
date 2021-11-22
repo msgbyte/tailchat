@@ -25,7 +25,7 @@ describe('parsePluginManifest', () => {
       false,
     ],
     [
-      'more properties',
+      'not allow additional properties',
       JSON.stringify({
         label: '网页面板插件',
         name: 'com.msgbyte.webview',
@@ -36,7 +36,7 @@ describe('parsePluginManifest', () => {
         requireRestart: false,
         foo: 'bar',
       }),
-      true,
+      false,
     ],
     [
       'missed properties',
