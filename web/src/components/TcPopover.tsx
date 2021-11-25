@@ -13,9 +13,14 @@ const TcPopoverContext = React.createContext({ closePopover: _noop });
 export const TcPopover: React.FC<PopoverProps> = React.memo((props) => {
   const [visible, setVisible] = useState(false);
 
-  const handleVisibleChange = useCallback((v) => {
-    setVisible(v);
-  }, []);
+  const handleVisibleChange = useCallback(
+    (v) => {
+      setVisible(v);
+
+      typeof props.onVisibleChange === 'function' && props.onVisibleChange(v);
+    },
+    [props.onVisibleChange]
+  );
 
   const closePopover = useCallback(() => {
     setVisible(false);
