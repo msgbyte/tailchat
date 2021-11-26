@@ -266,7 +266,7 @@ export function buildMessageItemRow(
   return (
     <div key={message._id}>
       {showDate && (
-        <Divider className="text-sm opacity-40 px-6 font-normal select-none">
+        <Divider className="text-sm opacity-40 px-6 font-normal select-text">
           {getMessageTimeDiff(messageCreatedAt)}
         </Divider>
       )}
