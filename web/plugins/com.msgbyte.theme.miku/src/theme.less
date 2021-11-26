@@ -20,6 +20,25 @@
     background-color: lighten(@primary-color, 40%);
   }
 
+  [data-tc-role^=content-] {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-image: var(--tc-background-image);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.15;
+    }
+  }
+
   &.dark {
     --tc-primary-color: darken(@primary-color, 10%);
 
