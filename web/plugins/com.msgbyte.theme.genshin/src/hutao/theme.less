@@ -1,0 +1,57 @@
+#tailchat-app.theme-genshin-hutao {
+  @primary-color: #dd5545;
+
+  --tc-primary-color: @primary-color;
+  --tc-background-image: url(./bg.jpg);
+
+  .bg-navbar-light {
+    background-color: @primary-color;
+
+    .bg-gray-400 {
+      background-color: darken(@primary-color, 10%);
+    }
+  }
+
+  .bg-sidebar-light {
+    background-color: lighten(@primary-color, 20%);
+  }
+
+  .bg-content-light {
+    background-color: lighten(@primary-color, 40%);
+  }
+
+  [data-tc-role^=content-] {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-image: url(./avatar.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      opacity: 0.15;
+    }
+  }
+
+  &.dark {
+    --tc-primary-color: darken(@primary-color, 10%);
+
+    .dark\:bg-navbar-dark {
+      background-color: darken(@primary-color, 40%);
+    }
+
+    .dark\:bg-sidebar-dark {
+      background-color: darken(@primary-color, 20%);
+    }
+
+    .dark\:bg-content-dark {
+      background-color: @primary-color;
+    }
+  }
+}

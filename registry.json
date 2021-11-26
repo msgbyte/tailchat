@@ -16,5 +16,14 @@
     "author": "msgbyte",
     "description": "初音未来主题",
     "requireRestart": true
+  },
+  {
+    "label": "原神主题",
+    "name": "com.msgbyte.theme.genshin",
+    "url": "/plugins/com.msgbyte.theme.genshin/index.js",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "原神主题",
+    "requireRestart": true
   }
 ]
