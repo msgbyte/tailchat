@@ -24,6 +24,8 @@ export const TcPopover: React.FC<PopoverProps> = React.memo((props) => {
 
   const closePopover = useCallback(() => {
     setVisible(false);
+
+    typeof props.onVisibleChange === 'function' && props.onVisibleChange(false);
   }, []);
 
   const handler = useMemo(() => ({ closePopover }), [closePopover]);
