@@ -14,4 +14,5 @@ export {
   getCachedUserInfo,
   getCachedConverseInfo,
   localTrans,
+  sharedEvent,
 } from 'tailchat-shared';

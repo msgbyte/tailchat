@@ -44,6 +44,10 @@ export {
   useGroupInfoContext,
 } from './contexts/GroupInfoContext';
 
+// event
+export { sharedEvent } from './event/index';
+
+// helper
 export { getDMConverseName } from './helper/converse-helper';
 
 // i18n

@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useStorage } from 'tailchat-shared';
 import { parseColorScheme } from '../../web/src/utils/color-scheme-helper';
+import { sharedEvent } from '../event';
 
 const ColorSchemeContext = React.createContext<{
   /**
@@ -15,9 +16,17 @@ const ColorSchemeContext = React.createContext<{
 ColorSchemeContext.displayName = 'ColorSchemeContext';
 
 export const ColorSchemeContextProvider: React.FC = React.memo((props) => {
-  const [colorScheme = 'dark', { save: setColorScheme }] = useStorage(
+  const [colorScheme = 'dark', { save: saveColorScheme }] = useStorage(
     'colorScheme',
     'dark'
+  );
+
+  const setColorScheme = useCallback(
+    (colorScheme: string) => {
+      sharedEvent.emit('changeColorScheme', colorScheme);
+      saveColorScheme(colorScheme);
+    },
+    [saveColorScheme]
   );
 
   return (
