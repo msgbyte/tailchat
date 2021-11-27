@@ -17,6 +17,7 @@ export function parsePluginManifest(json: string): PluginManifest {
       label: { type: 'string' },
       name: { type: 'string' },
       url: { type: 'string' },
+      icon: { type: 'string' },
       version: { type: 'string' },
       author: { type: 'string' },
       description: { type: 'string' },

@@ -37,6 +37,7 @@ export const ManualInstall: React.FC = React.memo(() => {
         <Button
           loading={loading}
           disabled={invalid}
+          type="primary"
           onClick={handleInstallPlugin}
         >
           {t('确认')}
