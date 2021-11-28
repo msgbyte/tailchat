@@ -46,28 +46,26 @@ export const PluginStore: React.FC = React.memo(() => {
         <PillTabPane key="1" tab={t('全部')}>
           <Divider orientation="left">{t('内置插件')}</Divider>
 
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-2">
             {builtinPlugins.map((plugin) => (
-              <div key={plugin.name} className="m-1">
-                <PluginStoreItem
-                  manifest={plugin}
-                  installed={installedPluginNameList.includes(plugin.name)}
-                  builtin={true}
-                />
-              </div>
+              <PluginStoreItem
+                key={plugin.name}
+                manifest={plugin}
+                installed={installedPluginNameList.includes(plugin.name)}
+                builtin={true}
+              />
             ))}
           </div>
 
           <Divider orientation="left">{t('插件中心')}</Divider>
 
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-2">
             {allPlugins.map((plugin) => (
-              <div key={plugin.name} className="m-1">
-                <PluginStoreItem
-                  manifest={plugin}
-                  installed={installedPluginNameList.includes(plugin.name)}
-                />
-              </div>
+              <PluginStoreItem
+                key={plugin.name}
+                manifest={plugin}
+                installed={installedPluginNameList.includes(plugin.name)}
+              />
             ))}
           </div>
         </PillTabPane>
@@ -75,15 +73,14 @@ export const PluginStore: React.FC = React.memo(() => {
         <PillTabPane key="2" tab={t('已安装')}>
           <Divider orientation="left">{t('已安装')}</Divider>
 
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-2">
             {[...builtinPlugins, ...installedPluginList].map((plugin) => (
-              <div key={plugin.name} className="m-1">
-                <PluginStoreItem
-                  manifest={plugin}
-                  installed={true}
-                  builtin={true}
-                />
-              </div>
+              <PluginStoreItem
+                key={plugin.name}
+                manifest={plugin}
+                installed={true}
+                builtin={true}
+              />
             ))}
           </div>
         </PillTabPane>

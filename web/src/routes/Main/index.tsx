@@ -15,7 +15,7 @@ const MainRoute: React.FC = React.memo(() => {
       <div className="flex flex-col h-full">
         <GlobalTemporaryTip />
 
-        <div className="flex flex-1">
+        <div className="flex flex-1 overflow-hidden">
           <Navbar />
 
           <MainContent />
