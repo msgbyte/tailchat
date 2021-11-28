@@ -9,6 +9,7 @@ import {
   createGroupPanel,
   createFastFormSchema,
   fieldSchema,
+  showToasts,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../Modal';
 import { WebFastForm } from '../WebFastForm';
@@ -86,6 +87,7 @@ export const ModalCreateGroupPanel: React.FC<{
         pluginPanelName,
         meta,
       });
+      showToasts(t('创建成功'), 'success');
       props.onCreateSuccess();
     },
     [props.groupId, props.onCreateSuccess]

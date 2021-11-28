@@ -84,6 +84,7 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
       <div
         className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-60 flex justify-center items-center z-10"
         onClick={handleClose}
+        data-tc-role="modal-mask"
       >
         <ModalContext.Provider value={{ closeModal }}>
           {/* Inner */}
@@ -91,6 +92,7 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
             className="modal-inner bg-content-light dark:bg-content-dark rounded overflow-auto relative z-10"
             style={{ maxHeight: '80vh', maxWidth: '80vw' }}
             onClick={stopPropagation}
+            data-tc-role="modal"
           >
             {closable === true && (
               <Icon
