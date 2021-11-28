@@ -7,6 +7,7 @@ import { openModal } from '@/components/Modal';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import { DevContainer } from '@/components/DevContainer';
 import { SectionHeader } from '@/components/SectionHeader';
+import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 
 const SidebarSection: React.FC<{
   action: React.ReactNode;
@@ -32,10 +33,10 @@ export const PersonalSidebar: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
 
   return (
-    <div data-tc-role="sidebar-personal">
+    <CommonSidebarWrapper data-tc-role="sidebar-personal">
       <SectionHeader>{userInfo?.nickname}</SectionHeader>
 
-      <div className="p-2">
+      <div className="p-2 overflow-auto">
         <SidebarItem
           name={t('好友')}
           icon={<Icon icon="mdi:account-multiple" />}
@@ -62,7 +63,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
           return <SidebarDMItem key={converse._id} converse={converse} />;
         })}
       </div>
-    </div>
+    </CommonSidebarWrapper>
   );
 });
 PersonalSidebar.displayName = 'PersonalSidebar';

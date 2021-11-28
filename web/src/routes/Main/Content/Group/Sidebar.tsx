@@ -10,6 +10,7 @@ import { GroupHeader } from './GroupHeader';
 import { GroupSection } from '@/components/GroupSection';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
 import { GroupTextPanelItem } from './TextPanelItem';
+import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 
 interface GroupParams {
   groupId: string;
@@ -35,10 +36,10 @@ export const Sidebar: React.FC = React.memo(() => {
     );
 
   return (
-    <div data-tc-role="sidebar-group">
+    <CommonSidebarWrapper data-tc-role="sidebar-group">
       <GroupHeader groupId={groupId} />
 
-      <div className="p-2 space-y-1">
+      <div className="p-2 space-y-1 overflow-auto">
         {groupPanels
           .filter((panel) => !isValidStr(panel.parentId))
           .map((panel) =>
@@ -55,7 +56,7 @@ export const Sidebar: React.FC = React.memo(() => {
             )
           )}
       </div>
-    </div>
+    </CommonSidebarWrapper>
   );
 });
 Sidebar.displayName = 'Sidebar';
