@@ -17,13 +17,13 @@ import { getMessageRender } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
-import './item.less';
 import clsx from 'clsx';
 import { useChatMessageItemAction } from './useChatMessageItemAction';
 import { useChatMessageReaction } from './useChatMessageReaction';
 import { DevContainer } from '@/components/DevContainer';
 import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
+import './Item.less';
 
 /**
  * 消息引用
