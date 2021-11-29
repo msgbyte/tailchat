@@ -3,15 +3,13 @@ import { Loadable } from '../Loadable';
 
 const Emoji = Loadable(
   () =>
-    import(
-      /* webpackChunkName: 'emoji' */ /* webpackPrefetch: true */ './Emoji'
-    )
+    import(/* webpackChunkName: 'emoji' */ /* webpackPreload: true */ './Emoji')
 );
 
 const EmojiPicker = Loadable(
   () =>
     import(
-      /* webpackChunkName: 'emoji-picker' */ /* webpackPrefetch: true */ './Picker'
+      /* webpackChunkName: 'emoji-picker' */ /* webpackPreload: true */ './Picker'
     )
 );
 
