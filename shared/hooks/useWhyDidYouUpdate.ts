@@ -7,6 +7,7 @@ import { parse, stringify } from 'flatted';
 import _get from 'lodash/get';
 import _isEqual from 'lodash/isEqual';
 import { useEffect, useRef } from 'react';
+import { isDevelopment } from '../utils/environment';
 
 interface UseWhyDidYouUpdateCallback<T> {
   onChangeFound?: (data: {
@@ -49,7 +50,7 @@ export function useWhyDidYouUpdate<T>(
   const latestProps = useRef(props);
 
   useEffect(() => {
-    if (!__DEV__) return;
+    if (!isDevelopment) return;
 
     const allKeys = Object.keys({ ...latestProps.current, ...props });
 

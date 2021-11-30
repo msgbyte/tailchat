@@ -10,6 +10,7 @@
     "build": "yarn plugins:all && cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack --config ./build/webpack.config.ts",
     "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve --config ./build/webpack.config.ts",
     "serve": "npx http-server ./dist",
+    "analysis": "cross-env ANALYSIS=true yarn build",
     "check:type": "tsc --noEmit --skipLibCheck",
     "postinstall": "yarn plugins:install",
     "plugins:new": "ministar createPlugin",
