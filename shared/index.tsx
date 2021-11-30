@@ -64,6 +64,7 @@ export { useMountedState } from './hooks/useMountedState';
 export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
 export { useUpdateRef } from './hooks/useUpdateRef';
+export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 
 // manager
 export { buildRegFn } from './manager/buildRegFn';
