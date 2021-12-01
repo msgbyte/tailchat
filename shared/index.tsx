@@ -56,6 +56,7 @@ export { Trans } from './i18n/Trans';
 export { useLanguage } from './i18n/language';
 
 // hooks
+export { useUsernames } from './hooks/model/useUsernames';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
@@ -112,7 +113,7 @@ export {
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
 export { recallMessage, deleteMessage, addReaction } from './model/message';
-export type { ChatMessage } from './model/message';
+export type { ChatMessageReaction, ChatMessage } from './model/message';
 export type { PluginManifest } from './model/plugin';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
