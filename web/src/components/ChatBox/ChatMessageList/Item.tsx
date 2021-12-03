@@ -66,7 +66,11 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const reactions = useMessageReactions(payload);
 
   const emojiAction = useChatMessageReaction(payload);
-  const moreActions = useChatMessageItemAction(payload);
+  const moreActions = useChatMessageItemAction(payload, {
+    onClick: () => {
+      setIsActionBtnActive(false);
+    },
+  });
 
   return (
     <div

@@ -16,7 +16,8 @@ import {
  * 消息的会话操作
  */
 export function useChatMessageItemAction(
-  payload: ChatMessage
+  payload: ChatMessage,
+  options: { onClick?: () => void }
 ): React.ReactElement {
   const context = useChatBoxContext();
   const groupInfo = useGroupInfoContext();
@@ -34,7 +35,7 @@ export function useChatMessageItemAction(
   const isMessageAuthor = payload.author === userInfo?._id;
 
   return (
-    <Menu>
+    <Menu onClick={options.onClick}>
       {context.hasContext && (
         <Menu.Item
           key="reply"
