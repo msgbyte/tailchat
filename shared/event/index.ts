@@ -7,7 +7,7 @@ export interface SharedEventMap {
   /**
    * 修改配色方案
    */
-  changeColorScheme: (scheme: string) => void;
+  loadColorScheme: (scheme: string) => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 
