@@ -111,7 +111,7 @@ const plugins: Configuration['plugins'] = [
       {
         // 匹配内置 plugins 以加速
         urlPattern: workboxPluginPattern,
-        handler: 'CacheFirst',
+        handler: 'StaleWhileRevalidate',
         options: {
           cacheName: 'builtin-plugins',
           expiration: {
