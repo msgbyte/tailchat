@@ -1,4 +1,4 @@
-import { regPluginColorScheme } from '@capital/common';
+import { regPluginColorScheme, sharedEvent } from '@capital/common';
 
 regPluginColorScheme({
   label: 'Miku 葱',
@@ -13,4 +13,9 @@ regPluginColorScheme({
 /**
  * 异步加载以防止入口文件过大阻塞主应用加载(因为有图片)
  */
-import('./theme.less');
+sharedEvent.on('loadColorScheme', (colorSchemeName) => {
+  if (colorSchemeName === 'light+miku' || colorSchemeName === 'dark+miku') {
+    console.log('正在加载初音未来主题...');
+    import('./theme.less');
+  }
+});
