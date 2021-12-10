@@ -13,7 +13,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import fs from 'fs';
 import WorkboxPlugin from 'workbox-webpack-plugin';
-import { getCommitHash, workboxPluginPattern } from './utils';
+import { workboxPluginPattern } from './utils';
 import dayjs from 'dayjs';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -47,8 +47,8 @@ const plugins: Configuration['plugins'] = [
     'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
     'process.env.VERSION': JSON.stringify(
       `${process.env.VERSION || packageJson.version}-${dayjs().format(
-        'YYYYMMDD'
-      )}-${getCommitHash()}`
+        'YYYYMMDDHHmm'
+      )}`
     ),
   }),
   new HtmlWebpackPlugin({
