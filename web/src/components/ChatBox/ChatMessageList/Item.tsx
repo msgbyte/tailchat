@@ -263,7 +263,8 @@ export function buildMessageItemRow(
 
     // 进行头像合并(在同一时间块下 且发送者为同一人)
     if (showDate === false) {
-      showAvatar = prevMessage.author !== message.author;
+      showAvatar =
+        prevMessage.author !== message.author || prevMessage.hasRecall === true;
     }
   }
 
