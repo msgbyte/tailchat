@@ -1,4 +1,6 @@
+import { showToasts, t } from '..';
 import { request } from '../api/request';
+import _get from 'lodash/get';
 
 interface UploadFileOptions {
   onProgress?: (percent: number, progressEvent: unknown) => void;
@@ -19,18 +21,23 @@ export async function uploadFile(
   const form = new FormData();
   form.append('file', file);
 
-  const { data } = await request.post('/upload', form, {
-    onUploadProgress(progressEvent) {
-      if (progressEvent.lengthComputable) {
-        if (typeof options.onProgress === 'function') {
-          options.onProgress(
-            progressEvent.loaded / progressEvent.total,
-            progressEvent
-          );
+  try {
+    const { data } = await request.post('/upload', form, {
+      onUploadProgress(progressEvent) {
+        if (progressEvent.lengthComputable) {
+          if (typeof options.onProgress === 'function') {
+            options.onProgress(
+              progressEvent.loaded / progressEvent.total,
+              progressEvent
+            );
+          }
         }
-      }
-    },
-  });
+      },
+    });
 
-  return data;
+    return data;
+  } catch (e) {
+    showToasts(`${t('上传失败')}: ${_get(e, 'message')}`, 'error');
+    throw e;
+  }
 }
