@@ -20,13 +20,20 @@ export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
       }
     }, [props.onConfirm]);
 
-    useGlobalKeyDown((e) => {
-      if (isEnterHotkey(e)) {
-        handleConfirm();
-      } else if (isEscHotkey(e)) {
-        props.onCancel();
+    useGlobalKeyDown(
+      (e) => {
+        if (isEnterHotkey(e)) {
+          e.stopPropagation();
+          handleConfirm();
+        } else if (isEscHotkey(e)) {
+          e.stopPropagation();
+          props.onCancel();
+        }
+      },
+      {
+        capture: true,
       }
-    });
+    );
 
     return (
       <ModalWrapper style={{ maxHeight: '60vh', maxWidth: '60vw' }}>
