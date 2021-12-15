@@ -12,7 +12,7 @@ module.exports = {
             `./plugins/${pluginName}`,
             './assets/**/*'
           ),
-          dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/public/`),
+          dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/assets/`),
         },
       ],
     }),
