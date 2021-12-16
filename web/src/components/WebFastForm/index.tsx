@@ -11,12 +11,14 @@ import { FastFormText } from './types/Text';
 import { FastFormTextArea } from './types/TextArea';
 import { FastFormPassword } from './types/Password';
 import { FastFormSelect } from './types/Select';
+import { FastFormCheckbox } from './types/Checkbox';
 import { FastFormCustom } from './types/Custom';
 
 regField('text', FastFormText);
 regField('textarea', FastFormTextArea);
 regField('password', FastFormPassword);
 regField('select', FastFormSelect);
+regField('checkbox', FastFormCheckbox);
 regField('custom', FastFormCustom);
 
 const WebFastFormContainer: FastFormContainerComponent = React.memo((props) => {
