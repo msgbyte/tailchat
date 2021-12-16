@@ -13,6 +13,20 @@ export function useGroupInfo(groupId: string): GroupInfo | null {
 }
 
 /**
+ * 获取群组中所有成员的uuid列表
+ */
+export function useGroupMemberUUIDs(groupId: string): string[] {
+  const groupInfo = useGroupInfo(groupId);
+  const members = groupInfo?.members ?? [];
+  const groupMemberUUIDs = useMemo(
+    () => members.map((m) => m.userId),
+    [members]
+  );
+
+  return groupMemberUUIDs;
+}
+
+/**
  * 获取群组面板信息
  */
 export function useGroupPanel(

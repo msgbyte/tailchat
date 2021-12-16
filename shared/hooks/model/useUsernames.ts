@@ -1,15 +1,10 @@
-import { getCachedUserInfo } from '../../cache/cache';
-import { useAsync } from '../useAsync';
+import { useUserInfoList } from './useUserInfoList';
 
 /**
  * 用户名列表
  */
 export function useUsernames(userIds: string[]): string[] {
-  const { value: names = [] } = useAsync(async () => {
-    const users = await Promise.all(userIds.map((id) => getCachedUserInfo(id)));
+  const userInfoList = useUserInfoList(userIds);
 
-    return users.map((user) => user.nickname);
-  }, [userIds.join(',')]);
-
-  return names;
+  return userInfoList.map((info) => info.nickname);
 }

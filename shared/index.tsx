@@ -134,6 +134,7 @@ export { useConverseMessage } from './redux/hooks/useConverseMessage';
 export { useDMConverseName } from './redux/hooks/useDMConverseName';
 export {
   useGroupInfo,
+  useGroupMemberUUIDs,
   useGroupPanel,
   useIsGroupOwner,
   useGroupUnread,

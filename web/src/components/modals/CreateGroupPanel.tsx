@@ -10,13 +10,18 @@ import {
   createFastFormSchema,
   fieldSchema,
   showToasts,
+  useGroupMemberUUIDs,
+  isDevelopment,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../Modal';
 import { WebFastForm } from '../WebFastForm';
+import _compact from 'lodash/compact';
+import { UserSelector } from '../UserSelector';
+import { useFastFormContext } from 'tailchat-shared/components/FastForm/context';
 
 interface Values {
   name: string;
-  type: string;
+  type: string | GroupPanelType;
   [key: string]: unknown;
 }
 
@@ -93,7 +98,48 @@ export const ModalCreateGroupPanel: React.FC<{
     [props.groupId, props.onCreateSuccess]
   );
 
+  const disableSendMessageWithoutRender = useMemo(() => {
+    const DisableSendMessageWithoutComponent: React.FC = () => {
+      const groupMemberUUIDs = useGroupMemberUUIDs(props.groupId);
+      const context = useFastFormContext();
+
+      return (
+        <UserSelector
+          allUserIds={groupMemberUUIDs}
+          onChange={(userIds) => {
+            context?.setValues({
+              ...context.values,
+              disableSendMessageWithout: userIds,
+            });
+          }}
+        />
+      );
+    };
+    DisableSendMessageWithoutComponent.displayName =
+      'DisableSendMessageWithoutComponent';
+
+    return DisableSendMessageWithoutComponent;
+  }, [props.groupId]);
+
   const field = useMemo(() => {
+    // NOTICE: 仅开发环境有这个配置
+    if (isDevelopment && currentValues.type === GroupPanelType.TEXT) {
+      return _compact([
+        ...baseFields,
+        {
+          type: 'checkbox',
+          name: 'disableSendMessage',
+          label: t('禁止所有人发言'),
+        },
+        currentValues.disableSendMessage === true && {
+          type: 'custom',
+          name: 'disableSendMessageWithout',
+          label: t('仅允许指定用户发言'),
+          render: disableSendMessageWithoutRender,
+        },
+      ]) as FastFormFieldMeta[];
+    }
+
     if (typeof currentValues.type === 'string') {
       // 如果当前选择的面板类型为插件类型
       // 需要从插件信息中获取额外的字段
