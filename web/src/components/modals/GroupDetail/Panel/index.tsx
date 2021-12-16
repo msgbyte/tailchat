@@ -12,7 +12,7 @@ import _isEqual from 'lodash/isEqual';
 import { GroupPanelTree } from './GroupPanelTree';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import { closeModal, openModal } from '@/components/Modal';
-import { ModalCreateGroupPanel } from '../../CreateGroupPanel';
+import { ModalCreateGroupPanel } from '../../GroupPanel/CreateGroupPanel';
 
 export const GroupPanel: React.FC<{
   groupId: string;

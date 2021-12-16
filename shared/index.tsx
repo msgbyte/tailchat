@@ -30,6 +30,7 @@ export {
   createFastFormSchema,
   fieldSchema,
 } from './components/FastForm/schema';
+export { useFastFormContext } from './components/FastForm/context';
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 
