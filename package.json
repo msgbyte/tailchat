@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "translation": "node build/script/scanTranslation.js",
     "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
-    "test": "jest"
+    "test": "cd web && yarn test"
   },
   "lint-staged": {
     "src/*.{json,less}": [
@@ -31,7 +31,6 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
     "commitlint": "^12.1.4",
@@ -45,10 +44,8 @@
     "husky": "^7.0.0",
     "i18next-scanner": "^3.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.0.6",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
     "vinyl-fs": "^3.0.3"
   }
 }

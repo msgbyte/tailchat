@@ -1,4 +1,6 @@
 const regeneratorRuntime = require('regenerator-runtime');
+const { pathsToModuleNameMapper } = require('ts-jest');
+const webCompilerOptions = require('./tsconfig.json').compilerOptions;
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
@@ -6,9 +8,12 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
+    ...pathsToModuleNameMapper(webCompilerOptions.paths, {
+      prefix: '<rootDir>/web/',
+    }),
   },
   // projects: ['<rootDir>/web/'], // https://jestjs.io/docs/configuration#projects-arraystring--projectconfig
-  rootDir: '.',
+  rootDir: '../',
   testRegex: '.*\\.(test|spec)\\.tsx?$',
   testPathIgnorePatterns: ['/node_modules/', '/e2e/cypress/'],
   transform: {
