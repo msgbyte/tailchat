@@ -1,5 +1,5 @@
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
-import { GroupPanelType } from 'tailchat-shared';
+import { GroupPanel, GroupPanelType } from 'tailchat-shared';
 import type { GroupPanelValues } from './types';
 
 /**
@@ -30,5 +30,21 @@ export function buildDataFromValues(values: GroupPanelValues) {
     provider,
     pluginPanelName,
     meta,
+  };
+}
+
+/**
+ * 从群组面板信息中获取面板属性修改相关信息
+ */
+export function pickValuesFromGroupPanelInfo(
+  groupPanelInfo: GroupPanel
+): GroupPanelValues {
+  return {
+    ...groupPanelInfo.meta,
+    name: groupPanelInfo.name,
+    type:
+      groupPanelInfo.type === GroupPanelType.PLUGIN
+        ? String(groupPanelInfo.pluginPanelName)
+        : groupPanelInfo.type,
   };
 }

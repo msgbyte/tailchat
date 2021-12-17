@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import _isNil from 'lodash/isNil';
 import _fromPairs from 'lodash/fromPairs';
@@ -22,6 +22,7 @@ export interface FastFormProps {
   schema?: ObjectSchema<any>; // yup schame object 用于表单校验
   layout?: 'horizontal' | 'vertical'; // 布局方式(默认水平)
   submitLabel?: string; // 提交按钮的标签名
+  initialValues?: any;
   onSubmit: (values: any) => Promise<void> | void; // 点击提交按钮的回调
   onChange?: (values: any) => void; // 数据更新回调
 }
@@ -32,12 +33,20 @@ export interface FastFormProps {
  */
 export const FastForm: React.FC<FastFormProps> = React.memo((props) => {
   const initialValues = useMemo(() => {
-    return _fromPairs(
-      props.fields.map((field) => [field.name, field.defaultValue ?? ''])
-    );
-  }, [props.fields]);
+    return {
+      ..._fromPairs(
+        props.fields.map((field) => [field.name, field.defaultValue ?? ''])
+      ),
+      ...props.initialValues,
+    };
+  }, [props.fields, props.initialValues]);
 
   const [loading, setLoading] = useState(false);
+
+  useLayoutEffect(() => {
+    // 加载时提交一次initialValues
+    typeof props.onChange === 'function' && props.onChange(initialValues);
+  }, []);
 
   const formik = useFormik({
     initialValues,

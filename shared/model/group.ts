@@ -171,6 +171,27 @@ export async function createGroupPanel(
 }
 
 /**
+ * 创建群组面板
+ */
+export async function modifyGroupPanel(
+  groupId: string,
+  panelId: string,
+  options: {
+    name: string;
+    parentId?: string;
+    provider?: string;
+    pluginPanelName?: string;
+    meta?: Record<string, unknown>;
+  }
+) {
+  await request.post('/api/group/modifyGroupPanel', {
+    ...options,
+    groupId,
+    panelId,
+  });
+}
+
+/**
  * 删除群组面板
  * @param groupId 群组Id
  * @param panelId 面板Id

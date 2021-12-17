@@ -110,6 +110,7 @@ export {
   applyGroupInvite,
   modifyGroupField,
   createGroupPanel,
+  modifyGroupPanel,
   deleteGroupPanel,
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';

@@ -52,7 +52,7 @@ export const GroupPanel: React.FC<{
     const key = openModal(
       <ModalCreateGroupPanel
         groupId={groupId}
-        onCreateSuccess={() => {
+        onSuccess={() => {
           closeModal(key);
           isEditingRef.current = false;
         }}

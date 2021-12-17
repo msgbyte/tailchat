@@ -10,6 +10,8 @@ import type { DataNode } from 'antd/lib/tree';
 import { buildTreeDataWithGroupPanel } from './utils';
 import { Icon } from '@iconify/react';
 import { useGroupPanelTreeDrag } from './useGroupPanelTreeDrag';
+import { closeModal, openModal } from '@/components/Modal';
+import { ModalModifyGroupPanel } from '../../GroupPanel/ModifyGroupPanel';
 
 interface GroupPanelTree {
   groupId: string;
@@ -23,6 +25,19 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
   const treeData: DataNode[] = useMemo(
     () => buildTreeDataWithGroupPanel(props.groupPanels),
     [props.groupPanels]
+  );
+
+  const handleModifyPanel = useCallback(
+    (panelId: string) => {
+      const key = openModal(
+        <ModalModifyGroupPanel
+          groupId={props.groupId}
+          groupPanelId={panelId}
+          onSuccess={() => closeModal(key)}
+        />
+      );
+    },
+    [props.groupId]
   );
 
   const handleDeletePanel = useCallback(
@@ -47,6 +62,17 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
         <div className="flex group">
           <span>{node.title}</span>
           <div className="opacity-0 group-hover:opacity-100">
+            <Button
+              type="text"
+              size="small"
+              icon={<Icon className="anticon" icon="mdi:pencil-outline" />}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleModifyPanel(String(node.key));
+              }}
+            />
+
             <Button
               type="text"
               size="small"
