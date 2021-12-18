@@ -93,6 +93,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       >
                         <span />
                       </button>
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                     </div>
                   </div>
                 </span>
@@ -136,6 +142,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       >
                         <span />
                       </button>
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                     </div>
                   </div>
                 </span>
@@ -173,6 +185,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                     <div
                       class="opacity-0 group-hover:opacity-100"
                     >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
@@ -238,6 +256,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       >
                         <span />
                       </button>
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                     </div>
                   </div>
                 </span>
@@ -281,6 +305,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       >
                         <span />
                       </button>
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                     </div>
                   </div>
                 </span>
@@ -318,6 +348,12 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                     <div
                       class="opacity-0 group-hover:opacity-100"
                     >
+                      <button
+                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
+                        type="button"
+                      >
+                        <span />
+                      </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
