@@ -1,5 +1,8 @@
 // mock
 jest.mock('tailchat-shared/i18n');
+jest.mock('@iconify/react', () => ({
+  Icon: ({ icon }) => `[iconify icon="${icon}"]`,
+}));
 
 const ignoreErroMessages = [
   /Warning.*not wrapped in act/,

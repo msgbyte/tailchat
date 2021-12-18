@@ -2,6 +2,6 @@
 
 exports[`Spinner render 1`] = `
 <div>
-  <span />
+  [iconify icon="mdi:loading"]
 </div>
 `;

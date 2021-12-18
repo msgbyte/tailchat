@@ -3,7 +3,7 @@
 exports[`LoadingSpinner render 1`] = `
 <div>
   <div>
-    <span />
+    [iconify icon="mdi:loading"]
     加载中...
   </div>
 </div>
@@ -12,7 +12,7 @@ exports[`LoadingSpinner render 1`] = `
 exports[`LoadingSpinner render with text 1`] = `
 <div>
   <div>
-    <span />
+    [iconify icon="mdi:loading"]
     加载中...
   </div>
 </div>

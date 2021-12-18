@@ -5,7 +5,7 @@ exports[`IsDeveloping render 1`] = `
   <div
     class="text-white w-full h-full flex items-center justify-center flex-col"
   >
-    <span />
+    [iconify icon="mdi:code-braces"]
     <p
       class="text-2xl"
     >

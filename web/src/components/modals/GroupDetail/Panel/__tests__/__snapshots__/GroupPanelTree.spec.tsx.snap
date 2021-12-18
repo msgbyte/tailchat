@@ -91,13 +91,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>
@@ -140,13 +140,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>
@@ -189,13 +189,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>
@@ -254,13 +254,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>
@@ -303,13 +303,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>
@@ -352,13 +352,13 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:pencil-outline"]
                       </button>
                       <button
                         class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
                         type="button"
                       >
-                        <span />
+                        [iconify icon="mdi:trash-can-outline"]
                       </button>
                     </div>
                   </div>

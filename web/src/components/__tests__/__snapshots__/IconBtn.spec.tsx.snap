@@ -6,7 +6,7 @@ exports[`IconBtn render 1`] = `
     class="ant-btn ant-btn-circle ant-btn-icon-only border-0 bg-black bg-opacity-30 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
     type="button"
   >
-    <span />
+    [iconify icon="mdi:close"]
   </button>
 </div>
 `;
