@@ -3,6 +3,7 @@ import { findGroupInviteByCode, GroupInvite } from '../model/group';
 import {
   fetchGithubStaticRegistryPlugins,
   fetchRegistryPlugins,
+  fetchServiceRegistryPlugins,
   PluginManifest,
 } from '../model/plugin';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
@@ -60,9 +61,10 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
     ['pluginRegistry'],
     () =>
       Promise.all([
-        fetchRegistryPlugins(),
-        fetchGithubStaticRegistryPlugins(),
-      ]).then(([a, b]) => [...a, ...b]),
+        fetchRegistryPlugins().catch(() => []),
+        fetchServiceRegistryPlugins().catch(() => []),
+        fetchGithubStaticRegistryPlugins().catch(() => []),
+      ]).then(([a, b, c]) => [...a, ...b, ...c]),
     {
       staleTime: 2 * 60 * 60 * 1000, // 缓存2小时
     }

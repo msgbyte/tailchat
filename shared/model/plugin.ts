@@ -49,6 +49,11 @@ export interface PluginManifest {
   requireRestart: boolean;
 }
 
+/**
+ * 获取服务端插件中心的插件列表
+ *
+ * 后端动态
+ */
 export async function fetchRegistryPlugins(): Promise<PluginManifest[]> {
   const { data } = await request.get('/api/plugin/registry/list');
 
@@ -56,7 +61,20 @@ export async function fetchRegistryPlugins(): Promise<PluginManifest[]> {
 }
 
 /**
+ * 获取服务器安装的插件列表
+ *
+ * 后端固定
+ */
+export async function fetchServiceRegistryPlugins() {
+  const { data } = await request.get('/registry.json');
+
+  return data;
+}
+
+/**
  * 获取官方Github注册表文件
+ *
+ * 前端固定
  */
 export async function fetchGithubStaticRegistryPlugins(): Promise<
   PluginManifest[]
