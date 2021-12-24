@@ -18,10 +18,10 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/e2e/cypress/'],
   transform: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/../test/fileTransformer.js',
+      '<rootDir>/test/fileTransformer.js',
   },
   transformIgnorePatterns: ['/node_modules/'],
-  setupFiles: ['<rootDir>/../test/setup.js', '<rootDir>/test/setup.js'],
+  setupFiles: ['<rootDir>/test/setup.js'],
   setupFilesAfterEnv: [],
   globals: {
     window: {},

@@ -1,4 +1,4 @@
-import { isValidStr } from 'tailchat-shared';
+import { isValidStr } from './string-helper';
 
 /**
  * 解析配色方案，优先dark模式

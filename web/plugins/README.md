@@ -7,7 +7,7 @@
 在web目录执行:
 
 ```bash
-yarn ministar createPlugin 
+pnpm ministar createPlugin 
 ```
 
 插件名请准守反域名模式, 如: `com.msgbyte.xxx`

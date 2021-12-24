@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { useStorage } from 'tailchat-shared';
-import { parseColorScheme } from '../../web/src/utils/color-scheme-helper';
+import { parseColorScheme } from '../utils/color-scheme-helper';
 import { sharedEvent } from '../event';
+import { useStorage } from '../manager/storage';
 
 const ColorSchemeContext = React.createContext<{
   /**

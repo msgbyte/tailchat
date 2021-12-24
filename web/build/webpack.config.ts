@@ -215,6 +215,9 @@ const config: Configuration = {
         configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
       }),
     ],
+    fallback: {
+      url: require.resolve('url/'),
+    },
   },
   plugins,
 };

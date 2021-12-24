@@ -1,0 +1,5 @@
+packages:
+  # all packages in subdirs of packages/ and components/
+  - 'web'
+  - 'shared'
+  - 'web/plugins/**'

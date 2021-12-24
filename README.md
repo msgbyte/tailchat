@@ -28,9 +28,9 @@ Nightly版 体验地址: [https://nightly.paw.msgbyte.com/](https://nightly.paw.
 #### 编译 web 前端代码
 
 ```bash
-yarn install
+pnpm install
 cd web
-yarn build
+pnpm build
 ```
 
 使用任意方式代理 `web/dist` 目录即可。
@@ -39,6 +39,6 @@ yarn build
 #### expo 打开移动端app
 ```bash
 cd app
-yarn install
-yarn start
+pnpm install
+pnpm start
 ```

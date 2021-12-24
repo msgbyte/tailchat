@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { showToasts, t, GroupPanel as GroupPanelInfo } from 'tailchat-shared';
+import { showToasts, GroupPanel as GroupPanelInfo } from 'tailchat-shared';
 import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
 import type { DataNode, EventDataNode } from 'antd/lib/tree';
 import type { Key } from 'rc-tree/lib/interface';

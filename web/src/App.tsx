@@ -4,7 +4,6 @@ import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
-import { parseColorScheme } from './utils/color-scheme-helper';
 import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
 import { getPopupContainer, preventDefault } from './utils/dom-helper';
