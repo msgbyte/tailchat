@@ -1,3 +1,4 @@
+import { pluginCustomPanel } from '@/plugin/common';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { PageContent } from '../PageContent';
@@ -18,6 +19,16 @@ export const Personal: React.FC = React.memo(() => {
           path="/main/personal/converse/:converseId"
           component={PersonalConverse}
         />
+
+        {pluginCustomPanel
+          .filter((p) => p.position === 'personal')
+          .map((p) => (
+            <Route
+              key={p.name}
+              path={`/main/personal/custom/${p.name}`}
+              component={p.render}
+            />
+          ))}
 
         <Redirect to="/main/personal/friends" />
       </Switch>

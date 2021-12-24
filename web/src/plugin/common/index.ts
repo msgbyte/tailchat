@@ -9,6 +9,7 @@ export {
   useCurrentGroupPanelInfo,
 } from '@/routes/Main/Content/Group/utils';
 export { openModal, ModalWrapper, useModalContext } from '@/components/Modal';
+export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
 export {
   getCachedUserInfo,

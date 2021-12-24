@@ -8,6 +8,7 @@ import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import { DevContainer } from '@/components/DevContainer';
 import { SectionHeader } from '@/components/SectionHeader';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
+import { pluginCustomPanel } from '@/plugin/common';
 
 const SidebarSection: React.FC<{
   action: React.ReactNode;
@@ -47,6 +48,19 @@ export const PersonalSidebar: React.FC = React.memo(() => {
           icon={<Icon icon="mdi:puzzle" />}
           to="/main/personal/plugins"
         />
+
+        {/* 插件自定义面板 */}
+        {pluginCustomPanel
+          .filter((p) => p.position === 'personal')
+          .map((p) => (
+            <SidebarItem
+              key={p.name}
+              name={p.label}
+              icon={<Icon icon={p.icon} />}
+              to={`/main/personal/custom/${p.name}`}
+            />
+          ))}
+
         <SidebarSection
           action={
             <DevContainer>

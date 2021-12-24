@@ -61,7 +61,7 @@ export const t: TFunction = (
 /**
  * 本地翻译
  * @example
- * localTrans({zh-CN: '你好', en-US: 'Hello'});
+ * localTrans({'zh-CN': '你好', 'en-US': 'Hello'});
  *
  * @param trans 翻译对象
  */

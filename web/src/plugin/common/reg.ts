@@ -7,6 +7,41 @@ import {
 } from 'tailchat-shared';
 
 /**
+ * 注册自定义面板
+ */
+export interface PluginCustomPanel {
+  /**
+   * 面板位置:
+   *
+   * - personal: 个人面板中的一项
+   * - navbar: 导航栏(未实装)
+   */
+  position: 'personal' | 'navbar';
+
+  /**
+   * Iconify 名
+   */
+  icon: string;
+
+  /**
+   * 自定义面板唯一标识名
+   */
+  name: string;
+
+  /**
+   * 自定义面板显示名
+   */
+  label: string;
+
+  /**
+   * 渲染组件
+   */
+  render: React.ComponentType;
+}
+export const [pluginCustomPanel, regCustomPanel] =
+  buildRegList<PluginCustomPanel>();
+
+/**
  * 注册群组面板
  */
 export interface PluginGroupPanel {
