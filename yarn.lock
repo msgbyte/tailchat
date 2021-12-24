@@ -7775,10 +7775,10 @@ mini-css-extract-plugin@^1.6.2:
     schema-utils "^3.0.0"
     webpack-sources "^1.1.0"
 
-mini-star@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.npmmirror.com/mini-star/download/mini-star-1.2.8.tgz#aedf663927bf7706b185b01d2934a064844faf96"
-  integrity sha512-0oSrxaPopOBCCqYn2UMUXd18cRLjXS/xiE0iYwv3ov8agAwrc8zhFNrJmamxJU924q/q0Ppx72DwRfCP2q+ehw==
+mini-star@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.npmmirror.com/mini-star/download/mini-star-1.2.9.tgz#36f1bafb167f6ca9593e547472f9d05cafaf5f4a"
+  integrity sha512-UJPjtCpuyDqWN7tFF1zLOfLjSpvUBk53ttpYvr2gSfsBgtwAi2BhyB8hxGxd7YbVRJi+Nxwz8JJuTlP+fdhiwQ==
   dependencies:
     "@rollup/plugin-commonjs" "^19.0.0"
     "@rollup/plugin-json" "^4.1.0"

@@ -31,7 +31,7 @@
     "jsonschema": "^1.4.0",
     "jwt-decode": "^3.1.2",
     "memoize-one": "^6.0.0",
-    "mini-star": "^1.2.8",
+    "mini-star": "^1.2.9",
     "p-min-delay": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
