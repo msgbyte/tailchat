@@ -21,7 +21,7 @@ module.exports = {
       '<rootDir>/../test/fileTransformer.js',
   },
   transformIgnorePatterns: ['/node_modules/'],
-  setupFiles: ['<rootDir>/../test/setup.js'],
+  setupFiles: ['<rootDir>/../test/setup.js', '<rootDir>/test/setup.js'],
   setupFilesAfterEnv: [],
   globals: {
     window: {},

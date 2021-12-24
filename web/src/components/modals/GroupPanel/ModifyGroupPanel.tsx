@@ -1,5 +1,5 @@
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   t,
   useAsyncRequest,
