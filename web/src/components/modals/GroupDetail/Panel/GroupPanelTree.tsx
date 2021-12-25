@@ -106,7 +106,9 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
       treeData={treeData}
       defaultExpandAll={true}
       blockNode={true}
-      draggable={true}
+      draggable={{
+        icon: false,
+      }}
       selectable={false}
       titleRender={titleRender}
       onDrop={handleDrop}

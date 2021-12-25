@@ -72,11 +72,13 @@ export const GroupPanel: React.FC<{
         {t('面板管理')}
       </FullModalCommonTitle>
 
-      <GroupPanelTree
-        groupId={groupId}
-        groupPanels={editingGroupPanels}
-        onChange={handleChange}
-      />
+      <div className="max-h-80 overflow-auto border rounded border-black border-opacity-20 p-1">
+        <GroupPanelTree
+          groupId={groupId}
+          groupPanels={editingGroupPanels}
+          onChange={handleChange}
+        />
+      </div>
 
       {!_isEqual(groupPanels, editingGroupPanels) && (
         <div className="space-x-1 mt-2">
