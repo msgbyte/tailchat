@@ -3,12 +3,12 @@
 exports[`GroupPanelTree simple render snapshot 1`] = `
 <div>
   <div
-    class="ant-tree ant-tree-icon-hide ant-tree-block-node"
+    class="ant-tree ant-tree-icon-hide ant-tree-block-node ant-tree-unselectable"
+    role="tree"
   >
-    <div
-      role="tree"
-    >
+    <div>
       <input
+        aria-label="for screen reader"
         style="width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;"
         tabindex="0"
         value=""
@@ -40,12 +40,37 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
             style="display: flex; flex-direction: column;"
           >
             <div
-              class="ant-tree-treenode ant-tree-treenode-switcher-open"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-switcher-open ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
                 class="ant-tree-indent"
               />
+              <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
               <span
                 class="ant-tree-switcher ant-tree-switcher_open"
               >
@@ -70,9 +95,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 </span>
               </span>
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"
                 title="section-1"
               >
                 <span
@@ -85,27 +108,50 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       section-1
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>
               </span>
             </div>
             <div
-              class="ant-tree-treenode"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
@@ -116,12 +162,33 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 />
               </span>
               <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
                 class="ant-tree-switcher ant-tree-switcher-noop"
               />
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"
                 title="panel-01"
               >
                 <span
@@ -134,27 +201,50 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       panel-01
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>
               </span>
             </div>
             <div
-              class="ant-tree-treenode ant-tree-treenode-leaf-last"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-leaf-last ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
@@ -165,12 +255,33 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 />
               </span>
               <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
                 class="ant-tree-switcher ant-tree-switcher-noop"
               />
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"
                 title="panel-02"
               >
                 <span
@@ -183,32 +294,78 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       panel-02
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>
               </span>
             </div>
             <div
-              class="ant-tree-treenode ant-tree-treenode-switcher-open ant-tree-treenode-leaf-last"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-switcher-open ant-tree-treenode-leaf-last ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
                 class="ant-tree-indent"
               />
+              <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
               <span
                 class="ant-tree-switcher ant-tree-switcher_open"
               >
@@ -233,9 +390,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 </span>
               </span>
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"
                 title="section-2"
               >
                 <span
@@ -248,27 +403,50 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       section-2
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>
               </span>
             </div>
             <div
-              class="ant-tree-treenode"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
@@ -279,12 +457,33 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 />
               </span>
               <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
                 class="ant-tree-switcher ant-tree-switcher-noop"
               />
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"
                 title="panel-11"
               >
                 <span
@@ -297,27 +496,50 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       panel-11
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>
               </span>
             </div>
             <div
-              class="ant-tree-treenode ant-tree-treenode-leaf-last"
+              aria-grabbed="false"
+              class="ant-tree-treenode ant-tree-treenode-leaf-last ant-tree-treenode-draggable"
+              draggable="true"
             >
               <span
                 aria-hidden="true"
@@ -328,12 +550,33 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                 />
               </span>
               <span
+                class="ant-tree-draggable-icon"
+              >
+                <span
+                  aria-label="holder"
+                  class="anticon anticon-holder"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="holder"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M300 276.5a56 56 0 1056-97 56 56 0 00-56 97zm0 284a56 56 0 1056-97 56 56 0 00-56 97zM640 228a56 56 0 10112 0 56 56 0 00-112 0zm0 284a56 56 0 10112 0 56 56 0 00-112 0zM300 844.5a56 56 0 1056-97 56 56 0 00-56 97zM640 796a56 56 0 10112 0 56 56 0 00-112 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
                 class="ant-tree-switcher ant-tree-switcher-noop"
               />
               <span
-                aria-grabbed="true"
-                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal draggable"
-                draggable="true"
+                class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"
                 title="panel-12"
               >
                 <span
@@ -346,20 +589,41 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                       panel-12
                     </span>
                     <div
-                      class="opacity-0 group-hover:opacity-100"
+                      class="opacity-0 group-hover:opacity-100 ml-2"
                     >
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
+                      <div
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        [iconify icon="mdi:pencil-outline"]
-                      </button>
-                      <button
-                        class="ant-btn ant-btn-text ant-btn-sm ant-btn-icon-only"
-                        type="button"
-                      >
-                        [iconify icon="mdi:trash-can-outline"]
-                      </button>
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:pencil-outline"]
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
+                        >
+                          <button
+                            class="ant-btn ant-btn-text ant-btn-circle ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            type="button"
+                          >
+                            <span
+                              class="anticon"
+                            >
+                              [iconify icon="mdi:trash-can-outline"]
+                            </span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </span>

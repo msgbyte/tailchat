@@ -1,12 +1,11 @@
 import React from 'react';
 import { t, useGroupPanel } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
-import { Icon } from '@iconify/react';
-import { Button, Tooltip } from 'antd';
 import { MembersPanel } from './MembersPanel';
 import { CommonPanelWrapper } from '../common/Wrapper';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
+import { IconBtn } from '@/components/IconBtn';
 
 /**
  * 群组面板通用包装器
@@ -33,30 +32,27 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
       <CommonPanelWrapper
         header={panelInfo.name}
         actions={(setRightPanel) => [
-          <Tooltip key="open" title={t('在新窗口打开')}>
-            <Button
-              icon={
-                <Icon className="anticon text-2xl" icon="mdi:dock-window" />
-              }
-              onClick={openPanelWindow}
-            />
-          </Tooltip>,
-          <Tooltip key="members" title={t('成员列表')}>
-            <Button
-              icon={
-                <Icon
-                  className="anticon text-2xl"
-                  icon="mdi:account-supervisor-outline"
-                />
-              }
-              onClick={() =>
-                setRightPanel({
-                  name: t('成员'),
-                  panel: <MembersPanel groupId={props.groupId} />,
-                })
-              }
-            />
-          </Tooltip>,
+          <IconBtn
+            key="open"
+            title={t('在新窗口打开')}
+            shape="square"
+            icon="mdi:dock-window"
+            iconClassName="text-2xl"
+            onClick={openPanelWindow}
+          />,
+          <IconBtn
+            key="members"
+            title={t('成员列表')}
+            shape="square"
+            icon="mdi:account-supervisor-outline"
+            iconClassName="text-2xl"
+            onClick={() =>
+              setRightPanel({
+                name: t('成员'),
+                panel: <MembersPanel groupId={props.groupId} />,
+              })
+            }
+          />,
         ]}
       >
         {props.children}

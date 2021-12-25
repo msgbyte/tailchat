@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { PanelCommonHeader } from '../common/Header';
-import { Icon } from '@iconify/react';
-import { Button } from 'antd';
 import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { IconBtn } from '@/components/IconBtn';
 
 interface RightPanelType {
   name: string;
@@ -54,9 +53,11 @@ export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
           <PanelCommonHeader
             actions={[
               // 关闭按钮
-              <Button
+              <IconBtn
                 key="close"
-                icon={<Icon className="anticon text-2xl" icon="mdi:close" />}
+                shape="square"
+                icon="mdi:close"
+                iconClassName="text-2xl"
                 onClick={() => setRightPanel(undefined)}
               />,
             ]}

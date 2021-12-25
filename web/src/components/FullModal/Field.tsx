@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import _isString from 'lodash/isString';
 import _isNil from 'lodash/isNil';
-import { Button, Input, Space } from 'antd';
-import { Icon } from '@iconify/react';
+import { Input, Space } from 'antd';
 import { t } from 'tailchat-shared';
 import { DelayTip } from '../DelayTip';
+import { IconBtn } from '../IconBtn';
 
 export type FullModalFieldEditorRenderComponent = React.FC<{
   value: string;
@@ -86,25 +86,15 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
 
         {!isEditing ? (
           <DelayTip title={t('编辑')}>
-            <Button
-              icon={<Icon className="anticon" icon="mdi:square-edit-outline" />}
-              onClick={handleEditing}
-            />
+            <IconBtn icon="mdi:square-edit-outline" onClick={handleEditing} />
           </DelayTip>
         ) : (
           <>
             <DelayTip title={t('取消')}>
-              <Button
-                icon={<Icon className="anticon" icon="mdi:close" />}
-                onClick={handleEditing}
-              />
+              <IconBtn icon="mdi:close" onClick={handleEditing} />
             </DelayTip>
             <DelayTip title={t('保存变更')}>
-              <Button
-                type="primary"
-                icon={<Icon className="anticon" icon="mdi:check" />}
-                onClick={handleSave}
-              />
+              <IconBtn type="primary" icon="mdi:check" onClick={handleSave} />
             </DelayTip>
           </>
         )}

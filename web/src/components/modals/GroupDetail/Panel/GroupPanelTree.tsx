@@ -5,13 +5,13 @@ import {
   showAlert,
   t,
 } from 'tailchat-shared';
-import { Button, Tree } from 'antd';
+import { Space, Tree } from 'antd';
 import type { DataNode } from 'antd/lib/tree';
 import { buildTreeDataWithGroupPanel } from './utils';
-import { Icon } from '@iconify/react';
 import { useGroupPanelTreeDrag } from './useGroupPanelTreeDrag';
 import { closeModal, openModal } from '@/components/Modal';
 import { ModalModifyGroupPanel } from '../../GroupPanel/ModifyGroupPanel';
+import { IconBtn } from '@/components/IconBtn';
 
 interface GroupPanelTree {
   groupId: string;
@@ -61,32 +61,36 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
       return (
         <div className="flex group">
           <span>{node.title}</span>
-          <div className="opacity-0 group-hover:opacity-100">
-            <Button
-              type="text"
-              size="small"
-              icon={<Icon className="anticon" icon="mdi:pencil-outline" />}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                handleModifyPanel(String(node.key));
-              }}
-            />
+          <div className="opacity-0 group-hover:opacity-100 ml-2">
+            <Space size="small">
+              <IconBtn
+                title={t('编辑')}
+                type="text"
+                size="small"
+                icon="mdi:pencil-outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handleModifyPanel(String(node.key));
+                }}
+              />
 
-            <Button
-              type="text"
-              size="small"
-              icon={<Icon className="anticon" icon="mdi:trash-can-outline" />}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                handleDeletePanel(
-                  String(node.key),
-                  String(node.title),
-                  !node.isLeaf
-                );
-              }}
-            />
+              <IconBtn
+                title={t('删除')}
+                type="text"
+                size="small"
+                icon="mdi:trash-can-outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handleDeletePanel(
+                    String(node.key),
+                    String(node.title),
+                    !node.isLeaf
+                  );
+                }}
+              />
+            </Space>
           </div>
         </div>
       );
@@ -103,6 +107,7 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
       defaultExpandAll={true}
       blockNode={true}
       draggable={true}
+      selectable={false}
       titleRender={titleRender}
       onDrop={handleDrop}
       // TODO: 待简化 https://github.com/react-component/tree/pull/482
