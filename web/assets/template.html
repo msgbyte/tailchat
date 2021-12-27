@@ -28,7 +28,27 @@
   </head>
   <body>
     <div id="app">
-      <img style="display: block;margin: auto;" src="<%= htmlWebpackPlugin.options.preloadImage %>" />
+      <div id="tailchat-loading">
+        <img style="display: block;margin: auto;" src="<%= htmlWebpackPlugin.options.preloadImage %>" />
+      </div>
+
+      <script>
+        setTimeout(() => {
+          const el = document.getElementById('tailchat-loading')
+          if(el) {
+            // 依旧在 loading
+            const tip = document.createElement('div')
+            tip.style.textAlign = 'center';
+            tip.style.fontSize = '18px';
+            tip.style.marginTop = '20px';
+            tip.style.color = 'gray';
+            tip.innerText = navigator.language === 'zh-CN'
+              ? '可能资源加载出现了一些问题，请手动刷新重试一下'
+              : 'There may be some problems with resource loading, please refresh manually and try again'
+            el.appendChild(tip)
+          }
+        }, 10000);
+      </script>
     </div>
   </body>
 </html>
