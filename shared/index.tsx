@@ -146,7 +146,7 @@ export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { userActions, groupActions, uiActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
-export { createStore } from './redux/store';
+export { createStore, ReduxProvider } from './redux/store';
 export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // utils

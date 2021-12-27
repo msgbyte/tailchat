@@ -1,13 +1,13 @@
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   claimTemporaryUser,
   createFastFormSchema,
   FastFormFieldMeta,
   fieldSchema,
   t,
+  useAppDispatch,
   useAsyncRequest,
   userActions,
 } from 'tailchat-shared';
@@ -47,7 +47,7 @@ interface ClaimTemporaryUserProps {
 export const ClaimTemporaryUser: React.FC<ClaimTemporaryUserProps> = React.memo(
   (props) => {
     const userId = props.userId;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [{}, handleClaim] = useAsyncRequest(
       async (values: Values) => {

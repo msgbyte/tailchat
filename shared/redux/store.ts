@@ -14,3 +14,4 @@ export function createStore() {
 export type AppStore = ReturnType<typeof createStore>;
 export type AppState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
+export { Provider as ReduxProvider } from 'react-redux';

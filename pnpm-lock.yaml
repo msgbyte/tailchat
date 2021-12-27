@@ -23,12 +23,10 @@ importers:
       lint-staged: ^11.0.0
       prettier: ^2.3.2
       react: 17.0.2
-      react-redux: ^7.2.6
       typescript: ^4.5.2
       vinyl-fs: ^3.0.3
     dependencies:
       react: registry.npmmirror.com/react/17.0.2
-      react-redux: registry.npmmirror.com/react-redux/7.2.6_react@17.0.2
     devDependencies:
       '@commitlint/cli': registry.npmmirror.com/@commitlint/cli/12.1.4
       '@commitlint/config-conventional': registry.npmmirror.com/@commitlint/config-conventional/12.1.4
@@ -68,25 +66,27 @@ importers:
       react-i18next: ^11.15.1
       react-native-storage: npm:@trpgengine/react-native-storage@^1.0.1
       react-query: ^3.34.6
+      react-redux: ^7.2.6
       regenerator-runtime: ^0.13.9
       socket.io-client: ^4.1.2
       str2int: ^1.0.0
       url-regex: ^5.0.0
       yup: ^0.32.9
     dependencies:
-      '@reduxjs/toolkit': registry.npmmirror.com/@reduxjs/toolkit/1.7.1
+      '@reduxjs/toolkit': registry.npmmirror.com/@reduxjs/toolkit/1.7.1_react-redux@7.2.6+react@17.0.2
       axios: registry.npmmirror.com/axios/0.21.4
       crc: registry.npmmirror.com/crc/3.8.0
       dayjs: registry.npmmirror.com/dayjs/1.10.7
       events: registry.npmmirror.com/events/3.3.0
       flatted: registry.npmmirror.com/flatted/3.2.4
-      formik: registry.npmmirror.com/formik/2.2.9
+      formik: registry.npmmirror.com/formik/2.2.9_react@17.0.2
       i18next: registry.npmmirror.com/i18next/20.6.1
       i18next-http-backend: registry.npmmirror.com/i18next-http-backend/1.3.1
       lodash: registry.npmmirror.com/lodash/4.17.21
-      react-i18next: registry.npmmirror.com/react-i18next/11.15.1_i18next@20.6.1
+      react-i18next: registry.npmmirror.com/react-i18next/11.15.1_i18next@20.6.1+react@17.0.2
       react-native-storage: registry.npmmirror.com/@trpgengine/react-native-storage/1.0.1
-      react-query: registry.npmmirror.com/react-query/3.34.6
+      react-query: registry.npmmirror.com/react-query/3.34.6_react@17.0.2
+      react-redux: registry.npmmirror.com/react-redux/7.2.6_react@17.0.2
       regenerator-runtime: registry.nlark.com/regenerator-runtime/0.13.9
       socket.io-client: registry.npmmirror.com/socket.io-client/4.4.0
       str2int: registry.npmmirror.com/str2int/1.1.0
@@ -7858,8 +7858,9 @@ packages:
     version: 2.11.0
     dev: false
 
-  registry.npmmirror.com/@reduxjs/toolkit/1.7.1:
+  registry.npmmirror.com/@reduxjs/toolkit/1.7.1_react-redux@7.2.6+react@17.0.2:
     resolution: {integrity: sha512-wXwXYjBVz/ItxB7SMzEAMmEE/FBiY1ze18N+VVVX7NtVbRUrdOGKhpQMHivIJfkbJvSdLUU923a/yAagJQzY0Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@reduxjs/toolkit/download/@reduxjs/toolkit-1.7.1.tgz}
+    id: registry.npmmirror.com/@reduxjs/toolkit/1.7.1
     name: '@reduxjs/toolkit'
     version: 1.7.1
     peerDependencies:
@@ -7872,6 +7873,8 @@ packages:
         optional: true
     dependencies:
       immer: registry.npmmirror.com/immer/9.0.7
+      react: registry.npmmirror.com/react/17.0.2
+      react-redux: registry.npmmirror.com/react-redux/7.2.6_react@17.0.2
       redux: registry.npmmirror.com/redux/4.1.2
       redux-thunk: registry.npmmirror.com/redux-thunk/2.4.1_redux@4.1.2
       reselect: registry.npmmirror.com/reselect/4.1.5
@@ -10829,8 +10832,9 @@ packages:
       debug:
         optional: true
 
-  registry.npmmirror.com/formik/2.2.9:
+  registry.npmmirror.com/formik/2.2.9_react@17.0.2:
     resolution: {integrity: sha1-hZS6nF4uXPH0LFcEEo4Rn8RiMtA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/formik/download/formik-2.2.9.tgz}
+    id: registry.npmmirror.com/formik/2.2.9
     name: formik
     version: 2.2.9
     peerDependencies:
@@ -10840,6 +10844,7 @@ packages:
       hoist-non-react-statics: registry.nlark.com/hoist-non-react-statics/3.3.2
       lodash: registry.npmmirror.com/lodash/4.17.21
       lodash-es: registry.nlark.com/lodash-es/4.17.21
+      react: registry.npmmirror.com/react/17.0.2
       react-fast-compare: registry.npmmirror.com/react-fast-compare/2.0.4
       tiny-warning: registry.nlark.com/tiny-warning/1.0.3
       tslib: registry.nlark.com/tslib/1.14.1
@@ -13496,7 +13501,7 @@ packages:
       react: registry.npmmirror.com/react/17.0.2
     dev: false
 
-  registry.npmmirror.com/react-i18next/11.15.1_i18next@20.6.1:
+  registry.npmmirror.com/react-i18next/11.15.1_i18next@20.6.1+react@17.0.2:
     resolution: {integrity: sha512-lnje1uKu5XeM5MLvfbt1oygF+nEIZnpOM4Iu8bkx5ECD4XRYgi3SJDmolrp0EDxDHeK2GgFb+vEEK0hsZ9sjeA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-i18next/download/react-i18next-11.15.1.tgz}
     id: registry.npmmirror.com/react-i18next/11.15.1
     name: react-i18next
@@ -13509,6 +13514,7 @@ packages:
       html-escaper: registry.nlark.com/html-escaper/2.0.2
       html-parse-stringify: registry.npmmirror.com/html-parse-stringify/3.0.1
       i18next: registry.npmmirror.com/i18next/20.6.1
+      react: registry.npmmirror.com/react/17.0.2
     dev: false
 
   registry.npmmirror.com/react-is/16.13.1:
@@ -13521,8 +13527,9 @@ packages:
     name: react-is
     version: 17.0.2
 
-  registry.npmmirror.com/react-query/3.34.6:
+  registry.npmmirror.com/react-query/3.34.6_react@17.0.2:
     resolution: {integrity: sha512-2UKldH8T2PjmLxaOzANok7yITQn9FF1pBbrZFF1hvukBjYefHtCjUur+GOVAWMhrsskcCoKRviei4hcpvj9wLQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-query/download/react-query-3.34.6.tgz}
+    id: registry.npmmirror.com/react-query/3.34.6
     name: react-query
     version: 3.34.6
     peerDependencies:
@@ -13538,6 +13545,7 @@ packages:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.16.5
       broadcast-channel: registry.npmmirror.com/broadcast-channel/3.7.0
       match-sorter: registry.npmmirror.com/match-sorter/6.3.1
+      react: registry.npmmirror.com/react/17.0.2
     dev: false
 
   registry.npmmirror.com/react-redux/7.2.6_react@17.0.2:

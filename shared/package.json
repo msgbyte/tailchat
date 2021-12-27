@@ -20,6 +20,7 @@
     "react-i18next": "^11.15.1",
     "react-native-storage": "npm:@trpgengine/react-native-storage@^1.0.1",
     "react-query": "^3.34.6",
+    "react-redux": "^7.2.6",
     "regenerator-runtime": "^0.13.9",
     "socket.io-client": "^4.1.2",
     "str2int": "^1.0.0",

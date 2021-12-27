@@ -6,10 +6,10 @@ import {
   userActions,
   loginWithToken,
   t,
+  ReduxProvider,
 } from 'tailchat-shared';
 import React from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { Provider as ReduxProvider } from 'react-redux';
 import { getGlobalUserLoginInfo } from '@/utils/user-helper';
 import _isNil from 'lodash/isNil';
 import { getUserJWT } from '@/utils/jwt-helper';
