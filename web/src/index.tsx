@@ -11,5 +11,10 @@ installServiceWorker();
 
 // 先加载插件再开启应用
 initPlugins().then(() => {
-  ReactDOM.render(<App />, document.querySelector('#app'));
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.querySelector('#app')
+  );
 });
