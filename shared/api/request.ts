@@ -1,7 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import _get from 'lodash/get';
-import _isString from 'lodash/isString';
-import _isNil from 'lodash/isNil';
 import _isFunction from 'lodash/isFunction';
 import { getErrorHook, tokenGetter } from '../manager/request';
 import { getServiceUrl, onServiceUrlChange } from '../manager/service';
@@ -16,6 +14,8 @@ export type CommonRequestResult<T> =
     } & T);
 
 class RequestError extends Error {}
+
+export type RequestConfig = AxiosRequestConfig;
 
 /**
  * 创建请求实例

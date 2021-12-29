@@ -1,6 +1,7 @@
 // api
 export { buildStorage } from './api/buildStorage';
 export { request } from './api/request';
+export type { RequestConfig } from './api/request';
 export { createSocket } from './api/socket';
 export type { AppSocket } from './api/socket';
 

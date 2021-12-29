@@ -11,9 +11,30 @@ export {
 export { openModal, ModalWrapper, useModalContext } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
+import { request, RequestConfig } from 'tailchat-shared';
 export {
   getCachedUserInfo,
   getCachedConverseInfo,
   localTrans,
   sharedEvent,
+  useAsync,
+  useAsyncFn,
 } from 'tailchat-shared';
+
+/**
+ * 插件仅可以通过这种方式进行网络请求发送
+ */
+export function createPluginRequest(pluginName: string) {
+  return {
+    get(actionName: string, config?: RequestConfig) {
+      return request.get(`/api/plugin:${pluginName}/${actionName}`, config);
+    },
+    post(actionName: string, data?: any, config?: RequestConfig) {
+      return request.post(
+        `/api/plugin:${pluginName}/${actionName}`,
+        data,
+        config
+      );
+    },
+  };
+}
