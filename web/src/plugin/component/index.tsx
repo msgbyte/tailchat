@@ -1,6 +1,6 @@
-import Button from 'antd/lib/button';
-import TextArea from 'antd/lib/input/TextArea';
+import { Input } from 'antd';
 
-export { Button, TextArea };
+export { Button, Checkbox, Input } from 'antd';
+export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
 export { Icon } from '@iconify/react';
