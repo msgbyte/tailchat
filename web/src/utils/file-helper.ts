@@ -14,6 +14,22 @@ export function fileToDataUrl(img: File): Promise<string> {
 }
 
 /**
+ * 传入一个dataUrl
+ * 输出对应的File结构
+ */
+export function dataUrlToFile(dataUrl: string, fileName = 'file'): File {
+  const arr = dataUrl.split(',');
+  const mime = _get(arr[0].match(/:(.*?);/), [1]);
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], fileName, { type: mime });
+}
+
+/**
  * 传入文件并返回该文件的内容
  * @param file 文件对象
  */

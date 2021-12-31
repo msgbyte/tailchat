@@ -1,0 +1,9 @@
+{
+  "label": "绘图插件",
+  "name": "com.msgbyte.draw",
+  "url": "/plugins/com.msgbyte.draw/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "允许发送自定义绘图",
+  "requireRestart": false
+}

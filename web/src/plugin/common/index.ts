@@ -8,9 +8,15 @@ export {
   useGroupPanelParams,
   useCurrentGroupPanelInfo,
 } from '@/routes/Main/Content/Group/utils';
-export { openModal, ModalWrapper, useModalContext } from '@/components/Modal';
+export {
+  openModal,
+  closeModal,
+  ModalWrapper,
+  useModalContext,
+} from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
+export { dataUrlToFile } from '@/utils/file-helper';
 import { request, RequestConfig } from 'tailchat-shared';
 export {
   getCachedUserInfo,
@@ -19,6 +25,7 @@ export {
   sharedEvent,
   useAsync,
   useAsyncFn,
+  uploadFile,
 } from 'tailchat-shared';
 
 /**

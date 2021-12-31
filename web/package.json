@@ -92,6 +92,7 @@
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.0",
     "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-replace": "^2.2.0",
     "style-loader": "^3.0.0",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.0.0",

@@ -1,4 +1,5 @@
 const copy = require('rollup-plugin-copy');
+const replace = require('rollup-plugin-replace');
 const path = require('path');
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
           dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/assets/`),
         },
       ],
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 };

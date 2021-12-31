@@ -1,0 +1,12 @@
+{
+  "name": "@plugins/com.msgbyte.draw",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "react-canvas-draw": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/react-canvas-draw": "^1.1.1"
+  }
+}
