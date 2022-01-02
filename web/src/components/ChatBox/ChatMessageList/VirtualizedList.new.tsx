@@ -77,6 +77,7 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         startReached={handleLoadMore}
         followOutput={followOutput}
         defaultItemHeight={25}
+        atBottomThreshold={40}
       />
     );
   }
