@@ -33,7 +33,7 @@ const DrawModal: React.FC<{
     const file = dataUrlToFile(dataUrl);
     const res = await uploadFile(file);
 
-    sendMsg(`[img]${res.url}[/img]`);
+    sendMsg(`[img width=400 height=400]${res.url}[/img]`);
     onSuccess();
   }, [sendMsg, onSuccess]);
 

@@ -18,9 +18,11 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     const image = files[0];
     if (image) {
       // 发送图片
-      uploadMessageImage(image).then((imageRemoteUrl) => {
+      uploadMessageImage(image).then(({ url, width, height }) => {
         // TODO: not good, should bind with plugin bbcode
-        actionContext.sendMsg(`[img]${imageRemoteUrl}[/img]`);
+        actionContext.sendMsg(
+          `[img width=${width} height=${height}]${url}[/img]`
+        );
       });
     }
   };

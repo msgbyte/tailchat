@@ -36,9 +36,9 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
       if (image) {
         // 上传图片
         e.preventDefault();
-        uploadMessageImage(image).then((imageRemoteUrl) => {
+        uploadMessageImage(image).then(({ url, width, height }) => {
           // TODO: not good, should bind with plugin bbcode
-          props.onSendMsg(`[img]${imageRemoteUrl}[/img]`);
+          props.onSendMsg(`[img width=${width} height=${height}]${url}[/img]`);
         });
       }
     },
