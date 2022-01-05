@@ -261,6 +261,40 @@ const chatSlice = createSlice({
 
       message.reactions.push(reaction);
     },
+
+    /**
+     * 移除消息反应
+     */
+    removeMessageReaction(
+      state,
+      action: PayloadAction<{
+        converseId: string;
+        messageId: string;
+        reaction: ChatMessageReaction;
+      }>
+    ) {
+      const { converseId, messageId, reaction } = action.payload;
+      const converse = state.converses[converseId];
+      if (!converse) {
+        console.warn('Not found converse,', converseId);
+        return;
+      }
+
+      const message = converse.messages.find((m) => m._id === messageId);
+      if (!message) {
+        console.warn('Not found message,', messageId);
+        return;
+      }
+
+      if (!Array.isArray(message.reactions)) {
+        message.reactions = [];
+      }
+
+      const reactionIndex = message.reactions.findIndex(
+        (r) => r.name === reaction.name && r.author === reaction.author
+      );
+      message.reactions.splice(reactionIndex, 1);
+    },
   },
 });
 

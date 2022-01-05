@@ -12,7 +12,9 @@ import {
 /**
  * 消息的反应信息操作
  */
-export function useChatMessageReaction(payload: ChatMessage): RenderFunction {
+export function useChatMessageReactionAction(
+  payload: ChatMessage
+): RenderFunction {
   const payloadRef = useUpdateRef(payload);
   const Component = useMemo(
     () =>

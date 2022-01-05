@@ -19,7 +19,7 @@ import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
 import clsx from 'clsx';
 import { useChatMessageItemAction } from './useChatMessageItemAction';
-import { useChatMessageReaction } from './useChatMessageReaction';
+import { useChatMessageReactionAction } from './useChatMessageReaction';
 import { DevContainer } from '@/components/DevContainer';
 import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
@@ -65,7 +65,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
 
   const reactions = useMessageReactions(payload);
 
-  const emojiAction = useChatMessageReaction(payload);
+  const emojiAction = useChatMessageReactionAction(payload);
   const moreActions = useChatMessageItemAction(payload, {
     onClick: () => {
       setIsActionBtnActive(false);

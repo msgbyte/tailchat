@@ -199,6 +199,20 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     );
   });
 
+  socket.listen<{
+    converseId: string;
+    messageId: string;
+    reaction: ChatMessageReaction;
+  }>('chat.message.removeReaction', ({ converseId, messageId, reaction }) => {
+    store.dispatch(
+      chatActions.removeMessageReaction({
+        converseId,
+        messageId,
+        reaction,
+      })
+    );
+  });
+
   socket.listen<ChatConverseInfo>(
     'chat.converse.updateDMConverse',
     (converse) => {

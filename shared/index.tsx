@@ -115,7 +115,12 @@ export {
   deleteGroupPanel,
 } from './model/group';
 export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
-export { recallMessage, deleteMessage, addReaction } from './model/message';
+export {
+  recallMessage,
+  deleteMessage,
+  addReaction,
+  removeReaction,
+} from './model/message';
 export type { ChatMessageReaction, ChatMessage } from './model/message';
 export type { PluginManifest } from './model/plugin';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';

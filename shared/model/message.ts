@@ -118,3 +118,18 @@ export async function addReaction(
 
   return data;
 }
+
+/**
+ * 移除表情行为
+ */
+export async function removeReaction(
+  messageId: string,
+  emoji: string
+): Promise<boolean> {
+  const { data } = await request.post('/api/chat/message/removeReaction', {
+    messageId,
+    emoji,
+  });
+
+  return data;
+}
