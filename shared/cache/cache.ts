@@ -1,7 +1,7 @@
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { findGroupInviteByCode, GroupInvite } from '../model/group';
 import {
-  fetchGithubStaticRegistryPlugins,
+  fetchLocalStaticRegistryPlugins,
   fetchRegistryPlugins,
   fetchServiceRegistryPlugins,
   PluginManifest,
@@ -63,7 +63,7 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
       Promise.all([
         fetchRegistryPlugins().catch(() => []),
         fetchServiceRegistryPlugins().catch(() => []),
-        fetchGithubStaticRegistryPlugins().catch(() => []),
+        fetchLocalStaticRegistryPlugins().catch(() => []),
       ]).then(([a, b, c]) => [...a, ...b, ...c]),
     {
       staleTime: 2 * 60 * 60 * 1000, // 缓存2小时

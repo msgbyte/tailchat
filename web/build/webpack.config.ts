@@ -70,6 +70,10 @@ const plugins: Configuration['plugins'] = [
         to: 'locales',
       },
       {
+        from: path.resolve(ROOT_PATH, './registry.json'),
+        to: 'registry.json',
+      },
+      {
         from: path.resolve(ROOT_PATH, './assets/pwa.webmanifest'),
         to: 'pwa.webmanifest',
       },

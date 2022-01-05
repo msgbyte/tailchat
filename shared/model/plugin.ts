@@ -72,16 +72,14 @@ export async function fetchServiceRegistryPlugins() {
 }
 
 /**
- * 获取官方Github注册表文件
+ * 获取本地固定的registry
  *
  * 前端固定
  */
-export async function fetchGithubStaticRegistryPlugins(): Promise<
+export async function fetchLocalStaticRegistryPlugins(): Promise<
   PluginManifest[]
 > {
-  const data = await fetch(
-    'https://raw.githubusercontent.com/msgbyte/tailchat/master/registry.json'
-  );
+  const { data } = await request.get('/registry.json', { baseURL: '' });
 
-  return await data.json();
+  return data;
 }
