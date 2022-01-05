@@ -20,7 +20,6 @@ import { UserName } from '@/components/UserName';
 import clsx from 'clsx';
 import { useChatMessageItemAction } from './useChatMessageItemAction';
 import { useChatMessageReactionAction } from './useChatMessageReaction';
-import { DevContainer } from '@/components/DevContainer';
 import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
 import './Item.less';
@@ -124,19 +123,17 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           }
         )}
       >
-        <DevContainer>
-          <TcPopover
-            overlayClassName="chat-message-item_action-popover"
-            content={emojiAction}
-            placement="bottomLeft"
-            trigger={['click']}
-            onVisibleChange={setIsActionBtnActive}
-          >
-            <div>
-              <MessageActionIcon icon="mdi:emoticon-happy-outline" />
-            </div>
-          </TcPopover>
-        </DevContainer>
+        <TcPopover
+          overlayClassName="chat-message-item_action-popover"
+          content={emojiAction}
+          placement="bottomLeft"
+          trigger={['click']}
+          onVisibleChange={setIsActionBtnActive}
+        >
+          <div>
+            <MessageActionIcon icon="mdi:emoticon-happy-outline" />
+          </div>
+        </TcPopover>
 
         <Dropdown
           overlay={moreActions}
