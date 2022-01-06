@@ -2,10 +2,18 @@
   @apply text-typography-light;
 
   --tc-background-image: url(../../assets/images/bg.jpg);
+  --tc-content-background-image: '';
+  --tc-content-background-image-opacity: 0.2;
 
   .tc-background {
     @apply bg-center bg-cover bg-no-repeat;
     background-image: var(--tc-background-image);
+  }
+
+  .tc-content-background {
+    @apply absolute block inset-0 bg-contain bg-no-repeat bg-right-bottom pointer-events-none;
+    background-image: var(--tc-content-background-image);
+    opacity: var(--tc-content-background-image-opacity);
   }
 
   /* 滚动条 */

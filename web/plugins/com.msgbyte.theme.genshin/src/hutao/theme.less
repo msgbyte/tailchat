@@ -3,6 +3,8 @@
 
   --tc-primary-color: @primary-color;
   --tc-background-image: url(./bg.jpg);
+  --tc-content-background-image: url(./avatar.png);
+  --tc-content-background-image-opacity: 0.15;
 
   .bg-navbar-light {
     background-color: @primary-color;
@@ -18,26 +20,6 @@
 
   .bg-content-light {
     background-color: lighten(@primary-color, 40%);
-  }
-
-  [data-tc-role^=content-] {
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      display: block;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      background-image: url(./avatar.png);
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      opacity: 0.15;
-      pointer-events: none;
-    }
   }
 
   &.dark {
