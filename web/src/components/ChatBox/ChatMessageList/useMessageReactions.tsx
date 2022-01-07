@@ -1,4 +1,11 @@
-import { ChatMessage, removeReaction, useUsernames } from 'tailchat-shared';
+import {
+  addReaction,
+  ChatMessage,
+  isValidStr,
+  removeReaction,
+  useUserId,
+  useUsernames,
+} from 'tailchat-shared';
 import _groupBy from 'lodash/groupBy';
 import _uniqBy from 'lodash/uniqBy';
 import { useCallback, useMemo } from 'react';
@@ -22,12 +29,14 @@ const ReactionItem: React.FC<{
   const { reaction, onClick } = props;
 
   return (
-    <div className="py-0.5 px-1 bg-black bg-opacity-20 hover:bg-opacity-40 rounded flex cursor-pointer">
-      <Tooltip title={useUsernames(reaction.users)}>
-        <div onClick={onClick}>
+    <div className="py-0.5 px-1 bg-black bg-opacity-20 hover:bg-opacity-40 rounded cursor-pointer">
+      <Tooltip title={useUsernames(reaction.users).join(', ')}>
+        <div className="flex" onClick={onClick}>
           <Emoji emoji={reaction.name} />
 
-          {reaction.length > 1 && <span>{reaction.length}</span>}
+          {reaction.length > 1 && (
+            <span className="ml-0.5">{reaction.length}</span>
+          )}
         </div>
       </Tooltip>
     </div>
@@ -41,6 +50,7 @@ ReactionItem.displayName = 'ReactionItem';
 export function useMessageReactions(payload: ChatMessage) {
   const messageId = payload._id;
   const reactions = payload.reactions ?? [];
+  const userId = useUserId();
 
   const groupedReactions: GroupedReaction[] = useMemo(() => {
     const groups = _groupBy(reactions, 'name');
@@ -56,10 +66,18 @@ export function useMessageReactions(payload: ChatMessage) {
   }, [reactions]);
 
   const handleClick = useCallback(
-    (reactionName: string) => {
-      removeReaction(messageId, reactionName);
+    (reaction: GroupedReaction) => {
+      if (!isValidStr(userId)) {
+        return;
+      }
+
+      if (reaction.users.includes(userId)) {
+        removeReaction(messageId, reaction.name);
+      } else {
+        addReaction(messageId, reaction.name);
+      }
     },
-    [messageId]
+    [messageId, userId]
   );
 
   return (
@@ -68,7 +86,7 @@ export function useMessageReactions(payload: ChatMessage) {
         <ReactionItem
           key={reaction.name}
           reaction={reaction}
-          onClick={() => handleClick(reaction.name)}
+          onClick={() => handleClick(reaction)}
         />
       ))}
     </div>
