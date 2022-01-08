@@ -7,7 +7,8 @@ import {
   ChatInputActionContextProps,
 } from '@capital/common';
 import { Button, TextArea } from '@capital/component';
-import { encode } from './trans';
+import { encode } from './miaotrans';
+import { Translate } from './translate';
 
 interface SendMiaoModalProps {
   actions: ChatInputActionContextProps;
@@ -25,9 +26,9 @@ export const SendMiaoModal: React.FC<SendMiaoModalProps> = React.memo(
     }, [text, modalContext, props.actions]);
 
     return (
-      <ModalWrapper title="喵言喵语">
+      <ModalWrapper title={Translate.title}>
         <TextArea
-          placeholder="输入人话"
+          placeholder={Translate.inputHuman}
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
@@ -38,7 +39,7 @@ export const SendMiaoModal: React.FC<SendMiaoModalProps> = React.memo(
           block={true}
           onClick={handleSendMiao}
         >
-          发送喵语
+          {Translate.send}
         </Button>
       </ModalWrapper>
     );

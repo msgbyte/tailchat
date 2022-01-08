@@ -1,4 +1,4 @@
-import { decode, encode, isMiao } from './trans';
+import { decode, encode, isMiao } from './miaotrans';
 import {
   regMessageInterpreter,
   regChatInputAction,
@@ -6,6 +6,7 @@ import {
 } from '@capital/common';
 import { createElement } from 'react';
 import { SendMiaoModal } from './SendMiaoModal';
+import { Translate } from './translate';
 
 const miao = encode('喵语翻译已加载');
 const human = decode(miao);
@@ -13,7 +14,7 @@ const human = decode(miao);
 console.log(`${miao}\n${human}`);
 
 regMessageInterpreter({
-  name: '喵语翻译',
+  name: Translate.miaoTrans,
   explainMessage(message: string) {
     // 喵语 -> 人话
     if (!isMiao(message)) {
@@ -25,7 +26,7 @@ regMessageInterpreter({
 });
 
 regChatInputAction({
-  label: '喵言喵语',
+  label: Translate.title,
   onClick: (actions) => {
     openModal(createElement(SendMiaoModal, { actions }));
   },

@@ -1,7 +1,10 @@
 import Miao from 'miao-lang';
+import { Translate } from './translate';
 
 export function encode(human: string): string {
-  return Miao.encode(human);
+  return Miao.encode(human, {
+    calls: Translate.calls,
+  });
 }
 
 export function decode(miao: string): string {
