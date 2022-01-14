@@ -24,16 +24,20 @@ import { setGlobalSocket, setGlobalStore } from '@/utils/global-state-helper';
 function useAppState() {
   const history = useHistory();
 
-  const { value, loading } = useAsync(async () => {
+  const { value, loading, error } = useAsync(async () => {
     let userLoginInfo = getGlobalUserLoginInfo();
     if (_isNil(userLoginInfo)) {
       // 如果没有全局缓存的数据, 则尝试自动登录
       try {
         const token = await getUserJWT();
         if (typeof token !== 'string') {
-          throw new Error('Token 不合法');
+          throw new Error('Token 格式不合法');
         }
         userLoginInfo = await loginWithToken(token);
+
+        if (userLoginInfo === null) {
+          throw new Error('Token 内容不合法');
+        }
       } catch (e) {
         // 当前 Token 不存在或已过期
         history.replace(
@@ -62,7 +66,7 @@ function useAppState() {
   const store = value?.store;
   const socket = value?.socket;
 
-  return { loading, store, socket };
+  return { loading, store, socket, error };
 }
 
 /**
@@ -70,7 +74,7 @@ function useAppState() {
  * 在主页存在
  */
 export const MainProvider: React.FC = React.memo((props) => {
-  const { loading, store } = useAppState();
+  const { loading, store, error } = useAppState();
 
   if (loading) {
     return (
@@ -78,6 +82,11 @@ export const MainProvider: React.FC = React.memo((props) => {
         <LoadingSpinner tip={t('正在连接到聊天服务器...')} />
       </div>
     );
+  }
+
+  if (error) {
+    console.error('[MainProvider]', error);
+    return <div>{error.message}</div>;
   }
 
   if (_isNil(store)) {
