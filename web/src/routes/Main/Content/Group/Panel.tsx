@@ -17,11 +17,23 @@ export const GroupPanelRender: React.FC = React.memo(() => {
   const panelInfo = useGroupPanel(groupId, panelId);
 
   if (groupInfo === null) {
-    return null;
+    return (
+      <Alert
+        className="w-full text-center"
+        type="error"
+        message={t('群组不存在')}
+      />
+    );
   }
 
   if (panelInfo === null) {
-    return null;
+    return (
+      <Alert
+        className="w-full text-center"
+        type="error"
+        message={t('面板不存在')}
+      />
+    );
   }
 
   if (panelInfo.type === GroupPanelType.TEXT) {

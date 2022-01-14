@@ -52,6 +52,8 @@
     "vinyl-fs": "^3.0.3"
   },
   "dependencies": {
+    "crc": "^3.8.0",
+    "lodash": "^4.17.21",
     "react": "17.0.2"
   }
 }
