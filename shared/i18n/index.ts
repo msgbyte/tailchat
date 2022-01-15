@@ -86,6 +86,13 @@ export async function setLanguage(lang: AllowedLanguage): Promise<void> {
 }
 
 /**
+ * 获取i18n语言
+ */
+export function getLanguage(): string {
+  return i18next.language;
+}
+
+/**
  * 监听语言变更
  */
 export function onLanguageChange(cb: (lang: string) => void) {

@@ -5,12 +5,12 @@ import { setLanguage as setI18NLanguage } from './index';
 import { getStorage, useStorage } from '../manager/storage';
 import { LANGUAGE_KEY } from '../utils/consts';
 
-export const defaultLanguage = 'zh-CN';
+const defaultLanguage = 'zh-CN';
 
 /**
  * 获取当前语言
  */
-export async function getLanguage(): Promise<string> {
+async function getLanguage(): Promise<string> {
   return await getStorage().get(LANGUAGE_KEY, defaultLanguage);
 }
 

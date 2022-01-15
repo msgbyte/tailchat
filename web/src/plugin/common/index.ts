@@ -22,6 +22,7 @@ export {
   getCachedUserInfo,
   getCachedConverseInfo,
   localTrans,
+  getLanguage,
   sharedEvent,
   useAsync,
   useAsyncFn,
