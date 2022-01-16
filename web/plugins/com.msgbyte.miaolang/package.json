@@ -4,6 +4,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "miao-lang": "^1.0.3"
+    "miao-lang": "^1.0.5"
   }
 }

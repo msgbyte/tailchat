@@ -299,9 +299,9 @@ importers:
 
   web/plugins/com.msgbyte.miaolang:
     specifiers:
-      miao-lang: ^1.0.3
+      miao-lang: ^1.0.5
     dependencies:
-      miao-lang: registry.npmmirror.com/miao-lang/1.0.3
+      miao-lang: registry.npmmirror.com/miao-lang/1.0.5
 
   web/plugins/com.msgbyte.notify:
     specifiers: {}
@@ -12383,10 +12383,10 @@ packages:
       yargs-parser: registry.npmmirror.com/yargs-parser/20.2.9
     dev: true
 
-  registry.npmmirror.com/miao-lang/1.0.3:
-    resolution: {integrity: sha1-J2mZeI9u7itgDbZqDXKz9TvL1qs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/miao-lang/download/miao-lang-1.0.3.tgz}
+  registry.npmmirror.com/miao-lang/1.0.5:
+    resolution: {integrity: sha512-aXfDZJ8aXR4fnMkJyJPGWf9gH55odkYNjxPTOlN6N4MH/+2Dt8d4TvM99bjyERG/tG4XprH9Q3bBQEkwKwXrRA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/miao-lang/download/miao-lang-1.0.5.tgz}
     name: miao-lang
-    version: 1.0.3
+    version: 1.0.5
     dependencies:
       js-base64: registry.npmmirror.com/js-base64/3.7.2
     dev: false

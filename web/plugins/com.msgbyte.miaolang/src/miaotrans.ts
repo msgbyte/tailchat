@@ -1,9 +1,11 @@
 import Miao from 'miao-lang';
 import { Translate } from './translate';
+import { getLanguage } from '@capital/common';
 
 export function encode(human: string): string {
   return Miao.encode(human, {
     calls: Translate.calls,
+    halfwidthSymbol: getLanguage() !== 'zh-CN',
   });
 }
 
