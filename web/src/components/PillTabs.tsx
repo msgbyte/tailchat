@@ -3,6 +3,14 @@ import React from 'react';
 
 import './PillTabs.less';
 
+/**
+ * @example
+ * <PillTabs>
+ *  <PillTabPane key="1" tab={t('全部')}>
+ *    ...
+ *  </PillTabPane>
+ * </PillTabs>
+ */
 export const PillTabs = React.memo((props) => {
   return (
     <Tabs className="pill-tabs" type="card" animated={true}>
