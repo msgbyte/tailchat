@@ -27,6 +27,7 @@ export {
   useAsync,
   useAsyncFn,
   uploadFile,
+  showToasts,
 } from 'tailchat-shared';
 
 /**
