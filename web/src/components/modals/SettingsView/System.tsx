@@ -23,7 +23,7 @@ export const SettingsSystem: React.FC = React.memo(() => {
         title={t('系统语言')}
         content={
           <Select
-            style={{ width: 300 }}
+            style={{ width: 280 }}
             size="large"
             value={language}
             onChange={handleChangeLanguage}
@@ -38,7 +38,7 @@ export const SettingsSystem: React.FC = React.memo(() => {
         title={t('配色方案')}
         content={
           <Select
-            style={{ width: 300 }}
+            style={{ width: 280 }}
             size="large"
             value={colorScheme}
             onChange={setColorScheme}

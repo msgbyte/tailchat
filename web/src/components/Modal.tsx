@@ -181,7 +181,7 @@ export const ModalWrapper: React.FC<{
   return (
     <div
       className={clsx('p-4', props.className)}
-      style={{ minWidth: isMobile ? 300 : 420, ...props.style }}
+      style={{ minWidth: isMobile ? 290 : 420, ...props.style }}
     >
       {title}
       {props.children}
