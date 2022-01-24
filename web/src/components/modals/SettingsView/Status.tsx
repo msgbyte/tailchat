@@ -1,12 +1,13 @@
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { pluginInspectServices } from '@/plugin/common';
 import { Icon } from '@iconify/react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { fetchAvailableServices, t, useAsync } from 'tailchat-shared';
 
 /**
- * 检查服务列表
+ * 默认检查服务列表
  */
-const SERVICES = [
+const DEFAULT_SERVICES = [
   {
     name: 'user',
     label: t('用户服务'),
@@ -41,6 +42,11 @@ const SERVICES = [
  * 服务状态
  */
 export const SettingsStatus: React.FC = React.memo(() => {
+  const inspectServices = useMemo(
+    () => [...DEFAULT_SERVICES, ...pluginInspectServices],
+    []
+  ); // 需要检查服务状态的列表
+
   const { loading, value: availableServices } = useAsync(async () => {
     const services = await fetchAvailableServices();
 
@@ -53,7 +59,7 @@ export const SettingsStatus: React.FC = React.memo(() => {
 
   return (
     <div>
-      {SERVICES.map((service) => (
+      {inspectServices.map((service) => (
         <div key={service.name} className="flex items-center">
           <span className="mr-1">{service.label}:</span>
           {availableServices?.includes(service.name) ? (

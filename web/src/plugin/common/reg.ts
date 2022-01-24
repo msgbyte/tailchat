@@ -111,3 +111,11 @@ export const [pluginColorScheme, regPluginColorScheme] = buildRegList<{
   label: string;
   name: string;
 }>();
+
+/**
+ * 注册检查服务方案
+ */
+export const [pluginInspectServices, regInspectService] = buildRegList<{
+  label: string;
+  name: string;
+}>();
