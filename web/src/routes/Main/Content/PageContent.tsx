@@ -96,20 +96,17 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
         )}
         data-tc-role={props['data-tc-role']}
       >
+        <div className="tc-content-background" />
+
         <div
-          className={clsx(
-            'flex flex-auto bg-content-light dark:bg-content-dark relative',
-            {
-              'overflow-auto': !showMask,
-              'overflow-hidden': showMask,
-            }
-          )}
+          className={clsx('flex flex-auto relative', {
+            'overflow-auto': !showMask,
+            'overflow-hidden': showMask,
+          })}
         >
           {contentMaskEl}
           {contentEl}
         </div>
-
-        <div className="tc-content-background" />
       </div>
     </>
   );
