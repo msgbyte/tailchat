@@ -13,6 +13,7 @@ export function initPlugins(): Promise<void> {
 
 function registerDependencies() {
   regDependency('react', () => import('react'));
+  regDependency('axios', () => import('axios')); // 用于插件的第三方包使用axios作为依赖的情况下，可以减少包体积
 }
 
 function registerModules() {

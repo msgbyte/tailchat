@@ -3,7 +3,10 @@ const replace = require('rollup-plugin-replace');
 const path = require('path');
 
 module.exports = {
-  externalDeps: ['react'],
+  externalDeps: [
+    'react',
+    'axios', // Use for some deps which will use axios and reduce bundle size
+  ],
   rollupPlugins: ({ pluginName }) => [
     copy({
       targets: [
