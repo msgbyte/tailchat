@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 
-export { Button, Checkbox, Input } from 'antd';
+export { Button, Checkbox, Input, Divider } from 'antd';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
 export { Icon } from '@iconify/react';

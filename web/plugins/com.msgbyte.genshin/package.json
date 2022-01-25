@@ -1,0 +1,9 @@
+{
+  "name": "@plugins/com.msgbyte.genshin",
+  "main": "src/index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "genshin-gacha-kit": "^1.1.0"
+  }
+}

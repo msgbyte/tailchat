@@ -1,4 +1,4 @@
-import { Tabs } from 'antd';
+import { Tabs, TabsProps } from 'antd';
 import React from 'react';
 
 import './PillTabs.less';
@@ -11,7 +11,7 @@ import './PillTabs.less';
  *  </PillTabPane>
  * </PillTabs>
  */
-export const PillTabs = React.memo((props) => {
+export const PillTabs: React.FC<TabsProps> = React.memo((props) => {
   return (
     <Tabs className="pill-tabs" type="card" animated={true}>
       {props.children}
