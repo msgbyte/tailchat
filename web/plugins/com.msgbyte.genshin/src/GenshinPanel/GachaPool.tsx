@@ -2,6 +2,7 @@ import { useAsync } from '@capital/common';
 import { Divider } from '@capital/component';
 import React from 'react';
 import { OfficialGachaPoolItem, util } from 'genshin-gacha-kit';
+import { GenshinRichtext } from '../components/GenshinRichtext';
 
 const GachaPoolItem: React.FC<{
   items: OfficialGachaPoolItem[];
@@ -43,7 +44,7 @@ export const GachaPool: React.FC<{
 
       <Divider />
 
-      <div>{poolData.content}</div>
+      <GenshinRichtext raw={poolData.content} />
     </div>
   );
 });
