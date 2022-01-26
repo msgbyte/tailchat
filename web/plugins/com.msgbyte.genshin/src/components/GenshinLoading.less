@@ -1,0 +1,99 @@
+.img-color(@color, @top: 500px) {
+  position: absolute;
+  top: @top;
+  left: 0;
+  filter: drop-shadow(0 -@top 0 @color);
+}
+
+#tailchat-app {
+  --plugin-genshinloadingbar-background-color: #f5f5f5;
+  --plugin-genshinloadingbar-prospect-color: #666666;
+
+  @loading-img-height: 62.5px;
+  @loading-img-width: 500px;
+  @mobile: 719px;
+  @animation: plugin-genshin-loading-bar 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite
+    forwards;
+
+  .dark {
+    --plugin-genshinloadingbar-background-color: #2c2b30;
+    --plugin-genshinloadingbar-prospect-color: #ece5d8;
+  }
+
+  .plugin-genshin-loading-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: @loading-img-width;
+    height: @loading-img-height;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: all 0.5s;
+    user-select: none;
+    overflow: hidden;
+
+    img {
+      .img-color(var(--plugin-genshinloadingbar-background-color));
+    }
+
+    &::after {
+      content: '';
+      .img-color(var(--plugin-genshinloadingbar-prospect-color));
+      width: @loading-img-width;
+      height: @loading-img-height;
+      background: url('https://yuanshen.site/imgs/loading-bar.png') no-repeat
+        left 100%;
+      background-size: @loading-img-width @loading-img-height;
+      background-position-x: 0;
+      animation: @animation;
+    }
+
+    @media screen and (max-width: @mobile) {
+      // Hide when vertical screen
+      & {
+        display: none;
+      }
+
+      // Horizontal when screen display
+      @media screen and (orientation: landscape) {
+        & {
+          display: block !important;
+          transform: translate(-50%, -50%) scale(0.7) !important;
+        }
+      }
+    }
+
+    @supports not (filter: drop-shadow(0 0 0 #fff)) {
+      // If the browser does not support Filter
+      &:before {
+        content: 'Your browser does not support the animation';
+      }
+    }
+  }
+
+
+  @keyframes plugin-genshin-loading-bar {
+    0% {
+      width: 0;
+      background-size: @loading-img-width @loading-img-height;
+    }
+
+    16.6% {
+    }
+
+    33.2% {
+    }
+
+    49.8% {
+    }
+
+    66.4% {
+    }
+
+    83% {
+    }
+
+    100% {
+      width: @loading-img-width;
+    }
+  }
+}
