@@ -46,30 +46,30 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   ！
   <p />
-
-
+  
+  
   <span
     style="color: rgb(201, 63, 35);"
   >
-    ※以上角色中，限定角色不会进入「奔行世间」常驻祈愿。
+    ※以上角色中，限定角色不会进入「奔行世间」常驻祈愿。 
   </span>
   <p />
-
-
+  
+  
   <br />
-
-  ※一般情况下所有角色或武器均适用基础概率，如触发概率UP、保底等以具体规则为准。
+  
+  ※一般情况下所有角色或武器均适用基础概率，如触发概率UP、保底等以具体规则为准。 
   <p />
-
-
+  
+  
   <br />
-
+  
   〓祈愿规则〓
   <p />
-
+  
   【5星物品】
   <p />
-
+  
   在本期「
   <span
     style="color: rgba(204, 144, 70, 1);"
@@ -96,7 +96,7 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   次祈愿必定能通过保底获取5星角色。
   <p />
-
+  
   当祈愿获取到5星角色时，有
   <span
     style="color: rgb(201, 63, 35);"
@@ -117,10 +117,10 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   为本期5星UP角色。
   <p />
-
+  
   【4星物品】
   <p />
-
+  
   在本期「
   <span
     style="color: rgba(204, 144, 70, 1);"
@@ -171,7 +171,7 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   。
   <p />
-
+  
   当祈愿获取到4星物品时，有
   <span
     style="color: rgb(201, 63, 35);"
@@ -204,10 +204,10 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   为本期4星UP角色。当祈愿获取到4星UP物品时，每个本期4星UP角色的获取概率均等。
   <p />
-
-
+  
+  
   <br />
-
+  
   获得4星武器时，会同时获得2个
   <span
     style="color: rgb(189, 105, 50);"
@@ -222,13 +222,13 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   作为副产物。
   <p />
-
-
+  
+  
   <br />
-
+  
   〓若获得重复角色〓
   <p />
-
+  
   无论通过何种方式（包含但不限于祈愿、商城兑换、系统赠送等）第2~7次获得相同5星角色时，每次将转化为1个
   <span
     style="color: rgb(162, 86, 225);"
@@ -249,7 +249,7 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   。
   <p />
-
+  
   无论通过何种方式（包含但不限于祈愿、商城兑换、系统赠送等）第2~7次获得相同4星角色时，每次将转化为1个
   <span
     style="color: rgb(162, 86, 225);"
@@ -270,10 +270,10 @@ exports[`GenshinRichtext test 1`] = `
   </span>
   。
   <p />
-
-
+  
+  
   <br />
-
+  
   ※本祈愿属于「角色活动祈愿」，「角色活动祈愿」和「角色活动祈愿-2」的祈愿次数保底完全共享，会一直共同累计在「角色活动祈愿」和「角色活动祈愿-2」中，与其他祈愿的祈愿次数保底相互独立计算，互不影响。
   <p />
 </div>
