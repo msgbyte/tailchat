@@ -10,7 +10,9 @@ import {
   util,
 } from 'genshin-gacha-kit';
 import { GenshinRichtext } from '../components/GenshinRichtext';
-import { getAppGachaItemText } from './utils';
+import { getAppGachaItemText, parseResultType } from './utils';
+import { openFullScreenVideo } from '../utils/openFullScreenVideo';
+import { wishVideoUrl } from './consts';
 
 const GachaPoolItem: React.FC<{
   items: OfficialGachaPoolItem[];
@@ -56,10 +58,13 @@ function useWish(poolData: OfficialGachaPool) {
       }
 
       const res = gachaKit.multiWish(num);
-      showToasts('抽卡结果: ' + res.map((item) => item.name).join(','));
 
-      setGachaCount(gachaKit.getCounter('total') as number);
-      setGachaResult(JSON.parse(JSON.stringify(gachaKit.getResult())));
+      openFullScreenVideo(wishVideoUrl[parseResultType(res)]).then(() => {
+        showToasts('抽卡结果: ' + res.map((item) => item.name).join(','));
+
+        setGachaCount(gachaKit.getCounter('total') as number);
+        setGachaResult(JSON.parse(JSON.stringify(gachaKit.getResult())));
+      });
     },
     [gachaKit]
   );
