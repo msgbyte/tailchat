@@ -1,11 +1,11 @@
 import { useAsync } from '@capital/common';
-import { Divider, Button } from '@capital/component';
+import { Divider, Button, Space } from '@capital/component';
 import React from 'react';
 import { util } from 'genshin-gacha-kit';
 import { GenshinRichtext } from '../../components/GenshinRichtext';
-import { WishResultText } from './WishResultText';
 import { GachaPoolItem } from './GachaPoolItem';
 import { useWish } from './useWish';
+import { GachaResult } from './GachaResult';
 
 export const GachaPool: React.FC<{
   gachaId: string;
@@ -29,28 +29,20 @@ export const GachaPool: React.FC<{
         <GachaPoolItem items={poolData.r4_up_items ?? []} />
       </div>
 
-      <div style={{ display: 'flex', gap: 4 }}>
+      <Space>
         <Button type="primary" onClick={() => handleGacha(1)}>
           模拟单抽
         </Button>
         <Button type="primary" onClick={() => handleGacha(10)}>
           模拟十连
         </Button>
-      </div>
+      </Space>
 
       {gachaCount > 0 && (
         <div>
           <div>已抽: {gachaCount} 次</div>
 
-          <div>
-            5星: <WishResultText items={gachaResult.ssr} />
-          </div>
-          <div>
-            4星: <WishResultText items={gachaResult.sr} />
-          </div>
-          <div>
-            3星: <WishResultText items={gachaResult.r} />
-          </div>
+          <GachaResult gachaResult={gachaResult} />
         </div>
       )}
 
