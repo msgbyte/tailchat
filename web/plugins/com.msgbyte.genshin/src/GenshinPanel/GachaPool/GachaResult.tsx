@@ -10,10 +10,10 @@ export const GachaResult: React.FC<GachaResultProps> = React.memo((props) => {
 
   return (
     <div>
-      <div>
+      <div style={{ color: '#c17a4e' }}>
         <WishResultText label="5星" items={gachaResult.ssr} />
       </div>
-      <div>
+      <div style={{ color: '#865cad' }}>
         <WishResultText label="4星" items={gachaResult.sr} />
       </div>
       <div>
