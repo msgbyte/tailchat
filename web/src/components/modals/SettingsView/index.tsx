@@ -1,5 +1,10 @@
 import { FullModal } from '@/components/FullModal';
-import { SidebarView, SidebarViewMenuType } from '@/components/SidebarView';
+import {
+  SidebarView,
+  SidebarViewMenuItem,
+  SidebarViewMenuType,
+} from '@/components/SidebarView';
+import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
 import { SettingsAbout } from './About';
@@ -21,42 +26,57 @@ export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
     [props.onClose]
   );
 
-  const menu: SidebarViewMenuType[] = useMemo(
-    () => [
-      {
+  const menu: SidebarViewMenuType[] = useMemo(() => {
+    const common: SidebarViewMenuType = {
+      type: 'group',
+      title: t('通用'),
+      children: [
+        {
+          type: 'item',
+          title: t('账户信息'),
+          content: <SettingsAccount />,
+        },
+        {
+          type: 'item',
+          title: t('系统设置'),
+          content: <SettingsSystem />,
+        },
+        {
+          type: 'item',
+          title: t('服务状态'),
+          content: <SettingsStatus />,
+        },
+        {
+          type: 'item',
+          title: t('性能统计'),
+          content: <SettingsPerformance />,
+        },
+        {
+          type: 'item',
+          title: t('关于'),
+          content: <SettingsAbout />,
+        },
+      ],
+    };
+    const more: SidebarViewMenuItem[] = pluginCustomPanel
+      .filter((p) => p.position === 'setting')
+      .map((p) => ({
+        type: 'item',
+        title: p.label,
+        content: React.createElement(p.render),
+      }));
+
+    const menu: SidebarViewMenuType[] = [common];
+    if (more.length > 0) {
+      menu.push({
         type: 'group',
-        title: t('通用'),
-        children: [
-          {
-            type: 'item',
-            title: t('账户信息'),
-            content: <SettingsAccount />,
-          },
-          {
-            type: 'item',
-            title: t('系统设置'),
-            content: <SettingsSystem />,
-          },
-          {
-            type: 'item',
-            title: t('服务状态'),
-            content: <SettingsStatus />,
-          },
-          {
-            type: 'item',
-            title: t('性能统计'),
-            content: <SettingsPerformance />,
-          },
-          {
-            type: 'item',
-            title: t('关于'),
-            content: <SettingsAbout />,
-          },
-        ],
-      },
-    ],
-    []
-  );
+        title: t('更多'),
+        children: [...more],
+      });
+    }
+
+    return menu;
+  }, []);
 
   return (
     <FullModal onChangeVisible={handleChangeVisible}>

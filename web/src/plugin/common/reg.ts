@@ -14,9 +14,10 @@ export interface PluginCustomPanel {
    * 面板位置:
    *
    * - personal: 个人面板中的一项
+   * - setting: 设置面板
    * - navbar: 导航栏(未实装)
    */
-  position: 'personal' | 'navbar';
+  position: 'personal' | 'setting' | 'navbar';
 
   /**
    * Iconify 名
