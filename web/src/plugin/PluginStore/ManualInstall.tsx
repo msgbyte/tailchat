@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Button, Input, Typography } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { isValidJson, showToasts, t, useAsyncRequest } from 'tailchat-shared';
 import { pluginManager } from '../manager';
@@ -19,6 +19,10 @@ export const ManualInstall: React.FC = React.memo(() => {
 
   return (
     <div className="p-2">
+      <Typography.Paragraph>
+        {t('请不要安装不明来源的插件，这可能会盗取你在 Tailchat 的个人信息')}
+      </Typography.Paragraph>
+
       <Input.TextArea
         placeholder={t(
           '请手动输入JSON信息，如果你不明确你在做什么请不要使用该功能'
