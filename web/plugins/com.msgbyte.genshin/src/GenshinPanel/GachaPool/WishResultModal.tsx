@@ -13,6 +13,7 @@ export const WishResultModal: React.FC<{ items: AppGachaItem[] }> = React.memo(
             sr: items.filter((i) => i.rarity === 4),
             r: items.filter((i) => i.rarity === 3),
           }}
+          withCount={false}
         />
       </ModalWrapper>
     );

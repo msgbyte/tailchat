@@ -42,7 +42,7 @@ export const GachaPool: React.FC<{
         <div>
           <div>已抽: {gachaCount} 次</div>
 
-          <GachaResult gachaResult={gachaResult} />
+          <GachaResult gachaResult={gachaResult} withCount={true} />
         </div>
       )}
 
