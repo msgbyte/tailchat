@@ -12,6 +12,7 @@ import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
 import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
+import { useHistory, useLocation } from 'react-router';
 
 const panelTemplate: {
   key: string;
@@ -76,6 +77,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
   const [panels, setPanels] = useState<GroupPanel[]>([]);
   const [name, setName] = useState('');
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const handleSelectTemplate = useCallback((panels: GroupPanel[]) => {
     setPanels(panels);
@@ -90,9 +92,10 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
     const data = await createGroup(name, panels);
 
     dispatch(groupActions.appendGroups([data]));
+    history.push(`/main/group/${data._id}`); // 创建完成后跳转到新建的群组
 
     closeModal();
-  }, [name, panels]);
+  }, [name, panels, location]);
 
   return (
     <ModalWrapper style={{ maxWidth: 440 }}>
