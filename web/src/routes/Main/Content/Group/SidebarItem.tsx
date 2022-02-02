@@ -28,8 +28,6 @@ export const SidebarItem: React.FC<{
     </Menu>
   );
 
-  console.log('Dropdown', Dropdown);
-
   return (
     <Dropdown overlay={menu} trigger={['contextMenu']}>
       <div>
