@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  GroupPanel,
-  GroupPanelType,
-  isValidStr,
-  useGroupInfo,
-} from 'tailchat-shared';
+import { GroupPanelType, isValidStr, useGroupInfo } from 'tailchat-shared';
 import { useParams } from 'react-router';
 import { GroupHeader } from './GroupHeader';
 import { GroupSection } from '@/components/GroupSection';
-import { GroupPanelItem } from '@/components/GroupPanelItem';
-import { GroupTextPanelItem } from './TextPanelItem';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
+import { SidebarItem } from './SidebarItem';
 
 interface GroupParams {
   groupId: string;
@@ -23,17 +17,6 @@ export const Sidebar: React.FC = React.memo(() => {
   const { groupId } = useParams<GroupParams>();
   const groupInfo = useGroupInfo(groupId);
   const groupPanels = groupInfo?.panels ?? [];
-
-  const renderItem = (panel: GroupPanel) =>
-    panel.type === GroupPanelType.TEXT ? (
-      <GroupTextPanelItem groupId={groupId} panel={panel} />
-    ) : (
-      <GroupPanelItem
-        name={panel.name}
-        icon={<div>#</div>}
-        to={`/main/group/${groupId}/${panel.id}`}
-      />
-    );
 
   return (
     <CommonSidebarWrapper data-tc-role="sidebar-group">
@@ -48,11 +31,11 @@ export const Sidebar: React.FC = React.memo(() => {
                 {groupPanels
                   .filter((sub) => sub.parentId === panel.id)
                   .map((sub) => (
-                    <div key={sub.id}>{renderItem(sub)}</div>
+                    <SidebarItem key={sub.id} groupId={groupId} panel={sub} />
                   ))}
               </GroupSection>
             ) : (
-              <div key={panel.id}>{renderItem(panel)}</div>
+              <SidebarItem key={panel.id} groupId={groupId} panel={panel} />
             )
           )}
       </div>

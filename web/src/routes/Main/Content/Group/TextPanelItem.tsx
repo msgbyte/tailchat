@@ -6,6 +6,10 @@ interface GroupTextPanelItemProps {
   groupId: string;
   panel: GroupPanel;
 }
+
+/**
+ * 相比一般的面板项增加了未读提示
+ */
 export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
   (props) => {
     const { groupId, panel } = props;
