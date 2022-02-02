@@ -1,5 +1,6 @@
 import React from 'react';
 import { regGroupPanel, useCurrentGroupPanelInfo } from '@capital/common';
+import { Translate } from './translate';
 
 const PLUGIN_NAME = 'com.msgbyte.webview';
 
@@ -7,7 +8,7 @@ const GroupWebPanelRender = () => {
   const groupPanelInfo = useCurrentGroupPanelInfo();
 
   if (!groupPanelInfo) {
-    return <div>加载失败, 面板信息不存在</div>;
+    return <div>{Translate.notfound}</div>;
   }
 
   const url = groupPanelInfo.meta?.url;
@@ -19,7 +20,7 @@ const GroupWebPanelRender = () => {
 
 regGroupPanel({
   name: `${PLUGIN_NAME}/grouppanel`,
-  label: '网页面板',
+  label: Translate.webpanel,
   provider: PLUGIN_NAME,
   extraFormMeta: [{ type: 'text', name: 'url', label: '网址' }],
   render: GroupWebPanelRender,
