@@ -13,6 +13,11 @@ import { IconBtn } from '@/components/IconBtn';
 interface GroupPanelWrapperProps {
   groupId: string;
   panelId: string;
+
+  /**
+   * 是否显示面板头
+   */
+  showHeader: boolean;
 }
 export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
   (props) => {
@@ -26,6 +31,10 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
       usePanelWindow(`/panel/group/${props.groupId}/${props.panelId}`);
     if (hasOpenedPanel) {
       return <OpenedPanelTip onClosePanelWindow={closePanelWindow} />;
+    }
+
+    if (!props.showHeader) {
+      return <>{props.children}</>;
     }
 
     return (

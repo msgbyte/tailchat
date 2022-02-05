@@ -15,7 +15,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     }
 
     return (
-      <GroupPanelWrapper groupId={groupId} panelId={panelId}>
+      <GroupPanelWrapper groupId={groupId} panelId={panelId} showHeader={true}>
         <ChatBox converseId={panelId} isGroup={true} groupId={groupId} />
       </GroupPanelWrapper>
     );

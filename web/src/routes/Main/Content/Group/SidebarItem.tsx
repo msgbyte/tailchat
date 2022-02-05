@@ -4,6 +4,7 @@ import { GroupPanelItem } from '@/components/GroupPanelItem';
 import { GroupTextPanelItem } from './TextPanelItem';
 import { Dropdown, Menu } from 'antd';
 import copy from 'copy-to-clipboard';
+import { usePanelWindow } from '@/hooks/usePanelWindow';
 
 /**
  * 群组面板侧边栏组件
@@ -13,6 +14,9 @@ export const SidebarItem: React.FC<{
   panel: GroupPanel;
 }> = React.memo((props) => {
   const { groupId, panel } = props;
+  const { hasOpenedPanel, openPanelWindow } = usePanelWindow(
+    `/panel/group/${groupId}/${panel.id}`
+  );
 
   const menu = (
     <Menu>
@@ -24,6 +28,10 @@ export const SidebarItem: React.FC<{
         }}
       >
         {t('复制链接')}
+      </Menu.Item>
+
+      <Menu.Item disabled={hasOpenedPanel} onClick={openPanelWindow}>
+        {t('在新窗口打开')}
       </Menu.Item>
     </Menu>
   );
