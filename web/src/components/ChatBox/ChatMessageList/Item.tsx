@@ -13,7 +13,7 @@ import {
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
-import { getMessageRender } from '@/plugin/common';
+import { getMessageRender, pluginMessageExtraParsers } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
@@ -110,6 +110,15 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
         </div>
 
         {reactions}
+
+        {/* 额外渲染 */}
+        <div>
+          {pluginMessageExtraParsers.map((parser) => (
+            <React.Fragment key={parser.name}>
+              {parser.render(payload)}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
 
       {/* 操作 */}

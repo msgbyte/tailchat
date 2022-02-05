@@ -2,6 +2,7 @@ import type { ChatInputActionContextProps } from '@/components/ChatBox/ChatInput
 import {
   buildRegFn,
   buildRegList,
+  ChatMessage,
   FastFormFieldMeta,
   regSocketEventListener,
 } from 'tailchat-shared';
@@ -119,4 +120,12 @@ export const [pluginColorScheme, regPluginColorScheme] = buildRegList<{
 export const [pluginInspectServices, regInspectService] = buildRegList<{
   label: string;
   name: string;
+}>();
+
+/**
+ * 注册对消息的额外解释函数
+ */
+export const [pluginMessageExtraParsers, regMessageExtraParser] = buildRegList<{
+  name: string;
+  render: (payload: ChatMessage) => React.ReactNode;
 }>();
