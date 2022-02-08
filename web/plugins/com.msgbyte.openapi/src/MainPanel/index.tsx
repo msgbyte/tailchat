@@ -10,6 +10,7 @@ import { OpenApp } from './types';
 import AppInfo from './AppInfo';
 import { OpenAppInfoProvider } from './context';
 import { CreateOpenApp } from '../modals/CreateOpenApp';
+import { ServiceChecker } from '../components/ServiceChecker';
 import './index.less';
 
 const OpenApiMainPanel: React.FC = React.memo(() => {
@@ -81,4 +82,12 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
 });
 OpenApiMainPanel.displayName = 'OpenApiMainPanel';
 
-export default OpenApiMainPanel;
+const OpenApiMainPanelWrapper = () => {
+  return (
+    <ServiceChecker>
+      <OpenApiMainPanel />
+    </ServiceChecker>
+  );
+};
+
+export default OpenApiMainPanelWrapper;

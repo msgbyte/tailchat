@@ -64,6 +64,7 @@ export { Trans } from './i18n/Trans';
 export { useLanguage } from './i18n/language';
 
 // hooks
+export { useAvailableServices } from './hooks/model/useAvailableServices';
 export { useUsernames } from './hooks/model/useUsernames';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';

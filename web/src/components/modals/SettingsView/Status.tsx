@@ -2,7 +2,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { pluginInspectServices } from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import React, { useMemo } from 'react';
-import { fetchAvailableServices, t, useAsync } from 'tailchat-shared';
+import { t, useAvailableServices } from 'tailchat-shared';
 
 /**
  * 默认检查服务列表
@@ -47,11 +47,7 @@ export const SettingsStatus: React.FC = React.memo(() => {
     []
   ); // 需要检查服务状态的列表
 
-  const { loading, value: availableServices } = useAsync(async () => {
-    const services = await fetchAvailableServices();
-
-    return services;
-  }, []);
+  const { loading, availableServices } = useAvailableServices();
 
   if (loading) {
     return <LoadingSpinner />;

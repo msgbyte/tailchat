@@ -33,6 +33,7 @@ export {
   showErrorToasts,
   createFastFormSchema,
   fieldSchema,
+  fetchAvailableServices,
 } from 'tailchat-shared';
 
 /**

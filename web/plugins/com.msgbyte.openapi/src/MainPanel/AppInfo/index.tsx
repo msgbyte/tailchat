@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from '@capital/component';
 import { Loadable } from '@capital/common';
-import { useOpenAppInfo } from '../context';
 import './index.less';
 
 const menuRouteMap: Record<string, React.ComponentType> = {
