@@ -96,6 +96,20 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
   (message: string) => React.ReactNode
 >('message-render', (message) => message);
 
+/**
+ * 消息渲染器
+ * 输入消息，返回渲染节点
+ */
+export const [getMessageTextDecorators, regMessageTextDecorators] = buildRegFn<
+  () => {
+    url: (plain: string) => string;
+    image: (plain: string, attrs: Record<string, unknown>) => string;
+  }
+>('message-text-decorators', () => ({
+  url: (plain: string) => plain,
+  image: (plain: string) => plain,
+}));
+
 interface ChatInputAction {
   label: string;
   onClick: (actions: ChatInputActionContextProps) => void;

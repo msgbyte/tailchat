@@ -1,3 +1,4 @@
+import { getMessageTextDecorators } from '@/plugin/common';
 import { isEnterHotkey } from '@/utils/hot-key';
 import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
@@ -37,8 +38,9 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
         // 上传图片
         e.preventDefault();
         uploadMessageImage(image).then(({ url, width, height }) => {
-          // TODO: not good, should bind with plugin bbcode
-          props.onSendMsg(`[img width=${width} height=${height}]${url}[/img]`);
+          props.onSendMsg(
+            getMessageTextDecorators().image(url, { width, height })
+          );
         });
       }
     },

@@ -1,6 +1,7 @@
 import {
   ChatInputActionContextProps,
   dataUrlToFile,
+  getMessageTextDecorators,
   uploadFile,
   useAsyncFn,
 } from '@capital/common';
@@ -33,7 +34,9 @@ const DrawModal: React.FC<{
     const file = dataUrlToFile(dataUrl);
     const res = await uploadFile(file);
 
-    sendMsg(`[img width=400 height=400]${res.url}[/img]`);
+    sendMsg(
+      getMessageTextDecorators().image(res.url, { width: 400, height: 400 })
+    );
     onSuccess();
   }, [sendMsg, onSuccess]);
 

@@ -1,5 +1,8 @@
 import { FileSelector } from '@/components/FileSelector';
-import { pluginChatInputActions } from '@/plugin/common';
+import {
+  getMessageTextDecorators,
+  pluginChatInputActions,
+} from '@/plugin/common';
 import { Icon } from '@iconify/react';
 import { Dropdown, Menu } from 'antd';
 import React from 'react';
@@ -19,9 +22,8 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     if (image) {
       // 发送图片
       uploadMessageImage(image).then(({ url, width, height }) => {
-        // TODO: not good, should bind with plugin bbcode
         actionContext.sendMsg(
-          `[img width=${width} height=${height}]${url}[/img]`
+          getMessageTextDecorators().image(url, { width, height })
         );
       });
     }
