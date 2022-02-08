@@ -7,11 +7,12 @@
 
   // 按钮
   .ant-btn {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     border-color: #434343;
     background: transparent;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: var(--antd-primary-border);
       border-color: var(--antd-primary-border);
     }
@@ -36,8 +37,11 @@
         }
       }
 
-      &[disabled],&[disabled]:hover,&[disabled]:focus,&[disabled]:active {
-        color: rgba(255,255,255,0.3);
+      &[disabled],
+      &[disabled]:hover,
+      &[disabled]:focus,
+      &[disabled]:active {
+        color: rgba(255, 255, 255, 0.3);
         border-color: #434343;
         background: #555;
       }
@@ -67,27 +71,28 @@
 
   // 分割线
   .ant-divider {
-    border-top-color: rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.85);
+    border-top-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   // 排版
   .ant-typography {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
   }
 
   // 输入框
   .ant-input {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     background-color: transparent;
-    border-color: rgba(255,255,255,0.12);
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
       border-color: #165996;
       border-right-width: 1px !important;
     }
 
-    &:focus, &.ant-input-focused {
+    &:focus,
+    &.ant-input-focused {
       border-color: #177ddc;
       border-right-width: 1px !important;
       box-shadow: 0 0 0 2px rgb(23 125 220 / 20%);
@@ -105,21 +110,22 @@
 
   // 走马灯
   .ant-carousel {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
   }
 
   // 下拉菜单
   .ant-dropdown {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 
     .ant-dropdown-menu {
       background-color: #1f1f1f;
 
-      .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
-        color: rgba(255,255,255,0.65);
+      .ant-dropdown-menu-item,
+      .ant-dropdown-menu-submenu-title {
+        color: rgba(255, 255, 255, 0.65);
 
         &:hover {
-          background-color: rgba(255,255,255,0.08);
+          background-color: rgba(255, 255, 255, 0.08);
         }
 
         &.ant-dropdown-menu-item-danger {
@@ -137,18 +143,18 @@
   // 树
   .ant-tree {
     background-color: transparent;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
 
     .ant-tree-node-content-wrapper {
       &:hover {
-        background-color: rgba(255,255,255,0.08);
+        background-color: rgba(255, 255, 255, 0.08);
       }
     }
   }
 
   // badge
   .ant-badge {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
 
     .ant-badge-count {
       color: #fff;
@@ -161,45 +167,45 @@
   .ant-empty {
     .ant-empty-img-default-ellipse {
       fill: #fff;
-      fill-opacity: .08
+      fill-opacity: 0.08;
     }
 
     .ant-empty-img-default-path-1 {
-      fill: #262626
+      fill: #262626;
     }
 
     .ant-empty-img-default-path-2 {
-      fill: url(#linearGradient-1)
+      fill: url(#linearGradient-1);
     }
 
     .ant-empty-img-default-path-3 {
-      fill: #595959
+      fill: #595959;
     }
 
     .ant-empty-img-default-path-4 {
-      fill: #434343
+      fill: #434343;
     }
 
     .ant-empty-img-default-path-5 {
-      fill: #595959
+      fill: #595959;
     }
 
     .ant-empty-img-default-g {
-      fill: #434343
+      fill: #434343;
     }
 
     .ant-empty-img-simple-ellipse {
       fill: #fff;
-      fill-opacity: .08
+      fill-opacity: 0.08;
     }
 
     .ant-empty-img-simple-g {
-      stroke: #434343
+      stroke: #434343;
     }
 
     .ant-empty-img-simple-path {
       fill: #262626;
-      stroke: #434343
+      stroke: #434343;
     }
   }
 
@@ -218,6 +224,29 @@
   .ant-result {
     .ant-result-title {
       color: #fff;
+    }
+  }
+
+  // Table
+  .ant-table {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.2);
+
+    .ant-table-thead > tr > th {
+      background: rgba(0, 0, 0, 0.2);
+      color: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid #303030;
+    }
+
+    .ant-table-tbody {
+      & > tr > td {
+        border-bottom: 1px solid #303030;
+      }
+
+      tr.ant-table-row:hover > td,
+      tr > td.ant-table-cell-row-hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
   }
 }
