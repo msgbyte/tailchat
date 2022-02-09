@@ -5,10 +5,7 @@
 
 import _pick from 'lodash/pick';
 export * from './reg';
-export {
-  useGroupPanelParams,
-  useCurrentGroupPanelInfo,
-} from '@/routes/Main/Content/Group/utils';
+export { useGroupPanelParams } from '@/routes/Main/Content/Group/utils';
 export {
   openModal,
   closeModal,

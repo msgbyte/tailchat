@@ -28,6 +28,7 @@ export interface GroupInfo {
   owner: string;
   members: GroupMember[];
   panels: GroupPanel[];
+  pinnedPanelId?: string; // 被钉选的面板Id
 }
 
 /**

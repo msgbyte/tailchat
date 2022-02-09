@@ -1,10 +1,20 @@
 import React from 'react';
-import { GroupPanel, GroupPanelType, showToasts, t } from 'tailchat-shared';
+import {
+  groupActions,
+  GroupPanel,
+  GroupPanelType,
+  isValidStr,
+  showToasts,
+  t,
+  useAppDispatch,
+  useGroupInfo,
+} from 'tailchat-shared';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
 import { GroupTextPanelItem } from './TextPanelItem';
 import { Dropdown, Menu } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
  * 群组面板侧边栏组件
@@ -17,6 +27,12 @@ export const SidebarItem: React.FC<{
   const { hasOpenedPanel, openPanelWindow } = usePanelWindow(
     `/panel/group/${groupId}/${panel.id}`
   );
+  const groupInfo = useGroupInfo(groupId);
+  const dispatch = useAppDispatch();
+
+  if (!groupInfo) {
+    return <LoadingSpinner />;
+  }
 
   const menu = (
     <Menu>
@@ -33,6 +49,34 @@ export const SidebarItem: React.FC<{
       <Menu.Item disabled={hasOpenedPanel} onClick={openPanelWindow}>
         {t('在新窗口打开')}
       </Menu.Item>
+
+      {isValidStr(groupInfo.pinnedPanelId) &&
+      groupInfo.pinnedPanelId === panel.id ? (
+        <Menu.Item
+          onClick={() => {
+            dispatch(
+              groupActions.unpinGroupPanel({
+                groupId,
+              })
+            );
+          }}
+        >
+          {t('Unpin')}
+        </Menu.Item>
+      ) : (
+        <Menu.Item
+          onClick={() => {
+            dispatch(
+              groupActions.pinGroupPanel({
+                groupId,
+                panelId: panel.id,
+              })
+            );
+          }}
+        >
+          {t('Pin')}
+        </Menu.Item>
+      )}
     </Menu>
   );
 

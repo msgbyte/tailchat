@@ -4,6 +4,7 @@ import {
   buildRegList,
   ChatMessage,
   FastFormFieldMeta,
+  GroupPanel,
   regSocketEventListener,
 } from 'tailchat-shared';
 
@@ -71,7 +72,7 @@ export interface PluginGroupPanel {
   /**
    * 该面板如何渲染
    */
-  render: React.ComponentType;
+  render: React.ComponentType<{ panelInfo: GroupPanel }>;
 }
 export const [pluginGroupPanel, regGroupPanel] =
   buildRegList<PluginGroupPanel>();

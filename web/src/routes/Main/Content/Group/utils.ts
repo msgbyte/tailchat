@@ -15,10 +15,3 @@ export function useGroupPanelParams(): {
 
   return { groupId, panelId };
 }
-
-export function useCurrentGroupPanelInfo(): GroupPanel | null {
-  const { groupId, panelId } = useGroupPanelParams();
-  const panelInfo = useGroupPanel(groupId, panelId);
-
-  return panelInfo;
-}

@@ -1,17 +1,18 @@
 import React from 'react';
-import { regGroupPanel, useCurrentGroupPanelInfo } from '@capital/common';
+import { regGroupPanel } from '@capital/common';
 import { Translate } from './translate';
+import _get from 'lodash/get';
 
 const PLUGIN_NAME = 'com.msgbyte.webview';
 
-const GroupWebPanelRender = () => {
-  const groupPanelInfo = useCurrentGroupPanelInfo();
+const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
+  const panelInfo = props.panelInfo;
 
-  if (!groupPanelInfo) {
+  if (!panelInfo) {
     return <div>{Translate.notfound}</div>;
   }
 
-  const url = groupPanelInfo.meta?.url;
+  const url = _get(panelInfo, 'meta.url');
 
   return (
     <iframe key={String(url)} className="w-full h-full bg-white" src={url} />

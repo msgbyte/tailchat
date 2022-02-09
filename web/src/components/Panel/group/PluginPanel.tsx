@@ -61,7 +61,7 @@ export const GroupPluginPanel: React.FC<GroupPluginPanelProps> = React.memo(
         panelId={props.panelId}
         showHeader={false}
       >
-        <Component />
+        <Component panelInfo={panelInfo} />
       </GroupPanelWrapper>
     );
   }

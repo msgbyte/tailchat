@@ -42,6 +42,39 @@ const groupSlice = createSlice({
       const groupId = action.payload;
       delete state.groups[groupId];
     },
+    pinGroupPanel(
+      state,
+      action: PayloadAction<{
+        groupId: string;
+        panelId: string;
+      }>
+    ) {
+      const { groupId, panelId } = action.payload;
+
+      if (state.groups[groupId]) {
+        // NOTICE: updateGroup 只会去更新，不会去添加新的
+        state.groups[groupId] = {
+          ...state.groups[groupId],
+          pinnedPanelId: panelId,
+        };
+      }
+    },
+    unpinGroupPanel(
+      state,
+      action: PayloadAction<{
+        groupId: string;
+      }>
+    ) {
+      const { groupId } = action.payload;
+
+      if (state.groups[groupId]) {
+        // NOTICE: updateGroup 只会去更新，不会去添加新的
+        state.groups[groupId] = {
+          ...state.groups[groupId],
+          pinnedPanelId: undefined,
+        };
+      }
+    },
   },
 });
 
