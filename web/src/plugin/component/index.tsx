@@ -7,3 +7,4 @@ export { Icon } from '@iconify/react';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
 export { LoadingSpinner } from '@/components/LoadingSpinner';
 export { WebFastForm } from '@/components/WebFastForm';
+export { FullModalField } from '@/components/FullModal/Field';
