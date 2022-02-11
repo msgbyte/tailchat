@@ -5,7 +5,13 @@ import {
   openModal,
   closeModal,
 } from '@capital/common';
-import { LoadingSpinner, Space, Table, Button } from '@capital/component';
+import {
+  LoadingSpinner,
+  Space,
+  Table,
+  Button,
+  Loading,
+} from '@capital/component';
 import { OpenApp } from './types';
 import AppInfo from './AppInfo';
 import { OpenAppInfoProvider } from './context';
@@ -56,29 +62,27 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
     );
   };
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   return (
-    <div className="plugin-openapi-main-panel">
-      {appInfo ? (
-        <OpenAppInfoProvider appInfo={appInfo} refresh={refresh}>
-          <AppInfo />
-        </OpenAppInfoProvider>
-      ) : (
-        <>
-          <Button
-            style={{ marginBottom: 4 }}
-            type="primary"
-            onClick={handleCreateOpenApp}
-          >
-            创建应用
-          </Button>
-          <Table columns={columns} dataSource={allApps} pagination={false} />
-        </>
-      )}
-    </div>
+    <Loading spinning={loading}>
+      <div className="plugin-openapi-main-panel">
+        {appInfo ? (
+          <OpenAppInfoProvider appInfo={appInfo} refresh={refresh}>
+            <AppInfo />
+          </OpenAppInfoProvider>
+        ) : (
+          <>
+            <Button
+              style={{ marginBottom: 4 }}
+              type="primary"
+              onClick={handleCreateOpenApp}
+            >
+              创建应用
+            </Button>
+            <Table columns={columns} dataSource={allApps} pagination={false} />
+          </>
+        )}
+      </div>
+    </Loading>
   );
 });
 OpenApiMainPanel.displayName = 'OpenApiMainPanel';
