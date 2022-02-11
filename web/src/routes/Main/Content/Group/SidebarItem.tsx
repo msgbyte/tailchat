@@ -15,6 +15,7 @@ import { Dropdown, Menu } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { Icon } from '@iconify/react';
 
 /**
  * 群组面板侧边栏组件
@@ -37,7 +38,7 @@ export const SidebarItem: React.FC<{
   const menu = (
     <Menu>
       <Menu.Item
-        key="copylink"
+        icon={<Icon icon="mdi:content-copy" />}
         onClick={() => {
           copy(`${location.origin}/main/group/${groupId}/${panel.id}`);
           showToasts(t('已复制到剪切板'));
@@ -46,13 +47,18 @@ export const SidebarItem: React.FC<{
         {t('复制链接')}
       </Menu.Item>
 
-      <Menu.Item disabled={hasOpenedPanel} onClick={openPanelWindow}>
+      <Menu.Item
+        icon={<Icon icon="mdi:dock-window" />}
+        disabled={hasOpenedPanel}
+        onClick={openPanelWindow}
+      >
         {t('在新窗口打开')}
       </Menu.Item>
 
       {isValidStr(groupInfo.pinnedPanelId) &&
       groupInfo.pinnedPanelId === panel.id ? (
         <Menu.Item
+          icon={<Icon icon="mdi:pin-off" />}
           onClick={() => {
             dispatch(
               groupActions.unpinGroupPanel({
@@ -65,6 +71,7 @@ export const SidebarItem: React.FC<{
         </Menu.Item>
       ) : (
         <Menu.Item
+          icon={<Icon icon="mdi:pin" />}
           onClick={() => {
             dispatch(
               groupActions.pinGroupPanel({
