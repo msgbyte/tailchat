@@ -14,16 +14,17 @@ import { ServiceChecker } from '../components/ServiceChecker';
 import './index.less';
 
 const OpenApiMainPanel: React.FC = React.memo(() => {
-  const [appInfo, setAppInfo] = useState<OpenApp | null>(null);
+  const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
   const {
     loading,
-    value: allApps,
+    value: allApps = [],
     refresh,
   } = useAsyncRefresh(async (): Promise<OpenApp[]> => {
     const { data } = await postRequest('/openapi/app/all');
 
     return data ?? [];
   }, []);
+  const appInfo = allApps.find((a) => a._id === selectedAppId);
 
   const columns = useMemo(
     () => [
@@ -36,7 +37,7 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
         key: 'action',
         render: (_, record: OpenApp) => (
           <Space>
-            <Button onClick={() => setAppInfo(record)}>进入</Button>
+            <Button onClick={() => setSelectedAppId(record._id)}>进入</Button>
           </Space>
         ),
       },
@@ -62,7 +63,7 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
   return (
     <div className="plugin-openapi-main-panel">
       {appInfo ? (
-        <OpenAppInfoProvider appInfo={appInfo}>
+        <OpenAppInfoProvider appInfo={appInfo} refresh={refresh}>
           <AppInfo />
         </OpenAppInfoProvider>
       ) : (

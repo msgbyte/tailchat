@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useReducer } from 'react';
+import { DependencyList, useCallback, useEffect } from 'react';
 import type { FunctionReturningPromise } from '../types';
 import { useAsyncFn } from './useAsyncFn';
 
@@ -9,11 +9,14 @@ export function useAsyncRefresh<T extends FunctionReturningPromise>(
   const [state, callback] = useAsyncFn(fn, deps, {
     loading: true,
   });
-  const [inc, refresh] = useReducer((i) => i + 1, 0);
 
   useEffect(() => {
     callback();
-  }, [callback, inc]);
+  }, [callback]);
+
+  const refresh = useCallback(() => {
+    return callback();
+  }, [callback]);
 
   return {
     ...state,
