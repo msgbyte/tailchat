@@ -5,6 +5,7 @@ import { GroupPanel, useGroupTextPanelUnread } from 'tailchat-shared';
 interface GroupTextPanelItemProps {
   groupId: string;
   panel: GroupPanel;
+  icon: React.ReactNode;
 }
 
 /**
@@ -19,7 +20,7 @@ export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
     return (
       <GroupPanelItem
         name={panel.name}
-        icon={<div>#</div>}
+        icon={props.icon}
         to={`/main/group/${groupId}/${panel.id}`}
         badge={hasUnread}
       />

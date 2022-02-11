@@ -35,6 +35,9 @@ export const SidebarItem: React.FC<{
     return <LoadingSpinner />;
   }
 
+  const isPinned =
+    isValidStr(groupInfo.pinnedPanelId) && groupInfo.pinnedPanelId === panel.id;
+
   const menu = (
     <Menu>
       <Menu.Item
@@ -55,8 +58,7 @@ export const SidebarItem: React.FC<{
         {t('在新窗口打开')}
       </Menu.Item>
 
-      {isValidStr(groupInfo.pinnedPanelId) &&
-      groupInfo.pinnedPanelId === panel.id ? (
+      {isPinned ? (
         <Menu.Item
           icon={<Icon icon="mdi:pin-off" />}
           onClick={() => {
@@ -87,15 +89,17 @@ export const SidebarItem: React.FC<{
     </Menu>
   );
 
+  const icon = isPinned ? <Icon icon="mdi:pin" /> : <Icon icon="mdi:pound" />;
+
   return (
     <Dropdown overlay={menu} trigger={['contextMenu']}>
       <div>
         {panel.type === GroupPanelType.TEXT ? (
-          <GroupTextPanelItem groupId={groupId} panel={panel} />
+          <GroupTextPanelItem icon={icon} groupId={groupId} panel={panel} />
         ) : (
           <GroupPanelItem
             name={panel.name}
-            icon={<div>#</div>}
+            icon={icon}
             to={`/main/group/${groupId}/${panel.id}`}
           />
         )}
