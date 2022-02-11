@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
 import { getPopupContainer, preventDefault } from './utils/dom-helper';
 import { LoadingSpinner } from './components/LoadingSpinner';
+import { pluginRootRouter } from './plugin/common';
 
 const MainRoute = Loadable(() => import('./routes/Main'));
 
@@ -76,6 +77,9 @@ export const App: React.FC = React.memo(() => {
           <Route path="/main" component={MainRoute} />
           <Route path="/panel" component={PanelRoute} />
           <Route path="/invite/:inviteCode" component={InviteRoute} />
+          {pluginRootRouter.map((r) => (
+            <Route key={r.name} path={r.path} component={r.component} />
+          ))}
           <Redirect to="/entry" />
         </Switch>
       </AppContainer>

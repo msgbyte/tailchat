@@ -144,3 +144,12 @@ export const [pluginMessageExtraParsers, regMessageExtraParser] = buildRegList<{
   name: string;
   render: (payload: ChatMessage) => React.ReactNode;
 }>();
+
+/**
+ * 注册根路由
+ */
+export const [pluginRootRouter, regRootRouter] = buildRegList<{
+  name: string;
+  path: string;
+  component: React.ComponentType;
+}>();

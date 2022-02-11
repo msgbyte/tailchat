@@ -1,19 +1,16 @@
+import { getSearchParam } from '@/utils/location-helper';
 import { useEffect, useState } from 'react';
-
-const getValue = (search: string, param: string) =>
-  new URLSearchParams(search).get(param);
 
 export type UseQueryParam = (param: string) => string | null;
 
 export const useSearchParam: UseQueryParam = (param) => {
-  const location = window.location;
   const [value, setValue] = useState<string | null>(() =>
-    getValue(location.search, param)
+    getSearchParam(param)
   );
 
   useEffect(() => {
     const onChange = () => {
-      setValue(getValue(location.search, param));
+      setValue(getSearchParam(param));
     };
 
     window.addEventListener('popstate', onChange);
