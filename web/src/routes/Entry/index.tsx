@@ -16,7 +16,7 @@ const EntryRoute = React.memo(() => {
       <div
         className={clsx(
           styles.entryLeft,
-          'entry-left w-142 sm:w-full pt-40 px-4 bg-gray-600 min-h-full flex justify-center bg-repeat-y'
+          'entry-left w-142 sm:w-full pt-40 px-4 bg-gray-600 min-h-full flex justify-center bg-repeat-y z-10'
         )}
         style={{ backgroundImage: `url(${loginPatternUrl})` }}
       >
@@ -27,7 +27,8 @@ const EntryRoute = React.memo(() => {
           <Redirect to="/entry/login" />
         </Switch>
       </div>
-      <div className="flex-1 sm:hidden tc-background -z-1" />
+
+      <div className="flex-1 sm:hidden tc-background" />
     </div>
   );
 });
