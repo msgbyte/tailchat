@@ -172,6 +172,10 @@
 
   // 空状态
   .ant-empty {
+    &.ant-empty-normal {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
     .ant-empty-img-default-ellipse {
       fill: #fff;
       fill-opacity: 0.08;
@@ -248,6 +252,10 @@
     .ant-table-tbody {
       & > tr > td {
         border-bottom: 1px solid #303030;
+      }
+
+      & > tr.ant-table-placeholder:hover > td {
+        background-color: rgba(255,255,255,0.2);
       }
 
       tr.ant-table-row:hover > td,
