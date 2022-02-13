@@ -72,7 +72,7 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
         ) : (
           <>
             <Button
-              style={{ marginBottom: 4 }}
+              style={{ marginBottom: 10 }}
               type="primary"
               onClick={handleCreateOpenApp}
             >
