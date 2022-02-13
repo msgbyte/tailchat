@@ -2,7 +2,7 @@ import { isValidStr, registerWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';

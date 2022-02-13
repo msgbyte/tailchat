@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import React from 'react';
 import { useReducer } from 'react';
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import _isFunction from 'lodash/isFunction';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import clsx from 'clsx';
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import { SidebarItem } from '../SidebarItem';
 import { t, useDMConverseList, useUserInfo } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';

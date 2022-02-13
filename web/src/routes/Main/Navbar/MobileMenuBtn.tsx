@@ -1,5 +1,5 @@
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import React, { useCallback } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 

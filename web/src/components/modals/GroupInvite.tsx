@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import { Button, Typography } from 'antd';
 import React, { useState } from 'react';
 import {

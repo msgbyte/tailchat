@@ -1,5 +1,5 @@
 import { messageInterpreter } from '@/plugin/common';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import { Popover } from 'antd';
 import React from 'react';
 import { useMemo } from 'react';

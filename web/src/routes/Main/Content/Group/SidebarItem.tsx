@@ -15,7 +15,7 @@ import { Dropdown, Menu } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 
 /**
  * 群组面板侧边栏组件

@@ -2,7 +2,7 @@ import { Typography } from 'antd';
 import React from 'react';
 import { version } from 'tailchat-shared';
 import logoUrl from '@assets/images/logo.svg';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 
 const { Paragraph, Text, Link } = Typography;
 

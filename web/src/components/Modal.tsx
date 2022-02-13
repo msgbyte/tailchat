@@ -7,7 +7,7 @@ import _isString from 'lodash/isString';
 import _noop from 'lodash/noop';
 import { PortalAdd, PortalRemove } from './Portal';
 import { Typography } from 'antd';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import { CSSTransition } from 'react-transition-group';
 import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';

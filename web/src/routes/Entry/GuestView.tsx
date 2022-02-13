@@ -2,7 +2,7 @@ import { Spinner } from '@/components/Spinner';
 import { useSearchParam } from '@/hooks/useSearchParam';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import {

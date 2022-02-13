@@ -1,6 +1,6 @@
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { pluginInspectServices } from '@/plugin/common';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import React, { useMemo } from 'react';
 import { t, useAvailableServices } from 'tailchat-shared';
 

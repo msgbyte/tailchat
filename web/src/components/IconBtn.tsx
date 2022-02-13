@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react';
 import { Button, ButtonProps, Tooltip } from 'antd';
 import React from 'react';
 import { isValidStr } from 'tailchat-shared';
+import { Icon } from './Icon';
 
 const btnClassName =
   'border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60';

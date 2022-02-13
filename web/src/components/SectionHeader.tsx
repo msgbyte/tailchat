@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'antd';
-import { Icon } from '@iconify/react';
+import { Icon } from '@/components/Icon';
 import clsx from 'clsx';
 
 interface SectionHeaderProps {
