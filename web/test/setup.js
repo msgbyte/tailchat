@@ -1,6 +1,6 @@
 // mock
 jest.mock('tailchat-shared/i18n');
-jest.mock('@iconify/react', () => ({
+jest.mock('../src/components/Icon', () => ({
   Icon: ({ icon }) => `[iconify icon="${icon}"]`,
 }));
 jest.mock('../src/components/Loadable');
