@@ -55,7 +55,7 @@ export const ModalModifyGroupPanel: React.FC<{
   }
 
   return (
-    <ModalWrapper title={t('创建群组面板')} style={{ maxWidth: 440 }}>
+    <ModalWrapper title={t('编辑群组面板')} style={{ maxWidth: 440 }}>
       <WebFastForm
         schema={schema}
         fields={fields.filter((f) => f.type !== 'type')} // 变更时不显示类型
