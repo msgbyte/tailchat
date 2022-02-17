@@ -78,12 +78,17 @@ export const App: React.FC = React.memo(() => {
           <Route path="/main" component={MainRoute} />
           <Route path="/panel" component={PanelRoute} />
           <Route path="/invite/:inviteCode" component={InviteRoute} />
-          <FallbackPortalHost>
-            {/* 这个host用于处理独立页面的modal */}
-            {pluginRootRouter.map((r) => (
-              <Route key={r.name} path={r.path} component={r.component} />
+          {/* 这个host用于处理独立页面的modal */}
+          {/* NOTICE: Switch里不能出现动态路由 */}
+          {/* <FallbackPortalHost>
+            {pluginRootRouter.map((r, i) => (
+              <Route
+                key={r.name}
+                path={r.path || `/fallback${i}`}
+                component={r.component}
+              />
             ))}
-          </FallbackPortalHost>
+          </FallbackPortalHost> */}
           <Redirect to="/entry" />
         </Switch>
       </AppContainer>
