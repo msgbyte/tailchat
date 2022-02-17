@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 import { useRecordMeasure } from './utils/measure-helper';
 import { getPopupContainer, preventDefault } from './utils/dom-helper';
 import { LoadingSpinner } from './components/LoadingSpinner';
-import { pluginRootRouter } from './plugin/common';
+import { pluginRootRoute } from './plugin/common';
 import { PortalHost as FallbackPortalHost } from './components/Portal';
 
 const MainRoute = Loadable(() => import('./routes/Main'));
@@ -78,17 +78,19 @@ export const App: React.FC = React.memo(() => {
           <Route path="/main" component={MainRoute} />
           <Route path="/panel" component={PanelRoute} />
           <Route path="/invite/:inviteCode" component={InviteRoute} />
-          {/* 这个host用于处理独立页面的modal */}
-          {/* NOTICE: Switch里不能出现动态路由 */}
-          {/* <FallbackPortalHost>
-            {pluginRootRouter.map((r, i) => (
-              <Route
-                key={r.name}
-                path={r.path || `/fallback${i}`}
-                component={r.component}
-              />
-            ))}
-          </FallbackPortalHost> */}
+          <Route path="/plugin/*">
+            {/* 这个host用于处理独立页面的modal */}
+            {/* NOTICE: Switch里不能出现动态路由 */}
+            <FallbackPortalHost>
+              {pluginRootRoute.map((r, i) => (
+                <Route
+                  key={r.name}
+                  path={r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`}
+                  component={r.component}
+                />
+              ))}
+            </FallbackPortalHost>
+          </Route>
           <Redirect to="/entry" />
         </Switch>
       </AppContainer>

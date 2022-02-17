@@ -1,4 +1,4 @@
-import { Loadable, regCustomPanel, regRootRouter } from '@capital/common';
+import { Loadable, regCustomPanel, regPluginRootRoute } from '@capital/common';
 import { Translate } from './translate';
 
 const MainPanel = Loadable(() => import('./MainPanel'));
@@ -11,7 +11,7 @@ regCustomPanel({
   render: MainPanel,
 });
 
-regRootRouter({
+regPluginRootRoute({
   name: 'com.msgbyte.openapi/route',
   path: '/openapi',
   component: MainPanel,

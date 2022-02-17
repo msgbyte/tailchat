@@ -148,7 +148,7 @@ export const [pluginMessageExtraParsers, regMessageExtraParser] = buildRegList<{
 /**
  * 注册根路由
  */
-export const [pluginRootRouter, regRootRouter] = buildRegList<{
+export const [pluginRootRoute, regPluginRootRoute] = buildRegList<{
   name: string;
   path: string;
   component: React.ComponentType;
