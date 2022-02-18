@@ -13,7 +13,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import fs from 'fs';
 import WorkboxPlugin from 'workbox-webpack-plugin';
-import { workboxPluginPattern } from './utils';
+import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
 import dayjs from 'dayjs';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -112,17 +112,19 @@ const plugins: Configuration['plugins'] = [
           // Only cache 10 images.
           expiration: {
             maxEntries: 10,
+            maxAgeSeconds: 14 * 24 * 60 * 60, // 2 week
           },
         },
       },
+      //#region 插件缓存匹配
       {
-        // 匹配内置 plugins 以加速
-        urlPattern: workboxPluginPattern,
+        // 匹配内置 plugins 入口文件 以加速
+        urlPattern: workboxPluginEntryPattern,
         handler: 'StaleWhileRevalidate',
         options: {
-          cacheName: 'builtin-plugins',
+          cacheName: 'builtin-plugins-entry',
           expiration: {
-            maxAgeSeconds: 1 * 60 * 60, // 1h
+            maxAgeSeconds: 24 * 60 * 60, // 1 day
           },
           cacheableResponse: {
             // 只缓存js, 防止404后台直接fallback到html
@@ -132,6 +134,24 @@ const plugins: Configuration['plugins'] = [
           },
         },
       },
+      {
+        // 匹配内置 plugins 内容 以加速
+        urlPattern: workboxPluginDetailPattern,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'builtin-plugins-detail',
+          expiration: {
+            maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+          },
+          cacheableResponse: {
+            // 只缓存js, 防止404后台直接fallback到html
+            headers: {
+              'content-type': 'application/javascript; charset=utf-8',
+            },
+          },
+        },
+      },
+      //#endregion
     ],
   }),
 ];
