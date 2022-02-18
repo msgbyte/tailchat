@@ -20,7 +20,7 @@ const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
 };
 
 regGroupPanel({
-  name: `${PLUGIN_NAME}/webpanel`,
+  name: `${PLUGIN_NAME}/grouppanel`,
   label: Translate.webpanel,
   provider: PLUGIN_NAME,
   extraFormMeta: [{ type: 'text', name: 'url', label: '网址' }],
