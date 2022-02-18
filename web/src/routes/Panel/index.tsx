@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router';
 import { MainProvider } from '../Main/Provider';
 import { t } from 'tailchat-shared';
 import { PersonalConverse } from '../Main/Content/Personal/Converse';
-import { GroupPanelRender } from '../Main/Content/Group/Panel';
+import { GroupPanelRoute } from '../Main/Content/Group/Panel';
 
 const PanelRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppRouteRenderStart');
@@ -21,7 +21,7 @@ const PanelRoute: React.FC = React.memo(() => {
           <Route
             exact={true}
             path="/panel/group/:groupId/:panelId"
-            component={GroupPanelRender}
+            component={GroupPanelRoute}
           />
 
           <Route>{t('未知的面板')}</Route>
