@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import windowStateKeeper from 'electron-window-state';
 
 const isDev = !app.isPackaged;
 const webUrl = isDev
@@ -13,10 +14,17 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = (): void => {
+  const mainWindowState = windowStateKeeper({
+    defaultWidth: 960,
+    defaultHeight: 640,
+  });
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 640,
-    width: 960,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    height: mainWindowState.height,
+    width: mainWindowState.width,
     minHeight: 640,
     minWidth: 960,
     center: true,
@@ -28,6 +36,8 @@ const createWindow = (): void => {
   });
 
   mainWindow.loadURL(webUrl);
+
+  mainWindowState.manage(mainWindow);
 
   if (isDev) {
     // Open the DevTools.
