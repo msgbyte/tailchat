@@ -136,7 +136,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
           </Typography.Paragraph>
 
           <div className="text-center mb-2">
-            {/* TODO: update avatar */}
+            {/* TODO: upload avatar */}
             <Avatar size={80} name={name} />
           </div>
 
@@ -146,6 +146,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
             <Input
               className="shadow-none"
               size="large"
+              maxLength={100}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

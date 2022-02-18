@@ -58,7 +58,7 @@ export const GroupSummary: React.FC<{
 
         <div className="w-2/3">
           <FullModalField
-            title={t('群组名')}
+            title={t('群组名称')}
             value={groupInfo.name}
             editable={true}
             renderEditor={DefaultFullModalInputEditorRender}

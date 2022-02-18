@@ -77,28 +77,32 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
     const EditorComponent = props.renderEditor;
 
     return (
-      <Space className="flex w-full">
-        {isEditing && !_isNil(EditorComponent) ? (
-          <EditorComponent value={editingValue} onChange={setEditingValue} />
-        ) : (
-          <span title={valueTitle}>{props.content ?? props.value}</span>
-        )}
+      <div className="flex w-full">
+        <div className="truncate">
+          {isEditing && !_isNil(EditorComponent) ? (
+            <EditorComponent value={editingValue} onChange={setEditingValue} />
+          ) : (
+            <span title={valueTitle}>{props.content ?? props.value}</span>
+          )}
+        </div>
 
-        {!isEditing ? (
-          <DelayTip title={t('编辑')}>
-            <IconBtn icon="mdi:square-edit-outline" onClick={handleEditing} />
-          </DelayTip>
-        ) : (
-          <>
-            <DelayTip title={t('取消')}>
-              <IconBtn icon="mdi:close" onClick={handleEditing} />
+        <div className="ml-2">
+          {!isEditing ? (
+            <DelayTip title={t('编辑')}>
+              <IconBtn icon="mdi:square-edit-outline" onClick={handleEditing} />
             </DelayTip>
-            <DelayTip title={t('保存变更')}>
-              <IconBtn type="primary" icon="mdi:check" onClick={handleSave} />
-            </DelayTip>
-          </>
-        )}
-      </Space>
+          ) : (
+            <Space>
+              <DelayTip title={t('取消')}>
+                <IconBtn icon="mdi:close" onClick={handleEditing} />
+              </DelayTip>
+              <DelayTip title={t('保存变更')}>
+                <IconBtn type="primary" icon="mdi:check" onClick={handleSave} />
+              </DelayTip>
+            </Space>
+          )}
+        </div>
+      </div>
     );
   }
 );

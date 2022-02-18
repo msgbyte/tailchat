@@ -14,6 +14,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
       <div className="h-12 relative flex items-center py-0 text-base font-bold flex-shrink-0 thin-line-bottom">
         {React.isValidElement(props.menu) ? (
           <Dropdown
+            className="overflow-hidden"
             onVisibleChange={setVisible}
             overlay={props.menu}
             placement="topRight"
