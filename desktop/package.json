@@ -6,6 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && electron-forge start",
+    "compile": "tsc",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -15,6 +16,9 @@
   "author": {
     "name": "moonrailgun",
     "email": "moonrailgun@gmail.com"
+  },
+  "config": {
+    "forge": "./forge.config.js"
   },
   "license": "MIT",
   "devDependencies": {

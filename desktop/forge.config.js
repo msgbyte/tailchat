@@ -11,7 +11,6 @@ module.exports = {
   // publishers: [ ... ],
   // plugins: [ ... ],
   // hooks: { ... },
-  buildIdentifier: 'com.tailchat.desktop',
   buildIdentifier: process.env.IS_BETA ? 'beta' : 'prod',
 
   // https://electron.github.io/electron-packager/main/interfaces/electronpackager.options.html
