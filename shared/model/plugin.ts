@@ -65,7 +65,7 @@ export async function fetchRegistryPlugins(): Promise<PluginManifest[]> {
  *
  * 后端固定
  */
-export async function fetchServiceRegistryPlugins() {
+export async function fetchServiceRegistryPlugins(): Promise<PluginManifest[]> {
   const { data } = await request.get('/registry.json');
 
   return data;

@@ -1,3 +1,4 @@
+import { getServiceUrl } from '../manager/service';
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { findGroupInviteByCode, GroupInvite } from '../model/group';
 import {
@@ -62,7 +63,15 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
     () =>
       Promise.all([
         fetchRegistryPlugins().catch(() => []),
-        fetchServiceRegistryPlugins().catch(() => []),
+        fetchServiceRegistryPlugins()
+          .then((list) =>
+            list.map((manifest) => ({
+              ...manifest,
+              // 后端url策略。根据前端的url在获取时自动变更为当前链接的后端地址
+              url: String(manifest.url).replace('{BACKEND}', getServiceUrl()),
+            }))
+          )
+          .catch(() => []),
         fetchLocalStaticRegistryPlugins().catch(() => []),
       ]).then(([a, b, c]) => [...a, ...b, ...c]),
     {

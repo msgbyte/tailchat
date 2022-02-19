@@ -34,8 +34,11 @@ Nightly版 体验地址: [https://nightly.paw.msgbyte.com/](https://nightly.paw.
 ```bash
 pnpm install
 cd web
-pnpm build
+SERVICE_URL=http://127.0.0.1:11000 pnpm build
 ```
+
+环境变量: 
+- `SERVICE_URL`: 后端服务的地址
 
 使用任意方式代理 `web/dist` 目录即可。
 
