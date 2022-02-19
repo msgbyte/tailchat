@@ -1,7 +1,7 @@
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 import { Alert } from 'antd';
 import React, { useMemo } from 'react';
-import { isValidStr, useGroupPanel } from 'tailchat-shared';
+import { isValidStr, t, useGroupPanel } from 'tailchat-shared';
 import { GroupPanelWrapper } from './Wrapper';
 
 interface GroupPluginPanelProps {
@@ -18,13 +18,16 @@ export const GroupPluginPanel: React.FC<GroupPluginPanelProps> = React.memo(
 
     if (!panelInfo) {
       return (
-        <Alert className="w-full text-center" message="无法获取面板信息" />
+        <Alert className="w-full text-center" message={t('无法获取面板信息')} />
       );
     }
 
     if (typeof panelInfo.provider !== 'string') {
       return (
-        <Alert className="w-full text-center" message="未找到插件的提供者" />
+        <Alert
+          className="w-full text-center"
+          message={t('未找到插件的提供者')}
+        />
       );
     }
 
@@ -42,7 +45,17 @@ export const GroupPluginPanel: React.FC<GroupPluginPanelProps> = React.memo(
       return (
         <Alert
           className="w-full text-center"
-          message={`该面板由插件提供, 插件未安装: ${panelInfo.provider}`}
+          message={
+            <div>
+              <p>{t('该面板由插件提供')}</p>
+              <p>
+                {t('插件名')}: {panelInfo.provider}
+              </p>
+              <p>
+                {t('面板名')}: {panelInfo.pluginPanelName}
+              </p>
+            </div>
+          }
         />
       );
     }
