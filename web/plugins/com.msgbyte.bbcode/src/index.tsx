@@ -5,7 +5,7 @@ import {
   regMessageTextDecorators,
 } from '@capital/common';
 
-const BBCode = Loadable(() => import('./bbcode'));
+const BBCode = Loadable(() => import('./render'));
 
 regMessageRender((message) => {
   return <BBCode plainText={message} />;

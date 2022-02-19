@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import bbcodeParser from './parser';
 import urlRegex from 'url-regex';
-import '../tags/__all__';
 
 /**
  * 客户端预处理文本
@@ -24,11 +23,9 @@ export function preProcessText(plainText: string): string {
 interface BBCodeProps {
   plainText: string;
 }
-const BBCode: React.FC<BBCodeProps> = React.memo(({ plainText }) => {
+export const BBCode: React.FC<BBCodeProps> = React.memo(({ plainText }) => {
   const bbcodeComponent = bbcodeParser.render(preProcessText(plainText));
 
   return <Fragment>{bbcodeComponent}</Fragment>;
 });
 BBCode.displayName = 'BBCode';
-
-export default BBCode;
