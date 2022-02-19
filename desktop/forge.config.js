@@ -19,7 +19,7 @@ module.exports = {
       beta: 'com.tailchat.desktop',
       prod: 'com.tailchat.beta.desktop',
     }),
-    icon: path.resolve(__dirname, './build/logo@512'),
+    icon: path.resolve(__dirname, './build/icon'),
   },
   makers: [
     {
