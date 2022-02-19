@@ -1,29 +1,15 @@
-import { decode, encode, isMiao } from './miaotrans';
-import {
-  regMessageInterpreter,
-  regChatInputAction,
-  openModal,
-} from '@capital/common';
+import { regChatInputAction, openModal, Loadable } from '@capital/common';
 import { createElement } from 'react';
-import { SendMiaoModal } from './SendMiaoModal';
 import { Translate } from './translate';
 
-const miao = encode('喵语翻译已加载');
-const human = decode(miao);
+const SendMiaoModal = Loadable(() =>
+  import('./SendMiaoModal').then((module) => ({
+    default: module.SendMiaoModal,
+  }))
+);
 
-console.log(`${miao}\n${human}`);
-
-regMessageInterpreter({
-  name: Translate.miaoTrans,
-  explainMessage(message: string) {
-    // 喵语 -> 人话
-    if (!isMiao(message)) {
-      return null;
-    }
-
-    return decode(message);
-  },
-});
+// Just for reduce entry file size
+import('./reg');
 
 regChatInputAction({
   label: Translate.title,

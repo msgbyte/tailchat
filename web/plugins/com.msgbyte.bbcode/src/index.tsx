@@ -1,7 +1,11 @@
 import React from 'react';
-import { regMessageRender, regMessageTextDecorators } from '@capital/common';
-import { BBCode } from './bbcode';
-import './tags/__all__';
+import {
+  Loadable,
+  regMessageRender,
+  regMessageTextDecorators,
+} from '@capital/common';
+
+const BBCode = Loadable(() => import('./bbcode'));
 
 regMessageRender((message) => {
   return <BBCode plainText={message} />;
