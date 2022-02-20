@@ -104,4 +104,7 @@ module.exports = {
     },
   },
   plugins: [tailchat],
+  corePlugins: {
+    gap: false,
+  },
 };

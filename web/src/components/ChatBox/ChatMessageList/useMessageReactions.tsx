@@ -81,7 +81,7 @@ export function useMessageReactions(payload: ChatMessage) {
   );
 
   return (
-    <div className="flex chat-message-reactions gap-1 py-0.5">
+    <div className="flex chat-message-reactions space-x-1 py-0.5">
       {groupedReactions.map((reaction) => (
         <ReactionItem
           key={reaction.name}
