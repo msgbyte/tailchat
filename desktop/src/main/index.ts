@@ -1,8 +1,11 @@
 import { app, BrowserWindow } from 'electron';
 import windowStateKeeper from 'electron-window-state';
 import { config } from './config';
+import unhandled from 'electron-unhandled';
 import './update';
 import './menu';
+
+unhandled();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {

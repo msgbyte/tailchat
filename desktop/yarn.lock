@@ -740,7 +740,7 @@ chromium-pickle-js@^0.2.0:
   resolved "https://registry.npmmirror.com/chromium-pickle-js/-/chromium-pickle-js-0.2.0.tgz#04a106672c18b085ab774d983dfa3ea138f22205"
   integrity sha1-BKEGZywYsIWrd02YPfo+oTjyIgU=
 
-clean-stack@^2.0.0:
+clean-stack@^2.0.0, clean-stack@^2.1.0:
   version "2.2.0"
   resolved "https://registry.npmmirror.com/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==
@@ -1086,6 +1086,11 @@ electron-is-dev@^0.3.0:
   resolved "https://registry.npmmirror.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
   integrity sha512-jLttuuq8QK67n3mXmIe9pkrO7IH3LGIk12xJkhTmc852U2sCJaRAOpRGPSh+1Xnzck5v9escd9YXzuze9nGejg==
 
+electron-is-dev@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/electron-is-dev/-/electron-is-dev-2.0.0.tgz#833487a069b8dad21425c67a19847d9064ab19bd"
+  integrity sha512-3X99K852Yoqu9AcW50qz3ibYBWY79/pBhlMCab8ToEWS48R0T9tyxRiQhwylE7zQdXrMnx2JKqUJyMPmt5FBqA==
+
 electron-log@^4.4.6:
   version "4.4.6"
   resolved "https://registry.npmmirror.com/electron-log/-/electron-log-4.4.6.tgz#e7824fc725370384f6edaaac0480c423e570dc69"
@@ -1162,6 +1167,16 @@ electron-squirrel-startup@^1.0.0:
   dependencies:
     debug "^2.2.0"
 
+electron-unhandled@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/electron-unhandled/-/electron-unhandled-4.0.0.tgz#875c6d468062bc45055abbfcb71ddaa9c5e90ad5"
+  integrity sha512-Vm0xyfJ06PUXktjN2fO2XdWwalAkuPVsVp/gW+30g5398XXt0blM9eg6tL+5kWBST5YZ1lC4bUvY3fwX4xbx1g==
+  dependencies:
+    clean-stack "^2.1.0"
+    electron-is-dev "^2.0.0"
+    ensure-error "^2.0.0"
+    lodash.debounce "^4.0.8"
+
 electron-update-notifier@^1.5.3:
   version "1.5.3"
   resolved "https://registry.npmmirror.com/electron-update-notifier/-/electron-update-notifier-1.5.3.tgz#23c4e6f255e2b8a8cc24061c742c180e2fd5fe99"
@@ -1222,6 +1237,11 @@ end-of-stream@^1.1.0:
   integrity sha1-WuZKX0UFe682JuwU2gyl5LJDHrA=
   dependencies:
     once "^1.4.0"
+
+ensure-error@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/ensure-error/-/ensure-error-2.1.0.tgz#f11fbe383c0cf4a54850ac77acceb7bc06e0f99d"
+  integrity sha512-+BMSJHw9gxiJAAp2ZR1E0TNcL09dD3lOvkl7WVm4+Y6xnes/pMetP/TzCHiDduh8ihNDjbGfuYxl7l4PA1xZ8A==
 
 env-paths@^2.2.0:
   version "2.2.1"
@@ -2086,6 +2106,11 @@ lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.npmmirror.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
 lodash.get@^4.0.0:
   version "4.4.2"
