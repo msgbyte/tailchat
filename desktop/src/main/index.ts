@@ -1,11 +1,8 @@
 import { app, BrowserWindow } from 'electron';
-import path from 'path';
 import windowStateKeeper from 'electron-window-state';
-
-const isDev = !app.isPackaged;
-const webUrl = isDev
-  ? 'http://localhost:11011'
-  : 'https://nightly.paw.msgbyte.com';
+import { config } from './config';
+import './update';
+import './menu';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -28,18 +25,17 @@ const createWindow = (): void => {
     minHeight: 640,
     minWidth: 960,
     center: true,
-    icon: path.resolve(__dirname, '../assets/logo@192.png'),
     webPreferences: {
       nodeIntegration: false,
       sandbox: true,
     },
   });
 
-  mainWindow.loadURL(webUrl);
+  mainWindow.loadURL(config.webUrl);
 
   mainWindowState.manage(mainWindow);
 
-  if (isDev) {
+  if (config.isDev) {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
   }

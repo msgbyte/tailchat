@@ -31,7 +31,10 @@
     "typescript": "~4.5.4"
   },
   "dependencies": {
+    "electron-log": "^4.4.6",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-window-state": "^5.0.3"
+    "electron-update-notifier": "^1.5.3",
+    "electron-window-state": "^5.0.3",
+    "update-electron-app": "^2.0.1"
   }
 }
