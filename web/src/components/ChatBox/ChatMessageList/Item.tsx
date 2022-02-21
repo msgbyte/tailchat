@@ -22,6 +22,7 @@ import { useChatMessageItemAction } from './useChatMessageItemAction';
 import { useChatMessageReactionAction } from './useChatMessageReaction';
 import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
+import { stopPropagation } from '@/utils/dom-helper';
 import './Item.less';
 
 /**
@@ -90,7 +91,10 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
       </div>
 
       {/* 主体 */}
-      <div className="flex flex-col flex-1 overflow-auto group">
+      <div
+        className="flex flex-col flex-1 overflow-auto group"
+        onContextMenu={stopPropagation}
+      >
         {showAvatar && (
           <div className="flex items-center">
             <div className="font-bold">{userInfo.nickname}</div>
