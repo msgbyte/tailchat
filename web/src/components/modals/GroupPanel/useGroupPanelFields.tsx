@@ -7,7 +7,7 @@ import {
   isDevelopment,
   t,
   useFastFormContext,
-  useGroupMemberUUIDs,
+  useGroupMemberIds,
 } from 'tailchat-shared';
 import type { GroupPanelValues } from './types';
 import _compact from 'lodash/compact';
@@ -43,7 +43,7 @@ export function useGroupPanelFields(
 ) {
   const disableSendMessageWithoutRender = useMemo(() => {
     const DisableSendMessageWithoutComponent: React.FC = () => {
-      const groupMemberUUIDs = useGroupMemberUUIDs(groupId);
+      const groupMemberUUIDs = useGroupMemberIds(groupId);
       const context = useFastFormContext();
 
       return (

@@ -1,0 +1,27 @@
+.chatbox-mention-input {
+  @apply shadow-none border-0 px-4 py-2 flex-1;
+
+  &__control {
+    @apply relative;
+  }
+
+  &__input {
+    @apply outline-none;
+  }
+
+  &__suggestions {
+    @apply bg-transparent !important;
+
+    &__list {
+      @apply border border-gray-500 bg-content-light dark:bg-content-dark rounded;
+    }
+
+    &__item {
+      @apply rounded;
+
+      &--focused {
+        @apply bg-black bg-opacity-20 dark:bg-white dark:bg-opacity-20;
+      }
+    }
+  }
+}

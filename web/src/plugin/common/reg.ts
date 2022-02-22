@@ -101,15 +101,25 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
  * 消息渲染器
  * 输入消息，返回渲染节点
  */
-export const [getMessageTextDecorators, regMessageTextDecorators] = buildRegFn<
+const defaultMessageTextDecorators = {
+  url: (plain: string) => plain,
+  image: (plain: string) => plain,
+  mention: (userId: string, userName: string) => `@${userName}`,
+};
+const [_getMessageTextDecorators, regMessageTextDecorators] = buildRegFn<
   () => {
     url: (plain: string) => string;
     image: (plain: string, attrs: Record<string, unknown>) => string;
+    mention: (userId: string, userName: string) => string;
   }
->('message-text-decorators', () => ({
-  url: (plain: string) => plain,
-  image: (plain: string) => plain,
-}));
+>('message-text-decorators', () => defaultMessageTextDecorators);
+function getMessageTextDecorators() {
+  return {
+    ...defaultMessageTextDecorators,
+    ..._getMessageTextDecorators(),
+  };
+}
+export { getMessageTextDecorators, regMessageTextDecorators };
 
 interface ChatInputAction {
   label: string;

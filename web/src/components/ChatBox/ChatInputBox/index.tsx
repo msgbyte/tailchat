@@ -1,18 +1,17 @@
 import { getMessageTextDecorators } from '@/plugin/common';
 import { isEnterHotkey } from '@/utils/hot-key';
-import { Input } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
-import { t } from 'tailchat-shared';
 import { ChatInputAddon } from './Addon';
 import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
 import { uploadMessageImage } from './utils';
+import { ChatInputBoxInput } from './input';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string) => void;
 }
 export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
-  const inputRef = useRef<Input>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const handleSendMsg = useCallback(() => {
     props.onSendMsg(message);
@@ -21,7 +20,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   }, [message]);
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
+    (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (isEnterHotkey(e.nativeEvent)) {
         e.preventDefault();
         handleSendMsg();
@@ -31,7 +30,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   );
 
   const handlePaste = useCallback(
-    (e: React.ClipboardEvent<HTMLDivElement>) => {
+    (e: React.ClipboardEvent<HTMLDivElement | HTMLTextAreaElement>) => {
       const helper = new ClipboardHelper(e);
       const image = helper.hasImage();
       if (image) {
@@ -51,12 +50,10 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
     <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>
       <div className="px-4 py-2">
         <div className="bg-white dark:bg-gray-600 flex rounded-md items-center">
-          <Input
-            ref={inputRef}
-            className="outline-none shadow-none border-0 py-2.5 px-4 flex-1"
-            placeholder={t('输入一些什么')}
+          <ChatInputBoxInput
+            inputRef={inputRef}
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={setMessage}
             onKeyDown={handleKeyDown}
             onPaste={handlePaste}
           />
