@@ -150,13 +150,18 @@ export { useConverseMessage } from './redux/hooks/useConverseMessage';
 export { useDMConverseName } from './redux/hooks/useDMConverseName';
 export {
   useGroupInfo,
-  useGroupMemberUUIDs,
+  useGroupMemberIds,
+  useGroupMemberInfos,
   useGroupPanel,
   useIsGroupOwner,
   useGroupUnread,
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
-export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
+export {
+  useUserInfo,
+  useUserId,
+  useUserInfoList,
+} from './redux/hooks/useUserInfo';
 export { userActions, groupActions, uiActions } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';

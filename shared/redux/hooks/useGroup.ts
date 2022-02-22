@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { GroupInfo, GroupPanel, GroupPanelType } from '../../model/group';
+import type { UserBaseInfo } from '../../model/user';
 import { isValidStr } from '../../utils/string-helper';
 import { useAppSelector } from './useAppSelector';
 import { useUnread } from './useUnread';
-import { useUserId } from './useUserInfo';
+import { useUserId, useUserInfoList } from './useUserInfo';
 
 /**
  * 获取群组信息
@@ -15,15 +16,22 @@ export function useGroupInfo(groupId: string): GroupInfo | null {
 /**
  * 获取群组中所有成员的uuid列表
  */
-export function useGroupMemberUUIDs(groupId: string): string[] {
+export function useGroupMemberIds(groupId: string): string[] {
   const groupInfo = useGroupInfo(groupId);
   const members = groupInfo?.members ?? [];
-  const groupMemberUUIDs = useMemo(
-    () => members.map((m) => m.userId),
-    [members]
-  );
+  const groupMemberIds = useMemo(() => members.map((m) => m.userId), [members]);
 
-  return groupMemberUUIDs;
+  return groupMemberIds;
+}
+
+/**
+ * 获取群组中成员信息的详细列表
+ */
+export function useGroupMemberInfos(groupId: string): UserBaseInfo[] {
+  const groupMemberIds = useGroupMemberIds(groupId);
+  const userInfos = useUserInfoList(groupMemberIds);
+
+  return userInfos;
 }
 
 /**

@@ -2,18 +2,7 @@ import React, { useCallback } from 'react';
 import { Avatar } from './Avatar';
 import _isEmpty from 'lodash/isEmpty';
 import { Skeleton, Space } from 'antd';
-// import { openUserProfile } from './modals/UserProfile';
 import { useCachedUserInfo, useCachedOnlineStatus } from 'tailchat-shared';
-
-// const UserAvatar = styled(Avatar)`
-//   cursor: pointer !important;
-//   margin-right: 10px !important;
-// `;
-
-// const UserNameText = styled(Typography)`
-//   flex: 1;
-//   color: ${(props) => props.theme.color.headerPrimary} !important;
-// `;
 
 interface UserListItemProps {
   userId: string;

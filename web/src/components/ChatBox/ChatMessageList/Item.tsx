@@ -8,8 +8,6 @@ import {
   t,
   useCachedUserInfo,
   MessageHelper,
-  useAsync,
-  getCachedUserInfo,
 } from 'tailchat-shared';
 import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
@@ -23,6 +21,7 @@ import { useChatMessageReactionAction } from './useChatMessageReaction';
 import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
 import { stopPropagation } from '@/utils/dom-helper';
+import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
 import './Item.less';
 
 /**
@@ -189,13 +188,8 @@ const SystemMessageWithNickname: React.FC<
     overwritePayload: (nicknameList: string[]) => ChatMessage;
   }
 > = React.memo((props) => {
-  const { value: nicknameList = [] } = useAsync(() => {
-    return Promise.all(
-      props.userIds.map((userId) =>
-        getCachedUserInfo(userId).then((u) => u.nickname)
-      )
-    );
-  }, [props.userIds.join(',')]);
+  const userInfos = useUserInfoList(props.userIds);
+  const nicknameList = userInfos.map((user) => user.nickname);
 
   return (
     <SystemMessage {...props} payload={props.overwritePayload(nicknameList)} />
