@@ -1,7 +1,8 @@
+import { Loadable } from '@capital/common';
 import React from 'react';
 import type { TagProps } from '../bbcode/type';
 
-const Highlight = React.lazy(() => import('../components/Highlight'));
+const Highlight = Loadable(() => import('../components/Highlight'));
 
 export const CodeTag: React.FC<TagProps> = React.memo((props) => {
   const { node } = props;

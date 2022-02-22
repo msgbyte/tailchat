@@ -20,4 +20,5 @@ regMessageTextDecorators(() => ({
 
     return `[img]${plain}[/img]`;
   },
+  mention: (userId, userName) => `[at=${userId}]${userName}[/at]`,
 }));

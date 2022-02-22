@@ -103,15 +103,11 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
  */
 const defaultMessageTextDecorators = {
   url: (plain: string) => plain,
-  image: (plain: string) => plain,
+  image: (plain: string, attrs: Record<string, unknown>) => plain,
   mention: (userId: string, userName: string) => `@${userName}`,
 };
 const [_getMessageTextDecorators, regMessageTextDecorators] = buildRegFn<
-  () => {
-    url: (plain: string) => string;
-    image: (plain: string, attrs: Record<string, unknown>) => string;
-    mention: (userId: string, userName: string) => string;
-  }
+  () => Partial<typeof defaultMessageTextDecorators>
 >('message-text-decorators', () => defaultMessageTextDecorators);
 function getMessageTextDecorators() {
   return {
