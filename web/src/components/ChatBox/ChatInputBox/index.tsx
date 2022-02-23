@@ -6,18 +6,22 @@ import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
 import { uploadMessageImage } from './utils';
 import { ChatInputBoxInput } from './input';
+import type { SendMessagePayloadMeta } from 'tailchat-shared';
 
 interface ChatInputBoxProps {
-  onSendMsg: (msg: string) => void;
+  onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
 }
 export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
+  const [mentions, setMentions] = useState<string[]>([]);
   const handleSendMsg = useCallback(() => {
-    props.onSendMsg(message);
+    props.onSendMsg(message, {
+      mentions,
+    });
     setMessage('');
     inputRef.current?.focus();
-  }, [message]);
+  }, [message, mentions]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -53,7 +57,10 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
           <ChatInputBoxInput
             inputRef={inputRef}
             value={message}
-            onChange={setMessage}
+            onChange={(message, mentions) => {
+              setMessage(message);
+              setMentions(mentions);
+            }}
             onKeyDown={handleKeyDown}
             onPaste={handlePaste}
           />

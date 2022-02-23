@@ -33,8 +33,12 @@ export interface SimpleMessagePayload {
   content: string;
 }
 
+export interface SendMessagePayloadMeta {
+  mentions?: string[];
+}
+
 export interface SendMessagePayload extends SimpleMessagePayload {
-  meta?: Record<string, unknown>;
+  meta?: SendMessagePayloadMeta;
 }
 
 /**

@@ -14,11 +14,11 @@ interface ChatInputBoxInputProps
   > {
   inputRef?: React.Ref<HTMLInputElement>;
   value: string;
-  onChange: (message: string) => void;
+  onChange: (message: string, mentions: string[]) => void;
 }
 export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
   (props) => {
-    const mentions = useChatInputMentionsContext();
+    const allMentions = useChatInputMentionsContext();
 
     return (
       <MentionsInput
@@ -27,7 +27,12 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         placeholder={t('输入一些什么')}
         singleLine={true}
         value={props.value}
-        onChange={(e) => props.onChange(e.target.value)}
+        onChange={(e, newValue, _, mentions) =>
+          props.onChange(
+            newValue,
+            mentions.map((m) => m.id)
+          )
+        }
         onKeyDown={props.onKeyDown}
         onPaste={props.onPaste}
         allowSuggestionsAboveCursor={true}
@@ -35,7 +40,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
       >
         <Mention
           trigger="@"
-          data={mentions.users}
+          data={allMentions.users}
           displayTransform={(id, display) => `@${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (

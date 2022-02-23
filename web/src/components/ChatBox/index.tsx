@@ -55,11 +55,12 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
       <ChatReply />
 
       <ChatInputBox
-        onSendMsg={(msg) => {
+        onSendMsg={(msg, meta) => {
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
             content: msg,
+            meta,
           });
         }}
       />

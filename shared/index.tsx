@@ -129,7 +129,11 @@ export {
   addReaction,
   removeReaction,
 } from './model/message';
-export type { ChatMessageReaction, ChatMessage } from './model/message';
+export type {
+  ChatMessageReaction,
+  ChatMessage,
+  SendMessagePayloadMeta,
+} from './model/message';
 export type { PluginManifest } from './model/plugin';
 export type { UserBaseInfo, UserLoginInfo } from './model/user';
 export {
