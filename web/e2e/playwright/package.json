@@ -6,10 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "playwright test",
-    "test:chromium": "playwright test --project=chromium",
+    "test": "playwright test --project=chromium",
+    "test:all": "playwright test",
     "test:debug": "playwright test --debug",
-    "codegen": "playwright codegen wikipedia.org"
+    "codegen": "playwright codegen http://localhost:11011"
   },
   "devDependencies": {
     "@playwright/test": "^1.19.2"
