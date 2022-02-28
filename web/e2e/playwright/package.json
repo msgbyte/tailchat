@@ -1,0 +1,17 @@
+{
+  "name": "tailchat-e2e-playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:debug": "playwright test --debug",
+    "codegen": "playwright codegen wikipedia.org"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.19.2"
+  }
+}
