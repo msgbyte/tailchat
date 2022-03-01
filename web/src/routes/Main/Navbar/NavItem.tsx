@@ -12,6 +12,7 @@ export const NavbarNavItem: React.FC<{
   showPill?: boolean;
   badge?: boolean;
   onClick?: () => void;
+  ['data-testid']?: string;
 }> = React.memo((props) => {
   const { name, className, to, showPill = false, badge = false } = props;
   const location = useLocation();
@@ -32,6 +33,7 @@ export const NavbarNavItem: React.FC<{
           }
         )}
         onClick={props.onClick}
+        data-testid={props['data-testid']}
       >
         {props.children}
       </div>

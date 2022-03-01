@@ -20,4 +20,7 @@ export async function loginToDemoUser(page: Page, context: BrowserContext) {
   await context.storageState({
     path: storagePath,
   });
+
+  // Click text=跳过引导
+  await page.locator('text=跳过引导').click();
 }

@@ -51,6 +51,7 @@ export const GroupNav: React.FC = React.memo(() => {
         className="bg-green-500"
         name={t('创建群组')}
         onClick={handleCreateGroup}
+        data-testid="create-group"
       >
         <Icon className="text-3xl text-white" icon="mdi:plus" />
       </NavbarNavItem>

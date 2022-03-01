@@ -47,6 +47,7 @@ export const FullModal: React.FC<FullModalProps> = React.memo((props) => {
         <div
           className="absolute right-8 top-8 cursor-pointer flex flex-col"
           onClick={handleClose}
+          data-testid="full-modal-close"
         >
           <Icon
             className="text-2xl border-2 rounded-1/2 border-gray-900 dark:border-gray-100"

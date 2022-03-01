@@ -9,9 +9,13 @@
     "test": "playwright test --project=chromium",
     "test:all": "playwright test",
     "test:debug": "playwright test --debug",
-    "codegen": "playwright codegen http://localhost:11011"
+    "test:watch": "playwright-watch exec yarn test",
+    "open": "playwright open --load-storage auth.json http://localhost:11011",
+    "codegen": "playwright codegen --load-storage auth.json http://localhost:11011"
   },
   "devDependencies": {
-    "@playwright/test": "^1.19.2"
-  }
+    "@playwright/test": "^1.19.2",
+    "playwright-watch": "^1.3.23"
+  },
+  "dependencies": {}
 }
