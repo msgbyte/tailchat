@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 interface SectionHeaderProps {
   menu?: React.ReactElement;
+  'data-testid'?: string;
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
@@ -20,7 +21,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
             placement="topRight"
             trigger={['click']}
           >
-            <div className="cursor-pointer flex flex-1">
+            <div
+              className="cursor-pointer flex flex-1"
+              data-testid={props['data-testid']}
+            >
               <header className="flex-1 truncate px-4">{props.children}</header>
               <Icon
                 className={clsx('text-2xl transition-transform transform', {
@@ -33,7 +37,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
             </div>
           </Dropdown>
         ) : (
-          <header className="flex-1 truncate px-4">{props.children}</header>
+          <header
+            className="flex-1 truncate px-4"
+            data-testid={props['data-testid']}
+          >
+            {props.children}
+          </header>
         )}
       </div>
     );

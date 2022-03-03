@@ -1,4 +1,5 @@
 import { message, Modal } from 'antd';
+import React from 'react';
 import {
   buildStorage,
   setAlert,
@@ -28,7 +29,7 @@ setToasts((msg, type = 'info') => {
   message.open({
     type,
     duration: 3,
-    content: String(msg),
+    content: <div data-testid="toast">{String(msg)}</div>,
   });
 });
 

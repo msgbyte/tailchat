@@ -11,7 +11,8 @@
     "test:debug": "playwright test --debug",
     "test:watch": "playwright-watch exec yarn test",
     "open": "playwright open --load-storage auth.json http://localhost:11011",
-    "codegen": "playwright codegen --load-storage auth.json http://localhost:11011"
+    "codegen": "playwright codegen --load-storage auth.json http://localhost:11011",
+    "trace": "playwright show-trace"
   },
   "devDependencies": {
     "@playwright/test": "^1.19.2",

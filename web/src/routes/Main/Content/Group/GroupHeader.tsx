@@ -41,6 +41,10 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
     </Menu>
   );
 
-  return <SectionHeader menu={menu}>{groupInfo?.name}</SectionHeader>;
+  return (
+    <SectionHeader menu={menu} data-testid="group-header">
+      {groupInfo?.name}
+    </SectionHeader>
+  );
 });
 GroupHeader.displayName = 'GroupHeader';

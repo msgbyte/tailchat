@@ -64,7 +64,7 @@ test.describe('Main Process', () => {
      */
     async function deleteGroup(page: Page) {
       // Click text=Test
-      await page.locator('text=Test').click();
+      await page.locator('[data-testid="group-header"]').click();
       // Click text=退出群组
       await page.locator('text=退出群组').click();
       // Click button:has-text("OK")
@@ -74,8 +74,50 @@ test.describe('Main Process', () => {
       ]);
     }
 
-    test.only('Create Group', async ({ page }) => {
+    test('Create Group', async ({ page }) => {
       await createGroup(page);
+      await deleteGroup(page);
+    });
+
+    test('Group Profile', async ({ page }) => {
+      await createGroup(page);
+
+      await page.locator('[data-testid="group-header"]').click();
+      // Click text=查看详情
+      await page.locator('text=查看详情').click();
+      // Click text=群组名称Test >> button
+      await page.locator('text=群组名称Test >> button').click();
+      // Click text=T群组名称 >> input[type="text"]
+      await page.locator('text=T群组名称 >> input[type="text"]').click();
+      // Fill text=T群组名称 >> input[type="text"]
+      await page
+        .locator('text=T群组名称 >> input[type="text"]')
+        .fill('Test123');
+      // Click button >> nth=4
+      await page.locator('button').nth(4).click();
+      await expect(page.locator('[data-testid="toast"]')).toHaveText(
+        '修改群组名成功'
+      );
+
+      // Click text=面板
+      await page.locator('text=面板').click();
+      // Click button:has-text("创建面板")
+      await page.locator('button:has-text("创建面板")').click();
+      // Click input[name="name"]
+      await page.locator('input[name="name"]').click();
+      // Fill input[name="name"]
+      await page.locator('input[name="name"]').fill('Test');
+      // Click button:has-text("提 交")
+      await page.locator('button:has-text("提 交")').click();
+      // Click .ant-tree-treenode.ant-tree-treenode-switcher-open
+      await page
+        .locator('.ant-tree-treenode.ant-tree-treenode-switcher-open')
+        .click();
+      // Click [data-testid="full-modal-close"] svg[role="img"]
+      await page
+        .locator('[data-testid="full-modal-close"] svg[role="img"]')
+        .click();
+
       await deleteGroup(page);
     });
   });
