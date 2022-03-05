@@ -9,6 +9,7 @@ import {
   useAsyncRequest,
 } from 'tailchat-shared';
 import React from 'react';
+import { Problem } from '@/components/Problem';
 
 export const RequestReceived: React.FC<{
   requests: FriendRequest[];
@@ -26,6 +27,10 @@ export const RequestReceived: React.FC<{
     },
     []
   );
+
+  if (props.requests.length === 0) {
+    return <Problem text={t('暂无待处理的好友请求')} />;
+  }
 
   const loading = acceptLoading || denyLoading;
 

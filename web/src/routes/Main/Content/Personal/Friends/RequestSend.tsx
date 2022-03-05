@@ -8,6 +8,7 @@ import {
   useAsyncFn,
 } from 'tailchat-shared';
 import React from 'react';
+import { Problem } from '@/components/Problem';
 
 export const RequestSend: React.FC<{
   requests: FriendRequest[];
@@ -15,6 +16,10 @@ export const RequestSend: React.FC<{
   const [{ loading }, handleCancel] = useAsyncFn(async (requestId) => {
     await cancelFriendRequest(requestId);
   }, []);
+
+  if (props.requests.length === 0) {
+    return <Problem text={t('暂无已发送的好友请求')} />;
+  }
 
   return (
     <div className="py-2.5 px-5">
