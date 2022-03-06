@@ -6,7 +6,7 @@ Tailchat 是一款现代化开源的即时通讯聊天应用，基于 React + Ty
 
 前端通过插件机制为应用赋能，对于 Tailchat 的二次开发来说非常简单且易用。
 
-官方文档: [http://tailchat.msgbyte.com/](http://tailchat.msgbyte.com/)
+官方文档: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte.com/)
 
 后端仓库地址: [tailchat-server](https://github.com/msgbyte/tailchat-server)
 
