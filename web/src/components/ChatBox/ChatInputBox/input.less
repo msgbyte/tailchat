@@ -13,7 +13,10 @@
     @apply bg-transparent !important;
 
     &__list {
-      @apply border border-gray-500 bg-content-light dark:bg-content-dark rounded;
+      @apply border border-gray-500 bg-content-light dark:bg-content-dark rounded overflow-auto absolute;
+      max-height: 60vh;
+      min-width: 240px;
+      bottom: 14px;
     }
 
     &__item {
