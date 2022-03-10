@@ -15,6 +15,7 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
   const userName = userInfo.nickname;
 
   const handleClick = useCallback(() => {
+    // TODO 点击展开用户信息卡片
     console.log('clicked avatar');
   }, []);
 
