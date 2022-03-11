@@ -20,6 +20,7 @@ module.exports = {
       prod: 'com.tailchat.beta.desktop',
     }),
     icon: path.resolve(__dirname, './build/icon'),
+    asar: true,
   },
   makers: [
     {
@@ -30,7 +31,7 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['darwin', 'win32'],
     },
     {
       name: '@electron-forge/maker-deb',

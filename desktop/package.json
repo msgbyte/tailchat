@@ -32,6 +32,7 @@
     "@types/gh-pages": "^3.2.1",
     "adm-zip": "^0.5.9",
     "electron": "17.0.1",
+    "gh-pages": "^3.2.3",
     "ts-node": "^10.7.0",
     "typescript": "~4.5.4"
   },
@@ -41,7 +42,6 @@
     "electron-unhandled": "^4.0.0",
     "electron-update-notifier": "^1.5.3",
     "electron-window-state": "^5.0.3",
-    "gh-pages": "^3.2.3",
     "update-electron-app": "^2.0.1"
   }
 }
