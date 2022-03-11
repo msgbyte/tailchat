@@ -6,10 +6,11 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && electron-forge start",
+    "build:update": "ts-node scripts/update.ts",
     "compile": "tsc",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "package": "tsc && electron-forge package",
+    "make": "tsc && electron-forge make",
+    "publish": "tsc && electron-forge publish",
     "lint": "eslint --ext .ts ."
   },
   "keywords": [],
@@ -27,7 +28,11 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@types/adm-zip": "^0.4.34",
+    "@types/gh-pages": "^3.2.1",
+    "adm-zip": "^0.5.9",
     "electron": "17.0.1",
+    "ts-node": "^10.7.0",
     "typescript": "~4.5.4"
   },
   "dependencies": {
@@ -36,6 +41,7 @@
     "electron-unhandled": "^4.0.0",
     "electron-update-notifier": "^1.5.3",
     "electron-window-state": "^5.0.3",
+    "gh-pages": "^3.2.3",
     "update-electron-app": "^2.0.1"
   }
 }
