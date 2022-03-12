@@ -29,7 +29,7 @@ setToasts((msg, type = 'info') => {
   message.open({
     type,
     duration: 3,
-    content: <div data-testid="toast">{String(msg)}</div>,
+    content: <span data-testid="toast">{String(msg)}</span>,
   });
 });
 
