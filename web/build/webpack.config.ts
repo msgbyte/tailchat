@@ -177,7 +177,7 @@ const splitChunks: Required<Configuration>['optimization']['splitChunks'] = {
   enforceSizeThreshold: 50000,
   cacheGroups: {
     vendors: {
-      chunks: 'all',
+      chunks: 'initial',
       name: 'vendors',
       test: /[\\/]node_modules[\\/]/,
       priority: -10,
