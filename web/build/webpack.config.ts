@@ -104,6 +104,7 @@ const plugins: Configuration['plugins'] = [
         urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
 
         // Apply a cache-first strategy.
+        // Reference: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-strategies
         handler: 'CacheFirst',
 
         options: {
