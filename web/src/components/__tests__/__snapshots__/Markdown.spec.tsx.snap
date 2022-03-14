@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Markdown heading 1`] = `
+<div>
+  <h1>
+    Heading1
+  </h1>
+  
+
+  <h2>
+    Heading2
+  </h2>
+  
+
+  <h3>
+    Heading3
+  </h3>
+  
+
+  <h4>
+    Heading4
+  </h4>
+  
+
+  <h5>
+    Heading5
+  </h5>
+</div>
+`;
+
+exports[`Markdown link with baseUrl 1`] = `
+<div>
+  <p>
+    <a
+      href="https://tailchat.msgbyte.com/"
+    >
+      https://tailchat.msgbyte.com/
+    </a>
+    
+
+    <a
+      href="https://tailchat.msgbyte.com/README.md"
+    >
+      ./README.md
+    </a>
+    
+
+    <img
+      alt=""
+      src="https://tailchat.msgbyte.com/demo.jpg"
+    />
+  </p>
+</div>
+`;
+
+exports[`Markdown link without baseUrl 1`] = `
+<div>
+  <p>
+    <a
+      href="https://tailchat.msgbyte.com/"
+    >
+      https://tailchat.msgbyte.com/
+    </a>
+    
+
+    <a
+      href="./README.md"
+    >
+      ./README.md
+    </a>
+    
+
+    <img
+      alt=""
+      src="./demo.jpg"
+    />
+  </p>
+</div>
+`;
+
+exports[`Markdown list 1`] = `
+<div>
+  <ul>
+    
+
+    <li>
+      1
+    </li>
+    
+
+    <li>
+      2
+    </li>
+    
+
+    <li>
+      3
+      
+
+      <ul>
+        
+
+        <li>
+          4
+        </li>
+        
+
+        <li>
+          5
+          
+
+          <ul>
+            
+
+            <li>
+              6
+            </li>
+            
+
+          </ul>
+          
+
+        </li>
+        
+
+      </ul>
+      
+
+    </li>
+    
+
+  </ul>
+</div>
+`;

@@ -42,6 +42,7 @@
     "react-dom": "17.0.2",
     "react-easy-crop": "^3.5.2",
     "react-helmet": "^6.1.0",
+    "react-markdown": "6",
     "react-mentions": "^4.3.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
