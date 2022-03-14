@@ -1,14 +1,17 @@
 import { Avatar } from '@/components/Avatar';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import React, { useCallback, useState } from 'react';
 import {
+  isValidStr,
   PluginManifest,
   showAlert,
   showToasts,
   t,
   useAsyncRequest,
 } from 'tailchat-shared';
+import { ModalWrapper, openModal } from '../common';
 import { pluginManager } from '../manager';
+import { DocumentView } from './DocumentView';
 
 /**
  * 插件项
@@ -41,6 +44,18 @@ export const PluginStoreItem: React.FC<{
     });
   }, [manifest]);
 
+  const handleShowDocument = useCallback(() => {
+    if (!isValidStr(manifest.documentUrl)) {
+      return;
+    }
+
+    openModal(
+      <ModalWrapper title={manifest.label}>
+        <DocumentView documentUrl={manifest.documentUrl} />
+      </ModalWrapper>
+    );
+  }, [manifest]);
+
   return (
     <div className="rounded-md flex w-80 mobile:w-full h-36 bg-white bg-opacity-40 dark:bg-black dark:bg-opacity-40 shadow py-2 px-3">
       <div className="flex w-full">
@@ -57,25 +72,31 @@ export const PluginStoreItem: React.FC<{
 
           <div className="flex-1 overflow-auto">{manifest.description}</div>
 
-          <div className="mt-1 text-right">
-            {builtin ? (
-              <Button type="primary" disabled={true}>
-                {t('内置插件')}
-              </Button>
-            ) : installed ? (
-              <Button type="primary" onClick={handleUninstallPlugin}>
-                {t('已安装')}
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                loading={loading}
-                onClick={handleInstallPlugin}
-              >
-                {t('安装')}
-              </Button>
+          <Space className="mt-1 justify-end">
+            {isValidStr(manifest.documentUrl) && (
+              <Button onClick={handleShowDocument}>文档</Button>
             )}
-          </div>
+
+            <div>
+              {builtin ? (
+                <Button type="primary" disabled={true}>
+                  {t('内置插件')}
+                </Button>
+              ) : installed ? (
+                <Button type="primary" onClick={handleUninstallPlugin}>
+                  {t('已安装')}
+                </Button>
+              ) : (
+                <Button
+                  type="primary"
+                  loading={loading}
+                  onClick={handleInstallPlugin}
+                >
+                  {t('安装')}
+                </Button>
+              )}
+            </div>
+          </Space>
         </div>
       </div>
     </div>

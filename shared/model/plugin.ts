@@ -47,6 +47,12 @@ export interface PluginManifest {
    * 是否需要重启才能应用插件
    */
   requireRestart: boolean;
+
+  /**
+   * 文档的链接
+   * 如果是markdown则解析, 如果是html则使用iframe
+   */
+  documentUrl?: string;
 }
 
 /**

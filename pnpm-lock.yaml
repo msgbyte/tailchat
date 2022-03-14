@@ -104,7 +104,7 @@ importers:
     specifiers:
       '@iconify/iconify': ^2.0.2
       '@iconify/react': ^3.0.0-alpha.1
-      '@loadable/component': ^5.15.0
+      '@loadable/component': ^5.15.2
       '@testing-library/jest-dom': ^5.14.1
       '@testing-library/react': ^12.0.0
       '@testing-library/react-hooks': ^7.0.1
@@ -2423,7 +2423,7 @@ packages:
     dev: true
 
   /@types/loadable__component/5.13.4:
-    resolution: {integrity: sha1-pGRrJAaxKD76wanZSFgkqQWzPUo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@types/loadable__component/download/@types/loadable__component-5.13.4.tgz}
+    resolution: {integrity: sha512-YhoCCxyuvP2XeZNbHbi8Wb9EMaUJuA2VGHxJffcQYrJKIKSkymJrhbzsf9y4zpTmr5pExAAEh5hbF628PAZ8Dg==}
     dependencies:
       '@types/react': 17.0.38
     dev: true
@@ -4843,6 +4843,12 @@ packages:
       tiny-invariant: 1.2.0
       tiny-warning: registry.nlark.com/tiny-warning/1.0.3
       value-equal: registry.nlark.com/value-equal/1.0.1
+    dev: false
+
+  /hoist-non-react-statics/3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+    dependencies:
+      react-is: 16.13.1
     dev: false
 
   /hosted-git-info/2.8.9:

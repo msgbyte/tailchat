@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 import { isValidStr } from 'tailchat-shared';
+import { Loadable } from './Loadable';
 
-const ReactMarkdown = React.lazy(() => import('react-markdown'));
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const ReactMarkdown = Loadable(() => import('react-markdown'));
 
 export const Markdown: React.FC<{
   raw: string;
@@ -20,6 +23,7 @@ export const Markdown: React.FC<{
 
   return (
     <ReactMarkdown
+      className="tailchat-markdown"
       transformImageUri={(src) => transformUrl(src)}
       transformLinkUri={(href) => transformUrl(href)}
     >
