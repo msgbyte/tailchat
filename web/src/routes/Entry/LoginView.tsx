@@ -65,7 +65,7 @@ export const LoginView: React.FC = React.memo(() => {
     <div className="w-96 text-white">
       <div className="mb-4 text-2xl">{t('登录 Tail Chat')}</div>
 
-      <form>
+      <div>
         <div className="mb-4">
           <div className="mb-2">{t('邮箱')}</div>
           <input
@@ -94,7 +94,6 @@ export const LoginView: React.FC = React.memo(() => {
         <button
           className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
           disabled={loading}
-          type="submit"
           onClick={handleLogin}
         >
           {loading && <Spinner />}
@@ -118,7 +117,7 @@ export const LoginView: React.FC = React.memo(() => {
           {t('游客访问')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
-      </form>
+      </div>
     </div>
   );
 });
