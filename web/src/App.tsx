@@ -41,6 +41,7 @@ const AppContainer: React.FC = React.memo((props) => {
     <div
       id="tailchat-app"
       className={clsx(
+        'tailchat-app',
         'absolute inset-0 select-none',
         {
           dark: isDarkMode,

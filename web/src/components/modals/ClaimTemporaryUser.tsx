@@ -42,7 +42,7 @@ const schema = createFastFormSchema({
 
 interface ClaimTemporaryUserProps {
   userId: string;
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 export const ClaimTemporaryUser: React.FC<ClaimTemporaryUserProps> = React.memo(
   (props) => {
@@ -63,7 +63,7 @@ export const ClaimTemporaryUser: React.FC<ClaimTemporaryUserProps> = React.memo(
 
         typeof props.onSuccess === 'function' && props.onSuccess();
       },
-      [, userId, props.onSuccess]
+      [userId, props.onSuccess]
     );
 
     return (

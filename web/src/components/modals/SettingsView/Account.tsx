@@ -4,9 +4,11 @@ import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
+import { openModal } from '@/components/Modal';
+import { closeModal } from '@/plugin/common';
 import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
-import { Button, Divider } from 'antd';
+import { Button, Divider, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
 import {
@@ -19,6 +21,7 @@ import {
   userActions,
   useUserInfo,
 } from 'tailchat-shared';
+import { ModifyPassword } from '../ModifyPassword';
 
 export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
@@ -53,6 +56,10 @@ export const SettingsAccount: React.FC = React.memo(() => {
     []
   );
 
+  const handleUpdatePassword = useCallback(() => {
+    const key = openModal(<ModifyPassword onSuccess={() => closeModal(key)} />);
+  }, []);
+
   // 登出
   const handleLogout = useCallback(async () => {
     await setUserJWT(null);
@@ -86,6 +93,14 @@ export const SettingsAccount: React.FC = React.memo(() => {
           />
         </div>
       </div>
+
+      <Divider />
+
+      <Typography.Title level={4}>{t('密码')}</Typography.Title>
+      <Button type="primary" onClick={handleUpdatePassword}>
+        {t('修改密码')}
+      </Button>
+
       <Divider />
 
       <div>

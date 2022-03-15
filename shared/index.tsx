@@ -140,6 +140,7 @@ export {
   loginWithEmail,
   loginWithToken,
   registerWithEmail,
+  modifyUserPassword,
   createTemporaryUser,
   claimTemporaryUser,
   searchUserWithUniqueName,

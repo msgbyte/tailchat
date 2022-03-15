@@ -82,6 +82,16 @@ export async function registerWithEmail(
   return data;
 }
 
+export async function modifyUserPassword(
+  oldPassword: string,
+  newPassword: string
+): Promise<void> {
+  await request.post('/api/user/modifyPassword', {
+    oldPassword,
+    newPassword,
+  });
+}
+
 /**
  * 创建访客账号
  * @param nickname 访客昵称
