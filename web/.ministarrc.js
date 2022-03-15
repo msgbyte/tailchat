@@ -18,6 +18,14 @@ module.exports = {
           ),
           dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/assets/`),
         },
+        {
+          src: path.resolve(
+            __dirname,
+            `./plugins/${pluginName}`,
+            './README.md'
+          ),
+          dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/`),
+        },
       ],
     }),
     replace({

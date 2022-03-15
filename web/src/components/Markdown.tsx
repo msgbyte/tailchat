@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { isValidStr } from 'tailchat-shared';
 import { Loadable } from './Loadable';
+import './Markdown.less';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

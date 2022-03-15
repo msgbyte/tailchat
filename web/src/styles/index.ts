@@ -1,4 +1,4 @@
 import 'antd/dist/antd.css';
 import './antd/index.less';
-import 'tailwindcss/tailwind.css';
+import './tailwind.less';
 import './global.less';

@@ -8,6 +8,7 @@ import {
   PluginManifest,
 } from '../model/plugin';
 import { fetchUserInfo, UserBaseInfo } from '../model/user';
+import { parseUrlStr } from '../utils/url-helper';
 import { queryClient } from './index';
 
 /**
@@ -68,7 +69,7 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
             list.map((manifest) => ({
               ...manifest,
               // 后端url策略。根据前端的url在获取时自动变更为当前链接的后端地址
-              url: String(manifest.url).replace('{BACKEND}', getServiceUrl()),
+              url: parseUrlStr(manifest.url),
             }))
           )
           .catch(() => []),

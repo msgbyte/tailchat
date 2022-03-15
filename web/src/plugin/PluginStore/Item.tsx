@@ -3,6 +3,7 @@ import { Button, Space } from 'antd';
 import React, { useCallback, useState } from 'react';
 import {
   isValidStr,
+  parseUrlStr,
   PluginManifest,
   showAlert,
   showToasts,
@@ -51,7 +52,7 @@ export const PluginStoreItem: React.FC<{
 
     openModal(
       <ModalWrapper title={manifest.label}>
-        <DocumentView documentUrl={manifest.documentUrl} />
+        <DocumentView documentUrl={parseUrlStr(manifest.documentUrl)} />
       </ModalWrapper>
     );
   }, [manifest]);

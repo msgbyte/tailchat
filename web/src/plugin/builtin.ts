@@ -13,6 +13,7 @@ export const builtinPlugins: PluginManifest[] = [
     version: '0.0.0',
     author: 'msgbyte',
     description: '为群组提供创建网页面板的功能',
+    documentUrl: '/plugins/com.msgbyte.webview/README.md',
     requireRestart: false,
   },
   {

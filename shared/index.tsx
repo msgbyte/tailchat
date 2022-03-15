@@ -193,4 +193,5 @@ export { isValidJson } from './utils/json-helper';
 export { MessageHelper } from './utils/message-helper';
 export { uploadFile } from './utils/upload-helper';
 export type { UploadFileResult } from './utils/upload-helper';
+export { parseUrlStr } from './utils/url-helper';
 export { sleep } from './utils/utils';
