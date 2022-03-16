@@ -55,7 +55,7 @@ const plugins: Configuration['plugins'] = [
   new HtmlWebpackPlugin({
     title: 'TailChat',
     inject: true,
-    hash: true,
+    hash: false,
     favicon: path.resolve(ROOT_PATH, './assets/images/logo.svg'),
     template: path.resolve(ROOT_PATH, './assets/template.html'),
     preloadImage: `data:image/svg+xml;base64,${Buffer.from(
