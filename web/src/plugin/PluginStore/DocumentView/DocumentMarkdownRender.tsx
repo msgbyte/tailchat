@@ -24,7 +24,7 @@ export const DocumentMarkdownRender: React.FC<{ url: string }> = React.memo(
       return <Problem text={String(error)} />;
     }
 
-    return <Markdown raw={String(value)} />;
+    return <Markdown raw={String(value)} baseUrl={url} />;
   }
 );
 DocumentMarkdownRender.displayName = 'DocumentMarkdownRender';

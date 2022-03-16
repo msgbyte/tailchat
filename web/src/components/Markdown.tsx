@@ -1,3 +1,4 @@
+import { markAbsoluteUrl } from '@/utils/url-helper';
 import React, { useCallback } from 'react';
 import { isValidStr } from 'tailchat-shared';
 import { Loadable } from './Loadable';
@@ -17,7 +18,7 @@ export const Markdown: React.FC<{
         return url;
       }
 
-      return new URL(url, baseUrl).href;
+      return new URL(url, markAbsoluteUrl(baseUrl)).href;
     },
     [baseUrl]
   );

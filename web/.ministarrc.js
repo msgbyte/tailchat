@@ -22,6 +22,14 @@ module.exports = {
           src: path.resolve(
             __dirname,
             `./plugins/${pluginName}`,
+            './docs/**/*'
+          ),
+          dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/docs/`),
+        },
+        {
+          src: path.resolve(
+            __dirname,
+            `./plugins/${pluginName}`,
             './README.md'
           ),
           dest: path.resolve(__dirname, `./dist/plugins/${pluginName}/`),

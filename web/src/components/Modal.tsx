@@ -11,9 +11,10 @@ import { Icon } from '@/components/Icon';
 import { CSSTransition } from 'react-transition-group';
 import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { stopPropagation } from '@/utils/dom-helper';
+import { ErrorBoundary } from './ErrorBoundary';
 
 import './Modal.less';
-import { stopPropagation } from '@/utils/dom-helper';
 
 const transitionEndListener = (node: HTMLElement, done: () => void) =>
   node.addEventListener('transitionend', done, false);
@@ -101,7 +102,8 @@ export const Modal: React.FC<ModalProps> = React.memo((props) => {
                 onClick={closeModal}
               />
             )}
-            {props.children}
+
+            <ErrorBoundary>{props.children}</ErrorBoundary>
           </div>
         </ModalContext.Provider>
       </div>

@@ -19,3 +19,7 @@ console.error = (...args) => {
 
   originalError.call(console, ...args);
 };
+
+// Mock location
+delete window.location;
+window.location = new URL('https://www.example.com/foo/index');
