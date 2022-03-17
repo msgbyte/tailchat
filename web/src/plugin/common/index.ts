@@ -18,6 +18,7 @@ export { dataUrlToFile } from '@/utils/file-helper';
 export { useGroupIdContext } from '@/context/GroupIdContext';
 import { request, RequestConfig } from 'tailchat-shared';
 export {
+  getServiceUrl,
   getCachedUserInfo,
   getCachedConverseInfo,
   localTrans,

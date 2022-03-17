@@ -81,7 +81,7 @@ export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 export { buildRegFn } from './manager/buildRegFn';
 export { buildRegList } from './manager/buildRegList';
 export { buildRegMap } from './manager/buildRegMap';
-export { setServiceUrl } from './manager/service';
+export { getServiceUrl, setServiceUrl } from './manager/service';
 export { setTokenGetter, refreshTokenGetter } from './manager/request';
 export { regSocketEventListener } from './manager/socket';
 export { getStorage, setStorage, useStorage } from './manager/storage';
