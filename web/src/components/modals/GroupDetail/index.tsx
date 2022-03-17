@@ -1,5 +1,10 @@
 import { FullModal } from '@/components/FullModal';
-import { SidebarView, SidebarViewMenuType } from '@/components/SidebarView';
+import {
+  SidebarView,
+  SidebarViewMenuItem,
+  SidebarViewMenuType,
+} from '@/components/SidebarView';
+import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
 import { GroupPanel } from './Panel';
@@ -19,8 +24,9 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
     [props.onClose]
   );
 
-  const menu: SidebarViewMenuType[] = useMemo(
-    () => [
+  const menu: SidebarViewMenuType[] = useMemo(() => {
+    // 内置
+    const _menu: SidebarViewMenuType[] = [
       {
         type: 'group',
         title: t('通用'),
@@ -37,9 +43,27 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
           },
         ],
       },
-    ],
-    []
-  );
+    ];
+
+    // 插件
+    const _pluginMenu: SidebarViewMenuItem[] = pluginCustomPanel
+      .filter((p) => p.position === 'groupdetail')
+      .map((p) => ({
+        type: 'item',
+        title: p.label,
+        content: React.createElement(p.render),
+      }));
+
+    if (_pluginMenu.length > 0) {
+      _menu.push({
+        type: 'group',
+        title: t('插件'),
+        children: _pluginMenu,
+      });
+    }
+
+    return _menu;
+  }, []);
 
   return (
     <FullModal onChangeVisible={handleChangeVisible}>

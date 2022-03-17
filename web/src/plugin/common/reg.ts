@@ -18,8 +18,9 @@ export interface PluginCustomPanel {
    * - personal: 个人面板中的一项
    * - setting: 设置面板
    * - navbar: 导航栏(未实装)
+   * - groupdetail: 群组详情
    */
-  position: 'personal' | 'setting' | 'navbar';
+  position: 'personal' | 'setting' | 'navbar' | 'groupdetail';
 
   /**
    * Iconify 名
