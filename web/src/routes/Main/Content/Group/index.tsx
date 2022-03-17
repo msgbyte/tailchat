@@ -1,5 +1,6 @@
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { SplitPanel } from '@/components/SplitPanel';
+import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import React from 'react';
 import { Route, Switch, useParams } from 'react-router-dom';
 import { isValidStr, useGroupInfo } from 'tailchat-shared';
@@ -32,18 +33,20 @@ export const Group: React.FC = React.memo(() => {
   );
 
   return (
-    <PageContent data-tc-role="content-group" sidebar={<Sidebar />}>
-      {isValidStr(pinnedPanelId) ? (
-        <SplitPanel className="flex-auto">
-          <div>{routeMatch}</div>
-          <div>
-            <GroupPanelRender groupId={groupId} panelId={pinnedPanelId} />
-          </div>
-        </SplitPanel>
-      ) : (
-        routeMatch
-      )}
-    </PageContent>
+    <GroupIdContextProvider value={groupId}>
+      <PageContent data-tc-role="content-group" sidebar={<Sidebar />}>
+        {isValidStr(pinnedPanelId) ? (
+          <SplitPanel className="flex-auto">
+            <div>{routeMatch}</div>
+            <div>
+              <GroupPanelRender groupId={groupId} panelId={pinnedPanelId} />
+            </div>
+          </SplitPanel>
+        ) : (
+          routeMatch
+        )}
+      </PageContent>
+    </GroupIdContextProvider>
   );
 });
 Group.displayName = 'Group';

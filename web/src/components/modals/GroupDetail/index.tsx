@@ -4,6 +4,7 @@ import {
   SidebarViewMenuItem,
   SidebarViewMenuType,
 } from '@/components/SidebarView';
+import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
@@ -15,6 +16,7 @@ interface SettingsViewProps {
   onClose: () => void;
 }
 export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
+  const groupId = props.groupId;
   const handleChangeVisible = useCallback(
     (visible) => {
       if (visible === false && typeof props.onClose === 'function') {
@@ -34,12 +36,12 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
           {
             type: 'item',
             title: t('概述'),
-            content: <GroupSummary groupId={props.groupId} />,
+            content: <GroupSummary groupId={groupId} />,
           },
           {
             type: 'item',
             title: t('面板'),
-            content: <GroupPanel groupId={props.groupId} />,
+            content: <GroupPanel groupId={groupId} />,
           },
         ],
       },
@@ -66,9 +68,11 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
   }, []);
 
   return (
-    <FullModal onChangeVisible={handleChangeVisible}>
-      <SidebarView menu={menu} defaultContentPath="0.children.0.content" />
-    </FullModal>
+    <GroupIdContextProvider value={groupId}>
+      <FullModal onChangeVisible={handleChangeVisible}>
+        <SidebarView menu={menu} defaultContentPath="0.children.0.content" />
+      </FullModal>
+    </GroupIdContextProvider>
   );
 });
 GroupDetail.displayName = 'GroupDetail';

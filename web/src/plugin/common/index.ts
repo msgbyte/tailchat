@@ -15,6 +15,7 @@ export {
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
 export { dataUrlToFile } from '@/utils/file-helper';
+export { useGroupIdContext } from '@/context/GroupIdContext';
 import { request, RequestConfig } from 'tailchat-shared';
 export {
   getCachedUserInfo,
@@ -25,6 +26,7 @@ export {
   useAsync,
   useAsyncFn,
   useAsyncRefresh,
+  useAsyncRequest,
   uploadFile,
   showToasts,
   showErrorToasts,
@@ -63,13 +65,13 @@ export function createPluginRequest(pluginName: string) {
   return {
     get(actionName: string, config?: RequestConfig) {
       return request.get(
-        `/api/plugin:${pluginName}/${actionName}`,
+        `/api/plugin:${pluginName}/${actionName.replaceAll('.', '/')}`,
         purgeRequestConfig(config)
       );
     },
     post(actionName: string, data?: any, config?: RequestConfig) {
       return request.post(
-        `/api/plugin:${pluginName}/${actionName}`,
+        `/api/plugin:${pluginName}/${actionName.replaceAll('.', '/')}`,
         data,
         purgeRequestConfig(config)
       );
