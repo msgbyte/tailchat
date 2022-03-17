@@ -3,3 +3,4 @@ packages:
   - 'web'
   - 'shared'
   - 'web/plugins/**'
+  - 'packages/**'

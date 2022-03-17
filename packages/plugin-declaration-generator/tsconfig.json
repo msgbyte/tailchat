@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["DOM"],
+    "outDir": "lib",
+    "declaration": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "importsNotUsedAsValues": "error",
+  }
+}
