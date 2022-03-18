@@ -7,6 +7,7 @@ import loginPatternUrl from '@assets/images/login-pattern.svg';
 import { RegisterView } from './RegisterView';
 import { useRecordMeasure } from '@/utils/measure-helper';
 import { GuestView } from './GuestView';
+import { ForgetPasswordView } from './ForgetPasswordView';
 
 const EntryRoute = React.memo(() => {
   useRecordMeasure('AppEntryRenderStart');
@@ -24,6 +25,8 @@ const EntryRoute = React.memo(() => {
           <Route path="/entry/login" component={LoginView} />
           <Route path="/entry/register" component={RegisterView} />
           <Route path="/entry/guest" component={GuestView} />
+          <Route path="/entry/forget" component={ForgetPasswordView} />
+
           <Redirect to="/entry/login" />
         </Switch>
       </div>

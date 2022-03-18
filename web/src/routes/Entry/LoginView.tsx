@@ -63,7 +63,7 @@ export const LoginView: React.FC = React.memo(() => {
 
   return (
     <div className="w-96 text-white">
-      <div className="mb-4 text-2xl">{t('登录 Tail Chat')}</div>
+      <div className="mb-4 text-2xl">{t('登录 Tailchat')}</div>
 
       <div>
         <div className="mb-4">
@@ -89,7 +89,17 @@ export const LoginView: React.FC = React.memo(() => {
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm mb-4">{error.message}</p>}
+        {error && (
+          <div className="flex justify-between mb-4">
+            <p className="text-red-500 text-sm">{error.message}</p>
+            <div
+              className="text-gray-200 cursor-pointer"
+              onClick={() => navToView('/entry/forget')}
+            >
+              {t('忘记密码？')}
+            </div>
+          </div>
+        )}
 
         <button
           className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"

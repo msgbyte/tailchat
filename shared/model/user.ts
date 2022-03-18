@@ -82,6 +82,9 @@ export async function registerWithEmail(
   return data;
 }
 
+/**
+ * 修改密码
+ */
 export async function modifyUserPassword(
   oldPassword: string,
   newPassword: string
@@ -89,6 +92,32 @@ export async function modifyUserPassword(
   await request.post('/api/user/modifyPassword', {
     oldPassword,
     newPassword,
+  });
+}
+
+/**
+ * 忘记密码
+ * @param email 邮箱
+ */
+export async function forgetPassword(email: string) {
+  await request.post('/api/user/forgetPassword', {
+    email,
+  });
+}
+
+/**
+ * 忘记密码
+ * @param email 邮箱
+ */
+export async function resetPassword(
+  email: string,
+  password: string,
+  otp: string
+) {
+  await request.post('/api/user/resetPassword', {
+    email,
+    password,
+    otp,
   });
 }
 

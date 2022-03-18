@@ -141,6 +141,8 @@ export {
   loginWithToken,
   registerWithEmail,
   modifyUserPassword,
+  forgetPassword,
+  resetPassword,
   createTemporaryUser,
   claimTemporaryUser,
   searchUserWithUniqueName,
