@@ -6,13 +6,14 @@ import _pull from 'lodash/pull';
 import _isString from 'lodash/isString';
 import _noop from 'lodash/noop';
 import { PortalAdd, PortalRemove } from './Portal';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import { Icon } from '@/components/Icon';
 import { CSSTransition } from 'react-transition-group';
 import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { stopPropagation } from '@/utils/dom-helper';
 import { ErrorBoundary } from './ErrorBoundary';
+import { t } from 'tailchat-shared';
 
 import './Modal.less';
 
@@ -153,6 +154,55 @@ export function openModal(
   modelKeyStack.push(key);
 
   return key;
+}
+
+interface OpenReconfirmModalProps {
+  onConfirm: () => void;
+  onCancel?: () => void;
+}
+
+/**
+ * 打开再次确认操作modal
+ */
+export function openReconfirmModal(props: OpenReconfirmModalProps) {
+  const key = openModal(
+    <ModalWrapper title={t('确认要进行该操作么?')}>
+      <h3 className="text-center pb-6">{t('该操作无法被撤回')}</h3>
+      <div className="space-x-2 text-right">
+        <Button
+          onClick={() => {
+            props.onCancel?.();
+            closeModal(key);
+          }}
+        >
+          {t('取消')}
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            props.onConfirm();
+            closeModal(key);
+          }}
+        >
+          {t('确认')}
+        </Button>
+      </div>
+    </ModalWrapper>
+  );
+}
+/**
+ * 打开再次确认操作modal(Promise版本)
+ * TODO: 需要检查一下持久pending的promise会不会导致内存泄露
+ */
+export function openReconfirmModalP(
+  props?: Omit<OpenReconfirmModalProps, 'onConfirm'>
+) {
+  return new Promise<void>((resolve) => {
+    openReconfirmModal({
+      ...props,
+      onConfirm: resolve,
+    });
+  });
 }
 
 /**

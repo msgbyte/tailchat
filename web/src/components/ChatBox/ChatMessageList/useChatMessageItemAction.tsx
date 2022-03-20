@@ -11,6 +11,7 @@ import {
   useGroupInfoContext,
   useUserInfo,
 } from 'tailchat-shared';
+import { openReconfirmModalP } from '@/components/Modal';
 
 /**
  * 消息的会话操作
@@ -23,12 +24,14 @@ export function useChatMessageItemAction(
   const groupInfo = useGroupInfoContext();
   const userInfo = useUserInfo();
 
-  const [, handleRecallMessage] = useAsyncRequest(() => {
-    return recallMessage(payload._id);
+  const [, handleRecallMessage] = useAsyncRequest(async () => {
+    await openReconfirmModalP();
+    await recallMessage(payload._id);
   }, [payload._id]);
 
-  const [, handleDeleteMessage] = useAsyncRequest(() => {
-    return deleteMessage(payload._id);
+  const [, handleDeleteMessage] = useAsyncRequest(async () => {
+    await openReconfirmModalP();
+    await deleteMessage(payload._id);
   }, [payload._id]);
 
   const isGroupOwner = groupInfo && groupInfo.owner === userInfo?._id; //
