@@ -135,7 +135,9 @@ export function closeModal(key?: number): void {
  */
 export function openModal(
   content: React.ReactNode,
-  props?: Pick<ModalProps, 'closable' | 'maskClosable'>
+  props?: Pick<ModalProps, 'closable' | 'maskClosable'> & {
+    onCloseModal?: () => void;
+  }
 ): number {
   const key = PortalAdd(
     <Modal
@@ -144,6 +146,7 @@ export function openModal(
       onChangeVisible={(visible) => {
         if (visible === false) {
           closeModal(key);
+          props?.onCloseModal?.();
         }
       }}
     >
@@ -187,20 +190,27 @@ export function openReconfirmModal(props: OpenReconfirmModalProps) {
           {t('确认')}
         </Button>
       </div>
-    </ModalWrapper>
+    </ModalWrapper>,
+    {
+      onCloseModal: props.onCancel,
+    }
   );
 }
 /**
  * 打开再次确认操作modal(Promise版本)
- * TODO: 需要检查一下持久pending的promise会不会导致内存泄露
+ * @example
+ * if(await openReconfirmModalP()) {
+ *   // do somthing
+ * }
  */
 export function openReconfirmModalP(
   props?: Omit<OpenReconfirmModalProps, 'onConfirm'>
-) {
-  return new Promise<void>((resolve) => {
+): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
     openReconfirmModal({
       ...props,
-      onConfirm: resolve,
+      onConfirm: () => resolve(true),
+      onCancel: () => resolve(false),
     });
   });
 }

@@ -25,13 +25,15 @@ export function useChatMessageItemAction(
   const userInfo = useUserInfo();
 
   const [, handleRecallMessage] = useAsyncRequest(async () => {
-    await openReconfirmModalP();
-    await recallMessage(payload._id);
+    if (await openReconfirmModalP()) {
+      await recallMessage(payload._id);
+    }
   }, [payload._id]);
 
   const [, handleDeleteMessage] = useAsyncRequest(async () => {
-    await openReconfirmModalP();
-    await deleteMessage(payload._id);
+    if (await openReconfirmModalP()) {
+      await deleteMessage(payload._id);
+    }
   }, [payload._id]);
 
   const isGroupOwner = groupInfo && groupInfo.owner === userInfo?._id; //
