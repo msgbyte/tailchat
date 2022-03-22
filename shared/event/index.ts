@@ -8,6 +8,13 @@ export interface SharedEventMap {
    * 修改配色方案
    */
   loadColorScheme: (schemeName: string) => void;
+
+  /**
+   * 网络状态更新
+   */
+  updateNetworkStatus: (
+    status: 'connected' | 'reconnecting' | 'disconnected'
+  ) => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 

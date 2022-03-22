@@ -4,6 +4,7 @@ import { getServiceUrl } from '../manager/service';
 import { isDevelopment } from '../utils/environment';
 import { showErrorToasts, showGlobalLoading } from '../manager/ui';
 import { t } from '../i18n';
+import { sharedEvent } from '../event';
 
 class SocketEventError extends Error {
   name = 'SocketEventError';
@@ -74,7 +75,7 @@ export class AppSocket {
    * 断线重连后触发
    */
   onReconnect(cb: () => void) {
-    this.socket.on('reconnect', cb);
+    this.socket.io.on('reconnect', cb);
   }
 
   /**
@@ -101,35 +102,55 @@ export class AppSocket {
     socket.on('connect', () => {
       console.log('连接成功');
       closeConnecting();
+
+      sharedEvent.emit('updateNetworkStatus', 'connected');
     });
     socket.on('connecting', (data) => {
       console.log('正在连接');
 
       showConnecting();
-    });
-    socket.on('reconnect', (data) => {
-      console.log('重连成功');
 
-      closeConnecting();
-    });
-    socket.on('reconnecting', (data) => {
-      console.log('重连中...');
-      showConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'reconnecting');
     });
     socket.on('disconnect', (data) => {
       console.log('与服务器的链接已断开');
       showErrorToasts(t('与服务器的链接已断开'));
       closeConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'disconnected');
     });
-    socket.on('connect_failed', (data) => {
+    socket.on('connect_error', (data) => {
       console.log('连接失败');
       showErrorToasts(t('连接失败'));
       closeConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'disconnected');
     });
-    socket.on('error', (data) => {
-      console.log('网络出现异常', data);
+
+    socket.io.on('reconnect', (data) => {
+      console.log('重连成功');
+
+      closeConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'connected');
+    });
+    socket.io.on('reconnect_attempt', (data) => {
+      console.log('重连中...');
+      showConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'reconnecting');
+    });
+    socket.io.on('reconnect_error', (error) => {
+      console.error('重连尝试失败...', error);
+      showConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'reconnecting');
+    });
+    socket.io.on('reconnect_failed', () => {
+      console.error('重连失败...');
+      showConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'disconnected');
+    });
+    socket.io.on('error', (error) => {
+      console.error('网络出现异常', error);
       showErrorToasts(t('网络出现异常'));
       closeConnecting();
+      sharedEvent.emit('updateNetworkStatus', 'disconnected');
     });
   }
 }
