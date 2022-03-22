@@ -169,7 +169,12 @@ export {
   useUserId,
   useUserInfoList,
 } from './redux/hooks/useUserInfo';
-export { userActions, groupActions, uiActions } from './redux/slices';
+export {
+  userActions,
+  groupActions,
+  uiActions,
+  globalActions,
+} from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
 export { createStore, ReduxProvider } from './redux/store';

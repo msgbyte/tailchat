@@ -1,6 +1,11 @@
 import type { AppStore } from './store';
 import type { AppSocket } from '../api/socket';
-import { chatActions, groupActions, userActions } from './slices';
+import {
+  chatActions,
+  globalActions,
+  groupActions,
+  userActions,
+} from './slices';
 import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
@@ -18,12 +23,14 @@ import {
   fetchUserAck,
 } from '../model/converse';
 import { appendUserDMConverse } from '../model/user';
+import { sharedEvent } from '../event';
 
 /**
  * 初始化 Redux 上下文
  * 该文件用于处理远程数据与本地 Redux 状态的交互
  */
 export function setupRedux(socket: AppSocket, store: AppStore) {
+  store.dispatch(globalActions.setNetworkStatus('initial'));
   initial(socket, store);
   listenNotify(socket, store);
 
@@ -31,6 +38,10 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
   socket.onReconnect(() => {
     console.warn('因为断线重连触发重新同步远程数据');
     initial(socket, store);
+  });
+
+  sharedEvent.on('updateNetworkStatus', (status) => {
+    store.dispatch(globalActions.setNetworkStatus(status));
   });
 }
 

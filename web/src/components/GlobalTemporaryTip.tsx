@@ -38,7 +38,6 @@ export const GlobalTemporaryTip: React.FC = React.memo(() => {
           立即认领
         </Button>
       </Trans>
-      {t('')}
     </div>
   ) : null;
 });
