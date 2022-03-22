@@ -10,5 +10,6 @@
     "moduleResolution": "node",
     "strict": true,
     "importsNotUsedAsValues": "error",
-  }
+  },
+  "include": ["./src/*"]
 }
