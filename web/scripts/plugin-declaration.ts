@@ -14,9 +14,11 @@ declare module 'dts-generator' {
 }
 
 dtsgen({
-  name: '', // 这个是为了跳过类型问题，其实移除该项也是可以的
+  main: '__tailchat__/common/index',
+  name: '@capital/commmon',
   out: 'tailchat.d.ts',
-  prefix: '@capital',
-  baseDir: path.resolve(__dirname, '../src/plugin'),
+  prefix: '__tailchat__',
+  baseDir: path.resolve(__dirname, '../src'),
+  rootDir: path.resolve(__dirname, '../src'),
   files: [path.resolve(__dirname, '../src/plugin/common/index.ts')],
 });

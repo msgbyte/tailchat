@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "plugin-declaration-generator Test",
+      "runtimeExecutable": "/Users/moonrailgun/.nvm/versions/node/v16.13.1/bin/node",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/packages/plugin-declaration-generator/node_modules/ts-node/dist/bin.js",
+      "args": [
+        "${workspaceRoot}/packages/plugin-declaration-generator/test/index.ts"
+      ],
+      "cwd": "${workspaceRoot}/packages/plugin-declaration-generator",
+      "protocol": "inspector"
+    }
+  ]
+}
