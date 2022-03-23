@@ -6,9 +6,10 @@ import {
 } from '@/components/SidebarView';
 import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
-import { t } from 'tailchat-shared';
+import { isDevelopment, t } from 'tailchat-shared';
 import { SettingsAbout } from './About';
 import { SettingsAccount } from './Account';
+import { SettingsDebug } from './Debug';
 import { SettingsPerformance } from './Performance';
 import { SettingsStatus } from './Status';
 import { SettingsSystem } from './System';
@@ -58,6 +59,15 @@ export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
         },
       ],
     };
+    if (isDevelopment) {
+      // 仅用于开发环境
+      common.children.push({
+        type: 'item',
+        title: t('调试'),
+        content: <SettingsDebug />,
+      });
+    }
+
     const more: SidebarViewMenuItem[] = pluginCustomPanel
       .filter((p) => p.position === 'setting')
       .map((p) => ({

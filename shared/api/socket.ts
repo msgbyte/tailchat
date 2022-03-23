@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client';
 import _isNil from 'lodash/isNil';
 import { getServiceUrl } from '../manager/service';
 import { isDevelopment } from '../utils/environment';
-import { showErrorToasts, showGlobalLoading } from '../manager/ui';
+import { showErrorToasts, showGlobalLoading, showToasts } from '../manager/ui';
 import { t } from '../i18n';
 import { sharedEvent } from '../event';
 
@@ -67,8 +67,21 @@ export class AppSocket {
     this.listener.push([`notify:${eventName}`, callback as any]);
   }
 
-  close() {
-    this.socket.close();
+  /**
+   * 模拟重连
+   * NOTICE: 仅用于开发环境
+   */
+  mockReconnect() {
+    this.socket.disconnect();
+    showToasts('reconnect after 5s');
+    setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.socket.io.skipReconnect = false;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.socket.io.reconnect();
+    }, 5 * 1000);
   }
 
   /**

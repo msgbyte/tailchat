@@ -17,6 +17,8 @@ import { useHistory } from 'react-router';
 import { SidebarContextProvider } from './SidebarContext';
 import { PortalHost } from '@/components/Portal';
 import { setGlobalSocket, setGlobalStore } from '@/utils/global-state-helper';
+import { SocketContextProvider } from '@/context/SocketContext';
+import { Problem } from '@/components/Problem';
 
 /**
  * 应用状态管理hooks
@@ -74,7 +76,7 @@ function useAppState() {
  * 在主页存在
  */
 export const MainProvider: React.FC = React.memo((props) => {
-  const { loading, store, error } = useAppState();
+  const { loading, store, error, socket } = useAppState();
 
   if (loading) {
     return (
@@ -90,14 +92,20 @@ export const MainProvider: React.FC = React.memo((props) => {
   }
 
   if (_isNil(store)) {
-    return <div>{t('出现异常, Store 创建失败')}</div>;
+    return <Problem text={t('出现异常, Store 创建失败')} />;
+  }
+
+  if (_isNil(socket)) {
+    return <Problem text={t('出现异常, Socket 创建失败')} />;
   }
 
   return (
     <ReduxProvider store={store}>
-      <SidebarContextProvider>
-        <PortalHost>{props.children}</PortalHost>
-      </SidebarContextProvider>
+      <SocketContextProvider socket={socket}>
+        <SidebarContextProvider>
+          <PortalHost>{props.children}</PortalHost>
+        </SidebarContextProvider>
+      </SocketContextProvider>
     </ReduxProvider>
   );
 });

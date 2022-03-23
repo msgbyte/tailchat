@@ -63,7 +63,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
   // 登出
   const handleLogout = useCallback(async () => {
     await setUserJWT(null);
-    getGlobalSocket()?.close();
+    getGlobalSocket()?.disconnect();
     history.push('/');
   }, []);
 
