@@ -13,13 +13,16 @@ import {
 } from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
-import { Dropdown, Menu, Tooltip } from 'antd';
+import { Button, Dropdown, Menu, Tooltip } from 'antd';
 import { useHistory } from 'react-router';
+import { Problem } from '@/components/Problem';
 
 /**
  * 好友列表
  */
-export const FriendList: React.FC = React.memo(() => {
+export const FriendList: React.FC<{
+  onSwitchToAddFriend: () => void;
+}> = React.memo((props) => {
   const friends = useAppSelector((state) => state.user.friends);
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -48,6 +51,21 @@ export const FriendList: React.FC = React.memo(() => {
       },
     });
   }, []);
+
+  if (friends.length === 0) {
+    return (
+      <Problem
+        text={
+          <div>
+            <p className="mb-2">{t('暂无好友')}</p>
+            <Button type="primary" onClick={props.onSwitchToAddFriend}>
+              {t('立即添加')}
+            </Button>
+          </div>
+        }
+      />
+    );
+  }
 
   return (
     <div className="py-2.5 px-5">

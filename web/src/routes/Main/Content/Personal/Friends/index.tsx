@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { AddFriend } from './AddFriend';
 import { t, useAppSelector } from 'tailchat-shared';
@@ -13,15 +13,20 @@ import { Badge } from 'antd';
 export const FriendPanel: React.FC = React.memo(() => {
   const friendRequests = useAppSelector((state) => state.user.friendRequests);
   const userId = useAppSelector((state) => state.user.info?._id);
+  const [activeKey, setActiveKey] = useState('1');
 
   const send = friendRequests.filter((item) => item.from === userId);
   const received = friendRequests.filter((item) => item.to === userId);
 
+  const handleSwitchToAddFriend = useCallback(() => {
+    setActiveKey('add');
+  }, []);
+
   return (
     <div className="w-full">
-      <PillTabs>
+      <PillTabs activeKey={activeKey} onChange={setActiveKey}>
         <PillTabPane tab={t('全部')} key="1">
-          <FriendList />
+          <FriendList onSwitchToAddFriend={handleSwitchToAddFriend} />
         </PillTabPane>
         <PillTabPane
           tab={
@@ -53,7 +58,7 @@ export const FriendPanel: React.FC = React.memo(() => {
         </PillTabPane>
         <PillTabPane
           tab={<span className="text-green-400">{t('添加好友')}</span>}
-          key="4"
+          key="add"
         >
           <AddFriend />
         </PillTabPane>
