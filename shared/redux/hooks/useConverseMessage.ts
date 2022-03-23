@@ -81,6 +81,7 @@ export function useConverseMessage(context: ConverseContext) {
   const converse = useAppSelector<ChatConverseState | undefined>(
     (state) => state.chat.converses[converseId]
   );
+  const reconnectNum = useAppSelector((state) => state.global.reconnectNum);
   const hasMoreMessage = converse?.hasMoreMessage ?? true;
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
@@ -93,7 +94,7 @@ export function useConverseMessage(context: ConverseContext) {
     };
   }, [converseId]);
 
-  // NOTICE: 该hook只会在converseId变化时执行
+  // NOTICE: 该hook只会在converseId变化和重新链接时执行
   const { loading, error } = useAsync(async () => {
     if (!converse) {
       // 如果是一个新会话(或者当前会话列表中没有)
@@ -140,7 +141,7 @@ export function useConverseMessage(context: ConverseContext) {
         );
       }
     }
-  }, [converseId]);
+  }, [converseId, reconnectNum]);
 
   // 加载更多消息
   const [{ loading: isLoadingMore }, handleFetchMoreMessage] =

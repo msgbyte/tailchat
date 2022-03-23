@@ -38,6 +38,12 @@ export function setupRedux(socket: AppSocket, store: AppStore) {
   socket.onReconnect(() => {
     console.warn('因为断线重连触发重新同步远程数据');
     initial(socket, store);
+    /**
+     * 重置会话列表
+     * 如果当前已经打开了一个会话列表则会让该会话自行更新(由useConverseMessage保障)
+     */
+    store.dispatch(chatActions.clearAllConverses());
+    store.dispatch(globalActions.incReconnectNum());
   });
 
   sharedEvent.on('updateNetworkStatus', (status) => {

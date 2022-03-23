@@ -150,6 +150,13 @@ const chatSlice = createSlice({
     },
 
     /**
+     * 清理所有会话信息
+     */
+    clearAllConverses(state) {
+      state.converses = {};
+    },
+
+    /**
      * 设置已读消息
      */
     setConverseAck(

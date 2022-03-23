@@ -92,6 +92,13 @@ export class AppSocket {
   }
 
   /**
+   * 断开连接
+   */
+  disconnect() {
+    this.socket.disconnect();
+  }
+
+  /**
    * 初始Socket状态管理提示
    */
   private closeFn: unknown = null; // 全局loading关闭函数
