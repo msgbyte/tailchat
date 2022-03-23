@@ -103,6 +103,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           </div>
         )}
 
+        {/* 消息内容 */}
         <div className="leading-6 break-words">
           <MessageQuote payload={payload} />
 
@@ -112,8 +113,6 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           {useRenderPluginMessageInterpreter(payload.content)}
         </div>
 
-        {reactions}
-
         {/* 额外渲染 */}
         <div>
           {pluginMessageExtraParsers.map((parser) => (
@@ -122,6 +121,9 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
             </React.Fragment>
           ))}
         </div>
+
+        {/* 消息反应 */}
+        {reactions}
       </div>
 
       {/* 操作 */}
