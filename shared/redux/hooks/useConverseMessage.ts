@@ -20,6 +20,7 @@ import {
 } from '../..';
 import { MessageHelper } from '../../utils/message-helper';
 import { ChatConverseType } from '../../model/converse';
+import { sharedEvent } from '../../event';
 
 function useHandleSendMessage(context: ConverseContext) {
   const { converseId } = context;
@@ -52,6 +53,7 @@ function useHandleSendMessage(context: ConverseContext) {
 
         // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
 
+        sharedEvent.emit('sendMessage', payload);
         const message = await sendMessage(payload);
         dispatch(
           chatActions.appendConverseMessage({

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 import {
@@ -6,7 +6,7 @@ import {
   Virtuoso,
   VirtuosoGridHandle,
 } from 'react-virtuoso';
-import type { ChatMessage } from 'tailchat-shared';
+import { ChatMessage, sharedEvent } from 'tailchat-shared';
 import _last from 'lodash/last';
 
 const PREPEND_OFFSET = 10 ** 7;
@@ -23,6 +23,22 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const listRef = useRef<VirtuosoGridHandle>();
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
+
+    useEffect(() => {
+      const onSendMessage = () => {
+        listRef.current?.scrollToIndex({
+          index: 'LAST',
+          align: 'end',
+          behavior: 'smooth',
+        });
+      };
+
+      sharedEvent.on('sendMessage', onSendMessage);
+
+      return () => {
+        sharedEvent.off('sendMessage', onSendMessage);
+      };
+    }, []);
 
     const handleLoadMore = () => {
       if (props.isLoadingMore) {

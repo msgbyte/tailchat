@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import type { SendMessagePayload } from '../model/message';
 
 /**
  * 共享事件类型
@@ -15,6 +16,11 @@ export interface SharedEventMap {
   updateNetworkStatus: (
     status: 'connected' | 'reconnecting' | 'disconnected'
   ) => void;
+
+  /**
+   * 发送消息
+   */
+  sendMessage: (payload: SendMessagePayload) => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 
