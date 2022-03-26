@@ -1,36 +1,17 @@
-import React, { useMemo, useState } from 'react';
-import {
-  postRequest,
-  useAsyncRefresh,
-  openModal,
-  closeModal,
-} from '@capital/common';
-import {
-  LoadingSpinner,
-  Space,
-  Table,
-  Button,
-  Loading,
-} from '@capital/component';
+import React, { useMemo } from 'react';
+import { openModal, closeModal } from '@capital/common';
+import { Space, Table, Button, Loading } from '@capital/component';
 import { OpenApp } from './types';
 import AppInfo from './AppInfo';
 import { OpenAppInfoProvider } from './context';
 import { CreateOpenApp } from '../modals/CreateOpenApp';
 import { ServiceChecker } from '../components/ServiceChecker';
+import { useOpenAppList } from './useOpenAppList';
 import './index.less';
 
 const OpenApiMainPanel: React.FC = React.memo(() => {
-  const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
-  const {
-    loading,
-    value: allApps = [],
-    refresh,
-  } = useAsyncRefresh(async (): Promise<OpenApp[]> => {
-    const { data } = await postRequest('/openapi/app/all');
-
-    return data ?? [];
-  }, []);
-  const appInfo = allApps.find((a) => a._id === selectedAppId);
+  const { loading, allApps, refresh, appInfo, handleSetSelectedApp } =
+    useOpenAppList();
 
   const columns = useMemo(
     () => [
@@ -43,7 +24,9 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
         key: 'action',
         render: (_, record: OpenApp) => (
           <Space>
-            <Button onClick={() => setSelectedAppId(record._id)}>进入</Button>
+            <Button onClick={() => handleSetSelectedApp(record._id)}>
+              进入
+            </Button>
           </Space>
         ),
       },

@@ -15,6 +15,11 @@ export {
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
 export { dataUrlToFile } from '@/utils/file-helper';
+export {
+  urlSearchStringify,
+  urlSearchParse,
+  appendUrlSearch,
+} from '@/utils/url-helper';
 export { useGroupIdContext } from '@/context/GroupIdContext';
 import { request, RequestConfig } from 'tailchat-shared';
 export {
@@ -34,7 +39,9 @@ export {
   createFastFormSchema,
   fieldSchema,
   fetchAvailableServices,
+  isValidStr,
 } from 'tailchat-shared';
+export { useLocation, useHistory } from 'react-router';
 
 /**
  * 处理axios的request config
