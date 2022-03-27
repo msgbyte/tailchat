@@ -36,7 +36,7 @@ export const SettingsAbout: React.FC = React.memo(() => {
       />
 
       <Paragraph>
-        <Text className="font-bold">TailChat</Text>
+        <Text className="font-bold">Tailchat</Text>
         <Text>: 属于所有人的开源聊天工具</Text>
       </Paragraph>
       <Paragraph>可供高度自定义的聊天工具</Paragraph>

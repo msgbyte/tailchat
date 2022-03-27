@@ -53,7 +53,7 @@ const plugins: Configuration['plugins'] = [
     ),
   }),
   new HtmlWebpackPlugin({
-    title: 'TailChat',
+    title: 'Tailchat',
     inject: true,
     hash: false,
     favicon: path.resolve(ROOT_PATH, './assets/images/logo.svg'),

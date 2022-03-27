@@ -40,7 +40,7 @@ function buildStepOption(options: {
 export const steps: Shepherd.Step.StepOptions[] = [
   {
     id: 'start',
-    text: '欢迎使用 TailChat, 一个插件化的开源IM应用',
+    text: '欢迎使用 Tailchat, 一个插件化的开源IM应用',
     beforeShowPromise: buildWatchDom('[data-tc-role=navbar]'), // 仅当主界面出现后才显示欢迎
   },
   buildStepOption({
