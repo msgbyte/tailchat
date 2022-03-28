@@ -21,7 +21,7 @@ interface FullModalFieldProps {
   /**
    * 提示信息
    */
-  tip: React.ReactNode;
+  tip?: React.ReactNode;
 
   /**
    * 字段内容
