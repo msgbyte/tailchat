@@ -5,6 +5,7 @@ import { Input, Space } from 'antd';
 import { t } from 'tailchat-shared';
 import { DelayTip } from '../DelayTip';
 import { IconBtn } from '../IconBtn';
+import { TipIcon } from '../TipIcon';
 
 export type FullModalFieldEditorRenderComponent = React.FC<{
   value: string;
@@ -16,6 +17,11 @@ interface FullModalFieldProps {
    * 字段标题
    */
   title: React.ReactNode;
+
+  /**
+   * 提示信息
+   */
+  tip: React.ReactNode;
 
   /**
    * 字段内容
@@ -116,8 +122,15 @@ export const FullModalField: React.FC<FullModalFieldProps> = React.memo(
 
     return (
       <div className="mb-4">
-        <div className="text-xs text-gray-400 mb-2">{props.title}</div>
-        <div className="h-10 text-base truncate">
+        <div className="text-xs text-gray-400 mb-2 flex items-center">
+          <span>{props.title}</span>
+          {props.tip && (
+            <span className="ml-1 text-sm">
+              <TipIcon content={props.tip} />
+            </span>
+          )}
+        </div>
+        <div className="min-h-10 text-base truncate">
           {allowEditor === true ? (
             <FullModalFieldEditor {...props} />
           ) : (
