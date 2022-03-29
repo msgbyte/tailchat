@@ -159,6 +159,7 @@ importers:
       axios: ^0.21.1
       bundle-stats-webpack-plugin: ^3.2.9
       clsx: ^1.1.1
+      compressorjs: ^1.1.1
       copy-to-clipboard: ^3.3.1
       copy-webpack-plugin: ^9.0.1
       cross-env: ^7.0.3
@@ -226,6 +227,7 @@ importers:
       antd: 4.18.2_react-dom@17.0.2+react@17.0.2
       axios: 0.21.4
       clsx: registry.nlark.com/clsx/1.1.1
+      compressorjs: 1.1.1
       copy-to-clipboard: 3.3.1
       emoji-mart: 3.0.1_react@17.0.2
       is-hotkey: 0.2.0
@@ -3467,6 +3469,10 @@ packages:
     resolution: {integrity: sha1-ZfCvOC9Xi83HQr2cKB6cstd2gyg=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/big.js/download/big.js-5.2.2.tgz}
     dev: true
 
+  /blueimp-canvas-to-blob/3.29.0:
+    resolution: {integrity: sha512-0pcSSGxC0QxT+yVkivxIqW0Y4VlO2XSDPofBAqoJ1qJxgH9eiUDLv50Rixij2cDuEfx4M6DpD9UGZpRhT5Q8qg==}
+    dev: false
+
   /body-parser/1.19.1:
     resolution: {integrity: sha512-8ljfQi5eBk8EJfECMrgqNGWPEY5jWP+1IzkzkGdFFEwFQZZyaZ21UqdaHktgiMlH0xLHqIFtE/u2OYE5dOtViA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/body-parser/download/body-parser-1.19.1.tgz}
     engines: {node: '>= 0.8'}
@@ -3830,6 +3836,13 @@ packages:
       array-ify: 1.0.0
       dot-prop: registry.nlark.com/dot-prop/5.3.0
     dev: true
+
+  /compressorjs/1.1.1:
+    resolution: {integrity: sha512-SysRuUPfmUNoq+RviE0iMFVUmoX2q/x+7PkEPUmk6NGkd85hDrmvujx0Qtp8UCGA6KMe5kuodsylPQcNaLf60w==}
+    dependencies:
+      blueimp-canvas-to-blob: 3.29.0
+      is-blob: 2.1.0
+    dev: false
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -5318,6 +5331,11 @@ packages:
     dependencies:
       is-alphabetical: 1.0.4
       is-decimal: 1.0.4
+    dev: false
+
+  /is-blob/2.1.0:
+    resolution: {integrity: sha512-SZ/fTft5eUhQM6oF/ZaASFDEdbFVe89Imltn9uZr03wdKMcWNVYSMjQPFtg05QuNkt5l5c135ElvXEQG0rk4tw==}
+    engines: {node: '>=6'}
     dev: false
 
   /is-buffer/2.0.5:

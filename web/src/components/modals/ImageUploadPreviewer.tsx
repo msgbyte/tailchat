@@ -1,9 +1,9 @@
-import { ModalWrapper } from '@/plugin/common';
-import { Button } from '@/plugin/component';
-import React, { useCallback, useRef } from 'react';
-import { t, useAsyncFn } from 'tailchat-shared';
+import React, { useCallback, useRef, useState } from 'react';
+import { showToasts, t, useAsyncFn } from 'tailchat-shared';
 import { useGlobalKeyDown } from '../../hooks/useGlobalKeyDown';
 import { isEnterHotkey, isEscHotkey } from '../../utils/hot-key';
+import { Switch, Button } from 'antd';
+import { ModalWrapper } from '@/components/Modal';
 
 interface ImageSize {
   width: number;
@@ -12,19 +12,36 @@ interface ImageSize {
 
 interface ImageUploadPreviewerProps {
   imageUrl: string;
-  onConfirm: (imageSize: ImageSize) => Promise<void>;
+  onConfirm: (imageUploadInfo: {
+    size: ImageSize;
+    uploadOriginImage: boolean;
+  }) => Promise<void>;
   onCancel: () => void;
 }
 export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
   React.memo((props) => {
     const { imageUrl } = props;
     const imageSizeRef = useRef<ImageSize>({ width: 0, height: 0 });
+    const [uploadOriginImage, setUploadOriginImage] = useState(false);
 
     const [{ loading }, handleConfirm] = useAsyncFn(async () => {
-      if (typeof props.onConfirm === 'function') {
-        await Promise.resolve(props.onConfirm(imageSizeRef.current));
+      if (
+        imageSizeRef.current.width === 0 ||
+        imageSizeRef.current.height === 0
+      ) {
+        showToasts(t('操作过于频繁'), 'warning');
+        return;
       }
-    }, [props.onConfirm]);
+
+      if (typeof props.onConfirm === 'function') {
+        await Promise.resolve(
+          props.onConfirm({
+            size: imageSizeRef.current,
+            uploadOriginImage,
+          })
+        );
+      }
+    }, [props.onConfirm, uploadOriginImage]);
 
     useGlobalKeyDown(
       (e) => {
@@ -72,14 +89,26 @@ export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
               </div>
             </div>
 
-            <Button
-              className="mt-4"
-              type="primary"
-              loading={loading}
-              onClick={handleConfirm}
-            >
-              {t('确认')}
-            </Button>
+            <div className="w-full">
+              <div className="text-left">
+                <Switch
+                  checked={uploadOriginImage}
+                  onChange={(checked) => setUploadOriginImage(checked)}
+                />
+                <span>{t('上传原图')}</span>
+              </div>
+
+              <div className="text-right">
+                <Button
+                  className="mt-4"
+                  type="primary"
+                  loading={loading}
+                  onClick={handleConfirm}
+                >
+                  {t('确认')}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </ModalWrapper>

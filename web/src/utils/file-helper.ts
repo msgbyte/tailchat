@@ -139,3 +139,33 @@ export async function openFile(
 export const isGIF = (file: File): boolean => {
   return file.type === 'image/gif';
 };
+
+/**
+ * 压缩图片
+ * 默认压缩质量为0.6
+ * @link https://www.npmjs.com/package/compressorjs
+ */
+export async function compressImage(
+  image: File,
+  options?: {
+    quality?: number;
+    maxWidth?: number;
+    maxHeight?: number;
+  }
+): Promise<File> {
+  const { default: Compressor } = await import('compressorjs');
+
+  return new Promise((resolve, reject) => {
+    new Compressor(image, {
+      quality: options?.quality ?? 0.6,
+      maxWidth: options?.maxWidth ?? 1920,
+      maxHeight: options?.maxHeight ?? 1080,
+      success(file) {
+        resolve(file as File);
+      },
+      error(err) {
+        reject(err);
+      },
+    });
+  });
+}
