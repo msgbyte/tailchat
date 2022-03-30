@@ -1,40 +1,58 @@
-import React, { useState } from 'react';
-import { Menu } from '@capital/component';
+import React, { useMemo } from 'react';
+import { SidebarView } from '@capital/component';
 import { Loadable } from '@capital/common';
 import { useOpenAppInfo } from '../context';
 import './index.less';
 
-const menuRouteMap: Record<string, React.ComponentType> = {
-  summary: Loadable(() => import('./Summary')),
-  profile: Loadable(() => import('./Profile')),
-  bot: Loadable(() => import('./Bot')),
-  webpage: Loadable(() => import('./Webpage')),
-};
+const Summary = Loadable(() => import('./Summary'));
+const Profile = Loadable(() => import('./Profile'));
+const Bot = Loadable(() => import('./Bot'));
+const Webpage = Loadable(() => import('./Webpage'));
+const OAuth = Loadable(() => import('./OAuth'));
 
 const AppInfo: React.FC = React.memo(() => {
-  const [menu, setMenu] = useState('summary');
   const { appName } = useOpenAppInfo();
+
+  const menu = useMemo(
+    () => [
+      {
+        type: 'group',
+        title: appName,
+        children: [
+          {
+            type: 'item',
+            title: '总览',
+            content: <Summary />,
+          },
+          {
+            type: 'item',
+            title: '基础信息',
+            content: <Profile />,
+          },
+          {
+            type: 'item',
+            title: '机器人',
+            content: <Bot />,
+          },
+          {
+            type: 'item',
+            title: '网页',
+            content: <Webpage />,
+          },
+          {
+            type: 'item',
+            title: '应用登录',
+            content: <OAuth />,
+          },
+        ],
+      },
+    ],
+    []
+  );
 
   return (
     <div className="plugin-openapi-app-info">
-      <div>
-        <div>{appName}</div>
-
-        <Menu
-          style={{ width: 256 }}
-          selectedKeys={[menu]}
-          onSelect={({ key }) => setMenu(key)}
-        >
-          <Menu.Item key="summary">总览</Menu.Item>
-          <Menu.Item key="profile">基础信息</Menu.Item>
-          <Menu.Item key="bot">机器人</Menu.Item>
-          <Menu.Item key="webpage">网页</Menu.Item>
-        </Menu>
-      </div>
-
-      <div className="plugin-openapi-app-info_body">
-        {menuRouteMap[menu] ? React.createElement(menuRouteMap[menu]) : <div />}
-      </div>
+      <SidebarView menu={menu} defaultContentPath="0.children.0.content" />
     </div>
   );
 });

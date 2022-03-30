@@ -6,6 +6,10 @@ const openAppCapability = [
 
 export type OpenAppCapability = typeof openAppCapability[number];
 
+interface OpenAppOAuth {
+  redirectUrls: string[];
+}
+
 export interface OpenApp {
   _id: string;
   appId: string;
@@ -14,6 +18,7 @@ export interface OpenApp {
   appDesc: string;
   appIcon: string;
   capability: OpenAppCapability[];
+  oauth?: OpenAppOAuth;
 
   owner: string;
 }

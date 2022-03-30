@@ -157,7 +157,7 @@ export const DefaultFullModalInputEditorRender: FullModalFieldEditorRenderCompon
 export const DefaultFullModalTextAreaEditorRender: FullModalFieldEditorRenderComponent =
   ({ value, onChange }) => (
     <Input.TextArea
-      autoSize={true}
+      autoSize={{ minRows: 2, maxRows: 6 }}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />
