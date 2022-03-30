@@ -1,13 +1,23 @@
 import { FullModalField } from '@/components/FullModal/Field';
 import { pluginColorScheme } from '@/plugin/common';
-import { Select } from 'antd';
+import { Select, Switch } from 'antd';
 import React, { useCallback } from 'react';
-import { showToasts, t, useColorScheme } from 'tailchat-shared';
+import {
+  showToasts,
+  t,
+  useColorScheme,
+  useSingleUserSetting,
+} from 'tailchat-shared';
 import { useLanguage } from 'tailchat-shared';
 
 export const SettingsSystem: React.FC = React.memo(() => {
   const { language, setLanguage } = useLanguage();
   const { colorScheme, setColorScheme } = useColorScheme();
+  const {
+    value: messageListVirtualization,
+    setValue: setMessageListVirtualization,
+    loading,
+  } = useSingleUserSetting('messageListVirtualization', false);
 
   const handleChangeLanguage = useCallback(
     (newLang: string) => {
@@ -52,6 +62,17 @@ export const SettingsSystem: React.FC = React.memo(() => {
               </Select.Option>
             ))}
           </Select>
+        }
+      />
+
+      <FullModalField
+        title={t('聊天列表虚拟化') + ' (Beta)'}
+        content={
+          <Switch
+            disabled={loading}
+            checked={messageListVirtualization}
+            onChange={(checked) => setMessageListVirtualization(checked)}
+          />
         }
       />
     </div>

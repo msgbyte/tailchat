@@ -16,6 +16,13 @@ export interface UserLoginInfo extends UserBaseInfo {
   createdAt: string;
 }
 
+export interface UserSettings {
+  /**
+   * 消息列表虚拟化
+   */
+  messageListVirtualization?: boolean;
+}
+
 // 内置用户信息
 const builtinUserInfo: Record<string, UserBaseInfo> = {
   [SYSTEM_USERID]: {
@@ -232,6 +239,28 @@ export async function modifyUserField(
   const { data } = await request.post('/api/user/updateUserField', {
     fieldName,
     fieldValue,
+  });
+
+  return data;
+}
+
+/**
+ * 获取用户设置
+ */
+export async function getUserSettings(): Promise<UserSettings> {
+  const { data } = await request.get('/api/user/getUserSettings');
+
+  return data;
+}
+
+/**
+ * 设置用户设置
+ */
+export async function setUserSettings(
+  settings: UserSettings
+): Promise<UserSettings> {
+  const { data } = await request.post('/api/user/setUserSettings', {
+    settings,
   });
 
   return data;

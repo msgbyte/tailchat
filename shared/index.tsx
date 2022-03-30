@@ -66,6 +66,10 @@ export { useLanguage } from './i18n/language';
 // hooks
 export { useAvailableServices } from './hooks/model/useAvailableServices';
 export { useUsernames } from './hooks/model/useUsernames';
+export {
+  useUserSettings,
+  useSingleUserSetting,
+} from './hooks/model/useUserSettings';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';
@@ -135,7 +139,7 @@ export type {
   SendMessagePayloadMeta,
 } from './model/message';
 export type { PluginManifest } from './model/plugin';
-export type { UserBaseInfo, UserLoginInfo } from './model/user';
+export type { UserBaseInfo, UserLoginInfo, UserSettings } from './model/user';
 export {
   loginWithEmail,
   loginWithToken,
