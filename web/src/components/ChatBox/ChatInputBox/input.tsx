@@ -1,5 +1,6 @@
 import { UserListItem } from '@/components/UserListItem';
 import { getMessageTextDecorators } from '@/plugin/common';
+import { stopPropagation } from '@/utils/dom-helper';
 import React from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
 import { t } from 'tailchat-shared';
@@ -35,6 +36,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         }
         onKeyDown={props.onKeyDown}
         onPaste={props.onPaste}
+        onContextMenu={stopPropagation}
         allowSuggestionsAboveCursor={true}
         forceSuggestionsAboveCursor={true}
       >
