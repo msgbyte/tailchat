@@ -84,14 +84,18 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
 
     return (
       <div className="flex w-full">
+        {/* 内容 */}
         <div className="truncate">
           {isEditing && !_isNil(EditorComponent) ? (
             <EditorComponent value={editingValue} onChange={setEditingValue} />
           ) : (
-            <span title={valueTitle}>{props.content ?? props.value}</span>
+            <span className="select-text" title={valueTitle}>
+              {props.content ?? props.value}
+            </span>
           )}
         </div>
 
+        {/* 操作 */}
         <div className="ml-2">
           {!isEditing ? (
             <DelayTip title={t('编辑')}>
@@ -134,7 +138,9 @@ export const FullModalField: React.FC<FullModalFieldProps> = React.memo(
           {allowEditor === true ? (
             <FullModalFieldEditor {...props} />
           ) : (
-            <span title={valueTitle}>{props.content ?? props.value}</span>
+            <span className="select-text" title={valueTitle}>
+              {props.content ?? props.value}
+            </span>
           )}
         </div>
       </div>
