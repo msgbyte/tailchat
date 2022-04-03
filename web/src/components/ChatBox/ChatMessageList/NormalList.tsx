@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useUpdateRef } from 'tailchat-shared';
+import { sharedEvent, useUpdateRef } from 'tailchat-shared';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 
@@ -23,6 +23,19 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         );
       }
     }, [props.messages.length]);
+
+    useEffect(() => {
+      const onSendMessage = () => {
+        // 滚动到底部
+        containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      sharedEvent.on('sendMessage', onSendMessage);
+
+      return () => {
+        sharedEvent.off('sendMessage', onSendMessage);
+      };
+    }, []);
 
     const handleScroll = useCallback(() => {
       if (props.messages.length === 0) {

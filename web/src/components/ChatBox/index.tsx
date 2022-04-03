@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChatBoxContextProvider, useConverseMessage } from 'tailchat-shared';
 import { AlertErrorView } from '../AlertErrorView';
 import { ChatBoxPlaceholder } from './ChatBoxPlaceholder';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList } from './ChatMessageList';
+import type { MessageListRef } from './ChatMessageList/types';
 import { ChatReply } from './ChatReply';
 import { useMessageAck } from './useMessageAck';
 
