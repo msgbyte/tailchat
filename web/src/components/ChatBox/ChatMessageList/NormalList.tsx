@@ -29,10 +29,20 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         return;
       }
 
-      if (containerRef.current?.scrollTop === 0) {
+      if (!containerRef.current) {
+        return;
+      }
+
+      if (containerRef.current.scrollTop === 0) {
         onUpdateReadedMessageRef.current(
           props.messages[props.messages.length - 1]._id
         );
+      } else if (
+        -containerRef.current.scrollTop + containerRef.current.clientHeight ===
+        containerRef.current.scrollHeight
+      ) {
+        // 滚动条碰触到最顶部
+        props.onLoadMore();
       }
     }, [props.messages]);
 
