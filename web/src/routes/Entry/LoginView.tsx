@@ -1,12 +1,12 @@
 import { Icon } from '@/components/Icon';
 import { Divider } from 'antd';
 import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useHistory } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
-import { setGlobalUserLoginInfo } from '../../utils/user-helper';
+import { setGlobalUserLoginInfo, tryAutoLogin } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
 import { useNavToView } from './utils';
 
@@ -35,6 +35,14 @@ export const LoginView: React.FC = React.memo(() => {
   const [password, setPassword] = useState('');
   const history = useHistory();
   const navRedirect = useSearchParam('redirect');
+
+  useEffect(() => {
+    tryAutoLogin()
+      .then(() => {
+        history.push('/main');
+      })
+      .catch(() => {});
+  }, []);
 
   const [{ loading, error }, handleLogin] = useAsyncFn(async () => {
     await string()

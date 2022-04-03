@@ -7,10 +7,11 @@ import {
   loginWithToken,
   t,
   ReduxProvider,
+  UserLoginInfo,
 } from 'tailchat-shared';
 import React from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { getGlobalUserLoginInfo } from '@/utils/user-helper';
+import { getGlobalUserLoginInfo, tryAutoLogin } from '@/utils/user-helper';
 import _isNil from 'lodash/isNil';
 import { getUserJWT } from '@/utils/jwt-helper';
 import { useHistory } from 'react-router';
@@ -27,26 +28,15 @@ function useAppState() {
   const history = useHistory();
 
   const { value, loading, error } = useAsync(async () => {
-    let userLoginInfo = getGlobalUserLoginInfo();
-    if (_isNil(userLoginInfo)) {
-      // 如果没有全局缓存的数据, 则尝试自动登录
-      try {
-        const token = await getUserJWT();
-        if (typeof token !== 'string') {
-          throw new Error('Token 格式不合法');
-        }
-        userLoginInfo = await loginWithToken(token);
-
-        if (userLoginInfo === null) {
-          throw new Error('Token 内容不合法');
-        }
-      } catch (e) {
-        // 当前 Token 不存在或已过期
-        history.replace(
-          `/entry/login?redirect=${encodeURIComponent(location.pathname)}`
-        );
-        return;
-      }
+    let userLoginInfo: UserLoginInfo;
+    try {
+      userLoginInfo = await tryAutoLogin();
+    } catch (e) {
+      // 当前 Token 不存在或已过期
+      history.replace(
+        `/entry/login?redirect=${encodeURIComponent(location.pathname)}`
+      );
+      return;
     }
 
     // 到这里 userLoginInfo 必定存在

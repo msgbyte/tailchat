@@ -8,6 +8,7 @@ import { openModal } from '@/components/Modal';
 import { closeModal } from '@/plugin/common';
 import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
+import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import { Button, Divider, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
@@ -64,6 +65,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
   const handleLogout = useCallback(async () => {
     await setUserJWT(null);
     getGlobalSocket()?.disconnect();
+    setGlobalUserLoginInfo(null);
     history.push('/');
   }, []);
 
