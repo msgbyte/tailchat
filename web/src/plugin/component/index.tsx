@@ -12,7 +12,7 @@ export {
 } from 'antd';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
-export { Icon } from '@iconify/react';
+export { Icon } from '@/components/Icon';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
 export { LoadingSpinner } from '@/components/LoadingSpinner';
 export { WebFastForm } from '@/components/WebFastForm';

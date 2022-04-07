@@ -1,0 +1,26 @@
+{
+  "name": "tailchat-design",
+  "version": "1.0.0",
+  "description": "Tailchat 的前端组件",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msgbyte/tailchat.git"
+  },
+  "keywords": [
+    "design",
+    "tailchat"
+  ],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msgbyte/tailchat/issues"
+  },
+  "homepage": "https://github.com/msgbyte/tailchat#readme",
+  "dependencies": {
+    "@iconify/react": "^3.2.1",
+    "antd": "^4.19.5"
+  }
+}

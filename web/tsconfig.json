@@ -5,7 +5,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@test/*": ["./test/*"],
-      "@assets/*": ["./assets/*"]
+      "@assets/*": ["./assets/*"],
+      "tailchat-design": ["../packages/design/components"]
     }
   },
   "exclude": ["e2e", "plugins"]
