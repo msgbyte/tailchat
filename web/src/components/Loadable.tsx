@@ -6,6 +6,27 @@ import loadable, {
 } from '@loadable/component';
 import pMinDelay from 'p-min-delay';
 import { LoadingSpinner } from './LoadingSpinner';
+import { isValidStr } from 'tailchat-shared';
+
+function promiseUsage<T>(p: Promise<T>, name: string): Promise<T> {
+  const start = new Date().valueOf();
+
+  return p.then((r) => {
+    const end = new Date().valueOf();
+
+    console.debug(`[Loadable] load ${name} usage: ${end - start}ms`);
+
+    return r;
+  });
+}
+
+interface LoadableOptions<P> extends OptionsWithoutResolver<P> {
+  /**
+   * 组件名, 如果传入则会记录组件加载用时
+   * 用于权衡组件大小
+   */
+  componentName?: string;
+}
 
 /**
  * 用法: Loadable(() => import('xxxxxx'))
@@ -13,10 +34,22 @@ import { LoadingSpinner } from './LoadingSpinner';
  */
 export function Loadable<Props>(
   loadFn: (props: Props) => Promise<DefaultComponent<Props>>,
-  options?: OptionsWithoutResolver<Props>
+  options?: LoadableOptions<Props>
 ): LoadableComponent<Props> {
-  return loadable((props) => pMinDelay(loadFn(props), 200), {
-    fallback: <LoadingSpinner />,
-    ...options,
-  });
+  return loadable(
+    (props) => {
+      let p = loadFn(props);
+
+      if (isValidStr(options?.componentName)) {
+        // 增加promise加载用时统计
+        p = promiseUsage(p, String(options?.componentName));
+      }
+
+      return pMinDelay(p, 200);
+    },
+    {
+      fallback: <LoadingSpinner />,
+      ...options,
+    }
+  );
 }

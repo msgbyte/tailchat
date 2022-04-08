@@ -3,5 +3,8 @@
   "main": "src/index.tsx",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "js-base64": "^3.7.2",
+    "xss": "^1.0.11"
+  }
 }
