@@ -45,7 +45,22 @@ export const PluginStore: React.FC = React.memo(() => {
   return (
     <div className="p-2 w-full">
       <PillTabs>
-        <PillTabPane key="1" tab={t('全部')}>
+        <PillTabPane key="1" tab={t('已安装')}>
+          <Divider orientation="left">{t('已安装')}</Divider>
+
+          <div className={styles.pluginSection}>
+            {[...builtinPlugins, ...installedPluginList].map((plugin) => (
+              <PluginStoreItem
+                key={plugin.name}
+                manifest={plugin}
+                installed={true}
+                builtin={builtinPluginNameList.includes(plugin.name)}
+              />
+            ))}
+          </div>
+        </PillTabPane>
+
+        <PillTabPane key="2" tab={t('全部')}>
           <Divider orientation="left">{t('内置插件')}</Divider>
 
           <div className={styles.pluginSection}>
@@ -67,21 +82,6 @@ export const PluginStore: React.FC = React.memo(() => {
                 key={plugin.name}
                 manifest={plugin}
                 installed={installedPluginNameList.includes(plugin.name)}
-              />
-            ))}
-          </div>
-        </PillTabPane>
-
-        <PillTabPane key="2" tab={t('已安装')}>
-          <Divider orientation="left">{t('已安装')}</Divider>
-
-          <div className={styles.pluginSection}>
-            {[...builtinPlugins, ...installedPluginList].map((plugin) => (
-              <PluginStoreItem
-                key={plugin.name}
-                manifest={plugin}
-                installed={true}
-                builtin={builtinPluginNameList.includes(plugin.name)}
               />
             ))}
           </div>
