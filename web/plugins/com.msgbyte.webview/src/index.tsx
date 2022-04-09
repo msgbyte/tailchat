@@ -16,7 +16,12 @@ regGroupPanel({
   label: Translate.customwebpanel,
   provider: PLUGIN_NAME,
   extraFormMeta: [
-    { type: 'textarea', name: 'html', label: Translate.htmlcode },
+    {
+      type: 'textarea',
+      name: 'html',
+      label: Translate.htmlcode,
+      placeholder: Translate.customwebpanelPlaceholder,
+    },
   ],
   render: Loadable(() => import('./group/GroupCustomWebPanelRender'), {
     componentName: 'com.msgbyte.webview:GroupCustomWebPanelRender',
