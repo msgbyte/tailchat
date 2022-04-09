@@ -381,10 +381,10 @@ importers:
   web/plugins/com.msgbyte.webview:
     specifiers:
       js-base64: ^3.7.2
-      xss: ^1.0.11
+      script_sanitize: ^1.2.6
     dependencies:
       js-base64: 3.7.2
-      xss: 1.0.11
+      script_sanitize: 1.2.6
 
 packages:
 
@@ -3902,6 +3902,7 @@ packages:
 
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+    dev: true
 
   /commander/6.2.1:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/commander/download/commander-6.2.1.tgz}
@@ -4137,10 +4138,6 @@ packages:
     resolution: {integrity: sha1-P3tweq32M7r2LCzrhXm1RbtA9/4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/css-what/download/css-what-5.1.0.tgz}
     engines: {node: '>= 6'}
     dev: true
-
-  /cssfilter/0.0.10:
-    resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
-    dev: false
 
   /cssnano-preset-default/4.0.8:
     resolution: {integrity: sha1-kgYisfwelaNOiDggPxOXpQTy0/8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/cssnano-preset-default/download/cssnano-preset-default-4.0.8.tgz}
@@ -8771,6 +8768,10 @@ packages:
       ajv-keywords: 5.1.0_ajv@8.8.2
     dev: true
 
+  /script_sanitize/1.2.6:
+    resolution: {integrity: sha512-CA53o9tyResT5Sq8HT4w6jcmHoYtfbBxRKvaBQc0Iw0kS4+c9MDNwl1ReUcFjbb/GFm8YjB7diTJE10MWOnHNQ==}
+    dev: false
+
   /scroll-into-view-if-needed/2.2.28:
     resolution: {integrity: sha512-8LuxJSuFVc92+0AdNv4QOxRL4Abeo1DgLnGNkn1XlaujPH/3cCFz3QI60r2VNu4obJJROzgnIUw5TKQkZvZI1w==}
     dependencies:
@@ -10172,15 +10173,6 @@ packages:
   /xmlhttprequest-ssl/2.0.0:
     resolution: {integrity: sha1-kTYMhrkU5n9E3OdpGAAnwNphjGc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/xmlhttprequest-ssl/download/xmlhttprequest-ssl-2.0.0.tgz}
     engines: {node: '>=0.4.0'}
-    dev: false
-
-  /xss/1.0.11:
-    resolution: {integrity: sha512-EimjrjThZeK2MO7WKR9mN5ZC1CSqivSl55wvUK5EtU6acf0rzEE1pN+9ZDrFXJ82BRp3JL38pPE6S4o/rpp1zQ==}
-    engines: {node: '>= 0.10.0'}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-      cssfilter: 0.0.10
     dev: false
 
   /xtend/4.0.2:

@@ -2,17 +2,20 @@ import React, { useMemo } from 'react';
 import { encode } from 'js-base64';
 import { isValidStr } from '@capital/common';
 import { Translate } from '../translate';
-import { FilterXSS, getDefaultWhiteList } from 'xss';
-import _mapValues from 'lodash/mapValues';
+import { sanitize } from 'script_sanitize';
 
-const xss = new FilterXSS({
-  // 允许style存在
-  whiteList: {
-    ..._mapValues(getDefaultWhiteList(), (v) => [...v, 'style']),
-    style: [],
-  },
-  css: false,
-});
+function getInjectedStyle() {
+  try {
+    // 当前面板文本颜色
+    const currentTextColor = document.defaultView.getComputedStyle(
+      document.querySelector('.tc-content-background')
+    ).color;
+
+    return `<style>body { color: ${currentTextColor} }</style>`;
+  } catch (e) {
+    return '';
+  }
+}
 
 const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const panelInfo = props.panelInfo;
@@ -24,9 +27,10 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const html = panelInfo?.meta?.html;
   const src = useMemo(() => {
     if (isValidStr(html)) {
+      const appendHtml = getInjectedStyle(); // 额外追加的样式
       try {
         return `data:text/html;charset=utf8;base64,${encode(
-          xss.process(html)
+          sanitize(html + appendHtml, { replacementText: 'No allowed script' })
         )}`;
       } catch (e) {
         return undefined;
