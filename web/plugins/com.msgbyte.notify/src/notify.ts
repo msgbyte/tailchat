@@ -18,19 +18,20 @@ export function initNotify() {
 
         // TODO: 需要增加所在群组
         if (Notification.permission === 'granted') {
-          Promise.all([getCachedUserInfo(currentUserId)]).then(([userInfo]) => {
-            console.log(userInfo, message);
-            const nickname = userInfo?.nickname ?? '';
-            const icon = userInfo?.avatar ?? undefined;
-            const content = message.content;
+          Promise.all([getCachedUserInfo(message.author)]).then(
+            ([userInfo]) => {
+              const nickname = userInfo?.nickname ?? '';
+              const icon = userInfo?.avatar ?? undefined;
+              const content = message.content;
 
-            new Notification(`来自 ${nickname}`, {
-              body: content,
-              icon,
-              tag: 'tailchat-message',
-              renotify: true,
-            });
-          });
+              new Notification(`来自 ${nickname}`, {
+                body: content,
+                icon,
+                tag: 'tailchat-message',
+                renotify: true,
+              });
+            }
+          );
         }
       }
     },
