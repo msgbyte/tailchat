@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ensureDMConverse } from '../../helper/converse-helper';
 import { useAsync } from '../../hooks/useAsync';
 import { showErrorToasts } from '../../manager/ui';
@@ -21,11 +21,13 @@ import {
 import { MessageHelper } from '../../utils/message-helper';
 import { ChatConverseType } from '../../model/converse';
 import { sharedEvent } from '../../event';
+import { useUpdateRef } from '../../hooks/useUpdateRef';
 
 function useHandleSendMessage(context: ConverseContext) {
   const { converseId } = context;
   const dispatch = useAppDispatch();
   const { hasContext, replyMsg, clearReplyMsg } = useChatBoxContext();
+  const replyMsgRef = useUpdateRef(replyMsg); // NOTICE: 这个是为了修复一个边界case: 当先输入文本再选中消息回复时，直接发送无法带上回复信息
 
   /**
    * 发送消息
@@ -43,8 +45,8 @@ function useHandleSendMessage(context: ConverseContext) {
         if (hasContext === true) {
           // 如果有上下文, 则组装payload
           const msgHelper = new MessageHelper(payload);
-          if (!_isNil(replyMsg)) {
-            msgHelper.setReplyMsg(replyMsg);
+          if (!_isNil(replyMsgRef.current)) {
+            msgHelper.setReplyMsg(replyMsgRef.current);
             clearReplyMsg();
           }
 
@@ -65,7 +67,7 @@ function useHandleSendMessage(context: ConverseContext) {
         showErrorToasts(err);
       }
     },
-    [converseId, hasContext, replyMsg, clearReplyMsg]
+    [converseId, hasContext, clearReplyMsg]
   );
 
   return handleSendMessage;
