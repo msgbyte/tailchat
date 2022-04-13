@@ -61,7 +61,14 @@ const OAuth: React.FC = React.memo(() => {
         <FullModalField
           title={'允许的回调地址'}
           tip="多个回调地址单独一行"
-          value={(oauth?.redirectUrls ?? []).join(',')}
+          content={
+            <>
+              {(oauth?.redirectUrls ?? []).map((url, i) => (
+                <p key={i}>{url}</p>
+              ))}
+            </>
+          }
+          value={(oauth?.redirectUrls ?? []).join('\n')}
           editable={true}
           renderEditor={DefaultFullModalTextAreaEditorRender}
           onSave={(str: string) =>
