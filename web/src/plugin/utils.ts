@@ -1,4 +1,4 @@
-import { isValidJson, PluginManifest, t } from 'tailchat-shared';
+import { isValidJson, parseUrlStr, PluginManifest, t } from 'tailchat-shared';
 import { Validator } from 'jsonschema';
 
 /**
@@ -35,6 +35,9 @@ export function parsePluginManifest(json: string): PluginManifest {
 
     throw new Error(t('不是一个合法的插件配置'));
   }
+
+  // 后端url策略。根据前端的url在获取时自动变更为当前链接的后端地址
+  obj.url = parseUrlStr(obj.url);
 
   return obj;
 }
