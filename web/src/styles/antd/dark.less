@@ -270,4 +270,35 @@
       }
     }
   }
+
+  .ant-select {
+    .ant-select-selector {
+      background-color: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .ant-select-arrow {
+      color: rgba(0, 0, 0, 0.3)
+    }
+  }
+
+  .ant-select-dropdown {
+    background-color: #1f1f1f;
+
+    .ant-select-item {
+      color: rgba(255,255,255,.85);
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgba(255,255,255,.2);
+      }
+    }
+
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+      color: rgba(255,255,255,.85);
+      font-weight: 600;
+      background-color: #111b26;
+    }
+  }
 }

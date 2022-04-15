@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Select } from 'antd';
-import { GroupPanelType, useGroupPanels } from 'tailchat-shared';
+import { GroupPanelType, t, useGroupPanels } from 'tailchat-shared';
 import { useGroupIdContext } from '@/context/GroupIdContext';
 
 const { Option } = Select;
@@ -28,7 +28,11 @@ export const GroupPanelSelector: React.FC<GroupPanelSelectorProps> = React.memo(
     );
 
     return (
-      <Select value={props.value} onChange={props.onChange}>
+      <Select
+        placeholder={t('请选择面板')}
+        value={props.value}
+        onChange={props.onChange}
+      >
         {filteredPanels.map((p) => (
           <Option key={p.id} value={p.id}>
             {p.name}

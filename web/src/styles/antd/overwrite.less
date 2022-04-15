@@ -43,6 +43,11 @@
   }
 }
 
-.ant-table-tbody {
-  @apply select-text;
+.ant-table{
+  .ant-table-content {
+    @apply overflow-auto;
+    .ant-table-tbody {
+      @apply select-text;
+    }
+  }
 }
