@@ -40,6 +40,7 @@ export {
   fieldSchema,
   fetchAvailableServices,
   isValidStr,
+  useGroupPanelInfo,
 } from 'tailchat-shared';
 export { useLocation, useHistory } from 'react-router';
 
