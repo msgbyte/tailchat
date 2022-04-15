@@ -7,7 +7,7 @@ import {
   GroupPanelType,
   t,
   useGroupInfo,
-  useGroupPanel,
+  useGroupPanelInfo,
 } from 'tailchat-shared';
 import { useGroupPanelParams } from './utils';
 
@@ -19,7 +19,7 @@ export const GroupPanelRender: React.FC<GroupPanelRenderProps> = React.memo(
   (props) => {
     const { groupId, panelId } = props;
     const groupInfo = useGroupInfo(groupId);
-    const panelInfo = useGroupPanel(groupId, panelId);
+    const panelInfo = useGroupPanelInfo(groupId, panelId);
 
     if (groupInfo === null) {
       return (

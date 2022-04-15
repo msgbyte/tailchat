@@ -1,7 +1,7 @@
 import { ChatBox } from '@/components/ChatBox';
 import { ChatInputMentionsContextProvider } from '@/components/ChatBox/ChatInputBox/context';
 import React from 'react';
-import { useGroupPanel, useGroupMemberInfos } from 'tailchat-shared';
+import { useGroupPanelInfo, useGroupMemberInfos } from 'tailchat-shared';
 import { GroupPanelWrapper } from './Wrapper';
 
 interface TextPanelProps {
@@ -11,7 +11,7 @@ interface TextPanelProps {
 export const TextPanel: React.FC<TextPanelProps> = React.memo(
   ({ groupId, panelId }) => {
     const groupMembers = useGroupMemberInfos(groupId);
-    const panelInfo = useGroupPanel(groupId, panelId);
+    const panelInfo = useGroupPanelInfo(groupId, panelId);
     if (panelInfo === undefined) {
       return null;
     }

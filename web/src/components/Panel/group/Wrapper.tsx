@@ -1,5 +1,5 @@
 import React from 'react';
-import { t, useGroupPanel } from 'tailchat-shared';
+import { t, useGroupPanelInfo } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { MembersPanel } from './MembersPanel';
 import { CommonPanelWrapper } from '../common/Wrapper';
@@ -21,7 +21,7 @@ interface GroupPanelWrapperProps {
 }
 export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
   (props) => {
-    const panelInfo = useGroupPanel(props.groupId, props.panelId);
+    const panelInfo = useGroupPanelInfo(props.groupId, props.panelId);
 
     if (_isNil(panelInfo)) {
       return null;

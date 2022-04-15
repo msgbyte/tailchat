@@ -35,17 +35,26 @@ export function useGroupMemberInfos(groupId: string): UserBaseInfo[] {
 }
 
 /**
+ * 获取群组面板列表
+ */
+export function useGroupPanels(groupId: string): GroupPanel[] {
+  const groupInfo = useGroupInfo(groupId);
+
+  return useMemo(() => groupInfo?.panels ?? [], [groupId]);
+}
+
+/**
  * 获取群组面板信息
  */
-export function useGroupPanel(
+export function useGroupPanelInfo(
   groupId: string,
   panelId: string
 ): GroupPanel | null {
-  const groupInfo = useGroupInfo(groupId);
+  const panels = useGroupPanels(groupId);
 
   return useMemo(
-    () => groupInfo?.panels.find((p) => p.id === panelId) ?? null,
-    [groupInfo, panelId]
+    () => panels.find((p) => p.id === panelId) ?? null,
+    [groupId, panelId]
   );
 }
 

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import { GroupPanel, useGroupPanel } from 'tailchat-shared';
+import { GroupPanel, useGroupPanelInfo } from 'tailchat-shared';
 
 /**
  * 获取群组面板的参数

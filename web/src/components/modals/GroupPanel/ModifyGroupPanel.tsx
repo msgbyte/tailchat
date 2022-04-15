@@ -7,7 +7,7 @@ import {
   createFastFormSchema,
   fieldSchema,
   showToasts,
-  useGroupPanel,
+  useGroupPanelInfo,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../../Modal';
 import { WebFastForm } from '../../WebFastForm';
@@ -32,7 +32,7 @@ export const ModalModifyGroupPanel: React.FC<{
   groupPanelId: string;
   onSuccess?: () => void;
 }> = React.memo((props) => {
-  const groupPanelInfo = useGroupPanel(props.groupId, props.groupPanelId);
+  const groupPanelInfo = useGroupPanelInfo(props.groupId, props.groupPanelId);
   const [currentValues, setValues] = useState<Partial<GroupPanelValues>>({});
 
   const [, handleSubmit] = useAsyncRequest(

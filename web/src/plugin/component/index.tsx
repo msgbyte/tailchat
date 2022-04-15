@@ -23,3 +23,4 @@ export {
 } from '@/components/FullModal/Field';
 export { Loading } from '@/components/Loading';
 export { SidebarView } from '@/components/SidebarView';
+export { GroupPanelSelector } from '@/components/GroupPanelSelector';
