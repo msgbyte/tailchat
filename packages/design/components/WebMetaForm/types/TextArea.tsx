@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input, Form } from 'antd';
-import type { FastFormFieldComponent } from 'tailchat-shared';
+import type { MetaFormFieldComponent } from 'meta-form';
 import { getValidateStatus } from '../utils';
 
-export const FastFormText: FastFormFieldComponent = React.memo((props) => {
+export const MetaFormTextArea: MetaFormFieldComponent = React.memo((props) => {
   const { name, label, value, onChange, error, maxLength, placeholder } = props;
 
   return (
@@ -12,9 +12,9 @@ export const FastFormText: FastFormFieldComponent = React.memo((props) => {
       validateStatus={getValidateStatus(error)}
       help={error}
     >
-      <Input
+      <Input.TextArea
         name={name}
-        size="large"
+        rows={4}
         maxLength={maxLength}
         placeholder={placeholder}
         value={value}
@@ -23,4 +23,4 @@ export const FastFormText: FastFormFieldComponent = React.memo((props) => {
     </Form.Item>
   );
 });
-FastFormText.displayName = 'FastFormText';
+MetaFormTextArea.displayName = 'MetaFormTextArea';

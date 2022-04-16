@@ -2,19 +2,18 @@ import { UserSelector } from '@/components/UserSelector';
 import React from 'react';
 import { useMemo } from 'react';
 import {
-  FastFormFieldMeta,
   GroupPanelType,
   isDevelopment,
   t,
-  useFastFormContext,
   useGroupMemberIds,
 } from 'tailchat-shared';
+import { MetaFormFieldMeta, useMetaFormContext } from 'tailchat-design';
 import type { GroupPanelValues } from './types';
 import _compact from 'lodash/compact';
 import { pluginGroupPanel } from '@/plugin/common';
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 
-const baseFields: FastFormFieldMeta[] = [
+const baseFields: MetaFormFieldMeta[] = [
   { type: 'text', name: 'name', label: t('面板名') },
   {
     type: 'select',
@@ -44,7 +43,7 @@ export function useGroupPanelFields(
   const disableSendMessageWithoutRender = useMemo(() => {
     const DisableSendMessageWithoutComponent: React.FC = () => {
       const groupMemberUUIDs = useGroupMemberIds(groupId);
-      const context = useFastFormContext();
+      const context = useMetaFormContext();
 
       return (
         <UserSelector
@@ -80,7 +79,7 @@ export function useGroupPanelFields(
           label: t('仅允许指定用户发言'),
           render: disableSendMessageWithoutRender,
         },
-      ]) as FastFormFieldMeta[];
+      ]) as MetaFormFieldMeta[];
     }
 
     if (typeof currentValues.type === 'string') {

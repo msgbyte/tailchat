@@ -3,10 +3,10 @@ import {
   buildRegFn,
   buildRegList,
   ChatMessage,
-  FastFormFieldMeta,
   GroupPanel,
   regSocketEventListener,
 } from 'tailchat-shared';
+import type { MetaFormFieldMeta } from 'tailchat-design';
 
 /**
  * 注册自定义面板
@@ -68,7 +68,7 @@ export interface PluginGroupPanel {
   /**
    * 额外的表单数据, 用于创建面板时使用
    */
-  extraFormMeta: FastFormFieldMeta[];
+  extraFormMeta: MetaFormFieldMeta[];
 
   /**
    * 该面板如何渲染

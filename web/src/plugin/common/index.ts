@@ -36,13 +36,23 @@ export {
   uploadFile,
   showToasts,
   showErrorToasts,
-  createFastFormSchema,
-  fieldSchema,
   fetchAvailableServices,
   isValidStr,
   useGroupPanelInfo,
 } from 'tailchat-shared';
+
 export { useLocation, useHistory } from 'react-router';
+
+export {
+  /**
+   * @deprecated please use createMetaFormSchema
+   */
+  createMetaFormSchema as createFastFormSchema,
+  /**
+   * @deprecated please use metaFormFieldSchema
+   */
+  metaFormFieldSchema as fieldSchema,
+} from 'tailchat-design';
 
 /**
  * 处理axios的request config

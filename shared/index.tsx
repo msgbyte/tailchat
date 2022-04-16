@@ -15,23 +15,6 @@ export {
 export { useCachedUserInfo, useCachedOnlineStatus } from './cache/useCache';
 
 // components
-export {
-  FastForm,
-  CustomField,
-  regField,
-  regFormContainer,
-} from './components/FastForm/index';
-export type {
-  FastFormFieldComponent,
-  FastFormFieldProps,
-  FastFormFieldMeta,
-  FastFormContainerComponent,
-} from './components/FastForm/index';
-export {
-  createFastFormSchema,
-  fieldSchema,
-} from './components/FastForm/schema';
-export { useFastFormContext } from './components/FastForm/context';
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
 export { TcProvider } from './components/Provider';
 

@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { Select, Form } from 'antd';
 import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
-import type { FastFormFieldComponent } from 'tailchat-shared';
+import type { MetaFormFieldComponent } from 'meta-form';
 
 const Option = Select.Option;
 
-interface FastFormSelectOptionsItem {
+interface MetaFormSelectOptionsItem {
   label: string;
   value: string;
 }
 
-export const FastFormSelect: FastFormFieldComponent<{
-  options: FastFormSelectOptionsItem[];
+export const MetaFormSelect: MetaFormFieldComponent<{
+  options: MetaFormSelectOptionsItem[];
 }> = React.memo((props) => {
   const { name, label, value, onChange, options } = props;
 
@@ -35,4 +35,4 @@ export const FastFormSelect: FastFormFieldComponent<{
     </Form.Item>
   );
 });
-FastFormSelect.displayName = 'FastFormSelect';
+MetaFormSelect.displayName = 'MetaFormSelect';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form, Checkbox } from 'antd';
-import type { FastFormFieldComponent } from 'tailchat-shared';
+import type { MetaFormFieldComponent } from 'meta-form';
 import { getValidateStatus } from '../utils';
 
-export const FastFormCheckbox: FastFormFieldComponent = React.memo((props) => {
+export const MetaFormCheckbox: MetaFormFieldComponent = React.memo((props) => {
   const { name, label, value, onChange, error } = props;
 
   return (
@@ -22,4 +22,4 @@ export const FastFormCheckbox: FastFormFieldComponent = React.memo((props) => {
     </Form.Item>
   );
 });
-FastFormCheckbox.displayName = 'FastFormCheckbox';
+MetaFormCheckbox.displayName = 'MetaFormCheckbox';

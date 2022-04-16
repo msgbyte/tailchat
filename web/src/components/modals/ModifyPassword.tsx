@@ -1,15 +1,17 @@
 import React from 'react';
 import {
-  createFastFormSchema,
-  FastFormFieldMeta,
-  fieldSchema,
   modifyUserPassword,
   showToasts,
   t,
   useAsyncRequest,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../Modal';
-import { WebFastForm } from '../WebFastForm';
+import {
+  createMetaFormSchema,
+  MetaFormFieldMeta,
+  metaFormFieldSchema,
+  WebMetaForm,
+} from 'tailchat-design';
 
 interface Values {
   oldPassword: string;
@@ -17,7 +19,7 @@ interface Values {
   newPasswordRepeat: string;
 }
 
-const fields: FastFormFieldMeta[] = [
+const fields: MetaFormFieldMeta[] = [
   {
     type: 'password',
     name: 'oldPassword',
@@ -35,16 +37,16 @@ const fields: FastFormFieldMeta[] = [
   },
 ];
 
-const schema = createFastFormSchema({
-  oldPassword: fieldSchema
+const schema = createMetaFormSchema({
+  oldPassword: metaFormFieldSchema
     .string()
     .min(6, t('密码不能低于6位'))
     .required(t('密码不能为空')),
-  newPassword: fieldSchema
+  newPassword: metaFormFieldSchema
     .string()
     .min(6, t('密码不能低于6位'))
     .required(t('密码不能为空')),
-  newPasswordRepeat: fieldSchema
+  newPasswordRepeat: metaFormFieldSchema
     .string()
     .min(6, t('密码不能低于6位'))
     .required(t('密码不能为空')),
@@ -72,7 +74,7 @@ export const ModifyPassword: React.FC<ModifyPasswordProps> = React.memo(
 
     return (
       <ModalWrapper title={t('修改密码')}>
-        <WebFastForm
+        <WebMetaForm
           schema={schema}
           fields={fields}
           onSubmit={handleModifyPassword}

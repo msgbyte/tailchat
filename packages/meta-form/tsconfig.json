@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "lib": ["DOM"],
+    "jsx": "react",
+    "outDir": "./lib",
+    "declaration": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "importsNotUsedAsValues": "error",
+  }
+}

@@ -15,7 +15,15 @@ export { Image } from '@/components/Image';
 export { Icon } from '@/components/Icon';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
 export { LoadingSpinner } from '@/components/LoadingSpinner';
-export { WebFastForm } from '@/components/WebFastForm';
+export {
+  /**
+   * @deprecated please use WebMetaForm
+   */
+  WebMetaForm as WebFastForm,
+  WebMetaForm,
+  createMetaFormSchema,
+  metaFormFieldSchema,
+} from 'tailchat-design';
 export {
   FullModalField,
   DefaultFullModalInputEditorRender,

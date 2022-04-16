@@ -1,27 +1,27 @@
 import React, { useMemo } from 'react';
 import {
-  FastForm,
+  MetaForm,
   regField,
-  FastFormContainerComponent,
+  MetaFormContainerComponent,
   regFormContainer,
-} from 'tailchat-shared';
+} from 'meta-form';
 import { Form, Button } from 'antd';
 
-import { FastFormText } from './types/Text';
-import { FastFormTextArea } from './types/TextArea';
-import { FastFormPassword } from './types/Password';
-import { FastFormSelect } from './types/Select';
-import { FastFormCheckbox } from './types/Checkbox';
-import { FastFormCustom } from './types/Custom';
+import { MetaFormText } from './types/Text';
+import { MetaFormTextArea } from './types/TextArea';
+import { MetaFormPassword } from './types/Password';
+import { MetaFormSelect } from './types/Select';
+import { MetaFormCheckbox } from './types/Checkbox';
+import { MetaFormCustom } from './types/Custom';
 
-regField('text', FastFormText);
-regField('textarea', FastFormTextArea);
-regField('password', FastFormPassword);
-regField('select', FastFormSelect);
-regField('checkbox', FastFormCheckbox);
-regField('custom', FastFormCustom);
+regField('text', MetaFormText);
+regField('textarea', MetaFormTextArea);
+regField('password', MetaFormPassword);
+regField('select', MetaFormSelect);
+regField('checkbox', MetaFormCheckbox);
+regField('custom', MetaFormCustom);
 
-const WebFastFormContainer: FastFormContainerComponent = React.memo((props) => {
+const WebMetaFormContainer: MetaFormContainerComponent = React.memo((props) => {
   const layout = props.layout;
   const submitButtonRender = useMemo(() => {
     return (
@@ -64,8 +64,8 @@ const WebFastFormContainer: FastFormContainerComponent = React.memo((props) => {
     </Form>
   );
 });
-WebFastFormContainer.displayName = 'WebFastFormContainer';
-regFormContainer(WebFastFormContainer);
+WebMetaFormContainer.displayName = 'WebMetaFormContainer';
+regFormContainer(WebMetaFormContainer);
 
-export const WebFastForm = FastForm;
-WebFastForm.displayName = 'WebFastForm';
+export const WebMetaForm = MetaForm;
+WebMetaForm.displayName = 'WebMetaForm';

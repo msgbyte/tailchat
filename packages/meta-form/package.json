@@ -1,17 +1,23 @@
 {
-  "name": "tailchat-design",
+  "name": "meta-form",
   "version": "1.0.0",
-  "description": "Tailchat 的前端组件",
+  "description": "基于Meta信息快速构建Form表单",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": ["lib"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/msgbyte/tailchat.git"
   },
   "keywords": [
-    "design",
-    "tailchat"
+    "meta",
+    "form",
+    "react",
+    "formik"
   ],
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
@@ -19,17 +25,15 @@
     "url": "https://github.com/msgbyte/tailchat/issues"
   },
   "homepage": "https://github.com/msgbyte/tailchat#readme",
-  "dependencies": {
-    "@iconify/react": "^3.2.1",
-    "antd": "^4.19.5",
-    "meta-form": "workspace:^1.0.0"
-  },
   "devDependencies": {
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "formik": "^2.2.9",
+    "yup": "^0.32.9"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "17.0.2"
   }
 }

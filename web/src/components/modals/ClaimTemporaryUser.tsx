@@ -3,16 +3,18 @@ import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import React from 'react';
 import {
   claimTemporaryUser,
-  createFastFormSchema,
-  FastFormFieldMeta,
-  fieldSchema,
   t,
   useAppDispatch,
   useAsyncRequest,
   userActions,
 } from 'tailchat-shared';
+import {
+  createMetaFormSchema,
+  MetaFormFieldMeta,
+  metaFormFieldSchema,
+  WebMetaForm,
+} from 'tailchat-design';
 import { ModalWrapper } from '../Modal';
-import { WebFastForm } from '../WebFastForm';
 
 interface Values {
   email: string;
@@ -20,7 +22,7 @@ interface Values {
   [key: string]: unknown;
 }
 
-const fields: FastFormFieldMeta[] = [
+const fields: MetaFormFieldMeta[] = [
   { type: 'text', name: 'email', label: t('邮箱') },
   {
     type: 'password',
@@ -29,12 +31,12 @@ const fields: FastFormFieldMeta[] = [
   },
 ];
 
-const schema = createFastFormSchema({
-  email: fieldSchema
+const schema = createMetaFormSchema({
+  email: metaFormFieldSchema
     .string()
     .required(t('邮箱不能为空'))
     .email(t('邮箱格式不正确')),
-  password: fieldSchema
+  password: metaFormFieldSchema
     .string()
     .min(6, t('密码不能低于6位'))
     .required(t('密码不能为空')),
@@ -68,7 +70,7 @@ export const ClaimTemporaryUser: React.FC<ClaimTemporaryUserProps> = React.memo(
 
     return (
       <ModalWrapper title={t('认领账号')}>
-        <WebFastForm schema={schema} fields={fields} onSubmit={handleClaim} />
+        <WebMetaForm schema={schema} fields={fields} onSubmit={handleClaim} />
       </ModalWrapper>
     );
   }
