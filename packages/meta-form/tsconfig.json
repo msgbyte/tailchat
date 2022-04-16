@@ -7,7 +7,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "strict": true,
     "importsNotUsedAsValues": "error",
