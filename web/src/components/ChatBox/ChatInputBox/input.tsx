@@ -27,6 +27,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         className="chatbox-mention-input"
         placeholder={t('输入一些什么')}
         singleLine={true}
+        maxLength={1000}
         value={props.value}
         onChange={(e, newValue, _, mentions) =>
           props.onChange(
