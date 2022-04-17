@@ -4,6 +4,7 @@ import _isNil from 'lodash/isNil';
 import { useDrag } from 'react-use-gesture';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const PageContentRoot: React.FC = (props) => (
   <div className="flex flex-row flex-1 overflow-hidden">{props.children}</div>
@@ -87,7 +88,7 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
   const contentEl = children;
 
   const el = (
-    <>
+    <ErrorBoundary>
       {sidebarEl}
 
       <div
@@ -108,7 +109,7 @@ export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
           {contentEl}
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 
   if (isMobile) {
