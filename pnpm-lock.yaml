@@ -247,6 +247,7 @@ importers:
       webpack-bundle-analyzer: ^4.5.0
       webpack-cli: ^4.9.1
       webpack-dev-server: ^4.3.1
+      webpackbar: ^5.0.2
       workbox-webpack-plugin: ^6.5.1
       yup: ^0.32.9
     dependencies:
@@ -342,6 +343,7 @@ importers:
       webpack-bundle-analyzer: 4.5.0
       webpack-cli: 4.9.1_85f6a43a0f60b39f22a1ad0f4ebf626a
       webpack-dev-server: 4.7.1_webpack-cli@4.9.1+webpack@5.65.0
+      webpackbar: 5.0.2_webpack@5.65.0
       workbox-webpack-plugin: 6.5.1_webpack@5.65.0
 
   web/plugins/com.msgbyte.bbcode:
@@ -3242,6 +3244,12 @@ packages:
     dependencies:
       color-convert: 1.9.3
 
+  /ansi-styles/4.3.0:
+    resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
+    engines: {node: '>=8'}
+    dependencies:
+      color-convert: 2.0.1
+
   /ansi-styles/5.2.0:
     resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
     engines: {node: '>=10'}
@@ -3752,15 +3760,15 @@ packages:
     resolution: {integrity: sha1-P3PCv1JlkfV0zEksUeJFY0n4ROQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/chalk/download/chalk-3.0.0.tgz}
     engines: {node: '>=8'}
     dependencies:
-      ansi-styles: registry.nlark.com/ansi-styles/4.3.0
+      ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
 
   /chalk/4.1.2:
-    resolution: {integrity: sha1-qsTit3NKdAhnrrFr8CqtVWoeegE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/chalk/download/chalk-4.1.2.tgz}
+    resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
     dependencies:
-      ansi-styles: registry.nlark.com/ansi-styles/4.3.0
+      ansi-styles: 4.3.0
       supports-color: 7.2.0
 
   /character-entities-legacy/1.1.4:
@@ -3963,6 +3971,10 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  /consola/2.15.3:
+    resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
+    dev: true
 
   /content-disposition/0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/content-disposition/download/content-disposition-0.5.4.tgz}
@@ -7252,8 +7264,13 @@ packages:
     dependencies:
       '@jest/types': 27.4.2
       ansi-regex: registry.nlark.com/ansi-regex/5.0.1
-      ansi-styles: registry.nlark.com/ansi-styles/5.2.0
+      ansi-styles: 5.2.0
       react-is: 17.0.2
+    dev: true
+
+  /pretty-time/1.1.0:
+    resolution: {integrity: sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==}
+    engines: {node: '>=4'}
     dev: true
 
   /prompts/2.4.2:
@@ -8856,6 +8873,10 @@ packages:
     resolution: {integrity: sha1-g26zyDgv4pNv6vVEYxAXzn1Ho88=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/stable/download/stable-0.1.8.tgz}
     dev: false
 
+  /std-env/3.1.1:
+    resolution: {integrity: sha512-/c645XdExBypL01TpFKiG/3RAa/Qmu+zRi0MwAmrdEkwHNuN0ebo8ccAXBBDa5Z0QOJgBskUIbuCK91x0sCVEw==}
+    dev: true
+
   /str2int/1.1.0:
     resolution: {integrity: sha1-8FW+wm94KSHgVE8Ml8AJ/0ZvE+U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/str2int/download/str2int-1.1.0.tgz}
     dev: false
@@ -9819,6 +9840,19 @@ packages:
       - uglify-js
     dev: true
 
+  /webpackbar/5.0.2_webpack@5.65.0:
+    resolution: {integrity: sha512-BmFJo7veBDgQzfWXl/wwYXr/VFus0614qZ8i9znqcl9fnEdiVkdbi0TedLQ6xAK92HZHDJ0QmyQ0fmuZPAgCYQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      webpack: 3 || 4 || 5
+    dependencies:
+      chalk: 4.1.2
+      consola: 2.15.3
+      pretty-time: 1.1.0
+      std-env: 3.1.1
+      webpack: 5.65.0_9def3870c80213359789f9191dbd286a
+    dev: true
+
   /whatwg-url/7.1.0:
     resolution: {integrity: sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==}
     dependencies:
@@ -10508,13 +10542,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       color-convert: 2.0.1
-
-  registry.nlark.com/ansi-styles/5.2.0:
-    resolution: {integrity: sha1-B0SWkK1Fd30ZJKwquy/IiV26g2s=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/ansi-styles/download/ansi-styles-5.2.0.tgz}
-    name: ansi-styles
-    version: 5.2.0
-    engines: {node: '>=10'}
-    dev: true
 
   registry.nlark.com/anymatch/3.1.2:
     resolution: {integrity: sha1-wFV8CWrzLxBhmPT04qODU343hxY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/anymatch/download/anymatch-3.1.2.tgz}

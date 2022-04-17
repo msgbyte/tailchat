@@ -11,6 +11,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import WebpackBar from 'webpackbar';
 import fs from 'fs';
 import WorkboxPlugin from 'workbox-webpack-plugin';
 import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
@@ -155,6 +156,9 @@ const plugins: Configuration['plugins'] = [
       },
       //#endregion
     ],
+  }),
+  new WebpackBar({
+    name: `Tailchat`,
   }),
 ];
 
