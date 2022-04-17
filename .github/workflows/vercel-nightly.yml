@@ -22,3 +22,5 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID}}
           working-directory: ./
           vercel-args: '--prod'
+      - name: Notify to Service
+        run: curl https://paw-server-test.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback?text=新版前端代码部署完毕&subscribeId=${{ secrets.NOTIFY_SUB_ID}}
