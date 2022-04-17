@@ -23,4 +23,7 @@ jobs:
           working-directory: ./
           vercel-args: '--prod'
       - name: Notify to Service
-        run: curl https://paw-server-test.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback?text=新版前端代码部署完毕&subscribeId=${{ secrets.NOTIFY_SUB_ID}}
+        uses: muinmomin/webhook-action@v1.0.0
+        with:
+          url: https://paw-server-test.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback
+          data: "{'text': '新版前端代码部署完毕(${{ env.GITHUB_SHA }})', 'subscribeId': '${{ secrets.NOTIFY_SUB_ID}}'}"
