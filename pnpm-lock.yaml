@@ -227,6 +227,7 @@ importers:
       react-use-gesture: ^9.1.3
       react-virtualized-auto-sizer: ^1.0.6
       react-virtuoso: ^2.8.3
+      rimraf: ^3.0.2
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-replace: ^2.2.0
       socket.io-client: ^4.1.2
@@ -329,6 +330,7 @@ importers:
       mini-css-extract-plugin: 1.6.2_webpack@5.65.0
       postcss: 8.4.5
       postcss-loader: 6.2.1_postcss@8.4.5+webpack@5.65.0
+      rimraf: 3.0.2
       rollup-plugin-copy: 3.4.0
       rollup-plugin-replace: 2.2.0
       style-loader: 3.3.1_webpack@5.65.0
@@ -8496,7 +8498,7 @@ packages:
     dev: true
 
   /rimraf/3.0.2:
-    resolution: {integrity: sha1-8aVAK6YiCtUswSgrrBrjqkn9Bho=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/rimraf/download/rimraf-3.0.2.tgz}
+    resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
       glob: 7.2.0

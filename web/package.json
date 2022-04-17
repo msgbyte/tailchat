@@ -7,7 +7,7 @@
   "license": "GPLv3",
   "private": true,
   "scripts": {
-    "build": "pnpm plugins:all && pnpm build:webpack",
+    "build": "rimraf ./dist && pnpm plugins:all && pnpm build:webpack",
     "build:webpack": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack --config ./build/webpack.config.ts",
     "build:stats": "pnpm build:webpack --profile --json=compilation-stats.json",
     "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve --config ./build/webpack.config.ts",
@@ -103,6 +103,7 @@
     "mini-css-extract-plugin": "^1.6.2",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.0",
+    "rimraf": "^3.0.2",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-replace": "^2.2.0",
     "style-loader": "^3.0.0",

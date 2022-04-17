@@ -51,6 +51,6 @@ for (const lang of langs) {
       });
     })
     .then(() => {
-      console.log(`Build [${lang}] Success!`);
+      console.log(`Build Translation [${lang}] Success!`);
     });
 }
