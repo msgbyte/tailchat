@@ -83,6 +83,10 @@ const plugins: Configuration['plugins'] = [
         from: path.resolve(ROOT_PATH, './assets/images/logo/'),
         to: 'images/logo/',
       },
+      {
+        from: path.resolve(ROOT_PATH, './assets/vercel.json'),
+        to: 'vercel.json',
+      },
     ],
   }) as any,
   new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
