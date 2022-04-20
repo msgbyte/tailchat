@@ -5,6 +5,7 @@ import { MainProvider } from '../Main/Provider';
 import { t } from 'tailchat-shared';
 import { PersonalConverse } from '../Main/Content/Personal/Converse';
 import { GroupPanelRoute } from '../Main/Content/Group/Panel';
+import { GroupDetail } from '@/components/modals/GroupDetail';
 
 const PanelRoute: React.FC = React.memo(() => {
   useRecordMeasure('AppRouteRenderStart');
@@ -17,6 +18,16 @@ const PanelRoute: React.FC = React.memo(() => {
             exact={true}
             path="/panel/personal/converse/:converseId"
             component={PersonalConverse}
+          />
+          <Route
+            exact={true}
+            path="/panel/group/:groupId/detail"
+            render={(props) => (
+              <GroupDetail
+                groupId={props.match.params.groupId}
+                onClose={() => {}}
+              />
+            )}
           />
           <Route
             exact={true}

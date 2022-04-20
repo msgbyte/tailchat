@@ -9,6 +9,7 @@ import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
 import { GroupPanel } from './Panel';
+import { GroupRole } from './Role';
 import { GroupSummary } from './Summary';
 
 interface SettingsViewProps {
@@ -42,6 +43,12 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('面板'),
             content: <GroupPanel groupId={groupId} />,
+          },
+          {
+            type: 'item',
+            title: t('身份组'),
+            isDev: true,
+            content: <GroupRole groupId={groupId} />,
           },
         ],
       },
