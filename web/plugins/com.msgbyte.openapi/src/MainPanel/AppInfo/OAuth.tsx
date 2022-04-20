@@ -6,12 +6,12 @@ import {
 } from '@capital/component';
 import { useOpenAppInfo } from '../context';
 import { OpenAppCapability } from '../types';
-import { postRequest, useAsyncFn } from '@capital/common';
+import { postRequest, useAsyncRequest } from '@capital/common';
 
 const OAuth: React.FC = React.memo(() => {
   const { refresh, appId, capability, oauth } = useOpenAppInfo();
 
-  const [{ loading }, handleChangeOAuthCapability] = useAsyncFn(
+  const [{ loading }, handleChangeOAuthCapability] = useAsyncRequest(
     async (checked: boolean) => {
       const newCapability: OpenAppCapability[] = [...capability];
       const findIndex = newCapability.findIndex((c) => c === 'oauth');
