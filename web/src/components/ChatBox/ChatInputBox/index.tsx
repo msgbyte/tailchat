@@ -58,7 +58,6 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   useSharedEventHandler('replyMessage', async (payload) => {
     if (inputRef.current) {
       inputRef.current.focus();
-      console.log(payload);
       if (payload && isValidStr(payload?.author)) {
         const userInfo = await getCachedUserInfo(payload.author);
         setMessage(
