@@ -10,6 +10,8 @@
     "test:all": "playwright test",
     "test:debug": "playwright test --debug",
     "test:watch": "playwright-watch exec yarn test",
+    "install:chromium": "playwright install chromium",
+    "install:ci:deps": "playwright install-deps",
     "open": "playwright open --load-storage auth.json http://localhost:11011",
     "codegen": "playwright codegen --load-storage auth.json http://localhost:11011",
     "trace": "playwright show-trace"
