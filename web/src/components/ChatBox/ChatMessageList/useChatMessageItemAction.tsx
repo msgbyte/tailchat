@@ -5,6 +5,7 @@ import {
   ChatMessage,
   deleteMessage,
   recallMessage,
+  sharedEvent,
   t,
   useAsyncRequest,
   useChatBoxContext,
@@ -45,7 +46,7 @@ export function useChatMessageItemAction(
         <Menu.Item
           key="reply"
           icon={<Icon icon="mdi:reply" />}
-          onClick={() => context.setReplyMsg(payload)}
+          onClick={() => sharedEvent.emit('replyMessage', payload)}
         >
           {t('回复')}
         </Menu.Item>

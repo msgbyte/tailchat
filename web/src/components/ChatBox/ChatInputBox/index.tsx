@@ -6,7 +6,12 @@ import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
 import { uploadMessageImage } from './utils';
 import { ChatInputBoxInput } from './input';
-import type { SendMessagePayloadMeta } from 'tailchat-shared';
+import {
+  getCachedUserInfo,
+  isValidStr,
+  SendMessagePayloadMeta,
+  useSharedEventHandler,
+} from 'tailchat-shared';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
@@ -49,6 +54,22 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
     },
     [props.onSendMsg]
   );
+
+  useSharedEventHandler('replyMessage', async (payload) => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      console.log(payload);
+      if (payload && isValidStr(payload?.author)) {
+        const userInfo = await getCachedUserInfo(payload.author);
+        setMessage(
+          `${getMessageTextDecorators().mention(
+            payload.author,
+            userInfo.nickname
+          )} ${message}`
+        );
+      }
+    }
+  });
 
   return (
     <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>

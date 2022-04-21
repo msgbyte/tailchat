@@ -1,12 +1,20 @@
 import React from 'react';
-import { t, useChatBoxContext } from 'tailchat-shared';
+import { t, useChatBoxContext, useSharedEventHandler } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { getMessageRender } from '@/plugin/common';
 import { UserName } from '../UserName';
 import { Icon } from '@/components/Icon';
 
 export const ChatReply: React.FC = React.memo(() => {
-  const { replyMsg, clearReplyMsg } = useChatBoxContext();
+  const { replyMsg, setReplyMsg, clearReplyMsg } = useChatBoxContext();
+
+  useSharedEventHandler('replyMessage', (payload) => {
+    /**
+     * 这里故意在本组件设置回复消息体而不是在事件发起方设置是为了确保当本组件不存在时
+     * 不会出现回复消息的值呗设置的情况
+     */
+    setReplyMsg(payload);
+  });
 
   if (_isNil(replyMsg)) {
     return null;

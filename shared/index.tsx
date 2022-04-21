@@ -30,7 +30,7 @@ export {
 } from './contexts/GroupInfoContext';
 
 // event
-export { sharedEvent } from './event/index';
+export { sharedEvent, useSharedEventHandler } from './event/index';
 
 // helper
 export { getDMConverseName } from './helper/converse-helper';
