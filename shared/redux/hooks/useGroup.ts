@@ -40,7 +40,7 @@ export function useGroupMemberInfos(groupId: string): UserBaseInfo[] {
 export function useGroupPanels(groupId: string): GroupPanel[] {
   const groupInfo = useGroupInfo(groupId);
 
-  return useMemo(() => groupInfo?.panels ?? [], [groupId]);
+  return useMemo(() => groupInfo?.panels ?? [], [groupInfo]);
 }
 
 /**
@@ -54,7 +54,7 @@ export function useGroupPanelInfo(
 
   return useMemo(
     () => panels.find((p) => p.id === panelId) ?? null,
-    [groupId, panelId]
+    [groupId, panelId, panels]
   );
 }
 

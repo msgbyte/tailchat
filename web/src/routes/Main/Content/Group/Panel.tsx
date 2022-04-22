@@ -1,5 +1,6 @@
 import { GroupPluginPanel } from '@/components/Panel/group/PluginPanel';
 import { TextPanel } from '@/components/Panel/group/TextPanel';
+import { Problem } from '@/components/Problem';
 import { Alert } from 'antd';
 import React from 'react';
 import {
@@ -32,13 +33,7 @@ export const GroupPanelRender: React.FC<GroupPanelRenderProps> = React.memo(
     }
 
     if (panelInfo === null) {
-      return (
-        <Alert
-          className="w-full text-center"
-          type="error"
-          message={t('面板不存在')}
-        />
-      );
+      return <Problem text={t('面板不存在')} />;
     }
 
     if (panelInfo.type === GroupPanelType.TEXT) {
