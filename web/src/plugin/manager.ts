@@ -2,10 +2,12 @@ import {
   getCachedRegistryPlugins,
   getStorage,
   PluginManifest,
+  t,
 } from 'tailchat-shared';
 import { initMiniStar, loadSinglePlugin } from 'mini-star';
 import _once from 'lodash/once';
 import { builtinPlugins } from './builtin';
+import { showPluginLoadError } from './showPluginLoadError';
 
 class PluginManager {
   /**
@@ -27,9 +29,17 @@ class PluginManager {
       url,
     }));
 
-    return initMiniStar({
+    const loadErrorPlugins = new Set<string>();
+    await initMiniStar({
       plugins,
+      onPluginLoadError: (err) => {
+        loadErrorPlugins.add(err.pluginName);
+      },
     });
+
+    if (loadErrorPlugins.size > 0) {
+      showPluginLoadError(Array.from(loadErrorPlugins));
+    }
   });
 
   /**

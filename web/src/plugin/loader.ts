@@ -4,11 +4,11 @@ import { pluginManager } from './manager';
 /**
  * 初始化插件
  */
-export function initPlugins(): Promise<void> {
+export async function initPlugins(): Promise<void> {
   registerDependencies();
   registerModules();
 
-  return pluginManager.initPlugins();
+  await pluginManager.initPlugins();
 }
 
 function registerDependencies() {
