@@ -87,7 +87,7 @@ class BBCodeParser {
           })
           // NOTICE: 这里排序看起来好像有问题，但是attrs的顺序是有序的，所以没有问题
           .join('');
-        return `[${tag}${attrsStr}]${content}[/${tag}]`;
+        return `[${tag}${attrsStr}]${content.join('')}[/${tag}]`;
       })
       .join('');
   }

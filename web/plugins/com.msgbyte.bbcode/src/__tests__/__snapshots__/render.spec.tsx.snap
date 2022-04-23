@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render <BBCode /> mention with space name 1`] = `
+<div>
+  <span
+    class="plugin-bbcode-mention-tag"
+    data-userid="6251986eab331ca2efbba9c6"
+  >
+    @
+    Notify Bot
+  </span>
+  <pre
+    style="display: inline; white-space: break-spaces;"
+  >
+     123123
+  </pre>
+</div>
+`;

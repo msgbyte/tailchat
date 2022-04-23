@@ -56,4 +56,20 @@ describe('bbcode parser', () => {
       ]);
     });
   });
+
+  test('with space', () => {
+    const ast = bbcodeParser.parse(
+      '[at=6251986eab331ca2efbba9c6]Notify Bot[/at] 123123'
+    );
+
+    expect(ast).toMatchObject([
+      {
+        tag: 'at',
+        attrs: { at: '6251986eab331ca2efbba9c6' },
+        content: ['Notify', ' ', 'Bot'],
+      },
+      ' ',
+      '123123',
+    ]);
+  });
 });
