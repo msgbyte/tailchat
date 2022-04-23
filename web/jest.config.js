@@ -1,6 +1,6 @@
 const regeneratorRuntime = require('regenerator-runtime');
 const { pathsToModuleNameMapper } = require('ts-jest');
-const webCompilerOptions = require('./tsconfig.json').compilerOptions;
+const webCompilerOptions = require('./tsconfig.test.json').compilerOptions;
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
@@ -25,5 +25,8 @@ module.exports = {
   setupFilesAfterEnv: [],
   globals: {
     window: {},
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json',
+    },
   },
 };
