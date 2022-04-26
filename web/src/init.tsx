@@ -8,6 +8,9 @@ import {
   setStorage,
   setToasts,
   setTokenGetter,
+  showErrorToasts,
+  t,
+  fetchGlobalConfig,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
@@ -49,4 +52,12 @@ setGlobalLoading((text) => {
   const hide = message.loading(text, 0);
 
   return hide;
+});
+
+/**
+ * 初始化时加载全局配置
+ */
+fetchGlobalConfig().catch((e) => {
+  showErrorToasts(t('全局配置加载失败'));
+  console.error('全局配置加载失败', e);
 });

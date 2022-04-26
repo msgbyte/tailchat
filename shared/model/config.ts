@@ -1,6 +1,4 @@
 import { request } from '../api/request';
-import { t } from '../i18n';
-import { showErrorToasts } from '../manager/ui';
 
 /**
  * 后端的全局设置
@@ -23,7 +21,7 @@ export function getGlobalConfig() {
   };
 }
 
-export async function fetchConfig() {
+export async function fetchGlobalConfig(): Promise<GlobalConfig> {
   const { data: config } = await request.get('/api/config/global');
 
   globalConfig = {
@@ -33,11 +31,3 @@ export async function fetchConfig() {
 
   return config;
 }
-
-/**
- * 加载时立即尝试执行
- */
-fetchConfig().catch((e) => {
-  showErrorToasts(t('全局配置加载失败'));
-  console.error('全局配置加载失败', e);
-});

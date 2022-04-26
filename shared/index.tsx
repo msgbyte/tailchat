@@ -84,6 +84,7 @@ export {
 
 // model
 export { fetchAvailableServices } from './model/common';
+export { fetchGlobalConfig } from './model/config';
 export {
   createDMConverse,
   appendDMConverseMembers,
