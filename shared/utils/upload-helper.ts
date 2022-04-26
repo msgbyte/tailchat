@@ -37,7 +37,8 @@ export async function uploadFile(
 
     return data;
   } catch (e) {
-    showToasts(`${t('上传失败')}: ${_get(e, 'message')}`, 'error');
+    showToasts(`${t('上传失败')}: ${t('可能是图片体积过大')}`, 'error');
+    console.error(`${t('上传失败')}: ${_get(e, 'message')}`);
     throw e;
   }
 }
