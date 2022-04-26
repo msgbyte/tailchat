@@ -1,6 +1,9 @@
 import { showToasts, t } from '..';
 import { request } from '../api/request';
 import _get from 'lodash/get';
+import { getGlobalConfig } from '../model/config';
+import { showErrorToasts } from '../manager/ui';
+import filesize from 'filesize';
 
 interface UploadFileOptions {
   onProgress?: (percent: number, progressEvent: unknown) => void;
@@ -20,6 +23,17 @@ export async function uploadFile(
 ): Promise<UploadFileResult> {
   const form = new FormData();
   form.append('file', file);
+
+  const uploadFileLimit = getGlobalConfig().uploadFileLimit;
+  if (file.size > uploadFileLimit) {
+    // 文件过大
+    showErrorToasts(
+      `${t('上传失败, 支持的文件最大大小为:')} ${filesize(uploadFileLimit, {
+        base: 2,
+      })}`
+    );
+    throw new Error('File Too Large');
+  }
 
   try {
     const { data } = await request.post('/upload', form, {
