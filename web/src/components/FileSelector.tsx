@@ -35,6 +35,8 @@ export const FileSelector: React.FC<FileSelectorProps> = React.memo((props) => {
     }
 
     _isFunction(props.onSelected) && props.onSelected(files);
+
+    fileInputRef.current.value = ''; // 清空选中状态
   }, [props.onSelected]);
 
   return (
