@@ -1,3 +1,5 @@
+export { DelayTip } from './DelayTip';
+export { Highlight } from './Highlight';
 export { Icon } from './Icon';
 export { Image } from './Image';
 
