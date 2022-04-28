@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Tailchat 的前端组件",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,17 @@
   "dependencies": {
     "@iconify/react": "^3.2.1",
     "antd": "^4.19.5",
-    "meta-form": "workspace:^1.0.0"
+    "meta-form": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-interactions": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/react": "^6.4.22",
+    "@storybook/testing-library": "^0.0.11",
+    "babel-loader": "^8.2.5",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
