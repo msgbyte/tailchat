@@ -3,7 +3,7 @@
 exports[`Highlight render 1`] = `
 <div>
   <span
-    class="bg-black bg-opacity-20 rounded py-1 px-2"
+    class="highLight"
   >
     Any Text
   </span>
