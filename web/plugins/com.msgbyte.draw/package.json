@@ -7,6 +7,7 @@
     "react-canvas-draw": "^1.2.1"
   },
   "devDependencies": {
-    "@types/react-canvas-draw": "^1.1.1"
+    "@types/react-canvas-draw": "^1.1.1",
+    "react": "17.0.2"
   }
 }
