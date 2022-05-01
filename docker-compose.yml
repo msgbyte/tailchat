@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  tailchat-web:
+    build:
+      context: .
+    image: tailchat-web
+    environment:
+      SERVICE_URL: ${SERVICE_URL}
