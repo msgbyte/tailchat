@@ -12,4 +12,4 @@ EXPOSE 11011
 
 RUN cd web && pnpm build
 
-CMD http-server-spa -p 11011 ./web/dist
+CMD http-server-spa ./web/dist index.html 11011
