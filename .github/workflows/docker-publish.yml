@@ -26,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: moonrailgun/tailchat:${{ steps.get_version.outputs.VERSION }}
+          tags: moonrailgun/tailchat:latest,moonrailgun/tailchat:${{ steps.get_version.outputs.VERSION }}
