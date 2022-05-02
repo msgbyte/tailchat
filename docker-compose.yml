@@ -7,3 +7,5 @@ services:
     image: tailchat-web
     environment:
       SERVICE_URL: ${SERVICE_URL}
+    ports:
+      - 11011:11011

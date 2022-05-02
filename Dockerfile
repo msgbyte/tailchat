@@ -5,11 +5,11 @@ WORKDIR /app
 
 # Install dependencies
 COPY . .
-RUN npm install -g pnpm
+RUN npm install -g pnpm@6.24.2
 RUN pnpm install
 
-RUN cd web
-RUN pnpm build
-
 EXPOSE 11011
-CMD npx http-server -p 11011 ./dist
+
+RUN cd web && pnpm build
+
+CMD npx http-server -p 11011 ./web/dist

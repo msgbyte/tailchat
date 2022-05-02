@@ -403,12 +403,14 @@ importers:
     specifiers:
       '@bbob/parser': ^2.7.0
       '@types/react-highlight': ^0.12.5
+      highlight.js: ^11.5.1
       react: 17.0.2
       react-dom: 17.0.2
       react-highlight: ^0.14.0
       url-regex: ^5.0.0
     dependencies:
       '@bbob/parser': 2.8.0
+      highlight.js: 11.5.1
       react-highlight: 0.14.0_react-dom@17.0.2+react@17.0.2
       url-regex: 5.0.0
     devDependencies:
@@ -10932,7 +10934,12 @@ packages:
     dev: true
 
   /highlight.js/10.7.3:
-    resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/highlight.js/download/highlight.js-10.7.3.tgz}
+    resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
+
+  /highlight.js/11.5.1:
+    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
+    engines: {node: '>=12.0.0'}
+    dev: false
 
   /history/4.10.1:
     resolution: {integrity: sha1-MzcaZeOoOyZ0NOKz87G0xYqtTPM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/history/download/history-4.10.1.tgz}
