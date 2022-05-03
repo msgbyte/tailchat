@@ -80,6 +80,10 @@ const plugins: Configuration['plugins'] = [
         to: 'pwa.webmanifest',
       },
       {
+        from: path.resolve(ROOT_PATH, './assets/config.json'),
+        to: 'config.json',
+      },
+      {
         from: path.resolve(ROOT_PATH, './assets/images/logo/'),
         to: 'images/logo/',
       },

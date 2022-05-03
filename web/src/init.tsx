@@ -11,9 +11,12 @@ import {
   showErrorToasts,
   t,
   fetchGlobalConfig,
+  request,
+  isValidStr,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
+import _get from 'lodash/get';
 
 const webStorage = buildStorage(window.localStorage);
 setStorage(() => webStorage);
@@ -53,6 +56,20 @@ setGlobalLoading((text) => {
 
   return hide;
 });
+
+/**
+ * 获取前端配置
+ */
+request
+  .get('/config.json', {
+    baseURL: '',
+  })
+  .then(({ data: config }) => {
+    if (isValidStr(_get(config, 'serviceUrl'))) {
+      setServiceUrl(() => _get(config, 'serviceUrl'));
+    }
+  })
+  .catch(() => {});
 
 /**
  * 初始化时加载全局配置

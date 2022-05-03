@@ -12,4 +12,4 @@ EXPOSE 11011
 
 RUN cd web && pnpm build
 
-CMD http-server-spa ./web/dist index.html 11011
+CMD node scripts/sync-config-from-env.js && http-server-spa ./web/dist index.html 11011
