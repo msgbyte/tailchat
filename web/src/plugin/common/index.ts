@@ -21,7 +21,7 @@ export {
   appendUrlSearch,
 } from '@/utils/url-helper';
 export { useGroupIdContext } from '@/context/GroupIdContext';
-import { request, RequestConfig } from 'tailchat-shared';
+import { request, RequestConfig, useUserInfo } from 'tailchat-shared';
 export {
   getServiceUrl,
   getCachedUserInfo,
@@ -53,6 +53,15 @@ export {
    */
   metaFormFieldSchema as fieldSchema,
 } from 'tailchat-design';
+
+/**
+ * 插件版本的useUserInfo
+ */
+export function useCurrentUserInfo() {
+  const userInfo = useUserInfo();
+
+  return _pick(userInfo, ['email', 'nickname', 'discriminator', 'avatar']);
+}
 
 /**
  * 处理axios的request config
