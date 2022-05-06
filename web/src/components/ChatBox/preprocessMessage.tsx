@@ -9,7 +9,7 @@ export function preprocessMessage(message: string) {
   /**
    * 预加工emoji
    */
-  return message.replaceAll(emojiNameRegex, (code) =>
+  return message.replace(emojiNameRegex, (code) =>
     getMessageTextDecorators().emoji(code)
   );
 }
