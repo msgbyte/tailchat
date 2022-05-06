@@ -5,6 +5,7 @@ import { ChatBoxPlaceholder } from './ChatBoxPlaceholder';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList } from './ChatMessageList';
 import { ChatReply } from './ChatReply';
+import { preprocessMessage } from './preprocessMessage';
 import { useMessageAck } from './useMessageAck';
 
 type ChatBoxProps =
@@ -59,7 +60,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
-            content: msg,
+            content: preprocessMessage(msg),
             meta,
           });
         }}

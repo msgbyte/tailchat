@@ -38,16 +38,14 @@ export class ErrorBoundary extends React.Component<
       typeof description === 'undefined' ? componentStack : description;
     if (error) {
       return (
-        <div className="p-2">
-          <Problem
-            text={
-              <>
-                <h3>{t('页面出现了一些问题')}</h3>
-                <p title={errorDescription ?? ''}>{errorMessage}</p>
-              </>
-            }
-          />
-        </div>
+        <Problem
+          text={
+            <>
+              <h3>{t('页面出现了一些问题')}</h3>
+              <p title={errorDescription ?? ''}>{errorMessage}</p>
+            </>
+          }
+        />
       );
     }
 

@@ -104,7 +104,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
         )}
 
         {/* 消息内容 */}
-        <div className="leading-6 break-words">
+        <div className="chat-message-item_body leading-6 break-words">
           <MessageQuote payload={payload} />
 
           <span>{getMessageRender(payload.content)}</span>

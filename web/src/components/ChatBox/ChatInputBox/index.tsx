@@ -12,6 +12,7 @@ import {
   SendMessagePayloadMeta,
   useSharedEventHandler,
 } from 'tailchat-shared';
+import { ChatInputEmotion } from './Emotion';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
@@ -27,6 +28,15 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
     setMessage('');
     inputRef.current?.focus();
   }, [message, mentions]);
+
+  const handleAppendMsg = useCallback(
+    (append: string) => {
+      setMessage(message + append);
+
+      inputRef.current?.focus();
+    },
+    [message]
+  );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -71,7 +81,12 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   });
 
   return (
-    <ChatInputActionContext.Provider value={{ sendMsg: props.onSendMsg }}>
+    <ChatInputActionContext.Provider
+      value={{
+        sendMsg: props.onSendMsg,
+        appendMsg: handleAppendMsg,
+      }}
+    >
       <div className="px-4 py-2">
         <div className="bg-white dark:bg-gray-600 flex rounded-md items-center">
           <ChatInputBoxInput
@@ -85,7 +100,8 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             onPaste={handlePaste}
           />
 
-          <div className="px-2">
+          <div className="px-2 flex space-x-1">
+            <ChatInputEmotion />
             <ChatInputAddon />
           </div>
         </div>

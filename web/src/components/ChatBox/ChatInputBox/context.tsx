@@ -6,9 +6,12 @@ import type { SuggestionDataItem } from 'react-mentions';
  */
 export interface ChatInputActionContextProps {
   sendMsg: (message: string) => void;
+  appendMsg: (message: string) => void;
 }
 export const ChatInputActionContext =
-  React.createContext<ChatInputActionContextProps | null>(null);
+  React.createContext<ChatInputActionContextProps>(
+    {} as ChatInputActionContextProps
+  );
 ChatInputActionContext.displayName = 'ChatInputContext';
 
 export function useChatInputActionContext() {

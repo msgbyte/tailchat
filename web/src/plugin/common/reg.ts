@@ -106,6 +106,7 @@ const defaultMessageTextDecorators = {
   url: (plain: string) => plain,
   image: (plain: string, attrs: Record<string, unknown>) => plain,
   mention: (userId: string, userName: string) => `@${userName}`,
+  emoji: (emojiCode: string) => emojiCode,
 };
 const [_getMessageTextDecorators, regMessageTextDecorators] = buildRegFn<
   () => Partial<typeof defaultMessageTextDecorators>
