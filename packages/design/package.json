@@ -25,7 +25,8 @@
     "@iconify/react": "^3.2.1",
     "antd": "^4.19.5",
     "lodash": "^4.17.21",
-    "meta-form": "^1.0.0"
+    "meta-form": "^1.0.0",
+    "str2int": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

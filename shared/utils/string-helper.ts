@@ -1,7 +1,5 @@
 import _isString from 'lodash/isString';
-import str2int from 'str2int';
 import urlRegex from 'url-regex';
-import { config } from '../config';
 
 /**
  * 判断一个字符串是否可用()
@@ -40,20 +38,6 @@ export const getUrls = (str: string): string[] => {
  */
 export function is(it: string) {
   return !!it && it !== '0' && it !== 'false';
-}
-
-/**
- * 根据文本内容返回一个内置色卡的颜色
- * @param text 文本
- */
-export function getTextColorHex(text: unknown): string {
-  if (!text || !_isString(text)) {
-    return '#ffffff'; // 如果获取不到文本，则返回白色
-  }
-
-  const color = config.color;
-  const id = str2int(text);
-  return color[id % color.length];
 }
 
 /**
