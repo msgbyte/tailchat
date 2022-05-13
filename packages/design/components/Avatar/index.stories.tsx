@@ -1,7 +1,7 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Avatar } from '.';
+import { CombinedAvatar } from './combined';
 
 export default {
   title: 'Tailchat/Avatar',
@@ -47,4 +47,74 @@ export const withImage = Template.bind({});
 withImage.args = {
   name: 'Anonymous',
   src: 'http://dummyimage.com/50x50',
+};
+
+const CombinedTemplate: ComponentStory<typeof CombinedAvatar> = (args) => (
+  <div>
+    <CombinedAvatar {...args} />
+  </div>
+);
+
+export const combined1 = CombinedTemplate.bind({});
+combined1.args = {
+  size: 48,
+  items: [
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+  ],
+};
+
+export const combined2 = CombinedTemplate.bind({});
+combined2.args = {
+  size: 48,
+  items: [
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+    {
+      name: 'Anonymous',
+    },
+  ],
+};
+
+export const combined3 = CombinedTemplate.bind({});
+combined3.args = {
+  size: 48,
+  items: [
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+    {
+      name: 'Anonymous',
+    },
+  ],
+};
+
+export const combined4 = CombinedTemplate.bind({});
+combined4.args = {
+  size: 48,
+  items: [
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+    {
+      name: 'Anonymous',
+      src: 'http://dummyimage.com/50x50',
+    },
+    {
+      name: 'Anonymous',
+    },
+    {
+      name: 'Anonymous',
+    },
+  ],
 };

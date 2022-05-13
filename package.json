@@ -17,6 +17,11 @@
     "preinstall": "npx only-allow pnpm",
     "test": "cd web && pnpm test"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["acorn"]
+    }
+  },
   "lint-staged": {
     "src/*.{json,less}": [
       "prettier --write --config ./.prettierrc.json"

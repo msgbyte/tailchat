@@ -1,0 +1,64 @@
+.td-combined-avatar {
+  position: relative;
+  overflow: hidden;
+}
+
+.td-combined-avatar-2::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: white;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+}
+
+.td-combined-avatar-3::before {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 1px;
+  background-color: white;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.td-combined-avatar-3::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: white;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+}
+
+.td-combined-avatar-4::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  left: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.td-combined-avatar-4::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: white;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+}
+
+.td-combined-avatar__item {
+  position: absolute;
+  border-radius: 0;
+}
