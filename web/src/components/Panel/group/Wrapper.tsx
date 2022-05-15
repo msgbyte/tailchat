@@ -6,6 +6,11 @@ import { CommonPanelWrapper } from '../common/Wrapper';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 import { IconBtn } from '@/components/IconBtn';
+import {
+  DMPluginPanelActionProps,
+  GroupPluginPanelActionProps,
+  pluginPanelActions,
+} from '@/plugin/common';
 
 /**
  * 群组面板通用包装器
@@ -41,6 +46,26 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
       <CommonPanelWrapper
         header={panelInfo.name}
         actions={(setRightPanel) => [
+          ...pluginPanelActions
+            .filter(
+              (action): action is GroupPluginPanelActionProps =>
+                action.position === 'group'
+            )
+            .map((action) => (
+              <IconBtn
+                key={action.name}
+                title={action.label}
+                shape="square"
+                icon={action.icon}
+                iconClassName="text-2xl"
+                onClick={() =>
+                  action.onClick({
+                    groupId: props.groupId,
+                    panelId: props.panelId,
+                  })
+                }
+              />
+            )),
           <IconBtn
             key="open"
             title={t('在新窗口打开')}

@@ -161,3 +161,36 @@ export const [pluginRootRoute, regPluginRootRoute] = buildRegList<{
   path: string;
   component: React.ComponentType;
 }>();
+
+export interface BasePluginPanelActionProps {
+  /**
+   * 唯一标识
+   */
+  name: string;
+  /**
+   * 显示名
+   */
+  label: string;
+  /**
+   * 来自iconify的图标标识
+   */
+  icon: string;
+}
+
+export interface GroupPluginPanelActionProps
+  extends BasePluginPanelActionProps {
+  position: 'group';
+  onClick: (ctx: { groupId: string; panelId: string }) => void;
+}
+
+export interface DMPluginPanelActionProps extends BasePluginPanelActionProps {
+  position: 'dm';
+  onClick: (ctx: { converseId: string }) => void;
+}
+
+/**
+ * 注册面板操作
+ */
+export const [pluginPanelActions, regPluginPanelAction] = buildRegList<
+  GroupPluginPanelActionProps | DMPluginPanelActionProps
+>();

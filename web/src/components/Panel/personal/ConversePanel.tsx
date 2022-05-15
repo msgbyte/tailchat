@@ -14,6 +14,7 @@ import { AppendDMConverseMembers } from '@/components/modals/AppendDMConverseMem
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 import { IconBtn } from '@/components/IconBtn';
+import { DMPluginPanelActionProps, pluginPanelActions } from '@/plugin/common';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -60,6 +61,21 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
           }
 
           return _compact([
+            ...pluginPanelActions
+              .filter(
+                (action): action is DMPluginPanelActionProps =>
+                  action.position === 'dm'
+              )
+              .map((action) => (
+                <IconBtn
+                  key={action.name}
+                  title={action.label}
+                  shape="square"
+                  icon={action.icon}
+                  iconClassName="text-2xl"
+                  onClick={() => action.onClick({ converseId })}
+                />
+              )),
             <IconBtn
               key="open"
               title={t('在新窗口打开')}
