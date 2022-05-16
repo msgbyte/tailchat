@@ -89,6 +89,7 @@ export function useConverseMessage(context: ConverseContext) {
   const hasMoreMessage = converse?.hasMoreMessage ?? true;
   const dispatch = useAppDispatch();
   const messages = converse?.messages ?? [];
+  const currentUserId = useAppSelector((state) => state.user.info?._id);
 
   useEffect(() => {
     dispatch(chatActions.updateCurrentConverseId(converseId));
@@ -105,7 +106,7 @@ export function useConverseMessage(context: ConverseContext) {
       if (!isGroup) {
         // 如果是私信会话
         // Step 1. 创建会话 并确保私信列表中存在该会话
-        const converse = await ensureDMConverse(converseId);
+        const converse = await ensureDMConverse(converseId, currentUserId);
         dispatch(chatActions.setConverseInfo(converse));
       } else {
         // 如果是群组会话(文本频道)
@@ -145,7 +146,7 @@ export function useConverseMessage(context: ConverseContext) {
         );
       }
     }
-  }, [converseId, reconnectNum]);
+  }, [converseId, reconnectNum, currentUserId]);
 
   // 加载更多消息
   const [{ loading: isLoadingMore }, handleFetchMoreMessage] =

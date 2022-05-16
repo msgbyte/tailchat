@@ -8,13 +8,19 @@ import { appendUserDMConverse } from '../model/user';
  * 确保私信会话存在
  */
 export async function ensureDMConverse(
-  converseId: string
+  converseId: string,
+  currentUserId: string
 ): Promise<ChatConverseInfo> {
   const converse = await getCachedConverseInfo(converseId);
   if (converse === null) {
     // TODO
     throw new Error(t('找不到私信会话'));
   }
+
+  if (!converse.members.includes(currentUserId)) {
+    throw new Error(t('会话没有权限'));
+  }
+
   await appendUserDMConverse(converseId); // 添加到私人会话列表
 
   return converse;

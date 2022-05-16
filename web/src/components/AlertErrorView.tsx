@@ -5,6 +5,7 @@ import { t } from 'tailchat-shared';
 
 /**
  * 用于接口错误显示的组件
+ * @deprecated 请使用 ErrorView
  */
 export const AlertErrorView: React.FC<{
   error: Error;

@@ -11,6 +11,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^4.28.1
       '@typescript-eslint/parser': ^4.28.1
       commitlint: ^12.1.4
+      crc: ^3.8.0
       dayjs: ^1.10.6
       esbuild: ^0.12.25
       eslint: ^7.30.0
@@ -23,9 +24,13 @@ importers:
       i18next-scanner: ^3.0.0
       identity-obj-proxy: ^3.0.0
       lint-staged: ^11.0.0
+      lodash: ^4.17.21
       prettier: ^2.3.2
       typescript: ^4.5.2
       vinyl-fs: ^3.0.3
+    dependencies:
+      crc: 3.8.0
+      lodash: 4.17.21
     devDependencies:
       '@commitlint/cli': 12.1.4
       '@commitlint/config-conventional': 12.1.4
@@ -5379,6 +5384,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
       acorn-private-class-elements: 0.2.7_acorn@8.7.1
@@ -5388,6 +5396,9 @@ packages:
     resolution: {integrity: sha512-d3OEjQV4ROpoflsnUA8HozoIR504TFxNivYEUi6uwz0IYhBkTDXGuWlNdMtybRt3nqVx/L6XqMt0FxkXuWKZhw==}
     peerDependencies:
       acorn: ^6.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
     dev: true
@@ -5411,6 +5422,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 7.4.1
     dev: true
@@ -5419,6 +5433,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
     dev: true
@@ -5436,6 +5453,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
     dev: true
@@ -5445,6 +5465,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
       acorn-private-class-elements: 0.2.7_acorn@8.7.1
@@ -5455,6 +5478,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^7.4 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
       acorn-class-fields: 0.3.7_acorn@8.7.1
@@ -5467,6 +5493,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.7.1
       acorn-private-class-elements: 0.2.7_acorn@8.7.1

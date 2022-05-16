@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatBoxContextProvider, useConverseMessage } from 'tailchat-shared';
-import { AlertErrorView } from '../AlertErrorView';
+import { ErrorView } from '../ErrorView';
 import { ChatBoxPlaceholder } from './ChatBoxPlaceholder';
 import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList } from './ChatMessageList';
@@ -40,7 +40,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
   }
 
   if (error) {
-    return <AlertErrorView error={error} />;
+    return <ErrorView error={error} />;
   }
 
   return (
