@@ -43,10 +43,12 @@ const chatSlice = createSlice({
     setConverseInfo(state, action: PayloadAction<ChatConverseInfo>) {
       const converseId = action.payload._id;
 
+      const originInfo = state.converses[converseId]
+        ? { ...state.converses[converseId] }
+        : { messages: [], hasFetchedHistory: false, hasMoreMessage: true };
+
       state.converses[converseId] = {
-        messages: [],
-        hasFetchedHistory: false,
-        hasMoreMessage: true,
+        ...originInfo,
         ...action.payload,
       };
     },
