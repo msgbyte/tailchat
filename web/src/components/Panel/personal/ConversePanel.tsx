@@ -15,6 +15,7 @@ import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 import { IconBtn } from '@/components/IconBtn';
 import { DMPluginPanelActionProps, pluginPanelActions } from '@/plugin/common';
+import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -84,21 +85,36 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
               iconClassName="text-2xl"
               onClick={openPanelWindow}
             />,
-            <IconBtn
-              key="add"
-              title={t('邀请成员')}
-              shape="square"
-              icon="mdi:account-multiple-plus-outline"
-              iconClassName="text-2xl"
-              onClick={() =>
-                openModal(
-                  <AppendDMConverseMembers
-                    converseId={converse._id}
-                    withoutUserIds={converse.members}
-                  />
-                )
-              }
-            />,
+            converse.members.length === 2 ? (
+              <IconBtn
+                key="create"
+                title={t('创建会话')}
+                shape="square"
+                icon="mdi:account-multiple-plus-outline"
+                iconClassName="text-2xl"
+                onClick={() =>
+                  openModal(
+                    <CreateDMConverse hiddenUserIds={converse.members} />
+                  )
+                }
+              />
+            ) : (
+              <IconBtn
+                key="add"
+                title={t('邀请成员')}
+                shape="square"
+                icon="mdi:account-multiple-plus-outline"
+                iconClassName="text-2xl"
+                onClick={() =>
+                  openModal(
+                    <AppendDMConverseMembers
+                      converseId={converse._id}
+                      withoutUserIds={converse.members}
+                    />
+                  )
+                }
+              />
+            ),
             // 当成员数大于2时，显示成员列表按钮
             converse.members.length > 2 && (
               <IconBtn

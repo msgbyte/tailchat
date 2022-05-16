@@ -112,8 +112,12 @@ function initial(socket: AppSocket, store: AppStore) {
     (data ?? []).forEach(async (converseId) => {
       // TODO: 待优化, 可以在后端一次性返回
 
-      const converse = await getCachedConverseInfo(converseId);
-      store.dispatch(chatActions.setConverseInfo(converse));
+      try {
+        const converse = await getCachedConverseInfo(converseId);
+        store.dispatch(chatActions.setConverseInfo(converse));
+      } catch (e) {
+        console.error(e);
+      }
     });
   });
 

@@ -1,25 +1,29 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { createDMConverse, t, useAsyncFn } from 'tailchat-shared';
+import { createDMConverse, t, useAsyncRequest } from 'tailchat-shared';
 import { FriendPicker } from '../FriendPicker';
 import { closeModal, ModalWrapper } from '../Modal';
 
 interface CreateDMConverseProps {
   /**
-   * 排除的用户id
+   * 隐藏成员
    * 在选择好友时会进行过滤
+   * 但是创建时会加上
    */
-  withoutUserIds?: string[];
+  hiddenUserIds?: string[];
 }
 export const CreateDMConverse: React.FC<CreateDMConverseProps> = React.memo(
   (props) => {
-    const { withoutUserIds = [] } = props;
+    const { hiddenUserIds = [] } = props;
     const [selectedFriendIds, setSelectedFriendIds] = useState<string[]>([]);
     const history = useHistory();
 
-    const [{ loading }, handleCreate] = useAsyncFn(async () => {
-      const converse = await createDMConverse([...selectedFriendIds]);
+    const [{ loading }, handleCreate] = useAsyncRequest(async () => {
+      const converse = await createDMConverse([
+        ...hiddenUserIds,
+        ...selectedFriendIds,
+      ]);
       closeModal();
       history.push(`/main/personal/converse/${converse._id}`);
     }, [selectedFriendIds]);
@@ -27,7 +31,7 @@ export const CreateDMConverse: React.FC<CreateDMConverseProps> = React.memo(
     return (
       <ModalWrapper title={t('创建多人会话')}>
         <FriendPicker
-          withoutUserIds={withoutUserIds}
+          withoutUserIds={hiddenUserIds}
           selectedIds={selectedFriendIds}
           onChange={setSelectedFriendIds}
         />

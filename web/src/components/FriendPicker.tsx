@@ -65,6 +65,7 @@ export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
       {withSearch && (
         <Input
           placeholder={t('搜索好友')}
+          className="mb-2"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />

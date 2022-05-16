@@ -101,6 +101,11 @@ export function useConverseMessage(context: ConverseContext) {
 
   // NOTICE: 该hook只会在converseId变化和重新链接时执行
   const { loading, error } = useAsync(async () => {
+    if (!currentUserId) {
+      // 如果当前用户不存在则跳过逻辑
+      return;
+    }
+
     if (!converse) {
       // 如果是一个新会话(或者当前会话列表中没有)
       if (!isGroup) {

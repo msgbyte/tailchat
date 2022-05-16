@@ -99,6 +99,10 @@ export const AddFriend: React.FC = React.memo(() => {
     try {
       const data = await searchUserWithUniqueName(uniqueName);
 
+      if (data === null) {
+        showToasts(t('没有找到该用户'), 'warning');
+      }
+
       return data;
     } catch (err) {
       showErrorToasts(err);
