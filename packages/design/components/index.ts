@@ -1,4 +1,5 @@
 export { Avatar } from './Avatar';
+export { CombinedAvatar } from './Avatar/combined';
 export { DelayTip } from './DelayTip';
 export { Highlight } from './Highlight';
 export { Icon } from './Icon';

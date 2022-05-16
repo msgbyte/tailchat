@@ -6,7 +6,7 @@ import './combined.css';
 interface CombinedAvatarProps {
   shape?: 'circle' | 'square';
   size?: number;
-  items: AvatarProps[];
+  items: Pick<AvatarProps, 'name' | 'src'>[];
 }
 
 /**
@@ -14,7 +14,7 @@ interface CombinedAvatarProps {
  */
 export const CombinedAvatar: React.FC<CombinedAvatarProps> = React.memo(
   (props) => {
-    const { size = 16, shape = 'circle' } = props;
+    const { size = 32, shape = 'circle' } = props;
     const items = _take(props.items, 4);
 
     const length = items.length;
