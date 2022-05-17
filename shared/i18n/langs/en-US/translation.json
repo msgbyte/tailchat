@@ -13,6 +13,7 @@
   "k18c716ce": "Password cannot be less than 6 digits",
   "k19885be1": "Panel name is too long",
   "k1a377364": "Message List Virtualization",
+  "k1a78e6f0": "Expiration",
   "k1b38bb5c": "Register Now",
   "k1bd56481": "Close independent window",
   "k1cbe2507": "Confirm",
@@ -147,6 +148,7 @@
   "ka697d1d8": "Password modify complete",
   "ka7907771": "Save Successful",
   "ka7ecc377": "Unpin",
+  "ka9481f95": "Creator",
   "kaa040a8e": "Default Group",
   "kaa7d786e": "Create Converse",
   "kaaf56f78": "Debug",
@@ -218,6 +220,7 @@
   "keda14478": "You are the group manager, leaving the group will cause the group to be dissolved",
   "kee9108f1": "Modify success",
   "kef25594f": "Nickname#0000",
+  "kefaf9956": "Created",
   "kefc07278": "Back to login",
   "kf02c6db": "Friend List",
   "kf0d97e0b": "Friend deleted successfully",
@@ -235,9 +238,11 @@
   "kf876a42d": "Modify Password",
   "kf87f3059": "Plugin Store",
   "kf8de33b7": "Plugin provider not found",
+  "kf94465ba": "Invite Code",
   "kf98fbe5e": "Forbid everyone to speak",
   "kfa01c850": "No private message found",
   "kfa493f3f": "Reply",
   "kfaddd61d": "Chat Service",
-  "kfbecf2a7": "Are you sure you want to delete the panel group [{{name}}] and all subordinate panels"
+  "kfbecf2a7": "Are you sure you want to delete the panel group [{{name}}] and all subordinate panels",
+  "kfe731dfc": "Action"
 }
