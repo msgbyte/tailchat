@@ -301,4 +301,53 @@
       background-color: #111b26;
     }
   }
+
+  // 分页器
+  .ant-pagination {
+    color: rgba(255, 255, 255, 0.85);
+
+    .ant-pagination-prev,.ant-pagination-next {
+      .ant-pagination-item-link {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.85);
+
+        &:hover {
+          border-color: #177ddc;
+          color: #177ddc;
+        }
+      }
+    }
+
+
+    .ant-pagination-disabled {
+      .ant-pagination-item-link {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      &:hover .ant-pagination-item-link {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .ant-pagination-item {
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        border-color: #177ddc;
+        color: #177ddc;
+      }
+
+      > a {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+
+    .ant-pagination-item-active {
+      border-color: #177ddc;
+    }
+  }
 }

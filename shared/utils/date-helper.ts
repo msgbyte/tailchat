@@ -54,6 +54,13 @@ export function formatShortTime(date: dayjs.ConfigType): string {
 }
 
 /**
+ * 格式化为 小时:分钟
+ */
+export function formatFullTime(date: dayjs.ConfigType): string {
+  return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+}
+
+/**
  * 返回当前实例到现在的相对时间。
  * @example
  * dayjs('1999-01-01').toNow() // 22 年后

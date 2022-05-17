@@ -102,15 +102,22 @@ export {
   GroupPanelType,
   createGroup,
   createGroupInviteCode,
+  getAllGroupInviteCode,
   getGroupBasicInfo,
   quitGroup,
   applyGroupInvite,
+  deleteGroupInvite,
   modifyGroupField,
   createGroupPanel,
   modifyGroupPanel,
   deleteGroupPanel,
 } from './model/group';
-export type { GroupPanel, GroupInfo, GroupBasicInfo } from './model/group';
+export type {
+  GroupPanel,
+  GroupInfo,
+  GroupBasicInfo,
+  GroupInvite,
+} from './model/group';
 export {
   recallMessage,
   deleteMessage,
@@ -177,6 +184,7 @@ export {
   shouldShowMessageTime,
   getMessageTimeDiff,
   formatShortTime,
+  formatFullTime,
   datetimeToNow,
   datetimeFromNow,
 } from './utils/date-helper';

@@ -8,6 +8,7 @@ import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
 import { t } from 'tailchat-shared';
+import { GroupInvite } from './Invite';
 import { GroupPanel } from './Panel';
 import { GroupRole } from './Role';
 import { GroupSummary } from './Summary';
@@ -43,6 +44,11 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('面板'),
             content: <GroupPanel groupId={groupId} />,
+          },
+          {
+            type: 'item',
+            title: t('邀请码'),
+            content: <GroupInvite groupId={groupId} />,
           },
           {
             type: 'item',

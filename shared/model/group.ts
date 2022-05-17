@@ -126,6 +126,25 @@ export async function createGroupInviteCode(
 }
 
 /**
+ * 获取群组所有邀请码
+ * @param groupId 群组ID
+ */
+export async function getAllGroupInviteCode(
+  groupId: string
+): Promise<GroupInvite[]> {
+  const { data } = await request.get(
+    '/api/group/invite/getAllGroupInviteCode',
+    {
+      params: {
+        groupId,
+      },
+    }
+  );
+
+  return data;
+}
+
+/**
  * 根据邀请码查找邀请信息
  * @param inviteCode 邀请码
  */
@@ -148,6 +167,19 @@ export async function findGroupInviteByCode(
 export async function applyGroupInvite(inviteCode: string): Promise<void> {
   await request.post('/api/group/invite/applyInvite', {
     code: inviteCode,
+  });
+}
+
+/**
+ * 删除群组邀请
+ */
+export async function deleteGroupInvite(
+  groupId: string,
+  inviteId: string
+): Promise<void> {
+  await request.post('/api/group/invite/deleteInvite', {
+    groupId,
+    inviteId,
   });
 }
 
