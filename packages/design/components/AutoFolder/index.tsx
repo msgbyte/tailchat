@@ -2,15 +2,11 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 interface AutoFolderProps {
   maxHeight: number;
-  showFullText?: string;
+  showFullText?: React.ReactNode;
   backgroundColor?: string;
 }
 export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
-  const {
-    maxHeight,
-    showFullText = 'More',
-    backgroundColor = 'rgba(0,0,0,0)',
-  } = props;
+  const { maxHeight, showFullText = 'More', backgroundColor = 'white' } = props;
   const [isShowFull, setIsShowFull] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -61,7 +57,7 @@ export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
             bottom: 0,
             textAlign: 'center',
             cursor: 'pointer',
-            backgroundImage: `linear-gradient(${backgroundColor}, white)`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0), ${backgroundColor})`,
             padding: '4px 0',
           }}
           onClick={() => setIsShowFull(true)}

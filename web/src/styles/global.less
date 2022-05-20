@@ -4,6 +4,7 @@
   --tc-background-image: url(../../assets/images/bg.jpg);
   --tc-content-background-image: '';
   --tc-content-background-image-opacity: 0.2;
+  --tc-content-background-color: rgba(243, 244, 246, 1); // copy from bg-content-light
 
   .tc-background {
     @apply bg-center bg-cover bg-no-repeat;
@@ -51,6 +52,7 @@
   // 深色模式覆盖
   &.dark {
     @apply text-typography-dark bg-content-dark;
+    --tc-content-background-color: rgba(55, 65, 81, 1);; // copy from bg-content-light
 
     h1,h2,h3,h4,h5,h6 {
       @apply text-typography-dark;

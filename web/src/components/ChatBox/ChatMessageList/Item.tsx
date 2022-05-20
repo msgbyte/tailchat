@@ -22,6 +22,7 @@ import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
 import { stopPropagation } from '@/utils/dom-helper';
 import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
+import { AutoFolder } from 'tailchat-design';
 import './Item.less';
 
 /**
@@ -104,14 +105,24 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
         )}
 
         {/* 消息内容 */}
-        <div className="chat-message-item_body leading-6 break-words">
-          <MessageQuote payload={payload} />
+        <AutoFolder
+          maxHeight={320}
+          backgroundColor="var(--tc-content-background-color)"
+          showFullText={
+            <div className="inline-block rounded-full bg-white dark:bg-black opacity-80 py-2 px-3 hover:opacity-100">
+              {t('点击展开更多')}
+            </div>
+          }
+        >
+          <div className="chat-message-item_body leading-6 break-words">
+            <MessageQuote payload={payload} />
 
-          <span>{getMessageRender(payload.content)}</span>
+            <span>{getMessageRender(payload.content)}</span>
 
-          {/* 解释器按钮 */}
-          {useRenderPluginMessageInterpreter(payload.content)}
-        </div>
+            {/* 解释器按钮 */}
+            {useRenderPluginMessageInterpreter(payload.content)}
+          </div>
+        </AutoFolder>
 
         {/* 额外渲染 */}
         <div>
