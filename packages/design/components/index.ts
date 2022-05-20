@@ -1,3 +1,4 @@
+export { AutoFolder } from './AutoFolder';
 export { Avatar } from './Avatar';
 export { CombinedAvatar } from './Avatar/combined';
 export { DelayTip } from './DelayTip';

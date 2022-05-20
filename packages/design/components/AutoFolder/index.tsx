@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 interface AutoFolderProps {
   maxHeight: number;
@@ -12,22 +12,40 @@ export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
     backgroundColor = 'rgba(0,0,0,0)',
   } = props;
   const [isShowFull, setIsShowFull] = useState(false);
-  const contentRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const observer = useMemo(
+    () =>
+      new window.ResizeObserver((entries) => {
+        if (entries[0]) {
+          const { height } = entries[0].contentRect;
+          if (height > maxHeight) {
+            setIsShowFull(false);
+
+            observer.disconnect(); // 触发一次则解除连接
+          } else {
+            setIsShowFull(true);
+          }
+        }
+      }),
+    []
+  );
 
   useEffect(() => {
-    if (contentRef.current) {
-      if (contentRef.current.scrollHeight > maxHeight) {
-        setIsShowFull(false);
-      } else {
-        setIsShowFull(true);
-      }
+    if (!contentRef.current) {
+      return;
     }
-  }, [props.maxHeight]);
+    observer.observe(contentRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div
       style={{
-        height: isShowFull ? 'auto' : maxHeight,
+        maxHeight: isShowFull ? 'none' : maxHeight,
         overflow: 'hidden',
         position: 'relative',
       }}
