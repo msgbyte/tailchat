@@ -11,9 +11,9 @@ import {
 import { Button, Table, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { UserName } from '@/components/UserName';
-import { Loading } from '@/components/Loading';
 import { openModal, openReconfirmModalP } from '@/components/Modal';
 import { CreateGroupInvite } from '../CreateGroupInvite';
+import { LoadingOnFirst } from '@/components/LoadingOnFirst';
 
 export const GroupInvite: React.FC<{
   groupId: string;
@@ -103,7 +103,7 @@ export const GroupInvite: React.FC<{
   );
 
   return (
-    <Loading spinning={loading}>
+    <LoadingOnFirst spinning={loading}>
       <div className="text-right mb-2">
         <Button type="primary" onClick={handleCreateInvite}>
           {t('创建邀请码')}
@@ -117,7 +117,7 @@ export const GroupInvite: React.FC<{
           hideOnSinglePage: true,
         }}
       />
-    </Loading>
+    </LoadingOnFirst>
   );
 });
 GroupInvite.displayName = 'GroupInvite';

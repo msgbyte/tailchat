@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { LoadingSpinner } from './LoadingSpinner';
 
-interface LoadingProps {
+export interface LoadingProps {
   spinning: boolean;
   className?: string;
   style?: React.CSSProperties;
