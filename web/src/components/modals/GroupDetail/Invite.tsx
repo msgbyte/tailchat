@@ -7,13 +7,17 @@ import {
   formatFullTime,
   deleteGroupInvite,
   useAsyncRefresh,
+  showToasts,
 } from 'tailchat-shared';
-import { Button, Table, Tooltip } from 'antd';
+import { Button, Space, Table, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { UserName } from '@/components/UserName';
 import { openModal, openReconfirmModalP } from '@/components/Modal';
 import { CreateGroupInvite } from '../CreateGroupInvite';
 import { LoadingOnFirst } from '@/components/LoadingOnFirst';
+import { IconBtn } from '@/components/IconBtn';
+import copy from 'copy-to-clipboard';
+import { generateInviteCodeUrl } from '@/utils/url-helper';
 
 export const GroupInvite: React.FC<{
   groupId: string;
@@ -35,6 +39,11 @@ export const GroupInvite: React.FC<{
       />
     );
   }, [groupId, refresh]);
+
+  const handleCopyInviteCode = useCallback((inviteCode: string) => {
+    copy(generateInviteCodeUrl(inviteCode));
+    showToasts(t('邀请链接已复制到剪切板'), 'success');
+  }, []);
 
   const handleDeleteInvite = useCallback(
     async (inviteId: string) => {
@@ -84,22 +93,28 @@ export const GroupInvite: React.FC<{
       {
         title: t('操作'),
         dataIndex: '_id',
-        render: (id: string) => {
+        render: (id: string, record) => {
           return (
-            <div>
-              <Button
-                type="primary"
+            <Space>
+              <IconBtn
+                title={t('复制邀请链接')}
+                shape="square"
+                icon="mdi:content-copy"
+                onClick={() => handleCopyInviteCode(record.code)}
+              />
+              <IconBtn
+                title={t('删除')}
+                shape="square"
+                icon="mdi:delete-outline"
                 danger={true}
                 onClick={() => handleDeleteInvite(id)}
-              >
-                {t('删除')}
-              </Button>
-            </div>
+              />
+            </Space>
           );
         },
       },
     ],
-    [handleDeleteInvite]
+    [handleCopyInviteCode, handleDeleteInvite]
   );
 
   return (

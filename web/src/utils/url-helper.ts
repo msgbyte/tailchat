@@ -20,3 +20,11 @@ export function appendUrlSearch(obj: Record<string, string>): string {
     ...obj,
   });
 }
+
+/**
+ * 生成群组邀请码链接
+ * @param inviteCode 邀请码
+ */
+export function generateInviteCodeUrl(inviteCode: string) {
+  return `${location.origin}/invite/${inviteCode}`;
+}

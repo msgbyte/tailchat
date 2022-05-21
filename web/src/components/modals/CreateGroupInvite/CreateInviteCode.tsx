@@ -1,4 +1,5 @@
 import { InviteCodeExpiredAt } from '@/components/InviteCodeExpiredAt';
+import { generateInviteCodeUrl } from '@/utils/url-helper';
 import { Menu, Typography, Dropdown } from 'antd';
 import React, { useState } from 'react';
 import {
@@ -49,7 +50,7 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
               level={4}
               copyable={true}
             >
-              {`${location.origin}/invite/${createdInvite.code}`}
+              {generateInviteCodeUrl(createdInvite.code)}
             </Typography.Title>
             <p className="text-gray-500 text-sm">
               <InviteCodeExpiredAt invite={createdInvite} />
