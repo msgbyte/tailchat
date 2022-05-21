@@ -38,15 +38,15 @@ export function useUserSettings() {
 /**
  * 单个用户设置
  */
-export function useSingleUserSetting<T>(
-  name: keyof UserSettings,
-  defaultValue?: T
+export function useSingleUserSetting<K extends keyof UserSettings>(
+  name: K,
+  defaultValue?: UserSettings[K]
 ) {
   const { settings, setSettings, loading } = useUserSettings();
 
   return {
     value: settings[name] ?? defaultValue,
-    setValue: async (newVal: T) =>
+    setValue: async (newVal: UserSettings[K]) =>
       setSettings({
         [name]: newVal,
       }),
