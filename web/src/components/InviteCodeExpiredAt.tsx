@@ -25,8 +25,8 @@ export const InviteCodeExpiredAt: React.FC<InviteCodeExpiredAtProps> =
         <Tooltip title={formatFullTime(invite.expiredAt)}>
           <span className="font-bold">
             {{ date: datetimeFromNow(invite.expiredAt) }}
-          </span>{' '}
-        </Tooltip>
+          </span>
+        </Tooltip>{' '}
         过期
       </Trans>
     );
