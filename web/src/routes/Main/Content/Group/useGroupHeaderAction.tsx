@@ -1,6 +1,6 @@
 import { closeModal, openModal } from '@/components/Modal';
 import { GroupDetail } from '@/components/modals/GroupDetail';
-import { GroupInvite } from '@/components/modals/GroupInvite';
+import { CreateGroupInvite } from '@/components/modals/CreateGroupInvite';
 import React from 'react';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router';
@@ -25,7 +25,7 @@ export function useGroupHeaderAction(groupId: string) {
   }, [groupId]);
 
   const handleInviteUser = useCallback(() => {
-    openModal(<GroupInvite groupId={groupId} />);
+    openModal(<CreateGroupInvite groupId={groupId} />);
   }, [groupId]);
 
   const handleQuitGroup = useCallback(() => {

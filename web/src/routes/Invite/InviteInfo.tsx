@@ -1,4 +1,5 @@
 import { Avatar } from '@/components/Avatar';
+import { InviteCodeExpiredAt } from '@/components/InviteCodeExpiredAt';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { UserName } from '@/components/UserName';
 import React from 'react';
@@ -66,15 +67,10 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
         {t('当前成员数')}: {value.group.memberCount}
       </div>
 
+      {/* 永久邀请码不显示过期时间 */}
       {value.expired && (
         <div>
-          <Trans>
-            该邀请将于{' '}
-            <span className="font-bold">
-              {{ date: datetimeFromNow(value.expired) }}
-            </span>{' '}
-            过期
-          </Trans>
+          <InviteCodeExpiredAt invite={{ expiredAt: value.expired }} />
         </div>
       )}
     </div>

@@ -15,5 +15,5 @@ export function useAsyncRequest<T extends FunctionReturningPromise>(
     }
   }, deps);
 
-  return [{ loading }, call] as const;
+  return [{ loading }, call as T] as const;
 }

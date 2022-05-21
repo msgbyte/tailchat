@@ -116,10 +116,12 @@ export async function quitGroup(groupId: string) {
  * @param groupId 群组id
  */
 export async function createGroupInviteCode(
-  groupId: string
+  groupId: string,
+  inviteType: 'normal' | 'permanent'
 ): Promise<GroupInvite> {
   const { data } = await request.post('/api/group/invite/createGroupInvite', {
     groupId,
+    inviteType,
   });
 
   return data;

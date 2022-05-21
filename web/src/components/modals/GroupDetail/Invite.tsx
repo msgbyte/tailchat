@@ -1,4 +1,3 @@
-import { LoadingSpinner } from '@/plugin/component';
 import React, { useCallback, useMemo } from 'react';
 import {
   getAllGroupInviteCode,
@@ -13,7 +12,8 @@ import { Button, Table, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { UserName } from '@/components/UserName';
 import { Loading } from '@/components/Loading';
-import { openReconfirmModalP } from '@/components/Modal';
+import { openModal, openReconfirmModalP } from '@/components/Modal';
+import { CreateGroupInvite } from '../CreateGroupInvite';
 
 export const GroupInvite: React.FC<{
   groupId: string;
@@ -22,8 +22,19 @@ export const GroupInvite: React.FC<{
   const { loading, value, refresh } = useAsyncRefresh(async () => {
     const list = await getAllGroupInviteCode(groupId);
 
-    return list;
+    return list.reverse(); // 倒序返回
   }, [groupId]);
+
+  const handleCreateInvite = useCallback(() => {
+    openModal(
+      <CreateGroupInvite
+        groupId={groupId}
+        onInviteCreated={() => {
+          refresh();
+        }}
+      />
+    );
+  }, [groupId, refresh]);
 
   const handleDeleteInvite = useCallback(
     async (inviteId: string) => {
@@ -53,11 +64,17 @@ export const GroupInvite: React.FC<{
       {
         title: t('过期时间'),
         dataIndex: 'expiredAt',
-        render: (date) => (
-          <Tooltip title={formatFullTime(date)}>
-            {datetimeFromNow(date)}
-          </Tooltip>
-        ),
+        render: (date) => {
+          if (!date) {
+            return t('永不过期');
+          }
+
+          return (
+            <Tooltip title={formatFullTime(date)}>
+              {datetimeFromNow(date)}
+            </Tooltip>
+          );
+        },
       },
       {
         title: t('创建者'),
@@ -87,6 +104,12 @@ export const GroupInvite: React.FC<{
 
   return (
     <Loading spinning={loading}>
+      <div className="text-right mb-2">
+        <Button type="primary" onClick={handleCreateInvite}>
+          {t('创建邀请码')}
+        </Button>
+      </div>
+
       <Table
         columns={columns}
         dataSource={value}
