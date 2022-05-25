@@ -78,6 +78,10 @@ export const GroupInvite: React.FC<{
             return t('永不过期');
           }
 
+          if (new Date(date).valueOf() < Date.now()) {
+            return t('已过期');
+          }
+
           return (
             <Tooltip title={formatFullTime(date)}>
               {datetimeFromNow(date)}
