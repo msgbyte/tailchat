@@ -119,6 +119,7 @@ export type {
   GroupInvite,
 } from './model/group';
 export {
+  sendMessage,
   recallMessage,
   deleteMessage,
   addReaction,

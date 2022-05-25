@@ -14,6 +14,7 @@ export {
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';
+export { getJWTUserInfo } from '@/utils/jwt-helper';
 export { dataUrlToFile } from '@/utils/file-helper';
 export {
   urlSearchStringify,
@@ -39,6 +40,7 @@ export {
   fetchAvailableServices,
   isValidStr,
   useGroupPanelInfo,
+  sendMessage,
 } from 'tailchat-shared';
 
 export { useLocation, useHistory } from 'react-router';

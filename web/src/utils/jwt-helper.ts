@@ -46,7 +46,7 @@ export async function getUserJWT(): Promise<string> {
 }
 
 export interface JWTUserInfoData {
-  name?: string;
+  nickname?: string;
   uuid?: string;
   avatar?: string;
 }

@@ -106,7 +106,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
 
         {/* 消息内容 */}
         <AutoFolder
-          maxHeight={320}
+          maxHeight={340}
           backgroundColor="var(--tc-content-background-color)"
           showFullText={
             <div className="inline-block rounded-full bg-white dark:bg-black opacity-80 py-2 px-3 hover:opacity-100">
