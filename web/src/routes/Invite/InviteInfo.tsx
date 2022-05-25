@@ -2,16 +2,16 @@ import { Avatar } from '@/components/Avatar';
 import { InviteCodeExpiredAt } from '@/components/InviteCodeExpiredAt';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { UserName } from '@/components/UserName';
+import { Divider } from 'antd';
 import React from 'react';
 import {
-  datetimeFromNow,
   getCachedGroupInviteInfo,
   getGroupBasicInfo,
   showErrorToasts,
   t,
-  Trans,
   useAsync,
 } from 'tailchat-shared';
+import { JoinBtn } from './JoinBtn';
 
 interface Props {
   inviteCode: string;
@@ -19,7 +19,7 @@ interface Props {
 export const InviteInfo: React.FC<Props> = React.memo((props) => {
   const { inviteCode } = props;
 
-  const { loading, value } = useAsync(async () => {
+  const { loading, value: inviteInfo } = useAsync(async () => {
     try {
       const invite = await getCachedGroupInviteInfo(inviteCode);
       if (invite === null) {
@@ -44,36 +44,42 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
     return <LoadingSpinner />;
   }
 
-  if (!value) {
+  if (!inviteInfo) {
     return <div>{t('群组信息加载失败')}</div>;
   }
 
   return (
-    <div className="text-white">
-      <div>
-        <Avatar
-          className="mb-4"
-          size={64}
-          src={value.group.avatar}
-          name={value.group.name}
-        />
-      </div>
-      <div>
-        <UserName className="font-bold" userId={value.creator} />{' '}
-        {t('邀请您加入群组')}
-      </div>
-      <div className="text-xl my-2 font-bold">{value.group.name}</div>
-      <div>
-        {t('当前成员数')}: {value.group.memberCount}
+    <>
+      <div className="text-white">
+        <div>
+          <Avatar
+            className="mb-4"
+            size={64}
+            src={inviteInfo.group.avatar}
+            name={inviteInfo.group.name}
+          />
+        </div>
+        <div>
+          <UserName className="font-bold" userId={inviteInfo.creator} />{' '}
+          {t('邀请您加入群组')}
+        </div>
+        <div className="text-xl my-2 font-bold">{inviteInfo.group.name}</div>
+        <div>
+          {t('当前成员数')}: {inviteInfo.group.memberCount}
+        </div>
+
+        {/* 永久邀请码不显示过期时间 */}
+        {inviteInfo.expired && (
+          <div>
+            <InviteCodeExpiredAt invite={{ expiredAt: inviteInfo.expired }} />
+          </div>
+        )}
       </div>
 
-      {/* 永久邀请码不显示过期时间 */}
-      {value.expired && (
-        <div>
-          <InviteCodeExpiredAt invite={{ expiredAt: value.expired }} />
-        </div>
-      )}
-    </div>
+      <Divider />
+
+      <JoinBtn inviteCode={inviteCode} expired={inviteInfo.expired} />
+    </>
   );
 });
 InviteInfo.displayName = 'InviteInfo';

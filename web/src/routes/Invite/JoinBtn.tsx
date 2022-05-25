@@ -7,7 +7,6 @@ import {
   applyGroupInvite,
   checkTokenValid,
   getCachedGroupInviteInfo,
-  showToasts,
   t,
   useAsync,
   useAsyncRequest,
@@ -16,6 +15,7 @@ import { SuccessModal } from './SuccessModal';
 
 interface Props {
   inviteCode: string;
+  expired?: string;
 }
 export const JoinBtn: React.FC<Props> = React.memo((props) => {
   const history = useHistory();
@@ -51,6 +51,14 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
     return (
       <Button block={true} type="primary" size="large" disabled={true}>
         {t('已加入')}
+      </Button>
+    );
+  }
+
+  if (props.expired && new Date(props.expired).valueOf() < Date.now()) {
+    return (
+      <Button block={true} type="primary" size="large" disabled={true}>
+        {t('已过期')}
       </Button>
     );
   }

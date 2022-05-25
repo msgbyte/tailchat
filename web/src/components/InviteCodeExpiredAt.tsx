@@ -19,6 +19,10 @@ export const InviteCodeExpiredAt: React.FC<InviteCodeExpiredAtProps> =
       return t('该邀请码永不过期');
     }
 
+    if (new Date(invite.expiredAt).valueOf() < Date.now()) {
+      return t('该邀请码已过期');
+    }
+
     return (
       <Trans>
         该邀请将于{' '}
