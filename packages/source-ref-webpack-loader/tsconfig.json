@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "commonjs",
+
+		// Node 10
+		"target": "ES2018",
+		"lib": ["ES2018"],
+
+		"declaration": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": ["src"]
+}

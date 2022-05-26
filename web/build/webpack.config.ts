@@ -225,17 +225,34 @@ const config: Configuration = {
       overlay: false,
     },
   },
+  // resolveLoader: {
+  //   alias: {
+  //     'source-ref-loader': require.resolve(
+  //       '../../packages/source-ref-webpack-loader/src'
+  //     ),
+  //   },
+  // },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'esbuild-loader',
-        options: {
-          loader: 'tsx',
-          target: 'es2015',
-          tsconfigRaw: require('../tsconfig.json'),
-        },
+        use: [
+          {
+            loader: 'esbuild-loader',
+            options: {
+              loader: 'tsx',
+              target: 'es2015',
+              tsconfigRaw: require('../tsconfig.json'),
+            },
+          },
+          // {
+          //   loader: 'source-ref-loader',
+          //   options: {
+          //     available: false,
+          //   },
+          // },
+        ],
       },
       {
         test: /\.(less|css)$/,
