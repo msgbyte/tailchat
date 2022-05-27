@@ -156,7 +156,7 @@ importers:
       '@types/node': 15.14.9
       ts-node: 10.7.0_ixcth6kbstn6no7hiktnzckliq
 
-  packages/source-ref-webpack-loader:
+  packages/source-ref-loader:
     specifiers:
       '@babel/generator': ^7.17.7
       '@babel/parser': ^7.17.7
@@ -184,6 +184,9 @@ importers:
       typescript: 4.6.4
       webpack: 5.72.1
       webpack-test-utils: 1.1.0_webpack@5.72.1
+
+  packages/source-ref-open-vscode:
+    specifiers: {}
 
   shared:
     specifiers:
@@ -17055,7 +17058,7 @@ packages:
       serialize-javascript: 6.0.0
       source-map: 0.6.1
       terser: 5.13.1
-      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack: 5.72.1
     dev: true
 
   /terser/4.8.0:
