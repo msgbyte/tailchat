@@ -225,13 +225,13 @@ const config: Configuration = {
       overlay: false,
     },
   },
-  // resolveLoader: {
-  //   alias: {
-  //     'source-ref-loader': require.resolve(
-  //       '../../packages/source-ref-webpack-loader/src'
-  //     ),
-  //   },
-  // },
+  resolveLoader: {
+    alias: {
+      'source-ref-loader': require.resolve(
+        '../../packages/source-ref-webpack-loader/src'
+      ),
+    },
+  },
   module: {
     rules: [
       {
@@ -246,12 +246,12 @@ const config: Configuration = {
               tsconfigRaw: require('../tsconfig.json'),
             },
           },
-          // {
-          //   loader: 'source-ref-loader',
-          //   options: {
-          //     available: false,
-          //   },
-          // },
+          {
+            loader: 'source-ref-loader',
+            options: {
+              available: isDev,
+            },
+          },
         ],
       },
       {

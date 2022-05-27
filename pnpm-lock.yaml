@@ -314,6 +314,7 @@ importers:
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-replace: ^2.2.0
       socket.io-client: ^4.1.2
+      source-ref-open-vscode: workspace:^1.0.0
       style-loader: ^3.0.0
       tailchat-design: workspace:^1.0.0
       tailchat-plugin-declaration-generator: workspace:^1.0.0
@@ -364,6 +365,7 @@ importers:
       react-virtualized-auto-sizer: 1.0.6_sfoxds7t5ydpegc3knd667wn6m
       react-virtuoso: 2.11.0_sfoxds7t5ydpegc3knd667wn6m
       socket.io-client: 4.4.0
+      source-ref-open-vscode: link:../packages/source-ref-open-vscode
       tailchat-design: link:../packages/design
       tailchat-shared: link:../shared
       tailwindcss: 2.2.19_hqu7j45oxtlo2g5y3qitzppg3y
@@ -17051,7 +17053,7 @@ packages:
       serialize-javascript: 6.0.0
       source-map: 0.6.1
       terser: 5.13.1
-      webpack: 5.72.1
+      webpack: 5.72.1_webpack-cli@4.9.2
     dev: true
 
   /terser/4.8.0:

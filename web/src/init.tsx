@@ -13,10 +13,15 @@ import {
   fetchGlobalConfig,
   request,
   isValidStr,
+  isDevelopment,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
+
+if (isDevelopment) {
+  import('source-ref-open-vscode');
+}
 
 const webStorage = buildStorage(window.localStorage);
 setStorage(() => webStorage);

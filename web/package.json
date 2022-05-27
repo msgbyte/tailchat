@@ -54,6 +54,7 @@
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-virtuoso": "^2.8.3",
     "socket.io-client": "^4.1.2",
+    "source-ref-open-vscode": "workspace:^1.0.0",
     "tailchat-design": "workspace:^1.0.0",
     "tailchat-shared": "*",
     "tailwindcss": "^2.2.4",
