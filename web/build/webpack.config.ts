@@ -225,13 +225,6 @@ const config: Configuration = {
       overlay: false,
     },
   },
-  resolveLoader: {
-    alias: {
-      'source-ref-loader': require.resolve(
-        '../../packages/source-ref-webpack-loader/src'
-      ),
-    },
-  },
   module: {
     rules: [
       {
