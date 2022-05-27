@@ -33,3 +33,5 @@ export { Loading } from '@/components/Loading';
 export { SidebarView } from '@/components/SidebarView';
 export { GroupPanelSelector } from '@/components/GroupPanelSelector';
 export { Emoji } from '@/components/Emoji';
+export { PortalAdd } from '@/components/Portal';
+export { ErrorBoundary } from '@/components/ErrorBoundary';
