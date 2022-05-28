@@ -20,7 +20,8 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "acorn"
+        "acorn",
+        "acorn-dynamic-import"
       ]
     }
   },

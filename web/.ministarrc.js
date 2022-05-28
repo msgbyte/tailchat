@@ -1,6 +1,9 @@
 const copy = require('rollup-plugin-copy');
 const replace = require('rollup-plugin-replace');
+const sourceRef = require('rollup-plugin-source-ref').default;
 const path = require('path');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   externalDeps: [
@@ -40,4 +43,14 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
+  buildRollupPlugins(plugins) {
+    if (isDev) {
+      return [
+        sourceRef(), // make sure to change to source
+        ...plugins,
+      ];
+    }
+
+    return plugins;
+  },
 };

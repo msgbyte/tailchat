@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "commonjs",
+		"target": "ES5",
+		"lib": ["ESNext"],
+		"declaration": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": ["src"]
+}

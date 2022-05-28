@@ -3,12 +3,13 @@ import traverse from '@babel/traverse';
 import generate from '@babel/generator';
 import template from '@babel/template';
 import type { Comment } from '@babel/types';
+import { program } from '@babel/types';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
 const babelPlugins: ParserPlugin[] = ['jsx', 'typescript'];
 const buildNamedExport = template('export function %%name%%(): any', {
-  plugins: babelPlugins as any,
+  plugins: babelPlugins,
 });
 
 interface Options {
@@ -26,10 +27,7 @@ export async function generateFunctionDeclare(options: Options) {
     });
   });
 
-  const code = generate({
-    type: 'Program',
-    body: _.flatten(astList),
-  } as any).code;
+  const code = generate(program(_.flatten(astList))).code;
 
   return code;
 }
