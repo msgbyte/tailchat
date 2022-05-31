@@ -6,16 +6,66 @@ export const ChatBoxPlaceholder: React.FC = React.memo(() => {
 
   return (
     <div className="px-2 w-2/3">
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
-      <Skeleton className="mb-2" avatar={true} paragraph={paragraph} />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
+      <Skeleton
+        className="mb-2"
+        active={true}
+        avatar={true}
+        paragraph={paragraph}
+      />
     </div>
   );
 });
