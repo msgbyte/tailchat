@@ -6,6 +6,10 @@ import {
 } from '@capital/common';
 
 const BBCode = Loadable(() => import('./render'));
+let serialize: (bbcode: string) => string;
+import('./bbcode/serialize').then((module) => {
+  serialize = module.bbcodeToPlainText;
+});
 
 regMessageRender((message) => {
   return <BBCode plainText={message} />;
@@ -22,6 +26,7 @@ regMessageTextDecorators(() => ({
   },
   mention: (userId, userName) => `[at=${userId}]${userName}[/at]`,
   emoji: (emojiCode) => `[emoji]${stripColons(emojiCode)}[/emoji]`,
+  serialize: (plain: string) => (serialize ? serialize(plain) : plain),
 }));
 
 /**

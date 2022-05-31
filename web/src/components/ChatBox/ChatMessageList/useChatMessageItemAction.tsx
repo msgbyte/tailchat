@@ -1,6 +1,6 @@
 import { Icon } from '@/components/Icon';
 import { Menu } from 'antd';
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   ChatMessage,
   deleteMessage,
@@ -13,6 +13,8 @@ import {
   useUserInfo,
 } from 'tailchat-shared';
 import { openReconfirmModalP } from '@/components/Modal';
+import copy from 'copy-to-clipboard';
+import { getMessageTextDecorators } from '@/plugin/common';
 
 /**
  * 消息的会话操作
@@ -24,6 +26,10 @@ export function useChatMessageItemAction(
   const context = useChatBoxContext();
   const groupInfo = useGroupInfoContext();
   const userInfo = useUserInfo();
+
+  const handleCopy = useCallback(() => {
+    copy(getMessageTextDecorators().serialize(payload.content));
+  }, [payload.content]);
 
   const [, handleRecallMessage] = useAsyncRequest(async () => {
     if (await openReconfirmModalP()) {
@@ -42,6 +48,14 @@ export function useChatMessageItemAction(
 
   return (
     <Menu onClick={options.onClick}>
+      <Menu.Item
+        key="copy"
+        icon={<Icon icon="mdi:content-copy" />}
+        onClick={handleCopy}
+      >
+        {t('复制')}
+      </Menu.Item>
+
       {context.hasContext && (
         <Menu.Item
           key="reply"

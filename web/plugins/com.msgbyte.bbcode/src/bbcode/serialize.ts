@@ -12,11 +12,17 @@ function bbcodeNodeToPlainText(node: AstNode): string {
   } else {
     if (node.tag === 'img') {
       return '[图片]';
-    } else {
-      return (node.content ?? [])
-        .map((sub) => bbcodeNodeToPlainText(sub))
-        .join('');
     }
+    if (node.tag === 'emoji') {
+      return `:${node.content.join('')}:`;
+    }
+    if (node.tag === 'at') {
+      return `@${node.content.join('')}`;
+    }
+
+    return (node.content ?? [])
+      .map((sub) => bbcodeNodeToPlainText(sub))
+      .join('');
   }
 }
 
