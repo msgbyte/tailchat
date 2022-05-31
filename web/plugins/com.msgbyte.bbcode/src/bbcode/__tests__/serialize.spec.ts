@@ -7,7 +7,8 @@ describe('bbcodeToPlainText should be ok', () => {
     ['image [img]http://image.url[/img]', 'image [图片]'],
     ['url [url]http://link.url[/url]', 'url http://link.url'],
     ['url2 [url=http://baidu.com]a[/url]', 'url2 a'],
-    ['at [at=uuid]name[/at]', 'at name'],
+    ['at [at=uuid]name[/at]', 'at @name'],
+    ['[emoji]smile[/emoji]', ':smile:'],
   ])('%s', (input, output) => {
     const plain = bbcodeToPlainText(input);
 
