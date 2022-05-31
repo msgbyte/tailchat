@@ -2,9 +2,9 @@
   "name": "source-ref-loader",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "build": "tsc",

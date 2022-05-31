@@ -1,14 +1,18 @@
 import type { Configuration } from 'webpack';
+import type { DefaultWebpackConfig } from 'webpack-test-utils';
 
 const loaderPath = require.resolve('../src/index.ts');
 
-export function configureLoader(config: Configuration) {
+export function configureLoader(config: DefaultWebpackConfig & Configuration) {
   config.resolveLoader.alias = {
-    'source-pointer-loader': loaderPath,
+    'source-ref-loader': loaderPath,
   };
 
   config.module.rules.push({
     test: /\.tsx$/,
-    loader: 'source-pointer-loader',
+    loader: 'source-ref-loader',
+    options: {
+      available: true,
+    },
   });
 }

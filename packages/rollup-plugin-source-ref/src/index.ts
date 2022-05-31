@@ -2,7 +2,13 @@ import type { Plugin } from 'rollup';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import generate from '@babel/generator';
-import { jsxAttribute, jsxIdentifier, stringLiteral } from '@babel/types';
+import {
+  isJSXIdentifier,
+  isJSXMemberExpression,
+  jsxAttribute,
+  jsxIdentifier,
+  stringLiteral,
+} from '@babel/types';
 
 const TRACE_ID = 'data-source';
 
@@ -25,6 +31,17 @@ export default function sourceRef(): Plugin {
           }
 
           if (Array.isArray(location)) {
+            return;
+          }
+
+          const name = path.node.name;
+          if (isJSXIdentifier(name) && name.name === 'Fragment') {
+            return;
+          }
+          if (
+            isJSXMemberExpression(name) &&
+            name.property.name === 'Fragment'
+          ) {
             return;
           }
 
