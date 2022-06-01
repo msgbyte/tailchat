@@ -159,18 +159,16 @@ export function openModal(
   return key;
 }
 
-interface OpenReconfirmModalProps {
+interface OpenConfirmModalProps {
   onConfirm: () => void;
   onCancel?: () => void;
+  title?: string;
+  content?: string;
 }
-
-/**
- * 打开再次确认操作modal
- */
-export function openReconfirmModal(props: OpenReconfirmModalProps) {
+export function openConfirmModal(props: OpenConfirmModalProps) {
   const key = openModal(
-    <ModalWrapper title={t('确认要进行该操作么?')}>
-      <h3 className="text-center pb-6">{t('该操作无法被撤回')}</h3>
+    <ModalWrapper title={props.title ?? t('确认操作')}>
+      <h3 className="text-center pb-6">{props.content}</h3>
       <div className="space-x-2 text-right">
         <Button
           onClick={() => {
@@ -195,6 +193,22 @@ export function openReconfirmModal(props: OpenReconfirmModalProps) {
       onCloseModal: props.onCancel,
     }
   );
+}
+
+type OpenReconfirmModalProps = Pick<
+  OpenConfirmModalProps,
+  'onConfirm' | 'onCancel'
+>;
+/**
+ * 打开再次确认操作modal
+ */
+export function openReconfirmModal(props: OpenReconfirmModalProps) {
+  openConfirmModal({
+    onConfirm: props.onConfirm,
+    onCancel: props.onCancel,
+    title: t('确认要进行该操作么?'),
+    content: t('该操作无法被撤回'),
+  });
 }
 /**
  * 打开再次确认操作modal(Promise版本)

@@ -6,11 +6,17 @@
 import _pick from 'lodash/pick';
 export * from './reg';
 export { useGroupPanelParams } from '@/routes/Main/Content/Group/utils';
+
+/**
+ * @deprecated 从component引用
+ */
 export {
   openModal,
   closeModal,
   ModalWrapper,
   useModalContext,
+  openConfirmModal,
+  openReconfirmModal,
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { getGlobalState } from '@/utils/global-state-helper';

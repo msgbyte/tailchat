@@ -9,10 +9,12 @@ export {
   Menu,
   Table,
   Switch,
+  Tooltip,
 } from 'antd';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
 export { Icon } from '@/components/Icon';
+export { IconBtn } from '@/components/IconBtn';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
 export { LoadingSpinner } from '@/components/LoadingSpinner';
 export {
@@ -29,6 +31,14 @@ export {
   DefaultFullModalInputEditorRender,
   DefaultFullModalTextAreaEditorRender,
 } from '@/components/FullModal/Field';
+export {
+  openModal,
+  closeModal,
+  ModalWrapper,
+  useModalContext,
+  openConfirmModal,
+  openReconfirmModal,
+} from '@/components/Modal';
 export { Loading } from '@/components/Loading';
 export { SidebarView } from '@/components/SidebarView';
 export { GroupPanelSelector } from '@/components/GroupPanelSelector';

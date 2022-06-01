@@ -1,10 +1,8 @@
 import { Button, ButtonProps, Tooltip } from 'antd';
+import clsx from 'clsx';
 import React from 'react';
 import { isValidStr } from 'tailchat-shared';
 import { Icon } from './Icon';
-
-const btnClassName =
-  'border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60';
 
 type IconBtnShapeType = 'circle' | 'square';
 
@@ -35,7 +33,17 @@ export const IconBtn: React.FC<IconBtnProps> = React.memo(
     );
 
     const btnEl = (
-      <Button className={btnClassName} {...props} shape={shape} icon={iconEl} />
+      <Button
+        className={clsx(
+          'border-0 text-white text-opacity-80 hover:text-opacity-100',
+          props.danger
+            ? 'bg-red-600 bg-opacity-80 hover:bg-opacity-100'
+            : 'bg-black bg-opacity-20 hover:bg-opacity-60'
+        )}
+        {...props}
+        shape={shape}
+        icon={iconEl}
+      />
     );
 
     if (isValidStr(title)) {

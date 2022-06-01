@@ -13,7 +13,7 @@ export const Problem: React.FC<ProblemProps> = React.memo((props) => {
     <div className="text-center w-full">
       <img className="w-32 h-32 m-auto mb-2" src={problemSvg} />
 
-      <p>{props.text}</p>
+      <div>{props.text}</div>
     </div>
   );
 });
