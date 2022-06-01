@@ -3,7 +3,7 @@
 exports[`IconBtn render 1`] = `
 <div>
   <button
-    class="ant-btn ant-btn-circle ant-btn-default ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+    class="ant-btn ant-btn-circle ant-btn-default ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
     type="button"
   >
     <span

@@ -95,7 +95,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -109,7 +109,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -165,7 +165,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -179,7 +179,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -235,7 +235,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -249,7 +249,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -321,7 +321,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -335,7 +335,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -391,7 +391,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -405,7 +405,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -461,7 +461,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           style="margin-right: 8px;"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
@@ -475,7 +475,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
                           class="ant-space-item"
                         >
                           <button
-                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 bg-black bg-opacity-20 text-white text-opacity-80 hover:text-opacity-100 hover:bg-opacity-60"
+                            class="ant-btn ant-btn-circle ant-btn-text ant-btn-sm ant-btn-icon-only border-0 text-white text-opacity-80 hover:text-opacity-100 bg-black bg-opacity-20 hover:bg-opacity-60"
                             type="button"
                           >
                             <span
