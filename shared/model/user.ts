@@ -197,12 +197,10 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
 export async function getUserOnlineStatus(
   userIds: string[]
 ): Promise<boolean[]> {
-  const { data } = await request.get<boolean[]>(
+  const { data } = await request.post<boolean[]>(
     '/api/gateway/checkUserOnline',
     {
-      params: {
-        userIds,
-      },
+      userIds,
     }
   );
 

@@ -34,14 +34,23 @@ export function useCachedUserInfo(
 /**
  * 用户登录状态
  */
-export function useCachedOnlineStatus(ids: string[]): boolean[] {
-  const { data } = useQuery(
+export function useCachedOnlineStatus(
+  ids: string[],
+  onOnlineStatusUpdate?: (onlineStatus: boolean[]) => void
+): boolean[] {
+  const { data, isSuccess } = useQuery(
     ['onlineStatus', ids.join(',')],
     () => getUserOnlineStatus(ids),
     {
       staleTime: 10 * 1000, // 缓存10s
     }
   );
+
+  if (isSuccess && Array.isArray(data)) {
+    if (typeof onOnlineStatusUpdate === 'function' && data) {
+      onOnlineStatusUpdate(data);
+    }
+  }
 
   return data ?? ids.map(() => false);
 }

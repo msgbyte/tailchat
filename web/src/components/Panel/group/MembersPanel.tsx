@@ -1,8 +1,13 @@
 import { Icon } from '@/components/Icon';
 import { UserListItem } from '@/components/UserListItem';
-import { Input, Skeleton } from 'antd';
+import { Divider, Input, Skeleton } from 'antd';
 import React, { useMemo, useState } from 'react';
-import { t, useGroupInfo } from 'tailchat-shared';
+import {
+  t,
+  useCachedOnlineStatus,
+  useGroupInfo,
+  UserBaseInfo,
+} from 'tailchat-shared';
 import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
 
 interface MembersPanelProps {
@@ -17,6 +22,27 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const members = groupInfo?.members ?? [];
   const userInfoList = useUserInfoList(members.map((m) => m.userId));
   const [searchStr, setSearchStr] = useState('');
+  const membersOnlineStatus = useCachedOnlineStatus(
+    members.map((m) => m.userId)
+  );
+
+  const groupedMembers = useMemo(() => {
+    const online: UserBaseInfo[] = [];
+    const offline: UserBaseInfo[] = [];
+
+    userInfoList.forEach((m, i) => {
+      if (membersOnlineStatus[i] === true) {
+        online.push(m);
+      } else {
+        offline.push(m);
+      }
+    });
+
+    return {
+      online,
+      offline,
+    };
+  }, [userInfoList, membersOnlineStatus]);
 
   const filteredGroupMembers = useMemo(() => {
     return userInfoList.filter((u) => u.nickname.includes(searchStr));
@@ -25,6 +51,12 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   if (userInfoList.length === 0) {
     return <Skeleton />;
   }
+
+  const isSearching = searchStr !== '';
+
+  const renderUser = (member: UserBaseInfo) => (
+    <UserListItem key={member._id} userId={member._id} />
+  );
 
   return (
     <div>
@@ -37,9 +69,17 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         />
       </div>
 
-      {filteredGroupMembers.map((member) => (
-        <UserListItem key={member._id} userId={member._id} />
-      ))}
+      {isSearching ? (
+        filteredGroupMembers.map(renderUser)
+      ) : (
+        <>
+          {groupedMembers.online.map(renderUser)}
+
+          <Divider>{t('以下用户已离线')}</Divider>
+
+          {groupedMembers.offline.map(renderUser)}
+        </>
+      )}
     </div>
   );
 });
