@@ -20,7 +20,11 @@
   function sourceToId(node) {
     if (!node.dataset.source) return;
     const source = node.dataset.source;
-    const [file, row, column] = source.split(':');
+    const splits = source.split(':');
+    const column = splits.pop();
+    const row = splits.pop();
+    const file = splits.join(':');
+
     if (!sourceMap[file]) {
       cursor++;
       sourceMap[file] = cursor;
