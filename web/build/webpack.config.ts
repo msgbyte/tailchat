@@ -102,7 +102,7 @@ const plugins: Configuration['plugins'] = [
     skipWaiting: true,
 
     // Do not precache images
-    exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+    exclude: [/\.(?:png|jpg|jpeg|svg)$/, 'config.json'],
 
     maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 限制最大缓存 8M
 

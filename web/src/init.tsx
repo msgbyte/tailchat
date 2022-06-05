@@ -66,7 +66,7 @@ setGlobalLoading((text) => {
  * 获取前端配置
  */
 request
-  .get('/config.json', {
+  .get('/config.json?v2', {
     baseURL: '',
   })
   .then(({ data: config }) => {
