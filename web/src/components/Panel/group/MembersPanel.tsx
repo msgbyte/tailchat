@@ -1,4 +1,5 @@
 import { Icon } from '@/components/Icon';
+import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Input, Skeleton } from 'antd';
 import React, { useMemo, useState } from 'react';
@@ -55,7 +56,11 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const isSearching = searchStr !== '';
 
   const renderUser = (member: UserBaseInfo) => (
-    <UserListItem key={member._id} userId={member._id} />
+    <UserListItem
+      key={member._id}
+      userId={member._id}
+      popover={<GroupUserPopover userInfo={member} />}
+    />
   );
 
   return (

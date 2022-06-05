@@ -30,7 +30,6 @@ export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
 
   const style: React.CSSProperties = useMemo(
     () => ({
-      cursor: 'inherit',
       userSelect: 'none',
       ...props.style,
       backgroundColor: color,

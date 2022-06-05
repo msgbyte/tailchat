@@ -117,6 +117,7 @@ export type {
   GroupInfo,
   GroupBasicInfo,
   GroupInvite,
+  GroupMember,
 } from './model/group';
 export {
   sendMessage,
