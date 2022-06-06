@@ -55,6 +55,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        inherit: {
+          DEFAULT: 'inherit',
+        },
         navbar: {
           light: colors.coolGray[300],
           dark: colors.coolGray[900],

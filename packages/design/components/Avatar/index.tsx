@@ -9,6 +9,8 @@ import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
 import { getTextColorHex } from './utils';
 import { isValidStr } from '../utils';
 
+export { getTextColorHex };
+
 export interface AvatarProps extends AntdAvatarProps {
   name?: string;
   isOnline?: boolean;
