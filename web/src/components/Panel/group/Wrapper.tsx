@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { t, useGroupPanelInfo } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { MembersPanel } from './MembersPanel';
@@ -7,10 +7,26 @@ import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 import { IconBtn } from '@/components/IconBtn';
 import {
-  DMPluginPanelActionProps,
   GroupPluginPanelActionProps,
   pluginPanelActions,
 } from '@/plugin/common';
+import { useUserSessionPreference } from '@/hooks/useUserPreference';
+
+/**
+ * 记录下最后访问的面板id
+ */
+function useRecordGroupPanel(groupId: string, panelId: string) {
+  const [lastVisitPanel, setLastVisitPanel] = useUserSessionPreference(
+    'groupLastVisitPanel'
+  );
+
+  useEffect(() => {
+    setLastVisitPanel({
+      ...lastVisitPanel,
+      [groupId]: panelId,
+    });
+  }, [groupId, panelId]);
+}
 
 /**
  * 群组面板通用包装器
@@ -27,6 +43,7 @@ interface GroupPanelWrapperProps {
 export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
   (props) => {
     const panelInfo = useGroupPanelInfo(props.groupId, props.panelId);
+    useRecordGroupPanel(props.groupId, props.panelId);
 
     if (_isNil(panelInfo)) {
       return null;

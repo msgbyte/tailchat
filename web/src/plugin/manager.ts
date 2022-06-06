@@ -2,7 +2,6 @@ import {
   getCachedRegistryPlugins,
   getStorage,
   PluginManifest,
-  t,
 } from 'tailchat-shared';
 import { initMiniStar, loadSinglePlugin } from 'mini-star';
 import _once from 'lodash/once';

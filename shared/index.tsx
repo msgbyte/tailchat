@@ -47,6 +47,7 @@ export { Trans } from './i18n/Trans';
 export { useLanguage } from './i18n/language';
 
 // hooks
+export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
 export { useUsernames } from './hooks/model/useUsernames';
 export {
@@ -58,6 +59,7 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useDebounce } from './hooks/useDebounce';
+export { useMemoizedFn } from './hooks/useMemoizedFn';
 export { useMountedState } from './hooks/useMountedState';
 export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
