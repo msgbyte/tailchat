@@ -11,6 +11,7 @@ export {
   Switch,
   Tooltip,
 } from 'antd';
+export { Avatar } from 'tailchat-design';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
 export { Icon } from '@/components/Icon';
