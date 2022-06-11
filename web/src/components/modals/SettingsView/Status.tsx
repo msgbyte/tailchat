@@ -9,8 +9,20 @@ import { t, useAvailableServices } from 'tailchat-shared';
  */
 const DEFAULT_SERVICES = [
   {
+    name: 'config',
+    label: t('全局配置'),
+  },
+  {
+    name: 'gateway',
+    label: t('服务网关'),
+  },
+  {
     name: 'user',
     label: t('用户服务'),
+  },
+  {
+    name: 'user.dmlist',
+    label: t('私信服务'),
   },
   {
     name: 'chat.message',
@@ -19,6 +31,10 @@ const DEFAULT_SERVICES = [
   {
     name: 'chat.converse',
     label: t('会话服务'),
+  },
+  {
+    name: 'chat.ack',
+    label: t('已读服务'),
   },
   {
     name: 'friend',
@@ -35,6 +51,14 @@ const DEFAULT_SERVICES = [
   {
     name: 'file',
     label: t('文件服务'),
+  },
+  {
+    name: 'mail',
+    label: t('邮件服务'),
+  },
+  {
+    name: 'plugin.registry',
+    label: t('插件中心服务'),
   },
 ];
 
