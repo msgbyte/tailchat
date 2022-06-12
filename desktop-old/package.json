@@ -1,6 +1,6 @@
 {
-  "name": "tailchat-desktop",
-  "productName": "tailchat-desktop",
+  "name": "tailchat-desktop-old",
+  "productName": "tailchat-desktop-old",
   "version": "0.0.1",
   "description": "Tailchat application desktop",
   "main": "dist/index.js",
