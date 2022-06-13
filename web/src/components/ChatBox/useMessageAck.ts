@@ -1,45 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import {
-  ChatMessage,
-  isValidStr,
-  updateAck,
-  useAppDispatch,
-  useAppSelector,
-  useUpdateRef,
-} from 'tailchat-shared';
-import { chatActions } from 'tailchat-shared/redux/slices';
+import { useEffect } from 'react';
+import { ChatMessage, useConverseAck, useUpdateRef } from 'tailchat-shared';
 import _debounce from 'lodash/debounce';
+import _last from 'lodash/last';
 
 export function useMessageAck(converseId: string, messages: ChatMessage[]) {
+  const { updateConverseAck } = useConverseAck(converseId);
   const messagesRef = useUpdateRef(messages);
-  const dispatch = useAppDispatch();
-
-  const lastMessageIdRef = useRef('');
-  lastMessageIdRef.current = useAppSelector(
-    (state) => state.chat.ack[converseId] ?? ''
-  );
-
-  const setConverseAck = useMemo(
-    () =>
-      _debounce(
-        (converseId: string, lastMessageId: string) => {
-          if (
-            isValidStr(lastMessageIdRef.current) &&
-            lastMessageId <= lastMessageIdRef.current
-          ) {
-            // 更新的数字比较小，跳过
-            return;
-          }
-
-          dispatch(chatActions.setConverseAck({ converseId, lastMessageId }));
-          updateAck(converseId, lastMessageId);
-          lastMessageIdRef.current = lastMessageId;
-        },
-        1000,
-        { leading: true, trailing: true }
-      ),
-    []
-  );
+  const updateConverseAckRef = useUpdateRef(updateConverseAck);
 
   useEffect(() => {
     // 设置当前
@@ -47,20 +14,9 @@ export function useMessageAck(converseId: string, messages: ChatMessage[]) {
       return;
     }
 
-    const lastMessageId =
-      messagesRef.current[messagesRef.current.length - 1]._id;
-    setConverseAck(converseId, lastMessageId);
+    const lastMessageId = _last(messagesRef.current)!._id;
+    updateConverseAckRef.current(lastMessageId);
   }, [converseId]);
-
-  /**
-   * 更新会话最新消息
-   */
-  const updateConverseAck = useCallback(
-    (lastMessageId: string) => {
-      setConverseAck(converseId, lastMessageId);
-    },
-    [converseId]
-  );
 
   return { updateConverseAck };
 }

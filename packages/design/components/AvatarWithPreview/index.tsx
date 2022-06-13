@@ -17,6 +17,7 @@ export const AvatarWithPreview: React.FC<AvatarProps> = React.memo((props) => {
       >
         <Avatar {...props} />
       </div>
+
       {hasImage && (
         <div
           style={{

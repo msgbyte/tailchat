@@ -7,6 +7,7 @@ import {
   showToasts,
   t,
   useAppDispatch,
+  useConverseAck,
   useGroupInfo,
 } from 'tailchat-shared';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
@@ -16,6 +17,24 @@ import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Icon } from '@/components/Icon';
+
+const GroupAckMenuItem: React.FC<{
+  panelId: string;
+}> = (props) => {
+  const { markConverseAllAck } = useConverseAck(props.panelId);
+
+  return (
+    <Menu.Item
+      icon={<Icon icon="mdi:message-badge-outline" />}
+      onClick={() => {
+        markConverseAllAck();
+      }}
+    >
+      {t('标记为已读')}
+    </Menu.Item>
+  );
+};
+GroupAckMenuItem.displayName = 'GroupAckMenuItem';
 
 /**
  * 群组面板侧边栏组件
@@ -85,6 +104,10 @@ export const SidebarItem: React.FC<{
         >
           {t('Pin')}
         </Menu.Item>
+      )}
+
+      {panel.type === GroupPanelType.TEXT && (
+        <GroupAckMenuItem panelId={panel.id} />
       )}
     </Menu>
   );
