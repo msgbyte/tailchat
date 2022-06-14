@@ -150,7 +150,11 @@ export {
 } from './model/user';
 
 // redux
-export { useAppSelector, useAppDispatch } from './redux/hooks/useAppSelector';
+export {
+  useAppSelector,
+  useAppDispatch,
+  useAppStore,
+} from './redux/hooks/useAppSelector';
 export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseAck } from './redux/hooks/useConverseAck';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';

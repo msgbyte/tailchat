@@ -1,5 +1,5 @@
 import type { AppState } from '../slices';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 
 export function useAppSelector<T>(
   selector: (state: AppState) => T,
@@ -9,3 +9,7 @@ export function useAppSelector<T>(
 }
 
 export const useAppDispatch = useDispatch;
+
+export function useAppStore<AppState>() {
+  return useStore<AppState>();
+}
