@@ -21,7 +21,7 @@
     "plugins:all": "ministar buildPlugin all",
     "plugins:watch": "ministar watchPlugin all",
     "plugins:declaration": "cross-env TS_NODE_PROJECT='tsconfig.node.json' ts-node ./scripts/plugin-declaration.ts",
-    "plugins:declaration:generate": "cross-env TS_NODE_PROJECT='tsconfig.node.json' ts-node ./scripts/generate-plugin-declaration.ts"
+    "plugins:declaration:generate": "cross-env TS_NODE_PROJECT='tsconfig.node.json' ts-node ./scripts/generate-plugin-declaration.typescript.ts"
   },
   "dependencies": {
     "@loadable/component": "^5.15.2",

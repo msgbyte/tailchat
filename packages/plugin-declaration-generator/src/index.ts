@@ -7,6 +7,8 @@ import { program, isFunctionDeclaration } from '@babel/types';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
+export * from './tsgenerator';
+
 const babelPlugins: ParserPlugin[] = ['jsx', 'typescript'];
 const buildNamedExport = template('export function %%name%%(): any', {
   plugins: babelPlugins,

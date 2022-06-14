@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^12.1.4
       '@commitlint/config-conventional': ^12.1.4
+      '@types/fs-extra': ^9.0.13
       '@types/jest': ^27.0.3
       '@types/node': ^15.12.5
       '@typescript-eslint/eslint-plugin': ^4.28.1
@@ -34,6 +35,7 @@ importers:
     devDependencies:
       '@commitlint/cli': 12.1.4
       '@commitlint/config-conventional': 12.1.4
+      '@types/fs-extra': 9.0.13
       '@types/jest': 27.5.1
       '@types/node': 15.14.9
       '@typescript-eslint/eslint-plugin': 4.33.0_lzzr7k3tjtqil7aczuhmzzwame

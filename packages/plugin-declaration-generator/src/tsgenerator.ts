@@ -1,11 +1,11 @@
-import ts from 'typescript';
+import ts, { isExportDeclaration, isVariableStatement } from 'typescript';
 import fs from 'fs-extra';
 
 /**
  * Tools: https://ts-ast-viewer.com/
  */
 
-interface ExportModuleItem {
+export interface ExportModuleItem {
   name: string;
   comment?: string;
 }
@@ -33,7 +33,10 @@ export function parseModuleDeclaration(
         if (ts.isVariableStatement(item)) {
           item.declarationList.declarations.forEach((declaration) => {
             const name = declaration.name.getText();
-            modules[moduleName].push(name);
+            modules[moduleName].push({
+              name,
+              text: declaration.getText(),
+            });
           });
         }
       });
@@ -70,6 +73,25 @@ export function parseExports(filePath: string, options: ts.CompilerOptions) {
           comment: getNodeComments(node),
         });
       }
+    } else if (
+      isVariableStatement(node) &&
+      node.modifiers?.some((v) => v.kind === ts.SyntaxKind.ExportKeyword)
+    ) {
+      // 如果为导出变量
+      // export const foo = ''
+      node.declarationList.declarations.forEach((d) => {
+        if (ts.isIdentifier(d.name)) {
+          exportModules.push({
+            name: d.name.getText(),
+          });
+        } else {
+          d.name.elements.forEach((n) => {
+            exportModules.push({
+              name: n.getText(),
+            });
+          });
+        }
+      });
     }
   });
 
