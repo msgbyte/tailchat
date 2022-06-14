@@ -3,7 +3,7 @@ import traverse from '@babel/traverse';
 import generate from '@babel/generator';
 import template from '@babel/template';
 import type { Comment } from '@babel/types';
-import { program } from '@babel/types';
+import { program, isFunctionDeclaration } from '@babel/types';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
@@ -47,7 +47,7 @@ function getSourceCodeExportedFunction(sourcecode: string): ExportedItem[] {
   traverse(ast, {
     ExportNamedDeclaration({ node }) {
       if (node.declaration) {
-        if (node.declaration.type === 'FunctionDeclaration') {
+        if (isFunctionDeclaration(node.declaration)) {
           const name = node.declaration.id?.name;
           if (typeof name === 'string') {
             exported.push({

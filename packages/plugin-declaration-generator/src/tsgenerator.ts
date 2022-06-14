@@ -10,14 +10,44 @@ interface ExportModuleItem {
   comment?: string;
 }
 
-/**
- * 解析文件
- */
-export function parseFile(filePath: string, options: ts.CompilerOptions) {
-  const host = new FileServiceHost(filePath, options);
+export function parseModuleDeclaration(
+  filePath: string,
+  options: ts.CompilerOptions
+) {
+  const program = parseFile(filePath, options);
+  const modules: Record<string, any[]> = {};
 
-  const service = ts.createLanguageService(host, ts.createDocumentRegistry());
-  const program = service.getProgram();
+  const sourceFile = program?.getSourceFile(filePath);
+  sourceFile?.forEachChild((node) => {
+    if (
+      ts.isModuleDeclaration(node) &&
+      node.body &&
+      ts.isModuleBlock(node.body)
+    ) {
+      const moduleName = node.name.text;
+      if (!modules[moduleName]) {
+        modules[moduleName] = [];
+      }
+
+      node.body.forEachChild((item) => {
+        if (ts.isVariableStatement(item)) {
+          item.declarationList.declarations.forEach((declaration) => {
+            const name = declaration.name.getText();
+            modules[moduleName].push(name);
+          });
+        }
+      });
+    }
+  });
+
+  return { modules };
+}
+
+/**
+ * 解析导出文件
+ */
+export function parseExports(filePath: string, options: ts.CompilerOptions) {
+  const program = parseFile(filePath, options);
 
   const exportModules: ExportModuleItem[] = [];
   const sourceFile = program?.getSourceFile(filePath);
@@ -44,6 +74,18 @@ export function parseFile(filePath: string, options: ts.CompilerOptions) {
   });
 
   return { exportModules };
+}
+
+/**
+ * 解析文件
+ */
+export function parseFile(filePath: string, options: ts.CompilerOptions) {
+  const host = new FileServiceHost(filePath, options);
+
+  const service = ts.createLanguageService(host, ts.createDocumentRegistry());
+  const program = service.getProgram();
+
+  return program;
 }
 
 function isExportFunc(node: ts.Node): node is ts.FunctionDeclaration {
