@@ -8,13 +8,14 @@ import fs from 'fs-extra';
 export interface ExportModuleItem {
   name: string;
   comment?: string;
+  pos: number;
 }
 
 export function parseModuleDeclaration(
   filePath: string,
   options: ts.CompilerOptions
 ) {
-  const program = parseFile(filePath, options);
+  const { program } = parseFile(filePath, options);
   const modules: Record<string, any[]> = {};
 
   const sourceFile = program?.getSourceFile(filePath);
@@ -33,9 +34,11 @@ export function parseModuleDeclaration(
         if (ts.isVariableStatement(item)) {
           item.declarationList.declarations.forEach((declaration) => {
             const name = declaration.name.getText();
+            const pos = declaration.pos;
             modules[moduleName].push({
               name,
               text: declaration.getText(),
+              pos,
             });
           });
         }
@@ -50,7 +53,7 @@ export function parseModuleDeclaration(
  * 解析导出文件
  */
 export function parseExports(filePath: string, options: ts.CompilerOptions) {
-  const program = parseFile(filePath, options);
+  const { program, service } = parseFile(filePath, options);
 
   const exportModules: ExportModuleItem[] = [];
   const sourceFile = program?.getSourceFile(filePath);
@@ -62,6 +65,7 @@ export function parseExports(filePath: string, options: ts.CompilerOptions) {
           exportModules.push({
             name: exportSpec.name.text,
             // comment:
+            pos: exportSpec.pos,
           });
         }
       });
@@ -71,6 +75,7 @@ export function parseExports(filePath: string, options: ts.CompilerOptions) {
         exportModules.push({
           name: node.name.text,
           comment: getNodeComments(node),
+          pos: node.pos,
         });
       }
     } else if (
@@ -83,11 +88,13 @@ export function parseExports(filePath: string, options: ts.CompilerOptions) {
         if (ts.isIdentifier(d.name)) {
           exportModules.push({
             name: d.name.getText(),
+            pos: d.pos,
           });
         } else {
           d.name.elements.forEach((n) => {
             exportModules.push({
               name: n.getText(),
+              pos: d.pos,
             });
           });
         }
@@ -107,7 +114,7 @@ export function parseFile(filePath: string, options: ts.CompilerOptions) {
   const service = ts.createLanguageService(host, ts.createDocumentRegistry());
   const program = service.getProgram();
 
-  return program;
+  return { service, program };
 }
 
 function isExportFunc(node: ts.Node): node is ts.FunctionDeclaration {
@@ -136,7 +143,9 @@ class FileServiceHost implements ts.LanguageServiceHost {
   getCompilationSettings = () => this.options;
   getScriptFileNames = () => [
     this.filePath,
-    // '/Users/moonrailgun/inventory/tailchat/packages/plugin-declaration-generator/test/demo/foo.ts',
+    // For test
+    '/Users/moonrailgun/inventory/tailchat/packages/plugin-declaration-generator/test/demo/foo.ts',
+    '/Users/moonrailgun/inventory/tailchat/packages/plugin-declaration-generator/test/demo/bar.ts',
   ];
   getScriptVersion = () => '1';
   getScriptSnapshot = (fileName: string) => {
@@ -146,7 +155,10 @@ class FileServiceHost implements ts.LanguageServiceHost {
 
     return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString());
   };
-  getCurrentDirectory = () => '';
+  // getCurrentDirectory = () => process.cwd();
+  getCurrentDirectory = () =>
+    // For test
+    '/Users/moonrailgun/inventory/tailchat/packages/plugin-declaration-generator/test/demo/';
   getDefaultLibFileName = (options: ts.CompilerOptions) =>
     ts.getDefaultLibFilePath(options);
 
