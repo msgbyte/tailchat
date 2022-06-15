@@ -71,7 +71,11 @@ export { buildRegFn } from './manager/buildRegFn';
 export { buildRegList } from './manager/buildRegList';
 export { buildRegMap } from './manager/buildRegMap';
 export { getServiceUrl, setServiceUrl } from './manager/service';
-export { setTokenGetter, refreshTokenGetter } from './manager/request';
+export {
+  setTokenGetter,
+  refreshTokenGetter,
+  setErrorHook,
+} from './manager/request';
 export { regSocketEventListener } from './manager/socket';
 export { getStorage, setStorage, useStorage } from './manager/storage';
 export {

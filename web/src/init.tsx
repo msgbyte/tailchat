@@ -14,10 +14,13 @@ import {
   request,
   isValidStr,
   isDevelopment,
+  setErrorHook,
+  showToasts,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
+import _debounce from 'lodash/debounce';
 
 if (isDevelopment) {
   import('source-ref-open-vscode');
@@ -60,6 +63,33 @@ setGlobalLoading((text) => {
   const hide = message.loading(text, 0);
 
   return hide;
+});
+
+const backToLoginPage = (() => {
+  let timer: number;
+
+  return () => {
+    if (timer) {
+      return;
+    }
+
+    console.warn('账号授权已过期, 2秒后自动跳转到登录页');
+    showToasts(t('账号授权已过期, 2秒后自动跳转到登录页'), 'warning');
+
+    timer = window.setTimeout(() => {
+      window.clearTimeout(timer);
+      window.location.href = '/entry/login';
+    }, 2000);
+  };
+})();
+setErrorHook((err) => {
+  if (_get(err, 'response.data.code') === 403) {
+    backToLoginPage();
+
+    return false;
+  }
+
+  return true;
 });
 
 /**
