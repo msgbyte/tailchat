@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * 该文件由 Tailchat 自动生成
+ * 用于插件的类型声明
  * 生成命令: pnpm run plugins:declaration:generate
  */
 
@@ -37,7 +40,7 @@ declare module '@capital/common' {
 
   export const useGroupIdContext: any;
 
-  export const getServiceUrl: any;
+  export const getServiceUrl: () => string;
 
   export const getCachedUserInfo: any;
 

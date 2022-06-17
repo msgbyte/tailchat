@@ -1,4 +1,4 @@
-import ts, { isExportDeclaration, isVariableStatement } from 'typescript';
+import ts, { isVariableStatement } from 'typescript';
 import fs from 'fs-extra';
 
 /**
@@ -11,12 +11,18 @@ export interface ExportModuleItem {
   pos: number;
 }
 
+export interface DeclarationModuleItem {
+  name: string;
+  text: string;
+  pos?: number;
+}
+
 export function parseModuleDeclaration(
   filePath: string,
   options: ts.CompilerOptions
 ) {
   const { program } = parseFile(filePath, options);
-  const modules: Record<string, any[]> = {};
+  const modules: Record<string, DeclarationModuleItem[]> = {};
 
   const sourceFile = program?.getSourceFile(filePath);
   sourceFile?.forEachChild((node) => {

@@ -2,16 +2,25 @@ import {
   parseModuleDeclaration,
   parseExports,
   ExportModuleItem,
+  DeclarationModuleItem,
 } from 'tailchat-plugin-declaration-generator';
 import path from 'path';
 import fs from 'fs-extra';
 
 const outputPath = path.resolve(__dirname, '../tailchat.d.ts');
 
-function exportModulesTemplate(items: ExportModuleItem[]) {
+function exportModulesTemplate(
+  items: ExportModuleItem[],
+  existedModules: DeclarationModuleItem[] = []
+) {
   return items
     .map((item) => {
-      return `export const ${item.name}: any;`;
+      const findedModule = existedModules.find((m) => m.name === item.name);
+      if (findedModule) {
+        return `export const ${findedModule.text};`;
+      } else {
+        return `export const ${item.name}: any;`;
+      }
     })
     .join('\n\n  ');
 }
@@ -32,7 +41,11 @@ function generateDeclarationFile() {
     {}
   );
 
-  const output = `/**
+  const { modules: existedModules } = parseModuleDeclaration(outputPath, {});
+
+  const output = `/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/**
  * 该文件由 Tailchat 自动生成
  * 用于插件的类型声明
  * 生成命令: pnpm run plugins:declaration:generate
@@ -42,9 +55,15 @@ function generateDeclarationFile() {
  * Tailchat 通用
  */
 declare module '@capital/common' {
-  ${exportModulesTemplate(commonExportModules)}
+  ${exportModulesTemplate(
+    commonExportModules,
+    existedModules['@capital/common']
+  )}
 
-  ${exportModulesTemplate(commonRegExportModules)}
+  ${exportModulesTemplate(
+    commonRegExportModules,
+    existedModules['@capital/common']
+  )}
 }
 
 
@@ -52,8 +71,12 @@ declare module '@capital/common' {
  * Tailchat 组件
  */
 declare module '@capital/component' {
-  ${exportModulesTemplate(componentExportModules)}
-}`;
+  ${exportModulesTemplate(
+    componentExportModules,
+    existedModules['@capital/component']
+  )}
+}
+`;
 
   fs.writeFile(outputPath, output, {
     encoding: 'utf8',
