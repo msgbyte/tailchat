@@ -23,7 +23,6 @@ const configuration: Configuration = {
       ),
     },
   },
-  target: ['web', 'electron-renderer'],
   devServer: {
     port,
     compress: true,

@@ -47,7 +47,7 @@
     "start:main": "cross-env NODE_ENV=development electronmon -r ts-node/register/transpile-only .",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
-    "http-server": "ts-node src/main/lib/http.ts",
+    "http-server": "ts-node test/http-server.ts",
     "test": "jest"
   },
   "lint-staged": {
@@ -145,7 +145,7 @@
     "core-js": "^3.22.5",
     "cross-env": "^7.0.3",
     "crypto-browserify": "^3.12.0",
-    "css-loader": "^6.7.1",
+    "css-loader": "^5.2.6",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "detect-port": "^1.3.0",
     "dotenv": "^16.0.1",
@@ -175,7 +175,7 @@
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "less": "^4.1.3",
-    "less-loader": "^11.0.0",
+    "less-loader": "^10.0.0",
     "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^2.6.0",
     "path-browserify": "^1.0.1",

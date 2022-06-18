@@ -13,16 +13,7 @@ const configuration: Configuration = {
       ),
     },
   },
-  target: ['web', 'electron-renderer'],
   mode: 'production',
-  output: {
-    path: webpackPaths.distRendererPath,
-    publicPath: '/',
-    filename: '[name].[contenthash].js',
-    library: {
-      type: 'umd',
-    },
-  },
 };
 
 export default configuration;
