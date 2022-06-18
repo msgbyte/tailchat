@@ -17,7 +17,7 @@ const configuration: Configuration = {
   mode: 'production',
   output: {
     path: webpackPaths.distRendererPath,
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].[contenthash].js',
     library: {
       type: 'umd',

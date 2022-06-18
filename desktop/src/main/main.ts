@@ -13,7 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { getMainWindowUrl, resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 
@@ -108,8 +108,15 @@ const createWindow = async () => {
       },
     });
 
-    const url = resolveHtmlPath('index.html');
-    log.info('loadUrl:', url);
+    // 方案一: 通过文件协议加载界面
+    // const url = resolveHtmlPath('index.html');
+    // log.info('loadUrl:', url);
+    // mainWindow.loadURL(url);
+
+    // 方案二: 通过本地起一个http服务，然后electron访问http服务
+    log.info('Starting Local Http Server');
+    const url = await getMainWindowUrl();
+    log.info('Local Server started, entry:', url);
     mainWindow.loadURL(url);
 
     mainWindow.on('ready-to-show', () => {

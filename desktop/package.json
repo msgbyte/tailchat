@@ -47,6 +47,7 @@
     "start:main": "cross-env NODE_ENV=development electronmon -r ts-node/register/transpile-only .",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
+    "http-server": "ts-node src/main/lib/http.ts",
     "test": "jest"
   },
   "lint-staged": {
@@ -115,6 +116,8 @@
     "electron-serve": "^1.1.0",
     "electron-updater": "^5.0.1",
     "electron-window-state": "^5.0.3",
+    "express": "^4.18.1",
+    "get-port": "5.1.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
