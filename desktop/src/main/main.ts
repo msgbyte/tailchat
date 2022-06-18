@@ -15,8 +15,15 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
+import is from 'electron-is';
 
 log.info('Start...');
+
+if (is.dev()) {
+  console.log('===========================');
+  console.log('Log file:', log.transports.file.getFile().path);
+  console.log('===========================');
+}
 
 export default class AppUpdater {
   constructor() {
