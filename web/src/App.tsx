@@ -1,5 +1,11 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  HashRouter,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
@@ -10,6 +16,9 @@ import { getPopupContainer, preventDefault } from './utils/dom-helper';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { pluginRootRoute } from './plugin/common';
 import { PortalHost as FallbackPortalHost } from './components/Portal';
+import isElectron from 'is-electron';
+
+const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
 const MainRoute = Loadable(() => import('./routes/Main'));
 
@@ -22,13 +31,13 @@ const InviteRoute = Loadable(() => import('./routes/Invite'));
 const AppProvider: React.FC = React.memo((props) => {
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <BrowserRouter>
+      <AppRouter>
         <TcProvider>
           <AntdProvider getPopupContainer={getPopupContainer}>
             {props.children}
           </AntdProvider>
         </TcProvider>
-      </BrowserRouter>
+      </AppRouter>
     </Suspense>
   );
 });

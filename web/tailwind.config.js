@@ -4,6 +4,7 @@
 
 const plugin = require('tailwindcss/plugin');
 const colors = require('tailwindcss/colors');
+const path = require('path');
 
 const customTheme = {
   boxShadow: {
@@ -41,7 +42,7 @@ const tailchat = plugin(({ addUtilities }) => {
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV !== 'development',
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    content: [path.resolve(__dirname, './src/**/*.{js,jsx,ts,tsx}')],
   },
   darkMode: 'class', // or 'media'
   important: '#app',

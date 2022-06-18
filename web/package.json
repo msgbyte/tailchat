@@ -31,6 +31,7 @@
     "compressorjs": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "emoji-mart": "^3.0.1",
+    "is-electron": "^2.2.1",
     "is-hotkey": "^0.2.0",
     "jsonschema": "^1.4.0",
     "jwt-decode": "^3.1.2",

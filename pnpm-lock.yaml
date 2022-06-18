@@ -318,6 +318,7 @@ importers:
       file-loader: ^6.2.0
       glob: ^7.2.0
       html-webpack-plugin: ^5.3.2
+      is-electron: ^2.2.1
       is-hotkey: ^0.2.0
       jest: ^27.4.5
       jsonschema: ^1.4.0
@@ -380,6 +381,7 @@ importers:
       compressorjs: 1.1.1
       copy-to-clipboard: 3.3.1
       emoji-mart: 3.0.1_react@17.0.2
+      is-electron: 2.2.1
       is-hotkey: 0.2.0
       jsonschema: 1.4.0
       jwt-decode: 3.1.2
@@ -10842,6 +10844,10 @@ packages:
       is-window: 1.0.2
     dev: true
 
+  /is-electron/2.2.1:
+    resolution: {integrity: sha512-r8EEQQsqT+Gn0aXFx7lTFygYQhILLCB+wn0WCDL5LZRINeLH/Rvw1j2oKodELLXYNImQ3CRlVsY8wW4cGOsyuw==}
+    dev: false
+
   /is-extendable/0.1.1:
     resolution: {integrity: sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==}
     engines: {node: '>=0.10.0'}
@@ -17088,7 +17094,7 @@ packages:
       serialize-javascript: 6.0.0
       source-map: 0.6.1
       terser: 5.13.1
-      webpack: 5.72.1
+      webpack: 5.72.1_webpack-cli@4.9.2
     dev: true
 
   /terser-webpack-plugin/5.3.1_webpack@5.73.0:

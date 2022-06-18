@@ -1,4 +1,4 @@
-/* eslint global-require: off, no-console: off, promise/always-return: off */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /**
  * This module executes inside of electron's main process. You can start
@@ -79,8 +79,8 @@ const createWindow = async () => {
     log.info('parse resolve path:', RESOURCES_PATH);
 
     const mainWindowState = windowStateKeeper({
-      defaultWidth: 1024,
-      defaultHeight: 728,
+      defaultWidth: 1200,
+      defaultHeight: 800,
     });
     log.info('load window state with:', mainWindow);
 
