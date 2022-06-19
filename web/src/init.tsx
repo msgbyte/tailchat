@@ -104,12 +104,14 @@ request
       setServiceUrl(() => _get(config, 'serviceUrl'));
     }
   })
-  .catch(() => {});
-
-/**
- * 初始化时加载全局配置
- */
-fetchGlobalConfig().catch((e) => {
-  showErrorToasts(t('全局配置加载失败'));
-  console.error('全局配置加载失败', e);
-});
+  .catch(() => {})
+  .finally(() => {
+    /**
+     * 初始化时加载全局配置
+     * 确保在请求前端配置之后(即尝试通过配置文件修改地址之后)再发起请求
+     */
+    fetchGlobalConfig().catch((e) => {
+      showErrorToasts(t('全局配置加载失败'));
+      console.error('全局配置加载失败', e);
+    });
+  });
