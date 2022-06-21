@@ -12,7 +12,30 @@
 declare module '@capital/common' {
   export const useGroupPanelParams: any;
 
-  export const openModal: any;
+  /**
+   * 打开模态框
+   */
+  export const openModal: (
+    content: React.ReactNode,
+
+    props?: {
+      /**
+       * 是否显示右上角的关闭按钮
+       * @default false
+       */
+      closable?: boolean;
+
+      /**
+       * 遮罩层是否可关闭
+       */
+      maskClosable?: boolean;
+
+      /**
+       * 关闭modal的回调
+       */
+      onCloseModal?: () => void;
+    }
+  ) => number;
 
   export const closeModal: any;
 

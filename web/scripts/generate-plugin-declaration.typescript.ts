@@ -17,7 +17,9 @@ function exportModulesTemplate(
     .map((item) => {
       const findedModule = existedModules.find((m) => m.name === item.name);
       if (findedModule) {
-        return `export const ${findedModule.text};`;
+        return `${
+          findedModule.comment ? findedModule.comment + '\n  ' : ''
+        }export const ${findedModule.text};`;
       } else {
         return `export const ${item.name}: any;`;
       }
@@ -65,7 +67,6 @@ declare module '@capital/common' {
     existedModules['@capital/common']
   )}
 }
-
 
 /**
  * Tailchat 组件

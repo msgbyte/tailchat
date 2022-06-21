@@ -14,6 +14,7 @@ export interface ExportModuleItem {
 export interface DeclarationModuleItem {
   name: string;
   text: string;
+  comment?: string;
   pos?: number;
 }
 
@@ -38,12 +39,25 @@ export function parseModuleDeclaration(
 
       node.body.forEachChild((item) => {
         if (ts.isVariableStatement(item)) {
+          let comment: string | undefined = undefined;
+          const commentRange = ts.getLeadingCommentRanges(
+            sourceFile.getFullText(),
+            item.pos
+          );
+          if (Array.isArray(commentRange) && commentRange.length > 0) {
+            comment = '';
+            commentRange.map(({ pos, end }) => {
+              comment += sourceFile.text.substring(pos, end);
+            });
+          }
+
           item.declarationList.declarations.forEach((declaration) => {
             const name = declaration.name.getText();
             const pos = declaration.pos;
             modules[moduleName].push({
               name,
               text: declaration.getText(),
+              comment,
               pos,
             });
           });
