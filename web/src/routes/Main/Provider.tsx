@@ -4,16 +4,14 @@ import {
   setupRedux,
   useAsync,
   userActions,
-  loginWithToken,
   t,
   ReduxProvider,
   UserLoginInfo,
 } from 'tailchat-shared';
 import React from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { getGlobalUserLoginInfo, tryAutoLogin } from '@/utils/user-helper';
+import { tryAutoLogin } from '@/utils/user-helper';
 import _isNil from 'lodash/isNil';
-import { getUserJWT } from '@/utils/jwt-helper';
 import { useHistory } from 'react-router';
 import { SidebarContextProvider } from './SidebarContext';
 import { PortalHost } from '@/components/Portal';
