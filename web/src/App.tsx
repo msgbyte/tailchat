@@ -83,15 +83,15 @@ export const App: React.FC = React.memo(() => {
     <AppProvider>
       <AppHeader />
       <AppContainer>
-        <Switch>
-          <Route path="/entry" component={EntryRoute} />
-          <Route path="/main" component={MainRoute} />
-          <Route path="/panel" component={PanelRoute} />
-          <Route path="/invite/:inviteCode" component={InviteRoute} />
-          <Route path="/plugin/*">
-            {/* 这个host用于处理独立页面的modal */}
-            {/* NOTICE: Switch里不能出现动态路由 */}
-            <FallbackPortalHost>
+        <FallbackPortalHost>
+          {/* 这个host用于处理其他页面(非main)的modal */}
+          <Switch>
+            <Route path="/entry" component={EntryRoute} />
+            <Route path="/main" component={MainRoute} />
+            <Route path="/panel" component={PanelRoute} />
+            <Route path="/invite/:inviteCode" component={InviteRoute} />
+            <Route path="/plugin/*">
+              {/* NOTICE: Switch里不能出现动态路由 */}
               {pluginRootRoute.map((r, i) => (
                 <Route
                   key={r.name}
@@ -99,10 +99,10 @@ export const App: React.FC = React.memo(() => {
                   component={r.component}
                 />
               ))}
-            </FallbackPortalHost>
-          </Route>
-          <Redirect to="/entry" />
-        </Switch>
+            </Route>
+            <Redirect to="/entry" />
+          </Switch>
+        </FallbackPortalHost>
       </AppContainer>
     </AppProvider>
   );

@@ -9,6 +9,9 @@ import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo, tryAutoLogin } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
 import { useNavToView } from './utils';
+import { IconBtn } from '@/components/IconBtn';
+import { openModal } from '@/components/Modal';
+import { ServiceUrlSettings } from '@/components/modals/ServiceUrlSettings';
 
 /**
  * TODO:
@@ -70,7 +73,7 @@ export const LoginView: React.FC = React.memo(() => {
   const navToView = useNavToView();
 
   return (
-    <div className="w-96 text-white">
+    <div className="w-96 text-white relative">
       <div className="mb-4 text-2xl">{t('登录 Tailchat')}</div>
 
       <div>
@@ -135,6 +138,14 @@ export const LoginView: React.FC = React.memo(() => {
           {t('游客访问')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
         </button>
+      </div>
+
+      <div className="absolute bottom-4 left-0">
+        <IconBtn
+          icon="mdi:cog"
+          shape="square"
+          onClick={() => openModal(<ServiceUrlSettings />)}
+        />
       </div>
     </div>
   );

@@ -33,8 +33,10 @@ setTokenGetter(async () => {
   return await getUserJWT();
 });
 
-if (window.localStorage.getItem('serviceUrl')) {
-  setServiceUrl(() => String(window.localStorage.getItem('serviceUrl')));
+const localStorageServiceUrl = window.localStorage.getItem('serviceUrl');
+
+if (localStorageServiceUrl) {
+  setServiceUrl(() => localStorageServiceUrl);
 } else if (process.env.SERVICE_URL) {
   setServiceUrl(() => String(process.env.SERVICE_URL));
 }
@@ -100,7 +102,8 @@ request
     baseURL: '',
   })
   .then(({ data: config }) => {
-    if (isValidStr(_get(config, 'serviceUrl'))) {
+    if (!localStorageServiceUrl && isValidStr(_get(config, 'serviceUrl'))) {
+      // 配置的优先级低于localStorage的优先级
       setServiceUrl(() => _get(config, 'serviceUrl'));
     }
   })
