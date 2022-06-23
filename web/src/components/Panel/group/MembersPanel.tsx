@@ -2,12 +2,13 @@ import { Icon } from '@/components/Icon';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Input, Skeleton } from 'antd';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
   t,
   useCachedOnlineStatus,
   useGroupInfo,
   UserBaseInfo,
+  useSearch,
 } from 'tailchat-shared';
 import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
 
@@ -22,10 +23,19 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const groupInfo = useGroupInfo(props.groupId);
   const members = groupInfo?.members ?? [];
   const userInfoList = useUserInfoList(members.map((m) => m.userId));
-  const [searchStr, setSearchStr] = useState('');
   const membersOnlineStatus = useCachedOnlineStatus(
     members.map((m) => m.userId)
   );
+
+  const {
+    searchText,
+    setSearchText,
+    isSearching,
+    searchResult: filteredGroupMembers,
+  } = useSearch({
+    dataSource: userInfoList,
+    filterFn: (item, searchText) => item.nickname.includes(searchText),
+  });
 
   const groupedMembers = useMemo(() => {
     const online: UserBaseInfo[] = [];
@@ -45,15 +55,9 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     };
   }, [userInfoList, membersOnlineStatus]);
 
-  const filteredGroupMembers = useMemo(() => {
-    return userInfoList.filter((u) => u.nickname.includes(searchStr));
-  }, [userInfoList, searchStr]);
-
   if (userInfoList.length === 0) {
     return <Skeleton />;
   }
-
-  const isSearching = searchStr !== '';
 
   const renderUser = (member: UserBaseInfo) => (
     <UserListItem
@@ -70,7 +74,8 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
           placeholder={t('搜索成员')}
           size="large"
           suffix={<Icon fontSize={20} color="grey" icon="mdi:magnify" />}
-          onChange={(e) => setSearchStr(e.target.value)}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
 

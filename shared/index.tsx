@@ -63,6 +63,7 @@ export { useMemoizedFn } from './hooks/useMemoizedFn';
 export { useMountedState } from './hooks/useMountedState';
 export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
+export { useSearch } from './hooks/useSearch';
 export { useUpdateRef } from './hooks/useUpdateRef';
 export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 

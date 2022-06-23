@@ -1,9 +1,10 @@
 import { IconBtn } from '@/components/IconBtn';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { UserListItem } from '@/components/UserListItem';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import React, { useCallback } from 'react';
-import { t, useGroupInfo } from 'tailchat-shared';
+import { Icon } from 'tailchat-design';
+import { t, useGroupInfo, useSearch, useUserInfoList } from 'tailchat-shared';
 import { PermissionItem } from './PermissionItem';
 import { RoleItem } from './RoleItem';
 
@@ -14,6 +15,16 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   const { groupId } = props;
   const groupInfo = useGroupInfo(groupId);
   const members = groupInfo?.members ?? [];
+  const userInfoList = useUserInfoList(members.map((m) => m.userId));
+  const {
+    searchText,
+    setSearchText,
+    isSearching,
+    searchResult: filterMembers,
+  } = useSearch({
+    dataSource: userInfoList,
+    filterFn: (item, searchText) => item.nickname.includes(searchText),
+  });
 
   const handleAddMember = useCallback(() => {}, []);
 
@@ -37,16 +48,24 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
           </PillTabPane>
           <PillTabPane key="member" tab="管理成员">
             {/* 管理成员 */}
-            <div className="text-right mb-2">
+            <div className="text-right mb-2 flex space-x-1">
+              <Input
+                placeholder={t('搜索成员')}
+                size="middle"
+                suffix={<Icon fontSize={20} color="grey" icon="mdi:magnify" />}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+
               <Button type="primary" onClick={handleAddMember}>
-                添加成员
+                {t('添加成员')}
               </Button>
             </div>
 
-            {members.map((m) => (
+            {(isSearching ? filterMembers : userInfoList).map((m) => (
               <UserListItem
-                key={m.userId}
-                userId={m.userId}
+                key={m._id}
+                userId={m._id}
                 actions={[<IconBtn key="remove" icon="mdi:close" />]}
               />
             ))}
