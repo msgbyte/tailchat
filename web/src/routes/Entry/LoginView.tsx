@@ -12,6 +12,7 @@ import { useNavToView } from './utils';
 import { IconBtn } from '@/components/IconBtn';
 import { openModal } from '@/components/Modal';
 import { ServiceUrlSettings } from '@/components/modals/ServiceUrlSettings';
+import { LanguageSelect } from '@/components/LanguageSelect';
 
 /**
  * TODO:
@@ -140,12 +141,14 @@ export const LoginView: React.FC = React.memo(() => {
         </button>
       </div>
 
-      <div className="absolute bottom-4 left-0">
+      <div className="absolute bottom-4 left-0 space-x-2">
         <IconBtn
           icon="mdi:cog"
           shape="square"
           onClick={() => openModal(<ServiceUrlSettings />)}
         />
+
+        <LanguageSelect size="middle" />
       </div>
     </div>
   );
