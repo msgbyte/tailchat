@@ -4,6 +4,8 @@ import React from 'react';
 interface PermissionItemProps {
   title: string;
   desc?: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
 }
 
 export const PermissionItem: React.FC<PermissionItemProps> = React.memo(
@@ -16,7 +18,7 @@ export const PermissionItem: React.FC<PermissionItemProps> = React.memo(
           </Col>
 
           <Col>
-            <Switch />
+            <Switch checked={props.checked} onChange={props.onChange} />
           </Col>
         </Row>
 

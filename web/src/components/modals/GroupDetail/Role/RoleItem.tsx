@@ -3,6 +3,7 @@ import React from 'react';
 
 export const RoleItem: React.FC<{
   active: boolean;
+  onClick?: () => void;
 }> = React.memo((props) => {
   return (
     <div
@@ -12,6 +13,7 @@ export const RoleItem: React.FC<{
           'bg-black bg-opacity-20': props.active,
         }
       )}
+      onClick={props.onClick}
     >
       {props.children}
     </div>

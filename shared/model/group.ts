@@ -21,6 +21,18 @@ export interface GroupPanel {
   meta?: Record<string, unknown>;
 }
 
+export interface GroupRole {
+  _id: string;
+  /**
+   * 权限组名
+   */
+  name: string;
+  /**
+   * 拥有的权限, 是一段字符串
+   */
+  permissions: string[];
+}
+
 export interface GroupInfo {
   _id: string;
   name: string;
@@ -28,6 +40,7 @@ export interface GroupInfo {
   owner: string;
   members: GroupMember[];
   panels: GroupPanel[];
+  roles: GroupRole[];
   pinnedPanelId?: string; // 被钉选的面板Id
 }
 
