@@ -51,7 +51,12 @@ declare module '@capital/common' {
 
   export const getGlobalState: any;
 
-  export const getJWTUserInfo: any;
+  export const getJWTUserInfo: () => Promise<{
+    _id?: string;
+    nickname?: string;
+    email?: string;
+    avatar?: string;
+  }>;
 
   export const dataUrlToFile: any;
 
@@ -65,7 +70,17 @@ declare module '@capital/common' {
 
   export const getServiceUrl: () => string;
 
-  export const getCachedUserInfo: any;
+  export const getCachedUserInfo: (
+    userId: string,
+    refetch?: boolean
+  ) => Promise<{
+    _id: string;
+    email: string;
+    nickname: string;
+    discriminator: string;
+    avatar: string | null;
+    temporary: boolean;
+  }>;
 
   export const getCachedConverseInfo: any;
 
@@ -107,7 +122,10 @@ declare module '@capital/common' {
 
   export const useCurrentUserInfo: any;
 
-  export const createPluginRequest: any;
+  export const createPluginRequest: (pluginName: string) => {
+    get: (actionName: string, config?: any) => Promise<any>;
+    post: (actionName: string, data?: any, config?: any) => Promise<any>;
+  };
 
   export const postRequest: any;
 
@@ -137,7 +155,10 @@ declare module '@capital/common' {
 
   export const regChatInputAction: any;
 
-  export const regSocketEventListener: any;
+  export const regSocketEventListener: (item: {
+    eventName: string;
+    eventFn: (...args: any[]) => void;
+  }) => void;
 
   export const pluginColorScheme: any;
 
@@ -181,6 +202,11 @@ declare module '@capital/component' {
   export const Switch: any;
 
   export const Tooltip: any;
+
+  /**
+   * @link https://ant.design/components/notification-cn/
+   */
+  export const notification: any;
 
   export const Avatar: any;
 
@@ -237,4 +263,9 @@ declare module '@capital/component' {
   export const PortalRemove: any;
 
   export const ErrorBoundary: any;
+
+  export const UserName: React.FC<{
+    userId: string;
+    className?: string;
+  }>;
 }

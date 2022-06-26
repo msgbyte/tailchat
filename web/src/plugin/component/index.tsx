@@ -10,6 +10,7 @@ export {
   Table,
   Switch,
   Tooltip,
+  notification,
 } from 'antd';
 export { Avatar } from 'tailchat-design';
 export const TextArea = Input.TextArea;
@@ -46,3 +47,4 @@ export { GroupPanelSelector } from '@/components/GroupPanelSelector';
 export { Emoji } from '@/components/Emoji';
 export { PortalAdd, PortalRemove } from '@/components/Portal';
 export { ErrorBoundary } from '@/components/ErrorBoundary';
+export { UserName } from '@/components/UserName';
