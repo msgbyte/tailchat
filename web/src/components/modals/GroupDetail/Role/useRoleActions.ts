@@ -1,25 +1,45 @@
+import { AllPermission, getDefaultPermissionList } from '@/utils/role-helper';
 import { model, t, useAsyncRequest } from 'tailchat-shared';
-import { permissionList } from './const';
 
-export function useRoleActions(groupId: string, roleId: string) {
+export function useRoleActions(
+  groupId: string,
+  roleId: typeof AllPermission | string
+) {
   const [{ loading: loading1 }, handleCreateRole] =
     useAsyncRequest(async () => {
       await model.group.createGroupRole(
         groupId,
         t('新身份组'),
-        permissionList.filter((p) => p.default).map((p) => p.key)
+        getDefaultPermissionList()
       );
     }, [groupId]);
 
   const [{ loading: loading2 }, handleSavePermission] = useAsyncRequest(
     async (permissions: string[]) => {
-      await model.group.updateGroupRolePermission(groupId, roleId, permissions);
+      if (roleId === AllPermission) {
+        // 所有人权限
+        await model.group.modifyGroupField(
+          groupId,
+          'fallbackPermissions',
+          permissions
+        );
+      } else {
+        // 身份组权限
+        await model.group.updateGroupRolePermission(
+          groupId,
+          roleId,
+          permissions
+        );
+      }
     },
     [groupId, roleId]
   );
 
   const [{ loading: loading3 }, handleChangeRoleName] = useAsyncRequest(
     async (newRoleName: string) => {
+      if (roleId === AllPermission) {
+        throw new Error(t('无法修改所有人权限组的显示名称'));
+      }
       await model.group.updateGroupRoleName(groupId, roleId, newRoleName);
     },
     [groupId, roleId]

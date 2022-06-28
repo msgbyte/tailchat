@@ -6,11 +6,11 @@ import { IconBtn } from '@/components/IconBtn';
 import { Loading } from '@/components/Loading';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { UserListItem } from '@/components/UserListItem';
+import { AllPermission, permissionList } from '@/utils/role-helper';
 import { Button, Input } from 'antd';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Icon } from 'tailchat-design';
 import { t, useGroupInfo, useSearch, useUserInfoList } from 'tailchat-shared';
-import { permissionList } from './const';
 import { PermissionItem } from './PermissionItem';
 import { RoleItem } from './RoleItem';
 import { useModifyPermission } from './useModifyPermission';
@@ -21,7 +21,9 @@ interface GroupPermissionProps {
 }
 export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   const { groupId } = props;
-  const [roleId, setRoleId] = useState('');
+  const [roleId, setRoleId] = useState<typeof AllPermission | string>(
+    AllPermission
+  );
   const groupInfo = useGroupInfo(groupId);
   const roles = groupInfo?.roles ?? [];
   const members = (groupInfo?.members ?? []).filter((m) => m.role === roleId);
@@ -39,10 +41,13 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
     () => roles.find((r) => r._id === roleId),
     [roles, roleId]
   );
-  const currentRolePermissions = useMemo(
-    () => currentRoleInfo?.permissions ?? [],
-    [currentRoleInfo]
-  );
+  const currentRolePermissions: string[] = useMemo(() => {
+    if (roleId === AllPermission) {
+      return groupInfo?.fallbackPermissions ?? [];
+    }
+
+    return currentRoleInfo?.permissions ?? [];
+  }, [roleId, currentRoleInfo, groupInfo]);
 
   const {
     loading,
@@ -71,7 +76,10 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
       <div className="flex h-full">
         <div className="pr-2 mr-2 w-40 border-r border-white border-opacity-20">
           {/* 角色列表 */}
-          <RoleItem active={roleId === ''} onClick={() => setRoleId('')}>
+          <RoleItem
+            active={roleId === AllPermission}
+            onClick={() => setRoleId(AllPermission)}
+          >
             {t('所有人')}
           </RoleItem>
 
@@ -92,7 +100,11 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
 
         <div className="flex-1 overflow-y-auto">
           <PillTabs defaultActiveKey="permission">
-            <PillTabPane key="summary" tab={t('概述')} disabled={!roleId}>
+            <PillTabPane
+              key="summary"
+              tab={t('概述')}
+              disabled={roleId === AllPermission}
+            >
               {/* 权限概述 */}
               {currentRoleInfo && (
                 <div className="px-2">
@@ -131,7 +143,11 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
                 />
               ))}
             </PillTabPane>
-            <PillTabPane key="member" tab={t('管理成员')} disabled={!roleId}>
+            <PillTabPane
+              key="member"
+              tab={t('管理成员')}
+              disabled={roleId === AllPermission}
+            >
               {/* 管理成员 */}
               <div className="text-right mb-2 flex space-x-1">
                 <Input

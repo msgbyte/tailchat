@@ -41,6 +41,7 @@ export interface GroupInfo {
   members: GroupMember[];
   panels: GroupPanel[];
   roles: GroupRole[];
+  fallbackPermissions: string[];
   pinnedPanelId?: string; // 被钉选的面板Id
 }
 
@@ -99,7 +100,12 @@ export async function getGroupBasicInfo(
  * @param fieldName 要修改的群组属性
  * @param fieldValue 要修改的属性的值
  */
-type AllowedModifyField = 'name' | 'avatar' | 'panels' | 'roles';
+type AllowedModifyField =
+  | 'name'
+  | 'avatar'
+  | 'panels'
+  | 'roles'
+  | 'fallbackPermissions';
 export async function modifyGroupField(
   groupId: string,
   fieldName: AllowedModifyField,

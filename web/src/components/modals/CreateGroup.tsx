@@ -12,7 +12,8 @@ import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
 import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
+import { applyDefaultFallbackGroupPermission } from '@/utils/role-helper';
 
 const panelTemplate: {
   key: string;
@@ -92,7 +93,11 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
     const data = await createGroup(name, panels);
 
     dispatch(groupActions.appendGroups([data]));
+
     history.push(`/main/group/${data._id}`); // 创建完成后跳转到新建的群组
+
+    // 应用默认权限
+    await applyDefaultFallbackGroupPermission(String(data._id));
 
     closeModal();
   }, [name, panels, location]);
