@@ -20,7 +20,6 @@ import {
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
-import _debounce from 'lodash/debounce';
 
 if (isDevelopment) {
   import('source-ref-open-vscode');

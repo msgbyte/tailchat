@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import _isEqual from 'lodash/isEqual';
 import _uniq from 'lodash/uniq';
 import _without from 'lodash/without';
+import { useAsyncFn } from 'tailchat-shared';
 
 /**
  * 权限编辑
@@ -9,7 +10,7 @@ import _without from 'lodash/without';
 export function useModifyPermission(originPermission: string[]) {
   const [editingPermission, setEditingPermission] = useState<string[]>([]);
   const isEditing = useMemo(
-    () => _isEqual(new Set(originPermission), new Set(editingPermission)),
+    () => !_isEqual(new Set(originPermission), new Set(editingPermission)),
     [originPermission, editingPermission]
   );
 
@@ -28,5 +29,10 @@ export function useModifyPermission(originPermission: string[]) {
     [editingPermission]
   );
 
-  return { isEditing, editingPermission, handleSwitchPermission };
+  return {
+    isEditing,
+    editingPermission,
+    setEditingPermission,
+    handleSwitchPermission,
+  };
 }

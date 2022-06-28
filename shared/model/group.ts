@@ -250,3 +250,69 @@ export async function deleteGroupPanel(groupId: string, panelId: string) {
     panelId,
   });
 }
+
+/**
+ * 创建群组身份组
+ * @param groupId 群组id
+ * @param roleName 群组名
+ * @param permission 初始权限
+ */
+export async function createGroupRole(
+  groupId: string,
+  roleName: string,
+  permission: string[]
+) {
+  await request.post('/api/group/createGroupRole', {
+    groupId,
+    roleName,
+    permission,
+  });
+}
+
+/**
+ * 删除群组身份组
+ * @param groupId 群组Id
+ * @param roleId 身份组Id
+ */
+export async function deleteGroupRole(groupId: string, roleId: string) {
+  await request.post('/api/group/deleteGroupRole', {
+    groupId,
+    roleId,
+  });
+}
+
+/**
+ * 删除群组身份组
+ * @param groupId 群组Id
+ * @param roleId 身份组Id
+ * @param roleName 新身份组名
+ */
+export async function updateGroupRoleName(
+  groupId: string,
+  roleId: string,
+  roleName: string
+) {
+  await request.post('/api/group/updateGroupRoleName', {
+    groupId,
+    roleId,
+    roleName,
+  });
+}
+
+/**
+ * 删除群组身份组
+ * @param groupId 群组Id
+ * @param roleId 身份组Id
+ * @param permissions 全量权限列表
+ */
+export async function updateGroupRolePermission(
+  groupId: string,
+  roleId: string,
+  permissions: string[]
+) {
+  await request.post('/api/group/updateGroupRolePermission', {
+    groupId,
+    roleId,
+    permissions,
+  });
+}

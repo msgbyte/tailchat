@@ -90,6 +90,7 @@ export {
 } from './manager/ui';
 
 // model
+export * as model from './model/__all__';
 export { fetchAvailableServices } from './model/common';
 export { fetchGlobalConfig } from './model/config';
 export {
@@ -118,6 +119,10 @@ export {
   createGroupPanel,
   modifyGroupPanel,
   deleteGroupPanel,
+  createGroupRole,
+  deleteGroupRole,
+  updateGroupRoleName,
+  updateGroupRolePermission,
 } from './model/group';
 export type {
   GroupPanel,
