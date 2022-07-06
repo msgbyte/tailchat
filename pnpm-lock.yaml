@@ -350,10 +350,10 @@ importers:
       rimraf: ^3.0.2
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-replace: ^2.2.0
-      rollup-plugin-source-ref: workspace:^1.0.0
+      rollup-plugin-source-ref: ^1.0.0
       socket.io-client: ^4.1.2
-      source-ref-loader: workspace:^1.0.0
-      source-ref-open-vscode: workspace:^1.0.0
+      source-ref-loader: ^1.0.0
+      source-ref-runtime: ^1.0.0
       style-loader: ^3.0.0
       tailchat-design: workspace:^1.0.0
       tailchat-plugin-declaration-generator: workspace:^1.0.0
@@ -405,7 +405,7 @@ importers:
       react-virtualized-auto-sizer: 1.0.6_sfoxds7t5ydpegc3knd667wn6m
       react-virtuoso: 2.11.0_sfoxds7t5ydpegc3knd667wn6m
       socket.io-client: 4.4.0
-      source-ref-open-vscode: link:../packages/source-ref-open-vscode
+      source-ref-runtime: 1.0.0
       tailchat-design: link:../packages/design
       tailchat-shared: link:../shared
       tailwindcss: 2.2.19_hqu7j45oxtlo2g5y3qitzppg3y
@@ -458,8 +458,8 @@ importers:
       rimraf: 3.0.2
       rollup-plugin-copy: 3.4.0
       rollup-plugin-replace: 2.2.0
-      rollup-plugin-source-ref: link:../packages/rollup-plugin-source-ref
-      source-ref-loader: link:../packages/source-ref-loader
+      rollup-plugin-source-ref: 1.0.0
+      source-ref-loader: 1.0.0
       style-loader: 3.3.1_webpack@5.73.0
       tailchat-plugin-declaration-generator: link:../packages/plugin-declaration-generator
       ts-jest: 27.1.4_ibhx3ehxrt2kgmkik4bkzmyeei
@@ -15864,6 +15864,14 @@ packages:
       rollup-pluginutils: 2.8.2
     dev: true
 
+  /rollup-plugin-source-ref/1.0.0:
+    resolution: {integrity: sha512-lJsEb3Z750Kocl1dc7sl4X+H29JTA1WQkf2H/4lpPI92akWpVWnq3u0hGD/2TKs1S0cz9F5BVKN2fn/aQXh+mw==}
+    dependencies:
+      source-ref-core: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /rollup-plugin-styles/3.14.1_rollup@2.72.1:
     resolution: {integrity: sha512-0JodP26O3WZ8320X3sBn5S2SOPv9Al2tLyOmLco+H2UqLjbmycM9KWGypLjcDuIEWwa0oLYiXpViMmO2yyeqIA==}
     engines: {node: '>=10'}
@@ -16462,6 +16470,29 @@ packages:
     dependencies:
       whatwg-url: 7.1.0
     dev: true
+
+  /source-ref-core/1.0.1:
+    resolution: {integrity: sha512-MKflr0a0XKfpPSzLfLZU7RZm99yqpdhsdy+qFxPjbCdjnBHskeRnn6QqDGi7XhBsB3jhYhdkHI7JP5dg+nvjbA==}
+    dependencies:
+      '@babel/generator': 7.17.10
+      '@babel/parser': 7.17.10
+      '@babel/traverse': 7.17.10
+      '@babel/types': 7.17.10
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /source-ref-loader/1.0.0:
+    resolution: {integrity: sha512-sdZq8Z1NBwVLKJWb4a6ycd3+jLqWLBAy8l2OfdvZ0aVku0d6lCpRKfz1NwmtnPvz8kj7Cok1QIhAnutCLGKcbw==}
+    dependencies:
+      source-ref-core: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /source-ref-runtime/1.0.0:
+    resolution: {integrity: sha512-l0UyA7K7+uMjQnTXYL4fnaa98HamyUy+AyfkqQX2Pr4xynH/d8JczCaVfsJsg88+/Ln/1yo69qGih7TmyMqzZw==}
+    dev: false
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}

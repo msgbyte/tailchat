@@ -22,7 +22,7 @@ import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
 
 if (isDevelopment) {
-  import('source-ref-open-vscode');
+  import('source-ref-runtime').then(({ start }) => start());
 }
 
 const webStorage = buildStorage(window.localStorage);
