@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 import { Icon } from '../Icon';
 
 interface SensitiveTextProps {
+  className?: string;
   text: string;
 }
 export const SensitiveText: React.FC<SensitiveTextProps> = React.memo(
   (props) => {
-    const { text } = props;
+    const { className, text } = props;
     const [show, setShow] = useState(false);
 
     return (
-      <span>
+      <div
+        className={className}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         {show ? text : getMaskedText(text)}
 
         <Icon
           style={{ cursor: 'pointer', marginLeft: 4 }}
-          icon={show ? 'mdi:eye-outline' : 'mdi:eye-off-outline'}
+          icon={show ? 'mdi:eye-off-outline' : 'mdi:eye-outline'}
           onClick={() => setShow((before) => !before)}
         />
-      </span>
+      </div>
     );
   }
 );

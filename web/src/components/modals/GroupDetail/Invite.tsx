@@ -18,6 +18,7 @@ import { LoadingOnFirst } from '@/components/LoadingOnFirst';
 import { IconBtn } from '@/components/IconBtn';
 import copy from 'copy-to-clipboard';
 import { generateInviteCodeUrl } from '@/utils/url-helper';
+import { SensitiveText } from 'tailchat-design';
 
 export const GroupInvite: React.FC<{
   groupId: string;
@@ -60,6 +61,8 @@ export const GroupInvite: React.FC<{
       {
         title: t('邀请码'),
         dataIndex: 'code',
+        width: 200,
+        render: (text) => <SensitiveText text={text} />,
       },
       {
         title: t('创建时间'),

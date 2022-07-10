@@ -210,6 +210,8 @@ declare module '@capital/component' {
 
   export const Avatar: any;
 
+  export const SensitiveText: React.FC<{ className?: string; text: string }>;
+
   export const TextArea: any;
 
   export const Image: any;

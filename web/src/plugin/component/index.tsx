@@ -12,7 +12,7 @@ export {
   Tooltip,
   notification,
 } from 'antd';
-export { Avatar } from 'tailchat-design';
+export { Avatar, SensitiveText } from 'tailchat-design';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
 export { Icon } from '@/components/Icon';

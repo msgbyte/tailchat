@@ -158,69 +158,6 @@ importers:
       '@types/node': 15.14.9
       ts-node: 10.7.0_ixcth6kbstn6no7hiktnzckliq
 
-  packages/rollup-plugin-source-ref:
-    specifiers:
-      '@babel/generator': ^7.17.7
-      '@babel/parser': ^7.17.7
-      '@babel/traverse': ^7.17.3
-      '@babel/types': ^7.17.10
-      '@types/babel__generator': ^7.6.4
-      '@types/babel__traverse': ^7.17.1
-      '@types/node': ^15.12.5
-      '@types/webpack': ^5.28.0
-      rollup: ^2.75.0
-      ts-node: ^10.0.0
-      typescript: ^4.5.2
-      webpack: ^5.72.0
-      webpack-test-utils: ^1.1.0
-    dependencies:
-      '@babel/generator': 7.17.10
-      '@babel/parser': 7.17.10
-      '@babel/traverse': 7.17.10
-      '@babel/types': 7.17.10
-    devDependencies:
-      '@types/babel__generator': 7.6.4
-      '@types/babel__traverse': 7.17.1
-      '@types/node': 15.14.9
-      '@types/webpack': 5.28.0
-      rollup: 2.75.0
-      ts-node: 10.7.0_ixcth6kbstn6no7hiktnzckliq
-      typescript: 4.6.4
-      webpack: 5.72.1
-      webpack-test-utils: 1.1.0_webpack@5.72.1
-
-  packages/source-ref-loader:
-    specifiers:
-      '@babel/generator': ^7.17.7
-      '@babel/parser': ^7.17.7
-      '@babel/traverse': ^7.17.3
-      '@babel/types': ^7.17.10
-      '@types/babel__generator': ^7.6.4
-      '@types/babel__traverse': ^7.17.1
-      '@types/node': ^15.12.5
-      '@types/webpack': ^5.28.0
-      ts-node: ^10.0.0
-      typescript: ^4.5.2
-      webpack: ^5.72.0
-      webpack-test-utils: ^1.1.0
-    dependencies:
-      '@babel/generator': 7.17.10
-      '@babel/parser': 7.17.10
-      '@babel/traverse': 7.17.10
-      '@babel/types': 7.17.10
-    devDependencies:
-      '@types/babel__generator': 7.6.4
-      '@types/babel__traverse': 7.17.1
-      '@types/node': 15.14.9
-      '@types/webpack': 5.28.0
-      ts-node: 10.7.0_ixcth6kbstn6no7hiktnzckliq
-      typescript: 4.6.4
-      webpack: 5.72.1
-      webpack-test-utils: 1.1.0_webpack@5.72.1
-
-  packages/source-ref-open-vscode:
-    specifiers: {}
-
   shared:
     specifiers:
       '@reduxjs/toolkit': ^1.7.1
@@ -5007,19 +4944,6 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /@types/webpack/5.28.0:
-    resolution: {integrity: sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==}
-    dependencies:
-      '@types/node': 17.0.4
-      tapable: 2.2.1
-      webpack: 5.72.1
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-      - webpack-cli
-    dev: true
-
   /@types/webpack/5.28.0_webpack-cli@4.9.2:
     resolution: {integrity: sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==}
     dependencies:
@@ -7455,7 +7379,7 @@ packages:
 
   /core-js/2.6.12:
     resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
-    deprecated: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
     requiresBuild: true
     dev: false
 
@@ -9606,10 +9530,6 @@ packages:
 
   /fs-monkey/1.0.3:
     resolution: {integrity: sha512-cybjIfiiE+pTWicSCLFHSrXZ6EilF30oh91FDP9S2B051prEa7QWfrVTQm10/dDpswBDXZugPa1Ogu8Yh+HV0Q==}
-    dev: true
-
-  /fs-require/1.4.0:
-    resolution: {integrity: sha512-ZytCzc6QAE0lprblNErZJuDVNoT0JPRSBCUXIMrIB0mLlwcAppbE5fqUyqC8zhgrrR3+whvpKLxOqtk8EnSbeA==}
     dev: true
 
   /fs-write-stream-atomic/1.0.10:
@@ -15924,14 +15844,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /rollup/2.75.0:
-    resolution: {integrity: sha512-1/wxtweHJ7YwI2AIK3ZgCBU3nbW8sLnBIFwN46cwOTnVzt8f1o6J8zPKjwoiuADvzSjmnLqJce31p0q2vQ+dqw==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /rsvp/4.8.5:
     resolution: {integrity: sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==}
     engines: {node: 6.* || >= 7.*}
@@ -17125,7 +17037,7 @@ packages:
       serialize-javascript: 6.0.0
       source-map: 0.6.1
       terser: 5.13.1
-      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack: 5.72.1
     dev: true
 
   /terser-webpack-plugin/5.3.1_webpack@5.73.0:
@@ -17659,12 +17571,6 @@ packages:
       get-value: 2.0.6
       is-extendable: 0.1.1
       set-value: 2.0.1
-    dev: true
-
-  /unionfs/4.4.0:
-    resolution: {integrity: sha512-N+TuJHJ3PjmzIRCE1d2N3VN4qg/P78eh/nxzwHnzpg3W2Mvf8Wvi7J1mvv6eNkb8neUeSdFSQsKna0eXVyF4+w==}
-    dependencies:
-      fs-monkey: 1.0.3
     dev: true
 
   /uniq/1.0.1:
@@ -18330,17 +18236,6 @@ packages:
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
-    dev: true
-
-  /webpack-test-utils/1.1.0_webpack@5.72.1:
-    resolution: {integrity: sha512-zJaJZsa3v8jFx41uiVSF6V/8wd4zuX/DtDZkm7t8f8WlxP0W3Iwj3BikZx4C45EX7+yTUBWmKbkknoSsaIhFmw==}
-    peerDependencies:
-      webpack: ^4.40.0 || ^5.0.0
-    dependencies:
-      fs-require: 1.4.0
-      memfs: 3.4.1
-      unionfs: 4.4.0
-      webpack: 5.72.1
     dev: true
 
   /webpack-virtual-modules/0.2.2:
