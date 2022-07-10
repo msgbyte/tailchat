@@ -6,6 +6,7 @@ export { DelayTip } from './DelayTip';
 export { Highlight } from './Highlight';
 export { Icon } from './Icon';
 export { Image } from './Image';
+export { SensitiveText } from './SensitiveText';
 
 export { WebMetaForm } from './WebMetaForm';
 export {
