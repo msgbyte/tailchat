@@ -14,13 +14,15 @@
       padding: 2px 8px;
       @apply text-gray-800 dark:text-gray-200 bg-black bg-opacity-0 dark:bg-white dark:bg-opacity-0;
 
-      &.ant-tabs-tab-active,
-      &:hover,
-      &:active {
-        @apply rounded bg-opacity-20;
+      &:not(.ant-tabs-tab-disabled) {
+        &.ant-tabs-tab-active,
+        &:hover,
+        &:active {
+          @apply rounded bg-opacity-20;
 
-        .ant-tabs-tab-btn {
-          @apply text-black dark:text-white ;
+          .ant-tabs-tab-btn {
+            @apply text-black dark:text-white ;
+          }
         }
       }
     }
