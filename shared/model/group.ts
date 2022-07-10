@@ -261,17 +261,17 @@ export async function deleteGroupPanel(groupId: string, panelId: string) {
  * 创建群组身份组
  * @param groupId 群组id
  * @param roleName 群组名
- * @param permission 初始权限
+ * @param permissions 初始权限
  */
 export async function createGroupRole(
   groupId: string,
   roleName: string,
-  permission: string[]
+  permissions: string[]
 ) {
   await request.post('/api/group/createGroupRole', {
     groupId,
     roleName,
-    permission,
+    permissions,
   });
 }
 
