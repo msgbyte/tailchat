@@ -84,7 +84,11 @@ const backToLoginPage = (() => {
   };
 })();
 setErrorHook((err) => {
-  if (_get(err, 'response.data.code') === 403) {
+  const statusCode = _get(err, 'response.data.code');
+  if (
+    statusCode === 403 || // forbidden
+    statusCode === 401 // Unauthorized (jwt过期)
+  ) {
     backToLoginPage();
 
     return false;
