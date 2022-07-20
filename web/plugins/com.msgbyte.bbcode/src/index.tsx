@@ -5,6 +5,9 @@ import {
   regMessageTextDecorators,
 } from '@capital/common';
 
+// 预加载
+import('./render');
+
 const BBCode = Loadable(() => import('./render'));
 let serialize: (bbcode: string) => string;
 import('./bbcode/serialize').then((module) => {
