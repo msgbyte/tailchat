@@ -7,7 +7,7 @@
     "author": "msgbyte",
     "description": "为聊天提供喵语言对话功能",
     "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
-    "requireRestart": true
+    "requireRestart": false
   },
   {
     "label": "Miku初音未来主题",
@@ -16,7 +16,7 @@
     "version": "0.0.0",
     "author": "msgbyte",
     "description": "初音未来主题",
-    "requireRestart": true
+    "requireRestart": false
   },
   {
     "label": "原神主题",
@@ -26,7 +26,7 @@
     "version": "0.0.0",
     "author": "msgbyte",
     "description": "原神主题",
-    "requireRestart": true
+    "requireRestart": false
   },
   {
     "label": "绘图插件",
@@ -44,6 +44,16 @@
     "version": "0.0.0",
     "author": "msgbyte",
     "description": "为Tailchat增加原神相关的娱乐能力",
+    "requireRestart": true
+  },
+  {
+    "label": "隔空投送",
+    "name": "com.msgbyte.snapdrop",
+    "url": "/plugins/com.msgbyte.snapdrop/index.js",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "隔空投送 —— 在同一网络发送文件与消息",
+    "documentUrl": "/plugins/com.msgbyte.webview/README.md",
     "requireRestart": true
   }
 ]

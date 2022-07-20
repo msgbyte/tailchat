@@ -1,0 +1,8 @@
+{
+  "name": "@plugins/com.msgbyte.snapdrop",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+  }
+}

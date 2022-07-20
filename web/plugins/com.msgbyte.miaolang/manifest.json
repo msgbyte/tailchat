@@ -6,5 +6,5 @@
   "author": "msgbyte",
   "description": "为聊天提供喵语言对话功能",
   "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
-  "requireRestart": true
+  "requireRestart": false
 }
