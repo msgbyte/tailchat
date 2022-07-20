@@ -120,7 +120,7 @@
   }
 
   // 下拉菜单
-  .ant-dropdown {
+  .ant-dropdown, .ant-dropdown-menu-submenu {
     color: rgba(255, 255, 255, 0.65);
 
     .ant-dropdown-menu {
@@ -131,7 +131,12 @@
         color: rgba(255, 255, 255, 0.65);
 
         &:hover {
+          color: rgba(255, 255, 255, 0.85);
           background-color: rgba(255, 255, 255, 0.08);
+
+          .ant-dropdown-menu-submenu-arrow-icon {
+            color: rgba(255, 255, 255, 0.85);
+          }
         }
 
         &.ant-dropdown-menu-item-danger {
@@ -141,6 +146,10 @@
             color: white;
             background-color: #a61d24;
           }
+        }
+
+        .ant-dropdown-menu-submenu-arrow-icon {
+          color: rgba(255, 255, 255, 0.65);
         }
       }
     }

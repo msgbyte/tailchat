@@ -9,6 +9,10 @@ export enum GroupPanelType {
 export interface GroupMember {
   role: string; // 角色
   userId: string;
+  /**
+   * 日期字符串 禁言到xxx
+   */
+  muteUntil?: string;
 }
 
 export interface GroupPanel {
