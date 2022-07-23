@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'; // 导入插件
+import duration from 'dayjs/plugin/duration'; // 导入插件
 import 'dayjs/locale/zh-cn'; // 导入本地化语言
 import { onLanguageChange } from '../i18n';
 
@@ -8,6 +9,7 @@ import { onLanguageChange } from '../i18n';
  */
 
 dayjs.extend(relativeTime);
+dayjs.extend(duration);
 dayjs.locale('zh-cn'); // 默认使用中文
 onLanguageChange((lang) => {
   if (lang === 'en-US') {
@@ -78,4 +80,11 @@ export function datetimeToNow(input: dayjs.ConfigType): string {
 export function datetimeFromNow(input: dayjs.ConfigType): string {
   const date = dayjs(input);
   return date.fromNow();
+}
+
+/**
+ * 将毫秒转换为易读的人类语言
+ */
+export function humanizeMsDuration(ms: number): string {
+  return dayjs.duration(ms, 'ms').humanize();
 }

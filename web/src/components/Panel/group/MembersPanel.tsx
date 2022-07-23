@@ -1,11 +1,16 @@
 import { Icon } from '@/components/Icon';
+import { openReconfirmModalP } from '@/components/Modal';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Dropdown, Input, Menu, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import {
+  formatFullTime,
   GroupMember,
+  humanizeMsDuration,
   isDevelopment,
+  model,
+  showToasts,
   t,
   useAsyncRequest,
   useCachedOnlineStatus,
@@ -20,30 +25,78 @@ interface MembersPanelProps {
   groupId: string;
 }
 
-function getMembersMuteUntil(
-  members: GroupMember[],
-  userId: string
-): string | undefined {
+function getMembersHasMute(members: GroupMember[], userId: string): boolean {
   const member = members.find((m) => m.userId === userId);
 
-  if (!member) {
-    return undefined;
+  if (!member || !member.muteUntil) {
+    return false;
   }
 
-  return member.muteUntil;
+  const muteUntil = member.muteUntil;
+
+  return new Date(muteUntil).valueOf() > new Date().valueOf();
+}
+
+/**
+ * 禁言相关
+ */
+function useMemberMuteAction(
+  groupId: string,
+  userInfoList: model.user.UserBaseInfo[]
+) {
+  /**
+   * 禁言
+   */
+  const [, handleMuteMember] = useAsyncRequest(
+    async (memberId: string, ms: number) => {
+      const memberInfo = userInfoList.find((m) => m._id === memberId);
+
+      if (!memberInfo) {
+        throw new Error(t('没有找到用户'));
+      }
+
+      if (
+        await openReconfirmModalP({
+          title: t('确定要禁言 {{name}} 么', { name: memberInfo.nickname }),
+          content: t('禁言 {{length}}, 预计到 {{until}} 为止', {
+            length: humanizeMsDuration(ms),
+            until: formatFullTime(new Date().valueOf() + ms),
+          }),
+        })
+      ) {
+        await model.group.muteGroupMember(groupId, memberId, ms);
+        showToasts(t('操作成功'), 'success');
+      }
+    },
+    [groupId, userInfoList]
+  );
+
+  /**
+   * 解除禁言
+   */
+  const [, handleUnmuteMember] = useAsyncRequest(
+    async (memberId: string) => {
+      await model.group.muteGroupMember(groupId, memberId, -1);
+      showToasts(t('操作成功'), 'success');
+    },
+    [groupId]
+  );
+
+  return { handleMuteMember, handleUnmuteMember };
 }
 
 /**
  * 用户面板
  */
 export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
-  const groupInfo = useGroupInfo(props.groupId);
+  const groupId = props.groupId;
+  const groupInfo = useGroupInfo(groupId);
   const members = groupInfo?.members ?? [];
   const userInfoList = useUserInfoList(members.map((m) => m.userId));
   const membersOnlineStatus = useCachedOnlineStatus(
     members.map((m) => m.userId)
   );
-  const isGroupOwner = useIsGroupOwner(props.groupId);
+  const isGroupOwner = useIsGroupOwner(groupId);
 
   const {
     searchText,
@@ -73,12 +126,17 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     };
   }, [userInfoList, membersOnlineStatus]);
 
+  const { handleMuteMember, handleUnmuteMember } = useMemberMuteAction(
+    groupId,
+    userInfoList
+  );
+
   if (userInfoList.length === 0) {
     return <Skeleton />;
   }
 
   const renderUser = (member: UserBaseInfo) => {
-    const muteUntil = getMembersMuteUntil(members, member._id);
+    const hasMute = getMembersHasMute(members, member._id);
 
     if (isGroupOwner && isDevelopment) {
       return (
@@ -87,17 +145,53 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
           trigger={['contextMenu']}
           overlay={
             <Menu>
-              {muteUntil ? (
-                <Menu.Item>{t('解除禁言')}</Menu.Item>
+              {hasMute ? (
+                <Menu.Item onClick={() => handleUnmuteMember(member._id)}>
+                  {t('解除禁言')}
+                </Menu.Item>
               ) : (
                 <Menu.SubMenu title={t('禁言')}>
-                  <Menu.Item>{t('1分钟')}</Menu.Item>
-                  <Menu.Item>{t('5分钟')}</Menu.Item>
-                  <Menu.Item>{t('10分钟')}</Menu.Item>
-                  <Menu.Item>{t('30分钟')}</Menu.Item>
-                  <Menu.Item>{t('1天')}</Menu.Item>
-                  <Menu.Item>{t('7天')}</Menu.Item>
-                  <Menu.Item>{t('30天')}</Menu.Item>
+                  <Menu.Item
+                    onClick={() => handleMuteMember(member._id, 1 * 60 * 1000)}
+                  >
+                    {t('1分钟')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() => handleMuteMember(member._id, 5 * 60 * 1000)}
+                  >
+                    {t('5分钟')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() => handleMuteMember(member._id, 10 * 60 * 1000)}
+                  >
+                    {t('10分钟')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() => handleMuteMember(member._id, 30 * 60 * 1000)}
+                  >
+                    {t('30分钟')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() =>
+                      handleMuteMember(member._id, 1 * 24 * 60 * 60 * 1000)
+                    }
+                  >
+                    {t('1天')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() =>
+                      handleMuteMember(member._id, 7 * 24 * 60 * 60 * 1000)
+                    }
+                  >
+                    {t('7天')}
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() =>
+                      handleMuteMember(member._id, 30 * 24 * 60 * 60 * 1000)
+                    }
+                  >
+                    {t('30天')}
+                  </Menu.Item>
                 </Menu.SubMenu>
               )}
             </Menu>

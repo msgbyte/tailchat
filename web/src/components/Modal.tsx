@@ -197,7 +197,7 @@ export function openConfirmModal(props: OpenConfirmModalProps) {
 
 type OpenReconfirmModalProps = Pick<
   OpenConfirmModalProps,
-  'onConfirm' | 'onCancel'
+  'title' | 'content' | 'onConfirm' | 'onCancel'
 >;
 /**
  * 打开再次确认操作modal
@@ -206,8 +206,8 @@ export function openReconfirmModal(props: OpenReconfirmModalProps) {
   openConfirmModal({
     onConfirm: props.onConfirm,
     onCancel: props.onCancel,
-    title: t('确认要进行该操作么?'),
-    content: t('该操作无法被撤回'),
+    title: props.title ?? t('确认要进行该操作么?'),
+    content: props.content ?? t('该操作无法被撤回'),
   });
 }
 /**
@@ -218,7 +218,7 @@ export function openReconfirmModal(props: OpenReconfirmModalProps) {
  * }
  */
 export function openReconfirmModalP(
-  props?: Omit<OpenReconfirmModalProps, 'onConfirm'>
+  props?: Omit<OpenReconfirmModalProps, 'onConfirm' | 'onCancel'>
 ): Promise<boolean> {
   return new Promise<boolean>((resolve) => {
     openReconfirmModal({

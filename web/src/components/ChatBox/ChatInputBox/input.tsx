@@ -5,7 +5,6 @@ import React from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
 import { t } from 'tailchat-shared';
 import { useChatInputMentionsContext } from './context';
-
 import './input.less';
 
 interface ChatInputBoxInputProps
@@ -19,13 +18,14 @@ interface ChatInputBoxInputProps
 }
 export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
   (props) => {
-    const allMentions = useChatInputMentionsContext();
+    const { users, placeholder, disabled } = useChatInputMentionsContext();
 
     return (
       <MentionsInput
         inputRef={props.inputRef}
         className="chatbox-mention-input"
-        placeholder={t('输入一些什么')}
+        placeholder={placeholder ?? t('输入一些什么')}
+        disabled={disabled}
         singleLine={true}
         maxLength={1000}
         value={props.value}
@@ -43,7 +43,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
       >
         <Mention
           trigger="@"
-          data={allMentions.users}
+          data={users}
           displayTransform={(id, display) => `@${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (

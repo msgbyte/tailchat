@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import type { SuggestionDataItem } from 'react-mentions';
+import { useShallowObject } from 'tailchat-shared';
 
 /**
  * Input Actions
@@ -23,6 +24,8 @@ export function useChatInputActionContext() {
  */
 interface ChatInputMentionsContextProps {
   users: SuggestionDataItem[];
+  placeholder?: string;
+  disabled?: boolean;
 }
 const ChatInputMentionsContext =
   React.createContext<ChatInputMentionsContextProps | null>(null);
@@ -31,7 +34,7 @@ ChatInputMentionsContext.displayName = 'ChatInputMentionsContext';
 export const ChatInputMentionsContextProvider: React.FC<ChatInputMentionsContextProps> =
   React.memo((props) => {
     return (
-      <ChatInputMentionsContext.Provider value={{ users: props.users }}>
+      <ChatInputMentionsContext.Provider value={useShallowObject({ ...props })}>
         {props.children}
       </ChatInputMentionsContext.Provider>
     );
@@ -44,5 +47,7 @@ export function useChatInputMentionsContext(): ChatInputMentionsContextProps {
 
   return {
     users: context?.users ?? [],
+    placeholder: context?.placeholder,
+    disabled: context?.disabled,
   };
 }

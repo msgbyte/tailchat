@@ -59,11 +59,13 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useDebounce } from './hooks/useDebounce';
+export { useInterval } from './hooks/useInterval';
 export { useMemoizedFn } from './hooks/useMemoizedFn';
 export { useMountedState } from './hooks/useMountedState';
 export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
 export { useSearch } from './hooks/useSearch';
+export { useShallowObject } from './hooks/useShallowObject';
 export { useUpdateRef } from './hooks/useUpdateRef';
 export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 
@@ -179,6 +181,7 @@ export {
   useGroupUnread,
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
+export { useGroupMemberMute } from './redux/hooks/useGroupMemberMute';
 export {
   useUserInfo,
   useUserId,
@@ -206,6 +209,7 @@ export {
   formatFullTime,
   datetimeToNow,
   datetimeFromNow,
+  humanizeMsDuration,
 } from './utils/date-helper';
 export {
   isBrowser,

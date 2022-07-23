@@ -326,3 +326,21 @@ export async function updateGroupRolePermission(
     permissions,
   });
 }
+
+/**
+ * 禁言群组成员
+ * @param groupId 群组ID
+ * @param memberId 成员ID
+ * @param muteMs 禁言到xxx, 精确到毫秒
+ */
+export async function muteGroupMember(
+  groupId: string,
+  memberId: string,
+  muteMs: number
+) {
+  await request.post('/api/group/muteGroupMember', {
+    groupId,
+    memberId,
+    muteMs,
+  });
+}
