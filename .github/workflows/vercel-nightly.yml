@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: Inject Analytics
+        run: node ./web/build/inject-analytics.js
       - name: Deploy Prod
         uses: amondnet/vercel-action@master
         env:
