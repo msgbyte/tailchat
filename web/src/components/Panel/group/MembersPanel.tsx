@@ -8,7 +8,6 @@ import {
   formatFullTime,
   GroupMember,
   humanizeMsDuration,
-  isDevelopment,
   model,
   showToasts,
   t,
@@ -138,7 +137,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const renderUser = (member: UserBaseInfo) => {
     const hasMute = getMembersHasMute(members, member._id);
 
-    if (isGroupOwner && isDevelopment) {
+    if (isGroupOwner) {
       return (
         <Dropdown
           key={member._id}
