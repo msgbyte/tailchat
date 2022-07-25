@@ -1,6 +1,6 @@
 import { ChatBox } from '@/components/ChatBox';
 import { ChatInputMentionsContextProvider } from '@/components/ChatBox/ChatInputBox/context';
-import React, { useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 import {
   useGroupPanelInfo,
   useGroupMemberInfos,
@@ -26,7 +26,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     const [placeholder, setPlaceholder] = useState<string | undefined>(
       undefined
     );
-    useInterval(() => {
+    const updatePlaceholder = useCallback(() => {
       if (muteUntil) {
         setPlaceholder(
           muteUntil
@@ -40,8 +40,15 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
       } else {
         setPlaceholder(undefined);
       }
-      // 10s 检查一次，因为 humanizeMsDuration 不会精确到秒
-    }, 10000);
+    }, [muteUntil]);
+    useInterval(
+      updatePlaceholder,
+      10000 // 10s 检查一次，因为 humanizeMsDuration 不会精确到秒
+    );
+    useLayoutEffect(() => {
+      // 当到期时间发生变化后立即更新
+      updatePlaceholder();
+    }, [muteUntil]);
 
     if (panelInfo === undefined) {
       return null;
