@@ -71,6 +71,12 @@ const backToLoginPage = (() => {
 
   return () => {
     if (timer) {
+      // 如果已经存在则跳过
+      return;
+    }
+
+    if (window.location.pathname.startsWith('/entry')) {
+      // 如果已经在入口页面则跳过
       return;
     }
 
