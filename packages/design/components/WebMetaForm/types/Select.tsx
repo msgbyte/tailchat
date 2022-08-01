@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { Select, Form } from 'antd';
 import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
-import type { MetaFormFieldComponent } from 'meta-form';
+import type { FastifyFormFieldComponent } from 'react-fastify-form';
 
 const Option = Select.Option;
 
-interface MetaFormSelectOptionsItem {
+interface FastifyFormSelectOptionsItem {
   label: string;
   value: string;
 }
 
-export const MetaFormSelect: MetaFormFieldComponent<{
-  options: MetaFormSelectOptionsItem[];
+export const FastifyFormSelect: FastifyFormFieldComponent<{
+  options: FastifyFormSelectOptionsItem[];
 }> = React.memo((props) => {
   const { name, label, value, onChange, options } = props;
 
@@ -35,4 +35,4 @@ export const MetaFormSelect: MetaFormFieldComponent<{
     </Form.Item>
   );
 });
-MetaFormSelect.displayName = 'MetaFormSelect';
+FastifyFormSelect.displayName = 'FastifyFormSelect';

@@ -1,27 +1,30 @@
 import React from 'react';
 import { Input, Form } from 'antd';
-import type { MetaFormFieldComponent } from 'meta-form';
+import type { FastifyFormFieldComponent } from 'react-fastify-form';
 import { getValidateStatus } from '../utils';
 
-export const MetaFormPassword: MetaFormFieldComponent = React.memo((props) => {
-  const { name, label, value, onChange, error, maxLength, placeholder } = props;
+export const FastifyFormPassword: FastifyFormFieldComponent = React.memo(
+  (props) => {
+    const { name, label, value, onChange, error, maxLength, placeholder } =
+      props;
 
-  return (
-    <Form.Item
-      label={label}
-      validateStatus={getValidateStatus(error)}
-      help={error}
-    >
-      <Input.Password
-        name={name}
-        type="password"
-        size="large"
-        maxLength={maxLength}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </Form.Item>
-  );
-});
-MetaFormPassword.displayName = 'MetaFormPassword';
+    return (
+      <Form.Item
+        label={label}
+        validateStatus={getValidateStatus(error)}
+        help={error}
+      >
+        <Input.Password
+          name={name}
+          type="password"
+          size="large"
+          maxLength={maxLength}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      </Form.Item>
+    );
+  }
+);
+FastifyFormPassword.displayName = 'FastifyFormPassword';

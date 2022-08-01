@@ -1,10 +1,13 @@
 import React from 'react';
 import { Form } from 'antd';
-import type { MetaFormFieldComponent, MetaFormFieldProps } from 'meta-form';
-import { CustomField } from 'meta-form';
+import type {
+  FastifyFormFieldComponent,
+  FastifyFormFieldProps,
+} from 'react-fastify-form';
+import { CustomField } from 'react-fastify-form';
 
-export const MetaFormCustom: MetaFormFieldComponent<{
-  render: (props: MetaFormFieldProps) => React.ReactNode;
+export const FastifyFormCustom: FastifyFormFieldComponent<{
+  render: (props: FastifyFormFieldProps) => React.ReactNode;
 }> = React.memo((props) => {
   const { label } = props;
 
@@ -14,4 +17,4 @@ export const MetaFormCustom: MetaFormFieldComponent<{
     </Form.Item>
   );
 });
-MetaFormCustom.displayName = 'MetaFormCustom';
+FastifyFormCustom.displayName = 'FastifyFormCustom';

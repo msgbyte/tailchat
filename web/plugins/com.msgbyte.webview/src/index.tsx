@@ -7,7 +7,13 @@ regGroupPanel({
   name: `${PLUGIN_NAME}/grouppanel`,
   label: Translate.webpanel,
   provider: PLUGIN_NAME,
-  extraFormMeta: [{ type: 'text', name: 'url', label: Translate.website }],
+  extraFormMeta: [
+    {
+      type: 'text',
+      name: 'url',
+      label: Translate.website,
+    },
+  ],
   render: Loadable(() => import('./group/GroupWebPanelRender')),
 });
 

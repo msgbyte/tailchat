@@ -1,71 +1,73 @@
 import React, { useMemo } from 'react';
 import {
-  MetaForm,
+  FastifyForm,
   regField,
-  MetaFormContainerComponent,
+  FastifyFormContainerComponent,
   regFormContainer,
-} from 'meta-form';
+} from 'react-fastify-form';
 import { Form, Button } from 'antd';
 
-import { MetaFormText } from './types/Text';
-import { MetaFormTextArea } from './types/TextArea';
-import { MetaFormPassword } from './types/Password';
-import { MetaFormSelect } from './types/Select';
-import { MetaFormCheckbox } from './types/Checkbox';
-import { MetaFormCustom } from './types/Custom';
+import { FastifyFormText } from './types/Text';
+import { FastifyFormTextArea } from './types/TextArea';
+import { FastifyFormPassword } from './types/Password';
+import { FastifyFormSelect } from './types/Select';
+import { FastifyFormCheckbox } from './types/Checkbox';
+import { FastifyFormCustom } from './types/Custom';
 
-regField('text', MetaFormText);
-regField('textarea', MetaFormTextArea);
-regField('password', MetaFormPassword);
-regField('select', MetaFormSelect);
-regField('checkbox', MetaFormCheckbox);
-regField('custom', MetaFormCustom);
+regField('text', FastifyFormText);
+regField('textarea', FastifyFormTextArea);
+regField('password', FastifyFormPassword);
+regField('select', FastifyFormSelect);
+regField('checkbox', FastifyFormCheckbox);
+regField('custom', FastifyFormCustom);
 
-const WebMetaFormContainer: MetaFormContainerComponent = React.memo((props) => {
-  const layout = props.layout;
-  const submitButtonRender = useMemo(() => {
-    return (
-      <Form.Item
-        wrapperCol={
-          layout === 'vertical'
-            ? { xs: 24 }
-            : { sm: 24, md: { span: 16, offset: 8 } }
-        }
-      >
-        <Button
-          loading={props.loading}
-          type="primary"
-          size="large"
-          htmlType="button"
-          style={{ width: '100%' }}
-          onClick={() => props.handleSubmit()}
-          disabled={props.canSubmit === false}
+const WebFastifyFormContainer: FastifyFormContainerComponent = React.memo(
+  (props) => {
+    const layout = props.layout;
+    const submitButtonRender = useMemo(() => {
+      return (
+        <Form.Item
+          wrapperCol={
+            layout === 'vertical'
+              ? { xs: 24 }
+              : { sm: 24, md: { span: 16, offset: 8 } }
+          }
         >
-          {props.submitLabel ?? '提交'}
-        </Button>
-      </Form.Item>
+          <Button
+            loading={props.loading}
+            type="primary"
+            size="large"
+            htmlType="button"
+            style={{ width: '100%' }}
+            onClick={() => props.handleSubmit()}
+            disabled={props.canSubmit === false}
+          >
+            {props.submitLabel ?? '提交'}
+          </Button>
+        </Form.Item>
+      );
+    }, [
+      props.loading,
+      props.handleSubmit,
+      props.canSubmit,
+      props.submitLabel,
+      layout,
+    ]);
+
+    return (
+      <Form
+        layout={layout}
+        labelCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 8 }}
+        wrapperCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 16 }}
+      >
+        {props.children}
+        {submitButtonRender}
+      </Form>
     );
-  }, [
-    props.loading,
-    props.handleSubmit,
-    props.canSubmit,
-    props.submitLabel,
-    layout,
-  ]);
+  }
+);
+WebFastifyFormContainer.displayName = 'WebFastifyFormContainer';
+regFormContainer(WebFastifyFormContainer);
 
-  return (
-    <Form
-      layout={layout}
-      labelCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 8 }}
-      wrapperCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 16 }}
-    >
-      {props.children}
-      {submitButtonRender}
-    </Form>
-  );
-});
-WebMetaFormContainer.displayName = 'WebMetaFormContainer';
-regFormContainer(WebMetaFormContainer);
-
-export const WebMetaForm = MetaForm;
-WebMetaForm.displayName = 'WebMetaForm';
+export const WebMetaForm = FastifyForm;
+(WebMetaForm as any).displayName = 'WebMetaForm';
