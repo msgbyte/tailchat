@@ -10,8 +10,8 @@ export { SensitiveText } from './SensitiveText';
 
 export { WebMetaForm } from './WebMetaForm';
 export {
-  createMetaFormSchema,
+  createFastifyFormSchema as createMetaFormSchema,
   fieldSchema as metaFormFieldSchema,
-  useMetaFormContext,
-} from 'meta-form';
-export type { MetaFormFieldMeta } from 'meta-form';
+  useFastifyFormContext as useMetaFormContext,
+} from 'react-fastify-form';
+export type { FastifyFormFieldMeta as MetaFormFieldMeta } from 'react-fastify-form';
