@@ -71,7 +71,6 @@ importers:
       antd: ^4.19.5
       babel-loader: ^8.2.5
       lodash: ^4.17.21
-      meta-form: ^1.0.0
       react: 17.0.2
       react-dom: 17.0.2
       react-fastify-form: ^1.0.3
@@ -82,7 +81,6 @@ importers:
       '@iconify/react': 3.2.1
       antd: 4.20.4_sfoxds7t5ydpegc3knd667wn6m
       lodash: 4.17.21
-      meta-form: link:../meta-form
       react-fastify-form: 1.0.3_react@17.0.2
       str2int: 1.1.0
     devDependencies:
@@ -99,25 +97,6 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       typescript: 4.6.4
       webpack: 5.72.1
-
-  packages/meta-form:
-    specifiers:
-      '@types/lodash': ^4.14.170
-      '@types/react': ^17.0.39
-      formik: ^2.2.9
-      lodash: ^4.17.21
-      react: 17.0.2
-      typescript: ^4.5.2
-      yup: ^0.32.9
-    dependencies:
-      formik: 2.2.9_react@17.0.2
-      lodash: 4.17.21
-      yup: 0.32.11
-    devDependencies:
-      '@types/lodash': 4.14.178
-      '@types/react': 17.0.44
-      react: 17.0.2
-      typescript: 4.6.4
 
   packages/plugin-declaration-generator:
     specifiers:
