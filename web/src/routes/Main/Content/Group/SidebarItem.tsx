@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   groupActions,
   GroupPanel,
@@ -16,25 +16,8 @@ import { Dropdown, Menu } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import _compact from 'lodash/compact';
 import { Icon } from '@/components/Icon';
-
-const GroupAckMenuItem: React.FC<{
-  panelId: string;
-}> = (props) => {
-  const { markConverseAllAck } = useConverseAck(props.panelId);
-
-  return (
-    <Menu.Item
-      icon={<Icon icon="mdi:message-badge-outline" />}
-      onClick={() => {
-        markConverseAllAck();
-      }}
-    >
-      {t('标记为已读')}
-    </Menu.Item>
-  );
-};
-GroupAckMenuItem.displayName = 'GroupAckMenuItem';
 
 /**
  * 群组面板侧边栏组件
@@ -49,6 +32,7 @@ export const SidebarItem: React.FC<{
   );
   const groupInfo = useGroupInfo(groupId);
   const dispatch = useAppDispatch();
+  const { markConverseAllAck } = useConverseAck(panel.id);
 
   if (!groupInfo) {
     return <LoadingSpinner />;
@@ -58,58 +42,58 @@ export const SidebarItem: React.FC<{
     isValidStr(groupInfo.pinnedPanelId) && groupInfo.pinnedPanelId === panel.id;
 
   const menu = (
-    <Menu>
-      <Menu.Item
-        icon={<Icon icon="mdi:content-copy" />}
-        onClick={() => {
-          copy(`${location.origin}/main/group/${groupId}/${panel.id}`);
-          showToasts(t('已复制到剪切板'));
-        }}
-      >
-        {t('复制链接')}
-      </Menu.Item>
-
-      <Menu.Item
-        icon={<Icon icon="mdi:dock-window" />}
-        disabled={hasOpenedPanel}
-        onClick={openPanelWindow}
-      >
-        {t('在新窗口打开')}
-      </Menu.Item>
-
-      {isPinned ? (
-        <Menu.Item
-          icon={<Icon icon="mdi:pin-off" />}
-          onClick={() => {
-            dispatch(
-              groupActions.unpinGroupPanel({
-                groupId,
-              })
-            );
-          }}
-        >
-          {t('Unpin')}
-        </Menu.Item>
-      ) : (
-        <Menu.Item
-          icon={<Icon icon="mdi:pin" />}
-          onClick={() => {
-            dispatch(
-              groupActions.pinGroupPanel({
-                groupId,
-                panelId: panel.id,
-              })
-            );
-          }}
-        >
-          {t('Pin')}
-        </Menu.Item>
-      )}
-
-      {panel.type === GroupPanelType.TEXT && (
-        <GroupAckMenuItem panelId={panel.id} />
-      )}
-    </Menu>
+    <Menu
+      items={_compact([
+        {
+          key: 'copy',
+          label: t('复制链接'),
+          icon: <Icon icon="mdi:content-copy" />,
+          onClick: () => {
+            copy(`${location.origin}/main/group/${groupId}/${panel.id}`);
+            showToasts(t('已复制到剪切板'));
+          },
+        },
+        {
+          key: 'new',
+          label: t('在新窗口打开'),
+          icon: <Icon icon="mdi:dock-window" />,
+          disabled: hasOpenedPanel,
+          onClick: openPanelWindow,
+        },
+        isPinned
+          ? {
+              key: 'unpin',
+              label: t('Unpin'),
+              icon: <Icon icon="mdi:pin-off" />,
+              onClick: () => {
+                dispatch(
+                  groupActions.unpinGroupPanel({
+                    groupId,
+                  })
+                );
+              },
+            }
+          : {
+              key: 'pin',
+              label: t('Pin'),
+              icon: <Icon icon="mdi:pin" />,
+              onClick: () => {
+                dispatch(
+                  groupActions.pinGroupPanel({
+                    groupId,
+                    panelId: panel.id,
+                  })
+                );
+              },
+            },
+        panel.type === GroupPanelType.TEXT && {
+          key: 'copy',
+          label: t('标记为已读'),
+          icon: <Icon icon="mdi:message-badge-outline" />,
+          onClick: markConverseAllAck,
+        },
+      ])}
+    />
   );
 
   const icon = isPinned ? <Icon icon="mdi:pin" /> : <Icon icon="mdi:pound" />;
