@@ -16,7 +16,13 @@ export interface GroupMember {
 }
 
 export interface GroupPanel {
-  id: string; // 在群组中唯一
+  /**
+   * 在群组中唯一
+   */
+  id: string;
+  /**
+   * 用于显示的面板名
+   */
   name: string;
   parentId?: string;
   type: GroupPanelType;

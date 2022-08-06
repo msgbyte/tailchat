@@ -15,6 +15,18 @@ regGroupPanel({
     },
   ],
   render: Loadable(() => import('./group/GroupWebPanelRender')),
+  menus: [
+    {
+      name: 'openInNewWindow',
+      label: Translate.openInExtra,
+      icon: 'mdi:web',
+      onClick: (panelInfo) => {
+        if (panelInfo.meta?.url) {
+          window.open(String(panelInfo.meta?.url));
+        }
+      },
+    },
+  ],
 });
 
 regGroupPanel({

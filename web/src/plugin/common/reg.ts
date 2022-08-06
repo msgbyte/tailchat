@@ -74,6 +74,16 @@ export interface PluginGroupPanel {
    * 该面板如何渲染
    */
   render: React.ComponentType<{ panelInfo: GroupPanel }>;
+
+  /**
+   * 面板项右键菜单
+   */
+  menus?: {
+    name: string;
+    label: string;
+    icon?: string;
+    onClick: (panelInfo: GroupPanel) => void;
+  }[];
 }
 export const [pluginGroupPanel, regGroupPanel] =
   buildRegList<PluginGroupPanel>();

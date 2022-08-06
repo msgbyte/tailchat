@@ -22,4 +22,8 @@ export const Translate = {
     'zh-CN': 'HTML代码',
     'en-US': 'HTML Code',
   }),
+  openInExtra: localTrans({
+    'zh-CN': '在外部打开',
+    'en-US': 'Open in extra',
+  }),
 };

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 /**
- * 面板项
+ * 群组面板项
  * 用于侧边栏
  */
 export const GroupPanelItem: React.FC<{

@@ -18,6 +18,41 @@ import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import _compact from 'lodash/compact';
 import { Icon } from '@/components/Icon';
+import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
+import type { ItemType } from 'antd/lib/menu/hooks/useItems';
+
+/**
+ * 获取来自插件的菜单项
+ */
+function useExtraMenuItems(panel: GroupPanel): ItemType[] {
+  const pluginPanelInfo = useMemo(
+    () =>
+      panel.pluginPanelName && findPluginPanelInfoByName(panel.pluginPanelName),
+    [panel.pluginPanelName]
+  );
+  if (!pluginPanelInfo) {
+    return [];
+  }
+
+  if (
+    Array.isArray(pluginPanelInfo.menus) &&
+    pluginPanelInfo.menus.length > 0
+  ) {
+    return [
+      {
+        type: 'divider',
+      },
+      ...pluginPanelInfo.menus.map((item) => ({
+        key: item.name,
+        label: item.label,
+        icon: item.icon ? <Icon icon={item.icon} /> : undefined,
+        onClick: () => item.onClick(panel),
+      })),
+    ];
+  }
+
+  return [];
+}
 
 /**
  * 群组面板侧边栏组件
@@ -33,6 +68,7 @@ export const SidebarItem: React.FC<{
   const groupInfo = useGroupInfo(groupId);
   const dispatch = useAppDispatch();
   const { markConverseAllAck } = useConverseAck(panel.id);
+  const extraMenuItems = useExtraMenuItems(panel);
 
   if (!groupInfo) {
     return <LoadingSpinner />;
@@ -92,6 +128,7 @@ export const SidebarItem: React.FC<{
           icon: <Icon icon="mdi:message-badge-outline" />,
           onClick: markConverseAllAck,
         },
+        ...extraMenuItems,
       ])}
     />
   );
