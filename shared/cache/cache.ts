@@ -1,4 +1,3 @@
-import { getServiceUrl } from '../manager/service';
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { findGroupInviteByCode, GroupInvite } from '../model/group';
 import {

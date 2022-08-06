@@ -1,6 +1,7 @@
 import { request } from '../api/request';
 import { buildCachedRequest } from '../cache/utils';
 import { SYSTEM_USERID } from '../utils/consts';
+import { createAutoMergedRequest } from '../utils/request';
 
 export interface UserBaseInfo {
   _id: string;
@@ -173,6 +174,16 @@ export async function searchUserWithUniqueName(
   return data;
 }
 
+const _fetchUserInfo = createAutoMergedRequest<string, UserBaseInfo>(
+  async (userIds) => {
+    // 这里用post是为了防止一次性获取的userId过多超过url限制
+    const { data } = await request.post('/api/user/getUserInfoList', {
+      userIds,
+    });
+
+    return data;
+  }
+);
 /**
  * 获取用户基本信息
  * @param userId 用户ID
@@ -182,13 +193,9 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
     return builtinUserInfo[userId];
   }
 
-  const { data } = await request.get('/api/user/getUserInfo', {
-    params: {
-      userId,
-    },
-  });
+  const userInfo = await _fetchUserInfo(userId);
 
-  return data;
+  return userInfo;
 }
 
 /**
