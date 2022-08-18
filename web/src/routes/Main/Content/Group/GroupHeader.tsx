@@ -1,7 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
 import _isNil from 'lodash/isNil';
-// import { useGroupHeaderAction } from './useGroupHeaderAction';
 import { useGroupInfo, useTranslation } from 'tailchat-shared';
 import { SectionHeader } from '@/components/SectionHeader';
 import { useGroupHeaderAction } from './useGroupHeaderAction';

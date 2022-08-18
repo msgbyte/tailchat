@@ -204,6 +204,7 @@ importers:
       '@types/loadable__component': ^5.13.4
       '@types/lodash': ^4.14.170
       '@types/mini-css-extract-plugin': ^1.4.3
+      '@types/minimatch': ^3.0.5
       '@types/node': ^15.12.5
       '@types/qs': ^6.9.7
       '@types/react': ^17.0.39
@@ -247,6 +248,7 @@ importers:
       memoize-one: ^6.0.0
       mini-css-extract-plugin: ^1.6.2
       mini-star: ^1.3.1
+      minimatch: ^5.1.0
       p-min-delay: ^4.0.0
       postcss: ^8.3.5
       postcss-loader: ^6.1.0
@@ -306,6 +308,7 @@ importers:
       lodash: 4.17.21
       memoize-one: 6.0.0
       mini-star: 1.3.1
+      minimatch: 5.1.0
       p-min-delay: 4.0.1
       qs: 6.10.3
       rc-tree: 5.6.1_sfoxds7t5ydpegc3knd667wn6m
@@ -341,6 +344,7 @@ importers:
       '@types/loadable__component': 5.13.4
       '@types/lodash': 4.14.178
       '@types/mini-css-extract-plugin': 1.4.3_webpack-cli@4.9.2
+      '@types/minimatch': 3.0.5
       '@types/node': 15.14.9
       '@types/qs': 6.9.7
       '@types/react': 17.0.44
@@ -6415,7 +6419,6 @@ packages:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
     dependencies:
       balanced-match: 1.0.2
-    dev: true
 
   /braces/2.3.2:
     resolution: {integrity: sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==}
@@ -9219,7 +9222,7 @@ packages:
   /filelist/1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
     dependencies:
-      minimatch: 5.0.1
+      minimatch: 5.1.0
     dev: true
 
   /filesize/8.0.7:
@@ -9719,7 +9722,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -11119,7 +11122,7 @@ packages:
       async: 3.2.3
       chalk: 4.1.2
       filelist: 1.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
     dev: true
 
   /jest-changed-files/27.5.1:
@@ -12513,23 +12516,16 @@ packages:
     resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==}
     dev: true
 
-  /minimatch/3.0.4:
-    resolution: {integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==}
-    dependencies:
-      brace-expansion: 1.1.11
-
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
-    dev: true
 
-  /minimatch/5.0.1:
-    resolution: {integrity: sha512-nLDxIFRyhDblz3qMuq+SoRZED4+miJ/G+tdDrjkkkRnjAsBexeGpgjLEQ0blJy7rHhR2b93rhQY4SvyWu9v03g==}
+  /minimatch/5.1.0:
+    resolution: {integrity: sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==}
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: 2.0.1
-    dev: true
 
   /minimist-options/4.1.0:
     resolution: {integrity: sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==}
@@ -17032,7 +17028,7 @@ packages:
       serialize-javascript: 6.0.0
       source-map: 0.6.1
       terser: 5.13.1
-      webpack: 5.72.1
+      webpack: 5.72.1_webpack-cli@4.9.2
     dev: true
 
   /terser-webpack-plugin/5.3.1_webpack@5.73.0:
@@ -17087,7 +17083,7 @@ packages:
     dependencies:
       '@istanbuljs/schema': 0.1.3
       glob: 7.2.0
-      minimatch: 3.0.4
+      minimatch: 3.1.2
     dev: true
 
   /text-extensions/1.9.0:

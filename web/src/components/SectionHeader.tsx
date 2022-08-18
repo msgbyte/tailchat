@@ -11,6 +11,7 @@ interface SectionHeaderProps {
 export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
   (props) => {
     const [visible, setVisible] = useState(false);
+
     return (
       <div className="h-12 relative flex items-center py-0 text-base font-bold flex-shrink-0 thin-line-bottom">
         {React.isValidElement(props.menu) ? (

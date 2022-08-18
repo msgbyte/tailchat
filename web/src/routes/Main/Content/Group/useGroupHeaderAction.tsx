@@ -5,6 +5,7 @@ import React from 'react';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { quitGroup, showAlert, t, useIsGroupOwner } from 'tailchat-shared';
+import { useHistoryNav } from '@/hooks/useHistoryNav';
 
 /**
  * 群组 Header 的操作 hooks
@@ -39,6 +40,12 @@ export function useGroupHeaderAction(groupId: string) {
       },
     });
   }, [groupId, isOwner]);
+
+  useHistoryNav('group.*', (nav) => {
+    if (nav.startsWith('group.detail')) {
+      handleShowGroupDetail();
+    }
+  });
 
   return { isOwner, handleShowGroupDetail, handleInviteUser, handleQuitGroup };
 }
