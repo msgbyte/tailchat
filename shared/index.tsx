@@ -49,6 +49,7 @@ export { useLanguage } from './i18n/language';
 // hooks
 export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
+export { useUserInfoList } from './hooks/model/useUserInfoList';
 export { useUsernames } from './hooks/model/useUsernames';
 export {
   useUserSettings,
@@ -182,11 +183,7 @@ export {
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
 export { useGroupMemberMute } from './redux/hooks/useGroupMemberMute';
-export {
-  useUserInfo,
-  useUserId,
-  useUserInfoList,
-} from './redux/hooks/useUserInfo';
+export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { useUnread } from './redux/hooks/useUnread';
 export {
   userActions,

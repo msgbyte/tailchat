@@ -1,5 +1,3 @@
-import { getCachedUserInfo } from '../../cache/cache';
-import { useAsync } from '../../hooks/useAsync';
 import type { UserLoginInfo } from '../../model/user';
 import { useAppSelector } from './useAppSelector';
 
@@ -15,15 +13,4 @@ export function useUserInfo(): UserLoginInfo | null {
  */
 export function useUserId(): string | undefined {
   return useUserInfo()?._id;
-}
-
-/**
- * 根据用户id获取用户信息列表
- */
-export function useUserInfoList(userIds: string[]) {
-  const { value: userInfos = [] } = useAsync(() => {
-    return Promise.all(userIds.map((userId) => getCachedUserInfo(userId)));
-  }, [userIds.join(',')]);
-
-  return userInfos;
 }

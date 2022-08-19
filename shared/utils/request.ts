@@ -15,9 +15,10 @@ export function createAutoMergedRequest<T, R>(
   windowMs = 200
 ): (params: T) => Promise<R> {
   let queue: QueueItem<T, R>[] = [];
-  let timer: number;
+  let timer: number | null = null;
 
   async function submitQueue() {
+    timer = null; // 清空计时器以接受后续请求
     const _queue = [...queue];
     queue = []; // 清空队列
     const ret = fn(_queue.map((q) => q.params));

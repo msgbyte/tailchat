@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
+import { useUserInfoList } from '../..';
 import { GroupInfo, GroupPanel, GroupPanelType } from '../../model/group';
 import type { UserBaseInfo } from '../../model/user';
 import { isValidStr } from '../../utils/string-helper';
 import { useAppSelector } from './useAppSelector';
 import { useUnread } from './useUnread';
-import { useUserId, useUserInfoList } from './useUserInfo';
+import { useUserId } from './useUserInfo';
 
 /**
  * 获取群组信息
