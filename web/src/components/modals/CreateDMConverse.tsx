@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { createDMConverse, t, useAsyncRequest } from 'tailchat-shared';
-import { FriendPicker } from '../FriendPicker';
+import { FriendPicker } from '../UserPicker/FriendPicker';
 import { closeModal, ModalWrapper } from '../Modal';
 
 interface CreateDMConverseProps {

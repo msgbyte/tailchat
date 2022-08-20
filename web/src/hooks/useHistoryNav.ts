@@ -9,7 +9,7 @@ import { useUpdateRef } from 'tailchat-shared';
  *
  * 用于根据 ?nav=xxx 来自动打开代码中的某一个部件
  */
-export function useHistoryNav(
+export function useLocationNav(
   pattern: string,
   callback: (nav: string) => void
 ) {

@@ -72,7 +72,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   }, []);
 
   return (
-    <Loading spinning={loading}>
+    <Loading spinning={loading} className="h-full">
       <div className="flex h-full">
         <div className="pr-2 mr-2 w-40 border-r border-white border-opacity-20">
           {/* 角色列表 */}

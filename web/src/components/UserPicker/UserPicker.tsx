@@ -1,21 +1,17 @@
 import { Checkbox, Input } from 'antd';
 import React, { useCallback, useState } from 'react';
-import {
-  getCachedUserInfo,
-  t,
-  useAppSelector,
-  useAsync,
-} from 'tailchat-shared';
+import { t, useUserInfoList } from 'tailchat-shared';
 import _take from 'lodash/take';
 import _without from 'lodash/without';
-import { Avatar } from './Avatar';
+import { Avatar } from 'tailchat-design';
 
-interface FriendPickerProps {
-  /**
-   * 排除的用户id
-   * 在选择好友时会进行过滤
-   */
-  withoutUserIds?: string[];
+/**
+ * 用户选择器
+ */
+
+interface UserPickerProps {
+  selectedIds: string[];
+  onChange: (selectedIds: string[]) => void;
 
   /**
    * 是否包含搜索框
@@ -23,24 +19,15 @@ interface FriendPickerProps {
    */
   withSearch?: boolean;
 
-  selectedIds: string[];
-  onChange: (selectedIds: string[]) => void;
+  /**
+   * 所有用户的id列表
+   */
+  allUserIds: string[];
 }
-export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
-  const {
-    withoutUserIds = [],
-    withSearch = true,
-    selectedIds,
-    onChange,
-  } = props;
+export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
+  const { withSearch = true, selectedIds, onChange, allUserIds } = props;
   const [searchValue, setSearchValue] = useState('');
-  const friendIds = useAppSelector((state) =>
-    state.user.friends.filter((id) => !withoutUserIds.includes(id))
-  );
-
-  const { value: friendInfoList = [] } = useAsync(() => {
-    return Promise.all(friendIds.map((id) => getCachedUserInfo(id)));
-  }, [friendIds.join(',')]);
+  const userInfoList = useUserInfoList(allUserIds);
 
   const handleSelectUser = useCallback(
     (userId: string, isSelected: boolean) => {
@@ -78,8 +65,8 @@ export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
       </div>
 
       {_take(
-        friendInfoList.filter((info) => info.nickname.includes(searchValue)),
-        5
+        userInfoList.filter((info) => info.nickname.includes(searchValue)),
+        10
       ).map((info) => {
         return (
           <div key={info._id} className="my-1">
@@ -102,4 +89,4 @@ export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
     </div>
   );
 });
-FriendPicker.displayName = 'FriendPicker';
+UserPicker.displayName = 'UserPicker';
