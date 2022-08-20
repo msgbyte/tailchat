@@ -4,17 +4,29 @@ import {
 } from '@/components/FullModal/Field';
 import { IconBtn } from '@/components/IconBtn';
 import { Loading } from '@/components/Loading';
+import { closeModal, openModal } from '@/components/Modal';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { UserListItem } from '@/components/UserListItem';
 import { AllPermission, permissionList } from '@/utils/role-helper';
 import { Button, Input } from 'antd';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Icon } from 'tailchat-design';
-import { t, useGroupInfo, useSearch, useUserInfoList } from 'tailchat-shared';
+import {
+  model,
+  showErrorToasts,
+  showSuccessToasts,
+  t,
+  useGroupInfo,
+  useSearch,
+  useUserId,
+  useUserInfoList,
+} from 'tailchat-shared';
+import { SelectGroupMember } from '../../SelectGroupMember';
 import { PermissionItem } from './PermissionItem';
 import { RoleItem } from './RoleItem';
 import { useModifyPermission } from './useModifyPermission';
 import { useRoleActions } from './useRoleActions';
+import _compact from 'lodash/compact';
 
 interface GroupPermissionProps {
   groupId: string;
@@ -26,8 +38,12 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   );
   const groupInfo = useGroupInfo(groupId);
   const roles = groupInfo?.roles ?? [];
-  const members = (groupInfo?.members ?? []).filter((m) => m.role === roleId);
-  const userInfoList = useUserInfoList(members.map((m) => m.userId));
+  const members =
+    roleId === AllPermission
+      ? []
+      : (groupInfo?.members ?? []).filter((m) => m.roles.includes(roleId));
+  const memberIds = members.map((m) => m.userId);
+  const userInfoList = useUserInfoList(memberIds);
   const {
     searchText,
     setSearchText,
@@ -37,6 +53,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
     dataSource: userInfoList,
     filterFn: (item, searchText) => item.nickname.includes(searchText),
   });
+  const userId = useUserId();
   const currentRoleInfo = useMemo(
     () => roles.find((r) => r._id === roleId),
     [roles, roleId]
@@ -63,7 +80,42 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
     handleSwitchPermission,
   } = useModifyPermission(currentRolePermissions);
 
-  const handleAddMember = useCallback(() => {}, []);
+  const handleAddMember = useCallback(() => {
+    const key = openModal(
+      <SelectGroupMember
+        groupId={groupId}
+        withoutMemberIds={_compact([...memberIds, userId])}
+        onConfirm={async (selectedIds) => {
+          if (!currentRoleInfo?._id) {
+            showErrorToasts(t('当前没有选择任何角色组'));
+            return;
+          }
+          await model.group.appendGroupMemberRoles(groupId, selectedIds, [
+            currentRoleInfo._id,
+          ]);
+          showSuccessToasts();
+          closeModal(key);
+        }}
+      />
+    );
+  }, [groupId, memberIds, currentRoleInfo?._id]);
+
+  const handleRemoveMember = useCallback(
+    async (memberId: string) => {
+      if (!currentRoleInfo?._id) {
+        showErrorToasts(t('当前没有选择任何角色组'));
+        return;
+      }
+
+      await model.group.removeGroupMemberRoles(
+        groupId,
+        [memberId],
+        [currentRoleInfo._id]
+      );
+      showSuccessToasts();
+    },
+    [groupId, currentRoleInfo?._id]
+  );
 
   const handleResetPermission = useCallback(() => {
     setEditingPermission(
@@ -169,7 +221,13 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
                 <UserListItem
                   key={m._id}
                   userId={m._id}
-                  actions={[<IconBtn key="remove" icon="mdi:close" />]}
+                  actions={[
+                    <IconBtn
+                      key="remove"
+                      icon="mdi:close"
+                      onClick={() => handleRemoveMember(m._id)}
+                    />,
+                  ]}
                 />
               ))}
             </PillTabPane>

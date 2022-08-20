@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { buildRegFn } from './buildRegFn';
 
 /**
@@ -21,6 +22,13 @@ export function showErrorToasts(error: unknown) {
   }
 
   showToasts(msg, 'error');
+}
+
+/**
+ * 展示成功消息
+ */
+export function showSuccessToasts(msg = t('操作成功')) {
+  showToasts(msg, 'success');
 }
 
 interface AlertOptions {

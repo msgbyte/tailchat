@@ -86,6 +86,7 @@ export {
   showToasts,
   setToasts,
   showErrorToasts,
+  showSuccessToasts,
   showAlert,
   setAlert,
   showGlobalLoading,

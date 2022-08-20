@@ -1,4 +1,4 @@
-import { Checkbox, Input } from 'antd';
+import { Checkbox, Empty, Input } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { t, useUserInfoList } from 'tailchat-shared';
 import _take from 'lodash/take';
@@ -47,6 +47,11 @@ export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
     [selectedIds, onChange]
   );
 
+  const matchedList = _take(
+    userInfoList.filter((info) => info.nickname.includes(searchValue)),
+    10
+  );
+
   return (
     <div>
       {withSearch && (
@@ -64,28 +69,29 @@ export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
         })}
       </div>
 
-      {_take(
-        userInfoList.filter((info) => info.nickname.includes(searchValue)),
-        10
-      ).map((info) => {
-        return (
-          <div key={info._id} className="my-1">
-            <Checkbox
-              className="mr-2 items-center"
-              checked={selectedIds.includes(info._id)}
-              onChange={(e) => handleSelectUser(info._id, e.target.checked)}
-            >
-              <div className="flex items-center">
-                <Avatar size="small" name={info.nickname} src={info.avatar} />
+      {matchedList.length > 0 ? (
+        matchedList.map((info) => {
+          return (
+            <div key={info._id} className="my-1">
+              <Checkbox
+                className="mr-2 items-center"
+                checked={selectedIds.includes(info._id)}
+                onChange={(e) => handleSelectUser(info._id, e.target.checked)}
+              >
+                <div className="flex items-center">
+                  <Avatar size="small" name={info.nickname} src={info.avatar} />
 
-                <div className="ml-1 text-typography-light dark:text-typography-dark">
-                  {info.nickname}
+                  <div className="ml-1 text-typography-light dark:text-typography-dark">
+                    {info.nickname}
+                  </div>
                 </div>
-              </div>
-            </Checkbox>
-          </div>
-        );
-      })}
+              </Checkbox>
+            </div>
+          );
+        })
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 });

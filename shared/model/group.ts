@@ -7,7 +7,7 @@ export enum GroupPanelType {
 }
 
 export interface GroupMember {
-  role: string; // 角色
+  roles: string[]; // 角色组
   userId: string;
   /**
    * 日期字符串 禁言到xxx
@@ -136,6 +136,42 @@ export async function modifyGroupField(
 export async function quitGroup(groupId: string) {
   await request.post('/api/group/quitGroup', {
     groupId,
+  });
+}
+
+/**
+ * 更新用户所在的权限组
+ * @param groupId 群组ID
+ * @param memberIds 成员信息
+ * @param roles 权限组名
+ */
+export async function appendGroupMemberRoles(
+  groupId: string,
+  memberIds: string[],
+  roles: string[]
+) {
+  await request.post('/api/group/appendGroupMemberRoles', {
+    groupId,
+    memberIds,
+    roles,
+  });
+}
+
+/**
+ * 更新用户所在的权限组
+ * @param groupId 群组ID
+ * @param memberIds 成员信息
+ * @param roles 权限组名
+ */
+export async function removeGroupMemberRoles(
+  groupId: string,
+  memberIds: string[],
+  roles: string[]
+) {
+  await request.post('/api/group/removeGroupMemberRoles', {
+    groupId,
+    memberIds,
+    roles,
   });
 }
 
