@@ -21,9 +21,21 @@
           @apply rounded bg-opacity-20;
 
           .ant-tabs-tab-btn {
-            @apply text-black dark:text-white ;
+            @apply text-black dark:text-white;
           }
         }
+      }
+
+      &.ant-tabs-tab-disabled {
+        @apply text-opacity-50;
+
+        &.ant-tabs-tab-active {
+          @apply text-red-500 rounded bg-opacity-20 bg-red-500;
+        }
+      }
+
+      .ant-tabs-tab-btn {
+        color: inherit;
       }
     }
   }

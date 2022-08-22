@@ -51,8 +51,15 @@ export interface GroupInfo {
   members: GroupMember[];
   panels: GroupPanel[];
   roles: GroupRole[];
+  /**
+   * 所有人的权限列表
+   * 为群组中的最低权限
+   */
   fallbackPermissions: string[];
-  pinnedPanelId?: string; // 被钉选的面板Id
+  /**
+   * 被钉选的面板Id
+   */
+  pinnedPanelId?: string;
 }
 
 /**

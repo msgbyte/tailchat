@@ -1,32 +1,13 @@
-import {
-  DefaultFullModalInputEditorRender,
-  FullModalField,
-} from '@/components/FullModal/Field';
-import { IconBtn } from '@/components/IconBtn';
 import { Loading } from '@/components/Loading';
-import { closeModal, openModal } from '@/components/Modal';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
-import { UserListItem } from '@/components/UserListItem';
-import { AllPermission, permissionList } from '@/utils/role-helper';
-import { Button, Input } from 'antd';
-import React, { useCallback, useMemo, useState } from 'react';
-import { Icon } from 'tailchat-design';
-import {
-  model,
-  showErrorToasts,
-  showSuccessToasts,
-  t,
-  useGroupInfo,
-  useSearch,
-  useUserId,
-  useUserInfoList,
-} from 'tailchat-shared';
-import { SelectGroupMember } from '../../SelectGroupMember';
-import { PermissionItem } from './PermissionItem';
+import { AllPermission } from '@/utils/role-helper';
+import React, { useMemo, useState } from 'react';
+import { t, useGroupInfo } from 'tailchat-shared';
 import { RoleItem } from './RoleItem';
-import { useModifyPermission } from './useModifyPermission';
 import { useRoleActions } from './useRoleActions';
-import _compact from 'lodash/compact';
+import { RoleSummary } from './tabs/summary';
+import { RolePermission } from './tabs/permission';
+import { RoleMember } from './tabs/member';
 
 interface GroupPermissionProps {
   groupId: string;
@@ -38,33 +19,11 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   );
   const groupInfo = useGroupInfo(groupId);
   const roles = groupInfo?.roles ?? [];
-  const members =
-    roleId === AllPermission
-      ? []
-      : (groupInfo?.members ?? []).filter((m) => m.roles.includes(roleId));
-  const memberIds = members.map((m) => m.userId);
-  const userInfoList = useUserInfoList(memberIds);
-  const {
-    searchText,
-    setSearchText,
-    isSearching,
-    searchResult: filterMembers,
-  } = useSearch({
-    dataSource: userInfoList,
-    filterFn: (item, searchText) => item.nickname.includes(searchText),
-  });
-  const userId = useUserId();
+
   const currentRoleInfo = useMemo(
     () => roles.find((r) => r._id === roleId),
     [roles, roleId]
   );
-  const currentRolePermissions: string[] = useMemo(() => {
-    if (roleId === AllPermission) {
-      return groupInfo?.fallbackPermissions ?? [];
-    }
-
-    return currentRoleInfo?.permissions ?? [];
-  }, [roleId, currentRoleInfo, groupInfo]);
 
   const {
     loading,
@@ -72,56 +31,6 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
     handleSavePermission,
     handleChangeRoleName,
   } = useRoleActions(groupId, roleId);
-
-  const {
-    isEditing,
-    editingPermission,
-    setEditingPermission,
-    handleSwitchPermission,
-  } = useModifyPermission(currentRolePermissions);
-
-  const handleAddMember = useCallback(() => {
-    const key = openModal(
-      <SelectGroupMember
-        groupId={groupId}
-        withoutMemberIds={_compact([...memberIds, userId])}
-        onConfirm={async (selectedIds) => {
-          if (!currentRoleInfo?._id) {
-            showErrorToasts(t('当前没有选择任何角色组'));
-            return;
-          }
-          await model.group.appendGroupMemberRoles(groupId, selectedIds, [
-            currentRoleInfo._id,
-          ]);
-          showSuccessToasts();
-          closeModal(key);
-        }}
-      />
-    );
-  }, [groupId, memberIds, currentRoleInfo?._id]);
-
-  const handleRemoveMember = useCallback(
-    async (memberId: string) => {
-      if (!currentRoleInfo?._id) {
-        showErrorToasts(t('当前没有选择任何角色组'));
-        return;
-      }
-
-      await model.group.removeGroupMemberRoles(
-        groupId,
-        [memberId],
-        [currentRoleInfo._id]
-      );
-      showSuccessToasts();
-    },
-    [groupId, currentRoleInfo?._id]
-  );
-
-  const handleResetPermission = useCallback(() => {
-    setEditingPermission(
-      permissionList.filter((p) => p.default === true).map((p) => p.key)
-    );
-  }, []);
 
   return (
     <Loading spinning={loading} className="h-full">
@@ -157,79 +66,32 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
               tab={t('概述')}
               disabled={roleId === AllPermission}
             >
-              {/* 权限概述 */}
               {currentRoleInfo && (
-                <div className="px-2">
-                  <FullModalField
-                    title={t('角色名称')}
-                    value={currentRoleInfo.name}
-                    editable={true}
-                    renderEditor={DefaultFullModalInputEditorRender}
-                    onSave={handleChangeRoleName}
-                  />
-                </div>
+                <RoleSummary
+                  currentRoleInfo={currentRoleInfo}
+                  onChangeRoleName={handleChangeRoleName}
+                />
               )}
             </PillTabPane>
             <PillTabPane key="permission" tab={t('权限')}>
-              <div className="mb-2 space-x-2 text-right">
-                <Button onClick={handleResetPermission}>
-                  {t('重置为默认值')}
-                </Button>
-                <Button
-                  type="primary"
-                  disabled={!isEditing}
-                  onClick={() => handleSavePermission(editingPermission)}
-                >
-                  {t('保存')}
-                </Button>
-              </div>
-
-              {/* 权限详情 */}
-              {permissionList.map((p) => (
-                <PermissionItem
-                  key={p.key}
-                  title={p.title}
-                  desc={p.desc}
-                  checked={editingPermission.includes(p.key)}
-                  onChange={(checked) => handleSwitchPermission(p.key, checked)}
-                />
-              ))}
+              <RolePermission
+                roleId={roleId}
+                fallbackPermissions={groupInfo?.fallbackPermissions ?? []}
+                currentRoleInfo={currentRoleInfo}
+                onSavePermission={handleSavePermission}
+              />
             </PillTabPane>
             <PillTabPane
               key="member"
               tab={t('管理成员')}
               disabled={roleId === AllPermission}
             >
-              {/* 管理成员 */}
-              <div className="text-right mb-2 flex space-x-1">
-                <Input
-                  placeholder={t('搜索成员')}
-                  size="middle"
-                  suffix={
-                    <Icon fontSize={20} color="grey" icon="mdi:magnify" />
-                  }
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
+              {currentRoleInfo && (
+                <RoleMember
+                  groupId={groupId}
+                  currentRoleInfo={currentRoleInfo}
                 />
-
-                <Button type="primary" onClick={handleAddMember}>
-                  {t('添加成员')}
-                </Button>
-              </div>
-
-              {(isSearching ? filterMembers : userInfoList).map((m) => (
-                <UserListItem
-                  key={m._id}
-                  userId={m._id}
-                  actions={[
-                    <IconBtn
-                      key="remove"
-                      icon="mdi:close"
-                      onClick={() => handleRemoveMember(m._id)}
-                    />,
-                  ]}
-                />
-              ))}
+              )}
             </PillTabPane>
           </PillTabs>
         </div>

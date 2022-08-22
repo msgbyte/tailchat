@@ -56,7 +56,7 @@ export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
     <div>
       {withSearch && (
         <Input
-          placeholder={t('搜索好友')}
+          placeholder={t('搜索用户')}
           className="mb-2"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -78,7 +78,7 @@ export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
                 checked={selectedIds.includes(info._id)}
                 onChange={(e) => handleSelectUser(info._id, e.target.checked)}
               >
-                <div className="flex items-center">
+                <div className="flex items-center w-full">
                   <Avatar size="small" name={info.nickname} src={info.avatar} />
 
                   <div className="ml-1 text-typography-light dark:text-typography-dark">
