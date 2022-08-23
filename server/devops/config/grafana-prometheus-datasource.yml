@@ -1,0 +1,28 @@
+apiVersion: 1
+
+deleteDatasources:
+- name: Prometheus
+  orgId: 1
+
+datasources:
+- name: Prometheus
+  type: prometheus
+  access: proxy
+  url: http://prometheus:9090
+  password:
+  user:
+  database: prometheus
+  basicAuth: false
+  basicAuthUser:
+  basicAuthPassword:
+  withCredentials:
+  isDefault: true
+  jsonData:
+     tlsAuth: false
+     tlsAuthWithCACert: false
+  secureJsonData:
+    tlsCACert: ""
+    tlsClientCert: ""
+    tlsClientKey: ""
+  version: 1
+  editable: true

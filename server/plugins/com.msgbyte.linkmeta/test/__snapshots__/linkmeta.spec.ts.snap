@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test "plugin:com.msgbyte.linkinfo" service Test "plugin:com.msgbyte.linkmeta.fetch" normal 1`] = `
+Object {
+  "contentType": "text/html",
+  "description": undefined,
+  "favicons": Array [
+    "https://www.baidu.com/favicon.ico",
+  ],
+  "images": Array [],
+  "isCache": false,
+  "mediaType": "website",
+  "siteName": undefined,
+  "title": "",
+  "url": "https://www.baidu.com/?fortest",
+  "videos": Array [],
+}
+`;
+
+exports[`Test "plugin:com.msgbyte.linkinfo" service Test "plugin:com.msgbyte.linkmeta.fetch" pure image 1`] = `
+Object {
+  "contentType": "image/jpeg",
+  "favicons": Array [
+    "https://www.w3schools.com/favicon.ico",
+  ],
+  "isCache": true,
+  "mediaType": "image",
+  "url": "https://www.w3schools.com/html/pic_trulli.jpg",
+}
+`;
+
+exports[`Test "plugin:com.msgbyte.linkinfo" service Test "plugin:com.msgbyte.linkmeta.fetch" pure mp3 1`] = `
+Object {
+  "contentType": "audio/mpeg",
+  "favicons": Array [
+    "https://www.w3schools.com/favicon.ico",
+  ],
+  "isCache": true,
+  "mediaType": "audio",
+  "url": "https://www.w3schools.com/html/horse.mp3",
+}
+`;
+
+exports[`Test "plugin:com.msgbyte.linkinfo" service Test "plugin:com.msgbyte.linkmeta.fetch" pure ogg 1`] = `
+Object {
+  "contentType": "video/ogg",
+  "favicons": Array [
+    "https://www.w3schools.com/favicon.ico",
+  ],
+  "isCache": true,
+  "mediaType": "video",
+  "url": "https://www.w3schools.com/html/horse.ogg",
+}
+`;
+
+exports[`Test "plugin:com.msgbyte.linkinfo" service Test "plugin:com.msgbyte.linkmeta.fetch" pure video 1`] = `
+Object {
+  "contentType": "video/mp4",
+  "favicons": Array [
+    "https://www.w3schools.com/favicon.ico",
+  ],
+  "isCache": true,
+  "mediaType": "video",
+  "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+}
+`;

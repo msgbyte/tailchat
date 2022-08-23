@@ -1,0 +1,9 @@
+{
+  "label": "Github 订阅",
+  "name": "com.msgbyte.github",
+  "url": "{BACKEND}/plugins/com.msgbyte.github/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "订阅Github项目动态到群组",
+  "requireRestart": true
+}

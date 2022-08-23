@@ -1,0 +1,21 @@
+{
+  "name": "tailchat-plugin-tasks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "less": "^4.1.2",
+    "mini-star": "^1.2.8",
+    "rollup-plugin-less": "^1.1.3"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
+  }
+}

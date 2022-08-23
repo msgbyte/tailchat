@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (HEAD)
+  labels:
+    io.kompose.network/internal: "true"
+    io.kompose.service: mongo
+  name: mongo
+spec:
+  containers:
+    - image: mongo:4
+      name: mongo
+      resources: {}
+      volumeMounts:
+        - mountPath: /data/db
+          name: data
+  restartPolicy: OnFailure
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: data
+status: {}

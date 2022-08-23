@@ -1,0 +1,81 @@
+.plugin-linkmeta-previewer {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  max-width: 90%;
+  overflow: hidden;
+  padding: 10px;
+
+  .basic {
+    cursor: pointer;
+    display: flex;
+
+    .summary {
+      flex: 1;
+
+      &:hover .title {
+        text-decoration: underline;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+      .description {
+        font-size: smaller;
+        color: grey;
+      }
+    }
+
+    .image {
+      margin-left: 16px;
+      margin-top: 8px;
+      max-width: 80px;
+      max-height: 50px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .video {
+    max-width: 100%;
+    max-height: 400px;
+    position: relative;
+
+    .openfull {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      padding: 4px;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
+      font-size: 20px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 719px) {
+    // Hide when vertical screen
+    .basic {
+      flex-direction: column;
+
+      .image {
+        max-width: 100%;
+        max-height: initial;
+        margin-left: 0;
+        margin-top: 4px;
+        overflow: initial;
+      }
+    }
+
+    .video {
+      iframe {
+        max-width: 100%;
+      }
+    }
+  }
+}

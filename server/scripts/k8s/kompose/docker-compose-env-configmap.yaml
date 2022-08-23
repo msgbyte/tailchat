@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  CACHER: redis://redis:6379
+  JWT_SECRET: ""
+  LOGGER: "true"
+  LOGLEVEL: info
+  MINIO_PASS: com.msgbyte.tailchat
+  MINIO_URL: minio:9000
+  MINIO_USER: tailchat
+  MONGO_URL: mongodb://mongo/moleculer-test
+  NAMESPACE: ""
+  REDIS_URL: redis://redis:6379
+  SERVICEDIR: dist/services
+  STATIC_URL: https://paw-server-nightly.moonrailgun.com/static/
+  TRANSPORTER: redis://redis:6379
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: service-chat-docker-compose-env
+  name: docker-compose-env

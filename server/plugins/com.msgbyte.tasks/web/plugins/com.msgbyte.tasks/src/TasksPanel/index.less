@@ -1,0 +1,51 @@
+.plugin-tasks-panel {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .plugin-task-title {
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .plugin-task-new {
+    margin-bottom: 4px;
+  }
+
+  .plugin-task-item {
+    border-radius: 3px;
+    background-color: white;
+    padding: 8px;
+    margin-bottom: 4px;
+    display: flex;
+    transition: box-shadow 0.5s;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+    }
+
+    .plugin-task-item_body {
+      margin-left: 4px;
+      flex: 1;
+
+      &.plugin-task-item_body-done {
+        text-decoration: line-through;
+        color: gray;
+      }
+    }
+  }
+}
+
+.dark .plugin-tasks-panel {
+  .plugin-task-item {
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .plugin-task-item_body {
+      &.plugin-task-item_body-done {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+  }
+}

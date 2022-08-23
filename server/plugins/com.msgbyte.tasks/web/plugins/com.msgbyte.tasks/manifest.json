@@ -1,0 +1,9 @@
+{
+  "label": "任务管理",
+  "name": "com.msgbyte.tasks",
+  "url": "{BACKEND}/plugins/com.msgbyte.tasks/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "任务管理工具",
+  "requireRestart": true
+}

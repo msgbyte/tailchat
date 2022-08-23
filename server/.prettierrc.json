@@ -1,0 +1,26 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "parser": "babel",
+  "jsxBracketSameLine": false,
+  "overrides": [
+    {
+      "files": "*.{tsx,ts}",
+      "options": {
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": ["*.json"],
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

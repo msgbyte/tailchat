@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (HEAD)
+  labels:
+    io.kompose.network/internal: "true"
+    io.kompose.service: minio
+  name: minio
+spec:
+  containers:
+    - args:
+        - minio
+        - server
+        - /data
+        - --console-address
+        - :9001
+      env:
+        - name: MINIO_ROOT_PASSWORD
+          value: com.msgbyte.tailchat
+        - name: MINIO_ROOT_USER
+          value: tailchat
+      image: minio/minio
+      name: minio
+      resources: {}
+      volumeMounts:
+        - mountPath: /data
+          name: storage
+  restartPolicy: OnFailure
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: storage
+status: {}

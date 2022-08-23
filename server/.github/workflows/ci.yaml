@@ -1,0 +1,55 @@
+name: "CI"
+
+on:
+  # 单元测试还有点问题。先注释
+  # push:
+  #   branches:
+  #     - master
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    services:
+      redis:
+        image: redis:alpine
+      mongo:
+        image: mongo:4
+      minio:
+        image: minio/minio
+        env:
+          MINIO_ROOT_USER: tailchat
+          MINIO_ROOT_PASSWORD: com.msgbyte.tailchat
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          run_install: false
+      - name: Install packages
+        run: pnpm install --frozen-lockfile
+      - name: Test
+        run: pnpm test
+        env:
+          TZ: Asia/Shanghai
+          MONGO_URL: mongodb://localhost:27017/tailchat
+          REDIS_URL: redis://localhost:6379
+          MINIO_URL: localhost:9000
+          MINIO_USER: tailchat
+          MINIO_PASS: com.msgbyte.tailchat
+      - name: Check Build
+        run: pnpm build

@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (HEAD)
+  labels:
+    io.kompose.service: service-chat
+  name: service-chat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: service-chat
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.24.0 (HEAD)
+      labels:
+        io.kompose.network/internal: "true"
+        io.kompose.service: service-chat
+    spec:
+      containers:
+        - env:
+            - name: CACHER
+              valueFrom:
+                configMapKeyRef:
+                  key: CACHER
+                  name: docker-compose-env
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: JWT_SECRET
+                  name: docker-compose-env
+            - name: LOGGER
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGGER
+                  name: docker-compose-env
+            - name: LOGLEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGLEVEL
+                  name: docker-compose-env
+            - name: MINIO_PASS
+              valueFrom:
+                configMapKeyRef:
+                  key: MINIO_PASS
+                  name: docker-compose-env
+            - name: MINIO_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: MINIO_URL
+                  name: docker-compose-env
+            - name: MINIO_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: MINIO_USER
+                  name: docker-compose-env
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: MONGO_URL
+                  name: docker-compose-env
+            - name: NAMESPACE
+              valueFrom:
+                configMapKeyRef:
+                  key: NAMESPACE
+                  name: docker-compose-env
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIS_URL
+                  name: docker-compose-env
+            - name: SERVICEDIR
+              valueFrom:
+                configMapKeyRef:
+                  key: SERVICEDIR
+                  name: docker-compose-env
+            - name: SERVICES
+              value: chat/message,chat/converse,chat/ack
+            - name: STATIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: STATIC_URL
+                  name: docker-compose-env
+            - name: TRANSPORTER
+              valueFrom:
+                configMapKeyRef:
+                  key: TRANSPORTER
+                  name: docker-compose-env
+          image: moonrailgun/tailchat-server
+          name: service-chat
+          resources: {}
+      restartPolicy: Always
+status: {}

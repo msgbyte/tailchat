@@ -1,0 +1,9 @@
+{
+  "label": "Url元数据展示",
+  "name": "com.msgbyte.linkmeta",
+  "url": "{BACKEND}/plugins/com.msgbyte.linkmeta/index.js",
+  "version": "0.0.0",
+  "author": "msgbyte",
+  "description": "解析并获取在聊天信息中的url信息概述",
+  "requireRestart": false
+}

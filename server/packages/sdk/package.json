@@ -1,0 +1,52 @@
+{
+  "name": "tailchat-server-sdk",
+  "version": "0.0.12",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "tailchat-runner": "./dist/runner/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run build",
+    "release": "npm version patch && npm publish --registry https://registry.npmjs.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msgbyte/tailchat-server.git"
+  },
+  "keywords": [
+    "msgbyte",
+    "moonrailgun",
+    "tailchat"
+  ],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msgbyte/tailchat-server/issues"
+  },
+  "homepage": "https://github.com/msgbyte/tailchat-server#readme",
+  "devDependencies": {
+    "typescript": "^4.3.3"
+  },
+  "dependencies": {
+    "@typegoose/typegoose": "9.3.1",
+    "accept-language": "^3.0.18",
+    "crc": "^3.8.0",
+    "dotenv": "^10.0.0",
+    "fastest-validator": "^1.12.0",
+    "i18next": "^20.3.5",
+    "i18next-fs-backend": "^1.1.1",
+    "ioredis": "^4.27.6",
+    "kleur": "^4.1.4",
+    "lodash": "^4.17.21",
+    "moleculer": "0.14.18",
+    "moleculer-db": "0.8.16",
+    "moleculer-repl": "^0.6.5",
+    "moment": "^2.29.1",
+    "mongodb": "4.2.1",
+    "mongoose": "6.1.1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@plugins/com.msgbyte.linkmeta",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "url-regex": "^5.0.0"
+  }
+}

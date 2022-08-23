@@ -1,0 +1,16 @@
+{
+  "name": "tailchat-plugin-simplenotify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "mini-star": "^1.2.8"
+  },
+  "dependencies": {}
+}

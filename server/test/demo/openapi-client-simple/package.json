@@ -1,0 +1,16 @@
+{
+  "name": "openapi-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "express": "^4.17.2"
+  }
+}

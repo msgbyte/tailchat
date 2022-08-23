@@ -1,0 +1,46 @@
+version: "3.3"
+
+services:
+  # 应用网关
+  prometheus:
+    image: prom/prometheus:v2.26.0
+    user: root
+    container_name: tailchat-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - 9090
+    links:
+      - service-gateway:tailchat-server
+    depends_on:
+      - service-gateway
+    networks:
+      - internal
+
+  grafana:
+    image: grafana/grafana:7.5.3
+    user: root
+    container_name: tailchat-grafana
+    restart: unless-stopped
+    links:
+      - prometheus:prometheus
+    ports:
+      - 13000:3000
+    volumes:
+      - ./config/grafana-prometheus-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml
+      # - ./config/grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/all.yml
+      # - ./config/grafana-dashboards:/var/lib/grafana/dashboards
+      - ./data/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=tailchat
+      - GF_SECURITY_ADMIN_PASSWORD=tailchat
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+    networks:
+      - internal

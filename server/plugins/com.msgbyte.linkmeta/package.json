@@ -1,0 +1,21 @@
+{
+  "name": "tailchat-plugin-linkmeta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "less": "^4.1.2",
+    "mini-star": "^1.2.8"
+  },
+  "dependencies": {
+    "got": "11.8.3",
+    "link-preview-js": "^2.1.10",
+    "lodash": "^4.17.21"
+  }
+}

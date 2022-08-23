@@ -1,0 +1,7 @@
+{
+  "name": "@plugins/com.msgbyte.github",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {}
+}

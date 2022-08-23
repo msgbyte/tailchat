@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`des encrypt D 1`] = `"ihmnn4VBPYE="`;
+
+exports[`des encrypt bar 1`] = `"p/PIC32MPm4="`;
+
+exports[`des encrypt foo 1`] = `"NP3+ABhEiY4="`;
+
+exports[`des encrypt 你 1`] = `"O5kF0LXzjpE="`;
