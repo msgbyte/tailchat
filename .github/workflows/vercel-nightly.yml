@@ -13,7 +13,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: Inject Analytics
-        run: node ./web/build/inject-analytics.js
+        run: node ./client/web/build/inject-analytics.js
       - name: Deploy Prod
         uses: amondnet/vercel-action@master
         env:
@@ -22,7 +22,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          working-directory: ./
+          working-directory: ./client
           vercel-args: '--prod'
       - name: Notify to Service
         uses: muinmomin/webhook-action@v1.0.0
