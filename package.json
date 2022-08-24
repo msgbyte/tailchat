@@ -1,0 +1,24 @@
+{
+  "name": "tailchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -k npm:dev:web npm:dev:server",
+    "dev:web": "cd client/web && pnpm run dev",
+    "dev:server": "cd server && pnpm run dev",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "commitlint": "^17.0.3",
+    "concurrently": "^7.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  }
+}
