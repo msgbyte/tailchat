@@ -5,7 +5,9 @@ on:
     branches:
       - master
     paths:
-      - "./client/**"
+      - "./client/web/**"
+      - "./client/shared/**"
+      - "./client/packages/design/**"
   workflow_dispatch:
 
 jobs:

@@ -7,20 +7,5 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "arrowParens": "always",
-  "parser": "babel",
-  "jsxBracketSameLine": false,
-  "overrides": [
-    {
-      "files": "*.{tsx,ts}",
-      "options": {
-        "parser": "typescript"
-      }
-    },
-    {
-      "files": "*.less",
-      "options": {
-        "parser": "less"
-      }
-    }
-  ]
+  "jsxBracketSameLine": false
 }

@@ -2,10 +2,10 @@
   "src/*.{json,less}": [
     "prettier --write --config ./.prettierrc.json"
   ],
-  "**/*.js": [
+  "./**/*.js": [
     "prettier --write --config ./.prettierrc.json"
   ],
-  "**/*.{ts,tsx}": [
+  "./**/*.{ts,tsx}": [
     "eslint --fix",
     "prettier --write --config ./.prettierrc.json"
   ]

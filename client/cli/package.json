@@ -1,0 +1,55 @@
+{
+  "name": "tailchat-cli",
+  "version": "1.3.0",
+  "description": "A Command line interface of tailchat",
+  "bin": {
+    "tailchat": "./bin/cli"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib",
+    "bin",
+    "templates"
+  ],
+  "scripts": {
+    "dev": "ts-node ./src/index.ts",
+    "build": "rm -rf lib && tsc",
+    "prepare": "npm run build",
+    "release": "npm publish --registry https://registry.npmjs.com/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msgbyte/tailchat-cli.git"
+  },
+  "keywords": [
+    "tailchat"
+  ],
+  "author": "moonrailgun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msgbyte/tailchat-cli/issues"
+  },
+  "homepage": "https://github.com/msgbyte/tailchat-cli#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "fs-extra": "^10.1.0",
+    "got": "11.8.5",
+    "inquirer": "^8.2.2",
+    "lodash": "^4.17.21",
+    "node-plop": "^0.26.3",
+    "ora": "5.4.1",
+    "plop": "^3.0.5",
+    "tailchat-server-sdk": "^0.0.12",
+    "yargs": "^17.4.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^8.2.1",
+    "@types/node": "16.11.7",
+    "@types/yargs": "^17.0.10",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
