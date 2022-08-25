@@ -3,7 +3,7 @@ import { PortalAdd, PortalRemove, ErrorBoundary } from '@capital/component';
 import React from 'react';
 import { FloatMeetingWindowWrapper } from './window';
 
-let currentMeeting: string | null = null;
+const currentMeeting: string | null = null;
 
 /**
  * TODO

@@ -11,10 +11,11 @@ import { queryClient } from './';
  *    return request.post(...)
  * })
  */
-export function buildCachedRequest<
-  R extends any,
-  F extends (...args: any) => Promise<R>
->(name: string, fn: F, options?: FetchQueryOptions): F {
+export function buildCachedRequest<R, F extends (...args: any) => Promise<R>>(
+  name: string,
+  fn: F,
+  options?: FetchQueryOptions
+): F {
   return ((...args: any) => {
     return queryClient.fetchQuery(
       [name, JSON.stringify(args)],

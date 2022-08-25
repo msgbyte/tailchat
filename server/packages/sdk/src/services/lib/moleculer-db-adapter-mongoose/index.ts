@@ -323,7 +323,7 @@ export class MongooseDbAdapter<TDocument extends Document>
    * @memberof MongooseDbAdapter
    */
   entityToObject(entity) {
-    let json = entity.toJSON();
+    const json = entity.toJSON();
     if (entity._id && entity._id.toHexString) {
       json._id = entity._id.toHexString();
     } else if (entity._id && entity._id.toString) {
@@ -400,7 +400,7 @@ export class MongooseDbAdapter<TDocument extends Document>
    * @returns {Object} Modified entity
    */
   beforeSaveTransformID(entity, idField) {
-    let newEntity = _.cloneDeep(entity);
+    const newEntity = _.cloneDeep(entity);
 
     if (idField !== '_id' && entity[idField] !== undefined) {
       newEntity._id = this.stringToObjectID(newEntity[idField]);

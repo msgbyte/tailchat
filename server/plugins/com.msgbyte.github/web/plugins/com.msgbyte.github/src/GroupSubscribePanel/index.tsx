@@ -30,6 +30,7 @@ const GroupPanelName: React.FC<{
 
   return groupPanelInfo?.name ?? '';
 });
+GroupPanelName.displayName = 'GroupPanelName';
 
 const GroupSubscribePanel: React.FC = React.memo(() => {
   const groupId = useGroupIdContext();

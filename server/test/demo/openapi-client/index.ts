@@ -21,7 +21,7 @@ const request = axios.create({
   transformRequest: [
     function (data) {
       let ret = '';
-      for (let it in data) {
+      for (const it in data) {
         ret +=
           encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
       }

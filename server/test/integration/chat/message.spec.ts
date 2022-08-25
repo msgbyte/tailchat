@@ -4,10 +4,7 @@ import type { MessageDocument } from '../../../models/chat/message';
 import { Types } from 'mongoose';
 import _ from 'lodash';
 
-function createTestMessage(
-  converseId: Types.ObjectId,
-  content: string = 'bar'
-) {
+function createTestMessage(converseId: Types.ObjectId, content = 'bar') {
   return {
     content,
     // author: '',

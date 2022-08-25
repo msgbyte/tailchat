@@ -1,7 +1,8 @@
-const rootlint = require('../../.eslintrc.js');
+const rootlint = require('../../../.eslintrc.js');
 
 module.exports = {
   ...rootlint,
+  root: true,
   rules: {
     ...rootlint.rules,
     'no-restricted-imports': [

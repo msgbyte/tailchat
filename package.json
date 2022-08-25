@@ -7,6 +7,8 @@
     "dev": "concurrently -k npm:dev:web npm:dev:server",
     "dev:web": "cd client/web && pnpm run dev",
     "dev:server": "cd server && pnpm run dev",
+    "preinstall": "npx only-allow pnpm",
+    "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -15,8 +17,14 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
     "commitlint": "^17.0.3",
     "concurrently": "^7.3.0",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
