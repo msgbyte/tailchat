@@ -167,9 +167,20 @@ class GroupService extends TcService {
         },
       }
     );
-    this.registerAction('getGroupUserPermission', this.getGroupUserPermission, {
+    this.registerAction('getPermissions', this.getPermissions, {
       params: {
         groupId: 'string',
+      },
+    });
+    this.registerAction('getUserAllPermissions', this.getUserAllPermissions, {
+      params: {
+        groupId: 'string',
+        userId: 'string',
+      },
+      visibility: 'public',
+      cache: {
+        keys: ['groupId', 'userId'],
+        ttl: 60 * 60, // 1 hour
       },
     });
     this.registerAction('muteGroupMember', this.muteGroupMember, {
@@ -489,6 +500,11 @@ class GroupService extends TcService {
     const group = await this.adapter.model.findById(groupId);
 
     await this.notifyGroupInfoUpdate(ctx, group);
+    await Promise.all(
+      memberIds.map((memberId) =>
+        this.cleanGroupUserPermission(groupId, memberId)
+      )
+    );
   }
 
   /**
@@ -531,6 +547,11 @@ class GroupService extends TcService {
     const group = await this.adapter.model.findById(groupId);
 
     await this.notifyGroupInfoUpdate(ctx, group);
+    await Promise.all(
+      memberIds.map((memberId) =>
+        this.cleanGroupUserPermission(groupId, memberId)
+      )
+    );
   }
 
   /**
@@ -830,16 +851,34 @@ class GroupService extends TcService {
   }
 
   /**
-   * 获取群组成员权限
+   * 获取群组成员权限(对外)
    */
-  async getGroupUserPermission(
+  async getPermissions(
     ctx: TcContext<{
       groupId: string;
     }>
-  ) {
+  ): Promise<string[]> {
     const { groupId } = ctx.params;
     const userId = ctx.meta.userId;
 
+    const permissions = await this.localCall('getUserAllPermissions', {
+      groupId,
+      userId,
+    });
+
+    return permissions;
+  }
+
+  /**
+   * 获取群组成员权限(对内)
+   */
+  async getUserAllPermissions(
+    ctx: TcContext<{
+      groupId: string;
+      userId: string;
+    }>
+  ): Promise<string[]> {
+    const { groupId, userId } = ctx.params;
     const permissions = await this.adapter.model.getGroupUserPermission(
       groupId,
       userId
@@ -914,6 +953,15 @@ class GroupService extends TcService {
    */
   private cleanGroupInfoCache(groupId: string) {
     this.cleanActionCache('getGroupInfo', [groupId]);
+  }
+
+  /**
+   * 清理群组用户缓存
+   * @param groupId 群组id
+   * @param userId 用户id
+   */
+  private cleanGroupUserPermission(groupId: string, userId: string) {
+    this.cleanActionCache('getUserAllPermissions', [groupId, userId]);
   }
 }
 

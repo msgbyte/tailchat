@@ -375,7 +375,7 @@ describe('Test "group" service', () => {
       ]);
     });
 
-    test('Test "group.getGroupUserPermission"', async () => {
+    test('Test "group.getPermissions"', async () => {
       const userId = new Types.ObjectId();
       const role1 = createTestRole('TestRole1', ['permission1', 'permission2']);
       const role2 = createTestRole('TestRole2', ['permission2', 'permission3']);
@@ -392,7 +392,7 @@ describe('Test "group" service', () => {
       );
 
       const res: string[] = await broker.call(
-        'group.getGroupUserPermission',
+        'group.getPermissions',
         {
           groupId: String(testGroup.id),
         },
