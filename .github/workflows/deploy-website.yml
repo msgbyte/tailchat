@@ -1,0 +1,53 @@
+name: "Deployment Website"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "./website/**"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    defaults:
+      run:
+        working-directory: website
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Cache pnpm modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-
+    - uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.0.2
+        run_install: true
+    - name: Install Packages
+      run: pnpm install
+    - name: Build page
+      run: pnpm build
+    # - name: Deploy to gh-pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./website/build
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@master
+      env:
+        VERSION: ${{ env.GITHUB_SHA }}
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.ORG_ID}}
+        vercel-project-id: ${{ secrets.PROJECT_ID}}
+        working-directory: ./
+        vercel-args: '--prod'
