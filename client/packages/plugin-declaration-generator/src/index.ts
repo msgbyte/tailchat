@@ -79,7 +79,7 @@ function getSourceCodeExportedFunction(sourcecode: string): ExportedItem[] {
 }
 
 function getCommentStr(
-  comments: readonly Comment[] | null
+  comments: Comment[] | null | undefined
 ): string | undefined {
   if (!comments) {
     return undefined;
