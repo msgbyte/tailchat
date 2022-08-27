@@ -1,6 +1,6 @@
 import { Loading } from '@/components/Loading';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
-import { AllPermission } from '@/utils/role-helper';
+import { AllPermission } from 'tailchat-shared';
 import React, { useMemo, useState } from 'react';
 import { t, useGroupInfo } from 'tailchat-shared';
 import { RoleItem } from './RoleItem';

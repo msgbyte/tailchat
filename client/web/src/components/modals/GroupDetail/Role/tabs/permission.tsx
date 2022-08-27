@@ -1,4 +1,4 @@
-import { AllPermission, permissionList } from '@/utils/role-helper';
+import { AllPermission, permissionList } from 'tailchat-shared';
 import { Button } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import { model, t } from 'tailchat-shared';
@@ -54,6 +54,11 @@ export const RolePermission: React.FC<RolePermissionProps> = React.memo(
             key={p.key}
             title={p.title}
             desc={p.desc}
+            disabled={
+              p.required
+                ? !p.required.every((r) => editingPermission.includes(r))
+                : undefined
+            }
             checked={editingPermission.includes(p.key)}
             onChange={(checked) => handleSwitchPermission(p.key, checked)}
           />

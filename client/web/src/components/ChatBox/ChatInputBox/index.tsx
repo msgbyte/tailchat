@@ -18,6 +18,9 @@ import _uniq from 'lodash/uniq';
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
 }
+/**
+ * 通用聊天输入框
+ */
 export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');

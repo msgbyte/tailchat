@@ -9,6 +9,8 @@ import {
   t,
   humanizeMsDuration,
   useInterval,
+  useHasGroupPermission,
+  PERMISSION,
 } from 'tailchat-shared';
 import { GroupPanelWrapper } from './Wrapper';
 
@@ -18,6 +20,9 @@ import { GroupPanelWrapper } from './Wrapper';
 function useChatInputInfo(groupId: string) {
   const userId = useUserId();
   const muteUntil = useGroupMemberMute(groupId, userId ?? '');
+  const [hasPermission] = useHasGroupPermission(groupId, [
+    PERMISSION.core.message,
+  ]);
 
   const [placeholder, setPlaceholder] = useState<string | undefined>(undefined);
   const updatePlaceholder = useCallback(() => {
@@ -43,6 +48,13 @@ function useChatInputInfo(groupId: string) {
     // 当到期时间发生变化后立即更新
     updatePlaceholder();
   }, [muteUntil]);
+
+  if (!hasPermission) {
+    return {
+      disabled: true,
+      placeholder: t('没有发送消息的权限, 请联系群组所有者'),
+    };
+  }
 
   return {
     disabled: Boolean(muteUntil),

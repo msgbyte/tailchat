@@ -47,5 +47,5 @@ export function useGroupHeaderAction(groupId: string) {
     }
   });
 
-  return { isOwner, handleShowGroupDetail, handleInviteUser, handleQuitGroup };
+  return { handleShowGroupDetail, handleInviteUser, handleQuitGroup };
 }

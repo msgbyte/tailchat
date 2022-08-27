@@ -1,4 +1,4 @@
-import { AllPermission, getDefaultPermissionList } from '@/utils/role-helper';
+import { AllPermission, getDefaultPermissionList } from 'tailchat-shared';
 import { model, t, useAsyncRequest } from 'tailchat-shared';
 
 export function useRoleActions(

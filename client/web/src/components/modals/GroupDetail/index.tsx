@@ -7,11 +7,12 @@ import {
 import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import { pluginCustomPanel } from '@/plugin/common';
 import React, { useCallback, useMemo } from 'react';
-import { t } from 'tailchat-shared';
+import { PERMISSION, t, useHasGroupPermission } from 'tailchat-shared';
 import { GroupInvite } from './Invite';
 import { GroupPanel } from './Panel';
 import { GroupRole } from './Role';
 import { GroupSummary } from './Summary';
+import _compact from 'lodash/compact';
 
 interface SettingsViewProps {
   groupId: string;
@@ -27,6 +28,12 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
     },
     [props.onClose]
   );
+  const [allowManagePanel, allowManageInvite, allowManageRoles] =
+    useHasGroupPermission(groupId, [
+      PERMISSION.core.managePanel,
+      PERMISSION.core.manageInvite,
+      PERMISSION.core.manageRoles,
+    ]);
 
   const menu: SidebarViewMenuType[] = useMemo(() => {
     // 内置
@@ -34,29 +41,29 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
       {
         type: 'group',
         title: t('通用'),
-        children: [
+        children: _compact([
           {
             type: 'item',
             title: t('概述'),
             content: <GroupSummary groupId={groupId} />,
           },
-          {
+          allowManagePanel && {
             type: 'item',
             title: t('面板'),
             content: <GroupPanel groupId={groupId} />,
           },
-          {
+          allowManageInvite && {
             type: 'item',
             title: t('邀请码'),
             content: <GroupInvite groupId={groupId} />,
           },
-          {
+          allowManageRoles && {
             type: 'item',
             title: t('身份组'),
             isDev: true,
             content: <GroupRole groupId={groupId} />,
           },
-        ],
+        ]),
       },
     ];
 

@@ -123,6 +123,7 @@ importers:
       '@reduxjs/toolkit': ^1.7.1
       '@types/crc': ^3.4.0
       '@types/lodash': ^4.14.170
+      '@types/react': ^17.0.39
       '@types/react-redux': ^7.1.24
       axios: ^0.21.1
       crc: ^3.8.0
@@ -166,6 +167,7 @@ importers:
     devDependencies:
       '@types/crc': 3.8.0
       '@types/lodash': 4.14.184
+      '@types/react': 17.0.48
       '@types/react-redux': 7.1.24
       react: 17.0.2
 
@@ -2983,7 +2985,7 @@ packages:
       react-dom: '*'
     dependencies:
       '@docusaurus/types': 2.0.0-beta.18
-      '@types/react': 17.0.48
+      '@types/react': 18.0.17
       '@types/react-router-config': 5.0.6
       '@types/react-router-dom': 5.3.3
       react: 17.0.2
@@ -3295,7 +3297,7 @@ packages:
     peerDependencies:
       react: '*'
     dependencies:
-      '@types/react': 17.0.48
+      '@types/react': 18.0.17
       prop-types: 15.8.1
       react: 17.0.2
 
@@ -15191,7 +15193,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
+      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
     transitivePeerDependencies:
       - bufferutil
       - canvas

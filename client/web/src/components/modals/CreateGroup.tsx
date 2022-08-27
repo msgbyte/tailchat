@@ -13,7 +13,7 @@ import { Avatar } from '../Avatar';
 import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
 import { useHistory } from 'react-router';
-import { applyDefaultFallbackGroupPermission } from '@/utils/role-helper';
+import { applyDefaultFallbackGroupPermission } from 'tailchat-shared';
 
 const panelTemplate: {
   key: string;

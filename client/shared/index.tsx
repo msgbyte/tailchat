@@ -184,6 +184,10 @@ export {
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
 export { useGroupMemberMute } from './redux/hooks/useGroupMemberMute';
+export {
+  useGroupMemberAllPermissions,
+  useHasGroupPermission,
+} from './redux/hooks/useGroupPermission';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { useUnread } from './redux/hooks/useUnread';
 export {
@@ -218,6 +222,13 @@ export {
 export { isValidStr } from './utils/string-helper';
 export { isValidJson } from './utils/json-helper';
 export { MessageHelper } from './utils/message-helper';
+export {
+  PERMISSION,
+  AllPermission,
+  permissionList,
+  getDefaultPermissionList,
+  applyDefaultFallbackGroupPermission,
+} from './utils/role-helper';
 export { uploadFile } from './utils/upload-helper';
 export type { UploadFileResult } from './utils/upload-helper';
 export { parseUrlStr } from './utils/url-helper';

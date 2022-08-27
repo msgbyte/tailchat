@@ -7,6 +7,8 @@ import {
   createGroupInviteCode,
   t,
   GroupInvite,
+  PERMISSION,
+  useHasGroupPermission,
 } from 'tailchat-shared';
 import styles from './CreateInviteCode.module.less';
 
@@ -30,10 +32,16 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
       },
       [groupId, onInviteCreated]
     );
+    const [hasInvitePermission, hasUnlimitedInvitePermission] =
+      useHasGroupPermission(groupId, [
+        PERMISSION.core.invite,
+        PERMISSION.core.unlimitedInvite,
+      ]);
 
     const menu = (
       <Menu>
         <Menu.Item
+          disabled={!hasUnlimitedInvitePermission}
           onClick={() => handleCreateInviteLink(InviteCodeType.Permanent)}
         >
           {t('创建永久邀请码')}
@@ -61,6 +69,7 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
             className={styles.createInviteBtn}
             size="large"
             type="primary"
+            disabled={!hasInvitePermission}
             loading={loading}
             onClick={() => handleCreateInviteLink(InviteCodeType.Normal)}
             overlay={menu}
