@@ -43,7 +43,7 @@ export const permissionList: PermissionItem[] = [
     key: PERMISSION.core.invite,
     title: t('邀请链接'),
     desc: t('允许成员创建邀请链接'),
-    default: true,
+    default: false,
   },
   {
     key: PERMISSION.core.unlimitedInvite,
