@@ -26,6 +26,7 @@ async function buildTailchatServer() {
 
     spinner.succeed('编译完成');
   } catch (e) {
+    console.error(e);
     spinner.fail('编译失败');
   }
 }

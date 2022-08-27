@@ -6,5 +6,4 @@ packages:
   - 'server'
   - 'server/packages/**'
   - 'server/plugins/**'
-  - 'server/admin'
   - 'website'
