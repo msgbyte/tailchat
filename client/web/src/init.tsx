@@ -92,7 +92,6 @@ const backToLoginPage = (() => {
 setErrorHook((err) => {
   const statusCode = _get(err, 'response.data.code');
   if (
-    statusCode === 403 || // forbidden
     statusCode === 401 // Unauthorized (jwt过期)
   ) {
     backToLoginPage();
