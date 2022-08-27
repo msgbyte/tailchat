@@ -7,6 +7,7 @@
     "dev": "concurrently -k npm:dev:web npm:dev:server",
     "dev:web": "cd client/web && pnpm run dev",
     "dev:server": "cd server && pnpm run dev",
+    "start:service": "cd server && pnpm run start:service",
     "preinstall": "npx only-allow pnpm",
     "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "prepare": "husky install"
