@@ -10,7 +10,7 @@ RUN npm install -g pnpm@7.1.9
 COPY ./server/packages ./server/packages
 COPY ./server/plugins ./server/plugins
 COPY ./server/package.json ./server/package.json
-COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.json ./.npmrc ./
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./.npmrc ./
 RUN pnpm install
 
 # Copy source
