@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "./website/**"
+      - "website/**"
   workflow_dispatch:
 
 jobs:
@@ -19,25 +19,25 @@ jobs:
         working-directory: website
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Cache pnpm modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-
-    - uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 7.1.9
-        run_install: true
-    - name: Install Packages
-      run: pnpm install
-    - name: Build page
-      run: pnpm build
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    # - name: Cache pnpm modules
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ~/.pnpm-store
+    #     key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-
+    # - uses: pnpm/action-setup@v2.0.1
+    #   with:
+    #     version: 7.1.9
+    #     run_install: true
+    # - name: Install Packages
+    #   run: pnpm install
+    # - name: Build page
+    #   run: pnpm build
     # - name: Deploy to gh-pages
     #   uses: peaceiris/actions-gh-pages@v3
     #   with:
