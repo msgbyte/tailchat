@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar } from './Avatar';
+import { Avatar } from 'tailchat-design';
 import _isEmpty from 'lodash/isEmpty';
 import { Popover, PopoverProps, Skeleton, Space } from 'antd';
 import { useCachedUserInfo, useCachedOnlineStatus } from 'tailchat-shared';
