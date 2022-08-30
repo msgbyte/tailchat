@@ -26,7 +26,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          working-directory: ./client
+          working-directory: ./
           vercel-args: '--prod'
       - name: Notify to Service
         uses: muinmomin/webhook-action@v1.0.0
