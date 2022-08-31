@@ -36,7 +36,7 @@ sudo yum-config-manager \
 
 <!-- 安装docker 与 docker-compose 插件 -->
 ```bash
-sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 *PS: `docker-compose-plugin`提供了`docker compose`命令，用法同`docker-compose`*
