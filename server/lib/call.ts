@@ -74,5 +74,23 @@ export function call(ctx: TcContext) {
         groupId,
       });
     },
+    /**
+     * 检查群组成员权限
+     */
+    async checkUserPermissions(
+      groupId: string,
+      userId: string,
+      permissions: string[]
+    ): Promise<boolean[]> {
+      const userAllPermissions: string[] = await ctx.call(
+        'group.getUserAllPermissions',
+        {
+          groupId,
+          userId,
+        }
+      );
+
+      return permissions.map((p) => (userAllPermissions ?? []).includes(p));
+    },
   };
 }

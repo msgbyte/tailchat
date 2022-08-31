@@ -10,6 +10,7 @@ import {
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import _ from 'lodash';
 import { Types } from 'mongoose';
+import { allPermission } from '../../lib/role';
 import { User } from '../user/user';
 
 export enum GroupPanelType {
@@ -196,17 +197,11 @@ export class Group extends TimeStamps implements Base {
     this: ReturnModelType<typeof Group>,
     groupId: string,
     roleId: string,
-    roleName: string,
-    operatorUserId: string
+    roleName: string
   ): Promise<Group> {
     const group = await this.findById(groupId);
     if (!group) {
       throw new Error('Not Found Group');
-    }
-
-    // 首先判断是否有修改权限的权限
-    if (String(group.owner) !== operatorUserId) {
-      throw new Error('No Permission');
     }
 
     const modifyRole = group.roles.find((role) => String(role._id) === roleId);
@@ -227,17 +222,11 @@ export class Group extends TimeStamps implements Base {
     this: ReturnModelType<typeof Group>,
     groupId: string,
     roleId: string,
-    permissions: string[],
-    operatorUserId: string
+    permissions: string[]
   ): Promise<Group> {
     const group = await this.findById(groupId);
     if (!group) {
       throw new Error('Not Found Group');
-    }
-
-    // 首先判断是否有修改权限的权限
-    if (String(group.owner) !== operatorUserId) {
-      throw new Error('No Permission');
     }
 
     const modifyRole = group.roles.find((role) => String(role._id) === roleId);
@@ -262,6 +251,11 @@ export class Group extends TimeStamps implements Base {
     const group = await this.findById(groupId);
     if (!group) {
       throw new Error('Not Found Group');
+    }
+
+    if (String(group.owner) === userId) {
+      // 群组管理者有所有权限
+      return [...allPermission];
     }
 
     const member = group.members.find(

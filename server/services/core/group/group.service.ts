@@ -22,6 +22,7 @@ import {
 } from 'tailchat-server-sdk';
 import { call } from '../../../lib/call';
 import moment from 'moment';
+import { PERMISSION } from '../../../lib/role';
 
 interface GroupService
   extends TcService,
@@ -320,13 +321,29 @@ class GroupService extends TcService {
       throw new EntityError(t('该数据不允许修改'));
     }
 
-    const group = await this.adapter.model.findById(groupId).exec();
-    if (String(group.owner) !== userId) {
-      throw new NoPermissionError();
+    const [isGroupOwner, hasRolePermission] = await call(
+      ctx
+    ).checkUserPermissions(groupId, userId, [
+      PERMISSION.core.owner,
+      PERMISSION.core.manageRoles,
+    ]);
+
+    if (fieldName === 'fallbackPermissions') {
+      if (!hasRolePermission) {
+        throw new NoPermissionError(t('没有操作权限'));
+      }
+    } else if (!isGroupOwner) {
+      throw new NoPermissionError(t('不是群组管理员无法编辑'));
     }
+
+    const group = await this.adapter.model.findById(groupId).exec();
 
     group[fieldName] = fieldValue;
     await group.save();
+
+    if (fieldName === 'fallbackPermissions') {
+      await this.cleanGroupAllUserPermissionCache(groupId);
+    }
 
     this.notifyGroupInfoUpdate(ctx, group);
   }
@@ -472,15 +489,12 @@ class GroupService extends TcService {
     const { groupId, memberIds, roles } = ctx.params;
     const { t, userId } = ctx.meta;
 
-    const isOwner: boolean = await this.actions['isGroupOwner'](
-      {
-        groupId,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.manageRoles]
     );
-    if (!isOwner) {
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
@@ -520,15 +534,12 @@ class GroupService extends TcService {
     const { groupId, memberIds, roles } = ctx.params;
     const { t, userId } = ctx.meta;
 
-    const isOwner: boolean = await this.actions['isGroupOwner'](
-      {
-        groupId,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.manageRoles]
     );
-    if (!isOwner) {
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
@@ -570,17 +581,15 @@ class GroupService extends TcService {
   ) {
     const { groupId, name, type, parentId, provider, pluginPanelName, meta } =
       ctx.params;
-    const { t } = ctx.meta;
-    const isOwner: boolean = await this.actions['isGroupOwner'](
-      {
-        groupId,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const { t, userId } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
     );
 
-    if (!isOwner) {
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
@@ -626,16 +635,14 @@ class GroupService extends TcService {
   ) {
     const { groupId, panelId, name, provider, pluginPanelName, meta } =
       ctx.params;
-    const { t } = ctx.meta;
-    const isOwner: boolean = await this.actions['isGroupOwner'](
-      {
-        groupId,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const { t, userId } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
     );
-    if (!isOwner) {
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
@@ -674,16 +681,14 @@ class GroupService extends TcService {
    */
   async deleteGroupPanel(ctx: TcContext<{ groupId: string; panelId: string }>) {
     const { groupId, panelId } = ctx.params;
-    const { t } = ctx.meta;
-    const isOwner: boolean = await this.actions['isGroupOwner'](
-      {
-        groupId,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const { t, userId } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
     );
-    if (!isOwner) {
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
@@ -746,19 +751,27 @@ class GroupService extends TcService {
     ctx: TcContext<{ groupId: string; roleName: string; permissions: string[] }>
   ) {
     const { groupId, roleName, permissions } = ctx.params;
-    const userId = ctx.meta.userId;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const group = await this.adapter.model
       .findOneAndUpdate(
         {
           _id: new Types.ObjectId(groupId),
-          owner: new Types.ObjectId(userId),
         },
         {
           $push: {
             roles: {
               name: roleName,
-              permissions: [],
+              permissions,
             },
           },
         },
@@ -777,13 +790,21 @@ class GroupService extends TcService {
    */
   async deleteGroupRole(ctx: TcContext<{ groupId: string; roleId: string }>) {
     const { groupId, roleId } = ctx.params;
-    const userId = ctx.meta.userId;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const group = await this.adapter.model
       .findOneAndUpdate(
         {
           _id: new Types.ObjectId(groupId),
-          owner: new Types.ObjectId(userId),
         },
         {
           $pull: {
@@ -813,13 +834,21 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, roleId, roleName } = ctx.params;
-    const userId = ctx.meta.userId;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const group = await this.adapter.model.updateGroupRoleName(
       groupId,
       roleId,
-      roleName,
-      userId
+      roleName
     );
 
     const json = await this.notifyGroupInfoUpdate(ctx, group);
@@ -837,13 +866,21 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, roleId, permissions } = ctx.params;
-    const userId = ctx.meta.userId;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const group = await this.adapter.model.updateGroupRolePermission(
       groupId,
       roleId,
-      permissions,
-      userId
+      permissions
     );
 
     const json = await this.notifyGroupInfoUpdate(ctx, group);
@@ -871,6 +908,7 @@ class GroupService extends TcService {
 
   /**
    * 获取群组成员权限(对内)
+   * 带有groupId和userId的缓存
    */
   async getUserAllPermissions(
     ctx: TcContext<{
@@ -962,6 +1000,14 @@ class GroupService extends TcService {
    */
   private cleanGroupUserPermission(groupId: string, userId: string) {
     this.cleanActionCache('getUserAllPermissions', [groupId, userId]);
+  }
+
+  /**
+   * 清理群组所有用户缓存
+   * @param groupId 群组id
+   */
+  private cleanGroupAllUserPermissionCache(groupId: string) {
+    this.cleanActionCache('getUserAllPermissions', [groupId]);
   }
 }
 

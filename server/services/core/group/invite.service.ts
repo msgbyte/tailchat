@@ -12,6 +12,7 @@ import {
   TcDbService,
   PureContext,
 } from 'tailchat-server-sdk';
+import { PERMISSION } from '../../../lib/role';
 
 interface GroupService
   extends TcService,
@@ -62,21 +63,21 @@ class GroupService extends TcService {
       inviteType: 'normal' | 'permanent';
     }>
   ): Promise<GroupInvite> {
-    const groupId = ctx.params.groupId;
-    const inviteType = ctx.params.inviteType;
-    const userId = ctx.meta.userId;
-    const t = ctx.meta.t;
+    const { groupId, inviteType } = ctx.params;
+    const { userId, t } = ctx.meta;
 
-    // TODO: 基于RBAC判定群组权限
-    // 先视为仅群组所有者可以创建群组邀请
-    const isGroupOwner = await ctx.call<boolean, { groupId: string }>(
-      'group.isGroupOwner',
-      {
-        groupId,
-      }
-    );
-    if (isGroupOwner !== true) {
-      throw new NoPermissionError(t('不是群组所有者, 没有分享权限'));
+    const [hasNormalPermission, hasUnlimitedPermission] = await call(
+      ctx
+    ).checkUserPermissions(groupId, userId, [
+      PERMISSION.core.invite,
+      PERMISSION.core.unlimitedInvite,
+    ]);
+
+    if (
+      (inviteType === 'normal' && !hasNormalPermission) ||
+      (inviteType === 'permanent' && !hasUnlimitedPermission)
+    ) {
+      throw new NoPermissionError(t('没有创建邀请码权限'));
     }
 
     const invite = await this.adapter.model.createGroupInvite(
@@ -96,18 +97,15 @@ class GroupService extends TcService {
     }>
   ) {
     const groupId = ctx.params.groupId;
-    const t = ctx.meta.t;
+    const { t, userId } = ctx.meta;
 
-    // TODO: 基于RBAC判定群组权限
-    // 先视为仅群组所有者可以创建群组邀请
-    const isGroupOwner = await ctx.call<boolean, { groupId: string }>(
-      'group.isGroupOwner',
-      {
-        groupId,
-      }
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.manageInvite]
     );
-    if (isGroupOwner !== true) {
-      throw new NoPermissionError(t('不是群组所有者, 没有查看权限'));
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有查看权限'));
     }
 
     const list = await this.adapter.model.find({
@@ -170,18 +168,15 @@ class GroupService extends TcService {
   async deleteInvite(ctx: TcContext<{ groupId: string; inviteId: string }>) {
     const groupId = ctx.params.groupId;
     const inviteId = ctx.params.inviteId;
-    const t = ctx.meta.t;
+    const { t, userId } = ctx.meta;
 
-    // TODO: 基于RBAC判定群组权限
-    // 先视为仅群组所有者可以创建群组邀请
-    const isGroupOwner = await ctx.call<boolean, { groupId: string }>(
-      'group.isGroupOwner',
-      {
-        groupId,
-      }
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.manageInvite]
     );
-    if (isGroupOwner !== true) {
-      throw new NoPermissionError(t('不是群组所有者, 没有查看权限'));
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有删除权限'));
     }
 
     await this.adapter.model.deleteOne({
