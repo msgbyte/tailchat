@@ -1,0 +1,9 @@
+.env
+node_modules
+logs
+dist
+website
+page
+client/desktop
+client/desktop-old
+client/app
