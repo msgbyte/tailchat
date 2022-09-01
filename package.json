@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently -k npm:dev:web npm:dev:server",
+    "dev": "concurrently --kill-others --handle-input npm:dev:server npm:dev:web",
     "dev:web": "cd client/web && pnpm run dev",
     "dev:server": "cd server && pnpm run dev",
     "start:service": "cd server && pnpm run start:service",
