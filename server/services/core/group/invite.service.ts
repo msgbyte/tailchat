@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { call } from '../../../lib/call';
 import { NoPermissionError } from '../../../lib/errors';
 import type {
   GroupInvite,
@@ -11,6 +10,7 @@ import {
   TcContext,
   TcDbService,
   PureContext,
+  call,
 } from 'tailchat-server-sdk';
 import { PERMISSION } from '../../../lib/role';
 

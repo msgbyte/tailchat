@@ -12,6 +12,7 @@ export type {
 } from './services/types';
 export { parseLanguageFromHead } from './services/lib/i18n/parser';
 export { t } from './services/lib/i18n';
+export { call } from './services/lib/call';
 export {
   config,
   buildUploadUrl,
@@ -31,6 +32,8 @@ export type { UserStruct } from './structs/user';
 
 // db
 export * as db from './db';
+
+export * from './const';
 
 // other
 export { Utils, Errors } from 'moleculer';

@@ -1,7 +1,4 @@
-import type { TcContext } from 'tailchat-server-sdk';
-import type { Group } from '../models/group/group';
-import type { User } from '../models/user/user';
-import { SYSTEM_USERID } from './const';
+import { GroupStruct, UserStruct, SYSTEM_USERID, TcContext } from '../../index';
 
 export function call(ctx: TcContext) {
   return {
@@ -61,7 +58,7 @@ export function call(ctx: TcContext) {
     /**
      * 获取用户信息
      */
-    async getUserInfo(userId: string): Promise<User> {
+    async getUserInfo(userId: string): Promise<UserStruct> {
       return await ctx.call('user.getUserInfo', {
         userId,
       });
@@ -69,7 +66,7 @@ export function call(ctx: TcContext) {
     /**
      * 获取群组信息
      */
-    async getGroupInfo(groupId: string): Promise<Group> {
+    async getGroupInfo(groupId: string): Promise<GroupStruct> {
       return await ctx.call('group.getGroupInfo', {
         groupId,
       });

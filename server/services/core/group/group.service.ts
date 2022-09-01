@@ -19,8 +19,8 @@ import {
   TcContext,
   TcDbService,
   PureContext,
+  call,
 } from 'tailchat-server-sdk';
-import { call } from '../../../lib/call';
 import moment from 'moment';
 import { PERMISSION } from '../../../lib/role';
 

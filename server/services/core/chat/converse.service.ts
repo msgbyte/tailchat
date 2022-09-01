@@ -6,12 +6,12 @@ import {
   TcService,
   TcContext,
   UserStruct,
+  call,
 } from 'tailchat-server-sdk';
 import type {
   ConverseDocument,
   ConverseModel,
 } from '../../../models/chat/converse';
-import { call } from '../../../lib/call';
 
 interface ConverseService
   extends TcService,
