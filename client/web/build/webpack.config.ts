@@ -88,7 +88,7 @@ const plugins: Configuration['plugins'] = [
         to: 'images/logo/',
       },
       {
-        from: path.resolve(ROOT_PATH, '../vercel.json'),
+        from: path.resolve(ROOT_PATH, '../../vercel.json'),
         to: 'vercel.json',
       },
     ],
