@@ -1,4 +1,4 @@
-import { buildRegFn } from './buildRegFn';
+import { buildRegFn } from './buildReg';
 import { useCallback, useLayoutEffect, useState } from 'react';
 
 export interface StorageObject {

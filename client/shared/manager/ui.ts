@@ -1,5 +1,5 @@
 import { t } from '../i18n';
-import { buildRegFn } from './buildRegFn';
+import { buildRegFn } from './buildReg';
 
 /**
  * 通用UI api设置

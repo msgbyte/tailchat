@@ -1,4 +1,4 @@
-import { buildRegFnWithEvent } from './buildRegFn';
+import { buildRegFnWithEvent } from './buildReg';
 
 /**
  * 获取服务器地址相关逻辑

@@ -1,4 +1,4 @@
-import { buildRegFn, buildCachedRegFnAsync } from './buildRegFn';
+import { buildRegFn, buildCachedRegFnAsync } from './buildReg';
 
 export const [getErrorHook, setErrorHook] = buildRegFn<(err: any) => boolean>(
   'requestErrorHook',

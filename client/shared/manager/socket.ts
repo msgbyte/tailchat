@@ -1,4 +1,4 @@
-import { buildRegList } from './buildRegList';
+import { buildRegList } from './buildReg';
 
 interface PluginSocketEventListener {
   eventName: string;

@@ -71,9 +71,7 @@ export { useUpdateRef } from './hooks/useUpdateRef';
 export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 
 // manager
-export { buildRegFn } from './manager/buildRegFn';
-export { buildRegList } from './manager/buildRegList';
-export { buildRegMap } from './manager/buildRegMap';
+export { buildRegFn, buildRegList, buildRegMap } from './manager/buildReg';
 export { getServiceUrl, setServiceUrl } from './manager/service';
 export {
   setTokenGetter,
@@ -219,6 +217,7 @@ export {
   isDevelopment,
   version,
 } from './utils/environment';
+export type { PermissionItemType } from './utils/role-helper';
 export { isValidStr } from './utils/string-helper';
 export { isValidJson } from './utils/json-helper';
 export { MessageHelper } from './utils/message-helper';
