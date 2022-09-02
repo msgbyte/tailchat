@@ -162,28 +162,34 @@ class GithubSubscribeService extends TcService {
 
       await this.sendMessageToSubscribes(ctx, repo, message);
     } else if ('pull_request' in event) {
-      const name = event.sender.name;
+      const name = event.sender.login;
+      const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
-      const url = event.pull_request.url;
+      const url = event.pull_request.html_url;
       const title = event.pull_request.title;
       const body = event.pull_request.body;
 
-      let message = `${name} 在 ${repo} 更新了PR请求:\n网址: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了PR请求:\n网址: ${url}`;
       if (event.action === 'created') {
-        message = `${name} 在 ${repo} 创建了PR请求:\n${title}\n${body}\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了PR请求:\n${title}\n${body}\n\n网址: ${url}`;
+      } else if (event.action === 'closed') {
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了PR请求:\n${title}\n${body}\n\n网址: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
     } else if ('issue' in event) {
-      const name = event.sender.name;
+      const name = event.sender.login;
+      const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
-      const url = event.issue.url;
+      const url = event.issue.html_url;
       const title = event.issue.title;
       const body = event.issue.body;
 
-      let message = `${name} 在 ${repo} 更新了Issue:\n网址: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了Issue:\n网址: ${url}`;
       if (event.action === 'created') {
-        message = `${name} 在 ${repo} 创建了Issue:\n${title}\n${body}\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了Issue:\n${title}\n${body}\n\n网址: ${url}`;
+      } else if (event.action === 'closed') {
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了Issue:\n${title}\n${body}\n\n网址: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
