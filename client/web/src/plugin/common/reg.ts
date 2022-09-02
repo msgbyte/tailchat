@@ -5,6 +5,7 @@ import {
   ChatMessage,
   GroupPanel,
   regSocketEventListener,
+  PermissionItemType,
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
 
@@ -205,3 +206,9 @@ export interface DMPluginPanelActionProps extends BasePluginPanelActionProps {
 export const [pluginPanelActions, regPluginPanelAction] = buildRegList<
   GroupPluginPanelActionProps | DMPluginPanelActionProps
 >();
+
+/**
+ * 注册插件权限
+ */
+export const [pluginPermission, regPluginPermission] =
+  buildRegList<PermissionItemType>();

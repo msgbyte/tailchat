@@ -18,9 +18,9 @@ import {
   DataNotFoundError,
   EntityError,
   NoPermissionError,
+  PERMISSION,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
-import { PERMISSION } from '../../../lib/role';
 
 interface GroupService
   extends TcService,

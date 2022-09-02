@@ -1,9 +1,10 @@
 import { AllPermission, permissionList } from 'tailchat-shared';
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import { model, t } from 'tailchat-shared';
 import { PermissionItem } from '../PermissionItem';
 import { useModifyPermission } from '../useModifyPermission';
+import { pluginPermission } from '@/plugin/common';
 
 interface RolePermissionProps {
   roleId: typeof AllPermission | string;
@@ -63,6 +64,28 @@ export const RolePermission: React.FC<RolePermissionProps> = React.memo(
             onChange={(checked) => handleSwitchPermission(p.key, checked)}
           />
         ))}
+
+        {pluginPermission.length > 0 && (
+          <>
+            <Divider>{t('以下为插件权限')}</Divider>
+
+            {/* 权限详情 */}
+            {pluginPermission.map((p) => (
+              <PermissionItem
+                key={p.key}
+                title={p.title}
+                desc={p.desc}
+                disabled={
+                  p.required
+                    ? !p.required.every((r) => editingPermission.includes(r))
+                    : undefined
+                }
+                checked={editingPermission.includes(p.key)}
+                onChange={(checked) => handleSwitchPermission(p.key, checked)}
+              />
+            ))}
+          </>
+        )}
       </div>
     );
   }

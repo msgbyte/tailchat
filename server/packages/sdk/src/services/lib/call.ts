@@ -1,4 +1,10 @@
-import { GroupStruct, UserStruct, SYSTEM_USERID, TcContext } from '../../index';
+import {
+  GroupStruct,
+  UserStruct,
+  SYSTEM_USERID,
+  TcContext,
+  PERMISSION,
+} from '../../index';
 
 export function call(ctx: TcContext) {
   return {
@@ -87,7 +93,15 @@ export function call(ctx: TcContext) {
         }
       );
 
-      return permissions.map((p) => (userAllPermissions ?? []).includes(p));
+      const hasOwnerPermission = userAllPermissions.includes(
+        PERMISSION.core.owner
+      );
+
+      return permissions.map((p) =>
+        hasOwnerPermission
+          ? true // 如果有管理员权限。直接返回true
+          : (userAllPermissions ?? []).includes(p)
+      );
     },
   };
 }

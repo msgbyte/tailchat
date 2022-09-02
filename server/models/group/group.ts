@@ -10,7 +10,7 @@ import {
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import _ from 'lodash';
 import { Types } from 'mongoose';
-import { allPermission } from '../../lib/role';
+import { allPermission } from 'tailchat-server-sdk';
 import { User } from '../user/user';
 
 export enum GroupPanelType {
@@ -253,11 +253,6 @@ export class Group extends TimeStamps implements Base {
       throw new Error('Not Found Group');
     }
 
-    if (String(group.owner) === userId) {
-      // 群组管理者有所有权限
-      return [...allPermission];
-    }
-
     const member = group.members.find(
       (member) => String(member.userId) === userId
     );
@@ -271,7 +266,24 @@ export class Group extends TimeStamps implements Base {
 
       return p?.permissions ?? [];
     });
-    return _.union(...allRolesPermission, group.fallbackPermissions); // 权限取并集
+
+    if (String(group.owner) === userId) {
+      /**
+       * 群组管理者有所有权限
+       * 这里是为了避免插件权限无法预先感知到的问题
+       */
+
+      return _.uniq([
+        ...allPermission,
+        ..._.flatten(allRolesPermission),
+        ...group.fallbackPermissions,
+      ]);
+    } else {
+      return _.uniq([
+        ..._.flatten(allRolesPermission),
+        ...group.fallbackPermissions,
+      ]);
+    }
   }
 
   /**

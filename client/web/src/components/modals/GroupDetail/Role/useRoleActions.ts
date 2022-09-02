@@ -1,4 +1,8 @@
-import { AllPermission, getDefaultPermissionList } from 'tailchat-shared';
+import {
+  AllPermission,
+  getDefaultPermissionList,
+  showSuccessToasts,
+} from 'tailchat-shared';
 import { model, t, useAsyncRequest } from 'tailchat-shared';
 
 export function useRoleActions(
@@ -12,6 +16,7 @@ export function useRoleActions(
         t('新身份组'),
         getDefaultPermissionList()
       );
+      showSuccessToasts();
     }, [groupId]);
 
   const [{ loading: loading2 }, handleSavePermission] = useAsyncRequest(
@@ -31,6 +36,8 @@ export function useRoleActions(
           permissions
         );
       }
+
+      showSuccessToasts();
     },
     [groupId, roleId]
   );
@@ -41,6 +48,7 @@ export function useRoleActions(
         throw new Error(t('无法修改所有人权限组的显示名称'));
       }
       await model.group.updateGroupRoleName(groupId, roleId, newRoleName);
+      showSuccessToasts();
     },
     [groupId, roleId]
   );

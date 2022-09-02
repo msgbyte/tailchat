@@ -3,9 +3,13 @@ import {
   TcPureContext,
   TcContext,
   TcDbService,
+  call,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import type { WebhookEvent } from '@octokit/webhooks-types';
 import type { SubscribeDocument, SubscribeModel } from '../models/subscribe';
+
+const PERMISSION_MANAGE = 'plugin.com.msgbyte.github.subscribe.manage';
 
 /**
  * Github订阅服务
@@ -79,16 +83,19 @@ class GithubSubscribeService extends TcService {
     }>
   ) {
     const { groupId, textPanelId, repoName } = ctx.params;
+    const { userId, t } = ctx.meta;
 
     if (!groupId || !textPanelId || !repoName) {
       throw new Error('参数不全');
     }
 
-    const isGroupOwner = await ctx.call('group.isGroupOwner', {
+    const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
-    });
-    if (isGroupOwner !== true) {
-      throw new Error('没有操作权限');
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
     }
 
     // TODO: 需要检查textPanelId是否合法
@@ -109,6 +116,16 @@ class GithubSubscribeService extends TcService {
     }>
   ) {
     const groupId = ctx.params.groupId;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有查看权限'));
+    }
 
     const docs = await this.adapter.model
       .find({
@@ -129,11 +146,15 @@ class GithubSubscribeService extends TcService {
     }>
   ) {
     const { groupId, subscribeId } = ctx.params;
-    const isGroupOwner = await ctx.call('group.isGroupOwner', {
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
-    });
-    if (isGroupOwner !== true) {
-      throw new Error('没有操作权限');
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有删除权限'));
     }
 
     await this.adapter.model.deleteOne({

@@ -11,8 +11,8 @@ import {
   PureContext,
   call,
   NoPermissionError,
+  PERMISSION,
 } from 'tailchat-server-sdk';
-import { PERMISSION } from '../../../lib/role';
 
 interface GroupService
   extends TcService,
