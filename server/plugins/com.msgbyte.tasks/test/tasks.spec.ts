@@ -2,7 +2,7 @@ import { createTestServiceBroker } from '../../../test/utils';
 import TasksService from '../services/tasks.service';
 import { Types } from 'mongoose';
 import _ from 'lodash';
-import { NoPermissionError } from '../../../lib/errors';
+import { NoPermissionError } from 'tailchat-server-sdk';
 
 describe('Test "plugin:com.msgbyte.tasks" service', () => {
   const { broker, service, insertTestData } =

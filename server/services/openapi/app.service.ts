@@ -1,11 +1,16 @@
-import { TcService, config, TcDbService, TcContext } from 'tailchat-server-sdk';
+import {
+  TcService,
+  config,
+  TcDbService,
+  TcContext,
+  EntityError,
+} from 'tailchat-server-sdk';
 import _ from 'lodash';
 import {
   filterAvailableAppCapability,
   OpenAppDocument,
   OpenAppModel,
 } from '../../models/openapi/app';
-import { EntityError } from '../../lib/errors';
 import { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 

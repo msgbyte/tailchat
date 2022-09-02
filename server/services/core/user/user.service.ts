@@ -15,8 +15,9 @@ import {
   config,
   PureContext,
   Errors,
+  DataNotFoundError,
+  EntityError,
 } from 'tailchat-server-sdk';
-import { DataNotFoundError, EntityError } from '../../../lib/errors';
 import {
   generateRandomNumStr,
   generateRandomStr,

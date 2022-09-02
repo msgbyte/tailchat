@@ -1,7 +1,12 @@
-import { TcCacheCleaner } from '../../../mixins/cache.cleaner.mixin';
-import { TcService, TcDbService, TcContext, Errors } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcDbService,
+  TcContext,
+  Errors,
+  DataNotFoundError,
+  NoPermissionError,
+} from 'tailchat-server-sdk';
 import _ from 'lodash';
-import { DataNotFoundError, NoPermissionError } from '../../../lib/errors';
 import type { FriendRequest } from '../../../models/user/friendRequest';
 
 interface FriendService extends TcService, TcDbService<any> {}

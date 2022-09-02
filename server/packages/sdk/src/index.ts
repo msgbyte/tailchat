@@ -12,6 +12,7 @@ export type {
 } from './services/types';
 export { parseLanguageFromHead } from './services/lib/i18n/parser';
 export { t } from './services/lib/i18n';
+export * from './services/lib/errors';
 export { call } from './services/lib/call';
 export {
   config,

@@ -5,13 +5,13 @@ import {
   buildUploadUrl,
   config,
   TcDbService,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import MinioService from 'moleculer-minio';
 import _ from 'lodash';
 import mime from 'mime';
 import type { Client as MinioClient } from 'minio';
 import { isValidStaticAssetsUrl, isValidStr } from '../../lib/utils';
-import { NoPermissionError } from '../../lib/errors';
 import path from 'node:path';
 import type { FileDocument, FileModel } from '../../models/file';
 import { Types } from 'mongoose';

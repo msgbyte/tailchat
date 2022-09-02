@@ -1,5 +1,9 @@
-import { NoPermissionError } from '../../../lib/errors';
-import { TcService, TcDbService, TcContext } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcDbService,
+  TcContext,
+  NoPermissionError,
+} from 'tailchat-server-sdk';
 import type { TaskDocument, TaskModel } from '../models/task';
 
 /**

@@ -15,7 +15,7 @@ import {
   Errors,
 } from 'tailchat-server-sdk';
 import _ from 'lodash';
-import { ServiceUnavailableError } from '../lib/errors';
+import { ServiceUnavailableError } from 'tailchat-server-sdk';
 import { generateRandomStr, isValidStr } from '../lib/utils';
 import bcrypt from 'bcryptjs';
 

@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { Types } from 'mongoose';
-import { DataNotFoundError } from '../../../lib/errors';
 import {
   TcDbService,
   TcService,
   TcContext,
   UserStruct,
   call,
+  DataNotFoundError,
 } from 'tailchat-server-sdk';
 import type {
   ConverseDocument,

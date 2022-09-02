@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { Types } from 'mongoose';
-import { DataNotFoundError, NoPermissionError } from '../../../lib/errors';
 import type {
   MessageDocument,
   MessageModel,
@@ -10,6 +9,8 @@ import {
   TcDbService,
   GroupBaseInfo,
   TcContext,
+  DataNotFoundError,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import type { Group } from '../../../models/group/group';
 import { isValidStr } from '../../../lib/utils';
