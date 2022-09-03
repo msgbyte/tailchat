@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production rimraf ./dist && pnpm plugins:all && pnpm build:webpack",
     "build:webpack": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack --config ./build/webpack.config.ts",
     "build:stats": "pnpm build:webpack --profile --json=compilation-stats.json",
-    "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development webpack serve --config ./build/webpack.config.ts",
+    "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development SERVICE_URL=http://127.0.0.1:11000 webpack serve --config ./build/webpack.config.ts",
     "serve": "npx http-server ./dist",
     "test": "jest",
     "analysis": "cross-env ANALYSIS=true pnpm build:webpack",

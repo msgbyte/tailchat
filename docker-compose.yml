@@ -2,6 +2,21 @@ version: "3.3"
 
 services:
   # 应用网关
+  web:
+    build:
+      context: .
+    image: tailchat
+    restart: unless-stopped
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Method(`GET`) || (Path(`/`) || PathPrefix(`/main`) || PathPrefix(`/entry`))"
+      - "traefik.http.services.web.loadbalancer.server.port=11011"
+    command: npx http-server-spa ./client/web/dist index.html 11011
+    networks:
+      - internal
+
+  # 应用网关
   service-gateway:
     build:
       context: .

@@ -26,7 +26,7 @@ Nightly版 体验地址: [https://nightly.paw.msgbyte.com/](https://nightly.paw.
 - 可以严谨，也可以乐趣。通过插件的组合可以创造用于不同场景的 Tailchat。可以是面向娱乐，也可以是面向企业
 - 后端微服务架构，已经为大规模部署做好了准备。不用担心用户量大了以后怎么办
 
-
+<!-- 
 ## Build
 
 #### 编译 web 前端代码
@@ -48,4 +48,4 @@ SERVICE_URL=http://127.0.0.1:11000 pnpm build
 cd app
 pnpm install
 pnpm start
-```
+``` -->
