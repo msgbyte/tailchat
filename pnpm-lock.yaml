@@ -479,6 +479,7 @@ importers:
       '@moonrailgun/socket.io-admin-ui': ^0.2.1
       '@socket.io/redis-adapter': ^7.0.0
       '@typegoose/typegoose': 9.3.1
+      '@types/accepts': ^1.3.5
       '@types/bcryptjs': ^2.4.2
       '@types/blessed': ^0.1.19
       '@types/bluebird': ^3.5.36
@@ -498,6 +499,9 @@ importers:
       '@types/node': 16.11.7
       '@types/nodemailer': ^6.4.4
       '@types/oidc-provider': ^7.8.1
+      '@types/send': ^0.17.1
+      '@types/serve-static': ^1.15.0
+      accepts: ^1.3.8
       bcryptjs: ^2.4.3
       bluebird: ^3.7.2
       crc: ^3.8.0
@@ -535,6 +539,8 @@ importers:
       prettier: ^2.3.2
       qs: ^6.10.3
       redlock: ^4.2.0
+      send: ^0.18.0
+      serve-static: ^1.15.0
       socket.io: ^4.2.0
       socket.io-client: ^4.1.3
       tailchat-server-sdk: workspace:*
@@ -548,6 +554,7 @@ importers:
       '@typegoose/typegoose': 9.3.1_mongoose@6.1.1
       '@types/blessed': 0.1.19
       '@types/bluebird': 3.5.36
+      accepts: 1.3.8
       bcryptjs: 2.4.3
       bluebird: 3.7.2
       crc: 3.8.0
@@ -574,12 +581,15 @@ importers:
       oidc-provider: 7.11.5
       qs: 6.11.0
       redlock: 4.2.0
+      send: 0.18.0
+      serve-static: 1.15.0
       socket.io: 4.5.1
       tailchat-server-sdk: link:packages/sdk
       ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
       typescript: 4.7.4
     devDependencies:
       '@babel/helper-compilation-targets': 7.18.9
+      '@types/accepts': 1.3.5
       '@types/bcryptjs': 2.4.2
       '@types/crc': 3.8.0
       '@types/ejs': 3.1.1
@@ -597,6 +607,8 @@ importers:
       '@types/node': 16.11.7
       '@types/nodemailer': 6.4.5
       '@types/oidc-provider': 7.11.1
+      '@types/send': 0.17.1
+      '@types/serve-static': 1.15.0
       fs-extra: 10.1.0
       gulp-sort: 2.0.0
       i18next-scanner: 3.3.0
@@ -6238,6 +6250,10 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
 
+  /@types/mime/1.3.2:
+    resolution: {integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==}
+    dev: true
+
   /@types/mime/2.0.3:
     resolution: {integrity: sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==}
     dev: true
@@ -6475,6 +6491,13 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+
+  /@types/send/0.17.1:
+    resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
+    dependencies:
+      '@types/mime': 1.3.2
+      '@types/node': 18.7.11
+    dev: true
 
   /@types/serve-index/1.9.1:
     resolution: {integrity: sha512-d/Hs3nWDxNL2xAczmOVZNj92YZCS6RGxfBPjKzuu/XirCgXdpKEb88dYNbrYGint6IVWLNP+yonwVAuRC0T2Dg==}
@@ -14694,7 +14717,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
+      ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -22838,7 +22861,6 @@ packages:
       typescript: 4.7.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-    dev: false
 
   /ts-pnp/1.2.0_typescript@4.7.4:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}

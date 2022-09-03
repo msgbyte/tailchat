@@ -11,6 +11,7 @@ const _ = require('lodash');
 
 const containerPath = path.resolve(__dirname, '../plugins');
 const publicPath = path.resolve(__dirname, '../public');
+const registryPath = path.resolve(publicPath, './registry-be.json');
 
 const list = fs.readdirSync(containerPath);
 const dirs = list.filter((item) =>
@@ -57,14 +58,9 @@ async function start() {
 
     // 追加前端配置到registry
     const originRegistry =
-      (await fs
-        .readJSON(path.resolve(publicPath, './registry.json'))
-        .catch(() => [])) ?? [];
+      (await fs.readJSON(registryPath).catch(() => [])) ?? [];
     const newRegistry = _.uniqBy([manifest, ...originRegistry], (m) => m.name);
-    await fs.writeJSON(
-      path.resolve(publicPath, './registry.json'),
-      newRegistry
-    );
+    await fs.writeJSON(registryPath, newRegistry);
 
     console.log('└ 安装完毕:', p);
   }

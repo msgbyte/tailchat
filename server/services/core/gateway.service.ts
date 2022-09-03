@@ -14,6 +14,9 @@ import {
 import { TcHealth } from '../../mixins/health.mixin';
 import type { Readable } from 'stream';
 import { checkPathMatch } from '../../lib/utils';
+import serve from 'serve-static';
+import accepts from 'accepts';
+import send from 'send';
 
 export default class ApiService extends TcService {
   authWhitelist = [];
@@ -50,11 +53,11 @@ export default class ApiService extends TcService {
     // Logging the response data. Set to any log level to enable it. E.g. "info"
     this.registerSetting('logResponseData', null);
     // Serve assets from "public" folder
-    this.registerSetting('assets', {
-      folder: 'public',
-      // Options to `server-static` module
-      options: {},
-    });
+    // this.registerSetting('assets', {
+    //   folder: 'public',
+    //   // Options to `server-static` module
+    //   options: {},
+    // });
     this.registerSetting('cors', {
       // Configures the Access-Control-Allow-Origin CORS header.
       origin: '*',
@@ -69,6 +72,27 @@ export default class ApiService extends TcService {
       // Configures the Access-Control-Max-Age CORS header.
       maxAge: 3600,
     });
+    // this.registerSetting('rateLimit', {
+    //   // How long to keep record of requests in memory (in milliseconds).
+    //   // Defaults to 60000 (1 min)
+    //   window: 60 * 1000,
+
+    //   // Max number of requests during window. Defaults to 30
+    //   limit: 30,
+
+    //   // Set rate limit headers to response. Defaults to false
+    //   headers: true,
+
+    //   // Function used to generate keys. Defaults to:
+    //   key: (req) => {
+    //     return (
+    //       req.headers['x-forwarded-for'] ||
+    //       req.connection.remoteAddress ||
+    //       req.socket.remoteAddress ||
+    //       req.connection.socket.remoteAddress
+    //     );
+    //   },
+    // });
 
     this.registerMethod('authorize', this.authorize);
 
@@ -83,6 +107,7 @@ export default class ApiService extends TcService {
 
   getRoutes() {
     return [
+      // /api
       {
         path: '/api',
         whitelist: [
@@ -166,6 +191,7 @@ export default class ApiService extends TcService {
         // Enable/disable logging
         logging: true,
       },
+      // /upload
       {
         // Reference: https://github.com/moleculerjs/moleculer-web/blob/master/examples/file/index.js
         path: '/upload',
@@ -217,6 +243,7 @@ export default class ApiService extends TcService {
 
         mappingPolicy: 'restrict',
       },
+      // /health
       {
         path: '/health',
         aliases: {
@@ -224,6 +251,7 @@ export default class ApiService extends TcService {
         },
         mappingPolicy: 'restrict',
       },
+      // /static 对象存储文件代理
       {
         path: '/static',
         authentication: false,
@@ -256,6 +284,25 @@ export default class ApiService extends TcService {
           },
         },
         mappingPolicy: 'restrict',
+      },
+      // 静态文件代理
+      {
+        path: '/',
+        authentication: false,
+        authorization: false,
+        use: [serve('public', {})],
+        onError(req: IncomingMessage, res: ServerResponse, err) {
+          if (
+            String(req.method).toLowerCase() === 'get' && // get请求
+            accepts(req).types(['html']) && // 且请求html页面
+            err.code === 404
+          ) {
+            // 如果没有找到, 则返回index.html(for spa)
+            console.log('fallback to fe entry file');
+            send(req, './public/index.html', { root: process.cwd() }).pipe(res);
+          }
+        },
+        autoAliases: false,
       },
     ];
   }
