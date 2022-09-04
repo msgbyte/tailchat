@@ -46,7 +46,7 @@ export const AddGroupSubscribeModal: React.FC<{
         type: 'text',
         name: 'repoName',
         label: Translate.repoName,
-        placeholder: 'msgbyte/tailchat',
+        placeholder: Translate.repoNamePlaceholder,
       },
       {
         type: 'custom',

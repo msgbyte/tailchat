@@ -37,6 +37,10 @@ export const Translate = {
     'zh-CN': '仓库名',
     'en-US': 'Repo Name',
   }),
+  repoNamePlaceholder: localTrans({
+    'zh-CN': '(示例: msgbyte/tailchat)',
+    'en-US': '(example: msgbyte/tailchat)',
+  }),
   textPanel: localTrans({
     'zh-CN': '文本频道',
     'en-US': 'Text Channel',
