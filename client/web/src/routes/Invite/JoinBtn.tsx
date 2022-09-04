@@ -21,6 +21,10 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
   const history = useHistory();
   const { loading, value: isTokenValid } = useAsync(async () => {
     const token = await getUserJWT();
+    if (!token) {
+      return false;
+    }
+
     const isTokenValid = await checkTokenValid(token);
     return isTokenValid;
   });

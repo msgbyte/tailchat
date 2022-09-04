@@ -75,8 +75,11 @@ const backToLoginPage = (() => {
       return;
     }
 
-    if (window.location.pathname.startsWith('/entry')) {
-      // 如果已经在入口页面则跳过
+    if (
+      window.location.pathname.startsWith('/entry') ||
+      window.location.pathname.startsWith('/invite')
+    ) {
+      // 如果已经在入口页面或者邀请页面则跳过
       return;
     }
 

@@ -1,4 +1,4 @@
-import { Avatar } from '@/components/Avatar';
+import { Avatar } from 'tailchat-design';
 import { InviteCodeExpiredAt } from '@/components/InviteCodeExpiredAt';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { UserName } from '@/components/UserName';
