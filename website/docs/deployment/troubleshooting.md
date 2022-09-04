@@ -31,6 +31,14 @@ server {
 }
 ```
 
+### 内网可以访问外网无法访问?
+
+可以启动一个简单的http服务看下是不是docker-proxy层的问题。*该问题可能会出现在腾讯轻量云的docker-ce镜像机器上, 可以选择使用centos7镜像重装*
+
+```bash
+docker run --rm --name nginx-test -p 8080:80 nginx
+```
+
 
 ## 开放平台相关
 
