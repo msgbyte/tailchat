@@ -61,4 +61,12 @@ export const Translate = {
     'zh-CN': '文本频道不能为空',
     'en-US': 'Text Panel Not Allowd Empty',
   }),
+  permissionTitle: localTrans({
+    'zh-CN': 'Github 订阅管理',
+    'en-US': 'Github Subscribe Manager',
+  }),
+  permissionDesc: localTrans({
+    'zh-CN': '允许管理Github订阅列表',
+    'en-US': 'Allows to manage Github subscription list',
+  }),
 };

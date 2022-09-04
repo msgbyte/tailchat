@@ -32,7 +32,7 @@ export const AddGroupSubscribeModal: React.FC<{
         textPanelId,
       });
 
-      showToasts('Success', 'success');
+      showToasts(Translate.success, 'success');
       props.onSuccess?.();
     },
     [groupId, props.onSuccess]

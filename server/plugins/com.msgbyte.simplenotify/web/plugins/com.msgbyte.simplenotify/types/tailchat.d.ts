@@ -179,6 +179,32 @@ declare module '@capital/common' {
   export const pluginPanelActions: any;
 
   export const regPluginPanelAction: any;
+
+  export const pluginPermission: any;
+
+  export const regPluginPermission: (permission: {
+    /**
+     * 权限唯一key, 用于写入数据库
+     * 如果为插件则权限点应当符合命名规范, 如: plugin.com.msgbyte.github.manage
+     */
+    key: string;
+    /**
+     * 权限点显示名称
+     */
+    title: string;
+    /**
+     * 权限描述
+     */
+    desc: string;
+    /**
+     * 是否默认开启
+     */
+    default: boolean;
+    /**
+     * 是否依赖其他权限点
+     */
+    required?: string[];
+  }) => void;
 }
 
 /**

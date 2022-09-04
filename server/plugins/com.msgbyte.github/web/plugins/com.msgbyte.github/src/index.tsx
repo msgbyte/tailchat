@@ -20,7 +20,7 @@ regInspectService({
 
 regPluginPermission({
   key: 'plugin.com.msgbyte.github.subscribe.manage',
-  title: 'Github 订阅管理',
-  desc: '允许管理Github订阅列表',
+  title: Translate.permissionTitle,
+  desc: Translate.permissionDesc,
   default: false,
 });

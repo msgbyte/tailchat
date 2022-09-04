@@ -3,11 +3,15 @@ import {
   TcDbService,
   TcContext,
   TcPureContext,
+  call,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import type {
   SimpleNotifyDocument,
   SimpleNotifyModel,
 } from '../models/simplenotify';
+
+const PERMISSION_MANAGE = 'plugin.com.msgbyte.simplenotify.subscribe.manage';
 
 /**
  * 任务管理服务
@@ -89,16 +93,19 @@ class SimpleNotifyService extends TcService {
     }>
   ) {
     const { groupId, textPanelId } = ctx.params;
+    const { userId, t } = ctx.meta;
 
     if (!groupId || !textPanelId) {
       throw new Error('参数不全');
     }
 
-    const isGroupOwner = await ctx.call('group.isGroupOwner', {
+    const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
-    });
-    if (isGroupOwner !== true) {
-      throw new Error('没有操作权限');
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
     }
 
     // TODO: 需要检查textPanelId是否合法
@@ -154,6 +161,16 @@ class SimpleNotifyService extends TcService {
     }>
   ) {
     const { groupId, type } = ctx.params;
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有查看权限'));
+    }
 
     const docs = await this.adapter.model
       .find({
@@ -175,11 +192,15 @@ class SimpleNotifyService extends TcService {
     }>
   ) {
     const { groupId, subscribeId } = ctx.params;
-    const isGroupOwner = await ctx.call('group.isGroupOwner', {
+    const { userId, t } = ctx.meta;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
-    });
-    if (isGroupOwner !== true) {
-      throw new Error('没有操作权限');
+      userId,
+      [PERMISSION_MANAGE]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有删除权限'));
     }
 
     await this.adapter.model.deleteOne({

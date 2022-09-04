@@ -5,6 +5,7 @@ __uploads/
 # 插件
 public/plugins/
 public/registry.json
+public/registry-be.json
 
 # Logs
 logs

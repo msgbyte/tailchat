@@ -1,4 +1,9 @@
-import { regCustomPanel, Loadable, regInspectService } from '@capital/common';
+import {
+  regCustomPanel,
+  Loadable,
+  regInspectService,
+  regPluginPermission,
+} from '@capital/common';
 import { Translate } from './translate';
 
 regCustomPanel({
@@ -11,4 +16,11 @@ regCustomPanel({
 regInspectService({
   name: 'plugin:com.msgbyte.simplenotify',
   label: Translate.simplenotifyService,
+});
+
+regPluginPermission({
+  key: 'plugin.com.msgbyte.simplenotify.subscribe.manage',
+  title: Translate.permissionTitle,
+  desc: Translate.permissionDesc,
+  default: false,
 });

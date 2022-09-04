@@ -45,4 +45,12 @@ export const Translate = {
     'zh-CN': '文本频道不能为空',
     'en-US': 'Text Panel Not Allowd Empty',
   }),
+  permissionTitle: localTrans({
+    'zh-CN': '简单通知管理',
+    'en-US': 'Simple Notify Manager',
+  }),
+  permissionDesc: localTrans({
+    'zh-CN': '允许管理群组简单通知机器人',
+    'en-US': 'Allows admin groups to simply notify bots',
+  }),
 };
