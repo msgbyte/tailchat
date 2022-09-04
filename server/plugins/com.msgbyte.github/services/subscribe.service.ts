@@ -204,13 +204,17 @@ class GithubSubscribeService extends TcService {
       const repo = event.repository.full_name;
       const url = event.issue.html_url;
       const title = event.issue.title;
-      const body = event.issue.body;
 
-      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了Issue:\n网址: ${url}`;
-      if (event.action === 'created') {
+      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了Issue:\n${title}\n\n网址: ${url}`;
+      if (event.action === 'opened') {
+        // @ts-ignore 这里不知道为什么判断issue为never 跳过
+        const body = event.issue.body;
         message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了Issue:\n${title}\n${body}\n\n网址: ${url}`;
+      } else if (event.action === 'created') {
+        const comment = event.comment;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了Issue:\n${title}\n回复内容:${comment.body}\n\n网址: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了Issue:\n${title}\n${body}\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了Issue:\n${title}\n\n网址: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
