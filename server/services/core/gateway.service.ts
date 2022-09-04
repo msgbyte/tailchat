@@ -290,7 +290,13 @@ export default class ApiService extends TcService {
         path: '/',
         authentication: false,
         authorization: false,
-        use: [serve('public', {})],
+        use: [
+          serve('public', {
+            setHeaders(res: ServerResponse, path: string, stat: any) {
+              res.setHeader('Access-Control-Allow-Origin', '*'); // 允许跨域
+            },
+          }),
+        ],
         onError(req: IncomingMessage, res: ServerResponse, err) {
           if (
             String(req.method).toLowerCase() === 'get' && // get请求
