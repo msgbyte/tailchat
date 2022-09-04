@@ -13,7 +13,11 @@ export const ChatMessageList: React.FC<MessageListProps> = React.memo(
     );
 
     if (loading) {
-      return <LoadingSpinner />;
+      return (
+        <div className="flex-1">
+          <LoadingSpinner />
+        </div>
+      );
     }
 
     return useVirtualizedList ? (
