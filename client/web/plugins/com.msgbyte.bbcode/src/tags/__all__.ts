@@ -5,6 +5,7 @@ import { MentionTag } from './MentionTag';
 import { PlainText } from './PlainText';
 import { UrlTag } from './UrlTag';
 import { EmojiTag } from './EmojiTag';
+import { MarkdownTag } from './MarkdownTag';
 
 import './styles.less';
 
@@ -14,3 +15,4 @@ registerBBCodeTag('img', ImgTag);
 registerBBCodeTag('code', CodeTag);
 registerBBCodeTag('at', MentionTag);
 registerBBCodeTag('emoji', EmojiTag);
+registerBBCodeTag('markdown', MarkdownTag);
