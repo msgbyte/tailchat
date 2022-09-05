@@ -3,23 +3,21 @@ sidebar_position: 99
 title: 开发环境
 ---
 
-对于开发环境的搭建，tailchat 提供了非常简单快捷的方式
+对于开发环境的搭建，tailchat 提供了非常简单快捷的方式:
 
-## 后端
+## 使用Docker快速搭建依赖环境
 
-### 使用Docker快速搭建依赖环境
-
-mongodb
+**mongodb**
 ```bash
 docker run -d --name mongo -p 27017:27017 mongo:4
 ```
 
-redis
+**redis**
 ```bash
 docker run -d --name redis -p 6379:6379 redis
 ```
 
-minio
+**minio**
 ```bash
 docker run -d \
   -p 19000:9000 \
@@ -33,22 +31,8 @@ docker run -d \
 ### 启动开发服务器
 
 ```bash
-cp .env.example .env
-vim .env
+pnpm install
+pnpm dev
 ```
 
-编辑`.env`的配置为自己相关的上下文
-
-```bash
-pnpm install # 安装环境变量
-pnpm dev # 启动开发服务器
-```
-
-## 前端
-
-```bash
-cd web
-pnpm install # 安装依赖
-pnpm plugins:all # 编译插件
-pnpm dev # 进入开发模式
-```
+可以编辑`.env`的配置为自己相关的上下文

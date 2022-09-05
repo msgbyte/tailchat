@@ -3,9 +3,9 @@ sidebar_position: 2
 title: 部署视频会议
 ---
 
-视频会议服务 `Tailchat Meeting` 可以作为一个独立应用单品存在。再本节中将会讲述如何独立部署 `Tailchat Meeting`
+视频会议服务 `Tailchat Meeting` 可以作为一个独立应用单品存在。在本节中将会讲述如何独立部署 `Tailchat Meeting`
 
-以下内容均基于docker环境，请确保服务端有 `docker` 最基本程度的环境。
+以下内容均基于`docker`环境，请确保服务端有 `docker` 最基本程度的环境。
 
 如果还没有安装 `docker` + `docker-compose` 可以查看文档 [安装docker环境](../deployment/install-docker.md)
 

@@ -3,13 +3,7 @@ sidebar_position: 7
 title: 环境变量
 ---
 
-## 前端编译环境变量
-
-| 变量名 | 默认值 | 描述 |
-| ----- | ------ | --- |
-| SERVICE_URL | http://127.0.0.1:11000 | 后端服务地址 |
-
-## 后端环境变量
+## 环境变量
 
 | 变量名 | 默认值 | 描述 |
 | ----- | ------ | --- |
@@ -26,7 +20,7 @@ title: 环境变量
 | SMTP_URI | - | 邮件服务连接地址(示例: `smtp://username:password@smtp.example.com/?pool=true`) |
 | FILE_LIMIT | 1048576 | 文件/图片上传的大小限制，默认为1m，请输入数字 |
 
-> 部分环境变量示例可见: https://github.com/msgbyte/tailchat-server/blob/master/.env.example
+> 部分环境变量示例可见: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 
 ### 使用文件进行配置环境变量
 

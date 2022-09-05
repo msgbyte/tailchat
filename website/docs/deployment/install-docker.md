@@ -55,3 +55,12 @@ sudo chmod +x /usr/local/bin/docker-compose # 给予执行权限
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose # 软链接到path, 可以直接调用
 docker-compose --version # 该行命令返回版本号则成功安装
 ```
+
+## NOTICE
+
+因为历史原因，`docker compose` 拥有`docker`插件版本与 `docker compose` 独立版本。一般意义上可以认为 `docker compose xxx` 与 `docker-compose xxx` 是等价的
+
+## 参考文档
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)

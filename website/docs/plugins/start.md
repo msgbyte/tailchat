@@ -7,7 +7,7 @@ title: 开始开发插件
 
 `MiniStar` 是一套完整的微内核架构开发工具链，`tailchat`的插件架构就是基于 `MiniStar` 进行开发。
 
-关于更多的 MiniStar 相关问题可以查看 MiniStar 的官方文档: [https://ministar.moonrailgun.com/](https://ministar.moonrailgun.com/)
+关于更多的 `MiniStar` 相关问题可以查看 `MiniStar` 的官方文档: [https://ministar.moonrailgun.com/](https://ministar.moonrailgun.com/)
 
 ## 创建一个基础项目
 
@@ -34,9 +34,9 @@ npm install --global mini-star
 
 在不经过任何预设的情况下，一个通用的办法是自己构造一个 `manifest` 配置, 然后在 `tailchat` 提供手动安装插件 Tab 中将配置文件粘贴进去安装。
 
-插件的url路径可以通过 `oss`/`static-server` 等办法代理
+插件的url路径可以通过 `oss对象存储服务` / `static-server` 等办法代理
 
-一个作为示例的`manifest`配置如下:
+一个作为示例的`manifest.json`配置如下:
 
 ```json
 {
@@ -52,7 +52,8 @@ npm install --global mini-star
 
 ## 其他有用的资源
 
+- 插件化架构内核依赖库 [MiniStar](https://ministar.moonrailgun.com/)
 - 来自基础项目提供的API: [API 文档](./api/common)
 - 导出接口源码
-  - [@capital/common](https://github.com/msgbyte/tailchat/blob/master/web/src/plugin/common/index.ts)
-  - [@capital/component](https://github.com/msgbyte/tailchat/blob/master/web/src/plugin/component/index.tsx)
+  - [@capital/common](https://github.com/msgbyte/tailchat/blob/master/client/web/src/plugin/common/index.ts)
+  - [@capital/component](https://github.com/msgbyte/tailchat/blob/master/client/web/src/plugin/component/index.tsx)
