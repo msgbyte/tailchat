@@ -60,7 +60,6 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
           allowManageRoles && {
             type: 'item',
             title: t('身份组'),
-            isDev: true,
             content: <GroupRole groupId={groupId} />,
           },
         ]),
