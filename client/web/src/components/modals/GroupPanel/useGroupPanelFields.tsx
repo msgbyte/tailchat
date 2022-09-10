@@ -43,7 +43,7 @@ export function useGroupPanelFields(
   const disableSendMessageWithoutRender = useMemo(() => {
     const DisableSendMessageWithoutComponent: React.FC = () => {
       const groupMemberUUIDs = useGroupMemberIds(groupId);
-      const context = useMetaFormContext();
+      const context = useMetaFormContext<any>();
 
       return (
         <UserSelector
