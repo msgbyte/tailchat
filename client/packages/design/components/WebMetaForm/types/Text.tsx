@@ -5,8 +5,16 @@ import { getValidateStatus } from '../utils';
 
 export const FastifyFormText: FastifyFormFieldComponent = React.memo(
   (props) => {
-    const { name, label, value, onChange, error, maxLength, placeholder } =
-      props;
+    const {
+      name,
+      label,
+      value,
+      onChange,
+      onBlur,
+      error,
+      maxLength,
+      placeholder,
+    } = props;
 
     return (
       <Form.Item
@@ -21,6 +29,7 @@ export const FastifyFormText: FastifyFormFieldComponent = React.memo(
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
         />
       </Form.Item>
     );

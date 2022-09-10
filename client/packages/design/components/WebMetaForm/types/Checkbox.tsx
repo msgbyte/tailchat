@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Checkbox } from 'antd';
 import type { FastifyFormFieldComponent } from 'react-fastify-form';
 import { getValidateStatus } from '../utils';

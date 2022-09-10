@@ -67,7 +67,7 @@ importers:
       lodash: ^4.17.21
       react: 17.0.2
       react-dom: 17.0.2
-      react-fastify-form: 1.0.9
+      react-fastify-form: 1.0.10
       str2int: ^1.1.0
       typescript: ^4.5.2
       webpack: ^5.72.0
@@ -75,7 +75,7 @@ importers:
       '@iconify/react': 3.2.2_react@17.0.2
       antd: 4.22.8_sfoxds7t5ydpegc3knd667wn6m
       lodash: 4.17.21
-      react-fastify-form: 1.0.9_react@17.0.2
+      react-fastify-form: 1.0.10_react@17.0.2
       str2int: 1.1.0
     devDependencies:
       '@babel/core': 7.18.13
@@ -19923,8 +19923,8 @@ packages:
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
 
-  /react-fastify-form/1.0.9_react@17.0.2:
-    resolution: {integrity: sha512-hZ1gEgDfUBFeVkuYW8b21FWW2Hmhabh1QoDvEwrZlRrgpxxQ7wYUWxDZtILRlwMcaLCmhs5ZDSrlDSoat+qqAg==}
+  /react-fastify-form/1.0.10_react@17.0.2:
+    resolution: {integrity: sha512-eEInsE5SJg6pbPaaeqgcFFydy6CPgSv/D3IqxGOp52oSPGSpYrW9RhI4W9RBDlO+LVtJBqcWWz3loBLkuLvIEQ==}
     peerDependencies:
       react: ^16.14.0
     dependencies:

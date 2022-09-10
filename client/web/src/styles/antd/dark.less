@@ -53,21 +53,35 @@
   }
 
   // 表单
-  .ant-form-item-label > label {
-    color: white;
-  }
+  .ant-form {
+    // 表单
+    .ant-form-item-label > label {
+      color: white;
+    }
 
-  // 表单错误
-  .ant-form-item-has-error {
-    .ant-input:not(.ant-input-disabled) {
-      background-color: transparent;
-      border-color: var(--antd-primary-dangerous-color);
-
-      &:hover {
+    // 表单错误
+    .ant-form-item-has-error {
+      .ant-input:not(.ant-input-disabled) {
         background-color: transparent;
+        border-color: var(--antd-primary-dangerous-color);
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
+
+    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+      background: transparent;
+      border-color: var(--antd-primary-dangerous-color);
+    }
   }
+
+  // 图标
+  .anticon {
+    color: rgba(255, 255, 255, 0.45)
+  }
+
 
   // 分割线
   .ant-divider {
