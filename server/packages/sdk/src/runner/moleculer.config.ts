@@ -10,6 +10,7 @@ import type { UserJWTPayload } from '../services/types';
 import moment from 'moment';
 import kleur from 'kleur';
 import { config } from '../services/lib/settings';
+import 'moleculer-repl';
 
 /**
  * Moleculer ServiceBroker configuration file
@@ -251,6 +252,9 @@ const brokerConfig: BrokerOptions = {
       command: 'login',
       description: 'Auto login or register tailchat user for cli test',
       options: [{ option: '-u, --username', description: 'Username' }],
+      alias: null,
+      allowUnknownOptions: null,
+      parse: null,
       action(broker: ServiceBroker, args) {
         const username = args.options.username ?? 'localtest';
         const password = 'localtest';

@@ -1,0 +1,22 @@
+diff --git a/src/errors/MinioInitializationError.js b/src/errors/MinioInitializationError.js
+index 2022b251c5bc9c036c7456d6937c270f8f920d3a..ae9d3808d87f8fe0ee5e82076802da09a1a7f676 100644
+--- a/src/errors/MinioInitializationError.js
++++ b/src/errors/MinioInitializationError.js
+@@ -1,4 +1,5 @@
+-const {MoleculerError} = require("moleculer/src/errors");
++const {Errors} = require('moleculer');
++const MoleculerError = Errors.MoleculerError;
+ 
+ /**
+  * Error that should be thrown when the Minio Service can not be Initialized
+diff --git a/src/errors/MinioPingError.js b/src/errors/MinioPingError.js
+index f73f9423f3407fe828ba99db556b2f8367483fa3..d03e31c2a223b6182c659b0c13beb7e1f11751d4 100644
+--- a/src/errors/MinioPingError.js
++++ b/src/errors/MinioPingError.js
+@@ -1,4 +1,5 @@
+-const {MoleculerRetryableError} = require("moleculer/src/errors");
++const {Errors} = require('moleculer');
++const MoleculerRetryableError = Errors.MoleculerRetryableError;
+ 
+ /**
+  * Error that should be thrown when the Minio Backend can not be pinged

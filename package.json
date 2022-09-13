@@ -46,5 +46,10 @@
   "dependencies": {
     "crc": "^3.8.0",
     "lodash": "^4.17.21"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "moleculer-minio@2.0.0": "patches/moleculer-minio@2.0.0.patch"
+    }
   }
 }

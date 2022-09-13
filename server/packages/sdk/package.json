@@ -42,9 +42,9 @@
     "ioredis": "^4.27.6",
     "kleur": "^4.1.4",
     "lodash": "^4.17.21",
-    "moleculer": "0.14.18",
-    "moleculer-db": "0.8.16",
-    "moleculer-repl": "^0.6.5",
+    "moleculer": "0.14.23",
+    "moleculer-db": "0.8.19",
+    "moleculer-repl": "^0.7.2",
     "moment": "^2.29.1",
     "mongodb": "4.2.1",
     "mongoose": "6.1.1"
