@@ -1,6 +1,10 @@
-import { Types } from 'mongoose';
 import type { InboxDocument, InboxModel } from '../../../models/chat/inbox';
-import { TcService, TcContext, TcDbService } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcContext,
+  TcDbService,
+  TcPureContext,
+} from 'tailchat-server-sdk';
 
 /**
  * 收件箱管理
@@ -16,34 +20,120 @@ class InboxService extends TcService {
   onInit(): void {
     this.registerLocalDb(require('../../../models/chat/inbox').default);
 
-    this.registerEventListener('chat.message.updateMessage', (payload) => {
-      // TODO
-    });
+    this.registerEventListener(
+      'chat.message.updateMessage',
+      async (payload, ctx) => {
+        if (
+          Array.isArray(payload.meta.mentions) &&
+          payload.meta.mentions.length > 0
+        ) {
+          const mentions = payload.meta.mentions;
+          if (payload.type === 'add') {
+            await Promise.all(
+              mentions.map((userId) => {
+                return ctx.call('chat.inbox.appendMessage', {
+                  userId,
+                  groupId: payload.groupId,
+                  converseId: payload.converseId,
+                  messageId: payload.messageId,
+                  messageSnippet: payload.content,
+                });
+              })
+            );
+          } else if (payload.type === 'delete') {
+            await Promise.all(
+              mentions.map((userId) => {
+                return ctx.call('chat.inbox.removeMessage', {
+                  userId,
+                  groupId: payload.groupId,
+                  converseId: payload.converseId,
+                  messageId: payload.messageId,
+                });
+              })
+            );
+          }
 
-    this.registerAction('append', this.append, {
+          this.notifyUsersInboxUpdate(ctx, mentions);
+        }
+      }
+    );
+
+    this.registerAction('appendMessage', this.appendMessage, {
       visibility: 'public',
       params: {
         userId: { type: 'string', optional: true },
+        groupId: { type: 'string', optional: true },
+        converseId: 'string',
         messageId: 'string',
         messageSnippet: 'string',
+      },
+    });
+    this.registerAction('removeMessage', this.removeMessage, {
+      visibility: 'public',
+      params: {
+        userId: { type: 'string', optional: true },
+        groupId: { type: 'string', optional: true },
+        converseId: 'string',
+        messageId: 'string',
       },
     });
     this.registerAction('all', this.all);
   }
 
-  async append(
+  async appendMessage(
     ctx: TcContext<{
       userId?: string;
+      groupId?: string;
+      converseId: string;
       messageId: string;
       messageSnippet: string;
     }>
   ) {
-    const { userId = ctx.meta.userId, messageId, messageSnippet } = ctx.params;
+    const {
+      userId = ctx.meta.userId,
+      groupId,
+      converseId,
+      messageId,
+      messageSnippet,
+    } = ctx.params;
 
     await this.adapter.model.create({
       userId,
+      type: 'message',
+      message: {
+        groupId,
+        converseId,
+        messageId,
+        messageSnippet,
+      },
+    });
+
+    return true;
+  }
+
+  async removeMessage(
+    ctx: TcContext<{
+      userId?: string;
+      groupId?: string;
+      converseId: string;
+      messageId: string;
+    }>
+  ) {
+    const {
+      userId = ctx.meta.userId,
+      groupId,
+      converseId,
       messageId,
-      messageSnippet,
+    } = ctx.params;
+
+    await this.adapter.model.remove({
+      userId,
+      type: 'message',
+      message: {
+        groupId,
+        converseId,
+        messageId,
+      },
     });
 
     return true;
@@ -60,6 +150,18 @@ class InboxService extends TcService {
     });
 
     return await this.transformDocuments(ctx, {}, list);
+  }
+
+  /**
+   * 发送通知群组信息发生变更
+   *
+   * 发送通知时会同时清空群组信息缓存
+   */
+  private async notifyUsersInboxUpdate(
+    ctx: TcPureContext,
+    userIds: string[]
+  ): Promise<void> {
+    await this.listcastNotify(ctx, userIds, 'updated', {});
   }
 }
 

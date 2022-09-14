@@ -8,12 +8,17 @@ export interface BuiltinEventMap {
   'chat.message.updateMessage':
     | {
         type: 'add';
+        groupId?: string;
+        converseId: string;
         messageId: string;
         content: string;
         meta: MessageMetaStruct;
       }
     | {
         type: 'recall' | 'delete';
+        groupId?: string;
+        converseId: string;
         messageId: string;
+        meta: MessageMetaStruct;
       };
 }

@@ -139,6 +139,8 @@ class MessageService extends TcService {
 
     ctx.emit('chat.message.updateMessage', {
       type: 'add',
+      groupId: String(groupId),
+      converseId: String(converseId),
       messageId: String(message._id),
       content,
       meta,
@@ -204,7 +206,10 @@ class MessageService extends TcService {
     this.roomcastNotify(ctx, converseId, 'update', json);
     ctx.emit('chat.message.updateMessage', {
       type: 'recall',
+      groupId: String(groupId),
+      converseId: String(converseId),
       messageId: String(message._id),
+      meta: message.meta,
     });
 
     return json;
@@ -241,7 +246,10 @@ class MessageService extends TcService {
     this.roomcastNotify(ctx, converseId, 'delete', { converseId, messageId });
     ctx.emit('chat.message.updateMessage', {
       type: 'delete',
+      groupId: String(groupId),
+      converseId: String(converseId),
       messageId: String(message._id),
+      meta: message.meta,
     });
 
     return true;

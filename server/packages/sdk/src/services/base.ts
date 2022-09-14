@@ -315,7 +315,7 @@ export abstract class TcService extends Service {
    * 单播推送socket事件
    */
   unicastNotify(
-    ctx: TcContext,
+    ctx: TcPureContext,
     userId: string,
     eventName: string,
     eventData: unknown
@@ -332,7 +332,7 @@ export abstract class TcService extends Service {
    * 列播推送socket事件
    */
   listcastNotify(
-    ctx: TcContext,
+    ctx: TcPureContext,
     userIds: string[],
     eventName: string,
     eventData: unknown
@@ -349,7 +349,7 @@ export abstract class TcService extends Service {
    * 组播推送socket事件
    */
   roomcastNotify(
-    ctx: TcContext,
+    ctx: TcPureContext,
     roomId: string,
     eventName: string,
     eventData: unknown
@@ -365,7 +365,7 @@ export abstract class TcService extends Service {
    * 群播推送socket事件
    */
   broadcastNotify(
-    ctx: TcContext,
+    ctx: TcPureContext,
     eventName: string,
     eventData: unknown
   ): Promise<void> {
