@@ -57,7 +57,7 @@ const plugins: Configuration['plugins'] = [
     title: 'Tailchat',
     inject: true,
     hash: false,
-    favicon: path.resolve(ROOT_PATH, './assets/images/logo.svg'),
+    favicon: path.resolve(ROOT_PATH, './assets/images/favicon.ico'),
     template: path.resolve(ROOT_PATH, './assets/template.html'),
     preloadImage: `data:image/svg+xml;base64,${Buffer.from(
       fs.readFileSync(path.resolve(ROOT_PATH, './assets/images/ripple.svg'), {
