@@ -23,7 +23,9 @@
   "homepage": "https://github.com/msgbyte/tailchat#readme",
   "dependencies": {
     "@iconify/react": "^3.2.1",
+    "ahooks": "^3.7.1",
     "antd": "^4.19.5",
+    "clsx": "^1.1.1",
     "lodash": "^4.17.21",
     "react-fastify-form": "1.0.10",
     "str2int": "^1.1.0"
@@ -37,6 +39,8 @@
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
     "@types/lodash": "^4.14.170",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.8",
     "babel-loader": "^8.2.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
