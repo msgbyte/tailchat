@@ -48,9 +48,8 @@ const plugins: Configuration['plugins'] = [
     'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
     'process.env.VERSION': JSON.stringify(
-      `${process.env.VERSION || packageJson.version}-${dayjs().format(
-        'YYYYMMDDHHmm'
-      )}`
+      process.env.VERSION ||
+        `${packageJson.version}-${dayjs().format('YYYYMMDDHHmm')}`
     ),
   }),
   new HtmlWebpackPlugin({
