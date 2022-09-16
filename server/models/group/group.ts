@@ -52,8 +52,16 @@ export class GroupPanel {
   @prop()
   parentId?: string; // 父节点id
 
+  /**
+   * 面板类型:
+   *  0 文本频道
+   *  1 面板分组
+   *  2 插件
+   *
+   * Reference: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+   */
   @prop()
-  type: number; // 面板类型: Reference: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+  type: number;
 
   @prop()
   provider?: string; // 面板提供者，为插件的标识，仅面板类型为插件时有效

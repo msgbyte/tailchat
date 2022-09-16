@@ -225,10 +225,10 @@ class GroupService extends TcService {
 
     const textPanelIds = this.getGroupTextPanelIds(group);
 
-    await ctx.call('gateway.joinRoom', {
-      roomIds: [String(group._id), ...textPanelIds],
-      userId,
-    });
+    await call(ctx).joinSocketIORoom(
+      [String(group._id), ...textPanelIds],
+      userId
+    );
 
     return this.transformDocuments(ctx, {}, group);
   }
@@ -411,10 +411,11 @@ class GroupService extends TcService {
     this.unicastNotify(ctx, userId, 'add', group);
 
     const textPanelIds = this.getGroupTextPanelIds(group);
-    await ctx.call('gateway.joinRoom', {
-      roomIds: [String(group._id), ...textPanelIds],
-      userId,
-    });
+
+    await call(ctx).joinSocketIORoom(
+      [String(group._id), ...textPanelIds],
+      userId
+    );
 
     return group;
   }
@@ -591,6 +592,8 @@ class GroupService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
+    const panelId = String(new Types.ObjectId());
+
     const group = await this.adapter.model
       .findOneAndUpdate(
         {
@@ -599,7 +602,7 @@ class GroupService extends TcService {
         {
           $push: {
             panels: {
-              id: String(new Types.ObjectId()),
+              id: panelId,
               name,
               type,
               parentId,
@@ -614,6 +617,17 @@ class GroupService extends TcService {
         }
       )
       .exec();
+
+    if (type === 0) {
+      /**
+       * 如果为文本面板
+       * 则所有群组成员加入房间
+       */
+      const groupInfo = await call(ctx).getGroupInfo(groupId);
+      (groupInfo?.members ?? []).map((m) =>
+        call(ctx).joinSocketIORoom([panelId], m.userId)
+      );
+    }
 
     this.notifyGroupInfoUpdate(ctx, group);
   }

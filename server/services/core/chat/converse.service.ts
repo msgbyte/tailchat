@@ -70,10 +70,7 @@ class ConverseService extends TcService {
     const roomId = String(converse._id);
     await Promise.all(
       participantList.map((memberId) =>
-        ctx.call('gateway.joinRoom', {
-          roomIds: [roomId],
-          userId: memberId,
-        })
+        call(ctx).joinSocketIORoom([roomId], memberId)
       )
     );
 
@@ -144,10 +141,7 @@ class ConverseService extends TcService {
 
     await Promise.all(
       memberIds.map((uid) =>
-        ctx.call('gateway.joinRoom', {
-          roomIds: [String(converseId)],
-          userId: uid,
-        })
+        call(ctx).joinSocketIORoom([String(converseId)], uid)
       )
     );
 
@@ -233,9 +227,11 @@ class ConverseService extends TcService {
       panelIds: string[];
     }>('group.getJoinedGroupAndPanelIds');
 
-    await ctx.call('gateway.joinRoom', {
-      roomIds: [...dmConverseIds, ...groupIds, ...panelIds],
-    });
+    await call(ctx).joinSocketIORoom([
+      ...dmConverseIds,
+      ...groupIds,
+      ...panelIds,
+    ]);
 
     return {
       dmConverseIds,

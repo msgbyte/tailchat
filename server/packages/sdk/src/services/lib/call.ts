@@ -9,6 +9,15 @@ import {
 export function call(ctx: TcContext) {
   return {
     /**
+     * 加入socketio房间
+     */
+    async joinSocketIORoom(roomIds: string[], userId?: string) {
+      await ctx.call('gateway.joinRoom', {
+        roomIds,
+        userId,
+      });
+    },
+    /**
      * 发送系统消息
      * 如果为群组消息则需要增加groupId
      */
@@ -72,7 +81,7 @@ export function call(ctx: TcContext) {
     /**
      * 获取群组信息
      */
-    async getGroupInfo(groupId: string): Promise<GroupStruct> {
+    async getGroupInfo(groupId: string): Promise<GroupStruct | null> {
       return await ctx.call('group.getGroupInfo', {
         groupId,
       });
