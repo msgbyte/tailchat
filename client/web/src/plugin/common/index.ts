@@ -27,6 +27,7 @@ export {
   urlSearchParse,
   appendUrlSearch,
 } from '@/utils/url-helper';
+export { getServiceWorkerRegistration } from '@/utils/sw-helper';
 export { useGroupIdContext } from '@/context/GroupIdContext';
 import { request, RequestConfig, useUserInfo } from 'tailchat-shared';
 export {

@@ -19,6 +19,8 @@ const handleShowUpdateTip = _once(() => {
   }, 2000);
 });
 
+let _serviceWorkerRegistration: ServiceWorkerRegistration | null = null;
+
 /**
  * 处理registration相关任务和状态
  */
@@ -67,6 +69,8 @@ export function installServiceWorker() {
         .then((registration) => {
           console.log('SW registered: ', registration);
 
+          _serviceWorkerRegistration = registration;
+
           handleRegistration(registration);
         })
         .catch((registrationError) => {
@@ -74,4 +78,11 @@ export function installServiceWorker() {
         });
     });
   }
+}
+
+/**
+ * 获取SW的Registration
+ */
+export function getServiceWorkerRegistration(): ServiceWorkerRegistration | null {
+  return _serviceWorkerRegistration;
 }

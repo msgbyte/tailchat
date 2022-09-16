@@ -2,6 +2,7 @@ import {
   regSocketEventListener,
   getGlobalState,
   getCachedUserInfo,
+  getServiceWorkerRegistration,
 } from '@capital/common';
 
 export function initNotify() {
@@ -24,12 +25,25 @@ export function initNotify() {
               const icon = userInfo?.avatar ?? undefined;
               const content = message.content;
 
-              new Notification(`来自 ${nickname}`, {
-                body: content,
-                icon,
-                tag: 'tailchat-message',
-                renotify: true,
-              });
+              const registration: ServiceWorkerRegistration | null =
+                getServiceWorkerRegistration();
+
+              if (registration) {
+                registration.showNotification(`来自 ${nickname}`, {
+                  body: content,
+                  icon,
+                  tag: 'tailchat-message',
+                  renotify: true,
+                });
+              } else {
+                // fallback
+                new Notification(`来自 ${nickname}`, {
+                  body: content,
+                  icon,
+                  tag: 'tailchat-message',
+                  renotify: true,
+                });
+              }
             }
           );
         }
