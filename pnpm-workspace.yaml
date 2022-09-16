@@ -6,4 +6,5 @@ packages:
   - 'server'
   - 'server/packages/**'
   - 'server/plugins/**'
+  - 'cli'
   - 'website'
