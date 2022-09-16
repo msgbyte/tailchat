@@ -4,6 +4,7 @@
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "lib",
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "esModuleInterop": true,
