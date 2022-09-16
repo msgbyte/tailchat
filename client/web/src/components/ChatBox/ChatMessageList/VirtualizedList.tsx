@@ -4,9 +4,9 @@ import type { MessageListProps } from './types';
 import {
   FollowOutputScalarType,
   Virtuoso,
-  VirtuosoGridHandle,
+  VirtuosoHandle,
 } from 'react-virtuoso';
-import { ChatMessage, sharedEvent } from 'tailchat-shared';
+import { ChatMessage, sharedEvent, useMemoizedFn } from 'tailchat-shared';
 import _last from 'lodash/last';
 
 const PREPEND_OFFSET = 10 ** 7;
@@ -21,7 +21,7 @@ const virtuosoStyle: React.CSSProperties = {
  */
 export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
-    const listRef = useRef<VirtuosoGridHandle>();
+    const listRef = useRef<VirtuosoHandle>(null);
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
       };
     }, []);
 
-    const handleLoadMore = () => {
+    const handleLoadMore = useMemoizedFn(() => {
       if (props.isLoadingMore) {
         return;
       }
@@ -48,31 +48,33 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
       if (props.hasMoreMessage) {
         props.onLoadMore();
       }
-    };
+    });
 
-    const followOutput = (isAtBottom: boolean): FollowOutputScalarType => {
-      if (isAtBottom) {
-        // 更新最新查看的消息id
-        const lastMessage = _last(props.messages);
-        if (lastMessage) {
-          props.onUpdateReadedMessage(lastMessage._id);
+    const followOutput = useMemoizedFn(
+      (isAtBottom: boolean): FollowOutputScalarType => {
+        if (isAtBottom) {
+          // 更新最新查看的消息id
+          const lastMessage = _last(props.messages);
+          if (lastMessage) {
+            props.onUpdateReadedMessage(lastMessage._id);
+          }
+
+          setTimeout(() => {
+            // 这里 Virtuoso 有个动态渲染高度的bug, 因此需要异步再次滚动到底部以确保代码功能work
+            listRef.current?.scrollToIndex({
+              index:
+                PREPEND_OFFSET - numItemsPrepended + props.messages.length - 1,
+              align: 'end',
+            });
+          }, 20);
         }
 
-        setTimeout(() => {
-          // 这里 Virtuoso 有个动态渲染高度的bug, 因此需要异步再次滚动到底部以确保代码功能work
-          listRef.current?.scrollToIndex({
-            index:
-              PREPEND_OFFSET - numItemsPrepended + props.messages.length - 1,
-            align: 'end',
-          });
-        }, 20);
+        /**
+         * 如果有新的内容，且当前处于最底部时, 保持在最底部
+         */
+        return isAtBottom ? 'smooth' : false;
       }
-
-      /**
-       * 如果有新的内容，且当前处于最底部时, 保持在最底部
-       */
-      return isAtBottom ? 'smooth' : false;
-    };
+    );
 
     const itemContent = (virtuosoIndex: number) => {
       const index = virtuosoIndex + numItemsPrepended - PREPEND_OFFSET;
@@ -83,16 +85,17 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
     return (
       <Virtuoso
         style={virtuosoStyle}
-        ref={listRef as any}
+        ref={listRef}
         firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
         initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
         totalCount={props.messages.length}
-        overscan={20}
+        overscan={40}
         itemContent={itemContent}
         alignToBottom={true}
         startReached={handleLoadMore}
         followOutput={followOutput}
         defaultItemHeight={25}
+        atTopThreshold={100}
         atBottomThreshold={40}
       />
     );
