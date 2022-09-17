@@ -12,7 +12,8 @@ COPY ./server/packages ./server/packages
 COPY ./server/plugins ./server/plugins
 COPY ./server/package.json ./server/package.json
 COPY ./server/tsconfig.json ./server/tsconfig.json
-COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./.npmrc ./patches ./
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./.npmrc ./
+COPY ./patches ./patches
 RUN pnpm install
 
 # Copy client

@@ -304,7 +304,7 @@ export default class ApiService extends TcService {
             err.code === 404
           ) {
             // 如果没有找到, 则返回index.html(for spa)
-            console.log('fallback to fe entry file');
+            this.logger.info('fallback to fe entry file');
             send(req, './public/index.html', { root: process.cwd() }).pipe(res);
           }
         },
