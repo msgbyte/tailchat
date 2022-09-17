@@ -19,7 +19,12 @@ export interface ChatState {
   currentConverseId: string | null; // 当前活跃的会话id
   converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
   ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>
-  lastMessageMap: Record<string, string>; // <会话Id, 远程会话列表最后一条会话Id>
+
+  /**
+   * 会话最新消息mapping
+   * <会话Id, 远程会话列表最后一条会话Id>
+   */
+  lastMessageMap: Record<string, string>;
 }
 
 const initialState: ChatState = {

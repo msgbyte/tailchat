@@ -161,16 +161,18 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     const appendMessage = () => {
       store.dispatch(
         chatActions.appendConverseMessage({
-          converseId: message.converseId,
+          converseId,
           messages: [message],
         })
       );
     };
 
     if (converse) {
+      // 如果该会话已经加载(群组面板)
       appendMessage();
     } else if (!message.groupId) {
-      // 获取会话信息后添加到会话消息中
+      // 如果会话没有加载, 但是是私信消息
+      // 则获取会话信息后添加到会话消息中
       getCachedConverseInfo(converseId).then((converse) => {
         if (converse.type === ChatConverseType.DM) {
           // 如果是私人会话, 则添加到dmlist
@@ -182,7 +184,16 @@ function listenNotify(socket: AppSocket, store: AppStore) {
         appendMessage();
       });
     } else {
-      console.warn('无法处理的新增会话内容', message);
+      // 是群组未加载的消息面板的消息
+      // 设置会话信息
+      store.dispatch(
+        chatActions.setLastMessageMap([
+          {
+            converseId,
+            lastMessageId: message._id,
+          },
+        ])
+      );
     }
   });
 

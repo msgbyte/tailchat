@@ -1,12 +1,19 @@
 import { useEffect } from 'react';
-import { ChatMessage, useConverseAck, useUpdateRef } from 'tailchat-shared';
-import _debounce from 'lodash/debounce';
+import {
+  ChatMessage,
+  useConverseAck,
+  useMemoizedFn,
+  useUpdateRef,
+} from 'tailchat-shared';
 import _last from 'lodash/last';
 
+/**
+ * 消息已读的回调
+ */
 export function useMessageAck(converseId: string, messages: ChatMessage[]) {
   const { updateConverseAck } = useConverseAck(converseId);
   const messagesRef = useUpdateRef(messages);
-  const updateConverseAckRef = useUpdateRef(updateConverseAck);
+  const updateConverseAckMemo = useMemoizedFn(updateConverseAck);
 
   useEffect(() => {
     // 设置当前
@@ -14,8 +21,11 @@ export function useMessageAck(converseId: string, messages: ChatMessage[]) {
       return;
     }
 
-    const lastMessageId = _last(messagesRef.current)!._id;
-    updateConverseAckRef.current(lastMessageId);
+    const lastMessage = _last(messagesRef.current);
+    if (lastMessage) {
+      const lastMessageId = lastMessage?._id;
+      updateConverseAckMemo(lastMessageId);
+    }
   }, [converseId]);
 
   return { updateConverseAck };

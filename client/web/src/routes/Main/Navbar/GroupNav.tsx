@@ -1,7 +1,6 @@
-import { Avatar } from '@/components/Avatar';
+import { Avatar, Icon } from 'tailchat-design';
 import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
-import { Icon } from '@/components/Icon';
 import React, { useCallback, useMemo } from 'react';
 import { GroupInfo, t, useAppSelector, useGroupUnread } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';

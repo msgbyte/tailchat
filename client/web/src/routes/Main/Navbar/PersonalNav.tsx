@@ -1,7 +1,6 @@
-import { Avatar } from '@/components/Avatar';
+import { Avatar } from 'tailchat-design';
 import React from 'react';
-import { t, useDMConverseList, useUserInfo } from 'tailchat-shared';
-import { useUnread } from 'tailchat-shared/redux/hooks/useUnread';
+import { t, useDMConverseList, useUserInfo, useUnread } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 
 function usePersonalUnread(): boolean {
