@@ -12,11 +12,17 @@ export const Loading: React.FC<LoadingProps> = React.memo((props) => {
 
   return (
     <div className={clsx('relative', className)} style={style}>
-      {spinning && (
-        <div className="absolute inset-0 z-10 bg-white bg-opacity-20 flex justify-center items-center">
-          <LoadingSpinner />
-        </div>
-      )}
+      <div
+        className={clsx(
+          'absolute inset-0 z-10 bg-white bg-opacity-20 flex justify-center items-center transition-opacity duration-100',
+          {
+            'opacity-0 pointer-events-none': !spinning,
+            'opacity-100': spinning,
+          }
+        )}
+      >
+        <LoadingSpinner />
+      </div>
 
       {props.children}
     </div>

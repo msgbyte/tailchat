@@ -1,8 +1,9 @@
-import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { pluginInspectServices } from '@/plugin/common';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React, { useMemo } from 'react';
 import { t, useAvailableServices } from 'tailchat-shared';
+import { Button } from 'antd';
+import { Loading } from '@/components/Loading';
 
 /**
  * 默认检查服务列表
@@ -71,28 +72,34 @@ export const SettingsStatus: React.FC = React.memo(() => {
     []
   ); // 需要检查服务状态的列表
 
-  const { loading, availableServices } = useAvailableServices();
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  const { loading, availableServices, refetch } = useAvailableServices();
 
   return (
     <div>
-      {inspectServices.map((service) => (
-        <div key={service.name} className="flex items-center">
-          <span className="mr-1">{service.label}:</span>
-          {availableServices?.includes(service.name) ? (
-            <span title={t('当前服务可用')}>
-              <Icon icon="emojione:white-heavy-check-mark" />
-            </span>
-          ) : (
-            <span title={t('服务异常')}>
-              <Icon icon="emojione:cross-mark-button" />
-            </span>
-          )}
-        </div>
-      ))}
+      <Button
+        className="mb-2"
+        type="primary"
+        loading={loading}
+        onClick={refetch}
+      >
+        {t('刷新')}
+      </Button>
+      <Loading spinning={loading}>
+        {inspectServices.map((service) => (
+          <div key={service.name} className="flex items-center">
+            <span className="mr-1">{service.label}:</span>
+            {availableServices?.includes(service.name) ? (
+              <span title={t('当前服务可用')}>
+                <Icon icon="emojione:white-heavy-check-mark" />
+              </span>
+            ) : (
+              <span title={t('服务异常')}>
+                <Icon icon="emojione:cross-mark-button" />
+              </span>
+            )}
+          </div>
+        ))}
+      </Loading>
     </div>
   );
 });

@@ -15,12 +15,34 @@ export function buildCachedRequest<R, F extends (...args: any) => Promise<R>>(
   name: string,
   fn: F,
   options?: FetchQueryOptions
-): F {
-  return ((...args: any) => {
+): F & {
+  /**
+   * 根据name重新获取数据
+   */
+  refetch: () => Promise<void>;
+  /**
+   * 清空name相关缓存
+   */
+  clearCache: () => void;
+} {
+  const req = ((...args: any) => {
     return queryClient.fetchQuery(
       [name, JSON.stringify(args)],
       () => fn(...args),
       options
     );
   }) as any;
+
+  const refetch = () => {
+    return queryClient.refetchQueries([name]);
+  };
+
+  const clearCache = () => {
+    queryClient.removeQueries([name]);
+  };
+
+  req.refetch = refetch;
+  req.clearCache = clearCache;
+
+  return req;
 }
