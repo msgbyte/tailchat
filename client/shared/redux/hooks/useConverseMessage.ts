@@ -55,7 +55,6 @@ function useHandleSendMessage(context: ConverseContext) {
 
         // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
 
-        sharedEvent.emit('sendMessage', payload);
         const message = await sendMessage(payload);
         dispatch(
           chatActions.appendConverseMessage({
@@ -63,6 +62,7 @@ function useHandleSendMessage(context: ConverseContext) {
             messages: [message],
           })
         );
+        sharedEvent.emit('sendMessage', payload);
       } catch (err) {
         showErrorToasts(err);
       }
