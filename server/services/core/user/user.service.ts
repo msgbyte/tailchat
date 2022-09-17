@@ -602,24 +602,34 @@ class UserService extends TcService {
 
   async ensurePluginBot(
     ctx: TcContext<{
-      botId: 'string';
-      nickname: 'string';
-      avatar: { type: 'string'; optional: true };
+      botId: string;
+      nickname: string;
+      avatar: string;
     }>
   ): Promise<string> {
     const { botId, nickname, avatar } = ctx.params;
     const email = this.buildPluginBotEmail(botId);
 
-    const bot = await this.adapter.model.findOne(
-      {
-        email,
-      },
-      {
-        _id: 1,
-      }
-    );
+    const bot = await this.adapter.model.findOne({
+      email,
+    });
 
     if (bot) {
+      if (bot.nickname !== nickname || bot.avatar !== avatar) {
+        /**
+         * 如果信息不匹配，则更新
+         */
+        this.logger.info('检查到插件机器人信息不匹配, 更新机器人信息:', {
+          nickname,
+          avatar,
+        });
+        await bot.updateOne({
+          nickname,
+          avatar,
+        });
+        await this.cleanUserInfoCache(String(bot._id));
+      }
+
       return String(bot._id);
     }
 
@@ -634,10 +644,22 @@ class UserService extends TcService {
     return String(newBot._id);
   }
 
+  /**
+   * 清理当前用户的缓存信息
+   */
   private async cleanCurrentUserCache(ctx: TcContext) {
     const { token, userId } = ctx.meta;
-    this.cleanActionCache('resolveToken', [token]);
-    this.cleanActionCache('getUserInfo', [userId]);
+    await Promise.all([
+      this.cleanActionCache('resolveToken', [token]),
+      this.cleanActionCache('getUserInfo', [userId]),
+    ]);
+  }
+
+  /**
+   * 根据用户ID清理缓存信息
+   */
+  private async cleanUserInfoCache(userId: string) {
+    await this.cleanActionCache('getUserInfo', [String(userId)]);
   }
 
   /**

@@ -70,8 +70,7 @@ class SimpleNotifyService extends TcService {
         const botUserId = await this.broker.call('user.ensurePluginBot', {
           botId: 'simple-notify-bot',
           nickname: 'Notify Bot',
-          avatar:
-            'https://api.iconify.design/icon-park-outline/volume-notice.svg',
+          avatar: '/images/avatar/robot.webp',
         });
 
         this.logger.info('Simple Notify Bot Id:', botUserId);

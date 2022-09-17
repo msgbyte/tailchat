@@ -84,6 +84,10 @@ const plugins: Configuration['plugins'] = [
         to: 'images/logo/',
       },
       {
+        from: path.resolve(ROOT_PATH, './assets/images/avatar/'),
+        to: 'images/avatar/',
+      },
+      {
         from: path.resolve(ROOT_PATH, '../../vercel.json'),
         to: 'vercel.json',
       },
