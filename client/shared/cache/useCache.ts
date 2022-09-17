@@ -1,10 +1,12 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   fetchUserInfo,
   getUserOnlineStatus,
   UserBaseInfo,
 } from '../model/user';
 import { isValidStr } from '../utils/string-helper';
+
+export { useQuery, useQueryClient };
 
 /**
  * 用户缓存

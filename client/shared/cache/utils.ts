@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FetchQueryOptions } from 'react-query';
+import type { FetchQueryOptions } from '@tanstack/react-query';
 import { queryClient } from './';
 
 /**

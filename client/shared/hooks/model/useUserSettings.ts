@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from '../../cache/useCache';
 import {
   getUserSettings,
   setUserSettings,
