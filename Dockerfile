@@ -23,7 +23,7 @@ RUN pnpm install
 COPY . .
 RUN pnpm install
 
-# Build and cleanup
+# Build and cleanup (client and server)
 ENV NODE_ENV=production
 RUN pnpm run build
 

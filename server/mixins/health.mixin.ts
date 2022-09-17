@@ -1,3 +1,4 @@
+import moment from 'moment';
 import type { PureContext, PureServiceSchema } from 'tailchat-server-sdk';
 
 /**
@@ -19,6 +20,8 @@ export const TcHealth = (): Partial<PureServiceSchema> => {
           services: services
             .filter((s) => s.available === true)
             .map((s) => s.fullName),
+          version:
+            process.env.VERSION || `nightly-${moment().format('YYYYMMDDHHmm')}`,
         };
       },
     },
