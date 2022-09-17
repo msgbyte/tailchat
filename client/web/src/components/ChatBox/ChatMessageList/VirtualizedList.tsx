@@ -89,7 +89,10 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
         initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
         totalCount={props.messages.length}
-        overscan={40}
+        overscan={{
+          main: 450,
+          reverse: 450,
+        }}
         itemContent={itemContent}
         alignToBottom={true}
         startReached={handleLoadMore}
