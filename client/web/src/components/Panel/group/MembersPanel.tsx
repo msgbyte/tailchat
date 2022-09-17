@@ -233,9 +233,13 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         <>
           {groupedMembers.online.map(renderUser)}
 
-          <Divider>{t('以下用户已离线')}</Divider>
+          {groupedMembers.offline.length > 0 && (
+            <>
+              <Divider>{t('以下用户已离线')}</Divider>
 
-          {groupedMembers.offline.map(renderUser)}
+              {groupedMembers.offline.map(renderUser)}
+            </>
+          )}
         </>
       )}
     </div>
