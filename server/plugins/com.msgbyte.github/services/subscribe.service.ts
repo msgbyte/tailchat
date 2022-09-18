@@ -191,8 +191,11 @@ class GithubSubscribeService extends TcService {
       const body = event.pull_request.body;
 
       let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了PR请求:\n网址: ${url}`;
-      if (event.action === 'created') {
+      if (event.action === 'opened') {
         message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了PR请求:\n${title}\n${body}\n\n网址: ${url}`;
+      } else if (event.action === 'created') {
+        const comment = event.comment;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了PR请求:\n${title}\n${comment.body}\n\n网址: ${url}`;
       } else if (event.action === 'closed') {
         message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了PR请求:\n${title}\n${body}\n\n网址: ${url}`;
       }
