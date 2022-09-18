@@ -102,13 +102,13 @@ export function createPluginRequest(pluginName: string) {
   return {
     get(actionName: string, config?: RequestConfig) {
       return request.get(
-        `/api/plugin:${pluginName}/${actionName.replaceAll('.', '/')}`,
+        `/api/plugin:${pluginName}/${actionName.replace(/\./g, '/')}`,
         purgeRequestConfig(config)
       );
     },
     post(actionName: string, data?: any, config?: RequestConfig) {
       return request.post(
-        `/api/plugin:${pluginName}/${actionName.replaceAll('.', '/')}`,
+        `/api/plugin:${pluginName}/${actionName.replace(/\./g, '/')}`,
         data,
         purgeRequestConfig(config)
       );
