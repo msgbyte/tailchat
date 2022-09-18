@@ -1,7 +1,7 @@
 import type { LanguageDetectorAsyncModule } from 'i18next';
 import { useRef, useMemo, useCallback } from 'react';
 import _isNil from 'lodash/isNil';
-import { setLanguage as setI18NLanguage } from './index';
+import { AllowedLanguage, setLanguage as setI18NLanguage } from './index';
 import { getStorage, useStorage } from '../manager/storage';
 import { LANGUAGE_KEY } from '../utils/consts';
 
@@ -23,7 +23,7 @@ export function useLanguage() {
   const originLanguageRef = useRef<string>();
 
   const setLanguage = useCallback(
-    async (newLanguage) => {
+    async (newLanguage: AllowedLanguage) => {
       if (_isNil(originLanguageRef.current)) {
         originLanguageRef.current = language;
       }

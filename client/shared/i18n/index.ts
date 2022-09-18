@@ -11,7 +11,7 @@ import HttpApi from 'i18next-http-backend'; // https://github.com/i18next/i18nex
 /**
  * 允许出现的语言
  */
-type AllowedLanguage = 'zh-CN' | 'en-US';
+export type AllowedLanguage = 'zh-CN' | 'en-US';
 
 i18next
   .use(languageDetector)
