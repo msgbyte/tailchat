@@ -2,7 +2,7 @@ import { openModal } from '@/components/Modal';
 import { getUserJWT } from '@/utils/jwt-helper';
 import { Button } from 'antd';
 import React, { useCallback, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import {
   applyGroupInvite,
   checkTokenValid,
@@ -18,7 +18,7 @@ interface Props {
   expired?: string;
 }
 export const JoinBtn: React.FC<Props> = React.memo((props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { loading, value: isTokenValid } = useAsync(async () => {
     const token = await getUserJWT();
     if (!token) {
@@ -31,7 +31,7 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
   const [isJoined, setIsJoined] = useState(false);
 
   const handleRegister = useCallback(() => {
-    history.push(
+    navigate(
       `/entry/register?redirect=${encodeURIComponent(location.pathname)}`
     );
   }, []);

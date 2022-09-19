@@ -1,15 +1,17 @@
 import { blobUrlToFile } from '@/utils/file-helper';
 import { Icon } from '@/components/Icon';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { uploadFile, UploadFileResult, useAsyncRequest } from 'tailchat-shared';
 import { AvatarPicker } from './AvatarPicker';
 
-export const AvatarUploader: React.FC<{
-  circle?: boolean;
-  className?: string;
-  onUploadSuccess: (fileInfo: UploadFileResult) => void;
-}> = React.memo((props) => {
+export const AvatarUploader: React.FC<
+  PropsWithChildren<{
+    circle?: boolean;
+    className?: string;
+    onUploadSuccess: (fileInfo: UploadFileResult) => void;
+  }>
+> = React.memo((props) => {
   const [uploadProgress, setUploadProgress] = useState(0); // 0 - 100
   const [{ loading }, handlePickImage] = useAsyncRequest(
     async (blobUrl: string) => {

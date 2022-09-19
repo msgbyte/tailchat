@@ -60,7 +60,7 @@ export const GroupPanelTree: React.FC<GroupPanelTree> = React.memo((props) => {
     (node: DataNode): React.ReactNode => {
       return (
         <div className="flex group">
-          <span>{node.title}</span>
+          <span>{node.title as string}</span>
           <div className="opacity-0 group-hover:opacity-100 ml-2">
             <Space size="small">
               <IconBtn

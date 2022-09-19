@@ -1,10 +1,12 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export const RoleItem: React.FC<{
-  active: boolean;
-  onClick?: () => void;
-}> = React.memo((props) => {
+export const RoleItem: React.FC<
+  PropsWithChildren<{
+    active: boolean;
+    onClick?: () => void;
+  }>
+> = React.memo((props) => {
   return (
     <div
       className={clsx(

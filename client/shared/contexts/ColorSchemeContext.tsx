@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { PropsWithChildren, useContext, useEffect } from 'react';
 import { parseColorScheme } from '../utils/color-scheme-helper';
 import { sharedEvent } from '../event';
 import { useStorage } from '../manager/storage';
@@ -15,22 +15,23 @@ const ColorSchemeContext = React.createContext<{
 });
 ColorSchemeContext.displayName = 'ColorSchemeContext';
 
-export const ColorSchemeContextProvider: React.FC = React.memo((props) => {
-  const [colorScheme = 'dark', { save: setColorScheme }] = useStorage(
-    'colorScheme',
-    'dark'
-  );
+export const ColorSchemeContextProvider: React.FC<PropsWithChildren> =
+  React.memo((props) => {
+    const [colorScheme = 'dark', { save: setColorScheme }] = useStorage(
+      'colorScheme',
+      'dark'
+    );
 
-  useEffect(() => {
-    sharedEvent.emit('loadColorScheme', colorScheme);
-  }, [colorScheme]);
+    useEffect(() => {
+      sharedEvent.emit('loadColorScheme', colorScheme);
+    }, [colorScheme]);
 
-  return (
-    <ColorSchemeContext.Provider value={{ colorScheme, setColorScheme }}>
-      {props.children}
-    </ColorSchemeContext.Provider>
-  );
-});
+    return (
+      <ColorSchemeContext.Provider value={{ colorScheme, setColorScheme }}>
+        {props.children}
+      </ColorSchemeContext.Provider>
+    );
+  });
 ColorSchemeContextProvider.displayName = 'ColorSchemeContextProvider';
 
 export function useColorScheme() {

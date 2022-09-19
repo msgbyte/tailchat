@@ -1,4 +1,9 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, {
+  useContext,
+  useState,
+  useCallback,
+  PropsWithChildren,
+} from 'react';
 import _noop from 'lodash/noop';
 
 interface SidebarContextProps {
@@ -13,22 +18,24 @@ const SidebarContext = React.createContext<SidebarContextProps>({
 });
 SidebarContext.displayName = 'SidebarContext';
 
-export const SidebarContextProvider: React.FC = React.memo((props) => {
-  const [showSidebar, setShowSidebar] = useState(true);
+export const SidebarContextProvider: React.FC<PropsWithChildren> = React.memo(
+  (props) => {
+    const [showSidebar, setShowSidebar] = useState(true);
 
-  // 切换
-  const switchSidebar = useCallback(() => {
-    setShowSidebar(!showSidebar);
-  }, [showSidebar]);
+    // 切换
+    const switchSidebar = useCallback(() => {
+      setShowSidebar(!showSidebar);
+    }, [showSidebar]);
 
-  return (
-    <SidebarContext.Provider
-      value={{ showSidebar, switchSidebar, setShowSidebar }}
-    >
-      {props.children}
-    </SidebarContext.Provider>
-  );
-});
+    return (
+      <SidebarContext.Provider
+        value={{ showSidebar, switchSidebar, setShowSidebar }}
+      >
+        {props.children}
+      </SidebarContext.Provider>
+    );
+  }
+);
 SidebarContextProvider.displayName = 'SidebarContextProvider';
 
 export function useSidebarContext(): SidebarContextProps {

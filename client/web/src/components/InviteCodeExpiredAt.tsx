@@ -16,11 +16,11 @@ export const InviteCodeExpiredAt: React.FC<InviteCodeExpiredAtProps> =
     const { invite } = props;
 
     if (!invite.expiredAt) {
-      return t('该邀请码永不过期');
+      return <span>{t('该邀请码永不过期')}</span>;
     }
 
     if (new Date(invite.expiredAt).valueOf() < Date.now()) {
-      return t('该邀请码已过期');
+      return <span>{t('该邀请码已过期')}</span>;
     }
 
     return (
@@ -28,7 +28,7 @@ export const InviteCodeExpiredAt: React.FC<InviteCodeExpiredAtProps> =
         该邀请将于{' '}
         <Tooltip title={formatFullTime(invite.expiredAt)}>
           <span className="font-bold">
-            {{ date: datetimeFromNow(invite.expiredAt) }}
+            {{ date: datetimeFromNow(invite.expiredAt) } as any}
           </span>
         </Tooltip>{' '}
         过期

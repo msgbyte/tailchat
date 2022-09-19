@@ -1,4 +1,9 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import _noop from 'lodash/noop';
 import type { ReplyMsgType } from '../utils/message-helper';
 
@@ -16,20 +21,22 @@ const ChatBoxContext = React.createContext<ChatBoxContextProps>({
 });
 ChatBoxContext.displayName = 'ChatBoxContext';
 
-export const ChatBoxContextProvider: React.FC = React.memo((props) => {
-  const [replyMsg, setReplyMsg] = useState<ReplyMsgType | null>(null);
+export const ChatBoxContextProvider: React.FC<PropsWithChildren> = React.memo(
+  (props) => {
+    const [replyMsg, setReplyMsg] = useState<ReplyMsgType | null>(null);
 
-  return (
-    <ChatBoxContext.Provider
-      value={{
-        replyMsg,
-        setReplyMsg,
-      }}
-    >
-      {props.children}
-    </ChatBoxContext.Provider>
-  );
-});
+    return (
+      <ChatBoxContext.Provider
+        value={{
+          replyMsg,
+          setReplyMsg,
+        }}
+      >
+        {props.children}
+      </ChatBoxContext.Provider>
+    );
+  }
+);
 ChatBoxContextProvider.displayName = 'ChatBoxContextProvider';
 
 export function useChatBoxContext(): ChatBoxContextProps & {

@@ -6,6 +6,7 @@ export interface LoadingProps {
   spinning: boolean;
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 export const Loading: React.FC<LoadingProps> = React.memo((props) => {
   const { spinning = false, className, style } = props;

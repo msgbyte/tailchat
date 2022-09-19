@@ -5,6 +5,7 @@ interface LoadingOnFirstProps extends LoadingProps {
   spinning: boolean;
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 /**
  * 类似于 <Loading /> 但是只会触发一次

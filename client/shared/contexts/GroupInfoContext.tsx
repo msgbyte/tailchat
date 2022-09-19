@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { PropsWithChildren, useContext } from 'react';
 import type { GroupInfo } from '..';
 
 /**
@@ -13,9 +13,11 @@ const GroupInfoContext = React.createContext<GroupInfoContextProps>({
 });
 GroupInfoContext.displayName = 'GroupInfoContext';
 
-export const GroupInfoContextProvider: React.FC<{
-  groupInfo: GroupInfo;
-}> = React.memo((props) => {
+export const GroupInfoContextProvider: React.FC<
+  PropsWithChildren<{
+    groupInfo: GroupInfo;
+  }>
+> = React.memo((props) => {
   return (
     <GroupInfoContext.Provider
       value={{

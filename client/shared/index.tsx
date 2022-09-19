@@ -43,6 +43,7 @@ export {
   getLanguage,
   useTranslation,
 } from './i18n';
+export type { AllowedLanguage } from './i18n';
 export { Trans } from './i18n/Trans';
 export { useLanguage } from './i18n/language';
 

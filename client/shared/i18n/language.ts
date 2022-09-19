@@ -18,7 +18,10 @@ async function getLanguage(): Promise<string> {
  * 当前语言管理hook
  */
 export function useLanguage() {
-  const [language, { save }] = useStorage(LANGUAGE_KEY, defaultLanguage);
+  const [language, { save }] = useStorage<AllowedLanguage>(
+    LANGUAGE_KEY,
+    defaultLanguage
+  );
 
   const originLanguageRef = useRef<string>();
 

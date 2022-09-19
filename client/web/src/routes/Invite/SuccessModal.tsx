@@ -1,7 +1,7 @@
 import { ModalWrapper, useModalContext } from '@/components/Modal';
 import { Button } from 'antd';
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { t } from 'tailchat-shared';
 
 interface Props {
@@ -9,10 +9,11 @@ interface Props {
 }
 export const SuccessModal: React.FC<Props> = React.memo((props) => {
   const { closeModal } = useModalContext();
-  const history = useHistory();
+  const navigate = useNavigate();
+
   const handleNav = useCallback(() => {
     closeModal();
-    history.push(`/main/group/${props.groupId}`);
+    navigate(`/main/group/${props.groupId}`);
   }, [closeModal, props.groupId]);
 
   return (

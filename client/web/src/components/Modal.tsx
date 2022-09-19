@@ -1,4 +1,9 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import _isFunction from 'lodash/isFunction';
 import _isNil from 'lodash/isNil';
 import _last from 'lodash/last';
@@ -30,7 +35,7 @@ const ModalContext = React.createContext<{
   closeModal: _noop,
 });
 
-interface ModalProps {
+interface ModalProps extends PropsWithChildren {
   visible?: boolean;
   onChangeVisible?: (visible: boolean) => void;
 
@@ -241,11 +246,13 @@ export function useModalContext() {
 /**
  * 标准模态框包装器
  */
-export const ModalWrapper: React.FC<{
-  title?: string;
-  className?: string;
-  style?: React.CSSProperties;
-}> = React.memo((props) => {
+export const ModalWrapper: React.FC<
+  PropsWithChildren<{
+    title?: string;
+    className?: string;
+    style?: React.CSSProperties;
+  }>
+> = React.memo((props) => {
   const isMobile = useIsMobile();
 
   const title = _isString(props.title) ? (

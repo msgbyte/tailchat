@@ -1,8 +1,8 @@
 import { SectionHeader } from '@/components/SectionHeader';
 import { Space } from 'antd';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface PanelCommonHeaderProps {
+interface PanelCommonHeaderProps extends PropsWithChildren {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   actions?: React.ReactNode[];

@@ -69,7 +69,7 @@ export interface GroupBasicInfo {
   name: string;
   avatar?: string;
   owner: string;
-  memberCount: GroupMember[];
+  memberCount: number;
 }
 
 export interface GroupInvite {

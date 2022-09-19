@@ -4,7 +4,7 @@ import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import { Icon } from '@/components/Icon';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import {
   createTemporaryUser,
   isValidStr,
@@ -15,7 +15,7 @@ import { string } from 'yup';
 import { useNavToView } from './utils';
 
 export const GuestView: React.FC = React.memo(() => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const navToView = useNavToView();
   const navRedirect = useSearchParam('redirect');
   const [nickname, setNickname] = useState('');
@@ -29,9 +29,9 @@ export const GuestView: React.FC = React.memo(() => {
     await setUserJWT(data.token);
 
     if (isValidStr(navRedirect)) {
-      history.push(decodeURIComponent(navRedirect));
+      navigate(decodeURIComponent(navRedirect));
     } else {
-      history.push('/main');
+      navigate('/main');
     }
   }, [nickname, history, navRedirect]);
 

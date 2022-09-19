@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { CacheProvider } from '../cache/Provider';
 import { ColorSchemeContextProvider } from '../contexts/ColorSchemeContext';
 
-export const TcProvider: React.FC = React.memo((props) => {
+export const TcProvider: React.FC<PropsWithChildren> = React.memo((props) => {
   return (
     <CacheProvider>
       <ColorSchemeContextProvider>{props.children}</ColorSchemeContextProvider>

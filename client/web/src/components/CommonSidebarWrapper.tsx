@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface CommonSidebarProps {
+interface CommonSidebarProps extends PropsWithChildren {
   ['data-tc-role']?: string;
 }
 export const CommonSidebarWrapper: React.FC<CommonSidebarProps> = React.memo(

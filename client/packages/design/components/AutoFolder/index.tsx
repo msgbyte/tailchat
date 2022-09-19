@@ -1,6 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
-interface AutoFolderProps {
+interface AutoFolderProps extends PropsWithChildren {
   maxHeight: number;
   showFullText?: React.ReactNode;
   backgroundColor?: string;

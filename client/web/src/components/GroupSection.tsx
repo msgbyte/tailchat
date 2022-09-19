@@ -1,10 +1,12 @@
 import { Icon } from '@/components/Icon';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useReducer } from 'react';
 
-export const GroupSection: React.FC<{
-  header: string;
-}> = React.memo((props) => {
+export const GroupSection: React.FC<
+  PropsWithChildren<{
+    header: string;
+  }>
+> = React.memo((props) => {
   const [isShow, switchShow] = useReducer((v) => !v, true);
 
   return (

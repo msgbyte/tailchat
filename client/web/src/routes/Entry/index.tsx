@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginView } from './LoginView';
 import clsx from 'clsx';
 import styles from './index.module.less';
@@ -21,14 +21,16 @@ const EntryRoute = React.memo(() => {
         )}
         style={{ backgroundImage: `url(${loginPatternUrl})` }}
       >
-        <Switch>
-          <Route path="/entry/login" component={LoginView} />
-          <Route path="/entry/register" component={RegisterView} />
-          <Route path="/entry/guest" component={GuestView} />
-          <Route path="/entry/forget" component={ForgetPasswordView} />
-
-          <Redirect to="/entry/login" />
-        </Switch>
+        <Routes>
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/register" element={<RegisterView />} />
+          <Route path="/guest" element={<GuestView />} />
+          <Route path="/forget" element={<ForgetPasswordView />} />
+          <Route
+            path="/"
+            element={<Navigate to="/entry/login" replace={true} />}
+          />
+        </Routes>
       </div>
 
       <div className="flex-1 sm:hidden tc-background" />

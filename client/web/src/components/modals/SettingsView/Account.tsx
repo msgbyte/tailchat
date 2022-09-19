@@ -11,7 +11,7 @@ import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import { Button, Divider, Typography } from 'antd';
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import {
   modifyUserField,
   showToasts,
@@ -27,7 +27,7 @@ import { ModifyPassword } from '../ModifyPassword';
 export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [, handleUserAvatarChange] = useAsyncRequest(
     async (fileInfo: UploadFileResult) => {
@@ -66,7 +66,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
     await setUserJWT(null);
     getGlobalSocket()?.disconnect();
     setGlobalUserLoginInfo(null);
-    history.push('/');
+    navigate('/');
   }, []);
 
   if (!userInfo) {

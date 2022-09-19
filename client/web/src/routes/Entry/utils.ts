@@ -1,17 +1,18 @@
 import { useCallback } from 'react';
-import { useHistory } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 /**
  * 导航到特定视图
  */
 export function useNavToView() {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navToView = useCallback(
     (pathname: string) => {
       // 携带上下文切换路由
-      history.push({
-        ...history.location,
+      navigate({
+        ...location,
         pathname,
       });
     },

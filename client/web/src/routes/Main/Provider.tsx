@@ -8,11 +8,11 @@ import {
   ReduxProvider,
   UserLoginInfo,
 } from 'tailchat-shared';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { tryAutoLogin } from '@/utils/user-helper';
 import _isNil from 'lodash/isNil';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { SidebarContextProvider } from './SidebarContext';
 import { PortalHost } from '@/components/Portal';
 import { setGlobalSocket, setGlobalStore } from '@/utils/global-state-helper';
@@ -23,7 +23,7 @@ import { Problem } from '@/components/Problem';
  * 应用状态管理hooks
  */
 function useAppState() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { value, loading, error } = useAsync(async () => {
     let userLoginInfo: UserLoginInfo;
@@ -31,8 +31,9 @@ function useAppState() {
       userLoginInfo = await tryAutoLogin();
     } catch (e) {
       // 当前 Token 不存在或已过期
-      history.replace(
-        `/entry/login?redirect=${encodeURIComponent(location.pathname)}`
+      navigate(
+        `/entry/login?redirect=${encodeURIComponent(location.pathname)}`,
+        { replace: true }
       );
       return;
     }
@@ -63,7 +64,7 @@ function useAppState() {
  * 主页面核心数据Provider
  * 在主页存在
  */
-export const MainProvider: React.FC = React.memo((props) => {
+export const MainProvider: React.FC<PropsWithChildren> = React.memo((props) => {
   const { loading, store, error, socket } = useAppState();
 
   if (loading) {

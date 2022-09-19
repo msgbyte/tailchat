@@ -12,7 +12,7 @@ import type { GroupPanel } from 'tailchat-shared';
 import { Avatar } from '../Avatar';
 import { closeModal, ModalWrapper } from '../Modal';
 import { Slides, SlidesRef } from '../Slides';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { applyDefaultFallbackGroupPermission } from 'tailchat-shared';
 
 const panelTemplate: {
@@ -78,7 +78,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
   const [panels, setPanels] = useState<GroupPanel[]>([]);
   const [name, setName] = useState('');
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSelectTemplate = useCallback((panels: GroupPanel[]) => {
     setPanels(panels);
@@ -94,7 +94,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
 
     dispatch(groupActions.appendGroups([data]));
 
-    history.push(`/main/group/${data._id}`); // 创建完成后跳转到新建的群组
+    navigate(`/main/group/${data._id}`); // 创建完成后跳转到新建的群组
 
     // 应用默认权限
     await applyDefaultFallbackGroupPermission(String(data._id));

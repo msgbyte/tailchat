@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Split from 'react-split';
 import { useStorage } from 'tailchat-shared';
 import './SplitPanel.less';
@@ -8,7 +8,7 @@ import './SplitPanel.less';
  * Reference: https://split.js.org/#/
  */
 
-interface SplitPanelProps {
+interface SplitPanelProps extends PropsWithChildren {
   className?: string;
 }
 export const SplitPanel: React.FC<SplitPanelProps> = React.memo((props) => {

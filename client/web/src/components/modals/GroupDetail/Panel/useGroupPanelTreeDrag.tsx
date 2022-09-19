@@ -13,12 +13,9 @@ export function useGroupPanelTreeDrag(
 ) {
   const draggingNode = useRef<DataNode | null>(null);
 
-  const handleDragStart = useCallback(
-    (info: NodeDragEventParams<HTMLDivElement>) => {
-      draggingNode.current = info.node;
-    },
-    []
-  );
+  const handleDragStart = useCallback((info: NodeDragEventParams<any>) => {
+    draggingNode.current = info.node;
+  }, []);
 
   const handleDragEnd = useCallback(() => {
     draggingNode.current = null;
@@ -49,7 +46,7 @@ export function useGroupPanelTreeDrag(
   const handleDrop = useCallback(
     (
       info: NodeDragEventParams & {
-        dragNode: EventDataNode;
+        dragNode: EventDataNode<any>;
         dragNodesKeys: Key[];
         dropPosition: number;
         dropToGap: boolean;

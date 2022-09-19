@@ -2,7 +2,7 @@ import {
   postRequest,
   appendUrlSearch,
   useAsyncRefresh,
-  useHistory,
+  useLocation,
   urlSearchParse,
   isValidStr,
 } from '@capital/common';
@@ -24,11 +24,11 @@ export function useOpenAppList() {
     return data ?? [];
   }, []);
 
-  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     // 仅初始化的时候才处理
-    const { appId } = urlSearchParse(history.location.search, {
+    const { appId } = urlSearchParse(location.search, {
       ignoreQueryPrefix: true,
     });
 

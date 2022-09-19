@@ -1,7 +1,7 @@
 import './init';
 import './dev';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { initPlugins } from './plugin/loader';
 import { installServiceWorker } from './utils/sw-helper';
@@ -13,11 +13,12 @@ installServiceWorker();
 // 先加载插件再开启应用
 initPlugins()
   .then(() => {
-    ReactDOM.render(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const root = createRoot(document.querySelector('#app')!);
+    root.render(
       <React.StrictMode>
         <App />
-      </React.StrictMode>,
-      document.querySelector('#app')
+      </React.StrictMode>
     );
   })
   .catch(() => {

@@ -1,4 +1,10 @@
-import React, { useCallback, useRef, Fragment, useContext } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  Fragment,
+  useContext,
+  PropsWithChildren,
+} from 'react';
 import { useEffect } from 'react';
 import { PortalManager } from './Manager';
 import { createPortalContext } from './context';
@@ -64,7 +70,7 @@ export function buildPortal(options: BuildPortalOptions) {
 
   const PortalContext = createPortalContext(hostName);
 
-  const PortalHost = React.memo((props) => {
+  const PortalHost: React.FC<PropsWithChildren> = React.memo((props) => {
     const managerRef = useRef<PortalManager>();
     const nextKeyRef = useRef<number>(0);
     const queueRef = useRef<Operation[]>([]);
@@ -180,7 +186,7 @@ export function buildPortal(options: BuildPortalOptions) {
   });
   PortalHost.displayName = 'PortalHost-' + hostName;
 
-  const PortalRender = React.memo((props) => {
+  const PortalRender: React.FC<PropsWithChildren> = React.memo((props) => {
     const manager = useContext(PortalContext);
 
     if (_isNil(manager)) {

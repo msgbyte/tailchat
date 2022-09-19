@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { GroupPanelType, useGroupInfo, useUpdateRef } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { useUserSessionPreference } from '@/hooks/useUserPreference';
 
 export const GroupPanelRedirect: React.FC = React.memo(() => {
-  const { groupId } = useParams<{
+  const { groupId = '' } = useParams<{
     groupId: string;
   }>();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [lastVisitPanel] = useUserSessionPreference('groupLastVisitPanel');
   const lastVisitPanelRef = useUpdateRef(lastVisitPanel);
 
@@ -32,7 +32,7 @@ export const GroupPanelRedirect: React.FC = React.memo(() => {
      */
     const panelExist = panels.some((p) => p.id === lastVisitPanelId);
     if (panelExist) {
-      history.replace(`/main/group/${groupId}/${lastVisitPanelId}`);
+      navigate(`/main/group/${groupId}/${lastVisitPanelId}`, { replace: true });
       return;
     }
 
@@ -40,7 +40,9 @@ export const GroupPanelRedirect: React.FC = React.memo(() => {
       (panel) => panel.type !== GroupPanelType.GROUP
     );
     if (!_isNil(firstAvailablePanel)) {
-      history.replace(`/main/group/${groupId}/${firstAvailablePanel.id}`);
+      navigate(`/main/group/${groupId}/${firstAvailablePanel.id}`, {
+        replace: true,
+      });
     }
   }, [groupInfo]);
 

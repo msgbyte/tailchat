@@ -19,7 +19,7 @@ interface SettingsViewProps {
 }
 export const SettingsView: React.FC<SettingsViewProps> = React.memo((props) => {
   const handleChangeVisible = useCallback(
-    (visible) => {
+    (visible: boolean) => {
       if (visible === false && typeof props.onClose === 'function') {
         props.onClose();
       }

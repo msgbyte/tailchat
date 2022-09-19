@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Icon } from '@/components/Icon';
 import { SidebarItem } from '../SidebarItem';
 import { t, useDMConverseList, useUserInfo } from 'tailchat-shared';
@@ -10,9 +10,11 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 import { pluginCustomPanel } from '@/plugin/common';
 
-const SidebarSection: React.FC<{
-  action: React.ReactNode;
-}> = React.memo((props) => {
+const SidebarSection: React.FC<
+  PropsWithChildren<{
+    action: React.ReactNode;
+  }>
+> = React.memo((props) => {
   return (
     <div className="h-10 text-gray-900 dark:text-white flex pt-4 px-2">
       <span className="flex-1 overflow-hidden overflow-ellipsis text-xs text-gray-700 dark:text-gray-300">

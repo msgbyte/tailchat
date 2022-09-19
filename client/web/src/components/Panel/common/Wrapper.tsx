@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { PanelCommonHeader } from '../common/Header';
 import clsx from 'clsx';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -12,7 +12,7 @@ interface RightPanelType {
 /**
  * 面板通用包装器
  */
-interface CommonPanelWrapperProps {
+interface CommonPanelWrapperProps extends PropsWithChildren {
   header: React.ReactNode;
   actions?: (
     setRightPanel: (info: RightPanelType) => void

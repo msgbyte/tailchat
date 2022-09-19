@@ -29,11 +29,11 @@ function useChatInputInfo(groupId: string) {
     if (muteUntil) {
       setPlaceholder(
         muteUntil
-          ? t('禁言中, 还剩 {{remain}}', {
+          ? (t('禁言中, 还剩 {{remain}}', {
               remain: humanizeMsDuration(
                 new Date().valueOf() - new Date(muteUntil).valueOf()
               ),
-            })
+            }) as string)
           : undefined
       );
     } else {

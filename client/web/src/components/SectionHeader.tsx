@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { Dropdown } from 'antd';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import clsx from 'clsx';
 
-interface SectionHeaderProps {
+interface SectionHeaderProps extends PropsWithChildren {
   menu?: React.ReactElement;
   'data-testid'?: string;
 }

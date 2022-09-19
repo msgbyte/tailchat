@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { PropsWithChildren, useCallback, useRef } from 'react';
 import _isFunction from 'lodash/isFunction';
 import _isNil from 'lodash/isNil';
 
@@ -6,7 +6,7 @@ import _isNil from 'lodash/isNil';
  * 文件选择器
  */
 
-interface FileSelectorProps {
+interface FileSelectorProps extends PropsWithChildren {
   fileProps?: React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement

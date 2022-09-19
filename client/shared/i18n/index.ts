@@ -1,4 +1,9 @@
-import i18next, { TFunction, TOptionsBase } from 'i18next';
+import i18next, {
+  StringMap,
+  TFunctionKeys,
+  TOptions,
+  TOptionsBase,
+} from 'i18next';
 import {
   useTranslation as useI18NTranslation,
   initReactI18next,
@@ -35,6 +40,32 @@ i18next
       },
     },
   } as any);
+
+type TFunctionResult = string | React.ReactNode;
+
+// Fork from i18next
+interface TFunction {
+  // basic usage
+  <TKeys extends TFunctionKeys = string>(key: TKeys): string;
+  <
+    TResult extends TFunctionResult = string,
+    TKeys extends TFunctionKeys = string,
+    TInterpolationMap extends object = StringMap
+  >(
+    key: TKeys,
+    options?: TOptions<TInterpolationMap> | string
+  ): TResult;
+  // overloaded usage
+  <
+    TResult extends TFunctionResult = string,
+    TKeys extends TFunctionKeys = string,
+    TInterpolationMap extends object = StringMap
+  >(
+    key: TKeys,
+    defaultValue?: string,
+    options?: TOptions<TInterpolationMap> | string
+  ): TResult;
+}
 
 /**
  * 国际化翻译

@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { createDMConverse, t, useAsyncRequest } from 'tailchat-shared';
 import { FriendPicker } from '../UserPicker/FriendPicker';
 import { closeModal, ModalWrapper } from '../Modal';
@@ -17,7 +17,7 @@ export const CreateDMConverse: React.FC<CreateDMConverseProps> = React.memo(
   (props) => {
     const { hiddenUserIds = [] } = props;
     const [selectedFriendIds, setSelectedFriendIds] = useState<string[]>([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [{ loading }, handleCreate] = useAsyncRequest(async () => {
       const converse = await createDMConverse([
@@ -25,7 +25,7 @@ export const CreateDMConverse: React.FC<CreateDMConverseProps> = React.memo(
         ...selectedFriendIds,
       ]);
       closeModal();
-      history.push(`/main/personal/converse/${converse._id}`);
+      navigate(`/main/personal/converse/${converse._id}`);
     }, [selectedFriendIds]);
 
     return (

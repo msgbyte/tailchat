@@ -50,7 +50,7 @@ export {
   sendMessage,
 } from 'tailchat-shared';
 
-export { useLocation, useHistory } from 'react-router';
+export { useLocation, useNavigate } from 'react-router';
 
 export {
   /**

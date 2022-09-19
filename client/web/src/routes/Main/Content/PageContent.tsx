@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 import _isNil from 'lodash/isNil';
 import { useDrag } from 'react-use-gesture';
@@ -6,11 +6,11 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
-const PageContentRoot: React.FC = (props) => (
+const PageContentRoot: React.FC<PropsWithChildren> = (props) => (
   <div className="flex flex-row flex-1 overflow-hidden">{props.children}</div>
 );
 
-const PageGestureWrapper: React.FC = React.memo((props) => {
+const PageGestureWrapper: React.FC<PropsWithChildren> = React.memo((props) => {
   const { setShowSidebar } = useSidebarContext();
 
   const bind = useDrag(
@@ -40,82 +40,83 @@ interface PageContentProps {
 /**
  * 用于渲染实际页面的组件，即除了导航栏剩余的内容
  */
-export const PageContent: React.FC<PageContentProps> = React.memo((props) => {
-  const { sidebar, children } = props;
-  const { showSidebar, setShowSidebar } = useSidebarContext();
-  const isMobile = useIsMobile();
-  const handleHideSidebar = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      e.stopPropagation();
-      e.preventDefault();
-      setShowSidebar(false);
-    },
-    []
-  );
+export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
+  React.memo((props) => {
+    const { sidebar, children } = props;
+    const { showSidebar, setShowSidebar } = useSidebarContext();
+    const isMobile = useIsMobile();
+    const handleHideSidebar = useCallback(
+      (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setShowSidebar(false);
+      },
+      []
+    );
 
-  useEffect(() => {
-    if (isMobile === false) {
-      // 如果不为移动端, 则一定显示侧边栏
-      setShowSidebar(true);
-    }
-  }, [isMobile]);
+    useEffect(() => {
+      if (isMobile === false) {
+        // 如果不为移动端, 则一定显示侧边栏
+        setShowSidebar(true);
+      }
+    }, [isMobile]);
 
-  const sidebarEl = _isNil(sidebar) ? null : (
-    <div
-      className={clsx(
-        'bg-sidebar-light dark:bg-sidebar-dark flex-shrink-0 transition-width',
-        {
-          'w-60': showSidebar,
-          'w-0': !showSidebar,
-        }
-      )}
-    >
-      {props.sidebar}
-    </div>
-  );
-
-  // 是否显示遮罩层
-  const showMask =
-    isMobile === true && showSidebar === true && !_isNil(sidebarEl);
-
-  const contentMaskEl = showMask ? (
-    <div
-      className="absolute left-0 top-0 bottom-0 right-0 z-10"
-      onClick={handleHideSidebar}
-    />
-  ) : null;
-
-  const contentEl = children;
-
-  const el = (
-    <ErrorBoundary>
-      {sidebarEl}
-
+    const sidebarEl = _isNil(sidebar) ? null : (
       <div
         className={clsx(
-          'flex flex-auto bg-content-light dark:bg-content-dark relative overflow-hidden'
+          'bg-sidebar-light dark:bg-sidebar-dark flex-shrink-0 transition-width',
+          {
+            'w-60': showSidebar,
+            'w-0': !showSidebar,
+          }
         )}
-        data-tc-role={props['data-tc-role']}
       >
-        <div className="tc-content-background" />
+        {props.sidebar}
+      </div>
+    );
+
+    // 是否显示遮罩层
+    const showMask =
+      isMobile === true && showSidebar === true && !_isNil(sidebarEl);
+
+    const contentMaskEl = showMask ? (
+      <div
+        className="absolute left-0 top-0 bottom-0 right-0 z-10"
+        onClick={handleHideSidebar}
+      />
+    ) : null;
+
+    const contentEl = children;
+
+    const el = (
+      <ErrorBoundary>
+        {sidebarEl}
 
         <div
-          className={clsx('flex flex-auto relative', {
-            'overflow-auto': !showMask,
-            'overflow-hidden': showMask,
-          })}
+          className={clsx(
+            'flex flex-auto bg-content-light dark:bg-content-dark relative overflow-hidden'
+          )}
+          data-tc-role={props['data-tc-role']}
         >
-          {contentMaskEl}
-          {contentEl}
-        </div>
-      </div>
-    </ErrorBoundary>
-  );
+          <div className="tc-content-background" />
 
-  if (isMobile) {
-    return <PageGestureWrapper>{el}</PageGestureWrapper>;
-  } else {
-    return <PageContentRoot>{el}</PageContentRoot>;
-  }
-});
+          <div
+            className={clsx('flex flex-auto relative', {
+              'overflow-auto': !showMask,
+              'overflow-hidden': showMask,
+            })}
+          >
+            {contentMaskEl}
+            {contentEl}
+          </div>
+        </div>
+      </ErrorBoundary>
+    );
+
+    if (isMobile) {
+      return <PageGestureWrapper>{el}</PageGestureWrapper>;
+    } else {
+      return <PageContentRoot>{el}</PageContentRoot>;
+    }
+  });
 PageContent.displayName = 'PageContent';

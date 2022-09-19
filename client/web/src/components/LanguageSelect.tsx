@@ -1,6 +1,7 @@
 import { Select, SelectProps } from 'antd';
 import React, { useCallback } from 'react';
 import { showToasts, t, useLanguage } from 'tailchat-shared';
+import type { AllowedLanguage } from 'tailchat-shared';
 
 type LanguageSelectProps = Omit<SelectProps, 'value' | 'onChange'>;
 
@@ -12,7 +13,7 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = React.memo(
     const { language, setLanguage } = useLanguage();
 
     const handleChangeLanguage = useCallback(
-      (newLang: string) => {
+      (newLang: AllowedLanguage) => {
         showToasts(t('刷新页面后生效'), 'info');
         setLanguage(newLang);
       },

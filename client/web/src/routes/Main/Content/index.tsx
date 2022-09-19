@@ -1,15 +1,18 @@
 import React from 'react';
 import { Personal } from './Personal';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Group } from './Group';
 
 export const MainContent: React.FC = React.memo(() => {
   return (
-    <Switch>
-      <Route path="/main/personal" component={Personal} />
-      <Route path="/main/group/:groupId" component={Group} />
-      <Redirect to="/main/personal" />
-    </Switch>
+    <Routes>
+      <Route path="/personal/*" element={<Personal />} />
+      <Route path="/group/:groupId/*" element={<Group />} />
+      <Route
+        path="/"
+        element={<Navigate to="/main/personal" replace={true} />}
+      />
+    </Routes>
   );
 });
 MainContent.displayName = 'MainContent';

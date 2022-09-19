@@ -6,15 +6,11 @@ import { GroupSection } from '@/components/GroupSection';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 import { SidebarItem } from './SidebarItem';
 
-interface GroupParams {
-  groupId: string;
-}
-
 /**
  * 群组面板侧边栏组件
  */
 export const Sidebar: React.FC = React.memo(() => {
-  const { groupId } = useParams<GroupParams>();
+  const { groupId = '' } = useParams<{ groupId: string }>();
   const groupInfo = useGroupInfo(groupId);
   const groupPanels = groupInfo?.panels ?? [];
 

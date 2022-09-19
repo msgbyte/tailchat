@@ -14,7 +14,7 @@ import {
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
 import { Button, Dropdown, Menu, Tooltip } from 'antd';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Problem } from '@/components/Problem';
 
 /**
@@ -24,13 +24,13 @@ export const FriendList: React.FC<{
   onSwitchToAddFriend: () => void;
 }> = React.memo((props) => {
   const friends = useAppSelector((state) => state.user.friends);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [, handleCreateConverse] = useAsyncRequest(
     async (targetId: string) => {
       const converse = await createDMConverse([targetId]);
-      history.push(`/main/personal/converse/${converse._id}`);
+      navigate(`/main/personal/converse/${converse._id}`);
     },
     [history]
   );

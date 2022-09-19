@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, PropsWithChildren } from 'react';
 import _get from 'lodash/get';
 import { DevContainer } from './DevContainer';
 import clsx from 'clsx';
@@ -26,11 +26,13 @@ interface SidebarViewLinkType {
   isDanger?: boolean;
 }
 
-const SidebarViewMenuItemTitle: React.FC<{
-  active?: boolean;
-  isDanger?: boolean;
-  onClick: () => void;
-}> = (props) => (
+const SidebarViewMenuItemTitle: React.FC<
+  PropsWithChildren<{
+    active?: boolean;
+    isDanger?: boolean;
+    onClick: () => void;
+  }>
+> = (props) => (
   <div
     className={clsx(
       'rounded-sm px-1.5 py-2.5 mb-1 text-gray-700 dark:text-gray-300 cursor-pointer  hover:bg-black hover:bg-opacity-10 hover:text-gray-800 dark:hover:text-gray-200',

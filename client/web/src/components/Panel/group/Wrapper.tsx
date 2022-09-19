@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { t, useGroupPanelInfo } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { MembersPanel } from './MembersPanel';
@@ -31,7 +31,7 @@ function useRecordGroupPanel(groupId: string, panelId: string) {
 /**
  * 群组面板通用包装器
  */
-interface GroupPanelWrapperProps {
+interface GroupPanelWrapperProps extends PropsWithChildren {
   groupId: string;
   panelId: string;
 

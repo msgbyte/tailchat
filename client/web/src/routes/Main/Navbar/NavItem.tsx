@@ -1,19 +1,21 @@
 import { Tooltip, Badge } from 'antd';
 import type { ClassValue } from 'clsx';
 import clsx from 'clsx';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
-export const NavbarNavItem: React.FC<{
-  name: string;
-  className?: ClassValue;
-  to?: string;
-  showPill?: boolean;
-  badge?: boolean;
-  onClick?: () => void;
-  ['data-testid']?: string;
-}> = React.memo((props) => {
+export const NavbarNavItem: React.FC<
+  PropsWithChildren<{
+    name: string;
+    className?: ClassValue;
+    to?: string;
+    showPill?: boolean;
+    badge?: boolean;
+    onClick?: () => void;
+    ['data-testid']?: string;
+  }>
+> = React.memo((props) => {
   const { name, className, to, showPill = false, badge = false } = props;
   const location = useLocation();
   const isActive = typeof to === 'string' && location.pathname.startsWith(to);

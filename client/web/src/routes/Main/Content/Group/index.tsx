@@ -2,7 +2,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { SplitPanel } from '@/components/SplitPanel';
 import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import React from 'react';
-import { Route, Switch, useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { isValidStr, useGroupInfo } from 'tailchat-shared';
 import { PageContent } from '../PageContent';
 import { GroupPanelRender, GroupPanelRoute } from './Panel';
@@ -10,7 +10,7 @@ import { GroupPanelRedirect } from './PanelRedirect';
 import { Sidebar } from './Sidebar';
 
 export const Group: React.FC = React.memo(() => {
-  const { groupId } = useParams<{
+  const { groupId = '' } = useParams<{
     groupId: string;
   }>();
   const groupInfo = useGroupInfo(groupId);
@@ -22,14 +22,10 @@ export const Group: React.FC = React.memo(() => {
   const pinnedPanelId = groupInfo.pinnedPanelId;
 
   const routeMatch = (
-    <Switch>
-      <Route path="/main/group/:groupId/:panelId" component={GroupPanelRoute} />
-      <Route
-        path="/main/group/:groupId"
-        exact={true}
-        component={GroupPanelRedirect}
-      />
-    </Switch>
+    <Routes>
+      <Route path="/:panelId" element={<GroupPanelRoute />} />
+      <Route path="/" element={<GroupPanelRedirect />} />
+    </Routes>
   );
 
   return (

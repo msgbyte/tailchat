@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface FullModalCommonTitleProps {
+interface FullModalCommonTitleProps extends PropsWithChildren {
   extra?: React.ReactNode;
 }
 export const FullModalCommonTitle: React.FC<FullModalCommonTitleProps> =

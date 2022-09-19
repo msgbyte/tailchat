@@ -1,12 +1,17 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 import _isFunction from 'lodash/isFunction';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import clsx from 'clsx';
 
 /**
  * 全屏模态框
  */
-interface FullModalProps {
+interface FullModalProps extends PropsWithChildren {
   visible?: boolean;
   onChangeVisible?: (visible: boolean) => void;
 }

@@ -4,7 +4,7 @@ import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo, tryAutoLogin } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
@@ -37,13 +37,13 @@ OAuthLoginView.displayName = 'OAuthLoginView';
 export const LoginView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
 
   useEffect(() => {
     tryAutoLogin()
       .then(() => {
-        history.push('/main');
+        navigate('/main');
       })
       .catch(() => {});
   }, []);
@@ -65,9 +65,9 @@ export const LoginView: React.FC = React.memo(() => {
     await setUserJWT(data.token);
 
     if (isValidStr(navRedirect)) {
-      history.push(decodeURIComponent(navRedirect));
+      navigate(decodeURIComponent(navRedirect));
     } else {
-      history.push('/main');
+      navigate('/main');
     }
   }, [email, password, history, navRedirect]);
 

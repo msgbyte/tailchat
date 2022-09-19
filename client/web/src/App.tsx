@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { PropsWithChildren, Suspense } from 'react';
 import {
   BrowserRouter,
   HashRouter,
-  Redirect,
+  Navigate,
   Route,
-  Switch,
+  Routes,
 } from 'react-router-dom';
 import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
 import clsx from 'clsx';
@@ -28,7 +28,7 @@ const PanelRoute = Loadable(() => import('./routes/Panel'));
 
 const InviteRoute = Loadable(() => import('./routes/Invite'));
 
-const AppProvider: React.FC = React.memo((props) => {
+const AppProvider: React.FC<PropsWithChildren> = React.memo((props) => {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <AppRouter>
@@ -43,7 +43,7 @@ const AppProvider: React.FC = React.memo((props) => {
 });
 AppProvider.displayName = 'AppProvider';
 
-const AppContainer: React.FC = React.memo((props) => {
+const AppContainer: React.FC<PropsWithChildren> = React.memo((props) => {
   const { isDarkMode, extraSchemeName } = useColorScheme();
 
   return (
@@ -83,29 +83,36 @@ export const App: React.FC = React.memo(() => {
     <AppProvider>
       <AppHeader />
       <AppContainer>
-        <Switch>
-          <Route path="/entry">
-            <FallbackPortalHost>
-              <EntryRoute />
-            </FallbackPortalHost>
-          </Route>
-          <Route path="/main" component={MainRoute} />
-          <Route path="/panel" component={PanelRoute} />
-          <Route path="/invite/:inviteCode" component={InviteRoute} />
-          <Route path="/plugin/*">
-            <FallbackPortalHost>
-              {/* NOTICE: Switch里不能出现动态路由 */}
-              {pluginRootRoute.map((r, i) => (
-                <Route
-                  key={r.name}
-                  path={r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`}
-                  component={r.component}
-                />
-              ))}
-            </FallbackPortalHost>
-          </Route>
-          <Redirect to="/entry" />
-        </Switch>
+        <Routes>
+          <Route
+            path="/entry/*"
+            element={
+              <FallbackPortalHost>
+                <EntryRoute />
+              </FallbackPortalHost>
+            }
+          />
+          <Route path="/main/*" element={<MainRoute />} />
+          <Route path="/panel/*" element={<PanelRoute />} />
+          <Route path="/invite/:inviteCode" element={<InviteRoute />} />
+          <Route
+            path="/plugin/*"
+            element={
+              <FallbackPortalHost>
+                {pluginRootRoute.map((r, i) => (
+                  // NOTICE: Switch里不能出现动态路由
+                  <Route
+                    key={r.name}
+                    path={r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`}
+                    element={React.createElement(r.component)}
+                  />
+                ))}
+              </FallbackPortalHost>
+            }
+          />
+
+          <Route path="/" element={<Navigate to="/entry" replace={true} />} />
+        </Routes>
       </AppContainer>
     </AppProvider>
   );

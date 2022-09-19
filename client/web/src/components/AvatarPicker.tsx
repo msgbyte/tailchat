@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { PropsWithChildren, useRef, useState } from 'react';
 import { closeModal, openModal } from './Modal';
 import { showToasts, t } from 'tailchat-shared';
 import { Avatar } from 'antd';
@@ -6,7 +6,7 @@ import { Icon } from '@/components/Icon';
 import { ModalAvatarCropper } from './modals/AvatarCropper';
 import { isGIF } from '@/utils/file-helper';
 
-interface AvatarPickerProps {
+interface AvatarPickerProps extends PropsWithChildren {
   className?: string;
   imageUrl?: string; // 初始image url, 仅children为空时生效
   onChange?: (blobUrl: string) => void;

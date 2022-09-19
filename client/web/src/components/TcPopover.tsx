@@ -14,7 +14,7 @@ export const TcPopover: React.FC<PopoverProps> = React.memo((props) => {
   const [visible, setVisible] = useState(false);
 
   const handleVisibleChange = useCallback(
-    (v) => {
+    (v: boolean) => {
       setVisible(v);
 
       typeof props.onVisibleChange === 'function' && props.onVisibleChange(v);

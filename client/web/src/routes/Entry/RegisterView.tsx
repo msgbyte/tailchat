@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { Icon } from '@/components/Icon';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
@@ -15,7 +15,7 @@ import { useNavToView } from './utils';
 export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
 
   const [{ loading, error }, handleRegister] = useAsyncFn(async () => {
@@ -35,9 +35,9 @@ export const RegisterView: React.FC = React.memo(() => {
     await setUserJWT(data.token);
 
     if (isValidStr(navRedirect)) {
-      history.push(decodeURIComponent(navRedirect));
+      navigate(decodeURIComponent(navRedirect));
     } else {
-      history.push('/main');
+      navigate('/main');
     }
   }, [email, password, navRedirect]);
 

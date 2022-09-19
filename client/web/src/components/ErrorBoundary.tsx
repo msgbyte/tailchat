@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { t } from 'tailchat-shared';
 import { Problem } from './Problem';
 
@@ -8,7 +8,7 @@ interface ErrorBoundaryProps {
 }
 
 export class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
+  PropsWithChildren<ErrorBoundaryProps>,
   {
     error?: Error | null;
     info: {

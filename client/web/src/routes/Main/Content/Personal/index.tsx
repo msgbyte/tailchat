@@ -1,7 +1,7 @@
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { pluginCustomPanel } from '@/plugin/common';
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { PageContent } from '../PageContent';
 import { PersonalConverse } from './Converse';
 import { FriendPanel } from './Friends';
@@ -12,28 +12,22 @@ export const Personal: React.FC = React.memo(() => {
   return (
     <PageContent data-tc-role="content-personal" sidebar={<PersonalSidebar />}>
       <ErrorBoundary>
-        <Switch>
-          <Route path="/main/personal/friends" component={FriendPanel} />
-
-          <Route path="/main/personal/plugins" component={PluginsPanel} />
-
-          <Route
-            path="/main/personal/converse/:converseId"
-            component={PersonalConverse}
-          />
-
+        <Routes>
+          <Route path="/friends" element={<FriendPanel />} />
+          <Route path="/plugins" element={<PluginsPanel />} />
+          <Route path="/converse/:converseId" element={<PersonalConverse />} />
           {pluginCustomPanel
             .filter((p) => p.position === 'personal')
             .map((p) => (
               <Route
                 key={p.name}
-                path={`/main/personal/custom/${p.name}`}
-                component={p.render}
+                path={`/custom/${p.name}`}
+                element={React.createElement(p.render)}
               />
             ))}
 
-          <Redirect to="/main/personal/friends" />
-        </Switch>
+          <Route path="/" element={<Navigate to="/main/personal/friends" />} />
+        </Routes>
       </ErrorBoundary>
     </PageContent>
   );

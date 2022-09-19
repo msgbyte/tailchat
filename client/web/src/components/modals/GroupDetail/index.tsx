@@ -21,7 +21,7 @@ interface SettingsViewProps {
 export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
   const groupId = props.groupId;
   const handleChangeVisible = useCallback(
-    (visible) => {
+    (visible: boolean) => {
       if (visible === false && typeof props.onClose === 'function') {
         props.onClose();
       }
