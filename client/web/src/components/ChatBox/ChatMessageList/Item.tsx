@@ -9,10 +9,8 @@ import {
   useCachedUserInfo,
   MessageHelper,
 } from 'tailchat-shared';
-import { Avatar } from '@/components/Avatar';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender, pluginMessageExtraParsers } from '@/plugin/common';
-import { Icon } from '@/components/Icon';
 import { Divider, Dropdown } from 'antd';
 import { UserName } from '@/components/UserName';
 import clsx from 'clsx';
@@ -22,7 +20,7 @@ import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
 import { stopPropagation } from '@/utils/dom-helper';
 import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
-import { AutoFolder } from 'tailchat-design';
+import { AutoFolder, Avatar, Icon } from 'tailchat-design';
 import './Item.less';
 
 /**
@@ -240,26 +238,15 @@ const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
 });
 ChatMessageItem.displayName = 'ChatMessageItem';
 
-function findMessageIndexWithId(
-  messages: ChatMessage[],
-  messageId: string
-): number {
-  return messages.findIndex((m) => m._id === messageId);
-}
-
 /**
  * 构造聊天项
  */
-export function buildMessageItemRow(
-  messages: ChatMessage[],
-  messageId: string
-) {
-  const index = findMessageIndexWithId(messages, messageId); // TODO: 这里是因为mattermost的动态列表传的id因此只能这边再用id找回，可以看看是否可以优化
-  if (index === -1) {
+export function buildMessageItemRow(messages: ChatMessage[], index: number) {
+  const message = messages[index];
+
+  if (message) {
     return <div />;
   }
-
-  const message = messages[index];
 
   let showDate = true;
   let showAvatar = true;
