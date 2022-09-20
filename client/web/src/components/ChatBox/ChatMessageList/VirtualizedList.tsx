@@ -76,11 +76,15 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
       }
     );
 
-    const itemContent = (virtuosoIndex: number) => {
+    const computeItemKey = useMemoizedFn((index: number, item: ChatMessage) => {
+      return item?._id ?? index;
+    });
+
+    const itemContent = useMemoizedFn((virtuosoIndex: number) => {
       const index = virtuosoIndex + numItemsPrepended - PREPEND_OFFSET;
 
       return buildMessageItemRow(props.messages, props.messages[index]._id);
-    };
+    });
 
     return (
       <Virtuoso
@@ -88,6 +92,7 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         ref={listRef}
         firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
         initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
+        computeItemKey={computeItemKey}
         totalCount={props.messages.length}
         overscan={{
           main: 450,

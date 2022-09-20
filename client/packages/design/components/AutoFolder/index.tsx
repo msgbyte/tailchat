@@ -1,3 +1,4 @@
+import { useMemoizedFn } from 'node_modules/tailchat-shared';
 import React, {
   PropsWithChildren,
   useEffect,
@@ -12,31 +13,28 @@ interface AutoFolderProps extends PropsWithChildren {
   backgroundColor?: string;
 }
 export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
-  const { maxHeight, showFullText = 'More', backgroundColor = 'white' } = props;
-  const [isShowFull, setIsShowFull] = useState(false);
+  const { showFullText = 'More', backgroundColor = 'white' } = props;
+  const [isShowFullBtn, setIsShowFullBtn] = useState(false); // 是否显示展示所有内容的按钮
+  const [isShowFull, setIsShowFull] = useState(false); // 是否点击按钮展示所有
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const observer = useMemo(
-    () =>
-      new window.ResizeObserver((entries) => {
-        if (entries[0]) {
-          const { height } = entries[0].contentRect;
-          if (height > maxHeight) {
-            setIsShowFull(false);
-
-            observer.disconnect(); // 触发一次则解除连接
-          } else {
-            setIsShowFull(true);
-          }
-        }
-      }),
-    []
-  );
 
   useEffect(() => {
     if (!contentRef.current) {
       return;
     }
+
+    const observer = new window.ResizeObserver((entries) => {
+      if (entries[0]) {
+        const { height } = entries[0].contentRect;
+
+        if (height > maxHeight) {
+          setIsShowFull(false);
+          setIsShowFullBtn(true);
+
+          observer.disconnect(); // 触发一次则解除连接
+        }
+      }
+    });
     observer.observe(contentRef.current);
 
     return () => {
@@ -44,17 +42,30 @@ export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
     };
   }, []);
 
+  const maxHeight = useMemo(() => {
+    if (isShowFull) {
+      return 'none';
+    } else {
+      return props.maxHeight;
+    }
+  }, [isShowFull, props.maxHeight]);
+
+  const handleClickShowFullBtn = useMemoizedFn(() => {
+    setIsShowFullBtn(false);
+    setIsShowFull(true);
+  });
+
   return (
     <div
       style={{
-        maxHeight: isShowFull ? 'none' : maxHeight,
+        maxHeight,
         overflow: 'hidden',
         position: 'relative',
       }}
     >
       <div ref={contentRef}>{props.children}</div>
 
-      {!isShowFull && (
+      {isShowFullBtn && (
         <div
           style={{
             position: 'absolute',
@@ -66,7 +77,7 @@ export const AutoFolder: React.FC<AutoFolderProps> = React.memo((props) => {
             backgroundImage: `linear-gradient(rgba(0,0,0,0), ${backgroundColor})`,
             padding: '4px 0',
           }}
-          onClick={() => setIsShowFull(true)}
+          onClick={handleClickShowFullBtn}
         >
           {showFullText}
         </div>
