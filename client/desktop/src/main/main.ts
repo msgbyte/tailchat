@@ -13,7 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { getMainWindowUrl, resolveHtmlPath } from './util';
+import { getMainWindowUrl } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 
@@ -113,11 +113,24 @@ const createWindow = async () => {
     // log.info('loadUrl:', url);
     // mainWindow.loadURL(url);
 
-    // 方案二: 通过本地起一个http服务，然后electron访问http服务
+    // 方案二: 通过本地起一个http代理服务，然后electron访问http服务
     log.info('Starting Local Http Server');
     const url = await getMainWindowUrl();
     log.info('Local Server started, entry:', url);
     mainWindow.loadURL(url);
+
+    /**
+     * 注入 SERVICE_URL
+     */
+    if (process.env.SERVICE_URL) {
+      mainWindow.webContents
+        .executeJavaScript(
+          `window.localStorage.setItem("serviceUrl", ${process.env.SERVICE_URL});`
+        )
+        .then(() => {
+          log.info('Update Service Url Success:', process.env.SERVICE_URL);
+        });
+    }
 
     mainWindow.on('ready-to-show', () => {
       if (!mainWindow) {
@@ -145,7 +158,6 @@ const createWindow = async () => {
     });
 
     // Remove this if your app does not use auto updates
-    // eslint-disable-next-line
     new AppUpdater();
   } catch (err) {
     log.error('createWindow error:', err);
@@ -171,7 +183,9 @@ app
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
-      if (mainWindow === null) createWindow();
+      if (mainWindow === null) {
+        createWindow();
+      }
     });
   })
   .catch(log.error);

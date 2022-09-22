@@ -16,13 +16,6 @@ const configuration: Configuration = {
     'webpack/hot/only-dev-server',
     webWebpackConfig.entry?.['app'],
   ],
-  resolveLoader: {
-    alias: {
-      'source-ref-loader': require.resolve(
-        '../../../packages/source-ref-loader/src/index.ts'
-      ),
-    },
-  },
   devServer: {
     port,
     compress: true,
