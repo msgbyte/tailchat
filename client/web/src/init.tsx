@@ -33,7 +33,6 @@ setTokenGetter(async () => {
 });
 
 const localStorageServiceUrl = window.localStorage.getItem('serviceUrl');
-
 if (localStorageServiceUrl) {
   setServiceUrl(() => localStorageServiceUrl);
 } else if (process.env.SERVICE_URL) {

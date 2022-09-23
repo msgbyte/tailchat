@@ -114,12 +114,21 @@ const createWindow = async () => {
     // mainWindow.loadURL(url);
 
     // 方案二: 通过本地起一个http代理服务，然后electron访问http服务
-    log.info('Starting Local Http Server');
-    const url = await getMainWindowUrl();
-    log.info('Local Server started, entry:', url);
-    mainWindow.loadURL(url);
+    // log.info('Starting Local Http Server');
+    // const url = await getMainWindowUrl();
+    // log.info('Local Server started, entry:', url);
+
+    // 方案三: 直接访问远程服务
+    log.info('Start with remote server', {
+      FE_URL: process.env.FE_URL,
+      SERVICE_URL: process.env.SERVICE_URL,
+    });
+    const url = process.env.FE_URL || process.env.SERVICE_URL;
+
+    mainWindow.loadURL(url as string);
 
     /**
+     * 如果存在
      * 注入 SERVICE_URL
      */
     if (process.env.SERVICE_URL) {

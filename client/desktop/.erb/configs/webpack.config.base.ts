@@ -53,6 +53,10 @@ const configuration: webpack.Configuration = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.FE_URL': JSON.stringify(process.env.FE_URL),
+      'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
     }),
