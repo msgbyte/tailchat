@@ -244,7 +244,7 @@ ChatMessageItem.displayName = 'ChatMessageItem';
 export function buildMessageItemRow(messages: ChatMessage[], index: number) {
   const message = messages[index];
 
-  if (message) {
+  if (!message) {
     return <div />;
   }
 
