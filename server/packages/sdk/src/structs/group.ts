@@ -4,6 +4,14 @@ export enum GroupPanelType {
   PLUGIN = 2,
 }
 
+export interface GroupPanelMeta {
+  /**
+   * 变体
+   * 比如消息面板的topic形式
+   */
+  variant?: 'topic';
+}
+
 interface GroupMemberStruct {
   roles?: string[]; // 角色
 
@@ -17,7 +25,7 @@ export interface GroupPanelStruct {
 
   parentId?: string; // 父节点id
 
-  type: number; // 面板类型: Reference: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+  type: GroupPanelType; // 面板类型: Reference: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 
   provider?: string; // 面板提供者，为插件的标识，仅面板类型为插件时有效
 
@@ -26,7 +34,7 @@ export interface GroupPanelStruct {
   /**
    * 面板的其他数据
    */
-  meta?: object;
+  meta?: GroupPanelMeta;
 }
 
 /**

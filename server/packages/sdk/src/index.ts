@@ -30,6 +30,7 @@ export type {
   GroupRoleStruct,
   GroupPanelStruct,
 } from './structs/group';
+export { GroupPanelType } from './structs/group';
 export type { UserStruct } from './structs/user';
 
 // db

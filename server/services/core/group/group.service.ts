@@ -1,12 +1,11 @@
 import _ from 'lodash';
 import { Types } from 'mongoose';
 import { isValidStr } from '../../../lib/utils';
-import {
+import type {
   Group,
   GroupDocument,
   GroupModel,
   GroupPanel,
-  GroupPanelType,
 } from '../../../models/group/group';
 import {
   TcService,
@@ -19,6 +18,7 @@ import {
   EntityError,
   NoPermissionError,
   PERMISSION,
+  GroupPanelType,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
 

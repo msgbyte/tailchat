@@ -10,14 +10,8 @@ import {
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import _ from 'lodash';
 import { Types } from 'mongoose';
-import { allPermission } from 'tailchat-server-sdk';
+import { allPermission, GroupPanelType } from 'tailchat-server-sdk';
 import { User } from '../user/user';
-
-export enum GroupPanelType {
-  TEXT = 0,
-  GROUP = 1,
-  PLUGIN = 2,
-}
 
 class GroupMember {
   @prop({
@@ -60,8 +54,10 @@ export class GroupPanel {
    *
    * Reference: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
    */
-  @prop()
-  type: number;
+  @prop({
+    type: () => Number,
+  })
+  type: GroupPanelType;
 
   @prop()
   provider?: string; // 面板提供者，为插件的标识，仅面板类型为插件时有效
