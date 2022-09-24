@@ -17,6 +17,7 @@ import WorkboxPlugin from 'workbox-webpack-plugin';
 import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
 import dayjs from 'dayjs';
 import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
+import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -176,7 +177,10 @@ if (ANALYSIS) {
       analyzerMode: 'static',
       openAnalyzer: true,
     }) as any,
-    new BundleStatsWebpackPlugin()
+    new BundleStatsWebpackPlugin(),
+    new WebpackStatsViewerPlugin({
+      open: true,
+    })
   );
 }
 
