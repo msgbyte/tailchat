@@ -1,14 +1,7 @@
-import {
-  getModelForClass,
-  DocumentType,
-  Ref,
-  prop,
-} from '@typegoose/typegoose';
-import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
+import { db } from 'tailchat-server-sdk';
+const { getModelForClass, prop, TimeStamps } = db;
 import type { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
-import { User } from '../user/user';
-import { Group } from './group';
 
 class GroupTopicComment {
   @prop({
@@ -19,8 +12,8 @@ class GroupTopicComment {
   @prop()
   content: string;
 
-  @prop({ ref: () => User })
-  author: Ref<User>;
+  @prop()
+  author: string;
 
   /**
    * 回复他人评论的id
@@ -29,18 +22,18 @@ class GroupTopicComment {
   replyCommentId?: string;
 }
 
-export class GroupTopic extends TimeStamps implements Base {
+export class GroupTopic extends TimeStamps implements db.Base {
   _id: Types.ObjectId;
   id: string;
 
   @prop()
   content: string;
 
-  @prop({ ref: () => User })
-  author: Ref<User>;
+  @prop()
+  author: string;
 
-  @prop({ ref: () => Group })
-  groupId: Ref<Group>;
+  @prop()
+  groupId: string;
 
   /**
    * 会话面板id
@@ -55,7 +48,7 @@ export class GroupTopic extends TimeStamps implements Base {
   comment: GroupTopicComment[];
 }
 
-export type GroupTopicDocument = DocumentType<GroupTopic>;
+export type GroupTopicDocument = db.DocumentType<GroupTopic>;
 
 const model = getModelForClass(GroupTopic);
 

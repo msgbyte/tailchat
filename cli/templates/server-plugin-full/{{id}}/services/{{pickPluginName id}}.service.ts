@@ -2,7 +2,9 @@ import { TcService, TcDbService } from 'tailchat-server-sdk';
 import type { {{pickPluginNameUp id}}Document, {{pickPluginNameUp id}}Model } from '../models/{{pickPluginName id}}';
 
 /**
- * 任务管理服务
+ * {{name}}
+ *
+ * {{desc}}
  */
 interface {{pickPluginNameUp id}}Service
   extends TcService,

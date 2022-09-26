@@ -837,6 +837,22 @@ importers:
   server/plugins/com.msgbyte.tasks/web/plugins/com.msgbyte.tasks:
     specifiers: {}
 
+  server/plugins/com.msgbyte.topic:
+    specifiers:
+      lodash: ^4.17.21
+      nanoid: ^3.1.23
+      tailchat-server-sdk: '*'
+    dependencies:
+      lodash: 4.17.21
+      nanoid: 3.3.4
+      tailchat-server-sdk: link:../../packages/sdk
+
+  server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic:
+    specifiers:
+      react: 17.0.2
+    devDependencies:
+      react: 17.0.2
+
   website:
     specifiers:
       '@docusaurus/core': 2.0.0-beta.18

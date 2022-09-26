@@ -1,27 +1,28 @@
-import type {
-  GroupTopicDocument,
-  GroupTopicModel,
-} from '../../../models/group/topic';
+import _ from 'lodash';
 import {
   TcService,
   TcDbService,
   TcContext,
-  call,
   GroupPanelType,
+  db,
+  call,
 } from 'tailchat-server-sdk';
-import { Types } from 'mongoose';
-import _ from 'lodash';
+import type { GroupTopicDocument, GroupTopicModel } from '../models/topic';
+const { Types } = db;
 
+/**
+ * 群组话题
+ */
 interface GroupTopicService
   extends TcService,
     TcDbService<GroupTopicDocument, GroupTopicModel> {}
 class GroupTopicService extends TcService {
   get serviceName(): string {
-    return 'group.topic';
+    return 'plugin:com.msgbyte.topic';
   }
 
   onInit(): void {
-    this.registerLocalDb(require('../../../models/group/topic').default);
+    this.registerLocalDb(require('../models/topic').default);
 
     this.registerAction('create', this.create, {
       params: {

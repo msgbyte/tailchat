@@ -8,5 +8,7 @@
   "private": true,
   "scripts": {},
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "tailchat-server-sdk": "*"
+  }
 }

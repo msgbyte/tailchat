@@ -1,0 +1,15 @@
+{
+  "name": "tailchat-plugin-topic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "为群组提供话题功能",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "nanoid": "^3.1.23",
+    "tailchat-server-sdk": "*"
+  }
+}

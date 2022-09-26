@@ -4,13 +4,8 @@ export enum GroupPanelType {
   PLUGIN = 2,
 }
 
-export interface GroupPanelMeta {
-  /**
-   * 变体
-   * 比如消息面板的topic形式
-   */
-  variant?: 'topic';
-}
+// TODO
+export type GroupPanelMeta = {};
 
 interface GroupMemberStruct {
   roles?: string[]; // 角色
