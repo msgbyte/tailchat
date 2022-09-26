@@ -1,6 +1,6 @@
 {
   "name": "tailchat-cli",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "A Command line interface of tailchat",
   "bin": {
     "tailchat": "./bin/cli"
@@ -49,7 +49,6 @@
     "pretty-ms": "7.0.1",
     "react": "18.2.0",
     "tailchat-server-sdk": "^0.0.12",
-    "tailchat-shared": "workspace:*",
     "yargs": "^17.4.0"
   },
   "devDependencies": {
@@ -59,6 +58,7 @@
     "@types/node": "16.11.7",
     "@types/react": "18.0.20",
     "@types/yargs": "^17.0.10",
+    "tailchat-shared": "workspace:*",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   }

@@ -101,7 +101,6 @@ importers:
       pretty-ms: 7.0.1
       react: 18.2.0
       tailchat-server-sdk: link:../server/packages/sdk
-      tailchat-shared: link:../client/shared
       yargs: 17.5.1
     devDependencies:
       '@types/fs-extra': 9.0.13
@@ -110,6 +109,7 @@ importers:
       '@types/node': 16.11.7
       '@types/react': 18.0.20
       '@types/yargs': 17.0.12
+      tailchat-shared: link:../client/shared
       ts-node: 10.9.1_rk33jgomelnuriwr3foeinccb4
       typescript: 4.8.2
 

@@ -39,6 +39,13 @@ export const createCommand: CommandModule = {
 
     const answers = await basic.runPrompts();
     const results = await basic.runActions(answers);
-    console.log('results', results);
+
+    console.log('操作变更:');
+    console.log(results.changes.map((change) => change.path).join('\n'));
+
+    if (results.failures.length > 0) {
+      console.log('操作失败:');
+      console.log(results.failures);
+    }
   },
 };

@@ -82,4 +82,31 @@ module.exports = function (
       },
     ],
   });
+
+  // 服务端插件的前端模板代码
+  plop.setGenerator('server-plugin-full', {
+    description: '服务端插件的完整模板代码',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        require: true,
+        message: '插件名称',
+      },
+      ...serverPrompts,
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: path.resolve(process.cwd(), './plugins'),
+        base: './server-plugin-full',
+        templateFiles: [
+          './server-plugin-full/**/*',
+          './server-plugin-full/*/.ministarrc.js',
+        ],
+        skipIfExists: true,
+        globOptions: {},
+      },
+    ],
+  });
 };

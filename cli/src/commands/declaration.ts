@@ -48,7 +48,7 @@ export const declarationCommand: CommandModule = {
 
       content = await got
         .get(
-          'https://raw.githubusercontent.com/msgbyte/tailchat/master/web/tailchat.d.ts'
+          'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts'
         )
         .then((res) => res.body);
 
