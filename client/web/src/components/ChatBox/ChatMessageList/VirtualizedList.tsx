@@ -7,7 +7,6 @@ import {
   VirtuosoHandle,
 } from 'react-virtuoso';
 import { ChatMessage, sharedEvent, useMemoizedFn } from 'tailchat-shared';
-import _last from 'lodash/last';
 
 const PREPEND_OFFSET = 10 ** 7;
 
@@ -53,12 +52,6 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
     const followOutput = useMemoizedFn(
       (isAtBottom: boolean): FollowOutputScalarType => {
         if (isAtBottom) {
-          // 更新最新查看的消息id
-          const lastMessage = _last(props.messages);
-          if (lastMessage) {
-            props.onUpdateReadedMessage(lastMessage._id);
-          }
-
           setTimeout(() => {
             // 这里 Virtuoso 有个动态渲染高度的bug, 因此需要异步再次滚动到底部以确保代码功能work
             listRef.current?.scrollToIndex({

@@ -1,32 +1,24 @@
 import { useEffect } from 'react';
-import {
-  ChatMessage,
-  useConverseAck,
-  useMemoizedFn,
-  useUpdateRef,
-} from 'tailchat-shared';
-import _last from 'lodash/last';
+import { ChatMessage, sharedEvent, useConverseAck } from 'tailchat-shared';
 
 /**
  * 消息已读的回调
  */
-export function useMessageAck(converseId: string, messages: ChatMessage[]) {
+export function useMessageAck(converseId: string) {
   const { updateConverseAck } = useConverseAck(converseId);
-  const messagesRef = useUpdateRef(messages);
-  const updateConverseAckMemo = useMemoizedFn(updateConverseAck);
 
   useEffect(() => {
-    // 设置当前
-    if (messagesRef.current.length === 0) {
-      return;
-    }
+    const handldReadMessage = (message: ChatMessage | null) => {
+      const messageId = message?._id;
+      if (messageId && converseId === message.converseId) {
+        updateConverseAck(messageId);
+      }
+    };
 
-    const lastMessage = _last(messagesRef.current);
-    if (lastMessage) {
-      const lastMessageId = lastMessage?._id;
-      updateConverseAckMemo(lastMessageId);
-    }
+    sharedEvent.on('readMessage', handldReadMessage);
+
+    return () => {
+      sharedEvent.off('readMessage', handldReadMessage);
+    };
   }, [converseId]);
-
-  return { updateConverseAck };
 }

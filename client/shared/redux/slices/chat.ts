@@ -86,7 +86,7 @@ const chatSlice = createSlice({
       state.converses[converseId].messages = newMessages;
 
       if (state.currentConverseId !== converseId) {
-        const lastMessageId = _last(messages)?._id;
+        const lastMessageId = _last(newMessages)?._id;
         if (isValidStr(lastMessageId)) {
           state.lastMessageMap[converseId] = lastMessageId;
         }

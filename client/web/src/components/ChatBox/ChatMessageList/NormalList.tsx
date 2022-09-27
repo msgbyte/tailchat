@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { sharedEvent, useUpdateRef } from 'tailchat-shared';
+import { sharedEvent } from 'tailchat-shared';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 
@@ -10,17 +10,9 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const onUpdateReadedMessageRef = useUpdateRef(props.onUpdateReadedMessage);
     useEffect(() => {
       if (props.messages.length === 0) {
         return;
-      }
-
-      if (containerRef.current?.scrollTop === 0) {
-        // 当前列表在最低
-        onUpdateReadedMessageRef.current(
-          props.messages[props.messages.length - 1]._id
-        );
       }
     }, [props.messages.length]);
 

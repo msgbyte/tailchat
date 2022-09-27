@@ -33,7 +33,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
     converseId,
     isGroup,
   });
-  const { updateConverseAck } = useMessageAck(converseId, messages);
+  useMessageAck(converseId);
 
   if (loading) {
     return <ChatBoxPlaceholder />;
@@ -50,7 +50,6 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
         messages={messages}
         isLoadingMore={isLoadingMore}
         hasMoreMessage={hasMoreMessage}
-        onUpdateReadedMessage={updateConverseAck}
         onLoadMore={handleFetchMoreMessage}
       />
 

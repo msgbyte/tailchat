@@ -30,6 +30,11 @@ export interface SharedEventMap {
    * 如果为null则是清空
    */
   replyMessage: (payload: ChatMessage | null) => void;
+
+  /**
+   * 消息已读(消息出现在界面上)
+   */
+  readMessage: (payload: ChatMessage | null) => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 

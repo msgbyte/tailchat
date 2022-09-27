@@ -8,6 +8,7 @@ import {
   t,
   useCachedUserInfo,
   MessageHelper,
+  sharedEvent,
 } from 'tailchat-shared';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender, pluginMessageExtraParsers } from '@/plugin/common';
@@ -21,6 +22,7 @@ import { useMessageReactions } from './useMessageReactions';
 import { stopPropagation } from '@/utils/dom-helper';
 import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
 import { AutoFolder, Avatar, Icon } from 'tailchat-design';
+import { Intersection } from '@/components/Intersection';
 import './Item.less';
 
 /**
@@ -279,7 +281,12 @@ export function buildMessageItemRow(messages: ChatMessage[], index: number) {
           {getMessageTimeDiff(messageCreatedAt)}
         </Divider>
       )}
-      <ChatMessageItem showAvatar={showAvatar} payload={message} />
+
+      <Intersection
+        onIntersection={() => sharedEvent.emit('readMessage', message)}
+      >
+        <ChatMessageItem showAvatar={showAvatar} payload={message} />
+      </Intersection>
     </div>
   );
 }
