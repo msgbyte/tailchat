@@ -39,9 +39,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
       }
 
       if (containerRef.current.scrollTop === 0) {
-        onUpdateReadedMessageRef.current(
-          props.messages[props.messages.length - 1]._id
-        );
+        // 滚动到最底部
       } else if (
         -containerRef.current.scrollTop + containerRef.current.clientHeight ===
         containerRef.current.scrollHeight
