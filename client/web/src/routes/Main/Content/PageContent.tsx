@@ -107,7 +107,8 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
             })}
           >
             {contentMaskEl}
-            {contentEl}
+
+            <ErrorBoundary>{contentEl}</ErrorBoundary>
           </div>
         </div>
       </ErrorBoundary>

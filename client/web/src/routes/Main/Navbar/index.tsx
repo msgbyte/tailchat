@@ -4,6 +4,8 @@ import { MobileMenuBtn } from './MobileMenuBtn';
 import { SettingBtn } from './SettingBtn';
 import { Divider } from 'antd';
 import { PersonalNav } from './PersonalNav';
+import { DevContainer } from '@/components/DevContainer';
+import { InboxNav } from './InboxNav';
 
 /**
  * 导航栏组件
@@ -18,7 +20,13 @@ export const Navbar: React.FC = React.memo(() => {
 
       {/* Navbar */}
       <div className="flex-1 w-full">
-        <PersonalNav />
+        <div className="space-y-2">
+          <PersonalNav />
+
+          <DevContainer>
+            <InboxNav />
+          </DevContainer>
+        </div>
 
         <div className="px-3">
           <Divider />

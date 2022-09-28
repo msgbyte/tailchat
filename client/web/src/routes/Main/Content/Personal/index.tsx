@@ -11,24 +11,22 @@ import { PersonalSidebar } from './Sidebar';
 export const Personal: React.FC = React.memo(() => {
   return (
     <PageContent data-tc-role="content-personal" sidebar={<PersonalSidebar />}>
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/friends" element={<FriendPanel />} />
-          <Route path="/plugins" element={<PluginsPanel />} />
-          <Route path="/converse/:converseId" element={<PersonalConverse />} />
-          {pluginCustomPanel
-            .filter((p) => p.position === 'personal')
-            .map((p) => (
-              <Route
-                key={p.name}
-                path={`/custom/${p.name}`}
-                element={React.createElement(p.render)}
-              />
-            ))}
+      <Routes>
+        <Route path="/friends" element={<FriendPanel />} />
+        <Route path="/plugins" element={<PluginsPanel />} />
+        <Route path="/converse/:converseId" element={<PersonalConverse />} />
+        {pluginCustomPanel
+          .filter((p) => p.position === 'personal')
+          .map((p) => (
+            <Route
+              key={p.name}
+              path={`/custom/${p.name}`}
+              element={React.createElement(p.render)}
+            />
+          ))}
 
-          <Route path="/" element={<Navigate to="/main/personal/friends" />} />
-        </Routes>
-      </ErrorBoundary>
+        <Route path="/" element={<Navigate to="/main/personal/friends" />} />
+      </Routes>
     </PageContent>
   );
 });
