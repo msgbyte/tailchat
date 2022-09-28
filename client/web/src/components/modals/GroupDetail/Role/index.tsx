@@ -30,6 +30,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
     handleCreateRole,
     handleSavePermission,
     handleChangeRoleName,
+    handleDeleteRole,
   } = useRoleActions(groupId, roleId);
 
   return (
@@ -70,6 +71,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
                 <RoleSummary
                   currentRoleInfo={currentRoleInfo}
                   onChangeRoleName={handleChangeRoleName}
+                  onDeleteRole={handleDeleteRole}
                 />
               )}
             </PillTabPane>

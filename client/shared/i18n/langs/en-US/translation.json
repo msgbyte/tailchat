@@ -1,4 +1,5 @@
 {
+  "k10416951": "Unable to remove everyone permission",
   "k1096add": "Create permanent invite code",
   "k10c018fe": "Teamwork",
   "k1141d649": "Version update",
@@ -95,6 +96,7 @@
   "k58a85592": "Is not a valid plugin configuration",
   "k5ab727ca": "This invitation will expire on <2><0>{{date}}</0></2>",
   "k5bb71ad7": "Installed",
+  "k5be1a5b0": "Delete role group",
   "k5bec387": "Unable to get group information",
   "k5d2a6631": "Allow to manage channels",
   "k5f91e72c": "Built Plugins",
@@ -178,6 +180,7 @@
   "ka39b3032": "1 day",
   "ka49ec177": "Input somthing",
   "ka4cebef8": "New Role",
+  "ka4dac521": "Are you sure you want to delete role {{name}}?",
   "ka50c7408": "Please enter the JSON information manually, if you are not sure what you are doing, please do not use this function",
   "ka5616453": "Mute {{length}}, expected until {{until}}",
   "ka5d64ee9": "Choose the following template and start creating your own group!",

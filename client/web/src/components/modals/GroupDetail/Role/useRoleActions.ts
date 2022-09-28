@@ -53,10 +53,21 @@ export function useRoleActions(
     [groupId, roleId]
   );
 
+  const [{ loading: loading4 }, handleDeleteRole] =
+    useAsyncRequest(async () => {
+      if (roleId === AllPermission) {
+        throw new Error(t('无法删除所有人权限'));
+      }
+
+      await model.group.deleteGroupRole(groupId, roleId);
+      showSuccessToasts();
+    }, [groupId, roleId]);
+
   return {
-    loading: loading1 || loading2 || loading3,
+    loading: loading1 || loading2 || loading3 || loading4,
     handleCreateRole,
     handleSavePermission,
     handleChangeRoleName,
+    handleDeleteRole,
   };
 }
