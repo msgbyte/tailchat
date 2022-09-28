@@ -12,6 +12,7 @@ import {
   t,
   useAsyncRequest,
   useGroupInfo,
+  useMemoizedFn,
   useSearch,
   useUserId,
   useUserInfoList,
@@ -24,7 +25,6 @@ interface RoleMemberProps {
 }
 export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
   const roleId = props.currentRoleInfo._id;
-  const userId = useUserId();
   const groupInfo = useGroupInfo(props.groupId);
   const members = (groupInfo?.members ?? []).filter((m) =>
     m.roles.includes(roleId)
@@ -41,11 +41,11 @@ export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
     filterFn: (item, searchText) => item.nickname.includes(searchText),
   });
 
-  const handleAddMember = useCallback(() => {
+  const handleAddMember = useMemoizedFn(() => {
     const key = openModal(
       <SelectGroupMember
         groupId={props.groupId}
-        withoutMemberIds={_compact([...memberIds, userId])}
+        withoutMemberIds={_compact([...memberIds])}
         onConfirm={async (selectedIds) => {
           try {
             await model.group.appendGroupMemberRoles(
@@ -61,7 +61,7 @@ export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
         }}
       />
     );
-  }, [userId, props.groupId, memberIds, props.currentRoleInfo._id]);
+  });
 
   const [, handleRemoveMember] = useAsyncRequest(
     async (memberId: string) => {
@@ -84,17 +84,19 @@ export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
     <div>
       {/* 管理成员 */}
       <div className="text-right mb-2 flex space-x-1">
-        <Input
-          placeholder={t('搜索成员')}
-          size="middle"
-          suffix={<Icon fontSize={20} color="grey" icon="mdi:magnify" />}
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-
         <Button type="primary" onClick={handleAddMember}>
           {t('添加成员')}
         </Button>
+
+        {userInfoList.length > 0 && (
+          <Input
+            placeholder={t('搜索成员')}
+            size="middle"
+            suffix={<Icon fontSize={20} color="grey" icon="mdi:magnify" />}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        )}
       </div>
 
       {(isSearching ? filterMembers : userInfoList).map((m) => (
