@@ -260,6 +260,7 @@ export class Group extends TimeStamps implements Base {
     const member = group.members.find(
       (member) => String(member.userId) === userId
     );
+
     if (!member) {
       throw new Error('Not Found Member');
     }

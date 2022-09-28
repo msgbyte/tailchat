@@ -1,9 +1,10 @@
 import { createTestServiceBroker } from '../../utils';
 import GroupService from '../../../services/core/group/group.service';
 import { Types } from 'mongoose';
-import { Group, GroupPanelType } from '../../../models/group/group';
+import type { Group } from '../../../models/group/group';
 import { generateRandomStr } from '../../../lib/utils';
 import _ from 'lodash';
+import { GroupPanelType, PERMISSION } from 'tailchat-server-sdk';
 
 function createTestGroup(
   userId: Types.ObjectId = new Types.ObjectId(),
@@ -38,7 +39,13 @@ function createTestRole(
 
 describe('Test "group" service', () => {
   const { broker, service, insertTestData } =
-    createTestServiceBroker<GroupService>(GroupService);
+    createTestServiceBroker<GroupService>(GroupService, {
+      contextCallMockFn(actionName) {
+        if (actionName === 'group.getUserAllPermissions') {
+          return [PERMISSION.core.owner];
+        }
+      },
+    });
 
   test('Test "group.createGroup"', async () => {
     const userId = String(new Types.ObjectId());
@@ -310,6 +317,12 @@ describe('Test "group" service', () => {
       const testGroup = await insertTestData(
         createTestGroup(userId, {
           roles: [role1, role2],
+          members: [
+            {
+              userId,
+              roles: [role1.id, role2.id],
+            },
+          ],
         })
       );
 
@@ -320,7 +333,7 @@ describe('Test "group" service', () => {
         'group.deleteGroupRole',
         {
           groupId: String(testGroup.id),
-          roleId: testGroup.roles?.[0]._id,
+          roleId: String(role1.id),
         },
         {
           meta: {
@@ -334,6 +347,12 @@ describe('Test "group" service', () => {
         {
           name: 'TestRole2',
           permissions: ['permission1', 'permission2'],
+        },
+      ]);
+      expect(res.members).toMatchObject([
+        {
+          userId,
+          roles: [role2.id],
         },
       ]);
     });

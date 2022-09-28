@@ -807,7 +807,7 @@ class GroupService extends TcService {
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
       userId,
-      [PERMISSION.core.managePanel]
+      [PERMISSION.core.manageRoles]
     );
     if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
@@ -822,7 +822,8 @@ class GroupService extends TcService {
           $pull: {
             roles: {
               _id: roleId,
-            },
+            }, // 删除角色
+            'members.$[].roles': roleId, // 删除成员角色
           },
         },
         {
