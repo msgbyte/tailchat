@@ -1,4 +1,5 @@
 import type { DependencyList } from 'react';
+import { isDevelopment, t } from '..';
 import { showErrorToasts } from '../manager/ui';
 import type { FunctionReturningPromise } from '../types';
 import { useAsyncFn } from './useAsyncFn';
@@ -11,7 +12,8 @@ export function useAsyncRequest<T extends FunctionReturningPromise>(
     try {
       await fn(...args);
     } catch (err) {
-      showErrorToasts(err);
+      showErrorToasts(isDevelopment ? err : t('系统忙, 请稍后再试'));
+      console.error(err);
     }
   }, deps);
 
