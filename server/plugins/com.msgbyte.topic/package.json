@@ -6,7 +6,14 @@
   "description": "为群组提供话题功能",
   "license": "MIT",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.20",
+    "mini-star": "*"
+  },
   "dependencies": {
     "lodash": "^4.17.21",
     "nanoid": "^3.1.23",
