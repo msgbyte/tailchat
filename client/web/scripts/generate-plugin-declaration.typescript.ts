@@ -47,6 +47,8 @@ function generateDeclarationFile() {
 
   const output = `/* eslint-disable @typescript-eslint/no-explicit-any */
 
+/// <reference types="react" />
+
 /**
  * 该文件由 Tailchat 自动生成
  * 用于插件的类型声明

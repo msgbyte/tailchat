@@ -6,7 +6,7 @@ import ora from 'ora';
 import got from 'got';
 
 export const declarationCommand: CommandModule = {
-  command: 'declaration [source]',
+  command: 'declaration <source>',
   describe: 'Tailchat 插件类型声明',
   builder: (yargs) =>
     yargs.positional('source', {
