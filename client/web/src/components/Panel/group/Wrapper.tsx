@@ -11,6 +11,7 @@ import {
   pluginPanelActions,
 } from '@/plugin/common';
 import { useUserSessionPreference } from '@/hooks/useUserPreference';
+import { GroupPanelContext } from '@/context/GroupPanelContext';
 
 /**
  * 记录下最后访问的面板id
@@ -56,58 +57,64 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
     }
 
     if (!props.showHeader) {
-      return <>{props.children}</>;
+      return (
+        <GroupPanelContext.Provider value={props}>
+          {props.children}
+        </GroupPanelContext.Provider>
+      );
     }
 
     return (
-      <CommonPanelWrapper
-        header={panelInfo.name}
-        actions={(setRightPanel) => [
-          ...pluginPanelActions
-            .filter(
-              (action): action is GroupPluginPanelActionProps =>
-                action.position === 'group'
-            )
-            .map((action) => (
-              <IconBtn
-                key={action.name}
-                title={action.label}
-                shape="square"
-                icon={action.icon}
-                iconClassName="text-2xl"
-                onClick={() =>
-                  action.onClick({
-                    groupId: props.groupId,
-                    panelId: props.panelId,
-                  })
-                }
-              />
-            )),
-          <IconBtn
-            key="open"
-            title={t('在新窗口打开')}
-            shape="square"
-            icon="mdi:dock-window"
-            iconClassName="text-2xl"
-            onClick={openPanelWindow}
-          />,
-          <IconBtn
-            key="members"
-            title={t('成员列表')}
-            shape="square"
-            icon="mdi:account-supervisor-outline"
-            iconClassName="text-2xl"
-            onClick={() =>
-              setRightPanel({
-                name: t('成员'),
-                panel: <MembersPanel groupId={props.groupId} />,
-              })
-            }
-          />,
-        ]}
-      >
-        {props.children}
-      </CommonPanelWrapper>
+      <GroupPanelContext.Provider value={props}>
+        <CommonPanelWrapper
+          header={panelInfo.name}
+          actions={(setRightPanel) => [
+            ...pluginPanelActions
+              .filter(
+                (action): action is GroupPluginPanelActionProps =>
+                  action.position === 'group'
+              )
+              .map((action) => (
+                <IconBtn
+                  key={action.name}
+                  title={action.label}
+                  shape="square"
+                  icon={action.icon}
+                  iconClassName="text-2xl"
+                  onClick={() =>
+                    action.onClick({
+                      groupId: props.groupId,
+                      panelId: props.panelId,
+                    })
+                  }
+                />
+              )),
+            <IconBtn
+              key="open"
+              title={t('在新窗口打开')}
+              shape="square"
+              icon="mdi:dock-window"
+              iconClassName="text-2xl"
+              onClick={openPanelWindow}
+            />,
+            <IconBtn
+              key="members"
+              title={t('成员列表')}
+              shape="square"
+              icon="mdi:account-supervisor-outline"
+              iconClassName="text-2xl"
+              onClick={() =>
+                setRightPanel({
+                  name: t('成员'),
+                  panel: <MembersPanel groupId={props.groupId} />,
+                })
+              }
+            />,
+          ]}
+        >
+          {props.children}
+        </CommonPanelWrapper>
+      </GroupPanelContext.Provider>
     );
   }
 );

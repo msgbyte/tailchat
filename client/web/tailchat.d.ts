@@ -70,8 +70,6 @@ declare module '@capital/common' {
 
   export const getServiceWorkerRegistration: any;
 
-  export const useGroupIdContext: any;
-
   export const getServiceUrl: () => string;
 
   export const getCachedUserInfo: (
@@ -216,6 +214,15 @@ declare module '@capital/common' {
      */
     required?: string[];
   }) => void;
+
+  export const useGroupIdContext: () => string;
+
+  export const useGroupPanelContext: () => {
+    groupId: string;
+    panelId: string;
+  } | null;
+
+  export const useSocketContext: any;
 }
 
 /**

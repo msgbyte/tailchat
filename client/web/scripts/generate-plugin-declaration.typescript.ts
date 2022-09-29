@@ -38,6 +38,11 @@ function generateDeclarationFile() {
     {}
   );
 
+  const { exportModules: commonContextExportModules } = parseExports(
+    path.resolve(__dirname, '../src/plugin/common/context.ts'),
+    {}
+  );
+
   const { exportModules: componentExportModules } = parseExports(
     path.resolve(__dirname, '../src/plugin/component/index.tsx'),
     {}
@@ -66,6 +71,11 @@ declare module '@capital/common' {
 
   ${exportModulesTemplate(
     commonRegExportModules,
+    existedModules['@capital/common']
+  )}
+
+  ${exportModulesTemplate(
+    commonContextExportModules,
     existedModules['@capital/common']
   )}
 }

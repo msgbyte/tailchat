@@ -5,6 +5,6 @@ GroupIdContext.displayName = 'GroupIdContext';
 
 export const GroupIdContextProvider = GroupIdContext.Provider;
 
-export function useGroupIdContext() {
+export function useGroupIdContext(): string {
   return useContext(GroupIdContext);
 }
