@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "description": "为群组提供话题功能",
   "private": true,
-  "dependencies": {},
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
   "devDependencies": {
-    "react": "17.0.2"
+    "react": "18.2.0"
   }
 }

@@ -12,7 +12,9 @@
   },
   "devDependencies": {
     "@types/react": "18.0.20",
-    "mini-star": "*"
+    "less": "^4.1.3",
+    "mini-star": "*",
+    "rollup-plugin-less": "^1.1.3"
   },
   "dependencies": {
     "lodash": "^4.17.21",

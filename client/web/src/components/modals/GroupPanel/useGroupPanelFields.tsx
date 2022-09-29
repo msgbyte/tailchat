@@ -87,7 +87,7 @@ export function useGroupPanelFields(
       // 需要从插件信息中获取额外的字段
       const panelInfo = findPluginPanelInfoByName(currentValues.type);
       if (panelInfo) {
-        return [...baseFields, ...panelInfo.extraFormMeta];
+        return [...baseFields, ...(panelInfo.extraFormMeta ?? [])];
       }
     }
 
