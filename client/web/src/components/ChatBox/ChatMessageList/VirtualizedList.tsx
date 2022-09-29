@@ -54,11 +54,7 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
         if (isAtBottom) {
           setTimeout(() => {
             // 这里 Virtuoso 有个动态渲染高度的bug, 因此需要异步再次滚动到底部以确保代码功能work
-            listRef.current?.scrollToIndex({
-              index:
-                PREPEND_OFFSET - numItemsPrepended + props.messages.length - 1,
-              align: 'end',
-            });
+            listRef.current?.autoscrollToBottom();
           }, 20);
         }
 

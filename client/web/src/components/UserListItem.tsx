@@ -42,7 +42,7 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
             #{userInfo.discriminator}
           </span>
         </div>
-        <Space>{...actions}</Space>
+        <Space>{actions}</Space>
       </Skeleton>
     </div>
   );
