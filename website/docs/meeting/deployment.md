@@ -19,7 +19,7 @@ git clone https://github.com/msgbyte/tailchat-meeting --depth=1
 > NOTE: 接下来会使用docker 的 host 模式进行安装。即`docker-compose` 会自动绑定主机端口
 
 需要服务器预留端口如下:
-- swag(服务器网关, nginx 强化版)
+- swag(服务器网关, nginx 强化版, 端口可通过配置文件 tailchat-meeting/compose/nginx.conf 修改)
   - 80
   - 443
 - tailchat-meeting
