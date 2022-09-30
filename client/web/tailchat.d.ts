@@ -252,6 +252,8 @@ declare module '@capital/component' {
    */
   export const notification: any;
 
+  export const Empty: any;
+
   export const Avatar: any;
 
   export const SensitiveText: React.FC<{ className?: string; text: string }>;

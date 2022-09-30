@@ -1,5 +1,5 @@
 import { db } from 'tailchat-server-sdk';
-const { getModelForClass, prop, TimeStamps } = db;
+const { getModelForClass, prop, TimeStamps, modelOptions } = db;
 import type { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 
@@ -22,6 +22,11 @@ class GroupTopicComment {
   replyCommentId?: string;
 }
 
+@modelOptions({
+  options: {
+    customName: 'p_topic',
+  },
+})
 export class GroupTopic extends TimeStamps implements db.Base {
   _id: Types.ObjectId;
   id: string;

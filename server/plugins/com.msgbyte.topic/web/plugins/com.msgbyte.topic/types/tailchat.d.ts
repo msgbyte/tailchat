@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+/// <reference types="react" />
+
 /**
  * 该文件由 Tailchat 自动生成
  * 用于插件的类型声明
@@ -66,7 +68,7 @@ declare module '@capital/common' {
 
   export const appendUrlSearch: any;
 
-  export const useGroupIdContext: any;
+  export const getServiceWorkerRegistration: any;
 
   export const getServiceUrl: () => string;
 
@@ -84,7 +86,14 @@ declare module '@capital/common' {
 
   export const getCachedConverseInfo: any;
 
-  export const localTrans: any;
+  /**
+   * 本地翻译
+   * @example
+   * localTrans({'zh-CN': '你好', 'en-US': 'Hello'});
+   *
+   * @param trans 翻译对象
+   */
+  export const localTrans: (trans: Record<'zh-CN' | 'en-US', string>) => string;
 
   export const getLanguage: any;
 
@@ -114,7 +123,7 @@ declare module '@capital/common' {
 
   export const useLocation: any;
 
-  export const useHistory: any;
+  export const useNavigate: any;
 
   export const createFastFormSchema: any;
 
@@ -205,6 +214,15 @@ declare module '@capital/common' {
      */
     required?: string[];
   }) => void;
+
+  export const useGroupIdContext: () => string;
+
+  export const useGroupPanelContext: () => {
+    groupId: string;
+    panelId: string;
+  } | null;
+
+  export const useSocketContext: any;
 }
 
 /**
@@ -214,6 +232,8 @@ declare module '@capital/component' {
   export const Button: any;
 
   export const Checkbox: any;
+
+  export const Empty: any;
 
   export const Input: any;
 
@@ -301,4 +321,6 @@ declare module '@capital/component' {
     userId: string;
     className?: string;
   }>;
+
+  export const Markdown: any;
 }

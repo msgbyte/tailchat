@@ -44,13 +44,12 @@ export const declarationCommand: CommandModule = {
       content =
         "declare module '@capital/common';\ndeclare module '@capital/component';\n";
     } else if (source === 'github') {
-      const spinner = ora('正在从 Github 下载插件类型声明').start();
+      const url =
+        'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts';
 
-      content = await got
-        .get(
-          'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts'
-        )
-        .then((res) => res.body);
+      const spinner = ora(`正在从 Github 下载插件类型声明: ${url}`).start();
+
+      content = await got.get(url).then((res) => res.body);
 
       spinner.succeed('声明文件下载完毕');
     }

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useEffect, useMemo } from 'react';
 import { t, useGroupPanelInfo } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { MembersPanel } from './MembersPanel';
@@ -46,26 +46,35 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
     const panelInfo = useGroupPanelInfo(props.groupId, props.panelId);
     useRecordGroupPanel(props.groupId, props.panelId);
 
+    const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
+      usePanelWindow(`/panel/group/${props.groupId}/${props.panelId}`);
+
+    const groupPanelContextValue = useMemo(
+      () => ({
+        groupId: props.groupId,
+        panelId: props.panelId,
+      }),
+      [props.groupId, props.panelId]
+    );
+
     if (_isNil(panelInfo)) {
       return null;
     }
 
-    const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
-      usePanelWindow(`/panel/group/${props.groupId}/${props.panelId}`);
     if (hasOpenedPanel) {
       return <OpenedPanelTip onClosePanelWindow={closePanelWindow} />;
     }
 
     if (!props.showHeader) {
       return (
-        <GroupPanelContext.Provider value={props}>
+        <GroupPanelContext.Provider value={groupPanelContextValue}>
           {props.children}
         </GroupPanelContext.Provider>
       );
     }
 
     return (
-      <GroupPanelContext.Provider value={props}>
+      <GroupPanelContext.Provider value={groupPanelContextValue}>
         <CommonPanelWrapper
           header={panelInfo.name}
           actions={(setRightPanel) => [

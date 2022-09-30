@@ -11,6 +11,7 @@ export {
   Switch,
   Tooltip,
   notification,
+  Empty,
 } from 'antd';
 export { Avatar, SensitiveText } from 'tailchat-design';
 export const TextArea = Input.TextArea;
