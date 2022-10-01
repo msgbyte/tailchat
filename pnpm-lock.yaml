@@ -858,13 +858,9 @@ importers:
 
   server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic:
     specifiers:
-      less: ^4.1.3
       react: 18.2.0
-      rollup-plugin-less: ^1.1.3
     devDependencies:
-      less: 4.1.3
       react: 18.2.0
-      rollup-plugin-less: 1.1.3
 
   website:
     specifiers:
