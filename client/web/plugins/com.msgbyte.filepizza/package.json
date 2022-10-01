@@ -1,0 +1,14 @@
+{
+  "name": "@plugins/com.msgbyte.filepizza",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "快捷打开filepizza以支持p2p传输文件",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "react": "18.2.0"
+  }
+}

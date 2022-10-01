@@ -55,5 +55,23 @@
     "description": "隔空投送 —— 在同一网络发送文件与消息",
     "documentUrl": "/plugins/com.msgbyte.webview/README.md",
     "requireRestart": true
+  },
+  {
+    "label": "file.pizza",
+    "name": "com.msgbyte.filepizza",
+    "url": "/plugins/com.msgbyte.filepizza/index.js",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "快捷打开 filepizza 以支持p2p传输文件",
+    "requireRestart": true
+  },
+  {
+    "label": "files.fm",
+    "name": "com.msgbyte.filesfm",
+    "url": "/plugins/com.msgbyte.filesfm/index.js",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "快捷打开 files.fm 以支持传输文件",
+    "requireRestart": true
   }
 ]
