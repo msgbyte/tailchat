@@ -2,6 +2,7 @@
   "label": "files.fm",
   "name": "com.msgbyte.filesfm",
   "url": "/plugins/com.msgbyte.filesfm/index.js",
+  "icon": "/plugins/com.msgbyte.filesfm/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "快捷打开 files.fm 以支持传输文件",

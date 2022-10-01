@@ -2,6 +2,7 @@
   "label": "file.pizza",
   "name": "com.msgbyte.filepizza",
   "url": "/plugins/com.msgbyte.filepizza/index.js",
+  "icon": "/plugins/com.msgbyte.filepizza/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "快捷打开 filepizza 以支持p2p传输文件",
