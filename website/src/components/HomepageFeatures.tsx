@@ -15,13 +15,12 @@ const FeatureList = [
     ),
   },
   {
-    title: '始于插件',
+    title: '易于拓展',
     Svg: require('../../static/img/undraw_design_components_9vy6.svg').default,
     description: (
       <>
         <code>Tailchat</code>{' '}
-        专心设计了一套独有的插件系统，这让外部能力深度集成到{' '}
-        <code>Tailchat</code> 成为可能
+        基于微内核+微服务架构，并精心设计了一套独有的插件系统，不论是业务还是规模上都易于拓展，足以支撑任意体量的业务与需求
       </>
     ),
   },
