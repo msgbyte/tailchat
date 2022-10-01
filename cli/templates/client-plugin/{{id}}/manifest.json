@@ -1,0 +1,9 @@
+{
+  "label": "{{name}}",
+  "name": "{{id}}",
+  "url": "/plugins/{{id}}/index.js",
+  "version": "0.0.0",
+  "author": "{{author}}",
+  "description": "{{desc}}",
+  "requireRestart": true
+}

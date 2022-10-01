@@ -18,6 +18,15 @@ module.exports = function (
     return upperFirst(pickPluginName(text));
   });
 
+  const namePrompts = [
+    {
+      type: 'input',
+      name: 'name',
+      require: true,
+      message: '插件名称',
+    }
+  ]
+
   const serverPrompts = [
     {
       type: 'input',
@@ -41,6 +50,27 @@ module.exports = function (
   ];
 
   // 服务端插件的前端模板代码
+  plop.setGenerator('client-plugin', {
+    description: '纯前端插件的模板代码',
+    prompts: [
+      ...namePrompts,
+      ...serverPrompts,
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: path.resolve(process.cwd(), './plugins'),
+        base: './client-plugin',
+        templateFiles: [
+          './client-plugin/**/*',
+        ],
+        skipIfExists: true,
+        globOptions: {},
+      },
+    ],
+  });
+
+  // 服务端插件的前端模板代码
   plop.setGenerator('server-plugin', {
     description: '服务端插件模板代码',
     prompts: serverPrompts,
@@ -60,12 +90,7 @@ module.exports = function (
   plop.setGenerator('server-plugin-web', {
     description: '服务端插件的前端模板代码',
     prompts: [
-      {
-        type: 'input',
-        name: 'name',
-        require: true,
-        message: '插件名称',
-      },
+      ...namePrompts,
       ...serverPrompts,
     ],
     actions: [
@@ -87,12 +112,7 @@ module.exports = function (
   plop.setGenerator('server-plugin-full', {
     description: '服务端插件的完整模板代码',
     prompts: [
-      {
-        type: 'input',
-        name: 'name',
-        require: true,
-        message: '插件名称',
-      },
+      ...namePrompts,
       ...serverPrompts,
     ],
     actions: [
