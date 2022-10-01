@@ -317,6 +317,7 @@ importers:
       mini-css-extract-plugin: ^1.6.2
       mini-star: ^1.3.1
       minimatch: ^5.1.0
+      normalize-path: ^3.0.0
       p-min-delay: ^4.0.0
       postcss: ^8.3.5
       postcss-loader: ^6.1.0
@@ -446,6 +447,7 @@ importers:
       less: 4.1.3
       less-loader: 10.2.0_less@4.1.3+webpack@5.73.0
       mini-css-extract-plugin: 1.6.2_webpack@5.73.0
+      normalize-path: 3.0.0
       postcss: 8.4.16
       postcss-loader: 6.2.1_n6opzohgnqlahvvvueerfwobwq
       rimraf: 3.0.2
@@ -497,6 +499,18 @@ importers:
       react-canvas-draw: 1.2.1_react@18.2.0
     devDependencies:
       '@types/react-canvas-draw': 1.2.0
+      react: 18.2.0
+
+  client/web/plugins/com.msgbyte.filepizza:
+    specifiers:
+      react: 18.2.0
+    devDependencies:
+      react: 18.2.0
+
+  client/web/plugins/com.msgbyte.filesfm:
+    specifiers:
+      react: 18.2.0
+    devDependencies:
       react: 18.2.0
 
   client/web/plugins/com.msgbyte.genshin:
@@ -598,7 +612,6 @@ importers:
       moleculer: 0.14.23
       moleculer-cli: ^0.7.1
       moleculer-minio: ^2.0.0
-      moleculer-repl: ^0.6.5
       moleculer-web: ^0.10.4
       moment: ^2.29.1
       mongodb: 4.2.1
@@ -690,7 +703,6 @@ importers:
       mini-star: 1.3.1
       moleculer: 0.14.23_v2nojfag4zngjtjfzx3xixwhsy
       moleculer-cli: 0.7.1_aq42ly5xd6eunvb7egqihu226a
-      moleculer-repl: 0.6.6
       neo-blessed: 0.2.0
       ora: 5.4.1
       prettier: 2.7.1
@@ -15318,7 +15330,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
+      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -24048,6 +24060,7 @@ packages:
       typescript: 4.7.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: false
 
   /ts-pnp/1.2.0_typescript@4.7.4:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}

@@ -5,6 +5,5 @@
   "version": "0.0.0",
   "author": "msgbyte",
   "description": "隔空投送 —— 在同一网络发送文件与消息",
-  "documentUrl": "/plugins/com.msgbyte.webview/README.md",
   "requireRestart": false
 }

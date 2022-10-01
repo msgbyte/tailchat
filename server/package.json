@@ -101,7 +101,6 @@
     "mini-star": "^1.2.8",
     "moleculer": "0.14.23",
     "moleculer-cli": "^0.7.1",
-    "moleculer-repl": "^0.6.5",
     "neo-blessed": "^0.2.0",
     "ora": "5",
     "prettier": "^2.3.2",
