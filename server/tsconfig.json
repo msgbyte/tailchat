@@ -1,10 +1,9 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "importsNotUsedAsValues": "error",
     "jsx": "react",

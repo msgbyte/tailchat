@@ -1,0 +1,12 @@
+.remirror-editor-wrapper {
+  height: 100%;
+}
+
+.tailchat-rich-editor {
+  height: 100%;
+  outline: 0;
+}
+
+.tailchat-rich-editor p {
+  margin: 0;
+}

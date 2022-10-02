@@ -1,4 +1,3 @@
-import { useMemoizedFn } from 'node_modules/tailchat-shared';
 import React, {
   PropsWithChildren,
   useEffect,
@@ -6,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useMemoizedFn } from 'ahooks';
 
 interface AutoFolderProps extends PropsWithChildren {
   maxHeight: number;

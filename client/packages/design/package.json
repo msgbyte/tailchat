@@ -23,11 +23,14 @@
   "homepage": "https://github.com/msgbyte/tailchat#readme",
   "dependencies": {
     "@iconify/react": "^3.2.1",
+    "@remirror/pm": "^2.0.0",
+    "@remirror/react": "^2.0.9",
     "ahooks": "^3.7.1",
     "antd": "^4.19.5",
     "clsx": "^1.1.1",
     "lodash": "^4.17.21",
     "react-fastify-form": "1.0.10",
+    "remirror": "^2.0.9",
     "str2int": "^1.1.0"
   },
   "devDependencies": {
