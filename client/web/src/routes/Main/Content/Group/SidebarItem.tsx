@@ -17,7 +17,7 @@ import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import _compact from 'lodash/compact';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 import type { ItemType } from 'antd/lib/menu/hooks/useItems';
 
@@ -123,7 +123,7 @@ export const SidebarItem: React.FC<{
               },
             },
         panel.type === GroupPanelType.TEXT && {
-          key: 'copy',
+          key: 'markAsRead',
           label: t('标记为已读'),
           icon: <Icon icon="mdi:message-badge-outline" />,
           onClick: markConverseAllAck,
