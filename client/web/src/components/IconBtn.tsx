@@ -2,7 +2,7 @@ import { Button, ButtonProps, Tooltip } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
 import { isValidStr } from 'tailchat-shared';
-import { Icon } from './Icon';
+import { Icon } from 'tailchat-design';
 
 type IconBtnShapeType = 'circle' | 'square';
 
@@ -23,7 +23,7 @@ interface IconBtnProps extends Omit<ButtonProps, 'shape'> {
   title?: string;
 }
 export const IconBtn: React.FC<IconBtnProps> = React.memo(
-  ({ icon, iconClassName, title, ...props }) => {
+  ({ icon, iconClassName, title, className, ...props }) => {
     const shape = calcShape(props.shape);
 
     const iconEl = (
@@ -38,7 +38,8 @@ export const IconBtn: React.FC<IconBtnProps> = React.memo(
           'border-0 text-white text-opacity-80 hover:text-opacity-100',
           props.danger
             ? 'bg-red-600 bg-opacity-80 hover:bg-opacity-100'
-            : 'bg-black bg-opacity-20 hover:bg-opacity-60'
+            : 'bg-black bg-opacity-20 hover:bg-opacity-60',
+          className
         )}
         {...props}
         shape={shape}

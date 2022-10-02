@@ -109,13 +109,16 @@ declare module '@capital/common' {
 
   export const uploadFile: any;
 
-  export const showToasts: any;
+  export const showToasts: (
+    message: string,
+    type?: 'info' | 'success' | 'error' | 'warning'
+  ) => void;
 
-  export const showErrorToasts: any;
+  export const showErrorToasts: (error: any) => void;
 
   export const fetchAvailableServices: any;
 
-  export const isValidStr: any;
+  export const isValidStr: (str: any) => str is string;
 
   export const useGroupPanelInfo: any;
 
@@ -252,7 +255,16 @@ declare module '@capital/component' {
    */
   export const notification: any;
 
-  export const Empty: any;
+  export const Empty: React.FC<
+    React.PropsWithChildren<{
+      prefixCls?: string;
+      className?: string;
+      style?: React.CSSProperties;
+      imageStyle?: React.CSSProperties;
+      image?: React.ReactNode;
+      description?: React.ReactNode;
+    }>
+  >;
 
   export const Avatar: any;
 
@@ -266,7 +278,9 @@ declare module '@capital/component' {
 
   export const IconBtn: React.FC<{
     icon: string;
+    className?: string;
     iconClassName?: string;
+    size?: 'small' | 'middle' | 'large';
     shape?: 'circle' | 'square';
     title?: string;
   }>;
