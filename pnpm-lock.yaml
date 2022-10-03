@@ -292,6 +292,7 @@ importers:
       '@types/webpack': ^5.28.0
       '@types/webpack-bundle-analyzer': ^4.4.1
       '@types/webpack-dev-server': ^4.3.1
+      ahooks: ^3.7.1
       antd: ^4.19.5
       autoprefixer: ^10.2.6
       axios: ^0.21.1
@@ -371,6 +372,7 @@ importers:
       yup: ^0.32.9
     dependencies:
       '@loadable/component': 5.15.2_react@18.2.0
+      ahooks: 3.7.1_react@18.2.0
       antd: 4.22.8_biqbaboplfbrettd7655fr4n2y
       axios: 0.21.4
       clsx: 1.2.1

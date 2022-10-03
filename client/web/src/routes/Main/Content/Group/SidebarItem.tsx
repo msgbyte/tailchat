@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   groupActions,
   GroupPanel,
@@ -18,41 +18,7 @@ import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import _compact from 'lodash/compact';
 import { Icon } from 'tailchat-design';
-import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
-import type { ItemType } from 'antd/lib/menu/hooks/useItems';
-
-/**
- * 获取来自插件的菜单项
- */
-function useExtraMenuItems(panel: GroupPanel): ItemType[] {
-  const pluginPanelInfo = useMemo(
-    () =>
-      panel.pluginPanelName && findPluginPanelInfoByName(panel.pluginPanelName),
-    [panel.pluginPanelName]
-  );
-  if (!pluginPanelInfo) {
-    return [];
-  }
-
-  if (
-    Array.isArray(pluginPanelInfo.menus) &&
-    pluginPanelInfo.menus.length > 0
-  ) {
-    return [
-      {
-        type: 'divider',
-      },
-      ...pluginPanelInfo.menus.map((item) => ({
-        key: item.name,
-        label: item.label,
-        icon: item.icon ? <Icon icon={item.icon} /> : undefined,
-        onClick: () => item.onClick(panel),
-      })),
-    ];
-  }
-
-  return [];
-}
+import { useExtraMenuItems, useGroupPanelExtraBadge } from './utils';
 
 /**
  * 群组面板侧边栏组件
@@ -62,20 +28,22 @@ export const SidebarItem: React.FC<{
   panel: GroupPanel;
 }> = React.memo((props) => {
   const { groupId, panel } = props;
+  const panelId = panel.id;
   const { hasOpenedPanel, openPanelWindow } = usePanelWindow(
-    `/panel/group/${groupId}/${panel.id}`
+    `/panel/group/${groupId}/${panelId}`
   );
   const groupInfo = useGroupInfo(groupId);
   const dispatch = useAppDispatch();
-  const { markConverseAllAck } = useConverseAck(panel.id);
+  const { markConverseAllAck } = useConverseAck(panelId);
   const extraMenuItems = useExtraMenuItems(panel);
+  const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
 
   if (!groupInfo) {
     return <LoadingSpinner />;
   }
 
   const isPinned =
-    isValidStr(groupInfo.pinnedPanelId) && groupInfo.pinnedPanelId === panel.id;
+    isValidStr(groupInfo.pinnedPanelId) && groupInfo.pinnedPanelId === panelId;
 
   const menu = (
     <Menu
@@ -85,7 +53,7 @@ export const SidebarItem: React.FC<{
           label: t('复制链接'),
           icon: <Icon icon="mdi:content-copy" />,
           onClick: () => {
-            copy(`${location.origin}/main/group/${groupId}/${panel.id}`);
+            copy(`${location.origin}/main/group/${groupId}/${panelId}`);
             showToasts(t('已复制到剪切板'));
           },
         },
@@ -117,7 +85,7 @@ export const SidebarItem: React.FC<{
                 dispatch(
                   groupActions.pinGroupPanel({
                     groupId,
-                    panelId: panel.id,
+                    panelId: panelId,
                   })
                 );
               },
@@ -144,7 +112,8 @@ export const SidebarItem: React.FC<{
           <GroupPanelItem
             name={panel.name}
             icon={icon}
-            to={`/main/group/${groupId}/${panel.id}`}
+            to={`/main/group/${groupId}/${panelId}`}
+            extraBadge={extraBadge}
           />
         )}
       </div>

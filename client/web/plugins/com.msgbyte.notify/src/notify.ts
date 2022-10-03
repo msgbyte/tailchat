@@ -4,6 +4,7 @@ import {
   getCachedUserInfo,
   getServiceWorkerRegistration,
 } from '@capital/common';
+import { hasSilent } from './silent';
 
 export function initNotify() {
   if (Notification.permission === 'default') {
@@ -13,7 +14,14 @@ export function initNotify() {
   regSocketEventListener({
     eventName: 'chat.message.add',
     eventFn: (message) => {
+      const converseId = message.converseId;
       const currentUserId = getGlobalState()?.user.info._id;
+
+      if (hasSilent(converseId)) {
+        // 免打扰
+        return;
+      }
+
       if (currentUserId !== message.author) {
         // 创建通知
 

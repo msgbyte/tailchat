@@ -46,6 +46,13 @@ export interface PluginCustomPanel {
 export const [pluginCustomPanel, regCustomPanel] =
   buildRegList<PluginCustomPanel>();
 
+export interface PluginPanelMenu {
+  name: string;
+  label: string;
+  icon?: string;
+  onClick: (panelInfo: GroupPanel) => void;
+}
+
 /**
  * 注册群组面板
  */
@@ -79,12 +86,7 @@ export interface PluginGroupPanel {
   /**
    * 面板项右键菜单
    */
-  menus?: {
-    name: string;
-    label: string;
-    icon?: string;
-    onClick: (panelInfo: GroupPanel) => void;
-  }[];
+  menus?: PluginPanelMenu[];
 }
 export const [pluginGroupPanel, regGroupPanel] =
   buildRegList<PluginGroupPanel>();
@@ -212,3 +214,19 @@ export const [pluginPanelActions, regPluginPanelAction] = buildRegList<
  */
 export const [pluginPermission, regPluginPermission] =
   buildRegList<PermissionItemType>();
+
+/**
+ * 注册自定义群组面板badge
+ */
+export const [pluginGroupPanelBadges, regGroupPanelBadge] = buildRegList<{
+  name: string;
+  render: (groupId: string, panelId: string) => React.ReactNode;
+}>();
+
+/**
+ * 注册自定义群组文本面板项额外操作菜单
+ */
+export const [
+  pluginGroupTextPanelExtraMenus,
+  regPluginGroupTextPanelExtraMenu,
+] = buildRegList<PluginPanelMenu>();

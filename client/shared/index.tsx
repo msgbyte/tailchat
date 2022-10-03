@@ -69,6 +69,7 @@ export { useRafState } from './hooks/useRafState';
 export { useSearch } from './hooks/useSearch';
 export { useShallowObject } from './hooks/useShallowObject';
 export { useUpdateRef } from './hooks/useUpdateRef';
+export { useWatch } from './hooks/useWatch';
 export { useWhyDidYouUpdate } from './hooks/useWhyDidYouUpdate';
 
 // manager

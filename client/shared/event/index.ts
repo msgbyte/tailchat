@@ -35,6 +35,11 @@ export interface SharedEventMap {
    * 消息已读(消息出现在界面上)
    */
   readMessage: (payload: ChatMessage | null) => void;
+
+  /**
+   * 群组面板状态更新
+   */
+  groupPanelBadgeUpdate: () => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 

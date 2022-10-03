@@ -2,7 +2,7 @@ import Shepherd from 'shepherd.js';
 import { steps } from './steps';
 import './style.less';
 
-const KEY = 'com.msgbyte.intro/hasRun';
+const KEY = 'plugin:com.msgbyte.intro/hasRun';
 
 if (!window.localStorage.getItem(KEY)) {
   const tour = new Shepherd.Tour({

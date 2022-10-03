@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.15.2",
+    "ahooks": "^3.7.1",
     "antd": "^4.19.5",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",

@@ -1,4 +1,4 @@
-import { Badge, Typography } from 'antd';
+import { Badge, Space, Typography } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
 import { useLocation } from 'react-router';
@@ -13,6 +13,7 @@ export const GroupPanelItem: React.FC<{
   icon: React.ReactNode;
   to: string;
   badge?: boolean;
+  extraBadge?: React.ReactNode[];
 }> = React.memo((props) => {
   const { icon, name, to, badge } = props;
   const location = useLocation();
@@ -37,11 +38,15 @@ export const GroupPanelItem: React.FC<{
           {name}
         </Typography.Text>
 
-        {badge === true ? (
-          <Badge status="error" />
-        ) : (
-          <Badge count={Number(badge) || 0} />
-        )}
+        <Space>
+          {badge === true ? (
+            <Badge status="error" />
+          ) : (
+            <Badge count={Number(badge) || 0} />
+          )}
+
+          {props.extraBadge}
+        </Space>
       </div>
     </Link>
   );
