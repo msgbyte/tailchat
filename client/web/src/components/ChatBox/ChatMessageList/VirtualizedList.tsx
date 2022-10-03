@@ -6,7 +6,12 @@ import {
   Virtuoso,
   VirtuosoHandle,
 } from 'react-virtuoso';
-import { ChatMessage, sharedEvent, useMemoizedFn } from 'tailchat-shared';
+import {
+  ChatMessage,
+  sharedEvent,
+  useMemoizedFn,
+  useSharedEventHandler,
+} from 'tailchat-shared';
 
 const PREPEND_OFFSET = 10 ** 7;
 
@@ -23,21 +28,13 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
     const listRef = useRef<VirtuosoHandle>(null);
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
 
-    useEffect(() => {
-      const onSendMessage = () => {
-        listRef.current?.scrollToIndex({
-          index: 'LAST',
-          align: 'end',
-          behavior: 'smooth',
-        });
-      };
-
-      sharedEvent.on('sendMessage', onSendMessage);
-
-      return () => {
-        sharedEvent.off('sendMessage', onSendMessage);
-      };
-    }, []);
+    useSharedEventHandler('sendMessage', () => {
+      listRef.current?.scrollToIndex({
+        index: 'LAST',
+        align: 'end',
+        behavior: 'smooth',
+      });
+    });
 
     const handleLoadMore = useMemoizedFn(() => {
       if (props.isLoadingMore) {

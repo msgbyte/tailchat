@@ -8,6 +8,7 @@ RUN npm install -g pnpm@7.11.0
 RUN npm install -g tailchat-cli@1.4.0
 
 # Install plugins and sdk dependency
+COPY ./tsconfig.json ./tsconfig.json
 COPY ./server/packages ./server/packages
 COPY ./server/plugins ./server/plugins
 COPY ./server/package.json ./server/package.json
