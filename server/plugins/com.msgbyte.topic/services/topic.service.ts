@@ -57,7 +57,9 @@ class GroupTopicService extends TcService {
 
     // 鉴权
     const group = await call(ctx).getGroupInfo(groupId);
-    const isMember = group.members.some((member) => member.userId === userId);
+    const isMember = group.members.some((member) => {
+      return String(member.userId) === userId;
+    });
     if (!isMember) {
       throw new Error(t('不是该群组成员'));
     }
