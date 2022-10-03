@@ -36,11 +36,9 @@ export const RoleSummary: React.FC<RoleSummaryProps> = React.memo((props) => {
         onSave={props.onChangeRoleName}
       />
 
-      <DevContainer>
-        <Button type="primary" danger={true} onClick={handleDeleteRole}>
-          {t('删除身份组')}
-        </Button>
-      </DevContainer>
+      <Button type="primary" danger={true} onClick={handleDeleteRole}>
+        {t('删除身份组')}
+      </Button>
     </div>
   );
 });

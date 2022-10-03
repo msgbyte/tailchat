@@ -7,6 +7,7 @@
     "emitDecoratorMetadata": true,
     "importsNotUsedAsValues": "error",
     "jsx": "react",
+    "strict": false, // 临时
     "typeRoots": ["./node_modules/@types", "./types"],
     "paths": {
       "tailchat-server-sdk": ["./packages/sdk/src"]
