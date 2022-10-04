@@ -16,6 +16,7 @@ declare module '@capital/common' {
 
   /**
    * 打开模态框
+   * @deprecated 请从 @capital/component 引入
    */
   export const openModal: (
     content: React.ReactNode,
@@ -39,16 +40,34 @@ declare module '@capital/common' {
     }
   ) => number;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const closeModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const ModalWrapper: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const useModalContext: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const openConfirmModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const openReconfirmModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const Loadable: any;
 
   export const getGlobalState: any;
@@ -218,6 +237,14 @@ declare module '@capital/common' {
     required?: string[];
   }) => void;
 
+  export const pluginGroupPanelBadges: any;
+
+  export const regGroupPanelBadge: any;
+
+  export const pluginGroupTextPanelExtraMenus: any;
+
+  export const regPluginGroupTextPanelExtraMenu: any;
+
   export const useGroupIdContext: () => string;
 
   export const useGroupPanelContext: () => {
@@ -305,7 +332,27 @@ declare module '@capital/component' {
 
   export const DefaultFullModalTextAreaEditorRender: any;
 
-  export const openModal: any;
+  export const openModal: (
+    content: React.ReactNode,
+
+    props?: {
+      /**
+       * 是否显示右上角的关闭按钮
+       * @default false
+       */
+      closable?: boolean;
+
+      /**
+       * 遮罩层是否可关闭
+       */
+      maskClosable?: boolean;
+
+      /**
+       * 关闭modal的回调
+       */
+      onCloseModal?: () => void;
+    }
+  ) => number;
 
   export const closeModal: any;
 
@@ -316,6 +363,8 @@ declare module '@capital/component' {
   export const openConfirmModal: any;
 
   export const openReconfirmModal: any;
+
+  export const Loadable: any;
 
   export const Loading: any;
 

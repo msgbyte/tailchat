@@ -15,6 +15,7 @@ function registerDependencies() {
   regDependency('react', () => import('react'));
   regDependency('react-router', () => import('react-router'));
   regDependency('axios', () => import('axios')); // 用于插件的第三方包使用axios作为依赖的情况下，可以减少包体积
+  regDependency('styled-components', () => import('styled-components')); // 仅用于第三方插件. tailchat本身更多使用 tailwindcss
 }
 
 function registerModules() {

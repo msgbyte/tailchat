@@ -42,6 +42,7 @@ export {
   openConfirmModal,
   openReconfirmModal,
 } from '@/components/Modal';
+export { Loadable } from '@/components/Loadable';
 export { Loading } from '@/components/Loading';
 export { SidebarView } from '@/components/SidebarView';
 export { GroupPanelSelector } from '@/components/GroupPanelSelector';

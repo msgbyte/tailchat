@@ -9,6 +9,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "react": "18.2.0"
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
   }
 }
