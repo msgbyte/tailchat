@@ -1,4 +1,5 @@
-import { regGroupPanel, Loadable } from '@capital/common';
+import { regGroupPanel } from '@capital/common';
+import { Loadable } from '@capital/component';
 import { Translate } from './translate';
 
 const PLUGIN_NAME = 'com.msgbyte.topic';

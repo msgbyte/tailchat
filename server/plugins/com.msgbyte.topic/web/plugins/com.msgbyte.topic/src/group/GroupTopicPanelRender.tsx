@@ -1,20 +1,23 @@
 import React, { useCallback, useEffect } from 'react';
 import { TopicCard } from '../components/TopicCard';
+import { useAsyncRequest, useGroupPanelContext } from '@capital/common';
 import {
-  showToasts,
-  useAsyncRequest,
-  useGroupPanelContext,
-} from '@capital/common';
-import { Button, Empty, IconBtn } from '@capital/component';
+  Button,
+  Empty,
+  IconBtn,
+  openModal,
+  closeModal,
+} from '@capital/component';
 import { request } from '../request';
-import './GroupTopicPanelRender.less';
 import { Translate } from '../translate';
+import { TopicCreate } from '../components/modals/TopicCreate';
+import './GroupTopicPanelRender.less';
 
 const GroupTopicPanelRender: React.FC = React.memo(() => {
   const panelInfo = useGroupPanelContext();
 
   const [{ value: list = [] }, fetch] = useAsyncRequest(async () => {
-    if (!panelInfo) {
+    if (!panelInfo.groupId || !panelInfo.panelId) {
       return [];
     }
 
@@ -26,15 +29,29 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
     });
 
     return data;
-  }, [panelInfo]);
+  }, [panelInfo.groupId, panelInfo.panelId]);
 
   useEffect(() => {
     fetch();
   }, [fetch]);
 
   const handleCreateTopic = useCallback(() => {
-    showToasts('TODO: 创建话题');
-  }, []);
+    const key = openModal(
+      <TopicCreate
+        onCreate={async (text) => {
+          await request.post('create', {
+            groupId: panelInfo.groupId,
+            panelId: panelInfo.panelId,
+            content: text,
+          });
+
+          fetch();
+
+          closeModal(key);
+        }}
+      />
+    );
+  }, [panelInfo, fetch]);
 
   return (
     <div className="plugin-topic-group-panel">

@@ -71,6 +71,7 @@ class GroupTopicService extends TcService {
       })
       .limit(size)
       .skip((page - 1) * 20)
+      .sort({ _id: 'desc' })
       .exec();
 
     const json = await this.transformDocuments(ctx, {}, topic);

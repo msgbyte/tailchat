@@ -8,14 +8,14 @@ export function useAsyncRequest<T extends FunctionReturningPromise>(
   fn: T,
   deps: DependencyList = []
 ) {
-  const [{ loading }, call] = useAsyncFn(async (...args) => {
+  const [{ loading, value }, call] = useAsyncFn(async (...args: any[]) => {
     try {
-      await fn(...args);
+      return await fn(...args);
     } catch (err) {
       showErrorToasts(isDevelopment ? err : t('系统忙, 请稍后再试'));
       console.error(err);
     }
   }, deps);
 
-  return [{ loading }, call as T] as const;
+  return [{ loading, value }, call as T] as const;
 }
