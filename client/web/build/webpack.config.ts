@@ -77,10 +77,6 @@ const plugins: Configuration['plugins'] = [
         to: 'pwa.webmanifest',
       },
       {
-        from: path.resolve(ROOT_PATH, './assets/config.json'),
-        to: 'config.json',
-      },
-      {
         from: path.resolve(ROOT_PATH, './assets/images/logo/'),
         to: 'images/logo/',
       },
@@ -103,7 +99,7 @@ const plugins: Configuration['plugins'] = [
     skipWaiting: true,
 
     // Do not precache images
-    exclude: [/\.(?:png|jpg|jpeg|svg)$/, 'config.json'],
+    exclude: [/\.(?:png|jpg|jpeg|svg)$/],
 
     maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 限制最大缓存 8M
 
