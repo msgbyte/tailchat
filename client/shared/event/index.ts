@@ -1,7 +1,7 @@
-import { EventEmitter } from 'events';
 import { useEffect } from 'react';
 import { useUpdateRef } from '../hooks/useUpdateRef';
 import type { ChatMessage, SendMessagePayload } from '../model/message';
+import { EventEmitter } from 'eventemitter-strict';
 
 /**
  * 共享事件类型
@@ -43,7 +43,7 @@ export interface SharedEventMap {
 }
 export type SharedEventType = keyof SharedEventMap;
 
-const bus = new EventEmitter();
+const bus = new EventEmitter<SharedEventMap>();
 
 /**
  * 事件中心
