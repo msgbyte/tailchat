@@ -11,7 +11,6 @@ import { builtinPlugins } from '../builtin';
 import { pluginManager } from '../manager';
 import { PluginStoreItem } from './Item';
 import { ManualInstall } from './ManualInstall';
-import styles from './index.module.less';
 
 function usePluginStoreData() {
   const { loading: loading1, value: installedPluginList = [] } = useAsync(
@@ -48,7 +47,7 @@ export const PluginStore: React.FC = React.memo(() => {
         <PillTabPane key="1" tab={t('已安装')}>
           <Divider orientation="left">{t('已安装')}</Divider>
 
-          <div className={styles.pluginSection}>
+          <div className="flex flex-wrap">
             {[...builtinPlugins, ...installedPluginList].map((plugin) => (
               <PluginStoreItem
                 key={plugin.name}
@@ -63,7 +62,7 @@ export const PluginStore: React.FC = React.memo(() => {
         <PillTabPane key="2" tab={t('全部')}>
           <Divider orientation="left">{t('内置插件')}</Divider>
 
-          <div className={styles.pluginSection}>
+          <div className="flex flex-wrap">
             {builtinPlugins.map((plugin) => (
               <PluginStoreItem
                 key={plugin.name}
@@ -76,7 +75,7 @@ export const PluginStore: React.FC = React.memo(() => {
 
           <Divider orientation="left">{t('插件中心')}</Divider>
 
-          <div className={styles.pluginSection}>
+          <div className="flex flex-wrap">
             {allPlugins.map((plugin) => (
               <PluginStoreItem
                 key={plugin.name}

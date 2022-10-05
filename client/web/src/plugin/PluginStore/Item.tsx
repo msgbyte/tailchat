@@ -1,4 +1,4 @@
-import { Avatar } from '@/components/Avatar';
+import { Avatar } from 'tailchat-design';
 import { Button, Space } from 'antd';
 import React, { useCallback, useState } from 'react';
 import {
@@ -58,8 +58,8 @@ export const PluginStoreItem: React.FC<{
   }, [manifest]);
 
   return (
-    <div className="rounded-md flex w-80 mobile:w-full h-36 bg-white bg-opacity-40 dark:bg-black dark:bg-opacity-40 shadow py-2 px-3">
-      <div className="flex w-full">
+    <div className="mobile:w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 p-1">
+      <div className="rounded-md flex w-full h-36 bg-white bg-opacity-40 dark:bg-black dark:bg-opacity-40 shadow py-2 px-3">
         <div className="mr-2">
           <Avatar shape="square" src={manifest.icon} name={manifest.label} />
         </div>
@@ -75,7 +75,7 @@ export const PluginStoreItem: React.FC<{
 
           <Space className="mt-1 justify-end">
             {isValidStr(manifest.documentUrl) && (
-              <Button onClick={handleShowDocument}>文档</Button>
+              <Button onClick={handleShowDocument}>{t('文档')}</Button>
             )}
 
             <div>

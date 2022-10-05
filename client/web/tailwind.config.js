@@ -48,9 +48,11 @@ module.exports = {
   important: '#app',
   theme: {
     screens: {
+      sm: { min: '640px' },
+      md: { min: '768px' },
       lg: { min: '1024px' },
-      md: { max: '767px' },
-      sm: { max: '639px' },
+      xl: { min: '1280px' },
+      '2xl': { min: '1536px' },
       mobile: { max: '639px' }, // alias
       desktop: { min: '640px' }, // alias
     },
