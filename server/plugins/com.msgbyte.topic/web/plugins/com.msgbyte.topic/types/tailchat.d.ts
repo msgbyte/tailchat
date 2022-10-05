@@ -310,6 +310,7 @@ declare module '@capital/component' {
     size?: 'small' | 'middle' | 'large';
     shape?: 'circle' | 'square';
     title?: string;
+    onClick?: React.MouseEventHandler<HTMLElement>;
   }>;
 
   export const PillTabs: any;
