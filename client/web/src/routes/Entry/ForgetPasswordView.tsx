@@ -56,7 +56,7 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
         <div className="mb-4">
           <div className="mb-2">{t('邮箱')}</div>
           <input
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
+            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
             name="forget-email"
             placeholder="name@example.com"
             type="text"
@@ -82,7 +82,7 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
             <div className="mb-4">
               <div className="mb-2">{t('OTP')}</div>
               <input
-                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
                 name="forget-otp"
                 type="text"
                 value={otp}
@@ -93,7 +93,7 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
             <div className="mb-4">
               <div className="mb-2">{t('新密码')}</div>
               <input
-                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
                 name="forget-password"
                 type="password"
                 placeholder="******"

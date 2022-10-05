@@ -17,7 +17,7 @@ const EntryRoute = React.memo(() => {
       <div
         className={clsx(
           styles.entryLeft,
-          'entry-left w-142 sm:w-full pt-40 px-4 bg-gray-600 min-h-full flex justify-center bg-repeat-y z-10'
+          'entry-left w-142 mobile:w-full pt-40 px-4 bg-gray-600 min-h-full flex justify-center bg-repeat-y z-10'
         )}
         style={{ backgroundImage: `url(${loginPatternUrl})` }}
       >
@@ -33,7 +33,7 @@ const EntryRoute = React.memo(() => {
         </Routes>
       </div>
 
-      <div className="flex-1 sm:hidden tc-background" />
+      <div className="flex-1 mobile:hidden tc-background" />
     </div>
   );
 });
