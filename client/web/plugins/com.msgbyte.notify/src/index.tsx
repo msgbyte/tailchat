@@ -2,23 +2,26 @@ import {
   regGroupPanelBadge,
   regPluginGroupTextPanelExtraMenu,
   sharedEvent,
+  showToasts,
 } from '@capital/common';
 import { Icon } from '@capital/component';
 import React from 'react';
 import { appendSilent, hasSilent, removeSilent } from './silent';
 import { initNotify } from './notify';
+import { Translate } from './translate';
 
 const PLUGIN_NAME = 'com.msgbyte.notify';
 
 if ('Notification' in window) {
   initNotify();
 } else {
-  console.warn('浏览器不支持 Notification');
+  showToasts(Translate.nosupport, 'warning');
+  console.warn(Translate.nosupport);
 }
 
 regPluginGroupTextPanelExtraMenu({
   name: `${PLUGIN_NAME}/grouppanelmenu`,
-  label: '免打扰',
+  label: Translate.slient,
   icon: 'mdi:bell-off-outline',
   onClick: (panelInfo) => {
     if (hasSilent(panelInfo.id)) {

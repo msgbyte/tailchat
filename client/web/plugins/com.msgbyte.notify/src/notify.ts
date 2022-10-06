@@ -4,6 +4,7 @@ import {
   getCachedUserInfo,
   getServiceWorkerRegistration,
 } from '@capital/common';
+import { Translate } from './translate';
 import { hasSilent } from './silent';
 
 export function initNotify() {
@@ -37,7 +38,7 @@ export function initNotify() {
                 getServiceWorkerRegistration();
 
               if (registration) {
-                registration.showNotification(`来自 ${nickname}`, {
+                registration.showNotification(`${Translate.from} ${nickname}`, {
                   body: content,
                   icon,
                   tag: 'tailchat-message',
@@ -45,7 +46,7 @@ export function initNotify() {
                 });
               } else {
                 // fallback
-                new Notification(`来自 ${nickname}`, {
+                new Notification(`${Translate.from} ${nickname}`, {
                   body: content,
                   icon,
                   tag: 'tailchat-message',
