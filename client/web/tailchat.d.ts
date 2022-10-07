@@ -122,9 +122,15 @@ declare module '@capital/common' {
 
   export const useAsyncFn: any;
 
-  export const useAsyncRefresh: any;
+  export const useAsyncRefresh: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any; error?: Error }, T];
 
-  export const useAsyncRequest: any;
+  export const useAsyncRequest: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any }, T];
 
   export const uploadFile: any;
 
@@ -132,6 +138,8 @@ declare module '@capital/common' {
     message: string,
     type?: 'info' | 'success' | 'error' | 'warning'
   ) => void;
+
+  export const showSuccessToasts: any;
 
   export const showErrorToasts: (error: any) => void;
 
@@ -142,6 +150,8 @@ declare module '@capital/common' {
   export const useGroupPanelInfo: any;
 
   export const sendMessage: any;
+
+  export const showMessageTime: any;
 
   export const useLocation: any;
 
@@ -380,6 +390,8 @@ declare module '@capital/component' {
   export const PortalRemove: any;
 
   export const ErrorBoundary: any;
+
+  export const UserAvatar: any;
 
   export const UserName: React.FC<{
     userId: string;

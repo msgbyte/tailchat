@@ -10,6 +10,7 @@ export const UserProfileContainer: React.FC<
   PropsWithChildren<{ userInfo: UserBaseInfo }>
 > = React.memo((props) => {
   const { userInfo } = props;
+
   const { value: bannerColor } = useAsync(async () => {
     if (!userInfo.avatar) {
       return getTextColorHex(userInfo.nickname);
@@ -18,6 +19,7 @@ export const UserProfileContainer: React.FC<
     const rgba = await fetchImagePrimaryColor(userInfo.avatar);
     return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
   }, [userInfo.avatar]);
+
   return (
     <div className="relative bg-inherit">
       <div

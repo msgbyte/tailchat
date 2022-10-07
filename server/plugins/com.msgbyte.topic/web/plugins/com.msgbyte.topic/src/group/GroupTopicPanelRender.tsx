@@ -78,7 +78,7 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
   return (
     <Root>
       {Array.isArray(list) && list.length > 0 ? (
-        list.map((_, i) => <TopicCard key={i} />)
+        list.map((item, i) => <TopicCard key={i} topic={item} />)
       ) : (
         <Empty description={Translate.noTopic}>
           <Button type="primary" onClick={handleCreateTopic}>

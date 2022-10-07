@@ -3,7 +3,7 @@ const { getModelForClass, prop, TimeStamps, modelOptions } = db;
 import type { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 
-class GroupTopicComment {
+class GroupTopicComment extends TimeStamps {
   @prop({
     default: () => nanoid(8),
   })
@@ -50,7 +50,7 @@ export class GroupTopic extends TimeStamps implements db.Base {
     type: () => GroupTopicComment,
     default: [],
   })
-  comment: GroupTopicComment[];
+  comments: GroupTopicComment[];
 }
 
 export type GroupTopicDocument = db.DocumentType<GroupTopic>;

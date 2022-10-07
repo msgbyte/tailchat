@@ -38,6 +38,15 @@ class GroupTopicService extends TcService {
         content: 'string',
       },
     });
+    this.registerAction('createComment', this.createComment, {
+      params: {
+        groupId: 'string',
+        panelId: 'string',
+        topicId: 'string',
+        content: 'string',
+        replyCommentId: { type: 'string', optional: true },
+      },
+    });
   }
 
   /**
@@ -117,6 +126,60 @@ class GroupTopicService extends TcService {
     const json = await this.transformDocuments(ctx, {}, topic);
 
     this.roomcastNotify(ctx, groupId, 'create', json);
+
+    return true;
+  }
+
+  /**
+   * 回复话题
+   */
+  async createComment(
+    ctx: TcContext<{
+      groupId: string;
+      panelId: string;
+      topicId: string;
+      content: string;
+      replyCommentId?: string;
+    }>
+  ) {
+    const { groupId, panelId, topicId, content, replyCommentId } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    // 鉴权
+    const group = await call(ctx).getGroupInfo(groupId);
+    const isMember = group.members.some((member) => member.userId === userId);
+    if (!isMember) {
+      throw new Error(t('不是该群组成员'));
+    }
+
+    const targetPanel = group.panels.find((p) => p.id === panelId);
+
+    if (!targetPanel) {
+      throw new Error(t('面板不存在'));
+    }
+
+    const topic = await this.adapter.model.findOneAndUpdate(
+      {
+        _id: topicId,
+        groupId,
+        panelId,
+      },
+      {
+        $push: {
+          comments: {
+            content,
+            author: userId,
+            replyCommentId,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    const json = await this.transformDocuments(ctx, {}, topic);
+
+    this.roomcastNotify(ctx, groupId, 'createComment', json);
 
     return true;
   }

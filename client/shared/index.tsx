@@ -207,6 +207,7 @@ export { NAME_REGEXP, SYSTEM_USERID } from './utils/consts';
 export {
   shouldShowMessageTime,
   getMessageTimeDiff,
+  showMessageTime,
   formatShortTime,
   formatFullTime,
   datetimeToNow,

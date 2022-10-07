@@ -41,6 +41,20 @@ export function getMessageTimeDiff(input: Date): string {
 }
 
 /**
+ * 小时消息时间
+ * 如果是当天则显示短时间，如果不是当天则显示完整时间
+ */
+export function showMessageTime(input: Date): string {
+  const date = dayjs(input);
+
+  if (isToday(date)) {
+    return formatShortTime(date);
+  } else {
+    return formatFullTime(date);
+  }
+}
+
+/**
  * 是否应该显示消息时间
  * 间隔时间大于十五分钟则显示
  */
