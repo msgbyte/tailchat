@@ -72,6 +72,11 @@ declare module '@capital/common' {
 
   export const getGlobalState: any;
 
+  export const useGlobalSocketEvent: <T>(
+    eventName: string,
+    callback: (data: T) => void
+  ) => void;
+
   export const getJWTUserInfo: () => Promise<{
     _id?: string;
     nickname?: string;

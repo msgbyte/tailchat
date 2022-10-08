@@ -20,7 +20,10 @@ export {
   openReconfirmModal,
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
-export { getGlobalState } from '@/utils/global-state-helper';
+export {
+  getGlobalState,
+  useGlobalSocketEvent,
+} from '@/utils/global-state-helper';
 export { getJWTUserInfo } from '@/utils/jwt-helper';
 export { dataUrlToFile } from '@/utils/file-helper';
 export {

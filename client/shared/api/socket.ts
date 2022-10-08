@@ -68,6 +68,18 @@ export class AppSocket {
   }
 
   /**
+   * 移除监听函数
+   */
+  removeListener(eventName: string, callback: (data: any) => void) {
+    const index = this.listener.findIndex(
+      (item) => item[0] === eventName && item[1] === callback
+    );
+    if (index >= 0) {
+      this.listener.splice(index, 1);
+    }
+  }
+
+  /**
    * 模拟重连
    * NOTICE: 仅用于开发环境
    */
