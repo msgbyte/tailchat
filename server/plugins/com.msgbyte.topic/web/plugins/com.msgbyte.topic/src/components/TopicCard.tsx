@@ -72,6 +72,7 @@ export const TopicCard: React.FC<{
     });
 
     setComment('');
+    toggleShowReply();
     showSuccessToasts();
   }, [topic.groupId, topic.panelId, topic._id, comment]);
 

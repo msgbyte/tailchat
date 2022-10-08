@@ -44,6 +44,7 @@ export {
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { Loading } from '@/components/Loading';
+export { LoadingOnFirst } from '@/components/LoadingOnFirst';
 export { SidebarView } from '@/components/SidebarView';
 export { GroupPanelSelector } from '@/components/GroupPanelSelector';
 export { Emoji } from '@/components/Emoji';

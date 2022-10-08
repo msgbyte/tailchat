@@ -1,20 +1,24 @@
 import React, { useCallback, useEffect } from 'react';
 import { TopicCard } from '../components/TopicCard';
-import { useAsyncRequest, useGroupPanelContext } from '@capital/common';
+import {
+  useAsyncRequest,
+  useGlobalSocketEvent,
+  useGroupPanelContext,
+} from '@capital/common';
 import {
   Button,
   Empty,
   IconBtn,
   openModal,
   closeModal,
-  LoadingSpinner,
+  LoadingOnFirst,
 } from '@capital/component';
 import { request } from '../request';
 import { Translate } from '../translate';
 import { TopicCreate } from '../components/modals/TopicCreate';
 import styled from 'styled-components';
 
-const Root = styled.div({
+const Root = styled(LoadingOnFirst)({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
@@ -53,6 +57,14 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
     fetch();
   }, [fetch]);
 
+  useGlobalSocketEvent('plugin:com.msgbyte.topic.create', () => {
+    fetch();
+  });
+
+  useGlobalSocketEvent('plugin:com.msgbyte.topic.createComment', () => {
+    fetch();
+  });
+
   const handleCreateTopic = useCallback(() => {
     const key = openModal(
       <TopicCreate
@@ -71,12 +83,8 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
     );
   }, [panelInfo, fetch]);
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   return (
-    <Root>
+    <Root spinning={loading}>
       {Array.isArray(list) && list.length > 0 ? (
         list.map((item, i) => <TopicCard key={i} topic={item} />)
       ) : (

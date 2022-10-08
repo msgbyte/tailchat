@@ -332,7 +332,7 @@ declare module '@capital/component' {
 
   export const PillTabPane: any;
 
-  export const LoadingSpinner: any;
+  export const LoadingSpinner: React.FC<{ tip?: string }>;
 
   export const WebFastForm: any;
 
@@ -382,7 +382,19 @@ declare module '@capital/component' {
 
   export const Loadable: any;
 
-  export const Loading: any;
+  export const Loading: React.FC<{
+    spinning: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+  }>;
+
+  export const LoadingOnFirst: React.FC<{
+    spinning: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+  }>;
 
   export const SidebarView: any;
 
