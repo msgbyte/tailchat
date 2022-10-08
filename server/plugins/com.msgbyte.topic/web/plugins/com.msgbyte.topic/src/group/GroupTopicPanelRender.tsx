@@ -58,11 +58,11 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
   }, [fetch]);
 
   useGlobalSocketEvent('plugin:com.msgbyte.topic.create', () => {
-    fetch();
+    fetch(); // not good, 待优化
   });
 
   useGlobalSocketEvent('plugin:com.msgbyte.topic.createComment', () => {
-    fetch();
+    fetch(); // not good, 待优化
   });
 
   const handleCreateTopic = useCallback(() => {

@@ -14,6 +14,9 @@ const Root = styled.div`
   }
 `;
 
+/**
+ * 话题评论
+ */
 export const TopicComments: React.FC<{
   comments: GroupTopicComment[];
 }> = React.memo((props) => {
