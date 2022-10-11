@@ -1,7 +1,6 @@
 import { useOpenAppInfo } from '../context';
 import React from 'react';
-import { FullModalField, Divider } from '@capital/component';
-import { SecretValue } from '../../components/SecretValue';
+import { FullModalField, Divider, SensitiveText } from '@capital/component';
 import './Profile.less';
 
 /**
@@ -18,7 +17,7 @@ const Profile: React.FC = React.memo(() => {
         <FullModalField title="App ID" content={appId} />
         <FullModalField
           title="App Secret"
-          content={<SecretValue>{appSecret}</SecretValue>}
+          content={<SensitiveText text={appSecret} />}
         />
       </div>
 
