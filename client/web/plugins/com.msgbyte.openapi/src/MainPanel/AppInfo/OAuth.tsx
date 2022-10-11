@@ -6,7 +6,7 @@ import {
 } from '@capital/component';
 import { useOpenAppInfo } from '../context';
 import { OpenAppCapability } from '../types';
-import { postRequest, useAsyncRequest } from '@capital/common';
+import { postRequest, useAsyncFn, useAsyncRequest } from '@capital/common';
 
 const OAuth: React.FC = React.memo(() => {
   const { refresh, appId, capability, oauth } = useOpenAppInfo();

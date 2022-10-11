@@ -8,10 +8,12 @@ interface OpenAppInfoContextProps extends OpenApp {
 const OpenAppInfoContext = React.createContext<OpenAppInfoContextProps>(null);
 OpenAppInfoContext.displayName = 'OpenAppInfoContext';
 
-export const OpenAppInfoProvider: React.FC<{
-  appInfo: OpenApp;
-  refresh: OpenAppInfoContextProps['refresh'];
-}> = (props) => {
+export const OpenAppInfoProvider: React.FC<
+  React.PropsWithChildren<{
+    appInfo: OpenApp;
+    refresh: OpenAppInfoContextProps['refresh'];
+  }>
+> = (props) => {
   return (
     <OpenAppInfoContext.Provider
       value={{

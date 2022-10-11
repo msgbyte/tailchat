@@ -5,6 +5,7 @@ import {
   useLocation,
   urlSearchParse,
   isValidStr,
+  useNavigate,
 } from '@capital/common';
 import { useEffect, useState } from 'react';
 import { OpenApp } from './types';
@@ -23,6 +24,7 @@ export function useOpenAppList() {
 
     return data ?? [];
   }, []);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
@@ -46,8 +48,7 @@ export function useOpenAppList() {
      * 设置当前选中的开放app
      */
     handleSetSelectedApp(appId: string) {
-      history.push({
-        ...history.location,
+      navigate({
         search: appendUrlSearch({
           appId,
         }),
