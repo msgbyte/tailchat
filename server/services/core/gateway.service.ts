@@ -168,6 +168,20 @@ export default class ApiService extends TcService {
         ) {
           // Async function which return with Promise
           res.setHeader('X-Node-ID', ctx.nodeID);
+
+          if (data['__raw']) {
+            if (data['header']) {
+              Object.entries(data['header']).forEach(([key, value]) => {
+                res.setHeader(key, String(value));
+              });
+            }
+
+            res.write(data['html'] ?? '');
+
+            res.end();
+            return;
+          }
+
           return { code: res.statusCode, data };
         },
 
@@ -308,6 +322,7 @@ export default class ApiService extends TcService {
             send(req, './public/index.html', { root: process.cwd() }).pipe(res);
           }
         },
+        whitelist: [],
         autoAliases: false,
       },
     ];

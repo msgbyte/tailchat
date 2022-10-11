@@ -1,0 +1,14 @@
+{
+  "name": "tailchat-plugin-prettyinvite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "邀请链接美化",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {
+    "tailchat-server-sdk": "*"
+  }
+}
