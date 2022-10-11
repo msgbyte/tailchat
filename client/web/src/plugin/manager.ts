@@ -56,8 +56,33 @@ class PluginManager {
   /**
    * 获取所有插件列表
    */
-  async getRegistryPlugins(): Promise<PluginManifest[]> {
-    return await getCachedRegistryPlugins();
+  getRegistryPlugins = _once(async (): Promise<PluginManifest[]> => {
+    const plugins = await getCachedRegistryPlugins();
+
+    this.updatePluginsInfo(plugins);
+
+    return plugins;
+  });
+
+  /**
+   * 自动更新插件信息到最新版本
+   */
+  private async updatePluginsInfo(plugins: PluginManifest[]) {
+    const installPlugins = await this.getInstalledPlugins();
+
+    await this.saveInstalledPlugins(
+      installPlugins.map((item) => {
+        const latestPluginInfo = plugins.find((p) => p.name === item.name);
+        if (latestPluginInfo) {
+          return {
+            ...item,
+            ...latestPluginInfo,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
   }
 
   /**
@@ -75,7 +100,7 @@ class PluginManager {
       plugins.push(manifest);
     }
 
-    await getStorage().save(PluginManager.STORE_KEY, plugins);
+    await this.saveInstalledPlugins(plugins);
 
     await loadSinglePlugin({
       name: manifest.name,
@@ -93,8 +118,15 @@ class PluginManager {
     const index = plugins.findIndex((plugin) => plugin.name === pluginName);
     if (index >= 0) {
       plugins.splice(index, 1);
-      await getStorage().save(PluginManager.STORE_KEY, plugins);
+      await this.saveInstalledPlugins(plugins);
     }
+  }
+
+  /**
+   * 记录已安装插件信息
+   */
+  private async saveInstalledPlugins(plugins: PluginManifest[]) {
+    await getStorage().save(PluginManager.STORE_KEY, plugins);
   }
 }
 
