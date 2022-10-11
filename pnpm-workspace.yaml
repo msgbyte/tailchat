@@ -4,6 +4,7 @@ packages:
   - 'client/web/plugins/**'
   - 'client/packages/**'
   - 'server'
+  - 'server/admin'
   - 'server/packages/**'
   - 'server/plugins/**'
   - 'cli'

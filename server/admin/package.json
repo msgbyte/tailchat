@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/index.ts'",
+    "start": "ts-node --transpile-only src/index.ts",
+    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/index.ts'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,13 +18,16 @@
     "@koa/router": "^10.1.1",
     "adminjs": "^5.10.4",
     "koa": "^2.13.4",
+    "koa-session": "^6.2.0",
     "koa-static": "^5.0.0",
     "koa2-formidable": "^1.0.3",
     "react-use": "^17.4.0",
-    "recharts": "^2.1.12"
+    "recharts": "^2.1.12",
+    "tushan": "github:msgbyte/tushan"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
+    "@types/koa-session": "^5.10.6",
     "@types/koa-static": "^4.0.2",
     "@types/node": "16.11.7",
     "@types/react": "^17.0.38",
