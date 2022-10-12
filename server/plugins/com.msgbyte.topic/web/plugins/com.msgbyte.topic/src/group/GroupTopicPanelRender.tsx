@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { TopicCard } from '../components/TopicCard';
 import {
+  showSuccessToasts,
   useAsyncRequest,
   useGlobalSocketEvent,
   useGroupPanelContext,
@@ -17,6 +18,8 @@ import { request } from '../request';
 import { Translate } from '../translate';
 import { TopicCreate } from '../components/modals/TopicCreate';
 import styled from 'styled-components';
+import { useTopicStore } from '../store';
+import type { GroupTopic } from '../types';
 
 const Root = styled(LoadingOnFirst)({
   display: 'flex',
@@ -37,46 +40,68 @@ const Root = styled(LoadingOnFirst)({
 
 const GroupTopicPanelRender: React.FC = React.memo(() => {
   const panelInfo = useGroupPanelContext();
+  const { panelId, groupId } = panelInfo;
+  const { topicMap, addTopicPanel, addTopicItem, updateTopicItem } =
+    useTopicStore();
+  const topicList = topicMap[panelId];
 
-  const [{ value: list = [], loading }, fetch] = useAsyncRequest(async () => {
-    if (!panelInfo.groupId || !panelInfo.panelId) {
+  const [{ loading }, fetch] = useAsyncRequest(async () => {
+    if (!groupId || !panelId) {
       return [];
     }
 
     const { data } = await request.get('list', {
       params: {
-        groupId: panelInfo.groupId,
-        panelId: panelInfo.panelId,
+        groupId,
+        panelId,
       },
     });
 
-    return data;
-  }, [panelInfo.groupId, panelInfo.panelId]);
+    addTopicPanel(panelId, data);
+  }, [groupId, panelId, addTopicPanel]);
 
   useEffect(() => {
+    /**
+     * 加载的时候获取列表
+     */
     fetch();
   }, [fetch]);
 
-  useGlobalSocketEvent('plugin:com.msgbyte.topic.create', () => {
-    fetch(); // not good, 待优化
-  });
+  useGlobalSocketEvent(
+    'plugin:com.msgbyte.topic.create',
+    (topic: GroupTopic) => {
+      /**
+       * 仅处理当前面板的话题更新
+       */
+      if (topic.panelId === panelId) {
+        addTopicItem(panelId, topic);
+      }
+    }
+  );
 
-  useGlobalSocketEvent('plugin:com.msgbyte.topic.createComment', () => {
-    fetch(); // not good, 待优化
-  });
+  useGlobalSocketEvent(
+    'plugin:com.msgbyte.topic.createComment',
+    (topic: GroupTopic) => {
+      /**
+       * 仅处理当前面板的话题更新
+       */
+      if (topic.panelId === panelId) {
+        updateTopicItem(panelId, topic);
+      }
+    }
+  );
 
   const handleCreateTopic = useCallback(() => {
     const key = openModal(
       <TopicCreate
         onCreate={async (text) => {
           await request.post('create', {
-            groupId: panelInfo.groupId,
-            panelId: panelInfo.panelId,
+            groupId,
+            panelId,
             content: text,
           });
 
-          fetch();
-
+          showSuccessToasts();
           closeModal(key);
         }}
       />
@@ -85,8 +110,8 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
 
   return (
     <Root spinning={loading}>
-      {Array.isArray(list) && list.length > 0 ? (
-        list.map((item, i) => <TopicCard key={i} topic={item} />)
+      {Array.isArray(topicList) && topicList.length > 0 ? (
+        topicList.map((item, i) => <TopicCard key={i} topic={item} />)
       ) : (
         <Empty description={Translate.noTopic}>
           <Button type="primary" onClick={handleCreateTopic}>

@@ -20,7 +20,11 @@ export const TopicCreate: React.FC<{
 
   return (
     <ModalWrapper title={Translate.createBtn}>
-      <TextArea value={text} onChange={(e) => setText(e.target.value)} />
+      <TextArea
+        autoFocus
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
 
       <Footer>
         <Button type="primary" loading={loading} onClick={handleCreate}>

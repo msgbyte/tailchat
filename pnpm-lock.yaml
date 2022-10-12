@@ -373,6 +373,7 @@ importers:
       webpackbar: ^5.0.2
       workbox-webpack-plugin: ^6.5.1
       yup: ^0.32.9
+      zustand: ^4.1.2
     dependencies:
       '@loadable/component': 5.15.2_react@18.2.0
       ahooks: 3.7.1_react@18.2.0
@@ -415,6 +416,7 @@ importers:
       tailwindcss: 2.2.19_ywsstkkounrjlah5ti55snp2aq
       url: 0.11.0
       yup: 0.32.11
+      zustand: 4.1.2_react@18.2.0
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 12.1.5_biqbaboplfbrettd7655fr4n2y
@@ -874,6 +876,12 @@ importers:
       '@types/react-router': 5.1.18
       react: 18.2.0
 
+  server/plugins/com.msgbyte.prettyinvite:
+    specifiers:
+      tailchat-server-sdk: '*'
+    dependencies:
+      tailchat-server-sdk: link:../../packages/sdk
+
   server/plugins/com.msgbyte.simplenotify:
     specifiers:
       mini-star: ^1.2.8
@@ -913,6 +921,7 @@ importers:
       lodash: ^4.17.21
       mini-star: '*'
       nanoid: ^3.1.23
+      rollup-plugin-inject-process-env: ^1.3.1
       rollup-plugin-less: ^1.1.3
       tailchat-server-sdk: '*'
     dependencies:
@@ -923,6 +932,7 @@ importers:
       '@types/react': 18.0.20
       less: 4.1.3
       mini-star: 1.3.1
+      rollup-plugin-inject-process-env: 1.3.1
       rollup-plugin-less: 1.1.3
 
   server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic:
@@ -930,10 +940,12 @@ importers:
       '@types/styled-components': ^5.1.26
       react: 18.2.0
       styled-components: ^5.3.6
+      zustand: ^4.1.2
     devDependencies:
       '@types/styled-components': 5.1.26
       react: 18.2.0
       styled-components: 5.3.6_react@18.2.0
+      zustand: 4.1.2_react@18.2.0
 
   website:
     specifiers:
@@ -1345,7 +1357,7 @@ packages:
       '@babel/compat-data': 7.18.13
       '@babel/core': 7.18.13
       '@babel/helper-validator-option': 7.18.6
-      browserslist: 4.21.4
+      browserslist: 4.21.3
       semver: 6.3.0
 
   /@babel/helper-create-class-features-plugin/7.18.13_@babel+core@7.18.13:
@@ -10818,7 +10830,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_mdz3marskokvq6744hhidi3r5a
+      styled-components: 5.3.6_react@18.2.0
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -18586,7 +18598,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
+      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -25012,6 +25024,7 @@ packages:
       prop-types: 15.8.1
       react: 16.14.0
       scheduler: 0.19.1
+    dev: false
 
   /react-dom/17.0.2_react@17.0.2:
     resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
@@ -25731,6 +25744,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       prop-types: 15.8.1
+    dev: false
 
   /react/17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
@@ -26556,6 +26570,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /rollup-plugin-inject-process-env/1.3.1:
+    resolution: {integrity: sha512-kKDoL30IZr0wxbNVJjq+OS92RJSKRbKV6B5eNW4q3mZTFqoWDh6lHy+mPDYuuGuERFNKXkG+AKxvYqC9+DRpKQ==}
+    dependencies:
+      magic-string: 0.25.9
+    dev: true
+
   /rollup-plugin-less/1.1.3:
     resolution: {integrity: sha512-gvJFXpEeU5Opyz514ZO4JGj9kvFTChZEDMR3LSkSIyFfWaeE5NJMFzxPpo+MZK3CY/0j7+AotDeRofyQt9rTew==}
     dependencies:
@@ -26808,6 +26828,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
 
   /scheduler/0.20.2:
     resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
@@ -27977,6 +27998,7 @@ packages:
       react-is: 16.13.1
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: false
 
   /styled-components/5.3.6_react@18.2.0:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -27998,7 +28020,6 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}
@@ -29026,6 +29047,7 @@ packages:
       typescript: 4.7.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: false
 
   /ts-pnp/1.2.0_typescript@4.7.4:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
@@ -29819,7 +29841,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
-    dev: false
 
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
@@ -31201,7 +31222,6 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

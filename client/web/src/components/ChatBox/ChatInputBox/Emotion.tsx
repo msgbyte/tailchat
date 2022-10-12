@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { Dropdown } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useChatInputActionContext } from './context';

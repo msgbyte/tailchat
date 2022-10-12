@@ -72,7 +72,7 @@ export class AppSocket {
    */
   removeListener(eventName: string, callback: (data: any) => void) {
     const index = this.listener.findIndex(
-      (item) => item[0] === eventName && item[1] === callback
+      (item) => item[0] === `notify:${eventName}` && item[1] === callback
     );
     if (index >= 0) {
       this.listener.splice(index, 1);

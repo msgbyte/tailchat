@@ -32,6 +32,7 @@ class PluginManager {
     await initMiniStar({
       plugins,
       onPluginLoadError: (err) => {
+        console.error('Plugin load error:', err);
         loadErrorPlugins.add(err.pluginName);
       },
     });
