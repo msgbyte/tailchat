@@ -1,12 +1,5 @@
 import _ from 'lodash';
-import {
-  TcService,
-  TcDbService,
-  TcContext,
-  GroupPanelType,
-  db,
-  call,
-} from 'tailchat-server-sdk';
+import { TcService, TcDbService, TcContext, call } from 'tailchat-server-sdk';
 import type { GroupTopicDocument, GroupTopicModel } from '../models/topic';
 
 /**
