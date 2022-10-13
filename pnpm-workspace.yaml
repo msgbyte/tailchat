@@ -1,4 +1,5 @@
 packages:
+  - 'apps/**'
   - 'client/web'
   - 'client/shared'
   - 'client/web/plugins/**'
