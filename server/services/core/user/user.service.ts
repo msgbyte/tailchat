@@ -173,6 +173,25 @@ class UserService extends TcService {
         avatar: { type: 'string', optional: true },
       },
     });
+    this.registerAction('ensureOpenapiBot', this.ensureOpenapiBot, {
+      params: {
+        /**
+         * 用户名唯一id, 创建的用户邮箱会为 <botId>@tailchat-open.com
+         */
+        botId: 'string',
+        nickname: 'string',
+        avatar: { type: 'string', optional: true },
+      },
+    });
+    this.registerAction('generateUserToken', this.generateUserToken, {
+      params: {
+        userId: 'string',
+        nickname: 'string',
+        email: 'string',
+        avatar: 'string',
+      },
+      visibility: 'public',
+    });
 
     this.registerAuthWhitelist(['/user/forgetPassword', '/user/resetPassword']);
   }
@@ -645,6 +664,88 @@ class UserService extends TcService {
   }
 
   /**
+   * 确保第三方开放平台机器人存在
+   */
+  async ensureOpenapiBot(
+    ctx: TcContext<{
+      botId: string;
+      nickname: string;
+      avatar: string;
+    }>
+  ): Promise<{
+    _id: string;
+    email: string;
+    nickname: string;
+    avatar: string;
+  }> {
+    const { botId, nickname, avatar } = ctx.params;
+    const email = this.buildOpenapiBotEmail(botId);
+
+    const bot = await this.adapter.model.findOne({
+      email,
+    });
+
+    if (bot) {
+      if (bot.nickname !== nickname || bot.avatar !== avatar) {
+        /**
+         * 如果信息不匹配，则更新
+         */
+        this.logger.info('检查到第三方机器人信息不匹配, 更新机器人信息:', {
+          nickname,
+          avatar,
+        });
+        await bot.updateOne({
+          nickname,
+          avatar,
+        });
+        await this.cleanUserInfoCache(String(bot._id));
+      }
+
+      return {
+        _id: String(bot._id),
+        email,
+        nickname,
+        avatar,
+      };
+    }
+
+    // 如果不存在，则创建
+    const newBot = await this.adapter.model.create({
+      email,
+      nickname,
+      avatar,
+      type: 'openapiBot',
+    });
+
+    return {
+      _id: String(newBot._id),
+      email,
+      nickname,
+      avatar,
+    };
+  }
+
+  async generateUserToken(
+    ctx: TcContext<{
+      userId: string;
+      nickname: string;
+      email: string;
+      avatar: string;
+    }>
+  ) {
+    const { userId, nickname, email, avatar } = ctx.params;
+
+    const token = this.generateJWT({
+      _id: userId,
+      nickname,
+      email,
+      avatar,
+    });
+
+    return token;
+  }
+
+  /**
    * 清理当前用户的缓存信息
    */
   private async cleanCurrentUserCache(ctx: TcContext) {
@@ -762,6 +863,10 @@ class UserService extends TcService {
 
   private buildPluginBotEmail(botId: string) {
     return `${botId}@tailchat-plugin.com`;
+  }
+
+  private buildOpenapiBotEmail(botId: string) {
+    return `${botId}@tailchat-openapi.com`;
   }
 }
 

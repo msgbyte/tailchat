@@ -1,4 +1,4 @@
-const userType = ['normalUser', 'pluginBot', 'thirdpartyBot'];
+const userType = ['normalUser', 'pluginBot', 'openapiBot'];
 type UserType = typeof userType[number];
 
 export interface UserStruct {

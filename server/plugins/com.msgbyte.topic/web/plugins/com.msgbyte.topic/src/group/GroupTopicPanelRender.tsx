@@ -27,6 +27,10 @@ const Root = styled(LoadingOnFirst)({
   width: '100%',
   position: 'relative',
 
+  '.ant-empty': {
+    paddingTop: 80,
+  },
+
   '.create-btn': {
     position: 'absolute',
     right: 20,

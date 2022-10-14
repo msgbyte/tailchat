@@ -1,9 +1,25 @@
 import { Probot } from 'probot';
+import { TailchatClient } from './client';
 
-// const tailchatApiUrl = process.env.TAILCHAT_API_URL;
 const configPath = '.tailchat/topic.json';
 
 export function app(app: Probot) {
+  if (
+    !process.env.TAILCHAT_API_URL ||
+    !process.env.TAILCHAT_APP_ID ||
+    !process.env.TAILCHAT_APP_SECRET
+  ) {
+    throw new Error(
+      'Require env: TAILCHAT_API_URL, TAILCHAT_APP_ID, TAILCHAT_APP_SECRET'
+    );
+  }
+
+  const tailchatClient = new TailchatClient(
+    process.env.TAILCHAT_API_URL,
+    process.env.TAILCHAT_APP_ID,
+    process.env.TAILCHAT_APP_SECRET
+  );
+
   app.on('issues.opened', async (ctx) => {
     if (ctx.isBot) {
       return;

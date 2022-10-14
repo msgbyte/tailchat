@@ -31,7 +31,7 @@ export class User {
   avatar!: boolean;
 
   @Column({
-    enum: ['normalUser', 'pluginBot', 'thirdpartyBot'],
+    enum: ['normalUser', 'pluginBot', 'openapiBot'],
     default: 'normalUser',
   })
   type: string;

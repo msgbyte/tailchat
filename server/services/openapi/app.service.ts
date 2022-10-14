@@ -13,6 +13,7 @@ import {
 } from '../../models/openapi/app';
 import { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
+import crypto from 'crypto';
 
 interface OpenAppService
   extends TcService,
@@ -29,7 +30,23 @@ class OpenAppService extends TcService {
 
     this.registerLocalDb(require('../../models/openapi/app').default);
 
+    this.registerAction('authToken', this.authToken, {
+      params: {
+        appId: 'string',
+        token: 'string',
+        capability: { type: 'array', items: 'string', optional: true },
+      },
+      cache: {
+        keys: ['appId', 'token'],
+        ttl: 60 * 60, // 1 hour
+      },
+    });
     this.registerAction('all', this.all);
+    this.registerAction('get', this.get, {
+      params: {
+        appId: 'string',
+      },
+    });
     this.registerAction('create', this.create, {
       params: {
         appName: 'string',
@@ -53,12 +70,75 @@ class OpenAppService extends TcService {
   }
 
   /**
+   * 校验Token 返回true/false
+   *
+   * Token 生成方式: appId + appSecret 取md5
+   */
+  async authToken(
+    ctx: TcContext<{
+      appId: string;
+      token: string;
+      capability?: OpenAppDocument['capability'];
+    }>
+  ): Promise<boolean> {
+    const { appId, token, capability } = ctx.params;
+    const app = await this.adapter.model.findOne({
+      appId,
+    });
+
+    if (!app) {
+      // 没有找到应用
+      throw new Error('Not found open app:' + appId);
+    }
+
+    if (Array.isArray(capability)) {
+      for (const item of capability) {
+        if (!app.capability.includes(item)) {
+          throw new Error('Open app not enabled capability:' + item);
+        }
+      }
+    }
+
+    const appSecret = app.appSecret;
+
+    if (
+      token ===
+      crypto
+        .createHash('md5')
+        .update(appId + appSecret)
+        .digest('hex')
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
    * 获取用户参与的所有应用
    */
   async all(ctx: TcContext<{}>) {
     const apps = await this.adapter.model.find({
       owner: ctx.meta.userId,
     });
+
+    return await this.transformDocuments(ctx, {}, apps);
+  }
+
+  /**
+   * 获取应用信息
+   */
+  async get(ctx: TcContext<{ appId: string }>) {
+    const appId = ctx.params.appId;
+
+    const apps = await this.adapter.model.findOne(
+      {
+        appId,
+      },
+      {
+        appSecret: false,
+      }
+    );
 
     return await this.transformDocuments(ctx, {}, apps);
   }

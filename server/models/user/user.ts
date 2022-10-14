@@ -11,7 +11,7 @@ import type { Types } from 'mongoose';
 
 type BaseUserInfo = Pick<User, 'nickname' | 'discriminator' | 'avatar'>;
 
-const userType = ['normalUser', 'pluginBot', 'thirdpartyBot'];
+const userType = ['normalUser', 'pluginBot', 'openapiBot'];
 type UserType = typeof userType[number];
 
 /**

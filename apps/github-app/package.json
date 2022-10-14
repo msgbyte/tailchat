@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "probot": "^12.2.4"
   },
   "devDependencies": {
