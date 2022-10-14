@@ -169,7 +169,7 @@ export default class ApiService extends TcService {
           // Async function which return with Promise
           res.setHeader('X-Node-ID', ctx.nodeID);
 
-          if (data['__raw']) {
+          if (data && data['__raw']) {
             if (data['header']) {
               Object.entries(data['header']).forEach(([key, value]) => {
                 res.setHeader(key, String(value));
