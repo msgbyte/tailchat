@@ -3,7 +3,7 @@ import { useUserId } from './useUserInfo';
 import _uniq from 'lodash/uniq';
 import _flatten from 'lodash/flatten';
 import { useDebugValue, useMemo } from 'react';
-import { permissionList } from '../..';
+import { getPermissionList } from '../..';
 
 /**
  * 获取群组用户的所有权限
@@ -19,7 +19,7 @@ export function useGroupMemberAllPermissions(groupId: string): string[] {
   if (groupInfo.owner === userId) {
     // 群组管理员拥有一切权限
     // 返回所有权限
-    return permissionList.map((p) => p.key);
+    return getPermissionList().map((p) => p.key);
   }
 
   const members = groupInfo.members;

@@ -45,7 +45,7 @@ export const PERMISSION = {
   },
 };
 
-export const permissionList: PermissionItemType[] = [
+export const getPermissionList = (): PermissionItemType[] => [
   {
     key: PERMISSION.core.message,
     title: t('发送消息'),
@@ -98,7 +98,9 @@ export const permissionList: PermissionItemType[] = [
  * 获取默认权限列表
  */
 export function getDefaultPermissionList(): string[] {
-  return permissionList.filter((p) => p.default).map((p) => p.key);
+  return getPermissionList()
+    .filter((p) => p.default)
+    .map((p) => p.key);
 }
 
 /**

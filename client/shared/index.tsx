@@ -227,7 +227,7 @@ export { MessageHelper } from './utils/message-helper';
 export {
   PERMISSION,
   AllPermission,
-  permissionList,
+  getPermissionList,
   getDefaultPermissionList,
   applyDefaultFallbackGroupPermission,
 } from './utils/role-helper';
