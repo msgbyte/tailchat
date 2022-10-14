@@ -12,7 +12,7 @@
     "probot-app"
   ],
   "scripts": {
-    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/index.ts'",
+    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec \"ts-node --transpile-only src/index.ts\"",
     "build": "tsc",
     "test": "jest"
   },

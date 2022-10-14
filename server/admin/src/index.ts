@@ -52,7 +52,7 @@ async function start() {
           return { username, title: 'Admin' };
         }
 
-        throw new Error('User not found');
+        throw new Error(`User not found: ${username}`);
       },
     },
   });

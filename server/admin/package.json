@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node --transpile-only src/index.ts",
-    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/index.ts'",
+    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec \"ts-node --transpile-only src/index.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -23,7 +23,7 @@
     "koa2-formidable": "^1.0.3",
     "react-use": "^17.4.0",
     "recharts": "^2.1.12",
-    "tushan": "github:msgbyte/tushan"
+    "tushan": "^0.0.1"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
