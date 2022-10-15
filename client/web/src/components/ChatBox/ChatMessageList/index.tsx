@@ -21,9 +21,7 @@ export const ChatMessageList: React.FC<MessageListProps> = React.memo(
     }
 
     return useVirtualizedList ? (
-      <div className="flex-1">
-        <VirtualizedMessageList {...props} />
-      </div>
+      <VirtualizedMessageList {...props} />
     ) : (
       <NormalMessageList {...props} />
     );

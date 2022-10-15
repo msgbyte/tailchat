@@ -1,12 +1,18 @@
-import React, { PropsWithChildren, useMemo, useRef, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { ResizeWatcher } from './ResizeWatcher';
 import { useMemoizedFn, useDebounceFn, usePrevious } from 'ahooks';
-import { IsForward, Vector } from './types';
+import type { IsForward, Vector } from './types';
 import clsx from 'clsx';
 
 export interface ScrollerRef {
   scrollTo: (position: Vector) => void;
-  getMaxPosition: () => Vector;
+  scrollToBottom: () => void;
 }
 
 type ScrollerProps = PropsWithChildren<{
@@ -15,6 +21,7 @@ type ScrollerProps = PropsWithChildren<{
   innerStyle?: React.CSSProperties;
   isLock?: boolean;
   scrollingClassName?: string;
+  scrollBehavior?: ScrollBehavior;
   onScroll?: (
     position: Vector,
     detail: {
@@ -37,27 +44,16 @@ const DEFAULT_POS = { x: 0, y: 0 };
  */
 export const Scroller = React.forwardRef<ScrollerRef, ScrollerProps>(
   (props, ref) => {
+    const { scrollBehavior = 'auto' } = props;
     const wrapperRef = useRef<HTMLDivElement>(null);
     const innerRef = useRef<HTMLDivElement>(null);
     const style = useMemo(() => {
       if (props.isLock ?? false) {
         return { ...props.style, overflow: 'hidden' };
       }
-      return props.style;
-    }, []);
 
-    const [isScroll, setIsScroll] = useState(false);
-    const [isMouseDown, setIsMouseDown] = useState(false);
-    const { run: setIsScrollLazy } = useDebounceFn(
-      (val) => {
-        setIsScroll(val);
-      },
-      {
-        leading: false,
-        trailing: true,
-        wait: 300,
-      }
-    );
+      return { ...props.style, overflow: 'auto' };
+    }, [props.isLock]);
 
     const getPosition = useMemoizedFn(() => {
       if (!wrapperRef.current) {
@@ -78,6 +74,36 @@ export const Scroller = React.forwardRef<ScrollerRef, ScrollerProps>(
         y: wrapperRef.current.clientHeight,
       };
     });
+
+    useImperativeHandle(ref, () => ({
+      scrollTo: (position) => {
+        wrapperRef.current?.scrollTo({
+          left: position.x,
+          top: position.y,
+          behavior: scrollBehavior,
+        });
+      },
+      scrollToBottom: () => {
+        wrapperRef.current?.scrollTo({
+          left: getPosition().x,
+          top: wrapperRef.current.scrollHeight - getContainerSize().y,
+          behavior: scrollBehavior,
+        });
+      },
+    }));
+
+    const [isScroll, setIsScroll] = useState(false);
+    const [isMouseDown, setIsMouseDown] = useState(false);
+    const { run: setIsScrollLazy } = useDebounceFn(
+      (val) => {
+        setIsScroll(val);
+      },
+      {
+        leading: false,
+        trailing: true,
+        wait: 300,
+      }
+    );
 
     const { run: handleEndScrollLazy } = useDebounceFn(
       () => {
@@ -107,7 +133,7 @@ export const Scroller = React.forwardRef<ScrollerRef, ScrollerProps>(
     });
 
     const prevPosition = usePrevious(getPosition()) ?? DEFAULT_POS;
-    const handleMouseScroll = useMemoizedFn(() => {
+    const handleScroll = useMemoizedFn(() => {
       const isUserScrolling = isScroll || isMouseDown;
       const currentPosition = getPosition();
       const forward = {
@@ -138,7 +164,7 @@ export const Scroller = React.forwardRef<ScrollerRef, ScrollerProps>(
       <ResizeWatcher wrapperStyle={{ height: '100%' }} onResize={handleResize}>
         <div
           key="scroller"
-          className={clsx(props.className, {
+          className={clsx(props.className, 'scroller', {
             [props.scrollingClassName ?? 'scrolling']: isScroll,
           })}
           style={style}
@@ -146,11 +172,11 @@ export const Scroller = React.forwardRef<ScrollerRef, ScrollerProps>(
           onWheel={handleWheel}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
-          onScroll={handleMouseScroll}
+          onScroll={handleScroll}
         >
           <div
-            className="scroller_content"
-            key="scroller_content"
+            className="scroller-inner"
+            key="scroller-inner"
             style={props.innerStyle}
             ref={innerRef}
           >

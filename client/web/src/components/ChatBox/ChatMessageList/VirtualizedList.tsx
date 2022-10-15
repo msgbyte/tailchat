@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 import {
@@ -8,7 +8,6 @@ import {
 } from 'react-virtuoso';
 import {
   ChatMessage,
-  sharedEvent,
   useMemoizedFn,
   useSharedEventHandler,
 } from 'tailchat-shared';
@@ -73,25 +72,27 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
     });
 
     return (
-      <Virtuoso
-        style={virtuosoStyle}
-        ref={listRef}
-        firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
-        initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
-        computeItemKey={computeItemKey}
-        totalCount={props.messages.length}
-        overscan={{
-          main: 450,
-          reverse: 450,
-        }}
-        itemContent={itemContent}
-        alignToBottom={true}
-        startReached={handleLoadMore}
-        followOutput={followOutput}
-        defaultItemHeight={25}
-        atTopThreshold={100}
-        atBottomThreshold={40}
-      />
+      <div className="flex-1">
+        <Virtuoso
+          style={virtuosoStyle}
+          ref={listRef}
+          firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
+          initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
+          computeItemKey={computeItemKey}
+          totalCount={props.messages.length}
+          overscan={{
+            main: 1000,
+            reverse: 1000,
+          }}
+          itemContent={itemContent}
+          alignToBottom={true}
+          startReached={handleLoadMore}
+          followOutput={followOutput}
+          defaultItemHeight={25}
+          atTopThreshold={100}
+          atBottomThreshold={40}
+        />
+      </div>
     );
   }
 );

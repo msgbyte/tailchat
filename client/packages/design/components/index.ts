@@ -7,6 +7,7 @@ export { Highlight } from './Highlight';
 export { Icon } from './Icon';
 export { Image } from './Image';
 export { SensitiveText } from './SensitiveText';
+export { VirtualChatList } from './VirtualChatList';
 
 export { WebMetaForm } from './WebMetaForm';
 export {

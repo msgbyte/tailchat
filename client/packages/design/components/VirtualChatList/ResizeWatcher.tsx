@@ -3,7 +3,7 @@ import { useMemoizedFn } from 'ahooks';
 
 type Size = { height: number; width: number };
 
-interface ResizeWatcherProps {
+interface ResizeWatcherProps extends React.PropsWithChildren {
   wrapperStyle?: React.CSSProperties;
   onResize?: (size: Size) => void;
 }
@@ -34,6 +34,7 @@ export const ResizeWatcher: React.FC<ResizeWatcherProps> = React.memo(
             return;
           }
 
+          // 使用 contentRect 计算大小以确保不会出现使用clientHeight立即向浏览器请求dom大小导致的性能问题
           handleResize({
             width: Math.round(contentRect.width),
             height: Math.round(contentRect.height),
