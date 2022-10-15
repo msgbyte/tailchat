@@ -9,4 +9,16 @@ export const Translate = {
     'zh-CN': '回复该话题',
     'en-US': 'Reply this topic',
   }),
+  loadMore: localTrans({
+    'zh-CN': '加载更多',
+    'en-US': 'Load More',
+  }),
+  noMore: localTrans({
+    'zh-CN': '没有更多了',
+    'en-US': 'No More',
+  }),
+  loading: localTrans({
+    'zh-CN': '加载中...',
+    'en-US': 'Loading...',
+  }),
 };

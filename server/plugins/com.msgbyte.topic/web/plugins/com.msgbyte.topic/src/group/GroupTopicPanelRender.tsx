@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TopicCard } from '../components/TopicCard';
 import {
   showSuccessToasts,
@@ -26,6 +26,8 @@ const Root = styled(LoadingOnFirst)({
   flexDirection: 'column',
   width: '100%',
   position: 'relative',
+  paddingTop: 10,
+  paddingBottom: 10,
 
   '.ant-empty': {
     paddingTop: 80,
@@ -42,33 +44,62 @@ const Root = styled(LoadingOnFirst)({
   },
 });
 
+const PAGE_SIZE = 20;
+
 const GroupTopicPanelRender: React.FC = React.memo(() => {
   const panelInfo = useGroupPanelContext();
   const { panelId, groupId } = panelInfo;
-  const { topicMap, addTopicPanel, addTopicItem, updateTopicItem } =
-    useTopicStore();
+  const {
+    topicMap,
+    addTopicPanel,
+    addTopicItem,
+    updateTopicItem,
+    resetTopicPanel,
+  } = useTopicStore();
   const topicList = topicMap[panelId];
+  const currentPageRef = useRef(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  const [{ loading }, fetch] = useAsyncRequest(async () => {
-    if (!groupId || !panelId) {
-      return [];
-    }
+  const [{ loading }, fetch] = useAsyncRequest(
+    async (page = 1) => {
+      if (!groupId || !panelId) {
+        return [];
+      }
 
-    const { data } = await request.get('list', {
-      params: {
+      const { data: list } = await request.post('list', {
         groupId,
         panelId,
-      },
-    });
+        page,
+        size: PAGE_SIZE,
+      });
 
-    addTopicPanel(panelId, data);
-  }, [groupId, panelId, addTopicPanel]);
+      if (Array.isArray(list)) {
+        addTopicPanel(panelId, list);
+        if (list.length !== PAGE_SIZE) {
+          // 没有更多了
+          setHasMore(false);
+        }
+      }
+    },
+    [groupId, panelId, addTopicPanel]
+  );
 
   useEffect(() => {
     /**
      * 加载的时候获取列表
      */
     fetch();
+
+    return () => {
+      // 因为监听更新只在当前激活的面板中监听，还没添加到全局，因此为了保持面板状态需要清理面板状态
+      // TODO: 增加群组级别的更新监听新增后可以移除
+      resetTopicPanel(panelId);
+    };
+  }, []);
+
+  const handleLoadMore = useCallback(() => {
+    currentPageRef.current += 1;
+    fetch(currentPageRef.current);
   }, [fetch]);
 
   useGlobalSocketEvent(
@@ -115,7 +146,21 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
   return (
     <Root spinning={loading}>
       {Array.isArray(topicList) && topicList.length > 0 ? (
-        topicList.map((item, i) => <TopicCard key={i} topic={item} />)
+        <>
+          {topicList.map((item, i) => (
+            <TopicCard key={i} topic={item} />
+          ))}
+
+          {hasMore ? (
+            <Button type="link" disabled={loading} onClick={handleLoadMore}>
+              {loading ? Translate.loading : Translate.loadMore}
+            </Button>
+          ) : (
+            <Button type="link" disabled={true} onClick={handleLoadMore}>
+              {Translate.noMore}
+            </Button>
+          )}
+        </>
       ) : (
         <Empty description={Translate.noTopic}>
           <Button type="primary" onClick={handleCreateTopic}>

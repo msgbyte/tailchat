@@ -49,6 +49,14 @@
 
     &.ant-btn-link {
       border-color: transparent;
+
+      &[disabled] {
+        &,&:hover, &:focus, &:active {
+          color: rgba(255, 255, 255, 0.25);
+          border-color: transparent;
+          background-color: transparent;
+        }
+      }
     }
   }
 
