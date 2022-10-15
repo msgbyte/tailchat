@@ -13,12 +13,16 @@ import { request } from '../request';
 import { TopicComments } from './TopicComments';
 
 const Root = styled.div`
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.05);
   padding: 10px;
   border-radius: 3px;
   margin: 10px;
   width: auto;
   display: flex;
+
+  .dark & {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
 
   .left {
     margin-right: 10px;
@@ -28,7 +32,7 @@ const Root = styled.div`
     flex: 1;
     user-select: text;
 
-    .header {
+    .header {·
       display: flex;
       line-height: 32px;
 
@@ -51,9 +55,13 @@ const Root = styled.div`
 `;
 
 const ReplyBox = styled.div`
-  background-color: rgba(0, 0, 0, 0.25);
   padding: 10px;
   margin-top: 10px;
+  background-color: transparent;
+
+  .dark & {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export const TopicCard: React.FC<{

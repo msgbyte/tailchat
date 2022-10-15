@@ -7,7 +7,11 @@ const Root = styled.div`
   padding: 10px;
   margin-bottom: 6px;
   border-radius: 3px;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.05);
+
+  .dark & {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
 
   > div {
     display: flex;
