@@ -1,5 +1,5 @@
 packages:
-  - 'apps/**'
+  - 'apps/*'
   - 'client/web'
   - 'client/shared'
   - 'client/web/plugins/**'
@@ -8,5 +8,4 @@ packages:
   - 'server/admin'
   - 'server/packages/**'
   - 'server/plugins/**'
-  - 'cli'
   - 'website'
