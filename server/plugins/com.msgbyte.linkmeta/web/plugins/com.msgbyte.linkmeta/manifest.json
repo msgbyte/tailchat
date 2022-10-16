@@ -4,6 +4,6 @@
   "url": "{BACKEND}/plugins/com.msgbyte.linkmeta/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "解析并获取在聊天信息中的url信息概述",
+  "description": "解析并获取在聊天信息中的url信息概述，如标题/概述/缩略图, 支持媒体路径，直接显示媒体播放器(特殊支持bilibili，自动加载b站iframe播放器)",
   "requireRestart": false
 }

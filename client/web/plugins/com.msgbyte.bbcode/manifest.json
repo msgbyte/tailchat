@@ -4,6 +4,6 @@
   "url": "/plugins/com.msgbyte.miaolang/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "消息解释器，渲染BBCode类型的消息",
+  "description": "一个用于支持bbcode语法解释富文本消息的插件",
   "requireRestart": true
 }

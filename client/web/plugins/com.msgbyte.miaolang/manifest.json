@@ -4,7 +4,7 @@
   "url": "/plugins/com.msgbyte.miaolang/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "为聊天提供喵语言对话功能",
+  "description": "允许发送喵语，安装插件后的双方加密对话，未安装插件的人看到的是 '喵'",
   "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
   "requireRestart": false
 }

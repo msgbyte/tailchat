@@ -982,12 +982,16 @@ importers:
       '@mdx-js/react': ^1.6.21
       '@svgr/webpack': ^5.5.0
       '@tsconfig/docusaurus': ^1.0.5
+      '@types/fs-extra': ^9.0.13
+      '@types/glob': ^8.0.0
       '@types/react': ^17.0.26
       '@types/react-helmet': ^6.1.2
       '@types/react-router-dom': ^5.3.0
       clsx: ^1.1.1
       docusaurus-plugin-image-zoom: ^0.0.2
       file-loader: ^6.2.0
+      fs-extra: ^10.1.0
+      glob: ^7.2.0
       prism-react-renderer: ^1.2.1
       react: ^17.0.1
       react-dom: ^17.0.1
@@ -1008,9 +1012,13 @@ importers:
     devDependencies:
       '@docusaurus/module-type-aliases': 2.0.1_sfoxds7t5ydpegc3knd667wn6m
       '@tsconfig/docusaurus': 1.0.6
+      '@types/fs-extra': 9.0.13
+      '@types/glob': 8.0.0
       '@types/react': 17.0.48
       '@types/react-helmet': 6.1.5
       '@types/react-router-dom': 5.3.3
+      fs-extra: 10.1.0
+      glob: 7.2.3
       typescript: 4.7.4
 
 packages:
@@ -9142,6 +9150,13 @@ packages:
     dependencies:
       '@types/minimatch': 3.0.5
       '@types/node': 18.7.11
+
+  /@types/glob/8.0.0:
+    resolution: {integrity: sha512-l6NQsDDyQUVeoTynNpC9uRvCUint/gSUXQA2euwmTuWGvPY5LSDUu6tkCtJB2SvGQlJQzLaKqcGZP4//7EDveA==}
+    dependencies:
+      '@types/minimatch': 3.0.5
+      '@types/node': 18.7.11
+    dev: true
 
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}

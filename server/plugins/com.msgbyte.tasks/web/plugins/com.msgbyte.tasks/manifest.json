@@ -4,6 +4,6 @@
   "url": "{BACKEND}/plugins/com.msgbyte.tasks/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "任务管理工具",
+  "description": "任务管理插件，在个人面板中增加TODO面板，用于个人待办事项的管理",
   "requireRestart": true
 }
