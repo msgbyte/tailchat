@@ -15,12 +15,12 @@
     "gen:plugin-doc": "ts-node ./scripts/generate-plugin-list.ts"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.18",
-    "@docusaurus/preset-classic": "2.0.0-beta.18",
+    "@docusaurus/core": "2.1.0",
+    "@docusaurus/preset-classic": "2.1.0",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^5.5.0",
     "clsx": "^1.1.1",
-    "docusaurus-plugin-image-zoom": "^0.0.2",
+    "docusaurus-plugin-image-zoom": "^0.1.1",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
@@ -40,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-beta.18",
+    "@docusaurus/module-type-aliases": "^2.1.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^8.0.0",
