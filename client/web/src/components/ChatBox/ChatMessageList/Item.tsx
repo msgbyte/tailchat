@@ -2,13 +2,13 @@ import React, { useMemo, useState } from 'react';
 import {
   ChatMessage,
   formatShortTime,
-  getMessageTimeDiff,
   shouldShowMessageTime,
   SYSTEM_USERID,
   t,
   useCachedUserInfo,
   MessageHelper,
   sharedEvent,
+  showMessageTime,
 } from 'tailchat-shared';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender, pluginMessageExtraParsers } from '@/plugin/common';
@@ -278,7 +278,7 @@ export function buildMessageItemRow(messages: ChatMessage[], index: number) {
     <div key={message._id}>
       {showDate && (
         <Divider className="text-sm opacity-40 px-6 font-normal select-text">
-          {getMessageTimeDiff(messageCreatedAt)}
+          {showMessageTime(messageCreatedAt)}
         </Divider>
       )}
 
