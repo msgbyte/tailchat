@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
-  "license": "GPLv3",
+  "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production rimraf ./dist && pnpm plugins:all && pnpm build:webpack",

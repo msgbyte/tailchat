@@ -9,7 +9,11 @@ const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
   externalDeps: [
     'react',
-    'axios', // Use for some deps which will use axios and reduce bundle size
+    'react-router',
+    'axios',
+    'styled-components',
+    'zustand',
+    'zustand/middleware/immer',
   ],
   rollupPlugins: ({ pluginName }) => [
     copy({
