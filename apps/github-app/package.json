@@ -5,20 +5,21 @@
   "description": "Tailchat github integrations",
   "author": "moonrailgun",
   "license": "ISC",
-  "homepage": "https://github.com//",
+  "homepage": "https://github.com/msgbyte/tailchat",
   "keywords": [
     "probot",
     "github",
     "probot-app"
   ],
   "scripts": {
-    "dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec \"ts-node --transpile-only src/index.ts\"",
+    "dev": "nodemon --watch \"src/**\" --ext \"ts\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node --transpile-only src/index.ts\"",
     "build": "tsc",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "probot": "^12.2.4"
+    "probot": "^12.2.4",
+    "probot-metadata": "^2.1.0"
   },
   "devDependencies": {
     "@types/jest": "^28.1.0",

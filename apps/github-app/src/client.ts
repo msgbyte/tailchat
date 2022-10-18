@@ -4,6 +4,7 @@ import crypto from 'crypto';
 export class TailchatClient {
   request: AxiosInstance;
   jwt: string | null = null;
+  loginP: Promise<void>;
 
   constructor(
     public url: string,
@@ -25,7 +26,7 @@ export class TailchatClient {
 
       return val;
     });
-    this.login();
+    this.loginP = this.login();
   }
 
   async login() {
@@ -45,17 +46,32 @@ export class TailchatClient {
       console.log(await this.whoami());
     } catch (err) {
       console.error(err);
-      throw new Error();
+      throw err;
     }
   }
 
   async call(action: string, params = {}) {
-    const { data } = await this.request.post(
-      '/api/' + action.replace(/\./g, '/'),
-      params
-    );
+    try {
+      await Promise.resolve(this.loginP); // 等待loigin完毕. 用于serverless服务
+      const { data } = await this.request.post(
+        '/api/' + action.replace(/\./g, '/'),
+        params
+      );
 
-    return data;
+      return data;
+    } catch (err: any) {
+      const data: string = err?.response?.data;
+      if (data) {
+        throw new Error(
+          JSON.stringify({
+            action,
+            data,
+          })
+        );
+      } else {
+        throw err;
+      }
+    }
   }
 
   async whoami() {

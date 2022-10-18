@@ -122,6 +122,7 @@ importers:
       nock: ^13.0.5
       nodemon: ^2.0.18
       probot: ^12.2.4
+      probot-metadata: ^2.1.0
       smee-client: ^1.2.2
       ts-jest: ^26.4.4
       ts-node: ^10.9.1
@@ -129,6 +130,7 @@ importers:
     dependencies:
       axios: 0.21.4
       probot: 12.2.8
+      probot-metadata: 2.1.0_probot@12.2.8
     devDependencies:
       '@types/jest': 28.1.8
       '@types/node': 18.7.11
@@ -25071,6 +25073,14 @@ packages:
   /prismjs/1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
+    dev: false
+
+  /probot-metadata/2.1.0_probot@12.2.8:
+    resolution: {integrity: sha512-0e8+fZ5tE2EbsSgN1zGHfjFNs17DEbG5b0zYq2HlEL6u+8JJRZraUMtwsi0QdtB2eMrenYfEy76aBfnfzFcrRw==}
+    peerDependencies:
+      probot: '>=10'
+    dependencies:
+      probot: 12.2.8
     dev: false
 
   /probot/12.2.8:

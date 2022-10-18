@@ -120,7 +120,7 @@ class GroupTopicService extends TcService {
 
     this.roomcastNotify(ctx, groupId, 'create', json);
 
-    return true;
+    return json;
   }
 
   /**
