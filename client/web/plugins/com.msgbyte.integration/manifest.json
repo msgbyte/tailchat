@@ -1,0 +1,9 @@
+{
+  "label": "第三方集成",
+  "name": "com.msgbyte.integration",
+  "url": "/plugins/com.msgbyte.integration/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "用于在群组中集成第三方应用",
+  "requireRestart": true
+}

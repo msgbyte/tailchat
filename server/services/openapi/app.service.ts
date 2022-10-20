@@ -131,7 +131,7 @@ class OpenAppService extends TcService {
   async get(ctx: TcContext<{ appId: string }>) {
     const appId = ctx.params.appId;
 
-    const apps = await this.adapter.model.findOne(
+    const app = await this.adapter.model.findOne(
       {
         appId,
       },
@@ -140,7 +140,7 @@ class OpenAppService extends TcService {
       }
     );
 
-    return await this.transformDocuments(ctx, {}, apps);
+    return await this.transformDocuments(ctx, {}, app);
   }
 
   /**
