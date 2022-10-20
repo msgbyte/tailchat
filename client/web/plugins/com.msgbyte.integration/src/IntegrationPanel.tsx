@@ -2,7 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { Avatar, Button, Input, UserName } from '@capital/component';
 import styled from 'styled-components';
 import type { OpenAppInfo } from 'types';
-import { useAsyncRequest, postRequest } from '@capital/common';
+import {
+  useAsyncRequest,
+  postRequest,
+  showErrorToasts,
+  useGroupIdContext,
+  showSuccessToasts,
+} from '@capital/common';
 
 const Tip = styled.div`
   color: #999;
@@ -37,18 +43,29 @@ const AppInfoCard = styled.div({
 const IntegrationPanel: React.FC = React.memo(() => {
   const [appId, setAppId] = useState('');
   const [openAppInfo, setOpenAppInfo] = useState<OpenAppInfo | null>(null);
+  const groupId = useGroupIdContext();
 
   const [{ loading }, handleQueryApp] = useAsyncRequest(async () => {
     const { data } = await postRequest('/openapi/app/get', {
       appId,
     });
 
+    if (!data) {
+      showErrorToasts('没找到该应用');
+      return;
+    }
+
     setOpenAppInfo(data);
   }, [appId]);
 
-  const handleAddBotIntoGroup = useCallback(() => {
-    console.log('TODO', appId);
-  }, [appId]);
+  const [{ loading: addBotLoading }, handleAddBotIntoGroup] =
+    useAsyncRequest(async () => {
+      await postRequest('/openapi/integration/addBotUser', {
+        appId,
+        groupId,
+      });
+      showSuccessToasts();
+    }, [appId]);
 
   return (
     <div>
@@ -90,7 +107,12 @@ const IntegrationPanel: React.FC = React.memo(() => {
 
                 <div className="action">
                   {openAppInfo.capability.includes('bot') && (
-                    <Button type="primary" onClick={handleAddBotIntoGroup}>
+                    <Button
+                      type="primary"
+                      size="small"
+                      loading={addBotLoading}
+                      onClick={handleAddBotIntoGroup}
+                    >
                       添加应用机器人到群组
                     </Button>
                   )}

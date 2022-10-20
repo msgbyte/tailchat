@@ -21,7 +21,7 @@ class OpenBotService extends TcService {
       params: {
         appId: 'string',
       },
-      visibility: 'private',
+      visibility: 'public',
     });
 
     this.registerAuthWhitelist(['/openapi/bot/login']);
