@@ -3,7 +3,6 @@ import type {
   BrokerOptions,
   CallingOptions,
   Errors,
-  MetricRegistry,
   ServiceBroker,
 } from 'moleculer';
 import type { UserJWTPayload } from '../services/types';
