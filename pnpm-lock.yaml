@@ -343,6 +343,7 @@ importers:
       fs-extra: ^10.0.0
       glob: ^7.2.0
       html-webpack-plugin: ^5.3.2
+      identity-obj-proxy: ^3.0.0
       is-electron: ^2.2.1
       is-hotkey: ^0.2.0
       jest: ^27.4.5
@@ -490,6 +491,7 @@ importers:
       fs-extra: 10.1.0
       glob: 7.2.3
       html-webpack-plugin: 5.5.0_webpack@5.73.0
+      identity-obj-proxy: 3.0.0
       jest: 27.5.1_ts-node@10.9.1
       less: 4.1.3
       less-loader: 10.2.0_less@4.1.3+webpack@5.73.0
@@ -17842,6 +17844,10 @@ packages:
       wildemitter: 1.2.1
     dev: false
 
+  /harmony-reflect/1.6.2:
+    resolution: {integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==}
+    dev: true
+
   /has-ansi/2.0.0:
     resolution: {integrity: sha512-C8vBJ8DwUCx19vhm7urhTuUsr4/IyP6l4VzNQDv+ryHQObW3TTTp9yB68WpYgRe2bbaGuZ/se74IqFeVnMnLZg==}
     engines: {node: '>=0.10.0'}
@@ -18492,6 +18498,13 @@ packages:
 
   /idb/7.0.2:
     resolution: {integrity: sha512-jjKrT1EnyZewQ/gCBb/eyiYrhGzws2FeY92Yx8qT9S9GeQAmo4JFVIiWRIfKW/6Ob9A+UDAOW9j9jn58fy2HIg==}
+    dev: true
+
+  /identity-obj-proxy/3.0.0:
+    resolution: {integrity: sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA==}
+    engines: {node: '>=4'}
+    dependencies:
+      harmony-reflect: 1.6.2
     dev: true
 
   /ieee754/1.2.1:

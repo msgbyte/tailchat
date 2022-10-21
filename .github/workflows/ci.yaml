@@ -39,7 +39,7 @@ jobs:
       - name: Check Type
         run: cd client/web && pnpm check:type
       - name: Test
-        run: pnpm test
+        run: cd client/web && pnpm test
         env:
           TZ: Asia/Shanghai
       - name: Check Build

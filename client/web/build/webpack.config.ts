@@ -39,7 +39,7 @@ declare module 'webpack' {
 }
 
 const NODE_ENV = process.env.NODE_ENV ?? 'production';
-const REPORT = !!process.env.REPORT;
+const PREF_REPORT = !!process.env.PREF_REPORT;
 
 const isDev = NODE_ENV === 'development';
 const mode = isDev ? 'development' : 'production';
@@ -182,7 +182,7 @@ if (ANALYSIS) {
   );
 }
 
-if (REPORT) {
+if (PREF_REPORT) {
   plugins.push(
     new PerfseePlugin({
       project: 'tailchat',
