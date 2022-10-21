@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "client/web/**"
+      - "client/shared/**"
+      - "client/packages/design/**"
   workflow_dispatch:
 
 jobs:
@@ -11,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -33,10 +37,10 @@ jobs:
       - name: Install packages
         run: pnpm install --frozen-lockfile
       - name: Check Type
-        run: cd web && pnpm check:type
+        run: cd client/web && pnpm check:type
       - name: Test
         run: pnpm test
         env:
           TZ: Asia/Shanghai
       - name: Check Build
-        run: cd web && pnpm build
+        run: cd client/web && pnpm build:ci

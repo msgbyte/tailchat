@@ -10,6 +10,7 @@
     "build": "cross-env NODE_ENV=production rimraf ./dist && pnpm plugins:all && pnpm build:webpack",
     "build:webpack": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack --config ./build/webpack.config.ts",
     "build:stats": "pnpm build:webpack --profile --json=compilation-stats.json",
+    "build:ci": "cross-env REPORT=1 NODE_ENV=production pnpm build:webpack",
     "dev": "cross-env TS_NODE_PROJECT='tsconfig.node.json' NODE_ENV=development SERVICE_URL=http://127.0.0.1:11000 webpack serve --config ./build/webpack.config.ts",
     "serve": "npx http-server ./dist",
     "test": "jest",
@@ -67,6 +68,7 @@
     "zustand": "^4.1.2"
   },
   "devDependencies": {
+    "@perfsee/webpack": "1.0.0-alpha.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
