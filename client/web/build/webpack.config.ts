@@ -18,7 +18,6 @@ import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
 import dayjs from 'dayjs';
 import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
 import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
-import { PerfseePlugin } from '@perfsee/webpack';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -183,6 +182,7 @@ if (ANALYSIS) {
 }
 
 if (PREF_REPORT) {
+  const PerfseePlugin = require('@perfsee/webpack').PerfseePlugin;
   plugins.push(
     new PerfseePlugin({
       project: 'tailchat',
