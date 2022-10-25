@@ -20,7 +20,7 @@ export type RequestConfig = AxiosRequestConfig;
 /**
  * 创建请求实例
  */
-export function createRequest() {
+function createRequest() {
   const ins = axios.create({
     baseURL: getServiceUrl(),
   });
