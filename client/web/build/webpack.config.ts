@@ -288,7 +288,7 @@ const config: Configuration = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf)$/,
+        test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|webp|webm)$/,
         loader: 'url-loader',
         options: {
           limit: 8192,
