@@ -38,9 +38,11 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check Type
         run: cd client/web && pnpm check:type
-      # - name: Test
-      #   run: cd client/web && pnpm test
-      #   env:
-      #     TZ: Asia/Shanghai
+      - name: Test
+        run: cd client/web && pnpm test
+        env:
+          TZ: Asia/Shanghai
       - name: Check Build
         run: cd client/web && pnpm build:ci
+        env:
+          PERFSEE_TOKEN: ${{ secrets.PERFSEE_TOKEN }}
