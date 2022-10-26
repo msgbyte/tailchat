@@ -17,12 +17,18 @@ title: Docker Compose 部署
 
 ### 从公共镜像中拉取
 
+**新人推荐**
+
+> 使用已经编译好的镜像可以无需花费足够的计算机资源进行编译，对小资源配置的服务器会十分友好。另外相对于源码编译，公共镜像的代码更加稳定。
+
 ```bash
 docker pull moonrailgun/tailchat
 docker tag moonrailgun/tailchat tailchat # 修改tag以让配置文件能够识别
 ```
 
 ### 从源码中编译
+
+**适用于高级玩家**
 
 #### 编译环境 node 环境
 
