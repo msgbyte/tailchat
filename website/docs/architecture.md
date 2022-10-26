@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 架构
+title: 系统架构
 ---
 
 ## 服务端架构

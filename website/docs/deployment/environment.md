@@ -24,10 +24,10 @@ title: 环境变量
 
 ### 使用文件进行配置环境变量
 
-如果是本地方式启动，请复制 `.env.example` 到 `.env` 然后进行编辑
-```bash
-mv .env.example .env
-vi .env
-```
+- 如果是本地方式启动，请复制 `.env.example` 到 `.env` 然后进行编辑
+  ```bash
+  mv .env.example .env
+  vi .env
+  ```
 
-如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker-compose up -d` 即可生效
+- 如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker-compose up -d` 即可生效

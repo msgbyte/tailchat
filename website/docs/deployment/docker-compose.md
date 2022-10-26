@@ -9,7 +9,7 @@ title: Docker Compose 部署
 
 首先需要确保有 `Docker / Docker Compose` 环境
 
-安装方式可参考 : [安装 Docker 环境](./install-docker.md)
+安装方式可参考: [安装 Docker 环境](./install-docker.md)
 
 ## 拉取镜像
 
@@ -101,3 +101,7 @@ docker-compose up -d
 ```
 docker volume ls | grep "tailchat-server"
 ```
+
+:::info
+完整的环境变量可以查询 [环境变量](./environment.md)
+:::
