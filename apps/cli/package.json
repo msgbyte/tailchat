@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "ts-node ./src/index.ts",
-    "build": "rm -rf lib && tsc",
+    "build": "rimraf -rf lib && tsc",
     "prepare": "npm run build",
     "release": "npm publish --registry https://registry.npmjs.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -48,6 +48,7 @@
     "plop": "^3.0.5",
     "pretty-ms": "7.0.1",
     "react": "18.2.0",
+    "rimraf": "^3.0.2",
     "tailchat-server-sdk": "^0.0.12",
     "yargs": "^17.4.0"
   },
