@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "nodemon --watch \"src/**\" --ext \"ts\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node --transpile-only src/index.ts\"",
     "build": "tsc",
+    "prepare": "tsc",
     "test": "jest"
   },
   "dependencies": {
