@@ -4,14 +4,14 @@ export interface TailchatWidgetOptions {
    */
   host?: string;
   groupId: string;
-  channelId: string;
+  panelId: string;
   widgetStyle?: Partial<CSSStyleDeclaration>;
   iconStyle?: Partial<CSSStyleDeclaration>;
   frameStyle?: Partial<CSSStyleDeclaration>;
 }
 
 const defaultTailchatWidgetOptions: Partial<TailchatWidgetOptions> = {
-  host: 'https://nightly.paw.msgbyte.com/',
+  host: 'https://nightly.paw.msgbyte.com',
 };
 
 const defaultWidgetStyle: Partial<CSSStyleDeclaration> = {
@@ -50,7 +50,7 @@ const closeIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http:
 export function createTailchatWidget(_options: TailchatWidgetOptions) {
   const options = { ...defaultTailchatWidgetOptions, ..._options };
 
-  const url = `${options.host}${options.groupId}/${options.channelId}`;
+  const url = `${options.host}/panel/group/${options.groupId}/${options.panelId}`;
 
   // 容器
   const container = document.createElement('div');
