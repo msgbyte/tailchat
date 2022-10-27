@@ -4,6 +4,7 @@ import { connectCommand } from './commands/connect';
 import { appCommand } from './commands/app';
 import { declarationCommand } from './commands/declaration';
 import { benchCommand } from './commands/bench';
+import { dockerCommand } from './commands/docker';
 
 yargs
   .demandCommand()
@@ -12,6 +13,7 @@ yargs
   .command(appCommand)
   .command(benchCommand)
   .command(declarationCommand)
+  .command(dockerCommand)
   .alias('h', 'help')
   .scriptName('tailchat')
   .parse();
