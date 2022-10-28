@@ -1,5 +1,5 @@
-export { foo } from '@/foo';
-export { bar } from '@/bar';
+export { foo, fooVar } from '@/foo';
+export { bar, complexBar } from '@/bar';
 
 /**
  * Root export

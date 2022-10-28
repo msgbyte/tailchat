@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["DOM"],
+    "lib": ["ESNext"],
     "outDir": "lib",
     "declaration": true,
     "esModuleInterop": true,

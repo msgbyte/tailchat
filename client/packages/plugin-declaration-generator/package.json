@@ -8,7 +8,9 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "prepare": "tsc",
-    "test": "ts-node ./test/index.ts"
+    "test": "ts-node ./test/index.ts",
+    "test:parser": "ts-node ./test/parser.ts",
+    "test:parser:debug": "node -r ts-node/register --inspect-brk ./test/parser.ts"
   },
   "author": "",
   "license": "MIT",
@@ -21,6 +23,7 @@
     "glob": "^7.2.0",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
+    "ts-morph": "^16.0.0",
     "typescript": "^4.5.2"
   },
   "devDependencies": {
@@ -31,7 +34,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/lodash": "^4.14.170",
     "@types/mkdirp": "^1.0.2",
-    "@types/node": "^15.12.5",
+    "@types/node": "^18.11.7",
     "ts-node": "^10.0.0"
   }
 }
