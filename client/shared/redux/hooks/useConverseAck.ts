@@ -51,6 +51,9 @@ export function useConverseAck(converseId: string) {
     setConverseAck(converseId, lastMessageId);
   });
 
+  /**
+   * 标记为会话已读
+   */
   const markConverseAllAck = useMemoizedFn(() => {
     updateConverseAck(converseLastMessage);
   });

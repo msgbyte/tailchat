@@ -8,17 +8,17 @@ export function useMessageAck(converseId: string) {
   const { updateConverseAck } = useConverseAck(converseId);
 
   useEffect(() => {
-    const handldReadMessage = (message: ChatMessage | null) => {
+    const handleReadMessage = (message: ChatMessage | null) => {
       const messageId = message?._id;
       if (messageId && converseId === message.converseId) {
         updateConverseAck(messageId);
       }
     };
 
-    sharedEvent.on('readMessage', handldReadMessage);
+    sharedEvent.on('readMessage', handleReadMessage);
 
     return () => {
-      sharedEvent.off('readMessage', handldReadMessage);
+      sharedEvent.off('readMessage', handleReadMessage);
     };
   }, [converseId]);
 }
