@@ -6,23 +6,21 @@ import { configPath, generateErrorBlock } from './utils';
 const LABEL = 'tailchat-topic';
 const TOPIC_KEY = 'tailchatTopicId';
 
-export function app(app: Probot) {
-  if (
-    !process.env.TAILCHAT_API_URL ||
-    !process.env.TAILCHAT_APP_ID ||
-    !process.env.TAILCHAT_APP_SECRET
-  ) {
-    throw new Error(
-      'Require env: TAILCHAT_API_URL, TAILCHAT_APP_ID, TAILCHAT_APP_SECRET'
-    );
-  }
-
-  const tailchatClient = new TailchatClient(
-    process.env.TAILCHAT_API_URL,
-    process.env.TAILCHAT_APP_ID,
-    process.env.TAILCHAT_APP_SECRET
+if (
+  !process.env.TAILCHAT_API_URL ||
+  !process.env.TAILCHAT_APP_ID ||
+  !process.env.TAILCHAT_APP_SECRET
+) {
+  throw new Error(
+    'Require env: TAILCHAT_API_URL, TAILCHAT_APP_ID, TAILCHAT_APP_SECRET'
   );
+}
 
+const defaultTailchatApiUrl = process.env.TAILCHAT_API_URL;
+const tailchatAppId = process.env.TAILCHAT_APP_ID;
+const tailchatAppSecret = process.env.TAILCHAT_APP_SECRET;
+
+export function app(app: Probot) {
   app.on('issues.opened', async (ctx) => {
     if (ctx.isBot) {
       return;
@@ -41,14 +39,8 @@ export function app(app: Probot) {
 
       // 是配置文件
 
-      const content = Buffer.from(data.content, 'base64').toString();
-      const json = await JSON.parse(content);
-      const groupId = json['groupId'];
-      const panelId = json['panelId'];
-
-      if (!groupId || !panelId) {
-        throw new Error('config format error');
-      }
+      const { tailchatClient, groupId, panelId } =
+        createTailchatContextWithConfig(data.content);
 
       // 发送到tailchat
       const topic = await tailchatClient.call(
@@ -113,14 +105,8 @@ export function app(app: Probot) {
 
       // 是配置文件
 
-      const content = Buffer.from(data.content, 'base64').toString();
-      const json = await JSON.parse(content);
-      const groupId = json['groupId'];
-      const panelId = json['panelId'];
-
-      if (!groupId || !panelId) {
-        throw new Error('config format error');
-      }
+      const { tailchatClient, groupId, panelId } =
+        createTailchatContextWithConfig(data.content);
 
       // 发送到tailchat
       await tailchatClient.call('plugin:com.msgbyte.topic.createComment', {
@@ -142,21 +128,42 @@ export function app(app: Probot) {
     }
   });
 
-  app.on('installation.created', async (ctx) => {
-    const installationId = ctx.payload.installation.id;
-    const installationTargetName = ctx.payload.installation.account.login;
-    const installationTargetRepositories = ctx.payload.repositories;
+  // app.on('installation.created', async (ctx) => {
+  //   const installationId = ctx.payload.installation.id;
+  //   const installationTargetName = ctx.payload.installation.account.login;
+  //   const installationTargetRepositories = ctx.payload.repositories;
 
-    console.log('installation.created', {
-      installationId,
-      installationTargetName,
-      installationTargetRepositories,
-    });
-  });
+  //   console.log('installation.created', {
+  //     installationId,
+  //     installationTargetName,
+  //     installationTargetRepositories,
+  //   });
+  // });
+}
 
-  // For more information on building apps:
-  // https://probot.github.io/docs/
+/**
+ * 从配置文件中创建上下文
+ */
+function createTailchatContextWithConfig(githubRaw: string) {
+  const content = Buffer.from(githubRaw, 'base64').toString();
+  const json = JSON.parse(content);
+  const tailchatHost = json['tailchatHost'];
+  const groupId = json['groupId'];
+  const panelId = json['panelId'];
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
+  if (!groupId || !panelId) {
+    throw new Error('config format error');
+  }
+
+  const tailchatClient = new TailchatClient(
+    tailchatHost ?? defaultTailchatApiUrl,
+    tailchatAppId,
+    tailchatAppSecret
+  );
+
+  return {
+    tailchatClient,
+    groupId,
+    panelId,
+  };
 }

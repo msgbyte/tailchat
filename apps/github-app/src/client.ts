@@ -11,6 +11,12 @@ export class TailchatClient {
     public appId: string,
     public appSecret: string
   ) {
+    if (!url || !appId || !appSecret) {
+      throw new Error(
+        'Require params: apiUrl, appId, appSecret. You can set it with env'
+      );
+    }
+
     this.request = axios.create({
       baseURL: url,
     });
