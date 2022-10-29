@@ -53,9 +53,13 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
       return <OpenedPanelTip onClosePanelWindow={closePanelWindow} />;
     }
 
+    const converseHeader = converse && (
+      <ConversePanelTitle converse={converse} />
+    );
+
     return (
       <CommonPanelWrapper
-        header={converse && <ConversePanelTitle converse={converse} />}
+        header={converseHeader}
         actions={(setRightPanel) => {
           if (!converse) {
             return [];
@@ -134,7 +138,11 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
           ]);
         }}
       >
-        <ChatBox converseId={converseId} isGroup={false} />
+        <ChatBox
+          converseId={converseId}
+          converseTitle={converseHeader}
+          isGroup={false}
+        />
       </CommonPanelWrapper>
     );
   }

@@ -72,7 +72,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     const panelInfo = useGroupPanelInfo(groupId, panelId);
     const { disabled, placeholder } = useChatInputInfo(groupId);
 
-    if (panelInfo === undefined) {
+    if (!panelInfo) {
       return null;
     }
 
@@ -86,7 +86,12 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
           disabled={disabled}
           placeholder={placeholder}
         >
-          <ChatBox converseId={panelId} isGroup={true} groupId={groupId} />
+          <ChatBox
+            converseId={panelId}
+            converseTitle={panelInfo.name}
+            isGroup={true}
+            groupId={groupId}
+          />
         </ChatInputMentionsContextProvider>
       </GroupPanelWrapper>
     );

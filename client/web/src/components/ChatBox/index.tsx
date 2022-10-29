@@ -11,16 +11,18 @@ import { useMessageAck } from './useMessageAck';
 type ChatBoxProps =
   | {
       converseId: string;
+      converseTitle?: React.ReactNode;
       isGroup: false;
       groupId?: string;
     }
   | {
       converseId: string;
+      converseTitle?: React.ReactNode;
       isGroup: true;
       groupId: string;
     };
 const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
-  const { converseId, isGroup } = props;
+  const { converseId, converseTitle, isGroup } = props;
   const {
     messages,
     loading,
@@ -47,6 +49,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
     <div className="w-full h-full flex flex-col select-text">
       <ChatMessageList
         key={converseId}
+        title={converseTitle}
         messages={messages}
         isLoadingMore={isLoadingMore}
         hasMoreMessage={hasMoreMessage}

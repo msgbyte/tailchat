@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { sharedEvent } from 'tailchat-shared';
+import { ChatMessageHeader } from './ChatMessageHeader';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 
@@ -60,6 +61,11 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
             buildMessageItemRow(arr, index)
           )}
         </div>
+
+        {/* 因为是倒过来的，因此要前面的要放在后面 */}
+        {props.title && !props.hasMoreMessage && (
+          <ChatMessageHeader title={props.title} />
+        )}
       </div>
     );
   }
