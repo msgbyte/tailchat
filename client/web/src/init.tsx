@@ -10,7 +10,7 @@ import {
   setTokenGetter,
   showErrorToasts,
   t,
-  fetchGlobalConfig,
+  fetchGlobalClientConfig,
   request,
   isValidStr,
   isDevelopment,
@@ -107,7 +107,7 @@ setErrorHook((err) => {
 /**
  * 获取前端配置
  */
-fetchGlobalConfig().catch((e) => {
+fetchGlobalClientConfig().catch((e) => {
   showErrorToasts(t('全局配置加载失败'));
   console.error('全局配置加载失败', e);
 });

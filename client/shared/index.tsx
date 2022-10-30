@@ -96,7 +96,7 @@ export {
 // model
 export * as model from './model/__all__';
 export { fetchAvailableServices } from './model/common';
-export { fetchGlobalConfig } from './model/config';
+export { fetchGlobalClientConfig } from './model/config';
 export {
   createDMConverse,
   appendDMConverseMembers,

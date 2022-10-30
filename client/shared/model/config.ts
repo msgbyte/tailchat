@@ -21,8 +21,8 @@ export function getGlobalConfig() {
   };
 }
 
-export async function fetchGlobalConfig(): Promise<GlobalConfig> {
-  const { data: config } = await request.get('/api/config/global');
+export async function fetchGlobalClientConfig(): Promise<GlobalConfig> {
+  const { data: config } = await request.get('/api/config/client');
 
   globalConfig = {
     ...globalConfig,
