@@ -31,6 +31,7 @@ class PluginManager {
     const loadErrorPlugins = new Set<string>();
     await initMiniStar({
       plugins,
+      // removeScriptDomOnLoaded: false, // for test
       onPluginLoadError: (err) => {
         console.error('Plugin load error:', err);
         loadErrorPlugins.add(err.pluginName);

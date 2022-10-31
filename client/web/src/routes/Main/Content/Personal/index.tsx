@@ -1,4 +1,3 @@
-import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { pluginCustomPanel } from '@/plugin/common';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';

@@ -377,7 +377,7 @@ importers:
       lodash: ^4.17.21
       memoize-one: ^6.0.0
       mini-css-extract-plugin: ^1.6.2
-      mini-star: ^1.3.1
+      mini-star: ^2.0.2
       minimatch: ^5.1.0
       normalize-path: ^3.0.0
       p-min-delay: ^4.0.0
@@ -443,7 +443,7 @@ importers:
       jwt-decode: 3.1.2
       lodash: 4.17.21
       memoize-one: 6.0.0
-      mini-star: 1.3.1
+      mini-star: 2.0.2
       minimatch: 5.1.0
       p-min-delay: 4.0.1
       qs: 6.11.0
@@ -1432,7 +1432,7 @@ packages:
       '@babel/compat-data': 7.18.13
       '@babel/core': 7.18.13
       '@babel/helper-validator-option': 7.18.6
-      browserslist: 4.21.3
+      browserslist: 4.21.4
       semver: 6.3.0
 
   /@babel/helper-create-class-features-plugin/7.18.13_@babel+core@7.18.13:
@@ -21482,6 +21482,29 @@ packages:
       yargs: 16.2.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /mini-star/2.0.2:
+    resolution: {integrity: sha512-oR3GIeYzENrf/Dlpbc+Z3yeK2zDuCw+xQp7oiDnDzB446XajTtEL6G6KCRUwjgsKLl000K+BbNTPwKXSdeWJoA==}
+    hasBin: true
+    dependencies:
+      '@rollup/plugin-commonjs': 19.0.2_rollup@2.78.1
+      '@rollup/plugin-json': 4.1.0_rollup@2.78.1
+      '@rollup/plugin-node-resolve': 13.3.0_rollup@2.78.1
+      '@rollup/plugin-url': 6.1.0_rollup@2.78.1
+      cosmiconfig: 7.0.1
+      esbuild: 0.12.29
+      fs-extra: 9.1.0
+      inquirer: 8.2.4
+      ora: 5.4.1
+      rimraf: 3.0.2
+      rollup: 2.78.1
+      rollup-plugin-esbuild: 4.10.1_ax473fqd6eskvxt55eom7ftbja
+      rollup-plugin-styles: 3.14.1_rollup@2.78.1
+      yargs: 16.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}

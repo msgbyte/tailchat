@@ -38,7 +38,7 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "memoize-one": "^6.0.0",
-    "mini-star": "^1.3.1",
+    "mini-star": "^2.0.2",
     "minimatch": "^5.1.0",
     "p-min-delay": "^4.0.0",
     "qs": "^6.10.3",

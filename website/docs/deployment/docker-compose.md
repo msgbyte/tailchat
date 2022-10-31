@@ -9,8 +9,7 @@ title: Docker Compose 部署
 
 > 如果只有 **1核1G**? 请参阅我的博客: [Linux 小资源服务器使用经验总结](http://moonrailgun.com/posts/6769ba51/) 通过交换内存来拓展内存空间
 > 
-> 可供参考的内存用量
-> 
+> 可供参考的内存用量:
 > ![](/img/misc/memory-usage.png)
 
 ## 前置环境
