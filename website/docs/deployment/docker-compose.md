@@ -3,6 +3,16 @@ sidebar_position: 4
 title: Docker Compose 部署
 ---
 
+## 建议配置
+
+建议最低配置 **1核2G** 
+
+> 如果只有 **1核1G**? 请参阅我的博客: [Linux 小资源服务器使用经验总结](http://moonrailgun.com/posts/6769ba51/) 通过交换内存来拓展内存空间
+> 
+> 可供参考的内存用量
+> 
+> ![](/img/misc/memory-usage.png)
+
 ## 前置环境
 
 ### Docker / Docker Compose
@@ -25,6 +35,10 @@ title: Docker Compose 部署
 docker pull moonrailgun/tailchat
 docker tag moonrailgun/tailchat tailchat # 修改tag以让配置文件能够识别
 ```
+
+:::
+可以从 [Docker Hub](https://hub.docker.com/r/moonrailgun/tailchat/tags) 查看历史支持的镜像版本
+:::
 
 ### 从源码中编译
 
@@ -69,6 +83,8 @@ docker-compose build
 > 需要手动下载配置文件与配置环境变量以一键启动: 
 > - [docker-compose.yml](https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml)
 > - [docker-compose.env](https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env)
+> 
+> 或者克隆完整项目 [tailchat](https://github.com/msgbyte/tailchat) 以获得最新的配置文件
 
 在启动之前需要修改一下配置
 
@@ -80,7 +96,7 @@ docker-compose build
 完成配置后使用`docker-compose` 一键启动 `Tailchat` 应用:
 
 ```bash
-cd tailchat
+cd tailchat # 切换目录到`docker-compose.yml`所在目录
 docker-compose up -d
 ```
 
