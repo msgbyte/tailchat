@@ -345,6 +345,7 @@ importers:
       '@types/webpack': ^5.28.0
       '@types/webpack-bundle-analyzer': ^4.4.1
       '@types/webpack-dev-server': ^4.3.1
+      '@use-gesture/react': ^10.2.21
       ahooks: ^3.7.1
       antd: ^4.19.5
       autoprefixer: ^10.2.6
@@ -396,7 +397,6 @@ importers:
       react-router-dom: ^6.4.0
       react-split: ^2.0.14
       react-transition-group: ^4.4.2
-      react-use-gesture: ^9.1.3
       react-virtualized-auto-sizer: ^1.0.6
       react-virtuoso: ^3.1.1
       rimraf: ^3.0.2
@@ -430,6 +430,7 @@ importers:
       zustand: ^4.1.2
     dependencies:
       '@loadable/component': 5.15.2_react@18.2.0
+      '@use-gesture/react': 10.2.21_react@18.2.0
       ahooks: 3.7.1_react@18.2.0
       antd: 4.22.8_biqbaboplfbrettd7655fr4n2y
       axios: 0.21.4
@@ -459,7 +460,6 @@ importers:
       react-router-dom: 6.4.0_biqbaboplfbrettd7655fr4n2y
       react-split: 2.0.14_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      react-use-gesture: 9.1.3_react@18.2.0
       react-virtualized-auto-sizer: 1.0.6_biqbaboplfbrettd7655fr4n2y
       react-virtuoso: 3.1.1_biqbaboplfbrettd7655fr4n2y
       socket.io-client: 4.5.1
@@ -10253,6 +10253,19 @@ packages:
       '@typescript-eslint/types': 5.35.1
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@use-gesture/core/10.2.21:
+    resolution: {integrity: sha512-EpqNIZ/diwbpjzjRqk+deMg+WOfW9GCYDZCZ6LHS2WPo6ea1flxC/0ncpsY7oUbMqJeKSsW6E7IOk0I6jji69g==}
+    dev: false
+
+  /@use-gesture/react/10.2.21_react@18.2.0:
+    resolution: {integrity: sha512-R8F6dnYWycpFPKi4ljvh1F+ItcBv8xFYFw7KIhUCJ3HWGndDKzqhahHshsM5XkuLL13PblNOf8oVgmSnRbB3Gg==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@use-gesture/core': 10.2.21
+      react: 18.2.0
+    dev: false
 
   /@virtuoso.dev/react-urx/0.2.13_react@18.2.0:
     resolution: {integrity: sha512-MY0ugBDjFb5Xt8v2HY7MKcRGqw/3gTpMlLXId2EwQvYJoC8sP7nnXjAxcBtTB50KTZhO0SbzsFimaZ7pSdApwA==}
@@ -26601,15 +26614,6 @@ packages:
       tslib: '*'
     dependencies:
       tslib: 2.4.0
-    dev: false
-
-  /react-use-gesture/9.1.3_react@18.2.0:
-    resolution: {integrity: sha512-CdqA2SmS/fj3kkS2W8ZU8wjTbVBAIwDWaRprX7OKaj7HlGwBasGEFggmk5qNklknqk9zK/h8D355bEJFTpqEMg==}
-    deprecated: This package is no longer maintained. Please use @use-gesture/react instead
-    peerDependencies:
-      react: '>= 16.8.0'
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-use/17.4.0:

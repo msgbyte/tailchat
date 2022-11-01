@@ -1,17 +1,27 @@
 import React, { PropsWithChildren, useCallback, useEffect } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 import _isNil from 'lodash/isNil';
-import { useDrag } from 'react-use-gesture';
+import { EventTypes, useDrag, UserDragConfig } from '@use-gesture/react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import type { ReactEventHandlers } from 'react-use-gesture/dist/types';
+import type { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 
-const PageContentRoot: React.FC<PropsWithChildren<ReactEventHandlers>> = ({
+interface PageContentRootProps extends PropsWithChildren<ReactDOMAttributes> {
+  className?: string;
+  style?: React.CSSProperties;
+}
+const PageContentRoot: React.FC<PageContentRootProps> = ({
+  className,
+  style,
   children,
   ...others
 }) => (
-  <div className="flex flex-row flex-1 overflow-hidden" {...others}>
+  <div
+    {...others}
+    style={style}
+    className={clsx('flex flex-row flex-1 overflow-hidden', className)}
+  >
     {children}
   </div>
 );
@@ -19,7 +29,7 @@ const PageContentRoot: React.FC<PropsWithChildren<ReactEventHandlers>> = ({
 const PageGestureWrapper: React.FC<PropsWithChildren> = React.memo((props) => {
   const { setShowSidebar } = useSidebarContext();
 
-  const bind = useDrag(
+  const bind = useDrag<EventTypes['drag'], UserDragConfig>(
     (state) => {
       const { swipe } = state;
       const swipeX = swipe[0];
@@ -31,11 +41,22 @@ const PageGestureWrapper: React.FC<PropsWithChildren> = React.memo((props) => {
     },
     {
       axis: 'x',
-      swipeDistance: 5,
+      swipe: {
+        distance: 5,
+      },
     }
   );
 
-  return <PageContentRoot {...bind()}>{props.children}</PageContentRoot>;
+  return (
+    <PageContentRoot
+      style={{
+        touchAction: 'pan-x',
+      }}
+      {...bind()}
+    >
+      {props.children}
+    </PageContentRoot>
+  );
 });
 PageGestureWrapper.displayName = 'PageGestureWrapper';
 
