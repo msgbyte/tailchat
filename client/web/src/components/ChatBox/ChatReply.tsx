@@ -3,7 +3,7 @@ import { t, useChatBoxContext, useSharedEventHandler } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { getMessageRender } from '@/plugin/common';
 import { UserName } from '../UserName';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 
 export const ChatReply: React.FC = React.memo(() => {
   const { replyMsg, setReplyMsg, clearReplyMsg } = useChatBoxContext();

@@ -1,5 +1,5 @@
 import { blobUrlToFile } from '@/utils/file-helper';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import clsx from 'clsx';
 import React, { PropsWithChildren, useState } from 'react';
 import { uploadFile, UploadFileResult, useAsyncRequest } from 'tailchat-shared';

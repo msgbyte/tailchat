@@ -1,6 +1,6 @@
 import { closeModal, openModal } from '@/components/Modal';
 import { SettingsView } from '@/components/modals/SettingsView';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React, { useCallback } from 'react';
 
 export const SettingBtn: React.FC = React.memo(() => {

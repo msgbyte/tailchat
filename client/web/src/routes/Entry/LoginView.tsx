@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { Divider } from 'antd';
 import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useEffect, useState } from 'react';

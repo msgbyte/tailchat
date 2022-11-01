@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { openReconfirmModalP } from '@/components/Modal';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';

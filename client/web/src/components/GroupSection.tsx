@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React, { PropsWithChildren } from 'react';
 import { useReducer } from 'react';
 

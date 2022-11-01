@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React from 'react';
 import { useGroupInfo, t } from 'tailchat-shared';
 import { ModalWrapper } from '../../Modal';

@@ -2,7 +2,7 @@ import { Spinner } from '@/components/Spinner';
 import { useSearchParam } from '@/hooks/useSearchParam';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {

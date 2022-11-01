@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { Menu } from 'antd';
 import React, { useCallback } from 'react';
 import {

@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React from 'react';
 
 export const Spinner: React.FC = React.memo(() => {

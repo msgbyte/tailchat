@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useRef, useState } from 'react';
 import { closeModal, openModal } from './Modal';
 import { showToasts, t } from 'tailchat-shared';
 import { Avatar } from 'antd';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { ModalAvatarCropper } from './modals/AvatarCropper';
 import { isGIF } from '@/utils/file-helper';
 

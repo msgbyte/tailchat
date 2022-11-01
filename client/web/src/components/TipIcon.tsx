@@ -1,5 +1,5 @@
-import { Icon } from './Icon';
 import React from 'react';
+import { Icon } from 'tailchat-design';
 import { DelayTip } from './DelayTip';
 
 export const TipIcon: React.FC<{

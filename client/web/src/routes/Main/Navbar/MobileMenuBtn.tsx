@@ -1,5 +1,5 @@
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import React, { useCallback } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 

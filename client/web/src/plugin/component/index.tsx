@@ -13,10 +13,9 @@ export {
   notification,
   Empty,
 } from 'antd';
-export { Avatar, SensitiveText } from 'tailchat-design';
+export { Avatar, SensitiveText, Icon } from 'tailchat-design';
 export const TextArea = Input.TextArea;
 export { Image } from '@/components/Image';
-export { Icon } from '@/components/Icon';
 export { IconBtn } from '@/components/IconBtn';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
 export { LoadingSpinner } from '@/components/LoadingSpinner';

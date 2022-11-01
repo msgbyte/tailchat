@@ -3,7 +3,7 @@ import {
   getMessageTextDecorators,
   pluginChatInputActions,
 } from '@/plugin/common';
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { Dropdown, Menu } from 'antd';
 import React from 'react';
 import { t } from 'tailchat-shared';

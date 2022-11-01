@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from 'tailchat-design';
 import { t } from 'tailchat-shared';
 import React from 'react';
 
