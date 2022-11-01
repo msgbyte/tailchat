@@ -5,9 +5,15 @@ import { useDrag } from 'react-use-gesture';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import type { ReactEventHandlers } from 'react-use-gesture/dist/types';
 
-const PageContentRoot: React.FC<PropsWithChildren> = (props) => (
-  <div className="flex flex-row flex-1 overflow-hidden">{props.children}</div>
+const PageContentRoot: React.FC<PropsWithChildren<ReactEventHandlers>> = ({
+  children,
+  ...others
+}) => (
+  <div className="flex flex-row flex-1 overflow-hidden" {...others}>
+    {children}
+  </div>
 );
 
 const PageGestureWrapper: React.FC<PropsWithChildren> = React.memo((props) => {
