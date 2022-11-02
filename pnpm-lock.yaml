@@ -378,7 +378,7 @@ importers:
       lodash: ^4.17.21
       memoize-one: ^6.0.0
       mini-css-extract-plugin: ^1.6.2
-      mini-star: ^2.0.4
+      mini-star: ^2.0.5
       minimatch: ^5.1.0
       normalize-path: ^3.0.0
       p-min-delay: ^4.0.0
@@ -444,7 +444,7 @@ importers:
       jwt-decode: 3.1.2
       lodash: 4.17.21
       memoize-one: 6.0.0
-      mini-star: 2.0.4
+      mini-star: 2.0.5
       minimatch: 5.1.0
       p-min-delay: 4.0.1
       qs: 6.11.0
@@ -21497,8 +21497,8 @@ packages:
       - supports-color
     dev: true
 
-  /mini-star/2.0.4:
-    resolution: {integrity: sha512-xEuLAUBVJ4JuzZiAi+q+2Jgg8tSTWT6Cev2w3ZziSE7KuwEds6lJyZgF1W0WuMTaXFEb5ctI9t/UKHmnBT7lcg==}
+  /mini-star/2.0.5:
+    resolution: {integrity: sha512-6zt5E8ky/LO7SrPgvVuLzF1E5/bnuex5zLQHpuKq/XBuTHb/iSD9UMav5o2bfYyzhsWNCLE/dUWmgm7bdQGocg==}
     hasBin: true
     dependencies:
       '@rollup/plugin-commonjs': 19.0.2_rollup@2.78.1

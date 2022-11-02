@@ -2,6 +2,9 @@ client/locales
 .vercel
 .DS_Store
 
+.yalc
+yalc.lock
+
 # Logs
 logs
 *.log
