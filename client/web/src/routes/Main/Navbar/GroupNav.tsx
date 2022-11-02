@@ -2,21 +2,59 @@ import { Avatar, Icon } from 'tailchat-design';
 import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
 import React, { useCallback, useMemo } from 'react';
-import { GroupInfo, t, useAppSelector, useGroupUnread } from 'tailchat-shared';
+import {
+  GroupInfo,
+  showSuccessToasts,
+  t,
+  useAppSelector,
+  useGroupAck,
+  useGroupUnread,
+} from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
+import { Dropdown, Menu } from 'antd';
 
+/**
+ * 群组导航栏栏项
+ */
 const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
-  const hasUnread = useGroupUnread(group._id);
+  const groupId = group._id;
+  const hasUnread = useGroupUnread(groupId);
+  const { markGroupAllAck } = useGroupAck(groupId);
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: 'ack',
+          label: t('标记为已读'),
+          icon: <Icon icon="mdi:message-badge-outline" />,
+          onClick: () => {
+            markGroupAllAck();
+            showSuccessToasts(t('已标记该群组所有消息已读'));
+          },
+        },
+      ]}
+    />
+  );
 
   return (
-    <NavbarNavItem
-      name={group.name}
-      to={`/main/group/${group._id}`}
-      showPill={true}
-      badge={hasUnread}
-    >
-      <Avatar shape="square" size={48} name={group.name} src={group.avatar} />
-    </NavbarNavItem>
+    <Dropdown overlay={menu} trigger={['contextMenu']}>
+      <div>
+        <NavbarNavItem
+          name={group.name}
+          to={`/main/group/${group._id}`}
+          showPill={true}
+          badge={hasUnread}
+        >
+          <Avatar
+            shape="square"
+            size={48}
+            name={group.name}
+            src={group.avatar}
+          />
+        </NavbarNavItem>
+      </div>
+    </Dropdown>
   );
 });
 GroupNavItem.displayName = 'GroupNavItem';

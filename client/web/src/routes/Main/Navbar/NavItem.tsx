@@ -47,7 +47,7 @@ export const NavbarNavItem: React.FC<
   }
 
   return (
-    <div className="w-full px-3 relative group">
+    <div className="px-3 relative group">
       {showPill && (
         <div
           className="absolute w-2 left-0 top-0 bottom-0 flex items-center"

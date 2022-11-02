@@ -183,6 +183,7 @@ export {
   useGroupUnread,
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
+export { useGroupAck } from './redux/hooks/useGroupAck';
 export { useGroupMemberMute } from './redux/hooks/useGroupMemberMute';
 export {
   useGroupMemberAllPermissions,
