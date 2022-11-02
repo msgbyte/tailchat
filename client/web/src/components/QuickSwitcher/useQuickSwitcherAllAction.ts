@@ -4,11 +4,13 @@ import {
   useAppSelector,
   useAsync,
   useUserId,
+  getDMConverseName,
+  model,
 } from 'tailchat-shared';
 import { useDebugValue } from 'react';
 import type { QuickActionContext } from './useQuickSwitcherActionContext';
-import { getDMConverseName } from 'tailchat-shared';
-import { ChatConverseType } from 'tailchat-shared/model/converse';
+
+const ChatConverseType = model.converse.ChatConverseType;
 
 export interface QuickAction {
   key: string;

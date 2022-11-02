@@ -1,7 +1,6 @@
 import { Select } from 'antd';
 import React, { useCallback } from 'react';
-import { t } from 'tailchat-shared';
-import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
+import { t, useUserInfoList } from 'tailchat-shared';
 
 interface UserSelectorProps {
   allUserIds: string[];

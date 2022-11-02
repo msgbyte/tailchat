@@ -17,8 +17,8 @@ import {
   useIsGroupOwner,
   UserBaseInfo,
   useSearch,
+  useUserInfoList,
 } from 'tailchat-shared';
-import { useUserInfoList } from 'tailchat-shared/hooks/model/useUserInfoList';
 
 interface MembersPanelProps {
   groupId: string;
