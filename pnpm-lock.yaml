@@ -378,7 +378,7 @@ importers:
       lodash: ^4.17.21
       memoize-one: ^6.0.0
       mini-css-extract-plugin: ^1.6.2
-      mini-star: ^2.0.3
+      mini-star: ^2.0.4
       minimatch: ^5.1.0
       normalize-path: ^3.0.0
       p-min-delay: ^4.0.0
@@ -444,7 +444,7 @@ importers:
       jwt-decode: 3.1.2
       lodash: 4.17.21
       memoize-one: 6.0.0
-      mini-star: 2.0.3
+      mini-star: 2.0.4
       minimatch: 5.1.0
       p-min-delay: 4.0.1
       qs: 6.11.0
@@ -9144,7 +9144,7 @@ packages:
   /@types/bonjour/3.5.10:
     resolution: {integrity: sha512-p7ienRMiS41Nu2/igbJxxLDWrSZ0WxM8UQgCeO9KhoVF7cOVFkrKsiDr1EsJIla8vV3oEEjGcz11jc5yimhzZw==}
     dependencies:
-      '@types/node': 18.7.11
+      '@types/node': 18.11.7
 
   /@types/btoa-lite/1.0.0:
     resolution: {integrity: sha512-wJsiX1tosQ+J5+bY5LrSahHxr2wT+uME5UDwdN1kg4frt40euqA+wzECkmq4t5QbveHiJepfdThgQrPw6KiSlg==}
@@ -9173,7 +9173,7 @@ packages:
     resolution: {integrity: sha512-h8QJa8xSb1WD4fpKBDcATDNGXghFj6/3GRWG6dhmRcu0RX1Ubasur2Uvx5aeEwlf0MwblEC2bMzzMQntxnw/Cw==}
     dependencies:
       '@types/express-serve-static-core': 4.17.30
-      '@types/node': 18.7.11
+      '@types/node': 18.11.7
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
@@ -9948,12 +9948,12 @@ packages:
     resolution: {integrity: sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 18.7.11
+      '@types/node': 18.11.7
 
   /@types/sockjs/0.3.33:
     resolution: {integrity: sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==}
     dependencies:
-      '@types/node': 18.7.11
+      '@types/node': 18.11.7
 
   /@types/source-list-map/0.1.2:
     resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}
@@ -10102,7 +10102,7 @@ packages:
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
-      '@types/node': 18.7.11
+      '@types/node': 18.11.7
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -21497,8 +21497,8 @@ packages:
       - supports-color
     dev: true
 
-  /mini-star/2.0.3:
-    resolution: {integrity: sha512-fONQmk7Vcpg1z/qeX7VnenRCqAdvEaq5GTlE7/nARtarLsODrPC1jxgukF8TXpqUWjhfrbllzh8XkGM+1QrQkA==}
+  /mini-star/2.0.4:
+    resolution: {integrity: sha512-xEuLAUBVJ4JuzZiAi+q+2Jgg8tSTWT6Cev2w3ZziSE7KuwEds6lJyZgF1W0WuMTaXFEb5ctI9t/UKHmnBT7lcg==}
     hasBin: true
     dependencies:
       '@rollup/plugin-commonjs': 19.0.2_rollup@2.78.1
