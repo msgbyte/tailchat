@@ -18,6 +18,8 @@ import type { TFunction } from 'i18next';
 import { t } from './lib/i18n';
 import type { ValidationRuleObject } from 'fastest-validator';
 import type { BuiltinEventMap } from '../structs/events';
+import { CONFIG_GATEWAY_AFTER_HOOK } from '../const';
+import _ from 'lodash';
 
 type ServiceActionHandler<T = any> = (
   ctx: TcPureContext<any>
@@ -68,6 +70,12 @@ interface TcServiceBroker extends ServiceBroker {
     groups?: string | string[]
   ): Promise<void>;
   emit(eventName: string): Promise<void>;
+  broadcast<K extends string>(
+    eventName: K,
+    data: K extends keyof BuiltinEventMap ? BuiltinEventMap[K] : unknown,
+    groups?: string | string[]
+  ): Promise<void>;
+  broadcast(eventName: string): Promise<void>;
 }
 
 /**
@@ -87,6 +95,11 @@ export abstract class TcService extends Service {
   private _settings: ServiceSchema['settings'] = {};
   private _events: ServiceSchema['events'] = {};
 
+  /**
+   * 全局的配置中心
+   */
+  public globalConfig: Record<string, any> = {};
+
   private _generateAndParseSchema() {
     this.parseServiceSchema({
       name: this.serviceName,
@@ -104,6 +117,8 @@ export abstract class TcService extends Service {
 
     this.onInit(); // 初始化服务
 
+    this.initBuiltin(); // 初始化内部服务
+
     this._generateAndParseSchema();
 
     this.logger = this.buildLoggerWithPrefix(this.logger);
@@ -118,6 +133,17 @@ export abstract class TcService extends Service {
   protected async onStart() {}
 
   protected async onStop() {}
+
+  protected initBuiltin() {
+    this.registerEventListener('config.updated', (payload) => {
+      this.logger.info('Update global config with:', payload.config);
+      if (payload.config) {
+        this.globalConfig = {
+          ...payload.config,
+        };
+      }
+    });
+  }
 
   registerMixin(mixin: Partial<ServiceSchema>): void {
     this._mixins.push(mixin);
@@ -255,6 +281,29 @@ export abstract class TcService extends Service {
     }
 
     return super.waitForServices(serviceNames, timeout, interval, logger);
+  }
+
+  getGlobalConfig(key: string): any {
+    return _.get(this.globalConfig, key);
+  }
+
+  /**
+   * 设置全局配置信息
+   */
+  async setGlobalConfig(key: string, value: any): Promise<void> {
+    await this.waitForServices('config');
+    await this.broker.call('config.set', {
+      key,
+      value,
+    });
+  }
+
+  async registryAfterActionHook(actionName: string, callbackAction: string) {
+    await this.waitForServices(['gateway', 'config']);
+    await this.broker.call('config.addToSet', {
+      key: `${CONFIG_GATEWAY_AFTER_HOOK}.${actionName}`,
+      value: `${this.serviceName}.${callbackAction}`,
+    });
   }
 
   /**

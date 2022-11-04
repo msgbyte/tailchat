@@ -21,4 +21,5 @@ export interface BuiltinEventMap {
         messageId: string;
         meta: MessageMetaStruct;
       };
+  'config.updated': { config: Record<string, any> };
 }

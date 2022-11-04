@@ -10,6 +10,7 @@ import {
   parseLanguageFromHead,
   builtinAuthWhitelist,
   PureContext,
+  CONFIG_GATEWAY_AFTER_HOOK,
 } from 'tailchat-server-sdk';
 import { TcHealth } from '../../mixins/health.mixin';
 import type { Readable } from 'stream';
@@ -168,6 +169,20 @@ export default class ApiService extends TcService {
         ) {
           // Async function which return with Promise
           res.setHeader('X-Node-ID', ctx.nodeID);
+
+          if (ctx.action.name) {
+            const afterHooks = this.getGlobalConfig(
+              `${CONFIG_GATEWAY_AFTER_HOOK}.${ctx.action.name}`
+            ); // TODO: 这里actionName可能不对。需要调试
+            if (Array.isArray(afterHooks) && afterHooks.length > 0) {
+              for (const action of afterHooks) {
+                this.broker.call(String(action), {
+                  route,
+                  data,
+                });
+              }
+            }
+          }
 
           if (data && data['__raw']) {
             if (data['header']) {
