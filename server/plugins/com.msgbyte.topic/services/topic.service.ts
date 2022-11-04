@@ -29,6 +29,7 @@ class GroupTopicService extends TcService {
         groupId: 'string',
         panelId: 'string',
         content: 'string',
+        meta: { type: 'object', optional: true },
       },
     });
     this.registerAction('createComment', this.createComment, {
@@ -89,9 +90,10 @@ class GroupTopicService extends TcService {
       groupId: string;
       panelId: string;
       content: string;
+      meta?: object;
     }>
   ) {
-    const { groupId, panelId, content } = ctx.params;
+    const { groupId, panelId, content, meta } = ctx.params;
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
 
@@ -112,6 +114,7 @@ class GroupTopicService extends TcService {
       groupId,
       panelId,
       content,
+      meta,
       author: userId,
       comment: [],
     });

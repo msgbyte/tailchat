@@ -2,6 +2,8 @@ import { Probot } from 'probot';
 import metadata from 'probot-metadata';
 import { TailchatClient } from './client';
 import { configPath, generateErrorBlock } from './utils';
+import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 
 const LABEL = 'tailchat-topic';
 const TOPIC_KEY = 'tailchatTopicId';
@@ -53,6 +55,11 @@ export function app(app: Probot) {
           }\ncontent: ${ctx.payload.issue.body ?? ''}\n\nwebsite: ${
             ctx.payload.issue.html_url
           }`,
+          meta: {
+            githubRepoOwner: ctx.payload.repository.owner,
+            githubRepoName: ctx.payload.repository.name,
+            githubIssueNumber: ctx.payload.issue.number,
+          },
         }
       );
 

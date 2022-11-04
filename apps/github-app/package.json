@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "dotenv": "^16.0.3",
     "probot": "^12.2.4",
     "probot-metadata": "^2.1.0"
   },

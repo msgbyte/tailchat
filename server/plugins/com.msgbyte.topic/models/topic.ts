@@ -51,6 +51,12 @@ export class GroupTopic extends TimeStamps implements db.Base {
     default: [],
   })
   comments: GroupTopicComment[];
+
+  /**
+   * 话题的其他数据
+   */
+  @prop()
+  meta?: object;
 }
 
 export type GroupTopicDocument = db.DocumentType<GroupTopic>;
