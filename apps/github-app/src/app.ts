@@ -44,17 +44,19 @@ export function app(app: Probot) {
       const { tailchatClient, groupId, panelId } =
         createTailchatContextWithConfig(data.content);
 
+      console.log('配置信息', { tailchatClient, groupId, panelId });
+
       // 发送到tailchat
-      const topic = await tailchatClient.call(
+      const { data: topic } = await tailchatClient.call(
         'plugin:com.msgbyte.topic.create',
         {
           groupId,
           panelId,
-          content: `${ctx.payload.issue.user.login} create Issue\n\ntitle: ${
-            ctx.payload.issue.title
-          }\ncontent: ${ctx.payload.issue.body ?? ''}\n\nwebsite: ${
-            ctx.payload.issue.html_url
-          }`,
+          content: `[b]${
+            ctx.payload.issue.user.login
+          }[/b] create Issue:\n\nTitle: ${ctx.payload.issue.title}\nContent: ${
+            ctx.payload.issue.body ?? ''
+          }\n\nWebsite: ${ctx.payload.issue.html_url}`,
           meta: {
             githubRepoOwner: ctx.payload.repository.owner,
             githubRepoName: ctx.payload.repository.name,
@@ -62,6 +64,8 @@ export function app(app: Probot) {
           },
         }
       );
+
+      console.log('Tailchat Topic 创建成功', topic);
 
       await Promise.all([
         ctx.octokit.issues.createComment(
@@ -77,6 +81,8 @@ export function app(app: Probot) {
         ),
         metadata(ctx).set(TOPIC_KEY, topic._id),
       ]);
+
+      console.log('发送相关信息到 Github 完毕');
     } catch (err) {
       console.error(err);
 
@@ -90,6 +96,7 @@ export function app(app: Probot) {
 
   app.on('issue_comment.created', async (ctx) => {
     if (ctx.isBot) {
+      console.error('This comment created by Bot, Skip!');
       return;
     }
     // 发送到tailchat
@@ -97,6 +104,7 @@ export function app(app: Probot) {
     try {
       const topicId = await metadata(ctx).get(TOPIC_KEY);
       if (!topicId) {
+        console.error('Not found topic id, Skip!');
         return;
       }
 
@@ -107,7 +115,7 @@ export function app(app: Probot) {
       );
 
       if (!(!Array.isArray(data) && 'content' in data)) {
-        throw new Error('config file type error');
+        throw new Error('Config file type error');
       }
 
       // 是配置文件
@@ -120,8 +128,10 @@ export function app(app: Probot) {
         groupId,
         panelId,
         topicId,
-        content: `${ctx.payload.comment.user.login} reply Issue\n\ncontent: ${
-          ctx.payload.issue.body ?? ''
+        content: `[b]${
+          ctx.payload.comment.user.login
+        }[/b] reply Issue:\n\nContent: ${
+          ctx.payload.comment.body ?? ''
         }\n\nWebsite: ${ctx.payload.comment.html_url}`,
       });
     } catch (err) {

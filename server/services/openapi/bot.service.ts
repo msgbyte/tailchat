@@ -41,7 +41,7 @@ class OpenBotService extends TcService {
     });
 
     if (!valid) {
-      throw new Error('auth failed.');
+      throw new Error('Auth failed.');
     }
 
     // 校验通过, 获取机器人账号存在
@@ -82,12 +82,6 @@ class OpenBotService extends TcService {
       const botId = 'open_' + appInfo._id;
       const nickname = appInfo.appName;
       const avatar = appInfo.appIcon;
-      console.log('da', {
-        botId,
-        nickname,
-        avatar,
-        appInfo,
-      });
       const { _id: botUserId, email } = await ctx.call<
         {
           _id: string;

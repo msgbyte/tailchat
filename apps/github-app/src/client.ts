@@ -49,7 +49,7 @@ export class TailchatClient {
       console.log('tailchat openapp login success!');
 
       // 尝试调用函数
-      console.log(await this.whoami());
+      this.whoami().then(console.log);
     } catch (err) {
       console.error(err);
       throw err;
@@ -58,7 +58,8 @@ export class TailchatClient {
 
   async call(action: string, params = {}) {
     try {
-      await Promise.resolve(this.loginP); // 等待loigin完毕. 用于serverless服务
+      await Promise.resolve(this.loginP);
+      console.log('正在调用服务:', action);
       const { data } = await this.request.post(
         '/api/' + action.replace(/\./g, '/'),
         params
@@ -66,6 +67,7 @@ export class TailchatClient {
 
       return data;
     } catch (err: any) {
+      console.error('服务调用失败');
       const data: string = err?.response?.data;
       if (data) {
         throw new Error(

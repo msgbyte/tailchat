@@ -1,4 +1,5 @@
-import { UserName } from '@capital/component';
+import { getMessageRender } from '@capital/common';
+import { UserAvatar, UserName } from '@capital/component';
 import React from 'react';
 import styled from 'styled-components';
 import type { GroupTopicComment } from '../types';
@@ -13,8 +14,20 @@ const Root = styled.div`
     background-color: rgba(0, 0, 0, 0.25);
   }
 
-  > div {
+  .comment-item {
     display: flex;
+    margin-bottom: 10px;
+
+    .left {
+      margin-right: 4px;
+    }
+
+    .right {
+      .username {
+        font-weight: bold;
+        line-height: 24px;
+      }
+    }
   }
 `;
 
@@ -27,8 +40,17 @@ export const TopicComments: React.FC<{
   return (
     <Root>
       {props.comments.map((comment) => (
-        <div key={comment.id}>
-          <UserName userId={comment.author} />: <div>{comment.content}</div>
+        <div key={comment.id} className="comment-item">
+          <div className="left">
+            <UserAvatar userId={comment.author} size={24} />
+          </div>
+
+          <div className="right">
+            <div className="username">
+              <UserName userId={comment.author} />
+            </div>
+            <div>{getMessageRender(comment.content)}</div>
+          </div>
         </div>
       ))}
     </Root>
