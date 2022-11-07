@@ -7,11 +7,17 @@ import { UrlTag } from './UrlTag';
 import { EmojiTag } from './EmojiTag';
 import { MarkdownTag } from './MarkdownTag';
 import { BoldTag } from './BoldTag';
+import { ItalicTag } from './ItalicTag';
+import { UnderlinedTag } from './underlinedTag';
+import { DeleteTag } from './DeleteTag';
 
 import './styles.less';
 
 registerBBCodeTag('_text', PlainText);
 registerBBCodeTag('b', BoldTag);
+registerBBCodeTag('i', ItalicTag);
+registerBBCodeTag('u', UnderlinedTag);
+registerBBCodeTag('s', DeleteTag);
 registerBBCodeTag('url', UrlTag);
 registerBBCodeTag('img', ImgTag);
 registerBBCodeTag('code', CodeTag);
