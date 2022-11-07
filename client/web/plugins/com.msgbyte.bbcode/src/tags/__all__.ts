@@ -8,11 +8,14 @@ import { EmojiTag } from './EmojiTag';
 import { MarkdownTag } from './MarkdownTag';
 import { BoldTag } from './BoldTag';
 import { ItalicTag } from './ItalicTag';
-import { UnderlinedTag } from './underlinedTag';
+import { UnderlinedTag } from './UnderlinedTag';
 import { DeleteTag } from './DeleteTag';
 
 import './styles.less';
 
+/**
+ * Reference: https://en.wikipedia.org/wiki/BBCode
+ */
 registerBBCodeTag('_text', PlainText);
 registerBBCodeTag('b', BoldTag);
 registerBBCodeTag('i', ItalicTag);
