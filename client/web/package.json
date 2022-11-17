@@ -18,7 +18,7 @@
     "check:type": "tsc --noEmit --skipLibCheck",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm plugins:all",
-    "plugins:new": "ministar createPlugin",
+    "plugins:new": "tailchat create client-plugin",
     "plugins:all": "ministar buildPlugin all",
     "plugins:watch": "ministar watchPlugin all",
     "plugins:declaration:generate": "cross-env TS_NODE_PROJECT='tsconfig.node.json' ts-node ./scripts/generate-plugin-declaration.typescript.ts"

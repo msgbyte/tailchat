@@ -1,0 +1,9 @@
+{
+  "label": "posthog",
+  "name": "com.msgbyte.posthog",
+  "url": "/plugins/com.msgbyte.posthog/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Posthog 数据统计",
+  "requireRestart": true
+}

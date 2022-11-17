@@ -1,11 +1,14 @@
 import type { PluginManifest } from 'tailchat-shared';
+import _compact from 'lodash/compact';
+
+const isOffical = ['nightly.paw.msgbyte.com'].includes(location.host);
 
 /**
  * 内置插件列表
  *
  * 该列表中的插件会被强制安装
  */
-export const builtinPlugins: PluginManifest[] = [
+export const builtinPlugins: PluginManifest[] = _compact([
   {
     label: '网页面板插件',
     name: 'com.msgbyte.webview',
@@ -43,4 +46,13 @@ export const builtinPlugins: PluginManifest[] = [
     description: '为应用首次打开介绍应用的能力',
     requireRestart: true,
   },
-];
+  isOffical && {
+    label: 'posthog',
+    name: 'com.msgbyte.posthog',
+    url: '/plugins/com.msgbyte.posthog/index.js',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description: 'Posthog 数据统计',
+    requireRestart: true,
+  },
+]);
