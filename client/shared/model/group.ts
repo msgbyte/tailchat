@@ -285,6 +285,7 @@ export async function modifyGroupPanel(
   panelId: string,
   options: {
     name: string;
+    type: number;
     parentId?: string;
     provider?: string;
     pluginPanelName?: string;

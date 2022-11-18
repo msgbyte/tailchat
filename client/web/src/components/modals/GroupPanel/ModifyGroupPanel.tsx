@@ -42,7 +42,7 @@ export const ModalModifyGroupPanel: React.FC<{
       await modifyGroupPanel(
         props.groupId,
         props.groupPanelId,
-        _omit(buildDataFromValues(values), 'type') // 发送时不传type
+        buildDataFromValues(values)
       );
       showToasts(t('修改成功'), 'success');
       typeof props.onSuccess === 'function' && props.onSuccess();

@@ -1,5 +1,5 @@
 {
-  "label": "posthog",
+  "label": "Posthog",
   "name": "com.msgbyte.posthog",
   "url": "/plugins/com.msgbyte.posthog/index.js",
   "version": "0.0.0",

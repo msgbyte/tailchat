@@ -112,6 +112,7 @@ class GroupService extends TcService {
         groupId: 'string',
         panelId: 'string',
         name: 'string',
+        type: 'number',
         provider: { type: 'string', optional: true },
         pluginPanelName: { type: 'string', optional: true },
         meta: { type: 'object', optional: true },
@@ -640,12 +641,13 @@ class GroupService extends TcService {
       groupId: string;
       panelId: string;
       name: string;
+      type: number;
       provider?: string;
       pluginPanelName?: string;
       meta?: object;
     }>
   ) {
-    const { groupId, panelId, name, provider, pluginPanelName, meta } =
+    const { groupId, panelId, name, type, provider, pluginPanelName, meta } =
       ctx.params;
     const { t, userId } = ctx.meta;
 
@@ -666,6 +668,7 @@ class GroupService extends TcService {
         {
           $set: {
             'panels.$[element].name': name,
+            'panels.$[element].type': type,
             'panels.$[element].provider': provider,
             'panels.$[element].pluginPanelName': pluginPanelName,
             'panels.$[element].meta': meta,
