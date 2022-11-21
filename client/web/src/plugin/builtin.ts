@@ -2,8 +2,8 @@ import type { PluginManifest } from 'tailchat-shared';
 import _compact from 'lodash/compact';
 
 const isOffical = [
-  'nightly.paw.msgbyte.com',
-  // 'localhost:11011',
+  'nightly.paw.msgbyte.com', //
+  //'localhost:11011'
 ].includes(location.host);
 
 /**
@@ -53,6 +53,7 @@ export const builtinPlugins: PluginManifest[] = _compact([
     label: 'Posthog',
     name: 'com.msgbyte.posthog',
     url: '/plugins/com.msgbyte.posthog/index.js',
+    icon: '/plugins/com.msgbyte.posthog/assets/icon.png',
     version: '0.0.0',
     author: 'moonrailgun',
     description: 'Posthog 数据统计',
@@ -62,6 +63,7 @@ export const builtinPlugins: PluginManifest[] = _compact([
     label: 'Sentry',
     name: 'com.msgbyte.sentry',
     url: '/plugins/com.msgbyte.sentry/index.js',
+    icon: '/plugins/com.msgbyte.sentry/assets/icon.png',
     version: '0.0.0',
     author: 'moonrailgun',
     description: 'Sentry 错误处理',

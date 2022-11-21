@@ -2,6 +2,7 @@
   "label": "Sentry",
   "name": "com.msgbyte.sentry",
   "url": "/plugins/com.msgbyte.sentry/index.js",
+  "icon": "/plugins/com.msgbyte.sentry/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "Sentry 错误处理",

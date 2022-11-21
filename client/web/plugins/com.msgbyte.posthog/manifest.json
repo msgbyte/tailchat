@@ -2,6 +2,7 @@
   "label": "Posthog",
   "name": "com.msgbyte.posthog",
   "url": "/plugins/com.msgbyte.posthog/index.js",
+  "icon": "/plugins/com.msgbyte.posthog/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "Posthog 数据统计",
