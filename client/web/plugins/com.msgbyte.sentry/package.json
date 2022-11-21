@@ -1,0 +1,19 @@
+{
+  "name": "@plugins/com.msgbyte.sentry",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "Sentry 错误处理",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {
+    "@sentry/react": "^7.20.0",
+    "@sentry/tracing": "^7.20.0"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}
