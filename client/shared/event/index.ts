@@ -2,11 +2,17 @@ import { useEffect } from 'react';
 import { useUpdateRef } from '../hooks/useUpdateRef';
 import type { ChatMessage, SendMessagePayload } from '../model/message';
 import { EventEmitter } from 'eventemitter-strict';
+import type { UserBaseInfo } from '../model/user';
 
 /**
  * 共享事件类型
  */
 export interface SharedEventMap {
+  /**
+   * 登录成功
+   */
+  loginSuccess: (userInfo: UserBaseInfo) => void;
+
   /**
    * 修改配色方案
    */

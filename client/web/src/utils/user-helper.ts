@@ -1,4 +1,4 @@
-import { loginWithToken, UserLoginInfo } from 'tailchat-shared';
+import { UserLoginInfo, model } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { getUserJWT } from './jwt-helper';
 
@@ -29,7 +29,7 @@ export async function tryAutoLogin(): Promise<UserLoginInfo> {
     }
 
     console.debug('正在尝试使用Token登录');
-    userLoginInfo = await loginWithToken(token);
+    userLoginInfo = await model.user.loginWithToken(token);
     if (userLoginInfo === null) {
       throw new Error('Token 内容不合法');
     }

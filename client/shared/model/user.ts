@@ -1,7 +1,10 @@
 import { request } from '../api/request';
 import { buildCachedRequest } from '../cache/utils';
+import { sharedEvent } from '../event';
 import { SYSTEM_USERID } from '../utils/consts';
 import { createAutoMergedRequest } from '../utils/request';
+import _pick from 'lodash/pick';
+import { t } from '../i18n';
 
 export interface UserBaseInfo {
   _id: string;
@@ -24,12 +27,23 @@ export interface UserSettings {
   messageListVirtualization?: boolean;
 }
 
+export function pickUserBaseInfo(userInfo: UserLoginInfo) {
+  return _pick(userInfo, [
+    '_id',
+    'email',
+    'nickname',
+    'discriminator',
+    'avatar',
+    'temporary',
+  ]);
+}
+
 // 内置用户信息
 const builtinUserInfo: Record<string, UserBaseInfo> = {
   [SYSTEM_USERID]: {
     _id: SYSTEM_USERID,
     email: 'admin@msgbyte.com',
-    nickname: '系统',
+    nickname: t('系统'),
     discriminator: '0000',
     avatar: null,
     temporary: false,
@@ -58,6 +72,8 @@ export async function loginWithEmail(
     password,
   });
 
+  sharedEvent.emit('loginSuccess', pickUserBaseInfo(data));
+
   return data;
 }
 
@@ -69,6 +85,8 @@ export async function loginWithToken(token: string): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/resolveToken', {
     token,
   });
+
+  sharedEvent.emit('loginSuccess', pickUserBaseInfo(data));
 
   return data;
 }
