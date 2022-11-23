@@ -13,16 +13,15 @@ console.log(`Plugin ${PLUGIN_NAME} is loaded`);
 setTimeout(() => {
   console.log('Report plugin install status');
 
-  const storage = JSON.parse(window.localStorage['$TailchatInstalledPlugins']);
   try {
+    const storage = JSON.parse(
+      window.localStorage['$TailchatInstalledPlugins']
+    );
     posthog.capture('Report Plugin', {
       plugins: storage.rawData,
       pluginNum: Array.isArray(storage.rawData) ? storage.rawData.length : 0,
     });
   } catch (err) {
-    posthog.capture('Report Plugin error', {
-      err: String(err),
-      storage,
-    });
+    // Ignore error
   }
 }, 2000);
