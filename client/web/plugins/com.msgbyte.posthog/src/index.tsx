@@ -1,4 +1,5 @@
 import posthog from 'posthog-js';
+import { sharedEvent } from '@capital/common';
 
 posthog.init('phc_xRCv3qbbOBMQkz31kbYMngXxn7Ey5JMu0BZIFktO6km', {
   api_host: 'https://app.posthog.com',
@@ -25,3 +26,12 @@ setTimeout(() => {
     // Ignore error
   }
 }, 2000);
+
+sharedEvent.on('loginSuccess', (userInfo) => {
+  posthog.identify(userInfo._id, {
+    email: userInfo.email,
+    username: `${userInfo.nickname}#${userInfo.discriminator}`,
+    avatar: userInfo.avatar,
+    temporary: userInfo.temporary,
+  });
+});
