@@ -28,6 +28,11 @@ title: 纯前端插件
 为Tailchat增加原神相关的娱乐能力
 
 
+### com.msgbyte.integration 第三方集成
+
+用于在群组中集成第三方应用
+
+
 ### com.msgbyte.intro 初始引导插件
 
 为应用首次打开介绍应用的能力
@@ -46,6 +51,16 @@ title: 纯前端插件
 ### com.msgbyte.openapi 开放平台插件
 
 为应用提供开放平台的操作能力
+
+
+### com.msgbyte.posthog Posthog
+
+Posthog 数据统计
+
+
+### com.msgbyte.sentry Sentry
+
+Sentry 错误处理
 
 
 ### com.msgbyte.snapdrop 隔空投送
