@@ -9,7 +9,7 @@ import { UrlMetaAudio } from './Audio';
 export const UrlMetaRender: React.FC<{
   meta: LinkMeta;
 }> = React.memo(({ meta }) => {
-  const contentType = _get(meta, 'contentType');
+  const contentType = _get(meta, 'contentType', '');
   if (contentType.startsWith('video/')) {
     return (
       <div className="plugin-linkmeta-previewer">
