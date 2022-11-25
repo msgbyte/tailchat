@@ -81,5 +81,9 @@ interface AckInfo {
 export async function fetchUserAck(): Promise<AckInfo[]> {
   const { data } = await request.get('/api/chat/ack/all');
 
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
   return data;
 }
