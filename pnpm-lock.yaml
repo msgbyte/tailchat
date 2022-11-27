@@ -186,7 +186,7 @@ importers:
       lodash: ^4.17.21
       react: 18.2.0
       react-dom: 18.2.0
-      react-fastify-form: 1.0.11
+      react-fastify-form: 1.0.12
       remirror: ^2.0.9
       str2int: ^1.1.0
       typescript: ^4.5.2
@@ -199,7 +199,7 @@ importers:
       antd: 4.22.8_biqbaboplfbrettd7655fr4n2y
       clsx: 1.2.1
       lodash: 4.17.21
-      react-fastify-form: 1.0.11_react@18.2.0
+      react-fastify-form: 1.0.12_react@18.2.0
       remirror: 2.0.9_@remirror+pm@2.0.0
       str2int: 1.1.0
     devDependencies:
@@ -26156,6 +26156,17 @@ packages:
 
   /react-fastify-form/1.0.11_react@18.2.0:
     resolution: {integrity: sha512-4ww2TSun8+DITIOBzBEfw0rOgPeMla7cFeKPYS16ebRLiCYv9chKQgi7rUfG08p2xCwguGosi7o4ZBGftmddyw==}
+    peerDependencies:
+      react: ^16.14.0
+    dependencies:
+      formik: 2.2.9_react@18.2.0
+      lodash: 4.17.21
+      react: 18.2.0
+      yup: 0.32.11
+    dev: false
+
+  /react-fastify-form/1.0.12_react@18.2.0:
+    resolution: {integrity: sha512-ml0F2wXMm4pAYHBsWmMOsuJQD0vwlUzOrhP46g6oxKag9Nbq+74iCbchePBXZxAhRT4ZJgNj4iJUndYFdsX+xg==}
     peerDependencies:
       react: ^16.14.0
     dependencies:

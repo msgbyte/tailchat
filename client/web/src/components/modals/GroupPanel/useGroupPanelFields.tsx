@@ -7,9 +7,16 @@ import {
   t,
   useGroupMemberIds,
 } from 'tailchat-shared';
-import { MetaFormFieldMeta, useMetaFormContext } from 'tailchat-design';
+import {
+  createMetaFormSchema,
+  MetaFormFieldMeta,
+  metaFormFieldSchema,
+  useMetaFormContext,
+} from 'tailchat-design';
 import type { GroupPanelValues } from './types';
 import _compact from 'lodash/compact';
+import _groupBy from 'lodash/groupBy';
+import _mapValues from 'lodash/mapValues';
 import { pluginGroupPanel } from '@/plugin/common';
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 
@@ -35,6 +42,14 @@ const baseFields: MetaFormFieldMeta[] = [
     ],
   },
 ];
+
+const baseSchema = {
+  name: metaFormFieldSchema
+    .string()
+    .required(t('面板名不能为空'))
+    .max(20, t('面板名过长')),
+  type: metaFormFieldSchema.string().required(t('面板类型不能为空')),
+};
 
 export function useGroupPanelFields(
   groupId: string,
@@ -63,36 +78,59 @@ export function useGroupPanelFields(
     return DisableSendMessageWithoutComponent;
   }, [groupId]);
 
-  const fields = useMemo(() => {
+  const ret = useMemo(() => {
     // NOTICE: 仅开发环境有这个配置
     if (isDevelopment && currentValues.type === GroupPanelType.TEXT) {
-      return _compact([
-        ...baseFields,
-        {
-          type: 'checkbox',
-          name: 'disableSendMessage',
-          label: t('禁止所有人发言'),
-        },
-        currentValues.disableSendMessage === true && {
-          type: 'custom',
-          name: 'disableSendMessageWithout',
-          label: t('仅允许指定用户发言'),
-          render: disableSendMessageWithoutRender,
-        },
-      ]) as MetaFormFieldMeta[];
+      return {
+        fields: _compact([
+          ...baseFields,
+          {
+            type: 'checkbox',
+            name: 'disableSendMessage',
+            label: t('禁止所有人发言'),
+          },
+          currentValues.disableSendMessage === true && {
+            type: 'custom',
+            name: 'disableSendMessageWithout',
+            label: t('仅允许指定用户发言'),
+            render: disableSendMessageWithoutRender,
+          },
+        ]) as MetaFormFieldMeta[],
+        schema: createMetaFormSchema({
+          ...baseSchema,
+          disableSendMessage: metaFormFieldSchema.mixed(),
+          disableSendMessageWithout: metaFormFieldSchema.mixed(),
+        }),
+      };
     }
+
+    let fields = baseFields;
+    let schema = baseSchema;
 
     if (typeof currentValues.type === 'string') {
       // 如果当前选择的面板类型为插件类型
       // 需要从插件信息中获取额外的字段
       const panelInfo = findPluginPanelInfoByName(currentValues.type);
       if (panelInfo) {
-        return [...baseFields, ...(panelInfo.extraFormMeta ?? [])];
+        const extraFormMeta = Array.isArray(panelInfo.extraFormMeta)
+          ? panelInfo.extraFormMeta
+          : [];
+        fields = [...baseFields, ...extraFormMeta];
+
+        const extraSchema = _mapValues(
+          _groupBy(extraFormMeta, (f) => f.name),
+          () => metaFormFieldSchema.mixed()
+        );
+
+        schema = {
+          ...extraSchema,
+          ...baseSchema,
+        };
       }
     }
 
-    return baseFields;
+    return { fields, schema: createMetaFormSchema(schema) };
   }, [currentValues]);
 
-  return fields;
+  return ret;
 }

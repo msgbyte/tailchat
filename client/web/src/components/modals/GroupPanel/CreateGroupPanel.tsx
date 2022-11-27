@@ -5,23 +5,11 @@ import {
   createGroupPanel,
   showToasts,
 } from 'tailchat-shared';
-import {
-  createMetaFormSchema,
-  metaFormFieldSchema,
-  WebMetaForm,
-} from 'tailchat-design';
+import { WebMetaForm } from 'tailchat-design';
 import { ModalWrapper } from '../../Modal';
 import { buildDataFromValues } from './helper';
 import type { GroupPanelValues } from './types';
 import { useGroupPanelFields } from './useGroupPanelFields';
-
-const schema = createMetaFormSchema({
-  name: metaFormFieldSchema
-    .string()
-    .required(t('面板名不能为空'))
-    .max(20, t('面板名过长')),
-  type: metaFormFieldSchema.string().required(t('面板类型不能为空')),
-});
 
 /**
  * 创建群组面板
@@ -41,7 +29,7 @@ export const ModalCreateGroupPanel: React.FC<{
     [props.groupId, props.onSuccess]
   );
 
-  const fields = useGroupPanelFields(props.groupId, currentValues);
+  const { fields, schema } = useGroupPanelFields(props.groupId, currentValues);
 
   return (
     <ModalWrapper title={t('创建群组面板')} style={{ maxWidth: 440 }}>
