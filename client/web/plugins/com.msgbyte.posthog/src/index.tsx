@@ -15,12 +15,26 @@ setTimeout(() => {
   console.log('Report plugin install status');
 
   try {
-    const storage = JSON.parse(
-      window.localStorage['$TailchatInstalledPlugins']
-    );
+    const d = window.localStorage['$TailchatInstalledPlugins'];
+    if (!d) {
+      posthog.capture('Report Plugin', {
+        plugins: [],
+        pluginNum: 0,
+        pluginRaw: '',
+      });
+      return;
+    }
+    const storage = JSON.parse(d);
+    const list = storage.rawData;
+    if (!list || !Array.isArray(list)) {
+      // 格式不匹配
+      return;
+    }
+
     posthog.capture('Report Plugin', {
-      plugins: storage.rawData,
-      pluginNum: Array.isArray(storage.rawData) ? storage.rawData.length : 0,
+      plugins: list.map((item) => item.name), // 主要收集名称列表
+      pluginNum: list.length,
+      pluginRaw: JSON.stringify(list), // 原始信息
     });
   } catch (err) {
     // Ignore error
