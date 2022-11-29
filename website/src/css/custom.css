@@ -31,3 +31,8 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 .medium-zoom-image--opened {
   z-index: var(--ifm-z-index-fixed);
 }
+
+table th {
+  /* 表头不换行 */
+  white-space: nowrap;
+}
