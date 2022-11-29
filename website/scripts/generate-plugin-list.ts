@@ -1,5 +1,6 @@
 import glob from 'glob';
 import path from 'path';
+import url from 'url';
 import fs from 'fs-extra';
 
 interface PluginMeta {
@@ -13,6 +14,7 @@ interface PluginMeta {
   requireRestart: boolean;
 }
 
+const githubRepoUrl = 'https://github.com/msgbyte/tailchat';
 const rootDir = path.resolve(__dirname, '../../');
 const feMD = path.resolve(__dirname, '../docs/plugin-list/fe.md');
 const themeMD = path.resolve(__dirname, '../docs/plugin-list/theme.md');
@@ -25,35 +27,47 @@ const beplugins = glob.sync(
   path.join(rootDir, './server/plugins/*/web/plugins/*/manifest.json')
 );
 
-Promise.all(feplugins.map((path) => fs.readJson(path))).then(async (list) => {
+Promise.all(
+  feplugins.map(async (path) => ({
+    path,
+    manifest: (await fs.readJson(path)) as PluginMeta,
+  }))
+).then(async (list) => {
+  const list1 = list.filter((item) => !item.manifest.name.includes('.theme.'));
+  const list2 = list.filter((item) => item.manifest.name.includes('.theme.'));
   await writeMarkdown(
     feMD,
-    list.filter((item) => !item.name.includes('.theme.')),
+    list1,
     `---
 sidebar_position: 1
-title: 纯前端插件
+title: 纯前端插件 (${list1.length})
 ---`
   );
 
   await writeMarkdown(
     themeMD,
-    list.filter((item) => item.name.includes('.theme.')),
+    list2,
     `---
 sidebar_position: 2
-title: 自定义主题
+title: 自定义主题 (${list2.length})
 ---`
   );
 
   console.log('纯前端插件文档自动生成完毕');
 });
 
-Promise.all(beplugins.map((path) => fs.readJson(path))).then(async (list) => {
+Promise.all(
+  beplugins.map(async (path) => ({
+    path,
+    manifest: (await fs.readJson(path)) as PluginMeta,
+  }))
+).then(async (list) => {
   await writeMarkdown(
     beMD,
     list,
     `---
 sidebar_position: 3
-title: 前后端插件
+title: 前后端插件 (${list.length})
 ---`
   );
 
@@ -63,7 +77,11 @@ title: 前后端插件
 /**
  * 写入markdown
  */
-async function writeMarkdown(path: string, list: PluginMeta[], header: string) {
+async function writeMarkdown(
+  path: string,
+  list: { path: string; manifest: PluginMeta }[],
+  header: string
+) {
   const text = `${header}
 
 ${list.map(renderPluginDetail).join('\n\n')}
@@ -72,9 +90,17 @@ ${list.map(renderPluginDetail).join('\n\n')}
   await fs.writeFile(path, text);
 }
 
-function renderPluginDetail(meta: PluginMeta) {
-  return `### ${meta.name} ${meta.label}
+function renderPluginDetail(info: { path: string; manifest: PluginMeta }) {
+  const sourceCodeUrl = url.resolve(
+    `${githubRepoUrl}/blob/master/`,
+    path.dirname(path.relative(rootDir, info.path))
+  );
 
-${meta.description}
+  return `### ${info.manifest.name} ${info.manifest.label}
+
+${info.manifest.description}
+
+- [插件源码](${sourceCodeUrl})
+- [manifest.json](${sourceCodeUrl}/manifest.json)
 `;
 }
