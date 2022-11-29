@@ -54,11 +54,11 @@ export function app(app: Probot) {
           panelId,
           content: `[b]${
             ctx.payload.issue.user.login
-          }[/b] create Issue:\n\nTitle: ${ctx.payload.issue.title}\nContent: ${
+          }[/b] create Issue:\n\nTitle: ${ctx.payload.issue.title}\n[markdown]${
             ctx.payload.issue.body ?? ''
-          }\n\nWebsite: ${ctx.payload.issue.html_url}`,
+          }[/markdown]\n\nWebsite: ${ctx.payload.issue.html_url}`,
           meta: {
-            githubRepoOwner: ctx.payload.repository.owner,
+            githubRepoOwner: ctx.payload.repository.owner.login,
             githubRepoName: ctx.payload.repository.name,
             githubIssueNumber: ctx.payload.issue.number,
           },
@@ -130,9 +130,9 @@ export function app(app: Probot) {
         topicId,
         content: `[b]${
           ctx.payload.comment.user.login
-        }[/b] reply Issue:\n\nContent: ${
+        }[/b] reply Issue:\n\n[markdown]${
           ctx.payload.comment.body ?? ''
-        }\n\nWebsite: ${ctx.payload.comment.html_url}`,
+        }[/markdown]\n\nWebsite: ${ctx.payload.comment.html_url}`,
       });
     } catch (err) {
       console.error(err);

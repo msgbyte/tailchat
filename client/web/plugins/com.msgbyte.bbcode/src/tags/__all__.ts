@@ -27,3 +27,4 @@ registerBBCodeTag('code', CodeTag);
 registerBBCodeTag('at', MentionTag);
 registerBBCodeTag('emoji', EmojiTag);
 registerBBCodeTag('markdown', MarkdownTag);
+registerBBCodeTag('md', MarkdownTag); // alias

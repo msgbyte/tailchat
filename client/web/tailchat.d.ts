@@ -183,13 +183,21 @@ declare module '@capital/common' {
 
   export const regGroupPanel: any;
 
-  export const messageInterpreter: any;
+  export const messageInterpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }[];
 
-  export const regMessageInterpreter: any;
+  export const regMessageInterpreter: (interpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }) => void;
 
-  export const getMessageRender: any;
+  export const getMessageRender: (message: string) => React.ReactNode;
 
-  export const regMessageRender: any;
+  export const regMessageRender: (
+    render: (message: string) => React.ReactNode
+  ) => void;
 
   export const getMessageTextDecorators: any;
 
