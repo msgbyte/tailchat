@@ -1,5 +1,5 @@
 {
-  "label": "音视频服务",
+  "label": "音视频服务(WIP)",
   "name": "com.msgbyte.meeting",
   "url": "{BACKEND}/plugins/com.msgbyte.meeting/index.js",
   "version": "0.0.0",

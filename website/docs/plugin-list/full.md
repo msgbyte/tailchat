@@ -19,7 +19,7 @@ title: 前后端插件 (6)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta/manifest.json)
 
 
-### com.msgbyte.meeting 音视频服务
+### com.msgbyte.meeting 音视频服务(WIP)
 
 为Tailchat提供音视频通讯的服务
 
