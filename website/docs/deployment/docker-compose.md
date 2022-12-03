@@ -31,17 +31,19 @@ title: Docker Compose 部署
 > 使用已经编译好的镜像可以无需花费足够的计算机资源进行编译，对小资源配置的服务器会十分友好。另外相对于源码编译，公共镜像的代码更加稳定。
 
 ```bash
-docker pull moonrailgun/tailchat
-docker tag moonrailgun/tailchat tailchat # 修改tag以让配置文件能够识别
+docker pull moonrailgun/tailchat # 从公共镜像库拉取 tailchat镜像
+docker tag moonrailgun/tailchat tailchat # 将下载的镜像改名为tailchat(和源码编译保持一致，如果不改的话会走源码编译流程)
 ```
 
-:::
+完毕后可以直接跳到 [启动项目](#启动项目) 节
+
+:::info
 可以从 [Docker Hub](https://hub.docker.com/r/moonrailgun/tailchat/tags) 查看历史支持的镜像版本
 :::
 
 ### 从源码中编译
 
-**适用于高级玩家**
+*本节内容适用于高级玩家，用于获取最新的tailchat实现，请确保你有足够的docker,nodejs,git的使用常识*
 
 #### 编译环境 node 环境
 
@@ -69,7 +71,7 @@ git clone https://github.com/msgbyte/tailchat.git # 克隆项目到本地
 #### 编译项目
 
 ```bash
-docker-compose build
+cd tailchat && docker-compose build
 ```
 
 *编译对服务器配置有一定要求，2核4G编译约10分钟，供参考*
@@ -95,7 +97,8 @@ docker-compose build
 完成配置后使用`docker-compose` 一键启动 `Tailchat` 应用:
 
 ```bash
-cd tailchat # 切换目录到`docker-compose.yml`所在目录
+# 确保配置文件(docker-compose.yml和docker-compose.env)在当前目录下
+# 执行以下命令一键启动
 docker-compose up -d
 ```
 
