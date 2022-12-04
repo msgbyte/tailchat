@@ -28,7 +28,7 @@ export const PluginStoreItem: React.FC<{
   const [{ loading }, handleInstallPlugin] = useAsyncRequest(async () => {
     await pluginManager.installPlugin(manifest);
     if (manifest.requireRestart === true) {
-      showToasts(t('插件安装成功, 需要重启后生效'), 'success');
+      showToasts(t('插件安装成功, 刷新页面后生效'), 'success');
     } else {
       showToasts(t('插件安装成功'), 'success');
     }
@@ -40,7 +40,7 @@ export const PluginStoreItem: React.FC<{
       message: t('是否要卸载插件'),
       onConfirm: async () => {
         await pluginManager.uninstallPlugin(manifest.name);
-        showToasts(t('插件卸载成功, 需要重启后生效'), 'success');
+        showToasts(t('插件卸载成功, 刷新页面后生效'), 'success');
       },
     });
   }, [manifest]);
