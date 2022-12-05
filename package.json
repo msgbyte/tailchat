@@ -16,7 +16,7 @@
     "check:type:client": "cd client/web && tsc --noEmit",
     "check:type:server": "cd server && tsc --noEmit",
     "preinstall": "npx only-allow pnpm",
-    "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
+    "lint:fix": "eslint --cache --fix './**/*.{ts,tsx}'",
     "prepare": "husky install"
   },
   "keywords": [],
