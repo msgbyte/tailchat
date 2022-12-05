@@ -13,7 +13,7 @@ title: 快速开始
 
 强烈推荐使用 `docker-compose` 部署 `tailchat`
 
-教程请翻阅: [Docker Compose 部署](./docker-compose.md)
+教程请翻阅: [Docker Compose 部署](./docker-compose.mdx)
 
 ## 系统架构
 

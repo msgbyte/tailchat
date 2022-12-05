@@ -4,7 +4,7 @@ title: Docker Compose 部署服务端(Deprecated)
 ---
 
 :::caution 弃用警告
-该文档已弃用。建议访问最新版的部署文档以获得最新的支持, [点击此处跳转](./docker-compose.md)
+该文档已弃用。建议访问最新版的部署文档以获得最新的支持, [点击此处跳转](./docker-compose.mdx)
 
 我们保留本篇文档是为了希望安装 `1.x` 版本之前的用户准备的
 :::
