@@ -52,7 +52,7 @@ TZ=Asia/Shanghai
 ```
 
 其中
-- 如果仅单机部署的话`MEDIASOUP_IP`和`MEDIASOUP_ANNOUNCED_IP`可以均填写服务器公网ip.
+- 如果仅单机部署的话`MEDIASOUP_IP`和`MEDIASOUP_ANNOUNCED_IP`可以均填写服务器公网ip, **但是对于弹性部署网络的服务商(如国内的腾讯云，阿里云等)必须严格按照注释分别填写内网IP和公网IP**(因为该类服务商提供的外网IP并不是绑定在网卡上的)
 - `tailchat-meeting` 基于 webrtc 服务，因此强依赖 https/wss 协议。swag服务可以为您自动申请https证书，但是必须得分配一个有效的域名，并确保dns指向已经指向到服务器上。
   - 更多相关的文档可以查看 [README](https://github.com/linuxserver/docker-letsencrypt/blob/master/README.md)
   - 示例配置:
