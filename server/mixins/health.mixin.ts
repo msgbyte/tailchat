@@ -1,6 +1,8 @@
 import moment from 'moment';
 import type { PureContext, PureServiceSchema } from 'tailchat-server-sdk';
 
+const now = moment().format('YYYYMMDDHHmm');
+
 /**
  * 增加一个action
  * 用于返回当前节点的健康信息
@@ -20,8 +22,7 @@ export const TcHealth = (): Partial<PureServiceSchema> => {
           services: services
             .filter((s) => s.available === true)
             .map((s) => s.fullName),
-          version:
-            process.env.VERSION || `nightly-${moment().format('YYYYMMDDHHmm')}`,
+          version: process.env.VERSION || `nightly-${now}`,
         };
       },
     },

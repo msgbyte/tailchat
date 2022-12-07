@@ -11,8 +11,6 @@ import {
   showErrorToasts,
   t,
   fetchGlobalClientConfig,
-  request,
-  isValidStr,
   isDevelopment,
   setErrorHook,
   showToasts,
