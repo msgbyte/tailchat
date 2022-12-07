@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { sharedEvent } from 'tailchat-shared';
+import { useMemoizedFn, useSharedEventHandler } from 'tailchat-shared';
 import { ChatMessageHeader } from './ChatMessageHeader';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
@@ -10,25 +10,24 @@ import type { MessageListProps } from './types';
 export const NormalMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const lockRef = useRef(false);
+
+    const scrollToBottom = useMemoizedFn(() => {
+      containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     useEffect(() => {
       if (props.messages.length === 0) {
         return;
       }
+
+      // 消息长度发生变化，滚动到底部
+      if (lockRef.current === false) {
+        scrollToBottom();
+      }
     }, [props.messages.length]);
 
-    useEffect(() => {
-      const onSendMessage = () => {
-        // 滚动到底部
-        containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      sharedEvent.on('sendMessage', onSendMessage);
-
-      return () => {
-        sharedEvent.off('sendMessage', onSendMessage);
-      };
-    }, []);
+    useSharedEventHandler('sendMessage', scrollToBottom);
 
     const handleScroll = useCallback(() => {
       if (props.messages.length === 0) {
@@ -41,12 +40,17 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
 
       if (containerRef.current.scrollTop === 0) {
         // 滚动到最底部
+        lockRef.current = false;
       } else if (
         -containerRef.current.scrollTop + containerRef.current.clientHeight ===
         containerRef.current.scrollHeight
       ) {
         // 滚动条碰触到最顶部
         props.onLoadMore();
+      } else {
+        // 滚动在中间
+        // 锁定位置不自动滚动
+        lockRef.current = true;
       }
     }, [props.messages]);
 
