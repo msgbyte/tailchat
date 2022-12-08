@@ -17,7 +17,7 @@ export const SuccessModal: React.FC<Props> = React.memo((props) => {
   }, [closeModal, props.groupId]);
 
   return (
-    <ModalWrapper title="加入群组成功!">
+    <ModalWrapper title={t('加入群组成功!')}>
       <div>
         <Button block={true} type="primary" size="large" onClick={handleNav}>
           {t('跳转到群组')}
