@@ -21,7 +21,7 @@ const GroupDetailRoute = React.memo(() => {
 GroupDetailRoute.displayName = 'GroupDetailRoute';
 
 const PanelRoute: React.FC = React.memo(() => {
-  useRecordMeasure('AppRouteRenderStart');
+  useRecordMeasure('appRouteRenderStart');
 
   return (
     <div className="flex h-full bg-content-light dark:bg-content-dark">

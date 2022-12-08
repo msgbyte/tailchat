@@ -1,7 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import { Metric, onCLS, onFCP, onFID, onINP, onLCP, onTTFB } from 'web-vitals';
 
 const records: Record<string, number> = {};
+const vitals: Record<string, number> = {};
+
+const handleVitalsCb = (metric: Metric) => {
+  if (!vitals[metric.name]) {
+    vitals[metric.name] = metric.value;
+  }
+};
+
+onCLS(handleVitalsCb);
+onFCP(handleVitalsCb);
+onFID(handleVitalsCb);
+onINP(handleVitalsCb);
+onLCP(handleVitalsCb);
+onTTFB(handleVitalsCb);
 
 /**
  * 记录测量点
@@ -9,6 +24,8 @@ const records: Record<string, number> = {};
  */
 export function recordMeasure(name: string) {
   if (!records[name]) {
+    // 首次进入
+    performance.mark(`tailchat:${name}`);
     records[name] = performance.now();
   }
 }
@@ -21,9 +38,14 @@ export function useRecordMeasure(name: string) {
   useLayoutEffect(() => {
     recordMeasure(name);
   }, []);
+
+  useEffect(() => {
+    recordMeasure(name + 'Mounted');
+  }, []);
 }
 
 export const measure = {
+  getVitals: () => ({ ...vitals }),
   getRecord: () => ({ ...records }),
   getTimeUsage() {
     let t = performance.timing;

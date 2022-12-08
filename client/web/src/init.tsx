@@ -18,6 +18,9 @@ import {
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
+import { recordMeasure } from './utils/measure-helper';
+
+recordMeasure('init');
 
 if (isDevelopment) {
   import('source-ref-runtime').then(({ start }) => start());

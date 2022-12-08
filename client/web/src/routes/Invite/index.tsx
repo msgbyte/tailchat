@@ -9,7 +9,7 @@ import { useRecordMeasure } from '@/utils/measure-helper';
  */
 const InviteRoute: React.FC = React.memo(() => {
   const { inviteCode = '' } = useParams<{ inviteCode: string }>();
-  useRecordMeasure('AppInviteRenderStart');
+  useRecordMeasure('appInviteRenderStart');
 
   return (
     <PortalHost>

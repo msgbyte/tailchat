@@ -10,7 +10,7 @@ import { GuestView } from './GuestView';
 import { ForgetPasswordView } from './ForgetPasswordView';
 
 const EntryRoute = React.memo(() => {
-  useRecordMeasure('AppEntryRenderStart');
+  useRecordMeasure('appEntryRenderStart');
 
   return (
     <div className="h-full flex flex-row">

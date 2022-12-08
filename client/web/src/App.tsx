@@ -77,7 +77,7 @@ const AppHeader: React.FC = React.memo(() => {
 AppHeader.displayName = 'AppHeader';
 
 export const App: React.FC = React.memo(() => {
-  useRecordMeasure('AppRenderStart');
+  useRecordMeasure('appRenderStart');
 
   return (
     <AppProvider>

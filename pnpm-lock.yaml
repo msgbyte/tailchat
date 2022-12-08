@@ -421,6 +421,7 @@ importers:
       typescript: ^4.5.2
       url: ^0.11.0
       url-loader: ^4.1.1
+      web-vitals: ^3.1.0
       webpack: 5.73.0
       webpack-bundle-analyzer: ^4.5.0
       webpack-cli: ^4.9.1
@@ -471,6 +472,7 @@ importers:
       tailchat-shared: link:../shared
       tailwindcss: 2.2.19_ywsstkkounrjlah5ti55snp2aq
       url: 0.11.0
+      web-vitals: 3.1.0
       yup: 0.32.11
       zustand: 4.1.2_react@18.2.0
     devDependencies:
@@ -11760,7 +11762,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_react@18.2.0
+      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -19626,7 +19628,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_k2dsl7zculo2nmh5s33pladmoa
+      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -29104,7 +29106,6 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: false
 
   /styled-components/5.3.6_mdz3marskokvq6744hhidi3r5a:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -29150,6 +29151,7 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}
@@ -31539,6 +31541,10 @@ packages:
 
   /web-namespaces/1.1.4:
     resolution: {integrity: sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==}
+
+  /web-vitals/3.1.0:
+    resolution: {integrity: sha512-zCeQ+bOjWjJbXv5ZL0r8Py3XP2doCQMZXNKlBGfUjPAVZWokApdeF/kFlK1peuKlCt8sL9TFkKzyXE9/cmNJQA==}
+    dev: false
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}

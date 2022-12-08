@@ -7,7 +7,7 @@ import { MainProvider } from './Provider';
 import { useShortcuts } from './useShortcuts';
 
 const MainRoute: React.FC = React.memo(() => {
-  useRecordMeasure('AppMainRenderStart');
+  useRecordMeasure('appMainRenderStart');
   useShortcuts();
 
   return (

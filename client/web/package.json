@@ -64,6 +64,7 @@
     "tailchat-shared": "*",
     "tailwindcss": "^2.2.4",
     "url": "^0.11.0",
+    "web-vitals": "^3.1.0",
     "yup": "^0.32.9",
     "zustand": "^4.1.2"
   },
