@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect, useMemo } from 'react';
-import { t, useGroupPanelInfo } from 'tailchat-shared';
+import { t, useGroupInfo, useGroupPanelInfo } from 'tailchat-shared';
 import _isNil from 'lodash/isNil';
 import { MembersPanel } from './MembersPanel';
 import { CommonPanelWrapper } from '../common/Wrapper';
@@ -43,18 +43,21 @@ interface GroupPanelWrapperProps extends PropsWithChildren {
 }
 export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
   (props) => {
-    const panelInfo = useGroupPanelInfo(props.groupId, props.panelId);
-    useRecordGroupPanel(props.groupId, props.panelId);
+    const { groupId, panelId } = props;
+    const groupInfo = useGroupInfo(groupId);
+    const panelInfo = useGroupPanelInfo(groupId, panelId);
+    const groupMemberCount = (groupInfo?.members ?? []).length;
+    useRecordGroupPanel(groupId, panelId);
 
     const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
-      usePanelWindow(`/panel/group/${props.groupId}/${props.panelId}`);
+      usePanelWindow(`/panel/group/${groupId}/${panelId}`);
 
     const groupPanelContextValue = useMemo(
       () => ({
-        groupId: props.groupId,
-        panelId: props.panelId,
+        groupId,
+        panelId,
       }),
-      [props.groupId, props.panelId]
+      [groupId, panelId]
     );
 
     if (_isNil(panelInfo)) {
@@ -114,7 +117,7 @@ export const GroupPanelWrapper: React.FC<GroupPanelWrapperProps> = React.memo(
               iconClassName="text-2xl"
               onClick={() =>
                 setRightPanel({
-                  name: t('成员'),
+                  name: t('成员') + ` (${groupMemberCount})`,
                   panel: <MembersPanel groupId={props.groupId} />,
                 })
               }

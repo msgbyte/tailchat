@@ -129,7 +129,7 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                 iconClassName="text-2xl"
                 onClick={() =>
                   setRightPanel({
-                    name: t('成员'),
+                    name: t('成员') + ` (${converse.members.length})`,
                     panel: <ConversePanelMembers members={converse.members} />,
                   })
                 }
