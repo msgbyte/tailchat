@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+/// <reference types="react" />
+
 /**
  * 该文件由 Tailchat 自动生成
  * 用于插件的类型声明
@@ -14,6 +16,7 @@ declare module '@capital/common' {
 
   /**
    * 打开模态框
+   * @deprecated 请从 @capital/component 引入
    */
   export const openModal: (
     content: React.ReactNode,
@@ -37,19 +40,42 @@ declare module '@capital/common' {
     }
   ) => number;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const closeModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const ModalWrapper: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const useModalContext: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const openConfirmModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const openReconfirmModal: any;
 
+  /**
+   * @deprecated 请从 @capital/component 引入
+   */
   export const Loadable: any;
 
   export const getGlobalState: any;
+
+  export const useGlobalSocketEvent: <T>(
+    eventName: string,
+    callback: (data: T) => void
+  ) => void;
 
   export const getJWTUserInfo: () => Promise<{
     _id?: string;
@@ -66,7 +92,7 @@ declare module '@capital/common' {
 
   export const appendUrlSearch: any;
 
-  export const useGroupIdContext: any;
+  export const getServiceWorkerRegistration: any;
 
   export const getServiceUrl: () => string;
 
@@ -84,40 +110,72 @@ declare module '@capital/common' {
 
   export const getCachedConverseInfo: any;
 
-  export const localTrans: any;
+  /**
+   * 本地翻译
+   * @example
+   * localTrans({'zh-CN': '你好', 'en-US': 'Hello'});
+   *
+   * @param trans 翻译对象
+   */
+  export const localTrans: (trans: Record<'zh-CN' | 'en-US', string>) => string;
 
   export const getLanguage: any;
 
   export const sharedEvent: any;
 
-  export const useAsync: any;
+  export const useAsync: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => { loading: boolean; value?: any; error?: Error };
 
-  export const useAsyncFn: any;
+  export const useAsyncFn: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any; error?: Error }, T];
 
-  export const useAsyncRefresh: any;
+  export const useAsyncRefresh: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => { loading: boolean; value?: any; error?: Error; refresh: () => void };
 
-  export const useAsyncRequest: any;
+  export const useAsyncRequest: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any }, T];
 
   export const uploadFile: any;
 
-  export const showToasts: any;
+  export const showToasts: (
+    message: string,
+    type?: 'info' | 'success' | 'error' | 'warning'
+  ) => void;
 
-  export const showErrorToasts: any;
+  export const showSuccessToasts: any;
+
+  export const showErrorToasts: (error: any) => void;
 
   export const fetchAvailableServices: any;
 
-  export const isValidStr: any;
+  export const isValidStr: (str: any) => str is string;
 
   export const useGroupPanelInfo: any;
 
   export const sendMessage: any;
 
+  export const showMessageTime: any;
+
   export const useLocation: any;
 
-  export const useHistory: any;
+  export const useNavigate: any;
 
+  /**
+   * @deprecated please use createMetaFormSchema from @capital/component
+   */
   export const createFastFormSchema: any;
 
+  /**
+   * @deprecated please use metaFormFieldSchema from @capital/component
+   */
   export const fieldSchema: any;
 
   export const useCurrentUserInfo: any;
@@ -137,13 +195,21 @@ declare module '@capital/common' {
 
   export const regGroupPanel: any;
 
-  export const messageInterpreter: any;
+  export const messageInterpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }[];
 
-  export const regMessageInterpreter: any;
+  export const regMessageInterpreter: (interpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }) => void;
 
-  export const getMessageRender: any;
+  export const getMessageRender: (message: string) => React.ReactNode;
 
-  export const regMessageRender: any;
+  export const regMessageRender: (
+    render: (message: string) => React.ReactNode
+  ) => void;
 
   export const getMessageTextDecorators: any;
 
@@ -205,6 +271,23 @@ declare module '@capital/common' {
      */
     required?: string[];
   }) => void;
+
+  export const pluginGroupPanelBadges: any;
+
+  export const regGroupPanelBadge: any;
+
+  export const pluginGroupTextPanelExtraMenus: any;
+
+  export const regPluginGroupTextPanelExtraMenu: any;
+
+  export const useGroupIdContext: () => string;
+
+  export const useGroupPanelContext: () => {
+    groupId: string;
+    panelId: string;
+  } | null;
+
+  export const useSocketContext: any;
 }
 
 /**
@@ -234,23 +317,38 @@ declare module '@capital/component' {
    */
   export const notification: any;
 
+  export const Empty: React.FC<
+    React.PropsWithChildren<{
+      prefixCls?: string;
+      className?: string;
+      style?: React.CSSProperties;
+      imageStyle?: React.CSSProperties;
+      image?: React.ReactNode;
+      description?: React.ReactNode;
+    }>
+  >;
+
+  export const TextArea: any;
+
   export const Avatar: any;
 
   export const SensitiveText: React.FC<{ className?: string; text: string }>;
 
-  export const TextArea: any;
+  export const Icon: React.FC<{ icon: string } & React.SVGProps<SVGSVGElement>>;
 
-  export const Image: any;
-
-  export const Icon: any;
-
-  export const IconBtn: any;
-
-  export const PillTabs: any;
-
-  export const PillTabPane: any;
-
-  export const LoadingSpinner: any;
+  export const CopyableText: React.FC<{
+    className?: string;
+    style?: React.CSSProperties;
+    config?:
+      | boolean
+      | {
+          text?: string;
+          onCopy?: (event?: React.MouseEvent<HTMLDivElement>) => void;
+          icon?: React.ReactNode;
+          tooltips?: boolean | React.ReactNode;
+          format?: 'text/plain' | 'text/html';
+        };
+  }>;
 
   export const WebFastForm: any;
 
@@ -260,13 +358,51 @@ declare module '@capital/component' {
 
   export const metaFormFieldSchema: any;
 
+  export const Image: any;
+
+  export const IconBtn: React.FC<{
+    icon: string;
+    className?: string;
+    iconClassName?: string;
+    size?: 'small' | 'middle' | 'large';
+    shape?: 'circle' | 'square';
+    title?: string;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+  }>;
+
+  export const PillTabs: any;
+
+  export const PillTabPane: any;
+
+  export const LoadingSpinner: React.FC<{ tip?: string }>;
+
   export const FullModalField: any;
 
   export const DefaultFullModalInputEditorRender: any;
 
   export const DefaultFullModalTextAreaEditorRender: any;
 
-  export const openModal: any;
+  export const openModal: (
+    content: React.ReactNode,
+
+    props?: {
+      /**
+       * 是否显示右上角的关闭按钮
+       * @default false
+       */
+      closable?: boolean;
+
+      /**
+       * 遮罩层是否可关闭
+       */
+      maskClosable?: boolean;
+
+      /**
+       * 关闭modal的回调
+       */
+      onCloseModal?: () => void;
+    }
+  ) => number;
 
   export const closeModal: any;
 
@@ -278,7 +414,21 @@ declare module '@capital/component' {
 
   export const openReconfirmModal: any;
 
-  export const Loading: any;
+  export const Loadable: any;
+
+  export const Loading: React.FC<{
+    spinning: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+  }>;
+
+  export const LoadingOnFirst: React.FC<{
+    spinning: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+  }>;
 
   export const SidebarView: any;
 
@@ -292,8 +442,12 @@ declare module '@capital/component' {
 
   export const ErrorBoundary: any;
 
+  export const UserAvatar: any;
+
   export const UserName: React.FC<{
     userId: string;
     className?: string;
   }>;
+
+  export const Markdown: any;
 }

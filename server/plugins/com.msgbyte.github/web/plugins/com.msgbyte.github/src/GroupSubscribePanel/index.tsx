@@ -8,7 +8,7 @@ import {
   getServiceUrl,
   useGroupPanelInfo,
 } from '@capital/common';
-import { Button, Space, Table } from '@capital/component';
+import { Button, CopyableText, Space, Table } from '@capital/component';
 import { Translate } from '../translate';
 import { AddGroupSubscribeModal } from './AddGroupSubscribeModal';
 import { request } from '../request';
@@ -99,6 +99,7 @@ const GroupSubscribePanel: React.FC = React.memo(() => {
     ],
     [handleDelete]
   );
+  const url = `${getServiceUrl()}/api/plugin:com.msgbyte.github.subscribe/webhook/callback`;
 
   return (
     <div>
@@ -128,10 +129,9 @@ const GroupSubscribePanel: React.FC = React.memo(() => {
           <h3>如何接入:</h3>
           <p>
             在对应 Github 仓库中添加 github webhook, 回调地址指向:{' '}
-            <code style={{ userSelect: 'text' }}>
-              {getServiceUrl()}
-              /api/plugin:com.msgbyte.github.subscribe/webhook/callback
-            </code>
+            <CopyableText config={{ text: url }}>
+              <code style={{ userSelect: 'text' }}>{url}</code>
+            </CopyableText>
           </p>
           <p>
             并确保 <code>Content type</code> 类型为{' '}

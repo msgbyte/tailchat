@@ -101,6 +101,8 @@ const GroupSubscribePanel: React.FC = React.memo(() => {
     [handleDelete]
   );
 
+  const url = `${getServiceUrl()}/api/plugin:com.msgbyte.simplenotify/webhook/callback?subscribeId=<ID>&text=<文本内容>`;
+
   return (
     <div>
       <div
@@ -129,10 +131,7 @@ const GroupSubscribePanel: React.FC = React.memo(() => {
           <h3>如何接入:</h3>
           <p>
             直接发送请求:&nbsp;
-            <code style={{ userSelect: 'text' }}>
-              {getServiceUrl()}
-              /api/plugin:com.msgbyte.simplenotify/webhook/callback?subscribeId=&lt;ID&gt;&text=&lt;文本内容&gt;
-            </code>
+            <code style={{ userSelect: 'text' }}>{url}</code>
           </p>
           <p>支持GET与POST</p>
           <p>

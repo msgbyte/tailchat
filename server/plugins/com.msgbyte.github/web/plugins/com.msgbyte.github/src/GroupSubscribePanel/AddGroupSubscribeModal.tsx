@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
 import {
-  ModalWrapper,
   createFastFormSchema,
   fieldSchema,
   useAsyncRequest,
   showToasts,
 } from '@capital/common';
-import { WebFastForm, GroupPanelSelector } from '@capital/component';
+import {
+  WebFastForm,
+  GroupPanelSelector,
+  ModalWrapper,
+} from '@capital/component';
 import { request } from '../request';
 import { Translate } from '../translate';
 
