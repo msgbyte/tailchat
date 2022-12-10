@@ -59,11 +59,11 @@ export { useLocation, useNavigate } from 'react-router';
 
 export {
   /**
-   * @deprecated please use createMetaFormSchema
+   * @deprecated please use createMetaFormSchema from @capital/component
    */
   createMetaFormSchema as createFastFormSchema,
   /**
-   * @deprecated please use metaFormFieldSchema
+   * @deprecated please use metaFormFieldSchema from @capital/component
    */
   metaFormFieldSchema as fieldSchema,
 } from 'tailchat-design';

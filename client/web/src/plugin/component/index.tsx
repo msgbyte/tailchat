@@ -13,13 +13,12 @@ export {
   notification,
   Empty,
 } from 'antd';
-export { Avatar, SensitiveText, Icon } from 'tailchat-design';
 export const TextArea = Input.TextArea;
-export { Image } from '@/components/Image';
-export { IconBtn } from '@/components/IconBtn';
-export { PillTabs, PillTabPane } from '@/components/PillTabs';
-export { LoadingSpinner } from '@/components/LoadingSpinner';
 export {
+  Avatar,
+  SensitiveText,
+  Icon,
+  CopyableText,
   /**
    * @deprecated please use WebMetaForm
    */
@@ -28,6 +27,11 @@ export {
   createMetaFormSchema,
   metaFormFieldSchema,
 } from 'tailchat-design';
+
+export { Image } from '@/components/Image';
+export { IconBtn } from '@/components/IconBtn';
+export { PillTabs, PillTabPane } from '@/components/PillTabs';
+export { LoadingSpinner } from '@/components/LoadingSpinner';
 export {
   FullModalField,
   DefaultFullModalInputEditorRender,

@@ -1,6 +1,7 @@
 export { AutoFolder } from './AutoFolder';
 export { Avatar, getTextColorHex } from './Avatar';
 export { AvatarWithPreview } from './AvatarWithPreview';
+export { CopyableText } from './CopyableText';
 export { CombinedAvatar } from './Avatar/combined';
 export { DelayTip } from './DelayTip';
 export { Highlight } from './Highlight';

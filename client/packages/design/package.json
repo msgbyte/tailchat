@@ -4,6 +4,7 @@
   "description": "Tailchat 的前端组件",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "pnpm storybook",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

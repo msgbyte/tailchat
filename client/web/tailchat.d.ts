@@ -123,14 +123,20 @@ declare module '@capital/common' {
 
   export const sharedEvent: any;
 
-  export const useAsync: any;
+  export const useAsync: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => { loading: boolean; value?: any; error?: Error };
 
-  export const useAsyncFn: any;
+  export const useAsyncFn: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any; error?: Error }, T];
 
   export const useAsyncRefresh: <T extends (...args: any[]) => Promise<any>>(
     fn: T,
     deps?: React.DependencyList
-  ) => [{ loading: boolean; value?: any; error?: Error }, T];
+  ) => { loading: boolean; value?: any; error?: Error; refresh: () => void };
 
   export const useAsyncRequest: <T extends (...args: any[]) => Promise<any>>(
     fn: T,
@@ -162,8 +168,14 @@ declare module '@capital/common' {
 
   export const useNavigate: any;
 
+  /**
+   * @deprecated please use createMetaFormSchema from @capital/component
+   */
   export const createFastFormSchema: any;
 
+  /**
+   * @deprecated please use metaFormFieldSchema from @capital/component
+   */
   export const fieldSchema: any;
 
   export const useCurrentUserInfo: any;
@@ -316,15 +328,37 @@ declare module '@capital/component' {
     }>
   >;
 
+  export const TextArea: any;
+
   export const Avatar: any;
 
   export const SensitiveText: React.FC<{ className?: string; text: string }>;
 
-  export const TextArea: any;
+  export const Icon: React.FC<{ icon: string } & React.SVGProps<SVGSVGElement>>;
+
+  export const CopyableText: React.FC<{
+    className?: string;
+    style?: React.CSSProperties;
+    config?:
+      | boolean
+      | {
+          text?: string;
+          onCopy?: (event?: React.MouseEvent<HTMLDivElement>) => void;
+          icon?: React.ReactNode;
+          tooltips?: boolean | React.ReactNode;
+          format?: 'text/plain' | 'text/html';
+        };
+  }>;
+
+  export const WebFastForm: any;
+
+  export const WebMetaForm: any;
+
+  export const createMetaFormSchema: any;
+
+  export const metaFormFieldSchema: any;
 
   export const Image: any;
-
-  export const Icon: React.FC<{ icon: string } & React.SVGProps<SVGSVGElement>>;
 
   export const IconBtn: React.FC<{
     icon: string;
@@ -341,14 +375,6 @@ declare module '@capital/component' {
   export const PillTabPane: any;
 
   export const LoadingSpinner: React.FC<{ tip?: string }>;
-
-  export const WebFastForm: any;
-
-  export const WebMetaForm: any;
-
-  export const createMetaFormSchema: any;
-
-  export const metaFormFieldSchema: any;
 
   export const FullModalField: any;
 
