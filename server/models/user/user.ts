@@ -101,6 +101,12 @@ export class User extends TimeStamps implements Base {
   type: UserType;
 
   /**
+   * 用户的额外信息
+   */
+  @prop()
+  extra?: object;
+
+  /**
    * 用户设置
    */
   @prop({

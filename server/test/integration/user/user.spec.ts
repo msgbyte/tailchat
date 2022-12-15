@@ -103,6 +103,48 @@ describe('Test "user" service', () => {
     expect(res).not.toHaveProperty('password');
   });
 
+  test('Test "user.updateUserExtra"', async () => {
+    const testUser = await insertTestData(createTestUser());
+
+    const res = await broker.call(
+      'user.updateUserExtra',
+      {
+        fieldName: 'foo',
+        fieldValue: 'bar',
+      },
+      {
+        meta: {
+          userId: String(testUser._id),
+        },
+      }
+    );
+
+    expect(res).toMatchObject({
+      extra: {
+        foo: 'bar',
+      },
+    });
+
+    const res2 = await broker.call(
+      'user.updateUserExtra',
+      {
+        fieldName: 'foo',
+        fieldValue: 'baz',
+      },
+      {
+        meta: {
+          userId: String(testUser._id),
+        },
+      }
+    );
+
+    expect(res2).toMatchObject({
+      extra: {
+        foo: 'baz',
+      },
+    });
+  });
+
   test('Test "user.setUserSettings"', async () => {
     const testUser = await insertTestData(createTestUser());
 

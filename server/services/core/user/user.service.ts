@@ -45,10 +45,12 @@ class UserService extends TcService {
       '_id',
       'username',
       'email',
-      'avatar',
       'nickname',
       'discriminator',
       'temporary',
+      'avatar',
+      'type',
+      'extra',
       'createdAt',
     ]);
 
@@ -152,6 +154,12 @@ class UserService extends TcService {
       },
     });
     this.registerAction('updateUserField', this.updateUserField, {
+      params: {
+        fieldName: 'string',
+        fieldValue: 'any',
+      },
+    });
+    this.registerAction('updateUserExtra', this.updateUserExtra, {
       params: {
         fieldName: 'string',
         fieldValue: 'any',
@@ -546,6 +554,9 @@ class UserService extends TcService {
     return list;
   }
 
+  /**
+   * 修改用户字段
+   */
   async updateUserField(
     ctx: TcContext<{ fieldName: string; fieldValue: string }>
   ) {
@@ -553,7 +564,8 @@ class UserService extends TcService {
     const t = ctx.meta.t;
     const userId = ctx.meta.userId;
     if (!['nickname', 'avatar'].includes(fieldName)) {
-      throw new EntityError(t('该数据不允许修改'));
+      // 只允许修改以上字段
+      throw new EntityError(`${t('该数据不允许修改')}: ${fieldName}`);
     }
 
     const doc = await this.adapter.model
@@ -563,6 +575,34 @@ class UserService extends TcService {
         },
         {
           [fieldName]: fieldValue,
+        },
+        {
+          new: true,
+        }
+      )
+      .exec();
+
+    this.cleanCurrentUserCache(ctx);
+
+    return await this.transformDocuments(ctx, {}, doc);
+  }
+
+  /**
+   * 修改用户额外数据
+   */
+  async updateUserExtra(
+    ctx: TcContext<{ fieldName: string; fieldValue: string }>
+  ) {
+    const { fieldName, fieldValue } = ctx.params;
+    const userId = ctx.meta.userId;
+
+    const doc = await this.adapter.model
+      .findOneAndUpdate(
+        {
+          _id: new Types.ObjectId(userId),
+        },
+        {
+          [`extra.${fieldName}`]: fieldValue,
         },
         {
           new: true,
