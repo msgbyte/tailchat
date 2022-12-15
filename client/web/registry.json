@@ -75,5 +75,14 @@
     "author": "moonrailgun",
     "description": "快捷打开 files.fm 以支持传输文件",
     "requireRestart": true
+  },
+  {
+    "label": "用户地理位置",
+    "name": "com.msgbyte.user.location",
+    "url": "/plugins/com.msgbyte.user.location/index.js",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "为用户信息增加地理位置记录",
+    "requireRestart": true
   }
 ]

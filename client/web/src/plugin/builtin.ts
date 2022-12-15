@@ -49,6 +49,7 @@ export const builtinPlugins: PluginManifest[] = _compact([
     description: '为应用首次打开介绍应用的能力',
     requireRestart: true,
   },
+  // isOffical
   isOffical && {
     label: 'Posthog',
     name: 'com.msgbyte.posthog',
@@ -67,6 +68,15 @@ export const builtinPlugins: PluginManifest[] = _compact([
     version: '0.0.0',
     author: 'moonrailgun',
     description: 'Sentry 错误处理',
+    requireRestart: true,
+  },
+  isOffical && {
+    label: '用户地理位置',
+    name: 'com.msgbyte.user.location',
+    url: '/plugins/com.msgbyte.user.location/index.js',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description: '为用户信息增加地理位置记录',
     requireRestart: true,
   },
 ]);

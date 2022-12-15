@@ -99,15 +99,28 @@ const FullModalFieldEditor: React.FC<FullModalFieldProps> = React.memo(
         <div className="ml-2">
           {!isEditing ? (
             <DelayTip title={t('编辑')}>
-              <IconBtn icon="mdi:square-edit-outline" onClick={handleEditing} />
+              <IconBtn
+                size="small"
+                icon="mdi:square-edit-outline"
+                onClick={handleEditing}
+              />
             </DelayTip>
           ) : (
             <Space>
               <DelayTip title={t('取消')}>
-                <IconBtn icon="mdi:close" onClick={handleEditing} />
+                <IconBtn
+                  size="small"
+                  icon="mdi:close"
+                  onClick={handleEditing}
+                />
               </DelayTip>
               <DelayTip title={t('保存变更')}>
-                <IconBtn type="primary" icon="mdi:check" onClick={handleSave} />
+                <IconBtn
+                  type="primary"
+                  size="small"
+                  icon="mdi:check"
+                  onClick={handleSave}
+                />
               </DelayTip>
             </Space>
           )}

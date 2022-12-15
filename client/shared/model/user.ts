@@ -13,6 +13,7 @@ export interface UserBaseInfo {
   discriminator: string;
   avatar: string | null;
   temporary: boolean;
+  extra?: Record<string, unknown>;
 }
 
 export interface UserLoginInfo extends UserBaseInfo {
@@ -260,6 +261,18 @@ export async function modifyUserField(
   fieldValue: unknown
 ): Promise<UserBaseInfo> {
   const { data } = await request.post('/api/user/updateUserField', {
+    fieldName,
+    fieldValue,
+  });
+
+  return data;
+}
+
+export async function modifyUserExtra(
+  fieldName: string,
+  fieldValue: unknown
+): Promise<UserBaseInfo> {
+  const { data } = await request.post('/api/user/updateUserExtra', {
     fieldName,
     fieldValue,
   });

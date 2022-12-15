@@ -1,19 +1,21 @@
-import { Avatar } from '@/components/Avatar';
 import { AvatarUploader } from '@/components/AvatarUploader';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
 import { openModal } from '@/components/Modal';
-import { closeModal } from '@/plugin/common';
+import { closeModal, pluginUserExtraInfo } from '@/plugin/common';
 import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import { Button, Divider, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router';
+import { Avatar } from 'tailchat-design';
 import {
+  model,
   modifyUserField,
+  showSuccessToasts,
   showToasts,
   t,
   UploadFileResult,
@@ -28,6 +30,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const userExtra = userInfo?.extra ?? {};
 
   const [, handleUserAvatarChange] = useAsyncRequest(
     async (fileInfo: UploadFileResult) => {
@@ -53,6 +56,20 @@ export const SettingsAccount: React.FC = React.memo(() => {
         })
       );
       showToasts(t('修改头像成功'), 'success');
+    },
+    []
+  );
+
+  const [, handleUpdateExtraInfo] = useAsyncRequest(
+    async (fieldName: string, fieldValue: unknown) => {
+      await model.user.modifyUserExtra(fieldName, fieldValue);
+      dispatch(
+        userActions.setUserInfoExtra({
+          fieldName,
+          fieldValue,
+        })
+      );
+      showSuccessToasts(t('修改成功'));
     },
     []
   );
@@ -93,6 +110,30 @@ export const SettingsAccount: React.FC = React.memo(() => {
             renderEditor={DefaultFullModalInputEditorRender}
             onSave={handleUpdateNickName}
           />
+
+          {pluginUserExtraInfo.map((item, i) => {
+            if (item.component && item.component.editor) {
+              const Component = item.component.editor;
+              return (
+                <Component
+                  key={item.name + i}
+                  value={userExtra[item.name]}
+                  onSave={(val) => handleUpdateExtraInfo(item.name, val)}
+                />
+              );
+            }
+
+            return (
+              <FullModalField
+                key={item.name + i}
+                title={item.label}
+                value={userExtra[item.name] ? String(userExtra[item.name]) : ''}
+                editable={true}
+                renderEditor={DefaultFullModalInputEditorRender}
+                onSave={(val) => handleUpdateExtraInfo(item.name, val)}
+              />
+            );
+          })}
         </div>
       </div>
 

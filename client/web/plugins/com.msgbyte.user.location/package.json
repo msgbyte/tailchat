@@ -1,0 +1,16 @@
+{
+  "name": "@plugins/com.msgbyte.user.location",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "为用户信息增加地理位置记录",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}

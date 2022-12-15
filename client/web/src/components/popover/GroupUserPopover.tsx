@@ -1,3 +1,4 @@
+import { pluginUserExtraInfo } from '@/plugin/common';
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import { Tag } from 'antd';
 import React, { useEffect } from 'react';
@@ -8,6 +9,7 @@ export const GroupUserPopover: React.FC<{
   userInfo: UserBaseInfo;
 }> = React.memo((props) => {
   const { userInfo } = props;
+  const userExtra = userInfo.extra ?? {};
 
   useEffect(() => {
     if (userInfo.avatar) {
@@ -27,6 +29,24 @@ export const GroupUserPopover: React.FC<{
 
         <div>
           {userInfo.temporary && <Tag color="processing">{t('游客')}</Tag>}
+        </div>
+
+        <div className="pt-2">
+          {pluginUserExtraInfo.map((item, i) => {
+            const Component = item.component?.render;
+            return (
+              <div key={item.name + i} className="flex">
+                <div className="w-1/4 text-gray-500">{item.label}:</div>
+                <div className="w-3/4">
+                  {Component ? (
+                    <Component value={userExtra[item.name]} />
+                  ) : (
+                    String(userExtra[item.name])
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </UserProfileContainer>
     </div>

@@ -230,3 +230,27 @@ export const [
   pluginGroupTextPanelExtraMenus,
   regPluginGroupTextPanelExtraMenu,
 ] = buildRegList<PluginPanelMenu>();
+
+interface PluginUserExtraInfo {
+  name: string;
+  label: string;
+  /**
+   * 自定义渲染函数
+   * 可选
+   */
+  component?: {
+    render?: React.ComponentType<{
+      value: unknown;
+    }>;
+    editor?: React.ComponentType<{
+      value: unknown;
+      onSave: (val: unknown) => void;
+    }>;
+  };
+}
+
+/**
+ * 注册用户自定义信息(比如社交账号，地理位置，手机号这些非必须的信息)
+ */
+export const [pluginUserExtraInfo, regUserExtraInfo] =
+  buildRegList<PluginUserExtraInfo>();

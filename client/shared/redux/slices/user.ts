@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import _set from 'lodash/set';
 import type { UserLoginInfo } from '../../model/user';
 import type { FriendRequest } from '../../model/friend';
 
@@ -29,9 +30,19 @@ const userSlice = createSlice({
       if (state.info === null) {
         return;
       }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      state.info[fieldName] = fieldValue;
+
+      _set(state.info, [fieldName], fieldValue);
+    },
+    setUserInfoExtra(
+      state,
+      action: PayloadAction<{ fieldName: string; fieldValue: any }>
+    ) {
+      const { fieldName, fieldValue } = action.payload;
+      if (state.info === null) {
+        return;
+      }
+
+      _set(state.info, ['extra', fieldName], fieldValue);
     },
     setFriendList(state, action: PayloadAction<string[]>) {
       state.friends = action.payload;
