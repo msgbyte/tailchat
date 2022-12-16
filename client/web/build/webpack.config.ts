@@ -226,6 +226,7 @@ const config: Configuration = {
     publicPath: ASSET_PATH,
   },
   devServer: {
+    open: true,
     port: PORT,
     historyApiFallback: true,
     static: {

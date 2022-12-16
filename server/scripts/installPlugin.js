@@ -18,6 +18,9 @@ const dirs = list.filter((item) =>
   fs.statSync(path.resolve(containerPath, item)).isDirectory()
 );
 
+/**
+ * 编译插件并添加到 registry 中
+ */
 async function start() {
   if (argv.length === 2) {
     console.log(`安装方式: pnpm plugin:install [pluginName]`);
