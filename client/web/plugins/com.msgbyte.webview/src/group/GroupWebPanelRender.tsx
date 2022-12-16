@@ -1,5 +1,6 @@
 import React from 'react';
 import { Translate } from '../translate';
+import { Webview } from '@capital/component';
 
 const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const panelInfo = props.panelInfo;
@@ -11,7 +12,7 @@ const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const url = panelInfo?.meta?.url;
 
   return (
-    <iframe key={String(url)} className="w-full h-full bg-white" src={url} />
+    <Webview key={String(url)} className="w-full h-full bg-white" url={url} />
   );
 };
 GroupWebPanelRender.displayName = 'GroupWebPanelRender';
