@@ -369,6 +369,7 @@ importers:
       glob: ^7.2.0
       html-webpack-plugin: ^5.3.2
       identity-obj-proxy: ^3.0.0
+      immer: ^9.0.16
       is-electron: ^2.2.1
       is-hotkey: ^0.2.0
       jest: 27.5.1
@@ -441,6 +442,7 @@ importers:
       compressorjs: 1.1.1
       copy-to-clipboard: 3.3.2
       emoji-mart: 3.0.1_react@18.2.0
+      immer: 9.0.16
       is-electron: 2.2.1
       is-hotkey: 0.2.0
       jsonschema: 1.4.1
@@ -474,7 +476,7 @@ importers:
       url: 0.11.0
       web-vitals: 3.1.0
       yup: 0.32.11
-      zustand: 4.1.2_react@18.2.0
+      zustand: 4.1.2_immer@9.0.16+react@18.2.0
     devDependencies:
       '@perfsee/webpack': 1.0.0-alpha.4_webpack@5.73.0
       '@testing-library/jest-dom': 5.16.5
@@ -11772,7 +11774,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_react@18.2.0
+      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -18527,6 +18529,10 @@ packages:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
     dev: false
 
+  /immer/9.0.16:
+    resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
+    dev: false
+
   /import-fresh/2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
     engines: {node: '>=4'}
@@ -19638,7 +19644,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_k2dsl7zculo2nmh5s33pladmoa
+      ts-node: 10.9.1_bqee57coj3oib6dw4m24wknwqe
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -29116,7 +29122,6 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: false
 
   /styled-components/5.3.6_mdz3marskokvq6744hhidi3r5a:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -29162,6 +29167,7 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}
@@ -32601,6 +32607,23 @@ packages:
       nanoclone: 0.2.1
       property-expr: 2.0.5
       toposort: 2.0.2
+    dev: false
+
+  /zustand/4.1.2_immer@9.0.16+react@18.2.0:
+    resolution: {integrity: sha512-gcRaKchcxFPbImrBb/BKgujOhHhik9YhVpIeP87ETT7uokEe2Szu7KkuZ9ghjtD+/KKkcrRNktR2AiLXPIbKIQ==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      immer: 9.0.16
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /zustand/4.1.2_react@18.2.0:
