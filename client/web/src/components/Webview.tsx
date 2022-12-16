@@ -1,17 +1,20 @@
 import React from 'react';
+import { withKeepAliveOverlay } from './KeepAliveOverlay';
 
 interface WebviewProps {
-  url: string;
   className?: string;
   style?: React.CSSProperties;
+  url: string;
 }
 
 /**
  * 网页渲染容器
  */
-export const Webview: React.FC<WebviewProps> = React.memo((props) => {
-  return (
-    <iframe className={props.className} style={props.style} src={props.url} />
+export const Webview: React.FC<WebviewProps> =
+  withKeepAliveOverlay<WebviewProps>(
+    (props) => {
+      return <iframe className="w-full h-full bg-white" src={props.url} />;
+    },
+    { cacheId: (props) => props.url }
   );
-});
 Webview.displayName = 'Webview';

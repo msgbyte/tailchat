@@ -18,6 +18,7 @@ import { PortalHost } from '@/components/Portal';
 import { setGlobalSocket, setGlobalStore } from '@/utils/global-state-helper';
 import { SocketContextProvider } from '@/context/SocketContext';
 import { Problem } from '@/components/Problem';
+import { KeepAliveOverlayHost } from '@/components/KeepAliveOverlay';
 
 /**
  * 应用状态管理hooks
@@ -92,7 +93,9 @@ export const MainProvider: React.FC<PropsWithChildren> = React.memo((props) => {
     <ReduxProvider store={store}>
       <SocketContextProvider socket={socket}>
         <SidebarContextProvider>
-          <PortalHost>{props.children}</PortalHost>
+          <KeepAliveOverlayHost>
+            <PortalHost>{props.children}</PortalHost>
+          </KeepAliveOverlayHost>
         </SidebarContextProvider>
       </SocketContextProvider>
     </ReduxProvider>

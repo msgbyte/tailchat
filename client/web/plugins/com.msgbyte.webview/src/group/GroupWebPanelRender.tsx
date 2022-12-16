@@ -11,9 +11,7 @@ const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
 
   const url = panelInfo?.meta?.url;
 
-  return (
-    <Webview key={String(url)} className="w-full h-full bg-white" url={url} />
-  );
+  return <Webview key={String(url)} className="w-full h-full" url={url} />;
 };
 GroupWebPanelRender.displayName = 'GroupWebPanelRender';
 
