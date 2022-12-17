@@ -76,7 +76,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
     <div
       className={clsx('chat-message-item flex px-2 group relative', {
         'bg-black bg-opacity-10': isActionBtnActive,
-        'hover:bg-black hover:bg-opacity-10': !isActionBtnActive,
+        'hover:bg-black hover:bg-opacity-5': !isActionBtnActive,
       })}
     >
       {/* 头像 */}
