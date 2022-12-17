@@ -15,26 +15,26 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/generator": "^7.17.7",
-    "@babel/parser": "^7.17.7",
-    "@babel/template": "^7.16.7",
-    "@babel/traverse": "^7.17.3",
-    "fs-extra": "^10.0.0",
-    "glob": "^7.2.0",
+    "@babel/generator": "^7.20.5",
+    "@babel/parser": "^7.20.5",
+    "@babel/template": "^7.18.10",
+    "@babel/traverse": "^7.20.5",
+    "fs-extra": "^10.1.0",
+    "glob": "^7.2.3",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
     "ts-morph": "^16.0.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.9.4"
   },
   "devDependencies": {
-    "@babel/types": "^7.17.10",
+    "@babel/types": "^7.20.5",
     "@types/babel__generator": "^7.6.4",
     "@types/babel__template": "^7.4.1",
-    "@types/babel__traverse": "^7.17.1",
+    "@types/babel__traverse": "^7.18.3",
     "@types/fs-extra": "^9.0.13",
-    "@types/lodash": "^4.14.170",
+    "@types/lodash": "^4.14.191",
     "@types/mkdirp": "^1.0.2",
-    "@types/node": "^18.11.7",
-    "ts-node": "^10.0.0"
+    "@types/node": "^18.11.16",
+    "ts-node": "^10.9.1"
   }
 }

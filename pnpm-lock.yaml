@@ -221,46 +221,46 @@ importers:
 
   client/packages/plugin-declaration-generator:
     specifiers:
-      '@babel/generator': ^7.17.7
-      '@babel/parser': ^7.17.7
-      '@babel/template': ^7.16.7
-      '@babel/traverse': ^7.17.3
-      '@babel/types': ^7.17.10
+      '@babel/generator': ^7.20.5
+      '@babel/parser': ^7.20.5
+      '@babel/template': ^7.18.10
+      '@babel/traverse': ^7.20.5
+      '@babel/types': ^7.20.5
       '@types/babel__generator': ^7.6.4
       '@types/babel__template': ^7.4.1
-      '@types/babel__traverse': ^7.17.1
+      '@types/babel__traverse': ^7.18.3
       '@types/fs-extra': ^9.0.13
-      '@types/lodash': ^4.14.170
+      '@types/lodash': ^4.14.191
       '@types/mkdirp': ^1.0.2
-      '@types/node': ^18.11.7
-      fs-extra: ^10.0.0
-      glob: ^7.2.0
+      '@types/node': ^18.11.16
+      fs-extra: ^10.1.0
+      glob: ^7.2.3
       lodash: ^4.17.21
       mkdirp: ^1.0.4
       ts-morph: ^16.0.0
-      ts-node: ^10.0.0
-      typescript: ^4.5.2
+      ts-node: ^10.9.1
+      typescript: ^4.9.4
     dependencies:
-      '@babel/generator': 7.18.13
-      '@babel/parser': 7.18.13
+      '@babel/generator': 7.20.5
+      '@babel/parser': 7.20.5
       '@babel/template': 7.18.10
-      '@babel/traverse': 7.18.13
+      '@babel/traverse': 7.20.5
       fs-extra: 10.1.0
       glob: 7.2.3
       lodash: 4.17.21
       mkdirp: 1.0.4
       ts-morph: 16.0.0
-      typescript: 4.7.4
+      typescript: 4.9.4
     devDependencies:
-      '@babel/types': 7.18.13
+      '@babel/types': 7.20.5
       '@types/babel__generator': 7.6.4
       '@types/babel__template': 7.4.1
-      '@types/babel__traverse': 7.18.0
+      '@types/babel__traverse': 7.18.3
       '@types/fs-extra': 9.0.13
-      '@types/lodash': 4.14.184
+      '@types/lodash': 4.14.191
       '@types/mkdirp': 1.0.2
-      '@types/node': 18.11.7
-      ts-node: 10.9.1_piiski4mlexhenq5w47wjhr3ty
+      '@types/node': 18.11.16
+      ts-node: 10.9.1_rmyookn2hbqnnqjamditnjqvjq
 
   client/shared:
     specifiers:
@@ -10333,8 +10333,8 @@ packages:
   /@ts-morph/common/0.17.0:
     resolution: {integrity: sha512-RMSSvSfs9kb0VzkvQ2NWobwnj7TxCA9vI/IjR9bDHqgAyVbu2T0DN4wiKVqomyDWqO7dPr/tErSfq7urQ1Q37g==}
     dependencies:
-      fast-glob: 3.2.11
-      minimatch: 5.1.0
+      fast-glob: 3.2.12
+      minimatch: 5.1.1
       mkdirp: 1.0.4
       path-browserify: 1.0.1
     dev: false
@@ -10454,12 +10454,6 @@ packages:
     dependencies:
       '@babel/parser': 7.20.5
       '@babel/types': 7.20.5
-    dev: true
-
-  /@types/babel__traverse/7.18.0:
-    resolution: {integrity: sha512-v4Vwdko+pgymgS+A2UIaJru93zQd85vIGWObM5ekZNdXCKtDYqATlEYnWgfo86Q6I1Lh0oXnksDnMU1cwmlPDw==}
-    dependencies:
-      '@babel/types': 7.18.13
     dev: true
 
   /@types/babel__traverse/7.18.3:
@@ -10723,7 +10717,7 @@ packages:
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 15.14.9
+      '@types/node': 18.11.16
 
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -11011,7 +11005,7 @@ packages:
   /@types/mkdirp/1.0.2:
     resolution: {integrity: sha512-o0K1tSO0Dx5X6xlU5F1D6625FawhC3dU3iqr25lluNv/+/QIVH8RLNEiVokgIZo+mz+87w/3Mkg/VvQS+J51fQ==}
     dependencies:
-      '@types/node': 18.11.7
+      '@types/node': 18.11.16
     dev: true
 
   /@types/mongoose/5.11.97:
@@ -11046,6 +11040,9 @@ packages:
   /@types/node/17.0.45:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
+
+  /@types/node/18.11.16:
+    resolution: {integrity: sha512-6T7P5bDkRhqRxrQtwj7vru+bWTpelgtcETAZEUSdq0YISKz8WKdoBukQLYQQ6DFHvU9JRsbFq0JH5C51X2ZdnA==}
 
   /@types/node/18.11.7:
     resolution: {integrity: sha512-LhFTglglr63mNXUSRYD8A+ZAIu5sFqNJ4Y2fPuY7UlrySJH87rRRlhtVmMHplmfk5WkoJGmDjE9oiTfyX94CpQ==}
@@ -32701,37 +32698,6 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  /ts-node/10.9.1_piiski4mlexhenq5w47wjhr3ty:
-    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.7
-      acorn: 8.8.0
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.7.4
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: true
-
   /ts-node/10.9.1_rk33jgomelnuriwr3foeinccb4:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -32761,6 +32727,37 @@ packages:
       typescript: 4.8.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+
+  /ts-node/10.9.1_rmyookn2hbqnnqjamditnjqvjq:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 18.11.16
+      acorn: 8.8.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
 
   /ts-node/10.9.1_t4lrjbt3sxauai4t5o275zsepa:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
