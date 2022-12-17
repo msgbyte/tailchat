@@ -143,7 +143,7 @@ class MessageService extends TcService {
       converseId: String(converseId),
       messageId: String(message._id),
       content,
-      meta,
+      meta: meta ?? {},
     });
 
     return json;
@@ -209,7 +209,7 @@ class MessageService extends TcService {
       groupId: String(groupId),
       converseId: String(converseId),
       messageId: String(message._id),
-      meta: message.meta,
+      meta: message.meta ?? {},
     });
 
     return json;
@@ -249,7 +249,7 @@ class MessageService extends TcService {
       groupId: String(groupId),
       converseId: String(converseId),
       messageId: String(message._id),
-      meta: message.meta,
+      meta: message.meta ?? {},
     });
 
     return true;

@@ -48,7 +48,7 @@ export class Message extends TimeStamps implements Base {
    * 会话ID 必填
    * 私信的本质就是创建一个双人的会话
    */
-  @prop({ ref: () => Converse })
+  @prop({ ref: () => Converse, index: true })
   converseId!: Ref<Converse>;
 
   @prop({ type: () => MessageReaction })
