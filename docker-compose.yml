@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     env_file: docker-compose.env
     environment:
-      SERVICES: core/user/*
+      SERVICES: core/user/*.service.js
     depends_on:
       - mongo
       - redis
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
     env_file: docker-compose.env
     environment:
-      SERVICES: core/group/*
+      SERVICES: core/group/*.service.js
     depends_on:
       - mongo
       - redis
@@ -59,7 +59,7 @@ services:
     restart: unless-stopped
     env_file: docker-compose.env
     environment:
-      SERVICES: core/chat/*
+      SERVICES: core/chat/*.service.js
     depends_on:
       - mongo
       - redis
