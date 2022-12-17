@@ -51,6 +51,7 @@ export const AddGroupSubscribeModal: React.FC<{
         }) => {
           return (
             <GroupPanelSelector
+              style={{ width: '100%' }}
               value={props.value}
               onChange={props.onChange}
               groupId={groupId}

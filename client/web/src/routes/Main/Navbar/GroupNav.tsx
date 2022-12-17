@@ -21,24 +21,22 @@ const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
   const hasUnread = useGroupUnread(groupId);
   const { markGroupAllAck } = useGroupAck(groupId);
 
-  const menu = (
-    <Menu
-      items={[
-        {
-          key: 'ack',
-          label: t('标记为已读'),
-          icon: <Icon icon="mdi:message-badge-outline" />,
-          onClick: () => {
-            markGroupAllAck();
-            showSuccessToasts(t('已标记该群组所有消息已读'));
-          },
+  const menu = {
+    items: [
+      {
+        key: 'ack',
+        label: t('标记为已读'),
+        icon: <Icon icon="mdi:message-badge-outline" />,
+        onClick: () => {
+          markGroupAllAck();
+          showSuccessToasts(t('已标记该群组所有消息已读'));
         },
-      ]}
-    />
-  );
+      },
+    ],
+  };
 
   return (
-    <Dropdown overlay={menu} trigger={['contextMenu']}>
+    <Dropdown menu={menu} trigger={['contextMenu']}>
       <div>
         <NavbarNavItem
           name={group.name}

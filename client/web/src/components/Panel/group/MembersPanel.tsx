@@ -2,7 +2,7 @@ import { Icon } from 'tailchat-design';
 import { openReconfirmModalP } from '@/components/Modal';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
-import { Divider, Dropdown, Input, Menu, Skeleton } from 'antd';
+import { Divider, Dropdown, Input, MenuProps, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import {
   formatFullTime,
@@ -138,64 +138,65 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     const hasMute = getMembersHasMute(members, member._id);
 
     if (isGroupOwner) {
+      const menu: MenuProps = {
+        items: hasMute
+          ? [
+              {
+                key: 'unmute',
+                label: t('解除禁言'),
+                onClick: () => handleUnmuteMember(member._id),
+              },
+            ]
+          : [
+              {
+                key: 'mute',
+                label: t('禁言'),
+                children: [
+                  {
+                    key: '1m',
+                    label: t('1分钟'),
+                    onClick: () => handleMuteMember(member._id, 1 * 60 * 1000),
+                  },
+                  {
+                    key: '5m',
+                    label: t('5分钟'),
+                    onClick: () => handleMuteMember(member._id, 5 * 60 * 1000),
+                  },
+                  {
+                    key: '10m',
+                    label: t('10分钟'),
+                    onClick: () => handleMuteMember(member._id, 10 * 60 * 1000),
+                  },
+                  {
+                    key: '30m',
+                    label: t('30分钟'),
+                    onClick: () => handleMuteMember(member._id, 30 * 60 * 1000),
+                  },
+                  {
+                    key: '1d',
+                    label: t('1天'),
+                    onClick: () =>
+                      handleMuteMember(member._id, 1 * 24 * 60 * 60 * 1000),
+                  },
+                  {
+                    key: '7d',
+                    label: t('7天'),
+                    onClick: () =>
+                      handleMuteMember(member._id, 7 * 24 * 60 * 60 * 1000),
+                  },
+                  {
+                    key: '30d',
+                    label: t('30天'),
+                    onClick: () =>
+                      handleMuteMember(member._id, 30 * 24 * 60 * 60 * 1000),
+                  },
+                ],
+              },
+            ],
+      };
+
       return (
-        <Dropdown
-          key={member._id}
-          trigger={['contextMenu']}
-          overlay={
-            <Menu>
-              {hasMute ? (
-                <Menu.Item onClick={() => handleUnmuteMember(member._id)}>
-                  {t('解除禁言')}
-                </Menu.Item>
-              ) : (
-                <Menu.SubMenu title={t('禁言')}>
-                  <Menu.Item
-                    onClick={() => handleMuteMember(member._id, 1 * 60 * 1000)}
-                  >
-                    {t('1分钟')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() => handleMuteMember(member._id, 5 * 60 * 1000)}
-                  >
-                    {t('5分钟')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() => handleMuteMember(member._id, 10 * 60 * 1000)}
-                  >
-                    {t('10分钟')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() => handleMuteMember(member._id, 30 * 60 * 1000)}
-                  >
-                    {t('30分钟')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() =>
-                      handleMuteMember(member._id, 1 * 24 * 60 * 60 * 1000)
-                    }
-                  >
-                    {t('1天')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() =>
-                      handleMuteMember(member._id, 7 * 24 * 60 * 60 * 1000)
-                    }
-                  >
-                    {t('7天')}
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={() =>
-                      handleMuteMember(member._id, 30 * 24 * 60 * 60 * 1000)
-                    }
-                  >
-                    {t('30天')}
-                  </Menu.Item>
-                </Menu.SubMenu>
-              )}
-            </Menu>
-          }
-        >
+        <Dropdown key={member._id} trigger={['contextMenu']} menu={menu}>
           <div>
             <UserListItem
               userId={member._id}

@@ -1,5 +1,5 @@
 import { Icon } from 'tailchat-design';
-import { Menu } from 'antd';
+import { Menu, MenuProps } from 'antd';
 import React, { useCallback } from 'react';
 import {
   ChatMessage,
@@ -15,6 +15,7 @@ import {
 import { openReconfirmModalP } from '@/components/Modal';
 import copy from 'copy-to-clipboard';
 import { getMessageTextDecorators } from '@/plugin/common';
+import _compact from 'lodash/compact';
 
 /**
  * 消息的会话操作
@@ -22,7 +23,7 @@ import { getMessageTextDecorators } from '@/plugin/common';
 export function useChatMessageItemAction(
   payload: ChatMessage,
   options: { onClick?: () => void }
-): React.ReactElement {
+): MenuProps {
   const context = useChatBoxContext();
   const groupInfo = useGroupInfoContext();
   const userInfo = useUserInfo();
@@ -46,47 +47,33 @@ export function useChatMessageItemAction(
   const isGroupOwner = groupInfo && groupInfo.owner === userInfo?._id; //
   const isMessageAuthor = payload.author === userInfo?._id;
 
-  return (
-    <Menu onClick={options.onClick}>
-      <Menu.Item
-        key="copy"
-        icon={<Icon icon="mdi:content-copy" />}
-        onClick={handleCopy}
-      >
-        {t('复制')}
-      </Menu.Item>
-
-      {context.hasContext && (
-        <Menu.Item
-          key="reply"
-          icon={<Icon icon="mdi:reply" />}
-          onClick={() => sharedEvent.emit('replyMessage', payload)}
-        >
-          {t('回复')}
-        </Menu.Item>
-      )}
-
-      {(isGroupOwner || isMessageAuthor) && (
-        <Menu.Item
-          key="recall"
-          icon={<Icon icon="mdi:restore" />}
-          onClick={handleRecallMessage}
-        >
-          {t('撤回')}
-        </Menu.Item>
-      )}
-
-      {/* 仅群组管理员可见 */}
-      {isGroupOwner && (
-        <Menu.Item
-          key="delete"
-          danger={true}
-          icon={<Icon icon="mdi:delete-outline" />}
-          onClick={handleDeleteMessage}
-        >
-          {t('删除')}
-        </Menu.Item>
-      )}
-    </Menu>
-  );
+  return {
+    items: _compact([
+      {
+        key: 'copy',
+        label: t('复制'),
+        icon: <Icon icon="mdi:content-copy" />,
+        onClick: handleCopy,
+      },
+      context.hasContext && {
+        key: 'reply',
+        label: t('回复'),
+        icon: <Icon icon="mdi:reply" />,
+        onClick: () => sharedEvent.emit('replyMessage', payload),
+      },
+      (isGroupOwner || isMessageAuthor) && {
+        key: 'recall',
+        label: t('撤回'),
+        icon: <Icon icon="mdi:restore" />,
+        onClick: handleRecallMessage,
+      },
+      isGroupOwner && {
+        key: 'delete',
+        label: t('删除'),
+        danger: true,
+        icon: <Icon icon="mdi:delete-outline" />,
+        onClick: handleDeleteMessage,
+      },
+    ] as MenuProps['items']),
+  };
 }

@@ -86,17 +86,16 @@ export const FriendList: React.FC<{
               </Tooltip>,
               <div key="more">
                 <Dropdown
-                  overlay={
-                    <Menu>
-                      <Menu.Item
-                        key="delete"
-                        danger={true}
-                        onClick={() => handleRemoveFriend(friendId)}
-                      >
-                        {t('删除')}
-                      </Menu.Item>
-                    </Menu>
-                  }
+                  menu={{
+                    items: [
+                      {
+                        key: 'delete',
+                        danger: true,
+                        onClick: () => handleRemoveFriend(friendId),
+                        label: t('删除'),
+                      },
+                    ],
+                  }}
                   trigger={['click']}
                   placement="bottomRight"
                 >

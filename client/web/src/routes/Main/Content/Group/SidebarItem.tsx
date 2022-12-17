@@ -12,7 +12,7 @@ import {
 } from 'tailchat-shared';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
 import { GroupTextPanelItem } from './TextPanelItem';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, MenuProps } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
@@ -45,66 +45,64 @@ export const SidebarItem: React.FC<{
   const isPinned =
     isValidStr(groupInfo.pinnedPanelId) && groupInfo.pinnedPanelId === panelId;
 
-  const menu = (
-    <Menu
-      items={_compact([
-        {
-          key: 'copy',
-          label: t('复制链接'),
-          icon: <Icon icon="mdi:content-copy" />,
-          onClick: () => {
-            copy(`${location.origin}/main/group/${groupId}/${panelId}`);
-            showToasts(t('已复制到剪切板'));
-          },
+  const menu: MenuProps = {
+    items: _compact([
+      {
+        key: 'copy',
+        label: t('复制链接'),
+        icon: <Icon icon="mdi:content-copy" />,
+        onClick: () => {
+          copy(`${location.origin}/main/group/${groupId}/${panelId}`);
+          showToasts(t('已复制到剪切板'));
         },
-        {
-          key: 'new',
-          label: t('在新窗口打开'),
-          icon: <Icon icon="mdi:dock-window" />,
-          disabled: hasOpenedPanel,
-          onClick: openPanelWindow,
-        },
-        isPinned
-          ? {
-              key: 'unpin',
-              label: t('Unpin'),
-              icon: <Icon icon="mdi:pin-off" />,
-              onClick: () => {
-                dispatch(
-                  groupActions.unpinGroupPanel({
-                    groupId,
-                  })
-                );
-              },
-            }
-          : {
-              key: 'pin',
-              label: t('Pin'),
-              icon: <Icon icon="mdi:pin" />,
-              onClick: () => {
-                dispatch(
-                  groupActions.pinGroupPanel({
-                    groupId,
-                    panelId: panelId,
-                  })
-                );
-              },
+      },
+      {
+        key: 'new',
+        label: t('在新窗口打开'),
+        icon: <Icon icon="mdi:dock-window" />,
+        disabled: hasOpenedPanel,
+        onClick: openPanelWindow,
+      },
+      isPinned
+        ? {
+            key: 'unpin',
+            label: t('Unpin'),
+            icon: <Icon icon="mdi:pin-off" />,
+            onClick: () => {
+              dispatch(
+                groupActions.unpinGroupPanel({
+                  groupId,
+                })
+              );
             },
-        panel.type === GroupPanelType.TEXT && {
-          key: 'markAsRead',
-          label: t('标记为已读'),
-          icon: <Icon icon="mdi:message-badge-outline" />,
-          onClick: markConverseAllAck,
-        },
-        ...extraMenuItems,
-      ])}
-    />
-  );
+          }
+        : {
+            key: 'pin',
+            label: t('Pin'),
+            icon: <Icon icon="mdi:pin" />,
+            onClick: () => {
+              dispatch(
+                groupActions.pinGroupPanel({
+                  groupId,
+                  panelId: panelId,
+                })
+              );
+            },
+          },
+      panel.type === GroupPanelType.TEXT && {
+        key: 'markAsRead',
+        label: t('标记为已读'),
+        icon: <Icon icon="mdi:message-badge-outline" />,
+        onClick: markConverseAllAck,
+      },
+      ...extraMenuItems,
+    ]),
+  };
 
   const icon = isPinned ? <Icon icon="mdi:pin" /> : <Icon icon="mdi:pound" />;
 
   return (
-    <Dropdown overlay={menu} trigger={['contextMenu']}>
+    <Dropdown menu={menu} trigger={['contextMenu']}>
       <div>
         {panel.type === GroupPanelType.TEXT ? (
           <GroupTextPanelItem icon={icon} groupId={groupId} panel={panel} />

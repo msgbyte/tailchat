@@ -1,6 +1,7 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, MenuProps } from 'antd';
 import _isNil from 'lodash/isNil';
+import _compact from 'lodash/compact';
 import {
   PERMISSION,
   useGroupInfo,
@@ -29,25 +30,26 @@ export const GroupHeader: React.FC<GroupHeaderProps> = React.memo((props) => {
     return null;
   }
 
-  const menu = (
-    <Menu>
-      {showGroupDetail && (
-        <Menu.Item key="0" onClick={handleShowGroupDetail}>
-          {t('查看详情')}
-        </Menu.Item>
-      )}
-
-      {showInvite && (
-        <Menu.Item key="1" onClick={handleInviteUser}>
-          {t('邀请用户')}
-        </Menu.Item>
-      )}
-
-      <Menu.Item key="2" danger={true} onClick={handleQuitGroup}>
-        {t('退出群组')}
-      </Menu.Item>
-    </Menu>
-  );
+  const menu: MenuProps = {
+    items: _compact([
+      showGroupDetail && {
+        key: '0',
+        label: t('查看详情'),
+        onClick: handleShowGroupDetail,
+      },
+      showInvite && {
+        key: '1',
+        label: t('邀请用户'),
+        onClick: handleInviteUser,
+      },
+      {
+        key: '2',
+        label: t('退出群组'),
+        danger: true,
+        onClick: handleQuitGroup,
+      },
+    ] as MenuProps['items']),
+  };
 
   return (
     <SectionHeader menu={menu} data-testid="group-header">

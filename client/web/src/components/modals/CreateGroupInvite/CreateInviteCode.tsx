@@ -1,6 +1,6 @@
 import { InviteCodeExpiredAt } from '@/components/InviteCodeExpiredAt';
 import { generateInviteCodeUrl } from '@/utils/url-helper';
-import { Menu, Typography, Dropdown } from 'antd';
+import { Menu, Typography, Dropdown, MenuProps } from 'antd';
 import React, { useState } from 'react';
 import {
   useAsyncRequest,
@@ -38,16 +38,16 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
         PERMISSION.core.unlimitedInvite,
       ]);
 
-    const menu = (
-      <Menu>
-        <Menu.Item
-          disabled={!hasUnlimitedInvitePermission}
-          onClick={() => handleCreateInviteLink(InviteCodeType.Permanent)}
-        >
-          {t('创建永久邀请码')}
-        </Menu.Item>
-      </Menu>
-    );
+    const menu: MenuProps = {
+      items: [
+        {
+          key: 'persist',
+          label: t('创建永久邀请码'),
+          disabled: !hasUnlimitedInvitePermission,
+          onClick: () => handleCreateInviteLink(InviteCodeType.Permanent),
+        },
+      ],
+    };
 
     return (
       <div>
@@ -72,7 +72,7 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
             disabled={!hasInvitePermission}
             loading={loading}
             onClick={() => handleCreateInviteLink(InviteCodeType.Normal)}
-            overlay={menu}
+            menu={menu}
             trigger={['click']}
           >
             {t('创建链接')}

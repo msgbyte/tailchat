@@ -161,7 +161,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
         </TcPopover>
 
         <Dropdown
-          overlay={moreActions}
+          menu={moreActions}
           placement="bottomLeft"
           trigger={['click']}
           onVisibleChange={setIsActionBtnActive}

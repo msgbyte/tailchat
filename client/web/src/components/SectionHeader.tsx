@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useState } from 'react';
-import { Dropdown } from 'antd';
+import { Dropdown, MenuProps } from 'antd';
 import { Icon } from 'tailchat-design';
 import clsx from 'clsx';
 
 interface SectionHeaderProps extends PropsWithChildren {
-  menu?: React.ReactElement;
+  menu?: MenuProps;
   'data-testid'?: string;
 }
 
@@ -14,11 +14,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
 
     return (
       <div className="h-12 relative flex items-center py-0 text-base font-bold flex-shrink-0 thin-line-bottom">
-        {React.isValidElement(props.menu) ? (
+        {props.menu ? (
           <Dropdown
             className="overflow-hidden"
-            onVisibleChange={setVisible}
-            overlay={props.menu}
+            onOpenChange={setVisible}
+            menu={props.menu}
             placement="topRight"
             trigger={['click']}
           >

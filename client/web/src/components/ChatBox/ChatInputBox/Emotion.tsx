@@ -1,5 +1,5 @@
 import { Icon } from 'tailchat-design';
-import { Dropdown } from 'antd';
+import { Dropdown, Popover } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useChatInputActionContext } from './context';
 import { EmojiPanel } from '@/components/Emoji';
@@ -21,10 +21,10 @@ export const ChatInputEmotion: React.FC = React.memo(() => {
   const menu = <EmojiPanel onSelect={handleSelect} />;
 
   return (
-    <Dropdown
-      visible={visible}
-      onVisibleChange={setVisible}
-      overlay={menu}
+    <Popover
+      open={visible}
+      onOpenChange={setVisible}
+      content={menu}
       placement="topRight"
       trigger={['click']}
     >
@@ -32,7 +32,7 @@ export const ChatInputEmotion: React.FC = React.memo(() => {
         className="text-2xl cursor-pointer"
         icon="mdi:emoticon-happy-outline"
       />
-    </Dropdown>
+    </Popover>
   );
 });
 ChatInputEmotion.displayName = 'ChatInputEmotion';

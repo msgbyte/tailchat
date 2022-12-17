@@ -6,6 +6,8 @@ import { useGroupIdContext } from '@/context/GroupIdContext';
 const { Option } = Select;
 
 interface GroupPanelSelectorProps {
+  className?: string;
+  style?: React.CSSProperties;
   value: string;
   onChange: (value: string) => void;
   groupId?: string;
@@ -29,6 +31,8 @@ export const GroupPanelSelector: React.FC<GroupPanelSelectorProps> = React.memo(
 
     return (
       <Select
+        className={props.className}
+        style={props.style}
         placeholder={t('请选择面板')}
         value={props.value}
         onChange={props.onChange}
