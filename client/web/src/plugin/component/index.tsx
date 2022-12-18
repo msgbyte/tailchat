@@ -56,4 +56,4 @@ export { ErrorBoundary } from '@/components/ErrorBoundary';
 export { UserAvatar } from '@/components/UserAvatar';
 export { UserName } from '@/components/UserName';
 export { Markdown } from '@/components/Markdown';
-export { Webview } from '@/components/Webview';
+export { Webview, WebviewKeepAlive } from '@/components/Webview';

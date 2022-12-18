@@ -1,6 +1,6 @@
 import React from 'react';
 import { Translate } from '../translate';
-import { Webview } from '@capital/component';
+import { WebviewKeepAlive } from '@capital/component';
 
 const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const panelInfo = props.panelInfo;
@@ -11,7 +11,9 @@ const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
 
   const url = panelInfo?.meta?.url;
 
-  return <Webview key={String(url)} className="w-full h-full" url={url} />;
+  return (
+    <WebviewKeepAlive key={String(url)} className="w-full h-full" url={url} />
+  );
 };
 GroupWebPanelRender.displayName = 'GroupWebPanelRender';
 

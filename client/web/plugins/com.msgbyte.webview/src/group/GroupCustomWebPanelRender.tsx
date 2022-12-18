@@ -3,6 +3,7 @@ import { encode } from 'js-base64';
 import { isValidStr } from '@capital/common';
 import { Translate } from '../translate';
 import { sanitize } from 'script_sanitize';
+import { WebviewKeepAlive } from '@capital/component';
 
 function getInjectedStyle() {
   try {
@@ -25,7 +26,7 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   }
 
   const html = panelInfo?.meta?.html;
-  const src = useMemo(() => {
+  const url = useMemo(() => {
     if (isValidStr(html)) {
       const appendHtml = getInjectedStyle(); // 额外追加的样式
       try {
@@ -40,7 +41,7 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
     }
   }, [html]);
 
-  return <iframe className="w-full h-full" src={src} />;
+  return <WebviewKeepAlive className="w-full h-full" url={url} />;
 };
 GroupCustomWebPanelRender.displayName = 'GroupCustomWebPanelRender';
 

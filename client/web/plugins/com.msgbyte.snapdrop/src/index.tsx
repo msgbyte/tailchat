@@ -1,4 +1,5 @@
 import { regCustomPanel } from '@capital/common';
+import { WebviewKeepAlive } from '@capital/component';
 import React from 'react';
 import { Translate } from './translate';
 
@@ -10,6 +11,9 @@ regCustomPanel({
   label: Translate.panelName,
   icon: 'mdi:radio-tower',
   render: () => (
-    <iframe className="w-full h-full bg-white" src="https://snapdrop.net/" />
+    <WebviewKeepAlive
+      className="w-full h-full bg-white"
+      url="https://snapdrop.net/"
+    />
   ),
 });
