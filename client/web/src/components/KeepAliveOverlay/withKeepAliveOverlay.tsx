@@ -19,7 +19,9 @@ export function withKeepAliveOverlay<
   OP extends Omit<P, 'className' | 'style'> = Omit<P, 'className' | 'style'>
 >(
   OriginComponent: React.ComponentType<OP>,
-  config: { cacheId: string | ((props: OP) => string) }
+  config: {
+    cacheId: string | ((props: OP) => string);
+  }
 ) {
   // eslint-disable-next-line react/display-name
   return (props: P) => {
@@ -32,7 +34,7 @@ export function withKeepAliveOverlay<
       }
 
       return config.cacheId;
-    }, []);
+    }, [originProps]);
 
     useEffect(() => {
       mount(cacheId, <OriginComponent key={cacheId} {...originProps} />);
@@ -40,7 +42,7 @@ export function withKeepAliveOverlay<
       return () => {
         hide(cacheId);
       };
-    }, []);
+    }, [cacheId]);
 
     useEffect(() => {
       if (!containerRef.current) {
@@ -72,7 +74,7 @@ export function withKeepAliveOverlay<
           resizeObserver.unobserve(containerRef.current);
         }
       };
-    }, []);
+    }, [cacheId]);
 
     return (
       <div
