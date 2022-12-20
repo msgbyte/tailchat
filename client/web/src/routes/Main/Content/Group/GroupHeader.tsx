@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuProps } from 'antd';
+import type { MenuProps } from 'antd';
 import _isNil from 'lodash/isNil';
 import _compact from 'lodash/compact';
 import {

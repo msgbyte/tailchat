@@ -70,7 +70,7 @@ export function useWhyDidYouUpdate<T>(
           to: props[key],
           changedKeys:
             props[key] && typeof props[key] === 'object'
-              ? Object.keys(latestProps.current[key])
+              ? Object.keys(latestProps.current[key] as object)
                   .map((k) =>
                     _get(latestProps.current, [key, k]) ===
                     _get(props, [key, k])

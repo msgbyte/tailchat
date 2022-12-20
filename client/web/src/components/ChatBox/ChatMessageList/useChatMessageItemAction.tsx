@@ -1,5 +1,5 @@
 import { Icon } from 'tailchat-design';
-import { Menu, MenuProps } from 'antd';
+import type { MenuProps } from 'antd';
 import React, { useCallback } from 'react';
 import {
   ChatMessage,
