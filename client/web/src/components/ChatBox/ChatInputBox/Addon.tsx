@@ -5,12 +5,14 @@ import {
 } from '@/plugin/common';
 import { Icon } from 'tailchat-design';
 import { Dropdown, Menu } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { t } from 'tailchat-shared';
 import { useChatInputActionContext } from './context';
 import { uploadMessageImage } from './utils';
+import clsx from 'clsx';
 
 export const ChatInputAddon: React.FC = React.memo(() => {
+  const [open, setOpen] = useState(false);
   const actionContext = useChatInputActionContext();
   if (actionContext === null) {
     return null;
@@ -50,11 +52,21 @@ export const ChatInputAddon: React.FC = React.memo(() => {
   );
 
   return (
-    <Dropdown overlay={menu} placement="topRight" trigger={['click']}>
-      <Icon
-        className="text-2xl cursor-pointer"
-        icon="mdi:plus-circle-outline"
-      />
+    <Dropdown
+      overlay={menu}
+      open={open}
+      onOpenChange={setOpen}
+      placement="topRight"
+      trigger={['click']}
+    >
+      <div>
+        <Icon
+          className={clsx('text-2xl cursor-pointer transition transform', {
+            'rotate-45': open,
+          })}
+          icon="mdi:plus-circle-outline"
+        />
+      </div>
     </Dropdown>
   );
 });

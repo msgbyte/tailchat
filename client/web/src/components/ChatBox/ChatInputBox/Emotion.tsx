@@ -1,8 +1,9 @@
 import { Icon } from 'tailchat-design';
-import { Dropdown, Popover } from 'antd';
+import { Popover } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useChatInputActionContext } from './context';
 import { EmojiPanel } from '@/components/Emoji';
+import './Emotion.less';
 
 export const ChatInputEmotion: React.FC = React.memo(() => {
   const actionContext = useChatInputActionContext();
@@ -18,13 +19,15 @@ export const ChatInputEmotion: React.FC = React.memo(() => {
     [appendMsg]
   );
 
-  const menu = <EmojiPanel onSelect={handleSelect} />;
+  const content = <EmojiPanel onSelect={handleSelect} />;
 
   return (
     <Popover
       open={visible}
       onOpenChange={setVisible}
-      content={menu}
+      content={content}
+      overlayClassName="chat-message-input_action-popover"
+      showArrow={false}
       placement="topRight"
       trigger={['click']}
     >
