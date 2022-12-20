@@ -8,8 +8,8 @@
     "sync:declaration": "tailchat declaration github"
   },
   "dependencies": {
-    "@sentry/react": "^7.20.0",
-    "@sentry/tracing": "^7.20.0"
+    "@sentry/react": "^7.28.0",
+    "@sentry/tracing": "^7.28.0"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
