@@ -5,6 +5,6 @@
   "icon": "/plugins/com.msgbyte.filepizza/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "快捷打开 filepizza 以支持p2p传输文件",
+  "description": "在聊天输入框快捷打开 filepizza 以支持p2p传输文件",
   "requireRestart": true
 }

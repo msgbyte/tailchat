@@ -1,0 +1,10 @@
+{
+  "label": "wenshushu",
+  "name": "com.msgbyte.wenshushu",
+  "url": "/plugins/com.msgbyte.wenshushu/index.js",
+  "icon": "/plugins/com.msgbyte.wenshushu/assets/icon.png",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "在聊天输入框快捷打开 文叔叔 以支持传输文件",
+  "requireRestart": true
+}

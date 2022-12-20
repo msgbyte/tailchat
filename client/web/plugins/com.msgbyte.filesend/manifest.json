@@ -1,0 +1,9 @@
+{
+  "label": "filesend",
+  "name": "com.msgbyte.filesend",
+  "url": "/plugins/com.msgbyte.filesend/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "在聊天输入框快捷打开 Filesend 以支持传输文件",
+  "requireRestart": true
+}
