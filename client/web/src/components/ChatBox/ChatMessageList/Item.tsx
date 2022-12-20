@@ -153,7 +153,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           content={emojiAction}
           placement="bottomLeft"
           trigger={['click']}
-          onVisibleChange={setIsActionBtnActive}
+          onOpenChange={setIsActionBtnActive}
         >
           <div>
             <MessageActionIcon icon="mdi:emoticon-happy-outline" />
@@ -164,7 +164,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
           menu={moreActions}
           placement="bottomLeft"
           trigger={['click']}
-          onVisibleChange={setIsActionBtnActive}
+          onOpenChange={setIsActionBtnActive}
         >
           <div>
             <MessageActionIcon icon="mdi:dots-horizontal" />

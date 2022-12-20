@@ -17,26 +17,22 @@ export const TcPopover: React.FC<PopoverProps> = React.memo((props) => {
     (v: boolean) => {
       setVisible(v);
 
-      typeof props.onVisibleChange === 'function' && props.onVisibleChange(v);
+      typeof props.onOpenChange === 'function' && props.onOpenChange(v);
     },
-    [props.onVisibleChange]
+    [props.onOpenChange]
   );
 
   const closePopover = useCallback(() => {
     setVisible(false);
 
-    typeof props.onVisibleChange === 'function' && props.onVisibleChange(false);
+    typeof props.onOpenChange === 'function' && props.onOpenChange(false);
   }, []);
 
   const handler = useMemo(() => ({ closePopover }), [closePopover]);
 
   return (
     <TcPopoverContext.Provider value={handler}>
-      <Popover
-        {...props}
-        visible={visible}
-        onVisibleChange={handleVisibleChange}
-      />
+      <Popover {...props} open={visible} onOpenChange={handleVisibleChange} />
     </TcPopoverContext.Provider>
   );
 });
