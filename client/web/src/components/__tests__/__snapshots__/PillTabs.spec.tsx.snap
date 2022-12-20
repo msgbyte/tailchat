@@ -45,7 +45,7 @@ exports[`PillTabs render 1`] = `
             </div>
           </div>
           <div
-            class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
+            class="ant-tabs-ink-bar"
           />
         </div>
       </div>
@@ -89,7 +89,7 @@ exports[`PillTabs render 1`] = `
       class="ant-tabs-content-holder"
     >
       <div
-        class="ant-tabs-content ant-tabs-content-top ant-tabs-content-animated"
+        class="ant-tabs-content ant-tabs-content-top"
       >
         <div
           aria-hidden="false"
