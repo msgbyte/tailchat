@@ -13,7 +13,7 @@ import './PillTabs.less';
  */
 export const PillTabs: React.FC<TabsProps> = React.memo((props) => {
   return (
-    <Tabs {...props} className="pill-tabs" type="card" animated={true}>
+    <Tabs {...props} className="pill-tabs" type="card" animated={false}>
       {props.children}
     </Tabs>
   );
