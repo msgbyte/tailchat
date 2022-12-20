@@ -17,7 +17,7 @@ exports[`GroupPanelTree simple render snapshot 1`] = `
     <div
       aria-hidden="true"
       class="ant-tree-treenode"
-      style="position: absolute; pointer-events: none; visibility: hidden; height: 0px; overflow: hidden;"
+      style="position: absolute; pointer-events: none; visibility: hidden; height: 0px; overflow: hidden; border: 0px; padding: 0px;"
     >
       <div
         class="ant-tree-indent"

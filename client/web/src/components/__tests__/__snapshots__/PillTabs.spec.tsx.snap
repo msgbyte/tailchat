@@ -101,15 +101,6 @@ exports[`PillTabs render 1`] = `
         >
           1
         </div>
-        <div
-          aria-hidden="true"
-          aria-labelledby="rc-tabs-test-tab-2"
-          class="ant-tabs-tabpane"
-          id="rc-tabs-test-panel-2"
-          role="tabpanel"
-          style="visibility: hidden; height: 0px; overflow-y: hidden;"
-          tabindex="-1"
-        />
       </div>
     </div>
   </div>

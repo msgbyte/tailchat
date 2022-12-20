@@ -13,8 +13,6 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import WebpackBar from 'webpackbar';
 import fs from 'fs';
-import WorkboxPlugin from 'workbox-webpack-plugin';
-import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
 import dayjs from 'dayjs';
 import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
 import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
