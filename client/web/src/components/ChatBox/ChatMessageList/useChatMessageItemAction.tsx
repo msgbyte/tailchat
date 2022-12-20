@@ -48,6 +48,7 @@ export function useChatMessageItemAction(
   const isMessageAuthor = payload.author === userInfo?._id;
 
   return {
+    onClick: options.onClick,
     items: _compact([
       {
         key: 'copy',
