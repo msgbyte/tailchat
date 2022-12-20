@@ -18,6 +18,7 @@ import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
 import dayjs from 'dayjs';
 import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
 import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
+import { buildWorkboxPlugin } from './workbox';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -92,77 +93,7 @@ const plugins: Configuration['plugins'] = [
     ],
   }) as any,
   new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
-  new WorkboxPlugin.GenerateSW({
-    // https://developers.google.com/web/tools/workbox
-    // these options encourage the ServiceWorkers to get in there fast
-    // and not allow any straggling "old" SWs to hang around
-    clientsClaim: true,
-    skipWaiting: true,
-
-    // Do not precache images
-    exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-
-    maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 限制最大缓存 8M
-
-    // Define runtime caching rules.
-    runtimeCaching: [
-      {
-        // Match any request that ends with .png, .jpg, .jpeg or .svg.
-        urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-
-        // Apply a cache-first strategy.
-        // Reference: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-strategies
-        handler: 'CacheFirst',
-
-        options: {
-          // Use a custom cache name.
-          cacheName: 'images',
-
-          // Only cache 10 images.
-          expiration: {
-            maxEntries: 10,
-            maxAgeSeconds: 14 * 24 * 60 * 60, // 2 week
-          },
-        },
-      },
-      //#region 插件缓存匹配
-      {
-        // 匹配内置 plugins 入口文件 以加速
-        urlPattern: workboxPluginEntryPattern,
-        handler: 'StaleWhileRevalidate',
-        options: {
-          cacheName: 'builtin-plugins-entry',
-          expiration: {
-            maxAgeSeconds: 24 * 60 * 60, // 1 day
-          },
-          cacheableResponse: {
-            // 只缓存js, 防止404后台直接fallback到html
-            headers: {
-              'content-type': 'application/javascript; charset=utf-8',
-            },
-          },
-        },
-      },
-      {
-        // 匹配内置 plugins 内容 以加速
-        urlPattern: workboxPluginDetailPattern,
-        handler: 'StaleWhileRevalidate',
-        options: {
-          cacheName: 'builtin-plugins-detail',
-          expiration: {
-            maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
-          },
-          cacheableResponse: {
-            // 只缓存js, 防止404后台直接fallback到html
-            headers: {
-              'content-type': 'application/javascript; charset=utf-8',
-            },
-          },
-        },
-      },
-      //#endregion
-    ],
-  }),
+  buildWorkboxPlugin(isDev),
   new WebpackBar({
     name: `Tailchat`,
   }),
