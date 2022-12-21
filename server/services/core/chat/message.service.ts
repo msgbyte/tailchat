@@ -260,32 +260,31 @@ class MessageService extends TcService {
    */
   async fetchConverseLastMessages(ctx: TcContext<{ converseIds: string[] }>) {
     const { converseIds } = ctx.params;
-    const list = await this.adapter.model
-      .aggregate<{
-        _id: string;
-        lastMessageId: string;
-      }>([
-        {
-          $match: {
-            converseId: {
-              $in: converseIds.map((id) => new Types.ObjectId(id)),
-            },
-          },
-        },
-        {
-          $group: {
-            _id: '$converseId' as any,
-            lastMessageId: {
-              $last: '$_id',
-            },
-          },
-        },
-      ])
-      .exec();
 
-    return list.map((item) => ({
-      converseId: item._id,
-      lastMessageId: item.lastMessageId,
+    // 这里使用了多个请求，但是通过limit=1会将查询范围降低到最低
+    const list = await Promise.all(
+      converseIds.map((id) => {
+        return this.adapter.model
+          .findOne(
+            {
+              converseId: new Types.ObjectId(id),
+            },
+            {
+              _id: 1,
+              converseId: 1,
+            }
+          )
+          .sort({
+            _id: -1,
+          })
+          .limit(1)
+          .exec();
+      })
+    );
+
+    return list.filter(Boolean).map((item) => ({
+      converseId: String(item.converseId),
+      lastMessageId: String(item._id),
     }));
   }
 
