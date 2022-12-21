@@ -7,13 +7,13 @@ import {
   ServiceBroker,
   ServiceDependency,
   ServiceEvent,
-  ServiceEventHandler,
+  ServiceHooks,
   ServiceSchema,
   WaitForServicesResult,
 } from 'moleculer';
 import { once } from 'lodash';
 import { TcDbService } from './mixins/db.mixin';
-import type { TcContext, TcPureContext } from './types';
+import type { PureContext, TcPureContext } from './types';
 import type { TFunction } from 'i18next';
 import { t } from './lib/i18n';
 import type { ValidationRuleObject } from 'fastest-validator';
@@ -62,6 +62,20 @@ type ServiceActionSchema = Pick<
   disableSocket?: boolean;
 };
 
+/**
+ * 生成AfterHook唯一键
+ */
+function generateAfterHookKey(actionName: string, serviceName = '') {
+  if (serviceName) {
+    return `${CONFIG_GATEWAY_AFTER_HOOK}.${serviceName}.${actionName}`.replaceAll(
+      '.',
+      '-'
+    );
+  } else {
+    return `${CONFIG_GATEWAY_AFTER_HOOK}.${actionName}`.replaceAll('.', '-');
+  }
+}
+
 interface TcServiceBroker extends ServiceBroker {
   // 事件类型重写
   emit<K extends string>(
@@ -109,6 +123,7 @@ export abstract class TcService extends Service {
       events: this._events,
       started: this.onStart,
       stopped: this.onStop,
+      hooks: this.buildHooks(),
     });
   }
 
@@ -143,6 +158,33 @@ export abstract class TcService extends Service {
         };
       }
     });
+  }
+
+  /**
+   * 构建内部hooks
+   */
+  protected buildHooks(): ServiceHooks {
+    return {
+      after: _.mapValues(this._actions, (action, name) => {
+        return (ctx: PureContext, res: unknown) => {
+          try {
+            const afterHooks =
+              this.globalConfig[generateAfterHookKey(name, this.serviceName)];
+
+            if (Array.isArray(afterHooks) && afterHooks.length > 0) {
+              for (const action of afterHooks) {
+                // 异步调用, 暂时不修改值
+                ctx.call(String(action), ctx.params, { meta: ctx.meta });
+              }
+            }
+          } catch (err) {
+            this.logger.error('Call action after hooks error:', err);
+          }
+
+          return res;
+        };
+      }),
+    };
   }
 
   registerMixin(mixin: Partial<ServiceSchema>): void {
@@ -298,10 +340,21 @@ export abstract class TcService extends Service {
     });
   }
 
-  async registryAfterActionHook(actionName: string, callbackAction: string) {
+  /**
+   * 注册一个触发了action后的回调
+   * @param fullActionName 完整的带servicename的action名
+   * @param callbackAction 当前服务的action名，不需要带servicename
+   */
+  async registryAfterActionHook(
+    fullActionName: string,
+    callbackAction: string
+  ) {
     await this.waitForServices(['gateway', 'config']);
     await this.broker.call('config.addToSet', {
-      key: `${CONFIG_GATEWAY_AFTER_HOOK}.${actionName}`,
+      key: `${CONFIG_GATEWAY_AFTER_HOOK}.${fullActionName}`.replaceAll(
+        '.',
+        '-'
+      ),
       value: `${this.serviceName}.${callbackAction}`,
     });
   }
