@@ -14,7 +14,6 @@ importers:
       '@release-it/conventional-changelog': ^5.1.1
       '@typescript-eslint/eslint-plugin': ^5.35.1
       '@typescript-eslint/parser': ^5.35.1
-      commitlint: ^17.0.3
       concurrently: ^7.3.0
       crc: ^3.8.0
       dayjs: ^1.10.6
@@ -42,7 +41,6 @@ importers:
       '@release-it/conventional-changelog': 5.1.1_release-it@15.5.1
       '@typescript-eslint/eslint-plugin': 5.35.1_4kgehhvxgrxdvptdn2db7re534
       '@typescript-eslint/parser': 5.35.1_shit3uhl6a7megkzgoz6xssnfa
-      commitlint: 17.0.3
       concurrently: 7.3.0
       dayjs: 1.11.5
       esbuild: 0.15.5
@@ -1548,6 +1546,7 @@ packages:
       '@babel/helper-validator-option': 7.18.6
       browserslist: 4.21.3
       semver: 6.3.0
+    dev: true
 
   /@babel/helper-compilation-targets/7.18.9_@babel+core@7.20.5:
     resolution: {integrity: sha512-tzLCyVmqUiFlcFoAPLA/gL9TeYrF61VLNtb+hvkuVaB5SUjW7jcfrglBIX1vUIoT7CLP3bBlIMeyEsIl2eFQNg==}
@@ -14837,18 +14836,6 @@ packages:
     resolution: {integrity: sha512-sRPT+umqkz90UA8M1yqYfnHlZA7fF6nSphDtxeywPZ49ysjxDQybzk13CL+mXekDRG92skbcqCLVovuCusNmFw==}
     engines: {node: ^12.20.0 || >=14}
 
-  /commitlint/17.0.3:
-    resolution: {integrity: sha512-/KbIyrd6nmrRvu5zj8KKrjoC4z5V6hBmYphHgCFu75kPjHODg1XTtGFgbnb0AdSGBHlGMzmDvykO7ETs8wBKFg==}
-    engines: {node: '>=v14'}
-    hasBin: true
-    dependencies:
-      '@commitlint/cli': 17.0.3
-      '@commitlint/types': 17.0.0
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-    dev: true
-
   /common-path-prefix/3.0.0:
     resolution: {integrity: sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w==}
     dev: true
@@ -18915,7 +18902,7 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
     dependencies:
-      loader-utils: 2.0.4
+      loader-utils: 2.0.2
       schema-utils: 3.1.1
       webpack: 5.75.0_webpack-cli@4.10.0
     dev: true
@@ -34579,7 +34566,7 @@ packages:
         optional: true
     dependencies:
       file-loader: 6.2.0_webpack@5.75.0
-      loader-utils: 2.0.4
+      loader-utils: 2.0.2
       mime-types: 2.1.35
       schema-utils: 3.1.1
       webpack: 5.75.0_webpack-cli@4.10.0

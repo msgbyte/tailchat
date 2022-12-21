@@ -29,7 +29,6 @@
     "@release-it/conventional-changelog": "^5.1.1",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
-    "commitlint": "^17.0.3",
     "concurrently": "^7.3.0",
     "dayjs": "^1.10.6",
     "esbuild": "^0.15.5",
