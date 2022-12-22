@@ -361,6 +361,7 @@ importers:
       copy-webpack-plugin: ^11.0.0
       cross-env: ^7.0.3
       css-loader: ^5.2.7
+      detect-browser: ^5.3.0
       dotenv: ^10.0.0
       dts-generator: ^3.0.0
       emoji-mart: ^3.0.1
@@ -443,6 +444,7 @@ importers:
       clsx: 1.2.1
       compressorjs: 1.1.1
       copy-to-clipboard: 3.3.3
+      detect-browser: 5.3.0
       emoji-mart: 3.0.1_react@18.2.0
       immer: 9.0.16
       is-electron: 2.2.1
@@ -16619,6 +16621,10 @@ packages:
     resolution: {integrity: sha512-8zdsQA5bIkoRECvCrNKPla84lyoR7DSAyf7p0YgXzBO9PDJx8KntPUay7NS6yp+KdxdVtiE5SpHKtbp2ZQyA9g==}
     dependencies:
       repeat-string: 1.6.1
+
+  /detect-browser/5.3.0:
+    resolution: {integrity: sha512-53rsFbGdwMwlF7qvCt0ypLM5V5/Mbl0szB7GPN8y9NCcbknYOeVVXdrXEq+90IwAfrrzt6Hd+u2E2ntakICU8w==}
+    dev: false
 
   /detect-file/1.0.0:
     resolution: {integrity: sha512-DtCOLG98P007x7wiiOmfI0fi3eIKyWiLTGJ2MDnVi/E04lWGbf+JzrRHMm0rgIIZJGtHpKpbVgLWHrv8xXpc3Q==}

@@ -6,6 +6,7 @@ import { Divider } from 'antd';
 import { PersonalNav } from './PersonalNav';
 import { DevContainer } from '@/components/DevContainer';
 import { InboxNav } from './InboxNav';
+import { InstallBtn } from './InstallBtn';
 
 /**
  * 导航栏组件
@@ -35,7 +36,14 @@ export const Navbar: React.FC = React.memo(() => {
         <GroupNav />
       </div>
 
-      <div data-tc-role="navbar-settings">
+      <div
+        data-tc-role="navbar-settings"
+        className="flex flex-col items-center space-y-2"
+      >
+        {/* 应用(PWA)安装按钮 */}
+        <InstallBtn />
+
+        {/* 设置按钮 */}
         <SettingBtn />
       </div>
     </div>
