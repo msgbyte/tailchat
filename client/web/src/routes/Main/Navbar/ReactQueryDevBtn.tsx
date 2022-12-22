@@ -7,7 +7,7 @@ import { isDevelopment } from 'tailchat-shared';
  */
 export const ReactQueryDevBtn: React.FC = React.memo(() => {
   if (!isDevelopment) {
-    return;
+    return null;
   }
 
   return (
