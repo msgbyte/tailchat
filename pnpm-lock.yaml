@@ -268,7 +268,6 @@ importers:
     specifiers:
       '@reduxjs/toolkit': ^1.7.1
       '@tanstack/react-query': ^4.3.4
-      '@tanstack/react-query-devtools': ^4.3.5
       '@types/crc': ^3.4.0
       '@types/lodash': ^4.14.170
       '@types/react': 18.0.20
@@ -293,7 +292,6 @@ importers:
     dependencies:
       '@reduxjs/toolkit': 1.8.5_kkwg4cbsojnjnupd3btipussee
       '@tanstack/react-query': 4.3.4_react@18.2.0
-      '@tanstack/react-query-devtools': 4.3.5_jkekd4jqbd6zkiapxsceyqr7ty
       axios: 0.21.4
       crc: 3.8.0
       dayjs: 1.11.5
@@ -321,6 +319,7 @@ importers:
     specifiers:
       '@loadable/component': ^5.15.2
       '@perfsee/webpack': 1.0.0-alpha.4
+      '@tanstack/react-query-devtools': ^4.3.5
       '@testing-library/jest-dom': ^5.16.5
       '@testing-library/react': ^13.4.0
       '@testing-library/react-hooks': ^8.0.1
@@ -437,6 +436,7 @@ importers:
       zustand: ^4.1.5
     dependencies:
       '@loadable/component': 5.15.2_react@18.2.0
+      '@tanstack/react-query-devtools': 4.3.5_biqbaboplfbrettd7655fr4n2y
       '@use-gesture/react': 10.2.23_react@18.2.0
       ahooks: 3.7.2_react@18.2.0
       antd: 4.24.5_biqbaboplfbrettd7655fr4n2y
@@ -1548,7 +1548,6 @@ packages:
       '@babel/helper-validator-option': 7.18.6
       browserslist: 4.21.3
       semver: 6.3.0
-    dev: true
 
   /@babel/helper-compilation-targets/7.18.9_@babel+core@7.20.5:
     resolution: {integrity: sha512-tzLCyVmqUiFlcFoAPLA/gL9TeYrF61VLNtb+hvkuVaB5SUjW7jcfrglBIX1vUIoT7CLP3bBlIMeyEsIl2eFQNg==}
@@ -10356,7 +10355,7 @@ packages:
     resolution: {integrity: sha512-NLAe3j5Vk1yYEtoPP5fPGPjRzkZPx67KUM3f14L3InziJZJ0wVecCh7uKfgYkbRKJSeq6PlbND7iuCGdTplN6Q==}
     dev: false
 
-  /@tanstack/react-query-devtools/4.3.5_jkekd4jqbd6zkiapxsceyqr7ty:
+  /@tanstack/react-query-devtools/4.3.5_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-Jb3HywQmvQDmyixNOzjv8xjksngguG9WjmJlBWjSBCcUFIm3GQGpeJYm62EnJmJ+lHMgDNWDr61UV7Fya8TVTA==}
     peerDependencies:
       '@tanstack/react-query': 4.3.4
@@ -10364,8 +10363,8 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.1.1
-      '@tanstack/react-query': 4.3.4_react@18.2.0
       react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
@@ -13425,7 +13424,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_react@18.2.0
+      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -22080,7 +22079,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_k2dsl7zculo2nmh5s33pladmoa
+      ts-node: 10.9.1_nzafxra4mdyuer2ejmql6rdadq
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -32549,7 +32548,6 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: false
 
   /styled-components/5.3.6_mdz3marskokvq6744hhidi3r5a:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -32595,6 +32593,7 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}

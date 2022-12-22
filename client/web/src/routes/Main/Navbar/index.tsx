@@ -7,6 +7,7 @@ import { PersonalNav } from './PersonalNav';
 import { DevContainer } from '@/components/DevContainer';
 import { InboxNav } from './InboxNav';
 import { InstallBtn } from './InstallBtn';
+import { ReactQueryDevBtn } from './ReactQueryDevBtn';
 
 /**
  * 导航栏组件
@@ -40,6 +41,9 @@ export const Navbar: React.FC = React.memo(() => {
         data-tc-role="navbar-settings"
         className="flex flex-col items-center space-y-2"
       >
+        {/* React Query 的调试面板 */}
+        <ReactQueryDevBtn />
+
         {/* 应用(PWA)安装按钮 */}
         <InstallBtn />
 
