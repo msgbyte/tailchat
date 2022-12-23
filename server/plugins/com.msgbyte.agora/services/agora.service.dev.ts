@@ -1,4 +1,4 @@
-import { TcContext } from 'tailchat-server-sdk';
+import type { TcContext } from 'tailchat-server-sdk';
 import { TcService, TcDbService } from 'tailchat-server-sdk';
 import type { AgoraDocument, AgoraModel } from '../models/agora';
 import { RtcTokenBuilder, Role as RtcRole } from './utils/RtcTokenBuilder2';

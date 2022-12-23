@@ -1,0 +1,14 @@
+{
+  "name": "@plugins/com.msgbyte.wormhole",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "在聊天输入框快捷打开 wormhole 以支持传输文件",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "react": "18.2.0"
+  }
+}
