@@ -39,15 +39,15 @@ export const Controls: React.FC<{
   return (
     <div className="controller">
       <IconBtn
-        icon={trackState.audio ? 'mdi:video' : 'mdi:video-off'}
-        title={trackState.audio ? '关闭摄像头' : '开启摄像头'}
+        icon={trackState.video ? 'mdi:video' : 'mdi:video-off'}
+        title={trackState.video ? '关闭摄像头' : '开启摄像头'}
         size="large"
         onClick={() => mute('video')}
       />
 
       <IconBtn
-        icon={trackState.video ? 'mdi:microphone' : 'mdi:microphone-off'}
-        title={trackState.video ? '关闭麦克风' : '开启麦克风'}
+        icon={trackState.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
+        title={trackState.audio ? '关闭麦克风' : '开启麦克风'}
         size="large"
         onClick={() => mute('audio')}
       />
