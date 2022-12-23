@@ -17,6 +17,7 @@ import dayjs from 'dayjs';
 import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
 import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
 import { buildWorkboxPlugin } from './workbox';
+import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -91,6 +92,9 @@ const plugins: Configuration['plugins'] = [
     ],
   }) as any,
   new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
+  new RetryChunkLoadPlugin({
+    maxRetries: 2,
+  }),
   buildWorkboxPlugin(isDev),
   new WebpackBar({
     name: `Tailchat`,

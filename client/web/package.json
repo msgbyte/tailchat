@@ -141,6 +141,7 @@
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1",
+    "webpack-retry-chunk-load-plugin": "^3.1.1",
     "webpack-stats-viewer-plugin": "1.0.2",
     "webpackbar": "^5.0.2",
     "workbox-webpack-plugin": "^6.5.4"
