@@ -101,7 +101,7 @@ export const LoginView: React.FC = React.memo(() => {
           />
         </div>
 
-        {error && (
+        {loading === false && error && (
           <div className="flex justify-between mb-4">
             <p className="text-red-500 text-sm">{error.message}</p>
             <div
