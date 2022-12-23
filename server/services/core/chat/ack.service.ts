@@ -51,7 +51,7 @@ class AckService extends TcService {
       }
     );
 
-    // TODO: 如果要实现可以在此处基于会话id进行通知
+    // TODO: 如果要实现消息已读可以在此处基于会话id进行通知
   }
 
   /**

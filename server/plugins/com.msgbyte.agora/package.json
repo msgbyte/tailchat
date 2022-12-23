@@ -1,0 +1,20 @@
+{
+  "name": "tailchat-plugin-agora",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "为Tailchat增加声网音视频通信功能",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.20",
+    "mini-star": "*"
+  },
+  "dependencies": {
+    "tailchat-server-sdk": "*"
+  }
+}

@@ -16,6 +16,6 @@ export async function createMeetingAndShare(groupId: string, panelId: string) {
   sendMessage({
     groupId,
     converseId: panelId,
-    content: `${userInfo.nickname} 发起了会话，点击链接快速加入会议: ${fullUrl}`,
+    content: `${userInfo.nickname} 发起了通话，点击链接快速加入会议: ${fullUrl}`,
   });
 }

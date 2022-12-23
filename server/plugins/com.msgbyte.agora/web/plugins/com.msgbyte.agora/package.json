@@ -1,0 +1,18 @@
+{
+  "name": "@plugins/com.msgbyte.agora",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "为Tailchat增加声网音视频通信功能",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {
+    "agora-rtc-react": "^1.1.3"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}
