@@ -14,11 +14,12 @@ export function buildRuntimePluginJSResourceCacheGroup(
   expiration: number
 ): RuntimeCaching {
   return {
-    urlPattern: ({ url }) => {
-      // 使用自定义匹配函数而不是直接传是为了方便解决跨域资源的service worker存储
-      // 否则需要填入完整的前缀以解决跨域匹配(workbox对此进行了特殊的处理)
-      return pattern.test(url.pathname);
-    },
+    urlPattern: pattern,
+    // urlPattern: ({ url }) => {
+    //   // 使用自定义匹配函数而不是直接传是为了方便解决跨域资源的service worker存储
+    //   // 否则需要填入完整的前缀以解决跨域匹配(workbox对此进行了特殊的处理)
+    //   return pattern.test(url.pathname);
+    // },
     handler: 'StaleWhileRevalidate' as const,
     options: {
       cacheName: name,
