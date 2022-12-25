@@ -45,7 +45,7 @@ export function Loadable<Props>(
         p = promiseUsage(p, String(options?.componentName));
       }
 
-      return pMinDelay(p, 200);
+      return pMinDelay(p, 200, { delayRejection: false });
     },
     {
       fallback: <LoadingSpinner />,
