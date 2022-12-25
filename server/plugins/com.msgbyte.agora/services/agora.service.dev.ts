@@ -1,8 +1,12 @@
 import { DataNotFoundError, TcContext } from 'tailchat-server-sdk';
-import { TcService, TcDbService } from 'tailchat-server-sdk';
-import type { AgoraDocument, AgoraModel } from '../models/agora';
+import { TcService, TcDbService, db } from 'tailchat-server-sdk';
+import type {
+  AgoraMeetingDocument,
+  AgoraMeetingModel,
+} from '../models/agora-meeting';
 import { RtcTokenBuilder, Role as RtcRole } from './utils/RtcTokenBuilder2';
 import got from 'got';
+import _ from 'lodash';
 
 // Reference: https://docs.agora.io/cn/metachat/rtc_channel_management_restfulapi#查询用户列表
 interface ChannelUserListRet {
@@ -29,7 +33,7 @@ interface ChannelUserListRet {
  */
 interface AgoraService
   extends TcService,
-    TcDbService<AgoraDocument, AgoraModel> {}
+    TcDbService<AgoraMeetingDocument, AgoraMeetingModel> {}
 class AgoraService extends TcService {
   get serviceName() {
     return 'plugin:com.msgbyte.agora';
@@ -75,7 +79,7 @@ class AgoraService extends TcService {
       );
       return;
     }
-    // this.registerLocalDb(require('../models/agora').default);
+    this.registerLocalDb(require('../models/agora-meeting').default);
 
     this.registerAction('generateToken', this.generateToken, {
       params: {
@@ -87,6 +91,15 @@ class AgoraService extends TcService {
     this.registerAction('getChannelUserList', this.getChannelUserList, {
       params: {
         channelName: 'string',
+      },
+    });
+    this.registerAction('webhook', this.webhook, {
+      params: {
+        noticeId: 'string',
+        productId: 'number',
+        eventType: 'number',
+        notifyMs: 'number',
+        payload: 'any',
       },
     });
   }
@@ -156,6 +169,92 @@ class AgoraService extends TcService {
   }
 
   /**
+   * agora服务的回调
+   * Reference: https://docs.agora.io/cn/live-streaming-premium-legacy/rtc_channel_event?platform=RESTful#101-channel-create
+   */
+  async webhook(
+    ctx: TcContext<{
+      noticeId: string;
+      productId: number;
+      eventType: number;
+      notifyMs: number;
+      payload: any;
+    }>
+  ) {
+    const { eventType, payload } = ctx.params;
+
+    if (eventType === 101) {
+      // 频道被创建
+      const { channelName } = payload;
+      const converseId = this.getConverseIdFromChannelName(channelName);
+
+      const meeting = await this.adapter.model.create({
+        channelName,
+        converseId,
+        active: true,
+      });
+      this.roomcastNotify(ctx, converseId, 'agoraChannelCreate', {
+        converseId,
+        meetingId: String(meeting._id),
+      });
+    } else if (eventType === 102) {
+      // 频道被销毁
+      const { channelName } = payload;
+      const converseId = this.getConverseIdFromChannelName(channelName);
+
+      const meeting = await this.adapter.model.findLastestMeetingByConverseId(
+        converseId
+      );
+      if (!meeting) {
+        return;
+      }
+
+      meeting.active = false;
+      await meeting.save();
+      this.roomcastNotify(ctx, converseId, 'agoraChannelDestroy', {
+        converseId,
+        meetingId: String(meeting._id),
+      });
+    } else if (eventType === 103) {
+      // 用户加入
+      const { channelName, uid: userId } = payload;
+      const converseId = this.getConverseIdFromChannelName(channelName);
+
+      const meeting = await this.adapter.model.findLastestMeetingByConverseId(
+        converseId
+      );
+      if (!meeting) {
+        return;
+      }
+      meeting.members = _.uniq([...meeting.members, userId]);
+      await meeting.save();
+
+      this.roomcastNotify(ctx, converseId, 'agoraBroadcasterJoin', {
+        converseId,
+        meetingId: String(meeting._id),
+        userId,
+      });
+    } else if (eventType === 104) {
+      // 用户离开
+      const { channelName, uid } = payload;
+      const converseId = this.getConverseIdFromChannelName(channelName);
+
+      const meeting = await this.adapter.model.findLastestMeetingByConverseId(
+        converseId
+      );
+      if (!meeting) {
+        return;
+      }
+
+      this.roomcastNotify(ctx, converseId, 'agoraBroadcasterLeave', {
+        converseId,
+        meetingId: String(meeting._id),
+        userId: uid,
+      });
+    }
+  }
+
+  /**
    * 生成restful api需要的请求头
    */
   private generateRESTfulHeaders() {
@@ -167,6 +266,24 @@ class AgoraService extends TcService {
       Authorization: 'Basic ' + encodedCredential,
       'Content-Type': 'application/json',
     };
+  }
+
+  /**
+   * NOTICE: 这里不用每次唯一的ChannelName是期望设计是会话维度的，即可以重复使用
+   */
+  private getConverseIdFromChannelName(channelName: string): string {
+    if (!channelName) {
+      this.logger.error('channel name invalid', channelName);
+      throw new Error('channel name invalid');
+    }
+
+    const [groupId, converseId] = channelName.split('|');
+    if (!db.Types.ObjectId.isValid(converseId)) {
+      this.logger.error('converseId invalid', converseId);
+      throw new Error('converseId invalid');
+    }
+
+    return converseId;
   }
 }
 
