@@ -240,9 +240,11 @@ const chatSlice = createSlice({
     ) {
       const list = action.payload;
 
-      list.forEach((item) => {
-        state.lastMessageMap[item.converseId] = item.lastMessageId;
-      });
+      if (Array.isArray(list)) {
+        list.forEach((item) => {
+          state.lastMessageMap[item.converseId] = item.lastMessageId;
+        });
+      }
     },
 
     /**
