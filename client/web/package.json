@@ -144,6 +144,7 @@
     "webpack-retry-chunk-load-plugin": "^3.1.1",
     "webpack-stats-viewer-plugin": "1.0.2",
     "webpackbar": "^5.0.2",
+    "workbox-build": "^6.5.4",
     "workbox-webpack-plugin": "^6.5.4"
   }
 }

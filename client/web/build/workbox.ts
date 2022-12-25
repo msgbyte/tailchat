@@ -1,4 +1,8 @@
-import { workboxPluginDetailPattern, workboxPluginEntryPattern } from './utils';
+import {
+  buildRuntimePluginJSResourceCacheGroup,
+  workboxPluginDetailPattern,
+  workboxPluginEntryPattern,
+} from './utils';
 import WorkboxPlugin from 'workbox-webpack-plugin';
 
 /**
@@ -45,40 +49,19 @@ export function buildWorkboxPlugin(isDev: boolean) {
         },
       },
       //#region 插件缓存匹配
-      {
-        // 匹配内置 plugins 入口文件 以加速
-        urlPattern: workboxPluginEntryPattern,
-        handler: 'StaleWhileRevalidate',
-        options: {
-          cacheName: 'builtin-plugins-entry',
-          expiration: {
-            maxAgeSeconds: 24 * 60 * 60, // 1 day
-          },
-          cacheableResponse: {
-            // 只缓存js, 防止404后台直接fallback到html
-            headers: {
-              'content-type': 'application/javascript; charset=utf-8',
-            },
-          },
-        },
-      },
-      {
-        // 匹配内置 plugins 内容 以加速
-        urlPattern: workboxPluginDetailPattern,
-        handler: 'StaleWhileRevalidate',
-        options: {
-          cacheName: 'builtin-plugins-detail',
-          expiration: {
-            maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
-          },
-          cacheableResponse: {
-            // 只缓存js, 防止404后台直接fallback到html
-            headers: {
-              'content-type': 'application/javascript; charset=utf-8',
-            },
-          },
-        },
-      },
+
+      // 匹配内置 plugins 入口文件 以加速
+      buildRuntimePluginJSResourceCacheGroup(
+        workboxPluginEntryPattern,
+        'builtin-plugins-entry',
+        24 * 60 * 60 // 1 day
+      ),
+      // 匹配内置 plugins 内容 以加速
+      buildRuntimePluginJSResourceCacheGroup(
+        workboxPluginDetailPattern,
+        'builtin-plugins-detail',
+        7 * 24 * 60 * 60 // 1 week
+      ),
       //#endregion
     ],
   });
