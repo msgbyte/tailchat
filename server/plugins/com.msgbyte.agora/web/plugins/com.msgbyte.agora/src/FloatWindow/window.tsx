@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { getJWTUserInfo } from '@capital/common';
+import React, { useEffect, useRef, useState } from 'react';
+import { getJWTUserInfo, isValidStr, showErrorToasts } from '@capital/common';
 import type { IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import styled from 'styled-components';
-import {
-  appId,
-  token,
-  useClient,
-  useMicrophoneAndCameraTracks,
-} from './client';
+import { appId, token, useClient } from './client';
 import { Videos } from './Videos';
 import { Controls } from './Controls';
+import { LoadingSpinner } from '@capital/component';
+import { useMemoizedFn } from 'ahooks';
 
 const FloatWindow = styled.div`
   z-index: 100;
@@ -81,59 +78,63 @@ export const FloatMeetingWindow: React.FC<{
 }> = React.memo((props) => {
   const [folder, setFolder] = useState(false);
   const client = useClient();
-  const { ready, tracks } = useMicrophoneAndCameraTracks();
   const channelName = props.meetingId;
   const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
   const [start, setStart] = useState<boolean>(false);
+  const initedRef = useRef(false);
 
-  useEffect(() => {
-    // function to initialise the SDK
-    const init = async (channel: string) => {
-      client.on('user-published', async (user, mediaType) => {
-        await client.subscribe(user, mediaType);
-        console.log('subscribe success');
-        if (mediaType === 'video') {
-          setUsers((prevUsers) => {
-            return [...prevUsers, user];
-          });
-        }
-        if (mediaType === 'audio') {
-          user.audioTrack?.play();
-        }
-      });
+  const init = useMemoizedFn(async (channelName: string) => {
+    client.on('user-published', async (user, mediaType) => {
+      await client.subscribe(user, mediaType);
+      console.log('subscribe success');
+      if (mediaType === 'video') {
+        setUsers((prevUsers) => {
+          return [...prevUsers, user];
+        });
+      }
+      if (mediaType === 'audio') {
+        user.audioTrack?.play();
+      }
+    });
 
-      client.on('user-unpublished', (user, type) => {
-        console.log('unpublished', user, type);
-        if (type === 'audio') {
-          user.audioTrack?.stop();
-        }
-        if (type === 'video') {
-          setUsers((prevUsers) => {
-            return prevUsers.filter((User) => User.uid !== user.uid);
-          });
-        }
-      });
-
-      client.on('user-left', (user) => {
-        console.log('leaving', user);
+    client.on('user-unpublished', (user, type) => {
+      console.log('unpublished', user, type);
+      if (type === 'audio') {
+        user.audioTrack?.stop();
+      }
+      if (type === 'video') {
         setUsers((prevUsers) => {
           return prevUsers.filter((User) => User.uid !== user.uid);
         });
-      });
-
-      const { _id } = await getJWTUserInfo();
-      await client.join(appId, channel, token, _id);
-      if (tracks) {
-        await client.publish([tracks[0], tracks[1]]);
       }
-      setStart(true);
-    };
+    });
 
-    if (ready && tracks) {
-      console.log('init ready');
-      init(channelName);
+    client.on('user-left', (user) => {
+      console.log('leaving', user);
+      setUsers((prevUsers) => {
+        return prevUsers.filter((User) => User.uid !== user.uid);
+      });
+    });
+
+    const { _id } = await getJWTUserInfo();
+    try {
+      await client.join(appId, channelName, token, _id);
+      setStart(true);
+    } catch (err) {
+      showErrorToasts(err);
     }
-  }, [channelName, client, ready, tracks]);
+  });
+
+  useEffect(() => {
+    if (initedRef.current) {
+      return;
+    }
+
+    if (isValidStr(channelName)) {
+      init(channelName);
+      initedRef.current = true;
+    }
+  }, [channelName]);
 
   return (
     <FloatWindow
@@ -142,17 +143,15 @@ export const FloatMeetingWindow: React.FC<{
       }}
     >
       <div className="body">
-        {start && tracks && <Videos users={users} tracks={tracks} />}
+        {start ? (
+          <Videos users={users} />
+        ) : (
+          <LoadingSpinner tip={'正在加入通话...'} />
+        )}
       </div>
 
       <div className="controller">
-        {ready && tracks && (
-          <Controls
-            tracks={tracks}
-            setStart={setStart}
-            onClose={props.onClose}
-          />
-        )}
+        <Controls onClose={props.onClose} />
       </div>
 
       <div className="folder-btn" onClick={() => setFolder(!folder)}>

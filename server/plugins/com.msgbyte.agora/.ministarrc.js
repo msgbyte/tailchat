@@ -1,6 +1,7 @@
 const path = require('path');
 const copy = require('rollup-plugin-copy');
 const normalize = require('normalize-path');
+const replace = require('@rollup/plugin-replace');
 
 const pluginRoot = path.resolve(__dirname, './web');
 const outDir = path.resolve(__dirname, '../../public');
@@ -48,6 +49,9 @@ module.exports = {
         src: normalize(item.src),
         dest: normalize(item.dest, false),
       })),
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 };

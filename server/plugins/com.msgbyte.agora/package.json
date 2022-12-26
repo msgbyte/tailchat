@@ -11,6 +11,7 @@
     "build:web:watch": "ministar watchPlugin all"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.2",
     "@types/react": "18.0.20",
     "mini-star": "*",
     "normalize-path": "^3.0.0",

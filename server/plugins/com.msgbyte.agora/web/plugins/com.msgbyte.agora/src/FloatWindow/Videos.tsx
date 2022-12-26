@@ -1,16 +1,10 @@
-import {
-  AgoraVideoPlayer,
-  IAgoraRTCRemoteUser,
-  ICameraVideoTrack,
-  IMicrophoneAudioTrack,
-} from 'agora-rtc-react';
+import { AgoraVideoPlayer, IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import React from 'react';
 
 export const Videos: React.FC<{
   users: IAgoraRTCRemoteUser[];
-  tracks: [IMicrophoneAudioTrack, ICameraVideoTrack];
 }> = React.memo((props) => {
-  const { users, tracks } = props;
+  const { users } = props;
 
   return (
     <div>

@@ -1,25 +1,34 @@
 import { IconBtn } from '@capital/component';
-import type { ICameraVideoTrack, IMicrophoneAudioTrack } from 'agora-rtc-react';
 import React, { useState } from 'react';
-import { useClient } from './client';
+import { useClient, useMicrophoneAndCameraTracks } from './client';
 
 export const Controls: React.FC<{
-  tracks: [IMicrophoneAudioTrack, ICameraVideoTrack];
-  setStart: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
 }> = React.memo((props) => {
   const client = useClient();
-  const { tracks, setStart } = props;
-  const [trackState, setTrackState] = useState({ video: true, audio: true });
+  const [trackState, setTrackState] = useState({ video: false, audio: false });
+  const { ready, tracks } = useMicrophoneAndCameraTracks();
 
   const mute = async (type: 'audio' | 'video') => {
     if (type === 'audio') {
-      await tracks[0].setEnabled(!trackState.audio);
+      if (trackState.audio === true) {
+        // await tracks[0].setEnabled(false);
+        await client.unpublish(tracks[0]);
+      } else {
+        // await tracks[0].setEnabled(true);
+        await client.publish(tracks[0]);
+      }
       setTrackState((ps) => {
         return { ...ps, audio: !ps.audio };
       });
     } else if (type === 'video') {
-      await tracks[1].setEnabled(!trackState.video);
+      if (trackState.video === true) {
+        // await tracks[1].setEnabled(false);
+        await client.unpublish(tracks[1]);
+      } else {
+        // await tracks[1].setEnabled(true);
+        await client.publish(tracks[1]);
+      }
       setTrackState((ps) => {
         return { ...ps, video: !ps.video };
       });
@@ -32,7 +41,6 @@ export const Controls: React.FC<{
     // we close the tracks to perform cleanup
     tracks[0].close();
     tracks[1].close();
-    setStart(false);
     props.onClose();
   };
 
@@ -41,6 +49,7 @@ export const Controls: React.FC<{
       <IconBtn
         icon={trackState.video ? 'mdi:video' : 'mdi:video-off'}
         title={trackState.video ? '关闭摄像头' : '开启摄像头'}
+        disabled={!ready}
         size="large"
         onClick={() => mute('video')}
       />
@@ -48,6 +57,7 @@ export const Controls: React.FC<{
       <IconBtn
         icon={trackState.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
         title={trackState.audio ? '关闭麦克风' : '开启麦克风'}
+        disabled={!ready}
         size="large"
         onClick={() => mute('audio')}
       />
