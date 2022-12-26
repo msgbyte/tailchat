@@ -1,4 +1,5 @@
 import Shepherd from 'shepherd.js';
+import { Translate } from './translate';
 import { steps } from './steps';
 import './style.less';
 
@@ -15,14 +16,14 @@ if (!window.localStorage.getItem(KEY)) {
       modalOverlayOpeningPadding: 4,
       buttons: [
         {
-          text: '跳过引导',
+          text: Translate.skip,
           secondary: true,
           action() {
             this.complete();
           },
         },
         {
-          text: '下一步',
+          text: Translate.next,
           action() {
             this.next();
           },
