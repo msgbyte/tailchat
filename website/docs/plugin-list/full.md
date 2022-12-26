@@ -1,7 +1,15 @@
 ---
 sidebar_position: 3
-title: 前后端插件 (6)
+title: 前后端插件 (7)
 ---
+
+### com.msgbyte.agora 声网音视频
+
+为Tailchat增加声网音视频通信功能
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.agora/web/plugins/com.msgbyte.agora)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.agora/web/plugins/com.msgbyte.agora/manifest.json)
+
 
 ### com.msgbyte.github Github 订阅
 

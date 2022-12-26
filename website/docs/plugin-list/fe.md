@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: 纯前端插件 (14)
+title: 纯前端插件 (18)
 ---
 
 ### com.msgbyte.bbcode BBCode 消息解释器
@@ -21,15 +21,23 @@ title: 纯前端插件 (14)
 
 ### com.msgbyte.filepizza file.pizza
 
-快捷打开 filepizza 以支持p2p传输文件
+在聊天输入框快捷打开 filepizza 以支持p2p传输文件
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filepizza)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filepizza/manifest.json)
 
 
+### com.msgbyte.filesend filesend
+
+在聊天输入框快捷打开 Filesend 以支持传输文件
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesend)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesend/manifest.json)
+
+
 ### com.msgbyte.filesfm files.fm
 
-快捷打开 files.fm 以支持传输文件
+在聊天输入框快捷打开 files.fm 以支持传输文件
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesfm)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesfm/manifest.json)
@@ -107,10 +115,34 @@ Sentry 错误处理
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop/manifest.json)
 
 
+### com.msgbyte.user.location 用户地理位置
+
+为用户信息增加地理位置记录
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.user.location)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.user.location/manifest.json)
+
+
 ### com.msgbyte.webview 网页面板插件
 
 为群组提供创建网页面板的功能
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.webview)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.webview/manifest.json)
+
+
+### com.msgbyte.wenshushu wenshushu
+
+在聊天输入框快捷打开 文叔叔 以支持传输文件
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu/manifest.json)
+
+
+### com.msgbyte.wormhole wormhole
+
+在聊天输入框快捷打开 wormhole 以支持传输文件
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wormhole)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wormhole/manifest.json)
 
