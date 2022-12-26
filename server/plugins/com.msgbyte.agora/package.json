@@ -12,7 +12,9 @@
   },
   "devDependencies": {
     "@types/react": "18.0.20",
-    "mini-star": "*"
+    "mini-star": "*",
+    "normalize-path": "^3.0.0",
+    "rollup-plugin-copy": "^3.4.0"
   },
   "dependencies": {
     "got": "11.8.6",

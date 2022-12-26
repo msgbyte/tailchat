@@ -65,11 +65,23 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
         fetchRegistryPlugins().catch(() => []),
         fetchServiceRegistryPlugins()
           .then((list) =>
-            list.map((manifest) => ({
-              ...manifest,
-              // 后端url策略。根据前端的url在获取时自动变更为当前链接的后端地址
-              url: parseUrlStr(manifest.url),
-            }))
+            list.map((manifest) => {
+              const serviceManifest = {
+                ...manifest,
+                // 后端url策略。根据前端的url在获取时自动变更为当前链接的后端地址
+                url: parseUrlStr(manifest.url),
+              };
+
+              if (manifest.icon) {
+                serviceManifest.icon = parseUrlStr(manifest.icon);
+              }
+
+              if (manifest.documentUrl) {
+                serviceManifest.documentUrl = parseUrlStr(manifest.documentUrl);
+              }
+
+              return serviceManifest;
+            })
           )
           .catch(() => []),
         fetchLocalStaticRegistryPlugins().catch(() => []),
