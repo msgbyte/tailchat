@@ -40,18 +40,18 @@ function buildStepOption(options: {
 export const steps: Shepherd.Step.StepOptions[] = [
   {
     id: 'start',
-    text: '欢迎使用 Tailchat, 一个插件化的开源IM应用',
+    text: '欢迎使用 Tailchat, 一个插件化的开源IM应用！',
     beforeShowPromise: buildWatchDom('[data-tc-role=navbar]'), // 仅当主界面出现后才显示欢迎
   },
   buildStepOption({
     id: 'navbar',
-    text: '这是导航栏, 在这里可以切换tailchat的各个主要页面',
+    text: '这是导航栏, 在这里可以切换tailchat的各个主要页面。',
     selector: '[data-tc-role=navbar]',
     position: 'right',
   }),
   buildStepOption({
     id: 'personal',
-    text: '这是个人信息，在这里可以管理您的好友、插件、以及私信',
+    text: '这是个人信息，在这里可以访问您的好友、插件、以及私信等功能。',
     selector: '[data-tc-role=navbar-personal]',
     position: 'right',
   }),
@@ -69,14 +69,18 @@ export const steps: Shepherd.Step.StepOptions[] = [
   }),
   buildStepOption({
     id: 'sidebar',
-    text: '这是侧边栏，用于切换内容',
+    text: '这是侧边栏，用于切换内容。在未来会经常使用它来切换不同的面板。',
     selector: '[data-tc-role^=sidebar-]',
     position: 'right',
   }),
   buildStepOption({
     id: 'content',
-    text: '这是内容区，用于显示主要内容',
+    text: '这是内容区，用于显示主要内容，也是Tailchat展示内容的地方。',
     selector: '[data-tc-role^=content-]',
     position: 'right',
   }),
+  {
+    id: 'end',
+    text: '如果有更多疑问, 欢迎访问官方文档了解更多: <br /><a href="https://tailchat.msgbyte.com/" target="_blank" style="text-decoration: underline;">点击此处打开官方文档</a>',
+  },
 ];

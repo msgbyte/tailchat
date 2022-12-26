@@ -10,7 +10,7 @@ if (!window.localStorage.getItem(KEY)) {
     defaultStepOptions: {
       classes: 'shadow-md',
       scrollTo: true,
-      arrow: false,
+      arrow: true,
       modalOverlayOpeningRadius: 4,
       modalOverlayOpeningPadding: 4,
       buttons: [
