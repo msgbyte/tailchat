@@ -1,6 +1,7 @@
 import { IconBtn } from '@capital/component';
 import React, { useState } from 'react';
 import { useClient, useMicrophoneAndCameraTracks } from './client';
+import { useMeetingStore } from './store';
 
 export const Controls: React.FC<{
   onClose: () => void;
@@ -38,6 +39,7 @@ export const Controls: React.FC<{
   const leaveChannel = async () => {
     await client.leave();
     client.removeAllListeners();
+    useMeetingStore.getState().clearUser();
     // we close the tracks to perform cleanup
     tracks[0].close();
     tracks[1].close();

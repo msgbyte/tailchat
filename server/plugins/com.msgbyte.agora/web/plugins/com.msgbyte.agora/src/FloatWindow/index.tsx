@@ -1,5 +1,5 @@
 import { showToasts } from '@capital/common';
-import { PortalAdd, PortalRemove, ErrorBoundary } from '@capital/component';
+import { PortalAdd, PortalRemove } from '@capital/component';
 import React from 'react';
 import { FloatMeetingWindow } from './window';
 
@@ -21,14 +21,12 @@ export function startFastMeeting(meetingId: string) {
   currentMeeting = meetingId;
 
   const key = PortalAdd(
-    <ErrorBoundary>
-      <FloatMeetingWindow
-        meetingId={meetingId}
-        onClose={() => {
-          PortalRemove(key);
-          currentMeeting = null;
-        }}
-      />
-    </ErrorBoundary>
+    <FloatMeetingWindow
+      meetingId={meetingId}
+      onClose={() => {
+        PortalRemove(key);
+        currentMeeting = null;
+      }}
+    />
   );
 }

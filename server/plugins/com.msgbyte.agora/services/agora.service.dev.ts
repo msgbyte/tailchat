@@ -81,11 +81,9 @@ class AgoraService extends TcService {
     }
     this.registerLocalDb(require('../models/agora-meeting').default);
 
-    this.registerAction('generateToken', this.generateToken, {
+    this.registerAction('generateJoinInfo', this.generateJoinInfo, {
       params: {
         channelName: 'string',
-        appId: { type: 'string', optional: true },
-        appCert: { type: 'string', optional: true },
       },
     });
     this.registerAction('getChannelUserList', this.getChannelUserList, {
@@ -104,18 +102,14 @@ class AgoraService extends TcService {
     });
   }
 
-  generateToken(
+  generateJoinInfo(
     ctx: TcContext<{
       channelName: string;
-      appId?: string;
-      appCert?: string;
     }>
   ) {
-    const {
-      channelName,
-      appId = this.serverAppId,
-      appCert = this.serverAppCertificate,
-    } = ctx.params;
+    const { channelName } = ctx.params;
+    const appId = this.serverAppId;
+    const appCert = this.serverAppCertificate;
 
     if (!appId || !appCert) {
       throw new Error('Agora.io AppId/AppCert not init');
@@ -139,7 +133,7 @@ class AgoraService extends TcService {
       privilegeExpirationInSecond
     );
 
-    return token;
+    return { appId, token };
   }
 
   /**
