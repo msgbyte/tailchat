@@ -178,7 +178,6 @@ export default class ApiService extends TcService {
             }
 
             res.write(data['html'] ?? '');
-
             res.end();
             return;
           }
