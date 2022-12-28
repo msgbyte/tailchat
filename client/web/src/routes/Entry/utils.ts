@@ -16,7 +16,7 @@ export function useNavToView() {
         pathname,
       });
     },
-    [history]
+    [navigate, location]
   );
 
   return navToView;

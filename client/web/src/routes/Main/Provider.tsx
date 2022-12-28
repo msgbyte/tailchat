@@ -53,7 +53,7 @@ function useAppState() {
     setupRedux(socket, store);
 
     return { store, socket };
-  }, [history]);
+  }, []);
 
   const store = value?.store;
   const socket = value?.socket;

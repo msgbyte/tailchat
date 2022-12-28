@@ -33,7 +33,7 @@ export const GuestView: React.FC = React.memo(() => {
     } else {
       navigate('/main');
     }
-  }, [nickname, history, navRedirect]);
+  }, [nickname, navigate, navRedirect]);
 
   return (
     <div className="w-96 text-white">

@@ -69,7 +69,7 @@ export const LoginView: React.FC = React.memo(() => {
     } else {
       navigate('/main');
     }
-  }, [email, password, history, navRedirect]);
+  }, [email, password, navRedirect, navigate]);
 
   const navToView = useNavToView();
 

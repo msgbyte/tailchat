@@ -32,7 +32,7 @@ export const FriendList: React.FC<{
       const converse = await createDMConverse([targetId]);
       navigate(`/main/personal/converse/${converse._id}`);
     },
-    [history]
+    [navigate]
   );
 
   const handleRemoveFriend = useCallback(async (targetId: string) => {
