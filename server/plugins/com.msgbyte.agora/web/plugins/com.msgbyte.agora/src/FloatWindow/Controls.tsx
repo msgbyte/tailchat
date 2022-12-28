@@ -1,45 +1,46 @@
 import { IconBtn } from '@capital/component';
-import React, { useState } from 'react';
+import React from 'react';
 import { useClient, useMicrophoneAndCameraTracks } from './client';
 import { useMeetingStore } from './store';
+import { getClientLocalTrack } from './utils';
 
 export const Controls: React.FC<{
   onClose: () => void;
 }> = React.memo((props) => {
   const client = useClient();
-  const [trackState, setTrackState] = useState({ video: false, audio: false });
   const { ready, tracks } = useMicrophoneAndCameraTracks();
+  const mediaPerm = useMeetingStore((state) => state.mediaPerm);
 
   const mute = async (type: 'audio' | 'video') => {
     if (type === 'audio') {
-      if (trackState.audio === true) {
-        // await tracks[0].setEnabled(false);
-        await client.unpublish(tracks[0]);
+      if (mediaPerm.audio === true) {
+        const track = getClientLocalTrack(client, 'audio');
+        if (track) {
+          await client.unpublish(track);
+        }
       } else {
-        // await tracks[0].setEnabled(true);
         await client.publish(tracks[0]);
       }
-      setTrackState((ps) => {
-        return { ...ps, audio: !ps.audio };
-      });
+
+      useMeetingStore.getState().setMediaPerm({ audio: !mediaPerm.audio });
     } else if (type === 'video') {
-      if (trackState.video === true) {
-        // await tracks[1].setEnabled(false);
-        await client.unpublish(tracks[1]);
+      if (mediaPerm.video === true) {
+        const track = getClientLocalTrack(client, 'video');
+        if (track) {
+          await client.unpublish(track);
+        }
       } else {
-        // await tracks[1].setEnabled(true);
         await client.publish(tracks[1]);
       }
-      setTrackState((ps) => {
-        return { ...ps, video: !ps.video };
-      });
+
+      useMeetingStore.getState().setMediaPerm({ video: !mediaPerm.video });
     }
   };
 
   const leaveChannel = async () => {
     await client.leave();
     client.removeAllListeners();
-    useMeetingStore.getState().clearUser();
+    useMeetingStore.getState().reset();
     // we close the tracks to perform cleanup
     tracks[0].close();
     tracks[1].close();
@@ -49,16 +50,16 @@ export const Controls: React.FC<{
   return (
     <div className="controller">
       <IconBtn
-        icon={trackState.video ? 'mdi:video' : 'mdi:video-off'}
-        title={trackState.video ? '关闭摄像头' : '开启摄像头'}
+        icon={mediaPerm.video ? 'mdi:video' : 'mdi:video-off'}
+        title={mediaPerm.video ? '关闭摄像头' : '开启摄像头'}
         disabled={!ready}
         size="large"
         onClick={() => mute('video')}
       />
 
       <IconBtn
-        icon={trackState.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
-        title={trackState.audio ? '关闭麦克风' : '开启麦克风'}
+        icon={mediaPerm.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
+        title={mediaPerm.audio ? '关闭麦克风' : '开启麦克风'}
         disabled={!ready}
         size="large"
         onClick={() => mute('audio')}
