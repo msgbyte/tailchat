@@ -1,5 +1,5 @@
 import React, { Fragment, PropsWithChildren } from 'react';
-import { isDevelopment } from 'tailchat-shared';
+import { isDevelopment } from '../utils/environment';
 
 /**
  * 开发中容器

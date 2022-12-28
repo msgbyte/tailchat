@@ -1,6 +1,6 @@
 import React, { useState, useContext, PropsWithChildren } from 'react';
 import _get from 'lodash/get';
-import { DevContainer } from './DevContainer';
+import { DevContainer } from 'tailchat-shared';
 import clsx from 'clsx';
 
 export interface SidebarViewMenuItemType {

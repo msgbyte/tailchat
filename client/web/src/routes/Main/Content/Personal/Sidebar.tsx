@@ -1,11 +1,15 @@
 import React, { PropsWithChildren } from 'react';
 import { Icon } from 'tailchat-design';
 import { SidebarItem } from '../SidebarItem';
-import { t, useDMConverseList, useUserInfo } from 'tailchat-shared';
+import {
+  t,
+  useDMConverseList,
+  useUserInfo,
+  DevContainer,
+} from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 import { openModal } from '@/components/Modal';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
-import { DevContainer } from '@/components/DevContainer';
 import { SectionHeader } from '@/components/SectionHeader';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 import { pluginCustomPanel } from '@/plugin/common';

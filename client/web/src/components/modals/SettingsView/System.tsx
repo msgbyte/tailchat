@@ -3,7 +3,13 @@ import { LanguageSelect } from '@/components/LanguageSelect';
 import { pluginColorScheme } from '@/plugin/common';
 import { Select, Switch } from 'antd';
 import React from 'react';
-import { t, useColorScheme, useSingleUserSetting } from 'tailchat-shared';
+import {
+  AlphaContainer,
+  t,
+  useAlphaMode,
+  useColorScheme,
+  useSingleUserSetting,
+} from 'tailchat-shared';
 
 export const SettingsSystem: React.FC = React.memo(() => {
   const { colorScheme, setColorScheme } = useColorScheme();
@@ -12,6 +18,7 @@ export const SettingsSystem: React.FC = React.memo(() => {
     setValue: setMessageListVirtualization,
     loading,
   } = useSingleUserSetting('messageListVirtualization', false);
+  const { isAlphaMode, setAlphaMode } = useAlphaMode();
 
   return (
     <div>
@@ -39,15 +46,31 @@ export const SettingsSystem: React.FC = React.memo(() => {
       />
 
       <FullModalField
-        title={t('聊天列表虚拟化') + ' (Beta)'}
+        title={t('Alpha测试开关')}
+        tip={t(
+          '在 Alpha 模式下会有一些尚处于测试阶段的功能将会被开放，如果出现问题欢迎反馈'
+        )}
         content={
           <Switch
             disabled={loading}
-            checked={messageListVirtualization}
-            onChange={(checked) => setMessageListVirtualization(checked)}
+            checked={isAlphaMode}
+            onChange={(checked) => setAlphaMode(checked)}
           />
         }
       />
+
+      {isAlphaMode && (
+        <FullModalField
+          title={t('聊天列表虚拟化') + ' (Beta)'}
+          content={
+            <Switch
+              disabled={loading}
+              checked={messageListVirtualization}
+              onChange={(checked) => setMessageListVirtualization(checked)}
+            />
+          }
+        />
+      )}
     </div>
   );
 });

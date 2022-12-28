@@ -16,6 +16,8 @@ export { useCachedUserInfo, useCachedOnlineStatus } from './cache/useCache';
 
 // components
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
+export { AlphaContainer } from './components/AlphaContainer';
+export { DevContainer } from './components/DevContainer';
 export { TcProvider } from './components/Provider';
 
 // contexts
@@ -56,6 +58,7 @@ export {
   useUserSettings,
   useSingleUserSetting,
 } from './hooks/model/useUserSettings';
+export { useAlphaMode } from './hooks/useAlphaMode';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';

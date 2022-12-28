@@ -4,7 +4,7 @@ import { MobileMenuBtn } from './MobileMenuBtn';
 import { SettingBtn } from './SettingBtn';
 import { Divider } from 'antd';
 import { PersonalNav } from './PersonalNav';
-import { DevContainer } from '@/components/DevContainer';
+import { DevContainer } from 'tailchat-shared';
 import { InboxNav } from './InboxNav';
 import { InstallBtn } from './InstallBtn';
 import { ReactQueryDevBtn } from './ReactQueryDevBtn';
