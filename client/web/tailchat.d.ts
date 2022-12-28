@@ -474,11 +474,17 @@ declare module '@capital/component' {
 
   export const ErrorBoundary: any;
 
-  export const UserAvatar: any;
+  export const UserAvatar: React.FC<{
+    userId: string;
+    className?: string;
+    style?: React.CSSProperties;
+    size?: 'large' | 'small' | 'default' | number;
+  }>;
 
   export const UserName: React.FC<{
     userId: string;
     className?: string;
+    style?: React.CSSProperties;
   }>;
 
   export const Markdown: any;
