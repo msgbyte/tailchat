@@ -1,4 +1,4 @@
-import { UserName } from '@capital/component';
+import { UserAvatar, UserName } from '@capital/component';
 import { AgoraVideoPlayer, IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import React from 'react';
 import styled from 'styled-components';
@@ -15,6 +15,9 @@ const Root = styled.div`
   justify-self: center;
   align-self: center;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .player {
     width: 100%;
@@ -36,8 +39,10 @@ export const VideoView: React.FC<{
 
   return (
     <Root>
-      {user.hasVideo && (
+      {user.hasVideo ? (
         <AgoraVideoPlayer className="player" videoTrack={user.videoTrack} />
+      ) : (
+        <UserAvatar size={96} userId={String(user.uid)} />
       )}
 
       <UserName className="name" userId={String(user.uid)} />
@@ -53,8 +58,10 @@ export const OwnVideoView: React.FC<{}> = React.memo(() => {
 
   return (
     <Root>
-      {ready && mediaPerm.video && (
+      {ready && mediaPerm.video ? (
         <AgoraVideoPlayer className="player" videoTrack={tracks[1]} />
+      ) : (
+        <UserAvatar size={96} userId={String(client.uid)} />
       )}
 
       <UserName className="name" userId={String(client.uid)} />

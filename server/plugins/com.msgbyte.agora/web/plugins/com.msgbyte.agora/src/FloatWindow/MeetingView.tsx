@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getJWTUserInfo, isValidStr, showErrorToasts } from '@capital/common';
-import type { IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import { useClient } from './client';
 import { Videos } from './Videos';
 import { Controls } from './Controls';
@@ -9,6 +8,7 @@ import { useMemoizedFn } from 'ahooks';
 import { request } from '../request';
 import styled from 'styled-components';
 import { useMeetingStore } from './store';
+import { NetworkStats } from './NetworkStats';
 
 const Root = styled.div`
   .body {
@@ -74,7 +74,7 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
       const { appId, token } = data ?? {};
 
       await client.join(appId, channelName, token, _id);
-      console.log('client.remoteUsers', client.remoteUsers);
+      await client.enableDualStream();
       setStart(true);
     } catch (err) {
       showErrorToasts(err);
@@ -94,6 +94,8 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
 
   return (
     <Root>
+      <NetworkStats />
+
       <div className="body">
         {start ? <Videos /> : <LoadingSpinner tip={'正在加入通话...'} />}
       </div>
