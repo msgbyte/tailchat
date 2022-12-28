@@ -101,19 +101,21 @@ class ConverseService extends TcService {
       })
     );
 
-    // 发送系统消息, 异步处理
-    await Promise.all(
-      _.without(participantList, userId).map<Promise<UserStruct>>((memberId) =>
-        ctx.call('user.getUserInfo', { userId: memberId })
-      )
-    ).then((infoList) => {
-      return call(ctx).sendSystemMessage(
-        `${ctx.meta.user.nickname} 邀请 ${infoList
-          .map((info) => info.nickname)
-          .join(', ')} 加入会话`,
-        roomId
-      );
-    });
+    if (participantList.length > 2) {
+      // 如果创建的是一个多人会话(非双人), 发送系统消息
+      await Promise.all(
+        _.without(participantList, userId).map<Promise<UserStruct>>(
+          (memberId) => ctx.call('user.getUserInfo', { userId: memberId })
+        )
+      ).then((infoList) => {
+        return call(ctx).sendSystemMessage(
+          `${ctx.meta.user.nickname} 邀请 ${infoList
+            .map((info) => info.nickname)
+            .join(', ')} 加入会话`,
+          roomId
+        );
+      });
+    }
 
     return await this.transformDocuments(ctx, {}, converse);
   }
