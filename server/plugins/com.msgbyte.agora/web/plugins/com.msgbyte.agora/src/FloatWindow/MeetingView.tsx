@@ -65,6 +65,15 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
       useMeetingStore.getState().removeUser(user);
     });
 
+    client.on('volume-indicator', (volumes) => {
+      useMeetingStore.setState({
+        volumes: volumes.map((v) => ({
+          uid: String(v.uid),
+          level: v.level,
+        })),
+      });
+    });
+
     try {
       const { _id } = await getJWTUserInfo();
       const { data } = await request.post('generateJoinInfo', {
@@ -75,6 +84,7 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
 
       await client.join(appId, channelName, token, _id);
       await client.enableDualStream();
+      client.enableAudioVolumeIndicator();
       setStart(true);
     } catch (err) {
       showErrorToasts(err);

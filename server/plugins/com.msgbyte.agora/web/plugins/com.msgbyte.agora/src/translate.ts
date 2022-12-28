@@ -9,4 +9,12 @@ export const Translate = {
     'zh-CN': '下行网络',
     'en-US': 'Downlink',
   }),
+  isSpeaking: localTrans({
+    'zh-CN': '正在发言',
+    'en-US': 'is Speaking',
+  }),
+  nomanSpeaking: localTrans({
+    'zh-CN': '无人发言',
+    'en-US': 'No one Speaking',
+  }),
 };

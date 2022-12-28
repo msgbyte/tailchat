@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { useClient, useMicrophoneAndCameraTracks } from './client';
 import { useMeetingStore } from './store';
 
-const Root = styled.div`
+const Root = styled.div<{
+  active?: boolean;
+}>`
   width: 95%;
   height: auto;
   position: relative;
@@ -18,6 +20,10 @@ const Root = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-width: 3px;
+  border-color: ${(props) => (props.active ? '#7ab157;' : 'transparent')};
+  transition: border-color 0.2s;
 
   .player {
     width: 100%;
@@ -36,9 +42,10 @@ export const VideoView: React.FC<{
   user: IAgoraRTCRemoteUser;
 }> = (props) => {
   const user = props.user;
+  const active = useVolumeActive(String(user.uid));
 
   return (
-    <Root>
+    <Root active={active}>
       {user.hasVideo ? (
         <AgoraVideoPlayer className="player" videoTrack={user.videoTrack} />
       ) : (
@@ -55,9 +62,10 @@ export const OwnVideoView: React.FC<{}> = React.memo(() => {
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const client = useClient();
   const mediaPerm = useMeetingStore((state) => state.mediaPerm);
+  const active = useVolumeActive(String(client.uid));
 
   return (
-    <Root>
+    <Root active={active}>
       {ready && mediaPerm.video ? (
         <AgoraVideoPlayer className="player" videoTrack={tracks[1]} />
       ) : (
@@ -69,3 +77,12 @@ export const OwnVideoView: React.FC<{}> = React.memo(() => {
   );
 });
 OwnVideoView.displayName = 'OwnVideoView';
+
+function useVolumeActive(uid: string) {
+  const volume = useMeetingStore((state) =>
+    state.volumes.find((v) => v.uid === uid)
+  );
+  const volumeLevel = volume?.level ?? 0;
+
+  return volumeLevel >= 60;
+}

@@ -15,6 +15,16 @@ interface MeetingState {
    * 本地媒体权限
    */
   mediaPerm: MediaPerm;
+  /**
+   * 音量信息
+   */
+  volumes: {
+    /**
+     * 音量, 0~100, 一般认为60以上视为正在发言.
+     */
+    level: number;
+    uid: string;
+  }[];
   appendUser: (user: IAgoraRTCRemoteUser) => void;
   removeUser: (user: IAgoraRTCRemoteUser) => void;
   /**
@@ -29,6 +39,7 @@ interface MeetingState {
 export const useMeetingStore = create<MeetingState>((set) => ({
   users: [],
   mediaPerm: { video: false, audio: false },
+  volumes: [],
   appendUser: (user: IAgoraRTCRemoteUser) => {
     set((state) => ({
       users: [...state.users, user],

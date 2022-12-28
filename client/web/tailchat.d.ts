@@ -164,6 +164,8 @@ declare module '@capital/common' {
 
   export const showMessageTime: any;
 
+  export const joinArray: any;
+
   export const useLocation: any;
 
   export const useNavigate: any;
@@ -244,21 +246,6 @@ declare module '@capital/common' {
 
   export const pluginPanelActions: any;
 
-  interface BasePluginPanelActionProps {
-    /**
-     * 唯一标识
-     */
-    name: string;
-    /**
-     * 显示名
-     */
-    label: string;
-    /**
-     * 来自iconify的图标标识
-     */
-    icon: string;
-  }
-
   export const regPluginPanelAction: (
     action:
       | {
@@ -310,6 +297,10 @@ declare module '@capital/common' {
   export const pluginGroupTextPanelExtraMenus: any;
 
   export const regPluginGroupTextPanelExtraMenu: any;
+
+  export const pluginUserExtraInfo: any;
+
+  export const regUserExtraInfo: any;
 
   export const useGroupIdContext: () => string;
 
@@ -488,4 +479,8 @@ declare module '@capital/component' {
   }>;
 
   export const Markdown: any;
+
+  export const Webview: any;
+
+  export const WebviewKeepAlive: any;
 }

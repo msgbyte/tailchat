@@ -53,6 +53,7 @@ export {
   useGroupPanelInfo,
   sendMessage,
   showMessageTime,
+  joinArray,
 } from 'tailchat-shared';
 
 export { useLocation, useNavigate } from 'react-router';
