@@ -2,12 +2,12 @@
     "@platforms" : [ "android", "iPhone", "iPad" ],
     "id" : "__W2A__nightly.paw.msgbyte.com",
     /*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name" : "tailchat",
+    "name" : "tailchat-nightly",
     /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "1.0",
         /*应用版本名称*/
-        "code" : ""
+        "code" : 1
     },
     "description" : "",
     /*应用描述信息*/
@@ -52,9 +52,9 @@
         "NativeUI" : {},
         "Navigator" : {},
         "NativeObj" : {},
-        "Push" : {},
         "UIWebview" : {},
-        "Camera" : {}
+        "Camera" : {},
+        "Push" : {}
     },
     "plus" : {
         "kernel" : {
