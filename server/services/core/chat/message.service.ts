@@ -29,7 +29,14 @@ class MessageService extends TcService {
     this.registerAction('fetchConverseMessage', this.fetchConverseMessage, {
       params: {
         converseId: 'string',
-        startId: [{ type: 'string', optional: true }],
+        startId: { type: 'string', optional: true },
+      },
+    });
+    this.registerAction('fetchNearbyMessage', this.fetchNearbyMessage, {
+      params: {
+        converseId: 'string',
+        messageId: 'string',
+        num: { type: 'number', optional: true },
       },
     });
     this.registerAction('sendMessage', this.sendMessage, {
@@ -89,6 +96,57 @@ class MessageService extends TcService {
     );
 
     return this.transformDocuments(ctx, {}, docs);
+  }
+
+  /**
+   * 获取一条消息附近的消息
+   * 以会话为准
+   *
+   * 额外需要converseId是为了防止暴力查找
+   */
+  async fetchNearbyMessage(
+    ctx: TcContext<{
+      converseId: string;
+      messageId: string;
+      num?: number;
+    }>
+  ) {
+    const { converseId, messageId, num = 5 } = ctx.params;
+    const { t } = ctx.meta;
+    const message = await this.adapter.model
+      .findOne({
+        _id: new Types.ObjectId(messageId),
+        converseId: new Types.ObjectId(converseId),
+      })
+      .limit(1)
+      .exec();
+
+    if (!message) {
+      return new DataNotFoundError(t('没有找到消息'));
+    }
+
+    const [prev, next] = await Promise.all([
+      this.adapter.model
+        .find({
+          _id: {
+            $lt: new Types.ObjectId(messageId),
+          },
+          converseId: new Types.ObjectId(converseId),
+        })
+        .limit(num)
+        .exec(),
+      this.adapter.model
+        .find({
+          _id: {
+            $gt: new Types.ObjectId(messageId),
+          },
+          converseId: new Types.ObjectId(converseId),
+        })
+        .limit(num)
+        .exec(),
+    ]);
+
+    return this.transformDocuments(ctx, {}, [...prev, message, ...next]);
   }
 
   /**
