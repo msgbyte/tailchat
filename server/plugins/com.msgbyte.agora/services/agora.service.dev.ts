@@ -100,6 +100,8 @@ class AgoraService extends TcService {
         payload: 'any',
       },
     });
+
+    this.registerAuthWhitelist(['/webhook']);
   }
 
   generateJoinInfo(
@@ -176,16 +178,25 @@ class AgoraService extends TcService {
     }>
   ) {
     const { eventType, payload } = ctx.params;
+    const channelName = payload.channelName;
+
+    this.logger.info('webhook received', { eventType, payload });
+    if (channelName === 'test_webhook') {
+      // 连通性检查
+      return true;
+    }
 
     if (eventType === 101) {
       // 频道被创建
-      const { channelName } = payload;
+      const ts = payload.ts;
+
       const converseId = this.getConverseIdFromChannelName(channelName);
 
       const meeting = await this.adapter.model.create({
         channelName,
         converseId,
         active: true,
+        createdAt: new Date(ts),
       });
       this.roomcastNotify(ctx, converseId, 'agoraChannelCreate', {
         converseId,
@@ -193,7 +204,8 @@ class AgoraService extends TcService {
       });
     } else if (eventType === 102) {
       // 频道被销毁
-      const { channelName } = payload;
+      const ts = payload.ts;
+
       const converseId = this.getConverseIdFromChannelName(channelName);
 
       const meeting = await this.adapter.model.findLastestMeetingByConverseId(
@@ -204,6 +216,7 @@ class AgoraService extends TcService {
       }
 
       meeting.active = false;
+      meeting.endAt = new Date(ts);
       await meeting.save();
       this.roomcastNotify(ctx, converseId, 'agoraChannelDestroy', {
         converseId,
@@ -273,7 +286,7 @@ class AgoraService extends TcService {
 
     const [groupId, converseId] = channelName.split('|');
     if (!db.Types.ObjectId.isValid(converseId)) {
-      this.logger.error('converseId invalid', converseId);
+      this.logger.error('converseId invalid:', converseId);
       throw new Error('converseId invalid');
     }
 
