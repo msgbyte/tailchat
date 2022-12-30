@@ -48,9 +48,7 @@ class GithubSubscribeService extends TcService {
     });
     this.registerAction('webhook.callback', this.webhookHandler);
 
-    this.registerAuthWhitelist([
-      '/plugin:com.msgbyte.github.subscribe/webhook/callback',
-    ]);
+    this.registerAuthWhitelist(['/webhook/callback']);
   }
 
   protected onInited(): void {

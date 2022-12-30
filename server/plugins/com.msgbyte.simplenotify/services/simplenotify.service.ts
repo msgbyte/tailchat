@@ -58,9 +58,7 @@ class SimpleNotifyService extends TcService {
       },
     });
 
-    this.registerAuthWhitelist([
-      '/plugin:com.msgbyte.simplenotify/webhook/callback',
-    ]);
+    this.registerAuthWhitelist(['/webhook/callback']);
   }
 
   protected onInited(): void {

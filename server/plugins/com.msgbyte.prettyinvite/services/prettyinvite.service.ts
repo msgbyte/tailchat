@@ -68,7 +68,7 @@ class PrettyinviteService extends TcService {
       },
     });
 
-    this.registerAuthWhitelist(['/plugin:com.msgbyte.prettyinvite/badge']);
+    this.registerAuthWhitelist(['/badge']);
   }
 
   async badge(

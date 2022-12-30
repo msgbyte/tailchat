@@ -42,7 +42,7 @@ class ConfigService extends TcService {
       },
     });
 
-    this.registerAuthWhitelist(['/config/client']);
+    this.registerAuthWhitelist(['/client']);
   }
 
   /**

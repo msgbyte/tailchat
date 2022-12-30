@@ -285,15 +285,15 @@ export abstract class TcService extends Service {
 
   /**
    * 注册跳过token鉴权的路由地址
-   * @param urls 鉴权路由
-   * @example "/user/login"
+   * @param urls 鉴权路由 会自动添加 serviceName 前缀
+   * @example "/login"
    */
   registerAuthWhitelist(urls: string[]) {
     this.waitForServices('gateway').then(() => {
       this.broker.broadcast(
         'gateway.auth.addWhitelists',
         {
-          urls,
+          urls: urls.map((url) => `/${this.serviceName}${url}`),
         },
         'gateway'
       );

@@ -24,7 +24,7 @@ class OpenBotService extends TcService {
       visibility: 'public',
     });
 
-    this.registerAuthWhitelist(['/openapi/bot/login']);
+    this.registerAuthWhitelist(['/bot/login']);
   }
 
   /**

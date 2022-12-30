@@ -201,7 +201,7 @@ class UserService extends TcService {
       visibility: 'public',
     });
 
-    this.registerAuthWhitelist(['/user/forgetPassword', '/user/resetPassword']);
+    this.registerAuthWhitelist(['/forgetPassword', '/resetPassword']);
   }
 
   /**
