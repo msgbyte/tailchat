@@ -5,6 +5,12 @@ import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 
 /**
+ * 距离顶部触发加载更多的 buffer
+ * 并处理在某些场景下计算位置会少1px导致无法正确触发加载的问题
+ */
+const topTriggerBuffer = 100;
+
+/**
  * 没有虚拟化版本的聊天列表
  */
 export const NormalMessageList: React.FC<MessageListProps> = React.memo(
@@ -42,8 +48,8 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         // 滚动到最底部
         lockRef.current = false;
       } else if (
-        -containerRef.current.scrollTop + containerRef.current.clientHeight ===
-        containerRef.current.scrollHeight
+        -containerRef.current.scrollTop + containerRef.current.clientHeight >=
+        containerRef.current.scrollHeight - topTriggerBuffer
       ) {
         // 滚动条碰触到最顶部
         props.onLoadMore();

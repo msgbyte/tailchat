@@ -17,6 +17,7 @@ import {
   t,
   useAsyncRequest,
   useChatBoxContext,
+  useMemoizedFn,
 } from '../..';
 import { MessageHelper } from '../../utils/message-helper';
 import { ChatConverseType } from '../../model/converse';
@@ -154,7 +155,7 @@ export function useConverseMessage(context: ConverseContext) {
   }, [converseId, reconnectNum, currentUserId]);
 
   // 加载更多消息
-  const [{ loading: isLoadingMore }, handleFetchMoreMessage] =
+  const [{ loading: isLoadingMore }, _handleFetchMoreMessage] =
     useAsyncRequest(async () => {
       const firstMessageId = _get(messages, [0, '_id']);
       if (!isValidStr(firstMessageId)) {
@@ -176,6 +177,18 @@ export function useConverseMessage(context: ConverseContext) {
         })
       );
     }, [converseId, hasMoreMessage, _get(messages, [0, '_id'])]);
+
+  /**
+   * 加载更多
+   * 同一时间只能请求一次
+   */
+  const handleFetchMoreMessage = useMemoizedFn(async () => {
+    if (isLoadingMore) {
+      return;
+    }
+
+    await _handleFetchMoreMessage();
+  });
 
   const handleSendMessage = useHandleSendMessage(context);
 
