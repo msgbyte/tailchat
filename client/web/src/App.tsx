@@ -20,13 +20,29 @@ import isElectron from 'is-electron';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
-const MainRoute = Loadable(() => import('./routes/Main'));
+const MainRoute = Loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'main' */ /* webpackPreload: true */ './routes/Main'
+    )
+);
 
-const EntryRoute = Loadable(() => import('./routes/Entry'));
+const EntryRoute = Loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'entry' */ /* webpackPreload: true */ './routes/Entry'
+    )
+);
 
 const PanelRoute = Loadable(() => import('./routes/Panel'));
 
-const InviteRoute = Loadable(() => import('./routes/Invite'));
+const InviteRoute = Loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'invite' */ /* webpackPreload: true */
+      './routes/Invite'
+    )
+);
 
 const AppProvider: React.FC<PropsWithChildren> = React.memo((props) => {
   return (
