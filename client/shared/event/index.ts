@@ -14,6 +14,11 @@ export interface SharedEventMap {
   loginSuccess: (userInfo: UserBaseInfo) => void;
 
   /**
+   * app加载成功
+   */
+  appLoaded: () => void;
+
+  /**
    * 修改配色方案
    */
   loadColorScheme: (schemeName: string) => void;

@@ -50,6 +50,13 @@ try {
       temporary: userInfo.temporary,
     });
   });
+
+  sharedEvent.on('appLoaded', () => {
+    // 上报加载耗时
+    posthog.capture('App Loaded', {
+      usage: performance.now(),
+    });
+  });
 } catch (err) {
   console.error(err);
 }

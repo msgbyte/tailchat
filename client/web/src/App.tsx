@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, Suspense } from 'react';
+import React, { PropsWithChildren, Suspense, useEffect } from 'react';
 import {
   BrowserRouter,
   HashRouter,
@@ -6,7 +6,12 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { TcProvider, useColorScheme, useLanguage } from 'tailchat-shared';
+import {
+  sharedEvent,
+  TcProvider,
+  useColorScheme,
+  useLanguage,
+} from 'tailchat-shared';
 import clsx from 'clsx';
 import { Loadable } from './components/Loadable';
 import { ConfigProvider as AntdProvider } from 'antd';
@@ -94,6 +99,10 @@ AppHeader.displayName = 'AppHeader';
 
 export const App: React.FC = React.memo(() => {
   useRecordMeasure('appRenderStart');
+
+  useEffect(() => {
+    sharedEvent.emit('appLoaded');
+  }, []);
 
   return (
     <AppProvider>
