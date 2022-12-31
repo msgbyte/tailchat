@@ -408,7 +408,7 @@ class GroupService extends TcService {
 
     const group: Group = await this.transformDocuments(ctx, {}, doc);
 
-    this.notifyGroupInfoUpdate(ctx, group);
+    this.notifyGroupInfoUpdate(ctx, group); // 推送变更
     this.unicastNotify(ctx, userId, 'add', group);
 
     const textPanelIds = this.getGroupTextPanelIds(group);
@@ -993,10 +993,14 @@ class GroupService extends TcService {
     group: Group
   ): Promise<Group> {
     const groupId = String(group._id);
-    const json = await this.transformDocuments(ctx, {}, group);
+    let json = group;
+    if (_.isPlainObject(group) === false) {
+      // 当传入的数据为group doc时
+      json = await this.transformDocuments(ctx, {}, group);
+    }
 
     this.cleanGroupInfoCache(groupId);
-    this.roomcastNotify(ctx, groupId, 'updateInfo', json);
+    await this.roomcastNotify(ctx, groupId, 'updateInfo', json);
 
     return json;
   }
