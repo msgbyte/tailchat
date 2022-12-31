@@ -232,10 +232,19 @@ export abstract class TcService extends Service {
         ctx: Context<unknown, { language: string; t: TFunction }>
       ) {
         // 调用时生成t函数
-        ctx.meta.t = (key: string, defaultValue?: string) =>
-          t(key, defaultValue, {
+        ctx.meta.t = (key: string, defaultValue?: string | object) => {
+          if (typeof defaultValue === 'object') {
+            // 如果是参数对象的话
+            return t(key, {
+              ...defaultValue,
+              lng: ctx.meta.language,
+            });
+          }
+
+          return t(key, defaultValue, {
             lng: ctx.meta.language,
           });
+        };
         return handler.call(this, ctx);
       },
     };
