@@ -156,9 +156,14 @@ class GroupService extends TcService {
       groupId: String(groupId),
     });
 
+    const creatorInfo = await call(ctx).getUserInfo(String(invite.creator));
+
     await call(ctx).addGroupSystemMessage(
       String(groupId),
-      `${ctx.meta.user.nickname} 通过邀请码加入群组`
+      t('{{nickname}} 通过 {{creator}} 的邀请码加入群组', {
+        nickname: ctx.meta.user.nickname,
+        creator: creatorInfo.nickname,
+      })
     );
   }
 

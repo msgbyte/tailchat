@@ -31,6 +31,7 @@
   "kb8be9969": "撤回失败, 没有权限",
   "kba207c17": "没有查看权限",
   "kbe83caeb": "过于频繁的请求，请 10 分钟以后再试",
+  "kc4b77045": "{{nickname}} 通过 {{creator}} 的邀请码加入群组",
   "kcb07c88f": "个人消息订阅已创建, subscribeId: {{subscribeId}}",
   "kcfcea753": "没有找到该面板",
   "kd08fb1bf": "无法获取到机器人ID",
