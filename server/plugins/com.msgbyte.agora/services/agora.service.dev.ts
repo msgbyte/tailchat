@@ -75,7 +75,7 @@ class AgoraService extends TcService {
       !this.serverCustomerSecret
     ) {
       this.logger.warn(
-        '声网服务启动失败, 缺少必要的环境变量。AGORA_APP_ID, AGORA_APP_CERT, AGORA_CUSTOMER_KEY, AGORA_CUSTOMER_SECRET'
+        '声网服务启动失败, 缺少必要的环境变量: AGORA_APP_ID, AGORA_APP_CERT, AGORA_CUSTOMER_KEY, AGORA_CUSTOMER_SECRET'
       );
       return;
     }

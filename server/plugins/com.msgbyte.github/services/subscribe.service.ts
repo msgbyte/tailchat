@@ -190,10 +190,10 @@ class GithubSubscribeService extends TcService {
 
       let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了PR请求:\n网址: ${url}`;
       if (event.action === 'opened') {
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了PR请求:\n${title}\n[markdown]${body}[/markdown]\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了PR请求:\n${title}\n[markdown]${body}[/markdown]\n网址: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了PR请求:\n${title}\n[markdown]${comment.body}[/markdown]\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了PR请求:\n${title}\n[markdown]${comment.body}[/markdown]\n网址: ${url}`;
       } else if (event.action === 'closed') {
         message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了PR请求:\n${title}\n\n网址: ${url}`;
       }
@@ -210,10 +210,10 @@ class GithubSubscribeService extends TcService {
       if (event.action === 'opened') {
         // @ts-ignore 这里不知道为什么判断issue为never 跳过
         const body = event.issue.body;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了Issue:\n${title}\n[markdown]${body}[/markdown]\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了Issue:\n${title}\n[markdown]${body}[/markdown]\n网址: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了Issue:\n${title}\n回复内容:[markdown]${comment.body}[/markdown]\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了Issue:\n${title}\n回复内容:[markdown]${comment.body}[/markdown]\n网址: ${url}`;
       } else if (event.action === 'closed') {
         message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了Issue:\n${title}\n\n网址: ${url}`;
       }
