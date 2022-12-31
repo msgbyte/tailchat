@@ -37,21 +37,18 @@ export function initNotify() {
               const registration: ServiceWorkerRegistration | null =
                 getServiceWorkerRegistration();
 
+              const title = `${Translate.from} ${nickname}`;
+              const options: NotificationOptions = {
+                body: content,
+                icon,
+                tag: 'tailchat-message',
+                renotify: true,
+              };
               if (registration) {
-                registration.showNotification(`${Translate.from} ${nickname}`, {
-                  body: content,
-                  icon,
-                  tag: 'tailchat-message',
-                  renotify: true,
-                });
+                registration.showNotification(title, options);
               } else {
                 // fallback
-                new Notification(`${Translate.from} ${nickname}`, {
-                  body: content,
-                  icon,
-                  tag: 'tailchat-message',
-                  renotify: true,
-                });
+                new Notification(title, options);
               }
             }
           );
