@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { buildMessageItemRow } from './Item';
 import type { MessageListProps } from './types';
 import {
@@ -11,11 +11,17 @@ import {
   useMemoizedFn,
   useSharedEventHandler,
 } from 'tailchat-shared';
+import { ScrollToBottom } from './ScrollToBottom';
 
 const PREPEND_OFFSET = 10 ** 7;
 
 const virtuosoStyle: React.CSSProperties = {
   height: '100%',
+};
+
+const overscan = {
+  main: 1000,
+  reverse: 1000,
 };
 
 /**
@@ -25,15 +31,17 @@ const virtuosoStyle: React.CSSProperties = {
 export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const listRef = useRef<VirtuosoHandle>(null);
+    const scrollerRef = useRef<HTMLElement>();
     const numItemsPrepended = usePrependedMessagesCount(props.messages);
 
-    useSharedEventHandler('sendMessage', () => {
-      listRef.current?.scrollToIndex({
-        index: 'LAST',
-        align: 'end',
+    const scrollToBottom = useMemoizedFn(() => {
+      listRef.current?.scrollTo({
+        top: scrollerRef.current?.scrollHeight,
         behavior: 'smooth',
       });
     });
+
+    useSharedEventHandler('sendMessage', scrollToBottom);
 
     const handleLoadMore = useMemoizedFn(() => {
       if (props.isLoadingMore) {
@@ -71,27 +79,38 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
       return buildMessageItemRow(props.messages, index);
     });
 
+    const [showScrollToBottom, setShowScrollToBottom] = useState(false);
+    const atBottomStateChange = useMemoizedFn((atBottom: boolean) => {
+      if (atBottom) {
+        setShowScrollToBottom(false);
+      } else {
+        setShowScrollToBottom(true);
+      }
+    });
+
     return (
       <div className="flex-1">
         <Virtuoso
           style={virtuosoStyle}
           ref={listRef}
+          scrollerRef={(ref) => (scrollerRef.current = ref as HTMLElement)}
           firstItemIndex={PREPEND_OFFSET - numItemsPrepended}
           initialTopMostItemIndex={Math.max(props.messages.length - 1, 0)}
           computeItemKey={computeItemKey}
           totalCount={props.messages.length}
-          overscan={{
-            main: 1000,
-            reverse: 1000,
-          }}
+          overscan={overscan}
           itemContent={itemContent}
           alignToBottom={true}
           startReached={handleLoadMore}
+          atBottomStateChange={atBottomStateChange}
           followOutput={followOutput}
           defaultItemHeight={25}
           atTopThreshold={100}
           atBottomThreshold={40}
+          useWindowScroll={false}
         />
+
+        {showScrollToBottom && <ScrollToBottom onClick={scrollToBottom} />}
       </div>
     );
   }

@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMemoizedFn, useSharedEventHandler } from 'tailchat-shared';
 import { ChatMessageHeader } from './ChatMessageHeader';
 import { buildMessageItemRow } from './Item';
+import { ScrollToBottom } from './ScrollToBottom';
 import type { MessageListProps } from './types';
 
 /**
@@ -9,6 +10,7 @@ import type { MessageListProps } from './types';
  * 并处理在某些场景下计算位置会少1px导致无法正确触发加载的问题
  */
 const topTriggerBuffer = 100;
+const bottomTriggerBuffer = 40;
 
 /**
  * 没有虚拟化版本的聊天列表
@@ -17,6 +19,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
   (props) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lockRef = useRef(false);
+    const [showScrollToBottom, setShowScrollToBottom] = useState(false);
 
     const scrollToBottom = useMemoizedFn(() => {
       containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -44,9 +47,10 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         return;
       }
 
-      if (containerRef.current.scrollTop === 0) {
+      if (-containerRef.current.scrollTop <= bottomTriggerBuffer) {
         // 滚动到最底部
         lockRef.current = false;
+        setShowScrollToBottom(false);
       } else if (
         -containerRef.current.scrollTop + containerRef.current.clientHeight >=
         containerRef.current.scrollHeight - topTriggerBuffer
@@ -57,6 +61,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         // 滚动在中间
         // 锁定位置不自动滚动
         lockRef.current = true;
+        setShowScrollToBottom(true);
       }
     }, [props.messages]);
 
@@ -71,6 +76,8 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
             buildMessageItemRow(arr, index)
           )}
         </div>
+
+        {showScrollToBottom && <ScrollToBottom onClick={scrollToBottom} />}
 
         {/* 因为是倒过来的，因此要前面的要放在后面 */}
         {props.title && !props.hasMoreMessage && (
