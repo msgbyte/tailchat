@@ -1,8 +1,17 @@
 import { notification } from 'antd';
 import React from 'react';
 import _once from 'lodash/once';
-import { t } from 'tailchat-shared';
+import { showErrorToasts, t } from 'tailchat-shared';
 import { UpdateNotificationBtn } from '@/components/UpdateNotificationBtn';
+
+type BeforeInstallPromptEvent = Event & {
+  readonly platforms: Array<string>;
+  readonly userChoice: Promise<{
+    outcome: 'accepted' | 'dismissed';
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+};
 
 /**
  * 弹出更新提示框
@@ -20,6 +29,7 @@ const handleShowUpdateTip = _once(() => {
 });
 
 let _serviceWorkerRegistration: ServiceWorkerRegistration | null = null;
+let beforeinstallprompt: BeforeInstallPromptEvent;
 
 /**
  * 处理registration相关任务和状态
@@ -77,6 +87,10 @@ export function installServiceWorker() {
           console.log('SW registration failed: ', registrationError);
         });
     });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      beforeinstallprompt = e as any;
+    });
   }
 }
 
@@ -85,4 +99,20 @@ export function installServiceWorker() {
  */
 export function getServiceWorkerRegistration(): ServiceWorkerRegistration | null {
   return _serviceWorkerRegistration;
+}
+
+/**
+ * 显示pwa安装按钮
+ */
+export function showInstallPrompt() {
+  if (!beforeinstallprompt) {
+    showErrorToasts(t('无法安装'));
+    return;
+  }
+
+  beforeinstallprompt.prompt();
+}
+
+export function canInstallprompt() {
+  return !!beforeinstallprompt;
 }

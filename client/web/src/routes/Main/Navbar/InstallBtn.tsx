@@ -1,14 +1,14 @@
-import { usePwa } from '@/hooks/usePwa';
-import React from 'react';
+import { canInstallprompt, showInstallPrompt } from '@/utils/sw-helper';
+import React, { useEffect, useState } from 'react';
 import { Icon } from 'tailchat-design';
 
 /**
  * 安装按钮
  */
 export const InstallBtn: React.FC = React.memo(() => {
-  const { canInstallprompt, showInstallPrompt } = usePwa();
+  const canInstall = useCanInstallPwa();
 
-  if (!canInstallprompt) {
+  if (!canInstall) {
     return null;
   }
 
@@ -21,3 +21,26 @@ export const InstallBtn: React.FC = React.memo(() => {
   );
 });
 InstallBtn.displayName = 'InstallBtn';
+
+function useCanInstallPwa() {
+  const [canInstall, setCanInstall] = useState(false);
+
+  useEffect(() => {
+    if (canInstallprompt()) {
+      setCanInstall(true);
+      return;
+    }
+
+    const handleEvent = (e: any) => {
+      setCanInstall(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleEvent);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleEvent);
+    };
+  }, []);
+
+  return canInstall;
+}
