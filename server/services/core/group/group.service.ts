@@ -190,6 +190,12 @@ class GroupService extends TcService {
         muteMs: 'number',
       },
     });
+    this.registerAction('deleteGroupMember', this.deleteGroupMember, {
+      params: {
+        groupId: 'string',
+        memberId: 'string',
+      },
+    });
   }
 
   /**
@@ -966,6 +972,50 @@ class GroupService extends TcService {
           .humanize()}`
       );
     }
+  }
+
+  async deleteGroupMember(
+    ctx: TcContext<{
+      groupId: string;
+      memberId: string;
+    }>
+  ) {
+    const { groupId, memberId } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.manageUser]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    if (String(memberId) === String(userId)) {
+      throw new Error(t('不允许踢出自己'));
+    }
+
+    const group = await this.adapter.model.findByIdAndUpdate(
+      groupId,
+      {
+        $pull: {
+          members: {
+            userId: String(memberId),
+          },
+        },
+      },
+      { new: true }
+    );
+
+    this.notifyGroupInfoUpdate(ctx, group);
+
+    const memberInfo = await call(ctx).getUserInfo(memberId);
+    await call(ctx).addGroupSystemMessage(
+      groupId,
+      `${ctx.meta.user.nickname} 将 ${memberInfo.nickname} 移出了本群组`
+    );
   }
 
   /**

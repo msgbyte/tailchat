@@ -44,6 +44,9 @@ describe('Test "group" service', () => {
         if (actionName === 'group.getUserAllPermissions') {
           return [PERMISSION.core.owner];
         }
+        if (actionName === 'user.getUserInfo') {
+          return { nickname: 'test-nickname' };
+        }
       },
     });
 
@@ -547,5 +550,51 @@ describe('Test "group" service', () => {
     expect(new Date(finalGroup?.members[0].muteUntil ?? 0).valueOf()).toBe(
       muteUntil
     );
+  });
+
+  test('Test "group.deleteGroupMember"', async () => {
+    const userId = new Types.ObjectId();
+    const userId2 = new Types.ObjectId();
+    const testGroup = await insertTestData(
+      createTestGroup(userId, {
+        members: [
+          {
+            roles: [],
+            userId: userId,
+          },
+          {
+            roles: [],
+            userId: userId2,
+          },
+        ],
+      })
+    );
+
+    const beforeGroup = await service.adapter.model.findById(testGroup._id);
+
+    expect(beforeGroup.members.map((m) => String(m.userId))).toEqual([
+      String(userId),
+      String(userId2),
+    ]);
+
+    await broker.call(
+      'group.deleteGroupMember',
+      {
+        groupId: String(testGroup._id),
+        memberId: String(userId2),
+      },
+      {
+        meta: {
+          userId: String(userId),
+          user: { nickname: 'foo' },
+        },
+      }
+    );
+
+    const finalGroup = await service.adapter.model.findById(testGroup._id);
+
+    expect(finalGroup.members.map((m) => String(m.userId))).toEqual([
+      String(userId),
+    ]);
   });
 });
