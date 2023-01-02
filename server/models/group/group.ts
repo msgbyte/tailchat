@@ -10,7 +10,14 @@ import {
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import _ from 'lodash';
 import { Types } from 'mongoose';
-import { allPermission, GroupPanelType } from 'tailchat-server-sdk';
+import {
+  allPermission,
+  call,
+  GroupPanelType,
+  NoPermissionError,
+  PERMISSION,
+  TcContext,
+} from 'tailchat-server-sdk';
 import { User } from '../user/user';
 
 class GroupMember {
@@ -296,8 +303,11 @@ export class Group extends TimeStamps implements Base {
    *
    * 带权限验证
    */
-  static async updateGroupMemberField<K extends keyof GroupMember>(
+  static async updateGroupMemberField<
+    K extends keyof Pick<GroupMember, 'roles' | 'muteUntil'>
+  >(
     this: ReturnModelType<typeof Group>,
+    ctx: TcContext,
     groupId: string,
     memberId: string,
     fieldName: K,
@@ -305,14 +315,33 @@ export class Group extends TimeStamps implements Base {
     operatorUserId: string
   ): Promise<Group> {
     const group = await this.findById(groupId);
+    const t = ctx.meta.t;
 
-    if (String(group.owner) !== operatorUserId) {
-      throw new Error('没有操作权限');
+    if (fieldName === 'roles') {
+      // 检查操作用户是否有管理角色的权限
+      const [hasRolePermission] = await call(ctx).checkUserPermissions(
+        groupId,
+        operatorUserId,
+        [PERMISSION.core.manageRoles]
+      );
+      if (!hasRolePermission) {
+        throw new NoPermissionError(t('没有操作角色权限'));
+      }
+    } else {
+      // 检查操作用户是否有管理用户权限
+      const [hasUserPermission] = await call(ctx).checkUserPermissions(
+        groupId,
+        operatorUserId,
+        [PERMISSION.core.manageUser]
+      );
+      if (!hasUserPermission) {
+        throw new NoPermissionError(t('没有操作用户权限'));
+      }
     }
 
     const member = group.members.find((m) => String(m.userId) === memberId);
     if (!member) {
-      throw new Error('没有找到该成员');
+      throw new Error(t('没有找到该成员'));
     }
 
     if (typeof fieldValue === 'function') {

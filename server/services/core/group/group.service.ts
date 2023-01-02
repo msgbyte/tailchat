@@ -487,20 +487,12 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, memberIds, roles } = ctx.params;
-    const { t, userId } = ctx.meta;
-
-    const [hasPermission] = await call(ctx).checkUserPermissions(
-      groupId,
-      userId,
-      [PERMISSION.core.manageRoles]
-    );
-    if (!hasPermission) {
-      throw new NoPermissionError(t('没有操作权限'));
-    }
+    const { userId } = ctx.meta;
 
     await Promise.all(
       memberIds.map((memberId) =>
         this.adapter.model.updateGroupMemberField(
+          ctx,
           groupId,
           memberId,
           'roles',
@@ -532,20 +524,12 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, memberIds, roles } = ctx.params;
-    const { t, userId } = ctx.meta;
-
-    const [hasPermission] = await call(ctx).checkUserPermissions(
-      groupId,
-      userId,
-      [PERMISSION.core.manageRoles]
-    );
-    if (!hasPermission) {
-      throw new NoPermissionError(t('没有操作权限'));
-    }
+    const { userId } = ctx.meta;
 
     await Promise.all(
       memberIds.map((memberId) =>
         this.adapter.model.updateGroupMemberField(
+          ctx,
           groupId,
           memberId,
           'roles',
@@ -954,19 +938,10 @@ class GroupService extends TcService {
     const { groupId, memberId, muteMs } = ctx.params;
     const userId = ctx.meta.userId;
     const language = ctx.meta.language;
-    const t = ctx.meta.t;
     const isUnmute = muteMs < 0;
 
-    const [hasPermission] = await call(ctx).checkUserPermissions(
-      groupId,
-      userId,
-      [PERMISSION.core.manageUser]
-    );
-    if (!hasPermission) {
-      throw new NoPermissionError(t('没有操作权限'));
-    }
-
     const group = await this.adapter.model.updateGroupMemberField(
+      ctx,
       groupId,
       memberId,
       'muteUntil',
