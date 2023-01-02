@@ -394,3 +394,15 @@ export async function muteGroupMember(
     muteMs,
   });
 }
+
+/**
+ * 移出群组成员
+ * @param groupId 群组ID
+ * @param memberId 成员ID
+ */
+export async function deleteGroupMember(groupId: string, memberId: string) {
+  await request.post('/api/group/deleteGroupMember', {
+    groupId,
+    memberId,
+  });
+}

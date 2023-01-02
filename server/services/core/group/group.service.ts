@@ -466,19 +466,7 @@ class GroupService extends TcService {
 
       const group: Group = await this.transformDocuments(ctx, {}, doc);
 
-      // 先将自己退出房间， 然后再进行房间级别通知
-      await ctx.call('gateway.leaveRoom', {
-        roomIds: [
-          groupId,
-          ...group.panels
-            .filter((p) => p.type === GroupPanelType.TEXT)
-            .map((p) => p.id),
-        ], // 离开群组和所有面板房间
-        userId,
-      });
-
-      this.unicastNotify(ctx, userId, 'remove', { groupId });
-      this.notifyGroupInfoUpdate(ctx, group);
+      await this.memberLeaveGroup(ctx, group, userId);
     }
   }
 
@@ -984,6 +972,12 @@ class GroupService extends TcService {
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
 
+    // 检查是否在踢自己
+    if (String(memberId) === String(userId)) {
+      throw new Error(t('不允许踢出自己'));
+    }
+
+    // 检查是否有权限
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
       userId,
@@ -993,8 +987,10 @@ class GroupService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
-    if (String(memberId) === String(userId)) {
-      throw new Error(t('不允许踢出自己'));
+    // 检查是否踢出了不该踢出的人
+    const groupInfo = await call(ctx).getGroupInfo(groupId);
+    if (String(memberId) === String(groupInfo.owner)) {
+      throw new Error(t('不允许踢出群组OP'));
     }
 
     const group = await this.adapter.model.findByIdAndUpdate(
@@ -1009,13 +1005,41 @@ class GroupService extends TcService {
       { new: true }
     );
 
-    this.notifyGroupInfoUpdate(ctx, group);
+    await this.memberLeaveGroup(ctx, group, memberId);
 
     const memberInfo = await call(ctx).getUserInfo(memberId);
     await call(ctx).addGroupSystemMessage(
       groupId,
       `${ctx.meta.user.nickname} 将 ${memberInfo.nickname} 移出了本群组`
     );
+  }
+
+  /**
+   * 退出群组流程
+   * 用于踢出群组成员和主动退出群组
+   *
+   * 先将自己退出房间， 然后再进行房间级别通知
+   */
+  private async memberLeaveGroup(
+    ctx: TcContext,
+    group: Group,
+    memberId: string
+  ) {
+    const groupId = String(group._id);
+
+    await ctx.call('gateway.leaveRoom', {
+      roomIds: [
+        groupId,
+        ...group.panels
+          .filter((p) => p.type === GroupPanelType.TEXT)
+          .map((p) => p.id),
+      ], // 离开群组和所有面板房间
+      memberId,
+    });
+    await Promise.all([
+      this.unicastNotify(ctx, memberId, 'remove', { groupId }),
+      this.notifyGroupInfoUpdate(ctx, group),
+    ]);
   }
 
   /**

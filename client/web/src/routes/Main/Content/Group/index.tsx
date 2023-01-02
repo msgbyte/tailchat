@@ -1,9 +1,9 @@
-import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { Problem } from '@/components/Problem';
 import { SplitPanel } from '@/components/SplitPanel';
 import { GroupIdContextProvider } from '@/context/GroupIdContext';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
-import { isValidStr, useGroupInfo } from 'tailchat-shared';
+import { isValidStr, t, useGroupInfo } from 'tailchat-shared';
 import { PageContent } from '../PageContent';
 import { GroupPanelRender, GroupPanelRoute } from './Panel';
 import { GroupPanelRedirect } from './PanelRedirect';
@@ -16,7 +16,7 @@ export const Group: React.FC = React.memo(() => {
   const groupInfo = useGroupInfo(groupId);
 
   if (!groupInfo) {
-    return <LoadingSpinner />;
+    return <Problem text={t('群组未找到')} />;
   }
 
   const pinnedPanelId = groupInfo.pinnedPanelId;
