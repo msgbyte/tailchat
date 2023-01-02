@@ -9,12 +9,13 @@ import {
   GroupMember,
   humanizeMsDuration,
   model,
+  PERMISSION,
   showToasts,
   t,
   useAsyncRequest,
   useCachedOnlineStatus,
   useGroupInfo,
-  useIsGroupOwner,
+  useHasGroupPermission,
   UserBaseInfo,
   useSearch,
   useUserInfoList,
@@ -95,7 +96,9 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const membersOnlineStatus = useCachedOnlineStatus(
     members.map((m) => m.userId)
   );
-  const isGroupOwner = useIsGroupOwner(groupId);
+  const [allowManageUser] = useHasGroupPermission(groupId, [
+    PERMISSION.core.manageUser,
+  ]);
 
   const {
     searchText,
@@ -137,7 +140,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const renderUser = (member: UserBaseInfo) => {
     const hasMute = getMembersHasMute(members, member._id);
 
-    if (isGroupOwner) {
+    if (allowManageUser) {
       const menu: MenuProps = {
         items: hasMute
           ? [

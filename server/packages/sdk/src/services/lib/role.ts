@@ -8,6 +8,7 @@ export const PERMISSION = {
     invite: 'core.invite',
     unlimitedInvite: 'core.unlimitedInvite',
     groupDetail: 'core.groupDetail',
+    manageUser: 'core.manageUser',
     managePanel: 'core.managePanel',
     manageInvite: 'core.manageInvite',
     manageRoles: 'core.manageRoles',
