@@ -7,8 +7,9 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --kill-others npm:dev:main npm:dev:plugins",
+    "dev": "concurrently --kill-others npm:dev:main npm:dev:sdk npm:dev:plugins",
     "dev:main": "ts-node ./runner.ts",
+    "dev:sdk": "cd packages/sdk && pnpm watch",
     "dev:plugins": "pnpm run --filter \"./plugins/*\" build:web:watch",
     "debug": "node --inspect -r ts-node/register ./runner.ts",
     "build": "ts-node scripts/build.ts",
