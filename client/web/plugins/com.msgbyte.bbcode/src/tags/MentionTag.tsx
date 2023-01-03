@@ -1,3 +1,4 @@
+import { UserName } from '@capital/component';
 import React from 'react';
 import type { TagProps } from '../bbcode/type';
 
@@ -8,7 +9,7 @@ export const MentionTag: React.FC<TagProps> = React.memo((props) => {
 
   return (
     <span className="plugin-bbcode-mention-tag" data-userid={userId}>
-      @{userName}
+      @{userName ?? <UserName userId={userId} />}
     </span>
   );
 });
