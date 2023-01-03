@@ -139,6 +139,12 @@ export class Group extends TimeStamps implements Base {
   fallbackPermissions: string[];
 
   /**
+   * 群组的配置信息
+   */
+  @prop({ default: () => ({}) })
+  config: object;
+
+  /**
    * 创建群组
    */
   static async createGroup(

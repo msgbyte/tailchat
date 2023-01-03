@@ -7,8 +7,9 @@ import { UserProfileContainer } from '../UserProfileContainer';
 
 export const GroupUserPopover: React.FC<{
   userInfo: UserBaseInfo;
+  hideDiscriminator?: boolean;
 }> = React.memo((props) => {
-  const { userInfo } = props;
+  const { userInfo, hideDiscriminator = false } = props;
   const userExtra = userInfo.extra ?? {};
 
   useEffect(() => {
@@ -24,7 +25,9 @@ export const GroupUserPopover: React.FC<{
       <UserProfileContainer userInfo={userInfo}>
         <div className="text-xl">
           <span className="font-semibold">{userInfo.nickname}</span>
-          <span className="opacity-60 ml-1">#{userInfo.discriminator}</span>
+          {!hideDiscriminator && (
+            <span className="opacity-60 ml-1">#{userInfo.discriminator}</span>
+          )}
         </div>
 
         <div>

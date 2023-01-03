@@ -39,6 +39,7 @@ export const PERMISSION = {
     invite: 'core.invite',
     unlimitedInvite: 'core.unlimitedInvite',
     groupDetail: 'core.groupDetail',
+    groupConfig: 'core.groupConfig',
     manageUser: 'core.manageUser',
     managePanel: 'core.managePanel',
     manageInvite: 'core.manageInvite',
@@ -70,6 +71,12 @@ export const getPermissionList = (): PermissionItemType[] => [
     key: PERMISSION.core.groupDetail,
     title: t('查看群组详情'),
     desc: t('允许成员查看群组详情'),
+    default: false,
+  },
+  {
+    key: PERMISSION.core.groupConfig,
+    title: t('修改群组配置'),
+    desc: t('允许成员修改群组配置'),
     default: false,
   },
   {

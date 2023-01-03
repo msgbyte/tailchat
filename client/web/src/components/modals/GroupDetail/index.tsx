@@ -13,6 +13,7 @@ import { GroupPanel } from './Panel';
 import { GroupRole } from './Role';
 import { GroupSummary } from './Summary';
 import _compact from 'lodash/compact';
+import { GroupConfig } from './Config';
 
 interface SettingsViewProps {
   groupId: string;
@@ -28,12 +29,17 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
     },
     [props.onClose]
   );
-  const [allowManagePanel, allowManageInvite, allowManageRoles] =
-    useHasGroupPermission(groupId, [
-      PERMISSION.core.managePanel,
-      PERMISSION.core.manageInvite,
-      PERMISSION.core.manageRoles,
-    ]);
+  const [
+    allowManageConfig,
+    allowManagePanel,
+    allowManageInvite,
+    allowManageRoles,
+  ] = useHasGroupPermission(groupId, [
+    PERMISSION.core.groupConfig,
+    PERMISSION.core.managePanel,
+    PERMISSION.core.manageInvite,
+    PERMISSION.core.manageRoles,
+  ]);
 
   const menu: SidebarViewMenuType[] = useMemo(() => {
     // 内置
@@ -46,6 +52,11 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('概述'),
             content: <GroupSummary groupId={groupId} />,
+          },
+          allowManageConfig && {
+            type: 'item',
+            title: t('配置'),
+            content: <GroupConfig groupId={groupId} />,
           },
           allowManagePanel && {
             type: 'item',

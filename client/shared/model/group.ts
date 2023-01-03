@@ -6,6 +6,13 @@ export enum GroupPanelType {
   PLUGIN = 2,
 }
 
+export const groupConfigNames = [
+  // 隐藏群组成员标识位
+  'hideGroupMemberDiscriminator',
+] as const;
+
+export type GroupConfigNames = typeof groupConfigNames[number];
+
 export interface GroupMember {
   roles: string[]; // 角色组
   userId: string;
@@ -51,6 +58,7 @@ export interface GroupInfo {
   members: GroupMember[];
   panels: GroupPanel[];
   roles: GroupRole[];
+  config?: Partial<Record<GroupConfigNames, any>>;
   /**
    * 所有人的权限列表
    * 为群组中的最低权限
@@ -132,6 +140,24 @@ export async function modifyGroupField(
     groupId,
     fieldName,
     fieldValue,
+  });
+}
+
+/**
+ * 修改群组配置
+ * @param groupId 群组ID
+ * @param configName 要修改的群组属性
+ * @param configValue 要修改的属性的值
+ */
+export async function modifyGroupConfig(
+  groupId: string,
+  configName: GroupConfigNames,
+  configValue: unknown
+) {
+  await request.post('/api/group/updateGroupConfig', {
+    groupId,
+    configName,
+    configValue,
   });
 }
 

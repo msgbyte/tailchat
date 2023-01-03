@@ -66,6 +66,13 @@ class GroupService extends TcService {
         fieldValue: 'any',
       },
     });
+    this.registerAction('updateGroupConfig', this.updateGroupConfig, {
+      params: {
+        groupId: 'string',
+        configName: 'string',
+        configValue: 'any',
+      },
+    });
     this.registerAction('isGroupOwner', this.isGroupOwner, {
       params: {
         groupId: 'string',
@@ -349,6 +356,37 @@ class GroupService extends TcService {
     if (fieldName === 'fallbackPermissions') {
       await this.cleanGroupAllUserPermissionCache(groupId);
     }
+
+    this.notifyGroupInfoUpdate(ctx, group);
+  }
+
+  /**
+   * 修改群组配置
+   */
+  async updateGroupConfig(
+    ctx: TcContext<{
+      groupId: string;
+      configName: string;
+      configValue: unknown;
+    }>
+  ) {
+    const { groupId, configName, configValue } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.groupConfig]
+    );
+
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    const group = await this.adapter.model.findById(groupId).exec();
+    group.config[configName] = configValue;
+    await group.save();
 
     this.notifyGroupInfoUpdate(ctx, group);
   }

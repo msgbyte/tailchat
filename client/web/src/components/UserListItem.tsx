@@ -9,9 +9,10 @@ interface UserListItemProps {
   userId: string;
   popover?: PopoverProps['content'];
   actions?: React.ReactElement[];
+  hideDiscriminator?: boolean;
 }
 export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
-  const { actions = [] } = props;
+  const { actions = [], hideDiscriminator = false } = props;
   const userInfo = useCachedUserInfo(props.userId);
   const [isOnline] = useCachedOnlineStatus([props.userId]);
   const userName = userInfo.nickname;
@@ -38,9 +39,11 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
         </div>
         <div className="flex-1 text-gray-900 dark:text-white">
           <span>{userName}</span>
-          <span className="text-gray-500 dark:text-gray-300 opacity-0 group-hover:opacity-100">
-            #{userInfo.discriminator}
-          </span>
+          {!hideDiscriminator && (
+            <span className="text-gray-500 dark:text-gray-300 opacity-0 group-hover:opacity-100">
+              #{userInfo.discriminator}
+            </span>
+          )}
         </div>
         <Space>{actions}</Space>
       </Skeleton>

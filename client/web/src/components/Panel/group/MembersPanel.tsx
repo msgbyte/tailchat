@@ -150,6 +150,10 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     [groupId]
   );
 
+  const config = groupInfo?.config ?? {};
+  const hideGroupMemberDiscriminator =
+    config.hideGroupMemberDiscriminator ?? false;
+
   if (userInfoList.length === 0) {
     return <Skeleton />;
   }
@@ -230,7 +234,13 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
           <div>
             <UserListItem
               userId={member._id}
-              popover={<GroupUserPopover userInfo={member} />}
+              popover={
+                <GroupUserPopover
+                  userInfo={member}
+                  hideDiscriminator={hideGroupMemberDiscriminator}
+                />
+              }
+              hideDiscriminator={hideGroupMemberDiscriminator}
             />
           </div>
         </Dropdown>
@@ -240,7 +250,13 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         <UserListItem
           key={member._id}
           userId={member._id}
-          popover={<GroupUserPopover userInfo={member} />}
+          popover={
+            <GroupUserPopover
+              userInfo={member}
+              hideDiscriminator={hideGroupMemberDiscriminator}
+            />
+          }
+          hideDiscriminator={hideGroupMemberDiscriminator}
         />
       );
     }
