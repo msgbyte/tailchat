@@ -24,6 +24,7 @@
   "k82f5a5d4": "Password incorrect",
   "k89bf46fc": "Unable to recall messages from {{minutes}} minutes ago",
   "k986040de": "No group found",
+  "ka3eb52f8": "Call ended, duration: {{num}} minutes",
   "ka8b712f7": "Email already exists!",
   "kb143afe": "This data is not allowed to be modified",
   "kb32d3d62": "Anonymous",
@@ -47,5 +48,6 @@
   "ke82b4383": "You cannot send messages because you are banned",
   "ke99cd649": "No access to converse information permission",
   "ke9fabda8": "Token Invalid",
+  "kea5b4254": "This channel has opened a call",
   "kef3676e1": "The invitation code has expired"
 }

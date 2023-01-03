@@ -5,6 +5,7 @@ import { OwnVideoView, VideoView } from './VideoView';
 
 const Root = styled.div`
   height: 70vh;
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
 `;

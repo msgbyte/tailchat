@@ -979,12 +979,14 @@ importers:
       '@types/styled-components': ^5.1.26
       agora-rtc-react: ^1.1.3
       ahooks: ^3.7.4
+      lodash: ^4.17.21
       react: 18.2.0
       styled-components: ^5.3.6
       zustand: ^4.1.5
     dependencies:
       agora-rtc-react: 1.1.3_react@18.2.0
       ahooks: 3.7.4_react@18.2.0
+      lodash: 4.17.21
     devDependencies:
       '@types/styled-components': 5.1.26
       react: 18.2.0
@@ -13538,7 +13540,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+      styled-components: 5.3.6_react@18.2.0
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -32885,6 +32887,7 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: false
 
   /styled-components/5.3.6_mdz3marskokvq6744hhidi3r5a:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -32930,7 +32933,6 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}

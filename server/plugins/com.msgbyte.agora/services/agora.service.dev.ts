@@ -1,4 +1,9 @@
-import { DataNotFoundError, TcContext } from 'tailchat-server-sdk';
+import {
+  DataNotFoundError,
+  MessageStruct,
+  TcContext,
+  TcPureContext,
+} from 'tailchat-server-sdk';
 import { TcService, TcDbService, db } from 'tailchat-server-sdk';
 import type {
   AgoraMeetingDocument,
@@ -26,6 +31,8 @@ interface ChannelUserListRet {
       };
 }
 
+const noticeCacheKey = 'agora:notice:';
+
 /**
  * 声网音视频
  *
@@ -35,6 +42,8 @@ interface AgoraService
   extends TcService,
     TcDbService<AgoraMeetingDocument, AgoraMeetingModel> {}
 class AgoraService extends TcService {
+  botUserId: string | undefined;
+
   get serviceName() {
     return 'plugin:com.msgbyte.agora';
   }
@@ -104,6 +113,25 @@ class AgoraService extends TcService {
     this.registerAuthWhitelist(['/webhook']);
   }
 
+  protected onInited(): void {
+    // 确保机器人用户存在, 并记录机器人用户id
+    this.waitForServices(['user']).then(async () => {
+      try {
+        const botUserId = await this.broker.call('user.ensurePluginBot', {
+          botId: 'agora-meeting',
+          nickname: 'Agora Bot',
+          avatar: '{BACKEND}/plugins/com.msgbyte.agora/assets/icon.png',
+        });
+
+        this.logger.info('Agora Meeting Bot Id:', botUserId);
+
+        this.botUserId = String(botUserId);
+      } catch (e) {
+        this.logger.error(e);
+      }
+    });
+  }
+
   generateJoinInfo(
     ctx: TcContext<{
       channelName: string;
@@ -166,6 +194,7 @@ class AgoraService extends TcService {
 
   /**
    * agora服务的回调
+   * NOTICE: 暂不支持密钥验证(因为拿不到header)
    * Reference: https://docs.agora.io/cn/live-streaming-premium-legacy/rtc_channel_event?platform=RESTful#101-channel-create
    */
   async webhook(
@@ -177,8 +206,15 @@ class AgoraService extends TcService {
       payload: any;
     }>
   ) {
-    const { eventType, payload } = ctx.params;
+    const { eventType, payload, noticeId } = ctx.params;
+    const { t } = ctx.meta;
     const channelName = payload.channelName;
+
+    const valid = await this.checkNoticeValid(noticeId);
+    if (!valid) {
+      this.logger.debug('agora notice has been handled');
+      return true;
+    }
 
     this.logger.info('webhook received', { eventType, payload });
     if (channelName === 'test_webhook') {
@@ -190,42 +226,74 @@ class AgoraService extends TcService {
       // 频道被创建
       const ts = payload.ts;
 
-      const converseId = this.getConverseIdFromChannelName(channelName);
+      const [converseId, groupId] = this.getSourceFromChannelName(channelName);
+
+      const existedMeeting =
+        await this.adapter.model.findLastestMeetingByConverseId(converseId);
+      if (existedMeeting) {
+        // 已经创建了，则跳过
+        return;
+      }
+
+      const message = await this.sendPluginBotMessage(ctx, {
+        converseId,
+        groupId,
+        content: t('本频道开启了通话'),
+      });
+      const messageId = String(message._id);
 
       const meeting = await this.adapter.model.create({
         channelName,
         converseId,
+        groupId,
+        messageId,
         active: true,
-        createdAt: new Date(ts),
+        createdAt: new Date(ts * 1000),
       });
+
       this.roomcastNotify(ctx, converseId, 'agoraChannelCreate', {
         converseId,
+        groupId,
         meetingId: String(meeting._id),
       });
     } else if (eventType === 102) {
       // 频道被销毁
       const ts = payload.ts;
 
-      const converseId = this.getConverseIdFromChannelName(channelName);
+      const [converseId, groupId] = this.getSourceFromChannelName(channelName);
 
       const meeting = await this.adapter.model.findLastestMeetingByConverseId(
         converseId
       );
       if (!meeting) {
+        // 会议不存在，直接跳过
         return;
       }
 
       meeting.active = false;
-      meeting.endAt = new Date(ts);
+      meeting.endAt = new Date(ts * 1000);
       await meeting.save();
       this.roomcastNotify(ctx, converseId, 'agoraChannelDestroy', {
         converseId,
+        groupId,
         meetingId: String(meeting._id),
+      });
+
+      const duration =
+        new Date(meeting.endAt).valueOf() -
+        new Date(meeting.createdAt).valueOf();
+
+      this.sendPluginBotMessage(ctx, {
+        converseId,
+        groupId,
+        content: t('通话已结束, 时长: {{num}}分钟', {
+          num: Math.round(duration / 1000 / 60),
+        }),
       });
     } else if (eventType === 103) {
       // 用户加入
       const { channelName, uid: userId } = payload;
-      const converseId = this.getConverseIdFromChannelName(channelName);
+      const [converseId, groupId] = this.getSourceFromChannelName(channelName);
 
       const meeting = await this.adapter.model.findLastestMeetingByConverseId(
         converseId
@@ -238,13 +306,14 @@ class AgoraService extends TcService {
 
       this.roomcastNotify(ctx, converseId, 'agoraBroadcasterJoin', {
         converseId,
+        groupId,
         meetingId: String(meeting._id),
         userId,
       });
     } else if (eventType === 104) {
       // 用户离开
       const { channelName, uid } = payload;
-      const converseId = this.getConverseIdFromChannelName(channelName);
+      const [converseId, groupId] = this.getSourceFromChannelName(channelName);
 
       const meeting = await this.adapter.model.findLastestMeetingByConverseId(
         converseId
@@ -255,6 +324,7 @@ class AgoraService extends TcService {
 
       this.roomcastNotify(ctx, converseId, 'agoraBroadcasterLeave', {
         converseId,
+        groupId,
         meetingId: String(meeting._id),
         userId: uid,
       });
@@ -278,7 +348,9 @@ class AgoraService extends TcService {
   /**
    * NOTICE: 这里不用每次唯一的ChannelName是期望设计是会话维度的，即可以重复使用
    */
-  private getConverseIdFromChannelName(channelName: string): string {
+  private getSourceFromChannelName(
+    channelName: string
+  ): [string, string | undefined] {
     if (!channelName) {
       this.logger.error('channel name invalid', channelName);
       throw new Error('channel name invalid');
@@ -290,7 +362,57 @@ class AgoraService extends TcService {
       throw new Error('converseId invalid');
     }
 
-    return converseId;
+    if (groupId === 'personal') {
+      return [converseId, undefined];
+    } else {
+      if (!db.Types.ObjectId.isValid(groupId)) {
+        this.logger.error('groupId invalid:', groupId);
+        throw new Error('groupId invalid');
+      }
+
+      return [converseId, groupId];
+    }
+  }
+
+  private async checkNoticeValid(noticeId: string) {
+    const key = noticeCacheKey + noticeId;
+    const v = await this.broker.cacher.get(key);
+    if (v) {
+      return false;
+    }
+
+    await this.broker.cacher.set(key, '1', 60 * 10); // 1分钟
+
+    return true;
+  }
+
+  private async sendPluginBotMessage(
+    ctx: TcPureContext<any>,
+    messagePayload: {
+      converseId: string;
+      groupId?: string;
+      content: string;
+      meta?: any;
+    }
+  ): Promise<MessageStruct> {
+    if (!this.botUserId) {
+      this.logger.warn('机器人尚未初始化，无法发送插件消息');
+      return;
+    }
+
+    const res = await ctx.call(
+      'chat.message.sendMessage',
+      {
+        ...messagePayload,
+      },
+      {
+        meta: {
+          userId: this.botUserId,
+        },
+      }
+    );
+
+    return res as MessageStruct;
   }
 }
 

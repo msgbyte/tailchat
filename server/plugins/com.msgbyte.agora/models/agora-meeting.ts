@@ -14,6 +14,12 @@ export class AgoraMeeting extends TimeStamps implements db.Base {
   converseId: string;
 
   @prop()
+  groupId?: string;
+
+  @prop()
+  messageId: string;
+
+  @prop()
   channelName: string;
 
   @prop()

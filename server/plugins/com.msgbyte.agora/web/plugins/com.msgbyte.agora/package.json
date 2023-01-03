@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "agora-rtc-react": "^1.1.3",
-    "ahooks": "^3.7.4"
+    "ahooks": "^3.7.4",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",

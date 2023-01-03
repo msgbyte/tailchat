@@ -9,6 +9,8 @@ import { request } from '../request';
 import styled from 'styled-components';
 import { useMeetingStore } from './store';
 import { NetworkStats } from './NetworkStats';
+import _once from 'lodash/once';
+import type { IAgoraRTCClient } from 'agora-rtc-react';
 
 const Root = styled.div`
   .body {
@@ -24,6 +26,10 @@ const Root = styled.div`
     }
   }
 `;
+
+const enableDualStream = _once((client: IAgoraRTCClient) => {
+  return client.enableDualStream();
+});
 
 export interface MeetingViewProps {
   meetingId: string;
@@ -83,7 +89,7 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
       const { appId, token } = data ?? {};
 
       await client.join(appId, channelName, token, _id);
-      await client.enableDualStream();
+      await enableDualStream(client);
       client.enableAudioVolumeIndicator();
       setStart(true);
     } catch (err) {

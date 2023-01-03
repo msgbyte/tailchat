@@ -19,8 +19,7 @@ regPluginPanelAction({
       title: '发起通话',
       content: '是否通过声网插件在当前会话开启音视频通讯？',
       onConfirm: async () => {
-        // startFastMeeting(`${groupId}|${panelId}`);
-        startFastMeeting('123456'); // for test
+        startFastMeeting(`${groupId}|${panelId}`);
       },
     });
   },
