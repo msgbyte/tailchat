@@ -277,8 +277,7 @@ export default class ApiService extends TcService {
             req: IncomingMessage,
             res: ServerResponse
           ) {
-            const arr: string[] = _.get(req, '$params.objectName') ?? [];
-            const objectName = arr.join('/');
+            const objectName = _.get(req, '$params.objectName');
 
             try {
               const result: Readable = await this.broker.call(
