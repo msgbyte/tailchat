@@ -17,15 +17,17 @@ import {
   Errors,
   DataNotFoundError,
   EntityError,
+  db,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
   generateRandomStr,
   getEmailAddress,
 } from '../../../lib/utils';
-import { Types } from 'mongoose';
 import type { TFunction } from 'i18next';
 import _ from 'lodash';
+
+const { isValidObjectId, Types } = db;
 
 /**
  * 用户服务
@@ -543,6 +545,9 @@ class UserService extends TcService {
   async getUserInfoList(ctx: PureContext<{ userIds: string[] }>) {
     const userIds = ctx.params.userIds;
 
+    if (userIds.some((userId) => !isValidObjectId(userId))) {
+      throw new EntityError('Include invalid userId');
+    }
     const list = await Promise.all(
       userIds.map((userId) =>
         ctx.call('user.getUserInfo', {

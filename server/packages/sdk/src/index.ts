@@ -25,7 +25,11 @@ export {
 } from './services/lib/settings';
 
 // struct
-export type { MessageMetaStruct } from './structs/chat';
+export type {
+  MessageStruct,
+  MessageReactionStruct,
+  MessageMetaStruct,
+} from './structs/chat';
 export type { BuiltinEventMap } from './structs/events';
 export type {
   GroupStruct,

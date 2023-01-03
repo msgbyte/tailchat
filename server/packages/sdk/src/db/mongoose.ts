@@ -1,1 +1,1 @@
-export { Types } from 'mongoose';
+export { Types, isValidObjectId } from 'mongoose';
