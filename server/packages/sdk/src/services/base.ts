@@ -221,7 +221,7 @@ export abstract class TcService extends Service {
     schema?: ServiceActionSchema
   ) {
     if (this._actions[name]) {
-      this.logger.warn(`重复注册操作: ${name}。操作被跳过...`);
+      console.warn(`重复注册操作: ${name}。操作被跳过...`);
       return;
     }
 
@@ -255,7 +255,7 @@ export abstract class TcService extends Service {
    */
   registerMethod(name: string, method: (...args: any[]) => any) {
     if (this._methods[name]) {
-      this.logger.warn(`重复注册方法: ${name}。操作被跳过...`);
+      console.warn(`重复注册方法: ${name}。操作被跳过...`);
       return;
     }
 
@@ -267,7 +267,7 @@ export abstract class TcService extends Service {
    */
   registerSetting(key: string, value: unknown): void {
     if (this._settings[key]) {
-      this.logger.warn(`重复注册配置: ${key}。之前的设置将被覆盖...`);
+      console.warn(`重复注册配置: ${key}。之前的设置将被覆盖...`);
     }
 
     this._settings[key] = value;
