@@ -44,7 +44,7 @@ export function initNotify() {
                 tag: 'tailchat-message',
                 renotify: true,
               };
-              if (registration) {
+              if (registration && registration.showNotification) {
                 registration.showNotification(title, options);
               } else {
                 // fallback
