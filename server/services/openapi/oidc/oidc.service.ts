@@ -1,6 +1,5 @@
-import ApiGateway from 'moleculer-web';
 import { Provider, Configuration, InteractionResults } from 'oidc-provider';
-import { config, TcService } from 'tailchat-server-sdk';
+import { config, TcService, ApiGatewayMixin } from 'tailchat-server-sdk';
 import type { IncomingMessage, ServerResponse } from 'http';
 import ejs from 'ejs';
 import path from 'path';
@@ -93,7 +92,7 @@ class OIDCService extends TcService {
   }
 
   protected onInit(): void {
-    this.registerMixin(ApiGateway);
+    this.registerMixin(ApiGatewayMixin);
 
     this.registerSetting('port', PORT);
     this.registerSetting('routes', this.getRoutes());

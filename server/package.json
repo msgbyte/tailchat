@@ -57,7 +57,6 @@
     "mime": "^2.5.2",
     "mkdirp": "^1.0.4",
     "moleculer-minio": "^2.0.0",
-    "moleculer-web": "^0.10.4",
     "moment": "^2.29.1",
     "mongodb": "4.2.1",
     "mongoose": "6.1.1",

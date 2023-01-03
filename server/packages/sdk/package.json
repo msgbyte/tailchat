@@ -32,14 +32,19 @@
     "typescript": "^4.3.3"
   },
   "dependencies": {
+    "@fastify/busboy": "^1.1.0",
     "@typegoose/typegoose": "9.3.1",
     "accept-language": "^3.0.18",
+    "body-parser": "^1.20.1",
     "crc": "^3.8.0",
     "dotenv": "^10.0.0",
+    "etag": "^1.8.1",
     "fastest-validator": "^1.12.0",
+    "fresh": "^0.5.2",
     "i18next": "^20.3.5",
     "i18next-fs-backend": "^1.1.1",
     "ioredis": "^4.27.6",
+    "isstream": "^0.1.2",
     "kleur": "^4.1.4",
     "lodash": "^4.17.21",
     "moleculer": "0.14.23",
@@ -47,6 +52,7 @@
     "moleculer-repl": "^0.7.2",
     "moment": "^2.29.1",
     "mongodb": "4.2.1",
-    "mongoose": "6.1.1"
+    "mongoose": "6.1.1",
+    "path-to-regexp": "^6.2.1"
   }
 }

@@ -12,6 +12,8 @@ export type {
 } from './services/types';
 export { parseLanguageFromHead } from './services/lib/i18n/parser';
 export { t } from './services/lib/i18n';
+export { ApiGatewayMixin } from './services/lib/moleculer-web';
+export * as ApiGatewayErrors from './services/lib/moleculer-web/errors';
 export * from './services/lib/errors';
 export { PERMISSION, allPermission } from './services/lib/role';
 export { call } from './services/lib/call';

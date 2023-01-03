@@ -1,5 +1,4 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import ApiGateway from 'moleculer-web';
 import _ from 'lodash';
 import { TcSocketIOService } from '../../mixins/socketio.mixin';
 import {
@@ -10,6 +9,8 @@ import {
   parseLanguageFromHead,
   builtinAuthWhitelist,
   PureContext,
+  ApiGatewayMixin,
+  ApiGatewayErrors,
 } from 'tailchat-server-sdk';
 import { TcHealth } from '../../mixins/health.mixin';
 import type { Readable } from 'stream';
@@ -26,7 +27,7 @@ export default class ApiService extends TcService {
   }
 
   onInit() {
-    this.registerMixin(ApiGateway);
+    this.registerMixin(ApiGatewayMixin);
     this.registerMixin(
       TcSocketIOService({
         userAuth: async (token) => {
@@ -355,8 +356,8 @@ export default class ApiService extends TcService {
     const token = req.headers['x-token'] as string;
 
     if (typeof token !== 'string') {
-      throw new ApiGateway.Errors.UnAuthorizedError(
-        ApiGateway.Errors.ERR_NO_TOKEN,
+      throw new ApiGatewayErrors.UnAuthorizedError(
+        ApiGatewayErrors.ERR_NO_TOKEN,
         {
           error: 'No Token',
         }
@@ -379,8 +380,8 @@ export default class ApiService extends TcService {
         throw new Error(t('Token不合规'));
       }
     } catch (err) {
-      throw new ApiGateway.Errors.UnAuthorizedError(
-        ApiGateway.Errors.ERR_INVALID_TOKEN,
+      throw new ApiGatewayErrors.UnAuthorizedError(
+        ApiGatewayErrors.ERR_INVALID_TOKEN,
         {
           error: 'Invalid Token:' + String(err),
         }
