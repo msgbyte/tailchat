@@ -8,6 +8,7 @@ import {
 } from 'tailchat-shared';
 import _groupBy from 'lodash/groupBy';
 import _uniqBy from 'lodash/uniqBy';
+import _take from 'lodash/take';
 import { useCallback, useMemo } from 'react';
 import { Emoji } from '@/components/Emoji';
 import React from 'react';
@@ -27,16 +28,23 @@ const ReactionItem: React.FC<{
   onClick: () => void;
 }> = React.memo((props) => {
   const { reaction, onClick } = props;
+  const usernames = useUsernames(reaction.users);
 
   return (
     <div className="py-0.5 px-1 bg-black bg-opacity-20 hover:bg-opacity-40 rounded cursor-pointer">
-      <Tooltip title={useUsernames(reaction.users).join(', ')}>
+      <Tooltip title={usernames.join(', ')}>
         <div className="flex" onClick={onClick}>
           <Emoji emoji={reaction.name} />
 
-          {reaction.length > 1 && (
-            <span className="ml-0.5">{reaction.length}</span>
-          )}
+          <div className="ml-1">
+            {usernames.length < 3 ? (
+              <span>{_take(usernames, 2).join(',')}</span>
+            ) : (
+              <span>
+                {_take(usernames, 2).join(', ')}, ...+{usernames.length - 2}
+              </span>
+            )}
+          </div>
         </div>
       </Tooltip>
     </div>
