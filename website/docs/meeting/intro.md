@@ -3,6 +3,10 @@ sidebar_position: 1
 title: 概述
 ---
 
+`Tailchat` 提供两套方案用于视频语音通话，可以根据实际情况自行选择:
+- `tailchat-meeting` 自部署视频会议(WIP)
+- `agora` 声网集成, 详细说明见: [声网插件部署指南](./agora.md)
+
 ## Tailchat Meeting
 
 视频会议模块是 `Tailchat` 系列的一套重要组成部分。提供能力如下:
