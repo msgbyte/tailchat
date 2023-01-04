@@ -36,7 +36,7 @@ const ReactionItem: React.FC<{
         <div className="flex" onClick={onClick}>
           <Emoji emoji={reaction.name} />
 
-          <div className="ml-1">
+          <div className="ml-1 text-xs">
             {usernames.length < 3 ? (
               <span>{_take(usernames, 2).join(',')}</span>
             ) : (
