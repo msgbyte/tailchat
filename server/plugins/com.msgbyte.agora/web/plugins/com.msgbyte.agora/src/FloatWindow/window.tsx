@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ErrorBoundary } from '@capital/component';
+import { Divider, ErrorBoundary } from '@capital/component';
 import { MeetingView, MeetingViewProps } from './MeetingView';
 import { SpeakerNames } from './SpeakerNames';
 
@@ -17,14 +17,14 @@ const FloatWindow = styled.div`
   display: flex;
   flex-direction: column;
 
-  .folder-btn {
+  .folder-btn-container {
     position: absolute;
     bottom: -30px;
     left: 0;
     right: 0;
     display: flex;
 
-    > div {
+    > .folder-btn {
       background-color: var(--tc-content-background-color);
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
       height: 30px;
@@ -55,9 +55,12 @@ export const FloatMeetingWindow: React.FC<MeetingViewProps> = React.memo(
           <MeetingView {...props} />
         </ErrorBoundary>
 
-        <div className="folder-btn" onClick={() => setFolder(!folder)}>
-          <div>
+        <div className="folder-btn-container">
+          <div className="folder-btn" onClick={() => setFolder(!folder)}>
             <SpeakerNames />
+
+            <Divider type="vertical" />
+
             <span style={{ marginLeft: 4 }}>{folder ? '展开' : '收起'}</span>
           </div>
         </div>
