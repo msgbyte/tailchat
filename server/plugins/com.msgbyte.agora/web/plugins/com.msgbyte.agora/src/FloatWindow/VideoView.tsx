@@ -2,8 +2,9 @@ import { UserAvatar, UserName } from '@capital/component';
 import { AgoraVideoPlayer, IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import React from 'react';
 import styled from 'styled-components';
-import { useClient, useMicrophoneAndCameraTracks } from './client';
+import { useClient } from './client';
 import { useMeetingStore } from './store';
+import { getClientLocalTrack } from './utils';
 
 const Root = styled.div<{
   active?: boolean;
@@ -59,15 +60,20 @@ export const VideoView: React.FC<{
 VideoView.displayName = 'VideoView';
 
 export const OwnVideoView: React.FC<{}> = React.memo(() => {
-  const { ready, tracks } = useMicrophoneAndCameraTracks();
   const client = useClient();
   const mediaPerm = useMeetingStore((state) => state.mediaPerm);
   const active = useVolumeActive(String(client.uid));
 
+  if (!client.uid) {
+    return null;
+  }
+
+  const videoTrack = getClientLocalTrack(client, 'video');
+
   return (
     <Root active={active}>
-      {ready && mediaPerm.video ? (
-        <AgoraVideoPlayer className="player" videoTrack={tracks[1]} />
+      {mediaPerm.video ? (
+        <AgoraVideoPlayer className="player" videoTrack={videoTrack} />
       ) : (
         <UserAvatar size={96} userId={String(client.uid)} />
       )}

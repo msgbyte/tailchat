@@ -53,7 +53,8 @@ export const IconBtn: React.FC<IconBtnProps> = React.memo(
       />
     );
 
-    if (isValidStr(title)) {
+    if (isValidStr(title) && !props.disabled) {
+      // 这里判断 props.disabled 是因为在禁用场景下显示title会有className无法带到Button组件上导致样式错误的问题(背景色溢出形状)
       return <Tooltip title={title}>{btnEl}</Tooltip>;
     } else {
       return btnEl;

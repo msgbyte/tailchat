@@ -1,6 +1,11 @@
+import { useAsyncFn } from '@capital/common';
 import { IconBtn } from '@capital/component';
 import React from 'react';
-import { useClient, useMicrophoneAndCameraTracks } from './client';
+import {
+  useClient,
+  createMicrophoneAudioTrack,
+  createCameraVideoTrack,
+} from './client';
 import { useMeetingStore } from './store';
 import { getClientLocalTrack } from './utils';
 
@@ -8,42 +13,47 @@ export const Controls: React.FC<{
   onClose: () => void;
 }> = React.memo((props) => {
   const client = useClient();
-  const { ready, tracks } = useMicrophoneAndCameraTracks();
   const mediaPerm = useMeetingStore((state) => state.mediaPerm);
 
-  const mute = async (type: 'audio' | 'video') => {
-    if (type === 'audio') {
-      if (mediaPerm.audio === true) {
-        const track = getClientLocalTrack(client, 'audio');
-        if (track) {
-          await client.unpublish(track);
+  const [{ loading }, mute] = useAsyncFn(
+    async (type: 'audio' | 'video') => {
+      if (type === 'audio') {
+        if (mediaPerm.audio === true) {
+          const track = getClientLocalTrack(client, 'audio');
+          if (track) {
+            await client.unpublish(track);
+          }
+        } else {
+          const track = await createMicrophoneAudioTrack();
+          await client.publish(track);
         }
-      } else {
-        await client.publish(tracks[0]);
-      }
 
-      useMeetingStore.getState().setMediaPerm({ audio: !mediaPerm.audio });
-    } else if (type === 'video') {
-      if (mediaPerm.video === true) {
-        const track = getClientLocalTrack(client, 'video');
-        if (track) {
-          await client.unpublish(track);
+        useMeetingStore.getState().setMediaPerm({ audio: !mediaPerm.audio });
+      } else if (type === 'video') {
+        if (mediaPerm.video === true) {
+          const track = getClientLocalTrack(client, 'video');
+          if (track) {
+            await client.unpublish(track);
+          }
+        } else {
+          const track = await createCameraVideoTrack();
+          await client.publish(track);
         }
-      } else {
-        await client.publish(tracks[1]);
-      }
 
-      useMeetingStore.getState().setMediaPerm({ video: !mediaPerm.video });
-    }
-  };
+        useMeetingStore.getState().setMediaPerm({ video: !mediaPerm.video });
+      }
+    },
+    [client, mediaPerm]
+  );
 
   const leaveChannel = async () => {
     await client.leave();
     client.removeAllListeners();
     useMeetingStore.getState().reset();
     // we close the tracks to perform cleanup
-    tracks[0].close();
-    tracks[1].close();
+    client.localTracks.forEach((track) => {
+      track.close();
+    });
     props.onClose();
   };
 
@@ -53,7 +63,7 @@ export const Controls: React.FC<{
         icon={mediaPerm.video ? 'mdi:video' : 'mdi:video-off'}
         title={mediaPerm.video ? '关闭摄像头' : '开启摄像头'}
         active={mediaPerm.video}
-        disabled={!ready}
+        disabled={loading}
         size="large"
         onClick={() => mute('video')}
       />
@@ -62,7 +72,7 @@ export const Controls: React.FC<{
         icon={mediaPerm.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
         title={mediaPerm.audio ? '关闭麦克风' : '开启麦克风'}
         active={mediaPerm.audio}
-        disabled={!ready}
+        disabled={loading}
         size="large"
         onClick={() => mute('audio')}
       />

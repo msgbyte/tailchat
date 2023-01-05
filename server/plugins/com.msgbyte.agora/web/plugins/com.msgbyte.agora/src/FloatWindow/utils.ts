@@ -1,11 +1,24 @@
-import type { IAgoraRTCClient, ILocalTrack } from 'agora-rtc-react';
+import type {
+  IAgoraRTCClient,
+  ILocalAudioTrack,
+  ILocalTrack,
+  ILocalVideoTrack,
+} from 'agora-rtc-react';
 
 /**
  * 获取客户端本地轨道
  */
 export function getClientLocalTrack(
   client: IAgoraRTCClient,
-  trackMediaType: 'audio' | 'video'
+  trackMediaType: 'video'
+): ILocalVideoTrack | null;
+export function getClientLocalTrack(
+  client: IAgoraRTCClient,
+  trackMediaType: 'audio'
+): ILocalAudioTrack | null;
+export function getClientLocalTrack(
+  client: IAgoraRTCClient,
+  trackMediaType: string
 ): ILocalTrack | null {
   return (
     client.localTracks.find(
