@@ -6,5 +6,5 @@
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "为Tailchat增加声网音视频通信功能",
-  "requireRestart": true
+  "requireRestart": false
 }
