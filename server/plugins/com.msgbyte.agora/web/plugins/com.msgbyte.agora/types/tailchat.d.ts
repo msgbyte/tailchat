@@ -390,6 +390,8 @@ declare module '@capital/component' {
     shape?: 'circle' | 'square';
     title?: string;
     danger?: boolean;
+    active?: boolean;
+    disabled?: boolean;
     onClick?: React.MouseEventHandler<HTMLElement>;
   }>;
 

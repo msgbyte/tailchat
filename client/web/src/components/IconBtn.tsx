@@ -21,6 +21,7 @@ interface IconBtnProps extends Omit<ButtonProps, 'shape'> {
   iconClassName?: string;
   shape?: IconBtnShapeType;
   title?: string;
+  active?: boolean;
 }
 export const IconBtn: React.FC<IconBtnProps> = React.memo(
   ({ icon, iconClassName, title, className, ...props }) => {
@@ -32,13 +33,18 @@ export const IconBtn: React.FC<IconBtnProps> = React.memo(
       </span>
     );
 
+    // 默认情况下的背景颜色
+    const normalBg = props.active
+      ? 'bg-black bg-opacity-60'
+      : 'bg-black bg-opacity-20 hover:bg-opacity-60';
+
     const btnEl = (
       <Button
         className={clsx(
           'border-0 text-white text-opacity-80 hover:text-opacity-100',
           props.danger
             ? 'bg-red-600 bg-opacity-80 hover:bg-opacity-100'
-            : 'bg-black bg-opacity-20 hover:bg-opacity-60',
+            : normalBg,
           className
         )}
         {...props}

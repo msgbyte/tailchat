@@ -52,6 +52,7 @@ export const Controls: React.FC<{
       <IconBtn
         icon={mediaPerm.video ? 'mdi:video' : 'mdi:video-off'}
         title={mediaPerm.video ? '关闭摄像头' : '开启摄像头'}
+        active={mediaPerm.video}
         disabled={!ready}
         size="large"
         onClick={() => mute('video')}
@@ -60,6 +61,7 @@ export const Controls: React.FC<{
       <IconBtn
         icon={mediaPerm.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
         title={mediaPerm.audio ? '关闭麦克风' : '开启麦克风'}
+        active={mediaPerm.audio}
         disabled={!ready}
         size="large"
         onClick={() => mute('audio')}
