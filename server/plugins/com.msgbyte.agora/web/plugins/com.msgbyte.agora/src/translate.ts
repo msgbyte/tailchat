@@ -17,4 +17,50 @@ export const Translate = {
     'zh-CN': '无人发言',
     'en-US': 'No one Speaking',
   }),
+  startCall: localTrans({
+    'zh-CN': '发起通话',
+    'en-US': 'Start Call',
+  }),
+  startCallContent: localTrans({
+    'zh-CN': '是否通过声网插件在当前会话开启音视频通讯？',
+    'en-US':
+      'Do you want to enable audio and video communication in the current session through the Agora plugin?',
+  }),
+  expand: localTrans({
+    'zh-CN': '展开',
+    'en-US': 'expand',
+  }),
+  foldup: localTrans({
+    'zh-CN': '收起',
+    'en-US': 'foldup',
+  }),
+  joinTip: localTrans({
+    'zh-CN': '正在加入通话...',
+    'en-US': 'Joining call...',
+  }),
+  repeatTip: localTrans({
+    'zh-CN': '当前已有正在进行中的通话, 请先结束上一场通话',
+    'en-US':
+      'There is currently an active call, please end the previous call first',
+  }),
+  hangUp: localTrans({
+    'zh-CN': '挂断',
+    'en-US': 'Hang Up',
+  }),
+  openCamera: localTrans({
+    'zh-CN': '开启摄像头',
+    'en-US': 'Open Camera',
+  }),
+  closeCamera: localTrans({
+    'zh-CN': '关闭摄像头',
+    'en-US': 'Close Camera',
+  }),
+  openMic: localTrans({
+    'zh-CN': '开启麦克风',
+    'en-US': 'Open Mic',
+  }),
+  closeMic: localTrans({
+    'zh-CN': '关闭麦克风',
+    'en-US': 'Close Mic',
+  }),
 };

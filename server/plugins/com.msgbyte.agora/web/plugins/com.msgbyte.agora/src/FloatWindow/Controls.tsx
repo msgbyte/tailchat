@@ -1,6 +1,7 @@
 import { useAsyncFn } from '@capital/common';
 import { IconBtn } from '@capital/component';
 import React from 'react';
+import { Translate } from '../translate';
 import {
   useClient,
   createMicrophoneAudioTrack,
@@ -61,7 +62,7 @@ export const Controls: React.FC<{
     <div className="controller">
       <IconBtn
         icon={mediaPerm.video ? 'mdi:video' : 'mdi:video-off'}
-        title={mediaPerm.video ? '关闭摄像头' : '开启摄像头'}
+        title={mediaPerm.video ? Translate.closeCamera : Translate.openCamera}
         active={mediaPerm.video}
         disabled={loading}
         size="large"
@@ -70,7 +71,7 @@ export const Controls: React.FC<{
 
       <IconBtn
         icon={mediaPerm.audio ? 'mdi:microphone' : 'mdi:microphone-off'}
-        title={mediaPerm.audio ? '关闭麦克风' : '开启麦克风'}
+        title={mediaPerm.audio ? Translate.closeMic : Translate.openMic}
         active={mediaPerm.audio}
         disabled={loading}
         size="large"
@@ -79,7 +80,7 @@ export const Controls: React.FC<{
 
       <IconBtn
         icon="mdi:phone-remove-outline"
-        title="挂断"
+        title={Translate.hangUp}
         danger={true}
         size="large"
         onClick={leaveChannel}

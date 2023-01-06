@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Divider, ErrorBoundary } from '@capital/component';
 import { MeetingView, MeetingViewProps } from './MeetingView';
 import { SpeakerNames } from './SpeakerNames';
+import { Translate } from '../translate';
 
 const FloatWindow = styled.div`
   z-index: 100;
@@ -61,7 +62,9 @@ export const FloatMeetingWindow: React.FC<MeetingViewProps> = React.memo(
 
             <Divider type="vertical" />
 
-            <span style={{ marginLeft: 4 }}>{folder ? '展开' : '收起'}</span>
+            <span style={{ marginLeft: 4 }}>
+              {folder ? Translate.expand : Translate.foldup}
+            </span>
           </div>
         </div>
       </FloatWindow>

@@ -11,6 +11,7 @@ import { useMeetingStore } from './store';
 import { NetworkStats } from './NetworkStats';
 import _once from 'lodash/once';
 import type { IAgoraRTCClient } from 'agora-rtc-react';
+import { Translate } from '../translate';
 
 const Root = styled.div`
   .body {
@@ -113,7 +114,7 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
       <NetworkStats />
 
       <div className="body">
-        {start ? <Videos /> : <LoadingSpinner tip={'正在加入通话...'} />}
+        {start ? <Videos /> : <LoadingSpinner tip={Translate.joinTip} />}
       </div>
 
       <div className="controller">

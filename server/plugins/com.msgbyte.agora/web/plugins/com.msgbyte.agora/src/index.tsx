@@ -1,5 +1,6 @@
 import { regPluginPanelAction } from '@capital/common';
 import { openConfirmModal } from '@capital/component';
+import { Translate } from './translate';
 
 console.log('Plugin 声网音视频 is loaded');
 
@@ -11,13 +12,13 @@ async function startFastMeeting(meetingId: string) {
 // 发起群组会议
 regPluginPanelAction({
   name: 'plugin:com.msgbyte.meeting/groupAction',
-  label: '发起通话',
+  label: Translate.startCall,
   position: 'group',
   icon: 'mdi:video-box',
   onClick: ({ groupId, panelId }) => {
     openConfirmModal({
-      title: '发起通话',
-      content: '是否通过声网插件在当前会话开启音视频通讯？',
+      title: Translate.startCall,
+      content: Translate.startCallContent,
       onConfirm: async () => {
         startFastMeeting(`${groupId}|${panelId}`);
       },
