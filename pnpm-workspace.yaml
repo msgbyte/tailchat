@@ -6,6 +6,7 @@ packages:
   - 'client/packages/**'
   - 'server'
   - 'server/admin'
+  - 'server/admin-next'
   - 'server/packages/**'
   - 'server/plugins/**'
   - 'website'
