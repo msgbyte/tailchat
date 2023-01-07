@@ -29,30 +29,8 @@ Tailchat 声网集成是依赖声网服务实现的音视频通话功能，因�
 
 ![](./images/3.png)
 
-在项目配置中我们可以获取 `appid` 和`app cert`。这个两个是我们之后要用到的环境变量 `AGORA_APP_ID` 和 `AGORA_APP_CERT`
+在项目配置中我们可以获取 `appid` 和`app cert`。这两个分别是我们之后要用到的环境变量 `AGORA_APP_ID` 和 `AGORA_APP_CERT`
 
-
-
-### 申请服务状态回调
-
-为了使通话状态能够同步给`Tailchat`, 需要在声网中申请服务端回调。
-
-在项目配置中，我们需要在`服务配置` 中启用`消息通知服务`
-
-![](./images/6.png)
-
-需要订阅以下事件:
-
-- channel create=101
-- channel destroy=102
-- broadcaster join channel=103
-- broadcaster leave channel=104
-
-接收服务器 URL 一般为: `https://<YOUR SERVER DOMAIN>/api/plugin:com.msgbyte.agora/webhook`, 其中`<YOUR SERVER DOMAIN>` 换成你的 `Tailchat` 域名。
-
-配置完成后你会看到如下提示。等待声网工作人员确认完毕后即可生效。
-
-![](./images/7.png)
 
 ### 获取客户凭证
 
@@ -84,3 +62,32 @@ Tailchat 声网集成是依赖声网服务实现的音视频通话功能，因�
 - `AGORA_CUSTOMER_SECRET`: 声网客户秘钥
 
 这些环境变量都可以在上面的教程中获取。
+
+配置环境变量完毕后即可
+
+## 申请服务状态回调
+
+为了使通话状态能够同步给`Tailchat`, 需要在声网中申请服务端回调。
+
+在项目配置中，我们需要在`服务配置` 中启用`消息通知服务`
+
+![](./images/6.png)
+
+需要订阅以下事件:
+
+- channel create=101
+- channel destroy=102
+- broadcaster join channel=103
+- broadcaster leave channel=104
+
+接收服务器 URL 一般为: `https://<YOUR SERVER DOMAIN>/api/plugin:com.msgbyte.agora/webhook`, 其中`<YOUR SERVER DOMAIN>` 换成你的 `Tailchat` 域名。
+
+:::info
+声网的服务会对服务器做连通性检查，因此需要配置好环境变量启动服务后再执行本次步骤。
+
+另外声网需要配置`https` 且 `webrtc`服务也依赖`https`, 因此需要确保服务器网关支持`https`协议
+:::
+
+配置完成后你会看到如下提示。等待声网工作人员确认完毕后即可生效。
+
+![](./images/7.png)
