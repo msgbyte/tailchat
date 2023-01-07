@@ -15,6 +15,7 @@
     "check:type": "concurrently npm:check:type:client npm:check:type:server",
     "check:type:client": "cd client/web && tsc --noEmit",
     "check:type:server": "cd server && tsc --noEmit",
+    "website": "cd website && pnpm dev",
     "preinstall": "npx only-allow pnpm",
     "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "prepare": "husky install",
