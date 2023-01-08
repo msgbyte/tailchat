@@ -41,15 +41,15 @@ export function pickUserBaseInfo(userInfo: UserLoginInfo) {
 }
 
 // 内置用户信息
-const builtinUserInfo: Record<string, UserBaseInfo> = {
-  [SYSTEM_USERID]: {
+const builtinUserInfo: Record<string, () => UserBaseInfo> = {
+  [SYSTEM_USERID]: () => ({
     _id: SYSTEM_USERID,
     email: 'admin@msgbyte.com',
     nickname: t('系统'),
     discriminator: '0000',
     avatar: null,
     temporary: false,
-  },
+  }),
 };
 
 /**
@@ -209,8 +209,11 @@ const _fetchUserInfo = createAutoMergedRequest<string, UserBaseInfo>(
  * @param userId 用户ID
  */
 export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
-  if (builtinUserInfo[userId]) {
-    return builtinUserInfo[userId];
+  if (
+    builtinUserInfo[userId] &&
+    typeof builtinUserInfo[userId] === 'function'
+  ) {
+    return builtinUserInfo[userId]();
   }
 
   const userInfo = await _fetchUserInfo(userId);
