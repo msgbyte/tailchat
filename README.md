@@ -2,6 +2,8 @@
 
 [![Docker Publish](https://github.com/msgbyte/tailchat/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/msgbyte/tailchat/actions/workflows/docker-publish.yml)
 
+![tailchat](https://socialify.git.ci/msgbyte/tailchat/image?description=1&font=Inter&forks=1&issues=1&language=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F86033898%3Fs%3D200%26v%3D4&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Light)
+
 Tailchat 是一款现代化开源的即时通讯聊天应用，基于 React + Typescript 开发
 
 前端微内核架构+后端微服务架构，Tailchat 已经为集群化部署做好了准备。
