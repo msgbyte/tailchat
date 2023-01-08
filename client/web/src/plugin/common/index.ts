@@ -56,6 +56,7 @@ export {
   joinArray,
 } from 'tailchat-shared';
 
+export { navigate } from '@/components/AppRouterApi';
 export { useLocation, useNavigate } from 'react-router';
 
 export {

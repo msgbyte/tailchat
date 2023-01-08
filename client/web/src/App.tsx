@@ -22,6 +22,7 @@ import { LoadingSpinner } from './components/LoadingSpinner';
 import { pluginRootRoute } from './plugin/common';
 import { PortalHost as FallbackPortalHost } from './components/Portal';
 import isElectron from 'is-electron';
+import { AppRouterApi } from './components/AppRouterApi';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
@@ -108,6 +109,7 @@ export const App: React.FC = React.memo(() => {
     <AppProvider>
       <AppHeader />
       <AppContainer>
+        <AppRouterApi />
         <Routes>
           <Route
             path="/entry/*"
