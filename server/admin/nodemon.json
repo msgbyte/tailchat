@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "watch": ["./server.ts"],
+  "ext": "ts",
+  "delay": 1000,
+  "exec": "ts-node ./server.ts"
+}
