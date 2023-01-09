@@ -383,7 +383,7 @@ importers:
       lodash: ^4.17.21
       memoize-one: ^6.0.0
       mini-css-extract-plugin: ^2.7.2
-      mini-star: 2.0.5
+      mini-star: 2.0.8
       minimatch: ^5.1.1
       normalize-path: ^3.0.0
       p-min-delay: ^4.0.1
@@ -455,7 +455,7 @@ importers:
       jwt-decode: 3.1.2
       lodash: 4.17.21
       memoize-one: 6.0.0
-      mini-star: 2.0.5
+      mini-star: 2.0.8
       minimatch: 5.1.1
       p-min-delay: 4.0.1
       qs: 6.11.0
@@ -24314,6 +24314,29 @@ packages:
       yargs: 16.2.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /mini-star/2.0.8:
+    resolution: {integrity: sha512-la0VMkkiSLfYwVoc/gtKylrntv7LOOqsFEeo9vHYfPDi31+mFqKa2SFwkV/SU8bah3tScLfMuEvhc1OB3nv9QA==}
+    hasBin: true
+    dependencies:
+      '@rollup/plugin-commonjs': 19.0.2_rollup@2.79.1
+      '@rollup/plugin-json': 4.1.0_rollup@2.79.1
+      '@rollup/plugin-node-resolve': 13.3.0_rollup@2.79.1
+      '@rollup/plugin-url': 6.1.0_rollup@2.79.1
+      cosmiconfig: 7.1.0
+      esbuild: 0.12.29
+      fs-extra: 9.1.0
+      inquirer: 8.2.5
+      ora: 5.4.1
+      rimraf: 3.0.2
+      rollup: 2.79.1
+      rollup-plugin-esbuild: 4.10.3_a3lzt7iayvbsuv5iypu22sont4
+      rollup-plugin-styles: 3.14.1_rollup@2.79.1
+      yargs: 16.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
