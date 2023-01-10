@@ -11,6 +11,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.3",
     "@remix-run/express": "^1.9.0",
     "@remix-run/node": "^1.9.0",

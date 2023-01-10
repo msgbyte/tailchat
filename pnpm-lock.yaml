@@ -894,6 +894,7 @@ importers:
 
   server/admin:
     specifiers:
+      '@mui/icons-material': ^5.11.0
       '@mui/material': ^5.11.3
       '@remix-run/dev': ^1.9.0
       '@remix-run/express': ^1.9.0
@@ -921,6 +922,7 @@ importers:
       ts-node: ^10.9.1
       typescript: ^4.8.4
     dependencies:
+      '@mui/icons-material': 5.11.0_oiuuhmk4wjjpe4qb2sby7usney
       '@mui/material': 5.11.3_ib3m5ricvtkl2cll7qpr2f6lvq
       '@remix-run/express': 1.9.0_cwk4saenierp7pa7l5cpbeswge
       '@remix-run/node': 1.9.0_biqbaboplfbrettd7655fr4n2y
@@ -7750,7 +7752,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.20.7
-      '@mui/material': 5.11.3_dqge6ix3sjwueqhzcenpc5wc2q
+      '@mui/material': 5.11.3_ib3m5ricvtkl2cll7qpr2f6lvq
       '@types/react': 18.0.26
       react: 18.2.0
     dev: false
