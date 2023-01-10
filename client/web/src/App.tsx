@@ -23,6 +23,8 @@ import { pluginRootRoute } from './plugin/common';
 import { PortalHost as FallbackPortalHost } from './components/Portal';
 import isElectron from 'is-electron';
 import { AppRouterApi } from './components/AppRouterApi';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
@@ -55,9 +57,11 @@ const AppProvider: React.FC<PropsWithChildren> = React.memo((props) => {
     <Suspense fallback={<LoadingSpinner />}>
       <AppRouter>
         <TcProvider>
-          <AntdProvider getPopupContainer={getPopupContainer}>
-            {props.children}
-          </AntdProvider>
+          <DndProvider backend={HTML5Backend}>
+            <AntdProvider getPopupContainer={getPopupContainer}>
+              {props.children}
+            </AntdProvider>
+          </DndProvider>
         </TcProvider>
       </AppRouter>
     </Suspense>

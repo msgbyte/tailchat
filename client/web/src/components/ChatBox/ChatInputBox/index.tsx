@@ -14,6 +14,7 @@ import {
 } from 'tailchat-shared';
 import { ChatInputEmotion } from './Emotion';
 import _uniq from 'lodash/uniq';
+import { ChatDropArea } from './ChatDropArea';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
@@ -111,6 +112,8 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             <ChatInputEmotion />
             <ChatInputAddon />
           </div>
+
+          <ChatDropArea />
         </div>
       </div>
     </ChatInputActionContext.Provider>

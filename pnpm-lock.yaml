@@ -392,6 +392,8 @@ importers:
       qs: ^6.11.0
       rc-tree: ^5.7.2
       react: 18.2.0
+      react-dnd: ^16.0.1
+      react-dnd-html5-backend: ^16.0.1
       react-dom: 18.2.0
       react-easy-crop: ^3.5.3
       react-helmet: ^6.1.0
@@ -461,6 +463,8 @@ importers:
       qs: 6.11.0
       rc-tree: 5.7.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
+      react-dnd: 16.0.1_44xqbblv4eynrtx3g5sxpcjfbe
+      react-dnd-html5-backend: 16.0.1
       react-dom: 18.2.0_react@18.2.0
       react-easy-crop: 3.5.3_biqbaboplfbrettd7655fr4n2y
       react-helmet: 6.1.0_react@18.2.0
@@ -6919,6 +6923,18 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       tiny-warning: 1.0.3
       tslib: 2.4.1
+    dev: false
+
+  /@react-dnd/asap/5.0.2:
+    resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
+    dev: false
+
+  /@react-dnd/invariant/4.0.2:
+    resolution: {integrity: sha512-xKCTqAK/FFauOM9Ta2pswIyT3D8AQlfrYdOi/toTPEhqCuAs1v5tcJ3Y08Izh1cJ5Jchwy9SeAXmMg6zrKs2iw==}
+    dev: false
+
+  /@react-dnd/shallowequal/4.0.2:
+    resolution: {integrity: sha512-/RVXdLvJxLg4QKvMoM5WlwNR9ViO9z8B/qPcc+C0Sa/teJY7QG7kJ441DwzOjMYEY7GmU4dj5EcGHIkKZiQZCA==}
     dev: false
 
   /@reduxjs/toolkit/1.8.5_kkwg4cbsojnjnupd3btipussee:
@@ -16985,6 +17001,14 @@ packages:
 
   /dlv/1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
+    dev: false
+
+  /dnd-core/16.0.1:
+    resolution: {integrity: sha512-HK294sl7tbw6F6IeuK16YSBUoorvHpY8RHO+9yFfaJyCDVb6n7PRcezrOEOa2SBCqiYpemh5Jx20ZcjKdFAVng==}
+    dependencies:
+      '@react-dnd/asap': 5.0.2
+      '@react-dnd/invariant': 4.0.2
+      redux: 4.2.0
     dev: false
 
   /dns-equal/1.0.0:
@@ -29540,6 +29564,37 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /react-dnd-html5-backend/16.0.1:
+    resolution: {integrity: sha512-Wu3dw5aDJmOGw8WjH1I1/yTH+vlXEL4vmjk5p+MHxP8HuHJS1lAGeIdG/hze1AvNeXWo/JgULV87LyQOr+r5jw==}
+    dependencies:
+      dnd-core: 16.0.1
+    dev: false
+
+  /react-dnd/16.0.1_44xqbblv4eynrtx3g5sxpcjfbe:
+    resolution: {integrity: sha512-QeoM/i73HHu2XF9aKksIUuamHPDvRglEwdHL4jsp784BgUuWcg6mzfxT0QDdQz8Wj0qyRKx2eMg8iZtWvU4E2Q==}
+    peerDependencies:
+      '@types/hoist-non-react-statics': '>= 3.3.1'
+      '@types/node': '>= 12'
+      '@types/react': '>= 16'
+      react: '>= 16.14'
+    peerDependenciesMeta:
+      '@types/hoist-non-react-statics':
+        optional: true
+      '@types/node':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@react-dnd/invariant': 4.0.2
+      '@react-dnd/shallowequal': 4.0.2
+      '@types/node': 15.14.9
+      '@types/react': 18.0.20
+      dnd-core: 16.0.1
+      fast-deep-equal: 3.1.3
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
     dev: false
 
   /react-docgen-typescript/2.2.2_typescript@4.7.4:
