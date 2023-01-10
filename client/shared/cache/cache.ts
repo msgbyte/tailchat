@@ -1,5 +1,10 @@
 import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
-import { findGroupInviteByCode, GroupInvite } from '../model/group';
+import {
+  findGroupInviteByCode,
+  getGroupBasicInfo,
+  GroupBasicInfo,
+  GroupInvite,
+} from '../model/group';
 import {
   fetchLocalStaticRegistryPlugins,
   fetchRegistryPlugins,
@@ -36,6 +41,19 @@ export async function getCachedConverseInfo(
 ): Promise<ChatConverseInfo> {
   const data = await queryClient.fetchQuery(['converse', converseId], () =>
     fetchConverseInfo(converseId)
+  );
+
+  return data;
+}
+
+/**
+ * 获取缓存的邀请码信息
+ */
+export async function getCachedBaseGroupInfo(
+  groupId: string
+): Promise<GroupBasicInfo | null> {
+  const data = await queryClient.fetchQuery(['baseGroupInfo', groupId], () =>
+    getGroupBasicInfo(groupId)
   );
 
   return data;

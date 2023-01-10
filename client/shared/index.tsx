@@ -9,6 +9,7 @@ export type { AppSocket } from './api/socket';
 export {
   getCachedUserInfo,
   getCachedConverseInfo,
+  getCachedBaseGroupInfo,
   getCachedGroupInviteInfo,
   getCachedRegistryPlugins,
 } from './cache/cache';

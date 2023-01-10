@@ -3,5 +3,10 @@
   "main": "src/index.tsx",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "tinycon": "^0.6.8"
+  },
+  "devDependencies": {
+    "@types/tinycon": "^0.6.3"
+  }
 }

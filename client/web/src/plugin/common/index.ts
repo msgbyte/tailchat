@@ -37,6 +37,7 @@ export {
   getServiceUrl,
   getCachedUserInfo,
   getCachedConverseInfo,
+  getCachedBaseGroupInfo,
   localTrans,
   getLanguage,
   sharedEvent,

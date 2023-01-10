@@ -644,7 +644,13 @@ importers:
       miao-lang: 1.0.5
 
   client/web/plugins/com.msgbyte.notify:
-    specifiers: {}
+    specifiers:
+      '@types/tinycon': ^0.6.3
+      tinycon: ^0.6.8
+    dependencies:
+      tinycon: 0.6.8
+    devDependencies:
+      '@types/tinycon': 0.6.3
 
   client/web/plugins/com.msgbyte.openapi:
     specifiers: {}
@@ -11686,6 +11692,10 @@ packages:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
     dependencies:
       '@types/node': 18.11.16
+
+  /@types/tinycon/0.6.3:
+    resolution: {integrity: sha512-TC42m8KAyp3AqyZKRXVkk5Qy+oIU8zo2U3362i16Qan0JgZNzLawO7oYnin4BJOy8FSZfOadYYvUWQnpaXoZwg==}
+    dev: true
 
   /@types/trusted-types/2.0.2:
     resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
@@ -33653,6 +33663,10 @@ packages:
 
   /tinycolor2/1.4.2:
     resolution: {integrity: sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==}
+    dev: false
+
+  /tinycon/0.6.8:
+    resolution: {integrity: sha512-bF8Lxm4JUXF6Cw0XlZdugJ44GV575OinZ0Pt8vQPr8ooNqd2yyNkoFdCHzmdpHlgoqfSLfcyk4HDP1EyllT+ug==}
     dev: false
 
   /title-case/2.1.1:
