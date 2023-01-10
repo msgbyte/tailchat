@@ -3,6 +3,11 @@ import { useMemoizedFn } from 'tailchat-shared';
 
 interface UserSessionPerference {
   /**
+   * 用户最后访问个人的面板地址
+   * 用于切换回个人菜单时回到最近一个
+   */
+  personLastVisitPanelUrl?: string;
+  /**
    * 用户最后访问群组的面板id
    * 用于切换群组时回到最后一个
    */

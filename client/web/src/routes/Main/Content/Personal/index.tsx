@@ -1,5 +1,7 @@
+import { useUserSessionPreference } from '@/hooks/useUserPreference';
 import { pluginCustomPanel } from '@/plugin/common';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PageContent } from '../PageContent';
 import { PersonalConverse } from './Converse';
@@ -8,6 +10,15 @@ import { PluginsPanel } from './Plugins';
 import { PersonalSidebar } from './Sidebar';
 
 export const Personal: React.FC = React.memo(() => {
+  const [lastVisitPanelUrl, setLastVisitPanelUrl] = useUserSessionPreference(
+    'personLastVisitPanelUrl'
+  );
+  const location = useLocation();
+
+  useEffect(() => {
+    setLastVisitPanelUrl(location.pathname);
+  }, [location.pathname]);
+
   return (
     <PageContent data-tc-role="content-personal" sidebar={<PersonalSidebar />}>
       <Routes>
@@ -24,7 +35,16 @@ export const Personal: React.FC = React.memo(() => {
             />
           ))}
 
-        <Route path="/" element={<Navigate to="/main/personal/friends" />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to={
+                lastVisitPanelUrl ? lastVisitPanelUrl : '/main/personal/friends'
+              }
+            />
+          }
+        />
       </Routes>
     </PageContent>
   );
