@@ -1,11 +1,11 @@
 import path from 'path';
-import express, { Router } from 'express';
+import express from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
 import { createRequestHandler } from '@remix-run/express';
-import raExpressMongoose from 'express-mongoose-ra-json-server';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { router } from './app/server/index';
 dotenv.config();
 
 // 链接数据库
@@ -37,15 +37,6 @@ app.use(express.static('public', { maxAge: '1h' }));
 
 app.use(morgan('tiny'));
 
-const router = Router();
-
-router.use(
-  '/users',
-  raExpressMongoose(require('../models/user/user').default, {
-    q: ['nickname', 'email'],
-  })
-);
-
 app.use('/admin/api', router);
 
 app.all(
@@ -68,7 +59,9 @@ app.all(
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Express server listening on port ${port}`);
+  console.log(
+    `Express server listening on port ${port}, visit with: http://localhost:${port}/admin/`
+  );
 });
 
 function purgeRequireCache() {

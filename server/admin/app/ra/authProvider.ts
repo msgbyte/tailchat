@@ -27,7 +27,7 @@ export const authProvider: AuthProvider = {
   getIdentity: () =>
     Promise.resolve({
       id: 'user',
-      fullName: 'John Doe',
+      fullName: 'Admin',
     }),
   getPermissions: () => Promise.resolve(''),
 };
