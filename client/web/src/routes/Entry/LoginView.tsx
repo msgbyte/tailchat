@@ -4,7 +4,7 @@ import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo, tryAutoLogin } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
@@ -39,6 +39,7 @@ export const LoginView: React.FC = React.memo(() => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
+  const { pathname } = useLocation();
 
   useEffect(() => {
     tryAutoLogin()
@@ -64,12 +65,13 @@ export const LoginView: React.FC = React.memo(() => {
     setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
 
-    if (isValidStr(navRedirect)) {
+    if (isValidStr(navRedirect) && navRedirect !== pathname) {
+      // 增加非当前状态判定避免循环
       navigate(decodeURIComponent(navRedirect));
     } else {
       navigate('/main');
     }
-  }, [email, password, navRedirect, navigate]);
+  }, [email, password, navRedirect, pathname, navigate]);
 
   const navToView = useNavToView();
 
