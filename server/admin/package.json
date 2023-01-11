@@ -28,6 +28,7 @@
     "react": "^18.2.0",
     "react-admin": "^4.6.3",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.5.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {

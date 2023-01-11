@@ -921,6 +921,7 @@ importers:
       react: ^18.2.0
       react-admin: ^4.6.3
       react-dom: ^18.2.0
+      react-router-dom: ^6.5.0
       ts-node: ^10.9.1
       typescript: ^4.8.4
     dependencies:
@@ -937,10 +938,11 @@ importers:
       isbot: 3.6.5
       lodash: 4.17.21
       morgan: 1.10.0
-      ra-data-json-server: 4.6.3_biqbaboplfbrettd7655fr4n2y
+      ra-data-json-server: 4.6.3_7gebip3sgfc5uoqbhvi5xascza
       react: 18.2.0
       react-admin: 4.6.3_ib3m5ricvtkl2cll7qpr2f6lvq
       react-dom: 18.2.0_react@18.2.0
+      react-router-dom: 6.5.0_biqbaboplfbrettd7655fr4n2y
       ts-node: 10.9.1_typescript@4.9.4
     devDependencies:
       '@remix-run/dev': 1.9.0_biqbaboplfbrettd7655fr4n2y
@@ -31066,7 +31068,7 @@ packages:
       quill-delta: 3.6.3
     dev: false
 
-  /ra-core/4.6.3_biqbaboplfbrettd7655fr4n2y:
+  /ra-core/4.6.3_7gebip3sgfc5uoqbhvi5xascza:
     resolution: {integrity: sha512-++UW1HJDy1m5EG8/6nRNr8btHxb7I5e5dMJXo83h0E7g5st2U6bIR0XLzIdcirOy5k3h3rM0lZP+tEA9M/Oxyw==}
     peerDependencies:
       history: ^5.1.0
@@ -31088,6 +31090,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-is: 17.0.2
       react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
+      react-router-dom: 6.5.0_biqbaboplfbrettd7655fr4n2y
     transitivePeerDependencies:
       - react-native
     dev: false
@@ -31122,11 +31125,11 @@ packages:
       - react-native
     dev: false
 
-  /ra-data-json-server/4.6.3_biqbaboplfbrettd7655fr4n2y:
+  /ra-data-json-server/4.6.3_7gebip3sgfc5uoqbhvi5xascza:
     resolution: {integrity: sha512-KChdLr/quUimzzsl5XTBc6jGg7EvQgjlRFi4Ymk8ovD/I11m2Vz8iXwgAV2kWDMKPqFuaRC9/xd6XZwjD/5zQQ==}
     dependencies:
       query-string: 7.1.3
-      ra-core: 4.6.3_biqbaboplfbrettd7655fr4n2y
+      ra-core: 4.6.3_7gebip3sgfc5uoqbhvi5xascza
     transitivePeerDependencies:
       - history
       - react

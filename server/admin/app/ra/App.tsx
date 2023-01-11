@@ -18,6 +18,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import GroupIcon from '@mui/icons-material/Group';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { theme } from './theme';
+import { Dashboard } from './dashboard';
 
 const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
   try {
@@ -43,6 +44,8 @@ export const App = () => (
   <Admin
     basename="/admin"
     theme={theme}
+    dashboard={Dashboard}
+    disableTelemetry={true}
     authProvider={authProvider}
     dataProvider={dataProvider}
   >

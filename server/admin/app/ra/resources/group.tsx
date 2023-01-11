@@ -29,11 +29,7 @@ export const GroupList: React.FC = () => (
       <TextField source="name" label="群组名称" />
       <TextField source="owner" label="管理员" />
       <TextField source="members.length" label="成员数量" />
-      <ArrayField source="panels" label="面板">
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ArrayField>
+      <TextField source="panels.length" label="面板数量" />
       <ArrayField source="roles" label="角色">
         <SingleFieldList>
           <ChipField source="name" />
