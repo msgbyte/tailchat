@@ -6,7 +6,7 @@ import { createRequestHandler } from '@remix-run/express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { router } from './app/server/index';
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // 链接数据库
 mongoose.connect(process.env.MONGO_URL!, (error: any) => {

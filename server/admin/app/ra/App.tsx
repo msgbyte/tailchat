@@ -12,10 +12,12 @@ import { UserList } from './resources/user';
 import React from 'react';
 import { GroupList } from './resources/group';
 import { MessageList } from './resources/chat';
+import { FileList } from './resources/file';
 import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
 import GroupIcon from '@mui/icons-material/Group';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { theme } from './theme';
 
 const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
   try {
@@ -40,6 +42,7 @@ const dataProvider = jsonServerProvider(
 export const App = () => (
   <Admin
     basename="/admin"
+    theme={theme}
     authProvider={authProvider}
     dataProvider={dataProvider}
   >
@@ -68,7 +71,7 @@ export const App = () => (
       icon={AttachFileIcon}
       name="file"
       options={{ label: '文件' }}
-      list={ListGuesser}
+      list={FileList}
       show={ShowGuesser}
     />
   </Admin>

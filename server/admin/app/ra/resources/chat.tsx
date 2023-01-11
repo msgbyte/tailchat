@@ -10,7 +10,16 @@ import {
 } from 'react-admin';
 
 export const MessageList: React.FC = () => (
-  <List filters={[<SearchInput key="search" source="q" alwaysOn />]}>
+  <List
+    filters={[
+      <SearchInput
+        key="search"
+        source="q"
+        alwaysOn
+        placeholder="搜索消息内容"
+      />,
+    ]}
+  >
     <Datagrid rowClick="show">
       <TextField source="id" label="ID" sortable={true} sortByOrder="DESC" />
       <TextField source="content" label="内容" />

@@ -911,7 +911,9 @@ importers:
       dotenv: ^16.0.3
       express: ^4.18.2
       express-mongoose-ra-json-server: ^0.1.0
+      filesize: ^8.0.7
       isbot: ^3.6.5
+      lodash: ^4.17.21
       morgan: ^1.10.0
       nodemon: ^2.0.20
       npm-run-all: ^4.1.5
@@ -931,7 +933,9 @@ importers:
       compression: 1.7.4
       express: 4.18.2
       express-mongoose-ra-json-server: 0.1.0_express@4.18.2
+      filesize: 8.0.7
       isbot: 3.6.5
+      lodash: 4.17.21
       morgan: 1.10.0
       ra-data-json-server: 4.6.3_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
