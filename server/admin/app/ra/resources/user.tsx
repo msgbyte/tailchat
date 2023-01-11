@@ -17,7 +17,16 @@ const PostListActionToolbar = ({ children, ...props }) => (
 );
 
 export const UserList: React.FC = () => (
-  <List filters={[<SearchInput key="search" source="q" alwaysOn />]}>
+  <List
+    filters={[
+      <SearchInput
+        key="search"
+        source="q"
+        alwaysOn
+        placeholder="搜索昵称或邮箱"
+      />,
+    ]}
+  >
     <Datagrid>
       <TextField source="id" label="用户ID" sortByOrder="DESC" />
       <EmailField source="email" label="邮箱" />
@@ -26,7 +35,6 @@ export const UserList: React.FC = () => (
       <BooleanField source="temporary" label="是否游客" />
       <TextField source="avatar" label="头像" />
       <TextField source="type" label="用户类型" />
-      <TextField source="password" label="密码" />
       <TextField source="settings" label="用户设置" />
       <DateField source="createdAt" label="创建时间" />
       <PostListActionToolbar>
