@@ -7,7 +7,7 @@ import {
   ShowGuesser,
 } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
-import { authProvider } from './authProvider';
+import { authProvider, authStorageKey } from './authProvider';
 import { UserList } from './resources/user';
 import React from 'react';
 import { GroupList } from './resources/group';
@@ -25,7 +25,9 @@ const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
     if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
     }
-    const { token } = JSON.parse(window.localStorage.getItem('auth') ?? '');
+    const { token } = JSON.parse(
+      window.localStorage.getItem(authStorageKey) ?? '{}'
+    );
     (options.headers as Headers).set('Authorization', `Bearer ${token}`);
 
     return fetchUtils.fetchJson(url, options);
@@ -36,8 +38,8 @@ const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
 
 const dataProvider = jsonServerProvider(
   // 'https://jsonplaceholder.typicode.com'
-  '/admin/api'
-  // httpClient
+  '/admin/api',
+  httpClient
 );
 
 export const App = () => (
@@ -48,6 +50,7 @@ export const App = () => (
     disableTelemetry={true}
     authProvider={authProvider}
     dataProvider={dataProvider}
+    requireAuth={true}
   >
     <Resource
       icon={PersonIcon}

@@ -98,6 +98,11 @@ export class GroupRole implements Base {
 /**
  * 群组
  */
+@modelOptions({
+  options: {
+    allowMixed: Severity.ALLOW,
+  },
+})
 export class Group extends TimeStamps implements Base {
   _id: Types.ObjectId;
   id: string;

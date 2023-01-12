@@ -903,9 +903,11 @@ importers:
       '@typegoose/typegoose': 9.3.1
       '@types/compression': ^1.7.2
       '@types/express': ^4.17.15
+      '@types/md5': ^2.3.2
       '@types/morgan': ^1.9.4
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.8
+      body-parser: ^1.20.1
       compression: ^1.7.4
       cross-env: ^7.0.3
       dotenv: ^16.0.3
@@ -913,7 +915,9 @@ importers:
       express-mongoose-ra-json-server: ^0.1.0
       filesize: ^8.0.7
       isbot: ^3.6.5
+      jsonwebtoken: ^8.5.1
       lodash: ^4.17.21
+      md5: ^2.3.0
       morgan: ^1.10.0
       nodemon: ^2.0.20
       npm-run-all: ^4.1.5
@@ -931,12 +935,16 @@ importers:
       '@remix-run/node': 1.9.0_biqbaboplfbrettd7655fr4n2y
       '@remix-run/react': 1.9.0_biqbaboplfbrettd7655fr4n2y
       '@typegoose/typegoose': 9.3.1
+      '@types/md5': 2.3.2
+      body-parser: 1.20.1
       compression: 1.7.4
       express: 4.18.2
       express-mongoose-ra-json-server: 0.1.0_express@4.18.2
       filesize: 8.0.7
       isbot: 3.6.5
+      jsonwebtoken: 8.5.1
       lodash: 4.17.21
+      md5: 2.3.0
       morgan: 1.10.0
       ra-data-json-server: 4.6.3_7gebip3sgfc5uoqbhvi5xascza
       react: 18.2.0
@@ -13197,6 +13205,10 @@ packages:
     resolution: {integrity: sha512-eEAhnz21CwvKVW+YvRvcTuFKNU9CV1qH+opcgVK3pIMI6YZzDm6gc8o2vHjldFk6MGKt5pueSB7IOpvpx5Qekw==}
     dev: false
 
+  /@types/md5/2.3.2:
+    resolution: {integrity: sha512-v+JFDu96+UYJ3/UWzB0mEglIS//MZXgRaJ4ubUPwOM0gvLc/kcQ3TWNYwENEK7/EcXGQVrW8h/XqednSjBd/Og==}
+    dev: false
+
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
     dependencies:
@@ -16662,6 +16674,10 @@ packages:
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
 
+  /charenc/0.0.2:
+    resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
+    dev: false
+
   /cheerio-select/2.1.0:
     resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
     dependencies:
@@ -17987,6 +18003,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  /crypt/0.0.2:
+    resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
+    dev: false
 
   /crypto-browserify/3.12.0:
     resolution: {integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==}
@@ -23632,7 +23652,6 @@ packages:
 
   /is-buffer/1.1.6:
     resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
-    dev: true
 
   /is-buffer/2.0.5:
     resolution: {integrity: sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==}
@@ -26096,6 +26115,14 @@ packages:
       hash-base: 3.1.0
       inherits: 2.0.4
       safe-buffer: 5.2.1
+
+  /md5/2.3.0:
+    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+    dependencies:
+      charenc: 0.0.2
+      crypt: 0.0.2
+      is-buffer: 1.1.6
+    dev: false
 
   /mdast-squeeze-paragraphs/4.0.0:
     resolution: {integrity: sha512-zxdPn69hkQ1rm4J+2Cs2j6wDEv7O17TfXTJ33tl/+JPIoEmtV9t2ZzBM5LPHE8QlHsmVD8t3vPKCyY3oH+H8MQ==}
