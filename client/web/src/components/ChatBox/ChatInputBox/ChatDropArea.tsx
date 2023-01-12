@@ -40,7 +40,7 @@ export const ChatDropArea: React.FC = React.memo(() => {
   });
 
   if (!collectedProps.canDrop) {
-    return;
+    return null;
   }
 
   return (
