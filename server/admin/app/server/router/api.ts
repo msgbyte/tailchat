@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
-import { adminAuth, auth, authSecret } from './middleware';
+import { adminAuth, auth, authSecret } from '../middleware';
+import { networkRouter } from './network';
 
 const router = Router();
 
@@ -20,7 +21,10 @@ router.post('/login', (req, res) => {
         username,
         platform: 'admin',
       },
-      authSecret
+      authSecret,
+      {
+        expiresIn: '2h',
+      }
     );
 
     res.json({
@@ -32,17 +36,19 @@ router.post('/login', (req, res) => {
   }
 });
 
+router.use('/network', networkRouter);
+
 router.use(
   '/users',
   auth(),
-  raExpressMongoose(require('../../../models/user/user').default, {
+  raExpressMongoose(require('../../../../models/user/user').default, {
     q: ['nickname', 'email'],
   })
 );
 router.use(
   '/messages',
   auth(),
-  raExpressMongoose(require('../../../models/chat/message').default, {
+  raExpressMongoose(require('../../../../models/chat/message').default, {
     q: ['content'],
     allowedRegexFields: ['content'],
   })
@@ -50,16 +56,16 @@ router.use(
 router.use(
   '/groups',
   auth(),
-  raExpressMongoose(require('../../../models/group/group').default, {
+  raExpressMongoose(require('../../../../models/group/group').default, {
     q: ['name'],
   })
 );
 router.use(
   '/file',
   auth(),
-  raExpressMongoose(require('../../../models/file').default, {
+  raExpressMongoose(require('../../../../models/file').default, {
     q: ['objectName'],
   })
 );
 
-export { router };
+export { router as apiRouter };

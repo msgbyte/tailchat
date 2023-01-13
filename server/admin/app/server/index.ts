@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import { createRequestHandler } from '@remix-run/express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import { router } from './api';
+import { apiRouter } from './router/api';
 
 // 链接数据库
 mongoose.connect(process.env.MONGO_URL!, (error: any) => {
@@ -37,7 +37,7 @@ app.use(express.static('public', { maxAge: '1h' }));
 
 app.use(morgan('tiny'));
 
-app.use('/admin/api', router);
+app.use('/admin/api', apiRouter);
 
 app.all(
   '/admin/*',
@@ -56,7 +56,7 @@ app.all(
       })
 );
 
-const port = process.env.PORT || 3000;
+const port = process.env.ADMIN_PORT || 3000;
 
 app.listen(port, () => {
   console.log(
