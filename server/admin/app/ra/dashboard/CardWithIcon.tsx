@@ -56,7 +56,7 @@ const CardWithIcon = (props: Props) => {
           <Box textAlign="right">
             <Typography color="textSecondary">{title}</Typography>
             <Typography variant="h5" component="h2">
-              {subtitle || <LoadingIndicator />}
+              {subtitle ?? <LoadingIndicator />}
             </Typography>
           </Box>
         </Box>

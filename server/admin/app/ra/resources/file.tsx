@@ -3,7 +3,6 @@ import {
   Datagrid,
   DateField,
   List,
-  NumberField,
   ReferenceField,
   TextField,
   UrlField,
