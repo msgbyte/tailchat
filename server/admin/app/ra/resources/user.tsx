@@ -39,7 +39,6 @@ export const UserList: React.FC = () => (
       <DateField source="createdAt" label="创建时间" />
       <PostListActionToolbar>
         <ShowButton />
-        <EditButton />
       </PostListActionToolbar>
     </Datagrid>
   </List>
