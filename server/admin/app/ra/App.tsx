@@ -1,10 +1,9 @@
 import {
   Admin,
   Resource,
-  ListGuesser,
   fetchUtils,
-  EditGuesser,
   ShowGuesser,
+  CustomRoutes,
 } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
 import { authProvider, authStorageKey } from './authProvider';
@@ -19,6 +18,9 @@ import GroupIcon from '@mui/icons-material/Group';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { theme } from './theme';
 import { Dashboard } from './dashboard';
+import { Route } from 'react-router-dom';
+import { TailchatNetwork } from './network';
+import { TailchatLayout } from './layout';
 
 const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
   try {
@@ -47,6 +49,7 @@ export const App = () => (
     basename="/admin"
     theme={theme}
     dashboard={Dashboard}
+    layout={TailchatLayout}
     disableTelemetry={true}
     authProvider={authProvider}
     dataProvider={dataProvider}
@@ -80,5 +83,9 @@ export const App = () => (
       list={FileList}
       show={ShowGuesser}
     />
+
+    <CustomRoutes>
+      <Route path="/network" element={<TailchatNetwork />} />
+    </CustomRoutes>
   </Admin>
 );

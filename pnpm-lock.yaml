@@ -907,6 +907,8 @@ importers:
       '@types/morgan': ^1.9.4
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.8
+      ahooks: ^3.7.4
+      axios: ^1.2.2
       body-parser: ^1.20.1
       compression: ^1.7.4
       cross-env: ^7.0.3
@@ -937,6 +939,8 @@ importers:
       '@remix-run/react': 1.9.0_biqbaboplfbrettd7655fr4n2y
       '@typegoose/typegoose': 9.3.1
       '@types/md5': 2.3.2
+      ahooks: 3.7.4_react@18.2.0
+      axios: 1.2.2
       body-parser: 1.20.1
       compression: 1.7.4
       express: 4.18.2
@@ -15380,6 +15384,16 @@ packages:
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/1.2.2:
+    resolution: {integrity: sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -30899,7 +30913,6 @@ packages:
 
   /proxy-from-env/1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: true
 
   /prr/1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
