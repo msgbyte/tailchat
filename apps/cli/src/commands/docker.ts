@@ -16,7 +16,7 @@ const targetImageName = targetImage.repo + targetImage.tag;
 
 export const dockerCommand: CommandModule = {
   command: 'docker',
-  describe: 'Tailchat 插件类型声明',
+  describe: 'Tailchat 镜像管理',
   builder: (yargs) =>
     yargs
       .command(

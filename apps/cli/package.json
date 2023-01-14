@@ -13,7 +13,7 @@
     "templates"
   ],
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
+    "dev": "cross-env NODE_ENV=development ts-node ./src/index.ts",
     "build": "rimraf -rf lib && tsc",
     "prepare": "npm run build",
     "release": "npm publish --registry https://registry.npmjs.com/",
@@ -65,6 +65,7 @@
     "@types/react": "18.0.20",
     "@types/spinnies": "^0.5.0",
     "@types/yargs": "^17.0.10",
+    "cross-env": "^7.0.3",
     "tailchat-shared": "workspace:*",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
