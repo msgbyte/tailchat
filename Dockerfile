@@ -4,8 +4,8 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # Install dependencies
-RUN npm install -g pnpm@7.11.0
-RUN npm install -g tailchat-cli@1.4.0
+RUN npm install -g pnpm@7.13.4
+RUN npm install -g tailchat-cli@latest
 
 # Install plugins and sdk dependency
 COPY ./tsconfig.json ./tsconfig.json
