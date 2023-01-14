@@ -78,6 +78,11 @@ class InboxService extends TcService {
       },
     });
     this.registerAction('all', this.all);
+    this.registerAction('ack', this.ack, {
+      params: {
+        inboxItemId: 'string',
+      },
+    });
   }
 
   async appendMessage(
@@ -150,6 +155,26 @@ class InboxService extends TcService {
     });
 
     return await this.transformDocuments(ctx, {}, list);
+  }
+
+  /**
+   * 标记收件箱内容已读
+   */
+  async ack(ctx: TcContext<{ inboxItemId: string }>) {
+    const inboxItemId = ctx.params.inboxItemId;
+    const userId = ctx.meta.userId;
+
+    await this.adapter.model.updateOne(
+      {
+        _id: inboxItemId,
+        userId,
+      },
+      {
+        readed: true,
+      }
+    );
+
+    return true;
   }
 
   /**

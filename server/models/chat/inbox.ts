@@ -57,6 +57,14 @@ export class Inbox extends TimeStamps implements Base {
     type: () => InboxMessage,
   })
   message?: InboxMessage;
+
+  /**
+   * 是否已读
+   */
+  @prop({
+    default: false,
+  })
+  readed: boolean;
 }
 
 export type InboxDocument = DocumentType<Inbox>;
