@@ -1,6 +1,7 @@
 import {
   regGroupPanelBadge,
   regPluginGroupTextPanelExtraMenu,
+  regPluginSettings,
   sharedEvent,
   showToasts,
 } from '@capital/common';
@@ -9,8 +10,7 @@ import React from 'react';
 import { appendSilent, hasSilent, removeSilent } from './silent';
 import { initNotify } from './notify';
 import { Translate } from './translate';
-
-const PLUGIN_NAME = 'com.msgbyte.notify';
+import { PLUGIN_NAME, PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND } from './const';
 
 if ('Notification' in window) {
   initNotify();
@@ -39,4 +39,11 @@ regGroupPanelBadge({
   render: (groupId: string, panelId: string) => {
     return hasSilent(panelId) ? <Icon icon="mdi:bell-off-outline" /> : null;
   },
+});
+
+regPluginSettings({
+  name: PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND,
+  label: Translate.disabledSound,
+  position: 'system',
+  type: 'boolean',
 });

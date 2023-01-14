@@ -2,14 +2,17 @@ import {
   regSocketEventListener,
   getGlobalState,
   getCachedUserInfo,
-  getCachedConverseInfo,
   getCachedBaseGroupInfo,
   getServiceWorkerRegistration,
   navigate,
+  sharedEvent,
+  getCachedUserSettings,
 } from '@capital/common';
 import { Translate } from './translate';
 import { hasSilent } from './silent';
 import { incBubble, setBubble } from './bubble';
+import _get from 'lodash/get';
+import { PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND } from './const';
 
 const TAG = 'tailchat-message';
 
@@ -123,10 +126,28 @@ function handleMessageNotifyClick(tag, data) {
   }
 }
 
+let userSettings = null;
+sharedEvent.on('loginSuccess', () => {
+  getCachedUserSettings().then((settings) => {
+    if (userSettings === null) {
+      userSettings = settings;
+    }
+  });
+});
+
+sharedEvent.on('userSettingsUpdate', (settings) => {
+  userSettings = settings;
+});
+
 /**
  * 尝试播放通知声音
  */
 function tryPlayNotificationSound() {
+  if (_get(userSettings, PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND) === true) {
+    // 消息提示音被禁用
+    return;
+  }
+
   try {
     const audio = new Audio(
       '/plugins/com.msgbyte.notify/assets/sounds_bing.mp3'

@@ -16,7 +16,6 @@ pnpm ministar createPlugin
 ```json
 {
   "compilerOptions": {
-    "rootDir": "./src",
     "baseUrl": "./src",
     "esModuleInterop": true,
     "jsx": "react",

@@ -646,8 +646,10 @@ importers:
   client/web/plugins/com.msgbyte.notify:
     specifiers:
       '@types/tinycon': ^0.6.3
+      lodash: ^4.17.21
       tinycon: ^0.6.8
     dependencies:
+      lodash: 4.17.21
       tinycon: 0.6.8
     devDependencies:
       '@types/tinycon': 0.6.3

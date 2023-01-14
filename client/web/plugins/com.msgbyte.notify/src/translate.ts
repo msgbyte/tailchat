@@ -14,4 +14,8 @@ export const Translate = {
     'zh-CN': '私信',
     'en-US': 'DM',
   }),
+  disabledSound: localTrans({
+    'zh-CN': '禁用消息通知提示音',
+    'en-US': 'Disable message notification sound',
+  }),
 };
