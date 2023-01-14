@@ -69,6 +69,7 @@ importers:
       '@types/spinnies': ^0.5.0
       '@types/yargs': ^17.0.10
       as-table: ^1.0.55
+      chalk: 4.1.2
       cross-env: ^7.0.3
       dockerode: ^3.3.4
       dotenv: ^16.0.0
@@ -97,6 +98,7 @@ importers:
     dependencies:
       '@types/dockerode': 3.3.10
       as-table: 1.0.55
+      chalk: 4.1.2
       dockerode: 3.3.4
       dotenv: 16.0.2
       filesize: 8.0.7
@@ -14508,11 +14510,6 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  /chalk/5.0.1:
-    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: false
-
   /chalk/5.1.2:
     resolution: {integrity: sha512-E5CkT4jWURs1Vy5qGJye+XwCkNj7Od3Af7CP6SujMetSMkLs8Do2RWJK5yx1wamHV/op8Rz+9rltjaTQWDnEFQ==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
@@ -26684,7 +26681,7 @@ packages:
     hasBin: true
     dependencies:
       '@types/liftoff': 4.0.0
-      chalk: 5.0.1
+      chalk: 5.1.2
       interpret: 2.2.0
       liftoff: 4.0.0
       minimist: 1.2.6

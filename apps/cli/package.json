@@ -35,6 +35,7 @@
   "dependencies": {
     "@types/dockerode": "^3.3.10",
     "as-table": "^1.0.55",
+    "chalk": "4.1.2",
     "dockerode": "^3.3.4",
     "dotenv": "^16.0.0",
     "filesize": "^8.0.7",
