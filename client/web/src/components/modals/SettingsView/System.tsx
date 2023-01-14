@@ -1,23 +1,20 @@
+import { FullModalFactory } from '@/components/FullModal/Factory';
 import { FullModalField } from '@/components/FullModal/Field';
 import { LanguageSelect } from '@/components/LanguageSelect';
-import { pluginColorScheme } from '@/plugin/common';
+import { pluginColorScheme, pluginSettings } from '@/plugin/common';
 import { Select, Switch } from 'antd';
 import React from 'react';
 import {
-  AlphaContainer,
   t,
   useAlphaMode,
   useColorScheme,
-  useSingleUserSetting,
+  useUserSettings,
 } from 'tailchat-shared';
+import _get from 'lodash/get';
 
 export const SettingsSystem: React.FC = React.memo(() => {
   const { colorScheme, setColorScheme } = useColorScheme();
-  const {
-    value: messageListVirtualization,
-    setValue: setMessageListVirtualization,
-    loading,
-  } = useSingleUserSetting('messageListVirtualization', false);
+  const { settings, setSettings, loading } = useUserSettings();
   const { isAlphaMode, setAlphaMode } = useAlphaMode();
 
   return (
@@ -45,6 +42,23 @@ export const SettingsSystem: React.FC = React.memo(() => {
         }
       />
 
+      {pluginSettings
+        .filter((item) => item.position === 'system')
+        .map((item) => {
+          return (
+            <FullModalFactory
+              key={item.name}
+              value={_get(settings, item.name, false)}
+              onChange={(val) => {
+                setSettings({
+                  [item.name]: val,
+                });
+              }}
+              config={item}
+            />
+          );
+        })}
+
       <FullModalField
         title={t('Alpha测试开关')}
         tip={t(
@@ -52,7 +66,6 @@ export const SettingsSystem: React.FC = React.memo(() => {
         )}
         content={
           <Switch
-            disabled={loading}
             checked={isAlphaMode}
             onChange={(checked) => setAlphaMode(checked)}
           />
@@ -65,8 +78,13 @@ export const SettingsSystem: React.FC = React.memo(() => {
           content={
             <Switch
               disabled={loading}
-              checked={messageListVirtualization}
-              onChange={(checked) => setMessageListVirtualization(checked)}
+              loading={loading}
+              checked={settings.messageListVirtualization ?? false}
+              onChange={(checked) =>
+                setSettings({
+                  messageListVirtualization: checked,
+                })
+              }
             />
           }
         />

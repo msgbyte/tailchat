@@ -38,6 +38,7 @@ export {
   getCachedUserInfo,
   getCachedConverseInfo,
   getCachedBaseGroupInfo,
+  getCachedUserSettings,
   localTrans,
   getLanguage,
   sharedEvent,

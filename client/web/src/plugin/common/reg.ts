@@ -8,6 +8,7 @@ import {
   PermissionItemType,
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
+import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
 
 /**
  * 注册自定义面板
@@ -254,3 +255,13 @@ interface PluginUserExtraInfo {
  */
 export const [pluginUserExtraInfo, regUserExtraInfo] =
   buildRegList<PluginUserExtraInfo>();
+
+type PluginSettings = FullModalFactoryConfig & {
+  position: 'system'; // 后面可能还会有个人设置/群组设置
+};
+
+/**
+ * 注册插件设置项
+ */
+export const [pluginSettings, regPluginSettings] =
+  buildRegList<PluginSettings>();

@@ -27,6 +27,11 @@ export interface UserSettings {
    * 消息列表虚拟化
    */
   messageListVirtualization?: boolean;
+
+  /**
+   * 其他的设置项
+   */
+  [key: string]: any;
 }
 
 export function pickUserBaseInfo(userInfo: UserLoginInfo) {

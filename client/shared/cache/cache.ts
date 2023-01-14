@@ -11,9 +11,18 @@ import {
   fetchServiceRegistryPlugins,
   PluginManifest,
 } from '../model/plugin';
-import { fetchUserInfo, UserBaseInfo } from '../model/user';
+import { fetchUserInfo, getUserSettings, UserBaseInfo } from '../model/user';
 import { parseUrlStr } from '../utils/url-helper';
 import { queryClient } from './index';
+
+export enum CacheKey {
+  user = 'user',
+  converse = 'converse',
+  baseGroupInfo = 'baseGroupInfo',
+  groupInvite = 'groupInvite',
+  pluginRegistry = 'pluginRegistry',
+  userSettings = 'userSettings',
+}
 
 /**
  * 获取缓存的用户信息
@@ -23,7 +32,7 @@ export async function getCachedUserInfo(
   refetch = false
 ): Promise<UserBaseInfo> {
   const data = await queryClient.fetchQuery(
-    ['user', userId],
+    [CacheKey.user, userId],
     () => fetchUserInfo(userId),
     {
       staleTime: refetch ? 0 : 2 * 60 * 60 * 1000, // 缓存2小时
@@ -39,8 +48,9 @@ export async function getCachedUserInfo(
 export async function getCachedConverseInfo(
   converseId: string
 ): Promise<ChatConverseInfo> {
-  const data = await queryClient.fetchQuery(['converse', converseId], () =>
-    fetchConverseInfo(converseId)
+  const data = await queryClient.fetchQuery(
+    [CacheKey.converse, converseId],
+    () => fetchConverseInfo(converseId)
   );
 
   return data;
@@ -52,8 +62,9 @@ export async function getCachedConverseInfo(
 export async function getCachedBaseGroupInfo(
   groupId: string
 ): Promise<GroupBasicInfo | null> {
-  const data = await queryClient.fetchQuery(['baseGroupInfo', groupId], () =>
-    getGroupBasicInfo(groupId)
+  const data = await queryClient.fetchQuery(
+    [CacheKey.baseGroupInfo, groupId],
+    () => getGroupBasicInfo(groupId)
   );
 
   return data;
@@ -65,8 +76,9 @@ export async function getCachedBaseGroupInfo(
 export async function getCachedGroupInviteInfo(
   inviteCode: string
 ): Promise<GroupInvite | null> {
-  const data = await queryClient.fetchQuery(['groupInvite', inviteCode], () =>
-    findGroupInviteByCode(inviteCode)
+  const data = await queryClient.fetchQuery(
+    [CacheKey.groupInvite, inviteCode],
+    () => findGroupInviteByCode(inviteCode)
   );
 
   return data;
@@ -77,7 +89,7 @@ export async function getCachedGroupInviteInfo(
  */
 export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
   const data = await queryClient.fetchQuery(
-    ['pluginRegistry'],
+    [CacheKey.pluginRegistry],
     () =>
       Promise.all([
         fetchRegistryPlugins().catch(() => []),
@@ -106,6 +118,21 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
       ]).then(([a, b, c]) => [...a, ...b, ...c]),
     {
       staleTime: 2 * 60 * 60 * 1000, // 缓存2小时
+    }
+  );
+
+  return data;
+}
+
+/**
+ * 获取用户配置
+ */
+export async function getCachedUserSettings() {
+  const data = await queryClient.fetchQuery(
+    [CacheKey.userSettings],
+    () => getUserSettings,
+    {
+      staleTime: 1 * 60 * 1000, // 缓存1分钟
     }
   );
 

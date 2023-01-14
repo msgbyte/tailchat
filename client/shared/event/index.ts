@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useUpdateRef } from '../hooks/useUpdateRef';
 import type { ChatMessage, SendMessagePayload } from '../model/message';
 import { EventEmitter } from 'eventemitter-strict';
-import type { UserBaseInfo } from '../model/user';
+import type { UserBaseInfo, UserSettings } from '../model/user';
 
 /**
  * 共享事件类型
@@ -51,6 +51,11 @@ export interface SharedEventMap {
    * 群组面板状态更新
    */
   groupPanelBadgeUpdate: () => void;
+
+  /**
+   * 用户设置发生了变更
+   */
+  userSettingsUpdate: (userSettings: UserSettings) => void;
 }
 export type SharedEventType = keyof SharedEventMap;
 

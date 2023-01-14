@@ -1,4 +1,6 @@
+import { CacheKey } from '../../cache/cache';
 import { useQuery, useQueryClient } from '../../cache/useCache';
+import { sharedEvent } from '../../event';
 import {
   getUserSettings,
   setUserSettings,
@@ -12,7 +14,7 @@ import { useAsyncRequest } from '../useAsyncRequest';
 export function useUserSettings() {
   const client = useQueryClient();
   const { data: settings, isLoading } = useQuery(
-    ['useUserSettings'],
+    [CacheKey],
     () => getUserSettings(),
     {
       staleTime: 1 * 60 * 1000, // 缓存1分钟
@@ -23,7 +25,8 @@ export function useUserSettings() {
     async (settings: UserSettings) => {
       const newSettings = await setUserSettings(settings);
 
-      client.setQueryData(['useUserSettings'], () => newSettings);
+      client.setQueryData([CacheKey], () => newSettings);
+      sharedEvent.emit('userSettingsUpdate', newSettings);
     },
     [client]
   );
