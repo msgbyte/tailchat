@@ -1,11 +1,15 @@
 FROM node:lts-alpine
 
 # Working directory
-WORKDIR /app
+WORKDIR /app/tailchat
 
 # Install dependencies
 RUN npm install -g pnpm@7.13.4
 RUN npm install -g tailchat-cli@latest
+
+# Add mc for minio
+RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
+RUN chmod +x /usr/local/bin/mc
 
 # Install plugins and sdk dependency
 COPY ./tsconfig.json ./tsconfig.json
