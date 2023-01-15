@@ -57,13 +57,13 @@ pnpm plugin:install com.msgbyte.tasks
 
 请确保已经安装了:
 - docker
-- docker-compose
+- docker-compose(或者docker compose plugin)
 
 
 在项目根目录下执行
 ```bash
-docker-compose build # 需要编译
-docker-compose up -d
+docker compose build # 需要编译
+docker compose up -d
 ```
 
 ## 运维

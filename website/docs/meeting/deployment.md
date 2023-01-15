@@ -65,7 +65,7 @@ TZ=Asia/Shanghai
 修改完毕以后可以直接执行以下命令
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 `docker compose` 会自动从网络下载镜像并构建`tailchat-meeting`
@@ -85,7 +85,7 @@ docker-compose up -d
 如:
 
 ```bash
-docker-compose up tailchat-meeting -d # 仅运行 tailchat-meeting 实例
+docker compose up tailchat-meeting -d # 仅运行 tailchat-meeting 实例
 ```
 
 

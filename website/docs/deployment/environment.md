@@ -30,4 +30,4 @@ title: 环境变量
   vi .env
   ```
 
-- 如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker-compose up -d` 即可生效
+- 如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker compose up -d` 即可生效

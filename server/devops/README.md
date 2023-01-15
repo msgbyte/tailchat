@@ -8,5 +8,5 @@ WIP
 
 ```bash
 cd ./devops
-docker-compose -f ../docker-compose.yml -f docker-compose.devops.yml up -d
+docker compose -f ../docker-compose.yml -f docker-compose.devops.yml up -d
 ```
