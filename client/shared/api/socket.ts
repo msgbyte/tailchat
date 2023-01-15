@@ -54,7 +54,13 @@ export class AppSocket {
         if (resp.result === true) {
           resolve(resp.data);
         } else if (resp.result === false) {
-          reject(new SocketEventError(resp.message));
+          reject(
+            new SocketEventError(
+              `[${eventName}]: ${resp.message}: \ndata: ${JSON.stringify(
+                eventData
+              )}`
+            )
+          );
         }
       });
     });
