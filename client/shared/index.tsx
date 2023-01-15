@@ -195,6 +195,7 @@ export {
   useHasGroupPermission,
 } from './redux/hooks/useGroupPermission';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
+export { useInboxList } from './redux/hooks/useInboxList';
 export { useUnread } from './redux/hooks/useUnread';
 export {
   userActions,

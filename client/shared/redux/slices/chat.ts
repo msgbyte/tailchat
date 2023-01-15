@@ -5,6 +5,7 @@ import _uniqBy from 'lodash/uniqBy';
 import _orderBy from 'lodash/orderBy';
 import _last from 'lodash/last';
 import { isValidStr } from '../../utils/string-helper';
+import type { InboxItem } from '../../model/inbox';
 
 export interface ChatConverseState extends ChatConverseInfo {
   messages: ChatMessage[];
@@ -19,6 +20,7 @@ export interface ChatState {
   currentConverseId: string | null; // 当前活跃的会话id
   converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
   ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>
+  inbox: InboxItem[];
 
   /**
    * 会话最新消息mapping
@@ -31,6 +33,7 @@ const initialState: ChatState = {
   currentConverseId: null,
   converses: {},
   ack: {},
+  inbox: [],
   lastMessageMap: {},
 };
 
@@ -310,6 +313,14 @@ const chatSlice = createSlice({
         (r) => r.name === reaction.name && r.author === reaction.author
       );
       message.reactions.splice(reactionIndex, 1);
+    },
+
+    /**
+     * 设置收件箱
+     */
+    setInboxList(state, action: PayloadAction<InboxItem[]>) {
+      const list = action.payload;
+      state.inbox = list;
     },
   },
 });

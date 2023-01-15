@@ -11,7 +11,7 @@ export const NavbarNavItem: React.FC<
     className?: ClassValue;
     to?: string;
     showPill?: boolean;
-    badge?: boolean;
+    badge?: boolean | number;
     onClick?: () => void;
     ['data-testid']?: string;
   }>
@@ -70,7 +70,7 @@ export const NavbarNavItem: React.FC<
         {badge === true ? (
           <Badge status="error" />
         ) : (
-          <Badge count={Number(badge) || 0} />
+          <Badge size="small" count={Number(badge) || 0} />
         )}
       </div>
     </div>

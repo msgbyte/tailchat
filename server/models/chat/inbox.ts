@@ -14,11 +14,13 @@ class InboxMessage {
   /**
    * 消息所在群组Id
    */
+  @prop()
   groupId?: string;
 
   /**
    * 消息所在会话Id
    */
+  @prop()
   converseId: string;
 
   @prop({

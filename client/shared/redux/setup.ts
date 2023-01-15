@@ -24,6 +24,7 @@ import {
 } from '../model/converse';
 import { appendUserDMConverse } from '../model/user';
 import { sharedEvent } from '../event';
+import type { InboxItem } from '../model/inbox';
 
 /**
  * 初始化 Redux 上下文
@@ -126,6 +127,10 @@ function initial(socket: AppSocket, store: AppStore) {
    */
   socket.request<GroupInfo[]>('group.getUserGroups').then((groups) => {
     store.dispatch(groupActions.appendGroups(groups));
+  });
+
+  socket.request<InboxItem[]>('chat.inbox.all').then((list) => {
+    store.dispatch(chatActions.setInboxList(list));
   });
 }
 
@@ -262,6 +267,13 @@ function listenNotify(socket: AppSocket, store: AppStore) {
 
   socket.listen<{ groupId: string }>('group.remove', ({ groupId }) => {
     store.dispatch(groupActions.removeGroup(groupId));
+  });
+
+  socket.listen('chat.inbox.updated', () => {
+    // 检测到收件箱列表被更新，需要重新获取
+    socket.request<InboxItem[]>('chat.inbox.all').then((list) => {
+      store.dispatch(chatActions.setInboxList(list));
+    });
   });
 
   // 其他的额外的通知

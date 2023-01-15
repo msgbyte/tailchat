@@ -6,3 +6,4 @@ export * as group from './group';
 export * as message from './message';
 export * as plugin from './plugin';
 export * as user from './user';
+export * as inbox from './inbox';
