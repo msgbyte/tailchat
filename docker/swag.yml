@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  swag:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    env_file:
+      - swag.env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VALIDATION=http
+    volumes:
+      - ./config/nginx.conf:/config/nginx/site-confs/default.conf:ro
+    restart: unless-stopped
+    network_mode: "host"
