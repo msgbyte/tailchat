@@ -71,7 +71,10 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
                 <RoleSummary
                   currentRoleInfo={currentRoleInfo}
                   onChangeRoleName={handleChangeRoleName}
-                  onDeleteRole={handleDeleteRole}
+                  onDeleteRole={async () => {
+                    await handleDeleteRole();
+                    setRoleId(AllPermission); // 删除身份组后切换到所有人
+                  }}
                 />
               )}
             </PillTabPane>
