@@ -89,6 +89,11 @@ class GroupService extends TcService {
         groupId: 'string',
       },
     });
+    this.registerAction('isMember', this.isMember, {
+      params: {
+        groupId: 'string',
+      },
+    });
     this.registerAction('appendGroupMemberRoles', this.appendGroupMemberRoles, {
       params: {
         groupId: 'string',
@@ -506,6 +511,24 @@ class GroupService extends TcService {
 
       await this.memberLeaveGroup(ctx, group, userId);
     }
+  }
+
+  /**
+   * 检查是否为群组成员
+   */
+  async isMember(ctx: TcContext<{ groupId: string }>) {
+    const groupId = ctx.params.groupId;
+    const userId = ctx.meta.userId;
+
+    const groupInfo = await call(ctx).getGroupInfo(groupId);
+    if (!groupInfo) {
+      // 没有找到群组信息
+      return false;
+    }
+
+    const members = groupInfo.members;
+
+    return members.some((m) => String(m.userId) === userId);
   }
 
   /**

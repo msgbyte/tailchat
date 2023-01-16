@@ -7,6 +7,8 @@ import {
   applyGroupInvite,
   checkTokenValid,
   getCachedGroupInviteInfo,
+  model,
+  showErrorToasts,
   t,
   useAsync,
   useAsyncRequest,
@@ -36,16 +38,50 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
     );
   }, []);
 
+  const { value: invite } = useAsync(() => {
+    return getCachedGroupInviteInfo(props.inviteCode);
+  }, [props.inviteCode]);
+
+  useAsync(async () => {
+    // 检查用户是否已经加入
+    if (!isTokenValid) {
+      return;
+    }
+
+    if (!invite) {
+      return;
+    }
+
+    try {
+      const isMember = await model.group.isMember(invite.groupId);
+      if (isMember) {
+        setIsJoined(true);
+      }
+    } catch (err) {}
+  }, [isTokenValid, invite]);
+
   const [{ loading: joinLoading }, handleJoinGroup] =
     useAsyncRequest(async () => {
       await applyGroupInvite(props.inviteCode);
 
-      const invite = await getCachedGroupInviteInfo(props.inviteCode);
-      openModal(<SuccessModal groupId={invite?.groupId ?? ''} />, {
+      if (!invite) {
+        showErrorToasts(t('未找到邀请码信息'));
+        return;
+      }
+      openModal(<SuccessModal groupId={invite.groupId} />, {
         maskClosable: false,
       });
       setIsJoined(true);
-    }, [props.inviteCode]);
+    }, [props.inviteCode, invite]);
+
+  const [, handleJumpToGroup] = useAsyncRequest(async () => {
+    if (!invite) {
+      showErrorToasts(t('未找到邀请码信息'));
+      return;
+    }
+
+    navigate(`/main/group/${invite.groupId}`);
+  }, [navigate, invite]);
 
   if (loading) {
     return null;
@@ -53,8 +89,13 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
 
   if (isJoined) {
     return (
-      <Button block={true} type="primary" size="large" disabled={true}>
-        {t('已加入')}
+      <Button
+        block={true}
+        type="primary"
+        size="large"
+        onClick={handleJumpToGroup}
+      >
+        {t('已加入，跳转到群组')}
       </Button>
     );
   }

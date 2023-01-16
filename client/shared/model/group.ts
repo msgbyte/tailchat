@@ -173,6 +173,18 @@ export async function quitGroup(groupId: string) {
 }
 
 /**
+ * 检查当前用户是否是群组成员
+ * @param groupId 群组ID
+ */
+export async function isMember(groupId: string): Promise<boolean> {
+  const { data } = await request.post('/api/group/isMember', {
+    groupId,
+  });
+
+  return data;
+}
+
+/**
  * 更新用户所在的权限组
  * @param groupId 群组ID
  * @param memberIds 成员信息
