@@ -109,6 +109,23 @@ export async function fetchConverseLastMessages(
 }
 
 /**
+ * @param converseId 会话ID
+ * @param messageId 消息ID
+ * @returns 消息附近的信息
+ */
+export async function fetchNearbyMessage(
+  converseId: string,
+  messageId: string
+): Promise<ChatMessage[]> {
+  const { data } = await request.post('/api/chat/message/fetchNearbyMessage', {
+    converseId,
+    messageId,
+  });
+
+  return data;
+}
+
+/**
  * 增加表情行为
  */
 export async function addReaction(

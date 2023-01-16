@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router';
 import { PageContent } from '../PageContent';
+import { InboxContent } from './Content';
 import { InboxSidebar } from './Sidebar';
 
 export const Inbox: React.FC = React.memo(() => {
-  const [selectedItem, setSelectedItem] = useState('');
   return (
-    <PageContent
-      data-tc-role="content-inbox"
-      sidebar={
-        <InboxSidebar selectedItem={selectedItem} onSelect={setSelectedItem} />
-      }
-    >
-      <div>Inbox {selectedItem}</div>
+    <PageContent data-tc-role="content-inbox" sidebar={<InboxSidebar />}>
+      <Routes>
+        <Route path="/:inboxItemId" element={<InboxContent />} />
+      </Routes>
     </PageContent>
   );
 });

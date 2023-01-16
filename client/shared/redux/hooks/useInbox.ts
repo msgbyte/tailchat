@@ -7,3 +7,12 @@ import { useAppSelector } from './useAppSelector';
 export function useInboxList(): InboxItem[] {
   return useAppSelector((state) => state.chat.inbox ?? []);
 }
+
+/**
+ * 返回收件箱某一项的值
+ */
+export function useInboxItem(inboxItemId: string): InboxItem | null {
+  const list = useInboxList();
+
+  return list.find((item) => item._id === inboxItemId) ?? null;
+}

@@ -140,6 +140,7 @@ export type {
   GroupInvite,
   GroupMember,
 } from './model/group';
+export type { InboxItem } from './model/inbox';
 export {
   sendMessage,
   recallMessage,
@@ -195,7 +196,7 @@ export {
   useHasGroupPermission,
 } from './redux/hooks/useGroupPermission';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
-export { useInboxList } from './redux/hooks/useInboxList';
+export { useInboxList, useInboxItem } from './redux/hooks/useInbox';
 export { useUnread } from './redux/hooks/useUnread';
 export {
   userActions,
