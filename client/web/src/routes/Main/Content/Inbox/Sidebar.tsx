@@ -9,6 +9,9 @@ import { getMessageRender } from '@/plugin/common';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
+import { SectionHeader } from '@/components/SectionHeader';
+
+const buildLink = (itemId: string) => `/main/inbox/${itemId}`;
 
 /**
  * 收件箱侧边栏组件
@@ -18,9 +21,7 @@ export const InboxSidebar: React.FC = React.memo(() => {
   const list = useMemo(() => _orderBy(inbox, 'createdAt', 'desc'), [inbox]);
 
   const renderInbox = (item: InboxItem) => {
-    const { type } = item;
-
-    if (type === 'message') {
+    if (item.type === 'message') {
       const message: Partial<model.inbox.InboxItem['message']> =
         item.message ?? {};
       let title: React.ReactNode = '';
@@ -37,7 +38,7 @@ export const InboxSidebar: React.FC = React.memo(() => {
           desc={getMessageRender(message.messageSnippet ?? '')}
           source={'Tailchat'}
           readed={item.readed}
-          to={`/main/inbox/${item._id}`}
+          to={buildLink(item._id)}
         />
       );
     }
@@ -50,9 +51,11 @@ export const InboxSidebar: React.FC = React.memo(() => {
 
   return (
     <CommonSidebarWrapper data-tc-role="sidebar-inbox">
+      <SectionHeader>{t('收件箱')}</SectionHeader>
+
       <div>
         <PillTabs>
-          <PillTabPane key="1" tab={`${t('全部')} (${fullList.length})`}>
+          <PillTabPane key="1" tab={`${t('全部')}`}>
             {fullList.map((item) => renderInbox(item))}
           </PillTabPane>
           <PillTabPane key="2" tab={`${t('未读')} (${unreadList.length})`}>
