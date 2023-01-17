@@ -173,11 +173,12 @@ class GithubSubscribeService extends TcService {
     if ('pusher' in event) {
       // Is push event
       const name = event.pusher.name;
+      const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
       const compareUrl = event.compare;
       const commits = event.commits.map((c) => `- ${c.message}`).join('\n');
 
-      const message = `${name} 在 ${repo} 提交了新的内容:\n${commits}\n\n查看改动: ${compareUrl}`;
+      const message = `[url=${userUrl}]${name}[/url] 在 ${repo} 提交了新的内容:\n${commits}\n\n查看改动: ${compareUrl}`;
 
       await this.sendMessageToSubscribes(ctx, repo, message);
     } else if ('pull_request' in event) {
