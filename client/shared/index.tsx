@@ -202,6 +202,7 @@ export {
   userActions,
   groupActions,
   uiActions,
+  chatActions,
   globalActions,
 } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';

@@ -322,6 +322,17 @@ const chatSlice = createSlice({
       const list = action.payload;
       state.inbox = list;
     },
+    /**
+     * 设置收件箱
+     */
+    setInboxItemAck(state, action: PayloadAction<string>) {
+      const inboxItemId = action.payload;
+      const item = state.inbox.find((item) => item._id === inboxItemId);
+
+      if (item) {
+        item.readed = true;
+      }
+    },
   },
 });
 

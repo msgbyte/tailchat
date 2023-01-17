@@ -1,3 +1,5 @@
+import { request } from '../api/request';
+
 /**
  * 收件箱记录项类型
  */
@@ -14,4 +16,10 @@ export interface InboxItem {
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export async function setInboxAck(inboxItemId: string) {
+  await request.post('/api/chat/inbox/ack', {
+    inboxItemId,
+  });
 }
