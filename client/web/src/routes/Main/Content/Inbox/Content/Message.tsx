@@ -1,3 +1,4 @@
+import { MessageHighlightContainer } from '@/components/ChatBox/ChatMessageList/MessageHighlightContainer';
 import { NormalMessageList } from '@/components/ChatBox/ChatMessageList/NormalList';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Problem } from '@/components/Problem';
@@ -71,14 +72,14 @@ export const NearbyMessages: React.FC<{
   }
 
   return (
-    <div>
+    <MessageHighlightContainer messageId={props.messageId}>
       <NormalMessageList
         messages={value}
         isLoadingMore={false}
         hasMoreMessage={false}
         onLoadMore={async () => {}}
       />
-    </div>
+    </MessageHighlightContainer>
   );
 });
 NearbyMessages.displayName = 'NearbyMessages';
