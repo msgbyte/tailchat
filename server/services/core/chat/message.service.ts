@@ -133,8 +133,10 @@ class MessageService extends TcService {
           },
           converseId: new Types.ObjectId(converseId),
         })
+        .sort({ _id: -1 })
         .limit(num)
-        .exec(),
+        .exec()
+        .then((arr) => arr.reverse()),
       this.adapter.model
         .find({
           _id: {
@@ -142,9 +144,12 @@ class MessageService extends TcService {
           },
           converseId: new Types.ObjectId(converseId),
         })
+        .sort({ _id: 1 })
         .limit(num)
         .exec(),
     ]);
+
+    console.log({ prev, next });
 
     return this.transformDocuments(ctx, {}, [...prev, message, ...next]);
   }
