@@ -25,9 +25,7 @@ export const Navbar: React.FC = React.memo(() => {
         <div className="space-y-2">
           <PersonalNav />
 
-          <DevContainer>
-            <InboxNav />
-          </DevContainer>
+          <InboxNav />
         </div>
 
         <div className="px-3">
