@@ -314,13 +314,19 @@ const chatSlice = createSlice({
       );
       message.reactions.splice(reactionIndex, 1);
     },
-
     /**
      * 设置收件箱
      */
     setInboxList(state, action: PayloadAction<InboxItem[]>) {
       const list = action.payload;
       state.inbox = list;
+    },
+
+    /**
+     * 增加收件箱项目
+     */
+    appendInboxItem(state, action: PayloadAction<InboxItem>) {
+      state.inbox.push(action.payload);
     },
     /**
      * 设置收件箱

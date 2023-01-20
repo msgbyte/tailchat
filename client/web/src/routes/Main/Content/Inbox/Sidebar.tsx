@@ -1,6 +1,15 @@
 import React, { useMemo } from 'react';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
-import { InboxItem, isValidStr, model, t, useInboxList } from 'tailchat-shared';
+import {
+  chatActions,
+  InboxItem,
+  isValidStr,
+  model,
+  t,
+  useAppDispatch,
+  useAsyncRequest,
+  useInboxList,
+} from 'tailchat-shared';
 import clsx from 'clsx';
 import _orderBy from 'lodash/orderBy';
 import { GroupName } from '@/components/GroupName';
@@ -10,6 +19,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { SectionHeader } from '@/components/SectionHeader';
+import { openReconfirmModalP } from '@/components/Modal';
 
 const buildLink = (itemId: string) => `/main/inbox/${itemId}`;
 
@@ -19,6 +29,7 @@ const buildLink = (itemId: string) => `/main/inbox/${itemId}`;
 export const InboxSidebar: React.FC = React.memo(() => {
   const inbox = useInboxList();
   const list = useMemo(() => _orderBy(inbox, 'createdAt', 'desc'), [inbox]);
+  const dispatch = useAppDispatch();
 
   const renderInbox = (item: InboxItem) => {
     if (item.type === 'message') {
@@ -49,9 +60,44 @@ export const InboxSidebar: React.FC = React.memo(() => {
   const fullList = list;
   const unreadList = list.filter((item) => item.readed === false);
 
+  const [, handleAllAck] = useAsyncRequest(async () => {
+    unreadList.forEach((item) => {
+      dispatch(chatActions.setInboxItemAck(item._id));
+    });
+
+    await model.inbox.setInboxAck(unreadList.map((item) => item._id));
+  }, [unreadList]);
+
+  const [, handleClear] = useAsyncRequest(async () => {
+    const res = await openReconfirmModalP({
+      title: t('确认清空收件箱么?'),
+    });
+    if (res) {
+      await model.inbox.clearInbox();
+    }
+  }, [unreadList]);
+
   return (
     <CommonSidebarWrapper data-tc-role="sidebar-inbox">
-      <SectionHeader>{t('收件箱')}</SectionHeader>
+      <SectionHeader
+        menu={{
+          items: [
+            {
+              key: 'readAll',
+              label: t('所有已读'),
+              onClick: handleAllAck,
+            },
+            {
+              key: 'clear',
+              label: t('清空收件箱'),
+              danger: true,
+              onClick: handleClear,
+            },
+          ],
+        }}
+      >
+        {t('收件箱')}
+      </SectionHeader>
 
       <div>
         <PillTabs>

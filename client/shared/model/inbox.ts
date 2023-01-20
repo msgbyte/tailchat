@@ -18,8 +18,18 @@ export interface InboxItem {
   updatedAt: string;
 }
 
-export async function setInboxAck(inboxItemId: string) {
+/**
+ * 设置收件箱某条记录已读
+ */
+export async function setInboxAck(inboxItemIds: string[]) {
   await request.post('/api/chat/inbox/ack', {
-    inboxItemId,
+    inboxItemIds,
   });
+}
+
+/**
+ * 清空收件箱
+ */
+export async function clearInbox() {
+  await request.post('/api/chat/inbox/clear');
 }

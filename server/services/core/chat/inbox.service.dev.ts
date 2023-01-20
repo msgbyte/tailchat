@@ -52,8 +52,6 @@ class InboxService extends TcService {
               })
             );
           }
-
-          this.notifyUsersInboxUpdate(ctx, mentions);
         }
       }
     );
@@ -80,9 +78,10 @@ class InboxService extends TcService {
     this.registerAction('all', this.all);
     this.registerAction('ack', this.ack, {
       params: {
-        inboxItemId: 'string',
+        inboxItemIds: { type: 'array', items: 'string' },
       },
     });
+    this.registerAction('clear', this.clear);
   }
 
   async appendMessage(
@@ -102,7 +101,7 @@ class InboxService extends TcService {
       messageSnippet,
     } = ctx.params;
 
-    await this.adapter.model.create({
+    const doc = await this.adapter.model.create({
       userId,
       type: 'message',
       message: {
@@ -112,6 +111,10 @@ class InboxService extends TcService {
         messageSnippet,
       },
     });
+
+    const inboxItem = await this.transformDocuments(ctx, {}, doc);
+
+    await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
 
     return true;
   }
@@ -141,6 +144,8 @@ class InboxService extends TcService {
       },
     });
 
+    await this.notifyUsersInboxUpdate(ctx, [userId]); // not good, 后面最好修改为发送删除的项而不是所有
+
     return true;
   }
 
@@ -160,13 +165,15 @@ class InboxService extends TcService {
   /**
    * 标记收件箱内容已读
    */
-  async ack(ctx: TcContext<{ inboxItemId: string }>) {
-    const inboxItemId = ctx.params.inboxItemId;
+  async ack(ctx: TcContext<{ inboxItemIds: string[] }>) {
+    const inboxItemIds = ctx.params.inboxItemIds;
     const userId = ctx.meta.userId;
 
-    await this.adapter.model.updateOne(
+    await this.adapter.model.updateMany(
       {
-        _id: inboxItemId,
+        _id: {
+          $in: [...inboxItemIds],
+        },
         userId,
       },
       {
@@ -175,6 +182,34 @@ class InboxService extends TcService {
     );
 
     return true;
+  }
+
+  /**
+   * 清空所有的收件箱内容
+   */
+  async clear(ctx: TcContext) {
+    const userId = ctx.meta.userId;
+
+    await this.adapter.model.deleteMany({
+      userId,
+    });
+
+    await this.notifyUsersInboxUpdate(ctx, [userId]);
+
+    return true;
+  }
+
+  /**
+   * 发送通知群组信息有新的内容
+   *
+   * 发送通知时会同时清空群组信息缓存
+   */
+  private async notifyUsersInboxAppend(
+    ctx: TcPureContext,
+    userIds: string[],
+    data: any
+  ): Promise<void> {
+    await this.listcastNotify(ctx, userIds, 'append', { ...data });
   }
 
   /**

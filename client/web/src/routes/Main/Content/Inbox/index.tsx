@@ -21,7 +21,7 @@ Inbox.displayName = 'Inbox';
 const InboxNoSelect: React.FC = React.memo(() => {
   return (
     <div className="mt-11 w-full">
-      <Problem text={t('空空的，什么都没有选中')} />
+      <Problem text={t('提及(@)您的消息会在这里出现哦')} />
     </div>
   );
 });

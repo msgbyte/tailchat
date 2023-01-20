@@ -269,6 +269,10 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     store.dispatch(groupActions.removeGroup(groupId));
   });
 
+  socket.listen<InboxItem>('chat.inbox.append', (item) => {
+    store.dispatch(chatActions.appendInboxItem(item));
+  });
+
   socket.listen('chat.inbox.updated', () => {
     // 检测到收件箱列表被更新，需要重新获取
     socket.request<InboxItem[]>('chat.inbox.all').then((list) => {

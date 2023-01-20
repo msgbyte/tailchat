@@ -11,6 +11,9 @@ import {
 import { chatActions } from 'tailchat-shared';
 import { InboxMessageContent } from './Message';
 
+/**
+ * 收件箱主要界面
+ */
 export const InboxContent: React.FC = React.memo((props) => {
   const { inboxItemId } = useParams();
   const inboxItem = useInboxItem(inboxItemId ?? '');
@@ -40,7 +43,7 @@ function useInboxAck(inboxItemId: string) {
 
     if (item.readed === false) {
       dispatch(chatActions.setInboxItemAck(inboxItemId));
-      model.inbox.setInboxAck(inboxItemId);
+      model.inbox.setInboxAck([inboxItemId]);
     }
   });
 }
