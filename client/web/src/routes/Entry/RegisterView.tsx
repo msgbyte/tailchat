@@ -1,6 +1,13 @@
-import { isValidStr, registerWithEmail, t, useAsyncFn } from 'tailchat-shared';
+import {
+  isValidStr,
+  model,
+  registerWithEmail,
+  showSuccessToasts,
+  t,
+  useAsyncFn,
+  useAsyncRequest,
+} from 'tailchat-shared';
 import React, { useState } from 'react';
-import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { Icon } from 'tailchat-design';
 import { useNavigate } from 'react-router';
@@ -11,6 +18,7 @@ import { useNavToView } from './utils';
 import { EntryInput } from './components/Input';
 import { SecondaryBtn } from './components/SecondaryBtn';
 import { PrimaryBtn } from './components/PrimaryBtn';
+import { getGlobalConfig } from 'tailchat-shared/model/config';
 
 /**
  * 注册视图
@@ -19,6 +27,7 @@ export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailOTP, setEmailOTP] = useState('');
+  const [sendedEmail, setSendedEmail] = useState(false);
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
 
@@ -45,6 +54,13 @@ export const RegisterView: React.FC = React.memo(() => {
     }
   }, [email, password, emailOTP, navRedirect]);
 
+  const [{ loading: sendEmailLoading }, handleSendEmail] =
+    useAsyncRequest(async () => {
+      await model.user.verifyEmail(email);
+      showSuccessToasts(t('发送成功, 请检查你的邮箱。'));
+      setSendedEmail(true);
+    }, [email]);
+
   const navToView = useNavToView();
 
   return (
@@ -62,6 +78,27 @@ export const RegisterView: React.FC = React.memo(() => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
+        {getGlobalConfig().emailVerification && (
+          <>
+            {!sendedEmail && (
+              <PrimaryBtn loading={sendEmailLoading} onClick={handleSendEmail}>
+                {t('向邮箱发送校验码')}
+              </PrimaryBtn>
+            )}
+
+            <div className="mb-4">
+              <div className="mb-2">{t('邮箱校验码')}</div>
+              <EntryInput
+                name="reg-email-otp"
+                type="text"
+                placeholder="6位校验码"
+                value={emailOTP}
+                onChange={(e) => setEmailOTP(e.target.value)}
+              />
+            </div>
+          </>
+        )}
 
         <div className="mb-4">
           <div className="mb-2">{t('密码')}</div>

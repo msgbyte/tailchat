@@ -53,6 +53,7 @@ class ConfigService extends TcService {
   async client(ctx: TcPureContext) {
     return {
       uploadFileLimit: config.storage.limit,
+      emailVerification: config.emailVerification,
     };
   }
 

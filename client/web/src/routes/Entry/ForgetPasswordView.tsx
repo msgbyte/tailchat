@@ -7,7 +7,6 @@ import {
   useAsyncRequest,
 } from 'tailchat-shared';
 import React, { useState } from 'react';
-import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useNavToView } from './utils';
 import { EntryInput } from './components/Input';

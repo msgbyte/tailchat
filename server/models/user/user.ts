@@ -101,6 +101,14 @@ export class User extends TimeStamps implements Base {
   type: UserType;
 
   /**
+   * 邮箱是否可用
+   */
+  @prop({
+    default: false,
+  })
+  emailAvailable: boolean;
+
+  /**
    * 用户的额外信息
    */
   @prop()

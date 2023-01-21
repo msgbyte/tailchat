@@ -18,6 +18,7 @@ import {
   DataNotFoundError,
   EntityError,
   db,
+  t,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -64,12 +65,18 @@ class UserService extends TcService {
         password: 'string',
       },
     });
+    this.registerAction('verifyEmail', this.verifyEmail, {
+      params: {
+        email: 'email',
+      },
+    });
     this.registerAction('register', this.register, {
       rest: 'POST /register',
       params: {
         username: [{ type: 'string', optional: true }],
         email: [{ type: 'email', optional: true }],
         password: 'string',
+        emailOTP: [{ type: 'string', optional: true }],
       },
     });
     this.registerAction('modifyPassword', this.modifyPassword, {
@@ -90,6 +97,7 @@ class UserService extends TcService {
         username: [{ type: 'string', optional: true }],
         email: 'email',
         password: 'string',
+        emailOTP: [{ type: 'string', optional: true }],
       },
     });
     this.registerAction('forgetPassword', this.forgetPassword, {
@@ -203,7 +211,11 @@ class UserService extends TcService {
       visibility: 'public',
     });
 
-    this.registerAuthWhitelist(['/forgetPassword', '/resetPassword']);
+    this.registerAuthWhitelist([
+      '/verifyEmail',
+      '/forgetPassword',
+      '/resetPassword',
+    ]);
   }
 
   /**
@@ -270,11 +282,46 @@ class UserService extends TcService {
   }
 
   /**
+   * 验证用户邮箱, 会往邮箱发送一个 OTP 作为唯一标识
+   * 需要在注册的时候带上
+   */
+  async verifyEmail(ctx: TcPureContext<{ email: string }>) {
+    const email = ctx.params.email;
+    const cacheKey = this.buildVerifyEmailKey(email);
+
+    const c = await this.broker.cacher.get(cacheKey);
+    if (!!c) {
+      // 如果有一个忘记密码请求未到期
+      throw new Error(t('过于频繁的请求，10 分钟内可以共用同一OTP'));
+    }
+
+    const otp = generateRandomNumStr(6); // 产生一次性6位数字密码
+    await this.broker.cacher.set(cacheKey, otp, 10 * 60); // 记录该OTP ttl: 10分钟
+
+    const html = `
+    <p>您正在尝试注册 Tailchat, 请使用以下 OTP 作为邮箱验证凭证:</p>
+    <h3>OTP: <strong>${otp}</strong></h3>
+    <p>该 OTP 将会在 10分钟 后过期</p>
+    <p style="color: grey;">如果并不是您触发的注册操作，请忽略此电子邮件。</p>`;
+
+    await ctx.call('mail.sendMail', {
+      to: email,
+      subject: 'Tailchat 邮箱验证',
+      html,
+    });
+  }
+
+  /**
    * 用户注册
    */
   async register(
     ctx: TcPureContext<
-      { username?: string; email?: string; password: string },
+      {
+        username?: string;
+        email?: string;
+        password: string;
+        emailOTP?: string;
+      },
       any
     >
   ) {
@@ -288,6 +335,16 @@ class UserService extends TcService {
     const discriminator = await this.adapter.model.generateDiscriminator(
       nickname
     );
+
+    if (config.emailVerification === true) {
+      // 检查OTP
+      const cacheKey = this.buildVerifyEmailKey(params.email);
+      const cachedOtp = await this.broker.cacher.get(cacheKey);
+
+      if (String(cachedOtp) !== params.emailOTP) {
+        throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
+      }
+    }
 
     const password = await this.hashPassword(params.password);
     const doc = await this.adapter.insert({
@@ -370,6 +427,7 @@ class UserService extends TcService {
       username?: string;
       email: string;
       password: string;
+      emailOTP?: string;
     }>
   ) {
     const params = ctx.params;
@@ -381,6 +439,16 @@ class UserService extends TcService {
     }
     if (!user.temporary) {
       throw new Error(t('该用户不是临时用户'));
+    }
+
+    if (config.emailVerification === true) {
+      // 检查OTP
+      const cacheKey = this.buildVerifyEmailKey(params.email);
+      const cachedOtp = await this.broker.cacher.get(cacheKey);
+
+      if (String(cachedOtp) !== params.emailOTP) {
+        throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
+      }
     }
 
     await this.validateRegisterParams(params, t);
@@ -414,7 +482,7 @@ class UserService extends TcService {
     const c = await this.broker.cacher.get(cacheKey);
     if (!!c) {
       // 如果有一个忘记密码请求未到期
-      throw new Error(t('过于频繁的请求，请 10 分钟以后再试'));
+      throw new Error(t('过于频繁的请求，10 分钟内可以共用同一OTP'));
     }
 
     const otp = generateRandomNumStr(6); // 产生一次性6位数字密码
@@ -912,6 +980,10 @@ class UserService extends TcService {
 
   private buildOpenapiBotEmail(botId: string) {
     return `${botId}@tailchat-openapi.com`;
+  }
+
+  private buildVerifyEmailKey(email: string) {
+    return `verify-email:${email}`;
   }
 }
 

@@ -15,5 +15,9 @@ export {
   createFastifyFormSchema as createMetaFormSchema,
   fieldSchema as metaFormFieldSchema,
   useFastifyFormContext as useMetaFormContext,
+  useFastifyFormContext,
 } from 'react-fastify-form';
-export type { FastifyFormFieldMeta as MetaFormFieldMeta } from 'react-fastify-form';
+export type {
+  FastifyFormFieldMeta as MetaFormFieldMeta,
+  FastifyFormFieldProps,
+} from 'react-fastify-form';
