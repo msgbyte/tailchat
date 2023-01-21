@@ -10,6 +10,9 @@ import React, { useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
 import { useNavToView } from './utils';
+import { EntryInput } from './components/Input';
+import { SecondaryBtn } from './components/SecondaryBtn';
+import { PrimaryBtn } from './components/PrimaryBtn';
 
 /**
  * 登录视图
@@ -55,8 +58,7 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
       <div>
         <div className="mb-4">
           <div className="mb-2">{t('邮箱')}</div>
-          <input
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
+          <EntryInput
             name="forget-email"
             placeholder="name@example.com"
             type="text"
@@ -67,22 +69,16 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
         </div>
 
         {!sendedEmail && (
-          <button
-            className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-            disabled={sendEmailLoading}
-            onClick={handleSendEmail}
-          >
-            {sendEmailLoading && <Spinner />}
+          <PrimaryBtn loading={sendEmailLoading} onClick={handleSendEmail}>
             {t('向邮箱发送OTP')}
-          </button>
+          </PrimaryBtn>
         )}
 
         {sendedEmail && (
           <>
             <div className="mb-4">
               <div className="mb-2">{t('OTP')}</div>
-              <input
-                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
+              <EntryInput
                 name="forget-otp"
                 type="text"
                 value={otp}
@@ -92,8 +88,7 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
 
             <div className="mb-4">
               <div className="mb-2">{t('新密码')}</div>
-              <input
-                className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
+              <EntryInput
                 name="forget-password"
                 type="password"
                 placeholder="******"
@@ -102,25 +97,19 @@ export const ForgetPasswordView: React.FC = React.memo(() => {
               />
             </div>
 
-            <button
-              className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-              disabled={loading}
-              onClick={handleResetPassword}
-            >
-              {loading && <Spinner />}
+            <PrimaryBtn loading={loading} onClick={handleResetPassword}>
               {t('重设密码')}
-            </button>
+            </PrimaryBtn>
           </>
         )}
 
-        <button
-          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+        <SecondaryBtn
           disabled={loading}
           onClick={() => navToView('/entry/login')}
         >
           <Icon icon="mdi:arrow-left" className="mr-1 inline" />
           {t('返回登录')}
-        </button>
+        </SecondaryBtn>
       </div>
     </div>
   );

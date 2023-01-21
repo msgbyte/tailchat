@@ -13,6 +13,9 @@ import { IconBtn } from '@/components/IconBtn';
 import { openModal } from '@/components/Modal';
 import { ServiceUrlSettings } from '@/components/modals/ServiceUrlSettings';
 import { LanguageSelect } from '@/components/LanguageSelect';
+import { EntryInput } from './components/Input';
+import { SecondaryBtn } from './components/SecondaryBtn';
+import { PrimaryBtn } from './components/PrimaryBtn';
 
 /**
  * TODO:
@@ -82,9 +85,8 @@ export const LoginView: React.FC = React.memo(() => {
       <div>
         <div className="mb-4">
           <div className="mb-2">{t('邮箱')}</div>
-          <input
+          <EntryInput
             name="login-email"
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
             placeholder="name@example.com"
             type="text"
             value={email}
@@ -93,9 +95,8 @@ export const LoginView: React.FC = React.memo(() => {
         </div>
         <div className="mb-4">
           <div className="mb-2">{t('密码')}</div>
-          <input
+          <EntryInput
             name="login-password"
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
             type="password"
             placeholder="******"
             value={password}
@@ -115,32 +116,25 @@ export const LoginView: React.FC = React.memo(() => {
           </div>
         )}
 
-        <button
-          className="w-full py-2 px-4 mb-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-          disabled={loading}
-          onClick={handleLogin}
-        >
-          {loading && <Spinner />}
+        <PrimaryBtn loading={loading} onClick={handleLogin}>
           {t('登录')}
-        </button>
+        </PrimaryBtn>
 
-        <button
-          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+        <SecondaryBtn
           disabled={loading}
           onClick={() => navToView('/entry/register')}
         >
           {t('注册账号')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
-        </button>
+        </SecondaryBtn>
 
-        <button
-          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none disabled:opacity-50"
+        <SecondaryBtn
           disabled={loading}
           onClick={() => navToView('/entry/guest')}
         >
           {t('游客访问')}
           <Icon icon="mdi:arrow-right" className="ml-1 inline" />
-        </button>
+        </SecondaryBtn>
       </div>
 
       <div className="absolute bottom-4 left-0 space-x-2">
