@@ -336,6 +336,7 @@ class UserService extends TcService {
       nickname
     );
 
+    let emailVerified = false;
     if (config.emailVerification === true) {
       // 检查OTP
       const cacheKey = this.buildVerifyEmailKey(params.email);
@@ -344,6 +345,8 @@ class UserService extends TcService {
       if (String(cachedOtp) !== params.emailOTP) {
         throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
       }
+
+      emailVerified = true;
     }
 
     const password = await this.hashPassword(params.password);
@@ -352,6 +355,7 @@ class UserService extends TcService {
       password,
       nickname,
       discriminator,
+      emailVerified,
       avatar: null,
       createdAt: new Date(),
     });
@@ -449,6 +453,8 @@ class UserService extends TcService {
       if (String(cachedOtp) !== params.emailOTP) {
         throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
       }
+
+      user.emailVerified = true;
     }
 
     await this.validateRegisterParams(params, t);

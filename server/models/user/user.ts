@@ -106,7 +106,7 @@ export class User extends TimeStamps implements Base {
   @prop({
     default: false,
   })
-  emailAvailable: boolean;
+  emailVerified: boolean;
 
   /**
    * 用户的额外信息
