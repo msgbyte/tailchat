@@ -13,6 +13,7 @@ export interface GlobalConfig {
 
 let globalConfig = {
   uploadFileLimit: 1 * 1024 * 1024,
+  emailVerification: false, // 是否在注册时校验邮箱
 };
 
 export function getGlobalConfig() {

@@ -37,6 +37,7 @@ export const config = {
   apiUrl,
   staticUrl: `${apiUrl}/static/`,
   enableOpenapi: true, // 是否开始openapi
+  emailVerification: checkEnvTrusty(process.env.EMAIL_VERIFY) || false, // 是否在注册后验证邮箱可用性
   smtp: {
     senderName: process.env.SMTP_SENDER, // 发邮件者显示名称
     connectionUrl: process.env.SMTP_URI || '',

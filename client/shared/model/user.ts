@@ -99,17 +99,31 @@ export async function loginWithToken(token: string): Promise<UserLoginInfo> {
 }
 
 /**
+ * 发送邮箱校验码
+ * @param email 邮箱
+ */
+export async function verifyEmail(email: string): Promise<UserLoginInfo> {
+  const { data } = await request.post('/api/user/verifyEmail', {
+    email,
+  });
+
+  return data;
+}
+
+/**
  * 邮箱注册账号
  * @param email 邮箱
  * @param password 密码
  */
 export async function registerWithEmail(
   email: string,
-  password: string
+  password: string,
+  emailOTP?: string
 ): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/register', {
     email,
     password,
+    emailOTP,
   });
 
   return data;
@@ -174,12 +188,14 @@ export async function createTemporaryUser(
 export async function claimTemporaryUser(
   userId: string,
   email: string,
-  password: string
+  password: string,
+  emailOTP?: string
 ): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/claimTemporaryUser', {
     userId,
     email,
     password,
+    emailOTP,
   });
 
   return data;
