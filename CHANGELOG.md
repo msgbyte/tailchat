@@ -1,5 +1,39 @@
 
 
+# [1.5.0](https://github.com/msgbyte/tailchat/compare/v1.4.0...v1.5.0) (2023-01-21)
+
+
+### Bug Fixes
+
+* 修复登录时可能会因为navRedirect的问题导致循环 ([8b95af0](https://github.com/msgbyte/tailchat/commit/8b95af0d78157ee6eeb4f233b4ea266299fe688e))
+* 修复内置用户信息无法获取到翻译的问题 ([935a26a](https://github.com/msgbyte/tailchat/commit/935a26ab095b8b2a02b21ab7691c5f10a54fca21))
+* 修复删除身份组后位置不正确的bug ([170a243](https://github.com/msgbyte/tailchat/commit/170a243a66d71b7bec30dfb29d5d5eaeeb753c6f))
+* 修复收件箱notfound的图片样式问题 ([29c7ed5](https://github.com/msgbyte/tailchat/commit/29c7ed5bbc4779a344f55cf49e223dc9030761a4))
+* 修复fetchNearbyMessage获取数据/顺序不正确的bug ([b74b956](https://github.com/msgbyte/tailchat/commit/b74b956e45c43d3fca7a96f9c786d9c0baf723a1))
+* 修复github webhook如果没有body会导致渲染异常的问题 ([71077d4](https://github.com/msgbyte/tailchat/commit/71077d4877cd5a1fec62099bbed690701bf9fe4d))
+
+
+### Features
+
+* 个人面板菜单选项增加记忆 ([fdb1830](https://github.com/msgbyte/tailchat/commit/fdb1830e923a99075543cea6fbd45b7fa09673b7))
+* 命令行应用增加tailchat docker init命令 ([f1238ba](https://github.com/msgbyte/tailchat/commit/f1238badbd44f50940cb12ae3e1a2314629f43af))
+* 收件箱侧边栏展示 ([db917d2](https://github.com/msgbyte/tailchat/commit/db917d26b9e015f245c851049e3982a5e4c53f34))
+* 收件箱增加已读未读标识 ([af03bec](https://github.com/msgbyte/tailchat/commit/af03bec1a913561acec755831d4de684eb41f774))
+* 收件箱增加message类型的消息内容渲染 ([a9f2d00](https://github.com/msgbyte/tailchat/commit/a9f2d00d9eca8882200a258f0596416ebed1e985))
+* 收件箱增加SectionHeader ([d8ac078](https://github.com/msgbyte/tailchat/commit/d8ac078461bfe3d39679ef5d558e9d12be8c31f9))
+* 消息通知插件增加开关允许禁用内置的提示音 ([c02dbed](https://github.com/msgbyte/tailchat/commit/c02dbed7e0a77300108e69f1f059b4a7aaf63fb9))
+* 优化通知功能，增加icon小红点，增加提示音，优化通知场景 ([350371d](https://github.com/msgbyte/tailchat/commit/350371d6a3f84ff485cf8f97236dc284d3161d18))
+* 增加工具蛙插件 ([8d539d2](https://github.com/msgbyte/tailchat/commit/8d539d2fa90d1e7d9f59b2ca00e9b44370104c28))
+* 增加收件箱操作: 全部已读和清空收件箱 ([677cf76](https://github.com/msgbyte/tailchat/commit/677cf7689bf151a699e79b12cdbea428fdea28c2))
+* 增加收件箱已读标识 ([badfaa0](https://github.com/msgbyte/tailchat/commit/badfaa07d343c892c1569c7598675dec554060e3))
+* 增加拖拽文件发送图片的功能 ([338af09](https://github.com/msgbyte/tailchat/commit/338af097cadbc7cb1303f0169caeeb6e20538a5a))
+* 增加未选中任何消息状态的placeholder ([c760d44](https://github.com/msgbyte/tailchat/commit/c760d44e87ece7d0b6513fe013c78bc15638fc62))
+* 增加系统设置页面的自定义设置项注册(for plugin) ([e9b96a1](https://github.com/msgbyte/tailchat/commit/e9b96a15a238904670d6bf30c177a25e43e79f4a))
+* 增加消息高亮容器用于高亮消息 ([590b572](https://github.com/msgbyte/tailchat/commit/590b572263c3752ec165941ee603c3b7163e923c))
+* 增强邀请页面的已加入检查，如果已登录则会发起请求查询是否为群组成员 ([f5b71b0](https://github.com/msgbyte/tailchat/commit/f5b71b076ec59a764075f7e3acf25308b68952bc))
+* github push event 增加提交者链接 ([bc64729](https://github.com/msgbyte/tailchat/commit/bc6472985758fc388f9a2ac4a4da11c1bf6e0be6))
+* notify增加点击输入框跳转的功能，并增加api调用页面跳转的方式 ([1290c1e](https://github.com/msgbyte/tailchat/commit/1290c1e42646ff4fbf1e36ee5a7cd19750485774))
+
 # [1.4.0](https://github.com/msgbyte/tailchat/compare/v1.3.1...v1.4.0) (2023-01-07)
 
 
