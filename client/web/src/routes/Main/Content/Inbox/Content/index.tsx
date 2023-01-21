@@ -21,7 +21,11 @@ export const InboxContent: React.FC = React.memo((props) => {
   useInboxAck(inboxItemId ?? '');
 
   if (!inboxItem) {
-    return <NotFound message={t('没有找到该记录')} />;
+    return (
+      <div className="w-full">
+        <NotFound message={t('没有找到该记录')} />
+      </div>
+    );
   }
 
   if (inboxItem.type === 'message') {
