@@ -9,7 +9,20 @@ title: 安装docker环境
 
 > 本文以 `linux centos` 为例，目标是方便大家直接在服务器上部署。对于想要在其他系统(`windows`, `mac`) 使用的同学可以参考官方文档进行`docker`的安装
 
-## 安装docker与docker compose
+## 一键安装 docker
+
+官方维护的一键安装 `Docker` 脚本, 适合不喜欢研究细节的同学
+
+在服务器终端按照以下操作依次执行即可
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+如果安装成功的话就可以跳过后续内容了。
+
+## 手动安装docker与docker compose
 
 官方文档: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
