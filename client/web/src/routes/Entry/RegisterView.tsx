@@ -8,6 +8,9 @@ import { setUserJWT } from '../../utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '../../utils/user-helper';
 import { useSearchParam } from '@/hooks/useSearchParam';
 import { useNavToView } from './utils';
+import { EntryInput } from './components/Input';
+import { SecondaryBtn } from './components/SecondaryBtn';
+import { PrimaryBtn } from './components/PrimaryBtn';
 
 /**
  * 注册视图
@@ -15,6 +18,7 @@ import { useNavToView } from './utils';
 export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailOTP, setEmailOTP] = useState('');
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
 
@@ -29,7 +33,7 @@ export const RegisterView: React.FC = React.memo(() => {
       .required(t('密码不能为空'))
       .validate(password);
 
-    const data = await registerWithEmail(email, password);
+    const data = await registerWithEmail(email, password, emailOTP);
 
     setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
@@ -39,7 +43,7 @@ export const RegisterView: React.FC = React.memo(() => {
     } else {
       navigate('/main');
     }
-  }, [email, password, navRedirect]);
+  }, [email, password, emailOTP, navRedirect]);
 
   const navToView = useNavToView();
 
@@ -50,20 +54,19 @@ export const RegisterView: React.FC = React.memo(() => {
       <div>
         <div className="mb-4">
           <div className="mb-2">{t('邮箱')}</div>
-          <input
+          <EntryInput
             name="reg-email"
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
             placeholder="name@example.com"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div className="mb-4">
           <div className="mb-2">{t('密码')}</div>
-          <input
+          <EntryInput
             name="reg-password"
-            className="appearance-none rounded-md relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-base mobile:text-sm"
             type="password"
             placeholder="******"
             value={password}
@@ -73,23 +76,18 @@ export const RegisterView: React.FC = React.memo(() => {
 
         {error && <p className="text-red-500 text-sm mb-4">{error.message}</p>}
 
-        <button
-          className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-          disabled={loading}
-          onClick={handleRegister}
-        >
-          {loading && <Spinner />}
+        <PrimaryBtn loading={loading} onClick={handleRegister}>
           {t('注册账号')}
-        </button>
+        </PrimaryBtn>
 
-        <button
-          className="w-full py-2 px-4 border border-transparent text-sm text-left font-medium text-white disabled:opacity-50"
+        <SecondaryBtn
+          className="text-left"
           disabled={loading}
           onClick={() => navToView('/entry/login')}
         >
           <Icon icon="mdi:arrow-left" className="mr-1 inline" />
           {t('返回登录')}
-        </button>
+        </SecondaryBtn>
       </div>
     </div>
   );
