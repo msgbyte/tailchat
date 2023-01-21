@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import _get from 'lodash/get';
 import _isFunction from 'lodash/isFunction';
+import { t } from '../i18n';
 import { getErrorHook, tokenGetter } from '../manager/request';
 import { getServiceUrl, onServiceUrlChange } from '../manager/service';
 
@@ -52,8 +53,23 @@ function createRequest() {
     },
     (err) => {
       // 尝试获取错误信息
-      const errorMsg: string = _get(err, 'response.data.message');
-      const code: number = _get(err, 'response.data.code');
+      const responseData = _get(err, 'response.data') ?? {};
+      let errorMsg: string = responseData.message;
+      const code: number = responseData.code;
+
+      if (responseData.type === 'VALIDATION_ERROR') {
+        // 校验失败
+        errorMsg = t('请求参数校验失败');
+
+        if (Array.isArray(responseData.data)) {
+          try {
+            errorMsg += `: ${responseData.data
+              .map((item: any) => item.field)
+              .join(', ')}`;
+          } catch (e) {}
+        }
+      }
+
       if (_isFunction(getErrorHook)) {
         const isContinue = getErrorHook(err);
         if (isContinue === false) {
