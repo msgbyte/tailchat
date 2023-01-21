@@ -19,7 +19,8 @@
     "preinstall": "npx only-allow pnpm",
     "lint:fix": "eslint --fix './**/*.{ts,tsx}'",
     "prepare": "husky install",
-    "release": "release-it"
+    "release": "release-it",
+    "release:patch": "release-it -i patch"
   },
   "keywords": [],
   "author": "moonrailgun <moonrailgun@gmail.com>",
