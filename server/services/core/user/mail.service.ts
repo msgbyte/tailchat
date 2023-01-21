@@ -51,19 +51,24 @@ class MailService extends TcService {
     }
 
     const { to, subject, html } = ctx.params;
+    const { t } = ctx.meta;
 
-    const info = await this.adapter.model.sendMail({
-      to,
-      subject,
-      html: await ejs.renderFile(
-        path.resolve(__dirname, '../../../views/mail.ejs'),
-        {
-          body: html,
-        }
-      ),
-    });
+    try {
+      const info = await this.adapter.model.sendMail({
+        to,
+        subject,
+        html: await ejs.renderFile(
+          path.resolve(__dirname, '../../../views/mail.ejs'),
+          {
+            body: html,
+          }
+        ),
+      });
 
-    this.logger.info('sendMailSuccess:', info);
+      this.logger.info('sendMailSuccess:', info);
+    } catch (err) {
+      throw new Error(t('邮件发送失败'));
+    }
   }
 }
 

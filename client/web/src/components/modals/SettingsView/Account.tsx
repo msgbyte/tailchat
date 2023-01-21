@@ -8,7 +8,7 @@ import { closeModal, pluginUserExtraInfo } from '@/plugin/common';
 import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
-import { Button, Divider, Typography } from 'antd';
+import { Button, Divider, Tag, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { Avatar } from 'tailchat-design';
@@ -24,6 +24,7 @@ import {
   userActions,
   useUserInfo,
 } from 'tailchat-shared';
+import { EmailVerify } from '../EmailVerify';
 import { ModifyPassword } from '../ModifyPassword';
 
 export const SettingsAccount: React.FC = React.memo(() => {
@@ -109,6 +110,36 @@ export const SettingsAccount: React.FC = React.memo(() => {
             editable={true}
             renderEditor={DefaultFullModalInputEditorRender}
             onSave={handleUpdateNickName}
+          />
+
+          <FullModalField
+            title={t('邮箱')}
+            content={
+              <div>
+                <span className="mr-1">{userInfo.email}</span>
+                {userInfo.emailVerified ? (
+                  <Tag color="success" className="select-none">
+                    {t('已认证')}
+                  </Tag>
+                ) : (
+                  <Tag
+                    color="warning"
+                    className="cursor-pointer"
+                    onClick={() => {
+                      const key = openModal(
+                        <EmailVerify
+                          onSuccess={() => {
+                            closeModal(key);
+                          }}
+                        />
+                      );
+                    }}
+                  >
+                    {t('未认证')}
+                  </Tag>
+                )}
+              </div>
+            }
           />
 
           {pluginUserExtraInfo.map((item, i) => {

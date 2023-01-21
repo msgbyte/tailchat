@@ -18,7 +18,7 @@ import {
   DataNotFoundError,
   EntityError,
   db,
-  t,
+  call,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -53,6 +53,7 @@ class UserService extends TcService {
       'temporary',
       'avatar',
       'type',
+      'emailVerified',
       'extra',
       'createdAt',
     ]);
@@ -68,6 +69,11 @@ class UserService extends TcService {
     this.registerAction('verifyEmail', this.verifyEmail, {
       params: {
         email: 'email',
+      },
+    });
+    this.registerAction('verifyEmailWithOTP', this.verifyEmailWithOTP, {
+      params: {
+        emailOTP: 'string',
       },
     });
     this.registerAction('register', this.register, {
@@ -287,6 +293,7 @@ class UserService extends TcService {
    */
   async verifyEmail(ctx: TcPureContext<{ email: string }>) {
     const email = ctx.params.email;
+    const t = ctx.meta.t;
     const cacheKey = this.buildVerifyEmailKey(email);
 
     const c = await this.broker.cacher.get(cacheKey);
@@ -296,19 +303,63 @@ class UserService extends TcService {
     }
 
     const otp = generateRandomNumStr(6); // 产生一次性6位数字密码
-    await this.broker.cacher.set(cacheKey, otp, 10 * 60); // 记录该OTP ttl: 10分钟
 
     const html = `
-    <p>您正在尝试注册 Tailchat, 请使用以下 OTP 作为邮箱验证凭证:</p>
+    <p>您正在尝试验证 Tailchat 账号的邮箱, 请使用以下 OTP 作为邮箱验证凭证:</p>
     <h3>OTP: <strong>${otp}</strong></h3>
     <p>该 OTP 将会在 10分钟 后过期</p>
-    <p style="color: grey;">如果并不是您触发的注册操作，请忽略此电子邮件。</p>`;
+    <p style="color: grey;">如果并不是您触发的验证操作，请忽略此电子邮件。</p>`;
 
     await ctx.call('mail.sendMail', {
       to: email,
-      subject: 'Tailchat 邮箱验证',
+      subject: `Tailchat 邮箱验证: ${otp}`,
       html,
     });
+
+    await this.broker.cacher.set(cacheKey, otp, 10 * 60); // 记录该OTP ttl: 10分钟
+
+    return true;
+  }
+
+  /**
+   * 通过用户邮件验证OTP, 并更新用户验证状态
+   */
+  async verifyEmailWithOTP(ctx: TcContext<{ emailOTP: string }>) {
+    const emailOTP = ctx.params.emailOTP;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    const userInfo = await call(ctx).getUserInfo(userId);
+    if (userInfo.emailVerified === true) {
+      throw new Error(t('邮箱已认证'));
+    }
+
+    // 检查
+    const cacheKey = this.buildVerifyEmailKey(userInfo.email);
+    const cachedOTP = await this.broker.cacher.get(cacheKey);
+    if (!cachedOTP) {
+      throw new Error(t('校验失败, OTP已过期'));
+    }
+    if (String(cachedOTP) !== emailOTP) {
+      throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
+    }
+
+    // 验证通过
+    const user = await this.adapter.model.findOneAndUpdate(
+      {
+        _id: new Types.ObjectId(userId),
+      },
+      {
+        emailVerified: true,
+      },
+      {
+        new: true,
+      }
+    );
+
+    await this.cleanCurrentUserCache(ctx);
+
+    return this.transformDocuments(ctx, {}, user);
   }
 
   /**
@@ -340,9 +391,13 @@ class UserService extends TcService {
     if (config.emailVerification === true) {
       // 检查OTP
       const cacheKey = this.buildVerifyEmailKey(params.email);
-      const cachedOtp = await this.broker.cacher.get(cacheKey);
+      const cachedOTP = await this.broker.cacher.get(cacheKey);
 
-      if (String(cachedOtp) !== params.emailOTP) {
+      if (!cachedOTP) {
+        throw new Error(t('校验失败, OTP已过期'));
+      }
+
+      if (String(cachedOTP) !== params.emailOTP) {
         throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
       }
 
@@ -448,9 +503,13 @@ class UserService extends TcService {
     if (config.emailVerification === true) {
       // 检查OTP
       const cacheKey = this.buildVerifyEmailKey(params.email);
-      const cachedOtp = await this.broker.cacher.get(cacheKey);
+      const cachedOTP = await this.broker.cacher.get(cacheKey);
 
-      if (String(cachedOtp) !== params.emailOTP) {
+      if (!cachedOTP) {
+        throw new Error(t('校验失败, OTP已过期'));
+      }
+
+      if (String(cachedOTP) !== params.emailOTP) {
         throw new Error(t('邮箱校验失败, 请输入正确的邮箱OTP'));
       }
 
@@ -492,7 +551,6 @@ class UserService extends TcService {
     }
 
     const otp = generateRandomNumStr(6); // 产生一次性6位数字密码
-    await this.broker.cacher.set(cacheKey, otp, 10 * 60); // 记录该OTP ttl: 10分钟
 
     const html = `
     <p>忘记密码了？ 请使用以下 OTP 作为重置密码凭证:</p>
@@ -502,9 +560,13 @@ class UserService extends TcService {
 
     await ctx.call('mail.sendMail', {
       to: email,
-      subject: 'Tailchat 忘记密码',
+      subject: `Tailchat 忘记密码: ${otp}`,
       html,
     });
+
+    await this.broker.cacher.set(cacheKey, otp, 10 * 60); // 记录该OTP ttl: 10分钟
+
+    return true;
   }
 
   /**
@@ -521,8 +583,13 @@ class UserService extends TcService {
     const { t } = ctx.meta;
     const cacheKey = `forget-password:${email}`;
 
-    const cachedOtp = await this.broker.cacher.get(cacheKey);
-    if (String(cachedOtp) !== otp) {
+    const cachedOTP = await this.broker.cacher.get(cacheKey);
+
+    if (!cachedOTP) {
+      throw new Error(t('校验失败, OTP已过期'));
+    }
+
+    if (String(cachedOTP) !== otp) {
       throw new Error(t('OTP 不正确'));
     }
 
@@ -988,6 +1055,9 @@ class UserService extends TcService {
     return `${botId}@tailchat-openapi.com`;
   }
 
+  /**
+   * 构建验证邮箱的缓存key
+   */
   private buildVerifyEmailKey(email: string) {
     return `verify-email:${email}`;
   }

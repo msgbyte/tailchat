@@ -40,4 +40,6 @@ export interface UserStruct {
   avatar?: string;
 
   type: UserType[];
+
+  emailVerified: boolean;
 }

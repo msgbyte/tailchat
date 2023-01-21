@@ -14,6 +14,7 @@ export interface UserBaseInfo {
   discriminator: string;
   avatar: string | null;
   temporary: boolean;
+  emailVerified: boolean;
   extra?: Record<string, unknown>;
 }
 
@@ -105,6 +106,20 @@ export async function loginWithToken(token: string): Promise<UserLoginInfo> {
 export async function verifyEmail(email: string): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/verifyEmail', {
     email,
+  });
+
+  return data;
+}
+
+/**
+ * 检查邮箱校验码并更新用户字段
+ * @param email 邮箱
+ */
+export async function verifyEmailWithOTP(
+  emailOTP: string
+): Promise<UserLoginInfo> {
+  const { data } = await request.post('/api/user/verifyEmailWithOTP', {
+    emailOTP,
   });
 
   return data;
