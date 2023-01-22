@@ -71,6 +71,7 @@ importers:
       as-table: ^1.0.55
       chalk: 4.1.2
       cross-env: ^7.0.3
+      crypto-random-string: 3.3.1
       dockerode: ^3.3.4
       dotenv: ^16.0.0
       filesize: ^8.0.7
@@ -99,6 +100,7 @@ importers:
       '@types/dockerode': 3.3.10
       as-table: 1.0.55
       chalk: 4.1.2
+      crypto-random-string: 3.3.1
       dockerode: 3.3.4
       dotenv: 16.0.2
       filesize: 8.0.7
