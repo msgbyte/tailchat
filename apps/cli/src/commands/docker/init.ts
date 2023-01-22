@@ -29,10 +29,12 @@ const initCompleted = chalk.green(`================
 - ${chalk.bold('docker compose up')} ${chalk.gray('# 启动服务')}
 ================`);
 
-const envUrl =
-  'https://ghproxy.com/https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env';
-const configUrl =
-  'https://ghproxy.com/https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml';
+const envUrl = withGhProxy(
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env'
+);
+const configUrl = withGhProxy(
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml'
+);
 
 export const dockerInitCommand: CommandModule = {
   command: 'init',
@@ -175,4 +177,11 @@ async function promptConfirm(message: string): Promise<boolean> {
   ]);
 
   return res;
+}
+
+/**
+ * 增加github资源代理以优化国内访问速度
+ */
+function withGhProxy(url: string): string {
+  return `https://ghproxy.com/${url}`;
 }
