@@ -1,3 +1,4 @@
+import './update';
 import yargs from 'yargs';
 import { createCommand } from './commands/create';
 import { connectCommand } from './commands/connect';

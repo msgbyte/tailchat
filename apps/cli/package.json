@@ -57,6 +57,7 @@
     "rimraf": "^3.0.2",
     "spinnies": "^0.5.1",
     "tailchat-server-sdk": "^0.0.12",
+    "update-notifier": "5.1.0",
     "yargs": "^17.4.0"
   },
   "devDependencies": {
@@ -66,6 +67,7 @@
     "@types/node": "16.11.7",
     "@types/react": "18.0.20",
     "@types/spinnies": "^0.5.0",
+    "@types/update-notifier": "^6.0.1",
     "@types/yargs": "^17.0.10",
     "cross-env": "^7.0.3",
     "tailchat-shared": "workspace:*",

@@ -67,6 +67,7 @@ importers:
       '@types/node': 16.11.7
       '@types/react': 18.0.20
       '@types/spinnies': ^0.5.0
+      '@types/update-notifier': ^6.0.1
       '@types/yargs': ^17.0.10
       as-table: ^1.0.55
       chalk: 4.1.2
@@ -95,6 +96,7 @@ importers:
       tailchat-shared: workspace:*
       ts-node: ^10.7.0
       typescript: ^4.6.3
+      update-notifier: 5.1.0
       yargs: ^17.4.0
     dependencies:
       '@types/dockerode': 3.3.10
@@ -121,6 +123,7 @@ importers:
       rimraf: 3.0.2
       spinnies: 0.5.1
       tailchat-server-sdk: 0.0.12
+      update-notifier: 5.1.0
       yargs: 17.5.1
     devDependencies:
       '@types/fs-extra': 9.0.13
@@ -129,6 +132,7 @@ importers:
       '@types/node': 16.11.7
       '@types/react': 18.0.20
       '@types/spinnies': 0.5.0
+      '@types/update-notifier': 6.0.1
       '@types/yargs': 17.0.12
       cross-env: 7.0.3
       tailchat-shared: link:../../client/shared
@@ -10700,7 +10704,7 @@ packages:
       loglevel: 1.8.0
       mongoose: 6.1.1
       reflect-metadata: 0.1.13
-      semver: 7.3.7
+      semver: 7.3.8
       tslib: 2.4.0
     dev: false
 
@@ -10832,6 +10836,10 @@ packages:
   /@types/component-emitter/1.2.11:
     resolution: {integrity: sha512-SRXjM+tfsSlA9VuG8hGO2nft2p8zjXCK1VcC6N4NXbBbYbSia9kzCChYQajIjzIqOOOuh5Ock6MmV2oux4jDZQ==}
     dev: false
+
+  /@types/configstore/6.0.0:
+    resolution: {integrity: sha512-GUvNiia85zTDDIx0iPrtF3pI8dwrQkfuokEqxqPDE55qxH0U5SZz4awVZjiJLWN2ZZRkXCUqgsMUbygXY+kytA==}
+    dev: true
 
   /@types/connect-history-api-fallback/1.3.5:
     resolution: {integrity: sha512-h8QJa8xSb1WD4fpKBDcATDNGXghFj6/3GRWG6dhmRcu0RX1Ubasur2Uvx5aeEwlf0MwblEC2bMzzMQntxnw/Cw==}
@@ -11721,6 +11729,13 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+
+  /@types/update-notifier/6.0.1:
+    resolution: {integrity: sha512-J6x9qtPDKgJGLdTjiswhhiL5QJoZv7eQb44t90mWb4Cf3tnuDRMvg8je9PoxDJZiGog0bfoFVcVHBq4RcItRZg==}
+    dependencies:
+      '@types/configstore': 6.0.0
+      boxen: 7.0.0
+    dev: true
 
   /@types/use-sync-external-store/0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
