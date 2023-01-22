@@ -16,15 +16,16 @@ const initWelcome = `================
 )} 以了解更多
 ================`;
 
-const initCompleted = chalk.green(`================
-恭喜你已经成功安装了, 你的配置文件已经准备就绪，距离成功就差一步了!
+const initCompleted = (dir: string) =>
+  chalk.green(`================
+恭喜你已经成功完成了配置初始化, 你的配置文件已经准备就绪，距离成功成功部署就差一步了!
 
 你的tailchat配置文件都被存储在: ${chalk.underline(
-  path.join(process.cwd(), './tailchat')
-)}
+    path.join(process.cwd(), dir)
+  )}
 
 运行以下命令以完成镜像下载与启动:
-- ${chalk.bold('cd tailchat')} ${chalk.gray('# 移动到安装目录')}
+- ${chalk.bold(`cd ${dir}`)} ${chalk.gray('# 移动到安装目录')}
 - ${chalk.bold('tailchat docker update')} ${chalk.gray('# 下载/更新官方镜像')}
 - ${chalk.bold('docker compose up')} ${chalk.gray('# 启动服务')}
 ================`);
@@ -136,12 +137,12 @@ export const dockerInitCommand: CommandModule = {
       spinner.info('正在写入配置文件 ...');
 
       await Promise.all([
-        fs.writeFile('./tailchat/docker-compose.env', rawEnv),
-        fs.writeFile('./tailchat/docker-compose.yml', rawConfig),
+        fs.writeFile(path.join(dir, 'docker-compose.env'), rawEnv),
+        fs.writeFile(path.join(dir, 'docker-compose.yml'), rawConfig),
       ]);
       spinner.succeed('配置初始化完毕');
 
-      console.log(initCompleted);
+      console.log(initCompleted(dir));
     } catch (err) {
       spinner.fail('Tailchat with docker 初始化出现意外');
       console.error(err);
