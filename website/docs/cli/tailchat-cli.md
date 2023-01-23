@@ -9,6 +9,11 @@ title: 命令行工具 tailchat-cli
 npm install -g tailchat-cli@latest # 安装与更新同一命令
 ```
 
+或直接使用
+```bash
+npx tailchat-cli <command>
+```
+
 安装成功后输入`tailchat` 后返回如下
 
 ```bash

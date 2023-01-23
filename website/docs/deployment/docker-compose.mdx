@@ -24,15 +24,26 @@ title: Docker Compose 部署
 
 你可以通过从**公共镜像拉取已经编译好的镜像**或者**通过源码手动编译**
 
+> 使用已经编译好的镜像可以无需花费足够的计算机资源进行编译，对小资源配置的服务器会十分友好。另外相对于源码编译，公共镜像的代码更加稳定。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs groupId="build">
-  <TabItem value="public-image" label="从公共镜像中拉取(推荐)" default>
+  <TabItem value="cli" label="使用cli一键安装" default>
 
-> 使用已经编译好的镜像可以无需花费足够的计算机资源进行编译，对小资源配置的服务器会十分友好。另外相对于源码编译，公共镜像的代码更加稳定。
+> 使用 `cli` 请确保在你的服务器上已经拥有了node环境(建议node版本 16+)
+> 如果对node不了解可以使用`从公共镜像中手动安装`方式
 
+使用 命令行工具 tailchat-cli 一键拉取/更新镜像:
+```bash
+npx tailchat-cli docker update
+```
+
+  </TabItem>
+  <TabItem value="public-image" label="从公共镜像中手动安装" default>
+
+使用Docker原生命令手动安装:
 ```bash
 docker pull moonrailgun/tailchat # 从公共镜像库拉取 tailchat镜像
 docker tag moonrailgun/tailchat tailchat # 将下载的镜像改名为tailchat(和源码编译保持一致，如果不改的话会走源码编译流程)
@@ -88,7 +99,19 @@ cd tailchat && docker compose build
 ## 启动项目
 
 <Tabs groupId="build">
-  <TabItem value="public-image" label="从公共镜像中拉取" default>
+  <TabItem value="cli" label="使用cli一键安装" default>
+
+```bash
+npx tailchat-cli docker init
+```
+
+执行该命令会以交互式的方式向你询问一些配置相关的问题(如下图)，填写完毕后即可自动生成配置文件
+
+![](./assets/docker-init.png)
+
+  </TabItem>
+
+  <TabItem value="public-image" label="从公共镜像中手动安装">
 
 > 启动之前需要下载配置文件以告知 `docker-compose` 要如何启动镜像
 > 从仓库下载配置文件与配置环境变量:
@@ -101,14 +124,16 @@ wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.ym
 wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env
 ```
 
+在启动之前需要修改一下配置
+
+修改 `docker-compose.env` 文件的配置，以下字段推荐修改:
+
+- `API_URL` 对外可访问的url地址，用于文件服务访问, 可以是域名也可以是ip
+- `SECRET` 服务端加密秘钥，用于生成Token. 默认为 `tailchat`
+
 
   </TabItem>
   <TabItem value="source-code" label="从源码中编译">
-
-  </TabItem>
-</Tabs>
-
-
 
 在启动之前需要修改一下配置
 
@@ -116,6 +141,12 @@ wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.en
 
 - `API_URL` 对外可访问的url地址，用于文件服务访问, 可以是域名也可以是ip
 - `SECRET` 服务端加密秘钥，用于生成Token. 默认为 `tailchat`
+
+
+  </TabItem>
+</Tabs>
+
+
 
 完成配置后使用`docker-compose` 一键启动 `Tailchat` 应用:
 
