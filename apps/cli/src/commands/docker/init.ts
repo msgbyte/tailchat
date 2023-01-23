@@ -27,7 +27,7 @@ const initCompleted = (dir: string) =>
 运行以下命令以完成镜像下载与启动:
 - ${chalk.bold(`cd ${dir}`)} ${chalk.gray('# 移动到安装目录')}
 - ${chalk.bold('tailchat docker update')} ${chalk.gray('# 下载/更新官方镜像')}
-- ${chalk.bold('docker compose up')} ${chalk.gray('# 启动服务')}
+- ${chalk.bold('docker compose up -d')} ${chalk.gray('# 启动服务')}
 ================`);
 
 const envUrl = withGhProxy(
