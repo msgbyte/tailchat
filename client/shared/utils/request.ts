@@ -1,7 +1,7 @@
 interface QueueItem<T, R> {
   params: T;
   resolve: (r: R) => void;
-  reject: (reason: any) => void;
+  reject: (reason: unknown) => void;
 }
 
 /**
@@ -25,12 +25,12 @@ export function createAutoMergedRequest<T, R>(
 
     try {
       const list = await ret;
-      _queue.forEach((q_1, i) => {
-        q_1.resolve(list[i]);
+      _queue.forEach((q1, i) => {
+        q1.resolve(list[i]);
       });
     } catch (err) {
-      _queue.forEach((q_2) => {
-        q_2.reject(err);
+      _queue.forEach((q2) => {
+        q2.reject(err);
       });
     }
   }

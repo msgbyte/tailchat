@@ -682,6 +682,7 @@ class UserService extends TcService {
 
   /**
    * 获取用户信息的批量操作版
+   * 用于优化网络访问性能
    */
   async getUserInfoList(ctx: PureContext<{ userIds: string[] }>) {
     const userIds = ctx.params.userIds;

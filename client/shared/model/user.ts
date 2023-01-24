@@ -4,6 +4,9 @@ import { sharedEvent } from '../event';
 import { SYSTEM_USERID } from '../utils/consts';
 import { createAutoMergedRequest } from '../utils/request';
 import _pick from 'lodash/pick';
+import _uniq from 'lodash/uniq';
+import _flatten from 'lodash/flatten';
+import _zipObject from 'lodash/zipObject';
 import { t } from '../i18n';
 import { parseUrlStr } from '../utils/url-helper';
 
@@ -263,20 +266,29 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
   return userInfo;
 }
 
+const _fetchUserOnlineStatus = createAutoMergedRequest<string[], boolean[]>(
+  async (userIdsList) => {
+    const uniqList = _uniq(_flatten(userIdsList));
+    // 这里用post是为了防止一次性获取的userId过多超过url限制
+    const { data } = await request.post('/api/gateway/checkUserOnline', {
+      userIds: uniqList,
+    });
+
+    const map = _zipObject<boolean>(uniqList, data);
+
+    // 将请求结果根据传输来源重新分组
+    return userIdsList.map((userIds) =>
+      userIds.map((userId) => map[userId] ?? false)
+    );
+  }
+);
 /**
  * 获取用户在线状态
  */
 export async function getUserOnlineStatus(
   userIds: string[]
 ): Promise<boolean[]> {
-  const { data } = await request.post<boolean[]>(
-    '/api/gateway/checkUserOnline',
-    {
-      userIds,
-    }
-  );
-
-  return data;
+  return _fetchUserOnlineStatus(userIds);
 }
 
 /**
