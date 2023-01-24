@@ -21,6 +21,7 @@ import {
   useUserInfoList,
 } from 'tailchat-shared';
 import _compact from 'lodash/compact';
+import { Problem } from '@/components/Problem';
 
 interface MembersPanelProps {
   groupId: string;
@@ -154,6 +155,10 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const hideGroupMemberDiscriminator =
     config.hideGroupMemberDiscriminator ?? false;
 
+  if (!groupInfo) {
+    return <Problem />;
+  }
+
   if (userInfoList.length === 0) {
     return <Skeleton />;
   }
@@ -237,6 +242,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
               popover={
                 <GroupUserPopover
                   userInfo={member}
+                  groupInfo={groupInfo}
                   hideDiscriminator={hideGroupMemberDiscriminator}
                 />
               }
@@ -253,6 +259,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
           popover={
             <GroupUserPopover
               userInfo={member}
+              groupInfo={groupInfo}
               hideDiscriminator={hideGroupMemberDiscriminator}
             />
           }

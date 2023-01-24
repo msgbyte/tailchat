@@ -1,16 +1,19 @@
 import { pluginUserExtraInfo } from '@/plugin/common';
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
-import { Tag } from 'antd';
+import { Space, Tag } from 'antd';
 import React, { useEffect } from 'react';
-import { t, UserBaseInfo } from 'tailchat-shared';
+import { getTextColorHex } from 'tailchat-design';
+import { GroupInfo, t, UserBaseInfo } from 'tailchat-shared';
 import { UserProfileContainer } from '../UserProfileContainer';
 
 export const GroupUserPopover: React.FC<{
   userInfo: UserBaseInfo;
+  groupInfo: GroupInfo;
   hideDiscriminator?: boolean;
 }> = React.memo((props) => {
-  const { userInfo, hideDiscriminator = false } = props;
+  const { userInfo, groupInfo, hideDiscriminator = false } = props;
   const userExtra = userInfo.extra ?? {};
+  const roleNames = getUserRoleNames(userInfo._id, groupInfo);
 
   useEffect(() => {
     if (userInfo.avatar) {
@@ -30,9 +33,19 @@ export const GroupUserPopover: React.FC<{
           )}
         </div>
 
-        <div>
+        <Space size={4} wrap={true} className="py-1">
+          {groupInfo.owner === userInfo._id && (
+            <Tag color="gold">{t('创建者')}</Tag>
+          )}
+
           {userInfo.temporary && <Tag color="processing">{t('游客')}</Tag>}
-        </div>
+
+          {roleNames.map((name) => (
+            <Tag key={name} color={getTextColorHex(name)}>
+              {name}
+            </Tag>
+          ))}
+        </Space>
 
         <div className="pt-2">
           {pluginUserExtraInfo.map((item, i) => {
@@ -60,3 +73,15 @@ export const GroupUserPopover: React.FC<{
   );
 });
 GroupUserPopover.displayName = 'GroupUserPopover';
+
+/**
+ * 获取用户的角色名列表
+ */
+function getUserRoleNames(userId: string, groupInfo: GroupInfo) {
+  const roles = groupInfo.members.find((m) => m.userId === userId)?.roles ?? [];
+  const roleNames = groupInfo.roles
+    .filter((r) => roles.includes(r._id))
+    .map((r) => r.name);
+
+  return roleNames;
+}
