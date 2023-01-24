@@ -1,7 +1,8 @@
-import { UserAvatar, UserName } from '@capital/component';
+import { Icon, UserAvatar, UserName } from '@capital/component';
 import { AgoraVideoPlayer, IAgoraRTCRemoteUser } from 'agora-rtc-react';
 import React from 'react';
 import styled from 'styled-components';
+import { Translate } from '../translate';
 import { useClient } from './client';
 import { useMeetingStore } from './store';
 import { getClientLocalTrack } from './utils';
@@ -36,8 +37,53 @@ const Root = styled.div<{
     left: 0;
     bottom: 0;
     padding: 4px 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+
+  .screen-icon {
+    width: 96px;
+    height: 96px;
+    font-size: 96px;
   }
 `;
+
+/**
+ * 界面Icon
+ */
+const VideViewIcon: React.FC<{ uid: string }> = React.memo(({ uid }) => {
+  if (uid.endsWith('_screen')) {
+    // 是屏幕共享
+    return (
+      <div className="screen-icon">
+        <Icon icon="mdi:projector-screen-outline" />
+      </div>
+    );
+  } else {
+    return <UserAvatar size={96} userId={uid} />;
+  }
+});
+VideViewIcon.displayName = 'VideViewIcon';
+
+/**
+ * 界面名称
+ */
+const VideViewName: React.FC<{ uid: string }> = React.memo(({ uid }) => {
+  if (uid.endsWith('_screen')) {
+    const userId = uid.substring(0, uid.length - '_screen'.length);
+
+    return (
+      <span className="name">
+        <UserName userId={userId} />
+        {Translate.someoneScreenName}
+      </span>
+    );
+  } else {
+    return <UserName className="name" userId={uid} />;
+  }
+});
+VideViewName.displayName = 'VideViewName';
 
 export const VideoView: React.FC<{
   user: IAgoraRTCRemoteUser;
@@ -47,13 +93,13 @@ export const VideoView: React.FC<{
 
   return (
     <Root active={active}>
-      {user.hasVideo ? (
+      {user.hasVideo && user.videoTrack ? (
         <AgoraVideoPlayer className="player" videoTrack={user.videoTrack} />
       ) : (
-        <UserAvatar size={96} userId={String(user.uid)} />
+        <VideViewIcon uid={String(user.uid)} />
       )}
 
-      <UserName className="name" userId={String(user.uid)} />
+      <VideViewName uid={String(user.uid)} />
     </Root>
   );
 };
@@ -75,10 +121,10 @@ export const OwnVideoView: React.FC<{}> = React.memo(() => {
       {mediaPerm.video ? (
         <AgoraVideoPlayer className="player" videoTrack={videoTrack} />
       ) : (
-        <UserAvatar size={96} userId={String(client.uid)} />
+        <VideViewIcon uid={String(client.uid)} />
       )}
 
-      <UserName className="name" userId={String(client.uid)} />
+      <VideViewName uid={String(client.uid)} />
     </Root>
   );
 });

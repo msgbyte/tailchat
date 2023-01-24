@@ -18,11 +18,11 @@ export const Translate = {
     'en-US': 'No one Speaking',
   }),
   startCall: localTrans({
-    'zh-CN': '发起通话',
-    'en-US': 'Start Call',
+    'zh-CN': '发起/加入通话',
+    'en-US': 'Start/Join Call',
   }),
   startCallContent: localTrans({
-    'zh-CN': '是否通过声网插件在当前会话开启音视频通讯？',
+    'zh-CN': '是否通过声网插件在当前会话开启/加入音视频通讯？',
     'en-US':
       'Do you want to enable audio and video communication in the current session through the Agora plugin?',
   }),
@@ -62,5 +62,17 @@ export const Translate = {
   closeMic: localTrans({
     'zh-CN': '关闭麦克风',
     'en-US': 'Close Mic',
+  }),
+  openScreensharing: localTrans({
+    'zh-CN': '开启屏幕共享',
+    'en-US': 'Open Screensharing',
+  }),
+  closeScreensharing: localTrans({
+    'zh-CN': '关闭屏幕共享',
+    'en-US': 'Close Screensharing',
+  }),
+  someoneScreenName: localTrans({
+    'zh-CN': ' 的屏幕',
+    'en-US': "'s Screen",
   }),
 };

@@ -4,6 +4,7 @@ import create from 'zustand';
 interface MediaPerm {
   video: boolean;
   audio: boolean;
+  screensharing: boolean;
 }
 
 interface MeetingState {
@@ -38,7 +39,7 @@ interface MeetingState {
 
 export const useMeetingStore = create<MeetingState>((set) => ({
   users: [],
-  mediaPerm: { video: false, audio: false },
+  mediaPerm: { video: false, audio: false, screensharing: false },
   volumes: [],
   appendUser: (user: IAgoraRTCRemoteUser) => {
     set((state) => ({

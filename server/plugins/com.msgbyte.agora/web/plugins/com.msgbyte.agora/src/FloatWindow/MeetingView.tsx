@@ -5,13 +5,13 @@ import { Videos } from './Videos';
 import { Controls } from './Controls';
 import { LoadingSpinner } from '@capital/component';
 import { useMemoizedFn } from 'ahooks';
-import { request } from '../request';
 import styled from 'styled-components';
 import { useMeetingStore } from './store';
 import { NetworkStats } from './NetworkStats';
 import _once from 'lodash/once';
 import type { IAgoraRTCClient } from 'agora-rtc-react';
 import { Translate } from '../translate';
+import { request } from '../request';
 
 const Root = styled.div`
   .body {
@@ -43,7 +43,14 @@ export const MeetingView: React.FC<MeetingViewProps> = React.memo((props) => {
   const initedRef = useRef(false);
 
   const init = useMemoizedFn(async (channelName: string) => {
+    const { _id } = await getJWTUserInfo();
+
     client.on('user-published', async (user, mediaType) => {
+      if (String(user.uid).startsWith(_id)) {
+        // 不监听自身
+        return;
+      }
+
       await client.subscribe(user, mediaType);
       console.log('subscribe success');
       if (mediaType === 'audio') {

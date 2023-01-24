@@ -1,5 +1,6 @@
 import { useAsyncFn } from '@capital/common';
 import { IconBtn } from '@capital/component';
+import { useMemoizedFn } from 'ahooks';
 import React from 'react';
 import { Translate } from '../translate';
 import {
@@ -8,16 +9,21 @@ import {
   createCameraVideoTrack,
 } from './client';
 import { useMeetingStore } from './store';
+import { useScreenSharing } from './useScreenSharing';
 import { getClientLocalTrack } from './utils';
 
+/**
+ * 媒体控制器
+ */
 export const Controls: React.FC<{
   onClose: () => void;
 }> = React.memo((props) => {
   const client = useClient();
+  const { startScreenSharing, stopScreenSharing } = useScreenSharing();
   const mediaPerm = useMeetingStore((state) => state.mediaPerm);
 
   const [{ loading }, mute] = useAsyncFn(
-    async (type: 'audio' | 'video') => {
+    useMemoizedFn(async (type: 'audio' | 'video' | 'screensharing') => {
       if (type === 'audio') {
         if (mediaPerm.audio === true) {
           const track = getClientLocalTrack(client, 'audio');
@@ -42,9 +48,17 @@ export const Controls: React.FC<{
         }
 
         useMeetingStore.getState().setMediaPerm({ video: !mediaPerm.video });
+      } else if (type === 'screensharing') {
+        if (mediaPerm.screensharing === true) {
+          // 关闭屏幕共享
+          await stopScreenSharing();
+        } else {
+          // 开始屏幕共享
+          await startScreenSharing();
+        }
       }
-    },
-    [client, mediaPerm]
+    }),
+    []
   );
 
   const leaveChannel = async () => {
@@ -60,6 +74,23 @@ export const Controls: React.FC<{
 
   return (
     <div className="controller">
+      <IconBtn
+        icon={
+          mediaPerm.screensharing
+            ? 'mdi:projector-screen-outline'
+            : 'mdi:projector-screen-off-outline'
+        }
+        title={
+          mediaPerm.screensharing
+            ? Translate.closeScreensharing
+            : Translate.openScreensharing
+        }
+        active={mediaPerm.screensharing}
+        disabled={loading}
+        size="large"
+        onClick={() => mute('screensharing')}
+      />
+
       <IconBtn
         icon={mediaPerm.video ? 'mdi:video' : 'mdi:video-off'}
         title={mediaPerm.video ? Translate.closeCamera : Translate.openCamera}

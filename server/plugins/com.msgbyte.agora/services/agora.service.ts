@@ -93,6 +93,7 @@ class AgoraService extends TcService {
     this.registerAction('generateJoinInfo', this.generateJoinInfo, {
       params: {
         channelName: 'string',
+        userId: { type: 'string', optional: true },
       },
     });
     this.registerAction('getChannelUserList', this.getChannelUserList, {
@@ -135,6 +136,7 @@ class AgoraService extends TcService {
   generateJoinInfo(
     ctx: TcContext<{
       channelName: string;
+      userId?: string;
     }>
   ) {
     const { channelName } = ctx.params;
@@ -147,7 +149,7 @@ class AgoraService extends TcService {
 
     const role = RtcRole.PUBLISHER;
 
-    const userId = ctx.meta.userId;
+    const userId = ctx.params.userId ?? ctx.meta.userId;
 
     const tokenExpirationInSecond = 3600; // 1h
     const privilegeExpirationInSecond = 3600; // 1h
