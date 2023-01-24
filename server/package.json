@@ -110,6 +110,7 @@
     "prettier": "^2.3.2",
     "socket.io-client": "^4.1.3",
     "swagger-jsdoc": "^6.2.8",
+    "tailchat-service-swagger-generator": "workspace:^1.0.0",
     "ts-jest": "27.1.4",
     "vinyl-fs": "^3.0.3"
   },
