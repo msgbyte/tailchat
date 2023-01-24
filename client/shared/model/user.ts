@@ -35,7 +35,7 @@ export interface UserSettings {
   [key: string]: any;
 }
 
-export function pickUserBaseInfo(userInfo: UserLoginInfo) {
+export function pickUserBaseInfo(userInfo: UserLoginInfo): UserBaseInfo {
   return _pick(userInfo, [
     '_id',
     'email',
@@ -43,6 +43,7 @@ export function pickUserBaseInfo(userInfo: UserLoginInfo) {
     'discriminator',
     'avatar',
     'temporary',
+    'emailVerified',
   ]);
 }
 
@@ -55,6 +56,7 @@ const builtinUserInfo: Record<string, () => UserBaseInfo> = {
     discriminator: '0000',
     avatar: null,
     temporary: false,
+    emailVerified: false,
   }),
 };
 
