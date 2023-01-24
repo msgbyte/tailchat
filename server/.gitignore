@@ -2,6 +2,9 @@ config/local.*
 data/
 __uploads/
 
+# Swagger
+public/swagger.json
+
 # 插件
 public/plugins/
 public/registry.json
