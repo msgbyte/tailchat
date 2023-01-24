@@ -1,13 +1,9 @@
 import { regPluginPanelAction } from '@capital/common';
 import { openConfirmModal } from '@capital/component';
+import { startFastMeeting } from './FloatWindow';
 import { Translate } from './translate';
 
 console.log('Plugin 声网音视频 is loaded');
-
-async function startFastMeeting(meetingId: string) {
-  const module = await import('./FloatWindow');
-  module.startFastMeeting(meetingId); // 仅用于测试
-}
 
 // 发起群组会议
 regPluginPanelAction({

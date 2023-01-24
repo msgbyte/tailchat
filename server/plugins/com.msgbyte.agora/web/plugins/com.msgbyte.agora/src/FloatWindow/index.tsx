@@ -1,8 +1,14 @@
 import { showToasts } from '@capital/common';
-import { PortalAdd, PortalRemove } from '@capital/component';
+import { PortalAdd, PortalRemove, Loadable } from '@capital/component';
 import React from 'react';
 import { Translate } from '../translate';
-import { FloatMeetingWindow } from './window';
+
+const FloatMeetingWindow = Loadable(
+  () => import('./window').then((module) => module.FloatMeetingWindow),
+  {
+    showLoading: true,
+  }
+);
 
 let currentMeeting: string | null = null;
 

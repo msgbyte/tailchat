@@ -6,7 +6,9 @@ import loadable, {
 } from '@loadable/component';
 import pMinDelay from 'p-min-delay';
 import { LoadingSpinner } from './LoadingSpinner';
-import { isValidStr } from 'tailchat-shared';
+import { isValidStr, t } from 'tailchat-shared';
+import { message } from 'antd';
+import _uniqueId from 'lodash/uniqueId';
 
 function promiseUsage<T>(p: Promise<T>, name: string): Promise<T> {
   const start = new Date().valueOf();
@@ -20,12 +22,33 @@ function promiseUsage<T>(p: Promise<T>, name: string): Promise<T> {
   });
 }
 
+function promiseLoading<T>(p: Promise<T>): Promise<T> {
+  const key = _uniqueId('Loadable');
+  message.loading({
+    content: t('加载中...'),
+    key,
+    duration: 0,
+  });
+
+  return p.then((r) => {
+    message.destroy(key);
+
+    return r;
+  });
+}
+
 interface LoadableOptions<P> extends OptionsWithoutResolver<P> {
   /**
    * 组件名, 如果传入则会记录组件加载用时
    * 用于权衡组件大小
    */
   componentName?: string;
+
+  /**
+   * 加载过程中显示 loading
+   * 一般用于 modal
+   */
+  showLoading?: boolean;
 }
 
 /**
@@ -43,6 +66,10 @@ export function Loadable<Props>(
       if (isValidStr(options?.componentName)) {
         // 增加promise加载用时统计
         p = promiseUsage(p, String(options?.componentName));
+      }
+
+      if (options?.showLoading === true) {
+        p = promiseLoading(p);
       }
 
       return pMinDelay(p, 200, { delayRejection: false });
