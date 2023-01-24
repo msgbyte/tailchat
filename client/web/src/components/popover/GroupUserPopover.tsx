@@ -3,17 +3,22 @@ import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import { Space, Tag } from 'antd';
 import React, { useEffect } from 'react';
 import { getTextColorHex } from 'tailchat-design';
-import { GroupInfo, t, UserBaseInfo } from 'tailchat-shared';
+import {
+  getGroupConfigWithInfo,
+  GroupInfo,
+  t,
+  UserBaseInfo,
+} from 'tailchat-shared';
 import { UserProfileContainer } from '../UserProfileContainer';
 
 export const GroupUserPopover: React.FC<{
   userInfo: UserBaseInfo;
   groupInfo: GroupInfo;
-  hideDiscriminator?: boolean;
 }> = React.memo((props) => {
-  const { userInfo, groupInfo, hideDiscriminator = false } = props;
+  const { userInfo, groupInfo } = props;
   const userExtra = userInfo.extra ?? {};
   const roleNames = getUserRoleNames(userInfo._id, groupInfo);
+  const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
 
   useEffect(() => {
     if (userInfo.avatar) {
@@ -28,7 +33,7 @@ export const GroupUserPopover: React.FC<{
       <UserProfileContainer userInfo={userInfo}>
         <div className="text-xl">
           <span className="font-semibold">{userInfo.nickname}</span>
-          {!hideDiscriminator && (
+          {!hideGroupMemberDiscriminator && (
             <span className="opacity-60 ml-1">#{userInfo.discriminator}</span>
           )}
         </div>

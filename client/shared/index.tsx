@@ -132,6 +132,7 @@ export {
   deleteGroupRole,
   updateGroupRoleName,
   updateGroupRolePermission,
+  getGroupConfigWithInfo,
 } from './model/group';
 export type {
   GroupPanel,

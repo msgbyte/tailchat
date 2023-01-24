@@ -1,11 +1,12 @@
 import { Icon } from 'tailchat-design';
-import { openReconfirmModal, openReconfirmModalP } from '@/components/Modal';
+import { openReconfirmModalP } from '@/components/Modal';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Dropdown, Input, MenuProps, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import {
   formatFullTime,
+  getGroupConfigWithInfo,
   GroupMember,
   humanizeMsDuration,
   model,
@@ -101,6 +102,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const [allowManageUser] = useHasGroupPermission(groupId, [
     PERMISSION.core.manageUser,
   ]);
+  const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
 
   const {
     searchText,
@@ -150,10 +152,6 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     },
     [groupId]
   );
-
-  const config = groupInfo?.config ?? {};
-  const hideGroupMemberDiscriminator =
-    config.hideGroupMemberDiscriminator ?? false;
 
   if (!groupInfo) {
     return <Problem />;
@@ -240,11 +238,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
             <UserListItem
               userId={member._id}
               popover={
-                <GroupUserPopover
-                  userInfo={member}
-                  groupInfo={groupInfo}
-                  hideDiscriminator={hideGroupMemberDiscriminator}
-                />
+                <GroupUserPopover userInfo={member} groupInfo={groupInfo} />
               }
               hideDiscriminator={hideGroupMemberDiscriminator}
             />
@@ -256,13 +250,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         <UserListItem
           key={member._id}
           userId={member._id}
-          popover={
-            <GroupUserPopover
-              userInfo={member}
-              groupInfo={groupInfo}
-              hideDiscriminator={hideGroupMemberDiscriminator}
-            />
-          }
+          popover={<GroupUserPopover userInfo={member} groupInfo={groupInfo} />}
           hideDiscriminator={hideGroupMemberDiscriminator}
         />
       );

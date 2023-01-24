@@ -88,6 +88,23 @@ export interface GroupInvite {
 }
 
 /**
+ * 获取群组设置信息
+ */
+export function getGroupConfigWithInfo(
+  groupInfo: GroupInfo | null | undefined
+): {
+  hideGroupMemberDiscriminator: boolean;
+  [key: string]: unknown;
+} {
+  const config = groupInfo?.config ?? {};
+
+  return {
+    ...config,
+    hideGroupMemberDiscriminator: config.hideGroupMemberDiscriminator ?? false,
+  };
+}
+
+/**
  * 创建群组
  * @param name 群组名
  * @param panels 初始面板
