@@ -33,7 +33,7 @@ export function auth() {
 
       next();
     } catch (err) {
-      res.status(500).end(String(err));
+      res.status(401).end(String(err));
     }
   };
 }
