@@ -6,11 +6,12 @@ App({
    * 当wap2app初始化完成时，会触发 onLaunch
    */
   onLaunch: function () {
-    console.log('launch');
-
     uni.onPushMessage((res) => {
       console.log('收到推送消息：', res); //监听推送消息
     });
+
+    const clientInfo = plus.push.getClientInfo();
+    console.log(clientInfo);
 
     uni.getPushClientId({
       success: (res) => {
@@ -38,6 +39,8 @@ App({
 
 Page('__W2A__nightly.paw.msgbyte.com', {
   //首页扩展配置
-  onShow: function () {},
+  onShow: function () {
+    console.log('__W2A__nightly.paw.msgbyte.com');
+  },
   onClose: function () {},
 });
