@@ -9,4 +9,5 @@ packages:
   - 'server/admin-next'
   - 'server/packages/**'
   - 'server/plugins/**'
+  - 'server/test/demo/**'
   - 'website'

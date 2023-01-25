@@ -15,5 +15,5 @@
     "outDir": "dist"
   },
   "include": ["./**/*"],
-  "exclude": ["node_modules/**/*", "dist", "plugins/**/web/**", "packages/sdk/**", "admin/**"]
+  "exclude": ["node_modules/**/*", "dist", "plugins/**/web/**", "packages/sdk/**", "admin/**", "admin-next/**"]
 }

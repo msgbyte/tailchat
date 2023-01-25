@@ -1,8 +1,7 @@
 import { TcSocketIOService } from '../socketio.mixin';
 import { io } from 'socket.io-client';
-import ApiGateway from 'moleculer-web';
 import { createTestUserToken } from '../../test/utils';
-import { UserJWTPayload, TcBroker } from 'tailchat-server-sdk';
+import { UserJWTPayload, TcBroker, ApiGatewayMixin } from 'tailchat-server-sdk';
 
 require('dotenv').config();
 
@@ -46,7 +45,7 @@ describe('Testing "socketio.mixin"', () => {
   const service = broker.createService({
     name: 'test',
     mixins: [
-      ApiGateway,
+      ApiGatewayMixin,
       TcSocketIOService({
         async userAuth(token): Promise<UserJWTPayload> {
           return {
