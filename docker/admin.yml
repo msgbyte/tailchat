@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  # 后台应用
+  tailchat-admin:
+    build:
+      context: ../
+    image: tailchat
+    restart: unless-stopped
+    env_file: docker-compose.env
+    depends_on:
+      - mongo
+      - redis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=PathPrefix(`/admin`)"
+      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+    networks:
+      - internal
+    command: cd server/admin && pnpm build && pnpm start
