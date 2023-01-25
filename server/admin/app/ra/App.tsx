@@ -4,6 +4,7 @@ import {
   fetchUtils,
   ShowGuesser,
   CustomRoutes,
+  TranslationMessages,
 } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
 import { authProvider, authStorageKey } from './authProvider';
@@ -21,10 +22,7 @@ import { Dashboard } from './dashboard';
 import { Route } from 'react-router-dom';
 import { TailchatNetwork } from './network';
 import { TailchatLayout } from './layout';
-import polyglotI18nProvider from 'ra-i18n-polyglot';
-import chineseMessages from 'ra-language-chinese';
-
-const i18nProvider = polyglotI18nProvider(() => chineseMessages, 'ch');
+import { i18nProvider } from './i18n';
 
 const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
   try {
@@ -57,8 +55,8 @@ export const App = () => (
     disableTelemetry={true}
     authProvider={authProvider}
     dataProvider={dataProvider}
-    requireAuth={true}
     i18nProvider={i18nProvider}
+    requireAuth={true}
   >
     <Resource
       icon={PersonIcon}
