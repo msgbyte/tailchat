@@ -21,6 +21,10 @@ import { Dashboard } from './dashboard';
 import { Route } from 'react-router-dom';
 import { TailchatNetwork } from './network';
 import { TailchatLayout } from './layout';
+import polyglotI18nProvider from 'ra-i18n-polyglot';
+import chineseMessages from 'ra-language-chinese';
+
+const i18nProvider = polyglotI18nProvider(() => chineseMessages, 'ch');
 
 const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
   try {
@@ -54,6 +58,7 @@ export const App = () => (
     authProvider={authProvider}
     dataProvider={dataProvider}
     requireAuth={true}
+    i18nProvider={i18nProvider}
   >
     <Resource
       icon={PersonIcon}
