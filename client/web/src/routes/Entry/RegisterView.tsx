@@ -35,11 +35,13 @@ export const RegisterView: React.FC = React.memo(() => {
     await string()
       .email(t('邮箱格式不正确'))
       .required(t('邮箱不能为空'))
+      .max(40, t('邮箱最长限制40个字符'))
       .validate(email);
 
     await string()
       .min(6, t('密码不能低于6位'))
       .required(t('密码不能为空'))
+      .max(40, t('密码最长限制40个字符'))
       .validate(password);
 
     const data = await registerWithEmail(email, password, emailOTP);

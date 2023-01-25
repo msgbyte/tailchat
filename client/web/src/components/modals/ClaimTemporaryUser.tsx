@@ -90,12 +90,14 @@ const getFields = (): MetaFormFieldMeta[] =>
 const schema = createMetaFormSchema({
   email: metaFormFieldSchema
     .string()
+    .required(t('邮箱不能为空'))
     .email(t('邮箱格式不正确'))
-    .required(t('邮箱不能为空')),
+    .max(40, t('邮箱最长限制40个字符')),
   password: metaFormFieldSchema
     .string()
+    .required(t('密码不能为空'))
     .min(6, t('密码不能低于6位'))
-    .required(t('密码不能为空')),
+    .max(40, t('密码最长限制40个字符')),
   emailOTP: metaFormFieldSchema.string().length(6, t('校验码为6位')),
 });
 

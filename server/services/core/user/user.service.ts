@@ -79,10 +79,10 @@ class UserService extends TcService {
     this.registerAction('register', this.register, {
       rest: 'POST /register',
       params: {
-        username: [{ type: 'string', optional: true }],
-        email: [{ type: 'email', optional: true }],
-        password: 'string',
-        emailOTP: [{ type: 'string', optional: true }],
+        username: { type: 'string', optional: true, max: 40 },
+        email: { type: 'email', optional: true, max: 40 },
+        password: { type: 'string', max: 40 },
+        emailOTP: { type: 'string', optional: true },
       },
     });
     this.registerAction('modifyPassword', this.modifyPassword, {
@@ -100,10 +100,10 @@ class UserService extends TcService {
     this.registerAction('claimTemporaryUser', this.claimTemporaryUser, {
       params: {
         userId: 'string',
-        username: [{ type: 'string', optional: true }],
-        email: 'email',
-        password: 'string',
-        emailOTP: [{ type: 'string', optional: true }],
+        username: { type: 'string', optional: true, max: 40 },
+        email: { type: 'email', max: 40 },
+        password: { type: 'string', max: 40 },
+        emailOTP: { type: 'string', optional: true },
       },
     });
     this.registerAction('forgetPassword', this.forgetPassword, {
