@@ -31,6 +31,8 @@
     "md5": "^2.3.0",
     "morgan": "^1.10.0",
     "ra-data-json-server": "^4.6.3",
+    "ra-i18n-polyglot": "^4.7.0",
+    "ra-language-chinese": "^2.0.10",
     "react": "^18.2.0",
     "react-admin": "^4.6.3",
     "react-dom": "^18.2.0",
