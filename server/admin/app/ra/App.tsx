@@ -10,7 +10,7 @@ import jsonServerProvider from 'ra-data-json-server';
 import { authProvider, authStorageKey } from './authProvider';
 import { UserList } from './resources/user';
 import React from 'react';
-import { GroupList } from './resources/group';
+import { GroupList, GroupShow } from './resources/group';
 import { MessageList } from './resources/chat';
 import { FileList } from './resources/file';
 import PersonIcon from '@mui/icons-material/Person';
@@ -77,7 +77,7 @@ export const App = () => (
       name="groups"
       options={{ label: '群组' }}
       list={GroupList}
-      show={ShowGuesser}
+      show={GroupShow}
     />
     <Resource
       icon={AttachFileIcon}

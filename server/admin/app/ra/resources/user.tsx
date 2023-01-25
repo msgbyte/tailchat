@@ -8,6 +8,7 @@ import {
   ShowButton,
   EditButton,
   SearchInput,
+  ImageField,
 } from 'react-admin';
 import React from 'react';
 import { Box } from '@mui/material';
@@ -33,7 +34,11 @@ export const UserList: React.FC = () => (
       <TextField source="nickname" label="昵称" />
       <TextField source="discriminator" label="标识符" />
       <BooleanField source="temporary" label="是否游客" />
-      <TextField source="avatar" label="头像" />
+      <ImageField
+        sx={{ '.RaImageField-image': { height: 40, width: 40 } }}
+        source="avatar"
+        label="头像"
+      />
       <TextField source="type" label="用户类型" />
       <TextField source="settings" label="用户设置" />
       <DateField source="createdAt" label="创建时间" />
