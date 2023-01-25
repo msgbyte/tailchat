@@ -2,6 +2,11 @@
 
 # [1.6.0](https://github.com/msgbyte/tailchat/compare/v1.5.0...v1.6.0) (2023-01-25)
 
+### Hightlight
+
+- 增加了 **Admin后台管理系统** 初版代码
+- 增强了邮箱认证相关逻辑
+- 声网插件增加了屏幕共享
 
 ### Bug Fixes
 
