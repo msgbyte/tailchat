@@ -4,7 +4,6 @@ import {
   List,
   TextField,
   ShowButton,
-  EditButton,
   SearchInput,
   ArrayField,
   SingleFieldList,
@@ -39,7 +38,6 @@ export const GroupList: React.FC = () => (
       <DateField source="createdAt" label="创建时间" />
       <PostListActionToolbar>
         <ShowButton />
-        <EditButton />
       </PostListActionToolbar>
     </Datagrid>
   </List>
