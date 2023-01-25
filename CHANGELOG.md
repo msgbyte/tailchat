@@ -1,5 +1,41 @@
 
 
+# [1.6.0](https://github.com/msgbyte/tailchat/compare/v1.5.0...v1.6.0) (2023-01-25)
+
+
+### Bug Fixes
+
+* 修复类型问题 ([79390d3](https://github.com/msgbyte/tailchat/commit/79390d329eac877ead7033f74f6a65e453fd44e1))
+* 修复校验失败不会跳转回登录页的bug ([79581d6](https://github.com/msgbyte/tailchat/commit/79581d6226a456e2f9fa88ec5b62e7521081aad3))
+
+
+### Features
+
+* 页面增加opengraph属性 ([64859eb](https://github.com/msgbyte/tailchat/commit/64859eb885df59de9928ac231f3b12ee036fdd6d))
+* 邮箱校验属性变更 ([ce97957](https://github.com/msgbyte/tailchat/commit/ce97957fa94dda5228c3b4d2ceb088622e8f0260))
+* 增加更多的资源(message/group/file) ([bacb5b3](https://github.com/msgbyte/tailchat/commit/bacb5b30313317097048c5f25f08ecd105dbd8a6))
+* 增加屏幕共享功能 ([2747e09](https://github.com/msgbyte/tailchat/commit/2747e0945ece59aeff979a355a8175e5b952f1f5))
+* 增加群组卡片创建者标签以及角色列表 ([f559c2b](https://github.com/msgbyte/tailchat/commit/f559c2ba96649701e392814d6e400ca27e21d651))
+* 增加文件列表 ([4f51ec4](https://github.com/msgbyte/tailchat/commit/4f51ec4aa85af2dc024683365405d6239aacae1a))
+* 增加邮箱认证功能 ([2e774d1](https://github.com/msgbyte/tailchat/commit/2e774d104f5ffb470c5a3358a289373a3eb7441a))
+* 增加注册账号/游客认领账号时进行邮箱校验(配置) ([099a906](https://github.com/msgbyte/tailchat/commit/099a906b4a55a9abbb1cb44fdc72002c35b78e12))
+* 增加admin登录鉴权逻辑 ([2c1aa02](https://github.com/msgbyte/tailchat/commit/2c1aa02428b0ea04dde1ac0cf40511c690e2e635))
+* 增加broker并增加相关接口 ([7cdb522](https://github.com/msgbyte/tailchat/commit/7cdb5220c5875a915178e283170e805606c1e4c6))
+* 增加tailchat 网络菜单 ([1151417](https://github.com/msgbyte/tailchat/commit/11514175e6ad7eeac2c7d6f5952d9b8f533eb270))
+* admin 初始化与基本界面 ([96292a2](https://github.com/msgbyte/tailchat/commit/96292a23baacc39767a598a5976b08ef7e3e270c))
+* admin 增加dashboard ([867fbd3](https://github.com/msgbyte/tailchat/commit/867fbd322318db87531a4043c8e57149d21333fc))
+* cli 增加更新提示 ([09b56b9](https://github.com/msgbyte/tailchat/commit/09b56b9c7cd4c2f79642f53b3d61ca7203e3c815))
+* cli docker init初始化增加引导 ([ee9a01d](https://github.com/msgbyte/tailchat/commit/ee9a01d552f2b55075bc52f732ee2dde7c2de35d))
+* Loadable增加配置项允许增加加载中提示 ([f13478a](https://github.com/msgbyte/tailchat/commit/f13478a98441a3a643bff8169fc62a07710aca9d))
+* tailchat docker init 命令增加自定义文件夹支持 ([9b4b375](https://github.com/msgbyte/tailchat/commit/9b4b375d08958f4a2e6dcdb73477846fde1e3007))
+
+
+### Performance Improvements
+
+* 优化获取群组设置的逻辑，增强代码可读性 ([0f5dc6a](https://github.com/msgbyte/tailchat/commit/0f5dc6aec6d8e3ca7ee85ee7ea63fc196cf5652d))
+* 优化网络请求错误抛出 ([c0ecd5e](https://github.com/msgbyte/tailchat/commit/c0ecd5e25b6b0afc905dc522a659a52abcb6f0f5))
+* 优化getUserOnlineStatus的网络请求连接，自动合并多个请求为一个后端请求 ([8f58788](https://github.com/msgbyte/tailchat/commit/8f587887eeabd96eb6c5a1c0b015279f1caf1a40))
+
 # [1.5.0](https://github.com/msgbyte/tailchat/compare/v1.4.0...v1.5.0) (2023-01-21)
 
 
