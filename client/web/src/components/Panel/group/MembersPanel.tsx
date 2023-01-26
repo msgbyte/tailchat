@@ -1,91 +1,24 @@
 import { Icon } from 'tailchat-design';
-import { openReconfirmModalP } from '@/components/Modal';
 import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Dropdown, Input, MenuProps, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import {
-  formatFullTime,
   getGroupConfigWithInfo,
-  GroupMember,
-  humanizeMsDuration,
-  model,
   PERMISSION,
-  showToasts,
   t,
-  useAsyncRequest,
   useCachedOnlineStatus,
   useGroupInfo,
   useHasGroupPermission,
   UserBaseInfo,
-  useSearch,
   useUserInfoList,
 } from 'tailchat-shared';
 import _compact from 'lodash/compact';
 import { Problem } from '@/components/Problem';
+import { useGroupMemberAction } from '@/hooks/useGroupMemberAction';
 
 interface MembersPanelProps {
   groupId: string;
-}
-
-function getMembersHasMute(members: GroupMember[], userId: string): boolean {
-  const member = members.find((m) => m.userId === userId);
-
-  if (!member || !member.muteUntil) {
-    return false;
-  }
-
-  const muteUntil = member.muteUntil;
-
-  return new Date(muteUntil).valueOf() > new Date().valueOf();
-}
-
-/**
- * 禁言相关
- */
-function useMemberMuteAction(
-  groupId: string,
-  userInfoList: model.user.UserBaseInfo[]
-) {
-  /**
-   * 禁言
-   */
-  const [, handleMuteMember] = useAsyncRequest(
-    async (memberId: string, ms: number) => {
-      const memberInfo = userInfoList.find((m) => m._id === memberId);
-
-      if (!memberInfo) {
-        throw new Error(t('没有找到用户'));
-      }
-
-      if (
-        await openReconfirmModalP({
-          title: t('确定要禁言 {{name}} 么', { name: memberInfo.nickname }),
-          content: t('禁言 {{length}}, 预计到 {{until}} 为止', {
-            length: humanizeMsDuration(ms),
-            until: formatFullTime(new Date().valueOf() + ms),
-          }),
-        })
-      ) {
-        await model.group.muteGroupMember(groupId, memberId, ms);
-        showToasts(t('操作成功'), 'success');
-      }
-    },
-    [groupId, userInfoList]
-  );
-
-  /**
-   * 解除禁言
-   */
-  const [, handleUnmuteMember] = useAsyncRequest(
-    async (memberId: string) => {
-      await model.group.muteGroupMember(groupId, memberId, -1);
-      showToasts(t('操作成功'), 'success');
-    },
-    [groupId]
-  );
-
-  return { handleMuteMember, handleUnmuteMember };
 }
 
 /**
@@ -109,10 +42,11 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     setSearchText,
     isSearching,
     searchResult: filteredGroupMembers,
-  } = useSearch({
-    dataSource: userInfoList,
-    filterFn: (item, searchText) => item.nickname.includes(searchText),
-  });
+    getMemberHasMute,
+    handleMuteMember,
+    handleUnmuteMember,
+    handleRemoveGroupMember,
+  } = useGroupMemberAction(groupId);
 
   const groupedMembers = useMemo(() => {
     const online: UserBaseInfo[] = [];
@@ -132,27 +66,6 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     };
   }, [userInfoList, membersOnlineStatus]);
 
-  const { handleMuteMember, handleUnmuteMember } = useMemberMuteAction(
-    groupId,
-    userInfoList
-  );
-
-  /**
-   * 解除禁言
-   */
-  const [, handleRemoveGroupMember] = useAsyncRequest(
-    async (memberId: string) => {
-      const confirm = await openReconfirmModalP({
-        title: t('确认要将该用户移出群组么'),
-      });
-      if (confirm) {
-        await model.group.deleteGroupMember(groupId, memberId);
-        showToasts(t('操作成功'), 'success');
-      }
-    },
-    [groupId]
-  );
-
   if (!groupInfo) {
     return <Problem />;
   }
@@ -162,7 +75,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   }
 
   const renderUser = (member: UserBaseInfo) => {
-    const hasMute = getMembersHasMute(members, member._id);
+    const hasMute = getMemberHasMute(member._id);
 
     if (allowManageUser) {
       const muteItems: MenuProps['items'] = hasMute

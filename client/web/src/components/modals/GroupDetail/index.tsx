@@ -14,6 +14,7 @@ import { GroupRole } from './Role';
 import { GroupSummary } from './Summary';
 import _compact from 'lodash/compact';
 import { GroupConfig } from './Config';
+import { GroupMember } from './Member';
 
 interface SettingsViewProps {
   groupId: string;
@@ -31,11 +32,13 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
   );
   const [
     allowManageConfig,
+    allowManageUser,
     allowManagePanel,
     allowManageInvite,
     allowManageRoles,
   ] = useHasGroupPermission(groupId, [
     PERMISSION.core.groupConfig,
+    PERMISSION.core.manageUser,
     PERMISSION.core.managePanel,
     PERMISSION.core.manageInvite,
     PERMISSION.core.manageRoles,
@@ -57,6 +60,11 @@ export const GroupDetail: React.FC<SettingsViewProps> = React.memo((props) => {
             type: 'item',
             title: t('配置'),
             content: <GroupConfig groupId={groupId} />,
+          },
+          allowManageUser && {
+            type: 'item',
+            title: t('成员'),
+            content: <GroupMember groupId={groupId} />,
           },
           allowManagePanel && {
             type: 'item',
