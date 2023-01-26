@@ -28,7 +28,6 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const groupId = props.groupId;
   const groupInfo = useGroupInfo(groupId);
   const members = groupInfo?.members ?? [];
-  const userInfoList = useUserInfoList(members.map((m) => m.userId));
   const membersOnlineStatus = useCachedOnlineStatus(
     members.map((m) => m.userId)
   );
@@ -38,21 +37,20 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
 
   const {
+    userInfos,
     searchText,
     setSearchText,
     isSearching,
     searchResult: filteredGroupMembers,
     getMemberHasMute,
-    handleMuteMember,
-    handleUnmuteMember,
-    handleRemoveGroupMember,
+    generateActionMenu,
   } = useGroupMemberAction(groupId);
 
   const groupedMembers = useMemo(() => {
     const online: UserBaseInfo[] = [];
     const offline: UserBaseInfo[] = [];
 
-    userInfoList.forEach((m, i) => {
+    userInfos.forEach((m, i) => {
       if (membersOnlineStatus[i] === true) {
         online.push(m);
       } else {
@@ -64,86 +62,19 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
       online,
       offline,
     };
-  }, [userInfoList, membersOnlineStatus]);
+  }, [userInfos, membersOnlineStatus]);
 
   if (!groupInfo) {
     return <Problem />;
   }
 
-  if (userInfoList.length === 0) {
+  if (userInfos.length === 0) {
     return <Skeleton />;
   }
 
   const renderUser = (member: UserBaseInfo) => {
-    const hasMute = getMemberHasMute(member._id);
-
     if (allowManageUser) {
-      const muteItems: MenuProps['items'] = hasMute
-        ? [
-            {
-              key: 'unmute',
-              label: t('解除禁言'),
-              onClick: () => handleUnmuteMember(member._id),
-            },
-          ]
-        : [
-            {
-              key: 'mute',
-              label: t('禁言'),
-              children: [
-                {
-                  key: '1m',
-                  label: t('1分钟'),
-                  onClick: () => handleMuteMember(member._id, 1 * 60 * 1000),
-                },
-                {
-                  key: '5m',
-                  label: t('5分钟'),
-                  onClick: () => handleMuteMember(member._id, 5 * 60 * 1000),
-                },
-                {
-                  key: '10m',
-                  label: t('10分钟'),
-                  onClick: () => handleMuteMember(member._id, 10 * 60 * 1000),
-                },
-                {
-                  key: '30m',
-                  label: t('30分钟'),
-                  onClick: () => handleMuteMember(member._id, 30 * 60 * 1000),
-                },
-                {
-                  key: '1d',
-                  label: t('1天'),
-                  onClick: () =>
-                    handleMuteMember(member._id, 1 * 24 * 60 * 60 * 1000),
-                },
-                {
-                  key: '7d',
-                  label: t('7天'),
-                  onClick: () =>
-                    handleMuteMember(member._id, 7 * 24 * 60 * 60 * 1000),
-                },
-                {
-                  key: '30d',
-                  label: t('30天'),
-                  onClick: () =>
-                    handleMuteMember(member._id, 30 * 24 * 60 * 60 * 1000),
-                },
-              ],
-            },
-          ];
-
-      const menu: MenuProps = {
-        items: _compact([
-          ...muteItems,
-          {
-            key: 'delete',
-            label: t('移出群组'),
-            danger: true,
-            onClick: () => handleRemoveGroupMember(member._id),
-          },
-        ] as MenuProps['items']),
-      };
+      const menu: MenuProps = generateActionMenu(member);
 
       return (
         <Dropdown key={member._id} trigger={['contextMenu']} menu={menu}>

@@ -10,5 +10,5 @@
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "exclude": ["e2e", "plugins"]
+  "exclude": ["e2e", "plugins", "tailchat.d.ts"]
 }
