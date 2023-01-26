@@ -14,6 +14,7 @@ export const authProvider: AuthProvider = {
         return response.json();
       })
       .then((auth) => {
+        console.log(auth);
         localStorage.setItem(authStorageKey, JSON.stringify(auth));
       })
       .catch(() => {
@@ -24,8 +25,19 @@ export const authProvider: AuthProvider = {
     localStorage.removeItem(authStorageKey);
     return Promise.resolve();
   },
-  checkAuth: () =>
-    localStorage.getItem(authStorageKey) ? Promise.resolve() : Promise.reject(),
+  checkAuth: () => {
+    const auth = localStorage.getItem(authStorageKey);
+    if (auth) {
+      try {
+        const obj = JSON.parse(auth);
+        if (obj.expiredAt && Date.now() < obj.expiredAt) {
+          return Promise.resolve();
+        }
+      } catch (err) {}
+    }
+
+    return Promise.reject();
+  },
   checkError: (error) => {
     const status = error.status;
     if (status === 401 || status === 403) {

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
-import { adminAuth, auth, authSecret } from '../middleware';
+import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { networkRouter } from './network';
 
 const router = Router();
@@ -30,6 +30,7 @@ router.post('/login', (req, res) => {
     res.json({
       username,
       token: token,
+      expiredAt: new Date().valueOf() + 2 * 60 * 60 * 1000,
     });
   } else {
     res.status(401).end('username or password incorrect');

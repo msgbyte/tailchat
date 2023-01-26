@@ -1,13 +1,6 @@
-import {
-  Admin,
-  Resource,
-  fetchUtils,
-  ShowGuesser,
-  CustomRoutes,
-  TranslationMessages,
-} from 'react-admin';
+import { Admin, Resource, ShowGuesser, CustomRoutes } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
-import { authProvider, authStorageKey } from './authProvider';
+import { authProvider } from './authProvider';
 import { UserList } from './resources/user';
 import React from 'react';
 import { GroupList, GroupShow } from './resources/group';
@@ -23,22 +16,7 @@ import { Route } from 'react-router-dom';
 import { TailchatNetwork } from './network';
 import { TailchatLayout } from './layout';
 import { i18nProvider } from './i18n';
-
-const httpClient: typeof fetchUtils.fetchJson = (url, options = {}) => {
-  try {
-    if (!options.headers) {
-      options.headers = new Headers({ Accept: 'application/json' });
-    }
-    const { token } = JSON.parse(
-      window.localStorage.getItem(authStorageKey) ?? '{}'
-    );
-    (options.headers as Headers).set('Authorization', `Bearer ${token}`);
-
-    return fetchUtils.fetchJson(url, options);
-  } catch (err) {
-    return Promise.reject();
-  }
-};
+import { httpClient } from './request';
 
 const dataProvider = jsonServerProvider(
   // 'https://jsonplaceholder.typicode.com'

@@ -4,7 +4,7 @@
 
 import { Router } from 'express';
 import { broker } from '../broker';
-import { auth } from '../middleware';
+import { auth } from '../middleware/auth';
 import _ from 'lodash';
 
 const router = Router();

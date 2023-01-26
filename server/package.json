@@ -21,6 +21,7 @@
     "migrate:up": "migrate-mongo up -f ./scripts/migrate-mongo-config.js",
     "docker:build": "node ./scripts/buildDocker.js",
     "dashboard": "ts-node ./scripts/dashboard.ts",
+    "admin": "cd admin && pnpm run build && pnpm run start",
     "plugin:install": "node ./scripts/installPlugin.js",
     "protobuf": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=proto/ proto/*.proto",
     "gen:swagger": "ts-node ./scripts/swagger.ts"
