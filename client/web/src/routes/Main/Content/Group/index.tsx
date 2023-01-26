@@ -32,7 +32,7 @@ export const Group: React.FC = React.memo(() => {
     <GroupIdContextProvider value={groupId}>
       <PageContent data-tc-role="content-group" sidebar={<Sidebar />}>
         {isValidStr(pinnedPanelId) ? (
-          <SplitPanel className="flex-auto">
+          <SplitPanel className="flex-auto w-full">
             <div>{routeMatch}</div>
             <div>
               <GroupPanelRender groupId={groupId} panelId={pinnedPanelId} />
