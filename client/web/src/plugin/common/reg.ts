@@ -117,7 +117,7 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
  * 输入消息，返回渲染节点
  */
 const defaultMessageTextDecorators = {
-  url: (plain: string) => plain,
+  url: (url: string, label?: string) => url,
   image: (plain: string, attrs: Record<string, unknown>) => plain,
   mention: (userId: string, userName: string) => `@${userName}`,
   emoji: (emojiCode: string) => emojiCode,

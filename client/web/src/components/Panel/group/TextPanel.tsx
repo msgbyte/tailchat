@@ -11,6 +11,8 @@ import {
   useInterval,
   useHasGroupPermission,
   PERMISSION,
+  useGroupInfo,
+  GroupPanelType,
 } from 'tailchat-shared';
 import { GroupPanelWrapper } from './Wrapper';
 
@@ -68,9 +70,14 @@ interface TextPanelProps {
 }
 export const TextPanel: React.FC<TextPanelProps> = React.memo(
   ({ groupId, panelId }) => {
+    const group = useGroupInfo(groupId);
     const groupMembers = useGroupMemberInfos(groupId);
     const panelInfo = useGroupPanelInfo(groupId, panelId);
     const { disabled, placeholder } = useChatInputInfo(groupId);
+
+    if (!group) {
+      return null;
+    }
 
     if (!panelInfo) {
       return null;
@@ -83,6 +90,12 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
             id: m._id,
             display: m.nickname,
           }))}
+          panels={group.panels
+            .filter((p) => p.type !== GroupPanelType.GROUP)
+            .map((p) => ({
+              id: `/main/group/${groupId}/${p.id}`,
+              display: p.name,
+            }))}
           disabled={disabled}
           placeholder={placeholder}
         >

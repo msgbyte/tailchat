@@ -6,6 +6,7 @@ import { Mention, MentionsInput } from 'react-mentions';
 import { t } from 'tailchat-shared';
 import { useChatInputMentionsContext } from './context';
 import './input.less';
+import { MentionCommandItem } from './MentionCommandItem';
 
 interface ChatInputBoxInputProps
   extends Omit<
@@ -18,7 +19,8 @@ interface ChatInputBoxInputProps
 }
 export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
   (props) => {
-    const { users, placeholder, disabled } = useChatInputMentionsContext();
+    const { users, panels, placeholder, disabled } =
+      useChatInputMentionsContext();
 
     return (
       <MentionsInput
@@ -50,6 +52,16 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
             <UserListItem userId={String(suggestion.id)} />
           )}
           markup={getMessageTextDecorators().mention('__id__', '__display__')}
+        />
+        <Mention
+          trigger="#"
+          data={panels}
+          displayTransform={(id, display) => `#${display}`}
+          appendSpaceOnAdd={true}
+          renderSuggestion={(suggestion) => (
+            <MentionCommandItem icon="mdi:pound" label={suggestion.display} />
+          )}
+          markup={getMessageTextDecorators().url('__id__', '#__display__')}
         />
       </MentionsInput>
     );

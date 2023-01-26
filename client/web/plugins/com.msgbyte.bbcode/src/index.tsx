@@ -19,7 +19,8 @@ regMessageRender((message) => {
 });
 
 regMessageTextDecorators(() => ({
-  url: (plain) => `[url]${plain}[/url]`,
+  url: (url, label?) =>
+    label ? `[url=${url}]${label}[/url]` : `[url]${url}[/url]`,
   image: (plain, attrs) => {
     if (attrs.height && attrs.width) {
       return `[img height=${attrs.height} width=${attrs.width}]${plain}[/img]`;

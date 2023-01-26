@@ -142,7 +142,7 @@ export const App: React.FC = React.memo(() => {
             }
           />
 
-          <Route path="/" element={<Navigate to="/entry" replace={true} />} />
+          <Route path="/*" element={<Navigate to="/entry" replace={true} />} />
         </Routes>
       </AppContainer>
     </AppProvider>

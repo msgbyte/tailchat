@@ -27,6 +27,7 @@ export {
   createMetaFormSchema,
   metaFormFieldSchema,
 } from 'tailchat-design';
+export { Link } from 'react-router-dom';
 
 export { Image } from '@/components/Image';
 export { IconBtn } from '@/components/IconBtn';
