@@ -4,7 +4,6 @@ import { MobileMenuBtn } from './MobileMenuBtn';
 import { SettingBtn } from './SettingBtn';
 import { Divider } from 'antd';
 import { PersonalNav } from './PersonalNav';
-import { DevContainer } from 'tailchat-shared';
 import { InboxNav } from './InboxNav';
 import { InstallBtn } from './InstallBtn';
 import { ReactQueryDevBtn } from './ReactQueryDevBtn';
@@ -16,7 +15,7 @@ export const Navbar: React.FC = React.memo(() => {
   return (
     <div
       data-tc-role="navbar"
-      className="w-18 bg-navbar-light dark:bg-navbar-dark flex flex-col justify-start items-center pt-4 pb-4"
+      className="w-18 mobile:zoom-4/5 bg-navbar-light dark:bg-navbar-dark flex flex-col justify-start items-center pt-4 pb-4"
     >
       <MobileMenuBtn />
 

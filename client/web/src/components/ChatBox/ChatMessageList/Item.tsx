@@ -75,7 +75,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
   return (
     <div
       className={clsx(
-        'chat-message-item flex px-2 group relative select-text',
+        'chat-message-item flex px-2 mobile:px-0 group relative select-text',
         {
           'bg-black bg-opacity-10': isActionBtnActive,
           'hover:bg-black hover:bg-opacity-5': !isActionBtnActive,
@@ -84,7 +84,7 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
       data-message-id={payload._id}
     >
       {/* 头像 */}
-      <div className="w-18 flex items-start justify-center pt-0.5">
+      <div className="w-18 mobile:w-14 flex items-start justify-center pt-0.5">
         {showAvatar ? (
           <Avatar size={40} src={userInfo.avatar} name={userInfo.nickname} />
         ) : (

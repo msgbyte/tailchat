@@ -67,7 +67,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
 
     return (
       <div
-        className="flex-1 overflow-y-scroll flex flex-col-reverse"
+        className="flex-1 overflow-y-scroll overflow-x-hidden flex flex-col-reverse"
         ref={containerRef}
         onScroll={handleScroll}
       >
