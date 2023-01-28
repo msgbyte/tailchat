@@ -35,19 +35,18 @@ export const UserList: React.FC = () => (
     ]}
   >
     <Datagrid>
-      <TextField source="id" label="用户ID" sortByOrder="DESC" />
-      <EmailField source="email" label="邮箱" />
-      <TextField source="nickname" label="昵称" />
-      <TextField source="discriminator" label="标识符" />
-      <BooleanField source="temporary" label="是否游客" />
+      <TextField source="id" sortByOrder="DESC" />
+      <EmailField source="email" />
+      <TextField source="nickname" />
+      <TextField source="discriminator" />
+      <BooleanField source="temporary" />
       <ImageField
         sx={{ '.RaImageField-image': { height: 40, width: 40 } }}
         source="avatar"
-        label="头像"
       />
-      <TextField source="type" label="用户类型" />
-      <TextField source="settings" label="用户设置" />
-      <DateField source="createdAt" label="创建时间" />
+      <TextField source="type" />
+      <TextField source="settings" />
+      <DateField source="createdAt" />
       <PostListActionToolbar>
         <ShowButton />
       </PostListActionToolbar>
@@ -96,8 +95,7 @@ export const UserShow: React.FC = () => (
       <BooleanField source="temporary" />
       <TextField source="avatar" />
       <TextField source="type" />
-      <DateField source="updatedAt" />
-      <BooleanField source="settings.messageListVirtualization" />
+      <BooleanField source="settings" />
     </SimpleShowLayout>
   </Show>
 );
