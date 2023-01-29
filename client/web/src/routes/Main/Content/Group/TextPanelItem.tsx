@@ -1,5 +1,5 @@
 import { GroupPanelItem } from '@/components/GroupPanelItem';
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   GroupPanel,
   useGroupTextPanelUnread,
@@ -23,10 +23,7 @@ export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
     const hasUnread = useGroupTextPanelUnread(panelId);
     const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
     const { checkIsMuted } = useUserNotifyMute();
-    const isMuted = useMemo(
-      () => checkIsMuted(panelId, groupId),
-      [groupId, panelId]
-    );
+    const isMuted = checkIsMuted(panelId, groupId);
 
     return (
       <GroupPanelItem
