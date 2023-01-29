@@ -1,5 +1,4 @@
 import {
-  regSocketEventListener,
   getGlobalState,
   getCachedUserInfo,
   getCachedBaseGroupInfo,
@@ -9,7 +8,6 @@ import {
   getCachedUserSettings,
 } from '@capital/common';
 import { Translate } from './translate';
-import { hasSilent } from './silent';
 import { incBubble, setBubble } from './bubble';
 import _get from 'lodash/get';
 import { PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND } from './const';
@@ -39,67 +37,58 @@ export function initNotify() {
   });
   window.addEventListener('blur', () => (isBlur = true));
 
-  regSocketEventListener({
-    eventName: 'chat.message.add',
-    eventFn: (message) => {
-      const converseId = message.converseId;
-      const currentUserId = getGlobalState()?.user.info._id;
+  sharedEvent.on('receiveUnmutedMessage', (message) => {
+    const currentUserId = getGlobalState()?.user.info._id;
 
-      if (hasSilent(converseId)) {
-        // 手动设置了当前会话免打扰
-        return;
-      }
+    if (currentUserId === message.author) {
+      // 忽略本人消息
+      return;
+    }
 
-      if (currentUserId === message.author) {
-        // 忽略本人消息
-        return;
-      }
+    const hidden = window.document.hidden ?? false;
+    if (hidden || isBlur) {
+      // 如果当前不是活跃窗口或处于隐藏状态，则创建通知
 
-      const hidden = window.document.hidden ?? false;
-      if (hidden || isBlur) {
-        // 如果当前不是活跃窗口或处于隐藏状态，则创建通知
+      if (Notification.permission === 'granted') {
+        // TODO: 需要增加显示所在群组
+        Promise.all([
+          getCachedUserInfo(message.author),
+          message.groupId
+            ? getCachedBaseGroupInfo(message.groupId).then((d) => d.name)
+            : Promise.resolve(Translate.dm),
+        ]).then(([userInfo, scopeName]) => {
+          const nickname = userInfo?.nickname ?? '';
+          const icon = userInfo?.avatar ?? undefined;
+          const content = message.content;
 
-        if (Notification.permission === 'granted') {
-          // TODO: 需要增加显示所在群组
-          Promise.all([
-            getCachedUserInfo(message.author),
-            message.groupId
-              ? getCachedBaseGroupInfo(message.groupId).then((d) => d.name)
-              : Promise.resolve(Translate.dm),
-          ]).then(([userInfo, scopeName]) => {
-            const nickname = userInfo?.nickname ?? '';
-            const icon = userInfo?.avatar ?? undefined;
-            const content = message.content;
+          const title = `${Translate.from} [${scopeName}] ${nickname}`;
+          const options: NotificationOptions = {
+            body: content,
+            icon,
+            tag: TAG,
+            renotify: true,
+            data: message,
+            silent: true, // 因为有提示音了，所以禁音默认音
+          };
 
-            const title = `${Translate.from} [${scopeName}] ${nickname}`;
-            const options: NotificationOptions = {
-              body: content,
-              icon,
-              tag: TAG,
-              renotify: true,
-              data: message,
-              silent: true, // 因为有提示音了，所以禁音默认音
+          if (registration && registration.showNotification) {
+            registration.showNotification(title, options);
+          } else {
+            // fallback
+            const notification = new Notification(title, options);
+            notification.onclick = (e: any) => {
+              const tag = e.target.tag;
+              const data = e.target.data;
+
+              handleMessageNotifyClick(tag, data);
             };
-
-            if (registration && registration.showNotification) {
-              registration.showNotification(title, options);
-            } else {
-              // fallback
-              const notification = new Notification(title, options);
-              notification.onclick = (e: any) => {
-                const tag = e.target.tag;
-                const data = e.target.data;
-
-                handleMessageNotifyClick(tag, data);
-              };
-            }
-          });
-        }
-
-        incBubble();
+          }
+        });
       }
-      tryPlayNotificationSound(); // 不管当前是不是处于活跃状态，都发出提示音
-    },
+
+      incBubble();
+    }
+    tryPlayNotificationSound(); // 不管当前是不是处于活跃状态，都发出提示音
   });
 }
 

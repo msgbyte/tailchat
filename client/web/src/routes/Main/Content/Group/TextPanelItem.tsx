@@ -1,6 +1,10 @@
 import { GroupPanelItem } from '@/components/GroupPanelItem';
-import React from 'react';
-import { GroupPanel, useGroupTextPanelUnread } from 'tailchat-shared';
+import React, { useMemo } from 'react';
+import {
+  GroupPanel,
+  useGroupTextPanelUnread,
+  useUserNotifyMute,
+} from 'tailchat-shared';
 import { useGroupPanelExtraBadge } from './utils';
 
 interface GroupTextPanelItemProps {
@@ -18,13 +22,22 @@ export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
     const panelId = panel.id;
     const hasUnread = useGroupTextPanelUnread(panelId);
     const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
+    const { checkIsMuted } = useUserNotifyMute();
+    const isMuted = useMemo(
+      () => checkIsMuted(panelId, groupId),
+      [groupId, panelId]
+    );
 
     return (
       <GroupPanelItem
         name={panel.name}
         icon={props.icon}
         to={`/main/group/${groupId}/${panel.id}`}
+        dimmed={isMuted}
         badge={hasUnread}
+        badgeProps={{
+          status: isMuted ? 'default' : 'error',
+        }}
         extraBadge={extraBadge}
       />
     );

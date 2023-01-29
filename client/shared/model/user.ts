@@ -33,6 +33,11 @@ export interface UserSettings {
   messageListVirtualization?: boolean;
 
   /**
+   * 消息通知免打扰(静音)
+   */
+  messageNotificationMuteList?: string[];
+
+  /**
    * 其他的设置项
    */
   [key: string]: any;

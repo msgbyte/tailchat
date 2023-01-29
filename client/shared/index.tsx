@@ -54,11 +54,13 @@ export { useLanguage } from './i18n/language';
 // hooks
 export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
+export { useMessageNotifyEventFilter } from './hooks/model/useMessageNotifyEventFilter';
 export { useUserInfoList } from './hooks/model/useUserInfoList';
 export { useUsernames } from './hooks/model/useUsernames';
 export {
   useUserSettings,
   useSingleUserSetting,
+  useUserNotifyMute,
 } from './hooks/model/useUserSettings';
 export { useAlphaMode } from './hooks/useAlphaMode';
 export { useAsync } from './hooks/useAsync';

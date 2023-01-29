@@ -200,6 +200,8 @@ function listenNotify(socket: AppSocket, store: AppStore) {
         ])
       );
     }
+
+    sharedEvent.emit('receiveMessage', message); // 推送到通知中心
   });
 
   socket.listen<ChatMessage>('chat.message.update', (message) => {

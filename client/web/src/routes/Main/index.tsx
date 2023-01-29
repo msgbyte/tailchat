@@ -1,6 +1,7 @@
 import { GlobalTemporaryTip } from '@/components/GlobalTemporaryTip';
 import { useRecordMeasure } from '@/utils/measure-helper';
 import React from 'react';
+import { useMessageNotifyEventFilter } from 'tailchat-shared';
 import { MainContent } from './Content';
 import { Navbar } from './Navbar';
 import { MainProvider } from './Provider';
@@ -9,6 +10,7 @@ import { useShortcuts } from './useShortcuts';
 const MainRoute: React.FC = React.memo(() => {
   useRecordMeasure('appMainRenderStart');
   useShortcuts();
+  useMessageNotifyEventFilter();
 
   return (
     <MainProvider>

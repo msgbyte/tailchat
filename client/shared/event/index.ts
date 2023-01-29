@@ -48,6 +48,16 @@ export interface SharedEventMap {
   readMessage: (payload: ChatMessage | null) => void;
 
   /**
+   * 接受到消息(所有的)
+   */
+  receiveMessage: (payload: ChatMessage) => void;
+
+  /**
+   * 接受到未被静音的消息
+   */
+  receiveUnmutedMessage: (payload: ChatMessage) => void;
+
+  /**
    * 群组面板状态更新
    */
   groupPanelBadgeUpdate: () => void;

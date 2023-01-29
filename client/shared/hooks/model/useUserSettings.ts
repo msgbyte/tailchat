@@ -7,6 +7,8 @@ import {
   UserSettings,
 } from '../../model/user';
 import { useAsyncRequest } from '../useAsyncRequest';
+import { useMemoizedFn } from '../useMemoizedFn';
+import _without from 'lodash/without';
 
 /**
  * 用户设置hooks
@@ -17,7 +19,7 @@ export function useUserSettings() {
     [CacheKey],
     () => getUserSettings(),
     {
-      staleTime: 1 * 60 * 1000, // 缓存1分钟
+      staleTime: 10 * 60 * 1000, // 缓存10分钟
     }
   );
 
@@ -54,5 +56,50 @@ export function useSingleUserSetting<K extends keyof UserSettings>(
         [name]: newVal,
       }),
     loading,
+  };
+}
+
+/**
+ * 用户消息通知免打扰设置
+ */
+export function useUserNotifyMute() {
+  const { value: list = [], setValue: setList } = useSingleUserSetting(
+    'messageNotificationMuteList',
+    []
+  );
+
+  const mute = useMemoizedFn((converseOrGroupId: string) => {
+    setList([...list, converseOrGroupId]);
+  });
+
+  const unmute = useMemoizedFn((converseOrGroupId: string) => {
+    setList(_without(list, converseOrGroupId));
+  });
+
+  const toggleMute = useMemoizedFn((converseOrGroupId) => {
+    if (list.includes(converseOrGroupId)) {
+      unmute(converseOrGroupId);
+    } else {
+      mute(converseOrGroupId);
+    }
+  });
+
+  /**
+   * 检查是否被静音
+   */
+  const checkIsMuted = useMemoizedFn((panelId: string, groupId?: string) => {
+    if (groupId) {
+      return list.includes(panelId) || list.includes(groupId);
+    }
+
+    return list.includes(panelId);
+  });
+
+  return {
+    mutedList: list,
+    mute,
+    unmute,
+    toggleMute,
+    checkIsMuted,
   };
 }

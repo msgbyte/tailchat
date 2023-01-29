@@ -9,10 +9,11 @@ import {
   useAppDispatch,
   useConverseAck,
   useGroupInfo,
+  useUserNotifyMute,
 } from 'tailchat-shared';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
 import { GroupTextPanelItem } from './TextPanelItem';
-import { Dropdown, Menu, MenuProps } from 'antd';
+import { Dropdown, MenuProps } from 'antd';
 import copy from 'copy-to-clipboard';
 import { usePanelWindow } from '@/hooks/usePanelWindow';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
@@ -37,6 +38,7 @@ export const SidebarItem: React.FC<{
   const { markConverseAllAck } = useConverseAck(panelId);
   const extraMenuItems = useExtraMenuItems(panel);
   const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
+  const { checkIsMuted, toggleMute } = useUserNotifyMute();
 
   if (!groupInfo) {
     return <LoadingSpinner />;
@@ -94,6 +96,12 @@ export const SidebarItem: React.FC<{
         label: t('标记为已读'),
         icon: <Icon icon="mdi:message-badge-outline" />,
         onClick: markConverseAllAck,
+      },
+      panel.type === GroupPanelType.TEXT && {
+        key: 'mute',
+        label: checkIsMuted(panelId, groupId) ? t('取消免打扰') : t('免打扰'),
+        icon: <Icon icon="mdi:bell-off-outline" />,
+        onClick: () => toggleMute(panelId),
       },
       ...extraMenuItems,
     ]),
