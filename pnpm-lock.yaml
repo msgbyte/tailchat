@@ -65,6 +65,7 @@ importers:
       '@types/inquirer': ^8.2.1
       '@types/lodash': ^4.14.170
       '@types/node': 16.11.7
+      '@types/pidusage': ^2.0.2
       '@types/react': 18.0.20
       '@types/spinnies': ^0.5.0
       '@types/update-notifier': ^6.0.1
@@ -76,6 +77,7 @@ importers:
       dockerode: ^3.3.4
       dotenv: ^16.0.0
       filesize: ^8.0.7
+      find-process: ^1.4.7
       fs-extra: ^10.1.0
       got: 11.8.5
       ink: ^3.2.0
@@ -87,6 +89,7 @@ importers:
       ora: 5.4.1
       p-all: 2.1.0
       p-series: 2.1.0
+      pidusage: ^3.0.2
       plop: ^3.0.5
       pretty-ms: 7.0.1
       react: 18.2.0
@@ -100,12 +103,14 @@ importers:
       yargs: ^17.4.0
     dependencies:
       '@types/dockerode': 3.3.10
+      '@types/pidusage': 2.0.2
       as-table: 1.0.55
       chalk: 4.1.2
       crypto-random-string: 3.3.1
       dockerode: 3.3.4
       dotenv: 16.0.2
       filesize: 8.0.7
+      find-process: 1.4.7
       fs-extra: 10.1.0
       got: 11.8.5
       ink: 3.2.0_w5j4k42lgipnm43s3brx6h3c34
@@ -117,6 +122,7 @@ importers:
       ora: 5.4.1
       p-all: 2.1.0
       p-series: 2.1.0
+      pidusage: 3.0.2
       plop: 3.1.1
       pretty-ms: 7.0.1
       react: 18.2.0
@@ -13345,6 +13351,10 @@ packages:
       '@types/express': 4.17.15
     dev: false
 
+  /@types/pidusage/2.0.2:
+    resolution: {integrity: sha512-lHgpGZjXDfjggZDLkgp4zQTYkvXq4S7RxjBjrDcPe1MBU72hESWxubutx8+AM4QkJdRxAhrQyxSA6pzHKJKlsQ==}
+    dev: false
+
   /@types/pino-http/5.8.1:
     resolution: {integrity: sha512-A9MW6VCnx5ii7s+Fs5aFIw+aSZcBCpsZ/atpxamu8tTsvWFacxSf2Hrn1Ohn1jkVRB/LiPGOapRXcFawDBnDnA==}
     dependencies:
@@ -21287,6 +21297,17 @@ packages:
       make-dir: 3.1.0
       pkg-dir: 4.2.0
 
+  /find-process/1.4.7:
+    resolution: {integrity: sha512-/U4CYp1214Xrp3u3Fqr9yNynUrr5Le4y0SsJh2lMDDSbpwYSz3M2SMWQC+wqcx79cN8PQtHQIL8KnuY9M66fdg==}
+    hasBin: true
+    dependencies:
+      chalk: 4.1.2
+      commander: 5.1.0
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /find-root/1.1.0:
     resolution: {integrity: sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==}
     dev: false
@@ -29206,6 +29227,13 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
     dev: true
+
+  /pidusage/3.0.2:
+    resolution: {integrity: sha512-g0VU+y08pKw5M8EZ2rIGiEBaB8wrQMjYGFfW2QVIfyT8V+fq8YFLkvlz4bz5ljvFDJYNFCWT3PWqcRr2FKO81w==}
+    engines: {node: '>=10'}
+    dependencies:
+      safe-buffer: 5.2.1
+    dev: false
 
   /pify/2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
