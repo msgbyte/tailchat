@@ -19,34 +19,34 @@ export const benchCommand: CommandModule = {
         '通过内网请求进行压力测试(适用于纯业务测试)',
         (yargs) =>
           yargs
-            .positional('groupId', {
+            .option('groupId', {
               describe: '群组ID',
               demandOption: true,
               type: 'string',
             })
-            .positional('converseId', {
+            .option('converseId', {
               describe: '会话ID',
               demandOption: true,
               type: 'string',
             })
-            .positional('userId', {
+            .option('userId', {
               describe: '用户ID',
               demandOption: true,
               type: 'string',
             })
-            .positional('num', {
+            .option('num', {
               describe: '测试次数',
               type: 'number',
               default: 100,
             })
-            .positional('parallel', {
+            .option('parallel', {
               describe: '是否并发',
               type: 'boolean',
               default: false,
             }),
 
         async (args) => {
-          config();
+          config(); // 加载环境变量
 
           const broker = new TcBroker({
             ...defaultBrokerConfig,
@@ -136,7 +136,7 @@ async function startBenchmark<T>(options: BenchmarkOptions<T>) {
   const spinner = ora();
 
   spinner.info(
-    `测试方式: ${parallel ? `并行, 上限 ${parallelLimit}` : `串行`}`
+    `测试方式: ${parallel ? `并行, 并行上限 ${parallelLimit}` : `串行`}`
   );
   spinner.info(`执行任务数: ${number}`);
   spinner.start('正在执行基准测试...');
