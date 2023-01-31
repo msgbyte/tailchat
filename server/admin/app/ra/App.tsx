@@ -13,10 +13,11 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { theme } from './theme';
 import { Dashboard } from './dashboard';
 import { Route } from 'react-router-dom';
-import { TailchatNetwork } from './network';
+import { TailchatNetwork } from './routes/network';
 import { TailchatLayout } from './layout';
 import { i18nProvider } from './i18n';
 import { httpClient } from './request';
+import { SocketIOAdmin } from './routes/socketio';
 
 const dataProvider = jsonServerProvider(
   // 'https://jsonplaceholder.typicode.com'
@@ -66,7 +67,9 @@ export const App = () => (
     />
 
     <CustomRoutes>
+      {/* 添加完毕以后还需要到 layout/Menu 增加侧边栏 */}
       <Route path="/network" element={<TailchatNetwork />} />
+      <Route path="/socketio" element={<SocketIOAdmin />} />
     </CustomRoutes>
   </Admin>
 );

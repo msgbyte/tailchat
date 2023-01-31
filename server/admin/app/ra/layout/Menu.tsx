@@ -6,6 +6,7 @@ import {
   useResourceDefinitions,
 } from 'react-admin';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
+import LinkIcon from '@mui/icons-material/Link';
 
 export const TailchatMenu: React.FC<MenuProps> = React.memo((props) => {
   const resources = useResourceDefinitions();
@@ -22,6 +23,12 @@ export const TailchatMenu: React.FC<MenuProps> = React.memo((props) => {
         to="/admin/network"
         primaryText="Tailchat 网络"
         leftIcon={<FilterDramaIcon />}
+      />
+
+      <Menu.Item
+        to="/admin/socketio"
+        primaryText="Socket.IO 长链接"
+        leftIcon={<LinkIcon />}
       />
     </Menu>
   );

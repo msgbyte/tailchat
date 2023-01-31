@@ -1,6 +1,6 @@
 import { Server as SocketServer } from 'socket.io';
 import { createAdapter } from '@socket.io/redis-adapter';
-import { instrument } from '@moonrailgun/socket.io-admin-ui';
+import { instrument } from '@socket.io/admin-ui';
 import RedisClient from 'ioredis';
 import {
   TcService,
@@ -16,7 +16,7 @@ import {
 } from 'tailchat-server-sdk';
 import _ from 'lodash';
 import { ServiceUnavailableError } from 'tailchat-server-sdk';
-import { generateRandomStr, isValidStr } from '../lib/utils';
+import { isValidStr } from '../lib/utils';
 import bcrypt from 'bcryptjs';
 
 const blacklist: (string | RegExp)[] = ['gateway.*'];
@@ -488,20 +488,19 @@ export const TcSocketIOService = (
           },
         });
 
-        if (config.enableSocketAdmin) {
-          const randomPassword = generateRandomStr(16);
-
+        if (
+          isValidStr(process.env.ADMIN_USER) &&
+          isValidStr(process.env.ADMIN_PASS)
+        ) {
           this.logger.info('****************************************');
-          this.logger.info(
-            `检测到Admin管理已开启, 当前随机密码: ${randomPassword}`
-          );
+          this.logger.info(`检测到Admin管理已开启`);
           this.logger.info('****************************************');
 
           instrument(this.io, {
             auth: {
               type: 'basic',
-              username: 'tailchat-admin',
-              password: bcrypt.hashSync(randomPassword, 10),
+              username: process.env.ADMIN_USER,
+              password: bcrypt.hashSync(process.env.ADMIN_PASS, 10),
             },
           });
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { request } from '../request';
+import { request } from '../../request';
 import { useRequest } from 'ahooks';
 import {
   CircularProgress,
@@ -12,7 +12,7 @@ import {
   Box,
 } from '@mui/material';
 import _uniq from 'lodash/uniq';
-import { ChipItems } from '../components/ChipItems';
+import { ChipItems } from '../../components/ChipItems';
 
 /**
  * Tailchat 网络状态
