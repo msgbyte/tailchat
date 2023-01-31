@@ -3,4 +3,5 @@ node_modules
 /.cache
 /build
 /public/build
+/public/admin
 .env
