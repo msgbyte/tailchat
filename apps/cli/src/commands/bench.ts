@@ -8,6 +8,7 @@ import pAll from 'p-all';
 import pSeries from 'p-series';
 import ora from 'ora';
 import prettyMs from 'pretty-ms';
+import filesize from 'filesize';
 
 export const benchCommand: CommandModule = {
   command: 'bench',
@@ -16,7 +17,7 @@ export const benchCommand: CommandModule = {
     yargs
       .command(
         'message',
-        '通过内网请求进行压力测试(适用于纯业务测试)',
+        '通过Tailchat网络请求进行压力测试(适用于纯业务测试)',
         (yargs) =>
           yargs
             .option('groupId', {
@@ -43,6 +44,11 @@ export const benchCommand: CommandModule = {
               describe: '是否并发',
               type: 'boolean',
               default: false,
+            })
+            .option('parallelLimit', {
+              describe: '并发上限',
+              type: 'number',
+              default: Infinity,
             }),
 
         async (args) => {
@@ -61,6 +67,7 @@ export const benchCommand: CommandModule = {
 
           await startBenchmark<number>({
             parallel: args.parallel,
+            parallelLimit: args.parallelLimit,
             number: args.num,
             task: async (i) => {
               const start = process.hrtime();
@@ -104,7 +111,7 @@ function printSystemInfo() {
   console.log(`系统: \t${os.type()} - ${os.release()}`);
   console.log(`架构: \t${os.arch()} - ${os.version()}`);
   console.log(`CPU: \t${os.cpus().length}`);
-  console.log(`内存: \t${os.totalmem()}`);
+  console.log(`内存: \t${filesize(os.totalmem(), { base: 2 })}`);
 }
 
 function calcUsage(startTime: [number, number]) {
@@ -142,23 +149,34 @@ async function startBenchmark<T>(options: BenchmarkOptions<T>) {
   spinner.start('正在执行基准测试...');
   try {
     const startTime = process.hrtime();
-    let res: T[] = [];
+    let res: (T | false)[] = [];
     if (parallel) {
-      res = await pAll<T>(
-        [...Array.from({ length: number }).map((_, i) => () => task(i))],
+      res = await pAll<T | false>(
+        [
+          ...Array.from({ length: number }).map(
+            (_, i) => () => task(i).catch(() => false as const)
+          ),
+        ],
         {
           concurrency: parallelLimit,
         }
       );
     } else {
-      res = await pSeries<T>([
-        ...Array.from({ length: number }).map((_, i) => () => task(i)),
+      res = await pSeries<T | false>([
+        ...Array.from({ length: number }).map(
+          (_, i) => () => task(i).catch(() => false as const)
+        ),
       ]);
     }
 
-    spinner.succeed(`基准测试完毕, 用时 ${prettyMs(calcUsage(startTime))}`);
+    const allUsage = calcUsage(startTime);
+    const succeed = res.filter((i): i is T => Boolean(i));
+    const failed = res.filter((i) => !Boolean(i));
+    spinner.succeed(`基准测试完毕, 用时: ${prettyMs(allUsage)}`);
+    console.log(`成功/失败: ${succeed.length}/${failed.length}`);
+    console.log(`TPS: ${res.length / allUsage}`);
 
-    onCompleted(res);
+    onCompleted(succeed);
   } catch (err) {
     console.error(err);
     spinner.fail(`基准测试出现问题`).stop();
