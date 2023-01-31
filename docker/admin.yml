@@ -17,4 +17,4 @@ services:
       - "traefik.http.services.admin.loadbalancer.server.port=3000"
     networks:
       - internal
-    command: cd server/admin && pnpm build && pnpm start
+    command: pnpm start:admin
