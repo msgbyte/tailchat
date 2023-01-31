@@ -69,9 +69,15 @@ export const VirtualizedMessageList: React.FC<MessageListProps> = React.memo(
       }
     );
 
-    const computeItemKey = useMemoizedFn((index: number, item: ChatMessage) => {
-      return item?._id ?? index;
-    });
+    const computeItemKey = useMemoizedFn(
+      (index: number, item?: ChatMessage) => {
+        if (!item) {
+          return index;
+        }
+
+        return item._id;
+      }
+    );
 
     const itemContent = useMemoizedFn((virtuosoIndex: number) => {
       const index = virtuosoIndex + numItemsPrepended - PREPEND_OFFSET;

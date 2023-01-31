@@ -25,6 +25,8 @@
     "plugins:declaration:generate": "cross-env TS_NODE_PROJECT='tsconfig.node.json' ts-node ./scripts/generate-plugin-declaration.typescript.ts"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@loadable/component": "^5.15.2",
     "@tanstack/react-query-devtools": "^4.3.5",
     "@use-gesture/react": "^10.2.23",
@@ -35,7 +37,7 @@
     "compressorjs": "^1.1.1",
     "copy-to-clipboard": "^3.3.3",
     "detect-browser": "^5.3.0",
-    "emoji-mart": "^3.0.1",
+    "emoji-mart": "^5.5.2",
     "immer": "^9.0.16",
     "is-electron": "^2.2.1",
     "is-hotkey": "^0.2.0",
@@ -81,7 +83,6 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/dts-generator": "^2.1.7",
-    "@types/emoji-mart": "^3.0.9",
     "@types/fs-extra": "^9.0.13",
     "@types/is-hotkey": "^0.1.7",
     "@types/jest": "^29.2.4",

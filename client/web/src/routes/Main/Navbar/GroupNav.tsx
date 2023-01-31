@@ -11,7 +11,7 @@ import {
   useGroupUnread,
 } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
 
 /**
  * 群组导航栏栏项

@@ -1,19 +1,6 @@
 import React from 'react';
-import { Loadable } from '../Loadable';
-
-const Emoji = Loadable(
-  () =>
-    import(/* webpackChunkName: 'emoji' */ /* webpackPreload: true */ './Emoji')
-);
-
-const EmojiPicker = Loadable(
-  () =>
-    import(
-      /* webpackChunkName: 'emoji-picker' */ /* webpackPreload: true */ './Picker'
-    )
-);
-
-export { Emoji };
+import { EmojiPicker } from './Picker';
+export { Emoji } from './Emoji';
 
 /**
  * emoji表情面板

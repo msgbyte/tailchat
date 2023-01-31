@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
-import { NimblePicker, EmojiData } from 'emoji-mart';
-import { isValidStr, useColorScheme } from 'tailchat-shared';
+import { isValidStr, useColorScheme, useLanguage } from 'tailchat-shared';
 import { emojiData } from './const';
+import Picker from '@emoji-mart/react';
+import type { EmojiData } from './types';
+import i18n from '@emoji-mart/data/i18n/zh.json';
 
-import 'emoji-mart/css/emoji-mart.css';
 import './Picker.less';
 
 interface EmojiPickerProps {
@@ -12,12 +13,15 @@ interface EmojiPickerProps {
 
 /**
  * emoji表情面板
+ *
+ * Reference: https://www.npmjs.com/package/emoji-mart
  */
-const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
+export const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
   const { isDarkMode } = useColorScheme();
+  const { language } = useLanguage();
   const handleSelect = useCallback(
     (emoji: EmojiData) => {
-      const code = emoji.colons;
+      const code = emoji.shortcodes;
       if (isValidStr(code)) {
         props.onSelect(code);
       }
@@ -27,18 +31,16 @@ const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
 
   return (
     <div className="emoji-picker">
-      <NimblePicker
+      <Picker
         set="twitter"
         data={emojiData}
         theme={isDarkMode ? 'dark' : 'light'}
-        showPreview={false}
-        showSkinTones={false}
-        emojiTooltip={false}
-        onSelect={handleSelect}
+        i18n={language === 'zh-CN' ? i18n : undefined}
+        previewPosition="none"
+        skinTonePosition="none"
+        onEmojiSelect={handleSelect}
       />
     </div>
   );
 });
 EmojiPicker.displayName = 'EmojiPicker';
-
-export default EmojiPicker;

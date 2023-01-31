@@ -333,6 +333,8 @@ importers:
 
   client/web:
     specifiers:
+      '@emoji-mart/data': ^1.1.2
+      '@emoji-mart/react': ^1.1.1
       '@loadable/component': ^5.15.2
       '@perfsee/webpack': 1.0.0-alpha.4
       '@tanstack/react-query-devtools': ^4.3.5
@@ -341,7 +343,6 @@ importers:
       '@testing-library/react-hooks': ^8.0.1
       '@types/copy-webpack-plugin': ^8.0.1
       '@types/dts-generator': ^2.1.7
-      '@types/emoji-mart': ^3.0.9
       '@types/fs-extra': ^9.0.13
       '@types/is-hotkey': ^0.1.7
       '@types/jest': ^29.2.4
@@ -379,7 +380,7 @@ importers:
       detect-browser: ^5.3.0
       dotenv: ^10.0.0
       dts-generator: ^3.0.0
-      emoji-mart: ^3.0.1
+      emoji-mart: ^5.5.2
       esbuild-loader: ^2.20.0
       execa: ^5.1.1
       file-loader: ^6.2.0
@@ -455,6 +456,8 @@ importers:
       yup: ^0.32.11
       zustand: ^4.1.5
     dependencies:
+      '@emoji-mart/data': 1.1.2
+      '@emoji-mart/react': 1.1.1_kyrnz3vmphzqyjjk2ivrm6bcsu
       '@loadable/component': 5.15.2_react@18.2.0
       '@tanstack/react-query-devtools': 4.3.5_biqbaboplfbrettd7655fr4n2y
       '@use-gesture/react': 10.2.23_react@18.2.0
@@ -465,7 +468,7 @@ importers:
       compressorjs: 1.1.1
       copy-to-clipboard: 3.3.3
       detect-browser: 5.3.0
-      emoji-mart: 3.0.1_react@18.2.0
+      emoji-mart: 5.5.2
       immer: 9.0.16
       is-electron: 2.2.1
       is-hotkey: 0.2.0
@@ -510,7 +513,6 @@ importers:
       '@testing-library/react-hooks': 8.0.1_7ey2zzynotv32rpkwno45fsx4e
       '@types/copy-webpack-plugin': 8.0.1_webpack-cli@4.10.0
       '@types/dts-generator': 2.1.7
-      '@types/emoji-mart': 3.0.9
       '@types/fs-extra': 9.0.13
       '@types/is-hotkey': 0.1.7
       '@types/jest': 29.2.4
@@ -6594,6 +6596,20 @@ packages:
       - supports-color
       - uglify-js
       - webpack-cli
+    dev: false
+
+  /@emoji-mart/data/1.1.2:
+    resolution: {integrity: sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==}
+    dev: false
+
+  /@emoji-mart/react/1.1.1_kyrnz3vmphzqyjjk2ivrm6bcsu:
+    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.5.2
+      react: 18.2.0
     dev: false
 
   /@emotion/babel-plugin/11.10.2:
@@ -12861,12 +12877,6 @@ packages:
     resolution: {integrity: sha512-RQul5wEfY7BjWm0sYY86cmUN/pcXWGyVxWX93DFFJvcrxax5zKlieLwA3T77xJGwNcZW0YW6CYG70p1m8xPFmA==}
     dev: true
 
-  /@types/emoji-mart/3.0.9:
-    resolution: {integrity: sha512-qdBo/2Y8MXaJ/2spKjDZocuq79GpnOhkwMHnK2GnVFa8WYFgfA+ei6sil3aeWQPCreOKIx9ogPpR5+7MaOqYAA==}
-    dependencies:
-      '@types/react': 18.0.26
-    dev: true
-
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -15697,7 +15707,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_react@18.2.0
+      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -19458,14 +19468,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /emoji-mart/3.0.1_react@18.2.0:
-    resolution: {integrity: sha512-sxpmMKxqLvcscu6mFn9ITHeZNkGzIvD0BSNFE/LJESPbCA8s1jM6bCDPjWbV31xHq7JXaxgpHxLB54RCbBZSlg==}
-    peerDependencies:
-      react: ^0.14.0 || ^15.0.0-0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@babel/runtime': 7.20.6
-      prop-types: 15.8.1
-      react: 18.2.0
+  /emoji-mart/5.5.2:
+    resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
     dev: false
 
   /emoji-regex/7.0.3:
@@ -24435,7 +24439,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_k2dsl7zculo2nmh5s33pladmoa
+      ts-node: 10.9.1_nzafxra4mdyuer2ejmql6rdadq
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -35903,7 +35907,6 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: false
 
   /styled-components/5.3.6_mdz3marskokvq6744hhidi3r5a:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -35949,6 +35952,7 @@ packages:
       react: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: true
 
   /styled-system/5.1.5:
     resolution: {integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==}
