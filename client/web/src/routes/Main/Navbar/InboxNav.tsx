@@ -8,6 +8,7 @@ import { NavbarNavItem } from './NavItem';
  */
 export const InboxNav: React.FC = React.memo(() => {
   const inbox = useInboxList();
+  const unreadList = inbox.filter((i) => !i.readed);
 
   return (
     <NavbarNavItem
@@ -15,7 +16,10 @@ export const InboxNav: React.FC = React.memo(() => {
       name={t('收件箱')}
       to={'/main/inbox'}
       showPill={true}
-      badge={inbox.filter((i) => !i.readed).length}
+      badge={unreadList.length > 0}
+      badgeProps={{
+        count: unreadList.length,
+      }}
       data-testid="inbox"
     >
       <Icon className="text-3xl text-white" icon="mdi:inbox-arrow-down" />

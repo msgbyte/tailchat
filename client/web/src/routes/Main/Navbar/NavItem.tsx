@@ -1,4 +1,4 @@
-import { Tooltip, Badge } from 'antd';
+import { Tooltip, Badge, BadgeProps } from 'antd';
 import type { ClassValue } from 'clsx';
 import clsx from 'clsx';
 import React, { PropsWithChildren } from 'react';
@@ -11,7 +11,8 @@ export const NavbarNavItem: React.FC<
     className?: ClassValue;
     to?: string;
     showPill?: boolean;
-    badge?: boolean | number;
+    badge?: boolean;
+    badgeProps?: BadgeProps;
     onClick?: () => void;
     ['data-testid']?: string;
   }>
@@ -67,11 +68,7 @@ export const NavbarNavItem: React.FC<
       {inner}
 
       <div className="absolute right-0 bottom-0">
-        {badge === true ? (
-          <Badge status="error" />
-        ) : (
-          <Badge size="small" count={Number(badge) || 0} />
-        )}
+        {badge === true && <Badge status="error" {...props.badgeProps} />}
       </div>
     </div>
   );

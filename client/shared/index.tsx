@@ -54,6 +54,7 @@ export { useLanguage } from './i18n/language';
 // hooks
 export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
+export { useGroupUnreadState } from './hooks/model/useGroupUnreadState';
 export { useMessageNotifyEventFilter } from './hooks/model/useMessageNotifyEventFilter';
 export { useUserInfoList } from './hooks/model/useUserInfoList';
 export { useUsernames } from './hooks/model/useUsernames';
@@ -189,7 +190,6 @@ export {
   useGroupPanels,
   useGroupPanelInfo,
   useIsGroupOwner,
-  useGroupUnread,
   useGroupTextPanelUnread,
 } from './redux/hooks/useGroup';
 export { useGroupAck } from './redux/hooks/useGroupAck';

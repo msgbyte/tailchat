@@ -8,7 +8,7 @@ import {
   t,
   useAppSelector,
   useGroupAck,
-  useGroupUnread,
+  useGroupUnreadState,
 } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 import { Dropdown } from 'antd';
@@ -18,7 +18,7 @@ import { Dropdown } from 'antd';
  */
 const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
   const groupId = group._id;
-  const hasUnread = useGroupUnread(groupId);
+  const unreadState = useGroupUnreadState(groupId);
   const { markGroupAllAck } = useGroupAck(groupId);
 
   const menu = {
@@ -42,7 +42,10 @@ const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
           name={group.name}
           to={`/main/group/${group._id}`}
           showPill={true}
-          badge={hasUnread}
+          badge={['muted', 'unread'].includes(unreadState)}
+          badgeProps={{
+            status: unreadState === 'unread' ? 'error' : 'default',
+          }}
         >
           <Avatar
             shape="square"
