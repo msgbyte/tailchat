@@ -90,8 +90,8 @@ export const benchCommand: CommandModule = {
             },
             onCompleted: (res) => {
               console.log(`测试数量: \t${res.length}`);
-              console.log(`最大用时: \t${prettyMs(Math.max(...res))}`);
-              console.log(`最小用时: \t${prettyMs(Math.min(...res))}`);
+              console.log(`最大用时: \t${prettyMs(Math.max(...res, 0))}`);
+              console.log(`最小用时: \t${prettyMs(Math.min(...res, 0))}`);
               console.log(`平均用时: \t${prettyMs(_.mean(res))}`);
             },
           });
@@ -174,7 +174,7 @@ async function startBenchmark<T>(options: BenchmarkOptions<T>) {
     const failed = res.filter((i) => !Boolean(i));
     spinner.succeed(`基准测试完毕, 用时: ${prettyMs(allUsage)}`);
     console.log(`成功/失败: ${succeed.length}/${failed.length}`);
-    console.log(`TPS: ${res.length / allUsage}`);
+    console.log(`TPS: ${res.length / (allUsage / 1000)}`);
 
     onCompleted(succeed);
   } catch (err) {
