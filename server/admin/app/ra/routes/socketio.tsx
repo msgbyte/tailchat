@@ -6,12 +6,17 @@ import { Card, CardContent } from '@mui/material';
  * SocketIO 管理
  */
 export const SocketIOAdmin: React.FC = React.memo(() => {
+  const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+
   return (
     <Box p={4}>
       <Card>
         <CardContent>
           <Typography component="div">
-            服务器URL为: <strong>ws://{window.location.host}</strong>
+            服务器URL为:{' '}
+            <strong>
+              {protocol}://{window.location.host}
+            </strong>
           </Typography>
           <Typography component="div">
             账号密码为Tailchat后台的账号密码
