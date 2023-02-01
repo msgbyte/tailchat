@@ -5,6 +5,7 @@ import { isDevelopment } from '../utils/environment';
 import { showErrorToasts, showGlobalLoading, showToasts } from '../manager/ui';
 import { t } from '../i18n';
 import { sharedEvent } from '../event';
+import msgpackParser from 'socket.io-msgpack-parser';
 
 class SocketEventError extends Error {
   name = 'SocketEventError';
@@ -211,6 +212,7 @@ export function createSocket(token: string): Promise<AppSocket> {
         token,
       },
       forceNew: true,
+      parser: msgpackParser,
     });
     _socket.once('connect', () => {
       // 连接成功

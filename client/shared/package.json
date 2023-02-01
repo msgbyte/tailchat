@@ -24,6 +24,7 @@
     "react-redux": "^8.0.2",
     "regenerator-runtime": "^0.13.9",
     "socket.io-client": "^4.1.2",
+    "socket.io-msgpack-parser": "^3.0.2",
     "url-regex": "^5.0.0",
     "yup": "^0.32.9"
   },

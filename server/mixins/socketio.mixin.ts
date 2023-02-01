@@ -18,6 +18,7 @@ import _ from 'lodash';
 import { ServiceUnavailableError } from 'tailchat-server-sdk';
 import { isValidStr } from '../lib/utils';
 import bcrypt from 'bcryptjs';
+import msgpackParser from 'socket.io-msgpack-parser';
 
 const blacklist: (string | RegExp)[] = ['gateway.*'];
 
@@ -476,7 +477,7 @@ export const TcSocketIOService = (
       initSocketIO() {
         if (!this.server) {
           throw new Errors.ServiceNotAvailableError(
-            '需要和 [moleculer-web] 一起使用'
+            '需要和 [ApiGatewayMixin] 一起使用'
           );
         }
         this.io = new SocketServer(this.server, {
@@ -486,6 +487,7 @@ export const TcSocketIOService = (
             origin: '*',
             methods: ['GET', 'POST'],
           },
+          parser: msgpackParser,
         });
 
         if (

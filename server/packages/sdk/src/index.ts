@@ -48,7 +48,7 @@ export * from './const';
 export { Utils, Errors } from 'moleculer';
 
 /**
- * 统一处理未捕获的错误
+ * 统一处理未捕获的错误, 防止直接把应用打崩
  * NOTICE: 未经测试
  */
 process.on('unhandledRejection', (reason, promise) => {
