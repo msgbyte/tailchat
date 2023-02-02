@@ -19,6 +19,7 @@ import {
   NoPermissionError,
   PERMISSION,
   GroupPanelType,
+  PanelFeature,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
 
@@ -211,6 +212,21 @@ class GroupService extends TcService {
   }
 
   /**
+   * 获取会被订阅的群组面板id列表
+   *
+   * 订阅即加入socket房间
+   */
+  private getSubscribedGroupPanelIds(group: Group): string[] {
+    const textPanelIds = this.getGroupTextPanelIds(group);
+    const subscribeFeaturePanelIds = this.getGroupPanelIdsWithFeature(
+      group,
+      'subscribe'
+    );
+
+    return _.uniq([...textPanelIds, ...subscribeFeaturePanelIds]);
+  }
+
+  /**
    * 获取群组所有的文字面板id列表
    * 用于加入房间
    */
@@ -221,6 +237,22 @@ class GroupService extends TcService {
       .map((p) => p.id);
 
     return textPanelIds;
+  }
+
+  /**
+   * 获取群组中拥有某些特性的面板
+   * @param group
+   */
+  private getGroupPanelIdsWithFeature(
+    group: Group,
+    feature: PanelFeature
+  ): string[] {
+    const featureAllPanelNames = this.getPanelNamesWithFeature(feature);
+    const matchedPanels = group.panels.filter((p) =>
+      featureAllPanelNames.includes(p.pluginPanelName)
+    );
+
+    return matchedPanels.map((p) => p.id);
   }
 
   /**
@@ -242,7 +274,7 @@ class GroupService extends TcService {
       owner: userId,
     });
 
-    const textPanelIds = this.getGroupTextPanelIds(group);
+    const textPanelIds = this.getSubscribedGroupPanelIds(group);
 
     await call(ctx).joinSocketIORoom(
       [String(group._id), ...textPanelIds],
@@ -268,7 +300,9 @@ class GroupService extends TcService {
     panelIds: string[];
   }> {
     const groups = await this.getUserGroups(ctx); // TODO: 应该使用call而不是直接调用，为了获取tracer和caching支持。目前moleculer的文档没有显式的声明类似localCall的行为，可以花时间看一下
-    const panelIds = _.flatten(groups.map((g) => this.getGroupTextPanelIds(g)));
+    const panelIds = _.flatten(
+      groups.map((g) => this.getSubscribedGroupPanelIds(g))
+    );
 
     return {
       groupIds: groups.map((g) => String(g._id)),
@@ -460,7 +494,7 @@ class GroupService extends TcService {
     this.notifyGroupInfoUpdate(ctx, group); // 推送变更
     this.unicastNotify(ctx, userId, 'add', group);
 
-    const textPanelIds = this.getGroupTextPanelIds(group);
+    const textPanelIds = this.getSubscribedGroupPanelIds(group);
 
     await call(ctx).joinSocketIORoom(
       [String(group._id), ...textPanelIds],
@@ -658,9 +692,12 @@ class GroupService extends TcService {
       )
       .exec();
 
-    if (type === 0) {
+    if (
+      type === GroupPanelType.TEXT ||
+      this.getPanelNamesWithFeature('subscribe').includes(name)
+    ) {
       /**
-       * 如果为文本面板
+       * 如果为订阅的面板
        * 则所有群组成员加入房间
        */
       const groupInfo = await call(ctx).getGroupInfo(groupId);

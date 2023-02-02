@@ -43,6 +43,10 @@ class GroupTopicService extends TcService {
     });
   }
 
+  protected onInited(): void {
+    this.setPanelFeature('com.msgbyte.topic/grouppanel', ['subscribe']);
+  }
+
   /**
    * 获取所有Topic
    */
@@ -121,7 +125,7 @@ class GroupTopicService extends TcService {
 
     const json = await this.transformDocuments(ctx, {}, topic);
 
-    this.roomcastNotify(ctx, groupId, 'create', json);
+    this.roomcastNotify(ctx, panelId, 'create', json);
 
     return json;
   }
@@ -175,7 +179,9 @@ class GroupTopicService extends TcService {
 
     const json = await this.transformDocuments(ctx, {}, topic);
 
-    this.roomcastNotify(ctx, groupId, 'createComment', json);
+    // TODO: 回复需要添加到收件箱
+
+    this.roomcastNotify(ctx, panelId, 'createComment', json);
 
     return true;
   }

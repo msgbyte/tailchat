@@ -9,6 +9,7 @@ export type {
   GroupBaseInfo,
   PureServiceSchema,
   PureService,
+  PanelFeature,
 } from './services/types';
 export { parseLanguageFromHead } from './services/lib/i18n/parser';
 export { t } from './services/lib/i18n';

@@ -53,3 +53,8 @@ export type TcContext<P = {}, M = {}> = TcPureContext<
 export type GroupBaseInfo = Pick<GroupStruct, 'name' | 'avatar' | 'owner'> & {
   memberCount: number;
 };
+
+/**
+ * 面板能力
+ */
+export type PanelFeature = 'subscribe'; // 订阅变更，即用户登录时自动加入面板的房间

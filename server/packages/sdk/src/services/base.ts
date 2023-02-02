@@ -13,7 +13,7 @@ import {
 } from 'moleculer';
 import { once } from 'lodash';
 import { TcDbService } from './mixins/db.mixin';
-import type { PureContext, TcPureContext } from './types';
+import type { PanelFeature, PureContext, TcPureContext } from './types';
 import type { TFunction } from 'i18next';
 import { t } from './lib/i18n';
 import type { ValidationRuleObject } from 'fastest-validator';
@@ -310,6 +310,29 @@ export abstract class TcService extends Service {
   }
 
   /**
+   * 注册面板功能特性，用于在服务端基础设施开放部分能力
+   * @param panelFeature 面板功能
+   */
+  async setPanelFeature(panelName: string, panelFeatures: PanelFeature[]) {
+    await this.setGlobalConfig(`panelFeature.${panelName}`, panelFeatures);
+  }
+
+  /**
+   * 获取拥有某些特性的面板列表
+   * @param panelFeature 面板功能
+   */
+  getPanelNamesWithFeature(panelFeature: PanelFeature) {
+    const map =
+      this.getGlobalConfig<Record<string, PanelFeature[]>>('panelFeature');
+
+    const matched = Object.entries(map).filter(([panelName, panelFeatures]) =>
+      panelFeatures.includes(panelFeature)
+    );
+
+    return matched.map((m) => m[0]);
+  }
+
+  /**
    * 等待微服务启动
    * @param serviceNames
    * @param timeout
@@ -334,7 +357,7 @@ export abstract class TcService extends Service {
     return super.waitForServices(serviceNames, timeout, interval, logger);
   }
 
-  getGlobalConfig(key: string): any {
+  getGlobalConfig<T = any>(key: string): T {
     return _.get(this.globalConfig, key);
   }
 

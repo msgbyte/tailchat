@@ -12,11 +12,6 @@ class ConfigService extends TcService {
   }
 
   onInit(): void {
-    /**
-     * 全局配置
-     *
-     * 用于提供给前端使用
-     */
     this.registerAction('client', this.client);
     this.registerAction('all', this.all, {
       visibility: 'public',
@@ -48,7 +43,9 @@ class ConfigService extends TcService {
   /**
    * 全局配置
    *
-   * 用于提供给前端使用d
+   * 用于提供给前端使用
+   *
+   * NOTICE: 返回内容比较简单，因此不建议增加缓存
    */
   async client(ctx: TcPureContext) {
     return {
