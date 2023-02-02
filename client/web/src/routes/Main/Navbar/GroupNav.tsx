@@ -8,10 +8,10 @@ import {
   t,
   useAppSelector,
   useGroupAck,
-  useGroupUnreadState,
 } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 import { Dropdown } from 'antd';
+import { useGroupUnreadState } from '@/hooks/useGroupUnreadState';
 
 /**
  * 群组导航栏栏项

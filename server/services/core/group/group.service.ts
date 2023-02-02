@@ -216,14 +216,20 @@ class GroupService extends TcService {
    *
    * 订阅即加入socket房间
    */
-  private getSubscribedGroupPanelIds(group: Group): string[] {
+  private getSubscribedGroupPanelIds(group: Group): {
+    textPanelIds: string[];
+    subscribeFeaturePanelIds: string[];
+  } {
     const textPanelIds = this.getGroupTextPanelIds(group);
     const subscribeFeaturePanelIds = this.getGroupPanelIdsWithFeature(
       group,
       'subscribe'
     );
 
-    return _.uniq([...textPanelIds, ...subscribeFeaturePanelIds]);
+    return {
+      textPanelIds,
+      subscribeFeaturePanelIds,
+    };
   }
 
   /**
@@ -274,10 +280,11 @@ class GroupService extends TcService {
       owner: userId,
     });
 
-    const textPanelIds = this.getSubscribedGroupPanelIds(group);
+    const { textPanelIds, subscribeFeaturePanelIds } =
+      this.getSubscribedGroupPanelIds(group);
 
     await call(ctx).joinSocketIORoom(
-      [String(group._id), ...textPanelIds],
+      [String(group._id), ...textPanelIds, ...subscribeFeaturePanelIds],
       userId
     );
 
@@ -297,16 +304,23 @@ class GroupService extends TcService {
    */
   async getJoinedGroupAndPanelIds(ctx: TcContext): Promise<{
     groupIds: string[];
-    panelIds: string[];
+    textPanelIds: string[];
+    subscribeFeaturePanelIds: string[];
   }> {
     const groups = await this.getUserGroups(ctx); // TODO: 应该使用call而不是直接调用，为了获取tracer和caching支持。目前moleculer的文档没有显式的声明类似localCall的行为，可以花时间看一下
-    const panelIds = _.flatten(
-      groups.map((g) => this.getSubscribedGroupPanelIds(g))
+    const textPanelIds = _.flatten(
+      groups.map((g) => this.getSubscribedGroupPanelIds(g).textPanelIds)
+    );
+    const subscribeFeaturePanelIds = _.flatten(
+      groups.map(
+        (g) => this.getSubscribedGroupPanelIds(g).subscribeFeaturePanelIds
+      )
     );
 
     return {
       groupIds: groups.map((g) => String(g._id)),
-      panelIds,
+      textPanelIds,
+      subscribeFeaturePanelIds,
     };
   }
 
@@ -494,10 +508,11 @@ class GroupService extends TcService {
     this.notifyGroupInfoUpdate(ctx, group); // 推送变更
     this.unicastNotify(ctx, userId, 'add', group);
 
-    const textPanelIds = this.getSubscribedGroupPanelIds(group);
+    const { textPanelIds, subscribeFeaturePanelIds } =
+      this.getSubscribedGroupPanelIds(group);
 
     await call(ctx).joinSocketIORoom(
-      [String(group._id), ...textPanelIds],
+      [String(group._id), ...textPanelIds, ...subscribeFeaturePanelIds],
       userId
     );
 

@@ -20,6 +20,10 @@ import type { ValidationRuleObject } from 'fastest-validator';
 import type { BuiltinEventMap } from '../structs/events';
 import { CONFIG_GATEWAY_AFTER_HOOK } from '../const';
 import _ from 'lodash';
+import {
+  decodeNoConflictServiceNameKey,
+  encodeNoConflictServiceNameKey,
+} from '../utils';
 
 type ServiceActionHandler<T = any> = (
   ctx: TcPureContext<any>
@@ -314,7 +318,10 @@ export abstract class TcService extends Service {
    * @param panelFeature 面板功能
    */
   async setPanelFeature(panelName: string, panelFeatures: PanelFeature[]) {
-    await this.setGlobalConfig(`panelFeature.${panelName}`, panelFeatures);
+    await this.setGlobalConfig(
+      `panelFeature.${encodeNoConflictServiceNameKey(panelName)}`,
+      panelFeatures
+    );
   }
 
   /**
@@ -326,11 +333,15 @@ export abstract class TcService extends Service {
       this.getGlobalConfig<Record<string, PanelFeature[]>>('panelFeature') ??
       {};
 
-    const matched = Object.entries(map).filter(([panelName, panelFeatures]) =>
-      panelFeatures.includes(panelFeature)
-    );
+    const matched = Object.entries(map).filter(([name, features]) => {
+      if (Array.isArray(features)) {
+        return features.includes(panelFeature);
+      }
 
-    return matched.map((m) => m[0]);
+      return false;
+    });
+
+    return matched.map((m) => decodeNoConflictServiceNameKey(m[0]));
   }
 
   /**
@@ -384,9 +395,8 @@ export abstract class TcService extends Service {
   ) {
     await this.waitForServices(['gateway', 'config']);
     await this.broker.call('config.addToSet', {
-      key: `${CONFIG_GATEWAY_AFTER_HOOK}.${fullActionName}`.replaceAll(
-        '.',
-        '-'
+      key: encodeNoConflictServiceNameKey(
+        `${CONFIG_GATEWAY_AFTER_HOOK}.${fullActionName}`
       ),
       value: `${this.serviceName}.${callbackAction}`,
     });

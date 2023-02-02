@@ -22,6 +22,13 @@ export interface GroupMember {
   muteUntil?: string;
 }
 
+/**
+ * 群组面板特性
+ */
+export type GroupPanelFeature =
+  | 'subscribe' // 订阅事件变更状态，用于加入socket.io群组
+  | 'ack'; // 是否包含已读未读检查，如果包含的话需要同时开启 subscribe 特性
+
 export interface GroupPanel {
   /**
    * 在群组中唯一

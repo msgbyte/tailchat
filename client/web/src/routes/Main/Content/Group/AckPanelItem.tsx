@@ -16,7 +16,7 @@ interface GroupTextPanelItemProps {
 /**
  * 相比一般的面板项增加了未读提示
  */
-export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
+export const GroupAckPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
   (props) => {
     const { groupId, panel } = props;
     const panelId = panel.id;
@@ -40,4 +40,4 @@ export const GroupTextPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
     );
   }
 );
-GroupTextPanelItem.displayName = 'GroupTextPanelItem';
+GroupAckPanelItem.displayName = 'GroupAckPanelItem';

@@ -6,6 +6,7 @@ import {
   GroupPanel,
   regSocketEventListener,
   PermissionItemType,
+  GroupPanelFeature,
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
@@ -88,6 +89,11 @@ export interface PluginGroupPanel {
    * 面板项右键菜单
    */
   menus?: PluginPanelMenu[];
+
+  /**
+   * 面板功能特性
+   */
+  feature?: GroupPanelFeature[];
 }
 export const [pluginGroupPanel, regGroupPanel] =
   buildRegList<PluginGroupPanel>();

@@ -9,4 +9,5 @@ regGroupPanel({
   label: Translate.topicpanel,
   provider: PLUGIN_NAME,
   render: Loadable(() => import('./group/GroupTopicPanelRender')),
+  feature: ['subscribe', 'ack'],
 });

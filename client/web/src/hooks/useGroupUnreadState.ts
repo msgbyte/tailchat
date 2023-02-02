@@ -1,8 +1,6 @@
-import { GroupPanelType } from '../../model/group';
-import { useGroupInfo } from '../../redux/hooks/useGroup';
-import { useUserNotifyMute } from './useUserSettings';
+import { isGroupAckPanel } from '@/utils/group-helper';
 import _zip from 'lodash/zip';
-import { useUnread } from '../../redux/hooks/useUnread';
+import { useGroupInfo, useUnread, useUserNotifyMute } from 'tailchat-shared';
 
 /**
  * 检查群组未读消息的状态
@@ -13,7 +11,7 @@ export function useGroupUnreadState(
 ): 'none' | 'muted' | 'unread' {
   const group = useGroupInfo(groupId);
   const groupTextPanelIds = (group?.panels ?? [])
-    .filter((panel) => panel.type === GroupPanelType.TEXT)
+    .filter((panel) => isGroupAckPanel(panel))
     .map((p) => p.id);
 
   const { mutedList } = useUserNotifyMute();

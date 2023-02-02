@@ -325,6 +325,7 @@ class MessageService extends TcService {
     const { converseIds } = ctx.params;
 
     // 这里使用了多个请求，但是通过limit=1会将查询范围降低到最低
+    // 这种方式会比用聚合操作实际上更加节省资源
     const list = await Promise.all(
       converseIds.map((id) => {
         return this.adapter.model

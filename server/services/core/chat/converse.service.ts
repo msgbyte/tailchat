@@ -224,21 +224,25 @@ class ConverseService extends TcService {
     );
 
     // 获取群组列表
-    const { groupIds, panelIds } = await ctx.call<{
-      groupIds: string[];
-      panelIds: string[];
-    }>('group.getJoinedGroupAndPanelIds');
+    const { groupIds, textPanelIds, subscribeFeaturePanelIds } =
+      await ctx.call<{
+        groupIds: string[];
+        textPanelIds: string[];
+        subscribeFeaturePanelIds: string[];
+      }>('group.getJoinedGroupAndPanelIds');
 
     await call(ctx).joinSocketIORoom([
       ...dmConverseIds,
       ...groupIds,
-      ...panelIds,
+      ...textPanelIds,
+      ...subscribeFeaturePanelIds,
     ]);
 
     return {
       dmConverseIds,
       groupIds,
-      panelIds,
+      textPanelIds,
+      subscribeFeaturePanelIds,
     };
   }
 }

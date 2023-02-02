@@ -63,7 +63,8 @@ function initial(socket: AppSocket, store: AppStore) {
     .request<{
       dmConverseIds: string[];
       groupIds: string[];
-      panelIds: string[];
+      textPanelIds: string[];
+      subscribeFeaturePanelIds: string[];
     }>('chat.converse.findAndJoinRoom')
     .catch((err) => {
       console.error(err);
@@ -75,7 +76,7 @@ function initial(socket: AppSocket, store: AppStore) {
     });
 
   Promise.all([conversesP, fetchUserAck()]).then(
-    ([{ dmConverseIds, panelIds }, acks]) => {
+    ([{ dmConverseIds, textPanelIds }, acks]) => {
       /**
        * TODO: 这里的逻辑还需要优化
        * 可能ack和lastMessageMap可以无关？
@@ -91,7 +92,7 @@ function initial(socket: AppSocket, store: AppStore) {
         );
       });
 
-      const converseIds = [...dmConverseIds, ...panelIds];
+      const converseIds = [...dmConverseIds, ...textPanelIds];
       fetchConverseLastMessages(converseIds).then((list) => {
         store.dispatch(chatActions.setLastMessageMap(list));
       });

@@ -54,7 +54,6 @@ export { useLanguage } from './i18n/language';
 // hooks
 export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
-export { useGroupUnreadState } from './hooks/model/useGroupUnreadState';
 export { useMessageNotifyEventFilter } from './hooks/model/useMessageNotifyEventFilter';
 export { useUserInfoList } from './hooks/model/useUserInfoList';
 export { useUsernames } from './hooks/model/useUsernames';
@@ -143,6 +142,7 @@ export type {
   GroupBasicInfo,
   GroupInvite,
   GroupMember,
+  GroupPanelFeature,
 } from './model/group';
 export type { InboxItem } from './model/inbox';
 export {
