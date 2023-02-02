@@ -1,5 +1,40 @@
 
 
+## [1.6.1](https://github.com/msgbyte/tailchat/compare/v1.6.0...v1.6.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* **cli:** v1.5.4 修复bench命令的计算问题和容错机制 ([9b7499a](https://github.com/msgbyte/tailchat/commit/9b7499a23eb6b7c1da93566db1fa02db3e335c1e))
+* 修复admin socketio平台链接协议问题 ([089dbbb](https://github.com/msgbyte/tailchat/commit/089dbbb37fa07076e36a97b85b22559fd1233699))
+* 修复admin静态资源的访问路径问题 ([3635653](https://github.com/msgbyte/tailchat/commit/3635653798160062e347b6b345ef8e33243d5096))
+* 修复pin面板后宽度异常的bug ([b44ccfd](https://github.com/msgbyte/tailchat/commit/b44ccfd76204d6d8ac1218283e68dd02739660fa))
+* 修复tailchat bench message 命令参数 ([11f28af](https://github.com/msgbyte/tailchat/commit/11f28af3bdeca6fe9c86d673d8a85094bf697996))
+* 修复修改免打扰ui不会更新的bug ([3121002](https://github.com/msgbyte/tailchat/commit/312100277c95be687dd9ea792d5145bbf43b74ab))
+* 修复国际化文案问题 ([e56eda0](https://github.com/msgbyte/tailchat/commit/e56eda0387799cdfb4adaed2247a2537758dd5c8))
+* 修复注册账号时没有增加长度限制的bug ([2ed79fb](https://github.com/msgbyte/tailchat/commit/2ed79fb5dd5a91568b9b6283cae5e2ae46a3c455))
+
+
+### Features
+
+* **admin:** 增加user资源的国际化写法 ([184daa3](https://github.com/msgbyte/tailchat/commit/184daa3e733fffe263943660675332dbd3f6d4d4))
+* **admin:** 增加用户详情页，并增加重置密码功能 ([8a8be0b](https://github.com/msgbyte/tailchat/commit/8a8be0b0856fd51aba1aa79fa59c9a0d31f35d52))
+* **admin:** 增加群组列表详情页的展示 ([6dcfd64](https://github.com/msgbyte/tailchat/commit/6dcfd647f55344f4308f9abad7030f0c61b7437c))
+* 升级emoji-mart的版本: v3 -> v5 ([749c2f7](https://github.com/msgbyte/tailchat/commit/749c2f7961f9fa8307a53f338ada77b888e71553))
+* 增加socket.io admin ([9f71fc0](https://github.com/msgbyte/tailchat/commit/9f71fc05e45fd632af60984269b2df5333897f9c))
+* 增加tailchat usage命令 ([1253101](https://github.com/msgbyte/tailchat/commit/12531017871b2573180a7f8b9ffaa56dd4185f73))
+* 增加引用时可以跳转到某个面板 ([1e00834](https://github.com/msgbyte/tailchat/commit/1e00834b1a0610ebe007c70ad9e94fbca94912df))
+* 增加成员管理面板 ([31c62b2](https://github.com/msgbyte/tailchat/commit/31c62b21a43638dd10869cf8a3e0914079f49d8c))
+* 设定静音状态下群组小红点为灰色 ([0c5e5c3](https://github.com/msgbyte/tailchat/commit/0c5e5c3cf47b570d4ec060a9ff5e7656aadfe58e))
+
+
+### Performance Improvements
+
+* **admin:** 整理admin鉴权相关的逻辑并强化对于token过期的处理 ([998e7a6](https://github.com/msgbyte/tailchat/commit/998e7a67073fa8d5db514fd213ad6acb66bfe1f1))
+* break change: socketio传输效率优化 ([424d451](https://github.com/msgbyte/tailchat/commit/424d451cd9a471314d2f620994e77b42adc5012e))
+* **cli:** 优化bench命令对于请求超时(失败)的处理 ([8aa944e](https://github.com/msgbyte/tailchat/commit/8aa944e7e513b510703cea7b25b5f8f8100f8803))
+* 优化在小屏幕移动端上的界面表现，移除不恰当的边距 ([90a30c7](https://github.com/msgbyte/tailchat/commit/90a30c7e98fdf5e0f3151e83d1090957fe5fb113))
+
 # [1.6.0](https://github.com/msgbyte/tailchat/compare/v1.5.0...v1.6.0) (2023-01-25)
 
 ### Hightlight
