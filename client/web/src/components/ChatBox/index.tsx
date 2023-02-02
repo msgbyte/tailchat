@@ -6,7 +6,6 @@ import { ChatInputBox } from './ChatInputBox';
 import { ChatMessageList } from './ChatMessageList';
 import { ChatReply } from './ChatReply';
 import { preprocessMessage } from './preprocessMessage';
-import { useMessageAck } from './useMessageAck';
 
 type ChatBoxProps =
   | {
@@ -35,7 +34,6 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
     converseId,
     isGroup,
   });
-  useMessageAck(converseId);
 
   if (loading) {
     return <ChatBoxPlaceholder />;

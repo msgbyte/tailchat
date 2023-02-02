@@ -323,7 +323,8 @@ export abstract class TcService extends Service {
    */
   getPanelNamesWithFeature(panelFeature: PanelFeature) {
     const map =
-      this.getGlobalConfig<Record<string, PanelFeature[]>>('panelFeature');
+      this.getGlobalConfig<Record<string, PanelFeature[]>>('panelFeature') ??
+      {};
 
     const matched = Object.entries(map).filter(([panelName, panelFeatures]) =>
       panelFeatures.includes(panelFeature)

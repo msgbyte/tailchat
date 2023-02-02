@@ -43,12 +43,7 @@ export interface SharedEventMap {
   replyMessage: (payload: ChatMessage | null) => void;
 
   /**
-   * 消息已读(消息出现在界面上)
-   */
-  readMessage: (payload: ChatMessage | null) => void;
-
-  /**
-   * 接受到消息(所有的)
+   * 接受到消息(所有的(相对receiveUnmutedMessage来说))
    */
   receiveMessage: (payload: ChatMessage) => void;
 

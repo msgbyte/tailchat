@@ -7,7 +7,6 @@ import {
   t,
   useCachedUserInfo,
   MessageHelper,
-  sharedEvent,
   showMessageTime,
   useUserInfoList,
 } from 'tailchat-shared';
@@ -22,7 +21,7 @@ import { TcPopover } from '@/components/TcPopover';
 import { useMessageReactions } from './useMessageReactions';
 import { stopPropagation } from '@/utils/dom-helper';
 import { AutoFolder, Avatar, Icon } from 'tailchat-design';
-import { Intersection } from '@/components/Intersection';
+import { MessageAckContainer } from './MessageAckContainer';
 import './Item.less';
 
 /**
@@ -288,11 +287,12 @@ export function buildMessageItemRow(messages: ChatMessage[], index: number) {
         </Divider>
       )}
 
-      <Intersection
-        onIntersection={() => sharedEvent.emit('readMessage', message)}
+      <MessageAckContainer
+        converseId={message.converseId}
+        messageId={message._id}
       >
         <ChatMessageItem showAvatar={showAvatar} payload={message} />
-      </Intersection>
+      </MessageAckContainer>
     </div>
   );
 }
