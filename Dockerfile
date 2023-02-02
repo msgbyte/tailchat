@@ -1,5 +1,8 @@
 FROM node:lts-alpine
 
+# use with --build-arg VERSION=xxxx
+ARG VERSION
+
 # Working directory
 WORKDIR /app/tailchat
 
@@ -31,6 +34,7 @@ RUN pnpm install
 
 # Build and cleanup (client and server)
 ENV NODE_ENV=production
+ENV VERSION=$VERSION
 RUN pnpm run build
 
 # web static service port
