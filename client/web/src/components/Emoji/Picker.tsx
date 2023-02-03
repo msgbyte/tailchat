@@ -4,6 +4,7 @@ import { emojiData } from './const';
 import Picker from '@emoji-mart/react';
 import type { EmojiData } from './types';
 import i18n from '@emoji-mart/data/i18n/zh.json';
+import spritesUrl from './twitter.png';
 
 import './Picker.less';
 
@@ -39,6 +40,7 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
         previewPosition="none"
         skinTonePosition="none"
         onEmojiSelect={handleSelect}
+        getSpritesheetURL={() => spritesUrl}
       />
     </div>
   );
