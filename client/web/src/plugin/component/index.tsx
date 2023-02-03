@@ -29,6 +29,7 @@ export {
 } from 'tailchat-design';
 export { Link } from 'react-router-dom';
 
+export { MessageAckContainer } from '@/components/ChatBox/ChatMessageList/MessageAckContainer';
 export { Image } from '@/components/Image';
 export { IconBtn } from '@/components/IconBtn';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';

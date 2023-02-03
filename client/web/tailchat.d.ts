@@ -110,6 +110,10 @@ declare module '@capital/common' {
 
   export const getCachedConverseInfo: any;
 
+  export const getCachedBaseGroupInfo: any;
+
+  export const getCachedUserSettings: any;
+
   /**
    * 本地翻译
    * @example
@@ -165,6 +169,8 @@ declare module '@capital/common' {
   export const showMessageTime: any;
 
   export const joinArray: any;
+
+  export const navigate: any;
 
   export const useLocation: any;
 
@@ -302,6 +308,10 @@ declare module '@capital/common' {
 
   export const regUserExtraInfo: any;
 
+  export const pluginSettings: any;
+
+  export const regPluginSettings: any;
+
   export const useGroupIdContext: () => string;
 
   export const useGroupPanelContext: () => {
@@ -379,6 +389,10 @@ declare module '@capital/component' {
   export const createMetaFormSchema: any;
 
   export const metaFormFieldSchema: any;
+
+  export const Link: any;
+
+  export const MessageAckContainer: any;
 
   export const Image: any;
 

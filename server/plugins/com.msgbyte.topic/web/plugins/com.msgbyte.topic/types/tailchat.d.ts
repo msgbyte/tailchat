@@ -110,6 +110,10 @@ declare module '@capital/common' {
 
   export const getCachedConverseInfo: any;
 
+  export const getCachedBaseGroupInfo: any;
+
+  export const getCachedUserSettings: any;
+
   /**
    * 本地翻译
    * @example
@@ -123,14 +127,20 @@ declare module '@capital/common' {
 
   export const sharedEvent: any;
 
-  export const useAsync: any;
+  export const useAsync: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => { loading: boolean; value?: any; error?: Error };
 
-  export const useAsyncFn: any;
+  export const useAsyncFn: <T extends (...args: any[]) => Promise<any>>(
+    fn: T,
+    deps?: React.DependencyList
+  ) => [{ loading: boolean; value?: any; error?: Error }, T];
 
   export const useAsyncRefresh: <T extends (...args: any[]) => Promise<any>>(
     fn: T,
     deps?: React.DependencyList
-  ) => [{ loading: boolean; value?: any; error?: Error }, T];
+  ) => { loading: boolean; value?: any; error?: Error; refresh: () => void };
 
   export const useAsyncRequest: <T extends (...args: any[]) => Promise<any>>(
     fn: T,
@@ -158,12 +168,22 @@ declare module '@capital/common' {
 
   export const showMessageTime: any;
 
+  export const joinArray: any;
+
+  export const navigate: any;
+
   export const useLocation: any;
 
   export const useNavigate: any;
 
+  /**
+   * @deprecated please use createMetaFormSchema from @capital/component
+   */
   export const createFastFormSchema: any;
 
+  /**
+   * @deprecated please use metaFormFieldSchema from @capital/component
+   */
   export const fieldSchema: any;
 
   export const useCurrentUserInfo: any;
@@ -183,13 +203,21 @@ declare module '@capital/common' {
 
   export const regGroupPanel: any;
 
-  export const messageInterpreter: any;
+  export const messageInterpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }[];
 
-  export const regMessageInterpreter: any;
+  export const regMessageInterpreter: (interpreter: {
+    name?: string;
+    explainMessage: (message: string) => React.ReactNode;
+  }) => void;
 
-  export const getMessageRender: any;
+  export const getMessageRender: (message: string) => React.ReactNode;
 
-  export const regMessageRender: any;
+  export const regMessageRender: (
+    render: (message: string) => React.ReactNode
+  ) => void;
 
   export const getMessageTextDecorators: any;
 
@@ -224,7 +252,23 @@ declare module '@capital/common' {
 
   export const pluginPanelActions: any;
 
-  export const regPluginPanelAction: any;
+  export const regPluginPanelAction: (
+    action:
+      | {
+          name: string;
+          label: string;
+          icon: string;
+          position: 'group';
+          onClick: (ctx: { groupId: string; panelId: string }) => void;
+        }
+      | {
+          name: string;
+          label: string;
+          icon: string;
+          position: 'dm';
+          onClick: (ctx: { converseId: string }) => void;
+        }
+  ) => void;
 
   export const pluginPermission: any;
 
@@ -259,6 +303,14 @@ declare module '@capital/common' {
   export const pluginGroupTextPanelExtraMenus: any;
 
   export const regPluginGroupTextPanelExtraMenu: any;
+
+  export const pluginUserExtraInfo: any;
+
+  export const regUserExtraInfo: any;
+
+  export const pluginSettings: any;
+
+  export const regPluginSettings: any;
 
   export const useGroupIdContext: () => string;
 
@@ -308,31 +360,27 @@ declare module '@capital/component' {
     }>
   >;
 
+  export const TextArea: any;
+
   export const Avatar: any;
 
   export const SensitiveText: React.FC<{ className?: string; text: string }>;
 
-  export const TextArea: any;
-
-  export const Image: any;
-
   export const Icon: React.FC<{ icon: string } & React.SVGProps<SVGSVGElement>>;
 
-  export const IconBtn: React.FC<{
-    icon: string;
+  export const CopyableText: React.FC<{
     className?: string;
-    iconClassName?: string;
-    size?: 'small' | 'middle' | 'large';
-    shape?: 'circle' | 'square';
-    title?: string;
-    onClick?: React.MouseEventHandler<HTMLElement>;
+    style?: React.CSSProperties;
+    config?:
+      | boolean
+      | {
+          text?: string;
+          onCopy?: (event?: React.MouseEvent<HTMLDivElement>) => void;
+          icon?: React.ReactNode;
+          tooltips?: boolean | React.ReactNode;
+          format?: 'text/plain' | 'text/html';
+        };
   }>;
-
-  export const PillTabs: any;
-
-  export const PillTabPane: any;
-
-  export const LoadingSpinner: React.FC<{ tip?: string }>;
 
   export const WebFastForm: any;
 
@@ -341,6 +389,31 @@ declare module '@capital/component' {
   export const createMetaFormSchema: any;
 
   export const metaFormFieldSchema: any;
+
+  export const Link: any;
+
+  export const MessageAckContainer: any;
+
+  export const Image: any;
+
+  export const IconBtn: React.FC<{
+    icon: string;
+    className?: string;
+    iconClassName?: string;
+    size?: 'small' | 'middle' | 'large';
+    shape?: 'circle' | 'square';
+    title?: string;
+    danger?: boolean;
+    active?: boolean;
+    disabled?: boolean;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+  }>;
+
+  export const PillTabs: any;
+
+  export const PillTabPane: any;
+
+  export const LoadingSpinner: React.FC<{ tip?: string }>;
 
   export const FullModalField: any;
 
@@ -408,12 +481,22 @@ declare module '@capital/component' {
 
   export const ErrorBoundary: any;
 
-  export const UserAvatar: any;
+  export const UserAvatar: React.FC<{
+    userId: string;
+    className?: string;
+    style?: React.CSSProperties;
+    size?: 'large' | 'small' | 'default' | number;
+  }>;
 
   export const UserName: React.FC<{
     userId: string;
     className?: string;
+    style?: React.CSSProperties;
   }>;
 
   export const Markdown: any;
+
+  export const Webview: any;
+
+  export const WebviewKeepAlive: any;
 }

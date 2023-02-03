@@ -5,7 +5,13 @@ import {
   showSuccessToasts,
   useAsyncRequest,
 } from '@capital/common';
-import { IconBtn, Input, UserName, UserAvatar } from '@capital/component';
+import {
+  IconBtn,
+  Input,
+  UserName,
+  UserAvatar,
+  MessageAckContainer,
+} from '@capital/component';
 import styled from 'styled-components';
 import type { GroupTopic } from '../types';
 import { Translate } from '../translate';
@@ -32,7 +38,7 @@ const Root = styled.div`
     flex: 1;
     user-select: text;
 
-    .header {·
+    .header {
       display: flex;
       line-height: 32px;
 
@@ -85,49 +91,51 @@ export const TopicCard: React.FC<{
   }, [topic.groupId, topic.panelId, topic._id, comment]);
 
   return (
-    <Root>
-      <div className="left">
-        <UserAvatar userId={topic.author} />
-      </div>
-
-      <div className="right">
-        <div className="header">
-          <div className="name">
-            <UserName userId={topic.author} />
-          </div>
-          <div className="date">{showMessageTime(topic.createdAt)}</div>
+    <MessageAckContainer>
+      <Root>
+        <div className="left">
+          <UserAvatar userId={topic.author} />
         </div>
 
-        <div className="body">
-          <div className="content">{getMessageRender(topic.content)}</div>
+        <div className="right">
+          <div className="header">
+            <div className="name">
+              <UserName userId={topic.author} />
+            </div>
+            <div className="date">{showMessageTime(topic.createdAt)}</div>
+          </div>
 
-          {Array.isArray(topic.comments) && topic.comments.length > 0 && (
-            <TopicComments comments={topic.comments} />
+          <div className="body">
+            <div className="content">{getMessageRender(topic.content)}</div>
+
+            {Array.isArray(topic.comments) && topic.comments.length > 0 && (
+              <TopicComments comments={topic.comments} />
+            )}
+          </div>
+
+          <div className="footer">
+            <IconBtn
+              title={Translate.reply}
+              icon="mdi:message-reply-text-outline"
+              onClick={toggleShowReply}
+            />
+          </div>
+
+          {showReply && (
+            <ReplyBox>
+              <Input
+                autoFocus
+                placeholder={Translate.replyThisTopic}
+                disabled={loading}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                onPressEnter={handleComment}
+              />
+            </ReplyBox>
           )}
         </div>
-
-        <div className="footer">
-          <IconBtn
-            title={Translate.reply}
-            icon="mdi:message-reply-text-outline"
-            onClick={toggleShowReply}
-          />
-        </div>
-
-        {showReply && (
-          <ReplyBox>
-            <Input
-              autoFocus
-              placeholder={Translate.replyThisTopic}
-              disabled={loading}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              onPressEnter={handleComment}
-            />
-          </ReplyBox>
-        )}
-      </div>
-    </Root>
+      </Root>
+    </MessageAckContainer>
   );
 });
 TopicCard.displayName = 'TopicCard';
