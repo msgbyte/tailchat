@@ -7,6 +7,10 @@ import { PersonalNav } from './PersonalNav';
 import { InboxNav } from './InboxNav';
 import { InstallBtn } from './InstallBtn';
 import { ReactQueryDevBtn } from './ReactQueryDevBtn';
+import { pluginCustomPanel } from '@/plugin/common';
+import { Icon } from 'tailchat-design';
+import { NavbarNavItem } from './NavItem';
+import { NavbarCustomNavItem } from './CustomNavItem';
 
 /**
  * 导航栏组件
@@ -25,6 +29,12 @@ export const Navbar: React.FC = React.memo(() => {
           <PersonalNav />
 
           <InboxNav />
+
+          {pluginCustomPanel
+            .filter((p) => p.position === 'navbar-personal')
+            .map((p) => (
+              <NavbarCustomNavItem key={p.name} panelInfo={p} withBg={true} />
+            ))}
         </div>
 
         <div className="px-3">
@@ -32,12 +42,24 @@ export const Navbar: React.FC = React.memo(() => {
         </div>
 
         <GroupNav />
+
+        {pluginCustomPanel
+          .filter((p) => p.position === 'navbar-group')
+          .map((p) => (
+            <NavbarCustomNavItem key={p.name} panelInfo={p} withBg={true} />
+          ))}
       </div>
 
       <div
         data-tc-role="navbar-settings"
         className="flex flex-col items-center space-y-2"
       >
+        {pluginCustomPanel
+          .filter((p) => p.position === 'navbar-more')
+          .map((p) => (
+            <NavbarCustomNavItem key={p.name} panelInfo={p} withBg={false} />
+          ))}
+
         {/* React Query 的调试面板 */}
         <ReactQueryDevBtn />
 

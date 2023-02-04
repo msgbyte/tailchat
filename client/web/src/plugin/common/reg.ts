@@ -20,10 +20,16 @@ export interface PluginCustomPanel {
    *
    * - personal: 个人面板中的一项
    * - setting: 设置面板
-   * - navbar: 导航栏(未实装)
    * - groupdetail: 群组详情
+   * - navbar*: 导航栏
    */
-  position: 'personal' | 'setting' | 'navbar' | 'groupdetail';
+  position:
+    | 'personal'
+    | 'setting'
+    | 'groupdetail'
+    | 'navbar-more'
+    | 'navbar-group'
+    | 'navbar-personal';
 
   /**
    * Iconify 名
@@ -210,7 +216,7 @@ export interface DMPluginPanelActionProps extends BasePluginPanelActionProps {
 }
 
 /**
- * 注册面板操作
+ * 注册 面板操作 到面板右上角
  */
 export const [pluginPanelActions, regPluginPanelAction] = buildRegList<
   GroupPluginPanelActionProps | DMPluginPanelActionProps
