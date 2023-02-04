@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: 纯前端插件 (18)
+title: 纯前端插件 (19)
 ---
 
 ### com.msgbyte.bbcode BBCode 消息解释器
@@ -113,6 +113,14 @@ Sentry 错误处理
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop/manifest.json)
+
+
+### com.msgbyte.toolwa 工具哇！
+
+工具哇 —— 在线小工具
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.toolwa)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.toolwa/manifest.json)
 
 
 ### com.msgbyte.user.location 用户地理位置
