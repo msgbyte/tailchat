@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Group } from './Group';
 import { Inbox } from './Inbox';
 import { pluginCustomPanel } from '@/plugin/common';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 export const MainContent: React.FC = React.memo(() => {
   return (
@@ -22,7 +23,9 @@ export const MainContent: React.FC = React.memo(() => {
           <Route
             key={p.name}
             path={`/custom/${p.name}`}
-            element={React.createElement(p.render)}
+            element={
+              <ErrorBoundary>{React.createElement(p.render)}</ErrorBoundary>
+            }
           />
         ))}
 

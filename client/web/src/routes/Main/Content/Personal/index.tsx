@@ -1,3 +1,4 @@
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useUserSessionPreference } from '@/hooks/useUserPreference';
 import { pluginCustomPanel } from '@/plugin/common';
 import React, { useEffect } from 'react';
@@ -31,7 +32,9 @@ export const Personal: React.FC = React.memo(() => {
             <Route
               key={p.name}
               path={`/custom/${p.name}`}
-              element={React.createElement(p.render)}
+              element={
+                <ErrorBoundary>{React.createElement(p.render)}</ErrorBoundary>
+              }
             />
           ))}
 

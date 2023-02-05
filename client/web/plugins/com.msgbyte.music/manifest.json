@@ -1,0 +1,10 @@
+{
+  "label": "在线听音乐",
+  "name": "com.msgbyte.music",
+  "url": "/plugins/com.msgbyte.music/index.js",
+  "icon": "/plugins/com.msgbyte.music/assets/icon.png",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "提供在线听音乐服务，内容来自网络",
+  "requireRestart": true
+}
