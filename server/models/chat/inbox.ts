@@ -4,6 +4,8 @@ import {
   DocumentType,
   Ref,
   index,
+  modelOptions,
+  Severity,
 } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
@@ -38,6 +40,11 @@ class InboxMessage {
 /**
  * 收件箱管理
  */
+@modelOptions({
+  options: {
+    allowMixed: Severity.ALLOW,
+  },
+})
 @index({ userId: 1 })
 export class Inbox extends TimeStamps implements Base {
   _id: Types.ObjectId;
@@ -59,6 +66,12 @@ export class Inbox extends TimeStamps implements Base {
     type: () => InboxMessage,
   })
   message?: InboxMessage;
+
+  /**
+   * 信息体，没有类型
+   */
+  @prop()
+  payload?: object;
 
   /**
    * 是否已读

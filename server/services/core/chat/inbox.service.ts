@@ -56,6 +56,14 @@ class InboxService extends TcService {
       }
     );
 
+    this.registerAction('append', this.append, {
+      visibility: 'public',
+      params: {
+        userId: { type: 'string', optional: true },
+        type: 'string',
+        payload: 'any',
+      },
+    });
     this.registerAction('appendMessage', this.appendMessage, {
       visibility: 'public',
       params: {
@@ -84,6 +92,35 @@ class InboxService extends TcService {
     this.registerAction('clear', this.clear);
   }
 
+  /**
+   * 通用的增加inbox的接口
+   * 用于内部，插件化的形式
+   */
+  async append(
+    ctx: TcContext<{
+      userId?: string;
+      type: string;
+      payload: any;
+    }>
+  ) {
+    const { userId = ctx.meta.userId, type, payload } = ctx.params;
+
+    const doc = await this.adapter.model.create({
+      userId,
+      type,
+      payload,
+    });
+
+    const inboxItem = await this.transformDocuments(ctx, {}, doc);
+
+    await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
+
+    return true;
+  }
+
+  /**
+   * 增加收件夹消息
+   */
   async appendMessage(
     ctx: TcContext<{
       userId?: string;
