@@ -65,6 +65,7 @@ export const NavbarNavItem: React.FC<
           />
         </div>
       )}
+
       {inner}
 
       <div className="absolute right-0 bottom-0">

@@ -16,11 +16,14 @@ export const NavbarCustomNavItem: React.FC<{
     <NavbarNavItem
       key={panelInfo.name}
       name={panelInfo.label}
-      className={clsx({ 'bg-gray-700': withBg })}
+      className={clsx('text-3xl  cursor-pointer', {
+        'bg-gray-700 text-white': withBg,
+        'text-gray-600 dark:text-white': !withBg,
+      })}
       to={`/main/custom/${panelInfo.name}`}
       data-testid={`navbar-custom-${panelInfo.name}`}
     >
-      <Icon className="text-3xl text-white" icon={panelInfo.icon} />
+      <Icon icon={panelInfo.icon} />
     </NavbarNavItem>
   );
 });
