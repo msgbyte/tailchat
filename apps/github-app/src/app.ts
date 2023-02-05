@@ -21,6 +21,8 @@ if (
 const defaultTailchatApiUrl = process.env.TAILCHAT_API_URL;
 const tailchatAppId = process.env.TAILCHAT_APP_ID;
 const tailchatAppSecret = process.env.TAILCHAT_APP_SECRET;
+const tailchatWebUrl =
+  process.env.TAILCHAT_WEB_URL || process.env.TAILCHAT_API_URL;
 
 export function app(app: Probot) {
   app.on('issues.opened', async (ctx) => {
@@ -70,7 +72,7 @@ export function app(app: Probot) {
       await Promise.all([
         ctx.octokit.issues.createComment(
           ctx.issue({
-            body: 'Thanks for opening this issue! Tailchat topic is created!',
+            body: `Thanks for opening this issue! Tailchat topic is created in ${tailchatWebUrl}/main/group/${groupId}/${panelId}!`,
           })
         ),
         ctx.octokit.issues.addLabels(
@@ -160,6 +162,8 @@ export function app(app: Probot) {
 
 /**
  * 从配置文件中创建上下文
+ *
+ * 因为考虑serverless服务因此不能全局管理
  */
 function createTailchatContextWithConfig(githubRaw: string) {
   const content = Buffer.from(githubRaw, 'base64').toString();

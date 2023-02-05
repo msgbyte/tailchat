@@ -24,7 +24,7 @@ class OpenBotService extends TcService {
       visibility: 'public',
     });
 
-    this.registerAuthWhitelist(['/bot/login']);
+    this.registerAuthWhitelist(['/login']);
   }
 
   /**
@@ -59,7 +59,7 @@ class OpenBotService extends TcService {
       avatar,
     });
 
-    return { jwt };
+    return { jwt, userId, email, nickname, avatar };
   }
 
   /**

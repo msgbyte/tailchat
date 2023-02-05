@@ -4,6 +4,7 @@ import crypto from 'crypto';
 export class TailchatClient {
   request: AxiosInstance;
   jwt: string | null = null;
+  userId: string | null = null;
   loginP: Promise<void>;
 
   constructor(
@@ -37,6 +38,7 @@ export class TailchatClient {
 
   async login() {
     try {
+      console.log('正在登录...');
       const { data } = await this.request.post('/api/openapi/bot/login', {
         appId: this.appId,
         token: this.getBotToken(),
@@ -52,7 +54,7 @@ export class TailchatClient {
       this.whoami().then(console.log);
     } catch (err) {
       console.error(err);
-      throw err;
+      throw new Error('登录失败, 请检查应用凭证');
     }
   }
 
@@ -67,7 +69,7 @@ export class TailchatClient {
 
       return data;
     } catch (err: any) {
-      console.error('服务调用失败');
+      console.error('服务调用失败:', err);
       const data: string = err?.response?.data;
       if (data) {
         throw new Error(
