@@ -82,9 +82,8 @@ export const SettingsAccount: React.FC = React.memo(() => {
   // 登出
   const handleLogout = useCallback(async () => {
     await setUserJWT(null);
-    getGlobalSocket()?.disconnect();
-    setGlobalUserLoginInfo(null);
-    navigate('/');
+
+    window.location.replace('/'); // 重载页面以清空所有状态
   }, []);
 
   if (!userInfo) {

@@ -210,7 +210,7 @@ export {
 } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
-export { createStore, ReduxProvider } from './redux/store';
+export { reduxStore, ReduxProvider } from './redux/store';
 export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // utils
