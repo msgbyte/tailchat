@@ -8,8 +8,6 @@ import { InboxNav } from './InboxNav';
 import { InstallBtn } from './InstallBtn';
 import { ReactQueryDevBtn } from './ReactQueryDevBtn';
 import { pluginCustomPanel } from '@/plugin/common';
-import { Icon } from 'tailchat-design';
-import { NavbarNavItem } from './NavItem';
 import { NavbarCustomNavItem } from './CustomNavItem';
 
 /**
@@ -24,7 +22,7 @@ export const Navbar: React.FC = React.memo(() => {
       <MobileMenuBtn />
 
       {/* Navbar */}
-      <div className="flex-1 w-full">
+      <div className="flex-1 w-full overflow-hidden flex flex-col">
         <div className="space-y-2">
           <PersonalNav />
 
@@ -41,7 +39,10 @@ export const Navbar: React.FC = React.memo(() => {
           <Divider />
         </div>
 
-        <GroupNav />
+        {/* 如果导航栏高度不够就缩减群组列表的高度 */}
+        <div className="overflow-y-hidden hover:overflow-y-auto overflow-x-hidden thin-scrollbar">
+          <GroupNav />
+        </div>
 
         {pluginCustomPanel
           .filter((p) => p.position === 'navbar-group')

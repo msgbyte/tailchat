@@ -34,6 +34,20 @@ const tailchat = plugin(({ e, addUtilities }) => {
         pointerEvents: 'none',
       },
     },
+    '.thin-scrollbar': {
+      '&::-webkit-scrollbar': {
+        width: '8px',
+        height: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        borderWidth: '2px',
+        borderRadius: '3px',
+      },
+      '&::-webkit-scrollbar-track': {
+        borderWidth: '2px',
+        borderRadius: '4px',
+      },
+    },
   };
 
   addUtilities(newUtilities);
@@ -211,6 +225,7 @@ module.exports = {
       borderRadius: ['hover'],
       borderWidth: ['last'],
       height: ['group-hover'],
+      overflow: ['hover'],
     },
   },
   plugins: [tailchat],
