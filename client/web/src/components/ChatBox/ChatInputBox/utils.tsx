@@ -50,3 +50,18 @@ export function uploadMessageImage(image: File): Promise<{
     });
   });
 }
+
+/**
+ * 上传文件，并返回地址
+ */
+export async function uploadMessageFile(file: File): Promise<{
+  name: string;
+  url: string;
+}> {
+  const fileInfo = await uploadFile(file);
+
+  return {
+    name: file.name || fileInfo.etag,
+    url: fileInfo.url,
+  };
+}

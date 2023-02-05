@@ -59,3 +59,4 @@ export { UserAvatar } from '@/components/UserAvatar';
 export { UserName } from '@/components/UserName';
 export { Markdown } from '@/components/Markdown';
 export { Webview, WebviewKeepAlive } from '@/components/Webview';
+export { Card } from '@/components/Card';

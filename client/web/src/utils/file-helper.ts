@@ -87,11 +87,11 @@ export async function blobUrlToFile(
 }
 
 /**
- * 下载Bloburl
+ * 通过url下载文件
  */
-export async function downloadBlobUrl(blobUrl: string, fileName: string) {
+export function downloadUrl(url: string, fileName: string) {
   const a = document.createElement('a');
-  a.href = blobUrl;
+  a.href = url;
   a.download = fileName; // 这里填保存成的文件名
   a.click();
 }
@@ -99,9 +99,9 @@ export async function downloadBlobUrl(blobUrl: string, fileName: string) {
 /**
  * 下载Blob文件
  */
-export async function downloadBlob(blob: Blob, fileName: string) {
+export function downloadBlob(blob: Blob, fileName: string) {
   const url = String(URL.createObjectURL(blob));
-  downloadBlobUrl(url, fileName);
+  downloadUrl(url, fileName);
   URL.revokeObjectURL(url);
 }
 

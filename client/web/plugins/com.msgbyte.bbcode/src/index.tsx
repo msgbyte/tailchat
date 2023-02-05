@@ -28,6 +28,14 @@ regMessageTextDecorators(() => ({
 
     return `[img]${plain}[/img]`;
   },
+  card: (plain, attrs) => {
+    const h = [
+      'card',
+      ...Object.entries(attrs).map(([k, v]) => `${k}=${v}`),
+    ].join(' ');
+
+    return `[${h}]${plain}[/card]`;
+  },
   mention: (userId, userName) => `[at=${userId}]${userName}[/at]`,
   emoji: (emojiCode) => `[emoji]${stripColons(emojiCode)}[/emoji]`,
   serialize: (plain: string) => (serialize ? serialize(plain) : plain),

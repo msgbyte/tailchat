@@ -10,6 +10,7 @@ import { BoldTag } from './BoldTag';
 import { ItalicTag } from './ItalicTag';
 import { UnderlinedTag } from './UnderlinedTag';
 import { DeleteTag } from './DeleteTag';
+import { CardTag } from './CardTag';
 
 import './styles.less';
 
@@ -28,3 +29,4 @@ registerBBCodeTag('at', MentionTag);
 registerBBCodeTag('emoji', EmojiTag);
 registerBBCodeTag('markdown', MarkdownTag);
 registerBBCodeTag('md', MarkdownTag); // alias
+registerBBCodeTag('card', CardTag); // alias

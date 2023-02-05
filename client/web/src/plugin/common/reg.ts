@@ -131,6 +131,7 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
 const defaultMessageTextDecorators = {
   url: (url: string, label?: string) => url,
   image: (plain: string, attrs: Record<string, unknown>) => plain,
+  card: (plain: string, payload: Record<string, unknown>) => plain,
   mention: (userId: string, userName: string) => `@${userName}`,
   emoji: (emojiCode: string) => emojiCode,
   serialize: (plain: string) => plain,

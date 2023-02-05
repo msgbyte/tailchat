@@ -3,7 +3,7 @@ import { t, useMemoizedFn } from 'tailchat-shared';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import { useChatInputActionContext } from './context';
-import { uploadMessageImage } from './utils';
+import { uploadMessageFile, uploadMessageImage } from './utils';
 import { getMessageTextDecorators } from '@/plugin/common';
 import { Icon } from 'tailchat-design';
 
@@ -11,13 +11,19 @@ export const ChatDropArea: React.FC = React.memo(() => {
   const actionContext = useChatInputActionContext();
 
   const handleDrop = useMemoizedFn((files: File[]) => {
-    const images = files.filter((f) => f.type.startsWith('image/'));
-    if (images.length > 0) {
-      // 目前只取一张
-      const img = images[0];
-      uploadMessageImage(img).then(({ url, width, height }) => {
+    const file = files[0];
+    if (file.type.startsWith('image/')) {
+      // 发送图片
+      uploadMessageImage(file).then(({ url, width, height }) => {
         actionContext?.sendMsg(
           getMessageTextDecorators().image(url, { width, height })
+        );
+      });
+    } else {
+      // 发送文件
+      uploadMessageFile(file).then(({ url, name }) => {
+        actionContext?.sendMsg(
+          getMessageTextDecorators().card(name, { type: 'file', url })
         );
       });
     }
