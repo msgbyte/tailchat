@@ -6,6 +6,7 @@ import path from 'path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import randomString from 'crypto-random-string';
+import { withGhProxy } from '../../utils';
 
 // https://docs.docker.com/engine/api/v1.41/
 
@@ -178,11 +179,4 @@ async function promptConfirm(message: string): Promise<boolean> {
   ]);
 
   return res;
-}
-
-/**
- * 增加github资源代理以优化国内访问速度
- */
-function withGhProxy(url: string): string {
-  return `https://ghproxy.com/${url}`;
 }

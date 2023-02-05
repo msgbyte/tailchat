@@ -4,6 +4,11 @@ import fs, { mkdirp } from 'fs-extra';
 import path from 'path';
 import ora from 'ora';
 import got from 'got';
+import { withGhProxy } from '../utils';
+
+const onlineDeclarationUrl = withGhProxy(
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts'
+);
 
 export const declarationCommand: CommandModule = {
   command: 'declaration <source>',
@@ -44,8 +49,7 @@ export const declarationCommand: CommandModule = {
       content =
         "declare module '@capital/common';\ndeclare module '@capital/component';\n";
     } else if (source === 'github') {
-      const url =
-        'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts';
+      const url = onlineDeclarationUrl;
 
       const spinner = ora(`正在从 Github 下载插件类型声明: ${url}`).start();
 
