@@ -2,6 +2,7 @@ import { TcCacheCleaner } from '../../../mixins/cache.cleaner.mixin';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import type {
+  User,
   UserDocument,
   UserLoginRes,
   UserModel,
@@ -19,6 +20,7 @@ import {
   EntityError,
   db,
   call,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -282,10 +284,15 @@ class UserService extends TcService {
     }
 
     const res = await this.comparePassword(password, user.password);
-    if (!res)
+    if (!res) {
       throw new EntityError(t('密码错误'), 422, '', [
         { field: 'password', message: t('密码错误') },
       ]);
+    }
+
+    if (user.banned === true) {
+      throw new NoPermissionError(t('用户被封禁'), 403);
+    }
 
     // Transform user entity (remove password and all protected fields)
     const doc = await this.transformDocuments(ctx, {}, user);
@@ -630,7 +637,12 @@ class UserService extends TcService {
       throw new EntityError(t('Token 内容不正确'));
     }
     const doc = await this.getById(decoded._id);
-    const user = await this.transformDocuments(ctx, {}, doc);
+    const user: User = await this.transformDocuments(ctx, {}, doc);
+
+    if (user.banned === true) {
+      throw new NoPermissionError(t('用户被封禁'));
+    }
+
     const json = await this.transformEntity(user, true, ctx.meta.token);
     return json;
   }

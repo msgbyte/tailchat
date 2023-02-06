@@ -398,6 +398,27 @@ export const TcSocketIOService = (
       },
 
       /**
+       * 踢出用户
+       */
+      tickUser: {
+        visibility: 'public',
+        params: {
+          userId: 'string',
+        },
+        async handler(this: TcService, ctx: TcContext<{ userId: string }>) {
+          const userId = ctx.params.userId;
+          const io: SocketServer = this.io;
+          const remoteSockets = await io
+            .in(buildUserRoomId(userId))
+            .fetchSockets();
+
+          remoteSockets.forEach((remoteSocket) => {
+            remoteSocket.disconnect(true);
+          });
+        },
+      },
+
+      /**
        * 服务端通知
        */
       notify: {

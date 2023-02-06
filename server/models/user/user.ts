@@ -107,6 +107,14 @@ export class User extends TimeStamps implements Base {
   emailVerified: boolean;
 
   /**
+   * 是否被封禁
+   */
+  @prop({
+    default: false,
+  })
+  banned: boolean;
+
+  /**
    * 用户的额外信息
    */
   @prop()
