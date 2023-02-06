@@ -197,6 +197,11 @@ class UserService extends TcService {
         avatar: { type: 'string', optional: true },
       },
     });
+    this.registerAction('findOpenapiBotId', this.findOpenapiBotId, {
+      params: {
+        email: 'string',
+      },
+    });
     this.registerAction('ensureOpenapiBot', this.ensureOpenapiBot, {
       params: {
         /**
@@ -912,6 +917,13 @@ class UserService extends TcService {
     };
   }
 
+  /**
+   * 根据用户邮件获取开放平台机器人id
+   */
+  findOpenapiBotId(ctx: TcContext<{ email: string }>): string {
+    return this.parseOpenapiBotEmail(ctx.params.email);
+  }
+
   async generateUserToken(
     ctx: TcContext<{
       userId: string;
@@ -1054,6 +1066,14 @@ class UserService extends TcService {
 
   private buildOpenapiBotEmail(botId: string) {
     return `${botId}@tailchat-openapi.com`;
+  }
+
+  private parseOpenapiBotEmail(email: string): string | null {
+    if (email.endsWith('@tailchat-openapi.com')) {
+      return email.replace('@tailchat-openapi.com', '');
+    }
+
+    return null;
   }
 
   /**

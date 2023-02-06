@@ -30,6 +30,7 @@ export type {
   MessageStruct,
   MessageReactionStruct,
   MessageMetaStruct,
+  InboxStruct,
 } from './structs/chat';
 export type { BuiltinEventMap } from './structs/events';
 export type {
@@ -38,7 +39,8 @@ export type {
   GroupPanelStruct,
 } from './structs/group';
 export { GroupPanelType } from './structs/group';
-export type { UserStruct } from './structs/user';
+export { userType } from './structs/user';
+export type { UserStruct, UserType } from './structs/user';
 
 // db
 export * as db from './db';

@@ -1,4 +1,4 @@
-import type { MessageMetaStruct } from './chat';
+import type { InboxStruct, MessageMetaStruct } from './chat';
 
 /**
  * 默认服务的事件映射
@@ -22,4 +22,5 @@ export interface BuiltinEventMap {
         meta: MessageMetaStruct;
       };
   'config.updated': { config: Record<string, any> };
+  'chat.inbox.append': InboxStruct;
 }

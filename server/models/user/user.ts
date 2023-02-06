@@ -8,11 +8,9 @@ import {
 } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
+import { UserType, userType } from 'tailchat-server-sdk';
 
 type BaseUserInfo = Pick<User, 'nickname' | 'discriminator' | 'avatar'>;
-
-const userType = ['normalUser', 'pluginBot', 'openapiBot'];
-type UserType = typeof userType[number];
 
 /**
  * 用户设置

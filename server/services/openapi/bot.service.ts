@@ -1,5 +1,8 @@
-import { TcService, config, TcContext } from 'tailchat-server-sdk';
+import { TcService, config, TcContext, call } from 'tailchat-server-sdk';
+import { isValidStr, isValidUrl } from '../../lib/utils';
 import type { OpenApp } from '../../models/openapi/app';
+import got from 'got';
+import _ from 'lodash';
 
 class OpenBotService extends TcService {
   get serviceName(): string {
@@ -10,6 +13,45 @@ class OpenBotService extends TcService {
     if (!config.enableOpenapi) {
       return;
     }
+
+    this.registerEventListener('chat.inbox.append', async (payload, ctx) => {
+      const userInfo = await call(ctx).getUserInfo(payload._id);
+
+      if (userInfo.type !== 'openapiBot') {
+        return;
+      }
+
+      // 开放平台机器人
+      const botId: string | null = await ctx.call('user.findOpenapiBotId', {
+        email: userInfo.email,
+      });
+
+      if (!(isValidStr(botId) && botId.startsWith('open_'))) {
+        return;
+      }
+
+      // 是合法的机器人id
+
+      const appId = botId.replace('open_', '');
+      const appInfo: OpenApp | null = await ctx.call('openapi.app.get', {
+        appId,
+      });
+      const callbackUrl = _.get(appInfo, 'bot.callbackUrl');
+
+      if (!isValidUrl(callbackUrl)) {
+        this.logger.info('机器人回调地址不是一个可用的url, skip.');
+        return;
+      }
+
+      got
+        .post(callbackUrl)
+        .then((res) => {
+          this.logger.info('调用机器人通知接口回调成功', res);
+        })
+        .catch((err) => {
+          this.logger.error('调用机器人通知接口回调失败:', err);
+        });
+    });
 
     this.registerAction('login', this.login, {
       params: {
@@ -94,7 +136,7 @@ class OpenBotService extends TcService {
         avatar,
       });
 
-      this.logger.info('Simple Notify Bot Id:', botUserId);
+      this.logger.info('[getOrCreateBotAccount] Bot Id:', botUserId);
 
       return {
         userId: String(botUserId),

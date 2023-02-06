@@ -2,11 +2,11 @@ import {
   GroupStruct,
   UserStruct,
   SYSTEM_USERID,
-  TcContext,
   PERMISSION,
+  TcPureContext,
 } from '../../index';
 
-export function call(ctx: TcContext) {
+export function call(ctx: TcPureContext) {
   return {
     /**
      * 加入socketio房间

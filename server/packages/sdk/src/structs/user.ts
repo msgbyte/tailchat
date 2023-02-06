@@ -1,5 +1,5 @@
-const userType = ['normalUser', 'pluginBot', 'openapiBot'];
-type UserType = typeof userType[number];
+export const userType = ['normalUser', 'pluginBot', 'openapiBot'] as const;
+export type UserType = typeof userType[number];
 
 export interface UserStruct {
   /**
@@ -39,7 +39,7 @@ export interface UserStruct {
    */
   avatar?: string;
 
-  type: UserType[];
+  type: UserType;
 
   emailVerified: boolean;
 }

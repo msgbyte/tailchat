@@ -1,5 +1,6 @@
 import randomString from 'crypto-random-string';
 import _ from 'lodash';
+import urlRegex from 'url-regex';
 
 /**
  * 返回电子邮箱的地址
@@ -31,6 +32,13 @@ export function generateRandomNumStr(length = 6) {
  */
 export function isValidStr(str: unknown): str is string {
   return typeof str == 'string' && str !== '';
+}
+
+/**
+ * 判断是否是一个可用的url
+ */
+export function isValidUrl(str: unknown): str is string {
+  return typeof str == 'string' && urlRegex({ exact: true }).test(str);
 }
 
 /**

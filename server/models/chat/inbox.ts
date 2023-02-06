@@ -12,28 +12,22 @@ import type { Types } from 'mongoose';
 import { User } from '../user/user';
 import { Message } from './message';
 
-class InboxMessage {
+interface InboxMessage {
   /**
    * 消息所在群组Id
    */
-  @prop()
   groupId?: string;
 
   /**
    * 消息所在会话Id
    */
-  @prop()
   converseId: string;
 
-  @prop({
-    ref: () => Message,
-  })
-  messageId: Ref<Message>;
+  messageId: string;
 
   /**
    * 消息片段，用于消息的预览/发送通知
    */
-  @prop()
   messageSnippet: string;
 }
 
@@ -60,11 +54,9 @@ export class Inbox extends TimeStamps implements Base {
   @prop({
     type: () => String,
   })
-  type: 'message';
+  type: string;
 
-  @prop({
-    type: () => InboxMessage,
-  })
+  @prop()
   message?: InboxMessage;
 
   /**

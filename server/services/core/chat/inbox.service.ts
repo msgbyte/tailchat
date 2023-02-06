@@ -4,6 +4,7 @@ import {
   TcContext,
   TcDbService,
   TcPureContext,
+  InboxStruct,
 } from 'tailchat-server-sdk';
 
 /**
@@ -114,6 +115,7 @@ class InboxService extends TcService {
     const inboxItem = await this.transformDocuments(ctx, {}, doc);
 
     await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
+    await this.emitInboxAppendEvent(ctx, inboxItem);
 
     return true;
   }
@@ -152,6 +154,7 @@ class InboxService extends TcService {
     const inboxItem = await this.transformDocuments(ctx, {}, doc);
 
     await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
+    await this.emitInboxAppendEvent(ctx, inboxItem);
 
     return true;
   }
@@ -237,9 +240,7 @@ class InboxService extends TcService {
   }
 
   /**
-   * 发送通知群组信息有新的内容
-   *
-   * 发送通知时会同时清空群组信息缓存
+   * 通知用户收件箱追加了新的内容
    */
   private async notifyUsersInboxAppend(
     ctx: TcPureContext,
@@ -250,15 +251,23 @@ class InboxService extends TcService {
   }
 
   /**
-   * 发送通知群组信息发生变更
-   *
-   * 发送通知时会同时清空群组信息缓存
+   * 通知用户收件箱有新的内容
    */
   private async notifyUsersInboxUpdate(
     ctx: TcPureContext,
     userIds: string[]
   ): Promise<void> {
     await this.listcastNotify(ctx, userIds, 'updated', {});
+  }
+
+  /**
+   * 向微服务通知有新的内容产生
+   */
+  private async emitInboxAppendEvent(
+    ctx: TcPureContext,
+    inboxItem: InboxStruct
+  ) {
+    await ctx.emit('chat.inbox.append', inboxItem);
   }
 }
 
