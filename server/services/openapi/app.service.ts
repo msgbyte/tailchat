@@ -8,8 +8,10 @@ import {
 import _ from 'lodash';
 import {
   filterAvailableAppCapability,
+  OpenAppBot,
   OpenAppDocument,
   OpenAppModel,
+  OpenAppOAuth,
 } from '../../models/openapi/app';
 import { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
@@ -61,6 +63,13 @@ class OpenAppService extends TcService {
       },
     });
     this.registerAction('setAppOAuthInfo', this.setAppOAuthInfo, {
+      params: {
+        appId: 'string',
+        fieldName: 'string',
+        fieldValue: 'any',
+      },
+    });
+    this.registerAction('setAppBotInfo', this.setAppBotInfo, {
       params: {
         appId: 'string',
         fieldName: 'string',
@@ -201,11 +210,11 @@ class OpenAppService extends TcService {
   /**
    * 设置OAuth的设置信息
    */
-  async setAppOAuthInfo(
+  async setAppOAuthInfo<T extends keyof OpenAppOAuth>(
     ctx: TcContext<{
       appId: string;
-      fieldName: string;
-      fieldValue: any;
+      fieldName: T;
+      fieldValue: OpenAppOAuth[T];
     }>
   ) {
     const { appId, fieldName, fieldValue } = ctx.params;
@@ -229,6 +238,42 @@ class OpenAppService extends TcService {
       {
         $set: {
           [`oauth.${fieldName}`]: fieldValue,
+        },
+      }
+    );
+  }
+
+  /**
+   * 设置Bot的设置信息
+   */
+  async setAppBotInfo<T extends keyof OpenAppBot>(
+    ctx: TcContext<{
+      appId: string;
+      fieldName: T;
+      fieldValue: OpenAppBot[T];
+    }>
+  ) {
+    const { appId, fieldName, fieldValue } = ctx.params;
+    const { userId } = ctx.meta;
+
+    if (!['callbackUrl'].includes(fieldName)) {
+      throw new Error('Not allowed fields');
+    }
+
+    if (fieldName === 'callbackUrl') {
+      if (typeof fieldValue !== 'string') {
+        throw new Error('`callbackUrl` should be a string');
+      }
+    }
+
+    await this.adapter.model.findOneAndUpdate(
+      {
+        appId,
+        owner: userId,
+      },
+      {
+        $set: {
+          [`bot.${fieldName}`]: fieldValue,
         },
       }
     );

@@ -1,48 +1,43 @@
 import React from 'react';
-import { FullModalField, Switch } from '@capital/component';
+import {
+  DefaultFullModalInputEditorRender,
+  FullModalField,
+  Switch,
+} from '@capital/component';
 import { useOpenAppInfo } from '../context';
-import { OpenAppCapability } from '../types';
-import { postRequest, useAsyncFn } from '@capital/common';
+import { Translate } from '../../translate';
+import { useOpenAppAction } from './useOpenAppAction';
 
 const Bot: React.FC = React.memo(() => {
-  const { refresh, appId, capability } = useOpenAppInfo();
-
-  const [{ loading }, handleChangeBotCapability] = useAsyncFn(
-    async (checked: boolean) => {
-      const newCapability: OpenAppCapability[] = [...capability];
-      const findIndex = newCapability.findIndex((c) => c === 'bot');
-
-      if (checked) {
-        if (findIndex === -1) {
-          newCapability.push('bot');
-        }
-      } else {
-        if (findIndex !== -1) {
-          newCapability.splice(findIndex, 1);
-        }
-      }
-
-      await postRequest('/openapi/app/setAppCapability', {
-        appId,
-        capability: newCapability,
-      });
-      await refresh();
-    },
-    [appId, capability, refresh]
-  );
+  const { capability, bot } = useOpenAppInfo();
+  const { loading, handleChangeAppCapability, handleUpdateBotInfo } =
+    useOpenAppAction();
 
   return (
     <div className="plugin-openapi-app-info_bot">
       <FullModalField
-        title="开启机器人能力"
+        title={Translate.enableBotCapability}
         content={
           <Switch
             disabled={loading}
             checked={capability.includes('bot')}
-            onChange={handleChangeBotCapability}
+            onChange={(checked) => handleChangeAppCapability('bot', checked)}
           />
         }
       />
+
+      {capability.includes('bot') && (
+        <FullModalField
+          title={Translate.bot.callback}
+          tip={Translate.bot.callbackTip}
+          value={bot?.callbackUrl}
+          editable={true}
+          renderEditor={DefaultFullModalInputEditorRender}
+          onSave={(str: string) =>
+            handleUpdateBotInfo('callbackUrl', String(str))
+          }
+        />
+      )}
     </div>
   );
 });

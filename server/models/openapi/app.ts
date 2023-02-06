@@ -29,11 +29,12 @@ export function filterAvailableAppCapability(
   ) as OpenAppCapability[];
 }
 
-class OpenAppOAuth {
-  @prop({
-    type: () => String,
-  })
+export interface OpenAppOAuth {
   redirectUrls: string[];
+}
+
+export interface OpenAppBot {
+  callbackUrl: string;
 }
 
 /**
@@ -70,10 +71,11 @@ export class OpenApp extends TimeStamps implements Base {
   })
   capability: OpenAppCapability[];
 
-  @prop({
-    type: () => OpenAppOAuth,
-  })
+  @prop()
   oauth?: OpenAppOAuth;
+
+  @prop()
+  bot?: OpenAppBot;
 
   /**
    * 根据appId获取openapp的实例

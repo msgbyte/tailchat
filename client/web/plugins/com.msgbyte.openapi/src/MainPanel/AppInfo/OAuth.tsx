@@ -5,44 +5,12 @@ import {
   Switch,
 } from '@capital/component';
 import { useOpenAppInfo } from '../context';
-import { OpenAppCapability } from '../types';
-import { postRequest, useAsyncFn, useAsyncRequest } from '@capital/common';
+import { useOpenAppAction } from './useOpenAppAction';
 
 const OAuth: React.FC = React.memo(() => {
-  const { refresh, appId, capability, oauth } = useOpenAppInfo();
-
-  const [{ loading }, handleChangeOAuthCapability] = useAsyncRequest(
-    async (checked: boolean) => {
-      const newCapability: OpenAppCapability[] = [...capability];
-      const findIndex = newCapability.findIndex((c) => c === 'oauth');
-      const isExist = findIndex !== -1;
-
-      if (checked && !isExist) {
-        newCapability.push('oauth');
-      } else if (!checked && isExist) {
-        newCapability.splice(findIndex, 1);
-      }
-
-      await postRequest('/openapi/app/setAppCapability', {
-        appId,
-        capability: newCapability,
-      });
-      await refresh();
-    },
-    [appId, capability, refresh]
-  );
-
-  const [, handleUpdateOAuthInfo] = useAsyncFn(
-    async (name: string, value: any) => {
-      await postRequest('/openapi/app/setAppOAuthInfo', {
-        appId,
-        fieldName: name,
-        fieldValue: value,
-      });
-      await refresh();
-    },
-    []
-  );
+  const { capability, oauth } = useOpenAppInfo();
+  const { loading, handleChangeAppCapability, handleUpdateOAuthInfo } =
+    useOpenAppAction();
 
   return (
     <div className="plugin-openapi-app-info_oauth">
@@ -52,7 +20,7 @@ const OAuth: React.FC = React.memo(() => {
           <Switch
             disabled={loading}
             checked={capability.includes('oauth')}
-            onChange={handleChangeOAuthCapability}
+            onChange={(checked) => handleChangeAppCapability('oauth', checked)}
           />
         }
       />
