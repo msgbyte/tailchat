@@ -415,6 +415,37 @@ PODS:
     - React-jsi (= 0.71.2)
     - React-logger (= 0.71.2)
     - React-perflogger (= 0.71.2)
+  - ReactNativeUiLib (3.0.9):
+    - React
+  - RNGestureHandler (2.9.0):
+    - React-Core
+  - RNReanimated (2.14.4):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - glog
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - ReactCommon/turbomodule/core
+    - Yoga
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -480,6 +511,9 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeUiLib (from `../node_modules/react-native-ui-lib`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -569,6 +603,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeUiLib:
+    :path: "../node_modules/react-native-ui-lib"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -620,6 +660,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: 0af3babdeee1b2d052811a2f86977d1e1c81ebd1
   React-runtimeexecutor: 4bf9a9086d27f74065fce1dddac274aa95216952
   ReactCommon: f697c0ac52e999aa818e43e2b6f277787c735e2d
+  ReactNativeUiLib: 8d3804947431a465a69f09c5e785c988314612a9
+  RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
+  RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 5b0304b3dbef2b52e078052138e23a19c7dacaef
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
