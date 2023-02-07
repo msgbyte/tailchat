@@ -8,10 +8,13 @@ import { WebView } from 'react-native-webview';
  * 由webview提供
  */
 
-export const AppMain: React.FC = React.memo(() => {
+interface Props {
+  host: string;
+}
+export const AppMain: React.FC<Props> = React.memo((props) => {
   return (
     <View style={styles.root}>
-      <WebView source={{ uri: 'https://nightly.paw.msgbyte.com/' }} />
+      <WebView source={{ uri: props.host }} />
     </View>
   );
 });
