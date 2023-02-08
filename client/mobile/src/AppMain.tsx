@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { generateInjectScript } from './lib/inject';
 import { initNotificationEnv } from './lib/notifications';
 
 /**
@@ -13,13 +14,19 @@ interface Props {
   host: string;
 }
 export const AppMain: React.FC<Props> = React.memo((props) => {
+  const webviewRef = useRef<WebView>(null);
+
   useEffect(() => {
     initNotificationEnv();
+
+    if (webviewRef.current) {
+      webviewRef.current.injectJavaScript(generateInjectScript());
+    }
   }, []);
 
   return (
     <View style={styles.root}>
-      <WebView source={{ uri: props.host }} />
+      <WebView ref={webviewRef} source={{ uri: props.host }} />
     </View>
   );
 });

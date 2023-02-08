@@ -7,11 +7,13 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "plugins:all": "ministar buildPlugin all",
     "test": "jest"
   },
   "dependencies": {
     "@notifee/react-native": "^7.4.0",
     "immer": "^9.0.19",
+    "mini-star": "^2.0.8",
     "react": "18.2.0",
     "react-native": "0.71.2",
     "react-native-gesture-handler": "^2.9.0",
