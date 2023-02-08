@@ -7,6 +7,7 @@ import { initMiniStar, loadSinglePlugin } from 'mini-star';
 import _once from 'lodash/once';
 import { builtinPlugins } from './builtin';
 import { showPluginLoadError } from './showPluginLoadError';
+import { injectTailchatGlobalValue } from '@/utils/global-helper';
 
 class PluginManager {
   /**
@@ -133,3 +134,4 @@ class PluginManager {
 }
 
 export const pluginManager = new PluginManager();
+injectTailchatGlobalValue('installPlugin', pluginManager.installPlugin);
