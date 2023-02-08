@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@notifee/react-native": "^7.4.0",
     "immer": "^9.0.19",
     "react": "18.2.0",
     "react-native": "0.71.2",
