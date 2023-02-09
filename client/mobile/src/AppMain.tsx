@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { generateInjectScript } from './lib/inject';
+import { generatePostMessageScript } from './lib/inject';
+import { handleTailchatMessage } from './lib/inject/message-handler';
 import { initNotificationEnv } from './lib/notifications';
 
 /**
@@ -18,15 +19,34 @@ export const AppMain: React.FC<Props> = React.memo((props) => {
 
   useEffect(() => {
     initNotificationEnv();
-
-    if (webviewRef.current) {
-      webviewRef.current.injectJavaScript(generateInjectScript());
-    }
   }, []);
 
   return (
     <View style={styles.root}>
-      <WebView ref={webviewRef} source={{ uri: props.host }} />
+      <WebView
+        ref={webviewRef}
+        source={{ uri: props.host }}
+        injectedJavaScriptBeforeContentLoaded={generatePostMessageScript()}
+        onMessage={(e) => {
+          if (!webviewRef.current) {
+            return;
+          }
+
+          try {
+            const raw = e.nativeEvent.data as string;
+            const data = JSON.parse(raw);
+            if (typeof data === 'object' && data._isTailchat === true) {
+              handleTailchatMessage(
+                data.type,
+                data.payload,
+                webviewRef.current
+              );
+            }
+          } catch (err) {
+            console.error('webview onmessage:', err);
+          }
+        }}
+      />
     </View>
   );
 });
