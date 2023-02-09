@@ -110,7 +110,7 @@ exit
 ## Benchmark
 
 ### Case 1
-
+<!--
 部署环境
 ```
 hash: 4771a830b0787280d53935948c99c340c81de977
@@ -138,7 +138,7 @@ Benchmark result:
     Min:        9ms
     Max:       91ms
 ```
-
+-->
 ### Case 2
 
 <!-- TODO -->
