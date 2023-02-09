@@ -18,6 +18,7 @@ import { BundleStatsWebpackPlugin } from 'bundle-stats-webpack-plugin';
 import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
 import { buildWorkboxPlugin } from './workbox';
 import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin';
+import GenerateJsonPlugin from 'generate-json-webpack-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -39,6 +40,9 @@ declare module 'webpack' {
 
 const NODE_ENV = process.env.NODE_ENV ?? 'production';
 const PREF_REPORT = !!process.env.PREF_REPORT;
+const VERSION =
+  process.env.VERSION || `nightly-${dayjs().format('YYYYMMDDHHmm')}`;
+const SERVICE_URL = process.env.SERVICE_URL; // 如果不传则为当前服务，用于前后端分离的场景
 
 const isDev = NODE_ENV === 'development';
 const mode = isDev ? 'development' : 'production';
@@ -46,10 +50,8 @@ const mode = isDev ? 'development' : 'production';
 const plugins: Configuration['plugins'] = [
   new DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-    'process.env.SERVICE_URL': JSON.stringify(process.env.SERVICE_URL),
-    'process.env.VERSION': JSON.stringify(
-      process.env.VERSION || `nightly-${dayjs().format('YYYYMMDDHHmm')}`
-    ),
+    'process.env.SERVICE_URL': JSON.stringify(SERVICE_URL),
+    'process.env.VERSION': JSON.stringify(VERSION),
   }),
   new HtmlWebpackPlugin({
     title: 'Tailchat',
@@ -91,6 +93,11 @@ const plugins: Configuration['plugins'] = [
       },
     ],
   }) as any,
+  new GenerateJsonPlugin('tailchat.manifest', {
+    version: VERSION,
+    env: NODE_ENV,
+    serviceUrl: SERVICE_URL,
+  }),
   new MiniCssExtractPlugin({ filename: 'styles-[contenthash].css' }),
   new RetryChunkLoadPlugin({
     maxRetries: 2,
