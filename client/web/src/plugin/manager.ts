@@ -134,4 +134,7 @@ class PluginManager {
 }
 
 export const pluginManager = new PluginManager();
-injectTailchatGlobalValue('installPlugin', pluginManager.installPlugin);
+injectTailchatGlobalValue(
+  'installPlugin',
+  pluginManager.installPlugin.bind(pluginManager)
+);
