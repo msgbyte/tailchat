@@ -13,6 +13,7 @@
   "dependencies": {
     "@notifee/react-native": "^7.4.0",
     "immer": "^9.0.19",
+    "lodash": "^4.17.21",
     "mini-star": "^2.0.8",
     "react": "18.2.0",
     "react-native": "0.71.2",
@@ -20,6 +21,7 @@
     "react-native-reanimated": "^2.14.4",
     "react-native-ui-lib": "^6.29.1",
     "react-native-webview": "^11.26.1",
+    "url-regex": "^5.0.0",
     "zustand": "^4.3.2"
   },
   "devDependencies": {
@@ -29,6 +31,7 @@
     "@react-native-community/eslint-config": "^3.2.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",
+    "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",

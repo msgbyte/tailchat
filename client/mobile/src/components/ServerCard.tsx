@@ -11,6 +11,7 @@ interface ServerCardProps {
   style?: StyleProp<ViewStyle>;
   name: string;
   url?: string;
+  version?: string;
   onPress?: () => void;
 }
 export const ServerCard: React.FC<ServerCardProps> = React.memo((props) => {
@@ -22,6 +23,10 @@ export const ServerCard: React.FC<ServerCardProps> = React.memo((props) => {
       <Text style={styles.name}>{props.name}</Text>
 
       {props.url && <Text style={styles.url}>{props.url}</Text>}
+
+      {props.version && (
+        <Text style={styles.version}>version: {props.version}</Text>
+      )}
     </TouchableOpacity>
   );
 });
@@ -40,6 +45,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     textAlign: 'center',
+  },
+  version: {
+    color: '#999',
+    textAlign: 'center',
+    fontSize: 10,
   },
   url: {
     color: '#999',
