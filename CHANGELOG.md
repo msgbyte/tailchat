@@ -1,5 +1,38 @@
 
 
+## [1.6.2](https://github.com/msgbyte/tailchat/compare/v1.6.1...v1.6.2) (2023-02-10)
+
+
+### Bug Fixes
+
+* 修复收件箱过长导致样式问题 ([4088de9](https://github.com/msgbyte/tailchat/commit/4088de907f56af6f39ce893bd7d28449b0d64f60))
+* 修复在亮色模式下navbar-more位置处自定义面板icon颜色不匹配问题 ([6be47e1](https://github.com/msgbyte/tailchat/commit/6be47e1f57c9f5aacaafc9523267a4e0164dbba3))
+
+
+### Features
+
+* 更新创建插件客户端模板，增加翻译 ([cda54eb](https://github.com/msgbyte/tailchat/commit/cda54ebdb68f1169e1668efd7262bd27df0155a3))
+* 话题卡片增加已读未读容器 ([84584c8](https://github.com/msgbyte/tailchat/commit/84584c8bed61a44eefb8ce25b0a3dac99cd427c0))
+* 增加 inbox.append 接口，用于内部调用增加收件箱内容 ([56c9f99](https://github.com/msgbyte/tailchat/commit/56c9f99c6734a5fd1bc0af63a8ab5aa05a3b59ea))
+* 增加导航栏相关的插件面板注册 ([53b7195](https://github.com/msgbyte/tailchat/commit/53b719514122958de89502cbc05439d959426b14))
+* 增加环境变量用于禁用日志选项 ([de37f64](https://github.com/msgbyte/tailchat/commit/de37f647a0adb21c86bf6203b830cd381841c76e))
+* 增加机器人接受到新的收件箱信息时调用回调 ([7fb9ddc](https://github.com/msgbyte/tailchat/commit/7fb9ddc4b5d5477b8d17b8ab01363ff517453e99))
+* 增加内置的文件发送功能 ([469f341](https://github.com/msgbyte/tailchat/commit/469f34134c0eb88d2fdf15afd4a136705750b753))
+* 增加前端编译信息部分上下文暴露，用于提前获取应用信息 ([037e37d](https://github.com/msgbyte/tailchat/commit/037e37d51548cfe2f4568aa74bb7f7fc6f7e167d))
+* 增加前端ack面板的概念，抽象化已读未读的面板属性而不是单纯的文本面板 ([7d14641](https://github.com/msgbyte/tailchat/commit/7d1464104abb0d135763520aff564eb4efc53810))
+* 增加用户封禁标识与断开连接功能 ([e8a705d](https://github.com/msgbyte/tailchat/commit/e8a705dad74d48f7173c9ed8a578bb550f2acb70))
+* 增加在线听音乐插件 ([9090ee8](https://github.com/msgbyte/tailchat/commit/9090ee8a94ca62eeeb030ee1e9447c5904c4281a))
+* **openapi:** 增加开放平台机器人回调编辑 ([3382189](https://github.com/msgbyte/tailchat/commit/3382189dee6d0b7cf891601e6132679209bcc775))
+* **server:** 增加面板feature定义，增加subscribe用于给自定义面板增加订阅功能(之前写死文本面板会有这个效果) ([b938fcb](https://github.com/msgbyte/tailchat/commit/b938fcb12ccd38c0d8bbde0035ef68aca136891a))
+
+
+### Performance Improvements
+
+* 优化导航栏高度不够的情况下的表现 ([f6483dd](https://github.com/msgbyte/tailchat/commit/f6483dd396024b19eac28740169a5ce187a9abda))
+* 优化消息已读容器逻辑，方便第三方复用 ([66a67bf](https://github.com/msgbyte/tailchat/commit/66a67bf02bd6cebf63a5e59fc8dc8813923ce927))
+* 优化github app 并增加白名单模糊匹配 ([f77d267](https://github.com/msgbyte/tailchat/commit/f77d267f8032c4e2fe895f6d629cd8f67fa60267))
+* 增加emoji图片picker的内置打包，优化在国内网络获取图集慢的问题 ([056d185](https://github.com/msgbyte/tailchat/commit/056d185debd4a8cb49b2b67c2b7127fa7c5abaf6))
+
 ## [1.6.1](https://github.com/msgbyte/tailchat/compare/v1.6.0...v1.6.1) (2023-02-02)
 
 
