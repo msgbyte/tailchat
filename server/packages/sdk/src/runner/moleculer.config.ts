@@ -36,7 +36,7 @@ import 'moleculer-repl';
  *    }
  *  }
  */
-const brokerConfig: BrokerOptions = {
+export const defaultBrokerConfig: BrokerOptions = {
   // Namespace of nodes to segment your nodes on the same network.
   namespace: 'tailchat',
   // Unique node identifier. Must be unique in a namespace.
@@ -310,5 +310,3 @@ const brokerConfig: BrokerOptions = {
 	stopped: async (broker: ServiceBroker): Promise<void> => {},
 	 */
 };
-
-export default brokerConfig;

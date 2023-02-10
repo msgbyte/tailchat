@@ -1,5 +1,15 @@
-import brokerConfig from 'tailchat-server-sdk/dist/runner/moleculer.config';
+import {
+  defaultBrokerConfig,
+  config,
+  BrokerOptions,
+} from 'tailchat-server-sdk';
 
-export default {
-  ...brokerConfig,
+const brokerConfig: BrokerOptions = {
+  ...defaultBrokerConfig,
 };
+
+if (config.feature.disableLogger === true) {
+  brokerConfig.logger = false;
+}
+
+export default brokerConfig;

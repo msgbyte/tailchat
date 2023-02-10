@@ -1,3 +1,4 @@
+export { defaultBrokerConfig } from './runner/moleculer.config';
 export { TcService } from './services/base';
 export { TcBroker } from './services/broker';
 export type { TcDbService } from './services/mixins/db.mixin';
@@ -49,6 +50,7 @@ export * from './const';
 
 // other
 export { Utils, Errors } from 'moleculer';
+export type { BrokerOptions } from 'moleculer';
 
 /**
  * 统一处理未捕获的错误, 防止直接把应用打崩
