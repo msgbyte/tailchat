@@ -3,6 +3,7 @@ import notifee, { EventType } from '@notifee/react-native';
 interface NotificationInfo {
   title: string;
   body: string;
+  icon?: string;
 }
 
 // Create a channel (required for Android)
@@ -19,8 +20,9 @@ async function createDefaultChannel() {
  * 显示本地通知
  */
 export async function showNotification(info: NotificationInfo) {
-  // Request permissions (required for iOS)
-  await notifee.requestPermission();
+  console.log('call showNotification', info);
+
+  await notifee.requestPermission(); // Request permissions (required for iOS)
 
   const channelId = await createDefaultChannel();
 
@@ -30,6 +32,8 @@ export async function showNotification(info: NotificationInfo) {
     body: info.body,
     android: {
       channelId,
+      // largeIcon: info.icon ?? undefined,
+      // smallIcon: info.icon ?? undefined,
       // pressAction is needed if you want the notification to open the app when pressed
       pressAction: {
         id: 'default',
