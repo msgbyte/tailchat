@@ -67,8 +67,8 @@ async function initForegroundService() {
   const channelId = await createDefaultChannel();
 
   notifee.displayNotification({
-    title: 'Foreground service',
-    body: 'This notification will exist for the lifetime of the service runner',
+    title: 'Tailchat',
+    body: '持续保持服务正常运行, 关闭后可能无法正常接受到消息推送',
     android: {
       channelId,
       asForegroundService: true,
