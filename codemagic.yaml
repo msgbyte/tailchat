@@ -1,0 +1,41 @@
+workflows:
+  android:
+    name: build, test & publish Android version
+    max_build_duration: 30
+    instance_type: mac_mini_m1
+    working_directory: client/mobile
+    cache:
+      cache_paths:
+        - $CM_BUILD_DIR/node_modules
+    scripts:
+        - name: Install npm dependencies
+          script: |
+            yarn
+        - name: Set Android SDK location
+          script: |
+            echo "sdk.dir=$ANDROID_SDK_ROOT" > "./android/local.properties"
+        - name: Build Android release
+          working_directory: client/mobile/android
+          script: |
+            UPDATED_BUILD_NUMBER=$BUILD_NUMBER
+            ./gradlew assembleRelease \
+              -PversionCode=$UPDATED_BUILD_NUMBER \
+              -PversionName=1.0.$UPDATED_BUILD_NUMBER
+    artifacts:
+      - android/app/build/outputs/**/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - moonrailgun@gmail.com
+      scripts:
+        - name: To get artifact URL
+          script: |
+            ARTIFACT_TYPE=".apk"
+            ARTIFACT_URL=$(echo $CM_ARTIFACT_LINKS | jq -r '.[] | select(.name | endswith("'"$ARTIFACT_TYPE"'")) | .url')
+
+  # ios:
+  #   name: build, test & publish iOS version
+  #   instance_type: mac_pro
+  #   working_directory: client/mobile
+  #   scripts:
+  #     - ...
