@@ -27,7 +27,9 @@ export const InboxMessageContent: React.FC<Props> = React.memo((props) => {
 
   return (
     <div className="w-full relative">
-      <NearbyMessages converseId={converseId} messageId={messageId} />
+      <div className="h-full overflow-auto">
+        <NearbyMessages converseId={converseId} messageId={messageId} />
+      </div>
 
       <div className="absolute bottom-4 left-0 right-0 text-center">
         <div
