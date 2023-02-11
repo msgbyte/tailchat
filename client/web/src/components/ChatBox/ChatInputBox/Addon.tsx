@@ -1,15 +1,16 @@
-import { FileSelector } from '@/components/FileSelector';
 import {
   getMessageTextDecorators,
   pluginChatInputActions,
 } from '@/plugin/common';
 import { Icon } from 'tailchat-design';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, MenuProps } from 'antd';
 import React, { useState } from 'react';
 import { t } from 'tailchat-shared';
 import { useChatInputActionContext } from './context';
 import { uploadMessageFile, uploadMessageImage } from './utils';
 import clsx from 'clsx';
+import type { MenuItemType } from 'antd/lib/menu/hooks/useItems';
+import { openFile } from '@/utils/file-helper';
 
 export const ChatInputAddon: React.FC = React.memo(() => {
   const [open, setOpen] = useState(false);
@@ -18,9 +19,9 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     return null;
   }
 
-  const handleSendImage = (files: FileList) => {
+  const handleSendImage = (file: File) => {
     // 发送图片
-    const image = files[0];
+    const image = file;
     if (image) {
       // 发送图片
       uploadMessageImage(image).then(({ url, width, height }) => {
@@ -31,9 +32,8 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     }
   };
 
-  const handleSendFile = (files: FileList) => {
+  const handleSendFile = (file: File) => {
     // 发送文件
-    const file = files[0];
     if (file) {
       // 发送图片
       uploadMessageFile(file).then(({ name, url }) => {
@@ -44,33 +44,47 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     }
   };
 
-  const menu = (
-    <Menu>
-      <FileSelector
-        fileProps={{ accept: 'image/*' }}
-        onSelected={handleSendImage}
-      >
-        <Menu.Item>{t('发送图片')}</Menu.Item>
-      </FileSelector>
-
-      <FileSelector onSelected={handleSendFile}>
-        <Menu.Item>{t('发送文件')}</Menu.Item>
-      </FileSelector>
-
-      {pluginChatInputActions.map((item, i) => (
-        <Menu.Item
-          key={item.label + i}
-          onClick={() => item.onClick(actionContext)}
-        >
-          {item.label}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
+  const menu: MenuProps = {
+    items: [
+      {
+        key: 'send-image',
+        label: t('发送图片'),
+        onClick: async () => {
+          setOpen(false);
+          const file = await openFile({ accept: 'image/*' });
+          if (file) {
+            handleSendImage(file);
+          }
+        },
+      },
+      {
+        key: 'send-file',
+        label: t('发送文件'),
+        onClick: async () => {
+          setOpen(false);
+          const file = await openFile();
+          if (file) {
+            handleSendFile(file);
+          }
+        },
+      },
+      ...pluginChatInputActions.map(
+        (item, i) =>
+          ({
+            key: item.label + i,
+            label: item.label,
+            onClick: () => {
+              item.onClick(actionContext);
+              setOpen(false);
+            },
+          } as MenuItemType)
+      ),
+    ],
+  };
 
   return (
     <Dropdown
-      overlay={menu}
+      menu={menu}
       open={open}
       onOpenChange={setOpen}
       placement="topRight"
