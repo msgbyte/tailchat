@@ -1,5 +1,17 @@
 
 
+## [1.6.3](https://github.com/msgbyte/tailchat/compare/v1.6.2...v1.6.3) (2023-02-11)
+
+
+### Bug Fixes
+
+* 修复在处理当前页面的完整路径时url的跳转行为 ([ca486ed](https://github.com/msgbyte/tailchat/commit/ca486ed6b09105193b52a6996f9c7308d0f14c3e))
+
+
+### Features
+
+* github 开放平台机器人增加监听消息回调到github issue comment ([2590242](https://github.com/msgbyte/tailchat/commit/2590242bd89e385ee45954721937d77bfe072c4c))
+
 ## [1.6.2](https://github.com/msgbyte/tailchat/compare/v1.6.1...v1.6.2) (2023-02-10)
 
 
