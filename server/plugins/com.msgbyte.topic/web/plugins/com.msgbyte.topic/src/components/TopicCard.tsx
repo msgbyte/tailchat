@@ -7,7 +7,7 @@ import {
 } from '@capital/common';
 import {
   IconBtn,
-  Input,
+  TextArea,
   UserName,
   UserAvatar,
   MessageAckContainer,
@@ -123,11 +123,14 @@ export const TopicCard: React.FC<{
 
           {showReply && (
             <ReplyBox>
-              <Input
+              <TextArea
                 autoFocus
                 placeholder={Translate.replyThisTopic}
                 disabled={loading}
                 value={comment}
+                row={2}
+                maxLength={1000}
+                showCount={true}
                 onChange={(e) => setComment(e.target.value)}
                 onPressEnter={handleComment}
               />

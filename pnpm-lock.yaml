@@ -1285,11 +1285,16 @@ importers:
 
   server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic:
     specifiers:
+      '@types/lodash': ^4.14.191
       '@types/styled-components': ^5.1.26
+      lodash: ^4.17.21
       react: 18.2.0
       styled-components: ^5.3.6
       zustand: ^4.1.2
+    dependencies:
+      lodash: 4.17.21
     devDependencies:
+      '@types/lodash': 4.14.191
       '@types/styled-components': 5.1.26
       react: 18.2.0
       styled-components: 5.3.6_react@18.2.0
