@@ -33,6 +33,11 @@ const Root = styled(LoadingOnFirst)({
     paddingTop: 80,
   },
 
+  '.list': {
+    height: '100%',
+    overflow: 'auto',
+  },
+
   '.create-btn': {
     position: 'absolute',
     right: 20,
@@ -146,7 +151,7 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
   return (
     <Root spinning={loading}>
       {Array.isArray(topicList) && topicList.length > 0 ? (
-        <>
+        <div className="list">
           {topicList.map((item, i) => (
             <TopicCard key={i} topic={item} />
           ))}
@@ -160,7 +165,7 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
               {Translate.noMore}
             </Button>
           )}
-        </>
+        </div>
       ) : (
         <Empty description={Translate.noTopic}>
           <Button type="primary" onClick={handleCreateTopic}>
