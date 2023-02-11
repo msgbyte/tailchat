@@ -3,7 +3,8 @@ import { isValidStr, useColorScheme, useLanguage } from 'tailchat-shared';
 import { emojiData } from './const';
 import Picker from '@emoji-mart/react';
 import type { EmojiData } from './types';
-import i18n from '@emoji-mart/data/i18n/zh.json';
+import i18nZh from '@emoji-mart/data/i18n/zh.json';
+import i18nEn from '@emoji-mart/data/i18n/en.json';
 import spritesUrl from './twitter.png';
 
 import './Picker.less';
@@ -36,7 +37,7 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = React.memo((props) => {
         set="twitter"
         data={emojiData}
         theme={isDarkMode ? 'dark' : 'light'}
-        i18n={language === 'zh-CN' ? i18n : undefined}
+        i18n={language === 'zh-CN' ? i18nZh : i18nEn}
         previewPosition="none"
         skinTonePosition="none"
         onEmojiSelect={handleSelect}

@@ -18,6 +18,11 @@ export const [getStorage, setStorage] =
   buildRegFn<() => StorageObject>('storage');
 
 /**
+ * 持久化hook的缓存, 减少因一步获取数据导致的gap
+ */
+const useStorageCache = new Map<string, any>();
+
+/**
  * 管理持久化存储数据
  * @param key 存储键
  * @param defaultValue 默认值
@@ -26,18 +31,24 @@ export function useStorage<T = any>(
   key: string,
   defaultValue?: T
 ): [T | undefined, { set: (v: T) => void; save: (v: T) => void }] {
-  const [value, setValue] = useState<T | undefined>(defaultValue);
+  const [value, setValue] = useState<T | undefined>(
+    useStorageCache.get(key) ?? defaultValue
+  );
 
   useLayoutEffect(() => {
     getStorage()
       .get(key)
-      .then((data: T) => setValue(data ?? defaultValue));
+      .then((data: T) => {
+        setValue(data ?? defaultValue);
+        useStorageCache.set(key, data ?? defaultValue);
+      });
   }, [key]);
 
   const set = useCallback(
     (newVal: T) => {
       setValue(newVal);
       getStorage().set(key, newVal);
+      useStorageCache.set(key, newVal);
     },
     [key]
   );
@@ -46,6 +57,7 @@ export function useStorage<T = any>(
     (newVal: T) => {
       setValue(newVal);
       getStorage().save(key, newVal);
+      useStorageCache.set(key, newVal);
     },
     [key]
   );
