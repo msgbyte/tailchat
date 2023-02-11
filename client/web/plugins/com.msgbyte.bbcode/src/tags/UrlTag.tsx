@@ -7,9 +7,14 @@ export const UrlTag: React.FC<TagProps> = React.memo((props) => {
   const text = node.content.join('');
   const url = node.attrs.url ?? text;
 
-  if (url.startsWith('/') || url.startsWith(window.location.origin)) {
+  if (url.startsWith('/')) {
     // 内部地址，使用 react-router 进行导航
     return <Link to={url}>{text}</Link>;
+  }
+
+  if (url.startsWith(window.location.origin)) {
+    // 内部地址，使用 react-router 进行导航
+    return <Link to={url.replace(window.location.origin, '')}>{text}</Link>;
   }
 
   return (
