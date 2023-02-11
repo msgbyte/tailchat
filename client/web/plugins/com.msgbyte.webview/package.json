@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "js-base64": "^3.7.2",
     "script_sanitize": "^1.2.6"
   }
 }

@@ -751,10 +751,8 @@ importers:
 
   client/web/plugins/com.msgbyte.webview:
     specifiers:
-      js-base64: ^3.7.2
       script_sanitize: ^1.2.6
     dependencies:
-      js-base64: 3.7.2
       script_sanitize: 1.2.6
 
   client/web/plugins/com.msgbyte.wenshushu:

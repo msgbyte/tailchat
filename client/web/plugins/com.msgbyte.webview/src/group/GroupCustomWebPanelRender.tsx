@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { encode } from 'js-base64';
 import { isValidStr } from '@capital/common';
 import { Translate } from '../translate';
 import { sanitize } from 'script_sanitize';
@@ -18,6 +17,38 @@ function getInjectedStyle() {
   }
 }
 
+const cacheMap = new Map<string, string>();
+
+function createInlineUrl(html: string): string | undefined {
+  if (cacheMap.has(html)) {
+    return cacheMap.get(html);
+  }
+
+  if (isValidStr(html)) {
+    const appendHtml = getInjectedStyle(); // 额外追加的样式
+    try {
+      const blob = new Blob(
+        [
+          sanitize(html + appendHtml, {
+            replacementText: 'No allowed script',
+          }),
+        ],
+        {
+          type: 'text/html',
+        }
+      );
+
+      const url = window.URL.createObjectURL(blob);
+      cacheMap.set(html, url);
+      return url;
+    } catch (e) {
+      return undefined;
+    }
+  } else {
+    return undefined;
+  }
+}
+
 const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
   const panelInfo = props.panelInfo;
 
@@ -27,18 +58,7 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
 
   const html = panelInfo?.meta?.html;
   const url = useMemo(() => {
-    if (isValidStr(html)) {
-      const appendHtml = getInjectedStyle(); // 额外追加的样式
-      try {
-        return `data:text/html;charset=utf8;base64,${encode(
-          sanitize(html + appendHtml, { replacementText: 'No allowed script' })
-        )}`;
-      } catch (e) {
-        return undefined;
-      }
-    } else {
-      return undefined;
-    }
+    return createInlineUrl(html);
   }, [html]);
 
   return <WebviewKeepAlive className="w-full h-full" url={url} />;
