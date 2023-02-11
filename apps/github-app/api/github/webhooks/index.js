@@ -2,9 +2,9 @@
 // Reference: https://probot.github.io/docs/deployment/#vercel
 
 const { createNodeMiddleware, createProbot } = require('probot');
-const app = require('../../../src/app').app;
+const appFn = require('../../../src/app').appFn;
 
-module.exports = createNodeMiddleware(app, {
+module.exports = createNodeMiddleware(appFn, {
   probot: createProbot(),
   webhooksPath: '/api/github/webhooks',
 });

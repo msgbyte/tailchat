@@ -11,3 +11,33 @@ export function generateErrorBlock(err: unknown) {
 
   return `Tailchat occur error, please checkout your config in \`${configPath}\`! \n${errorBlock}`;
 }
+
+/**
+ * 生成创建话题的内容
+ */
+export function generateTopicCreateContent(
+  user: string,
+  title: string,
+  body: string,
+  url: string
+) {
+  return `[b]${user}[/b] create Issue:
+[b]Title: ${title}[/b]
+[markdown]${body}[/markdown]
+
+Website: ${url}`;
+}
+
+/**
+ * 生成创建话题的内容
+ */
+export function generateTopicCommentCreateContent(
+  user: string,
+  body: string,
+  url: string
+) {
+  return `[b]${user}[/b] reply Issue:
+[markdown]${body}[/markdown]
+
+Website: ${url}`;
+}

@@ -51,7 +51,7 @@ export class TailchatClient {
       console.log('tailchat openapp login success!');
 
       // 尝试调用函数
-      this.whoami().then(console.log);
+      // this.whoami().then(console.log);
     } catch (err) {
       console.error(err);
       throw new Error('登录失败, 请检查应用凭证');
