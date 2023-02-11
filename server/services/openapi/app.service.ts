@@ -48,6 +48,10 @@ class OpenAppService extends TcService {
       params: {
         appId: 'string',
       },
+      cache: {
+        keys: ['appId'],
+        ttl: 60 * 60, // 1 hour
+      },
     });
     this.registerAction('create', this.create, {
       params: {
@@ -204,6 +208,8 @@ class OpenAppService extends TcService {
       })
       .exec();
 
+    await this.cleanAppInfoCache(appId);
+
     return true;
   }
 
@@ -241,6 +247,8 @@ class OpenAppService extends TcService {
         },
       }
     );
+
+    await this.cleanAppInfoCache(appId);
   }
 
   /**
@@ -277,6 +285,15 @@ class OpenAppService extends TcService {
         },
       }
     );
+
+    await this.cleanAppInfoCache(appId);
+  }
+
+  /**
+   * 清理获取开放平台应用的缓存
+   */
+  private async cleanAppInfoCache(appId: string) {
+    await this.cleanActionCache('get', [String(appId)]);
   }
 }
 

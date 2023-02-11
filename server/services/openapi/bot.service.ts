@@ -15,7 +15,11 @@ class OpenBotService extends TcService {
     }
 
     this.registerEventListener('chat.inbox.append', async (payload, ctx) => {
-      const userInfo = await call(ctx).getUserInfo(payload._id);
+      const userInfo = await call(ctx).getUserInfo(String(payload.userId));
+
+      if (!userInfo) {
+        return;
+      }
 
       if (userInfo.type !== 'openapiBot') {
         return;
@@ -44,9 +48,9 @@ class OpenBotService extends TcService {
       }
 
       got
-        .post(callbackUrl)
-        .then((res) => {
-          this.logger.info('调用机器人通知接口回调成功', res);
+        .post(callbackUrl, { json: payload })
+        .then(() => {
+          this.logger.info('调用机器人通知接口回调成功');
         })
         .catch((err) => {
           this.logger.error('调用机器人通知接口回调失败:', err);
@@ -121,7 +125,7 @@ class OpenBotService extends TcService {
     });
 
     try {
-      const botId = 'open_' + appInfo._id;
+      const botId = 'open_' + appInfo.appId;
       const nickname = appInfo.appName;
       const avatar = appInfo.appIcon;
       const { _id: botUserId, email } = await ctx.call<

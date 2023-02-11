@@ -73,9 +73,9 @@ export function call(ctx: TcPureContext) {
     /**
      * 获取用户信息
      */
-    async getUserInfo(userId: string): Promise<UserStruct> {
+    async getUserInfo(userId: string): Promise<UserStruct | null> {
       return await ctx.call('user.getUserInfo', {
-        userId,
+        userId: String(userId),
       });
     },
     /**
@@ -111,6 +111,23 @@ export function call(ctx: TcPureContext) {
           ? true // 如果有管理员权限。直接返回true
           : (userAllPermissions ?? []).includes(p)
       );
+    },
+    /**
+     * 添加到收件箱
+     * @param type 如果是插件则命名规范为包名加信息名，如: plugin:com.msgbyte.topic
+     * @param payload 内容体，相关的逻辑由前端处理
+     * @param userId 如果是添加到当前用户则userId可以不填
+     */
+    async appendInbox(
+      type: string,
+      payload: any,
+      userId?: string
+    ): Promise<boolean> {
+      return await ctx.call('chat.inbox.append', {
+        userId,
+        type,
+        payload,
+      });
     },
   };
 }
