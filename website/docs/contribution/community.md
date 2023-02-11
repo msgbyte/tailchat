@@ -7,6 +7,10 @@ title: 生态与社区
 
 欢迎提交 `pr/issue` 来提交你对`Tailchat`的贡献，让我们能够以下列表中收录:
 
+## 交流社区
+
+<img width="360" src="/img/wechat.jpg" />
+
 ## 代码
 
 *(empty)*
