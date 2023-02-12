@@ -312,6 +312,10 @@ declare module '@capital/common' {
 
   export const regPluginSettings: any;
 
+  export const pluginInboxItemMap: any;
+
+  export const regPluginInboxItemMap: any;
+
   export const useGroupIdContext: () => string;
 
   export const useGroupPanelContext: () => {
@@ -499,4 +503,14 @@ declare module '@capital/component' {
   export const Webview: any;
 
   export const WebviewKeepAlive: any;
+
+  export const Card: any;
+
+  export const Problem: any;
+
+  export const JumpToButton: any;
+
+  export const JumpToGroupPanelButton: any;
+
+  export const JumpToConverseButton: any;
 }

@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import _orderBy from 'lodash/orderBy';
 import { GroupName } from '@/components/GroupName';
 import { ConverseName } from '@/components/ConverseName';
-import { getMessageRender } from '@/plugin/common';
+import { getMessageRender, pluginInboxItemMap } from '@/plugin/common';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
@@ -48,6 +48,20 @@ export const InboxSidebar: React.FC = React.memo(() => {
           title={title}
           desc={getMessageRender(message.messageSnippet ?? '')}
           source={'Tailchat'}
+          readed={item.readed}
+          to={buildLink(item._id)}
+        />
+      );
+    } else if (pluginInboxItemMap[item.type]) {
+      const info = pluginInboxItemMap[item.type];
+      const preview = info.getPreview(item);
+
+      return (
+        <InboxSidebarItem
+          key={item._id}
+          title={preview.title}
+          desc={preview.desc}
+          source={info.source ?? 'Unknown'}
           readed={item.readed}
           to={buildLink(item._id)}
         />
@@ -99,7 +113,7 @@ export const InboxSidebar: React.FC = React.memo(() => {
         {t('收件箱')}
       </SectionHeader>
 
-      <div>
+      <div className="overflow-hidden">
         <PillTabs>
           <PillTabPane key="1" tab={`${t('全部')}`}>
             {fullList.map((item) => renderInbox(item))}

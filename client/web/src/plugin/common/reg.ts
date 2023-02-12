@@ -7,6 +7,8 @@ import {
   regSocketEventListener,
   PermissionItemType,
   GroupPanelFeature,
+  InboxItem,
+  buildRegMap,
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
@@ -278,3 +280,18 @@ type PluginSettings = FullModalFactoryConfig & {
  */
 export const [pluginSettings, regPluginSettings] =
   buildRegList<PluginSettings>();
+
+interface PluginInboxItem {
+  /**
+   * 来源
+   */
+  source: string;
+  getPreview: (inboxItem: InboxItem) => { title: string; desc: string };
+  render: React.ComponentType<{ inboxItem: InboxItem }>;
+}
+
+/**
+ * 注册收件箱内容
+ */
+export const [pluginInboxItemMap, regPluginInboxItemMap] =
+  buildRegMap<PluginInboxItem>();

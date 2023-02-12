@@ -10,7 +10,6 @@ import {
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
 import { User } from '../user/user';
-import { Message } from './message';
 
 interface InboxMessage {
   /**

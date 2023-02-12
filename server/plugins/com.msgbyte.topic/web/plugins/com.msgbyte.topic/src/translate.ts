@@ -21,4 +21,8 @@ export const Translate = {
     'zh-CN': '加载中...',
     'en-US': 'Loading...',
   }),
+  topicDataError: localTrans({
+    'zh-CN': '话题信息异常',
+    'en-US': 'Topic Data Error',
+  }),
 };

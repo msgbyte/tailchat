@@ -1,23 +1,16 @@
 import { MessageHighlightContainer } from '@/components/ChatBox/ChatMessageList/MessageHighlightContainer';
 import { NormalMessageList } from '@/components/ChatBox/ChatMessageList/NormalList';
+import { JumpToConverseButton } from '@/components/JumpToButton';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Problem } from '@/components/Problem';
 import React from 'react';
-import { useNavigate } from 'react-router';
-import {
-  InboxItem,
-  model,
-  showErrorToasts,
-  t,
-  useAsync,
-} from 'tailchat-shared';
+import { InboxItem, model, showErrorToasts, useAsync } from 'tailchat-shared';
 
 interface Props {
   info: InboxItem;
 }
 export const InboxMessageContent: React.FC<Props> = React.memo((props) => {
   const info = props.info;
-  const navigate = useNavigate();
 
   const message = info.message;
   if (!message) {
@@ -31,21 +24,7 @@ export const InboxMessageContent: React.FC<Props> = React.memo((props) => {
         <NearbyMessages converseId={converseId} messageId={messageId} />
       </div>
 
-      <div className="absolute bottom-4 left-0 right-0 text-center">
-        <div
-          className="shadow-lg px-6 py-2 rounded-full inline-block bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer"
-          onClick={() => {
-            if (groupId) {
-              // 跳转到群组
-              navigate(`/main/group/${groupId}/${converseId}`);
-            } else {
-              navigate(`/main/personal/converse/${converseId}`);
-            }
-          }}
-        >
-          {t('跳转到会话')}
-        </div>
-      </div>
+      <JumpToConverseButton groupId={groupId} converseId={converseId} />
     </div>
   );
 });

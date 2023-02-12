@@ -1,4 +1,5 @@
 import { NotFound } from '@/components/NotFound';
+import { pluginInboxItemMap } from '@/plugin/common';
 import React from 'react';
 import { useParams } from 'react-router';
 import {
@@ -30,6 +31,11 @@ export const InboxContent: React.FC = React.memo((props) => {
 
   if (inboxItem.type === 'message') {
     return <InboxMessageContent info={inboxItem} />;
+  } else if (pluginInboxItemMap[inboxItem.type]) {
+    const info = pluginInboxItemMap[inboxItem.type];
+    const Component = info.render;
+
+    return <Component inboxItem={inboxItem} />;
   }
 
   return <NotFound message={t('没有找到该类型的渲染方式')} />;

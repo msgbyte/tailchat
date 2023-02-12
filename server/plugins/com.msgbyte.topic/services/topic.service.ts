@@ -179,9 +179,23 @@ class GroupTopicService extends TcService {
 
     const json = await this.transformDocuments(ctx, {}, topic);
 
-    // TODO: 回复需要添加到收件箱
-
     this.roomcastNotify(ctx, panelId, 'createComment', json);
+
+    // 向所有参与者都添加收件箱消息
+    const memberIds = _.uniq([
+      topic.author,
+      ...topic.comments.map((c) => c.author),
+    ]);
+
+    await Promise.all(
+      memberIds.map((memberId) =>
+        call(ctx).appendInbox(
+          'plugin:com.msgbyte.topic.comment',
+          json,
+          String(memberId)
+        )
+      )
+    );
 
     return true;
   }
