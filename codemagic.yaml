@@ -28,10 +28,9 @@ workflows:
         recipients:
           - moonrailgun@gmail.com
       scripts:
-        - name: To get artifact URL
+        - name: Notify artifact URL to Tailchat
           script: |
-            ARTIFACT_TYPE=".apk"
-            ARTIFACT_URL=$(echo $CM_ARTIFACT_LINKS | jq -r '.[] | select(.name | endswith("'"$ARTIFACT_TYPE"'")) | .url')
+            node client/mobile/scripts/notify-links.js
 
   # ios:
   #   name: build, test & publish iOS version
