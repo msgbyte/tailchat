@@ -1,5 +1,35 @@
 
 
+## [1.6.4](https://github.com/msgbyte/tailchat/compare/v1.6.3...v1.6.4) (2023-02-14)
+
+
+### Bug Fixes
+
+* 修复topic列表过长会导致新增按钮位置错误的问题 ([43969e2](https://github.com/msgbyte/tailchat/commit/43969e23dd410fa24c7516957ff10a68d95ddfd8))
+
+
+### Features
+
+* add tailchat-client-sdk package ([94b56f0](https://github.com/msgbyte/tailchat/commit/94b56f0af5cd3cf6f3d0beb956cbf0b382ead42a))
+* **rn:** 增加notifee用于本地通知 ([02095aa](https://github.com/msgbyte/tailchat/commit/02095aa6280fe7b87af04adac217eec35eef33b8))
+* **rn:** 增加删除服务器功能 ([66b0f36](https://github.com/msgbyte/tailchat/commit/66b0f36bbb001913334dfc7fa4855f7d87423970))
+* **rn:** 增加插件逻辑注入 ([92d5e39](https://github.com/msgbyte/tailchat/commit/92d5e39cfc0b38b3fe980fe148dcf1b3f5dbce57))
+* **rn:** 增加服务列表持久化 ([93985b0](https://github.com/msgbyte/tailchat/commit/93985b02fba04885ee860b3fdc049925b2c6f6f0))
+* **rn:** 增加服务器选择入口 ([f8a4055](https://github.com/msgbyte/tailchat/commit/f8a4055628e768e9705331c710b30396111dbd5e))
+* **rn:** 添加服务器时增加基本信息的获取 ([c972eb8](https://github.com/msgbyte/tailchat/commit/c972eb8937623e0708f5e576f6a0b17ba6eade3c))
+* **rn:** 移动端增加消息通知显示 ([25084e0](https://github.com/msgbyte/tailchat/commit/25084e0422e52cca5a14f48c76f82b9265177be0))
+* 增加 react-native-webview 以显示主要内容 ([a15e127](https://github.com/msgbyte/tailchat/commit/a15e1270a03d5942cf6f402ae32aed2769d4fb93))
+* 增加react-native-ui-lib，增加添加服务器功能 ([59f559d](https://github.com/msgbyte/tailchat/commit/59f559d98cd19753e6190268f47f53ef921c2281))
+* 增加topic插件的收件箱通知项 ([6dcc18a](https://github.com/msgbyte/tailchat/commit/6dcc18a7e00269d37e755a21b7be11390571bcd9))
+* 增加插件安装方法到window对象 ([65d1e91](https://github.com/msgbyte/tailchat/commit/65d1e916f84bdb7b0968e212d7d058485ade759a))
+
+
+### Performance Improvements
+
+* 优化topic在多回复时的预览体验 ([206b90d](https://github.com/msgbyte/tailchat/commit/206b90d02607efb4f6f5bd7ac4675aa8b927062a))
+* 优化自定义网页面板url生成机制, 使用blob url来生成临时地址 ([c3d5856](https://github.com/msgbyte/tailchat/commit/c3d585650c3974c19a3e55db828accdf48d63855))
+* 表情面板增加中英国际化，并优化useStorage的缓存策略 ([ef41833](https://github.com/msgbyte/tailchat/commit/ef41833519f64b8a2e37c6a80f132f741f20551b))
+
 ## [1.6.3](https://github.com/msgbyte/tailchat/compare/v1.6.2...v1.6.3) (2023-02-11)
 
 
