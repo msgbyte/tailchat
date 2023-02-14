@@ -4,6 +4,9 @@ workflows:
     max_build_duration: 30
     instance_type: mac_mini_m1
     working_directory: client/mobile
+    environment:
+      groups:
+        - default
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
