@@ -1,5 +1,7 @@
 const tailchat = require('tailchat-client-sdk');
 const fs = require('fs-extra');
+const os = require('os');
+const path = require('path');
 
 // reference: https://docs.codemagic.io/yaml-basic-configuration/environment-variables/#artifact-links
 const artifactLinks = process.env['CM_ARTIFACT_LINKS'];
@@ -9,7 +11,7 @@ console.log('artifactLinks:', artifactLinks);
 
 if (tailchatSubscribeId) {
   try {
-    if (fs.existsSync('~/SUCCESS')) {
+    if (fs.existsSync(path.join(os.homedir(), './SUCCESS'))) {
       const links = JSON.parse(artifactLinks) ?? [];
       const text =
         '[b]App 构建成功:[/b]\n' +
