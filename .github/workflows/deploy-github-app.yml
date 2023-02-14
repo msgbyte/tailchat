@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "app/github-app/**"
+      - "apps/github-app/**"
   workflow_dispatch:
 
 jobs:
