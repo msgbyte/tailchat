@@ -14,6 +14,7 @@ interface ServerStoreState {
   selectedServerInfo: ServerInfo | null;
   serverList: ServerInfo[];
   addServer: (url: string) => Promise<void>;
+  removeServer: (url: string) => void;
   selectServer: (serverInfo: ServerInfo) => void;
 }
 
@@ -56,6 +57,11 @@ export const useServerStore = create<ServerStoreState>()(
           console.error('获取服务器配置失败:', err);
           throw err;
         }
+      },
+      removeServer: (url: string) => {
+        set((state) => {
+          state.serverList = state.serverList.filter((s) => s.url !== url);
+        });
       },
       selectServer: (serverInfo: ServerInfo) => {
         set({

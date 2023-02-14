@@ -3,14 +3,22 @@ import { Alert, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { ServerCard } from './components/ServerCard';
 import { useServerStore } from './store/server';
 import Dialog from 'react-native-ui-lib/dialog';
-import { Button, PanningProvider, Text, View } from 'react-native-ui-lib';
+import {
+  Button,
+  PanningProvider,
+  Text,
+  View,
+  ActionSheet,
+} from 'react-native-ui-lib';
 import { isValidUrl } from './lib/utils';
 
 export const Entry: React.FC = React.memo(() => {
-  const { serverList, selectServer, addServer } = useServerStore();
+  const { serverList, selectServer, addServer, removeServer } =
+    useServerStore();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [serverUrl, setServerUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selectedServer, setSelectedServer] = useState('');
 
   return (
     <ScrollView style={styles.root}>
@@ -23,11 +31,32 @@ export const Entry: React.FC = React.memo(() => {
             url={serverInfo.url}
             version={serverInfo.version}
             onPress={() => selectServer(serverInfo)}
+            onLongPress={() => {
+              if (i !== 0) {
+                setSelectedServer(serverInfo.url);
+              }
+            }}
           />
         );
       })}
 
       <ServerCard name={'添加服务器'} onPress={() => setDialogVisible(true)} />
+
+      <ActionSheet
+        visible={!!selectedServer}
+        message={`选中服务器: ${selectedServer}`}
+        onDismiss={() => setSelectedServer('')}
+        destructiveButtonIndex={0}
+        options={[
+          {
+            label: '删除服务器',
+            onPress: () => {
+              removeServer(selectedServer);
+            },
+          },
+        ]}
+        showCancelButton={true}
+      />
 
       <Dialog
         visible={dialogVisible}

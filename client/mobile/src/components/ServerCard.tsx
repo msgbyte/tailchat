@@ -13,12 +13,14 @@ interface ServerCardProps {
   url?: string;
   version?: string;
   onPress?: () => void;
+  onLongPress?: () => void;
 }
 export const ServerCard: React.FC<ServerCardProps> = React.memo((props) => {
   return (
     <TouchableOpacity
       style={[styles.root, props.style]}
       onPress={props.onPress}
+      onLongPress={props.onLongPress}
     >
       <Text style={styles.name}>{props.name}</Text>
 
