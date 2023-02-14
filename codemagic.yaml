@@ -21,6 +21,8 @@ workflows:
             ./gradlew assembleRelease \
               -PversionCode=$UPDATED_BUILD_NUMBER \
               -PversionName=1.0.$UPDATED_BUILD_NUMBER
+        - name: Build finished successfully
+          script: touch ~/SUCCESS
     artifacts:
       - android/app/build/outputs/**/**/*.apk
     publishing:
@@ -30,7 +32,7 @@ workflows:
       scripts:
         - name: Notify artifact URL to Tailchat
           script: |
-            node client/mobile/scripts/notify-links.js
+            node scripts/notify-links.js
 
   # ios:
   #   name: build, test & publish iOS version
