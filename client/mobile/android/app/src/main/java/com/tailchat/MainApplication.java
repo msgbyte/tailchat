@@ -1,4 +1,4 @@
-package com.tailchat;
+package com.msgbyte.tailchat;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
