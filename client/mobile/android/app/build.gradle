@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.tailchat"
+    namespace "com.msgbyte.tailchat"
     defaultConfig {
-        applicationId "com.tailchat"
+        applicationId "com.msgbyte.tailchat"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

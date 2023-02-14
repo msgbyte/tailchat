@@ -1,4 +1,4 @@
-package com.tailchat;
+package com.msgbyte.tailchat;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
