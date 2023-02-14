@@ -633,6 +633,16 @@ importers:
       '@types/react-canvas-draw': 1.2.0
       react: 18.2.0
 
+  client/web/plugins/com.msgbyte.env.rn:
+    specifiers:
+      '@types/styled-components': ^5.1.26
+      react: 18.2.0
+      styled-components: ^5.3.6
+    devDependencies:
+      '@types/styled-components': 5.1.26
+      react: 18.2.0
+      styled-components: 5.3.6_react@18.2.0
+
   client/web/plugins/com.msgbyte.filepizza:
     specifiers:
       react: 18.2.0
