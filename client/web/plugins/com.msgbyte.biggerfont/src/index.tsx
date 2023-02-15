@@ -37,7 +37,7 @@ function updateFontsize(settings: any) {
   if (typeof settings === 'object' && typeof fontSize === 'string') {
     if (fontSize === '') {
       // 清除字号设置
-      document.documentElement.style.fontSize = undefined;
+      document.documentElement.style.fontSize = '';
     } else if (fontSize === 'md') {
       document.documentElement.style.fontSize = '18px';
     } else if (fontSize === 'lg') {
