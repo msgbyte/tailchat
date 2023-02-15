@@ -5,6 +5,7 @@ import _upperCase from 'lodash/upperCase';
 import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
 import _isNumber from 'lodash/isNumber';
+import _omit from 'lodash/omit';
 import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
 import { getTextColorHex } from './utils';
 import { isValidStr } from '../utils';
@@ -35,18 +36,27 @@ export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
       userSelect: 'none',
       ...props.style,
       backgroundColor: color,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     }),
     [props.style, color]
   );
 
-  if (_isNumber(props.size) && typeof style.fontSize === 'undefined') {
-    // 如果props.size是数字且没有指定文字大小
-    // 则自动增加fontSize大小
-    style.fontSize = props.size * 0.4;
+  if (_isNumber(props.size)) {
+    // 为了支持rem统一管理宽度，将size转换为样式宽度(size类型上不支持rem单位)
+    style.width = props.size * (1 / 16) + 'rem';
+    style.height = props.size * (1 / 16) + 'rem';
+
+    if (typeof style.fontSize === 'undefined') {
+      // 如果props.size是数字且没有指定文字大小
+      // 则自动增加fontSize大小
+      style.fontSize = props.size * 0.4 * (1 / 16) + 'rem';
+    }
   }
 
   const inner = (
-    <AntdAvatar {...props} src={src} style={style}>
+    <AntdAvatar {..._omit(props, ['size'])} src={src} style={style}>
       {name}
     </AntdAvatar>
   );
