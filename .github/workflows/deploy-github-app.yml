@@ -14,9 +14,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    defaults:
-      run:
-        working-directory: app/github-app
     steps:
     - uses: actions/checkout@v1
     - name: Deploy to Vercel
@@ -27,5 +24,5 @@ jobs:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         vercel-org-id: ${{ secrets.ORG_ID}}
         vercel-project-id: prj_KwCzbuSaEj3XmP0sYvvnqqiK7nCW
-        working-directory: ./
+        working-directory: ./apps/github-app
         vercel-args: '--prod'
