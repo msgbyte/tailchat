@@ -10,6 +10,7 @@ export type FullModalFactoryConfig = {
   name: string;
   label: string;
   desc?: string;
+  defaultValue?: any;
 } & (
   | {
       type: 'text';

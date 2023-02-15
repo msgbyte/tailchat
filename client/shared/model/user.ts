@@ -349,6 +349,8 @@ export async function modifyUserExtra(
 export async function getUserSettings(): Promise<UserSettings> {
   const { data } = await request.get('/api/user/getUserSettings');
 
+  sharedEvent.emit('userSettingsUpdate', data);
+
   return data;
 }
 

@@ -1,0 +1,19 @@
+{
+  "name": "@plugins/com.msgbyte.biggerfont",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "为Tailchat增加放大字号的功能,方便不同用户群体",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}

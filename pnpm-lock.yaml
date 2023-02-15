@@ -622,6 +622,21 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
 
+  client/web/plugins/com.msgbyte.biggerfont:
+    specifiers:
+      '@types/lodash': ^4.14.191
+      '@types/styled-components': ^5.1.26
+      lodash: ^4.17.21
+      react: 18.2.0
+      styled-components: ^5.3.6
+    dependencies:
+      lodash: 4.17.21
+    devDependencies:
+      '@types/lodash': 4.14.191
+      '@types/styled-components': 5.1.26
+      react: 18.2.0
+      styled-components: 5.3.6_react@18.2.0
+
   client/web/plugins/com.msgbyte.draw:
     specifiers:
       '@types/react-canvas-draw': ^1.1.1

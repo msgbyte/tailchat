@@ -48,7 +48,7 @@ export const SettingsSystem: React.FC = React.memo(() => {
           return (
             <FullModalFactory
               key={item.name}
-              value={_get(settings, item.name, false)}
+              value={_get(settings, item.name, item.defaultValue ?? false)}
               onChange={(val) => {
                 setSettings({
                   [item.name]: val,

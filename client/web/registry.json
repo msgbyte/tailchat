@@ -134,5 +134,14 @@
     "author": "moonrailgun",
     "description": "提供在线听音乐服务，内容来自网络",
     "requireRestart": true
+  },
+  {
+    "label": "字号放大",
+    "name": "com.msgbyte.biggerfont",
+    "url": "/plugins/com.msgbyte.biggerfont/index.js",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "为Tailchat增加放大字号的功能,方便不同用户群体",
+    "requireRestart": true
   }
 ]
