@@ -23,6 +23,7 @@ const AppInfo: React.FC = React.memo(() => {
             type: 'item',
             title: '总览',
             content: <Summary />,
+            isDev: true,
           },
           {
             type: 'item',
@@ -38,6 +39,7 @@ const AppInfo: React.FC = React.memo(() => {
             type: 'item',
             title: '网页',
             content: <Webpage />,
+            isDev: true,
           },
           {
             type: 'item',
