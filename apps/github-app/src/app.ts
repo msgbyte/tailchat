@@ -219,7 +219,7 @@ export function buildRouter(
       .get('/api/message/webhook', (_req, res) => {
         res.send('Please use POST method');
       })
-      .post('/message/webhook', bodyParser.json(), (req, res) => {
+      .post('/api/message/webhook', bodyParser.json(), (req, res) => {
         (async () => {
           try {
             // 根据收件箱内容向 Github Issue 创建话题
