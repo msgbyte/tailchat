@@ -207,14 +207,17 @@ function createTailchatClient(tailchatHost = defaultTailchatApiUrl) {
   return tailchatClient;
 }
 
-function buildRouter(
+export function buildRouter(
   app: Probot,
   getRouter: Parameters<ApplicationFunction>[1]['getRouter']
 ) {
   if (getRouter) {
     getRouter('/')
-      .get('/', (_req, res) => {
-        res.send('Hello World! Github app server is working!');
+      .get('/api', (_req, res) => {
+        res.send('Hello World! Github app api server is working!');
+      })
+      .get('/api/message/webhook', (_req, res) => {
+        res.send('Please use POST method');
       })
       .post('/message/webhook', bodyParser.json(), (req, res) => {
         (async () => {
