@@ -44,7 +44,7 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col select-text relative">
+    <div className="w-full h-full flex flex-col select-text relative text-sm">
       <ChatMessageList
         key={converseId}
         title={converseTitle}
