@@ -64,7 +64,7 @@ export const PluginStoreItem: React.FC<{
           <Avatar shape="square" src={manifest.icon} name={manifest.label} />
         </div>
 
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <div className="font-bold">{manifest.label}</div>
 
           <div className="text-xs text-gray-700 dark:text-gray-300 text-opacity-50">
