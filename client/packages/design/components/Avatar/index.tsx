@@ -7,7 +7,7 @@ import _isEmpty from 'lodash/isEmpty';
 import _isNumber from 'lodash/isNumber';
 import _omit from 'lodash/omit';
 import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
-import { getTextColorHex } from './utils';
+import { getTextColorHex, px2rem } from './utils';
 import { isValidStr } from '../utils';
 
 export { getTextColorHex };
@@ -45,13 +45,13 @@ export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
 
   if (_isNumber(props.size)) {
     // 为了支持rem统一管理宽度，将size转换为样式宽度(size类型上不支持rem单位)
-    style.width = props.size * (1 / 16) + 'rem';
-    style.height = props.size * (1 / 16) + 'rem';
+    style.width = px2rem(props.size);
+    style.height = px2rem(props.size);
 
     if (typeof style.fontSize === 'undefined') {
       // 如果props.size是数字且没有指定文字大小
       // 则自动增加fontSize大小
-      style.fontSize = props.size * 0.4 * (1 / 16) + 'rem';
+      style.fontSize = px2rem(props.size * 0.4);
     }
   }
 

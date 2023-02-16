@@ -32,3 +32,10 @@ export function getTextColorHex(text: unknown): string {
   const id = str2int(text);
   return colors[id % colors.length];
 }
+
+/**
+ * 将像素转换为rem单位
+ */
+export function px2rem(size: number): string {
+  return size * (1 / 16) + 'rem';
+}
