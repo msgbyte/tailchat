@@ -1,5 +1,18 @@
 
 
+## [1.6.5](https://github.com/msgbyte/tailchat/compare/v1.6.4...v1.6.5) (2023-02-17)
+
+
+### Bug Fixes
+
+* 修复放大字体插件默认状态不生效的bug ([f33a978](https://github.com/msgbyte/tailchat/commit/f33a9781795723cf972c6539eda9cb0b2d311111))
+* 修改Avatar宽度策略变更后CombinedAvatar样式异常的bug ([d3a6e1b](https://github.com/msgbyte/tailchat/commit/d3a6e1b196489ea276be2136a7d1e6f86589aabf))
+
+
+### Features
+
+* 增加字体放大插件 ([caf5a45](https://github.com/msgbyte/tailchat/commit/caf5a45fe1933911cdb0b0165232f372987e4cee))
+
 ## [1.6.4](https://github.com/msgbyte/tailchat/compare/v1.6.3...v1.6.4) (2023-02-14)
 
 
