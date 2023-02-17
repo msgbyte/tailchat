@@ -1,8 +1,8 @@
 import { Avatar, AvatarProps } from '.';
 import React from 'react';
 import _take from 'lodash/take';
-import './combined.css';
 import { px2rem } from './utils';
+import './combined.css';
 
 interface CombinedAvatarProps {
   shape?: 'circle' | 'square';

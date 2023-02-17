@@ -1,4 +1,3 @@
-import { Avatar } from '@/components/Avatar';
 import { Highlight } from '@/components/Highlight';
 import { Button, Divider, Empty, Typography } from 'antd';
 import {
@@ -14,6 +13,7 @@ import {
 } from 'tailchat-shared';
 import React, { useCallback, useState } from 'react';
 import _isNil from 'lodash/isNil';
+import { Avatar } from 'tailchat-design';
 
 const SearchFriendResult: React.FC<{
   result: UserBaseInfo | undefined | null;

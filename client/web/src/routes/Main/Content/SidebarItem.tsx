@@ -2,8 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Typography, Badge } from 'antd';
-import { Avatar } from '@/components/Avatar';
 import clsx from 'clsx';
+import { Avatar } from 'tailchat-design';
 
 interface SidebarItemProps {
   name: string;

@@ -1,4 +1,3 @@
-import { Avatar } from '@/components/Avatar';
 import { AvatarUploader } from '@/components/AvatarUploader';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import {
@@ -7,6 +6,7 @@ import {
 } from '@/components/FullModal/Field';
 import { NoData } from '@/components/NoData';
 import React from 'react';
+import { Avatar } from 'tailchat-design';
 import {
   modifyGroupField,
   showToasts,
