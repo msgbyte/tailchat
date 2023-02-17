@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: 纯前端插件 (19)
+title: 纯前端插件 (22)
 ---
 
 ### com.msgbyte.bbcode BBCode 消息解释器
@@ -11,12 +11,28 @@ title: 纯前端插件 (19)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.bbcode/manifest.json)
 
 
+### com.msgbyte.biggerfont 字号放大
+
+为Tailchat增加放大字号的功能,方便不同用户群体
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.biggerfont)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.biggerfont/manifest.json)
+
+
 ### com.msgbyte.draw 绘图插件
 
 允许发送自定义绘图
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw/manifest.json)
+
+
+### com.msgbyte.env.rn ReactNative支持
+
+在Tailchat添加对ReactNative环境的支持
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.rn)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.rn/manifest.json)
 
 
 ### com.msgbyte.filepizza file.pizza
@@ -73,6 +89,14 @@ title: 纯前端插件 (19)
 
 - [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.miaolang)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.miaolang/manifest.json)
+
+
+### com.msgbyte.music 在线听音乐
+
+提供在线听音乐服务，内容来自网络
+
+- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.music)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.music/manifest.json)
 
 
 ### com.msgbyte.notify 消息通知插件
