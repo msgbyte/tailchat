@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install npm dependencies
+        run: yarn
+
       - name: Build/release Electron app
         uses: paneron/action-electron-builder@v1.8.1
         with:
