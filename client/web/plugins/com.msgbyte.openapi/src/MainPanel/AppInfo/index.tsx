@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 import { SidebarView } from '@capital/component';
 import { Loadable } from '@capital/common';
 import { useOpenAppInfo } from '../context';
+import { Translate } from '../../translate';
 import './index.less';
 
-const Summary = Loadable(() => import('./Summary'));
+// const Summary = Loadable(() => import('./Summary'));
 const Profile = Loadable(() => import('./Profile'));
 const Bot = Loadable(() => import('./Bot'));
 const Webpage = Loadable(() => import('./Webpage'));
@@ -19,31 +20,31 @@ const AppInfo: React.FC = React.memo(() => {
         type: 'group',
         title: appName,
         children: [
+          // {
+          //   type: 'item',
+          //   title: '总览',
+          //   content: <Summary />,
+          //   isDev: true,
+          // },
           {
             type: 'item',
-            title: '总览',
-            content: <Summary />,
-            isDev: true,
-          },
-          {
-            type: 'item',
-            title: '基础信息',
+            title: Translate.app.basicInfo,
             content: <Profile />,
           },
           {
             type: 'item',
-            title: '机器人',
+            title: Translate.app.bot,
             content: <Bot />,
           },
           {
             type: 'item',
-            title: '网页',
+            title: Translate.app.webpage,
             content: <Webpage />,
             isDev: true,
           },
           {
             type: 'item',
-            title: '应用登录',
+            title: Translate.app.oauth,
             content: <OAuth />,
           },
         ],

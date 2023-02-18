@@ -8,21 +8,22 @@ import {
 } from '@capital/common';
 import { WebFastForm } from '@capital/component';
 import React from 'react';
+import { Translate } from '../translate';
 
 const schema = createFastFormSchema({
   appName: fieldSchema
     .string()
-    .required('应用名不能为空')
-    .max(20, '应用名过长'),
+    .required(Translate.appNameCannotBeEmpty)
+    .max(20, Translate.appNameTooLong),
   appDesc: fieldSchema.string(),
 });
 
 const fields = [
-  { type: 'text', name: 'appName', label: '应用名' },
+  { type: 'text', name: 'appName', label: Translate.app.appName },
   {
     type: 'textarea',
     name: 'appDesc',
-    label: '应用描述',
+    label: Translate.app.appDesc,
   },
 ];
 
@@ -38,7 +39,7 @@ export const CreateOpenApp: React.FC<CreateOpenAppProps> = React.memo(
           appIcon: '',
         });
 
-        showToasts('应用创建成功', 'success');
+        showToasts(Translate.createApplicationSuccess, 'success');
         props.onSuccess?.();
       } catch (e) {
         showErrorToasts(e);
@@ -46,7 +47,7 @@ export const CreateOpenApp: React.FC<CreateOpenAppProps> = React.memo(
     };
 
     return (
-      <ModalWrapper title="创建应用">
+      <ModalWrapper title={Translate.createApplication}>
         <WebFastForm schema={schema} fields={fields} onSubmit={handleSubmit} />
       </ModalWrapper>
     );

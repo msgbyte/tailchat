@@ -6,6 +6,7 @@ import {
 } from '@capital/component';
 import { useOpenAppInfo } from '../context';
 import { useOpenAppAction } from './useOpenAppAction';
+import { Translate } from '../../translate';
 
 const OAuth: React.FC = React.memo(() => {
   const { capability, oauth } = useOpenAppInfo();
@@ -15,7 +16,7 @@ const OAuth: React.FC = React.memo(() => {
   return (
     <div className="plugin-openapi-app-info_oauth">
       <FullModalField
-        title="开启 OAuth"
+        title={Translate.oauth.open}
         content={
           <Switch
             disabled={loading}
@@ -27,8 +28,8 @@ const OAuth: React.FC = React.memo(() => {
 
       {capability.includes('oauth') && (
         <FullModalField
-          title={'允许的回调地址'}
-          tip="多个回调地址单独一行"
+          title={Translate.oauth.allowedCallbackUrls}
+          tip={Translate.oauth.allowedCallbackUrlsTip}
           content={
             <>
               {(oauth?.redirectUrls ?? []).map((url, i) => (
