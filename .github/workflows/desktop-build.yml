@@ -13,10 +13,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-    defaults:
-      run:
-        working-directory: ./client/desktop
+        os:
+          # - macos-latest
+          # - ubuntu-latest
+          - windows-latest
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
@@ -26,8 +26,12 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install global dependencies
+        run: pnpm install
+
       - name: Install npm dependencies
         run: yarn
+        working-directory: ./client/desktop
 
       - name: Build/release Electron app
         uses: paneron/action-electron-builder@v1.8.1
