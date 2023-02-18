@@ -16,6 +16,7 @@ import MenuBuilder from './menu';
 import { getMainWindowUrl } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
+import { initScreenshots } from './screenshots';
 
 log.info('Start...');
 
@@ -189,6 +190,8 @@ app
   .whenReady()
   .then(() => {
     createWindow();
+    initScreenshots();
+
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
