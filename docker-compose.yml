@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  # 应用网关
+  # Gateway
   service-gateway:
     build:
       context: .
@@ -21,7 +21,7 @@ services:
     networks:
       - internal
 
-  # 用户服务
+  # User Service
   service-user:
     build:
       context: .
@@ -36,7 +36,7 @@ services:
     networks:
       - internal
 
-  # 群组服务
+  # Group Service
   service-group:
     build:
       context: .
@@ -51,7 +51,7 @@ services:
     networks:
       - internal
 
-  # 聊天服务
+  # Chat Service
   service-chat:
     build:
       context: .
@@ -66,7 +66,7 @@ services:
     networks:
       - internal
 
-  # 文件服务 / 插件注册中心 / 配置服务
+  # File Service / Plugin Registry / Configuration Service
   service-file:
     build:
       context: .
@@ -82,6 +82,7 @@ services:
     networks:
       - internal
 
+  # Open Platform
   service-openapi:
     build:
       context: .
@@ -103,7 +104,7 @@ services:
     networks:
       - internal
 
-  # 插件服务(所有插件)
+  # Plugin Service (All Plugins)
   service-all-plugins:
     build:
       context: .
@@ -119,7 +120,7 @@ services:
     networks:
       - internal
 
-  # 数据库
+  # Database
   mongo:
     image: mongo:4
     restart: on-failure
@@ -128,14 +129,14 @@ services:
     networks:
       - internal
 
-  # 数据缓存与中转通讯
+  # Data cache and Transporter
   redis:
     image: redis:alpine
     restart: on-failure
     networks:
       - internal
 
-  # 存储服务
+  # Persist Storage
   minio:
     image: minio/minio
     restart: on-failure
@@ -148,7 +149,7 @@ services:
       - storage:/data
     command: minio server /data --console-address ":9001"
 
-  # 路由转发
+  # Router
   traefik:
     image: traefik:v2.1
     restart: unless-stopped

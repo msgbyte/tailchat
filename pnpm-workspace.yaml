@@ -6,7 +6,7 @@ packages:
   - 'client/packages/**'
   - 'server'
   - 'server/admin'
-  - 'server/admin-next'
+  - 'server/admin-next' # wait for delete
   - 'server/packages/**'
   - 'server/plugins/**'
   - 'server/test/demo/**'

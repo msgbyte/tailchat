@@ -40,5 +40,5 @@ RUN pnpm run build
 # web static service port
 EXPOSE 3000
 
-# Start server
+# Start server, ENV var is necessary
 CMD ["pnpm", "start:service"]

@@ -9,7 +9,7 @@
     "publish": false
   },
   "hooks": {
-    "after:bump": "echo 更新版本成功"
+    "after:bump": "echo Version Upgrade Success. checkout more in CHANGELOG"
   },
   "plugins": {
     "@release-it/conventional-changelog": {

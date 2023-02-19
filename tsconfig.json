@@ -3,6 +3,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "strict": true,
+    "pretty": true,
     "importsNotUsedAsValues": "error",
     "experimentalDecorators": true,
   }
