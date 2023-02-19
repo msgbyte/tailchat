@@ -53,7 +53,7 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
       <div className="text-white">
         <div>
           <Avatar
-            className="mb-4"
+            className="mx-auto mb-4"
             size={64}
             src={inviteInfo.group.avatar}
             name={inviteInfo.group.name}
