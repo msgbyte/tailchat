@@ -15,7 +15,7 @@ title: Github 集成
 
 ### 在项目中进行配置
 
-在根目录创建`.tailchat/topic.json` 文件:
+在根目录创建 `.tailchat/topic.json` 文件:
 ```json
 {
   "groupId": "<your-notify-group-id>",

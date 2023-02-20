@@ -7,17 +7,9 @@
     "message": "应用部署",
     "description": "The label for category 应用部署 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.运维操作": {
-    "message": "运维操作",
-    "description": "The label for category 运维操作 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.插件列表": {
     "message": "插件列表",
     "description": "The label for category 插件列表 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.进阶使用": {
-    "message": "进阶使用",
-    "description": "The label for category 进阶使用 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.命令行终端": {
     "message": "命令行终端",
@@ -42,5 +34,13 @@
   "sidebar.tutorialSidebar.category.开发文档": {
     "message": "开发文档",
     "description": "The label for category 开发文档 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Operations": {
+    "message": "运维操作",
+    "description": "The label for category Operations in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced Usage": {
+    "message": "进阶使用",
+    "description": "The label for category Advanced Usage in sidebar tutorialSidebar"
   }
 }
