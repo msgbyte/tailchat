@@ -14,9 +14,13 @@ const themeConfig = {
         type: 'doc',
         docId: 'intro',
         position: 'left',
-        label: '文档',
+        label: 'Docs',
       },
-      { to: '/blog', label: '博客', position: 'left' },
+      { to: '/blog', label: 'Blog', position: 'left' },
+      {
+        type: 'localeDropdown',
+        position: 'right',
+      },
       {
         href: 'https://github.com/msgbyte/tailchat',
         label: 'GitHub',
@@ -104,7 +108,7 @@ const presetClassicOptions = {
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Tailchat',
-  tagline: '一个插件化易拓展的开源 IM 应用',
+  tagline: 'A pluginify opensource IM Application',
   url: 'https://tailchat.msgbyte.com', // TODO: 待修改成文档主页
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -113,6 +117,10 @@ module.exports = {
   organizationName: 'msgbyte', // Usually your GitHub org/user name.
   projectName: 'tailchat', // Usually your repo name.
   themeConfig,
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
+  },
   presets: [['@docusaurus/preset-classic', presetClassicOptions]],
   plugins: [require.resolve('docusaurus-plugin-image-zoom')],
 };

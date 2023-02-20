@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
+import Translate from '@docusaurus/Translate';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -18,7 +19,7 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="https://nightly.paw.msgbyte.com/"
           >
-            进入网页 Nightly 版
+            <Translate>Try in Nightly version</Translate>
           </Link>
         </div>
       </div>
