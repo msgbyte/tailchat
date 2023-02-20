@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Github 集成
 ---
 
-![](./assets/github-integration.excalidraw.png)
+![](/img/github-app/github-integration.excalidraw.png)
 
 ## 普通用户使用
 
@@ -28,7 +28,7 @@ title: Github 集成
 
 应用启动前需要在github中注册一个应用: 
 
-![](./assets/github-new-app.png)
+![](/img/github-app/github-new-app.png)
 
 部署时需要配置以下环境变量:
 - `APP_ID`: 来自github 应用设置

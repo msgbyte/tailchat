@@ -3,10 +3,10 @@ sidebar_position: 3
 title: 系统架构
 ---
 
-## 服务端架构
+## Backend Architecture
 
 ![](/img/architecture/backend.excalidraw.svg)
 
-## 插件机制架构
+## Plugin mechanism architecture
 
 ![](/img/architecture/plugin.excalidraw.svg)

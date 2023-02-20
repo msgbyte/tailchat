@@ -1,21 +1,21 @@
 ---
 sidebar_position: 2
-title: Github 集成
+title: Github integration
 ---
 
-![](./assets/github-integration.excalidraw.png)
+![](/img/github-app/github-integration.excalidraw.png)
 
-## 普通用户使用
+## Common user use
 
-### 在项目安装应用
+### Install the application in the project
 
-地址: https://github.com/apps/tailchat
+Link: https://github.com/apps/tailchat
 
-安装到项目仓库中。
+Install into the project repository.
 
-### 在项目中进行配置
+### Configure in the project
 
-在根目录创建`.tailchat/topic.json` 文件:
+Create `.tailchat/topic.json` file in the root directory:
 ```json
 {
   "groupId": "<your-notify-group-id>",
@@ -23,30 +23,29 @@ title: Github 集成
 }
 ```
 
-## 自部署配置
+## Self-host configuration
 
+An application needs to be registered in github before the application starts:
 
-应用启动前需要在github中注册一个应用: 
+![](/img/github-app/github-new-app.png)
 
-![](./assets/github-new-app.png)
+The following environment variables need to be configured during deployment:
+- `APP_ID`: from the github app settings
+- `WEBHOOK_SECRET`: from the github app settings
+- `PRIVATE_KEY`: from the github application settings
+- `TAILCHAT_APP_ID`: the id of the Tailchat open platform
+- `TAILCHAT_APP_SECRET`: The secret key of Tailchat open platform
+- `TAILCHAT_API_URL`: Tailchat backend address
 
-部署时需要配置以下环境变量:
-- `APP_ID`: 来自github 应用设置
-- `WEBHOOK_SECRET`: 来自github 应用设置
-- `PRIVATE_KEY`: 来自github 应用设置
-- `TAILCHAT_APP_ID`: Tailchat 开放平台的id
-- `TAILCHAT_APP_SECRET`: Tailchat 开放平台的秘钥
-- `TAILCHAT_API_URL`: Tailchat 后台地址
+In order to obtain `TAILCHAT_APP_ID` and `TAILCHAT_APP_SECRET`, you need to create an open platform application in the Tailchat open platform
 
-为获取 `TAILCHAT_APP_ID` 与 `TAILCHAT_APP_SECRET` 需要在 Tailchat 开放平台中创建一个开放平台应用
+At the same time, enable the robot permission and set the message callback link: `https://<your_app_url>/message/webhook`
 
-同时开启机器人权限，并设置消息回调地址: `https://<your_app_url>/message/webhook`
+### Deploy open platform applications
 
-### 部署开放平台应用
+> Source code: [https://github.com/msgbyte/tailchat/tree/master/apps/github-app](https://github.com/msgbyte/tailchat/tree/master/apps/github-app)
 
-> 源码: [https://github.com/msgbyte/tailchat/tree/master/apps/github-app](https://github.com/msgbyte/tailchat/tree/master/apps/github-app)
+After pulling the source code and deploying it to an accessible online, there are two ways:
 
-拉取源码后部署到可供访问的线上，提供两种方式:
-
-- 独立应用: `npm run build` 后执行 `node lib/index.js`运行应用
-- Vercel: 直接推送到Vercel即可
+- Standalone application: execute `node lib/index.js` after `npm run build` to run the application
+- Vercel: just push to Vercel directly

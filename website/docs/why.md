@@ -1,26 +1,26 @@
 ---
 sidebar_position: 2
-title: 使用场景
+title: Why Tailchat
 ---
 
-Tailchat 的设计之处就是以插件化的架构来满足不同人群对于不同需求的实现。
+The design of `Tailchat` is to use a plug-in architecture to meet different needs of different groups of people.
 
-## 对于个人用户
+## For personal
 
-- 如果希望和朋友一起玩
-  - 创建一个群组
-  - 通过多个频道分割不同的话题
-  - 使用网页面板来分享喜欢的网页
-- 如果希望聚集自己的粉丝圈
-  - 使用机器人来订阅自己的信息并转发到聊天面板
-  - 让自己的粉丝集中在一起，不需要创建无数个qq群/微信群
-  - 多个频道让多个话题能够一起产生
-- 如果对于自己的隐私非常看中
-  - 自己部署让一切都能掌控在手中
+- If you want to play with friends
+  - Create a group
+  - Divide different topics through multiple channels
+  - Use the web panel to share favorite web pages
+- If you want to gather your own fandom
+   - Use bots to subscribe to your own messages and forward them to the chat panel
+   - Let your fans gather together without creating countless qq groups/WeChat groups
+   - Multiple channels allow multiple topics to be generated together
+- If you are very fancy about your privacy
+   - Self-host to keep everything under control
 
-## 对于企业用户
+## For enterprise
 
-- 面板化设计满足企业自定义化设计需求
-- 插件化架构可以方便基于核心进行二次开发
-- 自部署的实现可以让企业价值得到保护，让企业安心
-- 开源代码方便审查
+- The panel design meets the customized design needs of enterprises
+- Plug-in architecture can facilitate secondary development based on the core
+- The realization of self-host can protect the value of the enterprise and make the enterprise feel at ease
+- Open source code for easy review

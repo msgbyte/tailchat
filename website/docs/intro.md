@@ -1,63 +1,65 @@
 ---
 sidebar_position: 1
-title: 概述
+title: Summary
 ---
 
-`Tailchat` 是一款插件化易拓展的开源 IM 应用。可拓展架构赋予 `Tailchat` 无限可能性。
+`Tailchat` is an open source IM application that is pluggable and easy to expand. Plugin architecture gives `Tailchat` unlimited possibilities.
 
-前端微内核架构 + 后端微服务架构 使得 `Tailchat` 能够驾驭任何定制化/私有化的场景
+Front-end micro-kernel architecture + back-end micro-service architecture makes `Tailchat` to control any customized/privatized scenarios
 
-面向企业与私域用户打造，高度自由的群组管理与定制化的面板展示可以让私域主能够更好的展示自己的作品，管理用户，打造自己的品牌与圈子。
+Created for enterprises and private domain users, highly free group management and customized panel display allow private domain owners to better display their works, manage users, and build their own brand and circle.
 
-## 特性
+## Feature
 
-- 完整的即时通讯基础能力
-- 插件化架构的赋予的自由拓展能力
-- 微服务架构赋予的水平拓展能力
+- Complete basic ability of instant messaging
+- The free expansion ability endowed by the plugin architecture
+- The horizontal expansion capability endowed by the microservice architecture
 
-## 亮点
+## Highlight
 
-- 基于[mini-star](https://ministar.moonrailgun.com/)的前端微内核架构与基于[moleculer](https://moleculer.services/)的后端微服务架构可以适应各种用户用量，便于拓展
-- 完整的聊天系统，支持提及、面板跳转、富文本、markdown、url链接等各种语法
-- 消息reaction机制，让你通过表情表达自己
-- 文件分享与图片发送
-- 支持语音通话与视频通话
-- 完善的身份组管理，权限控制颗粒化
-- 用户管理与用户禁言
-- 邮箱认证与密码找回
-- 多种面板: 网页嵌入, 自定义html, 话题面板
-- 简易消息推送与github通知订阅
-- 后台管理平台，可以
-- 开放平台
-  - 机器人
+- The front-end micro-kernel architecture based on [mini-star](https://ministar.moonrailgun.com/) and the back-end micro-service architecture based on [moleculer](https://moleculer.services/) can adapt to various user usage, easy to expand
+- A complete chat system that supports various syntaxes such as mentions, panel jumps, rich text, markdown, url links, etc.
+- Message reaction mechanism, allowing you to express yourself through expressions
+- File sharing and image sending
+- Support voice calls and video calls
+- Perfect identity group management, RBAC
+- User Management and User Muting
+- Email authentication and password retrieval
+- Various panels: web page embedding, custom html, topic panel
+- Simple message push and github notification subscription
+- Admin platform
+- Openapi platform
+  - Bot
   - OAuth
-- 插件带来的更多奇妙化学反应
-  - 自定义主题
-  - 在线听音乐
-  - 消息加密
-  - url获取元数据
-  - 隔空投送
-  - 任务管理
-  - 在线绘图
-  - 字体放大
-  - 工具箱
+- More wonderful chemical reactions brought by plugins
+  - custom theme
+  - listen to music online
+  - message encryption
+  - fetch link metadata
+  - Airdrop
+  - Task
+  - Draw
+  - Font size
+  - Toolbox
   - ...
 
-## 技术栈
+## Technology Stack
 
-- 前端
+- Frontend
   - `React`
   - `Redux`
   - `mini-star`
   - `tailwindcss`
   - `iconify`
-- 后端
+- Backend
   - `Nodejs`
   - `Socket.io`
   - `koa`
   - `moleculer`
 
 ## 截图
+
+<!-- TODO -->
 
 #### 插件中心
 
