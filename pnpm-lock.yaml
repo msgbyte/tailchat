@@ -186,6 +186,27 @@ importers:
       ts-node: 10.9.1_4hee3ckhxcse3era5mxqjwg7u4
       typescript: 4.9.5
 
+  apps/oauth-demo:
+    specifiers:
+      '@types/express': ^4.17.15
+      '@types/fs-extra': ^9.0.13
+      '@types/node': ^18.13.0
+      express: ^4.18.2
+      fs-extra: ^11.1.0
+      tailchat-server-sdk: workspace:^0.0.14
+      ts-node: ^10.9.1
+      typescript: ^4.9.5
+    dependencies:
+      express: 4.18.2
+      fs-extra: 11.1.0
+      tailchat-server-sdk: link:../../server/packages/sdk
+    devDependencies:
+      '@types/express': 4.17.15
+      '@types/fs-extra': 9.0.13
+      '@types/node': 18.13.0
+      ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
+      typescript: 4.9.5
+
   apps/widget:
     specifiers:
       typescript: ^4.8.2
@@ -1093,6 +1114,7 @@ importers:
       '@fastify/busboy': ^1.1.0
       '@typegoose/typegoose': 9.3.1
       accept-language: ^3.0.18
+      axios: ^1.3.3
       body-parser: ^1.20.1
       crc: ^3.8.0
       dotenv: ^10.0.0
@@ -1117,6 +1139,7 @@ importers:
       '@fastify/busboy': 1.1.0
       '@typegoose/typegoose': 9.3.1_mongoose@6.1.1
       accept-language: 3.0.18
+      axios: 1.3.3
       body-parser: 1.20.1
       crc: 3.8.0
       dotenv: 10.0.0
@@ -12736,7 +12759,7 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 18.11.18
+      '@types/node': 18.13.0
 
   /@types/bonjour/3.5.10:
     resolution: {integrity: sha512-p7ienRMiS41Nu2/igbJxxLDWrSZ0WxM8UQgCeO9KhoVF7cOVFkrKsiDr1EsJIla8vV3oEEjGcz11jc5yimhzZw==}
@@ -12784,7 +12807,7 @@ packages:
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.13.0
 
   /@types/content-disposition/0.5.5:
     resolution: {integrity: sha512-v6LCdKfK6BwcqMo+wYW05rLS12S0ZO0Fl4w1h4aaZMD7bqT3gVUns6FvLJKGZHQmYn3SX55JWGpziwJRwVgutA==}
@@ -12932,7 +12955,7 @@ packages:
   /@types/express-serve-static-core/4.17.31:
     resolution: {integrity: sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==}
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.13.0
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
 
@@ -12961,7 +12984,7 @@ packages:
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 18.11.16
+      '@types/node': 18.13.0
 
   /@types/generate-json-webpack-plugin/0.3.4:
     resolution: {integrity: sha512-MubuE9xfB/NYIDGsmDs6O5nw6SDRmiUMAIWEfDHng1gQoI6w0/Zaa0CPTWIQ3OoiE9Z988q4R4Vsog4r6gXFvg==}
@@ -13306,6 +13329,9 @@ packages:
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
 
+  /@types/node/18.13.0:
+    resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
+
   /@types/node/18.7.11:
     resolution: {integrity: sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==}
     dev: true
@@ -13610,7 +13636,7 @@ packages:
     resolution: {integrity: sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 18.11.18
+      '@types/node': 18.13.0
 
   /@types/sockjs/0.3.33:
     resolution: {integrity: sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==}
@@ -15403,6 +15429,16 @@ packages:
 
   /axios/1.3.2:
     resolution: {integrity: sha512-1M3O703bYqYuPhbHeya5bnhpYVsDDRyQSabNja04mZtboLNSuZ4YrltestrLXfHgmzua4TpUqRiVKbiQuo2epw==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/1.3.3:
+    resolution: {integrity: sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -21638,7 +21674,6 @@ packages:
       graceful-fs: 4.2.10
       jsonfile: 6.1.0
       universalify: 2.0.0
-    dev: true
 
   /fs-extra/8.1.0:
     resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
@@ -36903,6 +36938,37 @@ packages:
     resolution: {integrity: sha512-1qrhAlavbm36wtW+7NtKOgxpzl+70NTF8xlz9mEhiA5zHMlMxjj3sEVKWm3pGZhHXE0Q3ykjrj+OSRVaYw+Dqg==}
     dependencies:
       tweetnacl: 1.0.3
+    dev: true
+
+  /ts-node/10.9.1_4bewfcp2iebiwuold25d6rgcsy:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 18.13.0
+      acorn: 8.8.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.5
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
     dev: true
 
   /ts-node/10.9.1_4hee3ckhxcse3era5mxqjwg7u4:

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strict": true,
+    "importsNotUsedAsValues": "error",
+    "experimentalDecorators": true,
+  }
+}

@@ -46,6 +46,9 @@ export type { UserStruct, UserType } from './structs/user';
 // db
 export * as db from './db';
 
+// openapi
+export * from './openapi';
+
 export * from './const';
 
 // other
