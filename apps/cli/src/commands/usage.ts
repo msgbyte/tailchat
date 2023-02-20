@@ -7,11 +7,11 @@ import _ from 'lodash';
 
 export const usageCommand: CommandModule = {
   command: 'usage [pid]',
-  describe: '查看 Tailchat 进程用量',
+  describe: 'View Tailchat process usage',
   builder: (yargs) =>
     yargs.positional('pid', {
       demandOption: false,
-      description: '进程ID',
+      description: 'process id',
       type: 'number',
     }),
   async handler(args) {
@@ -26,7 +26,7 @@ export const usageCommand: CommandModule = {
         {
           type: 'checkbox',
           name: 'process',
-          message: '选择需要查看的进程',
+          message: 'Select the process to view',
           choices: processList.map((item) => ({
             name: `(${item.pid})${item.cmd}`,
             value: item.pid,

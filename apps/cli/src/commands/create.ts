@@ -7,11 +7,11 @@ const plop = nodePlop(path.resolve(__dirname, '../../templates/plopfile.js'));
 
 export const createCommand: CommandModule = {
   command: 'create [template]',
-  describe: '创建 Tailchat 项目代码',
+  describe: 'Create Tailchat repo code',
   builder: (yargs) =>
     yargs.positional('template', {
       demandOption: true,
-      description: '代码模板名',
+      description: 'Template Name',
       type: 'string',
       choices: plop.getGeneratorList().map((v) => v.name),
     }),
@@ -23,7 +23,7 @@ export const createCommand: CommandModule = {
         {
           type: 'list',
           name: 'template',
-          message: '选择代码模板',
+          message: 'Choose Template',
           choices: plop.getGeneratorList().map((v) => ({
             name: `${v.name} (${v.description})`,
             value: v.name,
@@ -40,11 +40,11 @@ export const createCommand: CommandModule = {
     const answers = await basic.runPrompts();
     const results = await basic.runActions(answers);
 
-    console.log('操作变更:');
+    console.log('Changes:');
     console.log(results.changes.map((change) => change.path).join('\n'));
 
     if (results.failures.length > 0) {
-      console.log('操作失败:');
+      console.log('Operation failed:');
       console.log(results.failures);
     }
   },

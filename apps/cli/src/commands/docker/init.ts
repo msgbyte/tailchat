@@ -11,24 +11,28 @@ import { withGhProxy } from '../../utils';
 // https://docs.docker.com/engine/api/v1.41/
 
 const initWelcome = `================
-正在为您初始化 Tailchat 配置与环境变量
-完整的环境变量列表可以访问: ${chalk.underline(
+Initializing Tailchat configuration and environment variables for you
+A complete list of environment variables can be accessed at: ${chalk.underline(
   'https://tailchat.msgbyte.com/docs/deployment/environment'
-)} 以了解更多
+)} to learn more
 ================`;
 
 const initCompleted = (dir: string) =>
   chalk.green(`================
-恭喜你已经成功完成了配置初始化, 你的配置文件已经准备就绪，距离成功成功部署就差一步了!
+Congratulations, you have successfully completed the configuration initialization, your configuration file is ready, and you are one step away from a successful deployment!
 
-你的tailchat配置文件都被存储在: ${chalk.underline(
+Your tailchat configuration files are stored in: ${chalk.underline(
     path.join(process.cwd(), dir)
   )}
 
-运行以下命令以完成镜像下载与启动:
-- ${chalk.bold(`cd ${dir}`)} ${chalk.gray('# 移动到安装目录')}
-- ${chalk.bold('tailchat docker update')} ${chalk.gray('# 下载/更新官方镜像')}
-- ${chalk.bold('docker compose up -d')} ${chalk.gray('# 启动服务')}
+Run the following command to complete the image download and start:
+- ${chalk.bold(`cd ${dir}`)} ${chalk.gray(
+    '# Move to the installation directory'
+  )}
+- ${chalk.bold('tailchat docker update')} ${chalk.gray(
+    '# Download/update the official mirror'
+  )}
+- ${chalk.bold('docker compose up -d')} ${chalk.gray('# Start service')}
 ================`);
 
 const envUrl = withGhProxy(
@@ -40,7 +44,7 @@ const configUrl = withGhProxy(
 
 export const dockerInitCommand: CommandModule = {
   command: 'init',
-  describe: '初始化Tailchat with docker配置',
+  describe: 'Initialize Tailchat with docker configuration',
   builder: undefined,
   async handler(args) {
     const spinner = ora();
@@ -51,36 +55,37 @@ export const dockerInitCommand: CommandModule = {
           name: 'dir',
           type: 'input',
           default: './tailchat',
-          message: '配置存放目录',
+          message: 'Configurate storage directory',
         },
         {
           name: 'secret',
           type: 'input',
           default: randomString({ length: 16 }),
           message:
-            '(SECRET)请输入任意字符串，这将会作为Tailchat进行用户身份签名的秘钥，泄露该字符串则会产生身份伪造的风险, 默认随机生成一个16位字符串',
+            '(SECRET)Please enter any string, which will be used as the secret key for Tailchat to sign the user identity. Leaking this string will cause the risk of identity forgery. By default, a 16-digit string is randomly generated',
         },
         {
           name: 'apiUrl',
           type: 'input',
           message:
-            '(API_URL)请配置外网能够访问的地址，这个会影响文件的存储路径与访问地址, 示例: https://tailchat.example.com',
+            '(API_URL)Please configure an address that can be accessed by the external network, which will affect the storage path and access address of the file, example: https://tailchat.example.com',
         },
         {
           name: 'fileLimit',
           type: 'number',
           default: 1048576,
-          message: '(FILE_LIMIT)文件上传体积限制, 默认为 1048576(1m)',
+          message:
+            '(FILE_LIMIT)File upload volume limit, the default is 1048576(1m)',
         },
       ]);
 
-      spinner.start('开始下载最新的配置文件');
+      spinner.start('Start downloading the latest configuration file');
       // eslint-disable-next-line prefer-const
       let [rawEnv, rawConfig] = await Promise.all([
         got(envUrl).then((res) => res.body),
         got(configUrl).then((res) => res.body),
       ]);
-      spinner.info('配置文件下载完毕');
+      spinner.info('The configuration file is downloaded');
 
       if (secret) {
         rawEnv = setEnvValue(rawEnv, 'SECRET', secret);
@@ -96,7 +101,7 @@ export const dockerInitCommand: CommandModule = {
 
       if (
         await promptConfirm(
-          '需要配置邮件服务么?邮件服务可以用于密码找回以及邮件通知等功能。'
+          'Do you need to configure the email service? The email service can be used for functions such as password retrieval and email notification.'
         )
       ) {
         const { stmpURI, stmpSender } = await inquirer.prompt([
@@ -104,13 +109,13 @@ export const dockerInitCommand: CommandModule = {
             name: 'stmpURI',
             type: 'input',
             message:
-              '(SMTP_URI)请配置邮件服务SMTP的连接地址，示例: smtps://username:password@example.mailserver.com/?pool=true',
+              '(SMTP_URI) Please configure the SMTP connection address of the mail service, for example: smtps://username:password@example.mailserver.com/?pool=true',
           },
           {
             name: 'stmpSender',
             type: 'input',
             message:
-              '(SMTP_SENDER)邮件发送人，示例: "Tailchat" tailchat@example.mailserver.com',
+              '(SMTP_SENDER) Email sender, example: "Tailchat" tailchat@example.mailserver.com',
           },
         ]);
 
@@ -124,7 +129,7 @@ export const dockerInitCommand: CommandModule = {
         if (stmpURI && stmpSender) {
           if (
             await promptConfirm(
-              '是否需要开启邮箱校验? 开启后当用户注册时需要校验邮箱通过以后才能继续注册'
+              'Do you need to enable email verification? After it is enabled, when the user registers, it is necessary to verify the email address and pass it before continuing to register'
             )
           ) {
             rawEnv = setEnvValue(rawEnv, 'EMAIL_VERIFY', 'true');
@@ -132,20 +137,20 @@ export const dockerInitCommand: CommandModule = {
         }
       }
 
-      spinner.info(`正在创建目录 ${dir} ...`);
+      spinner.info(`Creating directory ${dir} ...`);
       await fs.mkdirp(dir);
 
-      spinner.info('正在写入配置文件 ...');
+      spinner.info('Writing configuration file ...');
 
       await Promise.all([
         fs.writeFile(path.join(dir, 'docker-compose.env'), rawEnv),
         fs.writeFile(path.join(dir, 'docker-compose.yml'), rawConfig),
       ]);
-      spinner.succeed('配置初始化完毕');
+      spinner.succeed('The configuration is initialized');
 
       console.log(initCompleted(dir));
     } catch (err) {
-      spinner.fail('Tailchat with docker 初始化出现意外');
+      spinner.fail('Unexpected initialization of Tailchat with docker');
       console.error(err);
     }
   },

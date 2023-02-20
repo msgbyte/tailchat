@@ -12,11 +12,11 @@ const onlineDeclarationUrl = withGhProxy(
 
 export const declarationCommand: CommandModule = {
   command: 'declaration <source>',
-  describe: 'Tailchat 插件类型声明',
+  describe: 'Tailchat plugin type declaration',
   builder: (yargs) =>
     yargs.positional('source', {
       demandOption: true,
-      description: '声明类型来源',
+      description: 'Declaration Type Source',
       type: 'string',
       choices: ['empty', 'github'],
     }),
@@ -28,14 +28,14 @@ export const declarationCommand: CommandModule = {
         {
           type: 'list',
           name: 'source',
-          message: '选择类型来源',
+          message: 'Select type source',
           choices: [
             {
-              name: '空',
+              name: 'Empty',
               value: 'empty',
             },
             {
-              name: '从 Github 下载完整声明',
+              name: 'Download the full statement from Github',
               value: 'github',
             },
           ],
@@ -51,18 +51,20 @@ export const declarationCommand: CommandModule = {
     } else if (source === 'github') {
       const url = onlineDeclarationUrl;
 
-      const spinner = ora(`正在从 Github 下载插件类型声明: ${url}`).start();
+      const spinner = ora(
+        `Downloading plugin type declarations from Github: ${url}`
+      ).start();
 
       content = await got.get(url).then((res) => res.body);
 
-      spinner.succeed('声明文件下载完毕');
+      spinner.succeed('The declaration file has been downloaded');
     }
 
     if (content !== '') {
       const target = path.resolve(process.cwd(), './types/tailchat.d.ts');
       await mkdirp(path.dirname(target));
       await fs.writeFile(target, content);
-      console.log('写入类型文件完毕:', target);
+      console.log('Writing type file complete:', target);
     }
   },
 };

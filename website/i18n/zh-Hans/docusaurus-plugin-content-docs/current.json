@@ -11,10 +11,6 @@
     "message": "插件列表",
     "description": "The label for category 插件列表 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.命令行终端": {
-    "message": "命令行终端",
-    "description": "The label for category 命令行终端 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.视频会议": {
     "message": "视频会议",
     "description": "The label for category 视频会议 in sidebar tutorialSidebar"
@@ -42,5 +38,9 @@
   "sidebar.tutorialSidebar.category.Advanced Usage": {
     "message": "进阶使用",
     "description": "The label for category Advanced Usage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.cli": {
+    "message": "命令行终端",
+    "description": "The label for category cli in sidebar tutorialSidebar"
   }
 }

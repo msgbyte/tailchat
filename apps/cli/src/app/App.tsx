@@ -31,7 +31,7 @@ export const App: React.FC = React.memo(() => {
 
       <Box>
         <Tabs flexDirection="column" onChange={() => {}}>
-          {/* 因为react版本问题暂时注释 */}
+          {/* Temporary comments due to react version issues */}
           {/* <Tab name="tab1">
             <Text>Foo</Text>
           </Tab>

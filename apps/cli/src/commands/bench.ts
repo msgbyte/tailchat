@@ -12,41 +12,41 @@ import filesize from 'filesize';
 
 export const benchCommand: CommandModule = {
   command: 'bench',
-  describe: '压力测试',
+  describe: 'Benchmark',
   builder: (yargs) =>
     yargs
       .command(
         'message',
-        '通过Tailchat网络请求进行压力测试(适用于纯业务测试)',
+        'Stress testing through Tailchat network requests (suitable for pure business testing)',
         (yargs) =>
           yargs
             .option('groupId', {
-              describe: '群组ID',
+              describe: 'Group ID',
               demandOption: true,
               type: 'string',
             })
             .option('converseId', {
-              describe: '会话ID',
+              describe: 'Converse ID',
               demandOption: true,
               type: 'string',
             })
             .option('userId', {
-              describe: '用户ID',
+              describe: 'User ID',
               demandOption: true,
               type: 'string',
             })
             .option('num', {
-              describe: '测试次数',
+              describe: 'Test Num',
               type: 'number',
               default: 100,
             })
             .option('parallel', {
-              describe: '是否并发',
+              describe: 'Is Parallel',
               type: 'boolean',
               default: false,
             })
             .option('parallelLimit', {
-              describe: '并发上限',
+              describe: 'Parallel Limit',
               type: 'number',
               default: Infinity,
             }),
@@ -89,10 +89,10 @@ export const benchCommand: CommandModule = {
               return usage;
             },
             onCompleted: (res) => {
-              console.log(`测试数量: \t${res.length}`);
-              console.log(`最大用时: \t${prettyMs(Math.max(...res, 0))}`);
-              console.log(`最小用时: \t${prettyMs(Math.min(...res, 0))}`);
-              console.log(`平均用时: \t${prettyMs(_.mean(res))}`);
+              console.log(`Test Num: \t${res.length}`);
+              console.log(`Max Usage: \t${prettyMs(Math.max(...res, 0))}`);
+              console.log(`Min Usage: \t${prettyMs(Math.min(...res, 0))}`);
+              console.log(`Average time: \t${prettyMs(_.mean(res))}`);
             },
           });
 
@@ -107,11 +107,11 @@ export const benchCommand: CommandModule = {
  * 打印系统信息
  */
 function printSystemInfo() {
-  console.log(`主机: \t${os.hostname()}`);
-  console.log(`系统: \t${os.type()} - ${os.release()}`);
-  console.log(`架构: \t${os.arch()} - ${os.version()}`);
+  console.log(`Host: \t${os.hostname()}`);
+  console.log(`System: \t${os.type()} - ${os.release()}`);
+  console.log(`Architecture: \t${os.arch()} - ${os.version()}`);
   console.log(`CPU: \t${os.cpus().length}`);
-  console.log(`内存: \t${filesize(os.totalmem(), { base: 2 })}`);
+  console.log(`Memory: \t${filesize(os.totalmem(), { base: 2 })}`);
 }
 
 function calcUsage(startTime: [number, number]) {
@@ -143,10 +143,12 @@ async function startBenchmark<T>(options: BenchmarkOptions<T>) {
   const spinner = ora();
 
   spinner.info(
-    `测试方式: ${parallel ? `并行, 并行上限 ${parallelLimit}` : `串行`}`
+    `Test mode: ${
+      parallel ? `parallel, parallel limit ${parallelLimit}` : `serial`
+    }`
   );
-  spinner.info(`执行任务数: ${number}`);
-  spinner.start('正在执行基准测试...');
+  spinner.info(`Number of tasks to execute: ${number}`);
+  spinner.start('Benchmark in progress...');
   try {
     const startTime = process.hrtime();
     let res: (T | false)[] = [];
@@ -172,13 +174,13 @@ async function startBenchmark<T>(options: BenchmarkOptions<T>) {
     const allUsage = calcUsage(startTime);
     const succeed = res.filter((i): i is T => Boolean(i));
     const failed = res.filter((i) => !Boolean(i));
-    spinner.succeed(`基准测试完毕, 用时: ${prettyMs(allUsage)}`);
-    console.log(`成功/失败: ${succeed.length}/${failed.length}`);
+    spinner.succeed(`Benchmarking is complete, usage: ${prettyMs(allUsage)}`);
+    console.log(`Success/Failed: ${succeed.length}/${failed.length}`);
     console.log(`TPS: ${res.length / (allUsage / 1000)}`);
 
     onCompleted(succeed);
   } catch (err) {
     console.error(err);
-    spinner.fail(`基准测试出现问题`).stop();
+    spinner.fail(`A problem with benchmarking`).stop();
   }
 }

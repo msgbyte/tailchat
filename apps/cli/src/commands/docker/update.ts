@@ -12,12 +12,12 @@ const targetImageName = targetImage.repo + targetImage.tag;
 
 export const dockerUpdateCommand: CommandModule = {
   command: 'update',
-  describe: '更新Tailchat镜像版本',
+  describe: 'Update Tailchat image version',
   builder: undefined,
   async handler(args) {
     const docker = new Docker();
 
-    const spinner = ora().start('开始更新镜像');
+    const spinner = ora().start('Start updating the image');
 
     try {
       const pullSpinnies = new Spinnies();
@@ -32,7 +32,7 @@ export const dockerUpdateCommand: CommandModule = {
             return;
           }
 
-          spinner.info('已找到远程镜像, 开始下载');
+          spinner.info('The remote image has been found, start downloading');
 
           docker.modem.followProgress(
             stream,
@@ -82,22 +82,26 @@ export const dockerUpdateCommand: CommandModule = {
         });
       });
 
-      spinner.succeed('下载镜像完毕');
+      spinner.succeed('Download image complete');
 
       const image = docker.getImage(remoteImageName);
 
       if (!image) {
-        spinner.fail('出现异常，没有找到下载的镜像');
+        spinner.fail(
+          'An exception occurred, the downloaded image was not found'
+        );
         return;
       }
 
-      spinner.info('正在更新镜像标签');
+      spinner.info('Updating image tags');
 
       await image.tag(targetImage);
 
-      spinner.succeed('镜像标签更新完毕');
+      spinner.succeed('The image tag has been updated');
     } catch (err) {
-      spinner.fail('更新出现错误, 请检查网络配置');
+      spinner.fail(
+        'An update error occurred, please check the network configuration'
+      );
       console.error(err);
     }
   },

@@ -5,7 +5,7 @@ import { config } from 'dotenv';
 
 export const connectCommand: CommandModule = {
   command: 'connect',
-  describe: '连接到 Tailchat 节点网络',
+  describe: 'Connect to Tailchat network',
   builder: undefined,
   async handler(args) {
     config();

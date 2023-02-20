@@ -5,7 +5,7 @@ import filesize from 'filesize';
 
 export const dockerDoctorCommand: CommandModule = {
   command: 'doctor',
-  describe: 'docker 环境检查',
+  describe: 'docker environment check',
   builder: undefined,
   async handler(args) {
     const docker = new Docker();
@@ -15,7 +15,7 @@ export const dockerDoctorCommand: CommandModule = {
       (image.RepoTags ?? []).some((tag) => tag.includes('tailchat'))
     );
 
-    console.log('Tailchat 镜像列表:');
+    console.log('Tailchat image list:');
     console.log(
       asTable.configure({ delimiter: ' | ' })(
         tailchatImages.map((image) => ({

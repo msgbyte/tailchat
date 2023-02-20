@@ -7,7 +7,7 @@ import { dockerDoctorCommand } from './doctor';
 
 export const dockerCommand: CommandModule = {
   command: 'docker',
-  describe: 'Tailchat 镜像管理',
+  describe: 'Tailchat image management',
   builder: (yargs) =>
     yargs
       .command(dockerInitCommand)
