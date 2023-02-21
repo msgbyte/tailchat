@@ -43,6 +43,7 @@
     "filesize": "^8.0.7",
     "find-process": "^1.4.7",
     "fs-extra": "^10.1.0",
+    "glob": "^8.1.0",
     "got": "11.8.5",
     "ink": "^3.2.0",
     "ink-tab": "^4.2.0",
@@ -65,6 +66,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^8.0.0",
     "@types/inquirer": "^8.2.1",
     "@types/lodash": "^4.14.170",
     "@types/node": "16.11.7",

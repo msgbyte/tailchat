@@ -7,6 +7,7 @@ import { declarationCommand } from './commands/declaration';
 import { benchCommand } from './commands/bench';
 import { dockerCommand } from './commands/docker';
 import { usageCommand } from './commands/usage';
+import { registryCommand } from './commands/registry';
 
 yargs
   .demandCommand()
@@ -16,6 +17,7 @@ yargs
   .command(benchCommand)
   .command(declarationCommand)
   .command(dockerCommand)
+  .command(registryCommand)
   .command(usageCommand)
   .alias('h', 'help')
   .scriptName('tailchat')

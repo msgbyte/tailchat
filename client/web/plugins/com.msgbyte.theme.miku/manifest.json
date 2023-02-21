@@ -1,9 +1,11 @@
 {
-  "label": "Miku初音未来主题",
+  "label": "Hatsune Miku Theme",
+  "label.zh-CN": "Miku初音未来主题",
   "name": "com.msgbyte.theme.miku",
   "url": "/plugins/com.msgbyte.theme.miku/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "初音未来主题，支持亮色与暗色",
+  "description": "Hatsune Miku theme, supports light and dark colors",
+  "description.zh-CN": "初音未来主题，支持亮色与暗色",
   "requireRestart": false
 }

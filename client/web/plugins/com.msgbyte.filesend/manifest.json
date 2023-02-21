@@ -1,9 +1,11 @@
 {
   "label": "filesend",
+  "label.zh-CN": "filesend",
   "name": "com.msgbyte.filesend",
   "url": "/plugins/com.msgbyte.filesend/index.js",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "在聊天输入框快捷打开 Filesend 以支持传输文件",
+  "description": "Quickly open Filesend in the chat input box to support file transfer",
+  "description.zh-CN": "在聊天输入框快捷打开 Filesend 以支持传输文件",
   "requireRestart": true
 }

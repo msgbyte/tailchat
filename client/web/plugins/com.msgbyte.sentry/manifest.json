@@ -5,6 +5,7 @@
   "icon": "/plugins/com.msgbyte.sentry/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "Sentry 错误处理",
+  "description": "Sentry error handling",
+  "description.zh-CN": "Sentry 错误处理",
   "requireRestart": true
 }

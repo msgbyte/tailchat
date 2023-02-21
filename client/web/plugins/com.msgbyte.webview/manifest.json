@@ -1,10 +1,12 @@
 {
-  "label": "网页面板插件",
+  "label": "Web Panel Plugin",
+  "label.zh-CN": "网页面板插件",
   "name": "com.msgbyte.webview",
   "url": "/plugins/com.msgbyte.webview/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "为群组提供创建网页面板的功能",
+  "description": "Provides groups with the ability to create web panels",
+  "description.zh-CN": "为群组提供创建网页面板的功能",
   "documentUrl": "/plugins/com.msgbyte.webview/README.md",
   "requireRestart": false
 }

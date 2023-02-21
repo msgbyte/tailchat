@@ -1,11 +1,13 @@
 {
-  "label": "隔空投送",
+  "label": "Snapdrop",
+  "label.zh-CN": "隔空投送",
   "name": "com.msgbyte.snapdrop",
   "url": "/plugins/com.msgbyte.snapdrop/index.js",
   "icon": "/plugins/com.msgbyte.snapdrop/assets/icon.png",
   "documentUrl": "/plugins/com.msgbyte.snapdrop/README.md",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "隔空投送 —— 在同一网络发送文件与消息",
+  "description": "Snapdrop —— Send files and messages on the same network",
+  "description.zh-CN": "隔空投送 —— 在同一网络发送文件与消息",
   "requireRestart": false
 }

@@ -1,11 +1,13 @@
 {
-  "label": "原神主题",
+  "label": "Genshin Theme",
+  "label.zh-CN": "原神主题",
   "name": "com.msgbyte.theme.genshin",
   "url": "/plugins/com.msgbyte.theme.genshin/index.js",
   "icon": "/plugins/com.msgbyte.theme.genshin/assets/icon.jpg",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "原神主题",
+  "description": "Genshin Theme",
+  "description.zh-CN": "原神主题",
   "documentUrl": "/plugins/com.msgbyte.theme.genshin/README.md",
   "requireRestart": false
 }

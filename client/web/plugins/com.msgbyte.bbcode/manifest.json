@@ -1,9 +1,11 @@
 {
-  "label": "BBCode 消息解释器",
+  "label": "BBCode Mmessage Interpreter",
+  "label.zh-CN": "BBCode 消息解释器",
   "name": "com.msgbyte.bbcode",
   "url": "/plugins/com.msgbyte.miaolang/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "一个用于支持bbcode语法解释富文本消息的插件",
+  "description": "A plugin for supporting bbcode syntax to interpret rich text messages",
+  "description.zh-CN": "一个用于支持bbcode语法解释富文本消息的插件",
   "requireRestart": true
 }

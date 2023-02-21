@@ -1,10 +1,12 @@
 {
-  "label": "喵语言",
+  "label": "Miaolang",
+  "label.zh-CN": "喵语言",
   "name": "com.msgbyte.miaolang",
   "url": "/plugins/com.msgbyte.miaolang/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "允许发送喵语，安装插件后的双方加密对话，未安装插件的人看到的是 '喵'",
+  "description": "It is allowed to send meow, and the two parties encrypt the conversation after installing the plugin. People who have not installed the plugin will see 'meow'",
+  "description.zh-CN": "允许发送喵语，安装插件后的双方加密对话，未安装插件的人看到的是 '喵'",
   "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
   "requireRestart": false
 }

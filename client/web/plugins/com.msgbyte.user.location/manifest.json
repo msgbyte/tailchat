@@ -1,9 +1,11 @@
 {
-  "label": "用户地理位置",
+  "label": "User Location",
+  "label.zh-CN": "用户地理位置",
   "name": "com.msgbyte.user.location",
   "url": "/plugins/com.msgbyte.user.location/index.js",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "为用户信息增加地理位置记录",
+  "description": "Add geographic location records for user information",
+  "description.zh-CN": "为用户信息增加地理位置记录",
   "requireRestart": true
 }

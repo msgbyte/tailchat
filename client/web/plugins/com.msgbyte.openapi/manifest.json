@@ -1,9 +1,11 @@
 {
-  "label": "开放平台插件",
+  "label": "Openapi Platform Plugin",
+  "label.zh-CN": "开放平台插件",
   "name": "com.msgbyte.openapi",
   "url": "/plugins/com.msgbyte.openapi/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "为应用提供开放平台的操作能力",
+  "description": "Provide the operating capability of the open platform for the application",
+  "description.zh-CN": "为应用提供开放平台的操作能力",
   "requireRestart": true
 }

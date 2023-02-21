@@ -1,80 +1,154 @@
 [
   {
-    "label": "喵语言",
-    "name": "com.msgbyte.miaolang",
-    "url": "/plugins/com.msgbyte.miaolang/index.js",
+    "label": "Bigger Font Size",
+    "label.zh-CN": "字号放大",
+    "name": "com.msgbyte.biggerfont",
+    "url": "/plugins/com.msgbyte.biggerfont/index.js",
     "version": "0.0.0",
-    "author": "msgbyte",
-    "description": "为聊天提供喵语言对话功能",
-    "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
-    "requireRestart": false
+    "author": "moonrailgun",
+    "description": "Add the feature of enlarging the font size to Tailchat, which is convenient for different user",
+    "description.zh-CN": "为Tailchat增加放大字号的功能,方便不同用户群体",
+    "requireRestart": true
   },
   {
-    "label": "Miku初音未来主题",
-    "name": "com.msgbyte.theme.miku",
-    "url": "/plugins/com.msgbyte.theme.miku/index.js",
-    "version": "0.0.0",
-    "author": "msgbyte",
-    "description": "初音未来主题",
-    "requireRestart": false
-  },
-  {
-    "label": "原神主题",
-    "name": "com.msgbyte.theme.genshin",
-    "url": "/plugins/com.msgbyte.theme.genshin/index.js",
-    "icon": "/plugins/com.msgbyte.theme.genshin/assets/icon.jpg",
-    "version": "0.0.0",
-    "author": "msgbyte",
-    "description": "原神主题",
-    "requireRestart": false
-  },
-  {
-    "label": "绘图插件",
+    "label": "Drawing plugin",
+    "label.zh-CN": "绘图插件",
     "name": "com.msgbyte.draw",
     "url": "/plugins/com.msgbyte.draw/index.js",
     "version": "0.0.0",
     "author": "msgbyte",
-    "description": "允许发送自定义绘图",
+    "description": "Allows sending custom drawings",
+    "description.zh-CN": "允许发送自定义绘图",
     "requireRestart": false
   },
   {
-    "label": "原神工具箱",
+    "label": "file.pizza",
+    "label.zh-CN": "file.pizza",
+    "name": "com.msgbyte.filepizza",
+    "url": "/plugins/com.msgbyte.filepizza/index.js",
+    "icon": "/plugins/com.msgbyte.filepizza/assets/icon.png",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "Quickly open filepizza in the chat input box to support p2p file transfer",
+    "description.zh-CN": "在聊天输入框快捷打开 filepizza 以支持p2p传输文件",
+    "requireRestart": true
+  },
+  {
+    "label": "filesend",
+    "label.zh-CN": "filesend",
+    "name": "com.msgbyte.filesend",
+    "url": "/plugins/com.msgbyte.filesend/index.js",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "Quickly open Filesend in the chat input box to support file transfer",
+    "description.zh-CN": "在聊天输入框快捷打开 Filesend 以支持传输文件",
+    "requireRestart": true
+  },
+  {
+    "label": "files.fm",
+    "label.zh-CN": "files.fm",
+    "name": "com.msgbyte.filesfm",
+    "url": "/plugins/com.msgbyte.filesfm/index.js",
+    "icon": "/plugins/com.msgbyte.filesfm/assets/icon.png",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "Quickly open files.fm in the chat input box to support file transfer",
+    "description.zh-CN": "在聊天输入框快捷打开 files.fm 以支持传输文件",
+    "requireRestart": true
+  },
+  {
+    "label": "Genshin Toolbox",
+    "label.zh-CN": "原神工具箱",
     "name": "com.msgbyte.genshin",
     "url": "/plugins/com.msgbyte.genshin/index.js",
     "version": "0.0.0",
     "author": "msgbyte",
-    "description": "为Tailchat增加原神相关的娱乐能力",
+    "description": "Add Genshin-related entertainment capabilities to Tailchat",
+    "description.zh-CN": "为Tailchat增加原神相关的娱乐能力",
     "requireRestart": true
   },
   {
-    "label": "隔空投送",
+    "label": "Miaolang",
+    "label.zh-CN": "喵语言",
+    "name": "com.msgbyte.miaolang",
+    "url": "/plugins/com.msgbyte.miaolang/index.js",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "It is allowed to send meow, and the two parties encrypt the conversation after installing the plugin. People who have not installed the plugin will see 'meow'",
+    "description.zh-CN": "允许发送喵语，安装插件后的双方加密对话，未安装插件的人看到的是 '喵'",
+    "documentUrl": "/plugins/com.msgbyte.miaolang/README.md",
+    "requireRestart": false
+  },
+  {
+    "label": "Listen Music Online",
+    "label.zh-CN": "在线听音乐",
+    "name": "com.msgbyte.music",
+    "url": "/plugins/com.msgbyte.music/index.js",
+    "icon": "/plugins/com.msgbyte.music/assets/icon.png",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "Provide online music listening service, the content comes from the Internet",
+    "description.zh-CN": "提供在线听音乐服务，内容来自网络",
+    "requireRestart": true
+  },
+  {
+    "label": "Snapdrop",
+    "label.zh-CN": "隔空投送",
     "name": "com.msgbyte.snapdrop",
     "url": "/plugins/com.msgbyte.snapdrop/index.js",
     "icon": "/plugins/com.msgbyte.snapdrop/assets/icon.png",
     "documentUrl": "/plugins/com.msgbyte.snapdrop/README.md",
     "version": "0.0.0",
     "author": "msgbyte",
-    "description": "隔空投送 —— 在同一网络发送文件与消息",
-    "requireRestart": true
+    "description": "Snapdrop —— Send files and messages on the same network",
+    "description.zh-CN": "隔空投送 —— 在同一网络发送文件与消息",
+    "requireRestart": false
   },
   {
-    "label": "file.pizza",
-    "name": "com.msgbyte.filepizza",
-    "url": "/plugins/com.msgbyte.filepizza/index.js",
-    "icon": "/plugins/com.msgbyte.filepizza/assets/icon.png",
+    "label": "Genshin Theme",
+    "label.zh-CN": "原神主题",
+    "name": "com.msgbyte.theme.genshin",
+    "url": "/plugins/com.msgbyte.theme.genshin/index.js",
+    "icon": "/plugins/com.msgbyte.theme.genshin/assets/icon.jpg",
     "version": "0.0.0",
-    "author": "moonrailgun",
-    "description": "快捷打开 filepizza 以支持p2p传输文件",
-    "requireRestart": true
+    "author": "msgbyte",
+    "description": "Genshin Theme",
+    "description.zh-CN": "原神主题",
+    "documentUrl": "/plugins/com.msgbyte.theme.genshin/README.md",
+    "requireRestart": false
   },
   {
-    "label": "files.fm",
-    "name": "com.msgbyte.filesfm",
-    "url": "/plugins/com.msgbyte.filesfm/index.js",
-    "icon": "/plugins/com.msgbyte.filesfm/assets/icon.png",
+    "label": "Hatsune Miku Theme",
+    "label.zh-CN": "Miku初音未来主题",
+    "name": "com.msgbyte.theme.miku",
+    "url": "/plugins/com.msgbyte.theme.miku/index.js",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "Hatsune Miku theme, supports light and dark colors",
+    "description.zh-CN": "初音未来主题，支持亮色与暗色",
+    "requireRestart": false
+  },
+  {
+    "label": "Tool frog!",
+    "label.zh-CN": "工具哇！",
+    "name": "com.msgbyte.toolwa",
+    "url": "/plugins/com.msgbyte.toolwa/index.js",
+    "icon": "/plugins/com.msgbyte.toolwa/assets/icon.png",
+    "version": "0.0.0",
+    "author": "msgbyte",
+    "description": "Tool frog —— online tools",
+    "description.zh-CN": "工具哇 —— 在线小工具",
+    "requireRestart": false
+  },
+  {
+    "label": "User Location",
+    "label.zh-CN": "用户地理位置",
+    "name": "com.msgbyte.user.location",
+    "url": "/plugins/com.msgbyte.user.location/index.js",
     "version": "0.0.0",
     "author": "moonrailgun",
-    "description": "快捷打开 files.fm 以支持传输文件",
+    "description": "Add geographic location records for user information",
+    "description.zh-CN": "为用户信息增加地理位置记录",
     "requireRestart": true
   },
   {
@@ -84,25 +158,8 @@
     "icon": "/plugins/com.msgbyte.wenshushu/assets/icon.png",
     "version": "0.0.0",
     "author": "moonrailgun",
-    "description": "在聊天输入框快捷打开 文叔叔 以支持传输文件",
-    "requireRestart": true
-  },
-  {
-    "label": "filesend",
-    "name": "com.msgbyte.filesend",
-    "url": "/plugins/com.msgbyte.filesend/index.js",
-    "version": "0.0.0",
-    "author": "moonrailgun",
-    "description": "在聊天输入框快捷打开 Filesend 以支持传输文件",
-    "requireRestart": true
-  },
-  {
-    "label": "用户地理位置",
-    "name": "com.msgbyte.user.location",
-    "url": "/plugins/com.msgbyte.user.location/index.js",
-    "version": "0.0.0",
-    "author": "moonrailgun",
-    "description": "为用户信息增加地理位置记录",
+    "description": "Quickly open Wenshushu in the chat input box to support file transfer",
+    "description.zh-CN": "在聊天输入框快捷打开 文叔叔 以支持传输文件",
     "requireRestart": true
   },
   {
@@ -112,36 +169,8 @@
     "icon": "/plugins/com.msgbyte.wormhole/assets/icon.webp",
     "version": "0.0.0",
     "author": "moonrailgun",
-    "description": "在聊天输入框快捷打开 wormhole 以支持传输文件",
-    "requireRestart": true
-  },
-  {
-    "label": "工具哇！",
-    "name": "com.msgbyte.toolwa",
-    "url": "/plugins/com.msgbyte.toolwa/index.js",
-    "icon": "/plugins/com.msgbyte.toolwa/assets/icon.png",
-    "version": "0.0.0",
-    "author": "msgbyte",
-    "description": "工具哇 —— 在线小工具",
-    "requireRestart": false
-  },
-  {
-    "label": "在线听音乐",
-    "name": "com.msgbyte.music",
-    "url": "/plugins/com.msgbyte.music/index.js",
-    "icon": "/plugins/com.msgbyte.music/assets/icon.png",
-    "version": "0.0.0",
-    "author": "moonrailgun",
-    "description": "提供在线听音乐服务，内容来自网络",
-    "requireRestart": true
-  },
-  {
-    "label": "字号放大",
-    "name": "com.msgbyte.biggerfont",
-    "url": "/plugins/com.msgbyte.biggerfont/index.js",
-    "version": "0.0.0",
-    "author": "moonrailgun",
-    "description": "为Tailchat增加放大字号的功能,方便不同用户群体",
+    "description": "Quickly open wormhole in the chat input box to support file transfer",
+    "description.zh-CN": "在聊天输入框快捷打开 wormhole 以支持传输文件",
     "requireRestart": true
   }
 ]

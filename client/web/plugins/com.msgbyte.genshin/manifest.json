@@ -1,9 +1,11 @@
 {
-  "label": "原神工具箱",
+  "label": "Genshin Toolbox",
+  "label.zh-CN": "原神工具箱",
   "name": "com.msgbyte.genshin",
   "url": "/plugins/com.msgbyte.genshin/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "为Tailchat增加原神相关的娱乐能力",
+  "description": "Add Genshin-related entertainment capabilities to Tailchat",
+  "description.zh-CN": "为Tailchat增加原神相关的娱乐能力",
   "requireRestart": true
 }

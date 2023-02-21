@@ -1,9 +1,11 @@
 {
-  "label": "字号放大",
+  "label": "Bigger Font Size",
+  "label.zh-CN": "字号放大",
   "name": "com.msgbyte.biggerfont",
   "url": "/plugins/com.msgbyte.biggerfont/index.js",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "为Tailchat增加放大字号的功能,方便不同用户群体",
+  "description": "Add the feature of enlarging the font size to Tailchat, which is convenient for different user",
+  "description.zh-CN": "为Tailchat增加放大字号的功能,方便不同用户群体",
   "requireRestart": true
 }

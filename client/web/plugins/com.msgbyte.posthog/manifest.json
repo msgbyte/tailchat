@@ -5,6 +5,7 @@
   "icon": "/plugins/com.msgbyte.posthog/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "Posthog 数据统计",
+  "description": "Posthog Statistics",
+  "description.zh-CN": "Posthog 数据统计",
   "requireRestart": true
 }

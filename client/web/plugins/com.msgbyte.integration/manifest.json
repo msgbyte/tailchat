@@ -1,9 +1,11 @@
 {
-  "label": "第三方集成",
+  "label": "third party integration",
+  "label.zh-CN": "第三方集成",
   "name": "com.msgbyte.integration",
   "url": "/plugins/com.msgbyte.integration/index.js",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "用于在群组中集成第三方应用",
+  "description": "Used to integrate third-party applications in groups",
+  "description.zh-CN": "用于在群组中集成第三方应用",
   "requireRestart": true
 }

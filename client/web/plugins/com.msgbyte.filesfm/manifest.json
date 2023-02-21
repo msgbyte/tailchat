@@ -1,10 +1,12 @@
 {
   "label": "files.fm",
+  "label.zh-CN": "files.fm",
   "name": "com.msgbyte.filesfm",
   "url": "/plugins/com.msgbyte.filesfm/index.js",
   "icon": "/plugins/com.msgbyte.filesfm/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "在聊天输入框快捷打开 files.fm 以支持传输文件",
+  "description": "Quickly open files.fm in the chat input box to support file transfer",
+  "description.zh-CN": "在聊天输入框快捷打开 files.fm 以支持传输文件",
   "requireRestart": true
 }

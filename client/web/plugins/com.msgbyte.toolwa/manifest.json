@@ -1,10 +1,12 @@
 {
-  "label": "工具哇！",
+  "label": "Tool frog!",
+  "label.zh-CN": "工具哇！",
   "name": "com.msgbyte.toolwa",
   "url": "/plugins/com.msgbyte.toolwa/index.js",
   "icon": "/plugins/com.msgbyte.toolwa/assets/icon.png",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "工具哇 —— 在线小工具",
+  "description": "Tool frog —— online tools",
+  "description.zh-CN": "工具哇 —— 在线小工具",
   "requireRestart": false
 }
