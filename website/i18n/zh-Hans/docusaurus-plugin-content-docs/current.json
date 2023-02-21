@@ -11,18 +11,6 @@
     "message": "插件列表",
     "description": "The label for category 插件列表 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.视频会议": {
-    "message": "视频会议",
-    "description": "The label for category 视频会议 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.开发插件": {
-    "message": "开发插件",
-    "description": "The label for category 开发插件 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.API 接口": {
-    "message": "API 接口",
-    "description": "The label for category API 接口 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.项目贡献": {
     "message": "项目贡献",
     "description": "The label for category 项目贡献 in sidebar tutorialSidebar"
@@ -39,8 +27,20 @@
     "message": "进阶使用",
     "description": "The label for category Advanced Usage in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.cli": {
+  "sidebar.tutorialSidebar.category.Cli": {
     "message": "命令行终端",
-    "description": "The label for category cli in sidebar tutorialSidebar"
+    "description": "The label for category Cli in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Video Conference": {
+    "message": "视频会议",
+    "description": "The label for category Video Conference in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Develop plugins": {
+    "message": "开发插件",
+    "description": "The label for category Develop plugins in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Interface": {
+    "message": "API 接口",
+    "description": "The label for category API Interface in sidebar tutorialSidebar"
   }
 }

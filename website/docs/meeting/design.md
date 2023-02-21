@@ -1,9 +1,9 @@
 ---
 sidebar_position: 99
-title: SDK设计文档
+title: SDK design document
 draft: true
 ---
 
-## 基本路径
+## base path
 
-用户基本操作路径是: 加入房间 —— 监听变更/推送本地媒体流 —— 离开房间这样完整的生命周期。
+The user's basic operation path is: join the room - monitor changes/push local media streams - leave the complete life cycle of the room.

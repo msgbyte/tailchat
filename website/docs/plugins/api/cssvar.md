@@ -1,9 +1,9 @@
 ---
 sidebar_position: 3
-title: 全局CSS变量
+title: Global CSS Variables
 ---
 
-- `--tc-primary-color`: 主色调
-- `--tc-background-image`: 背景图片
-- `--tc-content-background-image`: 内容页背景图片
-- `--tc-content-background-image-opacity`: 内容页背景图片透明度，默认 **0.15**
+- `--tc-primary-color`: primary color
+- `--tc-background-image`: background image
+- `--tc-content-background-image`: content page background image
+- `--tc-content-background-image-opacity`: content page background image opacity, default **0.15**

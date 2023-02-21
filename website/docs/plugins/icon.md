@@ -1,20 +1,20 @@
 ---
 sidebar_position: 2
-title: Icon 图标
+title: Icon
 ---
 
 ```ts
 import { Icon } from '@capital/component';
 ```
 
-`tailchat` 的 icon 解决方案来自 `iconify`
+The icon solution for `tailchat` comes from `iconify`
 
-使用方法很简单:
-- 在下述网站中选择想要的图标: [https://icon-sets.iconify.design/](https://icon-sets.iconify.design/)
-- 复制选中的key。传给 `Icon` 组件, 示例:
-  ```tsx
-  <Icon icon="mdi:account" />
-  ```
+The way of use is very simple:
+- Select the desired icon from the following website: [https://icon-sets.iconify.design/](https://icon-sets.iconify.design/)
+- Duplicate the selected key. Pass to `Icon` component, example:
+```tsx
+<Icon icon="mdi:account" />
+```
 
-推荐使用`mdi`来统一化图标视觉设计:
+It is recommended to use `mdi` to unify icon visual design:
 [https://icon-sets.iconify.design/mdi/](https://icon-sets.iconify.design/mdi/)

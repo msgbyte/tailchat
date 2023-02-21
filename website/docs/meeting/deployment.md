@@ -1,34 +1,33 @@
 ---
 sidebar_position: 2
-title: 部署视频会议
+title: Deploy Tailchat Meeting
 ---
 
-视频会议服务 `Tailchat Meeting` 可以作为一个独立应用单品存在。在本节中将会讲述如何独立部署 `Tailchat Meeting`
+The video conferencing service `Tailchat Meeting` can exist as an independent application. In this section, we will describe how to deploy `Tailchat Meeting` independently
 
-以下内容均基于`docker`环境，请确保服务端有 `docker` 最基本程度的环境。
+The following content is based on the `docker` environment, please ensure that the server has the most basic `docker` environment.
 
-如果还没有安装 `docker` + `docker-compose` 可以查看文档 [安装docker环境](../deployment/install-docker.md)
+If you haven't installed `docker` + `docker-compose`, you can check the document [Install docker environment](../deployment/install-docker.md)
 
-## 快速部署
+## Fast deployment
 
 ```bash
 git clone https://github.com/msgbyte/tailchat-meeting --depth=1
 ```
 
+> NOTE: Next, the host mode of docker will be used for installation. That means, `docker-compose` will automatically bind the host port
 
-> NOTE: 接下来会使用docker 的 host 模式进行安装。即`docker-compose` 会自动绑定主机端口
-
-需要服务器预留端口如下:
-- swag(服务器网关, nginx 强化版, 端口可通过配置文件 tailchat-meeting/compose/nginx.conf 修改)
-  - 80
-  - 443
+The ports that need to be reserved by the server are as follows:
+- swag (server gateway, nginx enhanced version, the port can be modified through the configuration file tailchat-meeting/compose/nginx.conf)
+   - 80
+   - 443
 - tailchat-meeting
-  - 13001
-  - 40000-49999(用于RTC服务, 动态占用)
-- redis
-  - 6379
+   - 13001
+   - 40000-49999 (for RTC service, dynamic occupancy)
+-redis
+   - 6379
 
-**以上端口均会在宿主机上暴露，为了服务器安全着想建议配置合适的防火墙策略，仅暴露必要的端口443和40000-49999**
+**The above ports will be exposed on the host machine. For the sake of server security, it is recommended to configure a suitable firewall policy, and only expose the necessary ports 443 and 40000-49999**
 
 ```bash
 cd tailchat-meeting/compose
@@ -36,61 +35,62 @@ cp docker-compose.env.example docker-compose.env
 vi docker-compose.env
 ```
 
-修改环境变量。
-环境变量如下:
+Modify environment variables.
+The environment variables are as follows:
 
 ```
-# 内网IP
+# Internal IP
 MEDIASOUP_IP=
-# 公网IP
+# Public IP
 MEDIASOUP_ANNOUNCED_IP=
 
-# swag相关
+# swag
 URL=
 SUBDOMAINS=
 TZ=Asia/Shanghai
 ```
 
 其中
-- 如果仅单机部署的话`MEDIASOUP_IP`和`MEDIASOUP_ANNOUNCED_IP`可以均填写服务器公网ip, **但是对于弹性部署网络的服务商(如国内的腾讯云，阿里云等)必须严格按照注释分别填写内网IP和公网IP**(因为该类服务商提供的外网IP并不是绑定在网卡上的)
-- `tailchat-meeting` 基于 webrtc 服务，因此强依赖 https/wss 协议。swag服务可以为您自动申请https证书，但是必须得分配一个有效的域名，并确保dns指向已经指向到服务器上。
-  - 更多相关的文档可以查看 [README](https://github.com/linuxserver/docker-letsencrypt/blob/master/README.md)
-  - 示例配置:
+
+- If you only deploy on a single machine, `MEDIASOUP_IP` and `MEDIASOUP_ANNOUNCED_IP` can both fill in the public network ip of the server, **But for service providers with flexible deployment networks (such as domestic AWS, Tencent Cloud, Alibaba Cloud, etc.) must strictly follow the notes to fill in the internal IP and public network IP** (because the external network IP provided by this type of service provider is not bound to the network card)
+- `tailchat-meeting` is based on **webrtc** service, so it strongly depends on https/wss protocol. The swag service can automatically apply for an https certificate for you, but you must assign a valid domain name and ensure that the dns point has been pointed to the server.
+  - More related documents can be viewed [README](https://github.com/linuxserver/docker-letsencrypt/blob/master/README.md)
+  - Sample configuration:
   ```bash
   URL=meeting.example.com # 这里请填入
   SUBDOMAINS= # 该参数用于多域名证书申请，可留空
   ```
 
 
-修改完毕以后可以直接执行以下命令
+After the modification, you can directly execute the following command
 
 ```bash
 docker compose up -d
 ```
 
-`docker compose` 会自动从网络下载镜像并构建`tailchat-meeting`
+`docker compose` will automatically download images from the network and build `tailchat-meeting`
 
-构建可能需要花费一定时间和资源。特别是构建前端代码，如果使用的小配置的服务器的话请耐心一点等待。
+Building may take time and resources. Especially for building the frontend code, please be patient if you use a server with a low server.
 
-> 实际测试中使用1核2g的小资源服务器耗时参考如下:
-> - 下载依赖包: 3分钟
-> - 编译前端代码: 5分钟
+> In the real world test, the time-consuming reference of a small resource server with 1 core and 2G is as follows:
+> - Download dependencies: 3 minutes
+> - Compile frontend code: 5 minutes
 
-访问 `https://meeting.example.com` 即可看到`tailchat-meeting`的页面
+Visit `https://meeting.example.com` to see `tailchat-meeting` page
 
-## 组合使用
+## Combined usage
 
-对于傻瓜式部署来说只需要一键就可以执行。如果已经有现成的网关服务(比如nginx, caddy等)以及redis实例，可以有选择的启动服务。
+For fool-proof deployment, it only needs one command to execute. If there are ready-made gateway services (such as nginx, caddy, etc.) and redis instances, you can selectively start the services.
 
-如:
+For example:
 
 ```bash
-docker compose up tailchat-meeting -d # 仅运行 tailchat-meeting 实例
+docker compose up tailchat-meeting -d # Only run the tailchat-meeting instance
 ```
 
 
-## 使用host模式的原因
+## Reasons for using host mode
 
-`tailchat-meeting` 核心的RTC服务需要在运行时申请端口，但是对于docker来说并不能实现这个功能。而预先申请一定范围的端口绑定即会造成无意义端口的浪费也会在启动时瞬间占据大量资源并把系统打死。
+The core RTC service of `tailchat-meeting` needs to apply for a port at runtime, but this function cannot be realized for docker. Pre-applying for a certain range of port bindings will not only waste meaningless ports, but also occupy a lot of resources and kill the system instantly when starting.
 
-**需要注意的是请不要把redis所在的6379端口暴露出去，这可能会产生安全隐患。**
+**It should be noted that please do not expose the 6379 port where redis is located, which may cause security risks. **

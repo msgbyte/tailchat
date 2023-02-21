@@ -3,80 +3,80 @@ sidebar_position: 1
 title: "@capital/common"
 ---
 
-## 注册
+## register
 
 ### regGroupPanel
 
-注册群组面板
+Register Group Panel
 
 ```typescript
 regGroupPanel({
-  name: `com.msgbyte.webview/grouppanel`,
-  label: '网页面板',
-  provider: PLUGIN_NAME,
-  extraFormMeta: [{ type: 'text', name: 'url', label: '网址' }],
-  render: GroupWebPanelRender,
+   name: `com.msgbyte.webview/grouppanel`,
+   label: 'web panel',
+   provider: PLUGIN_NAME,
+   extraFormMeta: [{ type: 'text', name: 'url', label: 'URL' }],
+   render: GroupWebPanelRender,
 });
 ```
 
-参数类型: [PluginGroupPanel](#plugingrouppanel)
+Parameter type: [PluginGroupPanel](#plugingrouppanel)
 
 ### regMessageInterpreter
 
-注册消息解释器
+register message interpreter
 
 ```typescript
 regMessageInterpreter({
-  name: '喵语翻译',
-  explainMessage(message: string) {
-    // 喵语 -> 人话
-    if (!isMiao(message)) {
-      return null;
-    }
+   name: 'Meow language translation',
+   explainMessage(message: string) {
+     // Meow -> Human
+     if (!isMiao(message)) {
+       return null;
+     }
 
-    return decode(message);
-  },
+     return decode(message);
+   },
 });
 ```
 
-参数类型: [PluginMessageInterpreter](#pluginmessageinterpreter)
+Parameter type: [PluginMessageInterpreter](#pluginmessageinterpreter)
 
 ### regMessageRender
 
-*注册多个仅生效最后一个*
+*Multiple registrations only take effect for the last one*
 
-注册消息渲染器, 输入消息文本返回渲染内容
+Register a message renderer, enter the message text and return the rendered content
 
 ```typescript
 regMessageRender((message) => {
-  return <BBCode plainText={message} />;
+   return <BBCode plainText={message} />;
 });
 ```
 
 ### regChatInputAction
 
-注册聊天输入框操作
+Register chat input box operation
 
 ```typescript
 regChatInputAction({
-  label: '喵言喵语',
-  onClick: (actions) => {
-    openModal(createElement(SendMiaoModal, { actions }));
-  },
+   label: 'Meow words',
+   onClick: (actions) => {
+     openModal(createElement(SendMiaoModal, { actions }));
+   },
 });
 ```
 
-参数类型: [ChatInputAction](#chatinputaction)
+Parameter Type: [ChatInputAction](#chatinputaction)
 
 
 ### regPluginColorScheme
 
-注册插件配色方案/主题
+Register plugin color schemes/themes
 
 ```typescript
 regPluginColorScheme({
-  label: 'Miku 葱',
-  name: 'light+miku',
+   label: 'Miku onion',
+   name: 'light+miku',
 });
 ```
 
@@ -87,11 +87,11 @@ regPluginColorScheme({
 
 
 
-## 工具函数
+## Utility function
 
 ### useGroupPanelParams
 
-在`hooks`中获取用户面板相关信息
+Get user panel related information in `hooks`
 
 ```typescript
 import { useGroupPanelParams } from '@capital/common';
@@ -101,7 +101,7 @@ const { groupId, panelId } = useGroupPanelParams();
 
 ### openModal
 
-打开一个模态框
+open a modal
 
 ```typescript
 openModal(
@@ -110,13 +110,13 @@ openModal(
 )
 ```
 
-类型:
-- [ModalProps](#modalprops)
+type:
+- [ModalProps] (#modalprops)
 
 
 ### ModalWrapper
 
-模态框包装器
+Modal Wrapper
 
 ```jsx
 <ModalWrapper>
@@ -126,7 +126,7 @@ openModal(
 
 ### useModalContext
 
-获取模态框上下文
+Get the modal context
 
 ```typescript
 const { closeModal } = useModalContext();
@@ -134,7 +134,7 @@ const { closeModal } = useModalContext();
 
 ### getGlobalState
 
-获取全局 `Redux` 状态上下文
+Get the global `Redux` state context
 
 ```typescript
 const state = getGlobalState();
@@ -142,7 +142,7 @@ const state = getGlobalState();
 
 ### getCachedUserInfo
 
-获取用户信息, 缓存版本
+Get user information, cached version
 
 ```typescript
 const info = getCachedUserInfo(userId);
@@ -150,60 +150,60 @@ const info = getCachedUserInfo(userId);
 
 ### getCachedConverseInfo
 
-获取会话信息
+Get session information
 
 ```typescript
 const info = getCachedConverseInfo(converseId);
 ```
 
-## 类型
+## type
 
 ### PluginGroupPanel
 
 ```typescript
 interface PluginGroupPanel {
   /**
-   * 面板唯一标识
-   * @example com.msgbyte.webview/grouppanel
-   */
+  * The unique identification of the panel
+  * @example com.msgbyte.webview/grouppanel
+  */
   name: string;
 
   /**
-   * 面板显示名
-   */
+  * panel display name
+  */
   label: string;
 
   /**
-   * 插件提供者, 用于引导没有安装插件的用户安装插件
-   */
+  * Plug-in provider, used to guide users who have not installed the plug-in to install the plug-in
+  */
   provider: string;
 
   /**
-   * 额外的表单数据, 用于创建面板时使用
-   */
+  * Additional form data, used when creating panels
+  */
   extraFormMeta: FastFormFieldMeta[];
 
   /**
-   * 该面板如何渲染
-   */
-  render: React.ComponentType;
+  * How the panel is rendered
+  */
+  render: React. ComponentType;
 }
 ```
 
 ### PluginMessageInterpreter
 
-插件消息解释器
+Plugin Message Interpreter
 
 ```typescript
 interface PluginMessageInterpreter {
   name?: string;
-  explainMessage: (message: string) => React.ReactNode;
+  explainMessage: (message: string) => React. ReactNode;
 }
 ```
 
 ### ChatInputAction
 
-消息输入框操作对象
+Message input box operation object
 
 ```typescript
 interface ChatInputAction {
@@ -213,16 +213,16 @@ interface ChatInputAction {
 ```
 
 
-### GroupPanel
+###GroupPanel
 
 ```typescript
 interface GroupPanel {
-  id: string; // 在群组中唯一
+  id: string; // unique in the group
   name: string;
   parentId?: string;
   type: GroupPanelType;
-  provider?: string; // 面板提供者
-  pluginPanelName?: string; // 插件面板名
+  provider?: string; // panel provider
+  pluginPanelName?: string; // plugin panel name
   meta?: Record<string, unknown>;
 }
 ```
@@ -236,14 +236,14 @@ interface ModalProps {
   onChangeVisible?: (visible: boolean) => void;
 
   /**
-   * 是否显示右上角的关闭按钮
-   * @default false
-   */
+  * Whether to display the close button in the upper right corner
+  * @default false
+  */
   closable?: boolean;
 
   /**
-   * 遮罩层是否可关闭
-   */
+  * Whether the mask layer can be closed
+  */
   maskClosable?: boolean;
 }
 ```
