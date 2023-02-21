@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslate } from 'react-admin';
 import { Typography, CardActions, Button, Box } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 
@@ -6,6 +7,7 @@ import { Card, CardContent } from '@mui/material';
  * SocketIO 管理
  */
 export const SocketIOAdmin: React.FC = React.memo(() => {
+  const translate = useTranslate();
   const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
 
   return (
@@ -13,13 +15,13 @@ export const SocketIOAdmin: React.FC = React.memo(() => {
       <Card>
         <CardContent>
           <Typography component="div">
-            服务器URL为:{' '}
+            {translate('custom.socketio.tip1')}{' '}
             <strong>
               {protocol}://{window.location.host}
             </strong>
           </Typography>
           <Typography component="div">
-            账号密码为Tailchat后台的账号密码
+            {translate('custom.socketio.tip2')}
           </Typography>
         </CardContent>
         <CardActions>
@@ -29,7 +31,7 @@ export const SocketIOAdmin: React.FC = React.memo(() => {
               window.open('https://admin.socket.io/');
             }}
           >
-            打开管理平台
+            {translate('custom.socketio.btn')}
           </Button>
         </CardActions>
       </Card>

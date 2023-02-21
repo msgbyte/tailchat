@@ -13,11 +13,13 @@ import {
 } from '@mui/material';
 import _uniq from 'lodash/uniq';
 import { ChipItems } from '../../components/ChipItems';
+import { useTranslate } from 'react-admin';
 
 /**
  * Tailchat 网络状态
  */
 export const TailchatNetwork: React.FC = React.memo(() => {
+  const translate = useTranslate();
   const { data, loading } = useRequest(async () => {
     const { data } = await request('/network/all');
 
@@ -37,16 +39,16 @@ export const TailchatNetwork: React.FC = React.memo(() => {
       }}
     >
       <Typography variant="h6" gutterBottom>
-        节点列表
+        {translate('custom.network.nodeList')}
       </Typography>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>主机名</TableCell>
-            <TableCell>CPU占用</TableCell>
-            <TableCell>IP地址列表</TableCell>
-            <TableCell>SDK版本</TableCell>
+            <TableCell>{translate('custom.network.id')}</TableCell>
+            <TableCell>{translate('custom.network.hostname')}</TableCell>
+            <TableCell>{translate('custom.network.cpuUsage')}</TableCell>
+            <TableCell>{translate('custom.network.ipList')}</TableCell>
+            <TableCell>{translate('custom.network.sdkVersion')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,21 +73,21 @@ export const TailchatNetwork: React.FC = React.memo(() => {
       </Table>
 
       <Typography variant="h6" gutterBottom>
-        服务列表
+        {translate('custom.network.serviceList')}
       </Typography>
       <Box flexWrap="wrap" overflow="hidden">
         <ChipItems items={_uniq<string>(data.services ?? [])} />
       </Box>
 
       <Typography variant="h6" gutterBottom>
-        操作列表
+        {translate('custom.network.actionList')}
       </Typography>
       <Box flexWrap="wrap" overflow="hidden">
         <ChipItems items={_uniq<string>(data.actions ?? [])} />
       </Box>
 
       <Typography variant="h6" gutterBottom>
-        事件列表
+        {translate('custom.network.eventList')}
       </Typography>
       <Box flexWrap="wrap" overflow="hidden">
         <ChipItems items={_uniq<string>(data.events ?? [])} />

@@ -142,7 +142,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
 
           <div className="text-center mb-2">
             {/* TODO: upload avatar */}
-            <Avatar size={80} name={name} />
+            <Avatar className="mx-auto" size={80} name={name} />
           </div>
 
           <div>

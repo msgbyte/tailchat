@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslate } from 'react-admin';
 import { Card, Box, Typography, CardActions, Button } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
 import logoSvg from './logo.svg';
 
 export const Welcome: React.FC = React.memo(() => {
+  const translate = useTranslate();
+
   return (
     <Card
       sx={{
@@ -22,11 +25,11 @@ export const Welcome: React.FC = React.memo(() => {
       <Box display="flex">
         <Box flex="1">
           <Typography variant="h5" component="h2" gutterBottom>
-            欢迎使用 Tailchat 后台管理程序
+            {translate('custom.dashboard.welcomeTitle')}
           </Typography>
           <Box maxWidth="40em">
             <Typography variant="body1" component="p" gutterBottom>
-              Tailchat 是一个完全开源的即时通讯应用
+              {translate('custom.dashboard.welcomeDesc')}
             </Typography>
           </Box>
           <CardActions
@@ -46,7 +49,7 @@ export const Welcome: React.FC = React.memo(() => {
               startIcon={<HomeIcon />}
               target="__blank"
             >
-              访问官网
+              {translate('custom.dashboard.welcomeHomepage')}
             </Button>
             <Button
               variant="contained"
@@ -54,7 +57,7 @@ export const Welcome: React.FC = React.memo(() => {
               startIcon={<CodeIcon />}
               target="__blank"
             >
-              浏览源码
+              {translate('custom.dashboard.welcomeSourcecode')}
             </Button>
           </CardActions>
         </Box>

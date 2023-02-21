@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
 import GroupIcon from '@mui/icons-material/Group';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import { useGetList } from 'react-admin';
+import { useGetList, useTranslate } from 'react-admin';
 import { Grid } from '@mui/material';
 
 export const Dashboard: React.FC = React.memo(() => {
@@ -26,6 +26,8 @@ export const Dashboard: React.FC = React.memo(() => {
     pagination: { page: 1, perPage: 1 },
   });
 
+  const translate = useTranslate();
+
   return (
     <div>
       <Welcome />
@@ -35,7 +37,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <CardWithIcon
             to="/admin/users"
             icon={PersonIcon}
-            title={'用户数'}
+            title={translate('custom.dashboard.userCount')}
             subtitle={usersNum}
           />
         </Grid>
@@ -43,7 +45,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <CardWithIcon
             to="/admin/users"
             icon={PersonIcon}
-            title={'临时用户数'}
+            title={translate('custom.dashboard.tempUserCount')}
             subtitle={tempUsersNum}
           />
         </Grid>
@@ -51,7 +53,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <CardWithIcon
             to="/admin/messages"
             icon={MessageIcon}
-            title={'总消息数'}
+            title={translate('custom.dashboard.messageCount')}
             subtitle={messageNum}
           />
         </Grid>
@@ -59,7 +61,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <CardWithIcon
             to="/admin/groups"
             icon={GroupIcon}
-            title={'总群组数'}
+            title={translate('custom.dashboard.groupCount')}
             subtitle={groupNum}
           />
         </Grid>
@@ -67,7 +69,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <CardWithIcon
             to="/admin/file"
             icon={AttachFileIcon}
-            title={'总文件数'}
+            title={translate('custom.dashboard.fileCount')}
             subtitle={fileNum}
           />
         </Grid>
