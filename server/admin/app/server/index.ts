@@ -10,9 +10,9 @@ import { apiRouter } from './router/api';
 // 链接数据库
 mongoose.connect(process.env.MONGO_URL!, (error: any) => {
   if (!error) {
-    return console.info('数据库已连接成功');
+    return console.info('Datebase connected');
   }
-  console.error('数据库连接失败', error);
+  console.error('Datebase connect error', error);
 });
 
 const BUILD_DIR = path.join(process.cwd(), 'build');

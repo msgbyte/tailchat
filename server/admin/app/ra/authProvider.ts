@@ -18,7 +18,7 @@ export const authProvider: AuthProvider = {
         localStorage.setItem(authStorageKey, JSON.stringify(auth));
       })
       .catch(() => {
-        throw new Error('登录失败');
+        throw new Error('Login Failed');
       });
   },
   logout: () => {

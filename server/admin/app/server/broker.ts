@@ -10,5 +10,5 @@ export const broker = new TcBroker({
 });
 
 broker.start().then(() => {
-  console.log('已链接上Tailchat网络, TRANSPORTER: ', transporter);
+  console.log('Linked to Tailchat network, TRANSPORTER: ', transporter);
 });

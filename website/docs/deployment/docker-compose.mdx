@@ -101,6 +101,7 @@ After the compilation is complete, you can view the compiled image through `dock
 <Tabs groupId="build">
   <TabItem value="cli" label="One-command installation using cli" default>
 
+
 ```bash
 npx tailchat-cli docker init
 ```
@@ -109,9 +110,10 @@ Executing this command will ask you some configuration-related questions in an i
 
 ![](./assets/docker-init.png)
 
-  </TabItem>
 
+  </TabItem>
   <TabItem value="public-image" label="Manually install from public image">
+
 
 > A configuration file needs to be downloaded before starting to tell `docker-compose` how to start the image
 > Download configuration files and configure environment variables from the repository:
@@ -131,8 +133,10 @@ Modify the configuration of the `docker-compose.env` file, the following fields 
 - `API_URL` is an externally accessible url address, used for file service access, it can be a domain name or an ip **If the sent picture cannot be displayed normally, this variable is not set**
 - `SECRET` server-side encryption key, used to generate Token. The default is `tailchat`
 
+
   </TabItem>
   <TabItem value="source-code" label="Compile from source">
+
 
 Need to modify the configuration before starting
 

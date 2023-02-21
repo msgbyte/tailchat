@@ -9,13 +9,10 @@ import {
   SingleFieldList,
   ChipField,
   Show,
-  SimpleShowLayout,
-  NumberField,
-  ReferenceField,
-  BooleanField,
   SelectField,
   TabbedShowLayout,
   ImageField,
+  useTranslate,
 } from 'react-admin';
 import React from 'react';
 import { Box } from '@mui/material';
@@ -28,23 +25,18 @@ const PostListActionToolbar = ({ children, ...props }) => (
 export const GroupList: React.FC = () => (
   <List filters={[<SearchInput key="search" source="q" alwaysOn />]}>
     <Datagrid>
-      <TextField
-        source="id"
-        label="群组ID"
-        sortable={true}
-        sortByOrder="DESC"
-      />
-      <TextField source="name" label="群组名称" />
-      <TextField source="owner" label="管理员" />
-      <TextField source="members.length" label="成员数量" />
-      <TextField source="panels.length" label="面板数量" />
-      <ArrayField source="roles" label="角色">
+      <TextField source="id" sortable={true} sortByOrder="DESC" />
+      <TextField source="name" />
+      <TextField source="owner" />
+      <TextField source="members.length" />
+      <TextField source="panels.length" />
+      <ArrayField source="roles">
         <SingleFieldList>
           <ChipField source="name" />
         </SingleFieldList>
       </ArrayField>
-      <TextField source="fallbackPermissions" label="默认权限" />
-      <DateField source="createdAt" label="创建时间" />
+      <TextField source="fallbackPermissions" />
+      <DateField source="createdAt" />
       <PostListActionToolbar>
         <ShowButton />
       </PostListActionToolbar>
@@ -53,64 +45,96 @@ export const GroupList: React.FC = () => (
 );
 GroupList.displayName = 'GroupList';
 
-export const GroupShow: React.FC = () => (
-  <Show>
-    <TabbedShowLayout>
-      <TabbedShowLayout.Tab label="概述">
-        <TextField source="id" />
-        <ImageField source="avatar" label="头像" emptyText="(无头像)" />
-        <TextField source="name" label="群组名" />
-        <UserField source="owner" label="所有人" />
+export const GroupShow: React.FC = () => {
+  const translate = useTranslate();
 
-        <DateField source="createdAt" label="创建时间" />
-        <DateField source="updatedAt" label="更新时间" />
-        <TextField source="fallbackPermissions" label="默认权限" />
-        <TextField source="config" label="配置信息" />
-      </TabbedShowLayout.Tab>
+  return (
+    <Show>
+      <TabbedShowLayout>
+        <TabbedShowLayout.Tab label={translate('custom.common.summary')}>
+          <TextField source="id" />
+          <ImageField
+            source="avatar"
+            emptyText={`(${translate('custom.groups.noAvatar')})`}
+          />
+          <TextField source="name" />
+          <UserField source="owner" />
 
-      {/* 面板 */}
-      <TabbedShowLayout.Tab label="面板">
-        <ArrayField source="panels" label="群组面板">
-          <Datagrid>
-            <TextField source="id" />
-            <TextField source="name" label="面板名" />
-            <SelectField
-              source="type"
-              choices={[
-                { id: 0, name: '文本频道' },
-                { id: 1, name: '面板分组' },
-                { id: 2, name: '插件面板' },
-              ]}
-              label={'面板类型'}
-            />
-            <TextField source="provider" label="面板供应插件" />
-            <TextField source="pluginPanelName" label="插件面板名" />
-            <TextField source="meta" label="面板元信息" />
-            <TextField source="parentId" label="面板父级" />
-          </Datagrid>
-        </ArrayField>
-      </TabbedShowLayout.Tab>
+          <DateField source="createdAt" />
+          <DateField source="updatedAt" />
+          <TextField source="fallbackPermissions" />
+          <TextField source="config" />
+        </TabbedShowLayout.Tab>
 
-      {/* 身份组 */}
-      <TabbedShowLayout.Tab label="身份组">
-        <ArrayField source="roles" label="身份组">
-          <Datagrid>
-            <TextField source="name" label="名称" />
-            <TextField source="permission" label="权限" />
-          </Datagrid>
-        </ArrayField>
-      </TabbedShowLayout.Tab>
+        {/* 面板 */}
+        <TabbedShowLayout.Tab label={translate('custom.common.panel')}>
+          <ArrayField source="panels">
+            <Datagrid>
+              <TextField source="id" />
+              <TextField
+                source="name"
+                label={translate('custom.groups.panels.name')}
+              />
+              <SelectField
+                source="type"
+                choices={[
+                  { id: 0, name: translate('custom.groups.textPanel') },
+                  { id: 1, name: translate('custom.groups.groupPanel') },
+                  { id: 2, name: translate('custom.groups.pluginPanel') },
+                ]}
+                label={translate('custom.groups.panels.type')}
+              />
+              <TextField
+                source="provider"
+                label={translate('custom.groups.panels.provider')}
+              />
+              <TextField
+                source="pluginPanelName"
+                label={translate('custom.groups.panels.name')}
+              />
+              <TextField
+                source="meta"
+                label={translate('custom.groups.panels.meta')}
+              />
+              <TextField
+                source="parentId"
+                label={translate('custom.groups.panels.parentId')}
+              />
+            </Datagrid>
+          </ArrayField>
+        </TabbedShowLayout.Tab>
 
-      {/* 成员列表 */}
-      <TabbedShowLayout.Tab label="成员列表">
-        <ArrayField source="members" label="成员列表">
-          <Datagrid>
-            <UserField source="userId" label="成员" />
-            <TextField source="roles" label="角色" />
-          </Datagrid>
-        </ArrayField>
-      </TabbedShowLayout.Tab>
-    </TabbedShowLayout>
-  </Show>
-);
+        {/* 身份组 */}
+        <TabbedShowLayout.Tab
+          label={translate('resources.groups.fields.roles')}
+        >
+          <ArrayField source="roles">
+            <Datagrid>
+              <TextField
+                source="name"
+                label={translate('custom.common.name')}
+              />
+              <TextField
+                source="permission"
+                label={translate('custom.common.permission')}
+              />
+            </Datagrid>
+          </ArrayField>
+        </TabbedShowLayout.Tab>
+
+        {/* 成员列表 */}
+        <TabbedShowLayout.Tab
+          label={translate('resources.groups.fields.members')}
+        >
+          <ArrayField source="members">
+            <Datagrid>
+              <UserField source="userId" />
+              <TextField source="roles" />
+            </Datagrid>
+          </ArrayField>
+        </TabbedShowLayout.Tab>
+      </TabbedShowLayout>
+    </Show>
+  );
+};
 GroupShow.displayName = 'GroupShow';

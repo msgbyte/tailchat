@@ -13,6 +13,7 @@ import {
   TopToolbar,
   useUpdate,
   useShowContext,
+  useTranslate,
 } from 'react-admin';
 import React from 'react';
 import { Box } from '@mui/material';
@@ -23,41 +24,46 @@ const PostListActionToolbar = ({ children, ...props }) => (
   <Box sx={{ alignItems: 'center', display: 'flex' }}>{children}</Box>
 );
 
-export const UserList: React.FC = () => (
-  <List
-    filters={[
-      <SearchInput
-        key="search"
-        source="q"
-        alwaysOn
-        placeholder="搜索昵称或邮箱"
-      />,
-    ]}
-  >
-    <Datagrid>
-      <TextField source="id" sortByOrder="DESC" />
-      <EmailField source="email" />
-      <TextField source="nickname" />
-      <TextField source="discriminator" />
-      <BooleanField source="temporary" />
-      <ImageField
-        sx={{ '.RaImageField-image': { height: 40, width: 40 } }}
-        source="avatar"
-      />
-      <TextField source="type" />
-      <TextField source="settings" />
-      <DateField source="createdAt" />
-      <PostListActionToolbar>
-        <ShowButton />
-      </PostListActionToolbar>
-    </Datagrid>
-  </List>
-);
+export const UserList: React.FC = () => {
+  const translate = useTranslate();
+
+  return (
+    <List
+      filters={[
+        <SearchInput
+          key="search"
+          source="q"
+          alwaysOn
+          placeholder={translate('custom.users.search')}
+        />,
+      ]}
+    >
+      <Datagrid>
+        <TextField source="id" sortByOrder="DESC" />
+        <EmailField source="email" />
+        <TextField source="nickname" />
+        <TextField source="discriminator" />
+        <BooleanField source="temporary" />
+        <ImageField
+          sx={{ '.RaImageField-image': { height: 40, width: 40 } }}
+          source="avatar"
+        />
+        <TextField source="type" />
+        <TextField source="settings" />
+        <DateField source="createdAt" />
+        <PostListActionToolbar>
+          <ShowButton />
+        </PostListActionToolbar>
+      </Datagrid>
+    </List>
+  );
+};
 UserList.displayName = 'UserList';
 
 const UserShowActions: React.FC = () => {
   const [update] = useUpdate();
   const { record, refetch, resource } = useShowContext();
+  const translate = useTranslate();
 
   return (
     <TopToolbar>
@@ -65,8 +71,8 @@ const UserShowActions: React.FC = () => {
 
       <ButtonWithConfirm
         component={DangerButton}
-        label="重置密码"
-        confirmContent="重置密码后密码变为: 123456789, 请及时修改密码"
+        label={translate('custom.users.resetPassword')}
+        confirmContent={translate('custom.users.resetPasswordTip')}
         onConfirm={async () => {
           await update(resource, {
             id: record.id,

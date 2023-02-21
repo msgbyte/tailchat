@@ -15,7 +15,7 @@ import { Dashboard } from './dashboard';
 import { Route } from 'react-router-dom';
 import { TailchatNetwork } from './routes/network';
 import { TailchatLayout } from './layout';
-import { i18nProvider } from './i18n';
+import { i18nProvider } from './i18n/index';
 import { httpClient } from './request';
 import { SocketIOAdmin } from './routes/socketio';
 
@@ -37,31 +37,22 @@ export const App = () => (
     i18nProvider={i18nProvider}
     requireAuth={true}
   >
-    <Resource
-      icon={PersonIcon}
-      name="users"
-      options={{ label: '用户管理' }}
-      list={UserList}
-      show={UserShow}
-    />
+    <Resource icon={PersonIcon} name="users" list={UserList} show={UserShow} />
     <Resource
       icon={MessageIcon}
       name="messages"
-      options={{ label: '聊天信息' }}
       list={MessageList}
       show={ShowGuesser}
     />
     <Resource
       icon={GroupIcon}
       name="groups"
-      options={{ label: '群组' }}
       list={GroupList}
       show={GroupShow}
     />
     <Resource
       icon={AttachFileIcon}
       name="file"
-      options={{ label: '文件' }}
       list={FileList}
       show={ShowGuesser}
     />
