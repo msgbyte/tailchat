@@ -3,10 +3,6 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.应用部署": {
-    "message": "应用部署",
-    "description": "The label for category 应用部署 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.Operations": {
     "message": "运维操作",
     "description": "The label for category Operations in sidebar tutorialSidebar"
@@ -42,5 +38,9 @@
   "sidebar.tutorialSidebar.category.Development Documentation": {
     "message": "开发文档",
     "description": "The label for category Development Documentation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Application Deployment": {
+    "message": "应用部署",
+    "description": "The label for category Application Deployment in sidebar tutorialSidebar"
   }
 }

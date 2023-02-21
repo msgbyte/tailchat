@@ -35,4 +35,6 @@ pnpm install
 pnpm dev
 ```
 
-可以编辑`.env`的配置为自己相关的上下文
+可以编辑`server/.env`的配置为自己相关的上下文
+
+该文件可以从 `server/.env.example` 开始

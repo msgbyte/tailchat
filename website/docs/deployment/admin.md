@@ -1,34 +1,35 @@
 ---
 sidebar_position: 9
-title: 部署管理后台(可选)
+title: Deployment admin platform (optional)
 ---
 
 :::info
-管理后台的功能还在不断迭代中，目前正处于前期体验版  
-后续会不断丰富内部的内容
+The feature of `admin` is still being iterated, and it is currently in the early trial version  
+We will continue to enrich the internal content in the future
 :::
 
-从`github`获取最新的管理后台配置:
+Get the latest `admin` configuration from `github`:
 ```bash
 wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin.yml 
 ```
 
-在环境变量 `docker-compose.env` 中设置管理后台的账号和密码:
+Set the account and password of the `admin` in the environment variable `docker-compose.env`:
+
 ```ini
 ADMIN_USER=tailchat
-ADMIN_PASS=<这里写入独立的后台密码, 不要告知其他人>
+ADMIN_PASS=<Write the independent background password here, do not tell others>
 ```
 
-然后使用[多文件方式](https://docs.docker.com/compose/extends/#understanding-multiple-compose-files)启动应用:
+Then use [Multiple Files](https://docs.docker.com/compose/extends/#understanding-multiple-compose-files) to start the application:
 ```bash
 docker compose -f docker-compose.yml -f admin.yml up -d 
 ```
 
-*注意先后顺序，因为`admin.yml`依赖`docker-compose.yml`所以要放在后面*
+*Pay attention to the order, because `admin.yml` depends on `docker-compose.yml`, so it should be placed behind*
 
-此时访问后台地址后面追加`/admin/`即可访问:
+At this time, add `/admin/` after the access backend address to access:
 ```
 https://tailchat.example.com/admin/
 ```
 
-*注意不要忘记在最后有一个`/`*
+*Note: don't forget to have a `/` at the end*

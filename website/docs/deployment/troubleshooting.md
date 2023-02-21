@@ -1,13 +1,13 @@
 ---
 sidebar_position: 10
-title: 常见问题
+title: Troubleshooting
 ---
 
-## 服务端相关
+## Server related
 
-### Websocket 连接访问不正确，表现形式是可以注册但是无法打开主界面
+### The Websocket connection access is incorrect, the manifestation is that it can be registered but the main interface cannot be opened
 
-如果使用了 nginx 进行反向代理。请确保nginx的配置支持websocket，一个参考的配置如下:
+If nginx is used for reverse proxy. Please ensure that the configuration of nginx supports websocket, a reference configuration is as follows:
 
 ```
 server {
@@ -31,20 +31,20 @@ server {
 }
 ```
 
-### 内网可以访问外网无法访问?
+### Internal Network can be accessed but External Network can not be accessed?
 
-可以启动一个简单的http服务看下是不是docker-proxy层的问题。*该问题可能会出现在腾讯轻量云的docker-ce镜像机器上, 可以选择使用centos7镜像重装*
+You can start a simple http service to see if it is a problem with the docker-proxy layer. *This problem may occur on the docker-ce image machine of Tencent lighthouse, you can choose to use the centos7 image to reinstall*
 
 ```bash
 docker run --rm --name nginx-test -p 8080:80 nginx
 ```
 
 
-## 开放平台相关
+## Openapi platform related
 
-如果开放平台部署在代理之后，如果出现访问 `/open/.well-known/openid-configuration` 结果的json中endpoint不正确的情况，请尝试修改代理的配置。
+If the open platform is deployed behind a proxy, if the endpoint in the JSON of the access `/open/.well-known/openid-configuration` result is incorrect, please try to modify the configuration of the proxy to forward real ip.
 
-如nginx:
+Such as nginx:
 
 ```
 location / {

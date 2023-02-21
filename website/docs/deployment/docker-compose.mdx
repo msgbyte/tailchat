@@ -1,120 +1,120 @@
 ---
 sidebar_position: 4
-title: Docker Compose 部署
+title: Docker Compose deployment
 ---
 
-## 建议配置
+## Recommended configuration
 
-建议最低配置 **1核2G**
+Recommended minimum configuration **1 core 2G**
 
-> 如果只有 **1核1G**? 请参阅我的博客: [Linux 小资源服务器使用经验总结](http://moonrailgun.com/posts/6769ba51/) 通过交换内存来拓展内存空间
+> If there is only **1 core 1G**? Please refer to my blog: [Linux small resource server experience summary](http://moonrailgun.com/posts/6769ba51/) expand memory space by swapping memory
 >
-> 可供参考的内存用量:
+> Memory usage for reference:
 > ![](/img/misc/memory-usage.png)
 
-## 前置环境
+## Pre-environment
 
 ### Docker / Docker Compose
 
-首先需要确保有 `Docker / Docker Compose` 环境
+First you need to make sure you have a `Docker / Docker Compose` environment
 
-安装方式可参考: [安装 Docker 环境](./install-docker.md)
+The installation method can refer to: [Install the docker environment](./install-docker.md)
 
-## 拉取镜像
+## Pull Image
 
-你可以通过从**公共镜像拉取已经编译好的镜像**或者**通过源码手动编译**
+You can pull the compiled image from **public image** or **manually compile from source code**
 
-> 使用已经编译好的镜像可以无需花费足够的计算机资源进行编译，对小资源配置的服务器会十分友好。另外相对于源码编译，公共镜像的代码更加稳定。
+> Using the compiled image can compile without spending enough computer resources, which is very friendly to servers with small resource configurations. In addition, compared to source code compilation, the code of the public image is more stable.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs groupId="build">
-  <TabItem value="cli" label="使用cli一键安装" default>
+  <TabItem value="cli" label="One-command installation using cli" default>
 
-> 使用 `cli` 请确保在你的服务器上已经拥有了node环境(建议node版本 16+)
-> 如果对node不了解可以使用`从公共镜像中手动安装`方式
+> Use `cli` Please make sure you already have a node environment on your server (node version 16+ is recommended)
+> If you don't know about node, you can use `Manually install from public image`
 
-使用 命令行工具 tailchat-cli 一键拉取/更新镜像:
+Use the command line tool `tailchat-cli` to pull/update the image with one click:
 ```bash
 npx tailchat-cli docker update
 ```
 
   </TabItem>
-  <TabItem value="public-image" label="从公共镜像中手动安装" default>
+  <TabItem value="public-image" label="Manually install from public image" default>
 
-使用Docker原生命令手动安装:
+Manually install using Docker native commands:
 ```bash
-docker pull moonrailgun/tailchat # 从公共镜像库拉取 tailchat镜像
-docker tag moonrailgun/tailchat tailchat # 将下载的镜像改名为tailchat(和源码编译保持一致，如果不改的话会走源码编译流程)
+docker pull moonrailgun/tailchat # Pull the tailchat image from the public image registry
+docker tag moonrailgun/tailchat tailchat # Retag the downloaded image to tailchat (consistent with source code compilation, if not changed, it will follow the source code compilation process)
 ```
 
 :::info
-可以从 [Docker Hub](https://hub.docker.com/r/moonrailgun/tailchat/tags) 查看历史支持的镜像版本
+You can view historically supported image versions from [Docker Hub](https://hub.docker.com/r/moonrailgun/tailchat/tags)
 :::
 
 
   </TabItem>
-  <TabItem value="source-code" label="从源码中编译">
+  <TabItem value="source-code" label="Compile from source">
 
-*本节内容适用于高级玩家，用于获取最新的tailchat实现，请确保你有足够的 docker, nodejs, git 的使用常识*
+*This section is for advanced players to get the latest tailchat implementation, please make sure you have enough knowledge of `docker`, `nodejs`, `git`*
 
-#### 编译环境 node 环境
+#### Compilation environment
 
-- 从 [官网下载](https://nodejs.org/en/download/)
-- 或者使用 [nvm](https://github.com/nvm-sh/nvm)
+- Download from [official website](https://nodejs.org/en/download/)
+- Or use [nvm](https://github.com/nvm-sh/nvm)
 
-#### 安装pnpm
+#### Install pnpm
 
-`pnpm` 是一个`nodejs`的包管理工具, 是`npm`的替代品, 为了确保能有与开发者一样依赖环境，强烈建议你使用pnpm作为后续的包管理工具
+`pnpm` is a package management tool for `nodejs`, a substitute for `npm`, in order to ensure the same dependency environment as developers, it is strongly recommended that you use pnpm as a follow-up package management tool
 
 ```bash
 npm install -g pnpm
 ```
 
-#### Clone 项目
+#### Clone Repo
 
-将项目从远程下载到本地:
+Download the project from remote:
 
 ```bash
 mkdir msgbyte && cd msgbyte
 
-git clone https://github.com/msgbyte/tailchat.git # 克隆项目到本地
+git clone https://github.com/msgbyte/tailchat.git # Clone the project to local
 ```
 
-#### 编译项目
+#### Compile project
 
 ```bash
 cd tailchat && docker compose build
 ```
 
-*编译对服务器配置有一定要求，2核4G编译约10分钟，供参考*
+*Compilation has certain requirements on server configuration, 2-core 4G compilation takes about 10 minutes, for reference*
 
-编译完毕后可以通过 `docker images` 查看编译完毕的镜像。
+After the compilation is complete, you can view the compiled image through `docker images`.
 
   </TabItem>
 </Tabs>
 
 
-## 启动项目
+## Startup project
 
 <Tabs groupId="build">
-  <TabItem value="cli" label="使用cli一键安装" default>
+  <TabItem value="cli" label="One-command installation using cli" default>
 
 ```bash
 npx tailchat-cli docker init
 ```
 
-执行该命令会以交互式的方式向你询问一些配置相关的问题(如下图)，填写完毕后即可自动生成配置文件
+Executing this command will ask you some configuration-related questions in an interactive manner (as shown in the figure below), and the configuration file will be automatically generated after filling it out
 
 ![](./assets/docker-init.png)
 
   </TabItem>
 
-  <TabItem value="public-image" label="从公共镜像中手动安装">
+  <TabItem value="public-image" label="Manually install from public image">
 
-> 启动之前需要下载配置文件以告知 `docker-compose` 要如何启动镜像
-> 从仓库下载配置文件与配置环境变量:
+> A configuration file needs to be downloaded before starting to tell `docker-compose` how to start the image
+> Download configuration files and configure environment variables from the repository:
 > - [docker-compose.yml](https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml)
 > - [docker-compose.env](https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env)
 
@@ -124,23 +124,22 @@ wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.ym
 wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env
 ```
 
-在启动之前需要修改一下配置
+Need to modify the configuration before starting
 
-修改 `docker-compose.env` 文件的配置，以下字段推荐修改:
+Modify the configuration of the `docker-compose.env` file, the following fields are recommended to be modified:
 
-- `API_URL` 对外可访问的url地址，用于文件服务访问, 可以是域名也可以是ip **如果出现发送图片不能正常显示就是这个变量没有设置**
-- `SECRET` 服务端加密秘钥，用于生成Token. 默认为 `tailchat`
-
+- `API_URL` is an externally accessible url address, used for file service access, it can be a domain name or an ip **If the sent picture cannot be displayed normally, this variable is not set**
+- `SECRET` server-side encryption key, used to generate Token. The default is `tailchat`
 
   </TabItem>
-  <TabItem value="source-code" label="从源码中编译">
+  <TabItem value="source-code" label="Compile from source">
 
-在启动之前需要修改一下配置
+Need to modify the configuration before starting
 
-修改 `docker-compose.env` 文件的配置，以下字段推荐修改:
+Modify the configuration of the `docker-compose.env` file, the following fields are recommended to be modified:
 
-- `API_URL` 对外可访问的url地址，用于文件服务访问, 可以是域名也可以是ip
-- `SECRET` 服务端加密秘钥，用于生成Token. 默认为 `tailchat`
+- `API_URL` is an externally accessible url address, used for file service access, it can be a domain name or an ip **If the sent picture cannot be displayed normally, this variable is not set**
+- `SECRET` server-side encryption key, used to generate Token. The default is `tailchat`
 
 
   </TabItem>
@@ -148,37 +147,37 @@ wget https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.en
 
 
 
-完成配置后使用`docker-compose` 一键启动 `Tailchat` 应用:
+After completing the configuration, use `docker-compose` to start the `Tailchat` application with one click:
 
 ```bash
-# 确保配置文件(docker-compose.yml和docker-compose.env)在当前目录下
-# 执行以下命令一键启动
+# Make sure the configuration files (docker-compose.yml and docker-compose.env) are in the current directory
+# Execute the following command to start with one key
 docker compose up -d
 ```
 
-访问: `http://<server ip>:11000` 即可打开tailchat
+Visit: `http://<server ip>:11000` to open tailchat.
 
-注意部分云服务可能需要手动开放防火墙端口。
+Note that some cloud services may need to manually open firewall ports.
 
-*在`docker-compose.env`文件中提供了部分环境变量可供配置。*
+*Some environment variables are provided in the `docker-compose.env` file for configuration.*
 
-`tailchat` 的`docker-compose.yml`配置默认提供了如下配置:
+The `docker-compose.yml` configuration of `tailchat` provides the following configuration by default:
 
-- `mongodb`: 持久化数据库
-- `redis`: KV数据库与消息中转服务
-- `minio`: 分布式文件服务
+- `mongodb`: Persistent Database
+- `redis`: KV database and message transport service
+- `minio`: Distributed file service
 
-其中持久化文件(数据库, 文件存储)通过 `docker volume` 统一管理:
+The persistent files (database, file storage) are managed uniformly through `docker volume`:
 
 ```
 docker volume ls | grep "tailchat-server"
 ```
 
 :::info
-完整的环境变量可以查询 [环境变量](./environment.md)
+Complete environment variables can be queried [Environment Variables](./environment.md)
 :::
 
-## 更多部署相关文档
+## More deployment related documents
 
-- [搭建 https 网关(可选)](./https-gateway.md)
-- [部署管理后台(可选)](./admin.md)
+- [Build https gateway (optional)](./https-gateway.md)
+- [Deployment admin platform (optional)](./admin.md)

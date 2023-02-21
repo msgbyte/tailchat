@@ -1,11 +1,11 @@
 ---
 sidebar_position: 99
-title: 开发环境
+title: Development environment
 ---
 
-对于开发环境的搭建，tailchat 提供了非常简单快捷的方式:
+For setting up the development environment, tailchat provides a very simple and fast way:
 
-## 使用Docker快速搭建依赖环境
+## Use Docker to quickly build a dependent environment
 
 **mongodb**
 ```bash
@@ -28,11 +28,13 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
-### 启动开发服务器
+### Start the development server
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-可以编辑`.env`的配置为自己相关的上下文
+You can edit the configuration of `server/.env` to your own relevant context
+
+The file can be started from `server/.env.example`

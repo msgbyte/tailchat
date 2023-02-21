@@ -1,35 +1,35 @@
 ---
 sidebar_position: 7
-title: 环境变量
+title: Environment Variable
 ---
 
-## 环境变量
+## Environment Variable
 
-| 变量名 | 默认值 | 描述 |
+| Name | Default Value | Description |
 | ----- | ------ | --- |
-| PORT | 11000 | 网关服务端口号 |
-| SECRET | tailchat | 加密秘钥, 用于JWT |
-| API_URL | http://127.0.0.1:11000 | 对外可访问的url地址，用于文件服务访问 |
-| MONGO_URL | - | 数据库服务地址 |
-| REDIS_URL | - | Redis服务地址 |
-| MINIO_URL | - | 文件服务地址(minio) |
-| MINIO_USER | - | 文件服务用户名 |
-| MINIO_PASS | - | 文件服务密码 |
-| MINIO_BUCKET_NAME | tailchat | 文件服务存储桶名 |
-| SMTP_SENDER | - | 邮件服务发件人(示例: `"Tailchat" example@163.com`) |
-| SMTP_URI | - | 邮件服务连接地址(示例: `smtp://username:password@smtp.example.com/?pool=true`) |
-| FILE_LIMIT | 1048576 | 文件/图片上传的大小限制，默认为1m，请输入数字 |
-| EMAIL_VERIFY | - | 是否开启邮箱校验, 如果为 "1" 或者 "true" 则在注册时增加邮箱校验控制 |
-| DISABLE_LOGGER | - | 是否禁用日志输出, 如果为 "1" 或者 "true" 则在运行中关闭日志 |
+| PORT | 11000 | Gateway service port number |
+| SECRET | tailchat | encryption key, used for JWT |
+| API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for file service access |
+| MONGO_URL | - | Database service address |
+| REDIS_URL | - | Redis service address |
+| MINIO_URL | - | File service address (minio) |
+| MINIO_USER | - | File service username |
+| MINIO_PASS | - | File service password |
+| MINIO_BUCKET_NAME | tailchat | file service bucket name |
+| SMTP_SENDER | - | Mail service sender (example: `"Tailchat" example@163.com`) |
+| SMTP_URI | - | mail service connection address (example: `smtp://username:password@smtp.example.com/?pool=true`) |
+| FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number |
+| EMAIL_VERIFY | - | Whether to enable email verification, if it is "1" or "true", add email verification control when registering |
+| DISABLE_LOGGER | - | Whether to disable the log output, if "1" or "true" turn off the log on the fly |
 
-> 部分环境变量示例可见: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
+> Some examples of environment variables can be seen: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 
-### 使用文件进行配置环境变量
+### Use files to configure environment variables
 
-- 如果是本地方式启动，请复制 `.env.example` 到 `.env` 然后进行编辑
+- - If starting locally, copy `.env.example` to `.env` and edit
   ```bash
   mv .env.example .env
   vi .env
   ```
 
-- 如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker compose up -d` 即可生效
+- If it is started by `docker-compose`, you can directly edit `docker-compose.env`, and use `docker compose up -d` directly after the modification to take effect
