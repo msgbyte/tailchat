@@ -7,18 +7,6 @@
     "message": "应用部署",
     "description": "The label for category 应用部署 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.插件列表": {
-    "message": "插件列表",
-    "description": "The label for category 插件列表 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.项目贡献": {
-    "message": "项目贡献",
-    "description": "The label for category 项目贡献 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.开发文档": {
-    "message": "开发文档",
-    "description": "The label for category 开发文档 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.Operations": {
     "message": "运维操作",
     "description": "The label for category Operations in sidebar tutorialSidebar"
@@ -42,5 +30,17 @@
   "sidebar.tutorialSidebar.category.API Interface": {
     "message": "API 接口",
     "description": "The label for category API Interface in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Plugin List": {
+    "message": "插件列表",
+    "description": "The label for category Plugin List in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Contribution": {
+    "message": "项目贡献",
+    "description": "The label for category Contribution in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Development Documentation": {
+    "message": "开发文档",
+    "description": "The label for category Development Documentation in sidebar tutorialSidebar"
   }
 }

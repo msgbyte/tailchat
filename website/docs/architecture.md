@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 系统架构
+title: System Architecture
 ---
 
 ## Backend Architecture

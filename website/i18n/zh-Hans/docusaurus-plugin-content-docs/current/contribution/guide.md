@@ -32,10 +32,10 @@ Github 地址: https://github.com/msgbyte/tailchat
 - 熟悉代码注入，能够实现 render 进程与 main 进行数据交互
 - 对开源项目抱有热情
 
-### uniapp w2a 应用开发者
+### React Native 应用开发者
 
-- 熟悉uniapp应用的开发
-- 熟悉unipush2的开发
+- 熟悉React Native应用的开发
+- 熟悉React Native Web的使用
 - 对开源项目抱有热情
 
 ### 运营同学
@@ -43,6 +43,15 @@ Github 地址: https://github.com/msgbyte/tailchat
 - 了解基本的运营能力，有当过大群群主的经验
 - 了解开源项目的宣传渠道与方式
 - 沟通能力强
+- 对开源项目抱有热情
+
+### 大使
+
+- 掌握母语和英语(如英语为母语则仅英语即可)
+- 对开源社群有一定了解
+- 参与Tailchat使用方式与最佳实践的开发
+- 沟通能力强
+- 对开源项目抱有热情
 
 ### 其他
 

@@ -1,28 +1,30 @@
 ---
 sidebar_position: 1
-title: 身份组与权限
+title: Identity Groups and Permissions
 ---
 
-身份组是在群组管理中划分用户权限点的形式(RBAC)。
+Identity groups are a form of dividing user authority points in group management (RBAC).
 
-身份组是由一系列权限点的开关组合而成的，而一个用户可能是由多个身份组组合而成的，比如身份组A拥有A权限，身份组B拥有B权限，那么作为同时拥有身份组A和身份组B的用户C则拥有权限A和权限B。为了简化权限的设计，权限点则是通过简单的`true/false`实现的
+An identity group is composed of a series of permission point switches, and a user may be composed of multiple identity groups. For example, identity group A has A permission, and identity group B has B permission. User C in group A and identity group B has permission A and permission B. In order to simplify the design of permissions, permission points are implemented through simple `true/false`
 
-更多关于 `RBAC` 可以查看相关wiki: https://en.wikipedia.org/wiki/Role-based_access_control 在此不做赘述。
+More about `RBAC` can be found in the related wiki: https://en.wikipedia.org/wiki/Role-based_access_control I won’t go into details here.
 
-下面主要讲讲在 `Tailchat` 是如何增加/修改权限点的
+The following mainly talks about how to add/modify permission points in `Tailchat`
 
-## 内置权限
 
-权限点需要同时在前端和后端均做一次声明，前端负责前端的显示，后端负责做兜底的权限校验。如果没有权限的话处理接口应当直接范围一个报错。
+## Built-in permissions
 
-### 前端管理
+Permission points need to be declared on both the front-end and back-end at the same time. The front-end is responsible for the display of the front-end, and the back-end is responsible for the comprehensive permission verification. If there is no permission, the processing interface should directly throw an error.
 
-前端的权限点列表维护在 `client/shared/utils/role-helper.ts` 中, 包含权限点的权限点位, 如:
+### Frontend Management
+
+The permission point list of the front end is maintained in `client/shared/utils/role-helper.ts`, including the permission point of the permission point, such as:
+
 
 ```tsx
 export const PERMISSION = {
   /**
-   * 非插件的权限点都叫core
+   * Non-plugin permission points are called core
    */
   core: {
     message: 'core.message',
@@ -30,19 +32,20 @@ export const PERMISSION = {
 };
 ```
 
-以及权限点的在管理页面中的显示:
+And the display of the permission point on the management page:
+
 ```tsx
 export const getPermissionList = (): PermissionItemType[] => [
   {
     key: PERMISSION.core.message,
-    title: t('发送消息'),
-    desc: t('允许成员在文字频道发送消息'),
+    title: t('Send Message'),
+    desc: t('Allow members to send messages in text channel'),
     default: true,
   }
 ];
 ```
 
-使用方式则是通过hooks获取维护在群组下的权限点:
+The way to use it is to obtain the permission points maintained under the group through hooks:
 
 ```tsx
 const [allowSendMessage] = useHasGroupPermission(groupId, [
@@ -50,12 +53,12 @@ const [allowSendMessage] = useHasGroupPermission(groupId, [
 ]);
 ```
 
-使用数组的方式便于一些业务逻辑需要拥有多个权限点。
+The way of using arrays is convenient for some business logics that need to have multiple permission points.
 
 
-### 后端
+### backend
 
-后端的权限声明则是在 `server/packages/sdk/src/services/lib/role.ts` 中维护，使用方式也非常简单。如下：
+The permission statement of the backend is maintained in `server/packages/sdk/src/services/lib/role.ts`, and the usage method is very simple. as follows:
 ```ts
 const [hasPermission] = await call(ctx).checkUserPermissions(
   groupId,
@@ -63,11 +66,11 @@ const [hasPermission] = await call(ctx).checkUserPermissions(
   [PERMISSION.core.message]
 );
 if (!hasPermission) {
-  throw new NoPermissionError(t('没有操作权限'));
+  throw new NoPermissionError(t('no operation permission'));
 }
 ```
 
 
-## 插件权限
+## Plugin permissions
 
 TODO

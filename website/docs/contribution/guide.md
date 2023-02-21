@@ -1,54 +1,64 @@
 ---
 sidebar_position: 1
-title: 贡献指南
+title: Contribution Guidelines
 ---
 
-`Tailchat` 是一个非常开放的项目，欢迎来自各种不同背景、任何形式的贡献。其插件的形式意味着允许`Tailchat` 可以承载任何想法的实现。
+`Tailchat` is a very open project and welcomes contributions of any kind from all backgrounds. Its plugin architecture is meant to allow `Tailchat` to host the implementation of any idea.
 
-我们期望 `Tailchat` 不仅仅是一个简单的聊天应用，更是一个连接不同工具、不同想法的空间。
+We hope that `Tailchat` is not just a simple chat application, but a space to connect different tools and different ideas.
 
-Github 地址: https://github.com/msgbyte/tailchat
+Github link: https://github.com/msgbyte/tailchat
 
 -----------
 
-目前 `Tailchat` 所急需要贡献者角色:
+Contributor roles are currently urgently needed for `Tailchat`:
 
-### 前端插件开发者
 
-- 熟悉 React 的使用
-- 拥有一定的抽象化思维
-- 有基本的审美能力
-- 对开源项目抱有热情
+### Front-end plugin developer
 
-### 后端插件开发者
+- Familiar with the use of React
+- Possess certain abstract thinking
+- Have basic aesthetic ability
+- Passionate about open source projects
 
-- 熟悉 Nodejs 的使用
-- 对微服务有基本的认知
-- 对开源项目抱有热情
+### Backend plugin developers
 
-### electron 应用开发者
+- Familiar with the use of Nodejs
+- Have a basic understanding of microservices
+- Passionate about open source projects
 
-- 了解跨平台的开发
-- 熟悉代码注入，能够实现 render 进程与 main 进行数据交互
-- 对开源项目抱有热情
+### electron application developer
 
-### uniapp w2a 应用开发者
+- Understand cross-platform development
+- Familiar with code injection, able to realize data interaction between render process and main
+- Passionate about open source projects
 
-- 熟悉uniapp应用的开发
-- 熟悉unipush2的开发
-- 对开源项目抱有热情
+### React Native App Developers
 
-### 运营同学
+- Familiar with the development of React Native applications
+- Familiar with the use of React Native Web
+- Passionate about open source projects
 
-- 了解基本的运营能力，有当过大群群主的经验
-- 了解开源项目的宣传渠道与方式
-- 沟通能力强
+### Operation Classmates
 
-### 其他
+- Understand basic operational capabilities and have experience as a group leader
+- Understand the publicity channels and methods of open source projects
+- Strong communication skills
+- Passionate about open source projects
 
-更多的一切可能性...
+### Ambassador
+
+- Master the mother tongue and English (if English is the mother tongue, only English is enough)
+- Have a certain understanding of the open source community
+- Participate in the development of Tailchat usage and best practices
+- Strong communication skills
+- Passionate about open source projects
+
+### other
+
+More of all possibilities...
 
 
 :::info
-联系方式: 发送邮件到`moonrailgun@gmail.com` 或 [加入TailchatNightly频道](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
+Contact: Send an email to `moonrailgun@gmail.com` or [Join TailchatNightly Channel](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
 :::

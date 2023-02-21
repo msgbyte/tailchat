@@ -1,24 +1,24 @@
 ---
 sidebar_position: 99
-title: 生态与社区
+title: Ecology & Community
 ---
 
-`Tailchat` 是一个非常开放的平台，欢迎来自所有人的以任何形式的贡献。在这里收录一些`Tailchat`相关的第三方资源
+`Tailchat` is a very open platform and welcomes contributions in any form from everyone. Here are some third-party resources related to `Tailchat`
 
-欢迎提交 `pr/issue` 来提交你对`Tailchat`的贡献，让我们能够以下列表中收录:
+Feel free submit `pr/issue` to submit your contribution to `Tailchat`, so that we can include it in the following list:
 
-## 交流社区
+## Exchange community
 
-<img width="360" src="/img/wechat.jpg" />
+[Join TailchatNightly Channel](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
 
-## 代码
+## Code
 
 *(empty)*
 
-## 视频
+## Video
 
 - [【好玩儿的Docker项目】激情畅聊！十分钟搭建一个插件化易拓展的开源即时聊天（IM）应用——Tailchat](https://www.bilibili.com/video/BV1aG411u7M8/)
 
-## 文章
+## Article
 
 - [【好玩儿的Docker项目】激情畅聊！十分钟搭建一个插件化易拓展的开源即时聊天（IM）应用——Tailchat](https://blog.laoda.de/archives/docker-compose-install-tailchat)

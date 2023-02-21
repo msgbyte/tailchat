@@ -54,7 +54,8 @@ export default function Home() {
     >
       <HomepageHeader />
       <main>
-        <HomepageVideo />
+        {/* TODO: 全球化 */}
+        {/* <HomepageVideo /> */}
 
         <HomepageFeatures />
       </main>
