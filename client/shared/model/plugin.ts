@@ -6,6 +6,7 @@ export interface PluginManifest {
    * @example 网页面板插件
    */
   label: string;
+  'label.zh-CN'?: string;
 
   /**
    * 插件名, 插件唯一标识
@@ -42,6 +43,7 @@ export interface PluginManifest {
    * 插件描述
    */
   description: string;
+  'description.zh-CN'?: string;
 
   /**
    * 是否需要重启才能应用插件

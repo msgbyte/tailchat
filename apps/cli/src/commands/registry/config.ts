@@ -16,10 +16,6 @@ export const registryConfigCommand: CommandModule = {
         describe: 'Config FE Plugin List',
         type: 'boolean',
       })
-      .option('be', {
-        describe: 'Config BE Plugin List',
-        type: 'boolean',
-      })
       .option('verbose', {
         describe: 'Show plugin manifest path list',
         type: 'boolean',

@@ -13,6 +13,7 @@ import {
 import { ModalWrapper, openModal } from '../common';
 import { pluginManager } from '../manager';
 import { DocumentView } from './DocumentView';
+import { getManifestFieldWithI18N } from '../utils';
 
 /**
  * 插件项
@@ -51,27 +52,30 @@ export const PluginStoreItem: React.FC<{
     }
 
     openModal(
-      <ModalWrapper title={manifest.label}>
+      <ModalWrapper title={label}>
         <DocumentView documentUrl={parseUrlStr(manifest.documentUrl)} />
       </ModalWrapper>
     );
   }, [manifest]);
 
+  const label = getManifestFieldWithI18N(manifest, 'label');
+  const description = getManifestFieldWithI18N(manifest, 'description');
+
   return (
     <div className="mobile:w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/3 2xl:w-1/4 p-1">
       <div className="rounded-md flex w-full h-36 bg-white bg-opacity-40 dark:bg-black dark:bg-opacity-40 shadow py-2 px-3">
         <div className="mr-2">
-          <Avatar shape="square" src={manifest.icon} name={manifest.label} />
+          <Avatar shape="square" src={manifest.icon} name={label} />
         </div>
 
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <div className="font-bold">{manifest.label}</div>
+          <div className="font-bold">{label}</div>
 
           <div className="text-xs text-gray-700 dark:text-gray-300 text-opacity-50">
             {manifest.name}
           </div>
 
-          <div className="flex-1 overflow-auto">{manifest.description}</div>
+          <div className="flex-1 overflow-auto">{description}</div>
 
           <Space className="mt-1 justify-end">
             {isValidStr(manifest.documentUrl) && (
