@@ -12,6 +12,10 @@ export const ChatDropArea: React.FC = React.memo(() => {
 
   const handleDrop = useMemoizedFn((files: File[]) => {
     const file = files[0];
+    if (!file) {
+      return;
+    }
+
     if (file.type.startsWith('image/')) {
       // 发送图片
       uploadMessageImage(file).then(({ url, width, height }) => {

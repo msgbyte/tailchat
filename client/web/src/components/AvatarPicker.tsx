@@ -30,6 +30,9 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
   const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const pickedFile = e.target.files[0];
+      if (!pickedFile) {
+        return;
+      }
 
       if (isGIF(pickedFile)) {
         updateAvatar(URL.createObjectURL(pickedFile));
