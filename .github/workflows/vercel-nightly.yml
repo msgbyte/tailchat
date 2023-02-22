@@ -32,4 +32,4 @@ jobs:
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: https://paw-server-nightly.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback
-          data: '{"text": "新版前端代码部署完毕", "subscribeId": "${{ secrets.NOTIFY_SUB_ID}}"}'
+          data: '{"text": "The new version of the frontend code is deployed", "subscribeId": "${{ secrets.NOTIFY_SUB_ID}}"}'
