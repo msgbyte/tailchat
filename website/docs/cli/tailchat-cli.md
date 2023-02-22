@@ -3,13 +3,14 @@ sidebar_position: 1
 title: tailchat-cli
 ---
 
-## 安装
+## Install
 
 ```bash
 npm install -g tailchat-cli@latest # Install and update with the same command
 ```
 
-或直接使用
+or directly use
+
 ```bash
 npx tailchat-cli <command>
 ```

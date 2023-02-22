@@ -84,7 +84,7 @@ class GithubSubscribeService extends TcService {
     const { userId, t } = ctx.meta;
 
     if (!groupId || !textPanelId || !repoName) {
-      throw new Error('参数不全');
+      throw new Error('Incomplete parameters');
     }
 
     const [hasPermission] = await call(ctx).checkUserPermissions(
@@ -178,7 +178,7 @@ class GithubSubscribeService extends TcService {
       const compareUrl = event.compare;
       const commits = event.commits.map((c) => `- ${c.message}`).join('\n');
 
-      const message = `[url=${userUrl}]${name}[/url] 在 ${repo} 提交了新的内容:\n${commits}\n\n查看改动: ${compareUrl}`;
+      const message = `[url=${userUrl}]${name}[/url] committed new content in ${repo}:\n${commits}\n\nView changes: ${compareUrl}`;
 
       await this.sendMessageToSubscribes(ctx, repo, message);
     } else if ('pull_request' in event) {
@@ -189,18 +189,18 @@ class GithubSubscribeService extends TcService {
       const title = event.pull_request.title;
       const body = event.pull_request.body;
 
-      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了PR请求:\n网址: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] Updated PR request at ${repo}:\nURL: ${url}`;
       if (event.action === 'opened') {
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了PR请求:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] Created a PR request at ${repo}:\n${title}\n[markdown]${
           body ?? ''
         }[/markdown]\n网址: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了PR请求:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] Replied PR request at ${repo}:\n${title}\n[markdown]${
           comment.body ?? ''
         }[/markdown]\n网址: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了PR请求:\n${title}\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] Closed PR request at ${repo}:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
@@ -211,20 +211,20 @@ class GithubSubscribeService extends TcService {
       const url = event.issue.html_url;
       const title = event.issue.title;
 
-      let message = `[url=${userUrl}]${name}[/url] 在 ${repo} 更新了Issue:\n${title}\n\n网址: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] Updated Issue in ${repo}:\n${title}\n\nURL: ${url}`;
       if (event.action === 'opened') {
         // @ts-ignore 这里不知道为什么判断issue为never 跳过
         const body = event.issue.body;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 创建了Issue:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] Created an Issue in ${repo}:\n${title}\n[markdown]${
           body ?? ''
-        }[/markdown]\n网址: ${url}`;
+        }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 回复了Issue:\n${title}\n回复内容:[markdown]${
+        message = `[url=${userUrl}]${name}[/url] Replied to Issue in ${repo}:\n${title}\nReply content:[markdown]${
           comment.body ?? ''
-        }[/markdown]\n网址: ${url}`;
+        }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] 在 ${repo} 关闭了Issue:\n${title}\n\n网址: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] Closed Issue in ${repo}:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
@@ -244,7 +244,7 @@ class GithubSubscribeService extends TcService {
     });
 
     this.logger.info(
-      '发送Github推送通知:',
+      'Send Github push notification:',
       subscribes
         .map((s) => `${s.repoName}|${s.groupId}|${s.textPanelId}`)
         .join(',')
