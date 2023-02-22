@@ -1,4 +1,3 @@
-import { pluginUserExtraInfo } from '@/plugin/common';
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import { Space, Tag } from 'antd';
 import React, { useEffect } from 'react';
@@ -9,7 +8,8 @@ import {
   t,
   UserBaseInfo,
 } from 'tailchat-shared';
-import { UserProfileContainer } from '../UserProfileContainer';
+import { UserProfileContainer } from '../../UserProfileContainer';
+import { usePluginUserExtraInfo } from './usePluginUserExtraInfo';
 
 export const GroupUserPopover: React.FC<{
   userInfo: UserBaseInfo;
@@ -19,6 +19,7 @@ export const GroupUserPopover: React.FC<{
   const userExtra = userInfo.extra ?? {};
   const roleNames = getUserRoleNames(userInfo._id, groupInfo);
   const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
+  const pluginUserExtraInfoEl = usePluginUserExtraInfo(userExtra);
 
   useEffect(() => {
     if (userInfo.avatar) {
@@ -52,27 +53,7 @@ export const GroupUserPopover: React.FC<{
           ))}
         </Space>
 
-        <div className="pt-2">
-          {pluginUserExtraInfo.map((item, i) => {
-            const Component = item.component?.render;
-            if (Component) {
-              // 自定义渲染方式
-              return (
-                <Component key={item.name + i} value={userExtra[item.name]} />
-              );
-            }
-
-            // 默认渲染方式
-            return (
-              <div key={item.name + i} className="flex">
-                <div className="w-1/4 text-gray-500">{item.label}:</div>
-                <div className="w-3/4">
-                  {userExtra[item.name] ? String(userExtra[item.name]) : ''}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <div className="pt-2">{pluginUserExtraInfoEl}</div>
       </UserProfileContainer>
     </div>
   );

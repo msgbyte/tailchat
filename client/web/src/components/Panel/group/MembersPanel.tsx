@@ -1,5 +1,5 @@
 import { Icon } from 'tailchat-design';
-import { GroupUserPopover } from '@/components/popover/GroupUserPopover';
+import { GroupUserPopover } from '@/components/popover/UserPopover/GroupUserPopover';
 import { UserListItem } from '@/components/UserListItem';
 import { Divider, Dropdown, Input, MenuProps, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
@@ -11,9 +11,7 @@ import {
   useGroupInfo,
   useHasGroupPermission,
   UserBaseInfo,
-  useUserInfoList,
 } from 'tailchat-shared';
-import _compact from 'lodash/compact';
 import { Problem } from '@/components/Problem';
 import { useGroupMemberAction } from '@/hooks/useGroupMemberAction';
 
@@ -42,7 +40,6 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     setSearchText,
     isSearching,
     searchResult: filteredGroupMembers,
-    getMemberHasMute,
     generateActionMenu,
   } = useGroupMemberAction(groupId);
 
