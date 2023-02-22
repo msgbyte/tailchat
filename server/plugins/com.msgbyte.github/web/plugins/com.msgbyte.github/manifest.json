@@ -1,10 +1,12 @@
 {
-  "label": "Github 订阅",
+  "label": "Github Subscription",
+  "label.zh-CN": "Github 订阅",
   "name": "com.msgbyte.github",
   "url": "{BACKEND}/plugins/com.msgbyte.github/index.js",
   "icon": "https://api.iconify.design/entypo-social/github.svg",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "订阅Github项目动态到群组",
+  "description": "Subscribe to the Github project dynamics to the group",
+  "description.zh-CN": "订阅Github项目动态到群组",
   "requireRestart": true
 }

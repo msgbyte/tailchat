@@ -1,9 +1,11 @@
 {
-  "label": "任务管理",
+  "label": "Task Manage",
+  "label.zh-CN": "任务管理",
   "name": "com.msgbyte.tasks",
   "url": "{BACKEND}/plugins/com.msgbyte.tasks/index.js",
   "version": "0.0.0",
   "author": "msgbyte",
-  "description": "任务管理插件，在个人面板中增加TODO面板，用于个人待办事项的管理",
+  "description": "Task management plugin, add TODO panel in personal panel for personal todo management",
+  "description.zh-CN": "任务管理插件，在个人面板中增加TODO面板，用于个人待办事项的管理",
   "requireRestart": true
 }

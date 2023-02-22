@@ -1,9 +1,11 @@
 {
-  "label": "群组话题",
+  "label": "Topic",
+  "label.zh-CN": "群组话题",
   "name": "com.msgbyte.topic",
   "url": "{BACKEND}/plugins/com.msgbyte.topic/index.js",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "为群组提供话题功能",
+  "description": "Provide topic feature for groups",
+  "description.zh-CN": "为群组提供话题功能",
   "requireRestart": true
 }

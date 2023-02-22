@@ -1,10 +1,12 @@
 {
-  "label": "简易机器人",
+  "label": "Simple Notify Bot",
+  "label.zh-CN": "简易机器人",
   "name": "com.msgbyte.simplenotify",
   "url": "{BACKEND}/plugins/com.msgbyte.simplenotify/index.js",
   "icon": "/images/avatar/robot.webp",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "一个简单的通用通知机器人, 用于直接向群组发送消息",
+  "description": "A simple generic notification bot for sending messages directly to groups",
+  "description.zh-CN": "一个简单的通用通知机器人, 用于直接向群组发送消息",
   "requireRestart": true
 }

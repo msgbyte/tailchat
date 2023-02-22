@@ -1,10 +1,12 @@
 {
-  "label": "声网音视频",
+  "label": "Agora",
+  "label.zh-CN": "声网音视频",
   "name": "com.msgbyte.agora",
   "url": "{BACKEND}/plugins/com.msgbyte.agora/index.js",
   "icon": "{BACKEND}/plugins/com.msgbyte.agora/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
-  "description": "为Tailchat增加声网音视频通信功能",
+  "description": "Add the Agora audio and video communication feature to Tailchat",
+  "description.zh-CN": "为Tailchat增加声网音视频通信功能",
   "requireRestart": false
 }
