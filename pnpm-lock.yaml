@@ -30,13 +30,11 @@ importers:
       lodash: ^4.17.21
       prettier: ^2.7.1
       release-it: ^15.5.1
-      tailchat-cli: workspace:^1.5.5
       typescript: ^4.8.2
       vinyl-fs: ^3.0.3
     dependencies:
       crc: 3.8.0
       lodash: 4.17.21
-      tailchat-cli: link:apps/cli
     devDependencies:
       '@commitlint/cli': 17.0.3
       '@commitlint/config-conventional': 17.0.3

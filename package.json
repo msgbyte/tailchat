@@ -52,8 +52,7 @@
   },
   "dependencies": {
     "crc": "^3.8.0",
-    "lodash": "^4.17.21",
-    "tailchat-cli": "workspace:^1.5.5"
+    "lodash": "^4.17.21"
   },
   "pnpm": {
     "patchedDependencies": {
