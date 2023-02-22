@@ -28,7 +28,7 @@ export const builtinPlugins: PluginManifest[] = _compact([
     label: 'BBCode Mmessage Interpreter',
     'label.zh-CN': 'BBCode 消息解释器',
     name: 'com.msgbyte.bbcode',
-    url: '/plugins/com.msgbyte.miaolang/index.js',
+    url: '/plugins/com.msgbyte.bbcode/index.js',
     version: '0.0.0',
     author: 'msgbyte',
     description:
