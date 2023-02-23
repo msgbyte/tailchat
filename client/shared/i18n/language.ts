@@ -5,17 +5,25 @@ import { AllowedLanguage, setLanguage as setI18NLanguage } from './index';
 import { getStorage, useStorage } from '../manager/storage';
 import { LANGUAGE_KEY } from '../utils/consts';
 
-const defaultLanguage = 'zh-CN';
+export const defaultLanguage = 'en-US';
 
-/**
- * 获取当前语言
- */
-async function getLanguage(): Promise<string> {
-  return await getStorage().get(LANGUAGE_KEY, defaultLanguage);
+function getNavigatorLanguage(): AllowedLanguage {
+  if (!navigator.language) {
+    return defaultLanguage;
+  }
+
+  return navigator.language.startsWith('zh') ? 'zh-CN' : 'en-US';
 }
 
 /**
- * 当前语言管理hook
+ * Get current language
+ */
+async function getLanguage(): Promise<string> {
+  return await getStorage().get(LANGUAGE_KEY, getNavigatorLanguage());
+}
+
+/**
+ * Current language management hook
  */
 export function useLanguage() {
   const [language, { save }] = useStorage<AllowedLanguage>(
@@ -49,15 +57,15 @@ export function useLanguage() {
 }
 
 /**
- * 存储语言
- * @param lang 语言代码
+ * Storage language
+ * @param lang Language Code
  */
 export async function saveLanguage(lang: string) {
   await getStorage().save(LANGUAGE_KEY, lang);
 }
 
 /**
- * i18n语言检测中间件
+ * i18n language detection middleware
  */
 export const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
