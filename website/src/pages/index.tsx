@@ -4,7 +4,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import { HomepageHeader } from '../components/HomepageHeader';
-import { ColorModeProvider } from '@docusaurus/theme-common';
+// @ts-ignore
+import { ColorModeProvider } from '@docusaurus/theme-common/internal';
 
 function HomepageVideo() {
   return (
