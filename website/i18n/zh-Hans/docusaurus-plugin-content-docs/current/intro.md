@@ -59,6 +59,10 @@ title: 概述
 
 ## 截图
 
+#### 概览
+
+![](/img/intro/hello.png)
+
 #### 插件中心
 
 ![](/img/intro/plugins.png)

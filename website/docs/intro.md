@@ -57,28 +57,30 @@ Created for enterprises and private domain users, highly free group management a
   - `koa`
   - `moleculer`
 
-## 截图
+## Screenshot
 
-<!-- TODO -->
+#### Overview
 
-#### 插件中心
+![](/img/intro/hello.png)
+
+#### Plugin Center
 
 ![](/img/intro/plugins.png)
 
-#### 各类主题
+#### Themes
 
 ![](/img/intro/theme.png)
 
-#### Github订阅机器人
+#### Github Subscription Bot
 
 ![](/img/intro/github-bot.png)
 
-#### Admin 后台管理
+#### Admin
 
 ![](/img/intro/admin-network.png)
 
-## 开源协议
+## Open Source Agreement
 
-开源协议请主要参考以下文档:
+For open source agreements, please mainly refer to the following documents:
 
 [Apache 2.0](https://github.com/msgbyte/tailchat/blob/master/LICENSE)
