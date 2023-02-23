@@ -17,8 +17,8 @@
     "gen:plugin-doc": "ts-node ./scripts/generate-plugin-list.ts"
   },
   "dependencies": {
-    "@docusaurus/core": "2.1.0",
-    "@docusaurus/preset-classic": "2.1.0",
+    "@docusaurus/core": "2.3.1",
+    "@docusaurus/preset-classic": "2.3.1",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^5.5.0",
     "clsx": "^1.1.1",
@@ -27,6 +27,7 @@
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "styled-components": "^5.3.6",
     "url-loader": "^4.1.1"
   },
   "browserslist": {
@@ -42,13 +43,14 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.1.0",
+    "@docusaurus/module-type-aliases": "^2.3.1",
     "@tsconfig/docusaurus": "^1.0.5",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^8.0.0",
     "@types/react": "^17.0.26",
     "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.3.0",
+    "@types/styled-components": "^5.1.26",
     "fs-extra": "^10.1.0",
     "glob": "^7.2.0",
     "ts-node": "^10.9.1",
