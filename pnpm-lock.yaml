@@ -232,7 +232,7 @@ importers:
       '@types/lodash': ^4.14.170
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
-      ahooks: ^3.7.1
+      ahooks: ^3.7.4
       antd: ^4.24.5
       babel-loader: ^8.2.5
       clsx: ^1.1.1
@@ -248,7 +248,7 @@ importers:
       '@iconify/react': 3.2.2_react@18.2.0
       '@remirror/pm': 2.0.0
       '@remirror/react': 2.0.9_xjlvk6bsfdcxtbtt7svzoxo5xe
-      ahooks: 3.7.1_react@18.2.0
+      ahooks: 3.7.4_react@18.2.0
       antd: 4.24.8_biqbaboplfbrettd7655fr4n2y
       clsx: 1.2.1
       lodash: 4.17.21
@@ -436,7 +436,7 @@ importers:
       glob: ^7.2.3
       html-webpack-plugin: ^5.5.0
       identity-obj-proxy: ^3.0.0
-      immer: ^9.0.19
+      immer: 9.0.15
       is-electron: ^2.2.2
       is-hotkey: ^0.2.0
       jest: 27.5.1
@@ -518,7 +518,7 @@ importers:
       detect-browser: 5.3.0
       emoji-mart: 5.5.2
       generate-json-webpack-plugin: 2.0.0
-      immer: 9.0.19
+      immer: 9.0.15
       is-electron: 2.2.2
       is-hotkey: 0.2.0
       jsonschema: 1.4.1
@@ -554,7 +554,7 @@ importers:
       url: 0.11.0
       web-vitals: 3.1.1
       yup: 0.32.11
-      zustand: 4.3.3_immer@9.0.19+react@18.2.0
+      zustand: 4.3.3_immer@9.0.15+react@18.2.0
     devDependencies:
       '@perfsee/webpack': 1.0.0-alpha.4_webpack@5.75.0
       '@testing-library/jest-dom': 5.16.5
@@ -15988,23 +15988,6 @@ packages:
     resolution: {integrity: sha512-V7uUvAwnimu6eh/PED4mCDjE7tokeZQLKlxg9lCTMPhN+NjsSbtdacByVlR1oluXQzD3MOw55wylDmQo4+S9ZQ==}
     dev: false
 
-  /ahooks/3.7.1_react@18.2.0:
-    resolution: {integrity: sha512-9fooKjhScNyJaIPnlWd13LkY1gQYqv3BqwSA9ynHg1ZUtDqAICuCRoedV97ylrEL6QqI4zeq3bO3lQxkfWVNcg==}
-    engines: {node: '>=8.0.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@types/js-cookie': 2.2.7
-      ahooks-v3-count: 1.0.0
-      dayjs: 1.11.5
-      intersection-observer: 0.12.2
-      js-cookie: 2.2.1
-      lodash: 4.17.21
-      react: 18.2.0
-      resize-observer-polyfill: 1.5.1
-      screenfull: 5.2.0
-    dev: false
-
   /ahooks/3.7.4_react@18.2.0:
     resolution: {integrity: sha512-hvgdqzPUKXn95mK3cGlDCi/ZZqv+FRibCUCFT8zW3hCwLGvixVfnHrIW2/2lgzPdLo8mLjp/XOdIJvcPvE2lgQ==}
     engines: {node: '>=8.0.0'}
@@ -24395,10 +24378,6 @@ packages:
 
   /immer/9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
-
-  /immer/9.0.19:
-    resolution: {integrity: sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==}
     dev: false
 
   /import-fresh/2.0.0:
@@ -32978,7 +32957,7 @@ packages:
       global-modules: 2.0.0
       globby: 11.1.0
       gzip-size: 6.0.0
-      immer: 9.0.19
+      immer: 9.0.15
       is-root: 2.1.0
       loader-utils: 3.2.1
       open: 8.4.2
@@ -40687,7 +40666,7 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
 
-  /zustand/4.3.3_immer@9.0.19+react@18.2.0:
+  /zustand/4.3.3_immer@9.0.15+react@18.2.0:
     resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -40699,7 +40678,7 @@ packages:
       react:
         optional: true
     dependencies:
-      immer: 9.0.19
+      immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

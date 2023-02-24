@@ -1,7 +1,7 @@
 {
   "name": "tailchat-design",
   "version": "1.0.0",
-  "description": "Tailchat 的前端组件",
+  "description": "Tailchat frontend UI library",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm storybook",
@@ -26,7 +26,7 @@
     "@iconify/react": "^3.2.1",
     "@remirror/pm": "^2.0.0",
     "@remirror/react": "^2.0.9",
-    "ahooks": "^3.7.1",
+    "ahooks": "^3.7.4",
     "antd": "^4.24.5",
     "clsx": "^1.1.1",
     "lodash": "^4.17.21",
