@@ -1,180 +1,180 @@
 ---
 sidebar_position: 1
-title: 纯前端插件 (22)
+title: Pure Frontend Plugin (22)
 ---
 
-### com.msgbyte.bbcode BBCode 消息解释器
+### com.msgbyte.bbcode BBCode Mmessage Interpreter
 
-一个用于支持bbcode语法解释富文本消息的插件
+A plugin for supporting bbcode syntax to interpret rich text messages
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.bbcode)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.bbcode)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.bbcode/manifest.json)
 
 
-### com.msgbyte.biggerfont 字号放大
+### com.msgbyte.biggerfont Bigger Font Size
 
-为Tailchat增加放大字号的功能,方便不同用户群体
+Add the feature of enlarging the font size to Tailchat, which is convenient for different user
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.biggerfont)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.biggerfont)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.biggerfont/manifest.json)
 
 
-### com.msgbyte.draw 绘图插件
+### com.msgbyte.draw Drawing plugin
 
-允许发送自定义绘图
+Allows sending custom drawings
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw/manifest.json)
 
 
-### com.msgbyte.env.rn ReactNative支持
+### com.msgbyte.env.rn React Native support
 
-在Tailchat添加对ReactNative环境的支持
+Add support for ReactNative environment in Tailchat
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.rn)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.rn)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.rn/manifest.json)
 
 
 ### com.msgbyte.filepizza file.pizza
 
-在聊天输入框快捷打开 filepizza 以支持p2p传输文件
+Quickly open filepizza in the chat input box to support p2p file transfer
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filepizza)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filepizza)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filepizza/manifest.json)
 
 
 ### com.msgbyte.filesend filesend
 
-在聊天输入框快捷打开 Filesend 以支持传输文件
+Quickly open Filesend in the chat input box to support file transfer
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesend)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesend)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesend/manifest.json)
 
 
 ### com.msgbyte.filesfm files.fm
 
-在聊天输入框快捷打开 files.fm 以支持传输文件
+Quickly open files.fm in the chat input box to support file transfer
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesfm)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesfm)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.filesfm/manifest.json)
 
 
-### com.msgbyte.genshin 原神工具箱
+### com.msgbyte.genshin Genshin Toolbox
 
-为Tailchat增加原神相关的娱乐能力
+Add Genshin-related entertainment capabilities to Tailchat
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.genshin)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.genshin)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.genshin/manifest.json)
 
 
-### com.msgbyte.integration 第三方集成
+### com.msgbyte.integration third party integration
 
-用于在群组中集成第三方应用
+Used to integrate third-party applications in groups
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.integration)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.integration)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.integration/manifest.json)
 
 
-### com.msgbyte.intro 初始引导插件
+### com.msgbyte.intro Intro plugin
 
-为应用首次打开介绍应用的能力
+Turn on the ability to introduce the app for the first time for the app
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.intro)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.intro)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.intro/manifest.json)
 
 
-### com.msgbyte.miaolang 喵语言
+### com.msgbyte.miaolang Miaolang
 
-允许发送喵语，安装插件后的双方加密对话，未安装插件的人看到的是 '喵'
+It is allowed to send meow, and the two parties encrypt the conversation after installing the plugin. People who have not installed the plugin will see 'meow'
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.miaolang)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.miaolang)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.miaolang/manifest.json)
 
 
-### com.msgbyte.music 在线听音乐
+### com.msgbyte.music Listen Music Online
 
-提供在线听音乐服务，内容来自网络
+Provide online music listening service, the content comes from the Internet
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.music)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.music)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.music/manifest.json)
 
 
-### com.msgbyte.notify 消息通知插件
+### com.msgbyte.notify Message notification plugin
 
-为应用增加通知的能力
+Ability to add notifications to apps
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.notify)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.notify)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.notify/manifest.json)
 
 
-### com.msgbyte.openapi 开放平台插件
+### com.msgbyte.openapi Openapi Platform Plugin
 
-为应用提供开放平台的操作能力
+Provide the operating capability of the open platform for the application
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.openapi)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.openapi)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.openapi/manifest.json)
 
 
 ### com.msgbyte.posthog Posthog
 
-Posthog 数据统计
+Posthog Statistics
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.posthog)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.posthog)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.posthog/manifest.json)
 
 
 ### com.msgbyte.sentry Sentry
 
-Sentry 错误处理
+Sentry error handling
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.sentry)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.sentry)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.sentry/manifest.json)
 
 
-### com.msgbyte.snapdrop 隔空投送
+### com.msgbyte.snapdrop Snapdrop
 
-隔空投送 —— 在同一网络发送文件与消息
+Snapdrop —— Send files and messages on the same network
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.snapdrop/manifest.json)
 
 
-### com.msgbyte.toolwa 工具哇！
+### com.msgbyte.toolwa Tool frog!
 
-工具哇 —— 在线小工具
+Tool frog —— online tools
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.toolwa)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.toolwa)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.toolwa/manifest.json)
 
 
-### com.msgbyte.user.location 用户地理位置
+### com.msgbyte.user.location User Location
 
-为用户信息增加地理位置记录
+Add geographic location records for user information
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.user.location)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.user.location)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.user.location/manifest.json)
 
 
-### com.msgbyte.webview 网页面板插件
+### com.msgbyte.webview Web Panel Plugin
 
-为群组提供创建网页面板的功能
+Provides groups with the ability to create web panels
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.webview)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.webview)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.webview/manifest.json)
 
 
 ### com.msgbyte.wenshushu wenshushu
 
-在聊天输入框快捷打开 文叔叔 以支持传输文件
+Quickly open Wenshushu in the chat input box to support file transfer
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu/manifest.json)
 
 
 ### com.msgbyte.wormhole wormhole
 
-在聊天输入框快捷打开 wormhole 以支持传输文件
+Quickly open wormhole in the chat input box to support file transfer
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wormhole)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wormhole)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wormhole/manifest.json)
 

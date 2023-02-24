@@ -1,60 +1,60 @@
 ---
 sidebar_position: 3
-title: 前后端插件 (7)
+title: Backend plugins (7)
 ---
 
-### com.msgbyte.agora 声网音视频
+### com.msgbyte.agora Agora
 
-为Tailchat增加声网音视频通信功能
+Add the Agora audio and video communication feature to Tailchat
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.agora/web/plugins/com.msgbyte.agora)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.agora/web/plugins/com.msgbyte.agora)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.agora/web/plugins/com.msgbyte.agora/manifest.json)
 
 
-### com.msgbyte.github Github 订阅
+### com.msgbyte.github Github Subscription
 
-订阅Github项目动态到群组
+Subscribe to the Github project dynamics to the group
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.github/web/plugins/com.msgbyte.github)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.github/web/plugins/com.msgbyte.github)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.github/web/plugins/com.msgbyte.github/manifest.json)
 
 
-### com.msgbyte.linkmeta Url元数据展示
+### com.msgbyte.linkmeta Url metadata display
 
-解析并获取在聊天信息中的url信息概述，如标题/概述/缩略图, 支持媒体路径，直接显示媒体播放器(特殊支持bilibili，自动加载b站iframe播放器)
+Parse and get the overview of url information in the chat information, such as title/overview/thumbnail, support media path, directly display media player (specially support bilibili, automatically load the iframe player of bilibili)
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta/manifest.json)
 
 
-### com.msgbyte.meeting 音视频服务(WIP)
+### com.msgbyte.meeting Audio and video service (WIP)
 
-为Tailchat提供音视频通讯的服务
+Provide audio and video communication services for Tailchat
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.meeting/web/plugins/com.msgbyte.meeting)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.meeting/web/plugins/com.msgbyte.meeting)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.meeting/web/plugins/com.msgbyte.meeting/manifest.json)
 
 
-### com.msgbyte.simplenotify 简易机器人
+### com.msgbyte.simplenotify Simple Notify Bot
 
-一个简单的通用通知机器人, 用于直接向群组发送消息
+A simple generic notification bot for sending messages directly to groups
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.simplenotify/web/plugins/com.msgbyte.simplenotify)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.simplenotify/web/plugins/com.msgbyte.simplenotify)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.simplenotify/web/plugins/com.msgbyte.simplenotify/manifest.json)
 
 
-### com.msgbyte.tasks 任务管理
+### com.msgbyte.tasks Task Manage
 
-任务管理插件，在个人面板中增加TODO面板，用于个人待办事项的管理
+Task management plugin, add TODO panel in personal panel for personal todo management
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.tasks/web/plugins/com.msgbyte.tasks)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.tasks/web/plugins/com.msgbyte.tasks)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.tasks/web/plugins/com.msgbyte.tasks/manifest.json)
 
 
-### com.msgbyte.topic 群组话题
+### com.msgbyte.topic Topic
 
-为群组提供话题功能
+Provide topic feature for groups
 
-- [插件源码](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic)
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.topic/web/plugins/com.msgbyte.topic/manifest.json)
 

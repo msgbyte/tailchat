@@ -40,7 +40,7 @@ Promise.all(
     list1,
     `---
 sidebar_position: 1
-title: 纯前端插件 (${list1.length})
+title: Pure Frontend Plugin (${list1.length})
 ---`
   );
 
@@ -49,11 +49,11 @@ title: 纯前端插件 (${list1.length})
     list2,
     `---
 sidebar_position: 2
-title: 自定义主题 (${list2.length})
+title: Custom Theme (${list2.length})
 ---`
   );
 
-  console.log('纯前端插件文档自动生成完毕');
+  console.log('The pure frontend plugin documents is automatically generated');
 });
 
 Promise.all(
@@ -67,11 +67,11 @@ Promise.all(
     list,
     `---
 sidebar_position: 3
-title: 前后端插件 (${list.length})
+title: Backend plugins (${list.length})
 ---`
   );
 
-  console.log('前后端插件文档自动生成完毕');
+  console.log('The Backend plugin documents are automatically generated');
 });
 
 /**
@@ -100,7 +100,7 @@ function renderPluginDetail(info: { path: string; manifest: PluginMeta }) {
 
 ${info.manifest.description}
 
-- [插件源码](${sourceCodeUrl})
+- [Source Code](${sourceCodeUrl})
 - [manifest.json](${sourceCodeUrl}/manifest.json)
 `;
 }
