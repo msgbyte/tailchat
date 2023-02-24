@@ -122,5 +122,8 @@ module.exports = {
     locales: ['en', 'zh-Hans'],
   },
   presets: [['@docusaurus/preset-classic', presetClassicOptions]],
-  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
+  plugins: [
+    require.resolve('docusaurus-plugin-image-zoom'),
+    require.resolve('docusaurus-plugin-less'),
+  ],
 };
