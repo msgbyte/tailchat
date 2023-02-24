@@ -19,6 +19,7 @@ import { WebpackStatsViewerPlugin } from 'webpack-stats-viewer-plugin';
 import { buildWorkboxPlugin } from './workbox';
 import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin';
 import GenerateJsonPlugin from 'generate-json-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -240,6 +241,7 @@ const config: Configuration = {
   },
   optimization: {
     splitChunks,
+    minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
