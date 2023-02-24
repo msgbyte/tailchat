@@ -71,6 +71,10 @@ title: 概述
 
 ![](/img/intro/theme.png)
 
+#### 身份组与权限管理
+
+![](/img/intro/roles.png)
+
 #### Github订阅机器人
 
 ![](/img/intro/github-bot.png)

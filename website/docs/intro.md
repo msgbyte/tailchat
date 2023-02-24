@@ -71,6 +71,10 @@ Created for enterprises and private domain users, highly free group management a
 
 ![](/img/intro/theme.png)
 
+#### Roles & Permission
+
+![](/img/intro/roles.png)
+
 #### Github Subscription Bot
 
 ![](/img/intro/github-bot.png)
