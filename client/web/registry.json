@@ -61,6 +61,7 @@
     "label.zh-CN": "原神工具箱",
     "name": "com.msgbyte.genshin",
     "url": "/plugins/com.msgbyte.genshin/index.js",
+    "icon": "/plugins/com.msgbyte.genshin/assets/icon.jpg",
     "version": "0.0.0",
     "author": "msgbyte",
     "description": "Add Genshin-related entertainment capabilities to Tailchat",
