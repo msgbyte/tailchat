@@ -27,7 +27,7 @@
     "@remirror/pm": "^2.0.0",
     "@remirror/react": "^2.0.9",
     "ahooks": "^3.7.1",
-    "antd": "^4.19.5",
+    "antd": "^4.24.5",
     "clsx": "^1.1.1",
     "lodash": "^4.17.21",
     "react-fastify-form": "1.0.12",
