@@ -59,6 +59,17 @@ export const builtinPlugins: PluginManifest[] = _compact([
     'description.zh-CN': '为应用首次打开介绍应用的能力',
     requireRestart: true,
   },
+  {
+    label: 'Markdown Panel',
+    'label.zh-CN': 'Markdown 面板',
+    name: 'com.msgbyte.mdpanel',
+    url: '/plugins/com.msgbyte.mdpanel/index.js',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description: 'Add markdown panel support',
+    'description.zh-CN': '增加 Markdown 面板支持',
+    requireRestart: true,
+  },
   // isOffical
   isOffical && {
     label: 'Posthog',

@@ -74,7 +74,7 @@ export const GroupPanelRender: React.FC<GroupPanelRenderProps> = React.memo(
     if (panelInfo.type === GroupPanelType.PLUGIN) {
       return (
         <GroupPanelContext.Provider value={groupPanelContextValue}>
-          <GroupPluginPanel groupId={groupId} panelId={panelInfo.id} />;
+          <GroupPluginPanel groupId={groupId} panelId={panelInfo.id} />
         </GroupPanelContext.Provider>
       );
     }

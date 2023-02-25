@@ -41,6 +41,7 @@ export const Markdown: React.FC<{
       className="tailchat-markdown"
       transformImageUri={(src) => transformUrl(src)}
       transformLinkUri={(href) => transformUrl(href)}
+      linkTarget="_blank"
       skipHtml={true}
       components={components}
     >

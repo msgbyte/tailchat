@@ -48,7 +48,7 @@ class GroupExtraService extends TcService {
       name,
     });
 
-    return res?.data ?? null;
+    return { data: res?.data ?? null };
   }
 
   async savePanelData(
@@ -69,6 +69,9 @@ class GroupExtraService extends TcService {
       },
       {
         data: String(data),
+      },
+      {
+        upsert: true, // Create if not exist
       }
     );
 

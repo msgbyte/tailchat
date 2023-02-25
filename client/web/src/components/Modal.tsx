@@ -141,17 +141,20 @@ export function closeModal(key?: number): void {
 export function openModal(
   content: React.ReactNode,
   props?: Pick<ModalProps, 'closable' | 'maskClosable'> & {
-    onCloseModal?: () => void;
+    onCloseModal?: () => void | Promise<void>;
   }
 ): number {
   const key = PortalAdd(
     <Modal
       {...props}
       visible={true}
-      onChangeVisible={(visible) => {
+      onChangeVisible={async (visible) => {
         if (visible === false) {
+          if (typeof props?.onCloseModal === 'function') {
+            await props.onCloseModal();
+          }
+
           closeModal(key);
-          props?.onCloseModal?.();
         }
       }}
     >

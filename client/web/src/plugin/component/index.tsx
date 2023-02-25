@@ -30,6 +30,7 @@ export {
 export { Link } from 'react-router-dom';
 
 export { MessageAckContainer } from '@/components/ChatBox/ChatMessageList/MessageAckContainer';
+export { GroupExtraDataPanel } from '@/components/Panel/group/GroupExtraDataPanel';
 export { Image } from '@/components/Image';
 export { IconBtn } from '@/components/IconBtn';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
