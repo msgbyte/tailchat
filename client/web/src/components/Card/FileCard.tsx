@@ -21,8 +21,8 @@ export const FileCard: React.FC<{
 
   return (
     <CardWrapper>
-      <div className="flex items-center">
-        <div className="mr-3 overflow-hidden">
+      <div className="flex w-full items-center">
+        <div className="mr-3 overflow-hidden flex-1">
           <div className="flex text-lg items-center">
             <Icon icon="mdi:paperclip" />
             <span className="ml-1">{t('文件')}</span>
