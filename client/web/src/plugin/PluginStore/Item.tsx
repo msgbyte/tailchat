@@ -88,7 +88,7 @@ export const PluginStoreItem: React.FC<{
                   {t('内置插件')}
                 </Button>
               ) : installed ? (
-                <Button type="primary" onClick={handleUninstallPlugin}>
+                <Button type="default" onClick={handleUninstallPlugin}>
                   {t('已安装')}
                 </Button>
               ) : (
