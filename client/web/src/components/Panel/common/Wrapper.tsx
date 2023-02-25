@@ -12,11 +12,11 @@ interface RightPanelType {
 /**
  * 面板通用包装器
  */
-interface CommonPanelWrapperProps extends PropsWithChildren {
+export interface CommonPanelWrapperProps extends PropsWithChildren {
   header: React.ReactNode;
-  actions?: (
-    setRightPanel: (info: RightPanelType) => void
-  ) => React.ReactElement[];
+  actions?: (ctx: {
+    setRightPanel: (info: RightPanelType) => void;
+  }) => React.ReactElement[];
 }
 export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
   (props) => {
@@ -33,7 +33,7 @@ export const CommonPanelWrapper: React.FC<CommonPanelWrapperProps> = React.memo(
         {/* 主面板 */}
         <div className="flex flex-col overflow-hidden flex-1">
           <PanelCommonHeader
-            actions={props.actions && props.actions(setRightPanel)}
+            actions={props.actions && props.actions({ setRightPanel })}
           >
             {props.header}
           </PanelCommonHeader>

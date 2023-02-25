@@ -1,5 +1,10 @@
 import { ChatBox } from '@/components/ChatBox';
 import { ChatInputMentionsContextProvider } from '@/components/ChatBox/ChatInputBox/context';
+import { IconBtn } from '@/components/IconBtn';
+import {
+  GroupPluginPanelActionProps,
+  pluginPanelActions,
+} from '@/plugin/common';
 import React, { useCallback, useLayoutEffect, useState } from 'react';
 import {
   useGroupPanelInfo,
@@ -14,7 +19,8 @@ import {
   useGroupInfo,
   GroupPanelType,
 } from 'tailchat-shared';
-import { GroupPanelWrapper } from './Wrapper';
+import { MembersPanel } from './MembersPanel';
+import { GroupPanelContainer } from './shared/GroupPanelContainer';
 
 /**
  * 聊天输入框显示状态管理
@@ -84,7 +90,47 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     }
 
     return (
-      <GroupPanelWrapper groupId={groupId} panelId={panelId} showHeader={true}>
+      <GroupPanelContainer
+        groupId={groupId}
+        panelId={panelId}
+        prefixActions={() => [
+          ...pluginPanelActions
+            .filter(
+              (action): action is GroupPluginPanelActionProps =>
+                action.position === 'group'
+            )
+            .map((action) => (
+              <IconBtn
+                key={action.name}
+                title={action.label}
+                shape="square"
+                icon={action.icon}
+                iconClassName="text-2xl"
+                onClick={() =>
+                  action.onClick({
+                    groupId,
+                    panelId,
+                  })
+                }
+              />
+            )),
+        ]}
+        suffixActions={({ setRightPanel }) => [
+          <IconBtn
+            key="members"
+            title={t('成员列表')}
+            shape="square"
+            icon="mdi:account-supervisor-outline"
+            iconClassName="text-2xl"
+            onClick={() =>
+              setRightPanel({
+                name: t('成员') + ` (${groupMembers.length})`,
+                panel: <MembersPanel groupId={groupId} />,
+              })
+            }
+          />,
+        ]}
+      >
         <ChatInputMentionsContextProvider
           users={groupMembers.map((m) => ({
             id: m._id,
@@ -106,7 +152,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
             groupId={groupId}
           />
         </ChatInputMentionsContextProvider>
-      </GroupPanelWrapper>
+      </GroupPanelContainer>
     );
   }
 );

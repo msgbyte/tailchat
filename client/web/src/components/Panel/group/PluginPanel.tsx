@@ -2,7 +2,6 @@ import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
 import { Alert } from 'antd';
 import React, { useMemo } from 'react';
 import { isValidStr, t, useGroupPanelInfo } from 'tailchat-shared';
-import { GroupPanelWrapper } from './Wrapper';
 
 interface GroupPluginPanelProps {
   groupId: string;
@@ -68,15 +67,7 @@ export const GroupPluginPanel: React.FC<GroupPluginPanelProps> = React.memo(
       return null;
     }
 
-    return (
-      <GroupPanelWrapper
-        groupId={props.groupId}
-        panelId={props.panelId}
-        showHeader={false}
-      >
-        <Component panelInfo={panelInfo} />
-      </GroupPanelWrapper>
-    );
+    return <Component panelInfo={panelInfo} />;
   }
 );
 GroupPluginPanel.displayName = 'GroupPluginPanel';
