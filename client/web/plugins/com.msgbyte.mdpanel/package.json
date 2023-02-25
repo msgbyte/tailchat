@@ -1,0 +1,16 @@
+{
+  "name": "@plugins/com.msgbyte.mdpanel",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "Add markdown panel support",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}

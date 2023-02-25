@@ -1,0 +1,11 @@
+{
+  "label": "Markdown Panel",
+  "label.zh-CN": "Markdown 面板",
+  "name": "com.msgbyte.mdpanel",
+  "url": "/plugins/com.msgbyte.mdpanel/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add markdown panel support",
+  "description.zh-CN": "增加 Markdown 面板支持",
+  "requireRestart": true
+}

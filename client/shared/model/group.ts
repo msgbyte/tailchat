@@ -11,7 +11,7 @@ export const groupConfigNames = [
   'hideGroupMemberDiscriminator',
 ] as const;
 
-export type GroupConfigNames = typeof groupConfigNames[number];
+export type GroupConfigNames = (typeof groupConfigNames)[number];
 
 export interface GroupMember {
   roles: string[]; // 角色组
@@ -466,5 +466,39 @@ export async function deleteGroupMember(groupId: string, memberId: string) {
   await request.post('/api/group/deleteGroupMember', {
     groupId,
     memberId,
+  });
+}
+
+/**
+ * Get Group Panel Data from group.extra service
+ */
+export async function getGroupPanelExtraData(
+  groupId: string,
+  panelId: string,
+  name: string
+): Promise<string | null> {
+  const { data } = await request.post('/api/group/extra/getPanelData', {
+    groupId,
+    panelId,
+    name,
+  });
+
+  return data.data ?? null;
+}
+
+/**
+ * Save Group Panel Data to group.extra service
+ */
+export async function saveGroupPanelExtraData(
+  groupId: string,
+  panelId: string,
+  name: string,
+  data: any
+): Promise<void> {
+  await request.post('/api/group/extra/savePanelData', {
+    groupId,
+    panelId,
+    name,
+    data: typeof data === 'string' ? data : JSON.stringify(data),
   });
 }

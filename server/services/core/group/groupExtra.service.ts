@@ -3,7 +3,15 @@ import type {
   GroupExtraDocument,
   GroupExtraModel,
 } from '../../../models/group/group-extra';
-import { TcService, TcContext, TcDbService } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcContext,
+  TcDbService,
+  call,
+  PERMISSION,
+  t,
+  NoPermissionError,
+} from 'tailchat-server-sdk';
 
 interface GroupExtraService
   extends TcService,
@@ -21,6 +29,10 @@ class GroupExtraService extends TcService {
         groupId: 'string',
         panelId: 'string',
         name: 'string',
+      },
+      cache: {
+        keys: ['groupId', 'panelId', 'name'],
+        ttl: 60 * 60, // 1 hour
       },
     });
     this.registerAction('savePanelData', this.savePanelData, {
@@ -60,6 +72,16 @@ class GroupExtraService extends TcService {
     }>
   ) {
     const { groupId, panelId, name, data } = ctx.params;
+    const userId = ctx.meta.userId;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.managePanel]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     await this.adapter.model.findOneAndUpdate(
       {
@@ -75,7 +97,17 @@ class GroupExtraService extends TcService {
       }
     );
 
+    await this.cleanGroupPanelDataCache(groupId, panelId, name);
+
     return true;
+  }
+
+  private cleanGroupPanelDataCache(
+    groupId: string,
+    panelId: string,
+    name: string
+  ) {
+    return this.cleanActionCache('getPanelData', [groupId, panelId, name]);
   }
 }
 
