@@ -23,7 +23,7 @@ module.exports = function (
       type: 'input',
       name: 'name',
       require: true,
-      message: '插件名称',
+      message: 'Plugin Name',
     }
   ]
 
@@ -33,25 +33,25 @@ module.exports = function (
       name: 'id',
       require: true,
       default: 'com.msgbyte.example',
-      message: '插件唯一id, 以反域名格式的唯一字符串',
+      message: 'Plugin unique id, a unique string in reverse domain name format',
     },
     {
       type: 'input',
       name: 'author',
-      message: '插件作者',
+      message: 'Plugin Author',
       default: 'anonymous',
     },
     {
       type: 'input',
       name: 'desc',
-      message: '插件描述',
+      message: 'Plugin description',
       default: '',
     },
   ];
 
   // 服务端插件的前端模板代码
   plop.setGenerator('client-plugin', {
-    description: '纯前端插件的模板代码',
+    description: 'Pure frontend plugin template',
     prompts: [
       ...namePrompts,
       ...serverPrompts,
@@ -72,7 +72,7 @@ module.exports = function (
 
   // 服务端插件的前端模板代码
   plop.setGenerator('server-plugin', {
-    description: '服务端插件模板代码',
+    description: 'Pure backtend plugin template',
     prompts: serverPrompts,
     actions: [
       {
@@ -88,7 +88,7 @@ module.exports = function (
 
   // 服务端插件的前端模板代码
   plop.setGenerator('server-plugin-web', {
-    description: '服务端插件的前端模板代码',
+    description: 'web plugin in backtend plugin template',
     prompts: [
       ...namePrompts,
       ...serverPrompts,
@@ -110,7 +110,7 @@ module.exports = function (
 
   // 服务端插件的前端模板代码
   plop.setGenerator('server-plugin-full', {
-    description: '服务端插件的完整模板代码',
+    description: 'Full backend plugin template',
     prompts: [
       ...namePrompts,
       ...serverPrompts,
