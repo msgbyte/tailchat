@@ -60,7 +60,7 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
     return (
       <CommonPanelWrapper
         header={converseHeader}
-        actions={(setRightPanel) => {
+        actions={({ setRightPanel }) => {
           if (!converse) {
             return [];
           }
