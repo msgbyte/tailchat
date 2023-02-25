@@ -1,71 +1,56 @@
 .homepage-header {
   padding: 4rem 1rem 0;
+  text-align: center;
 
-  @media (min-width: 997px) {
-    font-size: 3.75rem;
-    height: 540px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
+  .header {
+    flex: 1;
+    text-align: center;
 
-  .main {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 80rem;
-
-    @media (min-width: 997px) {
-      flex-direction: row;
-    }
-
-    .header {
-      flex: 1;
-      text-align: center;
+    .title {
+      margin-bottom: 24px;
+      font-size: 2.25rem;
+      line-height: 1;
+      font-weight: 900;
 
       @media (min-width: 997px) {
-        text-align: left;
+        font-size: 3.75rem;
       }
 
-      .title {
-        margin-bottom: 24px;
-        font-size: 2.25rem;
-        line-height: 1;
-        font-weight: 700;
-
-        @media (min-width: 997px) {
-          font-size: 3.75rem;
-        }
-      }
-
-      .desc {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        color: rgb(153, 153, 153);
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-
-        @media (min-width: 997px) {
-          font-size: 1rem;
-          line-height: 1.5rem;
-          max-width: 32rem;
-        }
-      }
-
-      .btns {
-        margin-bottom: 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        @media (min-width: 997px) {
-          flex-direction: row;
-        }
+      @media (min-width: 1300px) {
+        font-size: 5rem;
       }
     }
 
-    .screenshot {
-      flex: 1;
+    .desc {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: rgb(153, 153, 153);
+      font-size: 1rem;
+      line-height: 1.5;
+
+      @media (min-width: 997px) {
+        font-size: 1.5rem;
+      }
     }
+
+    .btns {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+
+      @media (min-width: 997px) {
+        flex-direction: row;
+      }
+    }
+
+    .link {
+      font-size: 1rem;
+    }
+  }
+
+  .screenshot {
+    margin-bottom: 3rem;
   }
 }

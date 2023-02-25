@@ -17,6 +17,8 @@
   --ifm-color-primary-light: #516d9a;
   --ifm-color-primary-lighter: #5572a1;
   --ifm-color-primary-lightest: #6782af;
+
+  --ifm-heading-font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
 
@@ -25,6 +27,10 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+html, body {
+  font-size: 16px;
 }
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
