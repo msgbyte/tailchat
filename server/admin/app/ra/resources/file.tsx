@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Datagrid,
-  DateField,
-  List,
-  ReferenceField,
-  TextField,
-  UrlField,
-} from 'react-admin';
+import { Datagrid, DateField, List, TextField, UrlField } from 'react-admin';
 import { FilesizeField } from '../components/FilesizeField';
+import { UserField } from '../components/UserField';
 
 export const FileList: React.FC = () => (
   <List>
@@ -17,10 +11,7 @@ export const FileList: React.FC = () => (
       <FilesizeField source="size" noWrap={true} />
       <TextField source="metaData.content-type" />
       <TextField source="etag" />
-      <ReferenceField source="userId" reference="users">
-        <TextField source="nickname" />
-        (<TextField source="email" />)
-      </ReferenceField>
+      <UserField source="userId" />
       <DateField source="createdAt" />
     </Datagrid>
   </List>

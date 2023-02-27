@@ -9,6 +9,7 @@ import {
   SearchInput,
   useTranslate,
 } from 'react-admin';
+import { UserField } from '../components/UserField';
 
 export const MessageList: React.FC = () => {
   const translate = useTranslate();
@@ -27,7 +28,7 @@ export const MessageList: React.FC = () => {
       <Datagrid rowClick="show">
         <TextField source="id" sortable={true} sortByOrder="DESC" />
         <TextField source="content" />
-        <TextField source="author" />
+        <UserField source="author" />
         <ReferenceField source="groupId" reference="groups" />
         <TextField source="converseId" />
         <BooleanField source="hasRecall" />
