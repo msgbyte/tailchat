@@ -16,6 +16,7 @@ import {
   GroupPanelType,
   NoPermissionError,
   PERMISSION,
+  SYSTEM_USERID,
   TcContext,
 } from 'tailchat-server-sdk';
 import { User } from '../user/user';
@@ -273,6 +274,10 @@ export class Group extends TimeStamps implements Base {
     const group = await this.findById(groupId);
     if (!group) {
       throw new Error('Not Found Group');
+    }
+
+    if (userId === SYSTEM_USERID) {
+      return allPermission;
     }
 
     const member = group.members.find(

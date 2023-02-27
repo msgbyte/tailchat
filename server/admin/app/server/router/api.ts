@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
+import { call } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { networkRouter } from './network';
 
@@ -46,6 +47,19 @@ router.use(
     q: ['nickname', 'email'],
   })
 );
+router.delete('/messages/:id', auth(), async (req, res) => {
+  try {
+    const messageId = req.params.id;
+    await call('chat.message.deleteMessage', {
+      messageId,
+    });
+
+    res.json({ id: messageId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+});
 router.use(
   '/messages',
   auth(),

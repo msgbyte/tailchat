@@ -8,6 +8,7 @@ import {
   TextField,
   SearchInput,
   useTranslate,
+  BulkDeleteButton,
 } from 'react-admin';
 import { UserField } from '../components/UserField';
 
@@ -25,7 +26,10 @@ export const MessageList: React.FC = () => {
         />,
       ]}
     >
-      <Datagrid rowClick="show">
+      <Datagrid
+        rowClick="show"
+        bulkActionButtons={<BulkDeleteButton mutationMode="optimistic" />}
+      >
         <TextField source="id" sortable={true} sortByOrder="DESC" />
         <TextField source="content" />
         <UserField source="author" />
