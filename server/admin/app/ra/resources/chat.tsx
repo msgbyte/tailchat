@@ -4,12 +4,17 @@ import {
   Datagrid,
   DateField,
   List,
-  ReferenceField,
   TextField,
   SearchInput,
   useTranslate,
   BulkDeleteButton,
+  ShowButton,
+  EditButton,
+  ReferenceInput,
+  SelectInput,
 } from 'react-admin';
+import { GroupField } from '../components/GroupField';
+import { PostListActionToolbar } from '../components/PostListActionToolbar';
 import { UserField } from '../components/UserField';
 
 export const MessageList: React.FC = () => {
@@ -24,6 +29,9 @@ export const MessageList: React.FC = () => {
           alwaysOn
           placeholder={translate('custom.users.search')}
         />,
+        <ReferenceInput key="groupID" source="groupId" reference="groups">
+          <SelectInput optionText="name" />
+        </ReferenceInput>,
       ]}
     >
       <Datagrid
@@ -33,11 +41,14 @@ export const MessageList: React.FC = () => {
         <TextField source="id" sortable={true} sortByOrder="DESC" />
         <TextField source="content" />
         <UserField source="author" />
-        <ReferenceField source="groupId" reference="groups" />
+        <GroupField source="groupId" />
         <TextField source="converseId" />
         <BooleanField source="hasRecall" />
         <TextField source="reactions" />
         <DateField source="createdAt" />
+        <PostListActionToolbar>
+          <ShowButton />
+        </PostListActionToolbar>
       </Datagrid>
     </List>
   );

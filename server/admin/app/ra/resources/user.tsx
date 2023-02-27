@@ -21,13 +21,9 @@ import {
   Labeled,
 } from 'react-admin';
 import React from 'react';
-import { Box } from '@mui/material';
 import { DangerButton } from '../components/DangerButton';
 import { ButtonWithConfirm } from '../components/ButtonWithConfirm';
-
-const PostListActionToolbar = ({ children, ...props }) => (
-  <Box sx={{ alignItems: 'center', display: 'flex' }}>{children}</Box>
-);
+import { PostListActionToolbar } from '../components/PostListActionToolbar';
 
 export const UserList: React.FC = () => {
   const translate = useTranslate();
