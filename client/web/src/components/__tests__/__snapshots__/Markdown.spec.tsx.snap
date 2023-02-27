@@ -40,6 +40,7 @@ exports[`Markdown link with baseUrl 1`] = `
     <p>
       <a
         href="https://tailchat.msgbyte.com/"
+        target="_blank"
       >
         https://tailchat.msgbyte.com/
       </a>
@@ -47,6 +48,7 @@ exports[`Markdown link with baseUrl 1`] = `
 
       <a
         href="https://tailchat.msgbyte.com/README.md"
+        target="_blank"
       >
         ./README.md
       </a>
@@ -102,6 +104,7 @@ exports[`Markdown link without baseUrl 1`] = `
     <p>
       <a
         href="https://tailchat.msgbyte.com/"
+        target="_blank"
       >
         https://tailchat.msgbyte.com/
       </a>
@@ -109,6 +112,7 @@ exports[`Markdown link without baseUrl 1`] = `
 
       <a
         href="./README.md"
+        target="_blank"
       >
         ./README.md
       </a>
