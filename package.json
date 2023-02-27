@@ -1,6 +1,6 @@
 {
   "name": "tailchat",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "private": true,
   "description": "",
   "main": "index.js",

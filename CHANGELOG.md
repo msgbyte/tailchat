@@ -1,5 +1,39 @@
 
 
+## [1.6.6](https://github.com/msgbyte/tailchat/compare/v1.6.5...v1.6.6) (2023-02-27)
+
+
+### Bug Fixes
+
+* fix antd popover dark theme color fit ([aaab464](https://github.com/msgbyte/tailchat/commit/aaab464b6b5a306cce5ad6939960275f13b20084))
+* fix bug if cannt get file then will throw error ([056709c](https://github.com/msgbyte/tailchat/commit/056709c8a53101c67a87fdfd698826458ccad813))
+* fix incorrect bbcode url ([693edf2](https://github.com/msgbyte/tailchat/commit/693edf2739fd2150d23764aa11cfa2b6e797951a))
+* fix style problem in avatar in invite info ([751fb55](https://github.com/msgbyte/tailchat/commit/751fb5534e6f0e4bdad9d6e10bdc5f847c18ab6b))
+
+
+### Features
+
+* add action group.extra for storage group extra data ([8aa5d93](https://github.com/msgbyte/tailchat/commit/8aa5d93eea6b86f24136f273a73daf4c2f084469))
+* add GroupExtraDataPanel for support panel which allow edit ([a64f742](https://github.com/msgbyte/tailchat/commit/a64f7423652870498120500e84c5af65c154815f))
+* add i18n support in plugin store ([69e8bd2](https://github.com/msgbyte/tailchat/commit/69e8bd2902dce979a75f09095a756d9ea6da2540))
+* add mdpanel plugin. then we can create markdown panel in group ([1f21e40](https://github.com/msgbyte/tailchat/commit/1f21e406a54432fd0289c1ae37aa8342cb758856))
+* add message list popover for DM and group ([704c05e](https://github.com/msgbyte/tailchat/commit/704c05e0ec594f88b7a6fbd962a905d6d3df55d7))
+* add navigator language detector ([ce1d7ee](https://github.com/msgbyte/tailchat/commit/ce1d7eec99a14e9473157dec3d8715f7e72f7428))
+* add permission for deleteMessage ([cbb436c](https://github.com/msgbyte/tailchat/commit/cbb436cfbe056cffbe9bee3f752dc1bc519a9e20))
+* **admin:** add group filter in chat list ([b9b1931](https://github.com/msgbyte/tailchat/commit/b9b193186892a194f2d69b88c5242a585d976bb6))
+* **admin:** add user edit page ([0f902d4](https://github.com/msgbyte/tailchat/commit/0f902d4766ad28fcc089d54111fc7cbc23f26a44))
+* **admin:** update delete message logic with call ([0cd4268](https://github.com/msgbyte/tailchat/commit/0cd4268a6553bb8464c6e7ad745a81b65f8aae4a))
+* **cli:** i18n support for create template ([3105406](https://github.com/msgbyte/tailchat/commit/310540631d76cccb448aa57b45bad0333e226760))
+* **desktop:** 增加截图功能 ([d82854a](https://github.com/msgbyte/tailchat/commit/d82854a3ec590541d22baf457fd25857976db0ea))
+* 增加开放平台oauth demo app ([51c2fb2](https://github.com/msgbyte/tailchat/commit/51c2fb20325d0f0f5c6c7cdc3b2c9eb9a9d186e2))
+
+
+### Performance Improvements
+
+* compress bundle js ([5ffac2b](https://github.com/msgbyte/tailchat/commit/5ffac2bf12c492de2c569fb3af0de963d136e920))
+* update backend language fallback to en ([a78221e](https://github.com/msgbyte/tailchat/commit/a78221e111a5c5ae6fc1753d4bccf726ae8325bc))
+* **website:** perf homepage without styled-component ([5faaa74](https://github.com/msgbyte/tailchat/commit/5faaa74ddf8186ad5cf3705d46ebb34c3c949d73))
+
 ## [1.6.5](https://github.com/msgbyte/tailchat/compare/v1.6.4...v1.6.5) (2023-02-17)
 
 
