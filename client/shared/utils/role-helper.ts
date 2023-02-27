@@ -44,6 +44,7 @@ export const PERMISSION = {
     managePanel: 'core.managePanel',
     manageInvite: 'core.manageInvite',
     manageRoles: 'core.manageRoles',
+    deleteMessage: 'core.deleteMessage',
   },
 };
 
@@ -104,6 +105,13 @@ export const getPermissionList = (): PermissionItemType[] => [
     key: PERMISSION.core.manageRoles,
     title: t('允许管理身份组'),
     desc: t('允许成员管理身份组'),
+    default: false,
+    required: [PERMISSION.core.groupDetail],
+  },
+  {
+    key: PERMISSION.core.deleteMessage,
+    title: t('删除消息'),
+    desc: t('允许删除用户信息'),
     default: false,
     required: [PERMISSION.core.groupDetail],
   },

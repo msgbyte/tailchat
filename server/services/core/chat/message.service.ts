@@ -11,6 +11,8 @@ import {
   TcContext,
   DataNotFoundError,
   NoPermissionError,
+  call,
+  PERMISSION,
 } from 'tailchat-server-sdk';
 import type { Group } from '../../../models/group/group';
 import { isValidStr } from '../../../lib/utils';
@@ -296,10 +298,13 @@ class MessageService extends TcService {
       throw new Error(t('无法删除私人信息'));
     }
 
-    const group: GroupBaseInfo = await ctx.call('group.getGroupBasicInfo', {
-      groupId: String(groupId),
-    });
-    if (String(group.owner) !== userId) {
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      String(groupId),
+      userId,
+      [PERMISSION.core.deleteMessage]
+    );
+
+    if (!hasPermission) {
       throw new NoPermissionError(t('没有删除权限')); // 仅管理员允许删除
     }
 

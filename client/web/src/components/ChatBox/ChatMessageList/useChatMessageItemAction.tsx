@@ -4,12 +4,14 @@ import React, { useCallback } from 'react';
 import {
   ChatMessage,
   deleteMessage,
+  PERMISSION,
   recallMessage,
   sharedEvent,
   t,
   useAsyncRequest,
   useChatBoxContext,
   useGroupInfoContext,
+  useHasGroupPermission,
   useUserInfo,
 } from 'tailchat-shared';
 import { openReconfirmModalP } from '@/components/Modal';
@@ -27,6 +29,10 @@ export function useChatMessageItemAction(
   const context = useChatBoxContext();
   const groupInfo = useGroupInfoContext();
   const userInfo = useUserInfo();
+  const [hasDeleteMessagePermission] = useHasGroupPermission(
+    groupInfo?._id ?? '',
+    [PERMISSION.core.deleteMessage]
+  );
 
   const handleCopy = useCallback(() => {
     copy(getMessageTextDecorators().serialize(payload.content));
@@ -68,7 +74,7 @@ export function useChatMessageItemAction(
         icon: <Icon icon="mdi:restore" />,
         onClick: handleRecallMessage,
       },
-      isGroupOwner && {
+      hasDeleteMessagePermission && {
         key: 'delete',
         label: t('删除'),
         danger: true,

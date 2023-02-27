@@ -13,6 +13,7 @@ export const PERMISSION = {
     managePanel: 'core.managePanel',
     manageInvite: 'core.manageInvite',
     manageRoles: 'core.manageRoles',
+    deleteMessage: 'core.deleteMessage',
   },
 };
 
