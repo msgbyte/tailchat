@@ -1,7 +1,7 @@
 import { Admin, Resource, ShowGuesser, CustomRoutes } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
 import { authProvider } from './authProvider';
-import { UserList, UserShow } from './resources/user';
+import { UserEdit, UserList, UserShow } from './resources/user';
 import React from 'react';
 import { GroupList, GroupShow } from './resources/group';
 import { MessageList } from './resources/chat';
@@ -37,7 +37,13 @@ export const App = () => (
     i18nProvider={i18nProvider}
     requireAuth={true}
   >
-    <Resource icon={PersonIcon} name="users" list={UserList} show={UserShow} />
+    <Resource
+      icon={PersonIcon}
+      name="users"
+      list={UserList}
+      show={UserShow}
+      edit={UserEdit}
+    />
     <Resource
       icon={MessageIcon}
       name="messages"

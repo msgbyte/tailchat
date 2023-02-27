@@ -11,7 +11,7 @@ import { FilesizeField } from '../components/FilesizeField';
 
 export const FileList: React.FC = () => (
   <List>
-    <Datagrid>
+    <Datagrid bulkActionButtons={false}>
       <TextField source="objectName" />
       <UrlField source="url" target="__blank" />
       <FilesizeField source="size" noWrap={true} />

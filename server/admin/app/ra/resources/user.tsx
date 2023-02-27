@@ -14,6 +14,11 @@ import {
   useUpdate,
   useShowContext,
   useTranslate,
+  EditButton,
+  Edit,
+  SimpleForm,
+  TextInput,
+  Labeled,
 } from 'react-admin';
 import React from 'react';
 import { Box } from '@mui/material';
@@ -38,7 +43,7 @@ export const UserList: React.FC = () => {
         />,
       ]}
     >
-      <Datagrid>
+      <Datagrid bulkActionButtons={false}>
         <TextField source="id" sortByOrder="DESC" />
         <EmailField source="email" />
         <TextField source="nickname" />
@@ -52,6 +57,7 @@ export const UserList: React.FC = () => {
         <TextField source="settings" />
         <DateField source="createdAt" />
         <PostListActionToolbar>
+          <EditButton />
           <ShowButton />
         </PostListActionToolbar>
       </Datagrid>
@@ -67,7 +73,7 @@ const UserShowActions: React.FC = () => {
 
   return (
     <TopToolbar>
-      {/* <EditButton /> */}
+      <EditButton />
 
       <ButtonWithConfirm
         component={DangerButton}
@@ -93,7 +99,6 @@ export const UserShow: React.FC = () => (
   <Show actions={<UserShowActions />}>
     <SimpleShowLayout>
       <TextField source="id" />
-      <DateField source="createdAt" />
       <EmailField source="email" />
       <TextField source="password" />
       <TextField source="nickname" />
@@ -106,3 +111,27 @@ export const UserShow: React.FC = () => (
   </Show>
 );
 UserShow.displayName = 'UserShow';
+
+export const UserEdit: React.FC = () => {
+  const translate = useTranslate();
+
+  return (
+    <Edit mutationMode="optimistic">
+      <SimpleForm>
+        <Labeled label={translate('resources.users.fields.id')}>
+          <TextField source="id" fullWidth={true} />
+        </Labeled>
+        <TextInput source="email" />
+        <TextInput source="nickname" />
+        <Labeled label={translate('resources.users.fields.temporary')}>
+          <BooleanField source="temporary" />
+        </Labeled>
+        <TextInput source="avatar" />
+        <Labeled label={translate('resources.users.fields.type')}>
+          <TextField source="type" />
+        </Labeled>
+      </SimpleForm>
+    </Edit>
+  );
+};
+UserEdit.displayName = 'UserEdit';
