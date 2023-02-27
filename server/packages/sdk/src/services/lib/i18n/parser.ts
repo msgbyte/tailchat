@@ -7,7 +7,7 @@ acceptLanguage.languages(['en-US', 'zh-CN', 'zh', 'zh-TW']);
  * 解析请求头的 Accept-Language
  */
 export function parseLanguageFromHead(
-  headerLanguage = 'zh-CN'
+  headerLanguage = 'en-US'
 ): AllowedLanguage {
   const language = acceptLanguage.get(headerLanguage);
 

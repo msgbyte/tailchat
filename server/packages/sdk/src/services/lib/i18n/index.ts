@@ -5,8 +5,8 @@ import { crc32 } from 'crc';
 
 i18next.use(Backend).init({
   // initImmediate: false,
-  lng: 'zh-CN',
-  fallbackLng: 'zh-CN',
+  lng: 'en-US',
+  fallbackLng: 'en-US',
   preload: ['zh-CN', 'en-US'],
   ns: ['translation'],
   defaultNS: 'translation',
