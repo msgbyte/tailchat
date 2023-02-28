@@ -12,10 +12,12 @@
     .title {
       display: flex;
       position: sticky;
-      top: var(--ifm-navbar-height);
+      top: 0;
       background-color: var(--ifm-background-color);
       z-index: 20;
       margin-top: -1rem;
+      margin-left: -1px;
+      margin-right: -1px; // fix 1px problem in mobile
       gap: 1.5rem;
       padding-bottom: 1.5rem;
       padding-top: 1.5rem;
@@ -23,6 +25,7 @@
       flex-direction: column;
 
       @media (min-width: 997px) {
+        top: var(--ifm-navbar-height);
         height: 5rem;
         flex-direction: row;
         justify-content: space-between;
