@@ -4,6 +4,7 @@ import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Translate from '@docusaurus/Translate';
 import { useColorMode } from '@docusaurus/theme-common';
+import { inviteLink, nightlyUrl } from '../utils/consts';
 import './HomepageHeader.less';
 
 export const HomepageHeader: React.FC = React.memo(() => {
@@ -26,10 +27,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
         <p className="desc">Tailchat: {siteConfig.tagline}</p>
 
         <div className="btns">
-          <Link
-            className="button button--primary button--lg"
-            to="https://nightly.paw.msgbyte.com/invite/8Jfm1dWb"
-          >
+          <Link className="button button--primary button--lg" to={inviteLink}>
             <Translate>Join our Group</Translate>
           </Link>
 
@@ -42,7 +40,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
         </div>
 
         <div className="link">
-          <Link to="https://nightly.paw.msgbyte.com/">
+          <Link to={nightlyUrl}>
             <Translate>Or direct visit Tailchat nightly version</Translate>
           </Link>
         </div>

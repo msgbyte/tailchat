@@ -56,7 +56,7 @@ const [allowSendMessage] = useHasGroupPermission(groupId, [
 The way of using arrays is convenient for some business logics that need to have multiple permission points.
 
 
-### backend
+### Backend
 
 The permission statement of the backend is maintained in `server/packages/sdk/src/services/lib/role.ts`, and the usage method is very simple. as follows:
 ```ts
