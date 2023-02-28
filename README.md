@@ -6,6 +6,8 @@
 
 ![tailchat](https://socialify.git.ci/msgbyte/tailchat/image?description=1&font=Inter&forks=1&issues=1&language=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F86033898%3Fs%3D200%26v%3D4&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Light)
 
+[简体中文](./README.zh.md)
+
 Tailchat is a modern open source IM application which based on **React** + **Typescript**
 
 Front-end microkernel architecture + backend microservice architecture, `Tailchat` is ready for clustering deployment.
@@ -40,7 +42,3 @@ If you are interested in `Tailchat`, welcome to join `Tailchat`'s seed user exch
 ### Tailchat
 
 [Tailchat Nightly Group](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
-
-### Wechat
-
-<img width="360" src="./website/static/img/wechat.jpg" />
