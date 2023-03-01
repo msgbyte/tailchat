@@ -13,7 +13,7 @@
     .title {
       margin-bottom: 24px;
       font-size: 2.25rem;
-      line-height: 1;
+      line-height: 1.5;
       font-weight: 900;
 
       @media (min-width: 997px) {
@@ -23,6 +23,38 @@
       @media (min-width: 1300px) {
         font-size: 5rem;
       }
+
+      strong {
+        position: relative;
+        color: var(--ifm-color-primary);
+        cursor: pointer;
+        user-select: none;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -0.125rem;
+          left: -0.5rem;
+          right: -0.5rem;
+          height: 0.75rem;
+
+          // Position the line behind the text so that
+          // it is still easily readable
+          z-index: -1;
+
+          // The SVG is added as an SVG background image
+          background-image: url('/img/underline.svg');
+          background-repeat: no-repeat;
+
+          // This allows the SVG to flex in size to fit
+          // any length of word. If the word is short,
+          // the SVG will be stretched vertically, if it
+          // is long, the SVG will be stretched horizontally.
+          // The jagged nature of this particular SVG works
+          // with this transforming.
+          background-size: cover;
+        }
+      }
     }
 
     .desc {
@@ -31,9 +63,19 @@
       color: rgb(153, 153, 153);
       font-size: 1rem;
       line-height: 1.5;
+      margin-bottom: 3rem;
 
       @media (min-width: 997px) {
         font-size: 1.5rem;
+      }
+
+      small {
+        display: block;
+        font-size: 0.75rem;
+
+        @media (min-width: 997px) {
+          font-size: 1rem;
+        }
       }
     }
 
