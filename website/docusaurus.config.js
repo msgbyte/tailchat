@@ -108,7 +108,7 @@ const presetClassicOptions = {
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Tailchat',
-  tagline: 'The next-generation noIM Application',
+  tagline: 'The next-generation noIM Application in your own workspace',
   url: 'https://tailchat.msgbyte.com', // TODO: 待修改成文档主页
   baseUrl: '/',
   onBrokenLinks: 'throw',
