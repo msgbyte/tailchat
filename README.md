@@ -32,7 +32,6 @@ Official Documentation: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte
 - It can be rigorous or fun. Through the combination of plugins, `Tailchat` can be created for different scenarios. It can be for individuals or for enterprises
 - The backend microservice structure is ready for large-scale deployment. Don't worry about what to do after the number of user growth
 
-
 Learn more in our [website](https://tailchat.msgbyte.com/)
 
 ## Communication
@@ -42,3 +41,9 @@ If you are interested in `Tailchat`, welcome to join `Tailchat`'s seed user exch
 ### Tailchat
 
 [Tailchat Nightly Group](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
+
+### Producthunt
+
+<a href="https://www.producthunt.com/posts/tailchat?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tailchat" target="_blank">
+<img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=382080&theme=light" alt="Tailchat - The&#0032;next&#0045;generation&#0032;noIM&#0032;Application&#0032;in&#0032;your&#0032;own&#0032;workspace | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" />
+</a>
