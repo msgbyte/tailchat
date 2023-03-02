@@ -117,8 +117,8 @@ const GroupExtraDataPanelInner: React.FC<GroupExtraDataPanelInnerProps> =
             : []
         }
       >
-        <Loading spinning={loading}>
-          <div>{props.render(info)}</div>
+        <Loading className="h-full w-full" spinning={loading}>
+          <div className="overflow-auto h-full">{props.render(info)}</div>
         </Loading>
       </GroupPanelContainer>
     );
