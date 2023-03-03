@@ -189,18 +189,18 @@ class GithubSubscribeService extends TcService {
       const title = event.pull_request.title;
       const body = event.pull_request.body;
 
-      let message = `[url=${userUrl}]${name}[/url] Updated PR request at ${repo}:\nURL: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] updated PR request at ${repo}:\nURL: ${url}`;
       if (event.action === 'opened') {
-        message = `[url=${userUrl}]${name}[/url] Created a PR request at ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] created a PR request at ${repo}:\n${title}\n[markdown]${
           body ?? ''
         }[/markdown]\n网址: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] Replied PR request at ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] replied PR request at ${repo}:\n${title}\n[markdown]${
           comment.body ?? ''
         }[/markdown]\n网址: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] Closed PR request at ${repo}:\n${title}\n\nURL: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] closed PR request at ${repo}:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
@@ -211,20 +211,20 @@ class GithubSubscribeService extends TcService {
       const url = event.issue.html_url;
       const title = event.issue.title;
 
-      let message = `[url=${userUrl}]${name}[/url] Updated Issue in ${repo}:\n${title}\n\nURL: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] updated Issue in ${repo}:\n${title}\n\nURL: ${url}`;
       if (event.action === 'opened') {
         // @ts-ignore 这里不知道为什么判断issue为never 跳过
         const body = event.issue.body;
-        message = `[url=${userUrl}]${name}[/url] Created an Issue in ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] created an Issue in ${repo}:\n${title}\n[markdown]${
           body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] Replied to Issue in ${repo}:\n${title}\nReply content:[markdown]${
+        message = `[url=${userUrl}]${name}[/url] replied to Issue in ${repo}:\n${title}\nReply content:[markdown]${
           comment.body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] Closed Issue in ${repo}:\n${title}\n\nURL: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] closed Issue in ${repo}:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
