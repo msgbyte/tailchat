@@ -6,7 +6,7 @@ export { CombinedAvatar } from './Avatar/combined';
 export { DelayTip } from './DelayTip';
 export { Highlight } from './Highlight';
 export { Icon } from './Icon';
-export { Image } from './Image';
+export { Image, setImageUrlParser } from './Image';
 export { SensitiveText } from './SensitiveText';
 export { VirtualChatList } from './VirtualChatList';
 

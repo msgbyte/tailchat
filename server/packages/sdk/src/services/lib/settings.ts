@@ -8,6 +8,7 @@ dotenv.config();
  */
 const port = process.env.PORT ? Number(process.env.PORT) : 11000;
 const apiUrl = process.env.API_URL || `http://127.0.0.1:${port}`;
+const staticHost = process.env.STAIC_HOST || apiUrl;
 export const config = {
   port,
   secret: process.env.SECRET || 'tailchat',
@@ -35,7 +36,7 @@ export const config = {
       : 1 * 1024 * 1024,
   },
   apiUrl,
-  staticUrl: `${apiUrl}/static/`,
+  staticUrl: `${staticHost}/static/`,
   enableOpenapi: true, // 是否开始openapi
 
   emailVerification: checkEnvTrusty(process.env.EMAIL_VERIFY) || false, // 是否在注册后验证邮箱可用性

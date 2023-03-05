@@ -14,12 +14,14 @@ import {
   isDevelopment,
   setErrorHook,
   showToasts,
+  parseUrlStr,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
 import { recordMeasure } from './utils/measure-helper';
 import { postMessageEvent } from './utils/event-helper';
+import { setImageUrlParser } from 'tailchat-design';
 
 recordMeasure('init');
 postMessageEvent('init');
@@ -67,6 +69,8 @@ setGlobalLoading((text) => {
 
   return hide;
 });
+
+setImageUrlParser(parseUrlStr);
 
 const backToLoginPage = (() => {
   let timer: number;

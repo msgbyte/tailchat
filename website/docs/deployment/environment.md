@@ -9,7 +9,8 @@ title: Environment Variable
 | ----- | ------ | --- |
 | PORT | 11000 | Gateway service port number |
 | SECRET | tailchat | encryption key, used for JWT |
-| API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for file service access |
+| STAIC_HOST | "{BACKEND}" | Externally accessible static service address, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS, it needs to be modified |
+| API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for issuer issuance on open platforms or as a fallback for file services |
 | MONGO_URL | - | Database service address |
 | REDIS_URL | - | Redis service address |
 | MINIO_URL | - | File service address (minio) |

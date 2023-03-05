@@ -1,4 +1,5 @@
 import _get from 'lodash/get';
+import { parseUrlStr } from 'tailchat-shared';
 
 /**
  * 传入一个图片文件， 返回对应的 Base64 编码
@@ -91,8 +92,9 @@ export async function blobUrlToFile(
  */
 export function downloadUrl(url: string, fileName: string) {
   const a = document.createElement('a');
-  a.href = url;
+  a.href = parseUrlStr(url);
   a.download = fileName; // 这里填保存成的文件名
+  a.target = '_blank';
   a.click();
 }
 

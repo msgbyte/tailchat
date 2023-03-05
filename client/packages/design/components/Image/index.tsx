@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image as AntdImage, ImageProps as AntdImageProps } from 'antd';
 
+export let imageUrlParser = (url: string) => url;
+
 export const Image: React.FC<AntdImageProps> = React.memo((props) => {
   return (
     <AntdImage
@@ -8,7 +10,12 @@ export const Image: React.FC<AntdImageProps> = React.memo((props) => {
       preview={false}
       loading="lazy"
       {...props}
+      src={props.src ? imageUrlParser(props.src) : undefined}
     />
   );
 });
 Image.displayName = 'Image';
+
+export function setImageUrlParser(parser: (url: string) => string): void {
+  imageUrlParser = parser;
+}

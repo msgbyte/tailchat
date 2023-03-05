@@ -8,7 +8,6 @@ import _uniq from 'lodash/uniq';
 import _flatten from 'lodash/flatten';
 import _zipObject from 'lodash/zipObject';
 import { t } from '../i18n';
-import { parseUrlStr } from '../utils/url-helper';
 
 export interface UserBaseInfo {
   _id: string;
@@ -263,10 +262,6 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
   }
 
   const userInfo = await _fetchUserInfo(userId);
-
-  if (userInfo && userInfo.avatar) {
-    userInfo.avatar = parseUrlStr(userInfo.avatar); // 用户信息从来源支持常量替换
-  }
 
   return userInfo;
 }

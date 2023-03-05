@@ -9,6 +9,7 @@ import _omit from 'lodash/omit';
 import type { AvatarProps as AntdAvatarProps } from 'antd/lib/avatar';
 import { getTextColorHex, px2rem } from './utils';
 import { isValidStr } from '../utils';
+import { imageUrlParser } from '../Image';
 
 export { getTextColorHex };
 
@@ -18,7 +19,7 @@ export interface AvatarProps extends AntdAvatarProps {
 }
 export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
   const { isOnline, ...props } = _props;
-  const src = isValidStr(props.src) ? props.src : undefined;
+  const src = isValidStr(props.src) ? imageUrlParser(props.src) : undefined;
 
   const name = useMemo(() => _upperCase(_head(props.name)), [props.name]);
 
