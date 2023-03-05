@@ -7,6 +7,7 @@ import {
   PERMISSION,
   recallMessage,
   sharedEvent,
+  showSuccessToasts,
   t,
   useAsyncRequest,
   useChatBoxContext,
@@ -36,17 +37,20 @@ export function useChatMessageItemAction(
 
   const handleCopy = useCallback(() => {
     copy(getMessageTextDecorators().serialize(payload.content));
+    showSuccessToasts(t('复制纯文本成功'));
   }, [payload.content]);
 
   const [, handleRecallMessage] = useAsyncRequest(async () => {
     if (await openReconfirmModalP()) {
       await recallMessage(payload._id);
+      showSuccessToasts(t('消息撤回成功'));
     }
   }, [payload._id]);
 
   const [, handleDeleteMessage] = useAsyncRequest(async () => {
     if (await openReconfirmModalP()) {
       await deleteMessage(payload._id);
+      showSuccessToasts(t('消息删除成功'));
     }
   }, [payload._id]);
 
