@@ -11,6 +11,7 @@ export const englishCustom = {
     menu: {
       network: 'Tailchat Network',
       socket: 'Socket.IO TCP',
+      system: 'System Config',
     },
     dashboard: {
       welcomeTitle: 'Welcome to Tailchat Admin',
@@ -61,6 +62,10 @@ export const englishCustom = {
       tip2: 'The account password is the account password of Tailchat Admin',
       btn: 'Open the Admin platform',
     },
+    config: {
+      uploadFileLimit: 'Upload file limit (KB)',
+      emailVerification: 'Mandatory Email Verification',
+    },
   },
 };
 
@@ -77,6 +82,7 @@ export const chineseCustom = {
     menu: {
       network: 'Tailchat 网络',
       socket: 'Socket.IO 长链接',
+      system: '系统设置',
     },
     dashboard: {
       welcomeTitle: '欢迎使用 Tailchat 后台管理程序',
@@ -124,6 +130,10 @@ export const chineseCustom = {
       tip1: '服务器URL为:',
       tip2: '账号密码为Tailchat后台的账号密码',
       btn: '打开管理平台',
+    },
+    config: {
+      uploadFileLimit: '上传文件限制(KB)',
+      emailVerification: '邮箱强制验证',
     },
   },
 };

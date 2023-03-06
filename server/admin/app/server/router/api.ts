@@ -3,6 +3,7 @@ import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
 import { call } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
+import { configRouter } from './config';
 import { networkRouter } from './network';
 
 const router = Router();
@@ -39,6 +40,7 @@ router.post('/login', (req, res) => {
 });
 
 router.use('/network', networkRouter);
+router.use('/config', configRouter);
 
 router.use(
   '/users',

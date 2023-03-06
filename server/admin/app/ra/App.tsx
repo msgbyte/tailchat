@@ -18,6 +18,7 @@ import { TailchatLayout } from './layout';
 import { i18nProvider } from './i18n/index';
 import { httpClient } from './request';
 import { SocketIOAdmin } from './routes/socketio';
+import { SystemConfig } from './routes/system';
 
 const dataProvider = jsonServerProvider(
   // 'https://jsonplaceholder.typicode.com'
@@ -65,6 +66,7 @@ export const App = () => (
 
     <CustomRoutes>
       {/* 添加完毕以后还需要到 layout/Menu 增加侧边栏 */}
+      <Route path="/system" element={<SystemConfig />} />
       <Route path="/network" element={<TailchatNetwork />} />
       <Route path="/socketio" element={<SocketIOAdmin />} />
     </CustomRoutes>

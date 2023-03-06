@@ -8,6 +8,7 @@ import {
 } from 'react-admin';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
 import LinkIcon from '@mui/icons-material/Link';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const TailchatMenu: React.FC<MenuProps> = React.memo((props) => {
   const resources = useResourceDefinitions();
@@ -20,6 +21,12 @@ export const TailchatMenu: React.FC<MenuProps> = React.memo((props) => {
       {...Object.keys(resources)
         .filter((name) => resources[name].hasList)
         .map((name) => <ResourceMenuItem key={name} name={name} />)}
+
+      <Menu.Item
+        to="/admin/system"
+        primaryText={translate('custom.menu.system')}
+        leftIcon={<SettingsIcon />}
+      />
 
       <Menu.Item
         to="/admin/network"
