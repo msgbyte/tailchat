@@ -8,11 +8,12 @@
 
 [简体中文](./README.zh.md)
 
-Tailchat is a modern open source IM application which based on **React** + **Typescript**
+## Next generation noIM application in your own workspace
 
-Front-end microkernel architecture + backend microservice architecture, `Tailchat` is ready for clustering deployment.
+### Not only another `Slack`, `Discord`, `Rocket.Chat`....
 
-The front end empowers the application through the plugin system, which is very simple and easy to expand for the secondary development of `Tailchat`.
+If you are interested in the concept of `noIM`, welcome to read my blog:
+- [It's time to officially step into the era of noIM](https://tailchat.msgbyte.com/blog/2023/03/01/the-era-of-noIM)
 
 Official Documentation: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte.com/)
 
@@ -21,7 +22,13 @@ Official Documentation: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte
 > Nightly version is the automatic compile version, that means, every commit code will be automatically compiled.
 > The reliability and stability of the data are not guaranteed, you can deploy with stable version with docker images or github release page
 
-**NOTICE: Although the core functionality of Tailchat is currently in a stable stage, its exposed interface for third-party developers is still being improved. Generally speaking, it is backward compatible, but retains the possibility of Break Change**
+## Motivation
+
+At present, the existing IM applications only focus on chatting itself, and IM is naturally a multi-person collaboration method. In my opinion, it should be able to take on more responsibilities, and form its own unique way of forwarding external applications through IM workflow.
+
+Therefore, I bring up the point of `noIM`, which means **Not only IM**. Instead, it designed a highly customized application platform for individuals/teams centered on IM, with third-party applications as enhanced functions, and a plugin system as the glue connection layer in the middle.
+
+To this end, the functions were abstracted, and a lot of time was spent designing the underlying mechanism. An instant messaging application such as `Tailchat` was born for expansion from the beginning of the underlying design. Through `Tailchat`'s plugin system, developers can easily use their favorite applications as part of `Tailchat` in a very natural way. Different from traditional integration methods such as `Slack`, the integration of `Tailchat` is more free, as if it is a native function.
 
 ## Feature
 
@@ -33,6 +40,26 @@ Official Documentation: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte
 - The backend microservice structure is ready for large-scale deployment. Don't worry about what to do after the number of user growth
 
 Learn more in our [website](https://tailchat.msgbyte.com/)
+
+## Performance and Expansion
+
+Tailchat is a modern open source IM application which based on **React** + **Typescript**
+
+Front-end microkernel architecture + backend microservice architecture, `Tailchat` is ready for clustering deployment.
+
+The front end empowers the application through the plugin system, which is very simple and easy to expand for the secondary development of `Tailchat`.
+
+**NOTICE: Although the core functionality of Tailchat is currently in a stable stage, its exposed interface for third-party developers is still being improved. Generally speaking, it is backward compatible, but retains the possibility of Break Change**
+
+## Preview
+
+![](./website/static/img/intro/hello.png)
+
+![](./website/static/img/intro/plugins.png)
+
+![](./website/static/img/intro/roles.png)
+
+Visit the official website to learn more: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte.com/)
 
 ## Communication
 
