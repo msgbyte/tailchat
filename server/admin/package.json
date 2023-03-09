@@ -3,11 +3,11 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
     "dev": "remix build && run-p \"dev:*\"",
     "dev:node": "cross-env NODE_ENV=development nodemon",
     "dev:remix": "remix watch",
-    "start": "cross-env NODE_ENV=production ts-node ./server.ts",
+    "start": "cross-env NODE_ENV=production node ./dist/admin/server.js",
+    "build": "rm -r ./dist && remix build && tsc --noEmit false && mv ./build ./dist/admin/",
     "typecheck": "tsc -b"
   },
   "dependencies": {
