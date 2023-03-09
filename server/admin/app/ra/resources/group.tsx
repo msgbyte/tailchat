@@ -14,7 +14,6 @@ import {
   ImageField,
   useTranslate,
 } from 'react-admin';
-import React from 'react';
 import { Box } from '@mui/material';
 import { UserField } from '../components/UserField';
 

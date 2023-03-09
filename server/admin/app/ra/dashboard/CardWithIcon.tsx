@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { FC, createElement } from 'react';
 import { Card, Box, Typography, Divider } from '@mui/material';
 import { Link, To } from 'react-router-dom';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { LoadingIndicator } from 'react-admin';
 
 import cartouche from './cartouche.png';

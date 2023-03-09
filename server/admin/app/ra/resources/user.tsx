@@ -20,7 +20,6 @@ import {
   TextInput,
   Labeled,
 } from 'react-admin';
-import React from 'react';
 import { DangerButton } from '../components/DangerButton';
 import { ButtonWithConfirm } from '../components/ButtonWithConfirm';
 import { PostListActionToolbar } from '../components/PostListActionToolbar';

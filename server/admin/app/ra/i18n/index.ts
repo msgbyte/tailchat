@@ -1,4 +1,4 @@
-import { TranslationMessages } from 'react-admin';
+import type { TranslationMessages } from 'react-admin';
 import _merge from 'lodash/merge';
 import defaultEnglishMessages from 'ra-language-english';
 import polyglotI18nProvider from 'ra-i18n-polyglot';

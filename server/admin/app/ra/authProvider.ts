@@ -1,4 +1,4 @@
-import { AuthProvider } from 'react-admin';
+import type { AuthProvider } from 'react-admin';
 
 export const authStorageKey = 'tailchat:admin:auth';
 

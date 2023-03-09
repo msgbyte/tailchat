@@ -1,4 +1,3 @@
-import React from 'react';
 import { Datagrid, DateField, List, TextField, UrlField } from 'react-admin';
 import { FilesizeField } from '../components/FilesizeField';
 import { UserField } from '../components/UserField';

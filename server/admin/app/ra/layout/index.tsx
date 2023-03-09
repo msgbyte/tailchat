@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutComponent } from 'react-admin';
+import type { LayoutComponent } from 'react-admin';
 import { Layout } from 'react-admin';
 import { TailchatMenu } from './Menu';
 
