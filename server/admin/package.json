@@ -6,7 +6,7 @@
     "dev": "remix build && run-p \"dev:*\"",
     "dev:node": "cross-env NODE_ENV=development nodemon",
     "dev:remix": "remix watch",
-    "start": "cross-env NODE_ENV=production node ./dist/admin/server.js",
+    "start": "cd dist/admin && cross-env NODE_ENV=production node ./server.js",
     "build": "rm -rf ./dist && remix build && tsc --noEmit false && mv ./build ./dist/admin/",
     "typecheck": "tsc -b"
   },
