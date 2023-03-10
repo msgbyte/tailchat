@@ -13,9 +13,15 @@ broker.start().then(() => {
   console.log('Linked to Tailchat network, TRANSPORTER: ', transporter);
 });
 
-export function call<T>(actionName: string, params: any): Promise<T> {
+export function callBrokerAction<T>(
+  actionName: string,
+  params: any,
+  opts?: Record<string, any>
+): Promise<T> {
   return broker.call(actionName, params, {
+    ...opts,
     meta: {
+      ...opts?.meta,
       userId: SYSTEM_USERID,
     },
   });

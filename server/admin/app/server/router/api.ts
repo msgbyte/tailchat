@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
-import { call } from '../broker';
+import { callBrokerAction } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
+import { fileRouter } from './upload';
 
 const router = Router();
 
@@ -41,6 +42,7 @@ router.post('/login', (req, res) => {
 
 router.use('/network', networkRouter);
 router.use('/config', configRouter);
+router.use('/file', fileRouter);
 
 router.use(
   '/users',
@@ -52,7 +54,7 @@ router.use(
 router.delete('/messages/:id', auth(), async (req, res) => {
   try {
     const messageId = req.params.id;
-    await call('chat.message.deleteMessage', {
+    await callBrokerAction('chat.message.deleteMessage', {
       messageId,
     });
 
