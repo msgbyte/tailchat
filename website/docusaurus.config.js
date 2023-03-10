@@ -126,4 +126,12 @@ module.exports = {
     require.resolve('docusaurus-plugin-image-zoom'),
     require.resolve('docusaurus-plugin-less'),
   ],
+  scripts: [
+    {
+      src: 'https://umami.moonrailgun.com/umami.js',
+      async: true,
+      defer: true,
+      'data-website-id': '22f7ff7b-db54-4222-b123-c8e3acfbf1aa',
+    },
+  ],
 };
