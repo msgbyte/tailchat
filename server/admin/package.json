@@ -7,7 +7,7 @@
     "dev:node": "cross-env NODE_ENV=development nodemon",
     "dev:remix": "remix watch",
     "start": "cd dist/admin && cross-env NODE_ENV=production node ./server.js",
-    "build": "rm -rf ./dist && remix build && tsc --noEmit false && mv ./build ./dist/admin/",
+    "build": "rm -rf ./dist && remix build && tsc --noEmit false && mv ./build ./dist/admin/ && cp -r ./public ./dist/admin/",
     "typecheck": "tsc -b"
   },
   "dependencies": {
