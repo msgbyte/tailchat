@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { request } from '../../request';
 import { useRequest } from 'ahooks';
 import { CircularProgress, Box, Grid } from '@mui/material';
-import _uniq from 'lodash/uniq';
-import { BooleanField, useTranslate } from 'react-admin';
+import { useTranslate } from 'react-admin';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
+
+const SystemItem: React.FC<
+  PropsWithChildren<{
+    label: string;
+  }>
+> = React.memo((props) => {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        {props.label}
+      </Grid>
+      <Grid item xs={8}>
+        {props.children}
+      </Grid>
+    </Grid>
+  );
+});
+SystemItem.displayName = 'SystemItem';
 
 /**
  * Tailchat 系统设置
@@ -30,26 +47,17 @@ export const SystemConfig: React.FC = React.memo(() => {
         maxWidth: '100vw',
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          {translate('custom.config.uploadFileLimit')}
-        </Grid>
-        <Grid item xs={8}>
-          {config.uploadFileLimit}
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          {translate('custom.config.emailVerification')}
-        </Grid>
-        <Grid item xs={8}>
-          {config.emailVerification ? (
-            <DoneIcon fontSize="small" />
-          ) : (
-            <ClearIcon fontSize="small" />
-          )}
-        </Grid>
-      </Grid>
+      <SystemItem label={translate('custom.config.uploadFileLimit')}>
+        {config.uploadFileLimit}
+      </SystemItem>
+
+      <SystemItem label={translate('custom.config.emailVerification')}>
+        {config.emailVerification ? (
+          <DoneIcon fontSize="small" />
+        ) : (
+          <ClearIcon fontSize="small" />
+        )}
+      </SystemItem>
     </Box>
   );
 });
