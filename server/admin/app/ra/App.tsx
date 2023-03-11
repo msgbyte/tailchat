@@ -4,7 +4,7 @@ import { authProvider } from './authProvider';
 import { UserEdit, UserList, UserShow } from './resources/user';
 import React from 'react';
 import { GroupList, GroupShow } from './resources/group';
-import { MessageList } from './resources/chat';
+import { MessageList, MessageShow } from './resources/chat';
 import { FileList } from './resources/file';
 import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
@@ -49,7 +49,7 @@ export const App = () => (
       icon={MessageIcon}
       name="messages"
       list={MessageList}
-      show={ShowGuesser}
+      show={MessageShow}
     />
     <Resource
       icon={GroupIcon}

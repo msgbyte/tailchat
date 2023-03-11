@@ -8,9 +8,11 @@ import {
   useTranslate,
   BulkDeleteButton,
   ShowButton,
-  EditButton,
   ReferenceInput,
   SelectInput,
+  Show,
+  SimpleShowLayout,
+  ReferenceField,
 } from 'react-admin';
 import { GroupField } from '../components/GroupField';
 import { PostListActionToolbar } from '../components/PostListActionToolbar';
@@ -26,15 +28,19 @@ export const MessageList: React.FC = () => {
           key="search"
           source="q"
           alwaysOn
-          placeholder={translate('custom.users.search')}
+          placeholder={translate('custom.messages.search')}
         />,
-        <ReferenceInput key="groupID" source="groupId" reference="groups">
+        <ReferenceInput key="groupId" source="groupId" reference="groups">
           <SelectInput optionText="name" />
         </ReferenceInput>,
+        <SearchInput
+          key="search"
+          source="converseId"
+          placeholder={translate('custom.messages.searchConverseId')}
+        />,
       ]}
     >
       <Datagrid
-        rowClick="show"
         bulkActionButtons={<BulkDeleteButton mutationMode="optimistic" />}
       >
         <TextField source="id" sortable={true} sortByOrder="DESC" />
@@ -53,3 +59,19 @@ export const MessageList: React.FC = () => {
   );
 };
 MessageList.displayName = 'MessageList';
+
+export const MessageShow: React.FC = () => (
+  <Show>
+    <SimpleShowLayout>
+      <TextField source="id" />
+      <ReferenceField source="groupId" reference="groups" />
+      <TextField source="converseId" />
+      <TextField source="author" />
+      <TextField source="content" />
+      <TextField source="reactions" />
+      <DateField source="createdAt" />
+      <DateField source="updatedAt" />
+    </SimpleShowLayout>
+  </Show>
+);
+MessageShow.displayName = 'MessageShow';

@@ -33,6 +33,7 @@ export const englishCustom = {
     },
     messages: {
       search: 'Search Message Content',
+      searchConverseId: 'Search Converse ID',
     },
     groups: {
       noAvatar: 'No Avatar',
@@ -102,6 +103,7 @@ export const chineseCustom = {
     },
     messages: {
       search: '搜索消息内容',
+      searchConverseId: '搜索会话ID',
     },
     groups: {
       noAvatar: '无头像',
