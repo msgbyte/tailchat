@@ -11,6 +11,7 @@ export const englishCustom = {
       operateSuccess: 'Operate Success',
       operateFailed: 'Operate Failed',
       upload: 'Upload',
+      delete: 'Delete',
     },
     menu: {
       network: 'Tailchat Network',
@@ -89,6 +90,7 @@ export const chineseCustom = {
       operateSuccess: '操作成功',
       operateFailed: '操作失败',
       upload: '上传',
+      delete: '删除',
     },
     menu: {
       network: 'Tailchat 网络',

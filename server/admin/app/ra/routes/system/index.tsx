@@ -1,13 +1,14 @@
 import React, { PropsWithChildren } from 'react';
 import { request } from '../../request';
 import { useRequest } from 'ahooks';
-import { CircularProgress, Box, Grid, Input } from '@mui/material';
+import { CircularProgress, Box, Grid, Input, Button } from '@mui/material';
 import { useTranslate, useNotify } from 'react-admin';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useEditValue } from '../../utils/hooks';
 import { Image } from '../../components/Image';
 import LoadingButton from '@mui/lab/LoadingButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const SystemItem: React.FC<
   PropsWithChildren<{
@@ -70,31 +71,40 @@ export const SystemConfig: React.FC = React.memo(() => {
 
   const {
     loading: loadingServerEntryImage,
-    run: handleUploadServerEntryImage,
+    run: handleChangeServerEntryImage,
   } = useRequest(
-    async (file: File) => {
+    async (file: File | null) => {
       try {
-        const formdata = new FormData();
-        formdata.append('file', file);
+        if (file) {
+          const formdata = new FormData();
+          formdata.append('file', file);
 
-        const { data } = await request.put('/file/upload', formdata, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+          const { data } = await request.put('/file/upload', formdata, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
 
-        const fileInfo = data.files[0];
+          const fileInfo = data.files[0];
 
-        if (!fileInfo) {
-          throw new Error('not get file');
+          if (!fileInfo) {
+            throw new Error('not get file');
+          }
+
+          const url = fileInfo.url;
+          await request.patch('/config/client', {
+            key: 'serverEntryImage',
+            value: url,
+          });
+          refresh();
+        } else {
+          // delete
+          await request.patch('/config/client', {
+            key: 'serverEntryImage',
+            value: '',
+          });
+          refresh();
         }
-
-        const url = fileInfo.url;
-        await request.patch('/config/client', {
-          key: 'serverEntryImage',
-          value: url,
-        });
-        refresh();
 
         notify('custom.common.operateSuccess', {
           type: 'info',
@@ -163,20 +173,30 @@ export const SystemConfig: React.FC = React.memo(() => {
               onChange={(e) => {
                 const file = e.target.files[0];
                 if (file) {
-                  handleUploadServerEntryImage(file);
+                  handleChangeServerEntryImage(file);
                 }
               }}
             />
           </LoadingButton>
 
-          <div style={{ marginTop: 10 }}>
-            {config?.serverEntryImage && (
-              <Image
-                style={{ maxWidth: '100%', maxHeight: 360 }}
-                src={config?.serverEntryImage}
-              />
-            )}
-          </div>
+          {config?.serverEntryImage && (
+            <div style={{ marginTop: 10 }}>
+              <div>
+                <Image
+                  style={{ maxWidth: '100%', maxHeight: 360 }}
+                  src={config?.serverEntryImage}
+                />
+              </div>
+
+              <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={() => handleChangeServerEntryImage(null)}
+              >
+                {translate('custom.common.delete')}
+              </Button>
+            </div>
+          )}
         </div>
       </SystemItem>
     </Box>
