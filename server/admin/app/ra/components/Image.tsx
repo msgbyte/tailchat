@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { ImgHTMLAttributes } from 'react';
 import { parseUrlStr } from '../utils';
 
-export const Image: React.FC<{ src: string }> = React.memo((props) => {
-  return <img src={parseUrlStr(props.src)} />;
-});
+export const Image: React.FC<ImgHTMLAttributes<HTMLImageElement>> = React.memo(
+  (props) => {
+    return <img {...props} src={parseUrlStr(props.src)} />;
+  }
+);
 Image.displayName = 'Image';

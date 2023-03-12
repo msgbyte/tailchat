@@ -5,7 +5,7 @@ import { callBrokerAction } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
-import { fileRouter } from './upload';
+import { fileRouter } from './file';
 
 const router = Router();
 

@@ -2,10 +2,12 @@ import React, { PropsWithChildren } from 'react';
 import { request } from '../../request';
 import { useRequest } from 'ahooks';
 import { CircularProgress, Box, Grid, Input } from '@mui/material';
-import { useTranslate, useDelete, useNotify } from 'react-admin';
+import { useTranslate, useNotify } from 'react-admin';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useEditValue } from '../../utils/hooks';
+import { Image } from '../../components/Image';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const SystemItem: React.FC<
   PropsWithChildren<{
@@ -13,9 +15,9 @@ const SystemItem: React.FC<
   }>
 > = React.memo((props) => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} marginBottom={2}>
       <Grid item xs={4}>
-        {props.label}
+        {props.label}:
       </Grid>
       <Grid item xs={8}>
         {props.children}
@@ -35,6 +37,7 @@ export const SystemConfig: React.FC = React.memo(() => {
     data: config,
     loading,
     error,
+    refresh,
   } = useRequest(async () => {
     const { data } = await request.get('/config/client');
 
@@ -53,6 +56,7 @@ export const SystemConfig: React.FC = React.memo(() => {
           key: 'serverName',
           value: val,
         });
+        refresh();
         notify('custom.common.operateSuccess', {
           type: 'info',
         });
@@ -61,6 +65,49 @@ export const SystemConfig: React.FC = React.memo(() => {
           type: 'info',
         });
       }
+    }
+  );
+
+  const {
+    loading: loadingServerEntryImage,
+    run: handleUploadServerEntryImage,
+  } = useRequest(
+    async (file: File) => {
+      try {
+        const formdata = new FormData();
+        formdata.append('file', file);
+
+        const { data } = await request.put('/file/upload', formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        const fileInfo = data.files[0];
+
+        if (!fileInfo) {
+          throw new Error('not get file');
+        }
+
+        const url = fileInfo.url;
+        await request.patch('/config/client', {
+          key: 'serverEntryImage',
+          value: url,
+        });
+        refresh();
+
+        notify('custom.common.operateSuccess', {
+          type: 'info',
+        });
+      } catch (err) {
+        console.log(err);
+        notify('custom.common.operateFailed', {
+          type: 'info',
+        });
+      }
+    },
+    {
+      manual: true,
     }
   );
 
@@ -99,6 +146,38 @@ export const SystemConfig: React.FC = React.memo(() => {
           onBlur={() => saveServerName()}
           placeholder="Tailchat"
         />
+      </SystemItem>
+
+      <SystemItem label={translate('custom.config.serverEntryImage')}>
+        <div>
+          <LoadingButton
+            loading={loadingServerEntryImage}
+            variant="contained"
+            component="label"
+          >
+            {translate('custom.common.upload')}
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  handleUploadServerEntryImage(file);
+                }
+              }}
+            />
+          </LoadingButton>
+
+          <div style={{ marginTop: 10 }}>
+            {config?.serverEntryImage && (
+              <Image
+                style={{ maxWidth: '100%', maxHeight: 360 }}
+                src={config?.serverEntryImage}
+              />
+            )}
+          </div>
+        </div>
       </SystemItem>
     </Box>
   );

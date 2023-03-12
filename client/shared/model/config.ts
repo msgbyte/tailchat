@@ -20,6 +20,11 @@ export interface GlobalConfig {
    * 服务器名
    */
   serverName?: string;
+
+  /**
+   * 服务器入口背景图
+   */
+  serverEntryImage?: string;
 }
 
 export function getGlobalConfig(): GlobalConfig {

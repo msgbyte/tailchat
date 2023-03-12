@@ -13,6 +13,7 @@
   "dependencies": {
     "@fastify/busboy": "^1.1.0",
     "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "5.0.0-alpha.122",
     "@mui/material": "^5.11.3",
     "@remix-run/express": "^1.9.0",
     "@remix-run/node": "^1.9.0",

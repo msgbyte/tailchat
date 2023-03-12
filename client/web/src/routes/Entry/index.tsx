@@ -8,9 +8,15 @@ import { RegisterView } from './RegisterView';
 import { useRecordMeasure } from '@/utils/measure-helper';
 import { GuestView } from './GuestView';
 import { ForgetPasswordView } from './ForgetPasswordView';
+import { Helmet } from 'react-helmet';
+import { parseUrlStr, useGlobalConfigStore } from 'tailchat-shared';
 
 const EntryRoute = React.memo(() => {
   useRecordMeasure('appEntryRenderStart');
+
+  const serverEntryImage = useGlobalConfigStore(
+    (state) => state.serverEntryImage
+  );
 
   return (
     <div className="h-full flex flex-row">
@@ -32,6 +38,18 @@ const EntryRoute = React.memo(() => {
           />
         </Routes>
       </div>
+
+      {serverEntryImage && (
+        <Helmet>
+          <style type="text/css">
+            {`
+              #tailchat-app {
+                --tc-background-image: url(${parseUrlStr(serverEntryImage)});
+              }
+            `}
+          </style>
+        </Helmet>
+      )}
 
       <div className="flex-1 mobile:hidden tc-background" />
     </div>

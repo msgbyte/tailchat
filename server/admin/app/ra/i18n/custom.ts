@@ -10,6 +10,7 @@ export const englishCustom = {
       errorOccurred: 'some errors occurred',
       operateSuccess: 'Operate Success',
       operateFailed: 'Operate Failed',
+      upload: 'Upload',
     },
     menu: {
       network: 'Tailchat Network',
@@ -87,6 +88,7 @@ export const chineseCustom = {
       errorOccurred: '发生了一些错误',
       operateSuccess: '操作成功',
       operateFailed: '操作失败',
+      upload: '上传',
     },
     menu: {
       network: 'Tailchat 网络',
