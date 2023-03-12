@@ -71,7 +71,7 @@ class ConfigService extends TcService {
    * NOTICE: 返回内容比较简单，因此不建议增加缓存
    */
   async client(ctx: TcPureContext) {
-    const persistConfig = this.adapter.model.getAllClientPersistConfig();
+    const persistConfig = await this.adapter.model.getAllClientPersistConfig();
 
     return {
       uploadFileLimit: config.storage.limit,

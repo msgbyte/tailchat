@@ -7,6 +7,9 @@ export const englishCustom = {
       permission: 'Permission',
       confirmTitle: 'Are you sure you want to perform this operation?',
       confirmContent: 'This action cannot be undone',
+      errorOccurred: 'some errors occurred',
+      operateSuccess: 'Operate Success',
+      operateFailed: 'Operate Failed',
     },
     menu: {
       network: 'Tailchat Network',
@@ -66,6 +69,8 @@ export const englishCustom = {
     config: {
       uploadFileLimit: 'Upload file limit (KB)',
       emailVerification: 'Mandatory Email Verification',
+      serverName: 'Server Name',
+      serverEntryImage: 'Server Entry Page Image',
     },
   },
 };
@@ -79,6 +84,9 @@ export const chineseCustom = {
       permission: '权限',
       confirmTitle: '确认要进行该操作么？',
       confirmContent: '该操作不可撤回',
+      errorOccurred: '发生了一些错误',
+      operateSuccess: '操作成功',
+      operateFailed: '操作失败',
     },
     menu: {
       network: 'Tailchat 网络',
@@ -136,6 +144,8 @@ export const chineseCustom = {
     config: {
       uploadFileLimit: '上传文件限制(KB)',
       emailVerification: '邮箱强制验证',
+      serverName: '服务器名',
+      serverEntryImage: '服务器登录图',
     },
   },
 };

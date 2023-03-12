@@ -5,6 +5,7 @@ import {
   modelOptions,
   Severity,
   ReturnModelType,
+  index,
 } from '@typegoose/typegoose';
 import type { Base } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
@@ -14,6 +15,7 @@ import type { Types } from 'mongoose';
     allowMixed: Severity.ALLOW,
   },
 })
+@index({ name: 1 })
 export class Config implements Base {
   _id: Types.ObjectId;
   id: string;
@@ -47,14 +49,17 @@ export class Config implements Base {
     key: string,
     value: any
   ): Promise<void> {
-    await this.updateOne(
+    await this.findOneAndUpdate(
       {
         name: Config.globalClientConfigName,
       },
       {
         $set: {
-          [key]: value,
+          [`data.${key}`]: value,
         },
+      },
+      {
+        upsert: true,
       }
     );
   }

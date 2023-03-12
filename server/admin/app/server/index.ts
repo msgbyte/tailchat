@@ -7,8 +7,13 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import { apiRouter } from './router/api';
 
+if (!process.env.MONGO_URL) {
+  console.error('Require env: MONGO_URL');
+  process.exit(1);
+}
+
 // 链接数据库
-mongoose.connect(process.env.MONGO_URL!, (error: any) => {
+mongoose.connect(process.env.MONGO_URL, (error: any) => {
   if (!error) {
     return console.info('Datebase connected');
   }
@@ -55,6 +60,11 @@ app.all(
         mode: process.env.NODE_ENV,
       })
 );
+
+app.use((err, req, res, next) => {
+  res.status(500);
+  res.json({ error: err.message });
+});
 
 const port = process.env.ADMIN_PORT || 3000;
 

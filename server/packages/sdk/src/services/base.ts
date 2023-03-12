@@ -407,9 +407,13 @@ export abstract class TcService extends Service {
    * NOTICE: 这里使用Redis作为缓存管理器，因此不需要通知所有的service
    */
   async cleanActionCache(actionName: string, keys: string[] = []) {
-    await this.broker.cacher.clean(
-      `${this.serviceName}.${actionName}:${keys.join('|')}**`
-    );
+    if (keys.length === 0) {
+      await this.broker.cacher.clean(`${this.serviceName}.${actionName}`);
+    } else {
+      await this.broker.cacher.clean(
+        `${this.serviceName}.${actionName}:${keys.join('|')}**`
+      );
+    }
   }
 
   /**
