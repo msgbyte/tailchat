@@ -1,7 +1,6 @@
 import { request } from '../api/request';
-import { globalActions } from '../redux/slices';
-import { defaultGlobalConfig } from '../redux/slices/global';
-import { reduxStore } from '../redux/store';
+import { useGlobalConfigStore } from '../store/globalConfig';
+import { defaultGlobalConfig } from '../utils/consts';
 
 /**
  * 后端的全局设置
@@ -16,21 +15,24 @@ export interface GlobalConfig {
    * 是否在注册时校验邮箱
    */
   emailVerification: boolean;
+
+  /**
+   * 服务器名
+   */
+  serverName?: string;
 }
 
 export function getGlobalConfig(): GlobalConfig {
-  return reduxStore.getState().global.config;
+  return useGlobalConfigStore.getState();
 }
 
 export async function fetchGlobalClientConfig(): Promise<GlobalConfig> {
   const { data: config } = await request.get('/api/config/client');
 
-  reduxStore.dispatch(
-    globalActions.setGlobalConfig({
-      ...defaultGlobalConfig,
-      ...config,
-    })
-  );
+  useGlobalConfigStore.setState({
+    ...defaultGlobalConfig,
+    ...config,
+  });
 
   return config;
 }

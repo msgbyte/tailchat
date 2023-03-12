@@ -350,6 +350,7 @@ importers:
       socket.io-msgpack-parser: ^3.0.2
       url-regex: ^5.0.0
       yup: ^0.32.9
+      zustand: ^4.3.6
     dependencies:
       '@reduxjs/toolkit': 1.8.5_kkwg4cbsojnjnupd3btipussee
       '@tanstack/react-query': 4.3.4_react@18.2.0
@@ -371,6 +372,7 @@ importers:
       socket.io-msgpack-parser: 3.0.2
       url-regex: 5.0.0
       yup: 0.32.11
+      zustand: 4.3.6_react@18.2.0
     devDependencies:
       '@types/crc': 3.8.0
       '@types/lodash': 4.14.184
@@ -40452,6 +40454,22 @@ packages:
         optional: true
     dependencies:
       immer: 9.0.15
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /zustand/4.3.6_react@18.2.0:
+    resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

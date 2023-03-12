@@ -1,3 +1,5 @@
+import type { GlobalConfig } from '../model/config';
+
 /**
  * 昵称合法性匹配
  * 最大八个汉字内容或者16字英文
@@ -15,3 +17,8 @@ export const LANGUAGE_KEY = 'i18n:language';
  * 系统用户id
  */
 export const SYSTEM_USERID = '000000000000000000000000';
+
+export const defaultGlobalConfig: GlobalConfig = {
+  uploadFileLimit: 1 * 1024 * 1024,
+  emailVerification: false,
+};

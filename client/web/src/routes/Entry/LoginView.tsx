@@ -1,6 +1,13 @@
 import { Icon } from 'tailchat-design';
 import { Divider } from 'antd';
-import { isValidStr, loginWithEmail, t, useAsyncFn } from 'tailchat-shared';
+import {
+  isValidStr,
+  loginWithEmail,
+  t,
+  useAppSelector,
+  useAsyncFn,
+  useGlobalConfigStore,
+} from 'tailchat-shared';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from '../../components/Spinner';
 import { string } from 'yup';
@@ -43,6 +50,7 @@ export const LoginView: React.FC = React.memo(() => {
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
   const { pathname } = useLocation();
+  const serverName = useGlobalConfigStore((state) => state.serverName);
 
   useEffect(() => {
     tryAutoLogin()
@@ -80,7 +88,11 @@ export const LoginView: React.FC = React.memo(() => {
 
   return (
     <div className="w-96 text-white relative">
-      <div className="mb-4 text-2xl">{t('登录 Tailchat')}</div>
+      <div className="mb-4 text-2xl">
+        {t('登录 {{serverName}}', {
+          serverName: serverName || 'Tailchat',
+        })}
+      </div>
 
       <div>
         <div className="mb-4">

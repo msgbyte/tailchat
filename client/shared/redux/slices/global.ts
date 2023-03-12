@@ -1,10 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { GlobalConfig } from '../../model/config';
-
-export const defaultGlobalConfig: GlobalConfig = {
-  uploadFileLimit: 1 * 1024 * 1024,
-  emailVerification: false,
-};
 
 export interface GlobalState {
   /**
@@ -12,13 +6,11 @@ export interface GlobalState {
    */
   networkStatus: 'initial' | 'connected' | 'reconnecting' | 'disconnected';
   reconnectNum: number;
-  config: GlobalConfig;
 }
 
 const initialState: GlobalState = {
   networkStatus: 'initial',
   reconnectNum: 0,
-  config: defaultGlobalConfig,
 };
 
 const globalSlice = createSlice({
@@ -33,9 +25,6 @@ const globalSlice = createSlice({
     },
     incReconnectNum(state) {
       state.reconnectNum += 1;
-    },
-    setGlobalConfig(state, action: PayloadAction<GlobalConfig>) {
-      state.config = action.payload;
     },
   },
 });

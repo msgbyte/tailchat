@@ -213,6 +213,9 @@ export { setupRedux } from './redux/setup';
 export { reduxStore, ReduxProvider } from './redux/store';
 export type { AppStore, AppState, AppDispatch } from './redux/store';
 
+// store
+export { useGlobalConfigStore } from './store/globalConfig';
+
 // utils
 export { joinArray } from './utils/array-helper';
 export { NAME_REGEXP, SYSTEM_USERID } from './utils/consts';
