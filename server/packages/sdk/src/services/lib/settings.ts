@@ -8,7 +8,7 @@ dotenv.config();
  */
 const port = process.env.PORT ? Number(process.env.PORT) : 11000;
 const apiUrl = process.env.API_URL || `http://127.0.0.1:${port}`;
-const staticHost = process.env.STAIC_HOST || '{BACKEND}';
+const staticHost = process.env.STATIC_HOST || '{BACKEND}';
 export const config = {
   port,
   secret: process.env.SECRET || 'tailchat',
