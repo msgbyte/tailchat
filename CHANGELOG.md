@@ -1,5 +1,32 @@
 
 
+## [1.6.7](https://github.com/msgbyte/tailchat/compare/v1.6.6...v1.6.7) (2023-03-14)
+
+
+### Bug Fixes
+
+* fix size problem in <GroupExtraDataPanel /> ([53e476d](https://github.com/msgbyte/tailchat/commit/53e476d8a8e504c35bb8b2cdd53d2f6f9dcee62b))
+* modify right position of ScrollToBottom ([e66591d](https://github.com/msgbyte/tailchat/commit/e66591d022a6f009438980ab6d66a4dace6685d8))
+
+
+### Features
+
+* add config model and add action for get client config ([b45d782](https://github.com/msgbyte/tailchat/commit/b45d782f8e0069656d033d2981cbe5b031f21ed0))
+* add custom serverName render in login view ([d9adf84](https://github.com/msgbyte/tailchat/commit/d9adf840148c8f7daf11823b4d9ec46a734ec35f))
+* add image parser ([8ee1215](https://github.com/msgbyte/tailchat/commit/8ee1215a9a04c6c47eec04c35ab9dcee2aa61f64))
+* add toast for message item action ([a5133b2](https://github.com/msgbyte/tailchat/commit/a5133b2d800448864d59f9c27e62d96e595fbd94))
+* add unlimited upload api in admin ([5ab4829](https://github.com/msgbyte/tailchat/commit/5ab4829565f1965946ac322c348d69db34f67ec3))
+* **admin:** add basic system config ([7688c84](https://github.com/msgbyte/tailchat/commit/7688c844f3790c5461956b1f8620462f0b3a77d8))
+* **admin:** add converseID filter and message detail ([9484e4c](https://github.com/msgbyte/tailchat/commit/9484e4ccedd3f512e2d665e10929b286ab5aee77))
+* **admin:** add delete button in server entry image ([4d6fd45](https://github.com/msgbyte/tailchat/commit/4d6fd451a177ae632db03fa8dab41f1556525b8a))
+* **admin:** allow edit client config serverName edit in admin ([9c7448b](https://github.com/msgbyte/tailchat/commit/9c7448b7cbf2a8019f54e350b8da190eb9085f4c))
+* allow admin upload and edit serverEntryImage ([fb13a3c](https://github.com/msgbyte/tailchat/commit/fb13a3c92802e73976f7e70549d242d4fca0aadb))
+
+
+### Performance Improvements
+
+* **admin:** replace ts-node with node to run admin ([f26a423](https://github.com/msgbyte/tailchat/commit/f26a42356fd6a45826aa18ed79719fc43c1567e4))
+
 ## [1.6.6](https://github.com/msgbyte/tailchat/compare/v1.6.5...v1.6.6) (2023-02-27)
 
 
