@@ -15,6 +15,7 @@ import {
 import { ChatInputEmotion } from './Emotion';
 import _uniq from 'lodash/uniq';
 import { ChatDropArea } from './ChatDropArea';
+import { Icon } from 'tailchat-design';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
@@ -110,7 +111,16 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
 
           <div className="px-2 flex space-x-1">
             <ChatInputEmotion />
-            <ChatInputAddon />
+
+            {message ? (
+              <Icon
+                icon="mdi:send-circle-outline"
+                className="text-2xl cursor-pointer"
+                onClick={() => handleSendMsg()}
+              />
+            ) : (
+              <ChatInputAddon />
+            )}
           </div>
 
           <ChatDropArea />
