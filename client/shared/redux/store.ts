@@ -4,7 +4,10 @@ import { appReducer } from './slices';
 function createStore() {
   const store = configureStore({
     reducer: appReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
     devTools: process.env.NODE_ENV !== 'production',
   });
 
