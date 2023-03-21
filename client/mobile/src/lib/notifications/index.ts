@@ -42,16 +42,21 @@ export async function showNotification(info: NotificationInfo) {
   });
 }
 
-export async function initNotificationEnv() {
+interface NotificationOptions {
+  nickname: string;
+  runService: () => void;
+}
+export async function initNotificationEnv(options: NotificationOptions) {
   await notifee.requestPermission();
 
-  await initForegroundService();
+  await initForegroundService(options);
 }
 
-async function initForegroundService() {
+async function initForegroundService(options: NotificationOptions) {
   notifee.registerForegroundService((_notification) => {
     return new Promise(() => {
       // 一直pending，因此前台服务会一直存在
+      options.runService();
 
       notifee.onForegroundEvent(async ({ type, detail }) => {
         if (
@@ -67,7 +72,7 @@ async function initForegroundService() {
   const channelId = await createDefaultChannel();
 
   notifee.displayNotification({
-    title: 'Tailchat',
+    title: `Tailchat: ${options.nickname}`,
     body: '持续保持服务正常运行, 关闭后可能无法正常接受到消息推送',
     android: {
       channelId,

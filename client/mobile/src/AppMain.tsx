@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { generatePostMessageScript } from './lib/inject';
 import { handleTailchatMessage } from './lib/inject/message-handler';
-import { initNotificationEnv } from './lib/notifications';
 
 /**
  * Tailchat的主要内容
@@ -16,10 +15,6 @@ interface Props {
 }
 export const AppMain: React.FC<Props> = React.memo((props) => {
   const webviewRef = useRef<WebView>(null);
-
-  useEffect(() => {
-    initNotificationEnv();
-  }, []);
 
   return (
     <View style={styles.root}>

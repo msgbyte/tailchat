@@ -1,8 +1,8 @@
 import type WebView from 'react-native-webview';
 import { generateInstallPluginScript } from '.';
 import { useUIStore } from '../../store/ui';
-import { showNotification } from '../notifications';
-import type { UserBaseInfo } from '../../types';
+import { UserBaseInfo } from '../../types';
+import { initNotificationEnv, showNotification } from '../notifications';
 import { bindSocketEvent, createSocket } from '../socket';
 
 export function handleTailchatMessage(
@@ -38,9 +38,14 @@ export function handleTailchatMessage(
     const token: string = payload.token;
     const userInfo = payload.userInfo as UserBaseInfo;
 
-    createSocket(serviceUrl, token).then((socket) => {
-      console.log('[createSocket]', 'socket', socket, 'userInfo', userInfo);
-      bindSocketEvent(socket);
+    initNotificationEnv({
+      nickname: userInfo.nickname ?? userInfo.email,
+      runService: () => {
+        createSocket(serviceUrl, token).then((socket) => {
+          console.log('[createSocket]', 'socket', socket, 'userInfo', userInfo);
+          bindSocketEvent(socket);
+        });
+      },
     });
   }
 }

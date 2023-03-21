@@ -14,14 +14,14 @@ if (tailchatSubscribeId) {
     if (fs.existsSync(path.join(os.homedir(), './SUCCESS'))) {
       const links = JSON.parse(artifactLinks) ?? [];
       const text =
-        '[b]App 构建成功:[/b]\n' +
+        '[b]App Building Success:[/b]\n' +
         links
           .map((link) => {
             const { name, url, md5, versionName } = link;
             return (
               `${name}\n` +
               `version: ${versionName}(${md5})\n` +
-              `[url=${url}]下载安装包[/url]`
+              `[url=${url}]Download[/url]`
             );
           })
           .join('\n=========\n');
@@ -33,8 +33,8 @@ if (tailchatSubscribeId) {
       );
     } else {
       const text =
-        '[b]App 构建失败:[/b]\n' +
-        `[url=https://codemagic.io/app/${process.env['CM_PROJECT_ID']}/build/${process.env['CM_BUILD_ID']}]查看详情[/url]`;
+        '[b]App Building Failed:[/b]\n' +
+        `[url=https://codemagic.io/app/${process.env['CM_PROJECT_ID']}/build/${process.env['CM_BUILD_ID']}]View Detail[/url]`;
 
       tailchat.sendSimpleNotify(
         'https://tailchat-nightly.moonrailgun.com',
