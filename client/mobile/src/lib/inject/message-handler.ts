@@ -2,6 +2,8 @@ import type WebView from 'react-native-webview';
 import { generateInstallPluginScript } from '.';
 import { useUIStore } from '../../store/ui';
 import { showNotification } from '../notifications';
+import type { UserBaseInfo } from '../../types';
+import { bindSocketEvent, createSocket } from '../socket';
 
 export function handleTailchatMessage(
   type: string,
@@ -29,5 +31,16 @@ export function handleTailchatMessage(
     });
 
     return;
+  }
+
+  if (type === 'bindWebsocket') {
+    const serviceUrl: string = payload.url;
+    const token: string = payload.token;
+    const userInfo = payload.userInfo as UserBaseInfo;
+
+    createSocket(serviceUrl, token).then((socket) => {
+      console.log('[createSocket]', 'socket', socket, 'userInfo', userInfo);
+      bindSocketEvent(socket);
+    });
   }
 }

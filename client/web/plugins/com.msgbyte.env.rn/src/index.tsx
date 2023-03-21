@@ -4,6 +4,7 @@ import {
   getCachedUserInfo,
   getCachedBaseGroupInfo,
   getMessageTextDecorators,
+  getServiceUrl,
 } from '@capital/common';
 import { Translate } from './translate';
 
@@ -46,6 +47,26 @@ function forwardSharedEvent(
 }
 
 forwardSharedEvent('loadColorScheme');
+forwardSharedEvent('loginSuccess', async (payload) => {
+  let token = window.localStorage.getItem('jsonwebtoken');
+  try {
+    token = JSON.parse(token).rawData;
+  } catch (e) {}
+
+  if (typeof token !== 'string') {
+    console.error('Cannot get token:', token);
+    return;
+  }
+
+  return {
+    type: 'bindWebsocket',
+    payload: {
+      url: getServiceUrl(),
+      token,
+      userInfo: payload,
+    },
+  };
+});
 forwardSharedEvent('receiveUnmutedMessage', async (payload) => {
   const message = payload;
   const currentUserId = getGlobalState()?.user.info._id;

@@ -22,6 +22,8 @@
     "react-native-reanimated": "^2.14.4",
     "react-native-ui-lib": "^6.29.1",
     "react-native-webview": "^11.26.1",
+    "socket.io-client": "^4.6.1",
+    "socket.io-msgpack-parser": "^3.0.2",
     "tailchat-client-sdk": "^1.0.0",
     "url-regex": "^5.0.0",
     "zustand": "^4.3.2"
