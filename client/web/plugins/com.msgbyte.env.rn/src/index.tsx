@@ -3,10 +3,11 @@ import {
   sharedEvent,
   getCachedUserInfo,
   getCachedBaseGroupInfo,
+  getMessageTextDecorators,
 } from '@capital/common';
 import { Translate } from './translate';
 
-const PLUGIN_NAME = 'ReactNative支持';
+const PLUGIN_NAME = 'ReactNative Support';
 
 console.log(`Plugin ${PLUGIN_NAME} is loaded`);
 
@@ -25,6 +26,11 @@ function forwardSharedEvent(
     let type = eventName;
     if (processPayload) {
       const res = await processPayload(payload);
+      if (!res) {
+        // Skip if res is undefined
+        return;
+      }
+
       payload = res.payload;
       type = res.type;
     }
@@ -60,7 +66,7 @@ forwardSharedEvent('receiveUnmutedMessage', async (payload) => {
   const content = message.content;
 
   const title = `${Translate.from} [${scopeName}] ${nickname}`;
-  const body = content;
+  const body = getMessageTextDecorators().serialize(content);
 
   return {
     type: 'showNotification',

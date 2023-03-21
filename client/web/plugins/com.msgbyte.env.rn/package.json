@@ -2,7 +2,7 @@
   "name": "@plugins/com.msgbyte.env.rn",
   "main": "src/index.tsx",
   "version": "0.0.0",
-  "description": "在Tailchat添加对ReactNative环境的支持",
+  "description": "Add support for ReactNative environment in Tailchat",
   "private": true,
   "scripts": {
     "sync:declaration": "tailchat declaration github"

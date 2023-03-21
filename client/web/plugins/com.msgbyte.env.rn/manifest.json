@@ -6,6 +6,6 @@
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "Add support for ReactNative environment in Tailchat",
-  "description.zh-CN": "在Tailchat添加对ReactNative环境的支持",
+  "description.zh-CN": "在 Tailchat 添加对 ReactNative 环境的支持",
   "requireRestart": true
 }
