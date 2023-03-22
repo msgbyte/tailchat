@@ -14,7 +14,7 @@ interface Props {
 export const Emoji: React.FC<Props> = React.memo((props) => {
   const code = props.emoji.startsWith(':') ? props.emoji : `:${props.emoji}:`; // 对旧版兼容
 
-  const { emojiSkin } = useMemo(() => {
+  return useMemo(() => {
     let id = '';
     let skin = 0;
     const matches = code.match(SearchIndex.SHORTCODES_REGEX);
@@ -29,28 +29,34 @@ export const Emoji: React.FC<Props> = React.memo((props) => {
 
     // @ts-ignore
     const emoji = SearchIndex.get(id);
+    if (!emoji) {
+      // not found emoji
+      return <span />;
+    }
+
     const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0];
 
-    return {
-      emojiSkin,
-    };
-  }, [code]);
-
-  return (
-    <span className="emoji-mart-emoji align-middle" data-emoji-set={'twitter'}>
+    return (
       <span
-        style={{
-          display: 'block',
-          width: props.size ?? '16px',
-          height: props.size ?? '16px',
-          backgroundImage: `url(${spritesUrl})`,
-          backgroundSize: `${100 * Data.sheet.cols}% ${100 * Data.sheet.rows}%`,
-          backgroundPosition: `${
-            (100 / (Data.sheet.cols - 1)) * emojiSkin.x
-          }% ${(100 / (Data.sheet.rows - 1)) * emojiSkin.y}%`,
-        }}
-      />
-    </span>
-  );
+        className="emoji-mart-emoji align-middle"
+        data-emoji-set={'twitter'}
+      >
+        <span
+          style={{
+            display: 'block',
+            width: props.size ?? '16px',
+            height: props.size ?? '16px',
+            backgroundImage: `url(${spritesUrl})`,
+            backgroundSize: `${100 * Data.sheet.cols}% ${
+              100 * Data.sheet.rows
+            }%`,
+            backgroundPosition: `${
+              (100 / (Data.sheet.cols - 1)) * emojiSkin.x
+            }% ${(100 / (Data.sheet.rows - 1)) * emojiSkin.y}%`,
+          }}
+        />
+      </span>
+    );
+  }, [code]);
 });
 Emoji.displayName = 'Emoji';
