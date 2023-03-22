@@ -19,3 +19,14 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
     }
 }
+
+allprojects {
+    repositories {
+        maven {
+            url "https://mvn.getui.com/nexus/content/repositories/releases/"
+        }
+
+        google()
+        mavenCentral()
+    }
+}

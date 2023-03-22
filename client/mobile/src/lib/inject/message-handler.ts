@@ -39,6 +39,7 @@ export function handleTailchatMessage(
     const userInfo = payload.userInfo as UserBaseInfo;
 
     initNotificationEnv({
+      userId: userInfo._id,
       nickname: userInfo.nickname ?? userInfo.email,
       runService: () => {
         createSocket(serviceUrl, token).then((socket) => {

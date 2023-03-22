@@ -21,5 +21,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+
+      <meta-data android:name="PUSH_APPID" android:value="@string/GETUI_APPID"/>
+      <meta-data android:name="PUSH_APPKEY" android:value="@string/GETUI_APPKEY"/>
+      <meta-data android:name="PUSH_APPSECRET" android:value="@string/GETUI_APPSECRET"/>
+
     </application>
 </manifest>

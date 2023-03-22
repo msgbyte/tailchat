@@ -1,4 +1,5 @@
 import notifee, { EventType } from '@notifee/react-native';
+import { bindAlias } from './getui';
 
 interface NotificationInfo {
   title: string;
@@ -43,15 +44,19 @@ export async function showNotification(info: NotificationInfo) {
 }
 
 interface NotificationOptions {
+  userId: string;
   nickname: string;
   runService: () => void;
 }
 export async function initNotificationEnv(options: NotificationOptions) {
   await notifee.requestPermission();
 
-  await initForegroundService(options);
+  bindAlias(options.userId);
+
+  // await initForegroundService(options);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function initForegroundService(options: NotificationOptions) {
   notifee.registerForegroundService((_notification) => {
     return new Promise(() => {

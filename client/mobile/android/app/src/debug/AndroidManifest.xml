@@ -10,4 +10,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false" />
     </application>
+
+    <meta-data android:name="PUSH_APPID" android:value="@string/GETUI_APPID"/>
+    <meta-data android:name="PUSH_APPKEY" android:value="@string/GETUI_APPKEY"/>
+    <meta-data android:name="PUSH_APPSECRET" android:value="@string/GETUI_APPSECRET"/>
+
 </manifest>
