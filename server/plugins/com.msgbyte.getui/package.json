@@ -1,0 +1,18 @@
+{
+  "name": "tailchat-plugin-getui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "Support Getui Notify in chinese mainland",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "got": "^11.8.3",
+    "lodash": "^4.17.21",
+    "tailchat-server-sdk": "*"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191"
+  }
+}
