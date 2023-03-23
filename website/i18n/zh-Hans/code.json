@@ -287,5 +287,95 @@
   "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
     "message": "切换导航栏",
     "description": "The ARIA label for hamburger menu button of mobile navigation"
+  },
+  "Slack": {
+    "message": "Slack"
+  },
+  "Discord": {
+    "message": "Discord"
+  },
+  "Rocket.Chat": {
+    "message": "Rocket.Chat"
+  },
+  "Open Source, Open Platform": {
+    "message": "开放源码, 开放生态"
+  },
+  "Not only Another": {
+    "message": "不仅仅是另一个"
+  },
+  "What is noIM(not only IM)?": {
+    "message": "什么是noIM(not only IM)?"
+  },
+  "Join our Group": {
+    "message": "加入我们"
+  },
+  "Or direct visit Tailchat nightly version": {
+    "message": "或者直接体验 Tailchat 实验版"
+  },
+  "Feature Overview": {
+    "message": "功能概览"
+  },
+  "Messenger": {
+    "message": "消息"
+  },
+  "Basic message support, multi message type like text/link/mention/image/file etc. and support append reaction for anything you want with messages.": {
+    "message": "支持基本信息，支持如文本/链接/提及/图像/文件等多种信息类型，并支持对任何你想要的信息的附加反应。"
+  },
+  "You can join multiple groups, and discuss different topics, perhaps information and notifications, through multiple panels in the group. Not just a simple chat.": {
+    "message": "你可以加入多个小组，并通过小组中的多个面板讨论不同的主题，或是信息和通知。不仅仅是简单的聊天。"
+  },
+  "In the inbox, you can receive anything you need to know, such as mention or plugin notification. Or you can push anything on yourself.": {
+    "message": "在收件箱中，你可以收到任何你需要知道的东西，如提及或插件通知。或者你可以对自己推送任何东西."
+  },
+  "Plugin Center": {
+    "message": "插件中心"
+  },
+  "Tailchat has a complete plugin system. With plugins, you can integrate your apps and projects into your chat app in any form you want. Unlike VSCode, Tailchat has fewer restrictions on the form of expression. I think Tailchat is not only a chat app, but also a platform for integrating different applications. You can start a video conference, listen to music, use online tools and more in Tailchat.": {
+    "message": "Tailchat有一个完整的插件系统。通过插件，你可以把你的应用程序和项目以任何形式整合到你的聊天应用程序中。与VSCode不同，Tailchat对表达形式的限制较少。Tailchat不仅是一个聊天应用程序，也是一个整合不同应用程序的平台。你可以在Tailchat中开始视频会议，听音乐，使用在线工具等等所有你能够想象到的一切事物。"
+  },
+  "At the same time, through plugins, you can further improve the chat experience, such as topic panel, end-to-end encryption, rich text, message notification, online drawing, receiving push from third-party applications, etc.": {
+    "message": "同时，通过插件，您可以进一步改善聊天体验，如话题面板、端到端加密、富文本、消息通知、在线绘画、接收第三方应用推送等。"
+  },
+  "Group Roles": {
+    "message": "身份组管理"
+  },
+  "Tailchat has a builtin RBAC permission management system. Based on the combination of role assignment and permission points, various permission combinations can be matched. At the same time, permission points can be easily integrated by plugins, which are a very flexible design.": {
+    "message": "Tailchat 有一个内置的RBAC权限管理系统。基于角色分配和权限点的组合，可以匹配各种权限组合。同时，权限点可以通过插件轻松整合，这是一个非常灵活的设计。"
+  },
+  "Bot": {
+    "message": "机器人"
+  },
+  "Tailchat has a very simple way to integrate third-party applications with bot like most applications. A simple url request or add openapi app or even create a backend plugin. You can use anyway to connect anything, its free!": {
+    "message": "Tailchat 有一个非常简单的方法来整合第三方应用程序与机器人，就像像大多数拥有开放平台的流行软件一样。形式可以是一个简单的url请求或添加openapi应用程序，甚至创建一个后端插件。你可以使用任何方式来连接任何东西，它是完全自由的!"
+  },
+  "Multi-platform Support": {
+    "message": "多平台支持"
+  },
+  "Tailchat design on HTML, and fit any platform or os, but its still some native support cannot provide in web. So Tailchat also has client to provide os support like mobile notification , desktop screenshot and etc.": {
+    "message": "Tailchat 基于HTML技术开发，作为最流行的跨平台解决方案，Tailchat 天然适合任何平台或操作系统，但它仍然有一些原生支持不能在网络上提供。因此，Tailchat也有客户端，提供原生操作系统的支持，如移动端推送通知，桌面截图等。"
+  },
+  "in Alpha Test, Join us for Early Experience": {
+    "message": "早期测试中，加入我们以抢先体验"
+  },
+  "in Alpha Test": {
+    "message": "早期测试中"
+  },
+  "Join the community": {
+    "message": "加入社区"
+  },
+  "Engage with our ever-growing community to get the latest updates, product support, and more.": {
+    "message": "与我们不断增长的社区互动，以获得最新的更新、产品支持和更多。"
+  },
+  "Join Our Group": {
+    "message": "加入我们"
+  },
+  "Plugin": {
+    "message": "插件"
+  },
+  "Roles": {
+    "message": "身份组"
+  },
+  "Platform": {
+    "message": "开放平台"
   }
 }

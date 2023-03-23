@@ -1,18 +1,23 @@
 import React from 'react';
 import { inviteLink } from '../utils/consts';
 import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 import './JoinCommunity.less';
 
 export const JoinCommunity: React.FC = React.memo(() => {
   return (
     <div className="join-community">
-      <h3>Join the community</h3>
+      <h3>
+        <Translate>Join the community</Translate>
+      </h3>
       <p>
-        Engage with our ever-growing community to get the latest updates,
-        product support, and more.
+        <Translate>
+          Engage with our ever-growing community to get the latest updates,
+          product support, and more.
+        </Translate>
       </p>
       <Link className="button button--primary button--lg" href={inviteLink}>
-        Join Our Group
+        <Translate>Join Our Group</Translate>
       </Link>
 
       <div className="producthunt">

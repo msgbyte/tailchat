@@ -7,7 +7,11 @@ import { useColorMode } from '@docusaurus/theme-common';
 import { inviteLink, nightlyUrl } from '../utils/consts';
 import './HomepageHeader.less';
 
-const alternative = ['Slack', 'Discord', 'Rocket.Chat'];
+const alternative = [
+  <Translate key="slack">Slack</Translate>,
+  <Translate key="discord">Discord</Translate>,
+  <Translate key="rocket.chat">Rocket.Chat</Translate>,
+];
 
 export function getRandomAlternative() {
   return alternative[Math.floor(Math.random() * alternative.length)];
@@ -33,9 +37,11 @@ export const HomepageHeader: React.FC = React.memo(() => {
       </div>
 
       <div className="header">
-        <h1 className="title">Open Source, Open Platform</h1>
+        <h1 className="title">
+          <Translate>Open Source, Open Platform</Translate>
+        </h1>
         <h3 className="title">
-          Not only Another{' '}
+          <Translate>Not only Another</Translate>{' '}
           <strong onClick={updateAlternative}>
             {alternative[alternativeIndex]}
           </strong>
@@ -45,7 +51,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
           Tailchat: {siteConfig.tagline}
           <small>
             <Link href="/blog/2023/03/01/the-era-of-noIM">
-              What is noIM(not only IM)?
+              <Translate>What is noIM(not only IM)?</Translate>
             </Link>
           </small>
         </p>
