@@ -50,19 +50,25 @@ export const HomepageHeader: React.FC = React.memo(() => {
         <p className="desc">
           Tailchat: {siteConfig.tagline}
           <small>
-            <Link href="/blog/2023/03/01/the-era-of-noIM">
+            <Link
+              className="umami--click--what-is-noim"
+              href="/blog/2023/03/01/the-era-of-noIM"
+            >
               <Translate>What is noIM(not only IM)?</Translate>
             </Link>
           </small>
         </p>
 
         <div className="btns">
-          <Link className="button button--primary button--lg" to={inviteLink}>
+          <Link
+            className="button button--primary button--lg umami--click--joingroup"
+            to={inviteLink}
+          >
             <Translate>Join our Group</Translate>
           </Link>
 
           <Link
-            className="button button--secondary button--lg"
+            className="button button--secondary button--lg umami--click--learnmore"
             href="/docs/intro"
           >
             <Translate>Learn More</Translate>
@@ -70,7 +76,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
         </div>
 
         <div className="link">
-          <Link to={nightlyUrl}>
+          <Link className="umami--click--direct-nightly" to={nightlyUrl}>
             <Translate>Or direct visit Tailchat nightly version</Translate>
           </Link>
         </div>

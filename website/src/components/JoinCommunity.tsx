@@ -16,7 +16,10 @@ export const JoinCommunity: React.FC = React.memo(() => {
           product support, and more.
         </Translate>
       </p>
-      <Link className="button button--primary button--lg" href={inviteLink}>
+      <Link
+        className="button button--primary button--lg umami--click--joingroup"
+        href={inviteLink}
+      >
         <Translate>Join Our Group</Translate>
       </Link>
 
@@ -25,6 +28,7 @@ export const JoinCommunity: React.FC = React.memo(() => {
           href="https://www.producthunt.com/posts/tailchat?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tailchat"
           target="_blank"
           rel="noreferrer"
+          className="umami--click--producthunt"
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=382080&theme=light"
