@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply plugin: 'com.huawei.agconnect' // huawei push
 
 import com.android.build.OutputFile
 
@@ -104,6 +105,20 @@ android {
 
         manifestPlaceholders = [
             GETUI_APPID: project.env.get("GETUI_APPID"),
+
+            MEIZU_APP_ID    : "",
+            MEIZU_APP_KEY   : "",
+
+            HUAWEI_APP_ID   : project.env.get("GETUI_HUAWEI_APP_ID"),
+
+            XIAOMI_APP_ID   : "",
+            XIAOMI_APP_KEY  : "",
+
+            VIVO_APP_ID   : "",
+            VIVO_APP_KEY  : "",
+
+            OPPO_APP_KEY    : "",
+            OPPO_APP_SECRET : ""
         ]
     }
 
@@ -134,6 +149,11 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+    }
+
+    lintOptions {
+        // https://stackoverflow.com/questions/49286268/error-execution-failed-for-task-app-lintvitalrelease-any-one-can-solve-it
+        checkReleaseBuilds false
     }
 
     // applicationVariants are e.g. debug, release
@@ -170,6 +190,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // Push
+    implementation 'com.huawei.hms:push:6.9.0.300'
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
