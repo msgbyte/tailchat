@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "GetuiConfigure": "node node_modules/react-native-getui/GetuiConfiguration.js",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "patch-package": "patch-package",
+    "postinstall": "patch-package",
     "plugins:all": "ministar buildPlugin all",
     "test": "jest"
   },
@@ -16,6 +19,8 @@
     "immer": "^9.0.19",
     "lodash": "^4.17.21",
     "mini-star": "^2.0.8",
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0",
     "react": "18.2.0",
     "react-native": "0.71.2",
     "react-native-config": "^1.5.0",
