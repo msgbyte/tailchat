@@ -52,10 +52,10 @@ workflows:
         script: |
           yarn
       - name: Build ipa for distribution
-        working_directory: client/mobile/android
+        working_directory: client/mobile/ios
         script: |
           xcode-project build-ipa \
-            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+            --workspace "$CM_BUILD_DIR/client/mobile/ios/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa
