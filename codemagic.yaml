@@ -37,9 +37,29 @@ workflows:
           script: |
             node scripts/notify-links.js
 
-  # ios:
-  #   name: build, test & publish iOS version
-  #   instance_type: mac_pro
-  #   working_directory: client/mobile
-  #   scripts:
-  #     - ...
+  ios:
+    name: build, test & publish iOS version
+    instance_type: mac_mini_m1
+    working_directory: client/mobile
+    environment:
+      groups:
+        - default
+    cache:
+      cache_paths:
+        - $CM_BUILD_DIR/node_modules
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          yarn
+      - name: Build ipa for distribution
+        working_directory: client/mobile/android
+        script: |
+          xcode-project build-ipa \
+            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - moonrailgun@gmail.com
