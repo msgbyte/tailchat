@@ -829,8 +829,10 @@ importers:
   client/web/plugins/com.msgbyte.webview:
     specifiers:
       script_sanitize: ^1.2.6
+      url-regex: ^5.0.0
     dependencies:
       script_sanitize: 1.2.6
+      url-regex: 5.0.0
 
   client/web/plugins/com.msgbyte.wenshushu:
     specifiers:
@@ -843,6 +845,9 @@ importers:
       react: 18.2.0
     devDependencies:
       react: 18.2.0
+
+  packages/types:
+    specifiers: {}
 
   server:
     specifiers:
