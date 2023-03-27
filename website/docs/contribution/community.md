@@ -22,3 +22,4 @@ Feel free submit `pr/issue` to submit your contribution to `Tailchat`, so that w
 ## Article
 
 - [【好玩儿的Docker项目】激情畅聊！十分钟搭建一个插件化易拓展的开源即时聊天（IM）应用——Tailchat](https://blog.laoda.de/archives/docker-compose-install-tailchat)
+- [Tailchat Synology deployment record](/blog/2023/03/27/deploy-in-synology)
