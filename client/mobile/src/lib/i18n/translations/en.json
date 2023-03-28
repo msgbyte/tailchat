@@ -1,0 +1,12 @@
+{
+  "core.addServer": "Add Server",
+  "core.selectedServer": "Selected Server",
+  "core.deleteServer": "Delete Server",
+  "core.inputServerUrl": "Input Server Url",
+  "core.confirm": "Confirm",
+  "core.invalidUrl": "Input is not a valid url",
+  "core.addServerError": "Failed to add server, maybe the address entered is not a Tailchat service address",
+  "core.foregroundServiceTip": "Continue to keep the service running normally, and may not be able to receive message pushes after closing",
+  "core.foregroundServiceStopAction": "Stop Foreground Service"
+
+}

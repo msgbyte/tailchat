@@ -1,4 +1,5 @@
 import notifee, { EventType } from '@notifee/react-native';
+import { translate } from '../i18n';
 import { bindAlias } from './getui';
 
 interface NotificationInfo {
@@ -78,13 +79,13 @@ async function initForegroundService(options: NotificationOptions) {
 
   notifee.displayNotification({
     title: `Tailchat: ${options.nickname}`,
-    body: '持续保持服务正常运行, 关闭后可能无法正常接受到消息推送',
+    body: translate('core.foregroundServiceTip'),
     android: {
       channelId,
       asForegroundService: true,
       actions: [
         {
-          title: '停止前台服务',
+          title: translate('core.foregroundServiceStopAction'),
           pressAction: {
             id: 'stop',
           },

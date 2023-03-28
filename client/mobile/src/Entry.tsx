@@ -11,6 +11,7 @@ import {
   ActionSheet,
 } from 'react-native-ui-lib';
 import { isValidUrl } from './lib/utils';
+import { translate } from './lib/i18n';
 
 export const Entry: React.FC = React.memo(() => {
   const { serverList, selectServer, addServer, removeServer } =
@@ -40,16 +41,19 @@ export const Entry: React.FC = React.memo(() => {
         );
       })}
 
-      <ServerCard name={'添加服务器'} onPress={() => setDialogVisible(true)} />
+      <ServerCard
+        name={translate('core.addServer')}
+        onPress={() => setDialogVisible(true)}
+      />
 
       <ActionSheet
         visible={!!selectedServer}
-        message={`选中服务器: ${selectedServer}`}
+        message={`${translate('core.selectedServer')}: ${selectedServer}`}
         onDismiss={() => setSelectedServer('')}
         destructiveButtonIndex={0}
         options={[
           {
-            label: '删除服务器',
+            label: translate('core.deleteServer'),
             onPress: () => {
               removeServer(selectedServer);
             },
@@ -64,7 +68,7 @@ export const Entry: React.FC = React.memo(() => {
         onDismiss={() => setDialogVisible(false)}
       >
         <View backgroundColor="white" style={styles.dialog}>
-          <Text>输入服务器地址:</Text>
+          <Text>{translate('core.inputServerUrl')}:</Text>
 
           <TextInput
             style={styles.textInput}
@@ -74,11 +78,11 @@ export const Entry: React.FC = React.memo(() => {
           />
 
           <Button
-            label={'确认'}
+            label={translate('core.confirm')}
             disabled={loading}
             onPress={async () => {
               if (!isValidUrl(serverUrl)) {
-                Alert.alert('输入不是一个有效的url');
+                Alert.alert(translate('core.invalidUrl'));
                 return;
               }
 
@@ -87,9 +91,7 @@ export const Entry: React.FC = React.memo(() => {
                 await addServer(serverUrl);
                 setDialogVisible(false);
               } catch (e) {
-                Alert.alert(
-                  '添加服务器失败, 可能输入的地址不是一个Tailchat服务地址'
-                );
+                Alert.alert(translate('core.addServerError'));
               }
 
               setLoading(false);

@@ -1,0 +1,11 @@
+{
+  "core.addServer": "添加服务器",
+  "core.selectedServer": "选中服务器",
+  "core.deleteServer": "删除服务器",
+  "core.inputServerUrl": "输入服务器地址",
+  "core.confirm": "确认",
+  "core.invalidUrl": "输入不是一个有效的url",
+  "core.addServerError": "添加服务器失败, 可能输入的地址不是一个Tailchat服务地址",
+  "core.foregroundServiceTip": "持续保持服务正常运行, 关闭后可能无法正常接受到消息推送",
+  "core.foregroundServiceStopAction": "停止前台服务"
+}
