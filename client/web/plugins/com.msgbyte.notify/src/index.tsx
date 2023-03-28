@@ -6,7 +6,10 @@ import { PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND } from './const';
 if ('Notification' in window) {
   initNotify();
 } else {
-  showToasts(Translate.nosupport, 'warning');
+  if ((window as Window).innerWidth >= 768) {
+    // if not mobile
+    showToasts(Translate.nosupport, 'warning');
+  }
   console.warn(Translate.nosupport);
 }
 
