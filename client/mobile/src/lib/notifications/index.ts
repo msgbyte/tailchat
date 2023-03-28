@@ -55,9 +55,10 @@ export async function initNotificationEnv(options: NotificationOptions) {
   bindAlias(options.userId);
 
   // 厂商渠道还没有ready, 推送需要依赖前台服务保活
-  await initForegroundService(options);
+  // await initForegroundService(options);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function initForegroundService(options: NotificationOptions) {
   notifee.registerForegroundService((_notification) => {
     return new Promise(() => {

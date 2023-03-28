@@ -132,10 +132,17 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            if (project.env.get('TAILCHAT_UPLOAD_STORE_FILE')) {
+                storeFile file(project.env.get('TAILCHAT_UPLOAD_STORE_FILE'))
+                storePassword project.env.get('TAILCHAT_UPLOAD_STORE_PASSWORD')
+                keyAlias project.env.get('TAILCHAT_UPLOAD_KEY_ALIAS')
+                keyPassword project.env.get('TAILCHAT_UPLOAD_KEY_PASSWORD')
+            } else {
+              storeFile file('debug.keystore')
+              storePassword 'android'
+              keyAlias 'androiddebugkey'
+              keyPassword 'android'
+            }
         }
     }
     buildTypes {
@@ -194,6 +201,16 @@ dependencies {
     // Push
     implementation 'com.getui:gtsdk:3.2.15.0'  //个推SDK
     implementation 'com.getui:gtc:3.2.1.0'  //个推核心组件
+
+    // 根据所需厂商选择集成
+    implementation 'com.getui.opt:hwp:3.1.1'   // 华为
+    // implementation 'com.getui.opt:xmp:3.3.0'   // 小米
+    // implementation 'com.assist-v3:oppo:3.3.0'  // oppo
+    // implementation 'com.assist-v3:vivo:3.1.1'  // vivo
+    // implementation 'com.getui.opt:mzp:3.2.2'   // 魅族
+    // implementation 'com.getui.opt:ups:3.0.3'   // ups，ups目前支持坚果，索尼，海信手机
+    // implementation 'com.getui.opt:honor:3.3.0' // 荣耀
+
     implementation 'com.huawei.hms:push:6.9.0.300'
 }
 
