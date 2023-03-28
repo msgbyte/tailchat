@@ -1506,10 +1506,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@notifee/react-native@^7.4.0":
-  version "7.4.0"
-  resolved "https://registry.npmmirror.com/@notifee/react-native/-/react-native-7.4.0.tgz#0f20744307bf3b800f7b56eb2d0bbdd474748d09"
-  integrity sha512-c8pkxDQFRbw0JlUmTb07OTG/4LQHRj8MBodMLwEcO+SvqIxK8ya8zSUEzfdcdWsSVqdoym0v3zpSNroR3Quj/w==
+"@notifee/react-native@^7.6.1":
+  version "7.6.1"
+  resolved "https://registry.npmmirror.com/@notifee/react-native/-/react-native-7.6.1.tgz#e215428787396ec57ea424106cc88666f7efe70d"
+  integrity sha512-OjhLPODh6FICYZmF9/0UZbcl2JPaPpcrWi1Cvs/OLFbPSJTIEwPZgXFrCHv/cA3wUX4YQCXreSqQGSVQgvNItQ==
 
 "@react-native-async-storage/async-storage@^1.17.11":
   version "1.17.11"
@@ -7142,11 +7142,6 @@ react-native-gesture-handler@^2.9.0:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
-
-react-native-getui@^1.1.42:
-  version "1.1.42"
-  resolved "https://registry.npmmirror.com/react-native-getui/-/react-native-getui-1.1.42.tgz#f4aa1f53e10584d4cf65bec5dd8afd58f08d0055"
-  integrity sha512-esRbDBI5G99/p7+zHEpm9J8V2oEv2L/xRMv1Voi0yxFcnhWd3i1OTodtnC+k+9lurYqu/A4MhTPL99hZcJ/ROg==
 
 react-native-gradle-plugin@^0.71.14:
   version "0.71.14"

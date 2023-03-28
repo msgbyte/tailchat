@@ -22,9 +22,27 @@
         </intent-filter>
       </activity>
 
+      <!-- 个推SDK配置开始 -->
+      <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复 -->
+      <service
+        android:name="com.msgbyte.tailchat.PushIntentService"/>
+      <!-- 配置SDK核心服务 -->
+      <service
+        android:name="com.msgbyte.tailchat.TailchatPushService"
+        android:exported="true"
+        android:label="PushService"
+        android:process=":pushservice" />
+
       <meta-data android:name="PUSH_APPID" android:value="@string/GETUI_APPID"/>
       <meta-data android:name="PUSH_APPKEY" android:value="@string/GETUI_APPKEY"/>
       <meta-data android:name="PUSH_APPSECRET" android:value="@string/GETUI_APPSECRET"/>
 
+      <!-- 个推SDK配置结束 -->
     </application>
+
+    <queries>
+      <intent>
+        <action android:name="com.getui.sdk.action" />
+      </intent>
+    </queries>
 </manifest>

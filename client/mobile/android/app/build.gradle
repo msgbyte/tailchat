@@ -192,6 +192,8 @@ dependencies {
     }
 
     // Push
+    implementation 'com.getui:gtsdk:3.2.15.0'  //个推SDK
+    implementation 'com.getui:gtc:3.2.1.0'  //个推核心组件
     implementation 'com.huawei.hms:push:6.9.0.300'
 }
 

@@ -73,11 +73,6 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - GTSDK (2.7.4.0):
-    - ZXSDK
-  - GtSdkRN (1.1.42):
-    - GTSDK
-    - React
   - hermes-engine (0.71.2):
     - hermes-engine/Pre-built (= 0.71.2)
   - hermes-engine/Pre-built (0.71.2)
@@ -468,7 +463,6 @@ PODS:
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
-  - ZXSDK (3.2.3)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
@@ -497,7 +491,6 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - GtSdkRN (from `../node_modules/react-native-getui`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
   - OpenSSL-Universal (= 1.1.1100)
@@ -553,12 +546,10 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
-    - GTSDK
     - libevent
     - OpenSSL-Universal
     - SocketRocket
     - YogaKit
-    - ZXSDK
 
 EXTERNAL SOURCES:
   boost:
@@ -571,8 +562,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
-  GtSdkRN:
-    :path: "../node_modules/react-native-getui"
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
   RCT-Folly:
@@ -665,8 +654,6 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  GTSDK: f28e6d575e8a1c26e331ce29b0ecac7db39679cc
-  GtSdkRN: d43bf94df00093d6a19a071080743cb4519bedd1
   hermes-engine: 6351580c827b3b03e5f25aadcf989f582d0b0a86
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
@@ -708,7 +695,6 @@ SPEC CHECKSUMS:
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 5b0304b3dbef2b52e078052138e23a19c7dacaef
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
-  ZXSDK: 3ae8f7f2c5d45b4c1def43e14d930495c5f4d424
 
 PODFILE CHECKSUM: 9aaf3e7752d79b6a889333eec3c3b53e8133916b
 

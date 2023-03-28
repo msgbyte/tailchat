@@ -9,7 +9,6 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
-import com.getui.reactnativegetui.GetuiModule;
 
 public class MainApplication extends Application implements ReactApplication {
 
