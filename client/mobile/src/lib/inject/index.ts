@@ -11,12 +11,14 @@ export function generateInstallPluginScript() {
   const inner = `function main() {
     window.tailchat
       .installPlugin({
-        label: 'ReactNative支持',
+        label: 'React Native Support',
+        'label.zh-CN': 'ReactNative 支持',
         name: 'com.msgbyte.env.rn',
         url: '/plugins/com.msgbyte.env.rn/index.js',
         version: '0.0.0',
         author: 'moonrailgun',
-        description: '在Tailchat添加对ReactNative环境的支持',
+        description: 'Add support for ReactNative environment in Tailchat',
+        'description.zh-CN': '在 Tailchat 添加对 ReactNative 环境的支持',
         requireRestart: true,
       });
   }`;
