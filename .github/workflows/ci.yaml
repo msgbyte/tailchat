@@ -32,8 +32,8 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: latest
-          run_install: true
+          version: latest-7
+          run_install: false
       - name: Install packages
         run: pnpm install --frozen-lockfile
       - name: Check Type
