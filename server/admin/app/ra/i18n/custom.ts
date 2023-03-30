@@ -69,7 +69,7 @@ export const englishCustom = {
       btn: 'Open the Admin platform',
     },
     config: {
-      uploadFileLimit: 'Upload file limit (KB)',
+      uploadFileLimit: 'Upload file limit (Byte)',
       emailVerification: 'Mandatory Email Verification',
       serverName: 'Server Name',
       serverEntryImage: 'Server Entry Page Image',
@@ -146,7 +146,7 @@ export const chineseCustom = {
       btn: '打开管理平台',
     },
     config: {
-      uploadFileLimit: '上传文件限制(KB)',
+      uploadFileLimit: '上传文件限制(Byte)',
       emailVerification: '邮箱强制验证',
       serverName: '服务器名',
       serverEntryImage: '服务器登录图',
