@@ -1,7 +1,7 @@
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import React, { PropsWithChildren } from 'react';
 import { AvatarWithPreview, getTextColorHex } from 'tailchat-design';
-import { useAsync, UserBaseInfo } from 'tailchat-shared';
+import { parseUrlStr, useAsync, UserBaseInfo } from 'tailchat-shared';
 
 /**
  * 用户信息容器

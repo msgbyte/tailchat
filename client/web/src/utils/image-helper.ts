@@ -1,3 +1,5 @@
+import { parseUrlStr } from 'tailchat-shared';
+
 /**
  * 加载图片
  */
@@ -6,7 +8,7 @@ async function loadImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     el.onload = () => resolve(el);
     el.onerror = reject;
-    el.src = url;
+    el.src = parseUrlStr(url);
     el.crossOrigin = 'Anonymous';
   });
 }

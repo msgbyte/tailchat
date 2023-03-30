@@ -1,3 +1,4 @@
+import { parseUrlStr } from 'node_modules/tailchat-shared';
 import React, { useState } from 'react';
 import { Avatar, AvatarProps } from '../Avatar';
 import { Image } from '../Image';
@@ -27,7 +28,7 @@ export const AvatarWithPreview: React.FC<AvatarProps> = React.memo((props) => {
           <Image
             preview={{
               visible,
-              src: String(props.src),
+              src: parseUrlStr(String(props.src)),
               onVisibleChange: (value) => {
                 setVisible(value);
               },
