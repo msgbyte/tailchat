@@ -3,6 +3,10 @@ sidebar_position: 2
 title: Github integration
 ---
 
+:::caution
+This section is still WIP
+:::
+
 ![](/img/github-app/github-integration.excalidraw.png)
 
 ## Common user use

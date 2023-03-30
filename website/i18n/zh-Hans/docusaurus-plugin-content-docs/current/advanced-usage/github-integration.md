@@ -3,6 +3,10 @@ sidebar_position: 2
 title: Github 集成
 ---
 
+:::caution
+该篇内容仍在调整中...
+:::
+
 ![](/img/github-app/github-integration.excalidraw.png)
 
 ## 普通用户使用
