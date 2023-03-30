@@ -34,3 +34,8 @@ title: Environment Variable
   ```
 
 - If it is started by `docker-compose`, you can directly edit `docker-compose.env`, and use `docker compose up -d` directly after the modification to take effect
+
+
+:::caution
+Some environment variable modifications may need to clear the cache to take effect
+:::

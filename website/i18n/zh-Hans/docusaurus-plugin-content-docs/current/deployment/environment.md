@@ -34,3 +34,7 @@ title: 环境变量
   ```
 
 - 如果是 `docker-compose` 启动，可以直接编辑 `docker-compose.env`, 改动后直接使用 `docker compose up -d` 即可生效
+
+:::caution
+部分环境变量修改可能需要清理缓存后才能生效
+:::
