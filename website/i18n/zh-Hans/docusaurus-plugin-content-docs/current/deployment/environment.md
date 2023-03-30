@@ -19,7 +19,7 @@ title: 环境变量
 | MINIO_BUCKET_NAME | tailchat | 文件服务存储桶名 |
 | SMTP_SENDER | - | 邮件服务发件人(示例: `"Tailchat" example@163.com`) |
 | SMTP_URI | - | 邮件服务连接地址(示例: `smtp://username:password@smtp.example.com/?pool=true`) |
-| FILE_LIMIT | 1048576 | 文件/图片上传的大小限制，默认为1m，请输入数字 |
+| FILE_LIMIT | 1048576 | 文件/图片上传的大小限制，默认为1m，请输入数字，（单位: 字节） |
 | EMAIL_VERIFY | - | 是否开启邮箱校验, 如果为 "1" 或者 "true" 则在注册时增加邮箱校验控制 |
 | DISABLE_LOGGER | - | 是否禁用日志输出, 如果为 "1" 或者 "true" 则在运行中关闭日志 |
 

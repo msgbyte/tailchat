@@ -19,7 +19,7 @@ title: Environment Variable
 | MINIO_BUCKET_NAME | tailchat | file service bucket name |
 | SMTP_SENDER | - | Mail service sender (example: `"Tailchat" example@163.com`) |
 | SMTP_URI | - | mail service connection address (example: `smtp://username:password@smtp.example.com/?pool=true`) |
-| FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number |
+| FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number(unit: byte) |
 | EMAIL_VERIFY | - | Whether to enable email verification, if it is "1" or "true", add email verification control when registering |
 | DISABLE_LOGGER | - | Whether to disable the log output, if "1" or "true" turn off the log on the fly |
 
