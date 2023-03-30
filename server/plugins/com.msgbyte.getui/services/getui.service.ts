@@ -1,3 +1,4 @@
+import { RequestError } from 'got';
 import { TcService, TcDbService, InboxStruct, call } from 'tailchat-server-sdk';
 import { GetuiClient } from '../lib/GetuiClient';
 import type { GetuiLogDocument, GetuiLogModel } from '../models/log';
@@ -9,8 +10,6 @@ interface GetuiService
   extends TcService,
     TcDbService<GetuiLogDocument, GetuiLogModel> {}
 class GetuiService extends TcService {
-  client: GetuiClient = null;
-
   get serviceName() {
     return 'plugin:com.msgbyte.getui';
   }
@@ -40,7 +39,8 @@ class GetuiService extends TcService {
       return;
     }
 
-    this.initClient();
+    const { appId, appKey, masterSecert } = this.getuiInfo;
+    const client = new GetuiClient(appId, appKey, masterSecert);
 
     this.registerLocalDb(require('../models/log').default);
     this.registerEventListener(
@@ -62,7 +62,7 @@ class GetuiService extends TcService {
           };
 
           try {
-            await this.client.singlePush(userId, title, content, payload);
+            await client.singlePush(userId, title, content, payload);
             await this.adapter.model.create({
               userId,
               title,
@@ -71,23 +71,23 @@ class GetuiService extends TcService {
               success: true,
             });
           } catch (err) {
+            let errorMsg = String(err);
+
+            if (err instanceof RequestError && err.response) {
+              errorMsg = String(err.response.body);
+            }
             await this.adapter.model.create({
               userId,
               title,
               content,
               payload,
               success: false,
-              errorMsg: String(err),
+              errorMsg,
             });
           }
         }
       }
     );
-  }
-
-  initClient() {
-    const { appId, appKey, masterSecert } = this.getuiInfo;
-    this.client = new GetuiClient(appId, appKey, masterSecert);
   }
 }
 
