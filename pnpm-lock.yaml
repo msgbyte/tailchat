@@ -1237,7 +1237,7 @@ importers:
       lodash: ^4.17.21
       react: 18.2.0
       styled-components: ^5.3.6
-      zustand: ^4.1.5
+      zustand: ^4.3.6
     dependencies:
       agora-rtc-react: 1.1.3_react@18.2.0
       ahooks: 3.7.4_react@18.2.0
@@ -1246,7 +1246,7 @@ importers:
       '@types/styled-components': 5.1.26
       react: 18.2.0
       styled-components: 5.3.6_react@18.2.0
-      zustand: 4.1.5_react@18.2.0
+      zustand: 4.3.6_react@18.2.0
 
   server/plugins/com.msgbyte.getui:
     specifiers:
@@ -1395,7 +1395,7 @@ importers:
       lodash: ^4.17.21
       react: 18.2.0
       styled-components: ^5.3.6
-      zustand: ^4.1.2
+      zustand: ^4.3.6
     dependencies:
       lodash: 4.17.21
     devDependencies:
@@ -1403,7 +1403,7 @@ importers:
       '@types/styled-components': 5.1.26
       react: 18.2.0
       styled-components: 5.3.6_react@18.2.0
-      zustand: 4.1.2_react@18.2.0
+      zustand: 4.3.6_react@18.2.0
 
   server/test/demo/openapi-client:
     specifiers:
@@ -40466,22 +40466,6 @@ packages:
       commander: 9.5.0
     dev: true
 
-  /zustand/4.1.2_react@18.2.0:
-    resolution: {integrity: sha512-gcRaKchcxFPbImrBb/BKgujOhHhik9YhVpIeP87ETT7uokEe2Szu7KkuZ9ghjtD+/KKkcrRNktR2AiLXPIbKIQ==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: true
-
   /zustand/4.1.5_react@18.2.0:
     resolution: {integrity: sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==}
     engines: {node: '>=12.7.0'}
@@ -40496,6 +40480,7 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
 
   /zustand/4.3.6_immer@9.0.15+react@18.2.0:
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -40528,7 +40513,6 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
