@@ -5,12 +5,22 @@ import {
   getCachedBaseGroupInfo,
   getMessageTextDecorators,
   getServiceUrl,
+  regCustomPanel,
 } from '@capital/common';
+import { DeviceInfoPanel } from './DeviceInfoPanel';
 import { Translate } from './translate';
 
 const PLUGIN_NAME = 'ReactNative Support';
 
 console.log(`Plugin ${PLUGIN_NAME} is loaded`);
+
+regCustomPanel({
+  position: 'setting',
+  icon: '',
+  name: 'com.msgbyte.env.rn/deviceInfoPanel',
+  label: Translate.deviceInfo,
+  render: DeviceInfoPanel,
+});
 
 /**
  * 转发事件

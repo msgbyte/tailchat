@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { generatePostMessageScript } from './lib/inject';
+import { generateInjectedScript } from './lib/inject';
 import { handleTailchatMessage } from './lib/inject/message-handler';
 
 /**
@@ -21,7 +21,7 @@ export const AppMain: React.FC<Props> = React.memo((props) => {
       <WebView
         ref={webviewRef}
         source={{ uri: props.host }}
-        injectedJavaScriptBeforeContentLoaded={generatePostMessageScript()}
+        injectedJavaScriptBeforeContentLoaded={generateInjectedScript()}
         onMessage={(e) => {
           if (!webviewRef.current) {
             return;

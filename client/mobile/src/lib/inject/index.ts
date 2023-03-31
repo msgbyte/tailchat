@@ -1,4 +1,4 @@
-// @ts-nocheck
+import { getVersion, getReadableVersion } from 'react-native-device-info';
 
 /**
  * 生成注入到Webview中的js代码
@@ -27,7 +27,15 @@ export function generateInstallPluginScript() {
   return raw;
 }
 
-export function generatePostMessageScript() {
+export function generateInjectedScript(): string {
+  return [generateDeviceInfo(), generatePostMessageScript()].join(';');
+}
+
+function generateDeviceInfo() {
+  return `window.__rnDeviceInfo = { version: "${getVersion()}", readableVersion: "${getReadableVersion()}" }`;
+}
+
+function generatePostMessageScript() {
   return `window.postMessage = function (data) {
     window.ReactNativeWebView.postMessage(JSON.stringify(data));
   };`;
