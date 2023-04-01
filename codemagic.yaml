@@ -17,9 +17,10 @@ workflows:
         - name: Set Android SDK location
           script: |
             echo "sdk.dir=$ANDROID_SDK_ROOT" > "./android/local.properties"
-        - name: Set Huawei AGCONNECT_SERVICES
+        - name: Set Files
           script: |
             echo $AGCONNECT_SERVICES | base64 --decode > "./android/app/agconnect-services.json"
+            echo $KEYSTORE_FILE | base64 --decode > "./android/app/tailchat.keystore"
         - name: Build Android release
           working_directory: client/mobile/android
           script: |
