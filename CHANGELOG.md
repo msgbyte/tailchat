@@ -1,5 +1,38 @@
 
 
+## [1.6.8](https://github.com/msgbyte/tailchat/compare/v1.6.7...v1.6.8) (2023-04-02)
+
+
+### Bug Fixes
+
+* **admin:** fix unit incorrect problem ([3747776](https://github.com/msgbyte/tailchat/commit/3747776239e4bb72abda893aac1f723dd5244661))
+* fix emoji render problem  if not found ([deceb60](https://github.com/msgbyte/tailchat/commit/deceb60da38587812f813d4d7c69aa2884ecfb59))
+* fix getui.service cannot get client problem ([a245373](https://github.com/msgbyte/tailchat/commit/a245373e0031a39bb296092af64ee695967f5621))
+* fix rn plugin error and plain message ([fcf8373](https://github.com/msgbyte/tailchat/commit/fcf837394a590bfd764361810099903a0f70f6aa))
+* fix url problem about avatar url in popover ([dcaa279](https://github.com/msgbyte/tailchat/commit/dcaa2799aa133dff104d31366f9a565af121b934))
+* fix url which without protocol will not been correct parse ([cfd1479](https://github.com/msgbyte/tailchat/commit/cfd1479ac628f3a8b87775d616d77c2e2fb26945))
+
+
+### Features
+
+* add device version display in settings ([11827f7](https://github.com/msgbyte/tailchat/commit/11827f7a4cfb4692c5c16f307c517ea0f6c3e7f1))
+* add event tracker in website ([82a08d6](https://github.com/msgbyte/tailchat/commit/82a08d65efb8bda162019b49bc2b6ef0f90adb68))
+* add huawei vendor SDK integration ([3c94ac2](https://github.com/msgbyte/tailchat/commit/3c94ac2438f624f10bdb9ed3e657b8bc34c4095e))
+* add mobile level socket to subscribe remote message ([91a6721](https://github.com/msgbyte/tailchat/commit/91a6721671c39d9bd62abe2b0b6f00717e564ac3))
+* add send button when message input has content ([ed05d61](https://github.com/msgbyte/tailchat/commit/ed05d61511d355e426a5ad23486d25ae70dd85d8))
+* add server getui.service ([e6e13db](https://github.com/msgbyte/tailchat/commit/e6e13db307774d121c4f7b2564c6c49f1a881843))
+* **mobile:** add i18n support in rn ([5668e09](https://github.com/msgbyte/tailchat/commit/5668e091edbabed6c8d54dfbf339cf2a1535fdd0))
+* **mobile:** custom release store file and bind alias with native modules ([e028998](https://github.com/msgbyte/tailchat/commit/e0289988d5dffd9c77383fa2871eb1bb8f2a9569))
+* **mobile:** integrate getui for chinese mainland notify push ([256cb43](https://github.com/msgbyte/tailchat/commit/256cb43c934c9dad3a010fbad091a686e3830397))
+* **mobile:** remove getui build problem ([c62e551](https://github.com/msgbyte/tailchat/commit/c62e551274f585c9925571d141481788d000d0ae))
+* **server:** add getuiclient lib and plugin ([1605b2d](https://github.com/msgbyte/tailchat/commit/1605b2d1869ad68b1e79baeb0c8b3e9f04b0fc4f))
+
+
+### Performance Improvements
+
+* beautify url tag style ([db4e4e8](https://github.com/msgbyte/tailchat/commit/db4e4e8958bac923ef193325acaee4e183d9deea))
+* reuse script in same image in single emoji ([fdf527e](https://github.com/msgbyte/tailchat/commit/fdf527eaa7c74523bdd23dc671c3fb40e66121a8))
+
 ## [1.6.7](https://github.com/msgbyte/tailchat/compare/v1.6.6...v1.6.7) (2023-03-14)
 
 
