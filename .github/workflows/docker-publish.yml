@@ -50,4 +50,4 @@ jobs:
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: https://tailchat-nightly.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback
-          data: '{"text": "The new docker images has been push: ${{ steps.meta.outputs.tags }}", "subscribeId": "${{ secrets.NOTIFY_SUB_ID}}"}'
+          data: '{"text": "The new docker images has been push, visit https://hub.docker.com/r/moonrailgun/tailchat/tags to learn more", "subscribeId": "${{ secrets.NOTIFY_SUB_ID}}"}'
