@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native-ui-lib';
 
 interface ServerCardProps {
   style?: StyleProp<ViewStyle>;
@@ -24,10 +19,16 @@ export const ServerCard: React.FC<ServerCardProps> = React.memo((props) => {
     >
       <Text style={styles.name}>{props.name}</Text>
 
-      {props.url && <Text style={styles.url}>{props.url}</Text>}
+      {props.url && (
+        <Text style={styles.url} grey30>
+          {props.url}
+        </Text>
+      )}
 
       {props.version && (
-        <Text style={styles.version}>version: {props.version}</Text>
+        <Text style={styles.version} grey30>
+          version: {props.version}
+        </Text>
       )}
     </TouchableOpacity>
   );
@@ -49,12 +50,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   version: {
-    color: '#999',
+    // color: '#999',
     textAlign: 'center',
     fontSize: 10,
   },
   url: {
-    color: '#999',
+    // color: '#999',
     textAlign: 'center',
   },
 });

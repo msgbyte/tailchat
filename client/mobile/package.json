@@ -17,6 +17,7 @@
     "@formatjs/intl": "^2.6.9",
     "@notifee/react-native": "^7.6.1",
     "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-native-community/clipboard": "^1.5.1",
     "immer": "^9.0.19",
     "lodash": "^4.17.21",
     "mini-star": "^2.0.8",
