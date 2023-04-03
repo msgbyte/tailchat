@@ -211,6 +211,7 @@ dependencies {
     // implementation 'com.getui.opt:ups:3.0.3'   // ups，ups目前支持坚果，索尼，海信手机
     // implementation 'com.getui.opt:honor:3.3.0' // 荣耀
 
+    implementation 'com.huawei.agconnect:agconnect-core:1.8.1.300'
     implementation 'com.huawei.hms:push:6.9.0.300'
 }
 
