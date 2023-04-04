@@ -3,7 +3,6 @@ import { Alert, StyleSheet, ScrollView } from 'react-native';
 import Clipboard from '@react-native-community/clipboard';
 import { ServerCard } from './components/ServerCard';
 import { useServerStore } from './store/server';
-import Dialog from 'react-native-ui-lib/dialog';
 import {
   Button,
   PanningProvider,
@@ -12,6 +11,7 @@ import {
   ActionSheet,
   TextField,
   TouchableOpacity,
+  Dialog,
 } from 'react-native-ui-lib';
 import { isValidUrl } from './lib/utils';
 import { translate } from './lib/i18n';

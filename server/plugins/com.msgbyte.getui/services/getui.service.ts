@@ -62,8 +62,14 @@ class GetuiService extends TcService {
           };
 
           try {
-            await client.singlePush(userId, title, content, payload);
+            const { requestId } = await client.singlePush(
+              userId,
+              title,
+              content,
+              payload
+            );
             await this.adapter.model.create({
+              requestId,
               userId,
               title,
               content,

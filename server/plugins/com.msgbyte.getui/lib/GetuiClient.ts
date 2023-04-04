@@ -106,7 +106,7 @@ export class GetuiClient {
     title: string,
     body: string,
     payload: {}
-  ): Promise<SinglePushResPayload> {
+  ): Promise<{ requestId: string; res: SinglePushResPayload }> {
     const token = await this.getToken();
     const requestId = this.generateRequestId();
     const res = await got(`${this.baseUrl}/push/single/alias`, {
@@ -131,14 +131,14 @@ export class GetuiClient {
       },
     }).json<SinglePushResPayload>();
 
-    return res;
+    return { requestId, res };
   }
 
   async allPush(
     title: string,
     body: string,
     payload: {}
-  ): Promise<AllPushResPayload> {
+  ): Promise<{ requestId: string; res: AllPushResPayload }> {
     const token = await this.getToken();
     console.log('token', token);
     const requestId = this.generateRequestId();
@@ -162,6 +162,6 @@ export class GetuiClient {
       },
     }).json<AllPushResPayload>();
 
-    return res;
+    return { requestId, res };
   }
 }

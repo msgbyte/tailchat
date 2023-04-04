@@ -12,6 +12,9 @@ export class GetuiLog extends TimeStamps implements db.Base {
   id: string;
 
   @prop()
+  requestId: string;
+
+  @prop()
   userId: string;
 
   @prop()
