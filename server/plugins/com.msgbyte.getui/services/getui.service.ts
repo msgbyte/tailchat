@@ -32,6 +32,8 @@ class GetuiService extends TcService {
   }
 
   onInit() {
+    this.registerAvailableAction(() => this.getuiAvailable);
+
     if (!this.getuiAvailable) {
       console.warn(
         '[plugin:com.msgbyte.getui] require env: GETUI_APPID, GETUI_APPKEY, GETUI_MASTERSECRET'

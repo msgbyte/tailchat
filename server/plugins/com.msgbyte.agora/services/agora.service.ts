@@ -76,13 +76,26 @@ class AgoraService extends TcService {
     return process.env.AGORA_CUSTOMER_SECRET;
   }
 
-  onInit() {
+  /**
+   * 返回服务是否可用
+   */
+  get serverAvailable(): boolean {
     if (
-      !this.serverAppId ||
-      !this.serverAppCertificate ||
-      !this.serverCustomerKey ||
-      !this.serverCustomerSecret
+      this.serverAppId &&
+      this.serverAppCertificate &&
+      this.serverCustomerKey &&
+      this.serverCustomerSecret
     ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  onInit() {
+    this.registerAvailableAction(() => this.serverAvailable);
+
+    if (!this.serverAvailable) {
       console.warn(
         '声网服务启动失败, 缺少必要的环境变量: AGORA_APP_ID, AGORA_APP_CERT, AGORA_CUSTOMER_KEY, AGORA_CUSTOMER_SECRET'
       );

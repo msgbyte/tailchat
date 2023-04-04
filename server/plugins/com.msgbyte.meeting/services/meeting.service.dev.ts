@@ -20,7 +20,7 @@ class MeetingService extends TcService {
   onInit() {
     // this.registerLocalDb(require('../models/meeting').default);
 
-    this.registerAction('available', this.available);
+    this.registerAvailableAction(() => Boolean(this.tailchatMeetingUrl));
 
     if (!isValidStr(this.tailchatMeetingUrl)) {
       return;
@@ -39,10 +39,6 @@ class MeetingService extends TcService {
         },
       }
     );
-  }
-
-  available(ctx: TcContext) {
-    return Boolean(this.tailchatMeetingUrl);
   }
 
   /**

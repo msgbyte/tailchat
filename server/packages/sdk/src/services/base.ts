@@ -314,6 +314,16 @@ export abstract class TcService extends Service {
   }
 
   /**
+   * 注册可用的action请求
+   *
+   * 传入检查函数, 函数的返回值作为结果
+   */
+  registerAvailableAction(checkFn: () => boolean) {
+    this.registerAction('available', checkFn);
+    this.registerAuthWhitelist(['/available']);
+  }
+
+  /**
    * 注册面板功能特性，用于在服务端基础设施开放部分能力
    * @param panelFeature 面板功能
    */
