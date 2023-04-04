@@ -35,7 +35,6 @@ function useHandleSendMessage(context: ConverseContext) {
    */
   const handleSendMessage = useCallback(
     async (payload: SendMessagePayload) => {
-      payload.content = String(payload.content).trim();
       // 输入合法性检测
       if (payload.content === '') {
         showErrorToasts(t('无法发送空消息'));

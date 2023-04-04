@@ -12,6 +12,7 @@ export interface BuiltinEventMap {
         converseId: string;
         messageId: string;
         content: string;
+        plain?: string;
         meta: MessageMetaStruct;
       }
     | {

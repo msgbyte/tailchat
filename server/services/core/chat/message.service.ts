@@ -46,6 +46,7 @@ class MessageService extends TcService {
         converseId: 'string',
         groupId: [{ type: 'string', optional: true }],
         content: 'string',
+        plain: { type: 'string', optional: true },
         meta: { type: 'any', optional: true },
       },
     });
@@ -164,10 +165,11 @@ class MessageService extends TcService {
       converseId: string;
       groupId?: string;
       content: string;
+      plain?: string;
       meta?: object;
     }>
   ) {
-    const { converseId, groupId, content, meta } = ctx.params;
+    const { converseId, groupId, content, plain, meta } = ctx.params;
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
 
@@ -208,6 +210,7 @@ class MessageService extends TcService {
       converseId: String(converseId),
       messageId: String(message._id),
       content,
+      plain,
       meta: meta ?? {},
     });
 

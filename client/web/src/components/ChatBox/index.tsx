@@ -1,3 +1,4 @@
+import { getMessageTextDecorators } from '@/plugin/common';
 import React from 'react';
 import { ChatBoxContextProvider, useConverseMessage } from 'tailchat-shared';
 import { ErrorView } from '../ErrorView';
@@ -58,10 +59,12 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
 
       <ChatInputBox
         onSendMsg={(msg, meta) => {
+          const content = preprocessMessage(msg);
           handleSendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
-            content: preprocessMessage(msg),
+            content,
+            plain: getMessageTextDecorators().serialize(content),
             meta,
           });
         }}

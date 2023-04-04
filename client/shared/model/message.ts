@@ -38,6 +38,11 @@ export interface SendMessagePayloadMeta {
 }
 
 export interface SendMessagePayload extends SimpleMessagePayload {
+  /**
+   * content的plain内容
+   * 用于inbox
+   */
+  plain?: string;
   meta?: SendMessagePayloadMeta;
 }
 
