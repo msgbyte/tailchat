@@ -134,6 +134,7 @@ export class AppSocket {
     const closeConnecting = () => {
       if (this.closeFn && typeof this.closeFn === 'function') {
         this.closeFn();
+        this.closeFn = null;
       }
     };
 

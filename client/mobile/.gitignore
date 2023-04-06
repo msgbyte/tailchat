@@ -1,4 +1,5 @@
 android/app/agconnect-services.json
+android/app/*.pem
 
 # OSX
 #
