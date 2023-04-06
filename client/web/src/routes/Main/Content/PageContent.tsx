@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect } from 'react';
 import { useSidebarContext } from '../SidebarContext';
 import _isNil from 'lodash/isNil';
 import { EventTypes, useDrag, UserDragConfig } from '@use-gesture/react';
@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import clsx from 'clsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import type { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
-import { useWatch } from 'tailchat-shared';
 
 interface PageContentRootProps extends PropsWithChildren<ReactDOMAttributes> {
   className?: string;
@@ -21,7 +20,7 @@ const PageContentRoot: React.FC<PageContentRootProps> = ({
   <div
     {...others}
     style={style}
-    className={clsx('flex flex-row flex-1 overflow-hidden relative', className)}
+    className={clsx('flex flex-row flex-1 overflow-hidden', className)}
   >
     {children}
   </div>
@@ -82,17 +81,21 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
       []
     );
 
-    useWatch([isMobile], () => {
+    useEffect(() => {
       if (isMobile === false) {
         // 如果不为移动端, 则一定显示侧边栏
         setShowSidebar(true);
       }
-    });
+    }, [isMobile]);
 
     const sidebarEl = _isNil(sidebar) ? null : (
       <div
         className={clsx(
-          'bg-sidebar-light dark:bg-sidebar-dark flex-shrink-0 transition-width w-60'
+          'bg-sidebar-light dark:bg-sidebar-dark flex-shrink-0 transition-width',
+          {
+            'w-60': showSidebar,
+            'w-0': !showSidebar,
+          }
         )}
       >
         {props.sidebar}
@@ -118,20 +121,14 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
 
         <div
           className={clsx(
-            'flex flex-auto bg-content-light dark:bg-content-dark overflow-hidden z-10',
-            isMobile &&
-              'transform left-0 w-full h-full absolute transition-transform',
-            isMobile && {
-              'translate-x-60': showSidebar,
-              'translate-x-0': !showSidebar,
-            }
+            'flex flex-auto bg-content-light dark:bg-content-dark relative overflow-hidden'
           )}
           data-tc-role={props['data-tc-role']}
         >
           <div className="tc-content-background" />
 
           <div
-            className={clsx('flex relative w-full', {
+            className={clsx('flex flex-auto relative', {
               'overflow-auto': !showMask,
               'overflow-hidden': showMask,
             })}
