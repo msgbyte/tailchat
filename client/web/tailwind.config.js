@@ -30,7 +30,7 @@ const tailchat = plugin(({ e, addUtilities }) => {
         right: 0,
         height: '1px',
         boxShadow: customTheme.boxShadow.elevationLow,
-        zIndex: 1,
+        // zIndex: 1,
         pointerEvents: 'none',
       },
     },

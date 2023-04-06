@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useKeepAliveStore } from './store';
 import _omit from 'lodash/omit';
+import { createRAFLoop, getDOMParentPath } from '@/utils/dom-helper';
 
 /**
  * 样式相关配置
@@ -49,6 +50,7 @@ export function withKeepAliveOverlay<
         return;
       }
 
+      // resize
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
           const { target } = entry;
@@ -66,12 +68,41 @@ export function withKeepAliveOverlay<
           });
         });
       });
-
       resizeObserver.observe(containerRef.current);
+
+      // transition
+      const parentPath = getDOMParentPath(containerRef.current);
+      function update(e: TransitionEvent) {
+        if (
+          containerRef.current &&
+          parentPath.includes(e.target as HTMLElement)
+        ) {
+          // 父节点有触发 transition 事件，则更新容器节点大小
+          const rect = containerRef.current.getBoundingClientRect();
+          updateRect(cacheId, {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height,
+          });
+        }
+      }
+
+      /**
+       * use raf to make sure smooth animation
+       */
+      const { start: handleTransitionStart, end: handleTransitionEnd } =
+        createRAFLoop(update);
+
+      window.addEventListener('transitionend', handleTransitionEnd);
+      window.addEventListener('transitionstart', handleTransitionStart);
 
       return () => {
         if (containerRef.current) {
           resizeObserver.unobserve(containerRef.current);
+
+          window.removeEventListener('transitionend', handleTransitionEnd);
+          window.removeEventListener('transitionstart', handleTransitionStart);
         }
       };
     }, [cacheId]);

@@ -105,7 +105,8 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
 
     const contentMaskEl = showMask ? (
       <div
-        className="absolute left-0 top-0 bottom-0 right-0 z-10"
+        className="absolute right-0 top-0 bottom-0 z-10"
+        style={{ width: 'calc(100% - 15rem)' }} // 15rem is "w-60" which sidebar with
         onClick={handleHideSidebar}
       />
     ) : null;
@@ -116,9 +117,11 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
       <ErrorBoundary>
         {sidebarEl}
 
+        {contentMaskEl}
+
         <div
           className={clsx(
-            'flex flex-auto bg-content-light dark:bg-content-dark overflow-hidden z-10',
+            'flex flex-auto bg-content-light dark:bg-content-dark overflow-hidden',
             isMobile &&
               'transform left-0 w-full h-full absolute transition-transform',
             isMobile && {
@@ -136,8 +139,6 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
               'overflow-hidden': showMask,
             })}
           >
-            {contentMaskEl}
-
             <ErrorBoundary>{contentEl}</ErrorBoundary>
           </div>
         </div>
