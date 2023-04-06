@@ -13,6 +13,8 @@ try {
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
     tracesSampleRate: 0.1, // reduce sentry quota usage
+
+    ignoreErrors: ['File Too Large'],
   });
 
   sharedEvent.on('loginSuccess', (userInfo) => {
