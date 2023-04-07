@@ -30,7 +30,7 @@ export function parsePluginManifest(json: string): PluginManifest {
       requireRestart: { type: 'boolean' },
     },
     required: ['label', 'name', 'url', 'version', 'author', 'description'],
-    additionalProperties: false,
+    additionalProperties: true,
   });
 
   if (!valid) {
