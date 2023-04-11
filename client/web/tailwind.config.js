@@ -52,6 +52,23 @@ const tailchat = plugin(({ e, addUtilities }) => {
 
   addUtilities(newUtilities);
 
+  addUtilities(
+    {
+      '.overflow-smart': {
+        overflow: ['auto', 'overlay'],
+      },
+      '.overflow-x-smart': {
+        'overflow-x': ['auto', 'overlay'],
+      },
+      '.overflow-y-smart': {
+        'overflow-y': ['auto', 'overlay'],
+      },
+    },
+    {
+      variants: ['hover'],
+    }
+  );
+
   // Fork from https://github.com/ItzAfroBoy/tailwindcss-zoom/blob/master/index.js
   const percents = [
     {

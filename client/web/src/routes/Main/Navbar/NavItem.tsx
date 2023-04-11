@@ -68,7 +68,7 @@ export const NavbarNavItem: React.FC<
 
       {inner}
 
-      <div className="absolute right-0 bottom-0">
+      <div className="absolute right-2 bottom-0">
         {badge === true && <Badge status="error" {...props.badgeProps} />}
       </div>
     </div>

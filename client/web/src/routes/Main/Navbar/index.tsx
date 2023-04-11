@@ -40,7 +40,7 @@ export const Navbar: React.FC = React.memo(() => {
         </div>
 
         {/* 如果导航栏高度不够就缩减群组列表的高度 */}
-        <div className="overflow-y-hidden hover:overflow-y-auto overflow-x-hidden thin-scrollbar">
+        <div className="overflow-y-hidden hover:overflow-y-smart scroll overflow-x-hidden thin-scrollbar">
           <GroupNav />
         </div>
 
