@@ -23,6 +23,9 @@ export const SocketIOAdmin: React.FC = React.memo(() => {
           <Typography component="div">
             {translate('custom.socketio.tip2')}
           </Typography>
+          <Typography component="div">
+            {translate('custom.socketio.tip3')}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button

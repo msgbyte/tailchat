@@ -66,6 +66,7 @@ export const englishCustom = {
     socketio: {
       tip1: 'The server URL is:',
       tip2: 'The account password is the account password of Tailchat Admin',
+      tip3: 'NOTICE: please check "Advanced options" then select "websocket only" and "MessagePack parser"',
       btn: 'Open the Admin platform',
     },
     config: {
@@ -143,6 +144,7 @@ export const chineseCustom = {
     socketio: {
       tip1: '服务器URL为:',
       tip2: '账号密码为Tailchat后台的账号密码',
+      tip3: '注意: 请打开 "Advanced options" 并选中 "websocket only" 与 "MessagePack parser"',
       btn: '打开管理平台',
     },
     config: {
