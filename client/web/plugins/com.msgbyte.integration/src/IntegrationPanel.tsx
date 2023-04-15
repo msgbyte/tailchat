@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Avatar, Button, Input, UserName } from '@capital/component';
 import styled from 'styled-components';
 import type { OpenAppInfo } from 'types';
@@ -9,6 +9,7 @@ import {
   useGroupIdContext,
   showSuccessToasts,
 } from '@capital/common';
+import { Translate } from './translate';
 
 const Tip = styled.div`
   color: #999;
@@ -51,7 +52,7 @@ const IntegrationPanel: React.FC = React.memo(() => {
     });
 
     if (!data) {
-      showErrorToasts('没找到该应用');
+      showErrorToasts(Translate.notFoundApp);
       return;
     }
 
@@ -69,11 +70,11 @@ const IntegrationPanel: React.FC = React.memo(() => {
 
   return (
     <div>
-      <Tip>目前仅支持通过应用ID手动添加</Tip>
+      <Tip>{Translate.onlyAllowManualAddition}</Tip>
 
       <Row>
         <Input
-          placeholder={'应用ID'}
+          placeholder={Translate.appId}
           value={appId}
           onChange={(e) => setAppId(e.target.value)}
         />
@@ -83,7 +84,7 @@ const IntegrationPanel: React.FC = React.memo(() => {
           loading={loading}
           onClick={handleQueryApp}
         >
-          查询
+          {Translate.search}
         </Button>
       </Row>
 
@@ -101,7 +102,7 @@ const IntegrationPanel: React.FC = React.memo(() => {
                 <div>{openAppInfo.appName}</div>
                 <div>{openAppInfo.appDesc}</div>
                 <Row>
-                  <div>开发者:</div>
+                  <div>{Translate.developer}:</div>
                   <UserName userId={openAppInfo.owner} />
                 </Row>
 
@@ -113,7 +114,7 @@ const IntegrationPanel: React.FC = React.memo(() => {
                       loading={addBotLoading}
                       onClick={handleAddBotIntoGroup}
                     >
-                      添加应用机器人到群组
+                      {Translate.addBot}
                     </Button>
                   )}
                 </div>
