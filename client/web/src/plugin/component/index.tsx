@@ -59,6 +59,7 @@ export { ErrorBoundary } from '@/components/ErrorBoundary';
 export { UserAvatar } from '@/components/UserAvatar';
 export { UserName } from '@/components/UserName';
 export { Markdown } from '@/components/Markdown';
+export { MarkdownEditor } from '@/components/MarkdownEditor';
 export { Webview, WebviewKeepAlive } from '@/components/Webview';
 export { Card } from '@/components/Card';
 export { Problem } from '@/components/Problem';
