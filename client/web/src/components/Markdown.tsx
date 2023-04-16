@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { isValidStr } from 'tailchat-shared';
 import { Loadable } from './Loadable';
 import { Image } from 'tailchat-design';
+import remarkGfm from 'remark-gfm';
 import './Markdown.less';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -41,6 +42,7 @@ export const Markdown: React.FC<{
       className="tailchat-markdown"
       transformImageUri={(src) => transformUrl(src)}
       transformLinkUri={(href) => transformUrl(href)}
+      remarkPlugins={[remarkGfm]}
       linkTarget="_blank"
       skipHtml={true}
       components={components}

@@ -1,6 +1,6 @@
 .tailchat-markdown {
   * {
-    user-select: auto;
+    user-select: text;
   }
 
   h1,
@@ -34,5 +34,26 @@
 
   blockquote {
     @apply px-2 text-gray-500 border-l-4 border-gray-500;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+
+    tr {
+      @apply border-t border-gray-200 bg-transparent;
+
+      &:nth-child(2n) {
+        @apply bg-gray-50 bg-opacity-10;
+      }
+
+      th, td {
+        @apply border border-gray-200 py-1 px-3;
+      }
+    }
+
   }
 }
