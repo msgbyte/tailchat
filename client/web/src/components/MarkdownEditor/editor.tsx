@@ -2,6 +2,7 @@ import React from 'react';
 import { Editor } from '@bytemd/react';
 import { plugins } from './plugins';
 import 'bytemd/dist/index.css';
+import './style.less';
 
 interface MarkdownEditorProps {
   value: string;
