@@ -21,14 +21,14 @@ workflows:
           script: |
             echo $AGCONNECT_SERVICES | base64 --decode > "./android/app/agconnect-services.json"
             echo $KEYSTORE_FILE | base64 --decode > "./android/app/tailchat.keystore"
-            echo $TAILCHAT_UPLOAD_STORE_FILE >> "./.env"
-            echo $TAILCHAT_UPLOAD_STORE_PASSWORD >> "./.env"
-            echo $TAILCHAT_UPLOAD_KEY_ALIAS >> "./.env"
-            echo $TAILCHAT_UPLOAD_KEY_PASSWORD >> "./.env"
-            echo $GETUI_APPID >> "./.env"
-            echo $GETUI_APPKEY >> "./.env"
-            echo $GETUI_APPSECRET >> "./.env"
-            echo $GETUI_HUAWEI_APP_ID >> "./.env"
+            echo "TAILCHAT_UPLOAD_STORE_FILE=$TAILCHAT_UPLOAD_STORE_FILE" >> "./.env"
+            echo "TAILCHAT_UPLOAD_STORE_PASSWORD=$TAILCHAT_UPLOAD_STORE_PASSWORD" >> "./.env"
+            echo "TAILCHAT_UPLOAD_KEY_ALIAS=$TAILCHAT_UPLOAD_KEY_ALIAS" >> "./.env"
+            echo "TAILCHAT_UPLOAD_KEY_PASSWORD=$TAILCHAT_UPLOAD_KEY_PASSWORD" >> "./.env"
+            echo "GETUI_APPID=$GETUI_APPID" >> "./.env"
+            echo "GETUI_APPKEY=$GETUI_APPKEY" >> "./.env"
+            echo "GETUI_APPSECRET=$GETUI_APPSECRET" >> "./.env"
+            echo "GETUI_HUAWEI_APP_ID=$GETUI_HUAWEI_APP_ID" >> "./.env"
         - name: Build Android release
           working_directory: client/mobile/android
           script: |
