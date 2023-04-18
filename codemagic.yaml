@@ -53,7 +53,7 @@ workflows:
           script: npm install -g wrangler
         - name: Deploy to Cloudflare Pages
           script: |
-            wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat-app --branch $CM_BRANCH
+            wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch $CM_BRANCH
 
   ios:
     name: build, test & publish iOS version
