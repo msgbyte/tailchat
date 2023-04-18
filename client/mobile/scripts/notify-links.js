@@ -21,7 +21,7 @@ if (tailchatSubscribeId) {
             const { name, url, md5, versionName } = link;
             const pagesUrl =
               branch === 'master'
-                ? 'https://tailchat.pages.dev/app-release.apk'
+                ? 'https://tailchat-app.msgbyte.com/app-release.apk'
                 : `https://${branch}.tailchat.pages.dev/app-release.apk`;
 
             return (
