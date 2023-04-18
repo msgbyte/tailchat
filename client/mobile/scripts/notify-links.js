@@ -6,6 +6,7 @@ const path = require('path');
 // reference: https://docs.codemagic.io/yaml-basic-configuration/environment-variables/#artifact-links
 const artifactLinks = process.env['CM_ARTIFACT_LINKS'];
 const tailchatSubscribeId = process.env['TAILCHAT_SUBSCRIBE_ID'];
+const branch = process.env['CM_BRANCH'];
 
 console.log('artifactLinks:', artifactLinks);
 
@@ -18,10 +19,15 @@ if (tailchatSubscribeId) {
         links
           .map((link) => {
             const { name, url, md5, versionName } = link;
+            const pagesUrl =
+              branch === 'master'
+                ? 'https://tailchat.pages.dev/app-release.apk'
+                : `https://${branch}.tailchat.pages.dev/app-release.apk`;
+
             return (
               `${name}\n` +
               `version: ${versionName}(${md5})\n` +
-              `[url=${url}]Download[/url]`
+              `[url=${pagesUrl}]Download from Pages[/url] or [url=${url}]Download from CI[/url]`
             );
           })
           .join('\n=========\n');

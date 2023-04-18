@@ -46,14 +46,22 @@ workflows:
         recipients:
           - moonrailgun@gmail.com
       scripts:
-        - name: Notify artifact URL to Tailchat
-          script: |
-            node scripts/notify-links.js
         - name: Install wrangler
           script: npm install -g wrangler
         - name: Deploy to Cloudflare Pages
           script: |
-            wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch $CM_BRANCH
+            if [[ -f ~/SUCCESS ]]; then
+              if [[ $CM_BRANCH == "master" ]]; then
+                # deploy to production
+                wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch main
+              else
+                wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch $CM_BRANCH
+              fi
+            fi
+        - name: Notify artifact URL to Tailchat
+          script: |
+            node scripts/notify-links.js
+
 
   ios:
     name: build, test & publish iOS version
