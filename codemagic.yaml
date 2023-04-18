@@ -7,6 +7,7 @@ workflows:
     environment:
       groups:
         - default
+        - cloudflare_credentials
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
@@ -48,6 +49,11 @@ workflows:
         - name: Notify artifact URL to Tailchat
           script: |
             node scripts/notify-links.js
+        - name: Install wrangler
+          script: npm install -g wrangler
+        - name: Deploy to Cloudflare Pages
+          script: |
+            wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat-app --branch $CM_BRANCH
 
   ios:
     name: build, test & publish iOS version
@@ -56,6 +62,7 @@ workflows:
     environment:
       groups:
         - default
+        - cloudflare_credentials
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
