@@ -218,3 +218,42 @@ exports[`Markdown list 1`] = `
   </div>
 </div>
 `;
+
+exports[`Markdown table 1`] = `
+<div>
+  <div
+    class="tailchat-markdown"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>
+            A
+          </th>
+          <th>
+            B
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            2
+          </td>
+        </tr>
+        <tr>
+          <td>
+            3
+          </td>
+          <td>
+            4
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

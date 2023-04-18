@@ -46,4 +46,15 @@ describe('Markdown', () => {
       expect(wrapper.container).toMatchSnapshot();
     });
   });
+
+  test('table', async () => {
+    const text = `
+| A | B |
+| --- | --- |
+| 1 | 2 |
+| 3 | 4 |
+        `;
+    const wrapper = await renderLazy(<Markdown raw={text} />);
+    expect(wrapper.container).toMatchSnapshot();
+  });
 });
