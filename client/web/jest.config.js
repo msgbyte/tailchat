@@ -30,6 +30,14 @@ const esModules = [
   'hast-util-whitespace',
   'space-separated-tokens',
   'comma-separated-tokens',
+  'remark-gfm',
+  'mdast-util-gfm',
+  'mdast-util-gfm-autolink-literal',
+  'mdast-util-find-and-replace',
+  'mdast-util-to-markdown',
+  'markdown-table',
+  'escape-string-regexp',
+  'ccount',
 ].join('|');
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
