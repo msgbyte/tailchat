@@ -30,7 +30,7 @@
     "@emoji-mart/data": "^1.1.2",
     "@emoji-mart/react": "^1.1.1",
     "@loadable/component": "^5.15.3",
-    "@tanstack/react-query-devtools": "^4.24.10",
+    "@tanstack/react-query-devtools": "4.29.3",
     "@use-gesture/react": "^10.2.24",
     "ahooks": "^3.7.4",
     "antd": "^4.24.8",

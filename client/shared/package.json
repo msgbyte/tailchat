@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
-    "@tanstack/react-query": "^4.3.4",
+    "@tanstack/react-query": "4.29.3",
     "axios": "^0.21.1",
     "crc": "^3.8.0",
     "dayjs": "^1.10.6",
