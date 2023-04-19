@@ -197,7 +197,19 @@ declare module '@capital/common' {
 
   export const pluginCustomPanel: any;
 
-  export const regCustomPanel: any;
+  export const regCustomPanel: (info: {
+    position:
+      | 'personal'
+      | 'setting'
+      | 'groupdetail'
+      | 'navbar-more'
+      | 'navbar-group'
+      | 'navbar-personal';
+    icon: string;
+    name: string;
+    label: string;
+    render: React.ComponentType;
+  }) => void;
 
   export const pluginGroupPanel: any;
 
