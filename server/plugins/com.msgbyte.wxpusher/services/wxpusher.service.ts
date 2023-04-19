@@ -114,9 +114,9 @@ class WxpusherService extends TcService {
       return null;
     }
 
-    const uid = user.wxpusherUserId;
+    const wxpusherUserId = user.wxpusherUserId;
 
-    return uid;
+    return wxpusherUserId;
   }
 
   /**

@@ -410,6 +410,8 @@ declare module '@capital/component' {
 
   export const MessageAckContainer: any;
 
+  export const GroupExtraDataPanel: any;
+
   export const Image: any;
 
   export const IconBtn: React.FC<{
@@ -497,6 +499,10 @@ declare module '@capital/component' {
 
   export const ErrorBoundary: any;
 
+  export const ErrorView: React.FC<{
+    error: Error;
+  }>;
+
   export const UserAvatar: React.FC<{
     userId: string;
     className?: string;
@@ -511,6 +517,8 @@ declare module '@capital/component' {
   }>;
 
   export const Markdown: any;
+
+  export const MarkdownEditor: any;
 
   export const Webview: any;
 
