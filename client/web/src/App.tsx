@@ -25,6 +25,7 @@ import isElectron from 'is-electron';
 import { AppRouterApi } from './components/AppRouterApi';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
@@ -114,36 +115,43 @@ export const App: React.FC = React.memo(() => {
       <AppHeader />
       <AppContainer>
         <AppRouterApi />
-        <Routes>
-          <Route
-            path="/entry/*"
-            element={
-              <FallbackPortalHost>
-                <EntryRoute />
-              </FallbackPortalHost>
-            }
-          />
-          <Route path="/main/*" element={<MainRoute />} />
-          <Route path="/panel/*" element={<PanelRoute />} />
-          <Route path="/invite/:inviteCode" element={<InviteRoute />} />
-          <Route
-            path="/plugin/*"
-            element={
-              <FallbackPortalHost>
-                {pluginRootRoute.map((r, i) => (
-                  // NOTICE: Switch里不能出现动态路由
-                  <Route
-                    key={r.name}
-                    path={r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`}
-                    element={React.createElement(r.component)}
-                  />
-                ))}
-              </FallbackPortalHost>
-            }
-          />
+        <ErrorBoundary>
+          <Routes>
+            <Route
+              path="/entry/*"
+              element={
+                <FallbackPortalHost>
+                  <EntryRoute />
+                </FallbackPortalHost>
+              }
+            />
+            <Route path="/main/*" element={<MainRoute />} />
+            <Route path="/panel/*" element={<PanelRoute />} />
+            <Route path="/invite/:inviteCode" element={<InviteRoute />} />
+            <Route
+              path="/plugin/*"
+              element={
+                <FallbackPortalHost>
+                  {pluginRootRoute.map((r, i) => (
+                    // NOTICE: Switch里不能出现动态路由
+                    <Route
+                      key={r.name}
+                      path={
+                        r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`
+                      }
+                      element={React.createElement(r.component)}
+                    />
+                  ))}
+                </FallbackPortalHost>
+              }
+            />
 
-          <Route path="/*" element={<Navigate to="/entry" replace={true} />} />
-        </Routes>
+            <Route
+              path="/*"
+              element={<Navigate to="/entry" replace={true} />}
+            />
+          </Routes>
+        </ErrorBoundary>
       </AppContainer>
     </AppProvider>
   );
