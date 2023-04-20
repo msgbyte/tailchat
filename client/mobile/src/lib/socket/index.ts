@@ -37,9 +37,10 @@ export function createSocket(url: string, token: string): Promise<Socket> {
 export function bindSocketEvent(socket: Socket): void {
   socket.on('notify:chat.inbox.append', (inboxItem: InboxItem) => {
     if (inboxItem.type === 'message') {
+      const payload = inboxItem.message ?? inboxItem.payload;
       showNotification({
-        title: inboxItem.message?.converseId ?? '',
-        body: inboxItem.message?.messageSnippet ?? '',
+        title: payload.converseId ?? '',
+        body: payload.messageSnippet ?? '',
       });
     }
   });

@@ -32,12 +32,15 @@ class InboxService extends TcService {
           if (payload.type === 'add') {
             await Promise.all(
               mentions.map((userId) => {
-                return ctx.call('chat.inbox.appendMessage', {
+                return ctx.call('chat.inbox.append', {
                   userId,
-                  groupId: payload.groupId,
-                  converseId: payload.converseId,
-                  messageId: payload.messageId,
-                  messageSnippet: payload.content,
+                  type: 'message',
+                  payload: {
+                    groupId: payload.groupId,
+                    converseId: payload.converseId,
+                    messageId: payload.messageId,
+                    messageSnippet: payload.content,
+                  },
                 });
               })
             );
@@ -63,16 +66,6 @@ class InboxService extends TcService {
         userId: { type: 'string', optional: true },
         type: 'string',
         payload: 'any',
-      },
-    });
-    this.registerAction('appendMessage', this.appendMessage, {
-      visibility: 'public',
-      params: {
-        userId: { type: 'string', optional: true },
-        groupId: { type: 'string', optional: true },
-        converseId: 'string',
-        messageId: 'string',
-        messageSnippet: 'string',
       },
     });
     this.registerAction('removeMessage', this.removeMessage, {
@@ -120,45 +113,6 @@ class InboxService extends TcService {
     return true;
   }
 
-  /**
-   * 增加收件夹消息
-   */
-  async appendMessage(
-    ctx: TcContext<{
-      userId?: string;
-      groupId?: string;
-      converseId: string;
-      messageId: string;
-      messageSnippet: string;
-    }>
-  ) {
-    const {
-      userId = ctx.meta.userId,
-      groupId,
-      converseId,
-      messageId,
-      messageSnippet,
-    } = ctx.params;
-
-    const doc = await this.adapter.model.create({
-      userId,
-      type: 'message',
-      message: {
-        groupId,
-        converseId,
-        messageId,
-        messageSnippet,
-      },
-    });
-
-    const inboxItem = await this.transformDocuments(ctx, {}, doc);
-
-    await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
-    await this.emitInboxAppendEvent(ctx, inboxItem);
-
-    return true;
-  }
-
   async removeMessage(
     ctx: TcContext<{
       userId?: string;
@@ -177,7 +131,7 @@ class InboxService extends TcService {
     await this.adapter.model.remove({
       userId,
       type: 'message',
-      message: {
+      payload: {
         groupId,
         converseId,
         messageId,

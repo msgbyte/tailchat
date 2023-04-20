@@ -144,7 +144,11 @@ export type {
   GroupMember,
   GroupPanelFeature,
 } from './model/group';
-export type { InboxItem } from './model/inbox';
+export type {
+  BasicInboxItem,
+  MessageInboxItem,
+  InboxItem,
+} from './model/inbox';
 export {
   sendMessage,
   recallMessage,

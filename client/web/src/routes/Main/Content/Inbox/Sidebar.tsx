@@ -33,20 +33,20 @@ export const InboxSidebar: React.FC = React.memo(() => {
 
   const renderInbox = (item: InboxItem) => {
     if (item.type === 'message') {
-      const message: Partial<model.inbox.InboxItem['message']> =
-        item.message ?? {};
+      const payload: Partial<model.inbox.InboxItem['payload']> =
+        item.message ?? item.payload ?? {};
       let title: React.ReactNode = '';
-      if (isValidStr(message.groupId)) {
-        title = <GroupName groupId={message.groupId} />;
-      } else if (isValidStr(message.converseId)) {
-        title = <ConverseName converseId={message.converseId} />;
+      if (isValidStr(payload.groupId)) {
+        title = <GroupName groupId={payload.groupId} />;
+      } else if (isValidStr(payload.converseId)) {
+        title = <ConverseName converseId={payload.converseId} />;
       }
 
       return (
         <InboxSidebarItem
           key={item._id}
           title={title}
-          desc={getMessageRender(message.messageSnippet ?? '')}
+          desc={getMessageRender(payload.messageSnippet ?? '')}
           source={'Tailchat'}
           readed={item.readed}
           to={buildLink(item._id)}

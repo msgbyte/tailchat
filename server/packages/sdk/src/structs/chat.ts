@@ -44,7 +44,10 @@ interface InboxMessageStruct {
   messageSnippet: string;
 }
 
-export interface InboxStruct {
+/**
+ * 收件箱记录项类型
+ */
+export interface BasicInboxItem {
   _id: string;
   userId: string;
   type: string;
@@ -60,3 +63,24 @@ export interface InboxStruct {
    */
   readed: boolean;
 }
+
+export interface MessageInboxItem extends BasicInboxItem {
+  type: 'message';
+  /**
+   * @deprecated
+   */
+  message?: {
+    groupId?: string;
+    converseId: string;
+    messageId: string;
+    messageSnippet: string;
+  };
+  payload: {
+    groupId?: string;
+    converseId: string;
+    messageId: string;
+    messageSnippet: string;
+  };
+}
+
+export type InboxStruct = MessageInboxItem;

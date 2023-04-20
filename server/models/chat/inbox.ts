@@ -55,6 +55,9 @@ export class Inbox extends TimeStamps implements Base {
   })
   type: string;
 
+  /**
+   * @deprecated please use payload
+   */
   @prop()
   message?: InboxMessage;
 
@@ -62,7 +65,7 @@ export class Inbox extends TimeStamps implements Base {
    * 信息体，没有类型
    */
   @prop()
-  payload?: object;
+  payload?: InboxMessage | object;
 
   /**
    * 是否已读

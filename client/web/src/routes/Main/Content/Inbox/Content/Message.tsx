@@ -4,19 +4,24 @@ import { JumpToConverseButton } from '@/components/JumpToButton';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Problem } from '@/components/Problem';
 import React from 'react';
-import { InboxItem, model, showErrorToasts, useAsync } from 'tailchat-shared';
+import {
+  MessageInboxItem,
+  model,
+  showErrorToasts,
+  useAsync,
+} from 'tailchat-shared';
 
 interface Props {
-  info: InboxItem;
+  info: MessageInboxItem;
 }
 export const InboxMessageContent: React.FC<Props> = React.memo((props) => {
   const info = props.info;
 
-  const message = info.message;
-  if (!message) {
+  const payload = info.message ?? info.payload;
+  if (!payload) {
     return <Problem />;
   }
-  const { groupId, converseId, messageId } = message;
+  const { groupId, converseId, messageId } = payload;
 
   return (
     <div className="w-full relative">

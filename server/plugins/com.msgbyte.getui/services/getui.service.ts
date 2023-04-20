@@ -50,7 +50,7 @@ class GetuiService extends TcService {
       async (inboxItem: InboxStruct, ctx) => {
         if (inboxItem.type === 'message') {
           const userId = inboxItem.userId;
-          const message = inboxItem.message;
+          const message = inboxItem.payload;
 
           let title = 'new';
           if (message.groupId) {
