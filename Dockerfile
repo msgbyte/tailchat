@@ -7,7 +7,7 @@ ARG VERSION
 WORKDIR /app/tailchat
 
 # Install dependencies
-RUN npm install -g pnpm@7.13.4
+RUN npm install -g pnpm@8.2.0
 RUN npm install -g tailchat-cli@latest
 
 # Add mc for minio

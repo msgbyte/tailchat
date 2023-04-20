@@ -10,7 +10,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "npm run build",
+    "prepare": "pnpm build",
     "release": "npm version patch && npm publish --registry https://registry.npmjs.com/"
   },
   "repository": {
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/msgbyte/tailchat-server#readme",
   "devDependencies": {
+    "@types/jest": "^29.5.1",
     "typescript": "^4.3.3"
   },
   "dependencies": {

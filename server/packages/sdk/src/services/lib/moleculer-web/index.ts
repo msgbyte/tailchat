@@ -148,7 +148,7 @@ export const ApiGatewayMixin: ServiceSchema = {
           params: ['req.url', 'req.method'],
         },
         spanName: (ctx) => `${ctx.params.req.method} ${ctx.params.req.url}`,
-      },
+      } as any,
       timeout: 0,
       handler(ctx) {
         const req = ctx.params.req;

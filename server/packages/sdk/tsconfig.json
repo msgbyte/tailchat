@@ -3,6 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types"],
     "rootDir": "./src",
     "outDir": "dist"
   },

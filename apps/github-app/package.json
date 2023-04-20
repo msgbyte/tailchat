@@ -30,7 +30,7 @@
     "@types/body-parser": "^1.19.2",
     "@types/jest": "27.5.2",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.13.0",
     "jest": "27.5.1",
     "nock": "^13.0.5",
     "nodemon": "^2.0.18",
