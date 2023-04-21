@@ -5,13 +5,33 @@ title: 开始开发插件
 
 ## 认识 MiniStar
 
-`MiniStar` 是一套完整的微内核架构开发工具链，`tailchat`的插件架构就是基于 `MiniStar` 进行开发。
+`MiniStar` 是一套完整的微内核架构开发工具链，`Tailchat`的插件架构就是基于 `MiniStar` 进行开发。
 
 关于更多的 `MiniStar` 相关问题可以查看 `MiniStar` 的官方文档: [https://ministar.moonrailgun.com/](https://ministar.moonrailgun.com/)
 
-## 创建一个基础项目
+## 创建一个基本项目
 
-首先创建一个基本的 npm 项目, 并全局安装 `MiniStar`
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="start">
+  <TabItem value="cli" label="使用命令行工具快速创建" default>
+
+移动到项目目录下(可以是自定义项目):
+
+```bash
+tailchat create
+```
+
+根据实际情况选择模板
+
+![](/img/tutorial/plugin/1.png)
+
+  </TabItem>
+  <TabItem value="ministar" label="使用原生ministar创建插件项目" default>
+
+
+创建一个基本的 npm 项目, 并全局安装 `MiniStar`
 
 ```bash
 npm install --global mini-star
@@ -27,6 +47,12 @@ npm install --global mini-star
 > 插件名: `com.msgbyte.webview`
 >
 > 注册内容: `com.msgbyte.webview/grouppanel`
+
+
+  </TabItem>
+</Tabs>
+
+
 
 ## 安装插件
 

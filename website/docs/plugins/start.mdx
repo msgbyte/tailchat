@@ -5,11 +5,32 @@ title: Start developing plugins
 
 ## Learn MiniStar
 
-`MiniStar` is a complete microkernel architecture development toolchain, and the plugin architecture of `tailchat` is developed based on `MiniStar`.
+`MiniStar` is a complete microkernel architecture development toolchain, and the plugin architecture of `Tailchat` is developed based on `MiniStar`.
 
 Learn more about `MiniStar`, you can check the official documentation of `MiniStar`: [https://ministar.moonrailgun.com/](https://ministar.moonrailgun.com/)
 
 ## Create a base project
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="start">
+  <TabItem value="cli" label="Use the cli to quick start" default>
+
+Move to the project directory (can be a custom project):
+
+```bash
+tailchat create
+```
+
+Choose the template according to the actual situation
+
+![](/img/tutorial/plugin/1.png)
+
+  </TabItem>
+  <TabItem value="ministar" label="Use the native ministar to create a plugin project" default>
+
 
 First, create a basic npm project and install `MiniStar` globally
 
@@ -28,6 +49,9 @@ Execute: `ministar buildPlugin` in the project to compile the plugin
 > Plugin name: `com.msgbyte.webview`
 >
 > Registration content: `com.msgbyte.webview/grouppanel`
+
+  </TabItem>
+</Tabs>
 
 ## Install Plugin
 
