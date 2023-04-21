@@ -1,4 +1,4 @@
-import { TcService, TcDbService } from 'tailchat-server-sdk';
+import { TcService, TcDbService, InboxStruct, call } from 'tailchat-server-sdk';
 import type {
   WXPusherUserDocument,
   WXPusherUserModel,
@@ -40,6 +40,29 @@ class WxpusherService extends TcService {
       );
       return;
     }
+
+    this.registerEventListener(
+      'chat.inbox.append',
+      async (inboxItem: InboxStruct, ctx) => {
+        if (inboxItem.type === 'message') {
+          const userId = inboxItem.userId;
+          const message = inboxItem.payload;
+
+          let title = 'new';
+          if (message.groupId) {
+            const groupInfo = await call(ctx).getGroupInfo(message.groupId);
+            title = groupInfo.name;
+          }
+          const content = message.messagePlainContent ?? message.messageSnippet; // 优先使用去节点的内容
+
+          try {
+            await this.sendMessage(userId, [title, content].join('\n'));
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      }
+    );
 
     this.registerAction('getWXPusherUserId', this.getWXPusherUserId);
     this.registerAction('createQRCode', this.createQRCode);

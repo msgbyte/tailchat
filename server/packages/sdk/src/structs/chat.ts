@@ -80,6 +80,7 @@ export interface MessageInboxItem extends BasicInboxItem {
     converseId: string;
     messageId: string;
     messageSnippet: string;
+    messagePlainContent?: string;
   };
 }
 

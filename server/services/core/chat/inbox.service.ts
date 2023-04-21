@@ -40,6 +40,7 @@ class InboxService extends TcService {
                     converseId: payload.converseId,
                     messageId: payload.messageId,
                     messageSnippet: payload.content,
+                    messagePlainContent: payload.plain,
                   },
                 });
               })

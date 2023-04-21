@@ -28,6 +28,11 @@ interface InboxMessage {
    * 消息片段，用于消息的预览/发送通知
    */
   messageSnippet: string;
+
+  /**
+   * 消息去除富文本标记的原始内容，用于推送
+   */
+  messagePlainContent: string;
 }
 
 /**
