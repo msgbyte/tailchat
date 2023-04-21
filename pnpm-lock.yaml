@@ -1942,6 +1942,12 @@ importers:
       mini-star:
         specifier: '*'
         version: 1.3.1
+      normalize-path:
+        specifier: ^3.0.0
+        version: 3.0.0
+      rollup-plugin-copy:
+        specifier: ^3.4.0
+        version: 3.4.0
 
   server/plugins/com.msgbyte.wxpusher/web/plugins/com.msgbyte.wxpusher:
     devDependencies:
@@ -13506,7 +13512,7 @@ packages:
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 15.14.9
+      '@types/node': 18.15.12
 
   /@types/content-disposition@0.5.5:
     resolution: {integrity: sha512-v6LCdKfK6BwcqMo+wYW05rLS12S0ZO0Fl4w1h4aaZMD7bqT3gVUns6FvLJKGZHQmYn3SX55JWGpziwJRwVgutA==}
@@ -22079,7 +22085,7 @@ packages:
     peerDependencies:
       glob: '*'
     dependencies:
-      '@types/glob': 8.0.0
+      '@types/glob': 8.1.0
       glob: 7.2.3
     dev: true
 
@@ -22226,7 +22232,7 @@ packages:
       dir-glob: 3.0.1
       fast-glob: 3.2.12
       glob: 7.2.3
-      ignore: 5.2.1
+      ignore: 5.2.4
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -23302,11 +23308,6 @@ packages:
 
   /ignore@4.0.6:
     resolution: {integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==}
-    engines: {node: '>= 4'}
-    dev: true
-
-  /ignore@5.2.1:
-    resolution: {integrity: sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==}
     engines: {node: '>= 4'}
     dev: true
 

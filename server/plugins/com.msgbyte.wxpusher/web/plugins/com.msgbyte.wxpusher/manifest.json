@@ -2,6 +2,7 @@
   "label": "wxpusher",
   "name": "com.msgbyte.wxpusher",
   "url": "{BACKEND}/plugins/com.msgbyte.wxpusher/index.js",
+  "icon": "{BACKEND}/plugins/com.msgbyte.wxpusher/assets/icon.png",
   "version": "0.0.0",
   "author": "moonrailgun",
   "description": "Add support for wxpusher to notify user",

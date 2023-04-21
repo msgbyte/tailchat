@@ -51,7 +51,7 @@ class WxpusherService extends TcService {
           let title = 'new';
           if (message.groupId) {
             const groupInfo = await call(ctx).getGroupInfo(message.groupId);
-            title = groupInfo.name;
+            title = `来自群组: ${groupInfo.name}`; // 因为wxpusher插件仅适用于中国大陆，因此仅需要中文即可
           }
           const content = message.messagePlainContent ?? message.messageSnippet; // 优先使用去节点的内容
 
