@@ -42,5 +42,13 @@
   "sidebar.tutorialSidebar.category.Application Deployment": {
     "message": "应用部署",
     "description": "The label for category Application Deployment in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Plugin Document": {
+    "message": "插件文档",
+    "description": "The label for category Plugin Document in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Guide": {
+    "message": "指南",
+    "description": "The label for category Guide in sidebar tutorialSidebar"
   }
 }
