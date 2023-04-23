@@ -15,7 +15,7 @@ export const DocumentView: React.FC<DocumentViewProps> = React.memo((props) => {
 
   if (documentUrl.endsWith('.md')) {
     return <DocumentMarkdownRender url={documentUrl} />;
-  } else if (documentUrl.endsWith('.html')) {
+  } else if (documentUrl.endsWith('.html') || documentUrl.startsWith('http')) {
     return <iframe src={documentUrl} />;
   } else {
     return <Problem text={t('不支持渲染的文档链接')} />;
