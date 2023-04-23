@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { createPluginRequest, useAsync } from '@capital/common';
 import { LoadingSpinner, ErrorView } from '@capital/component';
 import { Translate } from './translate';
