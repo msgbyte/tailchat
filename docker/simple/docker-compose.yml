@@ -1,0 +1,81 @@
+version: "3.3"
+
+services:
+  tailchat:
+    build:
+      context: ../../
+    image: tailchat
+    restart: unless-stopped
+    env_file: ../../docker-compose.env
+    environment:
+      SERVICEDIR: plugins,services
+      PORT: 3000
+      OPENAPI_PORT: 3003
+      OPENAPI_UNDER_PROXY: "true"
+    depends_on:
+      - mongo
+      - redis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
+      - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
+      - "traefik.http.routers.openapi-oidc.rule=PathPrefix(`/open`)"
+      - "traefik.http.services.openapi-oidc.loadbalancer.server.port=3003"
+    networks:
+      - internal
+
+  # Database
+  mongo:
+    image: mongo:4
+    restart: on-failure
+    volumes:
+      - data:/data/db
+    networks:
+      - internal
+
+  # Data cache and Transporter
+  redis:
+    image: redis:alpine
+    restart: on-failure
+    networks:
+      - internal
+
+  # Persist Storage
+  minio:
+    image: minio/minio
+    restart: on-failure
+    networks:
+      - internal
+    environment:
+      MINIO_ROOT_USER: tailchat
+      MINIO_ROOT_PASSWORD: com.msgbyte.tailchat
+    volumes:
+      - storage:/data
+    command: minio server /data --console-address ":9001"
+
+  # Router
+  traefik:
+    image: traefik:v2.1
+    restart: unless-stopped
+    command:
+      - "--api.insecure=true" # Don't do that in production!
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.forwardedHeaders.insecure" # Not good
+    ports:
+      - 11000:80
+      - 127.0.0.1:11001:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal
+      - default
+
+networks:
+  internal:
+    name: tailchat-internal
+
+volumes:
+  data:
+  storage:

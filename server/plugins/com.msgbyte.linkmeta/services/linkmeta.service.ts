@@ -53,9 +53,9 @@ class LinkmetaService extends TcService {
       // 转存图片
       if (Array.isArray(data.images) && data.images.length > 0) {
         try {
-          const { url } = await ctx.call('file.saveFileWithUrl', {
+          const { url } = (await ctx.call('file.saveFileWithUrl', {
             fileUrl: data.images[0],
-          });
+          })) as { url: string };
           data.images[0] = url;
         } catch (e) {}
       }
