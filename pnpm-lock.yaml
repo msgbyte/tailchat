@@ -1542,25 +1542,64 @@ importers:
 
   server/admin-next:
     dependencies:
+      '@fastify/busboy':
+        specifier: ^1.1.0
+        version: 1.1.0
+      body-parser:
+        specifier: ^1.20.1
+        version: 1.20.1
+      compression:
+        specifier: ^1.7.4
+        version: 1.7.4
       express:
         specifier: ^4.18.2
         version: 4.18.2
+      express-mongoose-ra-json-server:
+        specifier: ^0.1.0
+        version: 0.1.0(express@4.18.2)(mongoose@6.1.1)
+      jsonwebtoken:
+        specifier: ^8.5.1
+        version: 8.5.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      md5:
+        specifier: ^2.3.0
+        version: 2.3.0
+      morgan:
+        specifier: ^1.10.0
+        version: 1.10.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      tailchat-server-sdk:
+        specifier: workspace:^
+        version: link:../packages/sdk
       tushan:
-        specifier: ^0.2.1
-        version: 0.2.1(react-is@18.2.0)(ts-node@10.9.1)
+        specifier: ^0.2.2
+        version: 0.2.2(ts-node@10.9.1)
       vite-express:
         specifier: ^0.5.4
         version: 0.5.4(express@4.18.2)(vite@4.2.0)
     devDependencies:
+      '@types/body-parser':
+        specifier: ^1.19.2
+        version: 1.19.2
+      '@types/compression':
+        specifier: ^1.7.2
+        version: 1.7.2
       '@types/express':
         specifier: ^4.17.15
         version: 4.17.15
+      '@types/md5':
+        specifier: ^2.3.2
+        version: 2.3.2
+      '@types/morgan':
+        specifier: ^1.9.4
+        version: 1.9.4
       '@types/react':
         specifier: 18.0.20
         version: 18.0.20
@@ -7062,7 +7101,7 @@ packages:
       '@jest/test-result': 27.5.1
       '@jest/transform': 27.5.1
       '@jest/types': 27.5.1
-      '@types/node': 18.15.11
+      '@types/node': 18.15.12
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.8.1
@@ -12108,7 +12147,7 @@ packages:
       mongoose: 6.0.15
       reflect-metadata: 0.1.13
       semver: 7.3.8
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@typegoose/typegoose@9.3.1(mongoose@6.1.1):
@@ -12641,7 +12680,6 @@ packages:
 
   /@types/md5@2.3.2:
     resolution: {integrity: sha512-v+JFDu96+UYJ3/UWzB0mEglIS//MZXgRaJ4ubUPwOM0gvLc/kcQ3TWNYwENEK7/EcXGQVrW8h/XqednSjBd/Og==}
-    dev: false
 
   /@types/mdast@3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -12812,7 +12850,7 @@ packages:
   /@types/pino@6.3.12:
     resolution: {integrity: sha512-dsLRTq8/4UtVSpJgl9aeqHvbh6pzdmjYD3C092SYgLD2TyoCqHpTJk6vp8DvCTGGc7iowZ2MoiYiVUUCcu7muw==}
     dependencies:
-      '@types/node': 18.15.11
+      '@types/node': 18.15.12
       '@types/pino-pretty': 4.7.5
       '@types/pino-std-serializers': 2.4.1
       sonic-boom: 2.8.0
@@ -19286,6 +19324,17 @@ packages:
       mongoose: 6.0.15
     dev: false
 
+  /express-mongoose-ra-json-server@0.1.0(express@4.18.2)(mongoose@6.1.1):
+    resolution: {integrity: sha512-y/Z5zb3RWVsCLgof8MMWMmpyAe2ZUEy6sYqczELOqaCr0cChbI9Y1VNr5DcbwEjqWmEIoU9aqcsURoUse8r/gw==}
+    peerDependencies:
+      express: ^4.0.0 || ^3.0.0
+      mongoose: ^6.0.0 || ^5.0.0
+    dependencies:
+      escape-string-regexp: 4.0.0
+      express: 4.18.2
+      mongoose: 6.1.1
+    dev: false
+
   /express@4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -23298,7 +23347,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.5.1
-      '@types/node': 18.15.11
+      '@types/node': 18.15.12
       chalk: 4.1.2
       ci-info: 3.8.0
       graceful-fs: 4.2.10
@@ -34261,10 +34310,6 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
-  /tslib@2.4.1:
-    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-    dev: false
-
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
 
@@ -34302,8 +34347,8 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.2.1(react-is@18.2.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-ZLbG1yu6q/Dv7hXoSCjaK/SspsNxew2wx9Y9WUM5uPQ5odL+uVr9N7N4pZ536Sejat2dvm19/QPTSIXn8RHT0g==}
+  /tushan@0.2.2(ts-node@10.9.1):
+    resolution: {integrity: sha512-7Nxw5Ru9kQ8XyPZDgeS0CLRd0cbMs4INDgDt9kSUvqphnFdp7bMrG9FQGh+2RNYG65JIDZGhsR83Uv9wg2Esrg==}
     dependencies:
       '@arco-design/web-react': 2.47.1(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -34320,7 +34365,7 @@ packages:
       qs: 6.11.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-fastify-form: 1.0.12(react@18.2.0)
+      react-is: 18.2.0
       react-router: 6.8.1(react@18.2.0)
       react-router-dom: 6.8.1(react-dom@18.2.0)(react@18.2.0)
       styled-components: 5.3.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -34329,7 +34374,6 @@ packages:
       zustand: 4.3.6(immer@9.0.21)(react@18.2.0)
     transitivePeerDependencies:
       - debug
-      - react-is
       - react-native
       - ts-node
     dev: false

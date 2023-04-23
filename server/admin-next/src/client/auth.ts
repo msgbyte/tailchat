@@ -1,33 +1,66 @@
-import { AuthProvider } from 'tushan';
+import type { AuthProvider } from 'tushan';
+
+export const authStorageKey = 'tailchat:admin:auth';
 
 export const authProvider: AuthProvider = {
   login: ({ username, password }) => {
-    if (username !== 'tushan' || password !== 'tushan') {
-      return Promise.reject();
-    }
+    const request = new Request('/admin/api/login', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    });
 
-    localStorage.setItem('username', username);
-    return Promise.resolve();
+    return fetch(request)
+      .then((response) => {
+        return response.json();
+      })
+      .then((auth) => {
+        console.log(auth);
+        localStorage.setItem(authStorageKey, JSON.stringify(auth));
+      })
+      .catch(() => {
+        throw new Error('Login Failed');
+      });
   },
   logout: () => {
-    localStorage.removeItem('username');
+    localStorage.removeItem(authStorageKey);
     return Promise.resolve();
   },
-  checkAuth: () =>
-    localStorage.getItem('username') ? Promise.resolve() : Promise.reject(),
+  checkAuth: () => {
+    const auth = localStorage.getItem(authStorageKey);
+    if (auth) {
+      try {
+        const obj = JSON.parse(auth);
+        if (obj.expiredAt && Date.now() < obj.expiredAt) {
+          return Promise.resolve();
+        }
+      } catch (err) {}
+    }
+
+    return Promise.reject();
+  },
   checkError: (error) => {
     const status = error.status;
     if (status === 401 || status === 403) {
-      localStorage.removeItem('username');
+      localStorage.removeItem(authStorageKey);
       return Promise.reject();
     }
 
+    // other error code (404, 500, etc): no need to log out
     return Promise.resolve();
   },
-  getIdentity: () =>
-    Promise.resolve({
-      id: '0',
-      fullName: 'Admin',
-    }),
+  getIdentity: () => {
+    const { username } = JSON.parse(
+      localStorage.getItem(authStorageKey) ?? '{}'
+    );
+    if (!username) {
+      return Promise.reject();
+    }
+
+    return Promise.resolve({
+      id: username,
+      fullName: username,
+    });
+  },
   getPermissions: () => Promise.resolve(''),
 };
