@@ -266,7 +266,7 @@ export const ModalWrapper: React.FC<
 
   return (
     <div
-      className={clsx('p-4', props.className)}
+      className={clsx('tc-modal', 'p-4', props.className)}
       style={{ minWidth: isMobile ? 290 : 420, ...props.style }}
     >
       {title}
