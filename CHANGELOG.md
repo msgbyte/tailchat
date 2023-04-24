@@ -1,5 +1,39 @@
 
 
+# [1.7.0](https://github.com/msgbyte/tailchat/compare/v1.6.8...v1.7.0) (2023-04-24)
+
+
+### Bug Fixes
+
+* fix plugin manifest validator checker not allowed i18n ([b9c829d](https://github.com/msgbyte/tailchat/commit/b9c829d024f5dcc9cd68afcfc19742df86ee9538))
+* fix the problem that the version of react-query is not uniform ([1d5c061](https://github.com/msgbyte/tailchat/commit/1d5c061f0ce94f4435751e3f75e5db293dd5c038))
+
+
+### Features
+
+* add common service available check ([0cb61bc](https://github.com/msgbyte/tailchat/commit/0cb61bcf85d120a53184a85755834f00316bca22))
+* add fe ui in wxpusher plugin ([44595b3](https://github.com/msgbyte/tailchat/commit/44595b351f9888709958e979f983de630da95571))
+* add markdown editor into panel ([694a62c](https://github.com/msgbyte/tailchat/commit/694a62cd5aba9b6f2a83c3880ef622fcb5a56849))
+* add markdown gfm support and add markdown editor ([9f24bb1](https://github.com/msgbyte/tailchat/commit/9f24bb1de0e3294d84cca0291312ecc60d2738ea))
+* add more badge ([d0176b0](https://github.com/msgbyte/tailchat/commit/d0176b03138fd86ba22f995a7c291ddd824917ab))
+* add plain text with send text message ([1fa1293](https://github.com/msgbyte/tailchat/commit/1fa1293d1a3c8f43a758a30bd25bed369e77cdee))
+* add plugin com.msgbyte.wxpusher ([32de5b1](https://github.com/msgbyte/tailchat/commit/32de5b17e5e895b5388c0a135a165c46355f1e8a))
+* add url document support for http protocol ([6edb013](https://github.com/msgbyte/tailchat/commit/6edb013af79d4534f4374088c52ee854da3cbfa2))
+* add wxpusher message push ([1c09b17](https://github.com/msgbyte/tailchat/commit/1c09b17211189b4f0992941fe149095b33648475))
+* append openapi and integration plugin into registry ([c370347](https://github.com/msgbyte/tailchat/commit/c370347cf47b4c92c9e4b44c47f6a2fce6295bc2))
+* **getui:** add requestId record with single push ([4a068ee](https://github.com/msgbyte/tailchat/commit/4a068ee3d5e720d8bf0a43e14f1838210e90af57))
+* hidden github icon from markdown editor ([f25eea9](https://github.com/msgbyte/tailchat/commit/f25eea90ebad981e68b169738db3e8d17966d99a))
+* **mobile:** add cid in entry view ([781d413](https://github.com/msgbyte/tailchat/commit/781d4135273319626fd5bb93703b4204a029ace9))
+* **mobile:** add com.huawei.agconnect:agconnect-core in huawei ([4192d35](https://github.com/msgbyte/tailchat/commit/4192d35234c4f77d7377f97c9ab6dd07418a227f))
+
+
+### Performance Improvements
+
+* add ErrorBoundary for routes ([f426d92](https://github.com/msgbyte/tailchat/commit/f426d92a9f486784ec943f2f096a6b2091d82e6e))
+* beautify the visual performance of scroll bars caused by too many groups ([85d501d](https://github.com/msgbyte/tailchat/commit/85d501dae5bb2db6fa3cce7ac5d897c94362f956))
+* optimize the rendering animation and layer sequence of withKeepAliveOverlay ([f099307](https://github.com/msgbyte/tailchat/commit/f09930796bb67544fc9809bc0cefc0a929bdb69e))
+* perf mobile view display in pagecontent ([add116c](https://github.com/msgbyte/tailchat/commit/add116cffc6e7b86da9b3ed1b1f77f381e394f38))
+
 ## [1.6.8](https://github.com/msgbyte/tailchat/compare/v1.6.7...v1.6.8) (2023-04-02)
 
 
