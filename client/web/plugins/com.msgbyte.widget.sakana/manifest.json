@@ -1,0 +1,9 @@
+{
+  "label": "sakana-widget",
+  "name": "com.msgbyte.widget.sakana",
+  "url": "/plugins/com.msgbyte.widget.sakana/index.js",
+  "icon": "/plugins/com.msgbyte.widget.sakana/assets/icon.png",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add sakana widget in tailchat"
+}

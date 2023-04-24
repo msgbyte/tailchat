@@ -195,5 +195,14 @@
     "description": "Used to integrate third-party applications in groups",
     "description.zh-CN": "用于在群组中集成第三方应用",
     "requireRestart": true
+  },
+  {
+    "label": "sakana-widget",
+    "name": "com.msgbyte.widget.sakana",
+    "url": "/plugins/com.msgbyte.widget.sakana/index.js",
+    "icon": "/plugins/com.msgbyte.widget.sakana/assets/icon.png",
+    "version": "0.0.0",
+    "author": "moonrailgun",
+    "description": "Add sakana widget in tailchat"
   }
 ]
