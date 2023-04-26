@@ -90,7 +90,7 @@ services:
     restart: unless-stopped
     env_file: docker-compose.env
     environment:
-      SERVICES: openapi/app,openapi/oidc/oidc
+      SERVICES: openapi/app,openapi/bot,openapi/integration,openapi/oidc/oidc
       OPENAPI_PORT: 3003
       OPENAPI_UNDER_PROXY: "true"
     depends_on:
