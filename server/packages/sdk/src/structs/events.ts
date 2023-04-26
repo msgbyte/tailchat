@@ -11,6 +11,7 @@ export interface BuiltinEventMap {
         groupId?: string;
         converseId: string;
         messageId: string;
+        author: string;
         content: string;
         plain?: string;
         meta: MessageMetaStruct;

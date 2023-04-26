@@ -209,6 +209,7 @@ class MessageService extends TcService {
       groupId: String(groupId),
       converseId: String(converseId),
       messageId: String(message._id),
+      author: userId,
       content,
       plain,
       meta: meta ?? {},

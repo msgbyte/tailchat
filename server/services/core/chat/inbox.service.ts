@@ -39,6 +39,7 @@ class InboxService extends TcService {
                     groupId: payload.groupId,
                     converseId: payload.converseId,
                     messageId: payload.messageId,
+                    messageAuthor: payload.author,
                     messageSnippet: payload.content,
                     messagePlainContent: payload.plain,
                   },
@@ -95,7 +96,7 @@ class InboxService extends TcService {
     ctx: TcContext<{
       userId?: string;
       type: string;
-      payload: any;
+      payload: Record<string, any>;
     }>
   ) {
     const { userId = ctx.meta.userId, type, payload } = ctx.params;
