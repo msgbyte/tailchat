@@ -24,7 +24,7 @@ interface BBCodeProps {
   plainText: string;
 }
 export const BBCode: React.FC<BBCodeProps> = React.memo(({ plainText }) => {
-  const bbcodeComponent = bbcodeParser.render(preProcessText(plainText));
+  const bbcodeComponent = bbcodeParser.render(preProcessText(plainText ?? ''));
 
   return <Fragment>{bbcodeComponent}</Fragment>;
 });
