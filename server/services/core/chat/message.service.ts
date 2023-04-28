@@ -125,7 +125,7 @@ class MessageService extends TcService {
       .exec();
 
     if (!message) {
-      return new DataNotFoundError(t('没有找到消息'));
+      throw new DataNotFoundError(t('没有找到消息'));
     }
 
     const [prev, next] = await Promise.all([
