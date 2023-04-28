@@ -22,9 +22,9 @@ const Profile: React.FC = React.memo(() => {
         />
       </div>
 
-      <Divider />
+      {/* <Divider /> */}
 
-      <h2>{Translate.app.basicInfo}</h2>
+      {/* <h2>{Translate.app.basicInfo}</h2> */}
 
       {/* TODO */}
     </div>
