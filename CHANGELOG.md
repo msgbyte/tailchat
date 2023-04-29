@@ -1,5 +1,22 @@
 
 
+## [1.7.1](https://github.com/msgbyte/tailchat/compare/v1.7.0...v1.7.1) (2023-04-29)
+
+
+### Bug Fixes
+
+* fix react-router version not match problem ([b3ae79b](https://github.com/msgbyte/tailchat/commit/b3ae79bf7809a79ccfb84c07b6882b621a925138))
+* fix return error problem in message.fetchNearbyMessage ([44ec059](https://github.com/msgbyte/tailchat/commit/44ec0599e22b2541ab1cb8e2aa187b7314fbd398))
+
+
+### Features
+
+* add disableUserRegister and disableGuestLogin ([dedeaa8](https://github.com/msgbyte/tailchat/commit/dedeaa805fae4a06edc484c09ed0d998b3338cd2))
+* add message author in inbox event ([7f0568f](https://github.com/msgbyte/tailchat/commit/7f0568feed53a44bcabbe24abf781d73d9940bc4))
+* add openapi bot client ([7c65858](https://github.com/msgbyte/tailchat/commit/7c658583c23ac7019124ee4fd3aca8b92f120968))
+* add sakana widget ([d5db57d](https://github.com/msgbyte/tailchat/commit/d5db57dfdcd54168b8a05112c5701b285faa6742))
+* add stripMentionTag utils in tailchat-client-sdk ([14255b6](https://github.com/msgbyte/tailchat/commit/14255b680494c9ceee5d313f695233a8692a77d3))
+
 # [1.7.0](https://github.com/msgbyte/tailchat/compare/v1.6.8...v1.7.0) (2023-04-24)
 
 
