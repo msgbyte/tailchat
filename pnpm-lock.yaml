@@ -5,6 +5,8 @@ overrides:
   '@babel/runtime': 7.21.0
   '@types/react': 18.0.20
   webpack: 5.75.0
+  react-router: 6.11.0
+  react-router-dom: 6.11.0
 
 patchedDependencies:
   moleculer-minio@2.0.0:
@@ -540,7 +542,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -672,11 +674,11 @@ importers:
         specifier: ^4.4.7
         version: 4.4.7(react-dom@18.2.0)(react@18.2.0)
       react-router:
-        specifier: ^6.8.1
-        version: 6.8.1(react@18.2.0)
+        specifier: 6.11.0
+        version: 6.11.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.8.1
-        version: 6.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.11.0
+        version: 6.11.0(react-dom@18.2.0)(react@18.2.0)
       react-split:
         specifier: ^2.0.14
         version: 2.0.14(react@18.2.0)
@@ -1508,13 +1510,13 @@ importers:
         version: 1.10.0
       ra-data-json-server:
         specifier: ^4.7.0
-        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
+        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       ra-i18n-polyglot:
         specifier: ^4.7.0
-        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
+        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       ra-language-english:
         specifier: ^4.7.0
-        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
+        version: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1525,8 +1527,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.5.0
-        version: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.11.0
+        version: 6.11.0(react-dom@18.2.0)(react@18.2.0)
       tailchat-server-sdk:
         specifier: workspace:^0.0.14
         version: link:../packages/sdk
@@ -1796,7 +1798,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -1974,7 +1976,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.wxpusher:
     dependencies:
@@ -2374,7 +2376,6 @@ packages:
   /@babel/compat-data@7.18.13:
     resolution: {integrity: sha512-5yUzC5LqyTFp2HLmDoxGQelcdYgSpP9xsnMWBphAscOdFrHSAVbLNzWiy32sVNDqJRDiJK6klfDnAgu6PAGSHw==}
     engines: {node: '>=6.9.0'}
-    dev: true
 
   /@babel/compat-data@7.21.0:
     resolution: {integrity: sha512-gMuZsmsgxk/ENC3O/fRw5QY8A9/uxQbbCEypnLIiYYc/qVJtEV7ouxC3EllIIwNzMqAQee5tanFabWsUOutS7g==}
@@ -2515,10 +2516,10 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
-      '@babel/compat-data': 7.21.0
+      '@babel/compat-data': 7.18.13
       '@babel/core': 7.18.13
-      '@babel/helper-validator-option': 7.21.0
-      browserslist: 4.21.5
+      '@babel/helper-validator-option': 7.18.6
+      browserslist: 4.21.3
       semver: 6.3.0
 
   /@babel/helper-compilation-targets@7.18.9(@babel/core@7.21.0):
@@ -2858,7 +2859,6 @@ packages:
   /@babel/helper-validator-option@7.18.6:
     resolution: {integrity: sha512-XO7gESt5ouv/LRJdrVjkShckw6STTaB7l9BrpBaAHDeF5YZT+01PCwmR0SJHnkW6i8OwW/EVWRShfi4j2x+KQw==}
     engines: {node: '>=6.9.0'}
-    dev: true
 
   /@babel/helper-validator-option@7.21.0:
     resolution: {integrity: sha512-rmL/B8/f0mKS2baE9ZpyTcTavvEuWhTTW8amjzXNvYG4AwBsqTLikfXsEofsJEfKHf+HQVQbFOHy6o+4cnC/fQ==}
@@ -5488,9 +5488,9 @@ packages:
       react-helmet-async: 1.3.0(react-dom@17.0.2)(react@17.0.2)
       react-loadable: /@docusaurus/react-loadable@5.5.2(react@17.0.2)
       react-loadable-ssr-addon-v5-slorber: 1.0.1(@docusaurus/react-loadable@5.5.2)(webpack@5.75.0)
-      react-router: 5.3.4(react@17.0.2)
-      react-router-config: 5.1.1(react-router@5.3.4)(react@17.0.2)
-      react-router-dom: 5.3.4(react@17.0.2)
+      react-router: 6.11.0(react@17.0.2)
+      react-router-config: 5.1.1(react-router@6.11.0)(react@17.0.2)
+      react-router-dom: 6.11.0(react-dom@17.0.2)(react@17.0.2)
       rtl-detect: 1.0.4
       semver: 7.3.8
       serve-handler: 6.1.5
@@ -5966,7 +5966,7 @@ packages:
       prismjs: 1.29.0
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
-      react-router-dom: 5.3.4(react@17.0.2)
+      react-router-dom: 6.11.0(react-dom@17.0.2)(react@17.0.2)
       rtlcss: 3.5.0
       tslib: 2.5.0
       utility-types: 3.10.0
@@ -9897,15 +9897,15 @@ packages:
       '@remix-run/router': 1.1.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+      react-router-dom: 6.11.0(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@remix-run/router@1.1.0:
     resolution: {integrity: sha512-rGl+jH/7x1KBCQScz9p54p0dtPLNeKGb3e0wD2H5/oZj41bwQUnXdzbj2TbUAFhvD7cp9EyEQA4dEgpUFa1O7Q==}
     engines: {node: '>=14'}
 
-  /@remix-run/router@1.3.2:
-    resolution: {integrity: sha512-t54ONhl/h75X94SWsHGQ4G/ZrCEguKSRQr7DrjTciJXW0YU1QhlwYeycvK5JgkzlxmvrK7wq1NB/PLtHxoiDcA==}
+  /@remix-run/router@1.6.0:
+    resolution: {integrity: sha512-N13NRw3T2+6Xi9J//3CGLsK2OqC8NMme3d/YX+nh05K9YHWGcv8DycHJrqGScSP4T75o8IN6nqIMhVFU8ohg8w==}
     engines: {node: '>=14'}
     dev: false
 
@@ -15216,7 +15216,6 @@ packages:
       electron-to-chromium: 1.4.310
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10(browserslist@4.21.3)
-    dev: true
 
   /browserslist@4.21.5:
     resolution: {integrity: sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==}
@@ -21274,17 +21273,6 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
-  /history@4.10.1:
-    resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
-    dependencies:
-      '@babel/runtime': 7.21.0
-      loose-envify: 1.4.0
-      resolve-pathname: 3.0.0
-      tiny-invariant: 1.3.1
-      tiny-warning: 1.0.3
-      value-equal: 1.0.1
-    dev: false
-
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
@@ -21755,10 +21743,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
+    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -22734,6 +22722,7 @@ packages:
 
   /isarray@0.0.1:
     resolution: {integrity: sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==}
+    dev: true
 
   /isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -22966,7 +22955,7 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1(@types/node@18.16.1)(typescript@4.9.5)
+      ts-node: 10.9.1(@types/node@18.15.12)(typescript@4.9.5)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -27390,12 +27379,6 @@ packages:
   /path-to-regexp@0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
 
-  /path-to-regexp@1.8.0:
-    resolution: {integrity: sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==}
-    dependencies:
-      isarray: 0.0.1
-    dev: false
-
   /path-to-regexp@2.2.1:
     resolution: {integrity: sha512-gu9bD6Ta5bwGrrU8muHzVOBFFREpp2iRkVfhBJahwJ6p6Xw20SjT0MxLnwkjOibQmGSYhiUnf2FLe7k+jcFmGQ==}
     dev: false
@@ -29030,7 +29013,7 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
 
-  /ra-core@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0):
+  /ra-core@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-BqryOzTwuGd5Qn7Q5JLnipgWbhuNbIbK5Y9Kq0BQTNJTr8E8KxwgxduOyQatR4j8Gx8klrZrzZkQDGKlE4287g==}
     peerDependencies:
       history: ^5.1.0
@@ -29054,47 +29037,17 @@ packages:
       react-hook-form: 7.41.5(react@18.2.0)
       react-is: 17.0.2
       react-query: 3.39.2(react-dom@18.2.0)(react@18.2.0)
-      react-router: 6.5.0(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+      react-router: 6.11.0(react@18.2.0)
+      react-router-dom: 6.11.0(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react-native
     dev: false
 
-  /ra-core@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0):
-    resolution: {integrity: sha512-BqryOzTwuGd5Qn7Q5JLnipgWbhuNbIbK5Y9Kq0BQTNJTr8E8KxwgxduOyQatR4j8Gx8klrZrzZkQDGKlE4287g==}
-    peerDependencies:
-      history: ^5.1.0
-      react: ^16.9.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-      react-hook-form: ^7.40.0
-      react-router: ^6.1.0
-      react-router-dom: ^6.1.0
-    dependencies:
-      clsx: 1.2.1
-      date-fns: 2.29.3
-      eventemitter3: 4.0.7
-      history: 5.3.0
-      inflection: 1.12.0
-      jsonexport: 3.2.0
-      lodash: 4.17.21
-      prop-types: 15.8.1
-      query-string: 7.1.3
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-hook-form: 7.41.5(react@18.2.0)
-      react-is: 17.0.2
-      react-query: 3.39.2(react-dom@18.2.0)(react@18.2.0)
-      react-router: 6.8.1(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - react-native
-    dev: false
-
-  /ra-data-json-server@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0):
+  /ra-data-json-server@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-jUNhmpHPEgiG9UjSXI3eFDPNoAJYzyKaAx2Q9c2xcxIpiErBASvsQDnBrEgAD8OIlhpnhqHi4dCp3r399hR+Zg==}
     dependencies:
       query-string: 7.1.3
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
+      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
     transitivePeerDependencies:
       - history
       - react
@@ -29105,11 +29058,11 @@ packages:
       - react-router-dom
     dev: false
 
-  /ra-i18n-polyglot@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0):
+  /ra-i18n-polyglot@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-PUuG5i6ZYec62qvqrrcoI+ySEP4OXmy9XiqtWG4uNRMCI9Ib0lZiqfQQXR7MRIY3Wtv4CUMGGT2tjwxx5EL4FQ==}
     dependencies:
       node-polyglot: 2.4.2
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0)
+      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
     transitivePeerDependencies:
       - history
       - react
@@ -29120,25 +29073,10 @@ packages:
       - react-router-dom
     dev: false
 
-  /ra-i18n-polyglot@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0):
-    resolution: {integrity: sha512-PUuG5i6ZYec62qvqrrcoI+ySEP4OXmy9XiqtWG4uNRMCI9Ib0lZiqfQQXR7MRIY3Wtv4CUMGGT2tjwxx5EL4FQ==}
-    dependencies:
-      node-polyglot: 2.4.2
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
-    transitivePeerDependencies:
-      - history
-      - react
-      - react-dom
-      - react-hook-form
-      - react-native
-      - react-router
-      - react-router-dom
-    dev: false
-
-  /ra-language-english@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0):
+  /ra-language-english@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-vRu43vyULdWXzjyTBJP/lF+7WOJmZnhG/q+muY74o+bHsb4ZJZhdY1j2ZdLUtaLgtD6DKz/N4AoTTwgLK7gFGg==}
     dependencies:
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0)
+      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
     transitivePeerDependencies:
       - history
       - react
@@ -29149,21 +29087,7 @@ packages:
       - react-router-dom
     dev: false
 
-  /ra-language-english@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0):
-    resolution: {integrity: sha512-vRu43vyULdWXzjyTBJP/lF+7WOJmZnhG/q+muY74o+bHsb4ZJZhdY1j2ZdLUtaLgtD6DKz/N4AoTTwgLK7gFGg==}
-    dependencies:
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
-    transitivePeerDependencies:
-      - history
-      - react
-      - react-dom
-      - react-hook-form
-      - react-native
-      - react-router
-      - react-router-dom
-    dev: false
-
-  /ra-ui-materialui@4.7.1(@mui/icons-material@5.11.0)(@mui/material@5.11.3)(ra-core@4.7.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0):
+  /ra-ui-materialui@4.7.1(@mui/icons-material@5.11.0)(@mui/material@5.11.3)(ra-core@4.7.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-2Avn+w/wcW5Y6zyEbHMOhabZQBLlLWdJarTXmV7KxHqUcEvJcR7CqcrBwmIx+etqkjF3t9VHeb+9tOn4G4Zv8A==}
     peerDependencies:
       '@mui/icons-material': ^5.0.1
@@ -29185,15 +29109,15 @@ packages:
       lodash: 4.17.21
       prop-types: 15.8.1
       query-string: 7.1.3
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
+      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-dropzone: 12.1.0(react@18.2.0)
       react-error-boundary: 3.1.4(react@18.2.0)
       react-hook-form: 7.41.5(react@18.2.0)
       react-query: 3.39.2(react-dom@18.2.0)(react@18.2.0)
-      react-router: 6.5.0(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+      react-router: 6.11.0(react@18.2.0)
+      react-router-dom: 6.11.0(react-dom@18.2.0)(react@18.2.0)
       react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react-native
@@ -29814,15 +29738,15 @@ packages:
       '@mui/icons-material': 5.11.0(@mui/material@5.11.3)(@types/react@18.0.20)(react@18.2.0)
       '@mui/material': 5.11.3(@emotion/react@11.10.4)(@emotion/styled@11.10.4)(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       history: 5.3.0
-      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.8.1)(react@18.2.0)
-      ra-i18n-polyglot: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0)
-      ra-language-english: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0)
-      ra-ui-materialui: 4.7.1(@mui/icons-material@5.11.0)(@mui/material@5.11.3)(ra-core@4.7.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.5.0)(react-router@6.5.0)(react@18.2.0)
+      ra-core: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
+      ra-i18n-polyglot: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
+      ra-language-english: 4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
+      ra-ui-materialui: 4.7.1(@mui/icons-material@5.11.0)(@mui/material@5.11.3)(ra-core@4.7.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-hook-form: 7.41.5(react@18.2.0)
-      react-router: 6.5.0(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+      react-router: 6.11.0(react@18.2.0)
+      react-router-dom: 6.11.0(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
@@ -30332,7 +30256,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-config@5.1.1(react-router@5.3.4)(react@17.0.2):
+  /react-router-config@5.1.1(react-router@6.11.0)(react@17.0.2):
     resolution: {integrity: sha512-DuanZjaD8mQp1ppHjgnnUnyOlqYXZVjnov/JzFhjLEwd3Z4dYjMSnqrEzzGThH47vpCOqPPwJM2FtthLeJ8Pbg==}
     peerDependencies:
       react: '>=15'
@@ -30340,84 +30264,52 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.0
       react: 17.0.2
-      react-router: 5.3.4(react@17.0.2)
+      react-router: 6.11.0(react@17.0.2)
     dev: false
 
-  /react-router-dom@5.3.4(react@17.0.2):
-    resolution: {integrity: sha512-m4EqFMHv/Ih4kpcBCONHbkT68KoAeHN4p3lAGoNryfHi0dMy0kCzEZakiKRsvg5wHZ/JLrLW8o8KomWiz/qbYQ==}
-    peerDependencies:
-      react: '>=15'
-    dependencies:
-      '@babel/runtime': 7.21.0
-      history: 4.10.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 17.0.2
-      react-router: 5.3.4(react@17.0.2)
-      tiny-invariant: 1.3.1
-      tiny-warning: 1.0.3
-    dev: false
-
-  /react-router-dom@6.5.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-/XzRc5fq80gW1ctiIGilyKFZC/j4kfe75uivMsTChFbkvrK4ZrF3P3cGIc1f/SSkQ4JiJozPrf+AwUHHWVehVg==}
+  /react-router-dom@6.11.0(react-dom@17.0.2)(react@17.0.2):
+    resolution: {integrity: sha512-Q3mK1c/CYoF++J6ZINz7EZzwlgSOZK/kc7lxIA7PhtWhKju4KfF1WHqlx0kVCIFJAWztuYVpXZeljEbds8z4Og==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.1.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-router: 6.5.0(react@18.2.0)
+      '@remix-run/router': 1.6.0
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
+      react-router: 6.11.0(react@17.0.2)
     dev: false
 
-  /react-router-dom@6.8.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-67EXNfkQgf34P7+PSb6VlBuaacGhkKn3kpE51+P6zYSG2kiRoumXEL6e27zTa9+PGF2MNXbgIUHTVlleLbIcHQ==}
+  /react-router-dom@6.11.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Q3mK1c/CYoF++J6ZINz7EZzwlgSOZK/kc7lxIA7PhtWhKju4KfF1WHqlx0kVCIFJAWztuYVpXZeljEbds8z4Og==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.3.2
+      '@remix-run/router': 1.6.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-router: 6.8.1(react@18.2.0)
+      react-router: 6.11.0(react@18.2.0)
     dev: false
 
-  /react-router@5.3.4(react@17.0.2):
-    resolution: {integrity: sha512-Ys9K+ppnJah3QuaRiLxk+jDWOR1MekYQrlytiXxC1RyfbdsZkS5pvKAzCCr031xHixZwpnsYNT5xysdFHQaYsA==}
+  /react-router@6.11.0(react@17.0.2):
+    resolution: {integrity: sha512-hTm6KKNpj9SDG4syIWRjCU219O0RZY8RUPobCFt9p+PlF7nnkRgMoh2DieTKvw3F3Mw6zg565HGnSv8BuoY5oQ==}
+    engines: {node: '>=14'}
     peerDependencies:
-      react: '>=15'
+      react: '>=16.8'
     dependencies:
-      '@babel/runtime': 7.21.0
-      history: 4.10.1
-      hoist-non-react-statics: 3.3.2
-      loose-envify: 1.4.0
-      path-to-regexp: 1.8.0
-      prop-types: 15.8.1
+      '@remix-run/router': 1.6.0
       react: 17.0.2
-      react-is: 16.13.1
-      tiny-invariant: 1.3.1
-      tiny-warning: 1.0.3
     dev: false
 
-  /react-router@6.5.0(react@18.2.0):
-    resolution: {integrity: sha512-fqqUSU0NC0tSX0sZbyuxzuAzvGqbjiZItBQnyicWlOUmzhAU8YuLgRbaCL2hf3sJdtRy4LP/WBrWtARkMvdGPQ==}
+  /react-router@6.11.0(react@18.2.0):
+    resolution: {integrity: sha512-hTm6KKNpj9SDG4syIWRjCU219O0RZY8RUPobCFt9p+PlF7nnkRgMoh2DieTKvw3F3Mw6zg565HGnSv8BuoY5oQ==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.1.0
-      react: 18.2.0
-    dev: false
-
-  /react-router@6.8.1(react@18.2.0):
-    resolution: {integrity: sha512-Jgi8BzAJQ8MkPt8ipXnR73rnD7EmZ0HFFb7jdQU24TynGW1Ooqin2KVDN9voSC+7xhqbbCd2cjGUepb6RObnyg==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.3.2
+      '@remix-run/router': 1.6.0
       react: 18.2.0
     dev: false
 
@@ -33757,10 +33649,6 @@ packages:
     resolution: {integrity: sha512-ubFNn/t40vgIvRgQhu3jp/ouBczBube3r50JYvzGb/Am1T37hCSKVNBFlx99McaWgheQE4nmMOj82WHDrGoqDA==}
     engines: {node: '>=4'}
 
-  /tiny-invariant@1.3.1:
-    resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
-    dev: false
-
   /tiny-warning@1.0.3:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
     dev: false
@@ -34485,8 +34373,8 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
-      react-router: 6.8.1(react@18.2.0)
-      react-router-dom: 6.8.1(react-dom@18.2.0)(react@18.2.0)
+      react-router: 6.11.0(react@18.2.0)
+      react-router-dom: 6.11.0(react-dom@18.2.0)(react@18.2.0)
       styled-components: 5.3.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       tailwindcss: 3.3.1(postcss@8.4.21)(ts-node@10.9.1)
       url-regex: 5.0.0
@@ -34968,7 +34856,6 @@ packages:
       browserslist: 4.21.3
       escalade: 3.1.1
       picocolors: 1.0.0
-    dev: true
 
   /update-browserslist-db@1.0.10(browserslist@4.21.5):
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
@@ -35360,10 +35247,6 @@ packages:
     resolution: {integrity: sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==}
     engines: {node: '>= 0.10'}
     dev: true
-
-  /value-equal@1.0.1:
-    resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==}
-    dev: false
 
   /value-or-function@3.0.0:
     resolution: {integrity: sha512-jdBB2FrWvQC/pnPtIqcLsMaQgjhdb6B7tk1MMyTKapox+tQZbdRP4uLxu/JY0t7fbfDCUMnuelzEYv5GsxHhdg==}
@@ -36630,7 +36513,6 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36647,6 +36529,7 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
