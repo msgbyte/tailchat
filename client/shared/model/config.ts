@@ -25,6 +25,16 @@ export interface GlobalConfig {
    * 服务器入口背景图
    */
   serverEntryImage?: string;
+
+  /**
+   * 是否禁用注册功能
+   */
+  disableUserRegister?: boolean;
+
+  /**
+   * 是否禁用游客登录
+   */
+  disableGuestLogin?: boolean;
 }
 
 export function getGlobalConfig(): GlobalConfig {

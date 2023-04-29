@@ -76,6 +76,8 @@ class ConfigService extends TcService {
     return {
       uploadFileLimit: config.storage.limit,
       emailVerification: config.emailVerification,
+      disableUserRegister: config.feature.disableUserRegister,
+      disableGuestLogin: config.feature.disableGuestLogin,
       ...persistConfig,
     };
   }

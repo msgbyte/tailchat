@@ -394,6 +394,10 @@ class UserService extends TcService {
 
     await this.validateRegisterParams(params, t);
 
+    if (config.feature.disableUserRegister) {
+      throw new Error(t('服务器不允许新用户注册'));
+    }
+
     const nickname = params.username ?? getEmailAddress(params.email);
     const discriminator = await this.adapter.model.generateDiscriminator(
       nickname
@@ -468,6 +472,12 @@ class UserService extends TcService {
    */
   async createTemporaryUser(ctx: TcPureContext<{ nickname: string }>) {
     const nickname = ctx.params.nickname;
+    const t = ctx.meta.t;
+
+    if (config.feature.disableGuestLogin) {
+      throw new Error(t('服务器不允许游客登录'));
+    }
+
     const discriminator = await this.adapter.model.generateDiscriminator(
       nickname
     );

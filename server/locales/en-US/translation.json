@@ -19,6 +19,7 @@
   "k45c8d1bf": "Claimed user does not exist",
   "k4fd701fe": "Email does not exist",
   "k590cb8b6": "Account does not exist",
+  "k5f7a33eb": "The server does not allow guests to login",
   "k64a3c830": "User does not exist",
   "k65a070a1": "Not group admin cannot edit",
   "k674f3f65": "Email verification failed, please enter correct email OTP",
@@ -54,5 +55,6 @@
   "ke99cd649": "No access to converse information permission",
   "ke9fabda8": "Token Invalid",
   "kea5b4254": "This channel has opened a call",
+  "kebcb959": "The server does not allow new user register",
   "kef3676e1": "The invitation code has expired"
 }

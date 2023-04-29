@@ -21,4 +21,6 @@ export const SYSTEM_USERID = '000000000000000000000000';
 export const defaultGlobalConfig: GlobalConfig = {
   uploadFileLimit: 1 * 1024 * 1024,
   emailVerification: false,
+  disableUserRegister: false,
+  disableGuestLogin: false,
 };

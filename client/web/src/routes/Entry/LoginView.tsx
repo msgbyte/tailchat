@@ -50,7 +50,12 @@ export const LoginView: React.FC = React.memo(() => {
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
   const { pathname } = useLocation();
-  const serverName = useGlobalConfigStore((state) => state.serverName);
+  const { serverName, disableGuestLogin, disableUserRegister } =
+    useGlobalConfigStore((state) => ({
+      serverName: state.serverName,
+      disableGuestLogin: state.disableGuestLogin,
+      disableUserRegister: state.disableUserRegister,
+    }));
 
   useEffect(() => {
     tryAutoLogin()
@@ -132,21 +137,25 @@ export const LoginView: React.FC = React.memo(() => {
           {t('登录')}
         </PrimaryBtn>
 
-        <SecondaryBtn
-          disabled={loading}
-          onClick={() => navToView('/entry/register')}
-        >
-          {t('注册账号')}
-          <Icon icon="mdi:arrow-right" className="ml-1 inline" />
-        </SecondaryBtn>
+        {!disableUserRegister && (
+          <SecondaryBtn
+            disabled={loading}
+            onClick={() => navToView('/entry/register')}
+          >
+            {t('注册账号')}
+            <Icon icon="mdi:arrow-right" className="ml-1 inline" />
+          </SecondaryBtn>
+        )}
 
-        <SecondaryBtn
-          disabled={loading}
-          onClick={() => navToView('/entry/guest')}
-        >
-          {t('游客访问')}
-          <Icon icon="mdi:arrow-right" className="ml-1 inline" />
-        </SecondaryBtn>
+        {!disableGuestLogin && (
+          <SecondaryBtn
+            disabled={loading}
+            onClick={() => navToView('/entry/guest')}
+          >
+            {t('游客访问')}
+            <Icon icon="mdi:arrow-right" className="ml-1 inline" />
+          </SecondaryBtn>
+        )}
       </div>
 
       <div className="absolute bottom-4 left-0 space-x-2">
