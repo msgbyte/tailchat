@@ -1,0 +1,49 @@
+.downloads-page {
+  text-align: center;
+  max-width: 80rem;
+  margin: auto;
+  margin-top: 2rem;
+
+  @media (min-width: 997px) {
+    margin-top: 6rem;
+  }
+
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    @media (min-width: 997px) {
+      flex-direction: row;
+    }
+
+    .block {
+      h3 {
+        font-size: 2.25rem;
+        font-weight: 700;
+      }
+
+      .btns {
+        * + * {
+          margin-top: 0.5rem;
+        }
+
+        @media (min-width: 997px) {
+          * + * {
+            margin-top: 0;
+            margin-left: 0.5rem;
+          }
+        }
+
+
+        margin-bottom: 1rem;
+      }
+
+      .tip {
+        font-size: 0.8rem;
+        color: #666;
+      }
+    }
+  }
+}

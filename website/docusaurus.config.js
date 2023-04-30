@@ -17,6 +17,7 @@ const themeConfig = {
         label: 'Docs',
       },
       { to: '/blog', label: 'Blog', position: 'left' },
+      { to: '/downloads', label: 'Downloads', position: 'left' },
       {
         type: 'localeDropdown',
         position: 'right',
