@@ -130,7 +130,6 @@ export const PageContent: React.FC<PropsWithChildren<PageContentProps>> =
             }
           )}
           data-tc-role={props['data-tc-role']}
-          style={{ zIndex: 1 }}
         >
           <div className="tc-content-background" />
 

@@ -96,6 +96,9 @@ export const CombinedAvatar: React.FC<CombinedAvatarProps> = React.memo(
             {...item}
           />
         ))}
+
+        {items.length >= 2 && <div className="line1" />}
+        {items.length >= 3 && <div className="line2" />}
       </div>
     );
   }
