@@ -61,6 +61,9 @@ class ConfigService extends TcService {
     });
 
     this.registerAuthWhitelist(['/client']);
+    if (config.env === 'development') {
+      this.cleanActionCache('client'); // 初始化时清理缓存
+    }
   }
 
   /**
