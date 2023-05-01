@@ -13,7 +13,7 @@ export const ChatInputActionContext =
   React.createContext<ChatInputActionContextProps>(
     {} as ChatInputActionContextProps
   );
-ChatInputActionContext.displayName = 'ChatInputContext';
+ChatInputActionContext.displayName = 'ChatInputActionContext';
 
 export function useChatInputActionContext() {
   return useContext(ChatInputActionContext);

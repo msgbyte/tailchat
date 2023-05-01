@@ -68,6 +68,7 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useDebounce } from './hooks/useDebounce';
+export { useEvent } from './hooks/useEvent';
 export { useInterval } from './hooks/useInterval';
 export { useMemoizedFn } from './hooks/useMemoizedFn';
 export { useMountedState } from './hooks/useMountedState';
@@ -103,7 +104,7 @@ export {
 // model
 export * as model from './model/__all__';
 export { fetchAvailableServices } from './model/common';
-export { fetchGlobalClientConfig } from './model/config';
+export { fetchGlobalClientConfig, getGlobalConfig } from './model/config';
 export {
   createDMConverse,
   appendDMConverseMembers,

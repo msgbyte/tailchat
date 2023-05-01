@@ -1,9 +1,7 @@
-import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import {
   model,
-  showErrorToasts,
   showSuccessToasts,
   t,
   useAppDispatch,
@@ -16,13 +14,10 @@ import {
   MetaFormFieldMeta,
   metaFormFieldSchema,
   WebMetaForm,
-  FastifyFormFieldProps,
-  useFastifyFormContext,
 } from 'tailchat-design';
 import { ModalWrapper } from '../Modal';
 import { Button, Input } from 'antd';
 import _compact from 'lodash/compact';
-import { getGlobalConfig } from 'tailchat-shared/model/config';
 import { Problem } from '../Problem';
 
 interface Values {

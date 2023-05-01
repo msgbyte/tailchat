@@ -32,7 +32,15 @@ export {
   appendUrlSearch,
 } from '@/utils/url-helper';
 export { getServiceWorkerRegistration } from '@/utils/sw-helper';
-import { request, RequestConfig, useUserInfo } from 'tailchat-shared';
+import {
+  /**
+   * 注意: Tailchat 内部的request不会被导出为插件可用模块，如果需要网络请求的话请自行import axios(以作为复用依赖)
+   * 因为有内置中间件逻辑
+   */
+  request,
+  RequestConfig,
+  useUserInfo,
+} from 'tailchat-shared';
 export {
   getServiceUrl,
   getCachedUserInfo,
@@ -46,6 +54,7 @@ export {
   useAsyncFn,
   useAsyncRefresh,
   useAsyncRequest,
+  useEvent,
   uploadFile,
   showToasts,
   showSuccessToasts,

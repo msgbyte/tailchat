@@ -6,6 +6,7 @@ import {
   t,
   useAsyncFn,
   useAsyncRequest,
+  getGlobalConfig,
 } from 'tailchat-shared';
 import React, { useState } from 'react';
 import { string } from 'yup';
@@ -18,7 +19,6 @@ import { useNavToView } from './utils';
 import { EntryInput } from './components/Input';
 import { SecondaryBtn } from './components/SecondaryBtn';
 import { PrimaryBtn } from './components/PrimaryBtn';
-import { getGlobalConfig } from 'tailchat-shared/model/config';
 
 /**
  * 注册视图

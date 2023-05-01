@@ -1,5 +1,5 @@
 import React from 'react';
-import { t, useMemoizedFn } from 'tailchat-shared';
+import { t, useEvent } from 'tailchat-shared';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import { useChatInputActionContext } from './context';
@@ -10,7 +10,7 @@ import { Icon } from 'tailchat-design';
 export const ChatDropArea: React.FC = React.memo(() => {
   const actionContext = useChatInputActionContext();
 
-  const handleDrop = useMemoizedFn((files: File[]) => {
+  const handleDrop = useEvent((files: File[]) => {
     const file = files[0];
     if (!file) {
       return;

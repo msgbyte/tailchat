@@ -9,6 +9,7 @@ import {
   useAppDispatch,
   useAsyncRequest,
   userActions,
+  getGlobalConfig,
 } from 'tailchat-shared';
 import {
   createMetaFormSchema,
@@ -21,7 +22,6 @@ import {
 import { ModalWrapper } from '../Modal';
 import { Button, Input } from 'antd';
 import _compact from 'lodash/compact';
-import { getGlobalConfig } from 'tailchat-shared/model/config';
 
 interface Values {
   email: string;
