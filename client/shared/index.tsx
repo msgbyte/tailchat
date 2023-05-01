@@ -29,6 +29,10 @@ export {
 } from './contexts/ChatBoxContext';
 export { useColorScheme } from './contexts/ColorSchemeContext';
 export {
+  ConverseMessageProvider,
+  useConverseMessageContext,
+} from './contexts/ConverseMessageContext';
+export {
   GroupInfoContextProvider,
   useGroupInfoContext,
 } from './contexts/GroupInfoContext';
