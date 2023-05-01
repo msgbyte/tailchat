@@ -1,4 +1,7 @@
-import { getMessageTextDecorators } from '@/plugin/common';
+import {
+  getMessageTextDecorators,
+  pluginChatInputButtons,
+} from '@/plugin/common';
 import { isEnterHotkey } from '@/utils/hot-key';
 import React, { useCallback, useRef, useState } from 'react';
 import { ChatInputAddon } from './Addon';
@@ -89,6 +92,8 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   return (
     <ChatInputActionContext.Provider
       value={{
+        message,
+        setMessage,
         sendMsg: props.onSendMsg,
         appendMsg: handleAppendMsg,
       }}
@@ -110,6 +115,12 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
           </div>
 
           <div className="px-2 flex space-x-1">
+            {pluginChatInputButtons.map((item, i) =>
+              React.cloneElement(item.render(), {
+                key: `plugin-chatinput-btn#${i}`,
+              })
+            )}
+
             <ChatInputEmotion />
 
             {message ? (

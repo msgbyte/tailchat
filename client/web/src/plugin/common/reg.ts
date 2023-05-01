@@ -157,6 +157,12 @@ export type { ChatInputActionContextProps };
 export const [pluginChatInputActions, regChatInputAction] =
   buildRegList<ChatInputAction>();
 
+interface ChatInputButton {
+  render: () => React.ReactElement;
+}
+export const [pluginChatInputButtons, regChatInputButton] =
+  buildRegList<ChatInputButton>();
+
 export { regSocketEventListener };
 
 /**

@@ -6,6 +6,8 @@ import { useShallowObject } from 'tailchat-shared';
  * Input Actions
  */
 export interface ChatInputActionContextProps {
+  message: string;
+  setMessage: (msg: string) => void;
   sendMsg: (message: string) => void;
   appendMsg: (message: string) => void;
 }

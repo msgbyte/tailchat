@@ -1,0 +1,9 @@
+{
+  "label": "AI Assistant",
+  "name": "com.msgbyte.ai-assistant",
+  "url": "/plugins/com.msgbyte.ai-assistant/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add chatgpt into Tailchat",
+  "requireRestart": true
+}

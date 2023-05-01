@@ -13,6 +13,7 @@ export {
   notification,
   Empty,
   Popover,
+  Tag,
 } from 'antd';
 export const TextArea = Input.TextArea;
 export {
@@ -31,6 +32,8 @@ export {
 export { Link } from 'react-router-dom';
 
 export { MessageAckContainer } from '@/components/ChatBox/ChatMessageList/MessageAckContainer';
+export { BaseChatInputButton } from '@/components/ChatBox/ChatInputBox/BaseChatInputButton';
+export { useChatInputActionContext } from '@/components/ChatBox/ChatInputBox/context';
 export { GroupExtraDataPanel } from '@/components/Panel/group/GroupExtraDataPanel';
 export { Image } from '@/components/Image';
 export { IconBtn } from '@/components/IconBtn';
