@@ -12,6 +12,7 @@ export {
   Tooltip,
   notification,
   Empty,
+  Popover,
 } from 'antd';
 export const TextArea = Input.TextArea;
 export {
@@ -34,7 +35,6 @@ export { GroupExtraDataPanel } from '@/components/Panel/group/GroupExtraDataPane
 export { Image } from '@/components/Image';
 export { IconBtn } from '@/components/IconBtn';
 export { PillTabs, PillTabPane } from '@/components/PillTabs';
-export { LoadingSpinner } from '@/components/LoadingSpinner';
 export {
   FullModalField,
   DefaultFullModalInputEditorRender,
@@ -50,6 +50,7 @@ export {
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { Loading } from '@/components/Loading';
+export { LoadingSpinner } from '@/components/LoadingSpinner';
 export { LoadingOnFirst } from '@/components/LoadingOnFirst';
 export { SidebarView } from '@/components/SidebarView';
 export { GroupPanelSelector } from '@/components/GroupPanelSelector';
