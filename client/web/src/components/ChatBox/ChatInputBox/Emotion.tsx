@@ -1,41 +1,25 @@
-import { Icon } from 'tailchat-design';
-import { Popover } from 'antd';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useChatInputActionContext } from './context';
 import { EmojiPanel } from '@/components/Emoji';
+import { BaseChatInputButton } from './BaseChatInputButton';
 import './Emotion.less';
 
 export const ChatInputEmotion: React.FC = React.memo(() => {
   const actionContext = useChatInputActionContext();
   const { appendMsg } = actionContext;
 
-  const [visible, setVisible] = useState(false);
-
-  const handleSelect = useCallback(
-    async (code: string) => {
-      appendMsg(code);
-      setVisible(false);
-    },
-    [appendMsg]
-  );
-
-  const content = <EmojiPanel onSelect={handleSelect} />;
-
   return (
-    <Popover
-      open={visible}
-      onOpenChange={setVisible}
-      content={content}
-      overlayClassName="chat-message-input_action-popover"
-      showArrow={false}
-      placement="topRight"
-      trigger={['click']}
-    >
-      <Icon
-        className="text-2xl cursor-pointer"
-        icon="mdi:emoticon-happy-outline"
-      />
-    </Popover>
+    <BaseChatInputButton
+      icon="mdi:emoticon-happy-outline"
+      popoverContent={({ hidePopover }) => (
+        <EmojiPanel
+          onSelect={(code) => {
+            appendMsg(code);
+            hidePopover();
+          }}
+        />
+      )}
+    />
   );
 });
 ChatInputEmotion.displayName = 'ChatInputEmotion';
