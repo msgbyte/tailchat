@@ -32,6 +32,10 @@ const Tip = styled.div`
   margin-bottom: 4px;
 `;
 
+const Answer = styled.pre`
+  white-space: pre-wrap;
+`;
+
 const ActionButton = styled.div`
   min-width: 180px;
   padding: 4px 6px;
@@ -77,7 +81,7 @@ export const AssistantPopover: React.FC<{
           <>
             {value.result ? (
               <div>
-                <pre>{value.answer}</pre>
+                <Answer>{value.answer}</Answer>
                 <div>
                   <Tag color="green">
                     {Translate.usage}: {value.usage}ms
