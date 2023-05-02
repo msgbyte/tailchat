@@ -65,6 +65,7 @@ export {
   sendMessage,
   showMessageTime,
   joinArray,
+  useConverseMessageContext,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';

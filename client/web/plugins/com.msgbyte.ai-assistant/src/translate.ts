@@ -45,4 +45,12 @@ export const Translate = {
     'zh-CN': '应用',
     'en-US': 'Apply',
   }),
+  prompt: {
+    summaryMessages: localTrans({
+      'zh-CN':
+        '你将得到一串聊天记录，希望你能够对这些记录进行摘要。要求简明扼要，以包含列表的大纲形式输出。',
+      'en-US':
+        'You will receive a chat record and we hope you can summarize it. Please provide a concise outline format that includes a list.',
+    }),
+  },
 };

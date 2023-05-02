@@ -1,6 +1,11 @@
 import React from 'react';
 import { Translate } from './translate';
-import { useAsyncRequest } from '@capital/common';
+import {
+  useAsyncRequest,
+  useConverseMessageContext,
+  getCachedUserInfo,
+  getMessageTextDecorators,
+} from '@capital/common';
 import {
   LoadingSpinner,
   useChatInputActionContext,
@@ -14,6 +19,7 @@ import {
   improveTextPrompt,
   longerTextPrompt,
   shorterTextPrompt,
+  summaryMessagesPrompt,
   translateTextPrompt,
 } from './prompt';
 
@@ -42,6 +48,7 @@ const ActionButton = styled.div`
 export const AssistantPopover: React.FC<{
   onCompleted: () => void;
 }> = React.memo((props) => {
+  const { messages } = useConverseMessageContext();
   const { message, setMessage } = useChatInputActionContext();
   const [{ loading, value }, handleCallAI] = useAsyncRequest(
     async (question: string) => {
@@ -70,7 +77,7 @@ export const AssistantPopover: React.FC<{
           <>
             {value.result ? (
               <div>
-                <div>{value.answer}</div>
+                <pre>{value.answer}</pre>
                 <div>
                   <Tag color="green">
                     {Translate.usage}: {value.usage}ms
@@ -127,9 +134,28 @@ export const AssistantPopover: React.FC<{
         </>
       )}
 
-      {/* <ActionButton onClick={() => handleCallAI('')}>
+      <ActionButton
+        onClick={async () => {
+          const plainMessages = (
+            await Promise.all(
+              messages.map(
+                async (item) =>
+                  `${
+                    (
+                      await getCachedUserInfo(item.author)
+                    ).nickname
+                  }: ${getMessageTextDecorators().serialize(
+                    item.content ?? ''
+                  )}`
+              )
+            )
+          ).join('\n');
+
+          handleCallAI(summaryMessagesPrompt + plainMessages);
+        }}
+      >
         {Translate.summaryMessages}
-      </ActionButton> */}
+      </ActionButton>
     </Root>
   );
 });
