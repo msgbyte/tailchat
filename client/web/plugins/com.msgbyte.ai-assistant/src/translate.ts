@@ -41,4 +41,8 @@ export const Translate = {
     'zh-CN': '调用失败',
     'en-US': 'Call Error',
   }),
+  apply: localTrans({
+    'zh-CN': '应用',
+    'en-US': 'Apply',
+  }),
 };

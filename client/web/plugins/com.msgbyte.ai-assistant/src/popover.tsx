@@ -5,6 +5,8 @@ import {
   LoadingSpinner,
   useChatInputActionContext,
   Tag,
+  Button,
+  Divider,
 } from '@capital/component';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -40,7 +42,7 @@ const ActionButton = styled.div`
 export const AssistantPopover: React.FC<{
   onCompleted: () => void;
 }> = React.memo((props) => {
-  const { message } = useChatInputActionContext();
+  const { message, setMessage } = useChatInputActionContext();
   const [{ loading, value }, handleCallAI] = useAsyncRequest(
     async (question: string) => {
       // TODO: wait for replace
@@ -63,24 +65,42 @@ export const AssistantPopover: React.FC<{
 
   return (
     <Root>
-      <Tip>{Translate.helpMeTo}</Tip>
-
       <div>
-        {typeof value === 'object' &&
-          (value.result ? (
-            <div>
-              <div>{value.answer}</div>
-              <Tag color="green">
-                {Translate.usage}: {value.usage}ms
-              </Tag>
-            </div>
-          ) : (
-            <div>
-              <div>{Translate.serviceBusy}</div>
-              <Tag color="red">{Translate.callError}</Tag>
-            </div>
-          ))}
+        {typeof value === 'object' && (
+          <>
+            {value.result ? (
+              <div>
+                <div>{value.answer}</div>
+                <div>
+                  <Tag color="green">
+                    {Translate.usage}: {value.usage}ms
+                  </Tag>
+
+                  <Button
+                    size="small"
+                    type="primary"
+                    onClick={() => {
+                      setMessage(value.answer);
+                      props.onCompleted();
+                    }}
+                  >
+                    {Translate.apply}
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div>{Translate.serviceBusy}</div>
+                <Tag color="red">{Translate.callError}</Tag>
+              </div>
+            )}
+
+            <Divider />
+          </>
+        )}
       </div>
+
+      <Tip>{Translate.helpMeTo}</Tip>
 
       {typeof message === 'string' && message.length > 0 && (
         <>
