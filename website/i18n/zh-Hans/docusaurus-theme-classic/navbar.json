@@ -14,5 +14,9 @@
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
+  },
+  "item.label.Downloads": {
+    "message": "下载",
+    "description": "Navbar item with label Downloads"
   }
 }

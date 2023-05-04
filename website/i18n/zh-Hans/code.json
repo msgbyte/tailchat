@@ -377,5 +377,17 @@
   },
   "Platform": {
     "message": "开放平台"
+  },
+  "Mobile Apps": {
+    "message": "移动端"
+  },
+  "Use mobile app to visit Tailchat anywhere": {
+    "message": "使用移动App在任意地方访问 Tailchat"
+  },
+  "Design with react-native": {
+    "message": "使用 react-native 开发"
+  },
+  "Source Code": {
+    "message": "源代码"
   }
 }

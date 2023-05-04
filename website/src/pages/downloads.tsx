@@ -2,6 +2,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import React from 'react';
+import Translate from '@docusaurus/Translate';
 import './downloads.less';
 
 export default function Downloads() {
@@ -20,9 +21,13 @@ export default function Downloads() {
             </div>
 
             <div className="block">
-              <h3>Mobile Apps (test)</h3>
+              <h3>
+                <Translate>Mobile Apps</Translate> (test)
+              </h3>
 
-              <p>Use mobile app to visit Tailchat anywhere</p>
+              <p>
+                <Translate>Use mobile app to visit Tailchat anywhere</Translate>
+              </p>
 
               <div className="btns">
                 <Link
@@ -37,9 +42,9 @@ export default function Downloads() {
               </div>
 
               <p className="tip">
-                Design with react-native:&nbsp;
+                <Translate>Design with react-native</Translate>:&nbsp;
                 <Link to="https://github.com/msgbyte/tailchat/tree/master/client/mobile">
-                  Source Code
+                  <Translate>Source Code</Translate>
                 </Link>
               </p>
             </div>
