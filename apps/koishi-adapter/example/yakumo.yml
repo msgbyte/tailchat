@@ -1,0 +1,18 @@
+require:
+  - esbuild-register
+  - yakumo-esbuild
+  - yakumo-esbuild-yaml
+  - yakumo-publish
+  - yakumo-publish-sync
+  - yakumo-tsc
+  - yakumo-upgrade
+  - yakumo-version
+  - '@koishijs/client/lib/yakumo'
+
+pipeline:
+  build:
+    - tsc
+    - esbuild
+    - client
+  clean:
+    - tsc --clean

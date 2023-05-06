@@ -1,0 +1,63 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // If you are developing a plugin monorepo with custom prefix,
+      // just copy the next line and change `assets` to the prefix.
+      // Below are some examples for common prefixed plugins.
+      // See: https://github.com/koishijs/assets
+      "koishi-plugin-assets-*": ["external/assets/packages/*/src"],
+      "koishi-plugin-booru-*": ["external/booru/packages/*/src"],
+      "koishi-plugin-cache-*": ["external/cache/packages/*/src"],
+      "koishi-plugin-dialogue-*": ["external/dialogue/packages/*/src"],
+
+      // The `external` directory is used to store created plugins.
+      // Try `npm run setup` or `yarn setup` to create a new plugin.
+      "koishi-plugin-*": [
+        "external/*/src",
+        "external/*/packages/core/src",
+        "packages/*/src",
+        "plugins/*/src",
+      ],
+
+      // If you are developing a scoped plugin,
+      // just uncomment the next line and change `@scope`
+      // to the scope name (i.e. npm account or organization).
+      // "@scope/koishi-plugin-*": ["external/*/src"],
+
+      // Below are links for koishi internal packages.
+      // You only need them when you are developing koishi itself.
+      // See: https://github.com/koishijs/koishi
+      // See: https://github.com/koishijs/webui
+      // See: https://github.com/satorijs/satori
+      // See: https://github.com/shigma/minato
+      "@koishijs/plugin-adapter-*": ["external/koishi/plugins/adapter/*/src"],
+      "@koishijs/plugin-database-*": ["external/koishi/plugins/database/*/src"],
+      "@koishijs/plugin-*": [
+        "external/koishi/plugins/common/*/src",
+        "external/koishi/plugins/*/src",
+        "external/webui/plugins/*/src",
+      ],
+      "@koishijs/*": [
+        "external/koishi/packages/*/src",
+        "external/webui/packages/*/src",
+        "external/*/packages/core/src",
+      ],
+      "@minatojs/driver-*": ["external/minato/packages/*/src"],
+      "@minatojs/*": ["external/minato/packages/*/src"],
+      "@satorijs/adapter-*": ["external/satori/adapters/*/src"],
+      "@satorijs/*": ["external/satori/packages/*/src"],
+      "cordis-*": ["external/satori/packages/*/src"],
+      "koishi": ["external/koishi/packages/koishi/src"],
+      "minato": ["external/minato/packages/minato/src"],
+
+      // It is common practice that monorepo has a `packages` directory.
+      // Even if you don't use it, do not delete this line,
+      // as it bypasses a bug in tsconfig-path/register.
+      // See: https://github.com/dividab/tsconfig-paths/issues/209
+      "*": ["packages/*/src"],
+    },
+  },
+  "files": [],
+}

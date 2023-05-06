@@ -1,0 +1,1 @@
+Tailchat adapter for koishi
