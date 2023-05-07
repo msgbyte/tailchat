@@ -6,6 +6,7 @@ import {
   navigate,
   sharedEvent,
   getCachedUserSettings,
+  getMessageTextDecorators,
 } from '@capital/common';
 import { Translate } from './translate';
 import { incBubble, setBubble } from './bubble';
@@ -59,7 +60,7 @@ export function initNotify() {
         ]).then(([userInfo, scopeName]) => {
           const nickname = userInfo?.nickname ?? '';
           const icon = userInfo?.avatar ?? undefined;
-          const content = message.content;
+          const content = getMessageTextDecorators().serialize(message.content); // 只显示无富文本形式的消息
 
           const title = `${Translate.from} [${scopeName}] ${nickname}`;
           const options: NotificationOptions = {
