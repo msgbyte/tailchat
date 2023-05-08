@@ -3,15 +3,12 @@ import {
   createEmailField,
   createImageField,
   createTextField,
-  createUrlField,
+  createBooleanField,
 } from 'tushan';
 
 export const userFields = [
   createTextField('id', {
     label: 'ID',
-  }),
-  createTextField('name', {
-    label: 'Name',
     list: {
       sort: true,
     },
@@ -19,25 +16,67 @@ export const userFields = [
   createEmailField('email', {
     label: 'Email',
   }),
-  createUrlField('website', {
-    label: 'Website',
+  createTextField('nickname', {
+    label: 'Nickname',
+  }),
+  createTextField('discriminator', {
+    label: 'Discriminator',
+  }),
+  createBooleanField('temporary', {
+    label: 'Temporary',
+  }),
+  createImageField('avatar', {
+    label: 'Avatar',
+    height: 42,
+  }),
+  createTextField('settings', {
+    label: 'Settings',
+    list: {
+      width: 200,
+    },
+    edit: {
+      hidden: true, // wait for json field
+    },
+  }),
+  createTextField('createdAt', {
+    label: 'Created At',
   }),
 ];
 
-export const photoFields = [
+export const messageFields = [
   createTextField('id', {
     label: 'ID',
   }),
-  createTextField('albumId', {
-    label: 'AlbumId',
+  createTextField('content', {
+    label: 'Content',
   }),
-  createTextField('title', {
-    label: 'Title',
+  createTextField('author', {
+    label: 'Author',
   }),
-  createImageField('url', {
-    label: 'Url',
+  createTextField('groupId'),
+  createTextField('converseId'),
+  createBooleanField('hasRecall'),
+  createTextField('reactions'),
+  createTextField('createdAt'),
+];
+
+export const groupFields = [
+  createTextField('id', {
+    label: 'ID',
   }),
-  createAvatarField('thumbnailUrl', {
-    label: 'ThumbnailUrl',
+  createTextField('name'),
+  createTextField('owner'),
+  createTextField('members.length', {
+    edit: {
+      hidden: true,
+    },
   }),
+  createTextField('panels.length', {
+    edit: {
+      hidden: true,
+    },
+  }),
+  createTextField('roles'),
+  createTextField('fallbackPermissions'),
+  createTextField('createdAt'),
 ];

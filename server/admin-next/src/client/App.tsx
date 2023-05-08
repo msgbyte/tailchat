@@ -5,10 +5,12 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
+import { IconMessage, IconUser } from 'tushan/icon';
 import { authProvider } from './auth';
-import { photoFields, userFields } from './fields';
+import { groupFields, messageFields, userFields } from './fields';
+import { httpClient } from './request';
 
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const dataProvider = jsonServerProvider('/admin/api', httpClient);
 
 function App() {
   return (
@@ -20,11 +22,12 @@ function App() {
       <Resource
         name="users"
         label="User"
+        icon={<IconUser />}
         list={
           <ListTable
             filter={[
               createTextField('q', {
-                label: 'Query',
+                label: 'Search',
               }),
             ]}
             fields={userFields}
@@ -34,11 +37,34 @@ function App() {
       />
 
       <Resource
-        name="photos"
-        label="Photos"
+        name="messages"
+        label="Messages"
+        icon={<IconMessage />}
         list={
           <ListTable
-            fields={photoFields}
+            filter={[
+              createTextField('q', {
+                label: 'Search',
+              }),
+            ]}
+            fields={messageFields}
+            action={{ detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+
+      <Resource
+        name="groups"
+        label="Groups"
+        icon={<IconMessage />}
+        list={
+          <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'Search',
+              }),
+            ]}
+            fields={groupFields}
             action={{ detail: true, edit: true, delete: true }}
           />
         }
