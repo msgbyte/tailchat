@@ -1602,6 +1602,9 @@ importers:
       express-mongoose-ra-json-server:
         specifier: ^0.1.0
         version: 0.1.0(express@4.18.2)(mongoose@6.1.1)
+      filesize:
+        specifier: ^8.0.7
+        version: 8.0.7
       jsonwebtoken:
         specifier: ^8.5.1
         version: 8.5.1

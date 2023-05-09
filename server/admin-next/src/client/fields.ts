@@ -1,10 +1,13 @@
 import {
-  createAvatarField,
   createEmailField,
-  createImageField,
   createTextField,
   createBooleanField,
+  createAvatarField,
+  createJSONField,
+  createDateTimeField,
+  createUrlField,
 } from 'tushan';
+import { createFileSizeField } from './components/field/filesize';
 
 export const userFields = [
   createTextField('id', {
@@ -25,21 +28,20 @@ export const userFields = [
   createBooleanField('temporary', {
     label: 'Temporary',
   }),
-  createImageField('avatar', {
+  createAvatarField('avatar', {
     label: 'Avatar',
-    height: 42,
   }),
-  createTextField('settings', {
+  createJSONField('settings', {
     label: 'Settings',
     list: {
       width: 200,
     },
-    edit: {
-      hidden: true, // wait for json field
-    },
   }),
-  createTextField('createdAt', {
-    label: 'Created At',
+  createDateTimeField('createdAt', {
+    format: 'iso',
+    edit: {
+      hidden: true,
+    },
   }),
 ];
 
@@ -56,8 +58,13 @@ export const messageFields = [
   createTextField('groupId'),
   createTextField('converseId'),
   createBooleanField('hasRecall'),
-  createTextField('reactions'),
-  createTextField('createdAt'),
+  createJSONField('reactions'),
+  createDateTimeField('createdAt', {
+    format: 'iso',
+    edit: {
+      hidden: true,
+    },
+  }),
 ];
 
 export const groupFields = [
@@ -76,7 +83,28 @@ export const groupFields = [
       hidden: true,
     },
   }),
-  createTextField('roles'),
-  createTextField('fallbackPermissions'),
-  createTextField('createdAt'),
+  createJSONField('roles'),
+  createJSONField('fallbackPermissions'),
+  createDateTimeField('createdAt', {
+    format: 'iso',
+    edit: {
+      hidden: true,
+    },
+  }),
+];
+
+export const fileFields = [
+  createTextField('objectName'),
+  createUrlField('url'),
+  createFileSizeField('size', {
+    list: {
+      width: 120,
+    },
+  }),
+  createTextField('metaData.content-type', {
+    label: 'Content Type',
+  }),
+  createTextField('etag'),
+  createTextField('userId'),
+  createDateTimeField('createdAt'),
 ];

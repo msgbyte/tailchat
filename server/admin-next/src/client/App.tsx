@@ -5,9 +5,9 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
-import { IconMessage, IconUser } from 'tushan/icon';
+import { IconFile, IconMessage, IconUser, IconUserGroup } from 'tushan/icon';
 import { authProvider } from './auth';
-import { groupFields, messageFields, userFields } from './fields';
+import { fileFields, groupFields, messageFields, userFields } from './fields';
 import { httpClient } from './request';
 
 const dataProvider = jsonServerProvider('/admin/api', httpClient);
@@ -56,7 +56,7 @@ function App() {
       <Resource
         name="groups"
         label="Groups"
-        icon={<IconMessage />}
+        icon={<IconUserGroup />}
         list={
           <ListTable
             filter={[
@@ -66,6 +66,23 @@ function App() {
             ]}
             fields={groupFields}
             action={{ detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+
+      <Resource
+        name="file"
+        label="Files"
+        icon={<IconFile />}
+        list={
+          <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'Search',
+              }),
+            ]}
+            fields={fileFields}
+            action={{ detail: true }}
           />
         }
       />
