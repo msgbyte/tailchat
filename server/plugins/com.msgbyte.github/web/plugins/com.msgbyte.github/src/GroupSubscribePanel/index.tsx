@@ -1,14 +1,19 @@
 import React, { useCallback, useMemo } from 'react';
 import {
-  openModal,
-  closeModal,
   useGroupIdContext,
   useAsyncRefresh,
   useAsyncRequest,
   getServiceUrl,
   useGroupPanelInfo,
 } from '@capital/common';
-import { Button, CopyableText, Space, Table } from '@capital/component';
+import {
+  openModal,
+  closeModal,
+  Button,
+  CopyableText,
+  Space,
+  Table,
+} from '@capital/component';
 import { Translate } from '../translate';
 import { AddGroupSubscribeModal } from './AddGroupSubscribeModal';
 import { request } from '../request';

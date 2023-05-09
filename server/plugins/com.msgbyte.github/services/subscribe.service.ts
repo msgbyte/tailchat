@@ -228,6 +228,16 @@ class GithubSubscribeService extends TcService {
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
+    } else if ('starred_at' in event) {
+      if (event.action === 'created') {
+        const name = event.sender.login;
+        const userUrl = event.sender.html_url;
+        const repo = event.repository.full_name;
+        const repoUrl = event.repository.html_url;
+        const repoStarCount = event.repository.stargazers_count;
+        const message = `[url=${userUrl}]${name}[/url] starred [url=${repoUrl}]${repo}[/url](total ${repoStarCount} stargazers)`;
+        await this.sendMessageToSubscribes(ctx, repo, message);
+      }
     }
   }
 
