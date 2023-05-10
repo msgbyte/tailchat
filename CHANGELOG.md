@@ -1,5 +1,24 @@
 
 
+## [1.7.2](https://github.com/msgbyte/tailchat/compare/v1.7.1...v1.7.2) (2023-05-10)
+
+
+### Bug Fixes
+
+* resolve zIndex problem which will make zIndex level incorrect ([52f1534](https://github.com/msgbyte/tailchat/commit/52f153472f075c214cc10d52f9e2d6d09921ca77))
+* upgrade level with zIndex in PageContent ([c902731](https://github.com/msgbyte/tailchat/commit/c902731aec4ebba3f4f1c5f0640366e09f67d958))
+
+
+### Features
+
+* add AI Assistant plugin for Tailchat with ChatGPT ([060d07a](https://github.com/msgbyte/tailchat/commit/060d07ae8ee36dcf088ad253a18e6cabcd80f4d7))
+* add starred event push for github service ([2b20aee](https://github.com/msgbyte/tailchat/commit/2b20aee3dd58c0ef00bd1209bf72f68e69bb59cb))
+* **admin-next:** add custom routes ([ef88363](https://github.com/msgbyte/tailchat/commit/ef88363bbf0ade9d328164543a665d45cd98dc90))
+* **admin-next:** add file list ([d68108b](https://github.com/msgbyte/tailchat/commit/d68108b21a1b7e9da6edf56d0bc41443927fe461))
+* **admin-next:** add message and group list ([65e7cfe](https://github.com/msgbyte/tailchat/commit/65e7cfe11647dc785d03014423c7e86c03d8fa23))
+* **ai:** add message summary ([12c8813](https://github.com/msgbyte/tailchat/commit/12c8813b68d174d3ecfcc28533ea4c2c6c49a150))
+* **ai:** add output apply ([00c45d3](https://github.com/msgbyte/tailchat/commit/00c45d305024301ffb4ec13e17ab5efadc6fe8e5))
+
 ## [1.7.1](https://github.com/msgbyte/tailchat/compare/v1.7.0...v1.7.1) (2023-04-29)
 
 
