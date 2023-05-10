@@ -1,14 +1,26 @@
 import {
   createTextField,
+  CustomRoute,
   jsonServerProvider,
   ListTable,
   Resource,
   Tushan,
 } from 'tushan';
-import { IconFile, IconMessage, IconUser, IconUserGroup } from 'tushan/icon';
+import {
+  IconDashboard,
+  IconFile,
+  IconMessage,
+  IconSettings,
+  IconUser,
+  IconUserGroup,
+  IconWifi,
+} from 'tushan/icon';
 import { authProvider } from './auth';
 import { fileFields, groupFields, messageFields, userFields } from './fields';
 import { httpClient } from './request';
+import { TailchatNetwork } from './routes/network';
+import { SocketIOAdmin } from './routes/socketio';
+import { SystemConfig } from './routes/system';
 
 const dataProvider = jsonServerProvider('/admin/api', httpClient);
 
@@ -86,6 +98,18 @@ function App() {
           />
         }
       />
+
+      <CustomRoute name="system" icon={<IconSettings />}>
+        <SystemConfig />
+      </CustomRoute>
+
+      <CustomRoute name="network" icon={<IconWifi />}>
+        <TailchatNetwork />
+      </CustomRoute>
+
+      <CustomRoute name="socketio" icon={<IconDashboard />}>
+        <SocketIOAdmin />
+      </CustomRoute>
     </Tushan>
   );
 }
