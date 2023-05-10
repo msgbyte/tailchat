@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tailchat
+  namespace: tailchat
+spec:
+  selector:
+    matchLabels:
+      app: tailchat
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: tailchat
+    spec:
+      containers:
+        - name: tailchat
+          image: moonrailgun/tailchat
+          imagePullPolicy: Always
+          env:
+            - name: SERVICEDIR
+              value: services
+            - name: TRANSPORTER
+              value: redis://redis-service:6379
+            - name: REDIS_URL
+              value: redis://redis-service:6379
+            - name: MONGO_URL
+              value: mongodb://mongo-service/tailchat
+            - name: SECRET
+              value: any-secret-keywords
+            - name: MINIO_URL
+              value: minio-service:9000
+            - name: MINIO_USER
+              value: tailchat
+            - name: MINIO_PASS
+              value: com.msgbyte.tailchat
+          ports:
+            - containerPort: 11000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 51Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tailchat-service
+  namespace: tailchat
+spec:
+  type: ClusterIP
+  selector:
+    app: tailchat
+  ports:
+    - protocol: TCP
+      port: 11000
+      targetPort: 11000
