@@ -7,6 +7,11 @@ overrides:
   webpack: 5.75.0
   react-router@^6.0.0: 6.11.0
   react-router-dom@^6.0.0: 6.11.0
+  '@typegoose/typegoose': 9.3.1
+  mongodb: 4.2.1
+  mongoose@~6.0.14: 6.1.1
+  mongoose@^6.0.0: 6.1.1
+  mongoose-findorcreate: 3.0.0
 
 patchedDependencies:
   moleculer-minio@2.0.0:
@@ -542,7 +547,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1478,9 +1483,6 @@ importers:
       '@remix-run/react':
         specifier: ^1.9.0
         version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
-      '@typegoose/typegoose':
-        specifier: 9.3.1
-        version: 9.3.1(mongoose@6.0.15)
       '@types/md5':
         specifier: ^2.3.2
         version: 2.3.2
@@ -1501,7 +1503,7 @@ importers:
         version: 4.18.2
       express-mongoose-ra-json-server:
         specifier: ^0.1.0
-        version: 0.1.0(express@4.18.2)(mongoose@6.0.15)
+        version: 0.1.0(express@4.18.2)(mongoose@6.1.1)
       filesize:
         specifier: ^8.0.7
         version: 8.0.7
@@ -1816,7 +1818,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -1994,7 +1996,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.wxpusher:
     dependencies:
@@ -2456,10 +2458,10 @@ packages:
       '@babel/helpers': 7.21.0
       '@babel/parser': 7.21.2
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
       convert-source-map: 1.9.0
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -2479,10 +2481,10 @@ packages:
       '@babel/helpers': 7.21.0
       '@babel/parser': 7.21.2
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
       convert-source-map: 1.9.0
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -2713,7 +2715,7 @@ packages:
       '@babel/core': 7.21.0
       '@babel/helper-compilation-targets': 7.20.7(@babel/core@7.21.0)
       '@babel/helper-plugin-utils': 7.20.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       lodash.debounce: 4.0.8
       resolve: 1.22.1
       semver: 6.3.0
@@ -2788,7 +2790,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.18.6
       '@babel/helper-validator-identifier': 7.19.1
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2843,7 +2845,7 @@ packages:
       '@babel/helper-member-expression-to-functions': 7.21.0
       '@babel/helper-optimise-call-expression': 7.18.6
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2888,7 +2890,7 @@ packages:
     dependencies:
       '@babel/helper-function-name': 7.21.0
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2908,7 +2910,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2(supports-color@5.5.0)
+      '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -5006,6 +5008,23 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /@babel/traverse@7.21.2:
+    resolution: {integrity: sha512-ts5FFU/dSUPS13tv8XiEObDu9K+iagEKME9kAbaP7r0Y9KtZJZ+NGndDvWoRAYNpeWafbpFeki3q9QoMD6gxyw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/code-frame': 7.18.6
+      '@babel/generator': 7.21.1
+      '@babel/helper-environment-visitor': 7.18.9
+      '@babel/helper-function-name': 7.21.0
+      '@babel/helper-hoist-variables': 7.18.6
+      '@babel/helper-split-export-declaration': 7.18.6
+      '@babel/parser': 7.21.2
+      '@babel/types': 7.21.2
+      debug: 4.3.4
+      globals: 11.12.0
+    transitivePeerDependencies:
+      - supports-color
 
   /@babel/traverse@7.21.2(supports-color@5.5.0):
     resolution: {integrity: sha512-ts5FFU/dSUPS13tv8XiEObDu9K+iagEKME9kAbaP7r0Y9KtZJZ+NGndDvWoRAYNpeWafbpFeki3q9QoMD6gxyw==}
@@ -12183,20 +12202,6 @@ packages:
   /@tsconfig/node16@1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
 
-  /@typegoose/typegoose@9.3.1(mongoose@6.0.15):
-    resolution: {integrity: sha512-sdH1lpqZRIQYioffUq/EMhZlZsTP+8SNhmEaoULiFsRd0Go0QxuiUzy1DFHHMA8+k8h2XDIs1EGzqChih91jhw==}
-    engines: {node: '>=12.22.0'}
-    peerDependencies:
-      mongoose: ~6.0.14
-    dependencies:
-      lodash: 4.17.21
-      loglevel: 1.8.0
-      mongoose: 6.0.15
-      reflect-metadata: 0.1.13
-      semver: 7.3.8
-      tslib: 2.5.0
-    dev: false
-
   /@typegoose/typegoose@9.3.1(mongoose@6.1.1):
     resolution: {integrity: sha512-sdH1lpqZRIQYioffUq/EMhZlZsTP+8SNhmEaoULiFsRd0Go0QxuiUzy1DFHHMA8+k8h2XDIs1EGzqChih91jhw==}
     engines: {node: '>=12.22.0'}
@@ -13793,7 +13798,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -17507,6 +17512,17 @@ packages:
       ms: 2.1.3
       supports-color: 5.5.0
 
+  /debug@4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+
   /debug@4.3.4(supports-color@5.5.0):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -19340,17 +19356,6 @@ packages:
       handlebars: 4.7.7
     dev: false
 
-  /express-mongoose-ra-json-server@0.1.0(express@4.18.2)(mongoose@6.0.15):
-    resolution: {integrity: sha512-y/Z5zb3RWVsCLgof8MMWMmpyAe2ZUEy6sYqczELOqaCr0cChbI9Y1VNr5DcbwEjqWmEIoU9aqcsURoUse8r/gw==}
-    peerDependencies:
-      express: ^4.0.0 || ^3.0.0
-      mongoose: ^6.0.0 || ^5.0.0
-    dependencies:
-      escape-string-regexp: 4.0.0
-      express: 4.18.2
-      mongoose: 6.0.15
-    dev: false
-
   /express-mongoose-ra-json-server@0.1.0(express@4.18.2)(mongoose@6.1.1):
     resolution: {integrity: sha512-y/Z5zb3RWVsCLgof8MMWMmpyAe2ZUEy6sYqczELOqaCr0cChbI9Y1VNr5DcbwEjqWmEIoU9aqcsURoUse8r/gw==}
     peerDependencies:
@@ -20411,7 +20416,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       data-uri-to-buffer: 3.0.1
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       file-uri-to-path: 2.0.0
       fs-extra: 8.1.0
       ftp: 0.3.10
@@ -21525,7 +21530,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -21587,7 +21592,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -21754,10 +21759,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
+    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
-    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -25250,7 +25255,7 @@ packages:
     resolution: {integrity: sha512-6Mj0yHLdUZjHnOPgr5xfWIMqMWS12zDN6iws9SLuSz76W8jTtAv24MN4/CL7gJrl5vtxGInkkqDv/JIoRsQOvA==}
     dependencies:
       '@types/debug': 4.1.7
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       decode-named-character-reference: 1.0.2
       micromark-core-commonmark: 1.0.6
       micromark-factory-space: 1.0.0
@@ -25851,17 +25856,6 @@ packages:
       '@types/whatwg-url': 8.2.2
       whatwg-url: 11.0.0
 
-  /mongodb@4.1.4:
-    resolution: {integrity: sha512-Cv/sk8on/tpvvqbEvR1h03mdyNdyvvO+WhtFlL4jrZ+DSsN/oSQHVqmJQI/sBCqqbOArFcYCAYDfyzqFwV4GSQ==}
-    engines: {node: '>=12.9.0'}
-    dependencies:
-      bson: 4.7.0
-      denque: 2.1.0
-      mongodb-connection-string-url: 2.5.3
-    optionalDependencies:
-      saslprep: 1.0.3
-    dev: false
-
   /mongodb@4.2.1:
     resolution: {integrity: sha512-nDC+ulM/Ea3Q2VG5eemuGfB7T4ORwrtKegH2XW9OLlUBgQF6OTNrzFCS1Z3SJGVA+T0Sr1xBYV6DMnp0A7us0g==}
     engines: {node: '>=12.9.0'}
@@ -25872,36 +25866,8 @@ packages:
     optionalDependencies:
       saslprep: 1.0.3
 
-  /mongodb@4.2.2:
-    resolution: {integrity: sha512-zt8rCTnTKyMQppyt63qMnrLM5dbADgUk18ORPF1XbtHLIYCyc9hattaYHi0pqMvNxDpgGgUofSVzS+UQErgTug==}
-    engines: {node: '>=12.9.0'}
-    dependencies:
-      bson: 4.7.0
-      denque: 2.1.0
-      mongodb-connection-string-url: 2.5.3
-    optionalDependencies:
-      saslprep: 1.0.3
-    dev: false
-
   /mongoose-findorcreate@3.0.0:
     resolution: {integrity: sha512-kQhDe5XDj6tMv8kq1wjK+hITGIGUl60rj8oGLupF9poNsqIDkAJBXudZKcCdSyBZ7p6DLK2+0jSBthrb26tSYQ==}
-    dev: false
-
-  /mongoose@6.0.15:
-    resolution: {integrity: sha512-Lr53MKrJ4XNTdsMkhOYxeBJClsV7pgwr2VFf7E8TK9Xh5hs2kzFF49jJv9i4CWcshmydcF8uDfaQ9sQlqzZoYw==}
-    engines: {node: '>=12.0.0'}
-    dependencies:
-      bson: 4.7.0
-      kareem: 2.3.2
-      mongodb: 4.1.4
-      mpath: 0.8.4
-      mquery: 4.0.0
-      ms: 2.1.2
-      regexp-clone: 1.0.0
-      sift: 13.5.2
-      sliced: 1.0.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /mongoose@6.1.1:
@@ -25940,7 +25906,7 @@ packages:
     resolution: {integrity: sha512-nGjm89lHja+T/b8cybAby6H0YgA4qYC/lx6UlwvHGqvTq8bDaNeCwl1sY8uRELrNbVWJzIihxVd+vphGGn1vBw==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       regexp-clone: 1.0.0
       sliced: 1.0.1
     transitivePeerDependencies:
@@ -27074,7 +27040,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       get-uri: 3.0.2
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
@@ -28831,7 +28797,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
       lru-cache: 5.1.1
@@ -32244,7 +32210,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4
       socks: 2.7.1
     transitivePeerDependencies:
       - supports-color
@@ -33255,7 +33221,7 @@ packages:
       moleculer-db: 0.8.19(moleculer@0.14.23)
       moleculer-repl: 0.6.6
       moment: 2.29.4
-      mongodb: 4.2.2
+      mongodb: 4.2.1
       mongoose: 6.1.1
     transitivePeerDependencies:
       - amqplib
@@ -36476,6 +36442,7 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36492,7 +36459,6 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

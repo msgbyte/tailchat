@@ -62,7 +62,12 @@
       "@types/react": "18.0.20",
       "webpack": "5.75.0",
       "react-router@^6.0.0": "6.11.0",
-      "react-router-dom@^6.0.0": "6.11.0"
+      "react-router-dom@^6.0.0": "6.11.0",
+      "@typegoose/typegoose": "9.3.1",
+      "mongodb": "4.2.1",
+      "mongoose@~6.0.14": "6.1.1",
+      "mongoose@^6.0.0": "6.1.1",
+      "mongoose-findorcreate": "3.0.0"
     },
     "patchedDependencies": {
       "moleculer-minio@2.0.0": "patches/moleculer-minio@2.0.0.patch"
