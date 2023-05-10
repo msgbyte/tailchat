@@ -100,7 +100,11 @@
     margin-bottom: 3rem;
 
     > img {
-      max-width: 1090px;
+      max-width: 100%;
+
+      @media (min-width: 997px) {
+        max-width: 1090px;
+      }
     }
   }
 }
