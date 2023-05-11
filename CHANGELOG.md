@@ -1,5 +1,12 @@
 
 
+## [1.7.3](https://github.com/msgbyte/tailchat/compare/v1.7.2...v1.7.3) (2023-05-11)
+
+
+### Features
+
+* patch moleculer ([467a13c](https://github.com/msgbyte/tailchat/commit/467a13c5b043889c234a816929b371ae506ffd99))
+
 ## [1.7.2](https://github.com/msgbyte/tailchat/compare/v1.7.1...v1.7.2) (2023-05-10)
 
 
