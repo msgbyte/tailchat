@@ -39,6 +39,10 @@ server {
 docker run --rm --name nginx-test -p 8080:80 nginx
 ```
 
+### 启动时会出现随机hash的volume
+
+见: [https://github.com/msgbyte/tailchat/issues/79](https://github.com/msgbyte/tailchat/issues/79)
+
 
 ## 开放平台相关
 

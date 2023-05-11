@@ -39,6 +39,10 @@ You can start a simple http service to see if it is a problem with the docker-pr
 docker run --rm --name nginx-test -p 8080:80 nginx
 ```
 
+### There will be a random hash volume at startup
+
+See: [https://github.com/msgbyte/tailchat/issues/79](https://github.com/msgbyte/tailchat/issues/79)
+
 
 ## Openapi platform related
 
