@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  # 后台应用
+  tailchat-admin:
+    image: tailchat
+    restart: unless-stopped
+    env_file: ../../../docker-compose.env
+    environment:
+      ADMIN_PASS: tailchat
+    depends_on:
+      - mongo
+      - redis
+    ports:
+      - 13000:3000
+    command: pnpm start:admin
+
+  # Database
+  mongo:
+    image: mongo:4
+    restart: on-failure
+
+  # Data cache and Transporter
+  redis:
+    image: redis:alpine
+    restart: on-failure
