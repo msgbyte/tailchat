@@ -1,0 +1,317 @@
+diff --git a/src/runner-esm.mjs b/src/runner-esm.mjs
+index 97b78b59c8931ed2c71e719c12d23bd5172da977..b14e9e0c61be8b0460e60f448781103c49f563e5 100644
+--- a/src/runner-esm.mjs
++++ b/src/runner-esm.mjs
+@@ -332,83 +332,87 @@ export default class MoleculerRunner {
+ 		this.watchFolders.length = 0;
+ 		const fileMask = this.flags.mask || "**/*.service.js";
+ 
+-		const serviceDir = process.env.SERVICEDIR || "";
+-		const svcDir = path.isAbsolute(serviceDir)
+-			? serviceDir
+-			: path.resolve(process.cwd(), serviceDir);
++		const serviceDirList = (process.env.SERVICEDIR || "").split(',');
+ 
+-		let patterns = this.servicePaths;
++		for (const serviceDir of serviceDirList) {
++			const serviceDir = process.env.SERVICEDIR || "";
++			const svcDir = path.isAbsolute(serviceDir)
++				? serviceDir
++				: path.resolve(process.cwd(), serviceDir);
+ 
+-		if (process.env.SERVICES || process.env.SERVICEDIR) {
+-			if (this.isDirectory(svcDir) && !process.env.SERVICES) {
+-				// Load all services from directory (from subfolders too)
+-				this.broker.loadServices(svcDir, fileMask);
++			let patterns = this.servicePaths;
+ 
+-				if (this.config.hotReload) {
+-					this.watchFolders.push(svcDir);
++			if (process.env.SERVICES || process.env.SERVICEDIR) {
++				if (this.isDirectory(svcDir) && !process.env.SERVICES) {
++					// Load all services from directory (from subfolders too)
++					this.broker.loadServices(svcDir, fileMask);
++
++					if (this.config.hotReload) {
++						this.watchFolders.push(svcDir);
++					}
++				} else if (process.env.SERVICES) {
++					// Load services from env list
++					patterns = Array.isArray(process.env.SERVICES)
++						? process.env.SERVICES
++						: process.env.SERVICES.split(",");
+ 				}
+-			} else if (process.env.SERVICES) {
+-				// Load services from env list
+-				patterns = Array.isArray(process.env.SERVICES)
+-					? process.env.SERVICES
+-					: process.env.SERVICES.split(",");
+ 			}
+-		}
+ 
+-		if (patterns.length > 0) {
+-			let serviceFiles = [];
+-
+-			patterns
+-				.map(s => s.trim())
+-				.forEach(p => {
+-					const skipping = p[0] == "!";
+-					if (skipping) p = p.slice(1);
+-
+-					let files;
+-					const svcPath = path.isAbsolute(p) ? p : path.resolve(svcDir, p);
+-					// Check is it a directory?
+-					if (this.isDirectory(svcPath)) {
+-						if (this.config.hotReload) {
+-							this.watchFolders.push(svcPath);
++			if (patterns.length > 0) {
++				let serviceFiles = [];
++
++				patterns
++					.map(s => s.trim())
++					.forEach(p => {
++						const skipping = p[0] == "!";
++						if (skipping) p = p.slice(1);
++
++						let files;
++						const svcPath = path.isAbsolute(p) ? p : path.resolve(svcDir, p);
++						// Check is it a directory?
++						if (this.isDirectory(svcPath)) {
++							if (this.config.hotReload) {
++								this.watchFolders.push(svcPath);
++							}
++							files = glob.sync(svcPath + "/" + fileMask, { absolute: true });
++							if (files.length == 0)
++								return this.broker.logger.warn(
++									kleur
++										.yellow()
++										.bold(
++											`There is no service files in directory: '${svcPath}'`
++										)
++								);
++						} else if (this.isServiceFile(svcPath)) {
++							files = [svcPath.replace(/\\/g, "/")];
++						} else if (this.isServiceFile(svcPath + ".service.js")) {
++							files = [svcPath.replace(/\\/g, "/") + ".service.js"];
++						} else {
++							// Load with glob
++							files = glob.sync(p, { cwd: svcDir, absolute: true });
++							if (files.length == 0)
++								this.broker.logger.warn(
++									kleur
++										.yellow()
++										.bold(`There is no matched file for pattern: '${p}'`)
++								);
+ 						}
+-						files = glob.sync(svcPath + "/" + fileMask, { absolute: true });
+-						if (files.length == 0)
+-							return this.broker.logger.warn(
+-								kleur
+-									.yellow()
+-									.bold(
+-										`There is no service files in directory: '${svcPath}'`
+-									)
+-							);
+-					} else if (this.isServiceFile(svcPath)) {
+-						files = [svcPath.replace(/\\/g, "/")];
+-					} else if (this.isServiceFile(svcPath + ".service.js")) {
+-						files = [svcPath.replace(/\\/g, "/") + ".service.js"];
+-					} else {
+-						// Load with glob
+-						files = glob.sync(p, { cwd: svcDir, absolute: true });
+-						if (files.length == 0)
+-							this.broker.logger.warn(
+-								kleur
+-									.yellow()
+-									.bold(`There is no matched file for pattern: '${p}'`)
+-							);
+-					}
+ 
+-					if (files && files.length > 0) {
+-						if (skipping)
+-							serviceFiles = serviceFiles.filter(f => files.indexOf(f) === -1);
+-						else serviceFiles.push(...files);
+-					}
+-				});
++						if (files && files.length > 0) {
++							if (skipping)
++								serviceFiles = serviceFiles.filter(f => files.indexOf(f) === -1);
++							else serviceFiles.push(...files);
++						}
++					});
+ 
+-			await Promise.all(_.uniq(serviceFiles).map(async f => {
+-				const mod = await import(f.startsWith("/") ? f : "/" + f);
+-				const content = mod.default;
++				await Promise.all(_.uniq(serviceFiles).map(async f => {
++					const mod = await import(f.startsWith("/") ? f : "/" + f);
++					const content = mod.default;
+ 
+-				const svc = this.broker.createService(content);
+-				svc.__filename = f;
+-			}));
++					const svc = this.broker.createService(content);
++					svc.__filename = f;
++				}));
++			}
+ 		}
+ 	}
+ 
+diff --git a/src/runner.js b/src/runner.js
+index 695e5affcb21b456ce5b0f69f2c02e776ad4216a..34cc885fd80279b1b91f8013263c522ff6f1d42b 100644
+--- a/src/runner.js
++++ b/src/runner.js
+@@ -335,83 +335,87 @@ class MoleculerRunner {
+ 		this.watchFolders.length = 0;
+ 		const fileMask = this.flags.mask || "**/*.service.js";
+ 
+-		const serviceDir = process.env.SERVICEDIR || "";
+-		const svcDir = path.isAbsolute(serviceDir)
+-			? serviceDir
+-			: path.resolve(process.cwd(), serviceDir);
++		const serviceDirList = (process.env.SERVICEDIR || "").split(',');
+ 
+-		let patterns = this.servicePaths;
++		for (const serviceDir of serviceDirList) {
++			const svcDir = path.isAbsolute(serviceDir)
++				? serviceDir
++				: path.resolve(process.cwd(), serviceDir);
+ 
+-		if (process.env.SERVICES || process.env.SERVICEDIR) {
+-			if (this.isDirectory(svcDir) && !process.env.SERVICES) {
+-				// Load all services from directory (from subfolders too)
+-				this.broker.loadServices(svcDir, fileMask);
++			let patterns = this.servicePaths;
+ 
+-				if (this.config.hotReload) {
+-					this.watchFolders.push(svcDir);
++			if (process.env.SERVICES || process.env.SERVICEDIR) {
++				if (this.isDirectory(svcDir) && !process.env.SERVICES) {
++					// Load all services from directory (from subfolders too)
++					this.broker.loadServices(svcDir, fileMask);
++
++					if (this.config.hotReload) {
++						this.watchFolders.push(svcDir);
++					}
++				} else if (process.env.SERVICES) {
++					// Load services from env list
++					patterns = Array.isArray(process.env.SERVICES)
++						? process.env.SERVICES
++						: process.env.SERVICES.split(",");
+ 				}
+-			} else if (process.env.SERVICES) {
+-				// Load services from env list
+-				patterns = Array.isArray(process.env.SERVICES)
+-					? process.env.SERVICES
+-					: process.env.SERVICES.split(",");
+ 			}
+-		}
+ 
+-		if (patterns.length > 0) {
+-			let serviceFiles = [];
+-
+-			patterns
+-				.map(s => s.trim())
+-				.forEach(p => {
+-					const skipping = p[0] == "!";
+-					if (skipping) p = p.slice(1);
+-
+-					if (p.startsWith("npm:")) {
+-						// Load NPM module
+-						this.loadNpmModule(p.slice(4));
+-					} else {
+-						let files;
+-						const svcPath = path.isAbsolute(p) ? p : path.resolve(svcDir, p);
+-						// Check is it a directory?
+-						if (this.isDirectory(svcPath)) {
+-							if (this.config.hotReload) {
+-								this.watchFolders.push(svcPath);
+-							}
+-							files = glob(svcPath + "/" + fileMask, { absolute: true });
+-							if (files.length == 0)
+-								return this.broker.logger.warn(
+-									kleur
+-										.yellow()
+-										.bold(
+-											`There is no service files in directory: '${svcPath}'`
+-										)
+-								);
+-						} else if (this.isServiceFile(svcPath)) {
+-							files = [svcPath.replace(/\\/g, "/")];
+-						} else if (this.isServiceFile(svcPath + ".service.js")) {
+-							files = [svcPath.replace(/\\/g, "/") + ".service.js"];
++			if (patterns.length > 0) {
++				let serviceFiles = [];
++
++				patterns
++					.map(s => s.trim())
++					.forEach(p => {
++						const skipping = p[0] == "!";
++						if (skipping) p = p.slice(1);
++
++						if (p.startsWith("npm:")) {
++							// Load NPM module
++							this.loadNpmModule(p.slice(4));
+ 						} else {
+-							// Load with glob
+-							files = glob(p, { cwd: svcDir, absolute: true });
+-							if (files.length == 0)
+-								this.broker.logger.warn(
+-									kleur
+-										.yellow()
+-										.bold(`There is no matched file for pattern: '${p}'`)
+-								);
+-						}
++							let files;
++							const svcPath = path.isAbsolute(p) ? p : path.resolve(svcDir, p);
++							// Check is it a directory?
++							if (this.isDirectory(svcPath)) {
++								if (this.config.hotReload) {
++									this.watchFolders.push(svcPath);
++								}
++								files = glob(svcPath + "/" + fileMask, { absolute: true });
++								if (files.length == 0)
++									return this.broker.logger.warn(
++										kleur
++											.yellow()
++											.bold(
++												`There is no service files in directory: '${svcPath}'`
++											)
++									);
++							} else if (this.isServiceFile(svcPath)) {
++								files = [svcPath.replace(/\\/g, "/")];
++							} else if (this.isServiceFile(svcPath + ".service.js")) {
++								files = [svcPath.replace(/\\/g, "/") + ".service.js"];
++							} else {
++								// Load with glob
++								files = glob(p, { cwd: svcDir, absolute: true });
++								if (files.length == 0)
++									this.broker.logger.warn(
++										kleur
++											.yellow()
++											.bold(`There is no matched file for pattern: '${p}'`)
++									);
++							}
+ 
+-						if (files && files.length > 0) {
+-							if (skipping)
+-								serviceFiles = serviceFiles.filter(f => files.indexOf(f) === -1);
+-							else serviceFiles.push(...files);
++							if (files && files.length > 0) {
++								if (skipping)
++									serviceFiles = serviceFiles.filter(f => files.indexOf(f) === -1);
++								else serviceFiles.push(...files);
++							}
+ 						}
+-					}
+-				});
++					});
+ 
+-			_.uniq(serviceFiles).forEach(f => this.broker.loadService(f));
++				_.uniq(serviceFiles).forEach(f => this.broker.loadService(f));
++			}
+ 		}
++
+ 	}
+ 
+ 	/**

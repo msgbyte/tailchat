@@ -70,7 +70,8 @@
       "mongoose-findorcreate": "3.0.0"
     },
     "patchedDependencies": {
-      "moleculer-minio@2.0.0": "patches/moleculer-minio@2.0.0.patch"
+      "moleculer-minio@2.0.0": "patches/moleculer-minio@2.0.0.patch",
+      "moleculer@0.14.23": "patches/moleculer@0.14.23.patch"
     }
   }
 }

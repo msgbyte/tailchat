@@ -17,6 +17,9 @@ patchedDependencies:
   moleculer-minio@2.0.0:
     hash: 77awcwzrgh47fhn6qqq4ghcfau
     path: patches/moleculer-minio@2.0.0.patch
+  moleculer@0.14.23:
+    hash: ahhlgpfy57fntn2aftq6beaeja
+    path: patches/moleculer@0.14.23.patch
 
 importers:
 
@@ -547,7 +550,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1431,7 +1434,7 @@ importers:
         version: 1.3.1
       moleculer:
         specifier: 0.14.23
-        version: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+        version: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
       moleculer-cli:
         specifier: ^0.7.1
         version: 0.7.1(ejs@3.1.8)(ioredis@4.28.5)(redlock@4.2.0)
@@ -1724,7 +1727,7 @@ importers:
         version: 4.17.21
       moleculer:
         specifier: 0.14.23
-        version: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+        version: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
       moleculer-db:
         specifier: 0.8.19
         version: 0.8.19(moleculer@0.14.23)
@@ -1818,7 +1821,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -1996,7 +1999,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.wxpusher:
     dependencies:
@@ -2458,10 +2461,10 @@ packages:
       '@babel/helpers': 7.21.0
       '@babel/parser': 7.21.2
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
       convert-source-map: 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -2481,10 +2484,10 @@ packages:
       '@babel/helpers': 7.21.0
       '@babel/parser': 7.21.2
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
       convert-source-map: 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -2715,7 +2718,7 @@ packages:
       '@babel/core': 7.21.0
       '@babel/helper-compilation-targets': 7.20.7(@babel/core@7.21.0)
       '@babel/helper-plugin-utils': 7.20.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       lodash.debounce: 4.0.8
       resolve: 1.22.1
       semver: 6.3.0
@@ -2790,7 +2793,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.18.6
       '@babel/helper-validator-identifier': 7.19.1
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2845,7 +2848,7 @@ packages:
       '@babel/helper-member-expression-to-functions': 7.21.0
       '@babel/helper-optimise-call-expression': 7.18.6
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2890,7 +2893,7 @@ packages:
     dependencies:
       '@babel/helper-function-name': 7.21.0
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -2910,7 +2913,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.21.2
+      '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
     transitivePeerDependencies:
       - supports-color
@@ -5008,23 +5011,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
-
-  /@babel/traverse@7.21.2:
-    resolution: {integrity: sha512-ts5FFU/dSUPS13tv8XiEObDu9K+iagEKME9kAbaP7r0Y9KtZJZ+NGndDvWoRAYNpeWafbpFeki3q9QoMD6gxyw==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.21.1
-      '@babel/helper-environment-visitor': 7.18.9
-      '@babel/helper-function-name': 7.21.0
-      '@babel/helper-hoist-variables': 7.18.6
-      '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.21.2
-      '@babel/types': 7.21.2
-      debug: 4.3.4
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
 
   /@babel/traverse@7.21.2(supports-color@5.5.0):
     resolution: {integrity: sha512-ts5FFU/dSUPS13tv8XiEObDu9K+iagEKME9kAbaP7r0Y9KtZJZ+NGndDvWoRAYNpeWafbpFeki3q9QoMD6gxyw==}
@@ -13798,7 +13784,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -17512,17 +17498,6 @@ packages:
       ms: 2.1.3
       supports-color: 5.5.0
 
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-
   /debug@4.3.4(supports-color@5.5.0):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -20416,7 +20391,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       data-uri-to-buffer: 3.0.1
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       file-uri-to-path: 2.0.0
       fs-extra: 8.1.0
       ftp: 0.3.10
@@ -21530,7 +21505,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -21592,7 +21567,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -21759,10 +21734,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
+    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -25255,7 +25230,7 @@ packages:
     resolution: {integrity: sha512-6Mj0yHLdUZjHnOPgr5xfWIMqMWS12zDN6iws9SLuSz76W8jTtAv24MN4/CL7gJrl5vtxGInkkqDv/JIoRsQOvA==}
     dependencies:
       '@types/debug': 4.1.7
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       decode-named-character-reference: 1.0.2
       micromark-core-commonmark: 1.0.6
       micromark-factory-space: 1.0.0
@@ -25614,7 +25589,7 @@ packages:
       metalsmith: 2.5.0
       minimatch: 3.1.2
       mkdirp: 1.0.4
-      moleculer: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+      moleculer: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
       moleculer-repl: 0.6.6
       multimatch: 4.0.0
       nats: 1.4.12
@@ -25709,7 +25684,7 @@ packages:
       bluebird: 3.7.2
       flat: 5.0.2
       lodash: 4.17.21
-      moleculer: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+      moleculer: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
     dev: false
 
   /moleculer-minio@2.0.0(patch_hash=77awcwzrgh47fhn6qqq4ghcfau)(moleculer@0.14.23):
@@ -25719,7 +25694,7 @@ packages:
       moleculer: '>= 0.13.0'
     dependencies:
       minio: 7.0.32
-      moleculer: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+      moleculer: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
       ramda: 0.27.1
       ramda-adjunct: 2.36.0(ramda@0.27.1)
     dev: false
@@ -25757,7 +25732,7 @@ packages:
       yargs-parser: 21.1.1
     dev: false
 
-  /moleculer@0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0):
+  /moleculer@0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0):
     resolution: {integrity: sha512-DE84fy8+1QiA7kUkF9ce4nyDdptBDlLFQfsaUccTScMGAbEjye5e+zfoI9iSA9rznwvshC8tgLhbOcnQBMn/HA==}
     engines: {node: '>= 10.x.x'}
     hasBin: true
@@ -25845,6 +25820,7 @@ packages:
       redlock: 4.2.0
     transitivePeerDependencies:
       - encoding
+    patched: true
 
   /moment@2.29.4:
     resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
@@ -25906,7 +25882,7 @@ packages:
     resolution: {integrity: sha512-nGjm89lHja+T/b8cybAby6H0YgA4qYC/lx6UlwvHGqvTq8bDaNeCwl1sY8uRELrNbVWJzIihxVd+vphGGn1vBw==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       regexp-clone: 1.0.0
       sliced: 1.0.1
     transitivePeerDependencies:
@@ -27040,7 +27016,7 @@ packages:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       get-uri: 3.0.2
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
@@ -28797,7 +28773,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
       lru-cache: 5.1.1
@@ -32210,7 +32186,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@9.2.2)
       socks: 2.7.1
     transitivePeerDependencies:
       - supports-color
@@ -33217,7 +33193,7 @@ packages:
       ioredis: 4.28.5
       kleur: 4.1.5
       lodash: 4.17.21
-      moleculer: 0.14.23(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
+      moleculer: 0.14.23(patch_hash=ahhlgpfy57fntn2aftq6beaeja)(ioredis@4.28.5)(nats@1.4.12)(redlock@4.2.0)
       moleculer-db: 0.8.19(moleculer@0.14.23)
       moleculer-repl: 0.6.6
       moment: 2.29.4
@@ -36442,7 +36418,6 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36459,6 +36434,7 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
