@@ -8,19 +8,15 @@ services:
     restart: unless-stopped
     env_file: ../../docker-compose.env
     environment:
-      SERVICEDIR: plugins,services
+      SERVICEDIR: services
       PORT: 3000
-      OPENAPI_PORT: 3003
-      OPENAPI_UNDER_PROXY: "true"
     depends_on:
       - mongo
       - redis
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.api-gw.rule=PathPrefix(`/health`)"
       - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
-      - "traefik.http.routers.openapi-oidc.rule=PathPrefix(`/open`)"
-      - "traefik.http.services.openapi-oidc.loadbalancer.server.port=3003"
     networks:
       - internal
 
