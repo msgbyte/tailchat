@@ -437,9 +437,19 @@ class GroupService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
-    const group = await this.adapter.model.findById(groupId).exec();
-    group.config[configName] = configValue;
-    await group.save();
+    const group = await this.adapter.model.findOneAndUpdate(
+      {
+        _id: String(groupId),
+      },
+      {
+        $set: {
+          [`config.${configName}`]: configValue,
+        },
+      },
+      {
+        new: true,
+      }
+    );
 
     this.notifyGroupInfoUpdate(ctx, group);
   }
