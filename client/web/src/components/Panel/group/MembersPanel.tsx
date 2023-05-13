@@ -14,6 +14,7 @@ import {
 } from 'tailchat-shared';
 import { Problem } from '@/components/Problem';
 import { useGroupMemberAction } from '@/hooks/useGroupMemberAction';
+import { UserPopover } from '@/components/popover/UserPopover';
 
 interface MembersPanelProps {
   groupId: string;
@@ -78,9 +79,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
           <div>
             <UserListItem
               userId={member._id}
-              popover={
-                <GroupUserPopover userInfo={member} groupInfo={groupInfo} />
-              }
+              popover={<UserPopover userInfo={member} />}
               hideDiscriminator={hideGroupMemberDiscriminator}
             />
           </div>
@@ -91,7 +90,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         <UserListItem
           key={member._id}
           userId={member._id}
-          popover={<GroupUserPopover userInfo={member} groupInfo={groupInfo} />}
+          popover={<UserPopover userInfo={member} />}
           hideDiscriminator={hideGroupMemberDiscriminator}
         />
       );
