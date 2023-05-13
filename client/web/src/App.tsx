@@ -10,6 +10,7 @@ import {
   sharedEvent,
   TcProvider,
   useColorScheme,
+  useGlobalConfigStore,
   useLanguage,
 } from 'tailchat-shared';
 import clsx from 'clsx';
@@ -94,10 +95,14 @@ AppContainer.displayName = 'AppContainer';
 
 const AppHeader: React.FC = React.memo(() => {
   const { language } = useLanguage();
+  const { serverName } = useGlobalConfigStore((state) => ({
+    serverName: state.serverName,
+  }));
 
   return (
     <Helmet>
       <meta httpEquiv="Content-Language" content={language} />
+      <title>{serverName}</title>
     </Helmet>
   );
 });

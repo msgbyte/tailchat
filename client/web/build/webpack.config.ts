@@ -56,7 +56,6 @@ const plugins: Configuration['plugins'] = [
     'process.env.VERSION': JSON.stringify(VERSION),
   }),
   new HtmlWebpackPlugin({
-    title: 'Tailchat',
     inject: true,
     hash: false,
     favicon: path.resolve(ROOT_PATH, './assets/images/favicon.ico'),
