@@ -6,6 +6,7 @@ import {
   createJSONField,
   createDateTimeField,
   createUrlField,
+  emailValidator,
 } from 'tushan';
 import { createFileSizeField } from './components/field/filesize';
 
@@ -18,12 +19,32 @@ export const userFields = [
   }),
   createEmailField('email', {
     label: 'Email',
+    edit: {
+      rules: [
+        {
+          required: true,
+        },
+        {
+          validator: emailValidator,
+        },
+      ],
+    },
   }),
   createTextField('nickname', {
     label: 'Nickname',
   }),
   createTextField('discriminator', {
     label: 'Discriminator',
+    edit: {
+      rules: [
+        {
+          required: true,
+        },
+        {
+          match: /\d{4}/,
+        },
+      ],
+    },
   }),
   createBooleanField('temporary', {
     label: 'Temporary',
