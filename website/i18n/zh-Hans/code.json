@@ -17,7 +17,7 @@
   },
   "theme.ErrorPageContent.tryAgain": {
     "message": "重试",
-    "description": "The label of the button to try again when the page crashed"
+    "description": "The label of the button to try again rendering when the React error boundary captures an error"
   },
   "theme.NotFound.title": {
     "message": "找不到页面",
@@ -389,5 +389,20 @@
   },
   "Source Code": {
     "message": "源代码"
+  },
+  "AI": {
+    "message": "AI"
+  },
+  "AI Assistant": {
+    "message": "AI 智能助手"
+  },
+  "Thanks for ChatGPT, Communicate with people will be easier and friendly.": {
+    "message": "感谢 ChatGPT，人与人交流将更轻松、更友好."
+  },
+  "View in Bilibili": {
+    "message": "在 Bilibili 观看"
+  },
+  "Communicate by AI, AI Assistant will help you improve your word, simplify your expression and even summary history messages.": {
+    "message": "使用AI交流，AI 智能助手助你改善用词，简化表达，甚至汇总历史消息."
   }
 }

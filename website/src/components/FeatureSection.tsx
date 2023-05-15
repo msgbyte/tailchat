@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
-import Translate from '@docusaurus/Translate';
+import Translate, { translate } from '@docusaurus/Translate';
 import { nightlyUrl } from '../utils/consts';
 import './FeatureSection.less';
 
@@ -59,6 +59,7 @@ export const FeatureSection: React.FC = React.memo(() => {
         <link rel="prefetch" href="/img/hero-light.png" as="image" />
         <link rel="prefetch" href="/img/hero-dark.png" as="image" />
         <link rel="preload" href="/img/intro/hello.png" as="image" />
+        <link rel="preload" href="/img/intro/ai.png" as="image" />
         <link rel="preload" href="/img/intro/plugins.png" as="image" />
         <link rel="preload" href="/img/intro/roles.png" as="image" />
         <link rel="preload" href="/img/intro/github-bot.png" as="image" />
@@ -72,6 +73,7 @@ export const FeatureSection: React.FC = React.memo(() => {
           <div className="right">
             <div className="right-body">
               <Pill id="messenger" label={<Translate>Messenger</Translate>} />
+              <Pill id="ai" label={<Translate>AI</Translate>} />
               <Pill id="plugin" label={<Translate>Plugin</Translate>} />
               <Pill id="roles" label={<Translate>Roles</Translate>} />
               <Pill id="bot" label={<Translate>Bot</Translate>} />
@@ -113,7 +115,39 @@ export const FeatureSection: React.FC = React.memo(() => {
             </div>
           </div>
 
-          <div className="item reverse" id="plugin">
+          <div className="item" id="ai">
+            <div className="left">
+              <h3>
+                <Translate>AI Assistant</Translate>
+              </h3>
+              <p>
+                <Translate>
+                  Communicate by AI, AI Assistant will help you improve your
+                  word, simplify your expression and even summary history
+                  messages.
+                </Translate>
+              </p>
+              <p>
+                <Translate>
+                  Thanks for ChatGPT, Communicate with people will be easier and
+                  friendly.
+                </Translate>
+              </p>
+              <div className="btns">
+                <Link
+                  className="button button--primary"
+                  to={'https://www.bilibili.com/video/BV1UP41127JS/'}
+                >
+                  {translate({ message: 'View in Bilibili' })}
+                </Link>
+              </div>
+            </div>
+            <div className="right">
+              <img data-zoomable src="/img/intro/ai.png" />
+            </div>
+          </div>
+
+          <div className="item" id="plugin">
             <div className="left">
               <h3>
                 <Translate>Plugin Center</Translate>
@@ -170,7 +204,7 @@ export const FeatureSection: React.FC = React.memo(() => {
             </div>
           </div>
 
-          <div className="item reverse" id="bot">
+          <div className="item" id="bot">
             <div className="left">
               <h3>
                 <Translate>Bot</Translate>

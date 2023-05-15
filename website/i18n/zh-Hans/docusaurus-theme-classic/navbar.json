@@ -18,5 +18,9 @@
   "item.label.Downloads": {
     "message": "下载",
     "description": "Navbar item with label Downloads"
+  },
+  "logo.alt": {
+    "message": "Tailchat Logo",
+    "description": "The alt text of navbar logo"
   }
 }
