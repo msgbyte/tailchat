@@ -142,16 +142,18 @@ export const AssistantPopover: React.FC<{
         onClick={async () => {
           const plainMessages = (
             await Promise.all(
-              messages.map(
-                async (item) =>
-                  `${
-                    (
-                      await getCachedUserInfo(item.author)
-                    ).nickname
-                  }: ${getMessageTextDecorators().serialize(
-                    item.content ?? ''
-                  )}`
-              )
+              messages
+                .slice(0, 30) // get first 30 message, too much will throw error
+                .map(
+                  async (item) =>
+                    `${
+                      (
+                        await getCachedUserInfo(item.author)
+                      ).nickname
+                    }: ${getMessageTextDecorators().serialize(
+                      item.content ?? ''
+                    )}`
+                )
             )
           ).join('\n');
 
