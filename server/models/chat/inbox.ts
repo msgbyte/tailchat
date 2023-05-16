@@ -9,8 +9,12 @@ import {
 } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
+import type { InboxStruct } from 'tailchat-server-sdk';
 import { User } from '../user/user';
 
+/**
+ * @deprecated use InboxStruct directly
+ */
 interface InboxMessage {
   /**
    * 消息所在群组Id
@@ -23,6 +27,11 @@ interface InboxMessage {
   converseId: string;
 
   messageId: string;
+
+  /**
+   * 消息发送者
+   */
+  messageAuthor: string;
 
   /**
    * 消息片段，用于消息的预览/发送通知
@@ -70,7 +79,7 @@ export class Inbox extends TimeStamps implements Base {
    * 信息体，没有类型
    */
   @prop()
-  payload?: InboxMessage | object;
+  payload?: InboxStruct['payload'];
 
   /**
    * 是否已读

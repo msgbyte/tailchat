@@ -79,6 +79,7 @@ export interface MessageInboxItem extends BasicInboxItem {
     groupId?: string;
     converseId: string;
     messageId: string;
+    messageAuthor: string;
     messageSnippet: string;
     messagePlainContent?: string;
   };

@@ -49,11 +49,20 @@ class WxpusherService extends TcService {
           const message = inboxItem.payload;
 
           let title = 'new';
+          const senderInfo = await call(ctx).getUserInfo(message.messageAuthor);
+
           if (message.groupId) {
-            const groupInfo = await call(ctx).getGroupInfo(message.groupId);
-            title = `来自群组: ${groupInfo.name}`; // 因为wxpusher插件仅适用于中国大陆，因此仅需要中文即可
+            const [groupInfo] = await Promise.all([
+              call(ctx).getGroupInfo(message.groupId),
+            ]);
+            title = `[群组] ${groupInfo.name} 的 ${senderInfo.nickname}`; // 因为wxpusher插件仅适用于中国大陆，因此仅需要中文即可
+          } else {
+            title = `[私信] ${senderInfo.nickname}`; // 因为wxpusher插件仅适用于中国大陆，因此仅需要中文即可
           }
-          const content = message.messagePlainContent ?? message.messageSnippet; // 优先使用去节点的内容
+
+          const content = `${senderInfo.nickname}: ${
+            message.messagePlainContent ?? message.messageSnippet
+          }`; // 优先使用去节点的内容
 
           try {
             await this.sendMessage(userId, [title, content].join('\n'));
