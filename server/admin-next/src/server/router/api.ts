@@ -86,5 +86,10 @@ router.use(
     q: ['objectName'],
   })
 );
+router.use(
+  '/mail',
+  auth(),
+  raExpressMongoose(require('../../../../models/user/mail').default)
+);
 
 export { router as apiRouter };

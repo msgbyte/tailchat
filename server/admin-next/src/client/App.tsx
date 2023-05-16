@@ -8,6 +8,7 @@ import {
 } from 'tushan';
 import {
   IconDashboard,
+  IconEmail,
   IconFile,
   IconMessage,
   IconSettings,
@@ -16,7 +17,13 @@ import {
   IconWifi,
 } from 'tushan/icon';
 import { authProvider } from './auth';
-import { fileFields, groupFields, messageFields, userFields } from './fields';
+import {
+  fileFields,
+  groupFields,
+  mailFields,
+  messageFields,
+  userFields,
+} from './fields';
 import { httpClient } from './request';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
@@ -103,6 +110,13 @@ function App() {
             action={{ detail: true }}
           />
         }
+      />
+
+      <Resource
+        name="mail"
+        label="Mails"
+        icon={<IconEmail />}
+        list={<ListTable fields={mailFields} />}
       />
 
       <CustomRoute name="system" icon={<IconSettings />}>

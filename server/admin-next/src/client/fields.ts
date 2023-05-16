@@ -129,3 +129,15 @@ export const fileFields = [
   createTextField('userId'),
   createDateTimeField('createdAt'),
 ];
+
+export const mailFields = [
+  createTextField('userId'),
+  createTextField('host'),
+  createTextField('port'),
+  createTextField('port'),
+  createTextField('secure'),
+  createTextField('is_success'),
+  createTextField('data'),
+  createTextField('error'),
+  createDateTimeField('createdAt'),
+];
