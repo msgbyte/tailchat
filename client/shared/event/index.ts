@@ -49,6 +49,7 @@ export interface SharedEventMap {
 
   /**
    * 接受到未被静音的消息
+   * 一般用于消息推送
    */
   receiveUnmutedMessage: (payload: ChatMessage) => void;
 

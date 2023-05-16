@@ -104,4 +104,14 @@ export const builtinPlugins: PluginManifest[] = _compact([
     'description.zh-CN': '为用户信息增加地理位置记录',
     requireRestart: true,
   },
+  isOffical && {
+    label: 'AI Assistant',
+    name: 'com.msgbyte.ai-assistant',
+    url: '/plugins/com.msgbyte.ai-assistant/index.js',
+    icon: '/plugins/com.msgbyte.ai-assistant/assets/icon.png',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description: 'Add chatgpt into Tailchat',
+    requireRestart: true,
+  },
 ]);
