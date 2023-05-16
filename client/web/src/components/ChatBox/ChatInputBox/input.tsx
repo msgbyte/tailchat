@@ -8,6 +8,18 @@ import { useChatInputMentionsContext } from './context';
 import { MentionCommandItem } from './MentionCommandItem';
 import './input.less';
 
+const defaultChatInputBoxInputStyle = {
+  input: {
+    overflow: 'auto',
+    maxHeight: 70,
+  },
+  highlighter: {
+    boxSizing: 'border-box',
+    overflow: 'hidden',
+    maxHeight: 70,
+  },
+};
+
 interface ChatInputBoxInputProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
@@ -28,7 +40,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         className="chatbox-mention-input"
         placeholder={placeholder ?? t('输入一些什么')}
         disabled={disabled}
-        singleLine={true}
+        style={defaultChatInputBoxInputStyle}
         maxLength={1000}
         value={props.value}
         onChange={(e, newValue, _, mentions) =>
