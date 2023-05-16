@@ -5,13 +5,14 @@
   "author": "moonrailgun",
   "scripts": {
     "dev": "nodemon",
-    "start": "NODE_ENV=production ts-node src/server/index.ts",
-    "build": "vite build"
+    "start": "NODE_ENV=production node dist/admin-next/src/server/index.js",
+    "build": "pnpm build:client && pnpm build:server",
+    "build:client": "vite build",
+    "build:server": "tsc -p tsconfig.server.json"
   },
   "dependencies": {
     "@fastify/busboy": "^1.1.0",
     "axios": "^1.4.0",
-    "body-parser": "^1.20.1",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "express-mongoose-ra-json-server": "^0.1.0",
@@ -23,11 +24,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailchat-server-sdk": "workspace:^",
-    "tushan": "^0.2.3",
+    "tushan": "^0.2.4",
     "vite-express": "^0.5.4"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.2",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.15",
     "@types/md5": "^2.3.2",

@@ -3,7 +3,6 @@ import ViteExpress from 'vite-express';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import morgan from 'morgan';
-import bodyParser from 'body-parser';
 import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
@@ -27,7 +26,7 @@ mongoose.connect(process.env.MONGO_URL, (error: any) => {
 });
 
 app.use(compression());
-app.use(bodyParser());
+app.use(express.json());
 
 // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
 app.disable('x-powered-by');
@@ -50,6 +49,12 @@ app.use((err: any, req: any, res: any, next: any) => {
   res.status(500);
   res.json({ error: err.message });
 });
+
+if (process.env.NODE_ENV === 'production') {
+  ViteExpress.config({
+    mode: 'production',
+  });
+}
 
 ViteExpress.listen(app, port, () =>
   console.log(

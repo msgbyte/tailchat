@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./src/server/**/*.ts", "../models/**/*.ts"],
+  "exclude": ["node_modules/**/*", "dist"],
+  "compilerOptions": {
+    "rootDirs": ["./", "../"],
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "ES2019",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "experimentalDecorators": true,
+    "noEmit": false
+  }
+}
