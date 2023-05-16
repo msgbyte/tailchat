@@ -19,7 +19,7 @@ The following is a list of syntaxes currently supported by the `bbcode` plugin:
 | img | Image | `[img]https://tailchat.msgbyte.com/img/logo.svg[/img]` | <div style={{width: 60}}><img src="https:/ /tailchat.msgbyte.com/img/logo.svg" /></div> |
 | at | Mention | `[at=<hereisuserid>]moonrailgun[/at]` | - |
 | emoji | expression | `[emoji]smile[/emoji]` | - |
-| markdown / md | markdown syntax support | `[markdown]## Heading[/markdown]` | - |
+| markdown / md | markdown syntax support | `[markdown]## Heading[/markdown]` / `[md]## Heading[/md]` | - |
 
 ## For plugin developers
 

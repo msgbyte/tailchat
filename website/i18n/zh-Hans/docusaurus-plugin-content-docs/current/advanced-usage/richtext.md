@@ -19,7 +19,7 @@ Tailchat 内置了 `com.msgbyte.bbcode` 插件用于对富文本消息做支持(
 | img | 图片 | `[img]https://tailchat.msgbyte.com/img/logo.svg[/img]` | <div style={{width: 60}}><img src="https://tailchat.msgbyte.com/img/logo.svg" /></div>  |
 | at | 提及 | `[at=<hereisuserid>]moonrailgun[/at]` | - |
 | emoji | 表情 | `[emoji]smile[/emoji]` | - |
-| markdown / md | markdown语法支持 | `[markdown]## Heading[/markdown]` | - |
+| markdown / md | markdown语法支持 | `[markdown]## Heading[/markdown]` / `[md]## Heading[/md]` | - |
 
 ## 对于插件开发者
 
