@@ -43,7 +43,13 @@ function App() {
               }),
             ]}
             fields={userFields}
-            action={{ create: true, detail: true, edit: true, delete: true }}
+            action={{
+              create: true,
+              detail: true,
+              edit: true,
+              delete: true,
+              export: true,
+            }}
           />
         }
       />
@@ -60,7 +66,7 @@ function App() {
               }),
             ]}
             fields={messageFields}
-            action={{ detail: true, edit: true, delete: true }}
+            action={{ detail: true, edit: true, delete: true, export: true }}
           />
         }
       />
@@ -77,7 +83,7 @@ function App() {
               }),
             ]}
             fields={groupFields}
-            action={{ detail: true, edit: true, delete: true }}
+            action={{ detail: true, edit: true, delete: true, export: true }}
           />
         }
       />
