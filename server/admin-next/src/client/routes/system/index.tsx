@@ -9,6 +9,7 @@ import {
   Message,
   Form,
   Upload,
+  useTranslation,
 } from 'tushan';
 import { IconCheck, IconClose, IconDelete } from 'tushan/icon';
 import { TailchatImage } from '../../components/TailchatImage';
@@ -17,13 +18,14 @@ import { TailchatImage } from '../../components/TailchatImage';
  * Tailchat 系统设置
  */
 export const SystemConfig: React.FC = React.memo(() => {
-  const [{ value: config = {}, loading }, fetchConfig] = useAsyncRequest(
+  const [{ value: config = {}, loading, error }, fetchConfig] = useAsyncRequest(
     async () => {
       const { data } = await request.get('/config/client');
 
       return data.config ?? {};
     }
   );
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchConfig();
@@ -89,17 +91,22 @@ export const SystemConfig: React.FC = React.memo(() => {
     return <Spin />;
   }
 
+  if (error) {
+    console.log('error', error);
+    return <div>{String(error)}</div>;
+  }
+
   return (
     <Form>
-      <Form.Item label={'custom.config.uploadFileLimit'}>
+      <Form.Item label={t('custom.config.uploadFileLimit')}>
         {config.uploadFileLimit}
       </Form.Item>
 
-      <Form.Item label={'custom.config.emailVerification'}>
+      <Form.Item label={t('custom.config.emailVerification')}>
         {config.emailVerification ? <IconCheck /> : <IconClose />}
       </Form.Item>
 
-      <Form.Item label={'custom.config.serverName'}>
+      <Form.Item label={t('custom.config.serverName')}>
         <Input
           value={serverName}
           onChange={(val) => setServerName(val)}
@@ -108,7 +115,7 @@ export const SystemConfig: React.FC = React.memo(() => {
         />
       </Form.Item>
 
-      <Form.Item label={'custom.config.serverEntryImage'}>
+      <Form.Item label={t('custom.config.serverEntryImage')}>
         <div>
           {config?.serverEntryImage ? (
             <div style={{ marginTop: 10 }}>

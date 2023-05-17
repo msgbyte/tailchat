@@ -7,18 +7,17 @@ import {
   createDateTimeField,
   createUrlField,
   emailValidator,
+  createNumberField,
 } from 'tushan';
 import { createFileSizeField } from './components/field/filesize';
 
 export const userFields = [
   createTextField('id', {
-    label: 'ID',
     list: {
       sort: true,
     },
   }),
   createEmailField('email', {
-    label: 'Email',
     edit: {
       rules: [
         {
@@ -30,11 +29,8 @@ export const userFields = [
       ],
     },
   }),
-  createTextField('nickname', {
-    label: 'Nickname',
-  }),
+  createTextField('nickname'),
   createTextField('discriminator', {
-    label: 'Discriminator',
     edit: {
       rules: [
         {
@@ -46,14 +42,9 @@ export const userFields = [
       ],
     },
   }),
-  createBooleanField('temporary', {
-    label: 'Temporary',
-  }),
-  createAvatarField('avatar', {
-    label: 'Avatar',
-  }),
+  createBooleanField('temporary'),
+  createAvatarField('avatar'),
   createJSONField('settings', {
-    label: 'Settings',
     list: {
       width: 200,
     },
@@ -67,15 +58,9 @@ export const userFields = [
 ];
 
 export const messageFields = [
-  createTextField('id', {
-    label: 'ID',
-  }),
-  createTextField('content', {
-    label: 'Content',
-  }),
-  createTextField('author', {
-    label: 'Author',
-  }),
+  createTextField('id'),
+  createTextField('content'),
+  createTextField('author'),
   createTextField('groupId'),
   createTextField('converseId'),
   createBooleanField('hasRecall'),
@@ -89,9 +74,7 @@ export const messageFields = [
 ];
 
 export const groupFields = [
-  createTextField('id', {
-    label: 'ID',
-  }),
+  createTextField('id'),
   createTextField('name'),
   createTextField('owner'),
   createTextField('members.length', {
@@ -122,9 +105,7 @@ export const fileFields = [
       width: 120,
     },
   }),
-  createTextField('metaData.content-type', {
-    label: 'Content Type',
-  }),
+  createTextField('metaData.content-type'),
   createTextField('etag'),
   createTextField('userId'),
   createDateTimeField('createdAt'),
@@ -133,11 +114,10 @@ export const fileFields = [
 export const mailFields = [
   createTextField('userId'),
   createTextField('host'),
-  createTextField('port'),
-  createTextField('port'),
-  createTextField('secure'),
-  createTextField('is_success'),
-  createTextField('data'),
+  createNumberField('port'),
+  createBooleanField('secure'),
+  createBooleanField('is_success'),
+  createJSONField('data'),
   createTextField('error'),
   createDateTimeField('createdAt'),
 ];

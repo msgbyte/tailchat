@@ -2,7 +2,14 @@ import React from 'react';
 import { request } from '../../request';
 import _uniq from 'lodash/uniq';
 import { TagItems } from '../../components/TagItems';
-import { Card, Spin, Table, Typography, useAsync } from 'tushan';
+import {
+  Card,
+  Spin,
+  Table,
+  Typography,
+  useAsync,
+  useTranslation,
+} from 'tushan';
 
 /**
  * Tailchat 网络状态
@@ -13,6 +20,7 @@ export const TailchatNetwork: React.FC = React.memo(() => {
 
     return data;
   });
+  const { t } = useTranslation();
 
   if (loading) {
     return <Spin />;
@@ -21,7 +29,7 @@ export const TailchatNetwork: React.FC = React.memo(() => {
   return (
     <Card>
       <Typography.Title heading={6}>
-        {'custom.network.nodeList'}
+        {t('custom.network.nodeList')}
       </Typography.Title>
 
       <Table
@@ -59,7 +67,7 @@ export const TailchatNetwork: React.FC = React.memo(() => {
       />
 
       <Typography.Title heading={6}>
-        {'custom.network.serviceList'}
+        {t('custom.network.serviceList')}
       </Typography.Title>
 
       <div>
@@ -67,14 +75,14 @@ export const TailchatNetwork: React.FC = React.memo(() => {
       </div>
 
       <Typography.Title heading={6}>
-        {'custom.network.actionList'}
+        {t('custom.network.actionList')}
       </Typography.Title>
       <div>
         <TagItems items={_uniq<string>(data.actions ?? [])} />
       </div>
 
       <Typography.Title heading={6}>
-        {'custom.network.eventList'}
+        {t('custom.network.eventList')}
       </Typography.Title>
 
       <div>

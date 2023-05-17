@@ -24,6 +24,7 @@ import {
   messageFields,
   userFields,
 } from './fields';
+import { i18n } from './i18n';
 import { httpClient } from './request';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
@@ -37,10 +38,10 @@ function App() {
       basename="/admin"
       dataProvider={dataProvider}
       authProvider={authProvider}
+      i18n={i18n}
     >
       <Resource
         name="users"
-        label="User"
         icon={<IconUser />}
         list={
           <ListTable
@@ -63,7 +64,6 @@ function App() {
 
       <Resource
         name="messages"
-        label="Messages"
         icon={<IconMessage />}
         list={
           <ListTable
@@ -80,7 +80,6 @@ function App() {
 
       <Resource
         name="groups"
-        label="Groups"
         icon={<IconUserGroup />}
         list={
           <ListTable
@@ -97,7 +96,6 @@ function App() {
 
       <Resource
         name="file"
-        label="Files"
         icon={<IconFile />}
         list={
           <ListTable
@@ -114,7 +112,6 @@ function App() {
 
       <Resource
         name="mail"
-        label="Mails"
         icon={<IconEmail />}
         list={<ListTable fields={mailFields} />}
       />
