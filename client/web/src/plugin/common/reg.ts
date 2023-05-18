@@ -12,6 +12,7 @@ import {
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
+import type { ReactElement } from 'react';
 
 /**
  * 注册自定义面板
@@ -301,3 +302,14 @@ interface PluginInboxItem {
  */
 export const [pluginInboxItemMap, regPluginInboxItemMap] =
   buildRegMap<PluginInboxItem>();
+
+export const [pluginGroupConfigItems, regPluginGroupConfigItem] = buildRegList<{
+  name: string;
+  title: string;
+  tip?: string;
+  render: (props: {
+    value: any;
+    onChange: (val: unknown) => void;
+    loading: boolean;
+  }) => ReactElement;
+}>();

@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-  model,
-  showSuccessToasts,
-  t,
-  useAsyncRequest,
-  useGroupInfo,
-} from 'tailchat-shared';
+import { model, t, useAsyncRequest, useGroupInfo } from 'tailchat-shared';
 import { Loading } from '@/components/Loading';
 import { FullModalField } from '@/components/FullModal/Field';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import { Switch } from 'antd';
+import { pluginGroupConfigItems } from '@/plugin/common';
+import { ensurePluginNamePrefix } from '@/utils/plugin-helper';
 
 export const GroupConfig: React.FC<{
   groupId: string;
@@ -47,6 +43,22 @@ export const GroupConfig: React.FC<{
           />
         }
       />
+
+      {pluginGroupConfigItems.map((item) => {
+        const name = ensurePluginNamePrefix(item.name);
+        return (
+          <FullModalField
+            key={name}
+            title={item.title}
+            tip={item.tip}
+            content={item.render({
+              value: config[name],
+              onChange: (val: any) => handleModifyConfig(name, val),
+              loading,
+            })}
+          />
+        );
+      })}
     </div>
   );
 });

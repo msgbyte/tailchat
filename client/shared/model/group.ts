@@ -11,7 +11,7 @@ export const groupConfigNames = [
   'hideGroupMemberDiscriminator',
 ] as const;
 
-export type GroupConfigNames = (typeof groupConfigNames)[number];
+export type GroupConfigNames = (typeof groupConfigNames)[number] | string; // string is plugin config
 
 export interface GroupMember {
   roles: string[]; // 角色组

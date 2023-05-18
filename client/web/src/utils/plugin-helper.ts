@@ -9,3 +9,11 @@ export function findPluginPanelInfoByName(
 ): PluginGroupPanel | undefined {
   return pluginGroupPanel.find((p) => p.name === pluginPanelName);
 }
+
+export function ensurePluginNamePrefix(name: string): string {
+  if (typeof name !== 'string') {
+    throw new Error('Plugin Name must be string');
+  }
+
+  return name.startsWith('plugin:') ? name : `plugin:${name}`;
+}
