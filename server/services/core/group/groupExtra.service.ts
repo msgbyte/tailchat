@@ -24,6 +24,23 @@ class GroupExtraService extends TcService {
   onInit(): void {
     this.registerLocalDb(require('../../../models/group/group-extra').default);
 
+    this.registerAction('getGroupData', this.getGroupData, {
+      params: {
+        groupId: 'string',
+        name: 'string',
+      },
+      cache: {
+        keys: ['groupId', 'name'],
+        ttl: 60 * 60, // 1 hour
+      },
+    });
+    this.registerAction('saveGroupData', this.saveGroupData, {
+      params: {
+        groupId: 'string',
+        name: 'string',
+        data: 'string',
+      },
+    });
     this.registerAction('getPanelData', this.getPanelData, {
       params: {
         groupId: 'string',
@@ -43,6 +60,61 @@ class GroupExtraService extends TcService {
         data: 'string',
       },
     });
+  }
+
+  async getGroupData(
+    ctx: TcContext<{
+      groupId: string;
+      name: string;
+    }>
+  ) {
+    const { groupId, name } = ctx.params;
+
+    const res = await this.adapter.findOne({
+      groupId,
+      panelId: null,
+      name,
+    });
+
+    return { data: res?.data ?? null };
+  }
+
+  async saveGroupData(
+    ctx: TcContext<{
+      groupId: string;
+      name: string;
+      data: string;
+    }>
+  ) {
+    const { groupId, name, data } = ctx.params;
+    const userId = ctx.meta.userId;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.groupConfig]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    await this.adapter.model.findOneAndUpdate(
+      {
+        groupId,
+        panelId: null,
+        name,
+      },
+      {
+        data: String(data),
+      },
+      {
+        upsert: true, // Create if not exist
+      }
+    );
+
+    await this.cleanGroupDataCache(groupId, name);
+
+    return true;
   }
 
   async getPanelData(
@@ -100,6 +172,10 @@ class GroupExtraService extends TcService {
     await this.cleanGroupPanelDataCache(groupId, panelId, name);
 
     return true;
+  }
+
+  private cleanGroupDataCache(groupId: string, name: string) {
+    return this.cleanActionCache('getGroupData', [groupId, name]);
   }
 
   private cleanGroupPanelDataCache(
