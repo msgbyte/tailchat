@@ -143,7 +143,7 @@ export const AssistantPopover: React.FC<{
           const plainMessages = (
             await Promise.all(
               messages
-                .slice(0, 30) // get first 30 message, too much will throw error
+                .slice(messages.length - 30, messages.length) // get last 30 message, too much will throw error
                 .map(
                   async (item) =>
                     `${
