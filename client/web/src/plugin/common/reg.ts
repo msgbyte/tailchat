@@ -307,7 +307,7 @@ export const [pluginGroupConfigItems, regPluginGroupConfigItem] = buildRegList<{
   name: string;
   title: string;
   tip?: string;
-  render: (props: {
+  component: (props: {
     value: any;
     onChange: (val: unknown) => void;
     loading: boolean;

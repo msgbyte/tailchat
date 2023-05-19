@@ -51,7 +51,7 @@ export const GroupConfig: React.FC<{
             key={name}
             title={item.title}
             tip={item.tip}
-            content={item.render({
+            content={React.createElement(item.component, {
               value: config[name],
               onChange: (val: any) => handleModifyConfig(name, val),
               loading,

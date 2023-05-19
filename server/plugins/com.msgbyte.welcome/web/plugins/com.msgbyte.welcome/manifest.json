@@ -1,0 +1,11 @@
+{
+  "label": "Group Welcome",
+  "label.zh-CN": "入群欢迎",
+  "name": "com.msgbyte.welcome",
+  "url": "{BACKEND}/plugins/com.msgbyte.welcome/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Send a welcome message when joining a group",
+  "description.zh-CN": "加入群组时发送欢迎消息",
+  "requireRestart": true
+}

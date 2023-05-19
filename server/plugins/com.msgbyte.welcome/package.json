@@ -1,0 +1,20 @@
+{
+  "name": "tailchat-plugin-welcome",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "加入群组时发送欢迎消息",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.20",
+    "mini-star": "*"
+  },
+  "dependencies": {
+    "tailchat-server-sdk": "*"
+  }
+}

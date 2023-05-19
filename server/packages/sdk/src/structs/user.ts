@@ -1,7 +1,9 @@
 export const userType = ['normalUser', 'pluginBot', 'openapiBot'] as const;
-export type UserType = typeof userType[number];
+export type UserType = (typeof userType)[number];
 
 export interface UserStruct {
+  _id: string;
+
   /**
    * 用户名 不可被修改
    * 与email必有一个

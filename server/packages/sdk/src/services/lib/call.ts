@@ -42,12 +42,23 @@ export function call(ctx: TcPureContext) {
       );
     },
     /**
+     * 获取群组大厅会话的id
+     */
+    async getGroupLobbyConverseId(groupId: string): Promise<string | null> {
+      const lobbyConverseId: string = await ctx.call(
+        'group.getGroupLobbyConverseId',
+        {
+          groupId,
+        }
+      );
+
+      return lobbyConverseId;
+    },
+    /**
      * 添加群组系统信息
      */
     async addGroupSystemMessage(groupId: string, message: string) {
-      const lobbyConverseId = await ctx.call('group.getGroupLobbyConverseId', {
-        groupId,
-      });
+      const lobbyConverseId = await call(ctx).getGroupLobbyConverseId(groupId);
 
       if (!lobbyConverseId) {
         // 如果没有文本频道则跳过

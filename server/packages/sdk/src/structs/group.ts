@@ -52,4 +52,6 @@ export interface GroupStruct {
   panels: GroupPanelStruct[];
 
   roles?: GroupRoleStruct[];
+
+  config: Record<string, any>;
 }
