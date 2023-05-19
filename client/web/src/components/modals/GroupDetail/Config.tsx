@@ -1,5 +1,11 @@
 import React from 'react';
-import { model, t, useAsyncRequest, useGroupInfo } from 'tailchat-shared';
+import {
+  model,
+  showSuccessToasts,
+  t,
+  useAsyncRequest,
+  useGroupInfo,
+} from 'tailchat-shared';
 import { Loading } from '@/components/Loading';
 import { FullModalField } from '@/components/FullModal/Field';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
@@ -16,6 +22,7 @@ export const GroupConfig: React.FC<{
   const [{ loading }, handleModifyConfig] = useAsyncRequest(
     async (configName: model.group.GroupConfigNames, configValue: any) => {
       await model.group.modifyGroupConfig(groupId, configName, configValue);
+      showSuccessToasts();
     },
     [groupId]
   );
