@@ -71,12 +71,13 @@ type ServiceActionSchema = Pick<
  */
 function generateAfterHookKey(actionName: string, serviceName = '') {
   if (serviceName) {
-    return `${CONFIG_GATEWAY_AFTER_HOOK}.${serviceName}.${actionName}`.replaceAll(
-      '.',
-      '-'
+    return encodeNoConflictServiceNameKey(
+      `${CONFIG_GATEWAY_AFTER_HOOK}.${serviceName}.${actionName}`
     );
   } else {
-    return `${CONFIG_GATEWAY_AFTER_HOOK}.${actionName}`.replaceAll('.', '-');
+    return encodeNoConflictServiceNameKey(
+      `${CONFIG_GATEWAY_AFTER_HOOK}.${actionName}`
+    );
   }
 }
 
