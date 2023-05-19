@@ -46,7 +46,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         onChange={(e, newValue, _, mentions) =>
           props.onChange(
             newValue,
-            mentions.map((m) => m.id)
+            mentions.filter((m) => m.display.startsWith('@')).map((m) => m.id) // 仅处理mention的数据进行记录
           )
         }
         onKeyDown={props.onKeyDown}
