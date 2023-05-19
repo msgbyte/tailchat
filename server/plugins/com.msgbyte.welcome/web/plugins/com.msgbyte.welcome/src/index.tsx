@@ -24,7 +24,7 @@ regPluginGroupConfigItem({
         <TextArea
           disabled={loading}
           value={text}
-          maxLength={1000}
+          maxLength={2000}
           showCount={true}
           rows={5}
           onChange={(e) => setText(e.target.value)}
