@@ -47,6 +47,7 @@ export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
       (e) => {
         if (isEnterHotkey(e)) {
           e.stopPropagation();
+          e.preventDefault();
           handleConfirm();
         } else if (isEscHotkey(e)) {
           e.stopPropagation();
