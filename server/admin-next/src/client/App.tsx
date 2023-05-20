@@ -17,15 +17,10 @@ import {
   IconWifi,
 } from 'tushan/icon';
 import { authProvider } from './auth';
-import {
-  fileFields,
-  groupFields,
-  mailFields,
-  messageFields,
-  userFields,
-} from './fields';
+import { fileFields, groupFields, mailFields, messageFields } from './fields';
 import { i18n } from './i18n';
 import { httpClient } from './request';
+import { UserList } from './resources/user';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
 import { SystemConfig } from './routes/system';
@@ -40,27 +35,7 @@ function App() {
       authProvider={authProvider}
       i18n={i18n}
     >
-      <Resource
-        name="users"
-        icon={<IconUser />}
-        list={
-          <ListTable
-            filter={[
-              createTextField('q', {
-                label: 'Search',
-              }),
-            ]}
-            fields={userFields}
-            action={{
-              create: true,
-              detail: true,
-              edit: true,
-              delete: true,
-              export: true,
-            }}
-          />
-        }
-      />
+      <Resource name="users" icon={<IconUser />} list={<UserList />} />
 
       <Resource
         name="messages"

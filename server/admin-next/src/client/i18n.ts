@@ -10,6 +10,9 @@ export const i18n: TushanContextProps['i18n'] = {
       translation: {
         ...i18nEnTranslation,
         custom: {
+          action: {
+            resetPassword: 'Reset Password',
+          },
           network: {
             nodeList: 'Node List',
             id: 'ID',
@@ -121,6 +124,9 @@ export const i18n: TushanContextProps['i18n'] = {
           },
         },
         custom: {
+          action: {
+            resetPassword: '重置密码',
+          },
           network: {
             nodeList: '节点列表',
             id: 'ID',
