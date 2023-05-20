@@ -2512,7 +2512,7 @@ packages:
       '@babel/traverse': 7.21.2(supports-color@5.5.0)
       '@babel/types': 7.21.2
       convert-source-map: 1.9.0
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4(supports-color@5.5.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.0
@@ -26063,7 +26063,7 @@ packages:
     resolution: {integrity: sha512-nGjm89lHja+T/b8cybAby6H0YgA4qYC/lx6UlwvHGqvTq8bDaNeCwl1sY8uRELrNbVWJzIihxVd+vphGGn1vBw==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@9.2.2)
+      debug: 4.3.4(supports-color@5.5.0)
       regexp-clone: 1.0.0
       sliced: 1.0.1
     transitivePeerDependencies:
@@ -27913,7 +27913,7 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.21
-      ts-node: 10.9.1(@types/node@15.14.9)(typescript@4.9.5)
+      ts-node: 10.9.1(@types/node@18.16.1)(typescript@4.9.5)
       yaml: 1.10.2
     dev: false
 
@@ -34370,6 +34370,7 @@ packages:
       typescript: 4.9.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: true
 
   /ts-node@10.9.1(@types/node@16.11.7)(typescript@4.7.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
@@ -34554,7 +34555,6 @@ packages:
       typescript: 4.9.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-    dev: true
 
   /ts-pnp@1.2.0(typescript@4.7.4):
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}

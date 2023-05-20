@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import raExpressMongoose from 'express-mongoose-ra-json-server';
 import jwt from 'jsonwebtoken';
 import { callBrokerAction } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
@@ -8,6 +7,7 @@ import { networkRouter } from './network';
 import { fileRouter } from './file';
 import dayjs from 'dayjs';
 import messageModel from '../../../../models/chat/message';
+import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 
 const router = Router();
 
