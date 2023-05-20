@@ -13,6 +13,14 @@ export const i18n: TushanContextProps['i18n'] = {
           action: {
             resetPassword: 'Reset Password',
           },
+          dashboard: {
+            file: 'File',
+            messageCount: 'Message Count',
+            tip: {
+              github:
+                'Tailchat: The next-generation noIM Application in your own workspace',
+            },
+          },
           network: {
             nodeList: 'Node List',
             id: 'ID',
@@ -126,6 +134,14 @@ export const i18n: TushanContextProps['i18n'] = {
         custom: {
           action: {
             resetPassword: '重置密码',
+          },
+          dashboard: {
+            file: '文件',
+            messageCount: '消息数',
+            tip: {
+              github: 'Tailchat 是在你私有空间内的下一代noIM应用',
+              tushan: 'Tailchat Admin后台 由 tushan 提供技术支持',
+            },
           },
           network: {
             nodeList: '节点列表',

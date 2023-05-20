@@ -17,6 +17,7 @@ import {
   IconWifi,
 } from 'tushan/icon';
 import { authProvider } from './auth';
+import { Dashboard } from './components/Dashboard';
 import { fileFields, groupFields, mailFields, messageFields } from './fields';
 import { i18n } from './i18n';
 import { httpClient } from './request';
@@ -31,6 +32,7 @@ function App() {
   return (
     <Tushan
       basename="/admin"
+      dashboard={<Dashboard />}
       dataProvider={dataProvider}
       authProvider={authProvider}
       i18n={i18n}

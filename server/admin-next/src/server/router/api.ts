@@ -6,6 +6,8 @@ import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
 import { fileRouter } from './file';
+import dayjs from 'dayjs';
+import messageModel from '../../../../models/chat/message';
 
 const router = Router();
 
@@ -64,10 +66,61 @@ router.delete('/messages/:id', auth(), async (req, res) => {
     res.status(500).json({ message: (err as any).message });
   }
 });
+
+router.get('/message/count/summary', auth(), async (req, res) => {
+  // 返回最近7天的消息数统计
+  const day = 7;
+  const aggregateRes: { count: number; date: string }[] = await messageModel
+    .aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: dayjs().subtract(day, 'd').startOf('d').toDate(),
+            $lt: dayjs().endOf('d').toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            createdAt: {
+              $dateToString: {
+                format: '%Y-%m-%d',
+                date: '$createdAt',
+              },
+            },
+          } as any,
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $project: {
+          date: '$_id.createdAt',
+          count: '$count',
+        },
+      },
+    ])
+    .exec();
+
+  const summary = Array.from({ length: day })
+    .map((_, d) => {
+      const date = dayjs().subtract(d, 'd').format('YYYY-MM-DD');
+
+      return {
+        date,
+        count: aggregateRes.find((r) => r.date === date)?.count ?? 0,
+      };
+    })
+    .reverse();
+
+  res.json({ summary });
+});
 router.use(
   '/messages',
   auth(),
-  raExpressMongoose(require('../../../../models/chat/message').default, {
+  raExpressMongoose(messageModel, {
     q: ['content'],
     allowedRegexFields: ['content'],
   })

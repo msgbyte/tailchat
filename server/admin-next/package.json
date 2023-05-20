@@ -14,6 +14,7 @@
     "@fastify/busboy": "^1.1.0",
     "axios": "^1.4.0",
     "compression": "^1.7.4",
+    "dayjs": "^1.11.7",
     "express": "^4.18.2",
     "express-mongoose-ra-json-server": "^0.1.0",
     "filesize": "^8.0.7",
@@ -24,7 +25,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailchat-server-sdk": "workspace:^",
-    "tushan": "^0.2.6",
+    "tushan": "^0.2.8",
     "vite-express": "^0.5.4"
   },
   "devDependencies": {
