@@ -40,8 +40,5 @@ RUN pnpm build
 # web static service port
 EXPOSE 3000
 
-# health check
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD wget localhost:3000/health -q -O - > /dev/null 2>&1
-
 # Start server, ENV var is necessary
 CMD ["pnpm", "start:service"]
