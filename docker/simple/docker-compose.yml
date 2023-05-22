@@ -17,12 +17,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
       - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
     networks:
       - internal
 
