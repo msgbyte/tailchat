@@ -1,7 +1,7 @@
 import { RequestHandler, Router } from 'express';
-import { LeanDocument } from 'mongoose';
+import type { LeanDocument } from 'mongoose';
 import statusMessages from './statusMessages';
-import { ADPBaseModel, ADPBaseSchema } from './utils/baseModel.interface';
+import type { ADPBaseModel, ADPBaseSchema } from './utils/baseModel.interface';
 import castFilter from './utils/castFilter';
 import convertId from './utils/convertId';
 import filterGetList from './utils/filterGetList';

@@ -1,4 +1,4 @@
-import { ADPBaseModel } from './baseModel.interface';
+import type { ADPBaseModel } from './baseModel.interface';
 import castFilter from './castFilter';
 
 interface parseQueryParam {

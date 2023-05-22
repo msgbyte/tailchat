@@ -1,4 +1,4 @@
-import { ADPBaseModel } from './baseModel.interface';
+import type { ADPBaseModel } from './baseModel.interface';
 
 /**
  * Turns all the params into their proper types, string into regexes.

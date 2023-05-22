@@ -1,4 +1,4 @@
-import { Model, Document } from 'mongoose';
+import type { Model, Document } from 'mongoose';
 
 export interface ADPBaseSchema {
   _id: string;

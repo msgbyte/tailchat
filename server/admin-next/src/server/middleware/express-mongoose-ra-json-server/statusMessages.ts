@@ -3,7 +3,7 @@
  * @description handles status messages / error responses
  */
 
-import { Response } from 'express';
+import type { Response } from 'express';
 
 /**
  * Handles rejections other than errors. 400, 401, etc.
