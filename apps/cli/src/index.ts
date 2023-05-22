@@ -8,6 +8,7 @@ import { benchCommand } from './commands/bench';
 import { dockerCommand } from './commands/docker';
 import { usageCommand } from './commands/usage';
 import { registryCommand } from './commands/registry';
+import { smtpCommand } from './commands/smtp';
 
 yargs
   .demandCommand()
@@ -18,6 +19,7 @@ yargs
   .command(declarationCommand)
   .command(dockerCommand)
   .command(registryCommand)
+  .command(smtpCommand)
   .command(usageCommand)
   .alias('h', 'help')
   .scriptName('tailchat')

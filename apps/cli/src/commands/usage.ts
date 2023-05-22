@@ -1,9 +1,7 @@
 import { CommandModule } from 'yargs';
-import path from 'path';
 import inquirer from 'inquirer';
 import find from 'find-process';
 import pidusage from 'pidusage';
-import _ from 'lodash';
 
 export const usageCommand: CommandModule = {
   command: 'usage [pid]',
