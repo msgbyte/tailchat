@@ -10,7 +10,7 @@ import { apiRouter } from './router/api';
 
 const app = express();
 
-const port = Number(process.env.ADMIN_PORT || 13000);
+const port = Number(process.env.ADMIN_PORT || 3000);
 
 if (!process.env.MONGO_URL) {
   console.error('Require env: MONGO_URL');
