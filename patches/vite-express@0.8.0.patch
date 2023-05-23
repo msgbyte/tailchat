@@ -1,0 +1,15 @@
+diff --git a/dist/main.js b/dist/main.js
+index c3abbbad4dc48238cdf09f8fd009e7d89a7ea542..cdaeb9773154b1083877a22db4cb06f7d7e97a7e 100644
+--- a/dist/main.js
++++ b/dist/main.js
+@@ -57,7 +57,9 @@ function serveStatic() {
+ const stubMiddleware = (req, res, next) => next();
+ function injectStaticMiddleware(app, middleware) {
+     return __awaiter(this, void 0, void 0, function* () {
+-        app.use(middleware);
++        const config = yield Vite.resolveConfig({}, "build");
++        const base = config.base || '/';
++        app.use(base, middleware);
+         const stubMiddlewareLayer = app._router.stack.find((layer) => layer.handle === stubMiddleware);
+         if (stubMiddlewareLayer !== undefined) {
+             const serveStaticLayer = app._router.stack.pop();

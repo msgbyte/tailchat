@@ -21,6 +21,9 @@ patchedDependencies:
   moleculer@0.14.23:
     hash: ahhlgpfy57fntn2aftq6beaeja
     path: patches/moleculer@0.14.23.patch
+  vite-express@0.8.0:
+    hash: u6touqej4dt3zxnslnszarl7vq
+    path: patches/vite-express@0.8.0.patch
 
 importers:
 
@@ -1642,8 +1645,8 @@ importers:
         specifier: ^0.2.9
         version: 0.2.9(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
       vite-express:
-        specifier: ^0.5.4
-        version: 0.5.4(express@4.18.2)(vite@4.2.0)
+        specifier: 0.8.0
+        version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
     devDependencies:
       '@types/compression':
         specifier: ^1.7.2
@@ -35534,8 +35537,8 @@ packages:
       replace-ext: 1.0.1
     dev: true
 
-  /vite-express@0.5.4(express@4.18.2)(vite@4.2.0):
-    resolution: {integrity: sha512-9M608q41rVISItrUidcqmUFV9g0GcUJDeaPRyuW1ZO/blmhoDNjnPz8hdOglfLhfUp8n3oAHxZZeoRNtCmqIxA==}
+  /vite-express@0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0):
+    resolution: {integrity: sha512-6rTyHMnOpi6+7XIH49MZNKOh4Rv684pKj2fSiJ+mI0xKgomBQkEhzL+Y/6mAmvWcStXSCf4lr7ZR+rRVuVaNCg==}
     peerDependencies:
       express: ^4.18.2
       vite: ^4.0.0
@@ -35547,6 +35550,7 @@ packages:
     transitivePeerDependencies:
       - encoding
     dev: false
+    patched: true
 
   /vite@4.2.0(@types/node@18.16.1):
     resolution: {integrity: sha512-AbDTyzzwuKoRtMIRLGNxhLRuv1FpRgdIw+1y6AQG73Q5+vtecmvzKo/yk8X/vrHDpETRTx01ABijqUHIzBXi0g==}

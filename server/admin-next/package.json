@@ -26,7 +26,7 @@
     "react-dom": "^18.2.0",
     "tailchat-server-sdk": "workspace:^",
     "tushan": "^0.2.9",
-    "vite-express": "^0.5.4"
+    "vite-express": "0.8.0"
   },
   "devDependencies": {
     "@types/compression": "^1.7.2",
