@@ -32,3 +32,11 @@ https://tailchat.example.com/admin/
 ```
 
 *注意不要忘记在最后有一个`/`*
+
+:::info
+新版本 **admin-next** 已发布，你可以使用以下命令尝鲜使用
+
+```
+curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-next.yml" -o admin.yml
+```
+:::
