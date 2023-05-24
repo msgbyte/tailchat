@@ -1,5 +1,35 @@
 
 
+## [1.7.4](https://github.com/msgbyte/tailchat/compare/v1.7.3...v1.7.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* fix after hook not work problem ([3f22037](https://github.com/msgbyte/tailchat/commit/3f220373c7471abccba1951fe556453e804d8535))
+* fix updateGroupConfig not work problem ([ff86b84](https://github.com/msgbyte/tailchat/commit/ff86b84c14c631c2b9f91c098a7fcb2f69b9dcd7))
+* fix website title with global config ([0922f83](https://github.com/msgbyte/tailchat/commit/0922f83bb92ddea1ed4fcc8ae8bac90a387624f0))
+* fix will input enter when send image with enter key ([98e78e2](https://github.com/msgbyte/tailchat/commit/98e78e28f87a24c498b3e76ba5048affbf286a6a))
+
+
+### Features
+
+* add cache refresh when load user popover ([0b116e5](https://github.com/msgbyte/tailchat/commit/0b116e54060049fe2e2e0383108a26fdef66020b))
+* add group data get and save action in group.extra ([d83300e](https://github.com/msgbyte/tailchat/commit/d83300e141e0a5e44479fdb6c3860baa87e5cff2))
+* add multi line support for chatbox ([7b17614](https://github.com/msgbyte/tailchat/commit/7b176141be79a4bd223b9900161a7b96f1fca8b2))
+* add regPluginGroupConfigItem ([41cdfb0](https://github.com/msgbyte/tailchat/commit/41cdfb071514fd062faf2185820042c47a31a236))
+* add sender nickname in wxpusher ([5b238bf](https://github.com/msgbyte/tailchat/commit/5b238bf860d20bf4e99ead656a8083129bff16ef))
+* add welcome plugin for user which can send welcome message when user join group ([dbebbc5](https://github.com/msgbyte/tailchat/commit/dbebbc54e66172653006a002c03b8932cb9d8ed2))
+* **admin-next:** add custom dashboard ([4ee2fa8](https://github.com/msgbyte/tailchat/commit/4ee2fa81e2a49ff52dde730002091f5457c583be))
+* **admin-next:** add custom translation ([ba28719](https://github.com/msgbyte/tailchat/commit/ba287195b5e7ca89302f1ad227e1939ca5029688))
+* **admin-next:** add mail ([60b050d](https://github.com/msgbyte/tailchat/commit/60b050d416599b0be84a4b9d2eaf3df3e38fb4a1))
+* **admin-next:** add reset password ([26f4c6a](https://github.com/msgbyte/tailchat/commit/26f4c6a8646f495bf3bea5cd465fc30ba6e2b5d8))
+* **cli:** add smtp tools which help user positioning issue ([e357d2e](https://github.com/msgbyte/tailchat/commit/e357d2e1c56e4db376e2b1b29139581e4b32596d))
+
+
+### Performance Improvements
+
+* **admin-next:** optimize mongodb's performance on statistical quantities ([11154f7](https://github.com/msgbyte/tailchat/commit/11154f735b3ddbfcb33f4b6819ec78993e8a2044))
+
 ## [1.7.3](https://github.com/msgbyte/tailchat/compare/v1.7.2...v1.7.3) (2023-05-11)
 
 
