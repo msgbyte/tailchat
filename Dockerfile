@@ -7,7 +7,7 @@ ARG VERSION
 WORKDIR /app/tailchat
 
 # Install dependencies
-RUN npm install -g pnpm@8.2.0
+RUN npm install -g pnpm@8.3.1
 RUN npm install -g tailchat-cli@latest
 
 # Add mc for minio
@@ -22,15 +22,15 @@ COPY ./server/package.json ./server/package.json
 COPY ./server/tsconfig.json ./server/tsconfig.json
 COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./.npmrc ./
 COPY ./patches ./patches
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copy client
 COPY ./client ./client
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copy all source
 COPY . .
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Build and cleanup (client and server)
 ENV NODE_ENV=production
