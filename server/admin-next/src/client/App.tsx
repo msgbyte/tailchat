@@ -32,6 +32,8 @@ function App() {
   return (
     <Tushan
       basename="/admin"
+      header={'Tailchat Admin'}
+      footer={'Build with MsgByte'}
       dashboard={<Dashboard />}
       dataProvider={dataProvider}
       authProvider={authProvider}
