@@ -8,8 +8,10 @@ import {
   createUrlField,
   emailValidator,
   createNumberField,
+  createReferenceField,
 } from 'tushan';
 import { createFileSizeField } from './components/field/filesize';
+import { parseUrlStr } from './utils';
 
 export const userFields = [
   createTextField('id', {
@@ -43,7 +45,9 @@ export const userFields = [
     },
   }),
   createBooleanField('temporary'),
-  createAvatarField('avatar'),
+  createAvatarField('avatar', {
+    preRenderTransform: parseUrlStr,
+  }),
   createJSONField('settings', {
     list: {
       width: 200,
@@ -60,8 +64,20 @@ export const userFields = [
 export const messageFields = [
   createTextField('id'),
   createTextField('content'),
-  createTextField('author'),
-  createTextField('groupId'),
+  createReferenceField('author', {
+    reference: 'users',
+    displayField: 'nickname',
+    list: {
+      width: 80,
+    },
+  }),
+  createReferenceField('groupId', {
+    reference: 'groups',
+    displayField: 'name',
+    list: {
+      width: 80,
+    },
+  }),
   createTextField('converseId'),
   createBooleanField('hasRecall'),
   createJSONField('reactions'),
@@ -76,7 +92,13 @@ export const messageFields = [
 export const groupFields = [
   createTextField('id'),
   createTextField('name'),
-  createTextField('owner'),
+  createReferenceField('owner', {
+    reference: 'users',
+    displayField: 'nickname',
+    list: {
+      width: 80,
+    },
+  }),
   createTextField('members.length', {
     edit: {
       hidden: true,
