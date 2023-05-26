@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: tailchat
   namespace: tailchat
@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app: tailchat
+  serviceName: tailchat
   replicas: 3
   template:
     metadata:
@@ -16,7 +17,7 @@ spec:
       containers:
         - name: tailchat
           image: moonrailgun/tailchat
-          imagePullPolicy: Always
+          # imagePullPolicy: Always
           env:
             - name: SERVICEDIR
               value: services

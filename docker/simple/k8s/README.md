@@ -6,6 +6,8 @@ Its doc will tell you how to deploy `Tailchat` in kubeneters.
 kubectl apply -f namespace.yml -f pv.yml -f mongo.yml -f minio.yml -f redis.yml -f tailchat.yml
 ```
 
+if you wanna delete all resource, just replace `apply` to `delete`.
+
 ## Setup one by one
 
 ### Create Namespace
