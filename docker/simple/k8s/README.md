@@ -45,3 +45,21 @@ kubectl apply -f redis.yml
 ```bash
 kubectl apply -f tailchat.yml
 ```
+
+## Check tailchat-service work
+
+#### get services ClusterIP
+```bash
+kubectl get svc -n tailchat
+```
+
+#### create test container in kubernetes
+
+```bash
+kubectl run -it --rm test-pod --image=busybox --restart=Never
+```
+
+#### request health and checkout `nodeID`, send multi times.
+```
+wget -q -O - http://<tailchat-cluster-ip>:11000/health
+```

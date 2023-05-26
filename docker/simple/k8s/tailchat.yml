@@ -20,7 +20,7 @@ spec:
           # imagePullPolicy: Always
           env:
             - name: SERVICEDIR
-              value: services
+              value: services,plugins
             - name: TRANSPORTER
               value: redis://redis-service:6379
             - name: REDIS_URL
