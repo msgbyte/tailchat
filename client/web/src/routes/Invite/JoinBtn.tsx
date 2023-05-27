@@ -32,10 +32,8 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
   });
   const [isJoined, setIsJoined] = useState(false);
 
-  const handleRegister = useCallback(() => {
-    navigate(
-      `/entry/register?redirect=${encodeURIComponent(location.pathname)}`
-    );
+  const handleLogin = useCallback(() => {
+    navigate(`/entry/login?redirect=${encodeURIComponent(location.pathname)}`);
   }, []);
 
   const { value: invite } = useAsync(() => {
@@ -103,7 +101,7 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
   if (props.expired && new Date(props.expired).valueOf() < Date.now()) {
     return (
       <Button block={true} type="primary" size="large" disabled={true}>
-        {t('已过期')}
+        {t('邀请码已过期')}
       </Button>
     );
   }
@@ -119,8 +117,8 @@ export const JoinBtn: React.FC<Props> = React.memo((props) => {
       {t('加入群组')}
     </Button>
   ) : (
-    <Button block={true} type="primary" size="large" onClick={handleRegister}>
-      {t('立即注册')}
+    <Button block={true} type="primary" size="large" onClick={handleLogin}>
+      {t('尚未登录, 立即登录')}
     </Button>
   );
 });
