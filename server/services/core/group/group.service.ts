@@ -897,6 +897,7 @@ class GroupService extends TcService {
       )
       .exec();
 
+    this.cleanGroupInfoCache(groupId);
     const json = await this.notifyGroupInfoUpdate(ctx, group);
     return json;
   }
@@ -936,6 +937,7 @@ class GroupService extends TcService {
       )
       .exec();
 
+    this.cleanGroupInfoCache(groupId);
     const json = await this.notifyGroupInfoUpdate(ctx, group);
     return json;
   }
@@ -968,6 +970,7 @@ class GroupService extends TcService {
       roleName
     );
 
+    this.cleanGroupInfoCache(groupId);
     const json = await this.notifyGroupInfoUpdate(ctx, group);
     return json;
   }
@@ -1000,6 +1003,8 @@ class GroupService extends TcService {
       permissions
     );
 
+    this.cleanGroupInfoCache(groupId);
+    this.cleanGroupAllUserPermissionCache(groupId);
     const json = await this.notifyGroupInfoUpdate(ctx, group);
     return json;
   }

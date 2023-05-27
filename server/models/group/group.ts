@@ -290,7 +290,7 @@ export class Group extends TimeStamps implements Base {
 
     const allRoles = member.roles;
     const allRolesPermission = allRoles.map((roleName) => {
-      const p = group.roles.find((r) => r.name === roleName);
+      const p = group.roles.find((r) => String(r._id) === roleName);
 
       return p?.permissions ?? [];
     });
