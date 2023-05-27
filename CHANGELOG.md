@@ -1,5 +1,19 @@
 
 
+## [1.7.5](https://github.com/msgbyte/tailchat/compare/v1.7.4...v1.7.5) (2023-05-27)
+
+
+### Bug Fixes
+
+* fix check logic in getGroupUserPermission ([bad6aa0](https://github.com/msgbyte/tailchat/commit/bad6aa05fadcececafdf129254f35c5ef5f6b05e))
+
+
+### Features
+
+* add preRenderTransform to parse avatar url and add reference field ([1ae5770](https://github.com/msgbyte/tailchat/commit/1ae5770603c7129490798cdf1e1f306368b2daaa))
+* **admin-next:** custom admin header and footer ([7f08f54](https://github.com/msgbyte/tailchat/commit/7f08f5408cd8a6f53b7235805f5178e0a0eff977))
+* jump to login page in invite view ([9868d24](https://github.com/msgbyte/tailchat/commit/9868d24ad569e077a678a63be5e81c7e6a16a408))
+
 ## [1.7.4](https://github.com/msgbyte/tailchat/compare/v1.7.3...v1.7.4) (2023-05-24)
 
 
