@@ -79,6 +79,7 @@ export const getPermissionList = (): PermissionItemType[] => [
     title: t('修改群组配置'),
     desc: t('允许成员修改群组配置'),
     default: false,
+    required: [PERMISSION.core.groupDetail],
   },
   {
     key: PERMISSION.core.manageUser,

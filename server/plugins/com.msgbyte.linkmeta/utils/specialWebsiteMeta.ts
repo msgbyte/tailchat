@@ -17,7 +17,7 @@ const specialWebsiteMetaFetchers = [
 
       const { data } = await got(
         `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`
-      ).json();
+      ).json<any>();
 
       const aid = _.get(data, 'aid');
       const cid = _.get(data, 'cid');
