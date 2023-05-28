@@ -100,9 +100,11 @@ function initial(socket: AppSocket, store: AppStore) {
   );
 
   // 获取好友列表
-  socket.request<string[]>('friend.getAllFriends').then((data) => {
-    store.dispatch(userActions.setFriendList(data));
-  });
+  socket
+    .request<{ id: string; nickname?: string }[]>('friend.getAllFriends')
+    .then((data) => {
+      store.dispatch(userActions.setFriendList(data));
+    });
 
   // 获取好友邀请列表
   socket.request<FriendRequest[]>('friend.request.allRelated').then((data) => {
@@ -144,7 +146,7 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       console.error('错误的信息', userId);
       return;
     }
-    store.dispatch(userActions.appendFriend(userId));
+    store.dispatch(userActions.appendFriend({ id: userId }));
   });
 
   socket.listen<FriendRequest>('friend.request.add', (request) => {

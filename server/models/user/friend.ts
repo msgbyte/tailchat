@@ -31,6 +31,12 @@ export class Friend extends FindOrCreate implements Base {
   })
   to: Ref<User>;
 
+  /**
+   * 好友昵称, 覆盖用户自己的昵称
+   */
+  @prop()
+  nickname?: string;
+
   @prop()
   createdAt: Date;
 

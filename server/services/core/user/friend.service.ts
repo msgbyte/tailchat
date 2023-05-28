@@ -1,5 +1,8 @@
-import { TcCacheCleaner } from '../../../mixins/cache.cleaner.mixin';
-import type { FriendDocument, FriendModel } from '../../../models/user/friend';
+import type {
+  Friend,
+  FriendDocument,
+  FriendModel,
+} from '../../../models/user/friend';
 import { TcService, TcDbService, TcContext } from 'tailchat-server-sdk';
 
 interface FriendService
@@ -44,10 +47,13 @@ class FriendService extends TcService {
       },
     });
 
-    const records = await this.transformDocuments(ctx, {}, list);
-    const ids = records.map((r) => r.to);
+    const records: Friend[] = await this.transformDocuments(ctx, {}, list);
+    const res = records.map((r) => ({
+      id: r.to,
+      nickname: r.nickname,
+    }));
 
-    return ids;
+    return res;
   }
 
   /**

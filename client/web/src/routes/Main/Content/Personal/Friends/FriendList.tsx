@@ -71,16 +71,16 @@ export const FriendList: React.FC<{
     <div className="py-2.5 px-5">
       <div>{t('好友列表')}</div>
       <div>
-        {friends.map((friendId) => (
+        {friends.map((item) => (
           <UserListItem
-            key={friendId}
-            userId={friendId}
+            key={item.id}
+            userId={item.id}
             actions={[
               <Tooltip key="message" title={t('发送消息')}>
                 <div>
                   <IconBtn
                     icon="mdi:message-text-outline"
-                    onClick={() => handleCreateConverse(friendId)}
+                    onClick={() => handleCreateConverse(item.id)}
                   />
                 </div>
               </Tooltip>,
@@ -91,7 +91,7 @@ export const FriendList: React.FC<{
                       {
                         key: 'delete',
                         danger: true,
-                        onClick: () => handleRemoveFriend(friendId),
+                        onClick: () => handleRemoveFriend(item.id),
                         label: t('删除'),
                       },
                     ],
