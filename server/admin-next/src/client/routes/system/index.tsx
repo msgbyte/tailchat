@@ -106,6 +106,14 @@ export const SystemConfig: React.FC = React.memo(() => {
         {config.emailVerification ? <IconCheck /> : <IconClose />}
       </Form.Item>
 
+      <Form.Item label={t('custom.config.allowGuestLogin')}>
+        {!config.disableGuestLogin ? <IconCheck /> : <IconClose />}
+      </Form.Item>
+
+      <Form.Item label={t('custom.config.allowUserRegister')}>
+        {!config.disableUserRegister ? <IconCheck /> : <IconClose />}
+      </Form.Item>
+
       <Form.Item label={t('custom.config.serverName')}>
         <Input
           value={serverName}

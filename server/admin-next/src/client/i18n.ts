@@ -43,6 +43,8 @@ export const i18n: TushanContextProps['i18n'] = {
           config: {
             uploadFileLimit: 'Upload file limit (Byte)',
             emailVerification: 'Mandatory Email Verification',
+            allowGuestLogin: 'Allow Guest Login',
+            allowUserRegister: 'Allow User Register',
             serverName: 'Server Name',
             serverEntryImage: 'Server Entry Page Image',
           },
@@ -176,6 +178,8 @@ export const i18n: TushanContextProps['i18n'] = {
           config: {
             uploadFileLimit: '上传文件限制(Byte)',
             emailVerification: '邮箱强制验证',
+            allowGuestLogin: '允许访客登录',
+            allowUserRegister: '允许用户注册',
             serverName: '服务器名',
             serverEntryImage: '服务器登录图',
           },
