@@ -15,6 +15,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           dashboard: {
             file: 'File',
+            messages: 'Messages',
             newUserCount: 'New User Count',
             messageCount: 'Message Count',
             tip: {
@@ -138,6 +139,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           dashboard: {
             file: '文件',
+            messages: '消息数',
             newUserCount: '用户新增',
             messageCount: '消息数',
             tip: {

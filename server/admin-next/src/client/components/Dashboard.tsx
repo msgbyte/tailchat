@@ -1,4 +1,4 @@
-import { IconFile, IconUser, IconUserGroup } from 'tushan/icon';
+import { IconFile, IconMessage, IconUser, IconUserGroup } from 'tushan/icon';
 import React from 'react';
 import {
   XAxis,
@@ -30,16 +30,6 @@ export const Dashboard: React.FC = React.memo(() => {
   const { userIdentity } = useUserStore(createSelector('userIdentity'));
   const { t } = useTranslation();
 
-  const { total: usersNum } = useGetList('users', {
-    pagination: { page: 1, perPage: 1 },
-  });
-  const { total: groupNum } = useGetList('groups', {
-    pagination: { page: 1, perPage: 1 },
-  });
-  const { total: fileNum } = useGetList('file', {
-    pagination: { page: 1, perPage: 1 },
-  });
-
   return (
     <div>
       <div>
@@ -53,35 +43,7 @@ export const Dashboard: React.FC = React.memo(() => {
 
             <Divider />
 
-            <Grid.Row justify="center">
-              <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem
-                  icon={<IconUser />}
-                  title={t('tushan.dashboard.user')}
-                  count={usersNum}
-                />
-              </Grid.Col>
-
-              <Divider type="vertical" style={{ height: 40 }} />
-
-              <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem
-                  icon={<IconUserGroup />}
-                  title={t('tushan.dashboard.group')}
-                  count={groupNum}
-                />
-              </Grid.Col>
-
-              <Divider type="vertical" style={{ height: 40 }} />
-
-              <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem
-                  icon={<IconFile />}
-                  title={t('custom.dashboard.file')}
-                  count={fileNum}
-                />
-              </Grid.Col>
-            </Grid.Row>
+            <DashboardSummary />
 
             <Divider />
 
@@ -127,6 +89,66 @@ export const Dashboard: React.FC = React.memo(() => {
   );
 });
 Dashboard.displayName = 'Dashboard';
+
+const DashboardSummary: React.FC = React.memo(() => {
+  const { t } = useTranslation();
+
+  const { total: usersNum } = useGetList('users', {
+    pagination: { page: 1, perPage: 1 },
+  });
+  const { total: groupNum } = useGetList('groups', {
+    pagination: { page: 1, perPage: 1 },
+  });
+  const { total: fileNum } = useGetList('file', {
+    pagination: { page: 1, perPage: 1 },
+  });
+  const { total: messagesNum } = useGetList('messages', {
+    pagination: { page: 1, perPage: 1 },
+  });
+
+  return (
+    <Grid.Row justify="center">
+      <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
+        <DataItem
+          icon={<IconUser />}
+          title={t('tushan.dashboard.user')}
+          count={usersNum}
+        />
+      </Grid.Col>
+
+      <Divider type="vertical" style={{ height: 40 }} />
+
+      <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
+        <DataItem
+          icon={<IconUserGroup />}
+          title={t('tushan.dashboard.group')}
+          count={groupNum}
+        />
+      </Grid.Col>
+
+      <Divider type="vertical" style={{ height: 40 }} />
+
+      <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
+        <DataItem
+          icon={<IconFile />}
+          title={t('custom.dashboard.file')}
+          count={fileNum}
+        />
+      </Grid.Col>
+
+      <Divider type="vertical" style={{ height: 40 }} />
+
+      <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
+        <DataItem
+          icon={<IconMessage />}
+          title={t('custom.dashboard.messages')}
+          count={messagesNum}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  );
+});
+DashboardSummary.displayName = 'DashboardSummary';
 
 const DashboardItem: React.FC<
   React.PropsWithChildren<{
