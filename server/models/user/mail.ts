@@ -7,7 +7,7 @@ import {
   Severity,
   ReturnModelType,
 } from '@typegoose/typegoose';
-import type { Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
 import { User } from './user';
 import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
@@ -45,7 +45,7 @@ function getSMTPConnectionOptions(): SMTPConnection.Options | null {
     allowMixed: Severity.ALLOW,
   },
 })
-export class Mail implements Base {
+export class Mail extends TimeStamps implements Base {
   _id: Types.ObjectId;
   id: string;
 
