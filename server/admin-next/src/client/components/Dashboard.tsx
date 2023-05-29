@@ -86,6 +86,12 @@ export const Dashboard: React.FC = React.memo(() => {
             <Divider />
 
             <Typography.Title heading={6} style={{ marginBottom: 10 }}>
+              {t('custom.dashboard.newUserCount')}
+            </Typography.Title>
+
+            <UserCountChart />
+
+            <Typography.Title heading={6} style={{ marginBottom: 10 }}>
               {t('custom.dashboard.messageCount')}
             </Typography.Title>
 
@@ -93,12 +99,12 @@ export const Dashboard: React.FC = React.memo(() => {
           </Card>
 
           <Grid cols={3} colGap={12} rowGap={16}>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem title="Docs" href="https://tailchat.msgbyte.com/">
                 {t('tushan.dashboard.tip.docs')}
               </DashboardItem>
             </GridItem>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem
                 title="Github"
                 href="https://github.com/msgbyte/tailchat"
@@ -106,7 +112,7 @@ export const Dashboard: React.FC = React.memo(() => {
                 {t('custom.dashboard.tip.github')}
               </DashboardItem>
             </GridItem>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem
                 title="Provide by Tushan"
                 href="https://tushan.msgbyte.com/"
@@ -179,6 +185,51 @@ const DataItem: React.FC<{
   );
 });
 DataItem.displayName = 'DataItem';
+
+const UserCountChart: React.FC = React.memo(() => {
+  const { t } = useTranslation();
+  const { value: newUserCountSummary } = useAsync(async () => {
+    const { data } = await request.get<{
+      summary: {
+        count: number;
+        date: string;
+      }[];
+    }>('/user/count/summary');
+
+    return data.summary;
+  }, []);
+
+  return (
+    <ResponsiveContainer width="100%" height={320}>
+      <AreaChart
+        width={730}
+        height={250}
+        data={newUserCountSummary}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+      >
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="date" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Area
+          type="monotone"
+          dataKey="count"
+          label={t('custom.dashboard.newUserCount')}
+          stroke="#8884d8"
+          fillOpacity={1}
+          fill="url(#colorUv)"
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+});
+UserCountChart.displayName = 'UserCountChart';
 
 const MessageCountChart: React.FC = React.memo(() => {
   const { t } = useTranslation();

@@ -6,6 +6,7 @@ import { configRouter } from './config';
 import { networkRouter } from './network';
 import { fileRouter } from './file';
 import dayjs from 'dayjs';
+import userModel from '../../../../models/user/user';
 import messageModel from '../../../../models/chat/message';
 import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 
@@ -46,10 +47,60 @@ router.use('/network', networkRouter);
 router.use('/config', configRouter);
 router.use('/file', fileRouter);
 
+router.get('/user/count/summary', auth(), async (req, res) => {
+  // 返回最近7天的用户数统计
+  const day = 7;
+  const aggregateRes: { count: number; date: string }[] = await userModel
+    .aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: dayjs().subtract(day, 'd').startOf('d').toDate(),
+            $lt: dayjs().endOf('d').toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            createdAt: {
+              $dateToString: {
+                format: '%Y-%m-%d',
+                date: '$createdAt',
+              },
+            },
+          } as any,
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $project: {
+          date: '$_id.createdAt',
+          count: '$count',
+        },
+      },
+    ])
+    .exec();
+
+  const summary = Array.from({ length: day })
+    .map((_, d) => {
+      const date = dayjs().subtract(d, 'd').format('YYYY-MM-DD');
+
+      return {
+        date,
+        count: aggregateRes.find((r) => r.date === date)?.count ?? 0,
+      };
+    })
+    .reverse();
+
+  res.json({ summary });
+});
 router.use(
   '/users',
   auth(),
-  raExpressMongoose(require('../../../../models/user/user').default, {
+  raExpressMongoose(userModel, {
     q: ['nickname', 'email'],
   })
 );

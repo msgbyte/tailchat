@@ -1,4 +1,4 @@
-import { TushanContextProps } from 'tushan';
+import type { TushanContextProps } from 'tushan';
 import { i18nEnTranslation } from 'tushan/client/i18n/resources/en';
 import { i18nZhTranslation } from 'tushan/client/i18n/resources/zh';
 
@@ -15,6 +15,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           dashboard: {
             file: 'File',
+            newUserCount: 'New User Count',
             messageCount: 'Message Count',
             tip: {
               github:
@@ -137,6 +138,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           dashboard: {
             file: '文件',
+            newUserCount: '用户新增',
             messageCount: '消息数',
             tip: {
               github: 'Tailchat 是在你私有空间内的下一代noIM应用',
