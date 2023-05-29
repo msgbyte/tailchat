@@ -12,6 +12,7 @@ import {
   IconFile,
   IconMessage,
   IconSettings,
+  IconStorage,
   IconUser,
   IconUserGroup,
   IconWifi,
@@ -22,6 +23,7 @@ import { fileFields, groupFields, mailFields, messageFields } from './fields';
 import { i18n } from './i18n';
 import { httpClient } from './request';
 import { UserList } from './resources/user';
+import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
 import { SystemConfig } from './routes/system';
@@ -95,16 +97,20 @@ function App() {
         list={<ListTable fields={mailFields} />}
       />
 
-      <CustomRoute name="system" icon={<IconSettings />}>
-        <SystemConfig />
-      </CustomRoute>
-
       <CustomRoute name="network" icon={<IconWifi />}>
         <TailchatNetwork />
       </CustomRoute>
 
       <CustomRoute name="socketio" icon={<IconDashboard />}>
         <SocketIOAdmin />
+      </CustomRoute>
+
+      <CustomRoute name="cache" icon={<IconStorage />}>
+        <CacheManager />
+      </CustomRoute>
+
+      <CustomRoute name="system" icon={<IconSettings />}>
+        <SystemConfig />
       </CustomRoute>
     </Tushan>
   );

@@ -46,6 +46,12 @@ export const i18n: TushanContextProps['i18n'] = {
             serverName: 'Server Name',
             serverEntryImage: 'Server Entry Page Image',
           },
+          cache: {
+            cleanTitle: 'Are you sure you want to clear the cache?',
+            cleanDesc:
+              'Please be cautious in the production environment, clearing the cache may lead to increased pressure on the database in a short period of time',
+            cleanBtn: 'Clean Cache',
+          },
         },
       },
     },
@@ -132,6 +138,9 @@ export const i18n: TushanContextProps['i18n'] = {
           socketio: {
             name: 'Socket.IO 长链接',
           },
+          cache: {
+            name: '缓存管理',
+          },
         },
         custom: {
           action: {
@@ -169,6 +178,12 @@ export const i18n: TushanContextProps['i18n'] = {
             emailVerification: '邮箱强制验证',
             serverName: '服务器名',
             serverEntryImage: '服务器登录图',
+          },
+          cache: {
+            cleanTitle: '确定要清理缓存么？',
+            cleanDesc:
+              '生产环境请谨慎操作, 清理缓存可能会导致短时间内数据库压力增加',
+            cleanBtn: '清理缓存',
           },
         },
       },
