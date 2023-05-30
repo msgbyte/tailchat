@@ -53,6 +53,7 @@ function App() {
                 label: 'Search',
               }),
             ]}
+            showSizeChanger={true}
             fields={messageFields}
             action={{ detail: true, edit: true, delete: true, export: true }}
           />

@@ -9,6 +9,7 @@ import {
   emailValidator,
   createNumberField,
   createReferenceField,
+  createTextAreaField,
 } from 'tushan';
 import { createFileSizeField } from './components/field/filesize';
 import { parseUrlStr } from './utils';
@@ -62,8 +63,17 @@ export const userFields = [
 ];
 
 export const messageFields = [
-  createTextField('id'),
-  createTextField('content'),
+  createTextField('id', {
+    list: {
+      sort: true,
+    },
+  }),
+  createTextAreaField('content', {
+    list: {
+      width: 400,
+      ellipsis: true,
+    },
+  }),
   createReferenceField('author', {
     reference: 'users',
     displayField: 'nickname',
