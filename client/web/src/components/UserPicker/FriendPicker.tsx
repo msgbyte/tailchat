@@ -21,7 +21,9 @@ interface FriendPickerProps {
 export const FriendPicker: React.FC<FriendPickerProps> = React.memo((props) => {
   const { withoutUserIds = [], selectedIds, onChange } = props;
   const friendIds = useAppSelector((state) =>
-    state.user.friends.filter((id) => !withoutUserIds.includes(id))
+    state.user.friends
+      .map((f) => f.id)
+      .filter((item) => !withoutUserIds.includes(item))
   );
 
   return (
