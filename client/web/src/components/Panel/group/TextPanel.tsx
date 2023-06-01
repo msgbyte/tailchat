@@ -19,6 +19,7 @@ import {
   useGroupInfo,
   GroupPanelType,
 } from 'tailchat-shared';
+import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
 import { MembersPanel } from './MembersPanel';
 import { GroupPanelContainer } from './shared/GroupPanelContainer';
 
@@ -80,6 +81,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     const groupMembers = useGroupMemberInfos(groupId);
     const panelInfo = useGroupPanelInfo(groupId, panelId);
     const { disabled, placeholder } = useChatInputInfo(groupId);
+    const friendNicknameMap = useFriendNicknameMap();
 
     if (!group) {
       return null;
@@ -134,7 +136,9 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
         <ChatInputMentionsContextProvider
           users={groupMembers.map((m) => ({
             id: m._id,
-            display: m.nickname,
+            display: friendNicknameMap[m._id]
+              ? friendNicknameMap[m._id]
+              : m.nickname,
           }))}
           panels={group.panels
             .filter((p) => p.type !== GroupPanelType.GROUP)
