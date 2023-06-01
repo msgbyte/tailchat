@@ -1,3 +1,4 @@
+import { UserName } from '@/components/UserName';
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import { Space, Tag } from 'antd';
 import React, { useEffect } from 'react';
@@ -33,7 +34,9 @@ export const GroupUserPopover: React.FC<{
     <div className="w-80 -mx-4 -my-3 bg-inherit">
       <UserProfileContainer userInfo={userInfo}>
         <div className="text-xl">
-          <span className="font-semibold">{userInfo.nickname}</span>
+          <span className="font-semibold">
+            <UserName userId={userInfo._id} />
+          </span>
           {!hideGroupMemberDiscriminator && (
             <span className="opacity-60 ml-1">#{userInfo.discriminator}</span>
           )}

@@ -6,7 +6,7 @@ import {
   t,
   ReduxProvider,
   UserLoginInfo,
-  reduxStore,
+  getReduxStore,
 } from 'tailchat-shared';
 import React, { PropsWithChildren } from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
@@ -41,7 +41,7 @@ function useAppState() {
 
     // 到这里 userLoginInfo 必定存在
     // 创建Redux store
-    const store = reduxStore;
+    const store = getReduxStore();
     store.dispatch(userActions.setUserInfo(userLoginInfo));
     setGlobalStore(store);
 

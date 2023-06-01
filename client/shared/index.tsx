@@ -192,6 +192,7 @@ export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseAck } from './redux/hooks/useConverseAck';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';
 export { useDMConverseName } from './redux/hooks/useDMConverseName';
+export { useFriendNickname } from './redux/hooks/useFriendNickname';
 export {
   useGroupInfo,
   useGroupMemberIds,
@@ -219,7 +220,7 @@ export {
 } from './redux/slices';
 export type { ChatConverseState } from './redux/slices/chat';
 export { setupRedux } from './redux/setup';
-export { reduxStore, ReduxProvider } from './redux/store';
+export { getReduxStore, ReduxProvider } from './redux/store';
 export type { AppStore, AppState, AppDispatch } from './redux/store';
 
 // store

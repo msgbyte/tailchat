@@ -15,6 +15,7 @@ import {
   useSearch,
 } from 'tailchat-shared';
 import _compact from 'lodash/compact';
+import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
 
 /**
  * 群组成员管理相关操作
@@ -23,6 +24,7 @@ export function useGroupMemberAction(groupId: string) {
   const groupInfo = useGroupInfo(groupId);
   const members = groupInfo?.members ?? [];
   const userInfos = useGroupMemberInfos(groupId);
+  const friendNicknameMap = useFriendNicknameMap();
 
   const { handleMuteMember, handleUnmuteMember } = useMemberMuteAction(
     groupId,
@@ -31,7 +33,19 @@ export function useGroupMemberAction(groupId: string) {
 
   const { searchText, setSearchText, isSearching, searchResult } = useSearch({
     dataSource: userInfos,
-    filterFn: (item, searchText) => item.nickname.includes(searchText),
+    filterFn: (item, searchText) => {
+      if (friendNicknameMap[item._id]) {
+        if (friendNicknameMap[item._id].includes(searchText)) {
+          return true;
+        }
+      }
+
+      if (item.nickname.includes(searchText)) {
+        return true;
+      }
+
+      return false;
+    },
   });
 
   /**

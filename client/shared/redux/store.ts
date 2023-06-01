@@ -14,8 +14,11 @@ function createStore() {
   return store;
 }
 
-export const reduxStore = createStore();
+const reduxStore = createStore();
 
+export function getReduxStore() {
+  return reduxStore;
+}
 export type AppStore = ReturnType<typeof createStore>;
 export type AppState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];

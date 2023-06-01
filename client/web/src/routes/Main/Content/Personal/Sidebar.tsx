@@ -79,6 +79,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
         >
           {t('私信')}
         </SidebarSection>
+
         {converseList.map((converse) => {
           return <SidebarDMItem key={converse._id} converse={converse} />;
         })}

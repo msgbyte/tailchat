@@ -3,7 +3,7 @@ import { Avatar } from 'tailchat-design';
 import _isEmpty from 'lodash/isEmpty';
 import { Popover, PopoverProps, Skeleton, Space } from 'antd';
 import { useCachedUserInfo, useCachedOnlineStatus } from 'tailchat-shared';
-import clsx from 'clsx';
+import { UserName } from './UserName';
 
 interface UserListItemProps {
   userId: string;
@@ -26,24 +26,24 @@ export const UserListItem: React.FC<UserListItemProps> = React.memo((props) => {
         active={true}
       >
         <div className="mr-2">
-          <Popover content={props.popover} placement="left" trigger="click">
-            <Avatar
-              className={clsx({
-                'cursor-pointer': !!props.popover,
-              })}
-              src={userInfo.avatar}
-              name={userName}
-              isOnline={isOnline}
-            />
-          </Popover>
+          {props.popover ? (
+            <Popover content={props.popover} placement="left" trigger="click">
+              <Avatar
+                className="cursor-pointer"
+                src={userInfo.avatar}
+                name={userName}
+                isOnline={isOnline}
+              />
+            </Popover>
+          ) : (
+            <Avatar src={userInfo.avatar} name={userName} isOnline={isOnline} />
+          )}
         </div>
         <div className="flex-1 text-gray-900 dark:text-white">
-          <span>{userName}</span>
-          {!hideDiscriminator && (
-            <span className="text-gray-500 dark:text-gray-300 opacity-0 group-hover:opacity-100">
-              #{userInfo.discriminator}
-            </span>
-          )}
+          <UserName
+            userId={props.userId}
+            showDiscriminator={!hideDiscriminator}
+          />
         </div>
         <Space>{actions}</Space>
       </Skeleton>
