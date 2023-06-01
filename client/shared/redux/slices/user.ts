@@ -84,6 +84,16 @@ const userSlice = createSlice({
         state.friendRequests.splice(index, 1);
       }
     },
+    setFriendNickname(
+      state,
+      action: PayloadAction<{ friendId: string; nickname: string }>
+    ) {
+      const { friendId, nickname } = action.payload;
+      const target = state.friends.find((f) => f.id === friendId);
+      if (target) {
+        target.nickname = nickname;
+      }
+    },
   },
 });
 

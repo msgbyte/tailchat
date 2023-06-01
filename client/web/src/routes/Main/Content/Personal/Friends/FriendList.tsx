@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import {
   createDMConverse,
+  isValidStr,
   removeFriend,
   showAlert,
   showErrorToasts,
@@ -9,6 +10,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useAsyncRequest,
+  useEvent,
   userActions,
 } from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
@@ -16,6 +18,8 @@ import { IconBtn } from '@/components/IconBtn';
 import { Button, Dropdown, Menu, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { Problem } from '@/components/Problem';
+import { closeModal, openModal } from '@/components/Modal';
+import { SetFriendNickname } from '@/components/modals/SetFriendNickname';
 
 /**
  * 好友列表
@@ -35,7 +39,18 @@ export const FriendList: React.FC<{
     [navigate]
   );
 
-  const handleRemoveFriend = useCallback(async (targetId: string) => {
+  const handleSetFriendNickname = useEvent(async (userId: string) => {
+    const key = openModal(
+      <SetFriendNickname
+        userId={userId}
+        onSuccess={() => {
+          closeModal(key);
+        }}
+      />
+    );
+  });
+
+  const handleRemoveFriend = useEvent(async (targetId: string) => {
     showAlert({
       message: t(
         '是否要从自己的好友列表中删除对方? 注意:你不会从对方的好友列表消失'
@@ -50,7 +65,7 @@ export const FriendList: React.FC<{
         }
       },
     });
-  }, []);
+  });
 
   if (friends.length === 0) {
     return (
@@ -88,6 +103,13 @@ export const FriendList: React.FC<{
                 <Dropdown
                   menu={{
                     items: [
+                      {
+                        key: 'setNickname',
+                        onClick: () => handleSetFriendNickname(item.id),
+                        label: isValidStr(item.nickname)
+                          ? t('更改好友昵称')
+                          : t('添加好友昵称'),
+                      },
                       {
                         key: 'delete',
                         danger: true,

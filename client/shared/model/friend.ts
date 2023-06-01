@@ -59,3 +59,16 @@ export async function removeFriend(friendUserId: string): Promise<void> {
     friendUserId,
   });
 }
+
+/**
+ * 设置好友昵称
+ */
+export async function setFriendNickname(
+  targetId: string,
+  nickname: string
+): Promise<void> {
+  await request.post('/api/friend/setFriendNickname', {
+    targetId,
+    nickname,
+  });
+}
