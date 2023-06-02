@@ -51,10 +51,10 @@ const MarkdownPanel: React.FC = React.memo(() => {
   return (
     <GroupExtraDataPanel
       names={['markdown']}
-      render={(info) => {
+      render={(dataMap: Record<string, string>) => {
         return (
           <MainContent>
-            <Markdown raw={info['markdown'] ?? ''} />
+            <Markdown raw={dataMap['markdown'] ?? ''} />
           </MainContent>
         );
       }}
@@ -66,13 +66,6 @@ const MarkdownPanel: React.FC = React.memo(() => {
             <div className="main">
               <MarkdownEditorRender dataMap={dataMap} />
             </div>
-
-            {/* <TextArea
-              defaultValue={dataMap['markdown']}
-              onChange={(e) => {
-                dataMap['markdown'] = e.target.value;
-              }}
-            /> */}
           </EditModalContent>
         );
       }}
