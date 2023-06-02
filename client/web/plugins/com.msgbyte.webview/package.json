@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "script_sanitize": "^1.2.6",
     "url-regex": "^5.0.0"
   }
 }

@@ -1201,9 +1201,6 @@ importers:
 
   client/web/plugins/com.msgbyte.webview:
     dependencies:
-      script_sanitize:
-        specifier: ^1.2.6
-        version: 1.2.6
       url-regex:
         specifier: ^5.0.0
         version: 5.0.0
@@ -31952,10 +31949,6 @@ packages:
   /screenfull@5.2.0:
     resolution: {integrity: sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /script_sanitize@1.2.6:
-    resolution: {integrity: sha512-CA53o9tyResT5Sq8HT4w6jcmHoYtfbBxRKvaBQc0Iw0kS4+c9MDNwl1ReUcFjbb/GFm8YjB7diTJE10MWOnHNQ==}
     dev: false
 
   /scroll-into-view-if-needed@2.2.20:
