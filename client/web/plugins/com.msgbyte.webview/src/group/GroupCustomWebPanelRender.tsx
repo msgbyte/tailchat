@@ -34,7 +34,7 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
     return <div>{Translate.notfound}</div>;
   }
 
-  return <iframe ref={ref} />;
+  return <iframe ref={ref} className="w-full h-full" />;
 };
 GroupCustomWebPanelRender.displayName = 'GroupCustomWebPanelRender';
 
