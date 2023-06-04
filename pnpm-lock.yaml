@@ -1639,8 +1639,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/sdk
       tushan:
-        specifier: ^0.2.12
-        version: 0.2.12(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
+        specifier: ^0.2.17
+        version: 0.2.17(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
       vite-express:
         specifier: 0.8.0
         version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
@@ -2397,8 +2397,8 @@ packages:
       color: 3.2.1
     dev: false
 
-  /@arco-design/web-react@2.47.1(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-fVjW59iN3aP48yiJchqGOnCh8bEmoOtoC40S/gdfzmwK7Ef3vh5GPRUydscLhReePck2vi6JLyV0aXEZRKkorA==}
+  /@arco-design/web-react@2.49.0(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-g+B8d8am2inpMd3zGoWZ8TNDBDFZO2AiTzZurN+2q69bzpbsbiX41BG8ujV4GQPJSAt/GVGini0Hv8+LzQdmtw==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
@@ -34528,10 +34528,10 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.2.12(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1):
-    resolution: {integrity: sha512-hQwlHTWoOx45J46+VSK71BbVRnI4+MzO0buEIOFX3dd+r+oSqua/kTTfhN3YycpZO26ReH691WcnAJmM6jEi2g==}
+  /tushan@0.2.17(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1):
+    resolution: {integrity: sha512-tGWSG3qUKN0n7V5vevVsVWTZCUFh+DfVmDExSNgzRzRVTks3isNPXzGlTTz24WDV6Rvuj3uWG8fGaQzg8lcOgQ==}
     dependencies:
-      '@arco-design/web-react': 2.47.1(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
+      '@arco-design/web-react': 2.49.0(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-devtools': 4.29.3(@tanstack/react-query@4.29.3)(react-dom@18.2.0)(react@18.2.0)
       '@types/node': 18.16.1
@@ -34539,6 +34539,7 @@ packages:
       '@types/react-dom': 18.0.11
       axios: 0.27.2
       clsx: 1.2.1
+      eventemitter-strict: 1.0.1
       i18next: 22.5.0
       i18next-browser-languagedetector: 7.0.1
       immer: 9.0.21

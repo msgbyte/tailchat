@@ -110,6 +110,17 @@ router.post('/user/ban', auth(), async (req, res) => {
     ret,
   });
 });
+router.post('/user/unban', auth(), async (req, res) => {
+  const { userId } = req.body;
+
+  const ret = await broker.call('user.unbanUser', {
+    userId,
+  });
+
+  res.json({
+    ret,
+  });
+});
 router.use(
   '/users',
   auth(),

@@ -33,11 +33,11 @@ export const UserList: React.FC = React.memo(() => {
         delete: true,
         refresh: true,
         export: true,
-        custom: [
+        custom: (record) => [
           {
             key: 'resetPassword',
             label: t('custom.action.resetPassword'),
-            onClick: (record) => {
+            onClick: () => {
               const { close } = Modal.confirm({
                 title: t('tushan.common.confirmTitle'),
                 content: t('tushan.common.confirmContent'),
@@ -60,30 +60,53 @@ export const UserList: React.FC = React.memo(() => {
               });
             },
           },
-          {
-            key: 'banUser',
-            label: t('custom.action.banUser'),
-            onClick: (record) => {
-              const { close } = Modal.confirm({
-                title: t('tushan.common.confirmTitle'),
-                content: t('custom.action.banUserDesc'),
-                onConfirm: async () => {
-                  try {
-                    await request.post('/user/ban', {
-                      userId: record.id,
-                    });
-                    Message.success(t('tushan.common.success'));
-                    refreshUser();
-                    close();
-                  } catch (err) {
-                    console.error(err);
-                    Message.error(String(err));
-                  }
+          !record.banned
+            ? {
+                key: 'banUser',
+                label: t('custom.action.banUser'),
+                onClick: () => {
+                  const { close } = Modal.confirm({
+                    title: t('tushan.common.confirmTitle'),
+                    content: t('custom.action.banUserDesc'),
+                    onConfirm: async () => {
+                      try {
+                        await request.post('/user/ban', {
+                          userId: record.id,
+                        });
+                        Message.success(t('tushan.common.success'));
+                        refreshUser();
+                        close();
+                      } catch (err) {
+                        console.error(err);
+                        Message.error(String(err));
+                      }
+                    },
+                  });
                 },
-              });
-            },
-          },
-          // TODO: unban
+              }
+            : {
+                key: 'unbanUser',
+                label: t('custom.action.unbanUser'),
+                onClick: () => {
+                  const { close } = Modal.confirm({
+                    title: t('tushan.common.confirmTitle'),
+                    content: t('custom.action.unbanUserDesc'),
+                    onConfirm: async () => {
+                      try {
+                        await request.post('/user/unban', {
+                          userId: record.id,
+                        });
+                        Message.success(t('tushan.common.success'));
+                        refreshUser();
+                        close();
+                      } catch (err) {
+                        console.error(err);
+                        Message.error(String(err));
+                      }
+                    },
+                  });
+                },
+              },
         ],
       }}
     />

@@ -15,6 +15,8 @@ export const i18n: TushanContextProps['i18n'] = {
             banUser: 'Ban User',
             banUserDesc:
               'Banning a user disconnects the user from the current connection and prevents future logins',
+            unbanUser: 'Unban User',
+            unbanUserDesc: 'After lifting the ban, the user can login normally',
           },
           dashboard: {
             file: 'File',
@@ -153,6 +155,8 @@ export const i18n: TushanContextProps['i18n'] = {
             resetPassword: '重置密码',
             banUser: '封禁用户',
             banUserDesc: '封禁用户会将用户从当前连接断开并阻止之后的登录操作',
+            unbanUser: '解除封禁用户',
+            unbanUserDesc: '解除封禁后用户可以正常登录',
           },
           dashboard: {
             file: '文件',

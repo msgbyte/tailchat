@@ -151,6 +151,12 @@ class UserService extends TcService {
       },
       visibility: 'public',
     });
+    this.registerAction('unbanUser', this.unbanUser, {
+      params: {
+        userId: 'string',
+      },
+      visibility: 'public',
+    });
     this.registerAction('whoami', this.whoami);
     this.registerAction(
       'searchUserWithUniqueName',
@@ -705,6 +711,33 @@ class UserService extends TcService {
     await ctx.call('gateway.tickUser', {
       userId,
     });
+  }
+
+  /**
+   * 解除封禁用户
+   */
+  async unbanUser(
+    ctx: TcContext<{
+      userId: string;
+    }>
+  ) {
+    const { userId } = ctx.params;
+    await this.adapter.model.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        banned: false,
+      }
+    );
+
+    this.cleanUserInfoCache(userId);
+    const tokens = await ctx.call('gateway.getUserSocketToken', {
+      userId,
+    });
+    if (Array.isArray(tokens)) {
+      tokens.map((token) => this.cleanActionCache('resolveToken', [token]));
+    }
   }
 
   async whoami(ctx: TcContext) {
