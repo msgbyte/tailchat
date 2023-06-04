@@ -10,7 +10,7 @@ export const broker = new TcBroker({
 });
 
 broker.start().then(() => {
-  console.log('Linked to Tailchat network, TRANSPORTER: ', transporter);
+  console.log('Connnected to Tailchat network, TRANSPORTER: ', transporter);
 });
 
 export function callBrokerAction<T>(

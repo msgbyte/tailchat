@@ -7,11 +7,12 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --kill-others npm:dev:main npm:dev:sdk npm:dev:plugins npm:dev:admin",
+    "dev": "concurrently --kill-others npm:dev:main npm:dev:sdk npm:dev:plugins npm:dev:admin-next",
     "dev:main": "ts-node ./runner.ts",
     "dev:sdk": "cd packages/sdk && pnpm watch",
     "dev:plugins": "pnpm run --filter \"./plugins/*\" build:web:watch",
     "dev:admin": "cd admin && pnpm dev",
+    "dev:admin-next": "cd admin-next && pnpm dev",
     "debug": "node --inspect -r ts-node/register ./runner.ts",
     "build": "ts-node scripts/build.ts",
     "start:service": "cd dist && tailchat-runner --config moleculer.config.js",

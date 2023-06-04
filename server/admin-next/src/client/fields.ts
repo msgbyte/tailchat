@@ -49,6 +49,7 @@ export const userFields = [
   createAvatarField('avatar', {
     preRenderTransform: parseUrlStr,
   }),
+  createBooleanField('banned'),
   createJSONField('settings', {
     list: {
       width: 200,

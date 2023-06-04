@@ -17,6 +17,7 @@ export interface UserBaseInfo {
   avatar: string | null;
   temporary: boolean;
   emailVerified: boolean;
+  banned: boolean;
   extra?: Record<string, unknown>;
 }
 
@@ -51,6 +52,7 @@ export function pickUserBaseInfo(userInfo: UserLoginInfo): UserBaseInfo {
     'avatar',
     'temporary',
     'emailVerified',
+    'banned',
   ]);
 }
 
@@ -64,6 +66,7 @@ const builtinUserInfo: Record<string, () => UserBaseInfo> = {
     avatar: null,
     temporary: false,
     emailVerified: false,
+    banned: false,
   }),
 };
 

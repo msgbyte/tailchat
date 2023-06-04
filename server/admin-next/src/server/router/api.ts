@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import { callBrokerAction } from '../broker';
+import { broker, callBrokerAction } from '../broker';
 import { adminAuth, auth, authSecret } from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
@@ -98,6 +98,17 @@ router.get('/user/count/summary', auth(), async (req, res) => {
     .reverse();
 
   res.json({ summary });
+});
+router.post('/user/ban', auth(), async (req, res) => {
+  const { userId } = req.body;
+
+  const ret = await broker.call('user.banUser', {
+    userId,
+  });
+
+  res.json({
+    ret,
+  });
 });
 router.use(
   '/users',

@@ -12,6 +12,9 @@ export const i18n: TushanContextProps['i18n'] = {
         custom: {
           action: {
             resetPassword: 'Reset Password',
+            banUser: 'Ban User',
+            banUserDesc:
+              'Banning a user disconnects the user from the current connection and prevents future logins',
           },
           dashboard: {
             file: 'File',
@@ -76,6 +79,7 @@ export const i18n: TushanContextProps['i18n'] = {
               temporary: '是否游客',
               type: '用户类型',
               settings: '用户设置',
+              banned: '是否被封禁',
               createdAt: '创建时间',
             },
           },
@@ -147,6 +151,8 @@ export const i18n: TushanContextProps['i18n'] = {
         custom: {
           action: {
             resetPassword: '重置密码',
+            banUser: '封禁用户',
+            banUserDesc: '封禁用户会将用户从当前连接断开并阻止之后的登录操作',
           },
           dashboard: {
             file: '文件',

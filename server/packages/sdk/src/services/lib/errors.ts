@@ -40,7 +40,12 @@ export class NoPermissionError extends TcError {
 
 export class BannedError extends TcError {
   constructor(message?: string, code?: number, type?: string, data?: unknown) {
-    super(message ?? 'You has been banned', code ?? 403, type, data);
+    super(
+      message ?? 'You has been banned',
+      code ?? 403,
+      type ?? 'banned',
+      data
+    );
   }
 }
 

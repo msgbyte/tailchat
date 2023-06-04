@@ -20,7 +20,7 @@ import {
   EntityError,
   db,
   call,
-  NoPermissionError,
+  BannedError,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -56,6 +56,7 @@ class UserService extends TcService {
       'avatar',
       'type',
       'emailVerified',
+      'banned',
       'extra',
       'createdAt',
     ]);
@@ -143,6 +144,12 @@ class UserService extends TcService {
       params: {
         token: 'string',
       },
+    });
+    this.registerAction('banUser', this.banUser, {
+      params: {
+        userId: 'string',
+      },
+      visibility: 'public',
     });
     this.registerAction('whoami', this.whoami);
     this.registerAction(
@@ -291,7 +298,7 @@ class UserService extends TcService {
     }
 
     if (user.banned === true) {
-      throw new NoPermissionError(t('用户被封禁'), 403);
+      throw new BannedError(t('用户被封禁'), 403);
     }
 
     // Transform user entity (remove password and all protected fields)
@@ -646,11 +653,11 @@ class UserService extends TcService {
       // token 中没有 _id
       throw new EntityError(t('Token 内容不正确'));
     }
-    const doc = await this.getById(decoded._id);
+    const doc = await this.adapter.model.findById(decoded._id);
     const user: User = await this.transformDocuments(ctx, {}, doc);
 
     if (user.banned === true) {
-      throw new NoPermissionError(t('用户被封禁'));
+      throw new BannedError(t('用户被封禁'));
     }
 
     const json = await this.transformEntity(user, true, ctx.meta.token);
@@ -668,6 +675,36 @@ class UserService extends TcService {
     } catch (e) {
       return false;
     }
+  }
+
+  /**
+   * 封禁用户
+   */
+  async banUser(
+    ctx: TcContext<{
+      userId: string;
+    }>
+  ) {
+    const { userId } = ctx.params;
+    await this.adapter.model.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        banned: true,
+      }
+    );
+
+    this.cleanUserInfoCache(userId);
+    const tokens = await ctx.call('gateway.getUserSocketToken', {
+      userId,
+    });
+    if (Array.isArray(tokens)) {
+      tokens.map((token) => this.cleanActionCache('resolveToken', [token]));
+    }
+    await ctx.call('gateway.tickUser', {
+      userId,
+    });
   }
 
   async whoami(ctx: TcContext) {

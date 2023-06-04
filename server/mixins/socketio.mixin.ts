@@ -398,6 +398,28 @@ export const TcSocketIOService = (
       },
 
       /**
+       * 获取userId获取所有的用户的token
+       */
+      getUserSocketToken: {
+        visibility: 'public',
+        params: {
+          userId: 'string',
+        },
+        async handler(
+          this: TcService,
+          ctx: TcContext<{ userId: string }>
+        ): Promise<string[]> {
+          const userId = ctx.params.userId;
+          const io: SocketServer = this.io;
+          const remoteSockets = await io
+            .in(buildUserRoomId(userId))
+            .fetchSockets();
+
+          return remoteSockets.map((remoteSocket) => remoteSocket.data.token);
+        },
+      },
+
+      /**
        * 踢出用户
        */
       tickUser: {

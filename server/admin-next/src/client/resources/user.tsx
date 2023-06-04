@@ -4,16 +4,19 @@ import {
   ListTable,
   Message,
   Modal,
+  useRefreshList,
   useResourceContext,
   useTranslation,
   useUpdate,
 } from 'tushan';
 import { userFields } from '../fields';
+import { request } from '../request';
 
 export const UserList: React.FC = React.memo(() => {
   const { t } = useTranslation();
   const [update] = useUpdate();
   const resource = useResourceContext();
+  const refreshUser = useRefreshList(resource);
 
   return (
     <ListTable
@@ -28,16 +31,17 @@ export const UserList: React.FC = React.memo(() => {
         detail: true,
         edit: true,
         delete: true,
+        refresh: true,
         export: true,
         custom: [
           {
             key: 'resetPassword',
             label: t('custom.action.resetPassword'),
-            onClick: (record: any) => {
+            onClick: (record) => {
               const { close } = Modal.confirm({
                 title: t('tushan.common.confirmTitle'),
                 content: t('tushan.common.confirmContent'),
-                onConfirm: async (e) => {
+                onConfirm: async () => {
                   try {
                     await update(resource, {
                       id: record.id,
@@ -56,6 +60,30 @@ export const UserList: React.FC = React.memo(() => {
               });
             },
           },
+          {
+            key: 'banUser',
+            label: t('custom.action.banUser'),
+            onClick: (record) => {
+              const { close } = Modal.confirm({
+                title: t('tushan.common.confirmTitle'),
+                content: t('custom.action.banUserDesc'),
+                onConfirm: async () => {
+                  try {
+                    await request.post('/user/ban', {
+                      userId: record.id,
+                    });
+                    Message.success(t('tushan.common.success'));
+                    refreshUser();
+                    close();
+                  } catch (err) {
+                    console.error(err);
+                    Message.error(String(err));
+                  }
+                },
+              });
+            },
+          },
+          // TODO: unban
         ],
       }}
     />
