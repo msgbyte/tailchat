@@ -139,3 +139,37 @@ title: 在 Sealos 上部署Tailchat
 此时当我们访问 `https://<xxxxxxxxxx>.cloud.sealos.io/health` 可以看到我们可以访问到不同的节点
 
 ![](/img/kubernetes/sealos/16.png)
+
+## 添加 Tailchat 入口到桌面
+
+打开 Terminal, 输入`vim app.yml`创建并编辑一个配置文件
+
+输入以下内容，注意url要换成自己部署的网址
+
+```yml
+apiVersion: app.sealos.io/v1
+kind: App
+metadata:
+  name: tailchat-app-entry
+spec:
+  name: Tailchat
+  icon:
+  type: iframe
+  data:
+    url: <Your url>
+    desc:
+  icon: https://tailchat.msgbyte.com/img/logo.svg
+  menuData:
+    nameColor: text-black
+    helpDropDown:
+    helpDocs:
+  displayType: normal
+```
+
+按`esc`退出编辑模式, 按`:wq`保存并退出vim
+
+输入`kubectl apply -f app.yml`启动配置。
+
+完毕后刷新页面，此时我们可以看到我们的入口就出现在`sealos`的桌面上了
+
+![](/img/kubernetes/sealos/17.png)

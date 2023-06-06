@@ -110,3 +110,37 @@ Of course, as a distributed architecture system, Tailchat naturally supports hor
 At this point, when we access `https://<xxxxxxxxxx>.cloud.sealos.io/health`, we can see that we can access different nodes.
 
 ![](/img/kubernetes/sealos/16.png)
+
+## Add Tailchat entry to desktop
+
+Open Terminal, enter `vim app.yml` to create and edit a configuration file
+
+Enter the following content, note that the url should be replaced with the url deployed by yourself
+
+```yml
+apiVersion: app.sealos.io/v1
+kind: App
+metadata:
+  name: tailchat-app-entry
+spec:
+  name: Tailchat
+  icon:
+  type: iframe
+  data:
+    url: <Your url>
+    desc:
+  icon: https://tailchat.msgbyte.com/img/logo.svg
+  menuData:
+    nameColor: text-black
+    helpDropDown:
+    helpDocs:
+  displayType: normal
+```
+
+Press `esc` to exit edit mode, press `:wq` to save and exit vim
+
+Type `kubectl apply -f app.yml` to start the configuration.
+
+After refreshing the page, we can see that our entry appears on the desktop of `sealos`
+
+![](/img/kubernetes/sealos/17.png)
