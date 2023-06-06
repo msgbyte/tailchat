@@ -145,7 +145,8 @@ export const fileFields = [
 ];
 
 export const mailFields = [
-  createTextField('userId'),
+  createTextField('to'),
+  createTextField('subject'),
   createTextField('host'),
   createNumberField('port'),
   createBooleanField('secure'),

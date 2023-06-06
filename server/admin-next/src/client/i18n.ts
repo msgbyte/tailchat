@@ -128,6 +128,8 @@ export const i18n: TushanContextProps['i18n'] = {
             name: '邮件历史',
             fields: {
               userId: '用户ID',
+              to: '目标邮箱',
+              subject: '邮件主题',
               host: '发信主机',
               port: '发信端口',
               secure: '是否加密',

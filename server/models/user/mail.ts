@@ -50,15 +50,6 @@ export class Mail extends TimeStamps implements Base {
   id: string;
 
   /**
-   * 发送到的用户id
-   */
-  @prop({
-    ref: () => User,
-    index: true,
-  })
-  userId: Ref<User>;
-
-  /**
    * 发件人邮箱
    */
   @prop()
