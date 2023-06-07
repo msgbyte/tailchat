@@ -1,5 +1,31 @@
 
 
+## [1.7.6](https://github.com/msgbyte/tailchat/compare/v1.7.5...v1.7.6) (2023-06-07)
+
+
+### Bug Fixes
+
+* fix friend struct changed problem in `FriendPicker` ([fa49886](https://github.com/msgbyte/tailchat/commit/fa498867c4a40f023cdb613c9137a831fad146db))
+
+
+### Features
+
+* add ban user ([ea3ad15](https://github.com/msgbyte/tailchat/commit/ea3ad15f5fd8e5669b713d1c73f2d7b67211e991))
+* add friend nickname set model and api ([7029e67](https://github.com/msgbyte/tailchat/commit/7029e67f0cc8785f3bd7a30251ce2e8cdad5fb76))
+* add friend nickname support in everywhere ([20c16ad](https://github.com/msgbyte/tailchat/commit/20c16adeec66582943f952c4303a896993ea4bc4))
+* add mention support friend nickname ([902ab8f](https://github.com/msgbyte/tailchat/commit/902ab8f422a8580e8d7c394bf0ef21a0d6a3d4e9))
+* add message count ([db52b3d](https://github.com/msgbyte/tailchat/commit/db52b3d5d527e850609393bbf7287458eb3b0384))
+* add unban operation ([1b880a5](https://github.com/msgbyte/tailchat/commit/1b880a50518fb5876783b09f8e477291802e0c82))
+* **admin-next:** add cache manager ([0d7d71d](https://github.com/msgbyte/tailchat/commit/0d7d71d22f5a81f1a6ac5d4f08a8c4701229d530))
+* **admin-next:** add disableGuestLogin and disableUserRegister in admin/config ([43cc8e3](https://github.com/msgbyte/tailchat/commit/43cc8e34a3c0960feff7ccaa6ba97359cb990d0e))
+* **admin-next:** add user count chart ([54a7340](https://github.com/msgbyte/tailchat/commit/54a73403d73ff1acc55e4a41d49a6f1c841d533f))
+* mail record createdAt and updatedAt ([4d6e85c](https://github.com/msgbyte/tailchat/commit/4d6e85c849ee1cf8f671de33a74ea4afd28ba741))
+
+
+### Performance Improvements
+
+* **admin-next:** perf message content and id field ([e0a22e0](https://github.com/msgbyte/tailchat/commit/e0a22e01be286a1c33306a657ab3011b3bcbe389))
+
 ## [1.7.5](https://github.com/msgbyte/tailchat/compare/v1.7.4...v1.7.5) (2023-05-27)
 
 
