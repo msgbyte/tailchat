@@ -38,3 +38,5 @@ pnpm dev
 You can edit the configuration of `server/.env` to your own relevant context
 
 The file can be started from `server/.env.example`
+
+Now you can preview your server in `http://localhost:11011`

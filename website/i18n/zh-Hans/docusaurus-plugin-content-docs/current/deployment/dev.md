@@ -38,3 +38,5 @@ pnpm dev
 可以编辑`server/.env`的配置为自己相关的上下文
 
 该文件可以从 `server/.env.example` 开始
+
+现在你可以在 `http://localhost:11011` 访问你的 Tailchat 服务了
