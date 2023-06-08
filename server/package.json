@@ -1,6 +1,5 @@
 {
   "name": "tailchat-server",
-  "version": "1.0.2",
   "main": "index.js",
   "repository": "https://github.com/msgbyte/tailchat-server.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",

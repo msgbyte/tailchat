@@ -1,0 +1,431 @@
+openapi: 3.0.3
+info:
+  title: Tailchat API
+  description: "Tailchat: The next-generation noIM Application in your own workspace"
+  contact:
+    name: moonrailgun
+    url: https://tailchat.msgbyte.com/
+    email: moonrailgun@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.7.6
+servers:
+  - url: http://localhost:11000
+    description: localhost
+paths:
+  /api/debug/hello:
+    get:
+      tags:
+        - debug
+      summary: Send debug action
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        '200':
+          description: ok (code 0)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: string
+  /api/user/login:
+    post:
+      tags:
+        - user
+      summary: Login Tailchat with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '422':
+          $ref: '#/components/responses/EntityError'
+  /api/user/verifyEmail:
+    post:
+      tags:
+        - user
+      summary: verifyEmail Email with send mail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ActionSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/user/verifyEmailWithOTP:
+    post:
+      tags:
+        - user
+      summary: verifyEmail Email with apply email OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/user/register:
+    post:
+      tags:
+        - user
+      summary: Register Account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                - type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    emailOTP:
+                      type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/modifyPassword:
+    post:
+      tags:
+        - user
+      summary: Modify Account Password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ActionSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/createTemporaryUser:
+    post:
+      tags:
+        - user
+      summary: Create Temporary User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/claimTemporaryUser:
+    post:
+      tags:
+        - user
+      summary: Claim Temporary User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    userId:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                - type: object
+                  properties:
+                    userId:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    emailOTP:
+                      type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/forgetPassword:
+    post:
+      tags:
+        - user
+      summary: Forget Password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ActionSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/user/resetPassword:
+    post:
+      tags:
+        - user
+      summary: Reset Password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                  description: new password
+                otp:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ActionSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/resolveToken:
+    post:
+      tags:
+        - user
+      summary: Login with token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /api/user/checkTokenValid:
+    post:
+      tags:
+        - user
+      summary: Check Token Valid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Boolean'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  responses:
+    ActionSuccess:
+      description: No response and return true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+    Boolean:
+      description: Return true or false
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Success'
+              - $ref: '#/components/schemas/Failed'
+    UserInfo:
+      description: User Info
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              data:
+                $ref: '#/components/schemas/UserPayload'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    EntityError:
+      description: EntityError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: EntityError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    UserPayload:
+      type: object
+      properties:
+        _id:
+          type: string
+        email:
+          type: string
+        nickname:
+          type: string
+        discriminator:
+          type: string
+        temporary:
+          type: boolean
+          example: false
+        avatar:
+          type: string
+        type:
+          type: string
+          enum:
+            - normalUser
+            - pluginBot
+            - openapiBot
+          example: normalUser
+        emailVerified:
+          type: boolean
+        banned:
+          type: boolean
+          example: false
+        createdAt:
+          type: string
+        token:
+          type: string
+    # Schema for success response body
+    Success:
+      type: object
+      properties:
+        code:
+          type: string
+          example: 200
+        data:
+          type: boolean
+          example: true
+      required:
+        - code
+        - message
+    Failed:
+      type: object
+      properties:
+        code:
+          type: string
+          example: 200
+        data:
+          type: boolean
+          example: false
+      required:
+        - code
+        - message
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: X-Token
+      description: Token which get from login
+
+security:
+  - JWTAuth: []
