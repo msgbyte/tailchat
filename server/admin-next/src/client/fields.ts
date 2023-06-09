@@ -132,7 +132,9 @@ export const groupFields = [
 
 export const fileFields = [
   createTextField('objectName'),
-  createUrlField('url'),
+  createUrlField('url', {
+    preRenderTransform: parseUrlStr,
+  }),
   createFileSizeField('size', {
     list: {
       width: 120,
