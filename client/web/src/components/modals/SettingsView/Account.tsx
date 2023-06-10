@@ -8,7 +8,7 @@ import { closeModal, pluginUserExtraInfo } from '@/plugin/common';
 import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { setGlobalUserLoginInfo } from '@/utils/user-helper';
-import { Button, Divider, Tag, Typography } from 'antd';
+import { Button, Divider, message, Tag, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { Avatar } from 'tailchat-design';
@@ -125,6 +125,13 @@ export const SettingsAccount: React.FC = React.memo(() => {
                     color="warning"
                     className="cursor-pointer"
                     onClick={() => {
+                      if (userInfo.temporary) {
+                        message.warning(
+                          t('临时用户无法认证邮箱, 请先认领账号')
+                        );
+                        return;
+                      }
+
                       const key = openModal(
                         <EmailVerify
                           onSuccess={() => {
