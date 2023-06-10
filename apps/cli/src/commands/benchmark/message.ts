@@ -10,97 +10,89 @@ import ora from 'ora';
 import prettyMs from 'pretty-ms';
 import filesize from 'filesize';
 
-export const benchCommand: CommandModule = {
-  command: 'bench',
-  describe: 'Benchmark',
+export const benchMessageCommand: CommandModule = {
+  command: 'message',
+  describe:
+    'Stress testing through Tailchat network requests (suitable for pure business testing)',
   builder: (yargs) =>
     yargs
-      .command(
-        'message',
-        'Stress testing through Tailchat network requests (suitable for pure business testing)',
-        (yargs) =>
-          yargs
-            .option('groupId', {
-              describe: 'Group ID',
-              demandOption: true,
-              type: 'string',
-            })
-            .option('converseId', {
-              describe: 'Converse ID',
-              demandOption: true,
-              type: 'string',
-            })
-            .option('userId', {
-              describe: 'User ID',
-              demandOption: true,
-              type: 'string',
-            })
-            .option('num', {
-              describe: 'Test Num',
-              type: 'number',
-              default: 100,
-            })
-            .option('parallel', {
-              describe: 'Is Parallel',
-              type: 'boolean',
-              default: false,
-            })
-            .option('parallelLimit', {
-              describe: 'Parallel Limit',
-              type: 'number',
-              default: Infinity,
-            }),
+      .option('groupId', {
+        describe: 'Group ID',
+        demandOption: true,
+        type: 'string',
+      })
+      .option('converseId', {
+        describe: 'Converse ID',
+        demandOption: true,
+        type: 'string',
+      })
+      .option('userId', {
+        describe: 'User ID',
+        demandOption: true,
+        type: 'string',
+      })
+      .option('num', {
+        describe: 'Test Num',
+        type: 'number',
+        default: 100,
+      })
+      .option('parallel', {
+        describe: 'Is Parallel',
+        type: 'boolean',
+        default: false,
+      })
+      .option('parallelLimit', {
+        describe: 'Parallel Limit',
+        type: 'number',
+        default: Infinity,
+      }),
+  async handler(args) {
+    config(); // 加载环境变量
 
-        async (args) => {
-          config(); // 加载环境变量
+    const broker = new TcBroker({
+      ...defaultBrokerConfig,
+      transporter: process.env.TRANSPORTER,
+      logger: false,
+    });
+    await broker.start();
 
-          const broker = new TcBroker({
-            ...defaultBrokerConfig,
-            transporter: process.env.TRANSPORTER,
-            logger: false,
-          });
-          await broker.start();
+    printSystemInfo();
 
-          printSystemInfo();
+    console.log('===============');
 
-          console.log('===============');
-
-          await startBenchmark<number>({
-            parallel: args.parallel,
-            parallelLimit: args.parallelLimit,
-            number: args.num,
-            task: async (i) => {
-              const start = process.hrtime();
-              await broker.call(
-                'chat.message.sendMessage',
-                {
-                  converseId: args.converseId,
-                  groupId: args.groupId,
-                  content: `benchmessage ${i + 1}`,
-                },
-                {
-                  meta: {
-                    userId: args.userId,
-                  },
-                }
-              );
-              const usage = calcUsage(start);
-
-              return usage;
+    await startBenchmark<number>({
+      parallel: args.parallel as boolean,
+      parallelLimit: args.parallelLimit as number,
+      number: args.num as number,
+      task: async (i) => {
+        const start = process.hrtime();
+        await broker.call(
+          'chat.message.sendMessage',
+          {
+            converseId: args.converseId,
+            groupId: args.groupId,
+            content: `benchmessage ${i + 1}`,
+          },
+          {
+            meta: {
+              userId: args.userId,
             },
-            onCompleted: (res) => {
-              console.log(`Test Num: \t${res.length}`);
-              console.log(`Max Usage: \t${prettyMs(Math.max(...res, 0))}`);
-              console.log(`Min Usage: \t${prettyMs(Math.min(...res, 0))}`);
-              console.log(`Average time: \t${prettyMs(_.mean(res))}`);
-            },
-          });
+          }
+        );
+        const usage = calcUsage(start);
 
-          await broker.stop();
-        }
-      )
-      .demandCommand(),
-  handler() {},
+        return usage;
+      },
+      onCompleted: (res) => {
+        console.log(`Test Num: \t${res.length}`);
+        console.log(`Max Usage: \t${prettyMs(Math.max(...res, 0))}`);
+        console.log(`Min Usage: \t${prettyMs(Math.min(...res, 0))}`);
+        console.log(`Average time: \t${prettyMs(_.mean(res))}`);
+      },
+    });
+
+    await broker.stop();
+  },
 };
 
 /**
