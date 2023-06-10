@@ -10,7 +10,7 @@ import ora from 'ora';
 import prettyMs from 'pretty-ms';
 import filesize from 'filesize';
 
-export const benchMessageCommand: CommandModule = {
+export const benchmarkMessageCommand: CommandModule = {
   command: 'message',
   describe:
     'Stress testing through Tailchat network requests (suitable for pure business testing)',

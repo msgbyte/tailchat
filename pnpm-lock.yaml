@@ -183,6 +183,12 @@ importers:
       rimraf:
         specifier: ^3.0.2
         version: 3.0.2
+      socket.io-client:
+        specifier: ^4.6.2
+        version: 4.6.2
+      socket.io-msgpack-parser:
+        specifier: ^3.0.2
+        version: 3.0.2
       spinnies:
         specifier: ^0.5.1
         version: 0.5.1
@@ -560,7 +566,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1828,7 +1834,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -2006,7 +2012,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.welcome:
     dependencies:
@@ -18478,7 +18484,7 @@ packages:
     dependencies:
       '@socket.io/component-emitter': 3.1.0
       debug: 4.3.4(supports-color@9.2.2)
-      engine.io-parser: 5.0.4
+      engine.io-parser: 5.0.6
       ws: 8.2.3
       xmlhttprequest-ssl: 2.0.0
     transitivePeerDependencies:
@@ -18500,14 +18506,9 @@ packages:
       - utf-8-validate
     dev: false
 
-  /engine.io-parser@5.0.4:
-    resolution: {integrity: sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg==}
-    engines: {node: '>=10.0.0'}
-
   /engine.io-parser@5.0.6:
     resolution: {integrity: sha512-tjuoZDMAdEhVnSFleYPCtdL2GXwVTGtNjoeJd9IhIG3C1xs9uwxqRNEu5WpnDZCaozwVlK/nuQhpodhXSIMaxw==}
     engines: {node: '>=10.0.0'}
-    dev: false
 
   /engine.io@6.2.0:
     resolution: {integrity: sha512-4KzwW3F3bk+KlzSOY57fj/Jx6LyRQ1nbcyIadehl+AnXjKT7gDO0ORdRi/84ixvMKTym6ZKuxvbzN62HDDU1Lg==}
@@ -18521,7 +18522,7 @@ packages:
       cookie: 0.4.2
       cors: 2.8.5
       debug: 4.3.4(supports-color@9.2.2)
-      engine.io-parser: 5.0.4
+      engine.io-parser: 5.0.6
       ws: 8.2.3
     transitivePeerDependencies:
       - bufferutil
@@ -21884,10 +21885,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
+    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
-    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -32435,6 +32436,20 @@ packages:
       - utf-8-validate
     dev: false
 
+  /socket.io-client@4.6.2:
+    resolution: {integrity: sha512-OwWrMbbA8wSqhBAR0yoPK6EdQLERQAYjXb3A0zLpgxfM1ZGLKoxHx8gVmCHA6pcclRX5oA/zvQf7bghAS11jRA==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4(supports-color@9.2.2)
+      engine.io-client: 6.4.0
+      socket.io-parser: 4.2.4
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /socket.io-msgpack-parser@3.0.2:
     resolution: {integrity: sha512-1e76bJ1PCKi9H+JiYk+S29PBJvknHjQWM7Mtj0hjF2KxDA6b6rQxv3rTsnwBoz/haZOhlCDIMQvPATbqYeuMxg==}
     dependencies:
@@ -32464,6 +32479,16 @@ packages:
 
   /socket.io-parser@4.2.2:
     resolution: {integrity: sha512-DJtziuKypFkMMHCm2uIshOYC7QaylbtzQwiMYDuCKy3OPkjLzu4B2vAhTlqipRHHzrI0NJeBAizTK7X+6m1jVw==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4(supports-color@9.2.2)
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /socket.io-parser@4.2.4:
+    resolution: {integrity: sha512-/GbIKmo8ioc+NIWIhwdecY0ge+qVBSMdgxGygevmdHj24bsfgtCmcUUcQ5ZzcylGFHsN3k4HB4Cgkl96KVnuew==}
     engines: {node: '>=10.0.0'}
     dependencies:
       '@socket.io/component-emitter': 3.1.0
@@ -33487,7 +33512,7 @@ packages:
       hark: 1.2.3
       lodash: 4.17.21
       mediasoup-client: 3.6.57
-      socket.io-client: 4.5.1
+      socket.io-client: 4.6.2
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -36676,6 +36701,7 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36692,7 +36718,6 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
