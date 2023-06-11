@@ -79,10 +79,13 @@ class BBCodeParser {
         const { tag, content, attrs } = node;
         const attrsStr = _toPairs(attrs)
           .map(([key, value]) => {
+            /**
+             * 增加双引号以解决value中可能会出现空格的问题
+             */
             if (key === value) {
-              return `=${value}`;
+              return `="${value}"`;
             } else {
-              return ` ${key}=${value}`;
+              return ` ${key}="${value}"`;
             }
           })
           // NOTICE: 这里排序看起来好像有问题，但是attrs的顺序是有序的，所以没有问题
@@ -135,6 +138,7 @@ class BBCodeParser {
   }
 
   render(input: string): ReactNode[] {
+    console.log('input', input);
     const ast = this.parse(input);
 
     return ast
