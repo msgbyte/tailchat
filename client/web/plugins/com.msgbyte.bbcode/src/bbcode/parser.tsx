@@ -138,7 +138,6 @@ class BBCodeParser {
   }
 
   render(input: string): ReactNode[] {
-    console.log('input', input);
     const ast = this.parse(input);
 
     return ast
