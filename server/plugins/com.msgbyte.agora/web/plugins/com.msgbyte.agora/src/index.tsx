@@ -7,7 +7,7 @@ console.log('Plugin 声网音视频 is loaded');
 
 // 发起群组会议
 regPluginPanelAction({
-  name: 'plugin:com.msgbyte.meeting/groupAction',
+  name: 'plugin:com.msgbyte.agora/groupAction',
   label: Translate.startCall,
   position: 'group',
   icon: 'mdi:video-box',
