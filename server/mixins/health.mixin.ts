@@ -16,9 +16,11 @@ export const TcHealth = (): Partial<PureServiceSchema> => {
         const services: any[] = await ctx.call('$node.services');
 
         return {
-          nodeID: this.broker.nodeID,
+          nodeID: ctx.broker.nodeID,
+          instanceID: ctx.broker.instanceID,
           cpu: status.cpu,
           memory: status.mem,
+          process: status.process,
           services: services
             .filter((s) => s.available === true)
             .map((s) => s.fullName),
