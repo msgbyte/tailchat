@@ -24,9 +24,15 @@ export const benchmarkRegisterCommand: CommandModule = {
         demandOption: true,
         type: 'number',
         default: 100,
+      })
+      .option('invite', {
+        describe: 'Invite Code',
+        type: 'string',
       }),
   async handler(args) {
+    const url = args.url as string;
     const count = args.count as number;
+    const invite = args.invite as string | undefined;
     const tokens: string[] = [];
     const start = Date.now();
 
@@ -35,10 +41,11 @@ export const benchmarkRegisterCommand: CommandModule = {
     for (let i = 0; i < count; i++) {
       spinner.text = `Progress: ${i + 1}/${count}`;
 
-      const token = await registerTemporaryAccount(
-        args.url as string,
-        `benchUser-${i}`
-      );
+      const token = await registerTemporaryAccount(url, `benchUser-${i}`);
+      if (invite) {
+        // Apply group invite
+        applyGroupInviteCode(url, token, invite);
+      }
       tokens.push(token);
     }
 
@@ -63,4 +70,19 @@ async function registerTemporaryAccount(
     .json<{ data: { token: string } }>();
 
   return res.data.token;
+}
+
+async function applyGroupInviteCode(
+  url: string,
+  token: string,
+  inviteCode: string
+) {
+  await got.post(`${url}/api/group/invite/applyInvite`, {
+    json: {
+      code: inviteCode,
+    },
+    headers: {
+      'X-Token': token,
+    },
+  });
 }
