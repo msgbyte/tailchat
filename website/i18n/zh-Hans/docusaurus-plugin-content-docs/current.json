@@ -50,5 +50,13 @@
   "sidebar.tutorialSidebar.category.Guide": {
     "message": "指南",
     "description": "The label for category Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes": {
+    "message": "Kubernetes",
+    "description": "The label for category Kubernetes in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Benchmark": {
+    "message": "压力测试",
+    "description": "The label for category Benchmark in sidebar tutorialSidebar"
   }
 }
