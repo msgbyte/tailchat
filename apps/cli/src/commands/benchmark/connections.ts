@@ -2,26 +2,23 @@ import { CommandModule } from 'yargs';
 import { io, Socket } from 'socket.io-client';
 import msgpackParser from 'socket.io-msgpack-parser';
 import fs from 'fs-extra';
+import ora from 'ora';
 
 const CLIENT_CREATION_INTERVAL_IN_MS = 5;
 
 export const benchmarkConnectionsCommand: CommandModule = {
-  command: 'connections',
+  command: 'connections <url>',
   describe: 'Test Tailchat Connections',
   builder: (yargs) =>
-    yargs
-      .option('url', {
-        describe: 'Url',
-        demandOption: true,
-        type: 'string',
-      })
-      .option('accountPath', {
-        describe: 'Account Token Path',
-        demandOption: true,
-        type: 'string',
-      }),
+    yargs.demandOption('url', 'Backend Url').option('file', {
+      describe: 'Account Token Path',
+      demandOption: true,
+      type: 'string',
+      default: './accounts',
+    }),
   async handler(args) {
-    const account = await fs.readFile(args.accountPath as string, {
+    console.log('Reading account tokens from', args.file);
+    const account = await fs.readFile(args.file as string, {
       encoding: 'utf8',
     });
     createClients(
@@ -33,13 +30,16 @@ export const benchmarkConnectionsCommand: CommandModule = {
 
 async function createClients(url: string, accountTokens: string[]) {
   const maxCount = accountTokens.length;
+  const spinner = ora().info(`Create Client Connection to ${url}`).start();
 
+  let i = 0;
   for (const token of accountTokens) {
     await sleep(CLIENT_CREATION_INTERVAL_IN_MS);
+    spinner.text = `Progress: ${++i}/${maxCount}`;
     await createClient(url, token);
   }
 
-  console.log(`${maxCount} clients has been create.`);
+  spinner.succeed(`${maxCount} clients has been create.`);
 }
 
 function createClient(url: string, token: string): Promise<Socket> {
