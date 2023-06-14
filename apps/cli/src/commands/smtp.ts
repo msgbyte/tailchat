@@ -16,14 +16,16 @@ export const smtpCommand: CommandModule = {
         async (args) => {
           config(); // 加载环境变量
 
+          console.log(
+            'This command will verify SMTP URI which use in tailchat, please put your URI which same like in tailchat env'
+          );
           const { uri } = await inquirer.prompt([
             {
               type: 'input',
               name: 'uri',
               message: 'SMTP_URI',
               default: process.env.SMTP_URI,
-              validate: (input) =>
-                typeof input === 'string' && input.length > 0,
+              validate: isValidStr,
             },
           ]);
 
@@ -39,6 +41,61 @@ export const smtpCommand: CommandModule = {
           }
         }
       )
+      .command(
+        'test',
+        'Send test email with smtp service',
+        (yargs) => {},
+        async (args) => {
+          config(); // 加载环境变量
+
+          console.log(
+            'This command will send test email to your own email, please put your info which same like in tailchat env'
+          );
+
+          const { sender, uri, target } = await inquirer.prompt([
+            {
+              type: 'input',
+              name: 'sender',
+              message: 'SMTP_SENDER',
+              default: process.env.SMTP_SENDER,
+              validate: isValidStr,
+            },
+            {
+              type: 'input',
+              name: 'uri',
+              message: 'SMTP_URI',
+              default: process.env.SMTP_URI,
+              validate: isValidStr,
+            },
+            {
+              type: 'input',
+              name: 'target',
+              message: 'Email address which wanna send',
+              validate: isValidStr,
+            },
+          ]);
+
+          const transporter = nodemailer.createTransport(
+            parseConnectionUrl(uri)
+          );
+
+          try {
+            const res = await transporter.sendMail({
+              from: sender,
+              to: target,
+              subject: `Test email send in ${new Date().toLocaleDateString()}`,
+              text: 'This is a test email send by tailchat-cli',
+            });
+            console.log('Send Result:', res);
+          } catch (err) {
+            console.log('Send Failed:', String(err));
+          }
+        }
+      )
       .demandCommand(),
   handler() {},
 };
+
+function isValidStr(input: any): boolean {
+  return typeof input === 'string' && input.length > 0;
+}
