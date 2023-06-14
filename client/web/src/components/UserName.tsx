@@ -17,12 +17,13 @@ interface UserNameProps {
  * 纯净版的 UserName, 无需redux上下文
  */
 export const UserNamePure: React.FC<UserNameProps> = React.memo((props) => {
-  const { userId, showDiscriminator, className, style } = props;
+  const { userId, showDiscriminator, className, style, fallbackName } = props;
   const cachedUserInfo = useCachedUserInfo(userId);
 
   return (
     <span className={className} style={style}>
-      {cachedUserInfo.nickname ?? <span>&nbsp;</span>}
+      {cachedUserInfo.nickname ??
+        (isValidStr(fallbackName) ? fallbackName : <span>&nbsp;</span>)}
 
       {showDiscriminator && (
         <UserNameDiscriminator discriminator={cachedUserInfo.discriminator} />

@@ -4,6 +4,7 @@ jest.mock('tailchat-design/components/Icon', () => ({
   Icon: ({ icon }) => `[iconify icon="${icon}"]`,
 }));
 jest.mock('../src/components/Loadable');
+jest.mock('../src/components/UserName');
 
 const ignoreErroMessages = [
   /Warning.*not wrapped in act/,

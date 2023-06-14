@@ -7,7 +7,7 @@ exports[`render <BBCode /> mention with space name 1`] = `
     data-userid="6251986eab331ca2efbba9c6"
   >
     @
-    Notify Bot
+    [UserName {"userId":"6251986eab331ca2efbba9c6","fallbackName":"Notify Bot"}]
   </span>
   <pre
     style="display: inline; white-space: break-spaces;"
