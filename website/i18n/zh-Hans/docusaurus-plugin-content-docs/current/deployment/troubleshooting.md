@@ -43,6 +43,18 @@ docker run --rm --name nginx-test -p 8080:80 nginx
 
 见: [https://github.com/msgbyte/tailchat/issues/79](https://github.com/msgbyte/tailchat/issues/79)
 
+### 发送邮件时出现 `502 Invalid paramenters`
+
+如果提示类似: `Error: Mail command failed: 502 Invalid paramenters`
+
+```
+code:'EENVELOPE',
+response: '502 Invalid paramenters',
+responseCode: 502,
+command: 'MAIL FROM'
+```
+
+请检查你的`SMTP_SENDER`内容是否正确，一般的格式是 `xxx@example.com` 或 `"YourName" xxx@example.com`
 
 ## 开放平台相关
 

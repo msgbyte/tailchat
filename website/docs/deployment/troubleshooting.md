@@ -43,6 +43,18 @@ docker run --rm --name nginx-test -p 8080:80 nginx
 
 See: [https://github.com/msgbyte/tailchat/issues/79](https://github.com/msgbyte/tailchat/issues/79)
 
+### Getting `502 Invalid paramenters` when sending mail
+
+If the prompt is similar to: `Error: Mail command failed: 502 Invalid paramenters`
+
+```
+code:'EENVELOPE',
+response: '502 Invalid paramenters',
+responseCode: 502,
+command: 'MAIL FROM'
+```
+
+Please check whether your `SMTP_SENDER` content is correct, the general format is `xxx@example.com` or `"YourName" xxx@example.com`
 
 ## Openapi platform related
 
