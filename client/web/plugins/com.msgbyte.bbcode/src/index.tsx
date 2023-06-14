@@ -36,7 +36,7 @@ regMessageTextDecorators(() => ({
 
     return `[${h}]${plain}[/card]`;
   },
-  mention: (userId, userName) => `[at=${userId} origin="${userName}"][/at]`, // keep empty content to auto generate with context, useful for friend nickname. NOTE: `origin` is not meaningless just for react-mention to locate text.
+  mention: (userId, userName) => `[at=${userId}]${userName}[/at]`,
   emoji: (emojiCode) => `[emoji]${stripColons(emojiCode)}[/emoji]`,
   serialize: (plain: string) => (serialize ? serialize(plain) : plain),
 }));

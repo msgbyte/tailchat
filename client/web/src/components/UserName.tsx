@@ -1,11 +1,16 @@
 import React from 'react';
-import { useCachedUserInfo, useFriendNickname } from 'tailchat-shared';
+import {
+  isValidStr,
+  useCachedUserInfo,
+  useFriendNickname,
+} from 'tailchat-shared';
 
 interface UserNameProps {
   userId: string;
   className?: string;
   style?: React.CSSProperties;
   showDiscriminator?: boolean;
+  fallbackName?: string;
 }
 
 /**
@@ -31,7 +36,7 @@ UserNamePure.displayName = 'UserNamePure';
  * 增加好友名称patch的 UserName
  */
 export const UserName: React.FC<UserNameProps> = React.memo((props) => {
-  const { userId, showDiscriminator, className, style } = props;
+  const { userId, showDiscriminator, className, style, fallbackName } = props;
   const cachedUserInfo = useCachedUserInfo(userId);
   const friendNickname = useFriendNickname(userId);
 
@@ -43,7 +48,8 @@ export const UserName: React.FC<UserNameProps> = React.memo((props) => {
           <span className="opacity-60">({cachedUserInfo.nickname})</span>
         </>
       ) : (
-        cachedUserInfo.nickname ?? <span>&nbsp;</span>
+        cachedUserInfo.nickname ??
+        (isValidStr(fallbackName) ? fallbackName : <span>&nbsp;</span>)
       )}
 
       {showDiscriminator && (
