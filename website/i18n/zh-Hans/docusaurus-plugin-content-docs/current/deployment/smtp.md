@@ -10,7 +10,7 @@ title: SMTP 服务(可选)
 为了启用该服务，我们需要在环境变量中设置如下内容:
 
 - `SMTP_SENDER`: 发送人信息, 一般的格式是 `xxx@example.com` 或 `"YourName" xxx@example.com`
-- `SMTP_URI`: SMTP邮件服务地址, 遵循国际通用URI格式: <protocol>://<username>:<password>@<host>:<port>/<other-info>
+- `SMTP_URI`: SMTP邮件服务地址, 遵循国际通用URI格式: `<protocol>://<username>:<password>@<host>:<port>/<other-info>`
 
 ## 使用 cli 进行辅助测试
 

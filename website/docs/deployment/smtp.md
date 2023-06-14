@@ -10,7 +10,7 @@ Only simple mail service (SMTP) is used in `Tailchat` because only one-way sendi
 In order to enable the service, we need to set the following in the environment variable:
 
 - `SMTP_SENDER`: sender information, the general format is `xxx@example.com` or `"YourName" xxx@example.com`
-- `SMTP_URI`: SMTP mail service address, follow the international common URI format: <protocol>://<username>:<password>@<host>:<port>/<other-info>
+- `SMTP_URI`: SMTP mail service address, follow the international common URI format: `<protocol>://<username>:<password>@<host>:<port>/<other-info>`
 
 ## Auxiliary testing using cli
 
