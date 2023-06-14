@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: cli Test Method
+title: Cli Test Method
 ---
 
 First of all, you need to make sure that `tailchat-cli` has been installed, and the version is above `1.5.8`. For the installation method, see: [tailchat-cli](../cli/tailchat-cli.md)
