@@ -40,7 +40,7 @@ export const UserList: React.FC = React.memo(() => {
             onClick: () => {
               const { close } = Modal.confirm({
                 title: t('tushan.common.confirmTitle'),
-                content: t('tushan.common.confirmContent'),
+                content: t('custom.action.resetPasswordTip'),
                 onConfirm: async () => {
                   try {
                     await update(resource, {

@@ -12,6 +12,8 @@ export const i18n: TushanContextProps['i18n'] = {
         custom: {
           action: {
             resetPassword: 'Reset Password',
+            resetPasswordTip:
+              'After resetting the password, the password becomes: 123456789, please change the password in time',
             banUser: 'Ban User',
             banUserDesc:
               'Banning a user disconnects the user from the current connection and prevents future logins',
@@ -155,6 +157,7 @@ export const i18n: TushanContextProps['i18n'] = {
         custom: {
           action: {
             resetPassword: '重置密码',
+            resetPasswordTip: '重置密码后密码变为: 123456789, 请及时修改密码',
             banUser: '封禁用户',
             banUserDesc: '封禁用户会将用户从当前连接断开并阻止之后的登录操作',
             unbanUser: '解除封禁用户',
