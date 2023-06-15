@@ -11,10 +11,16 @@ The demo environment will continuously deploy the latest front-end code and upda
 
 ## Deployment method
 
+### Docker/Docker Compose
+
 It is highly recommended to use `docker-compose` to deploy `tailchat`
 
 Please refer to the tutorial: [Docker Compose Deployment](./docker-compose.mdx)
 
-## system structure
+### Kubernetes
+
+Please refer to the tutorial: [Kubernetes Simple Deployment](./kubernetes/simple.md)
+
+## System Structure
 
 See [System Architecture](../architecture.md)
