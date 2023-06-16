@@ -1,6 +1,6 @@
 {
   "name": "tailchat-cli",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "description": "A Command line interface of tailchat",
   "bin": {
     "tailchat": "./bin/cli"
@@ -54,6 +54,7 @@
     "nodemailer": "^6.7.2",
     "ora": "5.4.1",
     "p-all": "2.1.0",
+    "p-map": "^4.0.0",
     "p-series": "2.1.0",
     "pidusage": "^3.0.2",
     "plop": "^3.0.5",

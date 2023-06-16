@@ -167,6 +167,9 @@ importers:
       p-all:
         specifier: 2.1.0
         version: 2.1.0
+      p-map:
+        specifier: ^4.0.0
+        version: 4.0.0
       p-series:
         specifier: 2.1.0
         version: 2.1.0
@@ -568,7 +571,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1836,7 +1839,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -2014,7 +2017,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.welcome:
     dependencies:
@@ -21874,10 +21877,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
+    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
-    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -36599,6 +36602,7 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36615,7 +36619,6 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

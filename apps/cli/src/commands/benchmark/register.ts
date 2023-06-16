@@ -2,6 +2,7 @@ import { CommandModule } from 'yargs';
 import fs from 'fs-extra';
 import got from 'got';
 import ora from 'ora';
+import pMap from 'p-map';
 
 export const benchmarkRegisterCommand: CommandModule = {
   command: 'register <url>',
@@ -25,33 +26,58 @@ export const benchmarkRegisterCommand: CommandModule = {
         type: 'number',
         default: 100,
       })
+      .option('concurrency', {
+        describe: 'Concurrency when send request',
+        type: 'number',
+        default: 1,
+      })
       .option('invite', {
         describe: 'Invite Code',
         type: 'string',
+      })
+      .option('append', {
+        describe: 'Append mode',
+        type: 'boolean',
       }),
   async handler(args) {
     const url = args.url as string;
+    const file = args.file as string;
     const count = args.count as number;
+    const concurrency = args.concurrency as number;
     const invite = args.invite as string | undefined;
+    const append = (args.append ?? false) as boolean;
     const tokens: string[] = [];
     const start = Date.now();
 
     const spinner = ora().info(`Register temporary account`).start();
 
-    for (let i = 0; i < count; i++) {
-      spinner.text = `Progress: ${i + 1}/${count}`;
+    let i = 0;
+    spinner.text = `Progress: ${i}/${count}`;
+    await pMap(
+      Array.from({ length: count }),
+      async () => {
+        const token = await registerTemporaryAccount(url, `benchUser-${i}`);
+        if (invite) {
+          // Apply group invite
+          await applyGroupInviteCode(url, token, invite);
+        }
+        if (append) {
+          await fs.appendFile(file, `\n${token}`);
+        }
 
-      const token = await registerTemporaryAccount(url, `benchUser-${i}`);
-      if (invite) {
-        // Apply group invite
-        applyGroupInviteCode(url, token, invite);
+        spinner.text = `Progress: ${++i}/${count}`;
+        tokens.push(token);
+      },
+      {
+        concurrency,
       }
-      tokens.push(token);
+    );
+
+    if (!append) {
+      spinner.info(`Writing tokens into path: ${file}`);
+
+      await fs.writeFile(file, tokens.join('\n'));
     }
-
-    spinner.info(`Writing tokens into path: ${args.file}`);
-
-    await fs.writeFile(args.file as string, tokens.join('\n'));
 
     spinner.succeed(`Register completed! Usage: ${Date.now() - start}ms`);
   },
@@ -66,6 +92,7 @@ async function registerTemporaryAccount(
       json: {
         nickname,
       },
+      retry: 5,
     })
     .json<{ data: { token: string } }>();
 
@@ -81,6 +108,7 @@ async function applyGroupInviteCode(
     json: {
       code: inviteCode,
     },
+    retry: 5,
     headers: {
       'X-Token': token,
     },
