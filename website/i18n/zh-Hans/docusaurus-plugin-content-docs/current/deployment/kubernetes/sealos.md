@@ -48,7 +48,8 @@ title: 在 Sealos 上部署Tailchat
 需要注意的是我们要进行一些调整:
 
 - 暴露端口: 9000
-- 运行命令改为: `minio server /data`
+- 运行命令改为: `minio`
+- 命令参数改为: `server /data`
 - 设置环境变量: 
   - MINIO_ROOT_USER: tailchat
   - MINIO_ROOT_PASSWORD: com.msgbyte.tailchat

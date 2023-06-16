@@ -34,10 +34,11 @@ Click "Deploy Application" to submit the deployment. Wait patiently for a while,
 Next, we will create Minio, an open-source object storage service. We can also quickly create it through Sealos's UI. The image used is `minio/minio`. Note that we need to make some adjustments:
 
 - Expose port: 9000
-- Change the run command to: `minio server /data`
+- Change the run command to: `minio`
+- Change the command parameters to: `server /data`
 - Set environment variables:
-- MINIO_ROOT_USER: tailchat
-- MINIO_ROOT_PASSWORD: com.msgbyte.tailchat
+  - MINIO_ROOT_USER: tailchat
+  - MINIO_ROOT_PASSWORD: com.msgbyte.tailchat
 - Local storage: `/data`
 
 The final result is as follows:
