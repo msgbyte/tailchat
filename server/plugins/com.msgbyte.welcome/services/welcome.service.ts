@@ -31,7 +31,7 @@ class WelcomeService extends TcService {
 
     const groupInfo = await call(ctx).getGroupInfo(groupId);
 
-    if (groupInfo.config['plugin:groupWelcomeText']) {
+    if (groupInfo.config && groupInfo.config['plugin:groupWelcomeText']) {
       // 有欢迎词
 
       const lobbyConverseId = await call(ctx).getGroupLobbyConverseId(groupId);
