@@ -45,8 +45,8 @@ export const GroupSummary: React.FC<{
     <div>
       <FullModalCommonTitle>{t('群组概述')}</FullModalCommonTitle>
 
-      <div className="flex">
-        <div className="w-1/3">
+      <div className="flex flex-wrap">
+        <div className="w-1/3 mobile:w-full mobile:text-center">
           <AvatarUploader
             className="text-4xl"
             circle={true}
@@ -56,7 +56,7 @@ export const GroupSummary: React.FC<{
           </AvatarUploader>
         </div>
 
-        <div className="w-2/3">
+        <div className="w-2/3 mobile:w-full">
           <FullModalField
             title={t('群组名称')}
             value={groupInfo.name}
