@@ -12,6 +12,7 @@ import {
   createTextAreaField,
 } from 'tushan';
 import { createFileSizeField } from './components/field/filesize';
+import { createUserField } from './components/field/user';
 import { parseUrlStr } from './utils';
 
 export const userFields = [
@@ -75,7 +76,7 @@ export const messageFields = [
       ellipsis: true,
     },
   }),
-  createReferenceField('author', {
+  createUserField('author', {
     reference: 'users',
     displayField: 'nickname',
     list: {
