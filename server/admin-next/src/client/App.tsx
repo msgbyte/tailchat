@@ -56,6 +56,7 @@ function App() {
             showSizeChanger={true}
             fields={messageFields}
             action={{ detail: true, edit: true, delete: true, export: true }}
+            batchAction={{ delete: true }}
           />
         }
       />
