@@ -1,5 +1,5 @@
 import { TcBroker, SYSTEM_USERID } from 'tailchat-server-sdk';
-import brokerConfig from '../../../moleculer.config';
+import brokerConfig from '../../moleculer.config';
 
 const transporter = process.env.TRANSPORTER;
 export const broker = new TcBroker({
