@@ -5,7 +5,7 @@
   "author": "moonrailgun",
   "scripts": {
     "dev": "nodemon",
-    "start": "cross-env NODE_ENV=production node dist/admin-next/src/server/index.js",
+    "start": "cross-env NODE_ENV=production node dist/admin/src/server/index.js",
     "build": "pnpm build:client && pnpm build:server",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json"

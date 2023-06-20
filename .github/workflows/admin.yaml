@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "server/admin-next/**"
+      - "server/admin/**"
   workflow_dispatch:
 
 jobs:
@@ -35,4 +35,4 @@ jobs:
       - name: Install packages
         run: pnpm install --frozen-lockfile
       - name: Check Build
-        run: pnpm build:admin-next
+        run: pnpm build:admin

@@ -8,7 +8,6 @@ packages:
   - 'server'
   - 'server/admin'
   - 'server/admin-old'
-  - 'server/admin-next'
   - 'server/packages/**'
   - 'server/plugins/**'
   - 'server/test/demo/**'
