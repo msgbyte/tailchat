@@ -1,5 +1,34 @@
 
 
+# [1.8.0](https://github.com/msgbyte/tailchat/compare/v1.7.6...v1.8.0) (2023-06-21)
+
+
+### Bug Fixes
+
+* fix problem on bbcode value maybe include space ([b47a22b](https://github.com/msgbyte/tailchat/commit/b47a22b51f2f05e9925b637f2e6b31a36637b00e))
+* remove admin-next in source code ([c4b1af5](https://github.com/msgbyte/tailchat/commit/c4b1af5e626f79184c96594e7aa34bb40547f14a))
+
+
+### Features
+
+* add batch delete ([bde3665](https://github.com/msgbyte/tailchat/commit/bde36656d5a968bbddc0302d1fd2e34b62f9e14e))
+* add group panel in PanelRoute ([99f6793](https://github.com/msgbyte/tailchat/commit/99f679363f4148018fd910999b6542d484fde19a))
+* add limit for temporary to verify email ([3f6c3b0](https://github.com/msgbyte/tailchat/commit/3f6c3b08d8b364d1b3727754aeea379fda78f1b7))
+* add preRenderTransform in field file.url ([886e274](https://github.com/msgbyte/tailchat/commit/886e274a52e35761302702029b5a773ca70a757b))
+* **admin-next:** add resetPasswordTip ([de357bd](https://github.com/msgbyte/tailchat/commit/de357bd4e7bc409c15d213b1878fd0e0286c4c22))
+* **admin-next:** add system user fields support ([2796a7d](https://github.com/msgbyte/tailchat/commit/2796a7d38a7866a010af5ec86def68fe3b8426c3))
+* **cli:** add `smtp test` command which help user send test email full ([5bfa5b9](https://github.com/msgbyte/tailchat/commit/5bfa5b91bfbc1d529b4ba257960427c588d09e5c))
+* **cli:** add benchmark connections and register command ([9524502](https://github.com/msgbyte/tailchat/commit/9524502d7050c7beb6a4cdaf8f6775c04366bd46))
+* **cli:** add message revice test ([d096821](https://github.com/msgbyte/tailchat/commit/d09682139fa785ef3b0da1f82fcd414a338a7295))
+* **cli:** cli benchmark connections add progress ([77e6927](https://github.com/msgbyte/tailchat/commit/77e6927cf02601127f8311c0d0f00590867aac04))
+* health add more context ([8a9dd4f](https://github.com/msgbyte/tailchat/commit/8a9dd4f65c20675cbea99c0c4e516aa520771b9a))
+
+
+### Performance Improvements
+
+* beautify the visual experience of message text on windows [#41](https://github.com/msgbyte/tailchat/issues/41) ([2f0c8b2](https://github.com/msgbyte/tailchat/commit/2f0c8b2a265d1ed13b6a425b6bfd84cb063d2987))
+* **cli:** optimize the experience of the benchmark command ([2d6eaac](https://github.com/msgbyte/tailchat/commit/2d6eaac96a1205c6762ee927054ca66969421d14))
+
 ## [1.7.6](https://github.com/msgbyte/tailchat/compare/v1.7.5...v1.7.6) (2023-06-07)
 
 
