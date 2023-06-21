@@ -36,9 +36,9 @@ https://tailchat.example.com/admin/
 
 
 :::info
-New version **admin-next** has been released, you can use follow command to try to use.
+Old version **admin-old** has been deprecated, if you still wanna use old version, you can use follow command to use it.
 
 ```
-curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-next.yml" -o admin.yml
+curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
 ```
 :::
