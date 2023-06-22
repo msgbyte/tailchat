@@ -33,10 +33,12 @@ https://tailchat.example.com/admin/
 
 *注意不要忘记在最后有一个`/`*
 
-:::info
-旧版本 **admin-old** 已被弃用，如果你依旧期望使用旧版本，可以使用以下命令来替换上面的命令
+<details>
+  <summary>关于弃用的旧版admin</summary>
+  
+  旧版本 <strong>admin-old</strong> 已被弃用，如果你依旧期望使用旧版本，可以使用以下命令来替换上面的命令:
 
-```
-curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
-```
-:::
+  ```jsx
+  curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
+  ```
+</details>
