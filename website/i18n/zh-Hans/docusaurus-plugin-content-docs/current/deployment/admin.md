@@ -34,9 +34,9 @@ https://tailchat.example.com/admin/
 *注意不要忘记在最后有一个`/`*
 
 :::info
-新版本 **admin-next** 已发布，你可以使用以下命令尝鲜使用
+旧版本 **admin-old** 已被弃用，如果你依旧期望使用旧版本，可以使用以下命令来替换上面的命令
 
 ```
-curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-next.yml" -o admin.yml
+curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
 ```
 :::
