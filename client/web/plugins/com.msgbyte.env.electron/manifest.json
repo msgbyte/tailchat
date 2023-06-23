@@ -1,0 +1,11 @@
+{
+  "label": "Electron Support",
+  "label.zh-CN": "Electron 支持",
+  "name": "com.msgbyte.env.electron",
+  "url": "/plugins/com.msgbyte.env.electron/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add support for Electron environment in Tailchat",
+  "description.zh-CN": "在 Tailchat 添加对 Electron 环境的支持",
+  "requireRestart": true
+}

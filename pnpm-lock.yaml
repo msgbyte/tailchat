@@ -1049,6 +1049,18 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
 
+  client/web/plugins/com.msgbyte.env.electron:
+    devDependencies:
+      '@types/styled-components':
+        specifier: ^5.1.26
+        version: 5.1.26
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      styled-components:
+        specifier: ^5.3.6
+        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+
   client/web/plugins/com.msgbyte.env.rn:
     devDependencies:
       '@types/styled-components':
