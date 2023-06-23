@@ -1,5 +1,6 @@
 import { generateInstallPluginScript } from '.';
 import log from 'electron-log';
+import { startScreenshots } from '../screenshots';
 
 export function handleTailchatMessage(
   type: string,
@@ -10,6 +11,11 @@ export function handleTailchatMessage(
 
   if (type === 'init') {
     webview.executeJavaScript(generateInstallPluginScript());
+    return;
+  }
+
+  if (type === 'callScreenshotsTool') {
+    startScreenshots();
     return;
   }
 }

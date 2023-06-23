@@ -32,6 +32,7 @@ export {
   appendUrlSearch,
 } from '@/utils/url-helper';
 export { getServiceWorkerRegistration } from '@/utils/sw-helper';
+export { postMessageEvent } from '@/utils/event-helper';
 import {
   /**
    * 注意: Tailchat 内部的request不会被导出为插件可用模块，如果需要网络请求的话请自行import axios(以作为复用依赖)

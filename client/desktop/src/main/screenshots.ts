@@ -1,9 +1,13 @@
 import { globalShortcut } from 'electron';
 import Screenshots from 'electron-screenshots';
 import _once from 'lodash/once';
+import log from 'electron-log';
+
+let _screenshots: Screenshots;
 
 export const initScreenshots = _once(() => {
   const screenshots = new Screenshots();
+  _screenshots = screenshots;
 
   globalShortcut.register('ctrl+shift+a', () => {
     screenshots.startCapture();
@@ -23,3 +27,12 @@ export const initScreenshots = _once(() => {
     console.log('capture', buffer, bounds);
   });
 });
+
+export function startScreenshots() {
+  if (!_screenshots) {
+    log.warn('_screenshots not inited');
+    return;
+  }
+
+  _screenshots.startCapture();
+}
