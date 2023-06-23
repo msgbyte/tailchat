@@ -6,6 +6,8 @@ ARG VERSION
 # Working directory
 WORKDIR /app/tailchat
 
+RUN ulimit -n 10240
+
 # Install dependencies
 RUN npm install -g pnpm@8.3.1
 RUN npm install -g tailchat-cli@latest
