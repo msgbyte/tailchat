@@ -17,6 +17,8 @@ import { getMainWindowUrl } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 import { initScreenshots } from './screenshots';
+import { generateInjectedScript } from './inject';
+import { handleTailchatMessage } from './inject/message-handler';
 
 log.info('Start...');
 
@@ -103,6 +105,7 @@ const createWindow = async () => {
       width: mainWindowState.width,
       icon: getAssetPath('icon.png'),
       webPreferences: {
+        nodeIntegration: false,
         preload: app.isPackaged
           ? path.join(__dirname, 'preload.js')
           : path.join(__dirname, '../../.erb/dll/preload.js'),
@@ -142,6 +145,21 @@ const createWindow = async () => {
         });
     }
 
+    mainWindow.webContents.on('did-start-navigation', () => {
+      if (mainWindow) {
+        mainWindow.webContents.executeJavaScript(generateInjectedScript());
+      }
+    });
+
+    mainWindow.webContents.on('ipc-message', (e, channel, data) => {
+      if (channel === 'webview-message') {
+        const obj = JSON.parse(data);
+        if (typeof obj === 'object' && obj._isTailchat === true && mainWindow) {
+          handleTailchatMessage(obj.type, obj.payload, mainWindow.webContents);
+        }
+      }
+    });
+
     mainWindow.on('ready-to-show', () => {
       if (!mainWindow) {
         throw new Error('"mainWindow" is not defined');
@@ -166,6 +184,8 @@ const createWindow = async () => {
       shell.openExternal(edata.url);
       return { action: 'deny' };
     });
+
+    mainWindowState.manage(mainWindow);
 
     // Remove this if your app does not use auto updates
     new AppUpdater();

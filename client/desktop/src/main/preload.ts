@@ -1,11 +1,16 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
+import {
+  contextBridge,
+  ipcRenderer,
+  IpcRendererEvent,
+  webFrame,
+} from 'electron';
 
-export type Channels = 'ipc-example';
+export type Channels = 'ipc-example' | 'webview-message';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
-    sendMessage(channel: Channels, args: unknown[]) {
-      ipcRenderer.send(channel, args);
+    sendMessage(channel: Channels, ...args: unknown[]) {
+      ipcRenderer.send(channel, ...args);
     },
     on(channel: Channels, func: (...args: unknown[]) => void) {
       const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
@@ -19,3 +24,9 @@ contextBridge.exposeInMainWorld('electron', {
     },
   },
 });
+
+const postMessageOverride = `window.postMessage = function (data) {
+  window.electron.ipcRenderer.sendMessage('webview-message', JSON.stringify(data));
+};`;
+
+webFrame.executeJavaScript(postMessageOverride);
