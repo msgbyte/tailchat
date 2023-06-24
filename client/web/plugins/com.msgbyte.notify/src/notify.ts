@@ -89,6 +89,7 @@ export function initNotify() {
 
       incBubble();
     }
+
     tryPlayNotificationSound(); // 不管当前是不是处于活跃状态，都发出提示音
   });
 }
@@ -132,7 +133,7 @@ sharedEvent.on('userSettingsUpdate', (settings) => {
 /**
  * 尝试播放通知声音
  */
-function tryPlayNotificationSound() {
+async function tryPlayNotificationSound() {
   if (_get(userSettings, PLUGIN_SYSTEM_SETTINGS_DISABLED_SOUND) === true) {
     // 消息提示音被禁用
     return;
@@ -142,7 +143,7 @@ function tryPlayNotificationSound() {
     const audio = new Audio(
       '/plugins/com.msgbyte.notify/assets/sounds_bing.mp3'
     );
-    audio.play();
+    await audio.play();
   } catch (err) {
     console.error(err);
   }
