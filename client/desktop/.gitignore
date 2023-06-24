@@ -21,6 +21,7 @@ node_modules
 release/app/dist
 release/app/public
 release/build
+release/deploy
 .erb/dll
 
 .idea
