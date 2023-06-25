@@ -1350,6 +1350,9 @@ importers:
       oidc-provider:
         specifier: ^7.10.6
         version: 7.11.5
+      p-map:
+        specifier: ^4.0.0
+        version: 4.0.0
       qs:
         specifier: ^6.10.3
         version: 6.11.0

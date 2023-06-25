@@ -6,6 +6,7 @@ import {
   TcPureContext,
   InboxStruct,
 } from 'tailchat-server-sdk';
+import pMap from 'p-map';
 
 /**
  * 收件箱管理
@@ -70,6 +71,14 @@ class InboxService extends TcService {
         payload: 'any',
       },
     });
+    this.registerAction('batchAppend', this.batchAppend, {
+      visibility: 'public',
+      params: {
+        userIds: { type: 'array', items: 'string' },
+        type: 'string',
+        payload: 'any',
+      },
+    });
     this.registerAction('removeMessage', this.removeMessage, {
       visibility: 'public',
       params: {
@@ -111,6 +120,48 @@ class InboxService extends TcService {
 
     await this.notifyUsersInboxAppend(ctx, [userId], inboxItem);
     await this.emitInboxAppendEvent(ctx, inboxItem);
+
+    return true;
+  }
+
+  /**
+   * append 的多用户版本
+   */
+  async batchAppend(
+    ctx: TcContext<{
+      userIds: string[];
+      type: string;
+      payload: Record<string, any>;
+    }>
+  ) {
+    const { userIds, type, payload } = ctx.params;
+
+    const docs = await this.adapter.model.create(
+      userIds.map((userId) => ({
+        userId,
+        type,
+        payload,
+      }))
+    );
+
+    const inboxItems: InboxStruct[] = await this.transformDocuments(
+      ctx,
+      {},
+      docs
+    );
+
+    pMap(
+      inboxItems,
+      async (inboxItem) => {
+        await Promise.all([
+          this.notifyUsersInboxAppend(ctx, [inboxItem.userId], inboxItem),
+          this.emitInboxAppendEvent(ctx, inboxItem),
+        ]);
+      },
+      {
+        concurrency: 10,
+      }
+    );
 
     return true;
   }
