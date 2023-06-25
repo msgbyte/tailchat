@@ -55,6 +55,7 @@
     "moment": "^2.29.1",
     "mongodb": "4.2.1",
     "mongoose": "6.1.1",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^6.2.1",
+    "tailchat-types": "workspace:^"
   }
 }

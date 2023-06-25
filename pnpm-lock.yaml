@@ -547,13 +547,13 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-i18next:
         specifier: ^11.18.6
-        version: 11.18.6(i18next@21.9.2)(react-dom@18.2.0)(react@18.2.0)
+        version: 11.18.6(i18next@21.9.2)(react@18.2.0)
       react-native-storage:
         specifier: npm:@trpgengine/react-native-storage@^1.0.1
         version: /@trpgengine/react-native-storage@1.0.1
       react-redux:
         specifier: ^8.0.2
-        version: 8.0.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+        version: 8.0.2(@types/react@18.0.20)(react@18.2.0)(redux@4.2.1)
       regenerator-runtime:
         specifier: ^0.13.9
         version: 0.13.9
@@ -563,6 +563,9 @@ importers:
       socket.io-msgpack-parser:
         specifier: ^3.0.2
         version: 3.0.2
+      tailchat-types:
+        specifier: workspace:^
+        version: link:../../packages/types
       url-regex:
         specifier: ^5.0.0
         version: 5.0.0
@@ -571,7 +574,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1776,6 +1779,9 @@ importers:
       path-to-regexp:
         specifier: ^6.2.1
         version: 6.2.1
+      tailchat-types:
+        specifier: workspace:^
+        version: link:../../../packages/types
     devDependencies:
       '@types/jest':
         specifier: ^29.5.1
@@ -1851,7 +1857,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -2029,7 +2035,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.15)(react@18.2.0)
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
 
   server/plugins/com.msgbyte.welcome:
     dependencies:
@@ -8394,7 +8400,7 @@ packages:
     dependencies:
       immer: 9.0.15
       react: 18.2.0
-      react-redux: 8.0.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+      react-redux: 8.0.2(@types/react@18.0.20)(react@18.2.0)(redux@4.2.1)
       redux: 4.2.1
       redux-thunk: 2.4.1(redux@4.2.1)
       reselect: 4.1.6
@@ -21725,10 +21731,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
+    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
-    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -29987,7 +29993,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-i18next@11.18.6(i18next@21.9.2)(react-dom@18.2.0)(react@18.2.0):
+  /react-i18next@11.18.6(i18next@21.9.2)(react@18.2.0):
     resolution: {integrity: sha512-yHb2F9BiT0lqoQDt8loZ5gWP331GwctHz9tYQ8A2EIEUu+CcEdjBLQWli1USG3RdWQt3W+jqQLg/d4rrQR96LA==}
     peerDependencies:
       i18next: '>= 19.0.0'
@@ -30004,7 +30010,6 @@ packages:
       html-parse-stringify: 3.0.1
       i18next: 21.9.2
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-i18next@12.3.1(i18next@22.5.0)(react-dom@18.2.0)(react@18.2.0):
@@ -30177,7 +30182,7 @@ packages:
       scheduler: 0.20.2
     dev: false
 
-  /react-redux@8.0.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1):
+  /react-redux@8.0.2(@types/react@18.0.20)(react@18.2.0)(redux@4.2.1):
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -30204,7 +30209,6 @@ packages:
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
       redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
@@ -36388,6 +36392,7 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36404,7 +36409,6 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

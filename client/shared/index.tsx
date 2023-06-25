@@ -152,6 +152,7 @@ export type {
 export type {
   BasicInboxItem,
   MessageInboxItem,
+  MarkdownInboxItem,
   InboxItem,
 } from './model/inbox';
 export {

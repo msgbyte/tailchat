@@ -9,6 +9,7 @@ import {
   GroupPanelFeature,
   InboxItem,
   buildRegMap,
+  BasicInboxItem,
 } from 'tailchat-shared';
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
@@ -293,8 +294,8 @@ interface PluginInboxItem {
    * 来源
    */
   source: string;
-  getPreview: (inboxItem: InboxItem) => { title: string; desc: string };
-  render: React.ComponentType<{ inboxItem: InboxItem }>;
+  getPreview: (inboxItem: BasicInboxItem) => { title: string; desc: string };
+  render: React.ComponentType<{ inboxItem: BasicInboxItem }>;
 }
 
 /**

@@ -3,7 +3,13 @@
  */
 export interface BasicInboxItem {
   _id: string;
+  /**
+   * 用户id
+   */
   userId: string;
+  /**
+   * 是否已读
+   */
   readed: boolean;
   type: string;
   payload?: Record<string, any>;
@@ -14,7 +20,7 @@ export interface BasicInboxItem {
 export interface MessageInboxItem extends BasicInboxItem {
   type: 'message';
   /**
-   * @deprecated
+   * @deprecated ALl info should move into payload
    */
   message?: {
     groupId?: string;
@@ -26,8 +32,23 @@ export interface MessageInboxItem extends BasicInboxItem {
     groupId?: string;
     converseId: string;
     messageId: string;
+    messageAuthor: string;
     messageSnippet: string;
+    messagePlainContent?: string;
   };
 }
 
-export type InboxItem = MessageInboxItem;
+export interface MarkdownInboxItem extends BasicInboxItem {
+  type: 'markdown';
+
+  payload: {
+    title?: string;
+    content: string;
+    /**
+     * 消息来源
+     */
+    source?: string;
+  };
+}
+
+export type InboxItem = MessageInboxItem | MarkdownInboxItem;

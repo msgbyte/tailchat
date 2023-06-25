@@ -18,6 +18,7 @@ RUN chmod +x /usr/local/bin/mc
 
 # Install plugins and sdk dependency
 COPY ./tsconfig.json ./tsconfig.json
+COPY ./packages ./packages
 COPY ./server/packages ./server/packages
 COPY ./server/plugins ./server/plugins
 COPY ./server/package.json ./server/package.json

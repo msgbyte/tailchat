@@ -25,6 +25,7 @@
     "regenerator-runtime": "^0.13.9",
     "socket.io-client": "^4.1.2",
     "socket.io-msgpack-parser": "^3.0.2",
+    "tailchat-types": "workspace:^",
     "url-regex": "^5.0.0",
     "yup": "^0.32.9",
     "zustand": "^4.3.6"

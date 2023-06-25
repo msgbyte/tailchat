@@ -1,3 +1,5 @@
+import type { InboxItem } from 'tailchat-types';
+
 export interface MessageReactionStruct {
   name: string;
   author?: string;
@@ -64,25 +66,4 @@ export interface BasicInboxItem {
   readed: boolean;
 }
 
-export interface MessageInboxItem extends BasicInboxItem {
-  type: 'message';
-  /**
-   * @deprecated
-   */
-  message?: {
-    groupId?: string;
-    converseId: string;
-    messageId: string;
-    messageSnippet: string;
-  };
-  payload: {
-    groupId?: string;
-    converseId: string;
-    messageId: string;
-    messageAuthor: string;
-    messageSnippet: string;
-    messagePlainContent?: string;
-  };
-}
-
-export type InboxStruct = MessageInboxItem;
+export type InboxStruct = InboxItem;

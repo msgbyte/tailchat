@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 import {
+  BasicInboxItem,
   chatActions,
   InboxItem,
   isValidStr,
@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { SectionHeader } from '@/components/SectionHeader';
 import { openReconfirmModalP } from '@/components/Modal';
+import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 
 const buildLink = (itemId: string) => `/main/inbox/${itemId}`;
 
@@ -52,18 +53,39 @@ export const InboxSidebar: React.FC = React.memo(() => {
           to={buildLink(item._id)}
         />
       );
-    } else if (pluginInboxItemMap[item.type]) {
-      const info = pluginInboxItemMap[item.type];
-      const preview = info.getPreview(item);
+    }
+
+    if (item.type === 'markdown') {
+      const payload: Partial<model.inbox.InboxItem['payload']> =
+        item.payload ?? {};
+      const title = payload.title || t('新消息');
 
       return (
         <InboxSidebarItem
           key={item._id}
+          title={title}
+          desc={t('点击查看详情')}
+          source={payload.source ?? 'Tailchat'}
+          readed={item.readed}
+          to={buildLink(item._id)}
+        />
+      );
+    }
+
+    // For plugins
+    const _item = item as BasicInboxItem;
+    if (pluginInboxItemMap[_item.type]) {
+      const info = pluginInboxItemMap[_item.type];
+      const preview = info.getPreview(_item);
+
+      return (
+        <InboxSidebarItem
+          key={_item._id}
           title={preview.title}
           desc={preview.desc}
           source={info.source ?? 'Unknown'}
-          readed={item.readed}
-          to={buildLink(item._id)}
+          readed={_item.readed}
+          to={buildLink(_item._id)}
         />
       );
     }
