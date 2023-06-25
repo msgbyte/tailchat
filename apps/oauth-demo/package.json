@@ -1,6 +1,7 @@
 {
   "name": "oauth-demo",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {

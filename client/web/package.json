@@ -1,11 +1,11 @@
 {
   "name": "tailchat-web",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "Apache-2.0",
-  "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production rimraf ./dist && pnpm plugins:all && pnpm build:webpack",
     "build:webpack": "cross-env TS_NODE_PROJECT='tsconfig.node.json' webpack --config ./build/webpack.config.ts",

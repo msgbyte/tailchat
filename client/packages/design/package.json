@@ -1,5 +1,6 @@
 {
   "name": "tailchat-design",
+  "private": true,
   "version": "1.0.0",
   "description": "Tailchat frontend UI library",
   "scripts": {

@@ -1,10 +1,10 @@
 {
   "name": "tailchat-server",
+  "private": true,
   "main": "index.js",
   "repository": "https://github.com/msgbyte/tailchat-server.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "Apache-2.0",
-  "private": true,
   "scripts": {
     "dev": "concurrently --kill-others npm:dev:main npm:dev:sdk npm:dev:plugins npm:dev:admin",
     "dev:main": "ts-node ./runner.ts",

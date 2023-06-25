@@ -1,11 +1,11 @@
 {
   "name": "tailchat-shared",
+  "private": true,
   "version": "1.0.0",
   "main": "index.tsx",
   "repository": "https://github.com/msgbyte/tailchat.git",
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "GPLv3",
-  "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@tanstack/react-query": "4.29.3",
