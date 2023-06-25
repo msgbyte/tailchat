@@ -58,7 +58,7 @@ class GithubSubscribeService extends TcService {
         const botUserId = await this.broker.call('user.ensurePluginBot', {
           botId: 'github-bot',
           nickname: 'Github Bot',
-          avatar: 'https://api.iconify.design/entypo-social/github.svg',
+          avatar: '/images/avatar/github-dark.svg',
         });
 
         this.logger.info('Github Bot Id:', botUserId);
