@@ -84,6 +84,7 @@ class UserService extends TcService {
       params: {
         username: { type: 'string', optional: true, max: 40 },
         email: { type: 'email', optional: true, max: 40 },
+        nickname: { type: 'string', optional: true, max: 40 },
         password: { type: 'string', max: 40 },
         emailOTP: { type: 'string', optional: true },
       },
@@ -395,6 +396,7 @@ class UserService extends TcService {
       {
         username?: string;
         email?: string;
+        nickname?: string;
         password: string;
         emailOTP?: string;
       },
@@ -411,7 +413,8 @@ class UserService extends TcService {
       throw new Error(t('服务器不允许新用户注册'));
     }
 
-    const nickname = params.username ?? getEmailAddress(params.email);
+    const nickname =
+      params.nickname || (params.username ?? getEmailAddress(params.email));
     const discriminator = await this.adapter.model.generateDiscriminator(
       nickname
     );

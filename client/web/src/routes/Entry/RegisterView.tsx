@@ -7,6 +7,7 @@ import {
   useAsyncFn,
   useAsyncRequest,
   getGlobalConfig,
+  useWatch,
 } from 'tailchat-shared';
 import React, { useState } from 'react';
 import { string } from 'yup';
@@ -19,15 +20,18 @@ import { useNavToView } from './utils';
 import { EntryInput } from './components/Input';
 import { SecondaryBtn } from './components/SecondaryBtn';
 import { PrimaryBtn } from './components/PrimaryBtn';
+import { TipIcon } from '@/components/TipIcon';
 
 /**
  * 注册视图
  */
 export const RegisterView: React.FC = React.memo(() => {
   const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [emailOTP, setEmailOTP] = useState('');
   const [sendedEmail, setSendedEmail] = useState(false);
+  const [customNickname, setCustomNickname] = useState(false);
   const navigate = useNavigate();
   const navRedirect = useSearchParam('redirect');
 
@@ -44,7 +48,12 @@ export const RegisterView: React.FC = React.memo(() => {
       .max(40, t('密码最长限制40个字符'))
       .validate(password);
 
-    const data = await registerWithEmail(email, password, emailOTP);
+    const data = await registerWithEmail({
+      email,
+      password,
+      nickname,
+      emailOTP,
+    });
 
     setGlobalUserLoginInfo(data);
     await setUserJWT(data.token);
@@ -54,7 +63,7 @@ export const RegisterView: React.FC = React.memo(() => {
     } else {
       navigate('/main');
     }
-  }, [email, password, emailOTP, navRedirect]);
+  }, [email, nickname, password, emailOTP, navRedirect]);
 
   const [{ loading: sendEmailLoading }, handleSendEmail] =
     useAsyncRequest(async () => {
@@ -62,6 +71,12 @@ export const RegisterView: React.FC = React.memo(() => {
       showSuccessToasts(t('发送成功, 请检查你的邮箱。'));
       setSendedEmail(true);
     }, [email]);
+
+  useWatch([email, customNickname], () => {
+    if (!customNickname) {
+      setNickname(getEmailAddress(email));
+    }
+  });
 
   const navToView = useNavToView();
 
@@ -102,6 +117,28 @@ export const RegisterView: React.FC = React.memo(() => {
           </>
         )}
 
+        <div className="mb-4 relative">
+          <div className="mb-2 flex items-center">
+            <span className="mr-1">{t('昵称')}</span>
+            <TipIcon content={t('后续在用户设置中可以随时修改')} />
+          </div>
+          <EntryInput
+            name="reg-nickname"
+            type="text"
+            disabled={!customNickname}
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+
+          <Icon
+            className="absolute bottom-1 right-1 w-8 h-8 p-2 rounded cursor-pointer bg-opacity-20 bg-black z-10"
+            icon={customNickname ? 'mdi:pencil-off' : 'mdi:pencil'}
+            onClick={() =>
+              setCustomNickname((customNickname) => !customNickname)
+            }
+          />
+        </div>
+
         <div className="mb-4">
           <div className="mb-2">{t('密码')}</div>
           <EntryInput
@@ -132,3 +169,7 @@ export const RegisterView: React.FC = React.memo(() => {
   );
 });
 RegisterView.displayName = 'RegisterView';
+
+function getEmailAddress(email: string) {
+  return email.split('@')[0];
+}

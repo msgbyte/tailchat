@@ -142,13 +142,20 @@ export async function verifyEmailWithOTP(
  * @param email 邮箱
  * @param password 密码
  */
-export async function registerWithEmail(
-  email: string,
-  password: string,
-  emailOTP?: string
-): Promise<UserLoginInfo> {
+export async function registerWithEmail({
+  email,
+  password,
+  nickname,
+  emailOTP,
+}: {
+  email: string;
+  password: string;
+  nickname?: string;
+  emailOTP?: string;
+}): Promise<UserLoginInfo> {
   const { data } = await request.post('/api/user/register', {
     email,
+    nickname,
     password,
     emailOTP,
   });

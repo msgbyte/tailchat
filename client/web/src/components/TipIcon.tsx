@@ -7,7 +7,7 @@ export const TipIcon: React.FC<{
 }> = React.memo(({ content }) => {
   return (
     <DelayTip overlay={content}>
-      <Icon icon="mdi:alert-circle-outline" />
+      <Icon icon="mdi:alert-circle-outline" className="cursor-help" />
     </DelayTip>
   );
 });
