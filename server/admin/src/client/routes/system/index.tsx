@@ -10,6 +10,7 @@ import {
   Form,
   Upload,
   useTranslation,
+  Card,
 } from 'tushan';
 import { IconCheck, IconClose, IconDelete } from 'tushan/icon';
 import { TailchatImage } from '../../components/TailchatImage';
@@ -97,66 +98,68 @@ export const SystemConfig: React.FC = React.memo(() => {
   }
 
   return (
-    <Form>
-      <Form.Item label={t('custom.config.uploadFileLimit')}>
-        {config.uploadFileLimit}
-      </Form.Item>
+    <Card>
+      <Form>
+        <Form.Item label={t('custom.config.uploadFileLimit')}>
+          {config.uploadFileLimit}
+        </Form.Item>
 
-      <Form.Item label={t('custom.config.emailVerification')}>
-        {config.emailVerification ? <IconCheck /> : <IconClose />}
-      </Form.Item>
+        <Form.Item label={t('custom.config.emailVerification')}>
+          {config.emailVerification ? <IconCheck /> : <IconClose />}
+        </Form.Item>
 
-      <Form.Item label={t('custom.config.allowGuestLogin')}>
-        {!config.disableGuestLogin ? <IconCheck /> : <IconClose />}
-      </Form.Item>
+        <Form.Item label={t('custom.config.allowGuestLogin')}>
+          {!config.disableGuestLogin ? <IconCheck /> : <IconClose />}
+        </Form.Item>
 
-      <Form.Item label={t('custom.config.allowUserRegister')}>
-        {!config.disableUserRegister ? <IconCheck /> : <IconClose />}
-      </Form.Item>
+        <Form.Item label={t('custom.config.allowUserRegister')}>
+          {!config.disableUserRegister ? <IconCheck /> : <IconClose />}
+        </Form.Item>
 
-      <Form.Item label={t('custom.config.serverName')}>
-        <Input
-          value={serverName}
-          onChange={(val) => setServerName(val)}
-          onBlur={() => saveServerName()}
-          placeholder="Tailchat"
-        />
-      </Form.Item>
+        <Form.Item label={t('custom.config.serverName')}>
+          <Input
+            value={serverName}
+            onChange={(val) => setServerName(val)}
+            onBlur={() => saveServerName()}
+            placeholder="Tailchat"
+          />
+        </Form.Item>
 
-      <Form.Item label={t('custom.config.serverEntryImage')}>
-        <div>
-          {config?.serverEntryImage ? (
-            <div style={{ marginTop: 10 }}>
-              <div>
-                <TailchatImage
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: 360,
-                    overflow: 'hidden',
-                    marginBottom: 4,
-                  }}
-                  src={config?.serverEntryImage}
-                />
+        <Form.Item label={t('custom.config.serverEntryImage')}>
+          <div>
+            {config?.serverEntryImage ? (
+              <div style={{ marginTop: 10 }}>
+                <div>
+                  <TailchatImage
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: 360,
+                      overflow: 'hidden',
+                      marginBottom: 4,
+                    }}
+                    src={config?.serverEntryImage}
+                  />
+                </div>
+
+                <Button
+                  type="primary"
+                  icon={<IconDelete />}
+                  onClick={() => handleChangeServerEntryImage(null)}
+                >
+                  Delete
+                </Button>
               </div>
-
-              <Button
-                type="primary"
-                icon={<IconDelete />}
-                onClick={() => handleChangeServerEntryImage(null)}
-              >
-                Delete
-              </Button>
-            </div>
-          ) : (
-            <Upload
-              onChange={(_, file) => {
-                handleChangeServerEntryImage(file.originFile);
-              }}
-            />
-          )}
-        </div>
-      </Form.Item>
-    </Form>
+            ) : (
+              <Upload
+                onChange={(_, file) => {
+                  handleChangeServerEntryImage(file.originFile);
+                }}
+              />
+            )}
+          </div>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 });
 SystemConfig.displayName = 'SystemConfig';
