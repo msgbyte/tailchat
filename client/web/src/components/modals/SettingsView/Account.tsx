@@ -56,7 +56,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
           fieldValue: newNickname,
         })
       );
-      showToasts(t('修改头像成功'), 'success');
+      showToasts(t('修改昵称成功'), 'success');
     },
     []
   );
