@@ -7,8 +7,8 @@ const port = 8080;
 
 const API = process.env.API || 'http://localhost:11001';
 const clientUrl = `http://localhost:${port}`;
-const clientId = process.env.ID || 'tc_61f5270008e0635f67868f01';
-const clientSecret = process.env.SECRET || 'PDnLVsNnFyqWRS0QXYeaHDlE8KwgQLqv';
+const clientId = process.env.ID || 'tc_649aa2179e97b8b3b2d1004f';
+const clientSecret = process.env.SECRET || '4Pt4lccOaztJROs-VhmQf8XBU89-z8rr';
 
 console.log('config:', {
   API,
@@ -36,7 +36,7 @@ const request = axios.create({
 
 (async () => {
   const tailchatIssuer = await Issuer.discover(
-    'https://paw-server-nightly.moonrailgun.com/open/'
+    'https://tailchat-nightly.moonrailgun.com/open/'
   );
   console.log(
     'Discovered issuer',

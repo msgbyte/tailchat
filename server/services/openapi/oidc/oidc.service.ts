@@ -6,6 +6,7 @@ import path from 'path';
 import assert from 'assert';
 import qs from 'qs';
 import _ from 'lodash';
+import serve from 'serve-static';
 import { TcOIDCAdapter } from './adapter';
 import { claimUserInfo } from './account';
 import type { UserLoginRes } from '../../../models/user/user';
@@ -299,6 +300,15 @@ class OIDCService extends TcService {
           'GET /jwks': providerRoute,
           'GET /.well-known/openid-configuration': providerRoute,
         },
+      },
+      {
+        // For css file in development
+        path: '/',
+        authentication: false,
+        authorization: false,
+        use: [serve('public')],
+        whitelist: [],
+        autoAliases: false,
       },
     ];
   }

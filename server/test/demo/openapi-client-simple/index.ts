@@ -7,8 +7,8 @@ const port = 8080;
 
 const API = process.env.API || 'http://localhost:11001';
 const clientUrl = `http://localhost:${port}`;
-const clientId = process.env.ID || 'tc_61f5270008e0635f67868f01';
-const clientSecret = process.env.SECRET || 'PDnLVsNnFyqWRS0QXYeaHDlE8KwgQLqv';
+const clientId = process.env.ID || 'tc_649aa2179e97b8b3b2d1004f';
+const clientSecret = process.env.SECRET || '4Pt4lccOaztJROs-VhmQf8XBU89-z8rr';
 
 console.log('config:', {
   API,
@@ -80,6 +80,8 @@ app.get('/cb', async (req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`请确保回调已经被注册在OIDC服务端的白名单中: ${clientUrl}/cb`);
+  console.log(
+    `请确保第三方登录功能已启动并且回调已经被注册在OIDC服务端的白名单中: ${clientUrl}/cb`
+  );
   console.log(`测试服务地址: http://127.0.0.1:${port}`);
 });
