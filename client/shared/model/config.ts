@@ -35,6 +35,11 @@ export interface GlobalConfig {
    * 是否禁用游客登录
    */
   disableGuestLogin?: boolean;
+
+  /**
+   * 是否禁用创建群组功能
+   */
+  disableCreateGroup?: boolean;
 }
 
 export function getGlobalConfig(): GlobalConfig {

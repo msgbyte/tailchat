@@ -24,6 +24,7 @@ title: 环境变量
 | DISABLE_LOGGER | - | 是否禁用日志输出, 如果为 "1" 或者 "true" 则在运行中关闭日志 |
 | DISABLE_USER_REGISTER | - | 是否关闭用户注册功能, 如果为 "1" 或者 "true" 则关闭该功能 |
 | DISABLE_GUEST_LOGIN | - | 是否关闭用户游客登录功能, 如果为 "1" 或者 "true" 则关闭该功能 |
+| DISABLE_CREATE_GROUP | - | 是否关闭用户创建群组功能, 如果为 "1" 或者 "true" 则关闭该功能 |
 
 > 部分环境变量示例可见: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 

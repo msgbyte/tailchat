@@ -7,6 +7,7 @@ import {
   showSuccessToasts,
   t,
   useAppSelector,
+  useGlobalConfigStore,
   useGroupAck,
 } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
@@ -75,6 +76,10 @@ export const GroupNav: React.FC = React.memo(() => {
     openModal(<ModalCreateGroup />);
   }, []);
 
+  const { disableCreateGroup } = useGlobalConfigStore((state) => ({
+    disableCreateGroup: state.disableCreateGroup,
+  }));
+
   return (
     <div className="space-y-2" data-tc-role="navbar-groups">
       {Array.isArray(groups) &&
@@ -84,15 +89,16 @@ export const GroupNav: React.FC = React.memo(() => {
           </div>
         ))}
 
-      {/* 创建群组 */}
-      <NavbarNavItem
-        className="bg-green-500"
-        name={t('创建群组')}
-        onClick={handleCreateGroup}
-        data-testid="create-group"
-      >
-        <Icon className="text-3xl text-white" icon="mdi:plus" />
-      </NavbarNavItem>
+      {!disableCreateGroup && (
+        <NavbarNavItem
+          className="bg-green-500"
+          name={t('创建群组')}
+          onClick={handleCreateGroup}
+          data-testid="create-group"
+        >
+          <Icon className="text-3xl text-white" icon="mdi:plus" />
+        </NavbarNavItem>
+      )}
     </div>
   );
 });

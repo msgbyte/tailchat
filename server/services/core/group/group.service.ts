@@ -20,6 +20,7 @@ import {
   PERMISSION,
   GroupPanelType,
   PanelFeature,
+  config,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
 
@@ -273,6 +274,12 @@ class GroupService extends TcService {
     const name = ctx.params.name;
     const panels = ctx.params.panels;
     const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    if (config.feature.disableCreateGroup === true) {
+      // 环境变量禁止创建群组
+      throw new NoPermissionError(t('创建群组功能已被管理员禁用'));
+    }
 
     const group = await this.adapter.model.createGroup({
       name,

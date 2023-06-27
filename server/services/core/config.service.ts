@@ -81,6 +81,7 @@ class ConfigService extends TcService {
       emailVerification: config.emailVerification,
       disableUserRegister: config.feature.disableUserRegister,
       disableGuestLogin: config.feature.disableGuestLogin,
+      disableCreateGroup: config.feature.disableCreateGroup,
       ...persistConfig,
     };
   }

@@ -116,6 +116,10 @@ export const SystemConfig: React.FC = React.memo(() => {
           {!config.disableUserRegister ? <IconCheck /> : <IconClose />}
         </Form.Item>
 
+        <Form.Item label={t('custom.config.allowCreateGroup')}>
+          {!config.disableCreateGroup ? <IconCheck /> : <IconClose />}
+        </Form.Item>
+
         <Form.Item label={t('custom.config.serverName')}>
           <Input
             value={serverName}

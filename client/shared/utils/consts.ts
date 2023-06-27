@@ -24,4 +24,5 @@ export const defaultGlobalConfig: GlobalConfig = {
   serverName: 'Tailchat',
   disableUserRegister: false,
   disableGuestLogin: false,
+  disableCreateGroup: false,
 };

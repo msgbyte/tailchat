@@ -24,6 +24,7 @@ title: Environment Variable
 | DISABLE_LOGGER | - | Whether to disable the log output, if "1" or "true" turn off the log on the fly |
 | DISABLE_USER_REGISTER | - | Whether to disable the user register, if "1" or "true" turn off this method |
 | DISABLE_GUEST_LOGIN | - | Whether to disable the guest login, if "1" or "true" turn off this method |
+| DISABLE_CREATE_GROUP | - | Whether to disable user create group, if "1" or "true" turn off this method |
 
 > Some examples of environment variables can be seen: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 
