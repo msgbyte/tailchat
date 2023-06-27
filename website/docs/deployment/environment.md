@@ -38,6 +38,18 @@ title: Environment Variable
 
 - If it is started by `docker-compose`, you can directly edit `docker-compose.env`, and use `docker compose up -d` directly after the modification to take effect
 
+### About the use of environment variables with spaces
+
+If your environment variable value contains spaces, in order for the system to recognize that this is a complete string instead of treating spaces as separators. You need to wrap a double quotes around the outside.
+
+For example:
+
+```bash
+SMTP_SENDER="\"Tailchat\" example@163.com" # If there are repeated double quotes, they need to be escaped with an escape character
+```
+
+
+-------------
 
 :::caution
 Some environment variable modifications may need to clear the cache to take effect
