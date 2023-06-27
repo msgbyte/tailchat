@@ -121,6 +121,40 @@ router.post('/user/unban', auth(), async (req, res) => {
     ret,
   });
 });
+router.post('/users/system/notify', auth(), async (req, res) => {
+  const { scope, specifiedUser, title, content } = req.body;
+
+  let userIds = [];
+
+  if (scope === 'all') {
+    const users = await userModel.find(
+      {
+        // false 或 null(正式用户或者老的用户)
+        temporary: {
+          $ne: true,
+        },
+      },
+      {
+        _id: 1,
+      }
+    );
+
+    userIds = users.map((u) => u._id);
+  } else if (scope === 'specified') {
+    userIds = Array.isArray(specifiedUser) ? specifiedUser : [specifiedUser];
+  }
+
+  broker.call('chat.inbox.batchAppend', {
+    userIds,
+    type: 'markdown',
+    payload: {
+      title,
+      content,
+    },
+  });
+
+  res.json({ userIds });
+});
 router.use(
   '/users',
   auth(),

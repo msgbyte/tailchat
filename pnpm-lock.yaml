@@ -574,7 +574,7 @@ importers:
         version: 0.32.11
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
     devDependencies:
       '@types/crc':
         specifier: ^3.4.0
@@ -1556,8 +1556,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/sdk
       tushan:
-        specifier: ^0.2.28
-        version: 0.2.28(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
+        specifier: ^0.2.32
+        version: 0.2.32(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
       vite-express:
         specifier: 0.8.0
         version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
@@ -1875,7 +1875,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.getui:
     dependencies:
@@ -2053,7 +2053,7 @@ importers:
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       zustand:
         specifier: ^4.3.6
-        version: 4.3.6(immer@9.0.21)(react@18.2.0)
+        version: 4.3.6(immer@9.0.15)(react@18.2.0)
 
   server/plugins/com.msgbyte.welcome:
     dependencies:
@@ -21749,10 +21749,10 @@ packages:
 
   /immer@9.0.15:
     resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
+    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -34259,8 +34259,8 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.2.28(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1):
-    resolution: {integrity: sha512-8lYhCgOqvayRHkC6oT44WRzGWIjf0Eh565sjMLmyS5+9K10s/Wb0W1z8mPdx8N+PLDMhA2sBchc9Q3cLjJtA6g==}
+  /tushan@0.2.32(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1):
+    resolution: {integrity: sha512-yTv1TTUrCSJqzaYxJ1T21pjbxlQnyiEx2bAjB4VDixhrDFMwRugBpy+bZ58imKq1NKv2SZLi8NQlIUW8x432Eg==}
     dependencies:
       '@arco-design/web-react': 2.49.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -36412,7 +36412,6 @@ packages:
       immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zustand@4.3.6(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
@@ -36429,6 +36428,7 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

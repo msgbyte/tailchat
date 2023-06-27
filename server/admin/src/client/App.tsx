@@ -11,6 +11,7 @@ import {
   IconEmail,
   IconFile,
   IconMessage,
+  IconNotification,
   IconSettings,
   IconStorage,
   IconUser,
@@ -27,6 +28,7 @@ import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
 import { SystemConfig } from './routes/system';
+import { SystemNotify } from './routes/system/notify';
 
 const dataProvider = jsonServerProvider('/admin/api', httpClient);
 
@@ -109,6 +111,10 @@ function App() {
 
       <CustomRoute name="cache" icon={<IconStorage />}>
         <CacheManager />
+      </CustomRoute>
+
+      <CustomRoute name="system-notify" icon={<IconNotification />}>
+        <SystemNotify />
       </CustomRoute>
 
       <CustomRoute name="system" icon={<IconSettings />}>

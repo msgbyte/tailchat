@@ -61,6 +61,18 @@ export const i18n: TushanContextProps['i18n'] = {
               'Please be cautious in the production environment, clearing the cache may lead to increased pressure on the database in a short period of time',
             cleanBtn: 'Clean Cache',
           },
+          'system-notify': {
+            create: 'Create System Notify',
+            title: 'Title',
+            content: 'Content',
+            scope: 'Notify Scope',
+            allUser: 'All User',
+            allUserTip:
+              'All users excluding temporary users. Also, if there are many users, it may not be possible to notify all users at once',
+            specifiedUser: 'Specified User',
+            notifySuccess:
+              'Sent successfully, sent to ${data.userIds.length} users',
+          },
         },
       },
     },
@@ -153,6 +165,9 @@ export const i18n: TushanContextProps['i18n'] = {
           cache: {
             name: '缓存管理',
           },
+          'system-notify': {
+            name: '系统通知',
+          },
         },
         custom: {
           action: {
@@ -203,6 +218,17 @@ export const i18n: TushanContextProps['i18n'] = {
             cleanDesc:
               '生产环境请谨慎操作, 清理缓存可能会导致短时间内数据库压力增加',
             cleanBtn: '清理缓存',
+          },
+          'system-notify': {
+            create: '创建系统通知',
+            title: '标题',
+            content: '内容',
+            scope: '通知范围',
+            allUser: '所有用户',
+            allUserTip:
+              '所有用户不包含临时用户。另外，如果用户很多，可能会无法立即通知所有用户',
+            specifiedUser: '指定用户',
+            notifySuccess: '发送成功，已发送给 ${count} 名用户',
           },
         },
       },
