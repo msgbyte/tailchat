@@ -14,6 +14,7 @@ const redirect_uri = `${config.apiUrl}/api/plugin:com.msgbyte.fim/github/redirec
 
 export const GithubStrategy: StrategyType = {
   name: 'github',
+  type: 'oauth',
   checkAvailable: () => !!clientInfo.id && !!clientInfo.secret,
   getUrl: () => {
     return `${authorize_uri}?client_id=${clientInfo.id}&redirect_uri=${redirect_uri}`;
@@ -21,28 +22,30 @@ export const GithubStrategy: StrategyType = {
   getUserInfo: async (code) => {
     console.log('authorization code:', code);
 
-    const tokenResponse = await got(access_token_uri, {
-      method: 'POST',
-      searchParams: {
-        client_id: clientInfo.id,
-        client_secret: clientInfo.secret,
-        code: code,
-      },
-      headers: {
-        accept: 'application/json',
-      },
-    }).json<{ access_token: string }>();
+    const tokenResponse = await got
+      .post(access_token_uri, {
+        searchParams: {
+          client_id: clientInfo.id,
+          client_secret: clientInfo.secret,
+          code: code,
+        },
+        headers: {
+          accept: 'application/json',
+        },
+      })
+      .json<{ access_token: string }>();
 
     const accessToken = tokenResponse.access_token;
     console.log(`access token: ${accessToken}`);
 
-    const result = await got(userinfo_uri, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `token ${accessToken}`,
-      },
-    }).json<{ id: number; name: string; email: string; avatar_url: string }>();
+    const result = await got
+      .get(userinfo_uri, {
+        headers: {
+          accept: 'application/json',
+          Authorization: `token ${accessToken}`,
+        },
+      })
+      .json<{ id: number; name: string; email: string; avatar_url: string }>();
 
     return {
       id: String(result.id),

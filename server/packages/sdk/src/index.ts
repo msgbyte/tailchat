@@ -41,7 +41,7 @@ export type {
 } from './structs/group';
 export { GroupPanelType } from './structs/group';
 export { userType } from './structs/user';
-export type { UserStruct, UserType } from './structs/user';
+export type { UserStruct, UserType, UserStructWithToken } from './structs/user';
 
 // db
 export * as db from './db';

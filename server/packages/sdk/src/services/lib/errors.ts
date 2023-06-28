@@ -54,3 +54,9 @@ export class ServiceUnavailableError extends TcError {
     super('Service unavailable', 503, 'SERVICE_NOT_AVAILABLE', data);
   }
 }
+
+export class NotFoundError extends TcError {
+  constructor(data?: unknown) {
+    super('Not found', 404, 'NOT_FOUND', data);
+  }
+}

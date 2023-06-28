@@ -21,6 +21,7 @@ import {
   db,
   call,
   BannedError,
+  UserStructWithToken,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -29,6 +30,7 @@ import {
 } from '../../../lib/utils';
 import type { TFunction } from 'i18next';
 import _ from 'lodash';
+import type { UserStruct } from 'tailchat-server-sdk';
 
 const { isValidObjectId, Types } = db;
 
@@ -87,6 +89,12 @@ class UserService extends TcService {
         nickname: { type: 'string', optional: true, max: 40 },
         password: { type: 'string', max: 40 },
         emailOTP: { type: 'string', optional: true },
+      },
+    });
+    this.registerAction('signUserToken', this.signUserToken, {
+      visibility: 'public',
+      params: {
+        userId: 'string',
       },
     });
     this.registerAction('modifyPassword', this.modifyPassword, {
@@ -185,6 +193,12 @@ class UserService extends TcService {
         },
       },
     });
+    this.registerAction('findUserByEmail', this.findUserByEmail, {
+      visibility: 'public',
+      params: {
+        email: 'string',
+      },
+    });
     this.registerAction('updateUserField', this.updateUserField, {
       params: {
         fieldName: 'string',
@@ -229,13 +243,13 @@ class UserService extends TcService {
       },
     });
     this.registerAction('generateUserToken', this.generateUserToken, {
+      visibility: 'public',
       params: {
         userId: 'string',
         nickname: 'string',
         email: 'string',
         avatar: 'string',
       },
-      visibility: 'public',
     });
 
     this.registerAuthWhitelist([
@@ -402,7 +416,7 @@ class UserService extends TcService {
       },
       any
     >
-  ) {
+  ): Promise<UserStructWithToken> {
     const params = { ...ctx.params };
     const t = ctx.meta.t;
     await this.validateEntity(params);
@@ -450,6 +464,28 @@ class UserService extends TcService {
     const json = await this.transformEntity(user, true, ctx.meta.token);
     await this.entityChanged('created', json, ctx);
     return json;
+  }
+
+  /**
+   * 签发token
+   * 仅内部可以调用
+   */
+  async signUserToken(
+    ctx: TcContext<{
+      userId: string;
+    }>
+  ): Promise<string> {
+    const userId = ctx.params.userId;
+
+    const userInfo = await call(ctx).getUserInfo(userId);
+    const token = this.generateJWT({
+      _id: userInfo._id,
+      nickname: userInfo.nickname,
+      email: userInfo.email,
+      avatar: userInfo.avatar,
+    });
+
+    return token;
   }
 
   /**
@@ -799,6 +835,29 @@ class UserService extends TcService {
     );
 
     return list;
+  }
+
+  /**
+   * 通过用户邮箱查找用户
+   */
+  async findUserByEmail(
+    ctx: TcContext<{
+      email: string;
+    }>
+  ): Promise<UserStruct | null> {
+    const email = ctx.params.email;
+
+    const doc = await this.adapter.model.findOne({
+      email,
+    });
+
+    if (!doc) {
+      return null;
+    }
+
+    const user = await this.transformDocuments(ctx, {}, doc);
+
+    return user;
   }
 
   /**
