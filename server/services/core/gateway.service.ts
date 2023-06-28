@@ -79,7 +79,7 @@ export default class ApiService extends TcService {
     //   window: 60 * 1000,
 
     //   // Max number of requests during window. Defaults to 30
-    //   limit: 30,
+    //   limit: 60,
 
     //   // Set rate limit headers to response. Defaults to false
     //   headers: true,

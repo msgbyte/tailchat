@@ -1,0 +1,9 @@
+{
+  "label": "Federated Identity Management",
+  "name": "com.msgbyte.fim",
+  "url": "{BACKEND}/plugins/com.msgbyte.fim/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Unified identity authentication",
+  "requireRestart": true
+}
