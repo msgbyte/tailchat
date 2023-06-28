@@ -26,6 +26,7 @@ class FimService extends TcService {
       return availableStrategies.map((s) => ({
         name: s.name,
         type: s.type,
+        icon: s.icon,
       }));
     });
 
@@ -71,7 +72,10 @@ class FimService extends TcService {
             userId: fimRecord.userId,
           });
 
-          return { type: 'token', token };
+          return generatePostMessageHtml({
+            type: 'token',
+            token: token,
+          });
         }
 
         // 不存在记录，查找是否已经注册过，如果已经注册过需要绑定，如果没有注册过则创建账号并绑定用户关系
@@ -80,9 +84,7 @@ class FimService extends TcService {
         });
         if (!!userInfo) {
           // 用户已存在，需要登录后才能确定绑定关系
-          return {
-            type: 'existed',
-          };
+          return generatePostMessageHtml({ type: 'existed' });
         }
 
         const newUserInfo: UserStructWithToken = await ctx.call(
@@ -100,14 +102,21 @@ class FimService extends TcService {
           userId: String(newUserInfo._id),
         });
 
-        return {
+        return generatePostMessageHtml({
           type: 'token',
           isNew: true,
           token: newUserInfo.token,
-        };
+        });
       },
     };
   }
+}
+
+function generatePostMessageHtml(obj: Record<string, any>) {
+  return {
+    __raw: true,
+    html: `<script>window.postMessage(${JSON.stringify(obj)})</script>`,
+  };
 }
 
 export default FimService;

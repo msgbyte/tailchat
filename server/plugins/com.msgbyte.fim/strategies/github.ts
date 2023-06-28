@@ -15,12 +15,13 @@ const redirect_uri = `${config.apiUrl}/api/plugin:com.msgbyte.fim/github/redirec
 export const GithubStrategy: StrategyType = {
   name: 'github',
   type: 'oauth',
+  icon: '/images/avatar/github-dark.svg',
   checkAvailable: () => !!clientInfo.id && !!clientInfo.secret,
   getUrl: () => {
     return `${authorize_uri}?client_id=${clientInfo.id}&redirect_uri=${redirect_uri}`;
   },
   getUserInfo: async (code) => {
-    console.log('authorization code:', code);
+    console.log('[github oauth] authorization code:', code);
 
     const tokenResponse = await got
       .post(access_token_uri, {
@@ -36,7 +37,7 @@ export const GithubStrategy: StrategyType = {
       .json<{ access_token: string }>();
 
     const accessToken = tokenResponse.access_token;
-    console.log(`access token: ${accessToken}`);
+    console.log(`[github oauth] access token: ${accessToken}`);
 
     const result = await got
       .get(userinfo_uri, {
@@ -46,6 +47,8 @@ export const GithubStrategy: StrategyType = {
         },
       })
       .json<{ id: number; name: string; email: string; avatar_url: string }>();
+
+    console.log(`[github oauth] user info:`, result);
 
     return {
       id: String(result.id),

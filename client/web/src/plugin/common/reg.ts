@@ -314,3 +314,11 @@ export const [pluginGroupConfigItems, regPluginGroupConfigItem] = buildRegList<{
     loading: boolean;
   }) => ReactElement;
 }>();
+
+/**
+ * 注册登录操作
+ */
+export const [pluginLoginAction, regLoginAction] = buildRegList<{
+  name: string;
+  component: React.ComponentType;
+}>();
