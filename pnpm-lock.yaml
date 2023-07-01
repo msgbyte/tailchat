@@ -1557,8 +1557,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/sdk
       tushan:
-        specifier: ^0.2.32
-        version: 0.2.32(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1)
+        specifier: ^0.2.36
+        version: 0.2.36(prop-types@15.8.1)(ts-node@10.9.1)
       vite-express:
         specifier: 0.8.0
         version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
@@ -28699,21 +28699,6 @@ packages:
       - react-native
     dev: false
 
-  /ra-data-json-server@4.10.3(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
-    resolution: {integrity: sha512-8/9IJ1RPdNybvxwktW0B4GgOfdxgY/G8raSIpnw1dnpaF2xFuLclCRre5UkIFADCtC1/n2N2QQzoCSjMxDODBg==}
-    dependencies:
-      query-string: 7.1.3
-      ra-core: 4.10.3(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - history
-      - react
-      - react-dom
-      - react-hook-form
-      - react-native
-      - react-router
-      - react-router-dom
-    dev: false
-
   /ra-data-json-server@4.7.0(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0):
     resolution: {integrity: sha512-jUNhmpHPEgiG9UjSXI3eFDPNoAJYzyKaAx2Q9c2xcxIpiErBASvsQDnBrEgAD8OIlhpnhqHi4dCp3r399hR+Zg==}
     dependencies:
@@ -33946,8 +33931,8 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.2.32(history@5.3.0)(prop-types@15.8.1)(react-hook-form@7.41.5)(ts-node@10.9.1):
-    resolution: {integrity: sha512-yTv1TTUrCSJqzaYxJ1T21pjbxlQnyiEx2bAjB4VDixhrDFMwRugBpy+bZ58imKq1NKv2SZLi8NQlIUW8x432Eg==}
+  /tushan@0.2.36(prop-types@15.8.1)(ts-node@10.9.1):
+    resolution: {integrity: sha512-ij4yi75TFSGREa4zMn6va2E+Wg/vGKbrEDL7cgoTN9tgtQ3E3csAHQBKOTFhQody2C/CMWH3SU0+/8eQQhE2mw==}
     dependencies:
       '@arco-design/web-react': 2.49.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -33970,7 +33955,6 @@ packages:
       lodash-es: 4.17.21
       postcss: 8.4.21
       qs: 6.11.1
-      ra-data-json-server: 4.10.3(history@5.3.0)(react-dom@18.2.0)(react-hook-form@7.41.5)(react-router-dom@6.11.0)(react-router@6.11.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-helmet: 6.1.0(react@18.2.0)
@@ -33987,9 +33971,7 @@ packages:
     transitivePeerDependencies:
       - debug
       - encoding
-      - history
       - prop-types
-      - react-hook-form
       - react-native
       - ts-node
     dev: false

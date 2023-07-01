@@ -5,6 +5,7 @@ import {
   ListTable,
   Resource,
   Tushan,
+  createAuthHttpClient,
 } from 'tushan';
 import {
   IconDashboard,
@@ -22,7 +23,6 @@ import { authProvider } from './auth';
 import { Dashboard } from './components/Dashboard';
 import { fileFields, groupFields, mailFields, messageFields } from './fields';
 import { i18n } from './i18n';
-import { httpClient } from './request';
 import { UserList } from './resources/user';
 import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
@@ -30,7 +30,7 @@ import { SocketIOAdmin } from './routes/socketio';
 import { SystemConfig } from './routes/system';
 import { SystemNotify } from './routes/system/notify';
 
-const dataProvider = jsonServerProvider('/admin/api', httpClient);
+const dataProvider = jsonServerProvider('/admin/api', createAuthHttpClient());
 
 function App() {
   return (
