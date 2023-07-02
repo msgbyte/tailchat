@@ -1,5 +1,11 @@
-import { TcService, TcDbService, TcPureContext, db } from 'tailchat-server-sdk';
-import type { UserStructWithToken } from 'tailchat-server-sdk/src/structs/user';
+import {
+  TcService,
+  TcDbService,
+  TcPureContext,
+  db,
+  UserStructWithToken,
+} from 'tailchat-server-sdk';
+import { isValidStaticAssetsUrl } from '../../../lib/utils';
 import type { FimDocument, FimModel } from '../models/fim';
 import { strategies } from '../strategies';
 import type { StrategyType } from '../strategies/types';
@@ -87,12 +93,31 @@ class FimService extends TcService {
           return generatePostMessageHtml({ type: 'existed' });
         }
 
+        let avatar = providerUserInfo.avatar;
+        if (avatar && isValidStaticAssetsUrl(avatar)) {
+          try {
+            const { url } = (await ctx.call(
+              'file.saveFileWithUrl',
+              {
+                fileUrl: avatar,
+              },
+              {
+                timeout: 3000,
+              }
+            )) as { url: string };
+            avatar = url;
+          } catch (err) {
+            this.logger.error('Cannot storage avatar', avatar, err);
+          }
+        }
+
         const newUserInfo: UserStructWithToken = await ctx.call(
           'user.register',
           {
             email: providerUserInfo.email,
             nickname: providerUserInfo.nickname,
-            password: new db.Types.ObjectId(), // random password
+            password: String(new db.Types.ObjectId()), // random password
+            avatar,
           }
         );
 
@@ -115,7 +140,10 @@ class FimService extends TcService {
 function generatePostMessageHtml(obj: Record<string, any>) {
   return {
     __raw: true,
-    html: `<script>window.postMessage(${JSON.stringify(obj)})</script>`,
+    html: `<script>window.opener.postMessage(${JSON.stringify({
+      source: 'plugin:com.msgbyte.fim',
+      ...obj,
+    })}, "*");</script><div>Waiting for close</div>`,
   };
 }
 

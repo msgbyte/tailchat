@@ -89,6 +89,7 @@ class UserService extends TcService {
         nickname: { type: 'string', optional: true, max: 40 },
         password: { type: 'string', max: 40 },
         emailOTP: { type: 'string', optional: true },
+        avatar: { type: 'string', optional: true },
       },
     });
     this.registerAction('signUserToken', this.signUserToken, {
@@ -413,6 +414,7 @@ class UserService extends TcService {
         nickname?: string;
         password: string;
         emailOTP?: string;
+        avatar?: string;
       },
       any
     >
@@ -457,7 +459,6 @@ class UserService extends TcService {
       nickname,
       discriminator,
       emailVerified,
-      avatar: null,
       createdAt: new Date(),
     });
     const user = await this.transformDocuments(ctx, {}, doc);
