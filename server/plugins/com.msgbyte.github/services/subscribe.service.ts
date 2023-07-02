@@ -235,7 +235,7 @@ class GithubSubscribeService extends TcService {
         const repo = event.repository.full_name;
         const repoUrl = event.repository.html_url;
         const repoStarCount = event.repository.stargazers_count;
-        const message = `:tada: [url=${userUrl}]${name}[/url] starred [url=${repoUrl}]${repo}[/url](total ${repoStarCount} stargazers)`;
+        const message = `[emoji]tada[/emoji] [url=${userUrl}]${name}[/url] starred [url=${repoUrl}]${repo}[/url](total ${repoStarCount} stargazers)`;
         await this.sendMessageToSubscribes(ctx, repo, message);
       }
     }
