@@ -138,12 +138,14 @@ class IAMService extends TcService {
 }
 
 function generatePostMessageHtml(obj: Record<string, any>) {
+  const IAM_FE_URL = process.env.IAM_FE_URL || '*';
+
   return {
     __raw: true,
     html: `<script>window.opener.postMessage(${JSON.stringify({
       source: 'plugin:com.msgbyte.iam',
       ...obj,
-    })}, "*");</script><div>Waiting for close</div>`,
+    })}, "${IAM_FE_URL}");</script><div>Waiting for main window close</div>`,
   };
 }
 
