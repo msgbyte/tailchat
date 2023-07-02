@@ -24,7 +24,7 @@ export {
   getGlobalState,
   useGlobalSocketEvent,
 } from '@/utils/global-state-helper';
-export { getJWTUserInfo } from '@/utils/jwt-helper';
+export { setUserJWT, getJWTUserInfo } from '@/utils/jwt-helper';
 export { dataUrlToFile } from '@/utils/file-helper';
 export {
   urlSearchStringify,
@@ -67,6 +67,7 @@ export {
   showMessageTime,
   joinArray,
   useConverseMessageContext,
+  loginWithToken,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';
