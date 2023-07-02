@@ -3,14 +3,14 @@ import type { StrategyType } from './types';
 import got from 'got';
 
 const clientInfo = {
-  id: process.env.FIM_GITHUB_ID,
-  secret: process.env.FIM_GITHUB_SECRET,
+  id: process.env.IAM_GITHUB_ID,
+  secret: process.env.IAM_GITHUB_SECRET,
 };
 
 const authorize_uri = 'https://github.com/login/oauth/authorize';
 const access_token_uri = 'https://github.com/login/oauth/access_token';
 const userinfo_uri = 'https://api.github.com/user';
-const redirect_uri = `${config.apiUrl}/api/plugin:com.msgbyte.fim/github/redirect`;
+const redirect_uri = `${config.apiUrl}/api/plugin:com.msgbyte.iam/github/redirect`;
 
 export const GithubStrategy: StrategyType = {
   name: 'github',

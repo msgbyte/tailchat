@@ -1,7 +1,7 @@
 import { localTrans } from '@capital/common';
 
 export const Translate = {
-  fimLogin: localTrans({
+  iamLogin: localTrans({
     'zh-CN': '第三方登录',
     'en-US': 'Third party login',
   }),

@@ -1,8 +1,8 @@
 {
-  "name": "@plugins/com.msgbyte.fim",
+  "name": "@plugins/com.msgbyte.iam",
   "main": "src/index.tsx",
   "version": "0.0.0",
-  "description": "Unified identity authentication",
+  "description": "Identity and Access Management",
   "private": true,
   "scripts": {
     "sync:declaration": "tailchat declaration github"

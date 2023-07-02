@@ -3,10 +3,10 @@ const { getModelForClass, prop, modelOptions, TimeStamps } = db;
 
 @modelOptions({
   options: {
-    customName: 'p_fim',
+    customName: 'p_iam',
   },
 })
-export class Fim extends TimeStamps implements db.Base {
+export class IAM extends TimeStamps implements db.Base {
   _id: db.Types.ObjectId;
   id: string;
 
@@ -28,10 +28,10 @@ export class Fim extends TimeStamps implements db.Base {
   userId: string;
 }
 
-export type FimDocument = db.DocumentType<Fim>;
+export type IAMDocument = db.DocumentType<IAM>;
 
-const model = getModelForClass(Fim);
+const model = getModelForClass(IAM);
 
-export type FimModel = typeof model;
+export type IAMModel = typeof model;
 
 export default model;

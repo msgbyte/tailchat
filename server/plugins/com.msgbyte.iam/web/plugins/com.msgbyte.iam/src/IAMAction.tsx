@@ -10,7 +10,7 @@ import { Divider, Image, Tooltip } from '@capital/component';
 import { request } from './request';
 import { Translate } from './translate';
 
-export const FimAction: React.FC = React.memo(() => {
+export const IAMAction: React.FC = React.memo(() => {
   const { loading, value: strategies } = useAsync(async () => {
     const { data: strategies } = await request.get('availableStrategies');
 
@@ -55,7 +55,7 @@ export const FimAction: React.FC = React.memo(() => {
   if (Array.isArray(strategies) && strategies.length > 0) {
     return (
       <div>
-        <Divider>{Translate.fimLogin}</Divider>
+        <Divider>{Translate.iamLogin}</Divider>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {strategies.map((s) => (
             <Tooltip key={s.name} title={s.name}>
@@ -87,4 +87,4 @@ export const FimAction: React.FC = React.memo(() => {
 
   return null;
 });
-FimAction.displayName = 'FimAction';
+IAMAction.displayName = 'IAMAction';

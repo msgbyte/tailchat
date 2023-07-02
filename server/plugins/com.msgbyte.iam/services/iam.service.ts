@@ -6,7 +6,7 @@ import {
   UserStructWithToken,
 } from 'tailchat-server-sdk';
 import { isValidStaticAssetsUrl } from '../../../lib/utils';
-import type { FimDocument, FimModel } from '../models/fim';
+import type { IAMDocument, IAMModel } from '../models/iam';
 import { strategies } from '../strategies';
 import type { StrategyType } from '../strategies/types';
 
@@ -15,14 +15,14 @@ import type { StrategyType } from '../strategies/types';
  *
  * Unified identity authentication
  */
-interface FimService extends TcService, TcDbService<FimDocument, FimModel> {}
-class FimService extends TcService {
+interface IAMService extends TcService, TcDbService<IAMDocument, IAMModel> {}
+class IAMService extends TcService {
   get serviceName() {
-    return 'plugin:com.msgbyte.fim';
+    return 'plugin:com.msgbyte.iam';
   }
 
   onInit() {
-    this.registerLocalDb(require('../models/fim').default);
+    this.registerLocalDb(require('../models/iam').default);
 
     const availableStrategies = strategies.filter((strategy) =>
       strategy.checkAvailable()
@@ -67,15 +67,15 @@ class FimService extends TcService {
 
         const providerUserInfo = await strategy.getUserInfo(code);
 
-        const fimRecord = await this.adapter.model.findOne({
+        const iamRecord = await this.adapter.model.findOne({
           provider: strategyName,
           providerId: providerUserInfo.id,
         });
 
-        if (!!fimRecord) {
+        if (!!iamRecord) {
           // 存在记录，直接签发 token
           const token = await ctx.call('user.signUserToken', {
-            userId: fimRecord.userId,
+            userId: iamRecord.userId,
           });
 
           return generatePostMessageHtml({
@@ -141,10 +141,10 @@ function generatePostMessageHtml(obj: Record<string, any>) {
   return {
     __raw: true,
     html: `<script>window.opener.postMessage(${JSON.stringify({
-      source: 'plugin:com.msgbyte.fim',
+      source: 'plugin:com.msgbyte.iam',
       ...obj,
     })}, "*");</script><div>Waiting for close</div>`,
   };
 }
 
-export default FimService;
+export default IAMService;
