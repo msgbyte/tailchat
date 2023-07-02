@@ -7,7 +7,7 @@
   "types": "dist/cjs/index.d.ts",
   "scripts": {
     "prepare": "pnpm build",
-    "build": "concurrently --kill-others npm:build-cjs npm:build-esm",
+    "build": "concurrently npm:build-cjs npm:build-esm",
     "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
     "build-esm": "rimraf ./dist/esm && tsc --outDir dist/esm --module es2015",
     "test": "echo \"Error: no test specified\" && exit 1"
