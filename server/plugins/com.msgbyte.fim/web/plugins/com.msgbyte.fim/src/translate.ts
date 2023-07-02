@@ -10,7 +10,9 @@ export const Translate = {
     'en-US': 'Login Failed',
   }),
   accountExistedTip: localTrans({
-    'zh-CN': '账号已存在，你应该在登录后绑定账号',
-    'en-US': 'Account Existed, You should bind provider account after login',
+    // 'zh-CN': '账号已存在，你应该在登录后绑定账号',
+    // 'en-US': 'Account Existed, You should bind provider account after login',
+    'zh-CN': '账号已存在，请使用账号密码登录',
+    'en-US': 'Account Existed, please log in with account password',
   }),
 };
