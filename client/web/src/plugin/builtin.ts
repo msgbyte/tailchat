@@ -75,6 +75,8 @@ export const builtinPlugins: PluginManifest[] = _compact([
     'label.zh-CN': 'IAM 插件',
     name: 'com.msgbyte.iam',
     url: '{BACKEND}/plugins/com.msgbyte.iam/index.js',
+    documentUrl:
+      'https://tailchat.msgbyte.com/docs/advanced-usage/plugins/com.msgbyte.iam',
     version: '0.0.0',
     author: 'moonrailgun',
     description:
