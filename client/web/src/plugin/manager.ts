@@ -1,6 +1,7 @@
 import {
   getCachedRegistryPlugins,
   getStorage,
+  parseUrlStr,
   PluginManifest,
 } from 'tailchat-shared';
 import { initMiniStar, loadSinglePlugin } from 'mini-star';
@@ -26,7 +27,7 @@ class PluginManager {
 
     const plugins = installedPlugins.map(({ name, url }) => ({
       name,
-      url,
+      url: parseUrlStr(url),
     }));
 
     const loadErrorPlugins = new Set<string>();

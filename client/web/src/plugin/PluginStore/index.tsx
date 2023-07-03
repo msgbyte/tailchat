@@ -76,14 +76,15 @@ export const PluginStore: React.FC = React.memo(() => {
           <Divider orientation="left">{t('插件中心')}</Divider>
 
           <div className="flex flex-wrap">
-            {allPlugins.map((plugin) => (
-              <PluginStoreItem
-                key={plugin.name}
-                manifest={plugin}
-                installed={installedPluginNameList.includes(plugin.name)}
-                builtin={builtinPluginNameList.includes(plugin.name)}
-              />
-            ))}
+            {allPlugins
+              .filter((p) => !builtinPluginNameList.includes(p.name)) // 插件中心只显示不包含内置插件的插件
+              .map((plugin) => (
+                <PluginStoreItem
+                  key={plugin.name}
+                  manifest={plugin}
+                  installed={installedPluginNameList.includes(plugin.name)}
+                />
+              ))}
           </div>
         </PillTabPane>
 
