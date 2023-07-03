@@ -26,7 +26,7 @@ export const IAMAction: React.FC = React.memo(() => {
 
         const payload = event.data;
 
-        if (payload.type === 'exist') {
+        if (payload.type === 'existed') {
           showToasts(Translate.accountExistedTip, 'warning');
         } else if (payload.type === 'token') {
           const token = payload.token;
@@ -35,9 +35,12 @@ export const IAMAction: React.FC = React.memo(() => {
             .then(() => {
               navigate('/main');
             })
-            .catch(() => {
+            .catch((err) => {
+              console.error(err);
               showToasts(Translate.loginFailed, 'error');
             });
+        } else {
+          console.warn('Unknown payload type', payload.type);
         }
       }
     };
