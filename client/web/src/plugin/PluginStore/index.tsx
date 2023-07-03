@@ -81,6 +81,7 @@ export const PluginStore: React.FC = React.memo(() => {
                 key={plugin.name}
                 manifest={plugin}
                 installed={installedPluginNameList.includes(plugin.name)}
+                builtin={builtinPluginNameList.includes(plugin.name)}
               />
             ))}
           </div>

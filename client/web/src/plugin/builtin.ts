@@ -70,6 +70,18 @@ export const builtinPlugins: PluginManifest[] = _compact([
     'description.zh-CN': '增加 Markdown 面板支持',
     requireRestart: true,
   },
+  {
+    label: 'Identity and Access Management',
+    'label.zh-CN': 'IAM 插件',
+    name: 'com.msgbyte.iam',
+    url: '{BACKEND}/plugins/com.msgbyte.iam/index.js',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description:
+      'Provide Tailchat with the function of conveniently accessing external account systems',
+    'description.zh-CN': '为Tailchat提供方便的接入外部账户系统的功能',
+    requireRestart: true,
+  },
   // isOffical
   isOffical && {
     label: 'Posthog',
