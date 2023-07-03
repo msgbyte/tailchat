@@ -5,7 +5,11 @@ import {
   webFrame,
 } from 'electron';
 
-export type Channels = 'ipc-example' | 'webview-message';
+export type Channels =
+  | 'ipc-example'
+  | 'webview-message'
+  | 'close'
+  | 'selectServer';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {

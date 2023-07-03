@@ -13,7 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { getMainWindowUrl } from './util';
+import { resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 import { initScreenshots } from './screenshots';
@@ -73,8 +73,54 @@ const installExtensions = async () => {
     .catch(console.log);
 };
 
+const webPreferences: Electron.WebPreferences = {
+  nodeIntegration: false,
+  preload: app.isPackaged
+    ? path.join(__dirname, 'preload.js')
+    : path.join(__dirname, '../../.erb/dll/preload.js'),
+};
+
+let welcomeWindow: BrowserWindow | null = null;
 let mainWindow: BrowserWindow | null = null;
-const createWindow = async () => {
+
+const createWelcomeWindow = async () => {
+  // 创建一个新的浏览器窗口
+  welcomeWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    frame: false,
+    webPreferences,
+  });
+
+  // 加载欢迎窗口的HTML文件
+  welcomeWindow.loadURL(resolveHtmlPath('index.html'));
+
+  // 监听从渲染进程发送的选择用户事件
+  // welcomeWindow.webContents.on('selectUser', (event, user) => {
+  //   selectedUser = user;
+  //   welcomeWindow.close(); // 关闭欢迎窗口
+  //   createMainWindow(); // 创建主窗口
+  // });
+
+  welcomeWindow.webContents.on('ipc-message', (e, channel, data) => {
+    if (channel === 'close') {
+      welcomeWindow?.close();
+    } else if (channel === 'selectServer') {
+      console.log(data);
+      const url = data.url;
+
+      createMainWindow(url).then(() => {
+        welcomeWindow?.close();
+      });
+    }
+  });
+
+  welcomeWindow.on('closed', () => {
+    welcomeWindow = null;
+  });
+};
+
+const createMainWindow = async (url: string) => {
   try {
     log.info('Create window');
 
@@ -92,7 +138,7 @@ const createWindow = async () => {
       defaultWidth: 1200,
       defaultHeight: 800,
     });
-    log.info('load window state with:', mainWindow);
+    log.info('load window state with:', mainWindowState);
 
     const getAssetPath = (...paths: string[]): string => {
       return path.join(RESOURCES_PATH, ...paths);
@@ -104,32 +150,10 @@ const createWindow = async () => {
       height: mainWindowState.height,
       width: mainWindowState.width,
       icon: getAssetPath('icon.png'),
-      webPreferences: {
-        nodeIntegration: false,
-        preload: app.isPackaged
-          ? path.join(__dirname, 'preload.js')
-          : path.join(__dirname, '../../.erb/dll/preload.js'),
-      },
+      webPreferences,
     });
 
-    // 方案一: 通过文件协议加载界面
-    // const url = resolveHtmlPath('index.html');
-    // log.info('loadUrl:', url);
-    // mainWindow.loadURL(url);
-
-    // 方案二: 通过本地起一个http代理服务，然后electron访问http服务
-    // log.info('Starting Local Http Server');
-    // const url = await getMainWindowUrl();
-    // log.info('Local Server started, entry:', url);
-
-    // 方案三: 直接访问远程服务
-    log.info('Start with remote server', {
-      FE_URL: process.env.FE_URL,
-      SERVICE_URL: process.env.SERVICE_URL,
-    });
-    const url = process.env.FE_URL || process.env.SERVICE_URL;
-
-    mainWindow.loadURL(url as string);
+    mainWindow.loadURL(url);
 
     /**
      * 如果存在
@@ -209,14 +233,14 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
-    createWindow();
+    createWelcomeWindow();
     initScreenshots();
 
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
-      if (mainWindow === null) {
-        createWindow();
+      if (welcomeWindow === null && mainWindow === null) {
+        createWelcomeWindow();
       }
     });
   })

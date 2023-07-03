@@ -1132,7 +1132,7 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.18.3"
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.18.3.tgz#c7b654b57f6f63cf7f8b418ac9ca04408c4579f4"
   integrity sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
@@ -4833,16 +4833,6 @@ electron-rebuild@^3.2.7:
     tar "^6.0.5"
     yargs "^17.0.1"
 
-electron-screenshots@^0.5.15:
-  version "0.5.15"
-  resolved "https://registry.npmmirror.com/electron-screenshots/-/electron-screenshots-0.5.15.tgz#3800127da5442a3421ec18aa5df38553da75e618"
-  integrity sha512-93iFLCaLWnMCWzHXahk0rUkmbAebJEO3+AlntMwBrxURqZ4m7Hm/d8Z1Em92NMQtPeX44B+96gWknLOiLCzYOQ==
-  dependencies:
-    debug "^4.3.3"
-    fs-extra "^10.1.0"
-    node-screenshots "^0.1.1"
-    react-screenshots "^0.5.15"
-
 electron-serve@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmmirror.com/electron-serve/-/electron-serve-1.1.0.tgz#507f56c8512c501880d3a9bec792fa92512af378"
@@ -4974,6 +4964,14 @@ enhanced-resolve@^5.0.0, enhanced-resolve@^5.9.3:
   version "5.9.3"
   resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.9.3.tgz#44a342c012cbc473254af5cc6ae20ebd0aae5d88"
   integrity sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow==
+  dependencies:
+    graceful-fs "^4.2.4"
+    tapable "^2.2.0"
+
+enhanced-resolve@^5.7.0:
+  version "5.15.0"
+  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.15.0.tgz#1af946c7d93603eb88e9896cee4904dc012e9c35"
+  integrity sha512-LXYT42KJ7lpIKECr2mAXIaMldcNCh/7E0KBKOu4KSfkHmP+mZmSs+8V5gBAqisWBy0OO4W5Oyys0GO1Y8KtdKg==
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -5940,7 +5938,7 @@ fresh@0.5.2:
   resolved "https://registry.npmmirror.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==
 
-fs-extra@^10.0.0, fs-extra@^10.1.0:
+fs-extra@^10.0.0:
   version "10.1.0"
   resolved "https://registry.npmmirror.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
@@ -6349,13 +6347,6 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmmirror.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
-
-history@^5.2.0:
-  version "5.3.0"
-  resolved "https://registry.npmmirror.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
-  integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
-  dependencies:
-    "@babel/runtime" "^7.7.6"
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
@@ -8338,54 +8329,6 @@ node-releases@^2.0.8:
   resolved "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.10.tgz#c311ebae3b6a148c89b1813fd7c4d3c024ef537f"
   integrity sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==
 
-node-screenshots-darwin-arm64@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-darwin-arm64/-/node-screenshots-darwin-arm64-0.1.1.tgz#d581cfb26b9ac7168a9568055c02f76c97831854"
-  integrity sha512-ECseBNybDcl5W8hMNo35gLqob7DJIcGQAYrCMvP7wrthQT6WLlynrkJCfPWHXjHM821huvoFfgVr00od0GTZRA==
-
-node-screenshots-darwin-x64@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-darwin-x64/-/node-screenshots-darwin-x64-0.1.1.tgz#fb4bc3d890c8a6ef2377d2e0e893945b8892cce6"
-  integrity sha512-Ah8z6V8xQhmLyem7UnTWyOAGONJVklSLDnggUIXpIxZ9ecsbD0083bl2K+Cx/fLzP8akKRJ4s6domssgCKgJRg==
-
-node-screenshots-linux-x64-gnu@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-linux-x64-gnu/-/node-screenshots-linux-x64-gnu-0.1.1.tgz#2b5d58eaba5a4b8f17c8d7531b86c583e815bd1f"
-  integrity sha512-K/cd3ZdN1wO/6gTImOkougROrPkbI/6Inn152x3ZiQgxbZ4a7n75fq+wRRonSh7YzGPdBvvSPGRwDtXK9Da8Ew==
-
-node-screenshots-linux-x64-musl@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-linux-x64-musl/-/node-screenshots-linux-x64-musl-0.1.1.tgz#3bf37e1b499f046a122a283d08289231c3ec648c"
-  integrity sha512-Ag++DSXrOkf1fvjaHjlTHJzKhpCV66L4/9zTQJgeLfZkJIlgegdmH/35kXvOzKPUcjzAb+GDeDOkbO6/VgfIEA==
-
-node-screenshots-win32-arm64-msvc@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-win32-arm64-msvc/-/node-screenshots-win32-arm64-msvc-0.1.1.tgz#7206ac99d243769173bd6593fbd56520e08c2e2e"
-  integrity sha512-hB5Cm0s0SoaN6RmmRzoBN9A7PGnVqGSfx2qnOclG351N4YRQf9uU0pgDcZMVzPfi6mzHlx/VRsJOwtQgXVKOFg==
-
-node-screenshots-win32-ia32-msvc@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-win32-ia32-msvc/-/node-screenshots-win32-ia32-msvc-0.1.1.tgz#fac73f6b79f4381f41a8ab8696b993950096bbb1"
-  integrity sha512-4nRBAlkNrKvJ7AIQC2lBZykju9lzX/VGYhffVcMpPvgY5d/S67ir2aME/KsXTDFbWclzxU8grlvL9Tx14s8q/w==
-
-node-screenshots-win32-x64-msvc@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots-win32-x64-msvc/-/node-screenshots-win32-x64-msvc-0.1.1.tgz#7e5a7a1339c7fe4fce9370e74eed38de92fa951b"
-  integrity sha512-yI1Yf4HZTE+mtLZKsM9gFfrf/MsCywAQ5o/Xmd0uovdtt3IYRxc/QUatxbUQyl7mWX/TRJlj4ihIET4/rFRY5Q==
-
-node-screenshots@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/node-screenshots/-/node-screenshots-0.1.1.tgz#6556f0710fb00b79bed5474844e3ac24791f2dbf"
-  integrity sha512-XhteRLrlrpzMo1ZxaxkQ8URo6vqtqLRy3GVzVEWupYrZYUFgC7tBAC9kqemxXvugtS5ufYqqdyoLhHcWhKLvOQ==
-  optionalDependencies:
-    node-screenshots-darwin-arm64 "0.1.1"
-    node-screenshots-darwin-x64 "0.1.1"
-    node-screenshots-linux-x64-gnu "0.1.1"
-    node-screenshots-linux-x64-musl "0.1.1"
-    node-screenshots-win32-arm64-msvc "0.1.1"
-    node-screenshots-win32-ia32-msvc "0.1.1"
-    node-screenshots-win32-x64-msvc "0.1.1"
-
 nopt@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmmirror.com/nopt/-/nopt-5.0.0.tgz#530942bb58a512fccafe53fe210f13a25355dc88"
@@ -9407,26 +9350,6 @@ react-refresh@^0.13.0:
   version "0.13.0"
   resolved "https://registry.npmmirror.com/react-refresh/-/react-refresh-0.13.0.tgz#cbd01a4482a177a5da8d44c9755ebb1f26d5a1c1"
   integrity sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg==
-
-react-router-dom@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.npmmirror.com/react-router-dom/-/react-router-dom-6.3.0.tgz#a0216da813454e521905b5fa55e0e5176123f43d"
-  integrity sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==
-  dependencies:
-    history "^5.2.0"
-    react-router "6.3.0"
-
-react-router@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.npmmirror.com/react-router/-/react-router-6.3.0.tgz#3970cc64b4cb4eae0c1ea5203a80334fdd175557"
-  integrity sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==
-  dependencies:
-    history "^5.2.0"
-
-react-screenshots@^0.5.15:
-  version "0.5.15"
-  resolved "https://registry.npmmirror.com/react-screenshots/-/react-screenshots-0.5.15.tgz#0599fbdfdcb6392ddea718be208ab82238fb8ee6"
-  integrity sha512-HbaVXzlM4l4Vl/NgJ25sD2C0hdOMeDTFBzLqLRBFA5GF0ds1+rU3NWkVOTpvnuydD3qC/saCOd79a+MxubGgYQ==
 
 react-shallow-renderer@^16.15.0:
   version "16.15.0"
@@ -10735,6 +10658,15 @@ ts-node@^10.7.0:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
+tsconfig-paths-webpack-plugin@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmmirror.com/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-4.0.1.tgz#a24651d0f69668a1abad38d3c2489855c257460d"
+  integrity sha512-m5//KzLoKmqu2MVix+dgLKq70MnFi8YL8sdzQZ6DblmCdfuq/y3OqvJd5vMndg2KEVCOeNz8Es4WVZhYInteLw==
+  dependencies:
+    chalk "^4.1.0"
+    enhanced-resolve "^5.7.0"
+    tsconfig-paths "^4.1.2"
+
 tsconfig-paths@^3.14.1:
   version "3.14.1"
   resolved "https://registry.npmmirror.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
@@ -10742,6 +10674,15 @@ tsconfig-paths@^3.14.1:
   dependencies:
     "@types/json5" "^0.0.29"
     json5 "^1.0.1"
+    minimist "^1.2.6"
+    strip-bom "^3.0.0"
+
+tsconfig-paths@^4.1.2:
+  version "4.2.0"
+  resolved "https://registry.npmmirror.com/tsconfig-paths/-/tsconfig-paths-4.2.0.tgz#ef78e19039133446d244beac0fd6a1632e2d107c"
+  integrity sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==
+  dependencies:
+    json5 "^2.2.2"
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 

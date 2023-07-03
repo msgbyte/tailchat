@@ -42,16 +42,8 @@ li {
   list-style: none;
 }
 
-a {
-  text-decoration: none;
-  height: fit-content;
-  width: fit-content;
-  margin: 10px;
-}
-
-a:hover {
-  opacity: 1;
-  text-decoration: none;
+button + button {
+  margin-left: 10px;
 }
 
 .Hello {
