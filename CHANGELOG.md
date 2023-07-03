@@ -1,5 +1,41 @@
 
 
+## [1.8.1](https://github.com/msgbyte/tailchat/compare/v1.8.0...v1.8.1) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix audio.play() error throw which will marked as Unhandled ([741e9f7](https://github.com/msgbyte/tailchat/commit/741e9f7983748ff9aea7a04c8f31b3622b3f65bf))
+* fix builtin plugin cannot load with {BACKEND} ([05aae65](https://github.com/msgbyte/tailchat/commit/05aae656a2995260d8b96fce026d705c5056c0c9))
+* fix translation problem ([b038c5a](https://github.com/msgbyte/tailchat/commit/b038c5adf36c87f658a173f9f7b0d2ae05fa4f8d))
+* **iam:** fix account existed problem ([d906322](https://github.com/msgbyte/tailchat/commit/d906322eb4dcdae6ce2be2e06dc7f0a08e43c661))
+
+
+### Features
+
+* add chat.inbox.batchAppend action which can batch add inbox item ([3ad1e44](https://github.com/msgbyte/tailchat/commit/3ad1e4410cd85fc3374b1d0f8517d65ae0c445c8))
+* add env `DISABLE_CREATE_GROUP` which can control user allow create group ([2e56139](https://github.com/msgbyte/tailchat/commit/2e56139925dbaaa70556e8d46acb9c6268b071b3))
+* add fim plugin and add github oauth strategy ([b64d037](https://github.com/msgbyte/tailchat/commit/b64d037b60f26d2d8c234d6d2951400d2a159060))
+* add fim record provider create / search and sign token ([ed1d7cc](https://github.com/msgbyte/tailchat/commit/ed1d7cc1d629fee2c7118fd8fa87a5797b98a536))
+* add markdown inbox item which help to develop system notice ([a1048b7](https://github.com/msgbyte/tailchat/commit/a1048b77fd11413b9c388c35cd067bc7fe6b048b))
+* add nickname edit in register view ([40b0076](https://github.com/msgbyte/tailchat/commit/40b007698f478c7bc5d14a608c7ff546bc04a8e3))
+* add plugin com.msgbyte.env.electron ([eb83f78](https://github.com/msgbyte/tailchat/commit/eb83f784a1d4e67040d400652c077b7e8998346f))
+* **admin:** add MarkdownEditor ([ca95a0d](https://github.com/msgbyte/tailchat/commit/ca95a0dac78402b6c08b344a3af27190a1727255))
+* **admin:** add system notify ([4498453](https://github.com/msgbyte/tailchat/commit/449845315e0042eec9443c0f853ee12c99441bcb))
+* **desktop:** add desktop inject ([27eee90](https://github.com/msgbyte/tailchat/commit/27eee90034cfa5714d659c25457d40b70312b343))
+* **desktop:** add screenshot button in chatbox at electron env ([aebcd0d](https://github.com/msgbyte/tailchat/commit/aebcd0d130877f27c240aa7449ebdabddd286ef8))
+* **fim:** add avatar storage and enable fim ([a8bb744](https://github.com/msgbyte/tailchat/commit/a8bb744bfd343dec70a622c0230fb09552ee1c98))
+* **fim:** add fim login callback ([f6ef59e](https://github.com/msgbyte/tailchat/commit/f6ef59e37d4563ed23de4a6ed3a3ad9a44e7653e))
+* github oauth login view ([e81e7ad](https://github.com/msgbyte/tailchat/commit/e81e7ad64f76ac33584eeb5c7db96de1709a222c))
+* iam plugin add into builtin plugin ([e0d6738](https://github.com/msgbyte/tailchat/commit/e0d673867725278a8e6132da1e11b65e900be5d7))
+* **iam:** added a security policy that allows setting domain name verification for passing tokens ([9ae787f](https://github.com/msgbyte/tailchat/commit/9ae787f42b116a1a5d27afe94191f796a695b286))
+
+
+### Performance Improvements
+
+* beautify dashboard chart color ([fd9787f](https://github.com/msgbyte/tailchat/commit/fd9787f77bc6588eb0a6365e1e59843f3080cade))
+* beautify github repo star message with emoji ([22651c7](https://github.com/msgbyte/tailchat/commit/22651c74bf86f7c603c7d4d6cd0fbbd0835e5f6c))
+
 # [1.8.0](https://github.com/msgbyte/tailchat/compare/v1.7.6...v1.8.0) (2023-06-21)
 
 
