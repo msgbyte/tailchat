@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import React from 'react';
 import Translate from '@docusaurus/Translate';
+import clients from '../../static/downloads/client.json';
 import './downloads.less';
 
 export default function Downloads() {
@@ -32,7 +33,7 @@ export default function Downloads() {
               <div className="btns">
                 <Link
                   className="button button--primary"
-                  to="https://tailchat-app.msgbyte.com/app-release.apk"
+                  to={clients.android.url}
                 >
                   Android
                 </Link>
