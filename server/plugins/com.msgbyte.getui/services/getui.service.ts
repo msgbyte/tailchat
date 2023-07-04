@@ -57,7 +57,7 @@ class GetuiService extends TcService {
             const groupInfo = await call(ctx).getGroupInfo(message.groupId);
             title = groupInfo.name;
           }
-          const content = message.messageSnippet;
+          const content = message.messagePlainContent ?? message.messageSnippet;
           const payload = {
             converseId: message.converseId,
             groupId: message.groupId,
