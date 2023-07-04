@@ -1,7 +1,7 @@
 import icon from '../../assets/icon.svg';
 import { ServerItem } from './ServerItem';
 import React from 'react';
-import { useServerStore } from './store/server';
+import { defaultServerList, useServerStore } from './store/server';
 import { AddServerItem } from './AddServerItem';
 import { Dropdown, Modal } from 'antd';
 import './App.css';
@@ -25,6 +25,10 @@ const Hello: React.FC = React.memo(() => {
                   {
                     key: 'remove',
                     label: 'Delete Server',
+                    disabled:
+                      defaultServerList.findIndex(
+                        (info) => info.url === serverInfo.url
+                      ) >= 0, // is default server
                     onClick: () => {
                       Modal.confirm({
                         title: 'Do you Want to delete this server?',

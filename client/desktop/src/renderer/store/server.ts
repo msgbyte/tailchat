@@ -20,7 +20,7 @@ interface ServerStoreState {
   removeServer: (url: string) => void;
 }
 
-const defaultServerList: ServerInfo[] = [
+export const defaultServerList: ServerInfo[] = [
   {
     name: 'Tailchat',
     url: 'https://nightly.paw.msgbyte.com/',
