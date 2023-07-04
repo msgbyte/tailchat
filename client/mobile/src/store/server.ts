@@ -48,7 +48,7 @@ export const useServerStore = create<ServerStoreState>()(
 
           set((state) => {
             state.serverList.push({
-              name: serviceConfig.appName ?? 'Tailchat',
+              name: serviceConfig.serverName ?? 'Tailchat',
               url,
               version,
             });
