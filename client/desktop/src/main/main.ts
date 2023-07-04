@@ -75,6 +75,9 @@ const installExtensions = async () => {
 
 const webPreferences: Electron.WebPreferences = {
   nodeIntegration: false,
+  contextIsolation: true,
+  webSecurity: false, // skip same-origin
+  allowRunningInsecureContent: true, // allow visit http page in https
   preload: app.isPackaged
     ? path.join(__dirname, 'preload.js')
     : path.join(__dirname, '../../.erb/dll/preload.js'),

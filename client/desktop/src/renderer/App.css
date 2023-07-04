@@ -2,21 +2,28 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   position: relative;
   color: white;
   height: 100vh;
   background: linear-gradient(
     200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
+    #111827 -29.09%,
+    #374151 51.77%,
+    #111827 129.35%
   );
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -46,7 +53,22 @@ button + button {
   margin-left: 10px;
 }
 
-.Hello {
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.server-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.actions {
   display: flex;
   justify-content: center;
   align-items: center;
