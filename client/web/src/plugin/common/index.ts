@@ -20,6 +20,7 @@ export {
   openReconfirmModal,
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
+export { useIsMobile } from '@/hooks/useIsMobile';
 export {
   getGlobalState,
   useGlobalSocketEvent,

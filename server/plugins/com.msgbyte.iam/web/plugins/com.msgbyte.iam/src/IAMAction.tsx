@@ -5,6 +5,7 @@ import {
   useNavigate,
   loginWithToken,
   setUserJWT,
+  useIsMobile,
 } from '@capital/common';
 import { Divider, Image, Tooltip } from '@capital/component';
 import { request } from './request';
@@ -18,6 +19,7 @@ export const IAMAction: React.FC = React.memo(() => {
   }, []);
   const newWin = useRef<Window>();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const fn = (event: MessageEvent<any>) => {
@@ -59,31 +61,39 @@ export const IAMAction: React.FC = React.memo(() => {
     return (
       <div>
         <Divider>{Translate.iamLogin}</Divider>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {strategies.map((s) => (
-            <Tooltip key={s.name} title={s.name}>
-              <Image
-                style={{
-                  width: 40,
-                  height: 40,
-                  cursor: 'pointer',
-                  borderRadius: 20,
-                }}
-                src={s.icon}
-                onClick={async () => {
-                  if (s.type === 'oauth') {
-                    const { data: url } = await request.get(
-                      `${s.name}.loginUrl`
-                    );
+        {isMobile ? (
+          <div
+            style={{ textAlign: 'center', opacity: 0.8, fontSize: '0.75rem' }}
+          >
+            {Translate.notSupportMobile}
+          </div>
+        ) : (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {strategies.map((s) => (
+              <Tooltip key={s.name} title={s.name}>
+                <Image
+                  style={{
+                    width: 40,
+                    height: 40,
+                    cursor: 'pointer',
+                    borderRadius: 20,
+                  }}
+                  src={s.icon}
+                  onClick={async () => {
+                    if (s.type === 'oauth') {
+                      const { data: url } = await request.get(
+                        `${s.name}.loginUrl`
+                      );
 
-                    const win = window.open(url, 'square', 'frame=true');
-                    newWin.current = win;
-                  }
-                }}
-              />
-            </Tooltip>
-          ))}
-        </div>
+                      const win = window.open(url, 'square', 'frame=true');
+                      newWin.current = win;
+                    }
+                  }}
+                />
+              </Tooltip>
+            ))}
+          </div>
+        )}
       </div>
     );
   }
