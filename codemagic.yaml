@@ -53,9 +53,9 @@ workflows:
             if [[ -f ~/SUCCESS ]]; then
               if [[ $CM_BRANCH == "master" ]]; then
                 # deploy to production
-                wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch main
+                wrangler pages deploy android/app/build/outputs/apk/release --project-name tailchat --branch main
               else
-                wrangler pages publish android/app/build/outputs/apk/release --project-name tailchat --branch $CM_BRANCH
+                wrangler pages deploy android/app/build/outputs/apk/release --project-name tailchat --branch $CM_BRANCH
               fi
             fi
         - name: Notify artifact URL to Tailchat
