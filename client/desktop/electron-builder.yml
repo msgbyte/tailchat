@@ -40,7 +40,7 @@ directories:
   output: release/build
 extraResources:
   - ./assets/**
-publish:
-  provider: github
-  owner: msgbyte
-  repo: tailchat
+# publish:
+#   provider: github
+#   owner: msgbyte
+#   repo: tailchat

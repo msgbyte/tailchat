@@ -49,3 +49,9 @@ jobs:
           # # If the commit is tagged with a version (e.g. "v1.0.0"),
           # # release the app after building
           # release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: desktop-client-artifacts
+          path: ./client/desktop/release/build
