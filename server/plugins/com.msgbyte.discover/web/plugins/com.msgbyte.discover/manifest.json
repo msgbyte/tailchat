@@ -1,0 +1,9 @@
+{
+  "label": "Discover",
+  "name": "com.msgbyte.discover",
+  "url": "{BACKEND}/plugins/com.msgbyte.discover/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add Discover panel which can help user found groups",
+  "requireRestart": true
+}

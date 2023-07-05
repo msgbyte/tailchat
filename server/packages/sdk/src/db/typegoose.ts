@@ -3,6 +3,7 @@ export {
   prop,
   modelOptions,
   Severity,
+  index,
 } from '@typegoose/typegoose';
 export type { DocumentType, Ref, ReturnModelType } from '@typegoose/typegoose';
 export { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
