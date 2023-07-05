@@ -1,5 +1,20 @@
 
 
+## [1.8.2](https://github.com/msgbyte/tailchat/compare/v1.8.1...v1.8.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* **admin:** fix dashboard color conflict problem ([9f6d10c](https://github.com/msgbyte/tailchat/commit/9f6d10cb2829cdd211db8688d779d45fab37a89f))
+* fix auth http client not pass storage key problem [#98](https://github.com/msgbyte/tailchat/issues/98) ([eec3a79](https://github.com/msgbyte/tailchat/commit/eec3a798995c905f0d34cf2f2c67c9a9cab2c339))
+* **mobile:** fix name error when fetch serverName ([3a03c71](https://github.com/msgbyte/tailchat/commit/3a03c7124fac265d95be183967b9769b5c7a61d3))
+
+
+### Features
+
+* create discover plugin and define db schema ([4cd2267](https://github.com/msgbyte/tailchat/commit/4cd2267d6490137085aedbffb4467066c2810dd9))
+* **desktop:** support add server and remove server ([b7e720d](https://github.com/msgbyte/tailchat/commit/b7e720dd68f5d913e92e8fe2949714c9aeaaeaeb))
+
 ## [1.8.1](https://github.com/msgbyte/tailchat/compare/v1.8.0...v1.8.1) (2023-07-03)
 
 
