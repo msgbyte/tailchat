@@ -50,6 +50,47 @@ export default function Downloads() {
               </p>
             </div>
           </div>
+
+          <div className="section reverse">
+            <div className="block">
+              <img src="/img/gallery/download/desktop.png" />
+            </div>
+
+            <div className="block">
+              <h3>
+                <Translate>Desktop Client</Translate> (test)
+              </h3>
+
+              <p>
+                <Translate>
+                  Use our cross-platform client for the best experience in
+                  Tailchat
+                </Translate>
+              </p>
+
+              <div className="btns">
+                <Link
+                  className="button button--primary"
+                  to={clients.windows.url}
+                >
+                  Windows
+                </Link>
+                <Link className="button button--secondary disabled">
+                  MacOS(Coming soon)
+                </Link>
+                <Link className="button button--secondary disabled">
+                  Linux(Coming soon)
+                </Link>
+              </div>
+
+              <p className="tip">
+                <Translate>Design with electron</Translate>:&nbsp;
+                <Link to="https://github.com/msgbyte/tailchat/tree/master/client/desktop">
+                  <Translate>Source Code</Translate>
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </main>
     </Layout>

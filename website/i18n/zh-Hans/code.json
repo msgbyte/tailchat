@@ -404,5 +404,14 @@
   },
   "Communicate by AI, AI Assistant will help you improve your word, simplify your expression and even summary history messages.": {
     "message": "使用AI交流，AI 智能助手助你改善用词，简化表达，甚至汇总历史消息."
+  },
+  "Desktop Client": {
+    "message": "桌面端"
+  },
+  "Use our cross-platform client for the best experience in Tailchat": {
+    "message": "使用我们的跨平台客户端获得 Tailchat 的最佳体验"
+  },
+  "Design with electron": {
+    "message": "使用 electron 技术开发"
   }
 }

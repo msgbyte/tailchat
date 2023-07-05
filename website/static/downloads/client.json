@@ -2,5 +2,9 @@
   "android": {
     "version": "0.0.1",
     "url": "https://tailchat-app.msgbyte.com/app-release.apk"
+  },
+  "windows": {
+    "version": "0.0.1",
+    "url": "https://github.com/msgbyte/tailchat/releases/download/v1.8.2/Tailchat-0.0.1-win.zip"
   }
 }
