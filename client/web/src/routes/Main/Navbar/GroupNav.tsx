@@ -13,6 +13,8 @@ import {
 import { NavbarNavItem } from './NavItem';
 import { Dropdown } from 'antd';
 import { useGroupUnreadState } from '@/hooks/useGroupUnreadState';
+import { pluginCustomPanel } from '@/plugin/common';
+import { NavbarCustomNavItem } from './CustomNavItem';
 
 /**
  * 群组导航栏栏项
@@ -99,6 +101,12 @@ export const GroupNav: React.FC = React.memo(() => {
           <Icon className="text-3xl text-white" icon="mdi:plus" />
         </NavbarNavItem>
       )}
+
+      {pluginCustomPanel
+        .filter((p) => p.position === 'navbar-group')
+        .map((p) => (
+          <NavbarCustomNavItem key={p.name} panelInfo={p} withBg={true} />
+        ))}
     </div>
   );
 });

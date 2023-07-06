@@ -43,17 +43,11 @@ export const Navbar: React.FC = React.memo(() => {
         <div className="overflow-y-hidden hover:overflow-y-smart scroll overflow-x-hidden thin-scrollbar">
           <GroupNav />
         </div>
-
-        {pluginCustomPanel
-          .filter((p) => p.position === 'navbar-group')
-          .map((p) => (
-            <NavbarCustomNavItem key={p.name} panelInfo={p} withBg={true} />
-          ))}
       </div>
 
       <div
         data-tc-role="navbar-settings"
-        className="flex flex-col items-center space-y-2"
+        className="flex flex-col items-center space-y-2 pt-3"
       >
         {pluginCustomPanel
           .filter((p) => p.position === 'navbar-more')
