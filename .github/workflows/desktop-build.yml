@@ -54,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: desktop-client-artifacts
-          path: ./client/desktop/release/build
+          path: ./client/desktop/release/build/*
