@@ -84,6 +84,17 @@ export const builtinPlugins: PluginManifest[] = _compact([
     'description.zh-CN': '为Tailchat提供方便的接入外部账户系统的功能',
     requireRestart: true,
   },
+  {
+    label: 'Offline Icons',
+    'label.zh-CN': '离线图标',
+    name: 'com.msgbyte.offline-icons',
+    url: '/plugins/com.msgbyte.offline-icons/index.js',
+    version: '0.0.0',
+    author: 'moonrailgun',
+    description: 'Add prefetched icons which need run in intranet environment',
+    'description.zh-CN': '增加预获取的图标，适用于内网环境',
+    requireRestart: true,
+  },
   // isOffical
   isOffical && {
     label: 'Posthog',
