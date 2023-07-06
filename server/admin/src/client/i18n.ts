@@ -9,6 +9,16 @@ export const i18n: TushanContextProps['i18n'] = {
       label: 'English',
       translation: {
         ...i18nEnTranslation,
+        resources: {
+          p_discover: {
+            name: 'Discover',
+            fields: {
+              groupId: 'Group ID',
+              active: 'Is Active',
+              order: 'Order',
+            },
+          },
+        },
         custom: {
           action: {
             resetPassword: 'Reset Password',
@@ -154,6 +164,14 @@ export const i18n: TushanContextProps['i18n'] = {
               createdAt: '创建时间',
             },
           },
+          p_discover: {
+            name: '探索',
+            fields: {
+              groupId: '群组ID',
+              active: '是否活跃',
+              order: '排序',
+            },
+          },
           system: {
             name: '系统设置',
           },
@@ -169,6 +187,9 @@ export const i18n: TushanContextProps['i18n'] = {
           'system-notify': {
             name: '系统通知',
           },
+        },
+        category: {
+          plugins: '插件',
         },
         custom: {
           action: {

@@ -158,3 +158,23 @@ export const mailFields = [
   createTextField('error'),
   createDateTimeField('createdAt'),
 ];
+
+export const discoverFields = [
+  createReferenceField('groupId', {
+    reference: 'groups',
+    displayField: 'name',
+  }),
+  createBooleanField('active', {
+    edit: {
+      default: true,
+    },
+  }),
+  createNumberField('order', {
+    edit: {
+      default: 0,
+    },
+    list: {
+      sort: true,
+    },
+  }),
+];

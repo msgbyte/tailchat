@@ -253,5 +253,12 @@ router.use(
   auth(),
   raExpressMongoose(require('../../../../models/user/mail').default)
 );
+router.use(
+  '/p_discover',
+  auth(),
+  raExpressMongoose(
+    require('../../../../plugins/com.msgbyte.discover/models/discover').default
+  )
+);
 
 export { router as apiRouter };

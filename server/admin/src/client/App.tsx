@@ -1,4 +1,5 @@
 import {
+  Category,
   createTextField,
   CustomRoute,
   jsonServerProvider,
@@ -7,6 +8,7 @@ import {
   Tushan,
 } from 'tushan';
 import {
+  IconCompass,
   IconDashboard,
   IconEmail,
   IconFile,
@@ -20,7 +22,13 @@ import {
 } from 'tushan/icon';
 import { authHTTPClient, authProvider } from './auth';
 import { Dashboard } from './components/Dashboard';
-import { fileFields, groupFields, mailFields, messageFields } from './fields';
+import {
+  discoverFields,
+  fileFields,
+  groupFields,
+  mailFields,
+  messageFields,
+} from './fields';
 import { i18n } from './i18n';
 import { UserList } from './resources/user';
 import { CacheManager } from './routes/cache';
@@ -99,6 +107,19 @@ function App() {
         icon={<IconEmail />}
         list={<ListTable fields={mailFields} />}
       />
+
+      <Category name="plugins">
+        <Resource
+          name="p_discover"
+          icon={<IconCompass />}
+          list={
+            <ListTable
+              fields={discoverFields}
+              action={{ create: true, detail: true, delete: true }}
+            />
+          }
+        />
+      </Category>
 
       <CustomRoute name="network" icon={<IconWifi />}>
         <TailchatNetwork />
