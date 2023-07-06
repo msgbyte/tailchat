@@ -33,8 +33,10 @@ class DiscoverService extends TcService {
       .find({
         active: true,
       })
+      .sort({ order: 'desc' })
       .limit(size)
-      .skip(size * (page - 1));
+      .skip(size * (page - 1))
+      .exec();
 
     const list = await this.transformDocuments(ctx, {}, docs);
 
