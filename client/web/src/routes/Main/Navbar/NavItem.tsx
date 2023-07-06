@@ -47,6 +47,14 @@ export const NavbarNavItem: React.FC<
     inner = <Link to={to}>{inner}</Link>;
   }
 
+  if (badge === true) {
+    inner = (
+      <Badge status="error" dot={true} offset={[0, 44]} {...props.badgeProps}>
+        {inner}
+      </Badge>
+    );
+  }
+
   return (
     <div className="px-3 relative group">
       {showPill && (
@@ -67,10 +75,6 @@ export const NavbarNavItem: React.FC<
       )}
 
       {inner}
-
-      <div className="absolute right-2 bottom-0">
-        {badge === true && <Badge status="error" {...props.badgeProps} />}
-      </div>
     </div>
   );
 });
