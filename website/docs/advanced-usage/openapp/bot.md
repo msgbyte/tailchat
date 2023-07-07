@@ -226,4 +226,4 @@ Body
 
 ## Additional Documentation
 
-- [Tailchat x Laf: Develop a chatbot in 10 minutes](/blog/tailchat-laf-bot)
+- [Tailchat x Laf: Develop a chatbot in 10 minutes](/blog/tailchat-laf-robot)
