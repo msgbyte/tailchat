@@ -18,6 +18,9 @@ import axios from 'axios';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../../../');
 
+/**
+ * Entry
+ */
 (async () => {
   const start = Date.now();
   const paths = await globby(['**.tsx'], {

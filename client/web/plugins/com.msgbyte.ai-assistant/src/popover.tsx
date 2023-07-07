@@ -34,6 +34,8 @@ const Tip = styled.div`
 
 const Answer = styled.pre`
   white-space: pre-wrap;
+  max-height: 50vh;
+  overflow: auto;
 `;
 
 const ActionButton = styled.div`
