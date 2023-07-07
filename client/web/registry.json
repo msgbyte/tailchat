@@ -183,7 +183,7 @@
     "author": "msgbyte",
     "description": "Provide the operating capability of the open platform for the application",
     "description.zh-CN": "为应用提供开放平台的操作能力",
-    "requireRestart": true
+    "requireRestart": false
   },
   {
     "label": "third party integration",
@@ -194,7 +194,7 @@
     "author": "moonrailgun",
     "description": "Used to integrate third-party applications in groups",
     "description.zh-CN": "用于在群组中集成第三方应用",
-    "requireRestart": true
+    "requireRestart": false
   },
   {
     "label": "sakana-widget",

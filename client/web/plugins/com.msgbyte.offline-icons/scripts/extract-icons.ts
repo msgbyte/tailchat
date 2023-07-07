@@ -71,10 +71,13 @@ async function extractIcons(filepath: string): Promise<string[]> {
   traverse(ast, {
     JSXOpeningElement(path) {
       const name = path.node.name;
-      if (isJSXIdentifier(name) && name.name === 'Icon') {
+      if (
+        isJSXIdentifier(name) &&
+        ['Icon', 'BaseChatInputButton'].includes(name.name)
+      ) {
         path.node.attributes.forEach((attribute) => {
           if (isJSXAttribute(attribute) && attribute.name.name === 'icon') {
-            if (isStringLiteral(attribute.value)) {
+            if (isStringLiteral(attribute.value) && attribute.value.value) {
               icons.push(attribute.value.value);
             }
           }
