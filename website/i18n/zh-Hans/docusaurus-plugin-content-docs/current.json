@@ -58,5 +58,9 @@
   "sidebar.tutorialSidebar.category.Benchmark": {
     "message": "压力测试",
     "description": "The label for category Benchmark in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Open App": {
+    "message": "开放平台应用",
+    "description": "The label for category Open App in sidebar tutorialSidebar"
   }
 }
