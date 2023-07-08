@@ -193,12 +193,12 @@ class GithubSubscribeService extends TcService {
       if (event.action === 'opened') {
         message = `[url=${userUrl}]${name}[/url] created a PR request at ${repo}:\n${title}\n[markdown]${
           body ?? ''
-        }[/markdown]\n网址: ${url}`;
+        }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
         message = `[url=${userUrl}]${name}[/url] replied PR request at ${repo}:\n${title}\n[markdown]${
           comment.body ?? ''
-        }[/markdown]\n网址: ${url}`;
+        }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'closed') {
         message = `[url=${userUrl}]${name}[/url] closed PR request at ${repo}:\n${title}\n\nURL: ${url}`;
       }
