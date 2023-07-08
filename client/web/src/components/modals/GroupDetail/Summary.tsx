@@ -64,6 +64,11 @@ export const GroupSummary: React.FC<{
             renderEditor={DefaultFullModalInputEditorRender}
             onSave={handleUpdateGroupName}
           />
+
+          <FullModalField
+            title={t('成员数')}
+            value={String(groupInfo.members.length)}
+          />
         </div>
       </div>
     </div>
