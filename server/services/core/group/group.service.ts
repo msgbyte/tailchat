@@ -50,6 +50,10 @@ class GroupService extends TcService {
       params: {
         groupId: 'string',
       },
+      cache: {
+        keys: ['groupId'],
+        ttl: 60 * 60, // 1 hour
+      },
     });
     this.registerAction('getGroupInfo', this.getGroupInfo, {
       params: {
@@ -1204,6 +1208,7 @@ class GroupService extends TcService {
    * @param groupId 群组id
    */
   private cleanGroupInfoCache(groupId: string) {
+    this.cleanActionCache('getGroupBasicInfo', [groupId]);
     this.cleanActionCache('getGroupInfo', [groupId]);
   }
 
