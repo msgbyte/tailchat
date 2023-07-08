@@ -83,6 +83,7 @@ export {
    * @deprecated please use metaFormFieldSchema from @capital/component
    */
   metaFormFieldSchema as fieldSchema,
+  getTextColorHex,
 } from 'tailchat-design';
 
 /**

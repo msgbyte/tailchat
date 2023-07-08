@@ -14,6 +14,7 @@ export {
   Empty,
   Popover,
   Tag,
+  Skeleton,
 } from 'antd';
 export const TextArea = Input.TextArea;
 export {

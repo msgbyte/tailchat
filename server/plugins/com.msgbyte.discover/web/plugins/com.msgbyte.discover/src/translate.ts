@@ -5,4 +5,16 @@ export const Translate = {
     'zh-CN': '探索',
     'en-US': 'Discover',
   }),
+  memberCount: localTrans({
+    'zh-CN': '{count} 位成员',
+    'en-US': '{count} members',
+  }),
+  discoverHeader: localTrans({
+    'zh-CN': '在这里探索你感兴趣的群组',
+    'en-US': 'Explore the groups you are interested in here',
+  }),
+  join: localTrans({
+    'zh-CN': '加入',
+    'en-US': 'Join',
+  }),
 };

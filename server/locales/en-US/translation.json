@@ -30,6 +30,8 @@
   "k89bf46fc": "Unable to recall messages from {{minutes}} minutes ago",
   "k8c49f532": "Failed to set nickname, no friendship information found",
   "k986040de": "No group found",
+  "k9891f980": "{{nickname}} joined the group through the public community",
+  "k996e99cb": "This group is not a public group and cannot be joined directly",
   "ka3eb52f8": "Call ended, duration: {{num}} minutes",
   "ka5b432c0": "Too frequent requests can share the same OTP within 10 minutes",
   "ka8b712f7": "Email already exists!",
