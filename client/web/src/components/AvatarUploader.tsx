@@ -1,9 +1,8 @@
 import { blobUrlToFile } from '@/utils/file-helper';
-import { Icon } from 'tailchat-design';
 import clsx from 'clsx';
 import React, { PropsWithChildren, useState } from 'react';
 import { uploadFile, UploadFileResult, useAsyncRequest } from 'tailchat-shared';
-import { AvatarPicker } from './AvatarPicker';
+import { ImagePicker } from './ImagePicker';
 
 export const AvatarUploader: React.FC<
   PropsWithChildren<{
@@ -32,32 +31,22 @@ export const AvatarUploader: React.FC<
   );
 
   return (
-    <AvatarPicker
-      className="relative"
+    <ImagePicker
+      className={clsx('relative', {
+        'rounded-full overflow-hidden': props.circle,
+      })}
       disabled={loading}
       onChange={handlePickImage}
     >
-      <div className={clsx('group', props.className)}>
-        {props.children}
-        {loading && (
-          <div
-            className="absolute bottom-0 left-0 h-1"
-            style={{ width: `${uploadProgress}%` }}
-          />
-        )}
-
+      {loading && (
         <div
-          className={clsx(
-            'absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition opacity-0 group-hover:opacity-100',
-            {
-              'rounded-1/2': props.circle,
-            }
-          )}
-        >
-          <Icon className="text-white opacity-80" icon="mdi:camera-outline" />
-        </div>
-      </div>
-    </AvatarPicker>
+          className="absolute bottom-0 left-0 h-1"
+          style={{ width: `${uploadProgress}%` }}
+        />
+      )}
+
+      {props.children}
+    </ImagePicker>
   );
 });
 AvatarUploader.displayName = 'AvatarUploader';
