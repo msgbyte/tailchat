@@ -3,7 +3,7 @@ import { closeModal, openModal } from './Modal';
 import { showToasts, t } from 'tailchat-shared';
 import { Avatar } from 'antd';
 import { Icon } from 'tailchat-design';
-import { ModalAvatarCropper } from './modals/AvatarCropper';
+import { ImageCropperModal } from './modals/ImageCropper';
 import { isGIF } from '@/utils/file-helper';
 
 interface AvatarPickerProps extends PropsWithChildren {
@@ -41,7 +41,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = React.memo((props) => {
         reader.addEventListener('load', () => {
           if (reader.result) {
             const key = openModal(
-              <ModalAvatarCropper
+              <ImageCropperModal
                 imageUrl={reader.result.toString()}
                 onConfirm={(croppedImageBlobUrl) => {
                   closeModal(key);

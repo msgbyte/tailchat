@@ -2,18 +2,65 @@ import Cropper from 'react-easy-crop';
 import type { Area } from 'react-easy-crop/types';
 import _isNil from 'lodash/isNil';
 import { showToasts, t } from 'tailchat-shared';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { ModalWrapper } from '../Modal';
 
-const createImage = (url: string): Promise<HTMLImageElement> =>
-  new Promise((resolve, reject) => {
+/**
+ * 头像裁剪模态框
+ */
+export const ImageCropperModal: React.FC<{
+  imageUrl: string;
+  aspect?: number;
+  onConfirm: (croppedImageBlobUrl: string) => void;
+}> = React.memo((props) => {
+  const aspect = props.aspect ?? 1;
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [area, setArea] = useState<Area>({ width: 0, height: 0, x: 0, y: 0 });
+
+  const handleConfirm = async () => {
+    const blobUrl = await getCroppedImg(
+      await createImage(props.imageUrl),
+      area
+    );
+    props.onConfirm(blobUrl);
+  };
+
+  return (
+    <ModalWrapper
+      className="flex flex-col"
+      style={{ width: '80vw', height: '80vh' }}
+    >
+      <div className="flex-1 relative mb-4">
+        <Cropper
+          image={props.imageUrl}
+          crop={crop}
+          zoom={zoom}
+          aspect={aspect}
+          onCropChange={setCrop}
+          onZoomChange={setZoom}
+          onCropComplete={(_, area) => setArea(area)}
+        />
+      </div>
+
+      <Button type="primary" onClick={handleConfirm}>
+        {t('确认')}
+      </Button>
+    </ModalWrapper>
+  );
+});
+ImageCropperModal.displayName = 'ImageCropperModal';
+
+function createImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener('load', () => resolve(image));
     image.addEventListener('error', (error) => reject(error));
     image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
     image.src = url;
   });
+}
 
 function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
@@ -93,47 +140,3 @@ function getCroppedImg(
     }
   });
 }
-
-/**
- * 头像裁剪模态框
- */
-export const ModalAvatarCropper: React.FC<{
-  imageUrl: string;
-  onConfirm: (croppedImageBlobUrl: string) => void;
-}> = React.memo((props) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [area, setArea] = useState<Area>({ width: 0, height: 0, x: 0, y: 0 });
-
-  const handleConfirm = async () => {
-    const blobUrl = await getCroppedImg(
-      await createImage(props.imageUrl),
-      area
-    );
-    props.onConfirm(blobUrl);
-  };
-
-  return (
-    <ModalWrapper
-      className="flex flex-col"
-      style={{ width: '80vw', height: '80vh' }}
-    >
-      <div className="flex-1 relative mb-4">
-        <Cropper
-          image={props.imageUrl}
-          crop={crop}
-          zoom={zoom}
-          aspect={1}
-          onCropChange={setCrop}
-          onZoomChange={setZoom}
-          onCropComplete={(_, area) => setArea(area)}
-        />
-      </div>
-
-      <Button type="primary" onClick={handleConfirm}>
-        {t('确认')}
-      </Button>
-    </ModalWrapper>
-  );
-});
-ModalAvatarCropper.displayName = 'ModalAvatarCropper';
