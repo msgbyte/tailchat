@@ -1,5 +1,4 @@
-import Cropper from 'react-easy-crop';
-import type { Area } from 'react-easy-crop/types';
+import Cropper, { Area } from 'react-easy-crop';
 import _isNil from 'lodash/isNil';
 import { showToasts, t } from 'tailchat-shared';
 import React, { useState } from 'react';

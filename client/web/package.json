@@ -58,7 +58,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
-    "react-easy-crop": "^3.5.3",
+    "react-easy-crop": "^5.0.0",
     "react-helmet": "^6.1.0",
     "react-is": "^18.2.0",
     "react-markdown": "^8.0.5",
