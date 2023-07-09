@@ -139,4 +139,17 @@ export const builtinPlugins: PluginManifest[] = _compact([
     description: 'Add chatgpt into Tailchat',
     requireRestart: true,
   },
+  isOffical && {
+    label: 'Url metadata display',
+    'label.zh-CN': 'Url元数据展示',
+    name: 'com.msgbyte.linkmeta',
+    url: '{BACKEND}/plugins/com.msgbyte.linkmeta/index.js',
+    version: '0.0.0',
+    author: 'msgbyte',
+    description:
+      'Parse and get the overview of url information in the chat information, such as title/overview/thumbnail, support media path, directly display media player (specially support bilibili, automatically load the iframe player of bilibili)',
+    'description.zh-CN':
+      '解析并获取在聊天信息中的url信息概述，如标题/概述/缩略图, 支持媒体路径，直接显示媒体播放器(特殊支持bilibili，自动加载b站iframe播放器)',
+    requireRestart: false,
+  },
 ]);
