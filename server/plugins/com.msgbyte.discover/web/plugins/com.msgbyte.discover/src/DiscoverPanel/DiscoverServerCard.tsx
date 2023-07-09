@@ -37,10 +37,12 @@ const Root = styled.div`
   }
 
   .body {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     padding: 0 16px 16px;
     overflow: hidden;
-    flex: 1;
+    width: 100%;
 
     .name {
       font-weight: 600;
@@ -48,6 +50,8 @@ const Root = styled.div`
 
     .desc {
       opacity: 0.8;
+      overflow: auto;
+      font-size: 0.9rem;
     }
   }
 
@@ -110,14 +114,16 @@ export const DiscoverServerCard: React.FC<DiscoverServerCardProps> = React.memo(
             <Avatar
               shape="square"
               size={40}
-              src={groupBasicInfo.icon}
+              src={groupBasicInfo.avatar}
               name={groupBasicInfo.name}
             />
           </div>
         </div>
         <div className="body">
           <div className="name">{groupBasicInfo.name}</div>
-          <div className="desc"></div>
+          <div className="desc">
+            <pre>{groupBasicInfo.description}</pre>
+          </div>
         </div>
         <div className="footer">
           <div>

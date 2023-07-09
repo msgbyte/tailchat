@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAsync } from '@capital/common';
-import { LoadingSpinner } from '@capital/component';
+import { LoadingSpinner, ErrorView } from '@capital/component';
 import { request } from '../request';
 import styled from 'styled-components';
 import { DiscoverServerCard } from './DiscoverServerCard';
@@ -31,9 +31,11 @@ const DiscoverServerList = styled.div`
 `;
 
 export const DiscoverPanel: React.FC = React.memo(() => {
-  const { loading, value: list = [] } = useAsync(async (): Promise<
-    DiscoverServerItem[]
-  > => {
+  const {
+    error,
+    loading,
+    value: list = [],
+  } = useAsync(async (): Promise<DiscoverServerItem[]> => {
     const { data } = await request.get('all');
 
     return data.list ?? [];
@@ -41,6 +43,10 @@ export const DiscoverPanel: React.FC = React.memo(() => {
 
   if (loading) {
     return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <ErrorView error={error} />;
   }
 
   return (
