@@ -50,8 +50,8 @@ router.use('/file', fileRouter);
 router.use('/cache', cacheRouter);
 
 router.get('/user/count/summary', auth(), async (req, res) => {
-  // 返回最近7天的用户数统计
-  const day = 7;
+  // 返回最近14天的用户数统计
+  const day = 14;
   const aggregateRes: { count: number; date: string }[] = await userModel
     .aggregate([
       {
@@ -177,8 +177,8 @@ router.delete('/messages/:id', auth(), async (req, res) => {
 });
 
 router.get('/message/count/summary', auth(), async (req, res) => {
-  // 返回最近7天的消息数统计
-  const day = 7;
+  // 返回最近14天的消息数统计
+  const day = 14;
   const aggregateRes: { count: number; date: string }[] = await messageModel
     .aggregate([
       {

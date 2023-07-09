@@ -56,8 +56,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-ViteExpress.listen(app, port, () =>
+ViteExpress.listen(app, port, () => {
   console.log(
     `Server is listening on port ${port}, visit with: http://localhost:${port}/admin/`
-  )
-);
+  );
+});
