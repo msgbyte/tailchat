@@ -348,6 +348,7 @@ class GroupService extends TcService {
         name: 1,
         avatar: 1,
         owner: 1,
+        description: 1,
         members: 1,
       })
       .exec();
@@ -362,6 +363,7 @@ class GroupService extends TcService {
       name: group.name,
       avatar: group.avatar,
       owner: String(group.owner),
+      description: group.description ?? '',
       memberCount: groupMemberCount,
     };
   }
@@ -390,9 +392,14 @@ class GroupService extends TcService {
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
     if (
-      !['name', 'avatar', 'panels', 'roles', 'fallbackPermissions'].includes(
-        fieldName
-      )
+      ![
+        'name',
+        'avatar',
+        'description',
+        'panels',
+        'roles',
+        'fallbackPermissions',
+      ].includes(fieldName)
     ) {
       throw new EntityError(t('该数据不允许修改'));
     }

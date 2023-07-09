@@ -47,6 +47,8 @@ export interface GroupStruct {
 
   owner: string;
 
+  description?: string;
+
   members: GroupMemberStruct[];
 
   panels: GroupPanelStruct[];

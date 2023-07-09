@@ -50,7 +50,10 @@ export type TcContext<P = {}, M = {}> = TcPureContext<
   } & M
 >;
 
-export type GroupBaseInfo = Pick<GroupStruct, 'name' | 'avatar' | 'owner'> & {
+export type GroupBaseInfo = Pick<
+  GroupStruct,
+  'name' | 'avatar' | 'owner' | 'description'
+> & {
   memberCount: number;
 };
 

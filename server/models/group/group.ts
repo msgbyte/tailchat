@@ -122,6 +122,11 @@ export class Group extends TimeStamps implements Base {
   })
   owner: Ref<User>;
 
+  @prop({
+    maxlength: 120,
+  })
+  description?: string;
+
   @prop({ type: () => GroupMember, _id: false })
   members: GroupMember[];
 

@@ -3,12 +3,15 @@ import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
+  FullModalFieldEditorRenderComponent,
 } from '@/components/FullModal/Field';
 import { NoData } from '@/components/NoData';
+import { Input } from 'antd';
 import React from 'react';
 import { Avatar } from 'tailchat-design';
 import {
   modifyGroupField,
+  showSuccessToasts,
   showToasts,
   t,
   UploadFileResult,
@@ -24,7 +27,15 @@ export const GroupSummary: React.FC<{
   const [, handleUpdateGroupName] = useAsyncRequest(
     async (newName: string) => {
       await modifyGroupField(groupId, 'name', newName);
-      showToasts(t('修改群组名成功'), 'success');
+      showSuccessToasts(t('修改群组名成功'));
+    },
+    [groupId]
+  );
+
+  const [, handleUpdateGroupDescription] = useAsyncRequest(
+    async (newName: string) => {
+      await modifyGroupField(groupId, 'description', newName);
+      showSuccessToasts(t('修改群组描述成功'));
     },
     [groupId]
   );
@@ -69,9 +80,31 @@ export const GroupSummary: React.FC<{
             title={t('成员数')}
             value={String(groupInfo.members.length)}
           />
+
+          <FullModalField
+            title={t('群组描述')}
+            value={groupInfo.description ?? ''}
+            content={<pre>{groupInfo.description ?? ''}</pre>}
+            editable={true}
+            renderEditor={GroupDescriptionEditorRender}
+            onSave={handleUpdateGroupDescription}
+          />
         </div>
       </div>
     </div>
   );
 });
 GroupSummary.displayName = 'GroupSummary';
+
+const GroupDescriptionEditorRender: FullModalFieldEditorRenderComponent = ({
+  value,
+  onChange,
+}) => (
+  <Input.TextArea
+    autoSize={{ minRows: 4, maxRows: 6 }}
+    maxLength={120}
+    value={value}
+    onChange={(e) => onChange(e.target.value)}
+    showCount={true}
+  />
+);

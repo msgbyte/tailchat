@@ -62,6 +62,7 @@ export interface GroupInfo {
   name: string;
   avatar?: string;
   owner: string;
+  description?: string;
   members: GroupMember[];
   panels: GroupPanel[];
   roles: GroupRole[];
@@ -152,6 +153,7 @@ export async function getGroupBasicInfo(
 type AllowedModifyField =
   | 'name'
   | 'avatar'
+  | 'description'
   | 'panels'
   | 'roles'
   | 'fallbackPermissions';
