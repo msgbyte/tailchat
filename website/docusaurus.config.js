@@ -99,6 +99,7 @@ const presetClassicOptions = {
   },
   blog: {
     postsPerPage: 5,
+    blogSidebarCount: 'ALL',
   },
   // blog: false,
   theme: {
