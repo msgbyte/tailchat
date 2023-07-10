@@ -52,6 +52,10 @@ const Root = styled.div`
       opacity: 0.8;
       overflow: auto;
       font-size: 0.9rem;
+
+      > pre {
+        text-wrap: wrap;
+      }
     }
   }
 
