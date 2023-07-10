@@ -10,6 +10,7 @@ import userModel from '../../../../models/user/user';
 import messageModel from '../../../../models/chat/message';
 import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 import { cacheRouter } from './cache';
+import discoverModel from '../../../../plugins/com.msgbyte.discover/models/discover';
 
 const router = Router();
 
@@ -253,12 +254,6 @@ router.use(
   auth(),
   raExpressMongoose(require('../../../../models/user/mail').default)
 );
-router.use(
-  '/p_discover',
-  auth(),
-  raExpressMongoose(
-    require('../../../../plugins/com.msgbyte.discover/models/discover').default
-  )
-);
+router.use('/p_discover', auth(), raExpressMongoose(discoverModel));
 
 export { router as apiRouter };
