@@ -74,3 +74,4 @@ export {
   JumpToGroupPanelButton,
   JumpToConverseButton,
 } from '@/components/JumpToButton';
+export { NoData } from '@/components/NoData';

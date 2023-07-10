@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAsync } from '@capital/common';
-import { LoadingSpinner, ErrorView } from '@capital/component';
+import { LoadingSpinner, ErrorView, NoData } from '@capital/component';
 import { request } from '../request';
 import styled from 'styled-components';
 import { DiscoverServerCard } from './DiscoverServerCard';
@@ -14,6 +14,7 @@ interface DiscoverServerItem {
 
 const Root = styled.div`
   width: 100%;
+  overflow: auto;
 `;
 
 const DiscoverServerHeader = styled.div`
@@ -52,11 +53,15 @@ export const DiscoverPanel: React.FC = React.memo(() => {
   return (
     <Root>
       <DiscoverServerHeader>{Translate.discoverHeader}</DiscoverServerHeader>
-      <DiscoverServerList>
-        {list.map((item, i) => (
-          <DiscoverServerCard key={i} groupId={item.groupId} />
-        ))}
-      </DiscoverServerList>
+      {Array.isArray(list) && list.length > 0 ? (
+        <DiscoverServerList>
+          {list.map((item, i) => (
+            <DiscoverServerCard key={i} groupId={item.groupId} />
+          ))}
+        </DiscoverServerList>
+      ) : (
+        <NoData />
+      )}
     </Root>
   );
 });
