@@ -1,5 +1,37 @@
 
 
+## [1.8.3](https://github.com/msgbyte/tailchat/compare/v1.8.2...v1.8.3) (2023-07-10)
+
+
+### Bug Fixes
+
+* **admin:** fix import problem in import plugin model ([6afde58](https://github.com/msgbyte/tailchat/commit/6afde58c60f643bb50d35a933d875f37efde33be))
+* append some ignored offine icons ([487bff7](https://github.com/msgbyte/tailchat/commit/487bff78f9b63f1014cbdf0f04f0b1b60f85d6ca))
+* fix ci problem, update lockfile ([1384e49](https://github.com/msgbyte/tailchat/commit/1384e4957c94e4a7c541785e0a2f74716b61b47a))
+* fix NavItem badge move when display scrollbar problem ([4fdd876](https://github.com/msgbyte/tailchat/commit/4fdd8766af993834766f1b4ae2b92f41079d41f6))
+
+
+### Features
+
+* [#76](https://github.com/msgbyte/tailchat/issues/76) add offline icons plugin which will prefetch icons from iconify ([25a5c41](https://github.com/msgbyte/tailchat/commit/25a5c41bfc4ac620a7f5302808589b5e157bf5c3))
+* add com.msgbyte.discover plugin as published plugin ([bc5c522](https://github.com/msgbyte/tailchat/commit/bc5c522a775abbf0f217e52cc9888bd3163363da))
+* add discover plugin basic web page ([e507aae](https://github.com/msgbyte/tailchat/commit/e507aaee9d65b95bb3097dc029e51b39b5d270a0))
+* add discover server card and join action ([f943edf](https://github.com/msgbyte/tailchat/commit/f943edf3fe440d2d28489ad17d5c8bf2c8489e38))
+* add group description ([065f7d4](https://github.com/msgbyte/tailchat/commit/065f7d44c8ab853fea42ebcab835b3ec00fe8448))
+* add member count in group summary ([7b699ca](https://github.com/msgbyte/tailchat/commit/7b699ca606069e5e5741bf1979b732d645f7dfb6))
+* **admin:** add discover resource manager ([54c2676](https://github.com/msgbyte/tailchat/commit/54c2676d23b84050e9643cded1ad6a5753c32e4e))
+* plugin discover add error handle and add description ([f766d33](https://github.com/msgbyte/tailchat/commit/f766d33bb3ec11acc47d3895dd6c8c9c335d48d7))
+* **plugin:** add bo data fallback in discover ([d77eef4](https://github.com/msgbyte/tailchat/commit/d77eef44ff192f7da8ad92275ccef9c1865e7105))
+
+
+### Performance Improvements
+
+* add com.msgbyte.linkmeta plugin into builtin plugin list ([4c2f883](https://github.com/msgbyte/tailchat/commit/4c2f88352daa4402fe6be639babd3b1880c0a3d4))
+* add getGroupBasicInfo request cache ([2709beb](https://github.com/msgbyte/tailchat/commit/2709beb2d8c67bdfea2c997f12d534e0290a912a))
+* **admin:** change admin summary days from 7 to 14 ([94090e6](https://github.com/msgbyte/tailchat/commit/94090e666404d655ea1c674edd5ae351c47b787e))
+* **discover:** add text wrap in card desc ([9b63be6](https://github.com/msgbyte/tailchat/commit/9b63be60e64fe89fe36d02f30168c506ed5c870e))
+* fix ai-assistant answer too long problem ([b419f44](https://github.com/msgbyte/tailchat/commit/b419f44d1990edb02611c80ebd3e87ed0e2a044a))
+
 ## [1.8.2](https://github.com/msgbyte/tailchat/compare/v1.8.1...v1.8.2) (2023-07-05)
 
 
