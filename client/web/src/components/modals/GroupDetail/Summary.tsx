@@ -1,4 +1,4 @@
-import { AvatarUploader } from '@/components/AvatarUploader';
+import { AvatarUploader } from '@/components/ImageUploader';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import {
   DefaultFullModalInputEditorRender,
@@ -59,7 +59,6 @@ export const GroupSummary: React.FC<{
       <div className="flex flex-wrap">
         <div className="w-1/3 mobile:w-full mobile:text-center">
           <AvatarUploader
-            className="text-4xl"
             circle={true}
             onUploadSuccess={handleGroupAvatarChange}
           >

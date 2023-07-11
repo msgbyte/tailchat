@@ -1,13 +1,11 @@
-import { AvatarUploader } from '@/components/AvatarUploader';
+import { AvatarUploader } from '@/components/ImageUploader';
 import {
   DefaultFullModalInputEditorRender,
   FullModalField,
 } from '@/components/FullModal/Field';
 import { openModal } from '@/components/Modal';
 import { closeModal, pluginUserExtraInfo } from '@/plugin/common';
-import { getGlobalSocket } from '@/utils/global-state-helper';
 import { setUserJWT } from '@/utils/jwt-helper';
-import { setGlobalUserLoginInfo } from '@/utils/user-helper';
 import { Button, Divider, message, Tag, Typography } from 'antd';
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router';
@@ -95,7 +93,6 @@ export const SettingsAccount: React.FC = React.memo(() => {
       <div className="flex flex-wrap">
         <div className="w-1/3 mobile:w-full">
           <AvatarUploader
-            className="text-4xl"
             circle={true}
             onUploadSuccess={handleUserAvatarChange}
           >
