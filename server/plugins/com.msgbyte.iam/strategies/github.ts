@@ -46,13 +46,20 @@ export const GithubStrategy: StrategyType = {
           Authorization: `token ${accessToken}`,
         },
       })
-      .json<{ id: number; name: string; email: string; avatar_url: string }>();
+      .json<{
+        id: number;
+        login: string;
+        name: string;
+        email: string;
+        avatar_url: string;
+      }>();
 
     console.log(`[github oauth] user info:`, result);
 
     return {
       id: String(result.id),
       nickname: result.name,
+      username: result.login,
       email: result.email,
       avatar: result.avatar_url,
     };

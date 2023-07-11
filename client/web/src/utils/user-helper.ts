@@ -39,3 +39,28 @@ export async function tryAutoLogin(): Promise<UserLoginInfo> {
 
   return userLoginInfo;
 }
+
+/**
+ * 是否为内置邮箱
+ *
+ * 内置邮箱则为非用户输入，通过其他途径进来但是没有邮箱属于自动补全的邮箱类型
+ * 比如临时用户，比如iam
+ */
+export function isBuiltinEmail(email: string): boolean {
+  if (typeof email !== 'string') {
+    // 一般来说内置邮箱都是表示不可用状态，因此如果不是合法输入直接视为true
+    return true;
+  }
+
+  const domain = email.split('@')[1];
+
+  if (!domain) {
+    return true;
+  }
+
+  if (domain.endsWith('.msgbyte.com')) {
+    return true;
+  }
+
+  return false;
+}

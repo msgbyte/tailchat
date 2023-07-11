@@ -84,9 +84,14 @@ class IAMService extends TcService {
           });
         }
 
+        const username = providerUserInfo.username;
+        const email =
+          providerUserInfo.email ||
+          `${username}.${strategyName}@iam.msgbyte.com`;
+
         // 不存在记录，查找是否已经注册过，如果已经注册过需要绑定，如果没有注册过则创建账号并绑定用户关系
         const userInfo = await ctx.call('user.findUserByEmail', {
-          email: providerUserInfo.email,
+          email,
         });
         if (!!userInfo) {
           // 用户已存在，需要登录后才能确定绑定关系
@@ -114,7 +119,7 @@ class IAMService extends TcService {
         const newUserInfo: UserStructWithToken = await ctx.call(
           'user.register',
           {
-            email: providerUserInfo.email,
+            email,
             nickname: providerUserInfo.nickname,
             password: String(new db.Types.ObjectId()), // random password
             avatar,

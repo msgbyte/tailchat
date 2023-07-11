@@ -30,6 +30,8 @@ export const IAMAction: React.FC = React.memo(() => {
 
         if (payload.type === 'existed') {
           showToasts(Translate.accountExistedTip, 'warning');
+        } else if (payload.type === 'infoDeviant') {
+          showToasts(Translate.infoDeviantTip, 'error');
         } else if (payload.type === 'token') {
           const token = payload.token;
           setUserJWT(token)

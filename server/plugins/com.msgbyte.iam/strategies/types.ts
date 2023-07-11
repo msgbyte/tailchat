@@ -7,6 +7,7 @@ export interface StrategyType {
   getUserInfo: (code: string) => Promise<{
     id: string;
     nickname: string;
+    username: string;
     email: string;
     avatar: string;
   }>;

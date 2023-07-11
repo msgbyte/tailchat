@@ -24,11 +24,11 @@ import {
 } from 'tailchat-shared';
 import { EmailVerify } from '../EmailVerify';
 import { ModifyPassword } from '../ModifyPassword';
+import { isBuiltinEmail } from '@/utils/user-helper';
 
 export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const userExtra = userInfo?.extra ?? {};
 
   const [, handleUserAvatarChange] = useAsyncRequest(
@@ -113,7 +113,11 @@ export const SettingsAccount: React.FC = React.memo(() => {
             content={
               <div>
                 <span className="mr-1">{userInfo.email}</span>
-                {userInfo.emailVerified ? (
+                {isBuiltinEmail(userInfo.email) ? (
+                  <Tag color="default" className="select-none">
+                    {t('内置邮箱')}
+                  </Tag>
+                ) : userInfo.emailVerified ? (
                   <Tag color="success" className="select-none">
                     {t('已认证')}
                   </Tag>

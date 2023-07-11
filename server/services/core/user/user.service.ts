@@ -200,6 +200,12 @@ class UserService extends TcService {
         email: 'string',
       },
     });
+    this.registerAction('findUserByUsername', this.findUserByUsername, {
+      visibility: 'public',
+      params: {
+        username: 'string',
+      },
+    });
     this.registerAction('updateUserField', this.updateUserField, {
       params: {
         fieldName: 'string',
@@ -537,7 +543,7 @@ class UserService extends TcService {
 
     const password = await this.hashPassword(generateRandomStr());
     const doc = await this.adapter.insert({
-      email: `${generateRandomStr()}.temporary@msgbyte.com`,
+      email: `${generateRandomStr()}@temporary.msgbyte.com`,
       password,
       nickname,
       discriminator,
@@ -862,6 +868,29 @@ class UserService extends TcService {
   }
 
   /**
+   * 通过用户邮箱查找用户
+   */
+  async findUserByUsername(
+    ctx: TcContext<{
+      username: string;
+    }>
+  ): Promise<UserStruct | null> {
+    const username = ctx.params.username;
+
+    const doc = await this.adapter.model.findOne({
+      username,
+    });
+
+    if (!doc) {
+      return null;
+    }
+
+    const user = await this.transformDocuments(ctx, {}, doc);
+
+    return user;
+  }
+
+  /**
    * 修改用户字段
    */
   async updateUserField(
@@ -1073,7 +1102,7 @@ class UserService extends TcService {
   }
 
   /**
-   * 根据用户邮件获取开放平台机器人id
+   * 根据用户邮箱获取开放平台机器人id
    */
   findOpenapiBotId(ctx: TcContext<{ email: string }>): string {
     return this.parseOpenapiBotEmail(ctx.params.email);
@@ -1216,16 +1245,21 @@ class UserService extends TcService {
   }
 
   private buildPluginBotEmail(botId: string) {
-    return `${botId}@tailchat-plugin.com`;
+    return `${botId}@plugin.msgbyte.com`;
   }
 
   private buildOpenapiBotEmail(botId: string) {
-    return `${botId}@tailchat-openapi.com`;
+    return `${botId}@openapi.msgbyte.com`;
   }
 
   private parseOpenapiBotEmail(email: string): string | null {
     if (email.endsWith('@tailchat-openapi.com')) {
+      // 旧的实现，兼容代码
       return email.replace('@tailchat-openapi.com', '');
+    }
+
+    if (email.endsWith('@openapi.msgbyte.com')) {
+      return email.replace('@openapi.msgbyte.com', '');
     }
 
     return null;
