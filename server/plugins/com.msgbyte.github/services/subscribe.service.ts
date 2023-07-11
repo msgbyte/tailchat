@@ -175,32 +175,34 @@ class GithubSubscribeService extends TcService {
       const name = event.pusher.name;
       const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
+      const repoUrl = event.repository.html_url;
       const compareUrl = event.compare;
       const commits = event.commits.map((c) => `- ${c.message}`).join('\n');
 
-      const message = `[url=${userUrl}]${name}[/url] committed new content in ${repo}:\n${commits}\n\nView changes: ${compareUrl}`;
+      const message = `[url=${userUrl}]${name}[/url] committed new content in [url=${repoUrl}]${repo}[/url]:\n${commits}\n\nView changes: ${compareUrl}`;
 
       await this.sendMessageToSubscribes(ctx, repo, message);
     } else if ('pull_request' in event) {
       const name = event.sender.login;
       const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
+      const repoUrl = event.repository.html_url;
       const url = event.pull_request.html_url;
       const title = event.pull_request.title;
       const body = event.pull_request.body;
 
-      let message = `[url=${userUrl}]${name}[/url] updated PR request at ${repo}:\nURL: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] updated PR request at [url=${repoUrl}]${repo}[/url]:\nURL: ${url}`;
       if (event.action === 'opened') {
-        message = `[url=${userUrl}]${name}[/url] created a PR request at ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] created a PR request at [url=${repoUrl}]${repo}[/url]:\n${title}\n[markdown]${
           body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] replied PR request at ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] replied PR request at [url=${repoUrl}]${repo}[/url]:\n${title}\n[markdown]${
           comment.body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] closed PR request at ${repo}:\n${title}\n\nURL: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] closed PR request at [url=${repoUrl}]${repo}[/url]:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
@@ -208,23 +210,24 @@ class GithubSubscribeService extends TcService {
       const name = event.sender.login;
       const userUrl = event.sender.html_url;
       const repo = event.repository.full_name;
+      const repoUrl = event.repository.html_url;
       const url = event.issue.html_url;
       const title = event.issue.title;
 
-      let message = `[url=${userUrl}]${name}[/url] updated Issue in ${repo}:\n${title}\n\nURL: ${url}`;
+      let message = `[url=${userUrl}]${name}[/url] updated Issue in [url=${repoUrl}]${repo}[/url]:\n${title}\n\nURL: ${url}`;
       if (event.action === 'opened') {
         // @ts-ignore 这里不知道为什么判断issue为never 跳过
         const body = event.issue.body;
-        message = `[url=${userUrl}]${name}[/url] created an Issue in ${repo}:\n${title}\n[markdown]${
+        message = `[url=${userUrl}]${name}[/url] created an Issue in [url=${repoUrl}]${repo}[/url]:\n${title}\n[markdown]${
           body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'created') {
         const comment = event.comment;
-        message = `[url=${userUrl}]${name}[/url] replied to Issue in ${repo}:\n${title}\nReply content:[markdown]${
+        message = `[url=${userUrl}]${name}[/url] replied to Issue in [url=${repoUrl}]${repo}[/url]:\n${title}\nReply content:[markdown]${
           comment.body ?? ''
         }[/markdown]\nURL: ${url}`;
       } else if (event.action === 'closed') {
-        message = `[url=${userUrl}]${name}[/url] closed Issue in ${repo}:\n${title}\n\nURL: ${url}`;
+        message = `[url=${userUrl}]${name}[/url] closed Issue in [url=${repoUrl}]${repo}[/url]:\n${title}\n\nURL: ${url}`;
       }
 
       await this.sendMessageToSubscribes(ctx, repo, message);
