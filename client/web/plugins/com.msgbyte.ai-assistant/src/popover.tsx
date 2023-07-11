@@ -59,7 +59,7 @@ export const AssistantPopover: React.FC<{
   const [{ loading, value }, handleCallAI] = useAsyncRequest(
     async (question: string) => {
       // TODO: wait for replace
-      const { data } = await axios.post('https://uui1ik.laf.dev/chatgpt', {
+      const { data } = await axios.post('https://yyejoq.laf.dev/chatgpt', {
         question,
       });
 
