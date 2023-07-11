@@ -350,6 +350,7 @@ class GroupService extends TcService {
         owner: 1,
         description: 1,
         members: 1,
+        config: 1,
       })
       .exec();
 
@@ -358,6 +359,7 @@ class GroupService extends TcService {
     }
 
     const groupMemberCount = group.members.length;
+    const backgroundImage = group.config['groupBackgroundImage'];
 
     return {
       name: group.name,
@@ -365,6 +367,7 @@ class GroupService extends TcService {
       owner: String(group.owner),
       description: group.description ?? '',
       memberCount: groupMemberCount,
+      backgroundImage: backgroundImage,
     };
   }
 

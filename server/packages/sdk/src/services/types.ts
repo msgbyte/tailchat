@@ -55,6 +55,7 @@ export type GroupBaseInfo = Pick<
   'name' | 'avatar' | 'owner' | 'description'
 > & {
   memberCount: number;
+  backgroundImage?: string;
 };
 
 /**

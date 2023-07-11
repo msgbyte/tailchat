@@ -7,6 +7,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import {
+  parseUrlStr,
   sharedEvent,
   TcProvider,
   useColorScheme,
@@ -95,14 +96,25 @@ AppContainer.displayName = 'AppContainer';
 
 const AppHeader: React.FC = React.memo(() => {
   const { language } = useLanguage();
-  const { serverName } = useGlobalConfigStore((state) => ({
+  const { serverName, serverEntryImage } = useGlobalConfigStore((state) => ({
     serverName: state.serverName,
+    serverEntryImage: state.serverEntryImage,
   }));
 
   return (
     <Helmet>
       <meta httpEquiv="Content-Language" content={language} />
       <title>{serverName}</title>
+
+      {serverEntryImage && (
+        <style type="text/css">
+          {`
+              #tailchat-app {
+                --tc-background-image: url(${parseUrlStr(serverEntryImage)});
+              }
+            `}
+        </style>
+      )}
     </Helmet>
   );
 });

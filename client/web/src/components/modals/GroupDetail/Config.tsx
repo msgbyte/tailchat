@@ -3,15 +3,18 @@ import {
   model,
   showSuccessToasts,
   t,
+  UploadFileResult,
   useAsyncRequest,
   useGroupInfo,
 } from 'tailchat-shared';
+import { Image } from 'tailchat-design';
 import { Loading } from '@/components/Loading';
 import { FullModalField } from '@/components/FullModal/Field';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
 import { Switch } from 'antd';
 import { pluginGroupConfigItems } from '@/plugin/common';
 import { ensurePluginNamePrefix } from '@/utils/plugin-helper';
+import { ImageUploader } from '@/components/ImageUploader';
 
 export const GroupConfig: React.FC<{
   groupId: string;
@@ -48,6 +51,30 @@ export const GroupConfig: React.FC<{
               handleModifyConfig('hideGroupMemberDiscriminator', checked)
             }
           />
+        }
+      />
+
+      <FullModalField
+        title={t('群组背景')}
+        tip={t('个性化配置群组背景')}
+        content={
+          <>
+            <ImageUploader
+              aspect={16 / 9}
+              onUploadSuccess={function (fileInfo: UploadFileResult): void {
+                handleModifyConfig('groupBackgroundImage', fileInfo.url);
+              }}
+            >
+              <Image
+                wrapperClassName="block"
+                style={{ width: 640, height: 360 }}
+                src={config['groupBackgroundImage']}
+              />
+            </ImageUploader>
+            <div className="text-xs opacity-80">
+              {t('建议比例: 16:9 | 建议大小: 1280x720')}
+            </div>
+          </>
         }
       />
 

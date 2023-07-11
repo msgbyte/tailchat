@@ -9,6 +9,9 @@ export enum GroupPanelType {
 export const groupConfigNames = [
   // 隐藏群组成员标识位
   'hideGroupMemberDiscriminator',
+
+  // 群组背景图
+  'groupBackgroundImage',
 ] as const;
 
 export type GroupConfigNames = (typeof groupConfigNames)[number] | string; // string is plugin config
@@ -86,6 +89,7 @@ export interface GroupBasicInfo {
   avatar?: string;
   owner: string;
   memberCount: number;
+  backgroundImage?: string;
 }
 
 export interface GroupInvite {

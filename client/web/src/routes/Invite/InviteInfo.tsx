@@ -7,6 +7,7 @@ import React from 'react';
 import {
   getCachedGroupInviteInfo,
   getGroupBasicInfo,
+  GroupBasicInfo,
   showErrorToasts,
   t,
   useAsync,
@@ -15,6 +16,7 @@ import { JoinBtn } from './JoinBtn';
 
 interface Props {
   inviteCode: string;
+  onLoadInfo: (groupInfo: GroupBasicInfo) => void;
 }
 export const InviteInfo: React.FC<Props> = React.memo((props) => {
   const { inviteCode } = props;
@@ -29,6 +31,8 @@ export const InviteInfo: React.FC<Props> = React.memo((props) => {
       if (groupBasicInfo === null) {
         throw new Error(t('找不到群组信息'));
       }
+
+      props.onLoadInfo(groupBasicInfo);
 
       return {
         group: groupBasicInfo,
