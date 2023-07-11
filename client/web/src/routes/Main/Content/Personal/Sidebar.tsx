@@ -6,6 +6,7 @@ import {
   useDMConverseList,
   useUserInfo,
   DevContainer,
+  useGlobalConfigStore,
 } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 import { openModal } from '@/components/Modal';
@@ -38,6 +39,9 @@ SidebarSection.displayName = 'SidebarSection';
 export const PersonalSidebar: React.FC = React.memo(() => {
   const converseList = useDMConverseList();
   const userInfo = useUserInfo();
+  const { disablePluginStore } = useGlobalConfigStore((state) => ({
+    disablePluginStore: state.disablePluginStore,
+  }));
 
   return (
     <CommonSidebarWrapper data-tc-role="sidebar-personal">
@@ -49,11 +53,14 @@ export const PersonalSidebar: React.FC = React.memo(() => {
           icon={<Icon icon="mdi:account-multiple" />}
           to="/main/personal/friends"
         />
-        <SidebarItem
-          name={t('插件中心')}
-          icon={<Icon icon="mdi:puzzle" />}
-          to="/main/personal/plugins"
-        />
+
+        {!disablePluginStore && (
+          <SidebarItem
+            name={t('插件中心')}
+            icon={<Icon icon="mdi:puzzle" />}
+            to="/main/personal/plugins"
+          />
+        )}
 
         {/* 插件自定义面板 */}
         {pluginCustomPanel

@@ -25,6 +25,7 @@ title: Environment Variable
 | DISABLE_USER_REGISTER | - | Whether to disable the user register, if "1" or "true" turn off this method |
 | DISABLE_GUEST_LOGIN | - | Whether to disable the guest login, if "1" or "true" turn off this method |
 | DISABLE_CREATE_GROUP | - | Whether to disable user create group, if "1" or "true" turn off this method |
+| DISABLE_PLUGIN_STORE | - | Whether to hide user plugin store entry, if "1" or "true" turn off this method |
 
 > Some examples of environment variables can be seen: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 

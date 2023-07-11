@@ -40,6 +40,11 @@ export interface GlobalConfig {
    * 是否禁用创建群组功能
    */
   disableCreateGroup?: boolean;
+
+  /**
+   * 是否禁用插件中心
+   */
+  disablePluginStore?: boolean;
 }
 
 export function getGlobalConfig(): GlobalConfig {

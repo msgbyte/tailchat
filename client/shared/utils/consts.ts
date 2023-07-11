@@ -25,4 +25,5 @@ export const defaultGlobalConfig: GlobalConfig = {
   disableUserRegister: false,
   disableGuestLogin: false,
   disableCreateGroup: false,
+  disablePluginStore: false,
 };
