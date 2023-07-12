@@ -11,7 +11,7 @@ import { Image } from 'tailchat-design';
 import { Loading } from '@/components/Loading';
 import { FullModalField } from '@/components/FullModal/Field';
 import { FullModalCommonTitle } from '@/components/FullModal/CommonTitle';
-import { Switch } from 'antd';
+import { Button, Switch } from 'antd';
 import { pluginGroupConfigItems } from '@/plugin/common';
 import { ensurePluginNamePrefix } from '@/utils/plugin-helper';
 import { ImageUploader } from '@/components/ImageUploader';
@@ -74,6 +74,18 @@ export const GroupConfig: React.FC<{
             <div className="text-xs opacity-80">
               {t('建议比例: 16:9 | 建议大小: 1280x720')}
             </div>
+
+            {config['groupBackgroundImage'] && (
+              <Button
+                className="mt-1"
+                type="primary"
+                onClick={() => {
+                  handleModifyConfig('groupBackgroundImage', '');
+                }}
+              >
+                {t('清除')}
+              </Button>
+            )}
           </>
         }
       />
