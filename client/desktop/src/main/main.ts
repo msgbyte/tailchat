@@ -212,6 +212,34 @@ const createMainWindow = async (url: string) => {
       return { action: 'deny' };
     });
 
+    // 下载操作相关处理
+    mainWindow.webContents.session.on('will-download', (event, item) => {
+      // 下载开始前的回调函数
+      item.on('updated', (event, state) => {
+        if (state === 'interrupted') {
+          log.warn('File download interrupted');
+        } else if (state === 'progressing') {
+          if (item.isPaused()) {
+            log.warn('File download paused');
+          } else {
+            log.info(
+              `File download process: ${item.getReceivedBytes()} / ${item.getTotalBytes()} Bytes`
+            );
+          }
+        }
+      });
+
+      item.once('done', (event, state) => {
+        if (state === 'completed') {
+          log.info('File download completed');
+          const filePath = item.getSavePath();
+          shell.showItemInFolder(filePath);
+        } else {
+          log.error(`File download failed: ${state}`);
+        }
+      });
+    });
+
     mainWindowState.manage(mainWindow);
 
     // Remove this if your app does not use auto updates
