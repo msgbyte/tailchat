@@ -11,6 +11,12 @@ import { Translate } from '../translate';
 import { request } from '../request';
 
 const Root = styled.div`
+  --discover-server-card: #fff;
+
+  .dark & {
+    --discover-server-card: #2c3441;
+  }
+
   width: 100%;
   height: 320px;
   display: flex;
@@ -18,7 +24,7 @@ const Root = styled.div`
   overflow: hidden;
   border-radius: 8px;
   position: relative;
-  background-color: #2c3441;
+  background-color: var(--discover-server-card);
 
   .header {
     height: 143px;
@@ -31,7 +37,7 @@ const Root = styled.div`
       position: absolute;
       bottom: -21px;
       left: 12px;
-      border: 6px solid #2c3441;
+      border: 6px solid var(--discover-server-card);
       border-radius: 6px;
     }
   }
