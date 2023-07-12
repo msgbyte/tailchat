@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import {
   postRequest,
   useAsync,
   useAsyncRequest,
   getTextColorHex,
+  getGlobalState,
+  useNavigate,
+  useEvent,
 } from '@capital/common';
 import { Avatar, Skeleton, Button } from '@capital/component';
 import { Translate } from '../translate';
@@ -85,6 +88,7 @@ interface DiscoverServerCardProps {
 
 export const DiscoverServerCard: React.FC<DiscoverServerCardProps> = React.memo(
   (props) => {
+    const navigate = useNavigate();
     const { value: groupBasicInfo } = useAsync(async () => {
       const { data } = await postRequest('/group/getGroupBasicInfo', {
         groupId: props.groupId,
@@ -97,6 +101,21 @@ export const DiscoverServerCard: React.FC<DiscoverServerCardProps> = React.memo(
       await request.post('join', {
         groupId: props.groupId,
       });
+    }, [props.groupId]);
+
+    const handleJumpTo = useEvent(() => {
+      navigate(`/main/group/${props.groupId}`);
+    });
+
+    const isJoined = useMemo(() => {
+      try {
+        return Object.keys(getGlobalState().group.groups).includes(
+          props.groupId
+        );
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
     }, [props.groupId]);
 
     if (!groupBasicInfo) {
@@ -142,14 +161,26 @@ export const DiscoverServerCard: React.FC<DiscoverServerCardProps> = React.memo(
               groupBasicInfo.memberCount
             )}
           </div>
-          <Button
-            size="small"
-            type="primary"
-            loading={joinLoading}
-            onClick={handleJoin}
-          >
-            {Translate.join}
-          </Button>
+
+          {isJoined ? (
+            <Button
+              size="small"
+              type="primary"
+              loading={joinLoading}
+              onClick={handleJumpTo}
+            >
+              {Translate.joined}
+            </Button>
+          ) : (
+            <Button
+              size="small"
+              type="primary"
+              loading={joinLoading}
+              onClick={handleJoin}
+            >
+              {Translate.join}
+            </Button>
+          )}
         </div>
       </Root>
     );

@@ -17,4 +17,8 @@ export const Translate = {
     'zh-CN': '加入',
     'en-US': 'Join',
   }),
+  joined: localTrans({
+    'zh-CN': '已加入',
+    'en-US': 'Joined',
+  }),
 };
