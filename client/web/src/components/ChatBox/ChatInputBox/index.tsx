@@ -3,7 +3,7 @@ import {
   pluginChatInputButtons,
 } from '@/plugin/common';
 import { isEnterHotkey } from '@/utils/hot-key';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChatInputAddon } from './Addon';
 import { ClipboardHelper } from './clipboard-helper';
 import { ChatInputActionContext } from './context';
@@ -13,6 +13,7 @@ import {
   getCachedUserInfo,
   isValidStr,
   SendMessagePayloadMeta,
+  useEvent,
   useSharedEventHandler,
 } from 'tailchat-shared';
 import { ChatInputEmotion } from './Emotion';
@@ -21,7 +22,7 @@ import { ChatDropArea } from './ChatDropArea';
 import { Icon } from 'tailchat-design';
 
 interface ChatInputBoxProps {
-  onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => void;
+  onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => Promise<void>;
 }
 /**
  * 通用聊天输入框
@@ -30,34 +31,30 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const [mentions, setMentions] = useState<string[]>([]);
-  const handleSendMsg = useCallback(() => {
-    props.onSendMsg(message, {
+  const handleSendMsg = useEvent(async () => {
+    await props.onSendMsg(message, {
       mentions: _uniq(mentions), // 发送前去重
     });
     setMessage('');
     inputRef.current?.focus();
-  }, [message, mentions]);
+  });
 
-  const handleAppendMsg = useCallback(
-    (append: string) => {
-      setMessage(message + append);
+  const handleAppendMsg = useEvent((append: string) => {
+    setMessage(message + append);
 
-      inputRef.current?.focus();
-    },
-    [message]
-  );
+    inputRef.current?.focus();
+  });
 
-  const handleKeyDown = useCallback(
+  const handleKeyDown = useEvent(
     (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (isEnterHotkey(e.nativeEvent)) {
         e.preventDefault();
         handleSendMsg();
       }
-    },
-    [handleSendMsg]
+    }
   );
 
-  const handlePaste = useCallback(
+  const handlePaste = useEvent(
     (e: React.ClipboardEvent<HTMLDivElement | HTMLTextAreaElement>) => {
       const helper = new ClipboardHelper(e);
       const image = helper.hasImage();
@@ -70,8 +67,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
           );
         });
       }
-    },
-    [props.onSendMsg]
+    }
   );
 
   useSharedEventHandler('replyMessage', async (payload) => {

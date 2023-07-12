@@ -65,6 +65,7 @@ function useHandleSendMessage(context: ConverseContext) {
         sharedEvent.emit('sendMessage', payload);
       } catch (err) {
         showErrorToasts(err);
+        throw err;
       }
     },
     [converseId, hasContext, clearReplyMsg]

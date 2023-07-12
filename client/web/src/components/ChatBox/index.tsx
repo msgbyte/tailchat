@@ -59,9 +59,9 @@ const ChatBoxInner: React.FC<ChatBoxProps> = React.memo((props) => {
       <ChatReply />
 
       <ChatInputBox
-        onSendMsg={(msg, meta) => {
+        onSendMsg={async (msg, meta) => {
           const content = preprocessMessage(msg);
-          sendMessage({
+          await sendMessage({
             converseId: props.converseId,
             groupId: props.groupId,
             content,
