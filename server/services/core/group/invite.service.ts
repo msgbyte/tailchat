@@ -12,6 +12,7 @@ import {
   call,
   NoPermissionError,
   PERMISSION,
+  db,
 } from 'tailchat-server-sdk';
 
 interface GroupService
@@ -29,6 +30,14 @@ class GroupService extends TcService {
       params: {
         groupId: 'string',
         inviteType: { type: 'enum', values: ['normal', 'permanent'] },
+      },
+    });
+    this.registerAction('editGroupInvite', this.editGroupInvite, {
+      params: {
+        code: 'string',
+        groupId: 'string',
+        expiredAt: { type: 'number', optional: true },
+        usageLimit: { type: 'number', optional: true },
       },
     });
     this.registerAction('getAllGroupInviteCode', this.getAllGroupInviteCode, {
@@ -89,6 +98,49 @@ class GroupService extends TcService {
   }
 
   /**
+   * 编辑群组邀请码
+   */
+  async editGroupInvite(
+    ctx: TcContext<{
+      code: string;
+      groupId: string;
+      expiredAt?: number; // 时间戳，单位ms
+      usageLimit?: number;
+    }>
+  ) {
+    const { code, groupId, expiredAt, usageLimit } = ctx.params;
+    const { userId, t } = ctx.meta;
+
+    // 检查权限
+    const [hasEditPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      userId,
+      [PERMISSION.core.editInvite]
+    );
+
+    if (!hasEditPermission) {
+      throw new NoPermissionError(t('没有编辑邀请码权限'));
+    }
+
+    const update = {};
+    if (expiredAt) {
+      _.set(update, ['expiredAt'], new Date(expiredAt));
+    } else {
+      _.set(update, ['$unset', 'expiredAt'], 1);
+    }
+
+    if (usageLimit) {
+      _.set(update, ['usageLimit'], usageLimit);
+    } else {
+      _.set(update, ['$unset', 'usageLimit'], 1);
+    }
+
+    await this.adapter.model.updateOne({ groupId, code }, update);
+
+    return true;
+  }
+
+  /**
    * 获取所有群组邀请码
    */
   async getAllGroupInviteCode(
@@ -143,6 +195,13 @@ class GroupService extends TcService {
       code,
     });
 
+    if (typeof invite.usageLimit === 'number') {
+      const usage = invite.usage || 0;
+      if (usage >= invite.usageLimit) {
+        throw new Error(t('该邀请码使用次数耗尽'));
+      }
+    }
+
     if (new Date(invite.expiredAt).valueOf() < Date.now()) {
       throw new Error(t('该邀请码已过期'));
     }
@@ -156,8 +215,18 @@ class GroupService extends TcService {
       groupId: String(groupId),
     });
 
-    const creatorInfo = await call(ctx).getUserInfo(String(invite.creator));
+    await this.adapter.model.updateOne(
+      {
+        _id: new db.Types.ObjectId(invite._id),
+      },
+      {
+        $inc: {
+          usage: 1,
+        },
+      }
+    );
 
+    const creatorInfo = await call(ctx).getUserInfo(String(invite.creator));
     await call(ctx).addGroupSystemMessage(
       String(groupId),
       t('{{nickname}} 通过 {{creator}} 的邀请码加入群组', {

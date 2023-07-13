@@ -8,17 +8,19 @@ import {
   deleteGroupInvite,
   useAsyncRefresh,
   showToasts,
+  useEvent,
 } from 'tailchat-shared';
 import { Button, Space, Table, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { UserName } from '@/components/UserName';
-import { openModal, openReconfirmModalP } from '@/components/Modal';
+import { closeModal, openModal, openReconfirmModalP } from '@/components/Modal';
 import { CreateGroupInvite } from '../CreateGroupInvite';
 import { LoadingOnFirst } from '@/components/LoadingOnFirst';
 import { IconBtn } from '@/components/IconBtn';
 import copy from 'copy-to-clipboard';
 import { generateInviteCodeUrl } from '@/utils/url-helper';
 import { SensitiveText } from 'tailchat-design';
+import { EditGroupInvite } from '../EditGroupInvite';
 
 export const GroupInvite: React.FC<{
   groupId: string;
@@ -30,7 +32,7 @@ export const GroupInvite: React.FC<{
     return list.reverse(); // 倒序返回
   }, [groupId]);
 
-  const handleCreateInvite = useCallback(() => {
+  const handleCreateInvite = useEvent(() => {
     openModal(
       <CreateGroupInvite
         groupId={groupId}
@@ -39,22 +41,33 @@ export const GroupInvite: React.FC<{
         }}
       />
     );
-  }, [groupId, refresh]);
+  });
 
-  const handleCopyInviteCode = useCallback((inviteCode: string) => {
+  const handleEditInviteCode = useEvent((inviteCode: string) => {
+    const key = openModal(
+      <EditGroupInvite
+        groupId={groupId}
+        code={inviteCode}
+        onEditSuccess={() => {
+          showToasts(t('邀请设置修改成功'), 'success');
+          closeModal(key);
+          refresh();
+        }}
+      />
+    );
+  });
+
+  const handleCopyInviteCode = useEvent((inviteCode: string) => {
     copy(generateInviteCodeUrl(inviteCode));
     showToasts(t('邀请链接已复制到剪切板'), 'success');
-  }, []);
+  });
 
-  const handleDeleteInvite = useCallback(
-    async (inviteId: string) => {
-      if (await openReconfirmModalP()) {
-        await deleteGroupInvite(groupId, inviteId);
-        await refresh();
-      }
-    },
-    [groupId, refresh]
-  );
+  const handleDeleteInvite = useEvent(async (inviteId: string) => {
+    if (await openReconfirmModalP()) {
+      await deleteGroupInvite(groupId, inviteId);
+      await refresh();
+    }
+  });
 
   const columns: ColumnType<GroupInviteType>[] = useMemo(
     () => [
@@ -93,6 +106,18 @@ export const GroupInvite: React.FC<{
         },
       },
       {
+        title: t('使用次数'),
+        dataIndex: 'usage',
+        render: (usage, record) => {
+          return (
+            <div>
+              {usage}
+              {record.usageLimit && ` / ${record.usageLimit}`}
+            </div>
+          );
+        },
+      },
+      {
         title: t('创建者'),
         dataIndex: 'creator',
         render: (userId) => <UserName userId={userId} />,
@@ -103,6 +128,12 @@ export const GroupInvite: React.FC<{
         render: (id: string, record) => {
           return (
             <Space>
+              <IconBtn
+                title={t('编辑邀请链接')}
+                shape="square"
+                icon="mdi:edit"
+                onClick={() => handleEditInviteCode(record.code)}
+              />
               <IconBtn
                 title={t('复制邀请链接')}
                 shape="square"

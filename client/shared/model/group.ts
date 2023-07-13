@@ -97,6 +97,8 @@ export interface GroupInvite {
   groupId: string;
   creator: string;
   expiredAt?: string;
+  usage: number;
+  usageLimit?: number;
 }
 
 /**
@@ -265,6 +267,27 @@ export async function createGroupInviteCode(
   });
 
   return data;
+}
+
+/**
+ * 编辑群组邀请链接
+ * @param groupId 群组ID
+ * @param code 邀请码
+ * @param expiredAt 过期时间，是一个时间戳，单位ms，为undefined则为不限制
+ * @param usageLimit 最大使用次数，为undefined则不限制
+ */
+export async function editGroupInvite(
+  groupId: string,
+  code: string,
+  expiredAt?: number,
+  usageLimit?: number
+) {
+  await request.post('/api/group/invite/editGroupInvite', {
+    groupId,
+    code,
+    expiredAt,
+    usageLimit,
+  });
 }
 
 /**

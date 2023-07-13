@@ -36,8 +36,25 @@ export class GroupInvite extends TimeStamps implements Base {
   })
   groupId!: Ref<Group>;
 
+  /**
+   * 过期时间，如果不存在则永不过期
+   */
   @prop()
   expiredAt?: Date;
+
+  /**
+   * 被使用次数
+   */
+  @prop({
+    default: 0,
+  })
+  usage: number;
+
+  /**
+   * 使用上限，如果为空则不限制
+   */
+  @prop()
+  usageLimit?: number;
 
   /**
    * 创建群组邀请

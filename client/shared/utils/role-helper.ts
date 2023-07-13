@@ -38,6 +38,7 @@ export const PERMISSION = {
     message: 'core.message',
     invite: 'core.invite',
     unlimitedInvite: 'core.unlimitedInvite',
+    editInvite: 'core.editInvite',
     groupDetail: 'core.groupDetail',
     groupConfig: 'core.groupConfig',
     manageUser: 'core.manageUser',
@@ -67,6 +68,13 @@ export const getPermissionList = (): PermissionItemType[] => [
     desc: t('允许成员创建不限时邀请链接'),
     default: false,
     required: [PERMISSION.core.invite],
+  },
+  {
+    key: PERMISSION.core.editInvite,
+    title: t('编辑邀请链接'),
+    desc: t('允许成员编辑邀请链接'),
+    default: false,
+    required: [PERMISSION.core.unlimitedInvite],
   },
   {
     key: PERMISSION.core.groupDetail,
