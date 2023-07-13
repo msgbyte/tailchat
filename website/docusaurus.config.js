@@ -95,7 +95,7 @@ const presetClassicOptions = {
   docs: {
     sidebarPath: require.resolve('./sidebars.js'),
     // Please change this to your repo.
-    editUrl: 'https://github.com/msgbyte/tailchat-website/edit/master/website/',
+    editUrl: 'https://github.com/msgbyte/tailchat/edit/master/website/',
   },
   blog: {
     postsPerPage: 5,
