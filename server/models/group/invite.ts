@@ -22,6 +22,7 @@ export class GroupInvite extends TimeStamps implements Base {
 
   @prop({
     index: true,
+    unique: true,
     default: () => generateCode(),
   })
   code!: string;
