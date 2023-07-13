@@ -5,6 +5,7 @@ import {
   Errors,
   DataNotFoundError,
   NoPermissionError,
+  config,
 } from 'tailchat-server-sdk';
 import _ from 'lodash';
 import type { FriendRequest } from '../../../models/user/friendRequest';
@@ -47,11 +48,16 @@ class FriendService extends TcService {
    */
   async add(ctx: TcContext<{ to: string; message?: string }>) {
     const from = ctx.meta.userId;
+    const t = ctx.meta.t;
 
     const { to, message } = ctx.params;
 
+    if (config.feature.disableAddFriend === true) {
+      throw new NoPermissionError(t('管理员禁止添加好友功能'));
+    }
+
     if (from === to) {
-      throw new Errors.ValidationError('不能添加自己为好友');
+      throw new Errors.ValidationError(t('不能添加自己为好友'));
     }
 
     const exist = await this.adapter.findOne({
@@ -59,12 +65,12 @@ class FriendService extends TcService {
       to,
     });
     if (exist) {
-      throw new Errors.MoleculerError('不能发送重复的好友请求');
+      throw new Errors.MoleculerError(t('不能发送重复的好友请求'));
     }
 
     const isFriend = await ctx.call('friend.checkIsFriend', { targetId: to });
     if (isFriend) {
-      throw new Error('对方已经是您的好友, 不能再次添加');
+      throw new Error(t('对方已经是您的好友, 不能再次添加'));
     }
 
     const doc = await this.adapter.insert({

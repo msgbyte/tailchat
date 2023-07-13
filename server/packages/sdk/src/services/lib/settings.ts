@@ -51,7 +51,8 @@ export const config = {
     disableUserRegister: checkEnvTrusty(process.env.DISABLE_USER_REGISTER), // 是否关闭用户注册功能
     disableGuestLogin: checkEnvTrusty(process.env.DISABLE_GUEST_LOGIN), // 是否关闭用户游客登录功能
     disableCreateGroup: checkEnvTrusty(process.env.DISABLE_CREATE_GROUP), // 是否禁用用户创建群组功能
-    disablePluginStore: checkEnvTrusty(process.env.DISABLE_PLUGIN_STORE), // 是否禁用用户用户插件中心功能
+    disablePluginStore: checkEnvTrusty(process.env.DISABLE_PLUGIN_STORE), // 是否禁用用户插件中心功能
+    disableAddFriend: checkEnvTrusty(process.env.DISABLE_ADD_FRIEND), // 是否禁用用户添加好友功能
   },
 };
 

@@ -83,6 +83,7 @@ class ConfigService extends TcService {
       disableGuestLogin: config.feature.disableGuestLogin,
       disableCreateGroup: config.feature.disableCreateGroup,
       disablePluginStore: config.feature.disablePluginStore,
+      disableAddFriend: config.feature.disableAddFriend,
       ...persistConfig,
     };
   }

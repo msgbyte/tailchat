@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msgbyte/tailchat-server.git"
+    "url": "git+https://github.com/msgbyte/tailchat.git"
   },
   "keywords": [
     "msgbyte",
@@ -25,9 +25,9 @@
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/msgbyte/tailchat-server/issues"
+    "url": "https://github.com/msgbyte/tailchat/issues"
   },
-  "homepage": "https://github.com/msgbyte/tailchat-server#readme",
+  "homepage": "https://github.com/msgbyte/tailchat#readme",
   "devDependencies": {
     "@types/jest": "^29.5.1",
     "typescript": "^4.3.3"

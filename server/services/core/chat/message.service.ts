@@ -184,7 +184,6 @@ class MessageService extends TcService {
       const member = groupInfo.members.find((m) => String(m.userId) === userId);
       if (member) {
         // 因为有机器人，所以如果没有在成员列表中找到不报错
-
         if (new Date(member.muteUntil).valueOf() > new Date().valueOf()) {
           throw new Error(t('您因为被禁言无法发送消息'));
         }

@@ -26,4 +26,5 @@ export const defaultGlobalConfig: GlobalConfig = {
   disableGuestLogin: false,
   disableCreateGroup: false,
   disablePluginStore: false,
+  disableAddFriend: false,
 };

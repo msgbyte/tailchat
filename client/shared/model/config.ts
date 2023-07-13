@@ -45,6 +45,11 @@ export interface GlobalConfig {
    * 是否禁用插件中心
    */
   disablePluginStore?: boolean;
+
+  /**
+   * 是否禁用添加好友功能
+   */
+  disableAddFriend?: boolean;
 }
 
 export function getGlobalConfig(): GlobalConfig {
