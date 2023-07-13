@@ -11,6 +11,7 @@ import type { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 import { User } from '../user/user';
 import { Group } from './group';
+import promiseRetry from 'promise-retry';
 
 function generateCode() {
   return nanoid(8);
@@ -73,9 +74,27 @@ export class GroupInvite extends TimeStamps implements Base {
       expiredAt = undefined;
     }
 
+    const code = await promiseRetry(
+      async () => {
+        const code = generateCode();
+        const exists = await this.exists({ code });
+
+        if (exists) {
+          throw new Error('Cannot find unused invite code, please try again.');
+        }
+
+        return code;
+      },
+      {
+        minTimeout: 0,
+        maxTimeout: 0,
+        retries: 5,
+      }
+    );
+
     const invite = await this.create({
       groupId,
-      code: generateCode(),
+      code,
       creator,
       expiredAt,
     });
