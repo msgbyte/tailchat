@@ -1,4 +1,4 @@
-import { useMemoizedFn } from '../../hooks/useMemoizedFn';
+import { useEvent } from '../../hooks/useEvent';
 import { updateAck } from '../../model/converse';
 import { isConversePanel } from '../../utils/panel-helper';
 import { chatActions } from '../slices';
@@ -13,7 +13,7 @@ export function useGroupAck(groupId: string) {
   const lastMessageMap = useAppSelector((state) => state.chat.lastMessageMap);
   const dispatch = useAppDispatch();
 
-  const markGroupAllAck = useMemoizedFn(() => {
+  const markGroupAllAck = useEvent(() => {
     const conversePanels = (groupInfo?.panels ?? []).filter(isConversePanel);
 
     for (const converse of conversePanels) {

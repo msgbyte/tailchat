@@ -38,13 +38,13 @@ class AckService extends TcService {
     const { converseId, lastMessageId } = ctx.params;
     const userId = ctx.meta.userId;
 
-    await this.adapter.model.findOneAndUpdate(
+    await this.adapter.model.updateOne(
       {
         converseId,
         userId,
       },
       {
-        lastMessageId: new Types.ObjectId(lastMessageId),
+        lastMessageId: lastMessageId,
       },
       {
         upsert: true,
@@ -52,6 +52,8 @@ class AckService extends TcService {
     );
 
     // TODO: 如果要实现消息已读可以在此处基于会话id进行通知
+
+    return;
   }
 
   /**
