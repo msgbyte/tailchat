@@ -1,5 +1,36 @@
 
 
+## [1.8.4](https://github.com/msgbyte/tailchat/compare/v1.8.3...v1.8.4) (2023-07-14)
+
+
+### Bug Fixes
+
+* [#102](https://github.com/msgbyte/tailchat/issues/102) fix non-email github account login cannot register problem ([a0cbc45](https://github.com/msgbyte/tailchat/commit/a0cbc45760cf0f3b8743f1e410934c88eaa29fa2))
+* add invite code generate check to avoid duplicated invite code ([b6e978e](https://github.com/msgbyte/tailchat/commit/b6e978e569750dfb467e0ed4595bbd380d180161))
+* fix discover server card color schema fit ([480a1e3](https://github.com/msgbyte/tailchat/commit/480a1e344209a8ac9dbc21e88eab7e06883cf73c))
+* fix problem if send message throw error will clear input message ([1a81281](https://github.com/msgbyte/tailchat/commit/1a81281ad1e18a175439827bd8c8a1bce2397b36))
+* fix unupdate problem in group invite code create action ([9bb4b30](https://github.com/msgbyte/tailchat/commit/9bb4b301434a3250ea86e01a889183f197f9bfeb))
+
+
+### Features
+
+* add clear button for group background image ([4028f46](https://github.com/msgbyte/tailchat/commit/4028f46083775bbaed2139b44a66577bdd735b48))
+* add create invite code edited data update. now can review changed info ([f44a5c9](https://github.com/msgbyte/tailchat/commit/f44a5c9ec0696d1d6bdcbda5dc13b0e624e767b0))
+* add env DISABLE_PLUGIN_STORE which will hide plugin store entry ([51c7111](https://github.com/msgbyte/tailchat/commit/51c7111621d20a5545ca2964176c9355a8cd094a))
+* add feature disableAddFriend which can disable add friends ([36061f6](https://github.com/msgbyte/tailchat/commit/36061f6b740cf23fa663139ae71fbee2a4e99ee6))
+* add group background image in invite ([947d056](https://github.com/msgbyte/tailchat/commit/947d05697afdd0acdeb1c67c8ae54a2e7dd12bf9))
+* add invite code usage limit for every invite code ([738eb75](https://github.com/msgbyte/tailchat/commit/738eb750039a0f56ad3ea68df894f46554a81e56))
+* add jump to button for joined groups in discover ([2128c01](https://github.com/msgbyte/tailchat/commit/2128c019c41a220131e91851968289792e424706))
+* add unique index for group invite code ([8c1c03e](https://github.com/msgbyte/tailchat/commit/8c1c03e91dd81c9d3bf552f915d67d613c87a03c))
+* **desktop:** add menu and shortcuts to reload page ([0c8da55](https://github.com/msgbyte/tailchat/commit/0c8da55a2cbca8efe863ae1b38472cc523eccc86))
+* **desktop:** when file download completed, open folder ([2e48935](https://github.com/msgbyte/tailchat/commit/2e489351c15f2b6753babedbfe6b4b8de9d28418))
+
+
+### Performance Improvements
+
+* add url link for github subscribe message ([0d67261](https://github.com/msgbyte/tailchat/commit/0d6726111d182e2eb26a69d3cc94ec680d0e2331))
+* Remove linkmeta plugin based on performance considerations ([03e8ce1](https://github.com/msgbyte/tailchat/commit/03e8ce132ff05c8c36c543fe1205063b487a54c4))
+
 ## [1.8.3](https://github.com/msgbyte/tailchat/compare/v1.8.2...v1.8.3) (2023-07-10)
 
 
