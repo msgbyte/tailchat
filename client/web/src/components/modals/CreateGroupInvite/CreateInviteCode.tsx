@@ -24,9 +24,10 @@ enum InviteCodeType {
 interface CreateInviteCodeProps {
   groupId: string;
   onInviteCreated?: () => void;
+  onInviteUpdated?: () => void;
 }
 export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
-  ({ groupId, onInviteCreated }) => {
+  ({ groupId, onInviteCreated, onInviteUpdated }) => {
     const [createdInvite, setCreateInvite] = useState<GroupInvite | null>(null);
     const [{ loading }, handleCreateInviteLink] = useAsyncRequest(
       async (inviteType: InviteCodeType) => {
@@ -64,6 +65,7 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
                 } as any)
             );
             closeModal(key);
+            onInviteUpdated?.();
           }}
         />
       );

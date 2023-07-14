@@ -39,6 +39,9 @@ export const GroupInvite: React.FC<{
         onInviteCreated={() => {
           refresh();
         }}
+        onInviteUpdated={() => {
+          refresh();
+        }}
       />
     );
   });

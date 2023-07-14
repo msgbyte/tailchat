@@ -11,6 +11,7 @@ import { CreateInviteCode } from './CreateInviteCode';
 interface CreateGroupInviteProps {
   groupId: string;
   onInviteCreated?: () => void;
+  onInviteUpdated?: () => void;
 }
 export const CreateGroupInvite: React.FC<CreateGroupInviteProps> = React.memo(
   (props) => {
@@ -52,6 +53,7 @@ export const CreateGroupInvite: React.FC<CreateGroupInviteProps> = React.memo(
         <CreateInviteCode
           groupId={groupId}
           onInviteCreated={props.onInviteCreated}
+          onInviteUpdated={props.onInviteUpdated}
         />
       </ModalWrapper>
     );
