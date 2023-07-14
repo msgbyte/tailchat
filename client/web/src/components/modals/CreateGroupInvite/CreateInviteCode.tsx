@@ -51,8 +51,18 @@ export const CreateInviteCode: React.FC<CreateInviteCodeProps> = React.memo(
         <EditGroupInvite
           groupId={groupId}
           code={createdInvite.code}
-          onEditSuccess={() => {
+          onEditSuccess={({ expiredAt, usageLimit }) => {
             showToasts(t('邀请设置修改成功'), 'success');
+            setCreateInvite(
+              (state) =>
+                ({
+                  ...state,
+                  expiredAt: expiredAt
+                    ? new Date(expiredAt).toISOString()
+                    : undefined,
+                  usageLimit: usageLimit,
+                } as any)
+            );
             closeModal(key);
           }}
         />

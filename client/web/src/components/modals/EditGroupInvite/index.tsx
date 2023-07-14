@@ -90,21 +90,30 @@ const fields: MetaFormFieldMeta[] = [
 interface EditGroupInviteProps {
   groupId: string;
   code: string;
-  onEditSuccess: () => void;
+  onEditSuccess: (info: {
+    expiredAt: number | undefined;
+    usageLimit: number | undefined;
+  }) => void;
 }
 export const EditGroupInvite: React.FC<EditGroupInviteProps> = React.memo(
   (props) => {
     const handleEditGroupInvite = useEvent(async (values: MetaFormValues) => {
+      const expiredAt =
+        values.expiredAt === -1
+          ? undefined
+          : Date.now() + values.expiredAt * 1000;
+
+      const usageLimit =
+        values.usageLimit === -1 ? undefined : values.usageLimit;
+
       await model.group.editGroupInvite(
         props.groupId,
         props.code,
-        values.expiredAt === -1
-          ? undefined
-          : Date.now() + values.expiredAt * 1000,
-        values.usageLimit === -1 ? undefined : values.usageLimit
+        expiredAt,
+        usageLimit
       );
 
-      props.onEditSuccess();
+      props.onEditSuccess({ expiredAt, usageLimit });
     });
 
     return (
