@@ -3,6 +3,28 @@ sidebar_position: 50
 title: Troubleshooting
 ---
 
+## Deployment related
+
+### How to update the version?
+
+It is the same as getting the image when deploying
+
+```bash
+docker pull moonrailgun/tailchat
+docker tag moonrailgun/tailchat tailchat
+```
+
+Then restart the application, such as `docker compose up -d`
+
+### How to use the specified version?
+
+```bash
+docker pull moonrailgun/tailchat:1.8.4
+docker tag moonrailgun/tailchat:1.8.4 tailchat
+```
+
+Just specify the version number when pulling the image
+
 ## Server related
 
 ### The Websocket connection access is incorrect, the manifestation is that it can be registered but the main interface cannot be opened

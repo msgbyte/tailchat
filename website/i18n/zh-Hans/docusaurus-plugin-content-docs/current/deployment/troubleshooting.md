@@ -3,6 +3,28 @@ sidebar_position: 50
 title: 常见问题
 ---
 
+## 部署相关
+
+### 如何更新版本？
+
+和部署时获取镜像一样
+
+```bash
+docker pull moonrailgun/tailchat
+docker tag moonrailgun/tailchat tailchat
+```
+
+然后重启应用即可, 如 `docker compose up -d`
+
+### 如何使用指定版本?
+
+```bash
+docker pull moonrailgun/tailchat:1.8.4
+docker tag moonrailgun/tailchat:1.8.4 tailchat
+```
+
+在拉取镜像的时候指定版本号即可
+
 ## 服务端相关
 
 ### Websocket 连接访问不正确，表现形式是可以注册但是无法打开主界面
