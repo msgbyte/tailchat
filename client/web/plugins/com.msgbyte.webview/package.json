@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "url-regex": "^5.0.0"
+    "url-regex": "^5.0.0",
+    "xss": "^1.0.14"
   }
 }

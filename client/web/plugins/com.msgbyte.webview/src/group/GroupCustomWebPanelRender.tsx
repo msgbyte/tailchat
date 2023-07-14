@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Translate } from '../translate';
+import xss from 'xss';
 
 function getInjectedStyle() {
   try {
@@ -26,7 +27,7 @@ const GroupCustomWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
 
     const doc = ref.current.contentWindow.document;
     doc.open();
-    doc.writeln(getInjectedStyle(), html);
+    doc.writeln(getInjectedStyle(), xss(html));
     doc.close();
   }, [html]);
 
