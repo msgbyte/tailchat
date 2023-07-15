@@ -65,6 +65,13 @@ export const i18n: TushanContextProps['i18n'] = {
             allowCreateGroup: 'Allow Create Group',
             serverName: 'Server Name',
             serverEntryImage: 'Server Entry Page Image',
+            configPanel: 'Config',
+            announcementPanel: 'Announcement',
+            announcementEnable: 'Is Enable Announcement',
+            announcementText: 'Announcement Text',
+            announcementLink: 'Announcement Link',
+            announcementLinkTip:
+              'This content is optional, and it is the address to announce more content',
           },
           cache: {
             cleanTitle: 'Are you sure you want to clear the cache?',
@@ -235,6 +242,12 @@ export const i18n: TushanContextProps['i18n'] = {
             allowCreateGroup: '允许创建群组',
             serverName: '服务器名',
             serverEntryImage: '服务器登录图',
+            configPanel: '配置',
+            announcementPanel: '公告',
+            announcementEnable: '是否启用公告',
+            announcementText: '公告文本',
+            announcementLink: '公告链接',
+            announcementLinkTip: '该内容可选，为公告更多内容的地址',
           },
           cache: {
             cleanTitle: '确定要清理缓存么？',

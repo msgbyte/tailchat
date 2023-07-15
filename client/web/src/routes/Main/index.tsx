@@ -1,3 +1,4 @@
+import { GlobalAnnouncementBar } from '@/components/GlobalAnnouncementBar';
 import { GlobalTemporaryTip } from '@/components/GlobalTemporaryTip';
 import { useRecordMeasure } from '@/utils/measure-helper';
 import React from 'react';
@@ -16,6 +17,8 @@ const MainRoute: React.FC = React.memo(() => {
     <MainProvider>
       <div className="flex flex-col h-full">
         <GlobalTemporaryTip />
+
+        <GlobalAnnouncementBar />
 
         <div className="flex flex-1 overflow-hidden">
           <Navbar />

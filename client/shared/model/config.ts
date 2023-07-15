@@ -50,6 +50,14 @@ export interface GlobalConfig {
    * 是否禁用添加好友功能
    */
   disableAddFriend?: boolean;
+
+  announcement?:
+    | false
+    | {
+        id: string;
+        text: string;
+        link?: string;
+      };
 }
 
 export function getGlobalConfig(): GlobalConfig {
