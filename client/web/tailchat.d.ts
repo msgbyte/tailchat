@@ -70,12 +70,16 @@ declare module '@capital/common' {
    */
   export const Loadable: any;
 
+  export const useIsMobile: any;
+
   export const getGlobalState: any;
 
   export const useGlobalSocketEvent: <T>(
     eventName: string,
     callback: (data: T) => void
   ) => void;
+
+  export const setUserJWT: any;
 
   export const getJWTUserInfo: () => Promise<{
     _id?: string;
@@ -93,6 +97,8 @@ declare module '@capital/common' {
   export const appendUrlSearch: any;
 
   export const getServiceWorkerRegistration: any;
+
+  export const postMessageEvent: any;
 
   export const getServiceUrl: () => string;
 
@@ -174,6 +180,10 @@ declare module '@capital/common' {
 
   export const useConverseMessageContext: any;
 
+  export const loginWithToken: any;
+
+  export const useWatch: any;
+
   export const navigate: any;
 
   export const useLocation: any;
@@ -189,6 +199,8 @@ declare module '@capital/common' {
    * @deprecated please use metaFormFieldSchema from @capital/component
    */
   export const fieldSchema: any;
+
+  export const getTextColorHex: any;
 
   export const useCurrentUserInfo: any;
 
@@ -340,6 +352,10 @@ declare module '@capital/common' {
 
   export const regPluginGroupConfigItem: any;
 
+  export const pluginLoginAction: any;
+
+  export const regLoginAction: any;
+
   export const useGroupIdContext: () => string;
 
   export const useGroupPanelContext: () => {
@@ -391,6 +407,8 @@ declare module '@capital/component' {
   export const Popover: any;
 
   export const Tag: any;
+
+  export const Skeleton: any;
 
   export const TextArea: any;
 
@@ -553,4 +571,6 @@ declare module '@capital/component' {
   export const JumpToGroupPanelButton: any;
 
   export const JumpToConverseButton: any;
+
+  export const NoData: any;
 }
