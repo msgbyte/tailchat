@@ -77,7 +77,8 @@ export const i18n: TushanContextProps['i18n'] = {
             cleanTitle: 'Are you sure you want to clear the cache?',
             cleanDesc:
               'Please be cautious in the production environment, clearing the cache may lead to increased pressure on the database in a short period of time',
-            cleanBtn: 'Clean Cache',
+            cleanConfigBtn: 'Clean Client Config Cache',
+            cleanAllBtn: 'Clean All Cache',
           },
           'system-notify': {
             create: 'Create System Notify',
@@ -253,7 +254,8 @@ export const i18n: TushanContextProps['i18n'] = {
             cleanTitle: '确定要清理缓存么？',
             cleanDesc:
               '生产环境请谨慎操作, 清理缓存可能会导致短时间内数据库压力增加',
-            cleanBtn: '清理缓存',
+            cleanConfigBtn: '清理配置缓存',
+            cleanAllBtn: '清理所有缓存',
           },
           'system-notify': {
             create: '创建系统通知',

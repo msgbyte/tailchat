@@ -16,7 +16,10 @@ router.post('/clean', auth(), async (req, res, next) => {
       });
       return;
     }
-    await broker.cacher.clean();
+
+    const { target = undefined } = req.body;
+
+    await broker.cacher.clean(target);
 
     res.json({
       success: true,
