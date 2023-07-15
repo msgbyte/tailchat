@@ -2,7 +2,10 @@ import { request } from '../api/request';
 import { buildCachedRequest } from '../cache/utils';
 import { sharedEvent } from '../event';
 import { SYSTEM_USERID } from '../utils/consts';
-import { createAutoMergedRequest } from '../utils/request';
+import {
+  createAutoMergedRequest,
+  createAutoSplitRequest,
+} from '../utils/request';
 import _pick from 'lodash/pick';
 import _uniq from 'lodash/uniq';
 import _flatten from 'lodash/flatten';
@@ -250,14 +253,18 @@ export async function searchUserWithUniqueName(
 }
 
 const _fetchUserInfo = createAutoMergedRequest<string, UserBaseInfo>(
-  async (userIds) => {
-    // 这里用post是为了防止一次性获取的userId过多超过url限制
-    const { data } = await request.post('/api/user/getUserInfoList', {
-      userIds,
-    });
+  createAutoSplitRequest(
+    async (userIds) => {
+      // 这里用post是为了防止一次性获取的userId过多超过url限制
+      const { data } = await request.post('/api/user/getUserInfoList', {
+        userIds,
+      });
 
-    return data;
-  }
+      return data;
+    },
+    'serial',
+    1000
+  )
 );
 /**
  * 获取用户基本信息
@@ -277,21 +284,26 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
 }
 
 const _fetchUserOnlineStatus = createAutoMergedRequest<string[], boolean[]>(
-  async (userIdsList) => {
-    const uniqList = _uniq(_flatten(userIdsList));
-    // 这里用post是为了防止一次性获取的userId过多超过url限制
-    const { data } = await request.post('/api/gateway/checkUserOnline', {
-      userIds: uniqList,
-    });
+  createAutoSplitRequest(
+    async (userIdsList) => {
+      const uniqList = _uniq(_flatten(userIdsList));
+      // 这里用post是为了防止一次性获取的userId过多超过url限制
+      const { data } = await request.post('/api/gateway/checkUserOnline', {
+        userIds: uniqList,
+      });
 
-    const map = _zipObject<boolean>(uniqList, data);
+      const map = _zipObject<boolean>(uniqList, data);
 
-    // 将请求结果根据传输来源重新分组
-    return userIdsList.map((userIds) =>
-      userIds.map((userId) => map[userId] ?? false)
-    );
-  }
+      // 将请求结果根据传输来源重新分组
+      return userIdsList.map((userIds) =>
+        userIds.map((userId) => map[userId] ?? false)
+      );
+    },
+    'serial',
+    1000
+  )
 );
+
 /**
  * 获取用户在线状态
  */

@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   fetchUserInfo,
   getUserOnlineStatus,
@@ -40,11 +40,13 @@ export function useCachedOnlineStatus(
   ids: string[],
   onOnlineStatusUpdate?: (onlineStatus: boolean[]) => void
 ): boolean[] {
+  const staleTime = 20 * 1000; // 缓存20s
+
   const { data, isSuccess } = useQuery(
     ['onlineStatus', ids.join(',')],
     () => getUserOnlineStatus(ids),
     {
-      staleTime: 10 * 1000, // 缓存10s
+      staleTime,
     }
   );
 

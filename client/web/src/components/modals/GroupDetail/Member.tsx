@@ -6,6 +6,7 @@ import { Dropdown, Input, MenuProps } from 'antd';
 import React from 'react';
 import { Icon } from 'tailchat-design';
 import { t, UserBaseInfo } from 'tailchat-shared';
+import { Virtuoso } from 'react-virtuoso';
 
 /**
  * 群组成员管理
@@ -57,9 +58,11 @@ export const GroupMember: React.FC<{ groupId: string }> = React.memo(
         </div>
 
         <div className="flex-1 overflow-auto">
-          {isSearching
-            ? filteredGroupMembers.map(renderUser)
-            : userInfos.map(renderUser)}
+          <Virtuoso
+            style={{ height: '100%' }}
+            data={isSearching ? filteredGroupMembers : userInfos}
+            itemContent={(index, item) => renderUser(item)}
+          />
         </div>
       </div>
     );

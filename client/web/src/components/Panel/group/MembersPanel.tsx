@@ -15,6 +15,7 @@ import {
 import { Problem } from '@/components/Problem';
 import { useGroupMemberAction } from '@/hooks/useGroupMemberAction';
 import { UserPopover } from '@/components/popover/UserPopover';
+import { Virtuoso } from 'react-virtuoso';
 
 interface MembersPanelProps {
   groupId: string;
@@ -44,7 +45,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
     generateActionMenu,
   } = useGroupMemberAction(groupId);
 
-  const groupedMembers = useMemo(() => {
+  const sortedMembers = useMemo(() => {
     const online: UserBaseInfo[] = [];
     const offline: UserBaseInfo[] = [];
 
@@ -56,10 +57,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
       }
     });
 
-    return {
-      online,
-      offline,
-    };
+    return [...online, ...offline];
   }, [userInfos, membersOnlineStatus]);
 
   if (!groupInfo) {
@@ -98,7 +96,7 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   };
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       <div className="p-2">
         <Input
           placeholder={t('搜索成员')}
@@ -109,21 +107,13 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
         />
       </div>
 
-      {isSearching ? (
-        filteredGroupMembers.map(renderUser)
-      ) : (
-        <>
-          {groupedMembers.online.map(renderUser)}
-
-          {groupedMembers.offline.length > 0 && (
-            <>
-              <Divider>{t('以下用户已离线')}</Divider>
-
-              {groupedMembers.offline.map(renderUser)}
-            </>
-          )}
-        </>
-      )}
+      <div className="flex-1">
+        <Virtuoso
+          className="h-full"
+          data={isSearching ? filteredGroupMembers : sortedMembers}
+          itemContent={(i, item) => renderUser(item)}
+        />
+      </div>
     </div>
   );
 });

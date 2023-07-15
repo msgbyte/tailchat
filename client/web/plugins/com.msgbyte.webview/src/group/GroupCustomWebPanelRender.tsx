@@ -58,7 +58,6 @@ const GroupCustomWebPanelRender: React.FC<{ html: string }> = (props) => {
 
     const doc = ref.current.contentWindow.document;
     doc.open();
-    console.log('html', xss.process(html));
     doc.writeln(getInjectedStyle(), xss.process(html));
     doc.close();
   }, [html]);
