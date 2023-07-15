@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Translate } from '../translate';
-import xss from 'xss';
+import { FilterXSS, filterXSS, getDefaultWhiteList, IWhiteList } from 'xss';
 import { useWatch } from '@capital/common';
 import { GroupExtraDataPanel, TextArea } from '@capital/component';
 import styled from 'styled-components';
@@ -23,6 +23,16 @@ const EditModalContent = styled.div`
     }
   }
 `;
+
+const xss = new FilterXSS({
+  css: false,
+  onIgnoreTag: function (tag, html, options) {
+    if (['html', 'body', 'head', 'meta', 'style', 'iframe'].includes(tag)) {
+      // 不对其属性列表进行过滤
+      return html;
+    }
+  },
+});
 
 function getInjectedStyle() {
   try {
@@ -48,7 +58,8 @@ const GroupCustomWebPanelRender: React.FC<{ html: string }> = (props) => {
 
     const doc = ref.current.contentWindow.document;
     doc.open();
-    doc.writeln(getInjectedStyle(), xss(html));
+    console.log('html', xss.process(html));
+    doc.writeln(getInjectedStyle(), xss.process(html));
     doc.close();
   }, [html]);
 
