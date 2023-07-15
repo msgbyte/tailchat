@@ -69,6 +69,7 @@ export {
   joinArray,
   useConverseMessageContext,
   loginWithToken,
+  useWatch,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';

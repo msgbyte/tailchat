@@ -11,11 +11,11 @@ Register Group Panel
 
 ```typescript
 regGroupPanel({
-   name: `com.msgbyte.webview/grouppanel`,
-   label: 'web panel',
-   provider: PLUGIN_NAME,
-   extraFormMeta: [{ type: 'text', name: 'url', label: 'URL' }],
-   render: GroupWebPanelRender,
+  name: `com.msgbyte.webview/grouppanel`,
+  label: 'web panel',
+  provider: PLUGIN_NAME,
+  extraFormMeta: [{ type: 'text', name: 'url', label: 'URL' }],
+  render: GroupWebPanelRender,
 });
 ```
 

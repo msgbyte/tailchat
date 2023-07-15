@@ -6,10 +6,6 @@ export const Translate = {
     'zh-CN': '自定义网页面板',
     'en-US': 'Custom Webview Panel',
   }),
-  customwebpanelPlaceholder: localTrans({
-    'zh-CN': '建议在第三方页面编辑完毕后粘贴到此处',
-    'en-US': 'Recommended to paste it here after editing the third-party page',
-  }),
   notfound: localTrans({
     'zh-CN': '加载失败, 面板信息不存在',
     'en-US': 'Loading failed, panel info does not exist',
@@ -25,5 +21,9 @@ export const Translate = {
   openInExtra: localTrans({
     'zh-CN': '在外部打开',
     'en-US': 'Open in extra',
+  }),
+  editTip: localTrans({
+    'zh-CN': '使用html语法编辑, 关闭窗口自动保存',
+    'en-US': 'Edit with html syntax, close the window and save automatically',
   }),
 };

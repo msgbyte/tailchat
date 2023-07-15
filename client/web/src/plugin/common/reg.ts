@@ -88,7 +88,7 @@ export interface PluginGroupPanel {
   /**
    * 额外的表单数据, 用于创建面板时使用
    */
-  extraFormMeta: MetaFormFieldMeta[];
+  extraFormMeta?: MetaFormFieldMeta[];
 
   /**
    * 该面板如何渲染
