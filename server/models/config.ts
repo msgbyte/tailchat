@@ -43,13 +43,15 @@ export class Config implements Base {
 
   /**
    * set global client persist config from mongodb
+   *
+   * return all config from db
    */
   static async setClientPersistConfig(
     this: ReturnModelType<typeof Config>,
     key: string,
     value: any
-  ): Promise<void> {
-    await this.findOneAndUpdate(
+  ): Promise<Record<string, any>> {
+    const newConfig = await this.findOneAndUpdate(
       {
         name: Config.globalClientConfigName,
       },
@@ -60,8 +62,11 @@ export class Config implements Base {
       },
       {
         upsert: true,
+        new: true,
       }
     );
+
+    return newConfig.data;
   }
 }
 

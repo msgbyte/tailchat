@@ -25,6 +25,8 @@ import {
 import { appendUserDMConverse } from '../model/user';
 import { sharedEvent } from '../event';
 import type { InboxItem } from '../model/inbox';
+import { useGlobalConfigStore } from '../store/globalConfig';
+import type { GlobalConfig } from '../model/config';
 
 /**
  * 初始化 Redux 上下文
@@ -284,6 +286,16 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       store.dispatch(chatActions.setInboxList(list));
     });
   });
+
+  socket.listen(
+    'config.updateClientConfig',
+    (config: Partial<GlobalConfig>) => {
+      useGlobalConfigStore.setState((state) => ({
+        ...state,
+        ...config,
+      }));
+    }
+  );
 
   // 其他的额外的通知
   socketEventListeners.forEach(({ eventName, eventFn }) => {

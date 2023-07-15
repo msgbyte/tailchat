@@ -100,8 +100,12 @@ class ConfigService extends TcService {
     }>
   ) {
     const { key, value } = ctx.params;
-    await this.adapter.model.setClientPersistConfig(key, value);
+    const newConfig = await this.adapter.model.setClientPersistConfig(
+      key,
+      value
+    );
     await this.cleanActionCache('client', []);
+    this.broadcastNotify(ctx, 'updateClientConfig', newConfig);
   }
 
   async all(ctx: TcContext) {
