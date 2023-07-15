@@ -68,7 +68,7 @@
     "react-split": "^2.0.14",
     "react-transition-group": "^4.4.5",
     "react-virtualized-auto-sizer": "^1.0.7",
-    "react-virtuoso": "^3.1.5",
+    "react-virtuoso": "^4.4.0",
     "remark-gfm": "^3.0.1",
     "socket.io-client": "^4.6.1",
     "source-ref-runtime": "^1.0.7",
