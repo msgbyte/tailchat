@@ -78,6 +78,12 @@ command: 'MAIL FROM'
 
 请检查你的`SMTP_SENDER`内容是否正确，一般的格式是 `xxx@example.com` 或 `"YourName" xxx@example.com`
 
+### Openapi 服务一直在重启
+
+如果抛出了错误 `Issuer Identifier must be a valid web uri`
+
+你应该确保在环境变量`API_URL`中填入了一个url(`http://xxxx` 或 `https://xxxx`)
+
 ## 开放平台相关
 
 如果开放平台部署在代理之后，如果出现访问 `/open/.well-known/openid-configuration` 结果的json中endpoint不正确的情况，请尝试修改代理的配置。

@@ -78,6 +78,12 @@ command: 'MAIL FROM'
 
 Please check whether your `SMTP_SENDER` content is correct, the general format is `xxx@example.com` or `"YourName" xxx@example.com`
 
+### Openapi service is always restart
+
+If this throw error `Issuer Identifier must be a valid web uri`
+
+you should make sure has been writing a url(`http://xxxx` or `https://xxxx`) in env `API_URL`
+
 ## Openapi platform related
 
 If the open platform is deployed behind a proxy, if the endpoint in the JSON of the access `/open/.well-known/openid-configuration` result is incorrect, please try to modify the configuration of the proxy to forward real ip.
