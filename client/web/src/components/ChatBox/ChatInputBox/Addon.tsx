@@ -44,6 +44,18 @@ export const ChatInputAddon: React.FC = React.memo(() => {
     }
   };
 
+  const handleSendVideo = (file: File) => {
+    // 发送文件
+    if (file) {
+      // 发送视频
+      uploadMessageFile(file).then(({ name, url }) => {
+        actionContext.sendMsg(
+          getMessageTextDecorators().card(name, { type: 'video', url })
+        );
+      });
+    }
+  };
+
   const menu: MenuProps = {
     items: [
       {
@@ -54,6 +66,17 @@ export const ChatInputAddon: React.FC = React.memo(() => {
           const file = await openFile({ accept: 'image/*' });
           if (file) {
             handleSendImage(file);
+          }
+        },
+      },
+      {
+        key: 'send-video',
+        label: t('发送视频'),
+        onClick: async () => {
+          setOpen(false);
+          const file = await openFile({ accept: 'video/*' });
+          if (file) {
+            handleSendVideo(file);
           }
         },
       },
