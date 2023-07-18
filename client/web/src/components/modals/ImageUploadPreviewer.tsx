@@ -12,6 +12,12 @@ interface ImageSize {
 
 interface ImageUploadPreviewerProps {
   imageUrl: string;
+  /**
+   * 是否强制指定是否上传原图
+   *
+   * 如果传入undefined则视为用户自行选择
+   */
+  forceUploadOriginImage?: boolean;
   onConfirm: (imageUploadInfo: {
     size: ImageSize;
     uploadOriginImage: boolean;
@@ -20,9 +26,11 @@ interface ImageUploadPreviewerProps {
 }
 export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
   React.memo((props) => {
-    const { imageUrl } = props;
+    const { imageUrl, forceUploadOriginImage } = props;
     const imageSizeRef = useRef<ImageSize>({ width: 0, height: 0 });
-    const [uploadOriginImage, setUploadOriginImage] = useState(false);
+    const [uploadOriginImage, setUploadOriginImage] = useState(
+      forceUploadOriginImage ?? false
+    );
 
     const [{ loading }, handleConfirm] = useAsyncFn(async () => {
       if (
@@ -93,6 +101,7 @@ export const ImageUploadPreviewer: React.FC<ImageUploadPreviewerProps> =
             <div className="w-full">
               <div className="text-left">
                 <Switch
+                  disabled={typeof forceUploadOriginImage !== 'undefined'}
                   checked={uploadOriginImage}
                   onChange={(checked) => setUploadOriginImage(checked)}
                 />

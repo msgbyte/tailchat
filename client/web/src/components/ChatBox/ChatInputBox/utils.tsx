@@ -1,6 +1,7 @@
 import { closeModal, openModal } from '@/components/Modal';
 import { ImageUploadPreviewer } from '@/components/modals/ImageUploadPreviewer';
 import { compressImage, fileToDataUrl } from '@/utils/file-helper';
+import { canImageCompression } from '@/utils/image-helper';
 import React from 'react';
 import { uploadFile } from 'tailchat-shared';
 
@@ -17,6 +18,9 @@ export function uploadMessageImage(image: File): Promise<{
       const key = openModal(
         <ImageUploadPreviewer
           imageUrl={imageLocalUrl}
+          forceUploadOriginImage={
+            canImageCompression(image.type) ? undefined : true
+          }
           onCancel={() => {
             closeModal(key);
           }}
