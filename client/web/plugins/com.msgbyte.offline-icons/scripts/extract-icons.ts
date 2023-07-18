@@ -73,7 +73,7 @@ async function extractIcons(filepath: string): Promise<string[]> {
       const name = path.node.name;
       if (
         isJSXIdentifier(name) &&
-        ['Icon', 'BaseChatInputButton'].includes(name.name)
+        ['Icon', 'IconBtn', 'BaseChatInputButton'].includes(name.name)
       ) {
         path.node.attributes.forEach((attribute) => {
           if (isJSXAttribute(attribute) && attribute.name.name === 'icon') {

@@ -58,7 +58,7 @@ export const GithubStrategy: StrategyType = {
 
     return {
       id: String(result.id),
-      nickname: result.name,
+      nickname: result.name ?? result.login,
       username: result.login,
       email: result.email,
       avatar: result.avatar_url,

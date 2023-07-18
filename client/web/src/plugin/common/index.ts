@@ -70,6 +70,7 @@ export {
   useConverseMessageContext,
   loginWithToken,
   useWatch,
+  parseUrlStr,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';
