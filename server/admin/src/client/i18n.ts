@@ -82,6 +82,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           'system-notify': {
             create: 'Create System Notify',
+            tip: 'The system notification will be sent to the corresponding user in the form of inbox',
             title: 'Title',
             content: 'Content',
             scope: 'Notify Scope',
@@ -259,6 +260,7 @@ export const i18n: TushanContextProps['i18n'] = {
           },
           'system-notify': {
             create: '创建系统通知',
+            tip: '系统通知将会以收件箱的形式发送给对应的用户',
             title: '标题',
             content: '内容',
             scope: '通知范围',
