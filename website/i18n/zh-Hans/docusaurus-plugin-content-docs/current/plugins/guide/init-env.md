@@ -3,7 +3,7 @@ sidebar_position: 1
 title: 初始化插件开发环境
 ---
 
-在开发一个插件之前，我们需要创建一个插件开发环境，这个环境可以是直接复用 Tailchat 官方源码的环境(https://github.com/msgbyte/tailchat/tree/master/client/web/plugins)，也可以是一个独立的项目
+在开发一个插件之前，我们需要创建一个插件开发环境，这个环境可以是直接复用 Tailchat 官方源码的插件环境([https://github.com/msgbyte/tailchat/tree/master/client/web/plugins](https://github.com/msgbyte/tailchat/tree/master/client/web/plugins))，也可以是一个独立的项目
 
 这里主要教大家怎么创建一个独立的插件开发环境
 
