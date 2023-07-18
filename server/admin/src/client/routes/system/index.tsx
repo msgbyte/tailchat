@@ -215,7 +215,7 @@ export const SystemConfig: React.FC = React.memo(() => {
               <SwitchFormInput />
             </Form.Item>
             <Form.Item label={t('custom.config.announcementText')} field="text">
-              <Input maxLength={120} />
+              <Input maxLength={240} />
             </Form.Item>
             <Form.Item
               label={t('custom.config.announcementLink')}

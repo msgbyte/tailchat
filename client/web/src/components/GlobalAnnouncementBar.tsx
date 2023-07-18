@@ -18,8 +18,8 @@ export const GlobalAnnouncementBar: React.FC = React.memo(() => {
   }
 
   return (
-    <div className="text-center bg-indigo-400 text-white relative">
-      {announcementInfo.text}
+    <div className="text-center bg-indigo-400 text-white relative px-6">
+      <span className="select-text">{announcementInfo.text}</span>
 
       {announcementInfo.link && (
         <Button

@@ -44,6 +44,12 @@ export const SystemNotify: React.FC = React.memo(() => {
       <Typography.Title heading={3} style={{ textAlign: 'center' }}>
         {t('custom.system-notify.create')}
       </Typography.Title>
+      <Typography.Title
+        heading={6}
+        style={{ textAlign: 'center', color: '#666' }}
+      >
+        {t('custom.system-notify.tip')}
+      </Typography.Title>
 
       <Form form={form} onSubmit={handleSubmit}>
         <Form.Item label={t('custom.system-notify.title')} field="title">

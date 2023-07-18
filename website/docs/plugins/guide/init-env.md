@@ -3,7 +3,7 @@ sidebar_position: 1
 title: Init Plugin Develop Env
 ---
 
-Before developing a plugin, we need to create a plugin development environment. This environment can be the environment where the official source code of Tailchat is directly reused (https://github.com/msgbyte/tailchat/tree/master/client/web/plugins), It can also be an independent project
+Before developing a plugin, we need to create a plugin development environment. This environment can directly reuse the plugin environment of Tailchat official source code ([https://github.com/msgbyte/tailchat/tree/master/client/web/plugins](https://github.com/msgbyte/tailchat/tree/master/client/web/plugins)), It can also be an independent project
 
 Here we mainly teach you how to create an independent plugin development environment
 

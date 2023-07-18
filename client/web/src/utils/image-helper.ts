@@ -57,3 +57,14 @@ export async function fetchImagePrimaryColor(imageUrl: string) {
     a,
   };
 }
+
+/**
+ * 判断传入的文件类型是否可以进行图片压缩
+ */
+export function canImageCompression(imageType: string): boolean {
+  if (['image/gif'].includes(imageType)) {
+    return false;
+  }
+
+  return true;
+}
