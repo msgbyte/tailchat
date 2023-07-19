@@ -11,6 +11,7 @@ import { builtinPlugins } from '../builtin';
 import { pluginManager } from '../manager';
 import { PluginStoreItem } from './Item';
 import { ManualInstall } from './ManualInstall';
+import _uniqBy from 'lodash/uniqBy';
 
 function usePluginStoreData() {
   const { loading: loading1, value: installedPluginList = [] } = useAsync(
@@ -48,14 +49,16 @@ export const PluginStore: React.FC = React.memo(() => {
           <Divider orientation="left">{t('已安装')}</Divider>
 
           <div className="flex flex-wrap">
-            {[...builtinPlugins, ...installedPluginList].map((plugin) => (
-              <PluginStoreItem
-                key={plugin.name}
-                manifest={plugin}
-                installed={true}
-                builtin={builtinPluginNameList.includes(plugin.name)}
-              />
-            ))}
+            {_uniqBy([...builtinPlugins, ...installedPluginList], 'name').map(
+              (plugin) => (
+                <PluginStoreItem
+                  key={plugin.name}
+                  manifest={plugin}
+                  installed={true}
+                  builtin={builtinPluginNameList.includes(plugin.name)}
+                />
+              )
+            )}
           </div>
         </PillTabPane>
 
