@@ -1,6 +1,5 @@
 import {
   getGlobalState,
-  sharedEvent,
   getCachedUserInfo,
   getCachedBaseGroupInfo,
   getMessageTextDecorators,
@@ -9,6 +8,7 @@ import {
 } from '@capital/common';
 import { DeviceInfoPanel } from './DeviceInfoPanel';
 import { Translate } from './translate';
+import { forwardSharedEvent } from './utils';
 
 const PLUGIN_NAME = 'ReactNative Support';
 
@@ -21,40 +21,6 @@ regCustomPanel({
   label: Translate.deviceInfo,
   render: DeviceInfoPanel,
 });
-
-/**
- * 转发事件
- */
-function forwardSharedEvent(
-  eventName: string,
-  processPayload?: (payload: any) => Promise<{ type: string; payload: any }>
-) {
-  if (!(window as any).ReactNativeWebView) {
-    return;
-  }
-
-  sharedEvent.on(eventName, async (payload: any) => {
-    let type = eventName;
-    if (processPayload) {
-      const res = await processPayload(payload);
-      if (!res) {
-        // Skip if res is undefined
-        return;
-      }
-
-      payload = res.payload;
-      type = res.type;
-    }
-
-    (window as any).ReactNativeWebView.postMessage(
-      JSON.stringify({
-        _isTailchat: true,
-        type,
-        payload,
-      })
-    );
-  });
-}
 
 forwardSharedEvent('loadColorScheme');
 forwardSharedEvent('loginSuccess', async (payload) => {

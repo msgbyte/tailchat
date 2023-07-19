@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "client/desktop/**"
+      - "client/desktop/release/app/package.json" # build when version upgrade
   workflow_dispatch:
 
 jobs:
