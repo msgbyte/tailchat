@@ -38,9 +38,5 @@ https://tailchat.example.com/admin/
 <details>
   <summary>About the deprecated legacy admin</summary>
   
-  Old version <strong>admin-old</strong> has been deprecated, if you still wanna use old version, you can use follow command to use it:
-
-  ```jsx
-  curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
-  ```
+  admin-old will be remove in v1.8.6. you can checkout version before to get it
 </details>

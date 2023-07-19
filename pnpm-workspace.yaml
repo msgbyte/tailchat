@@ -7,7 +7,6 @@ packages:
   - 'client/packages/**'
   - 'server'
   - 'server/admin'
-  - 'server/admin-old'
   - 'server/packages/**'
   - 'server/plugins/**'
   - 'server/test/demo/**'

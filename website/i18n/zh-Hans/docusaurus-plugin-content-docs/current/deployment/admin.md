@@ -36,9 +36,6 @@ https://tailchat.example.com/admin/
 <details>
   <summary>关于弃用的旧版admin</summary>
   
-  旧版本 <strong>admin-old</strong> 已被弃用，如果你依旧期望使用旧版本，可以使用以下命令来替换上面的命令:
+  旧版本 <strong>admin-old</strong> 将于v1.8.6版本被移除，如果你依旧期望使用旧版本，可以切换到之前的版本获取
 
-  ```jsx
-  curl -L "https://raw.githubusercontent.com/msgbyte/tailchat/master/docker/admin-old.yml" -o admin.yml
-  ```
 </details>
