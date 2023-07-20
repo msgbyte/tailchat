@@ -7,7 +7,12 @@
   "scripts": {
     "sync:declaration": "tailchat declaration github"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@livekit/components-core": "^0.6.11",
+    "@livekit/components-react": "^1.0.8",
+    "@livekit/components-styles": "^1.0.4",
+    "livekit-client": "^1.12.1"
+  },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "react": "18.2.0",
