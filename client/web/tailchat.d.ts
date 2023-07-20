@@ -153,7 +153,9 @@ declare module '@capital/common' {
     deps?: React.DependencyList
   ) => [{ loading: boolean; value?: any }, T];
 
-  export const useEvent: any;
+  export const useEvent: <T extends (this: any, ...args: any[]) => any>(
+    fn: T
+  ) => T;
 
   export const uploadFile: any;
 
@@ -204,7 +206,12 @@ declare module '@capital/common' {
 
   export const getTextColorHex: any;
 
-  export const useCurrentUserInfo: any;
+  export const useCurrentUserInfo: () => {
+    email?: string;
+    nickname?: string;
+    discriminator: string;
+    avatar?: string;
+  };
 
   export const createPluginRequest: (pluginName: string) => {
     get: (actionName: string, config?: any) => Promise<any>;

@@ -573,4 +573,6 @@ declare module '@capital/component' {
   export const JumpToConverseButton: any;
 
   export const NoData: any;
+
+  export const GroupPanelContainer: any;
 }
