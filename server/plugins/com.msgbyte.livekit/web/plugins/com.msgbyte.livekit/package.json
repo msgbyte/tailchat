@@ -1,0 +1,16 @@
+{
+  "name": "@plugins/com.msgbyte.livekit",
+  "main": "src/index.tsx",
+  "version": "0.0.0",
+  "description": "Add livekit to provide meeting and live streaming feature",
+  "private": true,
+  "scripts": {
+    "sync:declaration": "tailchat declaration github"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}

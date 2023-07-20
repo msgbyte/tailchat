@@ -1,0 +1,9 @@
+{
+  "label": "livekit",
+  "name": "com.msgbyte.livekit",
+  "url": "{BACKEND}/plugins/com.msgbyte.livekit/index.js",
+  "version": "0.0.0",
+  "author": "moonrailgun",
+  "description": "Add livekit to provide meeting and live streaming feature",
+  "requireRestart": true
+}
