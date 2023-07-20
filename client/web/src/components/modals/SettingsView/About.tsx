@@ -74,6 +74,15 @@ export const SettingsAbout: React.FC = React.memo(() => {
             />
           }
         />
+        <LogoLink
+          src="https://tushan.msgbyte.com/"
+          icon={
+            <img
+              className="w-24 h-24"
+              src="https://tushan.msgbyte.com/img/logo.svg"
+            />
+          }
+        />
         <LogoLink src="https://zh-hans.reactjs.org/" icon="logos:react" />
         <LogoLink src="https://redux.js.org/" icon="logos:redux" />
         <LogoLink
