@@ -71,7 +71,7 @@ exports[`NoData render 1`] = `
     <div
       class="ant-empty-description"
     >
-      No data
+      没有数据
     </div>
   </div>
 </div>
