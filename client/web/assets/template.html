@@ -43,9 +43,9 @@
             tip.style.fontSize = '18px';
             tip.style.marginTop = '20px';
             tip.style.color = 'gray';
-            tip.innerText = navigator.language === 'zh-CN'
-              ? '可能资源加载出现了一些问题，请手动刷新重试一下'
-              : 'There may be some problems with resource loading, please refresh manually and try again'
+            tip.innerHTML = navigator.language === 'zh-CN'
+              ? '可能资源加载出现了一些问题，请手动<a style="color: rgb(9, 105, 218);" href="javascript:location.reload()">刷新</a>重试一下'
+              : 'There may be some problems with resource loading, please <a style="color: rgb(9, 105, 218);" href="javascript:location.reload()">refresh</a> manually and try again'
             el.appendChild(tip)
           }
         }, 10000);
