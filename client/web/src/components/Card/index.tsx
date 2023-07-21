@@ -11,6 +11,7 @@ interface Props {
 export interface CardPayload {
   label: string;
   url: string;
+  data: string;
 }
 export const Card: React.FC<Props> = React.memo((props) => {
   if (pluginCardItemMap[props.type]) {
