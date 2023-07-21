@@ -8,6 +8,7 @@ import React from 'react';
 import { DeviceInfoPanel } from './DeviceInfoPanel';
 import { Translate } from './translate';
 import { forwardSharedEvent } from './utils';
+import { checkUpdate } from './checkUpdate';
 
 const PLUGIN_NAME = 'Electron Support';
 
@@ -37,3 +38,7 @@ regChatInputButton({
 });
 
 forwardSharedEvent('receiveUnmutedMessage');
+
+setTimeout(() => {
+  checkUpdate();
+}, 1000);

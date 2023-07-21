@@ -7,8 +7,11 @@
   "scripts": {
     "sync:declaration": "tailchat declaration github"
   },
-  "dependencies": {},
+  "dependencies": {
+    "semver": "^7.5.4"
+  },
   "devDependencies": {
+    "@types/semver": "^7.5.0",
     "@types/styled-components": "^5.1.26",
     "react": "18.2.0",
     "styled-components": "^5.3.6"

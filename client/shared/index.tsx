@@ -39,6 +39,7 @@ export {
 
 // event
 export { sharedEvent, useSharedEventHandler } from './event/index';
+export type { SharedEventType } from './event/index';
 
 // helper
 export { getDMConverseName } from './helper/converse-helper';
