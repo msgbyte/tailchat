@@ -83,7 +83,7 @@ workflows:
         script: |
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/client/mobile/ios/$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME"
+            --scheme "$XCODE_SCHEME" --export-options-plist "$CM_BUILD_DIR/client/mobile/ios/export_options.plist"
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
