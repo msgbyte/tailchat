@@ -1,9 +1,0 @@
-{
-  "label": "视频文件播放器",
-  "name": "cn.ssdcc.tailchat.video",
-  "url": "/plugins/cn.ssdcc.tailchat.video/index.js",
-  "version": "0.0.0",
-  "author": "ssdc",
-  "description": "提供视频文件直接播放能力",
-  "requireRestart": true
-}
