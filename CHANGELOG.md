@@ -1,5 +1,30 @@
 
 
+## [1.8.5](https://github.com/msgbyte/tailchat/compare/v1.8.4...v1.8.5) (2023-07-19)
+
+
+### Bug Fixes
+
+* [#106](https://github.com/msgbyte/tailchat/issues/106) fixed maybe xss attack from custom web html panel ([6d16e09](https://github.com/msgbyte/tailchat/commit/6d16e09ae1ea8e01257ae112fdf5f429e922cb88))
+* add fallback for github account which maybe not include name in github ([bd4907d](https://github.com/msgbyte/tailchat/commit/bd4907dfe537d9d33677e88ce420c7a64c044c0a))
+* add plugin list maybe repeat problem ([b129cd7](https://github.com/msgbyte/tailchat/commit/b129cd78874668d2d7ae1e1d402b1e83d6e07f46))
+* added forceUploadOriginImage to force specify whether to enable image compression ([a224ac6](https://github.com/msgbyte/tailchat/commit/a224ac602eb0288557c6e340e438a309c9e9ac6d))
+
+
+### Features
+
+* add broadcast notify when call config.setClientConfig ([5ca5c76](https://github.com/msgbyte/tailchat/commit/5ca5c765b847ef28664eeedc38894d711137d4a4))
+* add global announcement ([798abeb](https://github.com/msgbyte/tailchat/commit/798abeb1ec700ed4dfd04f4359c4c11e655b20e2))
+
+
+### Performance Improvements
+
+* **admin:** cache management segmentation ([fba1b26](https://github.com/msgbyte/tailchat/commit/fba1b261ee298cea911f4c0246057b69de6f5a8d))
+* optimize the display of global notifications and increase system notification prompts ([7419df1](https://github.com/msgbyte/tailchat/commit/7419df17758bb7ece70b2007931d066e38c4a5f6))
+* optimize the performance of the member list in the case of large data ([4c77d14](https://github.com/msgbyte/tailchat/commit/4c77d144e8c0d086c457966092281326a237ba91))
+* update custom web panel render xss rules ([fd18eb7](https://github.com/msgbyte/tailchat/commit/fd18eb70301de2ce3c9265e2986c14a3e2c0d356))
+* use group extra to storage custom web panel html ([721da6f](https://github.com/msgbyte/tailchat/commit/721da6f34c8ab93aaa5d4dd6bb422a74480397fc))
+
 ## [1.8.4](https://github.com/msgbyte/tailchat/compare/v1.8.3...v1.8.4) (2023-07-14)
 
 

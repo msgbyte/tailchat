@@ -12,6 +12,10 @@ module.exports = {
         message: 'Only allow use `@capital/*`',
       },
       {
+        name: 'antd',
+        message: 'Only allow use `@capital/component`',
+      },
+      {
         name: 'translate',
         message: 'Maybe you should use `./translate`',
       },

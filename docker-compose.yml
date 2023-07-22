@@ -1,84 +1,24 @@
 version: "3.3"
 
 services:
-  # Gateway
-  service-gateway:
+  # Tailchat Core Services
+  service-core:
     build:
       context: .
     image: tailchat
     restart: unless-stopped
     env_file: docker-compose.env
     environment:
-      SERVICES: core/gateway
+      SERVICES: core/gateway,core/user/*.service.js,core/group/*.service.js,core/chat/*.service.js,core/file,core/plugin/registry,core/config
       PORT: 3000
     depends_on:
       - mongo
       - redis
+      - minio
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
       - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
-    networks:
-      - internal
-
-  # User Service
-  service-user:
-    build:
-      context: .
-    image: tailchat
-    restart: unless-stopped
-    env_file: docker-compose.env
-    environment:
-      SERVICES: core/user/*.service.js
-    depends_on:
-      - mongo
-      - redis
-    networks:
-      - internal
-
-  # Group Service
-  service-group:
-    build:
-      context: .
-    image: tailchat
-    restart: unless-stopped
-    env_file: docker-compose.env
-    environment:
-      SERVICES: core/group/*.service.js
-    depends_on:
-      - mongo
-      - redis
-    networks:
-      - internal
-
-  # Chat Service
-  service-chat:
-    build:
-      context: .
-    image: tailchat
-    restart: unless-stopped
-    env_file: docker-compose.env
-    environment:
-      SERVICES: core/chat/*.service.js
-    depends_on:
-      - mongo
-      - redis
-    networks:
-      - internal
-
-  # File Service / Plugin Registry / Configuration Service
-  service-file:
-    build:
-      context: .
-    image: tailchat
-    restart: unless-stopped
-    env_file: docker-compose.env
-    environment:
-      SERVICES: core/file,core/plugin/registry,core/config
-    depends_on:
-      - mongo
-      - redis
-      - minio
     networks:
       - internal
 

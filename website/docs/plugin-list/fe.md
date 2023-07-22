@@ -1,7 +1,15 @@
 ---
 sidebar_position: 1
-title: Pure Frontend Plugin (22)
+title: Pure Frontend Plugin (27)
 ---
+
+### com.msgbyte.ai-assistant AI Assistant
+
+Add chatgpt into Tailchat
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.ai-assistant)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.ai-assistant/manifest.json)
+
 
 ### com.msgbyte.bbcode BBCode Mmessage Interpreter
 
@@ -27,7 +35,15 @@ Allows sending custom drawings
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.draw/manifest.json)
 
 
-### com.msgbyte.env.rn React Native support
+### com.msgbyte.env.electron Electron Support
+
+Add support for Electron environment in Tailchat
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.electron)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.env.electron/manifest.json)
+
+
+### com.msgbyte.env.rn React Native Support
 
 Add support for ReactNative environment in Tailchat
 
@@ -83,6 +99,14 @@ Turn on the ability to introduce the app for the first time for the app
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.intro/manifest.json)
 
 
+### com.msgbyte.mdpanel Markdown Panel
+
+Add markdown panel support
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.mdpanel)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.mdpanel/manifest.json)
+
+
 ### com.msgbyte.miaolang Miaolang
 
 It is allowed to send meow, and the two parties encrypt the conversation after installing the plugin. People who have not installed the plugin will see 'meow'
@@ -105,6 +129,14 @@ Ability to add notifications to apps
 
 - [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.notify)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.notify/manifest.json)
+
+
+### com.msgbyte.offline-icons Offline Icons
+
+Add prefetched icons which need run in intranet environment
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.offline-icons)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.offline-icons/manifest.json)
 
 
 ### com.msgbyte.openapi Openapi Platform Plugin
@@ -169,6 +201,14 @@ Quickly open Wenshushu in the chat input box to support file transfer
 
 - [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.wenshushu/manifest.json)
+
+
+### com.msgbyte.widget.sakana sakana-widget
+
+Add sakana widget in tailchat
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.widget.sakana)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.widget.sakana/manifest.json)
 
 
 ### com.msgbyte.wormhole wormhole

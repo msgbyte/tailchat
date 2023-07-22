@@ -56,7 +56,7 @@ const plugins: Configuration['plugins'] = [
     'process.env.VERSION': JSON.stringify(VERSION),
   }),
   new HtmlWebpackPlugin({
-    inject: true,
+    inject: 'body',
     hash: false,
     favicon: path.resolve(ROOT_PATH, './assets/images/favicon.ico'),
     template: path.resolve(ROOT_PATH, './assets/template.html'),

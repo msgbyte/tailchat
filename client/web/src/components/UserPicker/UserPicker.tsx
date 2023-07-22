@@ -1,9 +1,10 @@
-import { Checkbox, Empty, Input } from 'antd';
+import { Checkbox, Input } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { t, useUserInfoList } from 'tailchat-shared';
 import _take from 'lodash/take';
 import _without from 'lodash/without';
 import { Avatar } from 'tailchat-design';
+import { NotFound } from '../NotFound';
 
 /**
  * 用户选择器
@@ -90,7 +91,7 @@ export const UserPicker: React.FC<UserPickerProps> = React.memo((props) => {
           );
         })
       ) : (
-        <Empty />
+        <NotFound />
       )}
     </div>
   );

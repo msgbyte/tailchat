@@ -9,6 +9,7 @@ import _once from 'lodash/once';
 import { builtinPlugins } from './builtin';
 import { showPluginLoadError } from './showPluginLoadError';
 import { injectTailchatGlobalValue } from '@/utils/global-helper';
+import _uniqBy from 'lodash/uniqBy';
 
 class PluginManager {
   /**
@@ -20,10 +21,10 @@ class PluginManager {
    * 初始化插件
    */
   initPlugins = _once(async () => {
-    const installedPlugins = [
-      ...builtinPlugins,
-      ...(await this.getInstalledPlugins()),
-    ];
+    const installedPlugins = _uniqBy(
+      [...builtinPlugins, ...(await this.getInstalledPlugins())],
+      'name'
+    );
 
     const plugins = installedPlugins.map(({ name, url }) => ({
       name,

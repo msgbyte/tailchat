@@ -2,6 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react",
-    "importsNotUsedAsValues": "error"
+    "importsNotUsedAsValues": "error",
+    "paths": {
+      "@capital/*": ["../../src/plugin/*"],
+    }
   }
 }

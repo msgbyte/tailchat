@@ -244,8 +244,8 @@ export const FeatureSection: React.FC = React.memo(() => {
                 <Link className="button button--secondary" to="/downloads">
                   Mobile
                 </Link>
-                <Link className="button button--secondary disabled">
-                  Desktop (<Translate>in Alpha Test</Translate>)
+                <Link className="button button--secondary" to="/downloads">
+                  Desktop
                 </Link>
               </div>
             </div>

@@ -182,9 +182,18 @@ const createMainWindow = async (url: string) => {
       if (channel === 'webview-message') {
         const obj = JSON.parse(data);
         if (typeof obj === 'object' && obj._isTailchat === true && mainWindow) {
-          handleTailchatMessage(obj.type, obj.payload, mainWindow.webContents);
+          handleTailchatMessage(
+            obj.type,
+            obj.payload,
+            mainWindow.webContents,
+            mainWindow
+          );
         }
       }
+    });
+
+    mainWindow.on('focus', () => {
+      mainWindow?.flashFrame(false);
     });
 
     mainWindow.on('ready-to-show', () => {

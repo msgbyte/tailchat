@@ -75,3 +75,4 @@ export {
   JumpToConverseButton,
 } from '@/components/JumpToButton';
 export { NoData } from '@/components/NoData';
+export { NotFound } from '@/components/NotFound';

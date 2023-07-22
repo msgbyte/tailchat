@@ -16,11 +16,10 @@ pnpm ministar createPlugin
 ```json
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "esModuleInterop": true,
     "jsx": "react",
     "paths": {
-      "@capital/*": ["../../../src/plugin/*"],
+      "@capital/*": ["../../src/plugin/*"],
     }
   }
 }

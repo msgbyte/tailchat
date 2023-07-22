@@ -2,7 +2,6 @@ import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import {
   isArrayExpression,
-  isExpression,
   isIdentifier,
   isJSXAttribute,
   isJSXIdentifier,
@@ -73,7 +72,9 @@ async function extractIcons(filepath: string): Promise<string[]> {
       const name = path.node.name;
       if (
         isJSXIdentifier(name) &&
-        ['Icon', 'IconBtn', 'BaseChatInputButton'].includes(name.name)
+        ['Icon', 'IconBtn', 'LogoLink', 'BaseChatInputButton'].includes(
+          name.name
+        )
       ) {
         path.node.attributes.forEach((attribute) => {
           if (isJSXAttribute(attribute) && attribute.name.name === 'icon') {

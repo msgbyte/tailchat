@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Translate } from '../translate';
-import { FilterXSS, filterXSS, getDefaultWhiteList, IWhiteList } from 'xss';
+import { FilterXSS } from 'xss';
 import { useWatch } from '@capital/common';
-import { GroupExtraDataPanel, TextArea } from '@capital/component';
+import { GroupExtraDataPanel, NoData, TextArea } from '@capital/component';
 import styled from 'styled-components';
 
 const EditModalContent = styled.div`
@@ -27,7 +27,9 @@ const EditModalContent = styled.div`
 const xss = new FilterXSS({
   css: false,
   onIgnoreTag: function (tag, html, options) {
-    if (['html', 'body', 'head', 'meta', 'style', 'iframe'].includes(tag)) {
+    if (
+      ['html', 'body', 'head', 'meta', 'style', 'iframe', 'div'].includes(tag)
+    ) {
       // 不对其属性列表进行过滤
       return html;
     }
@@ -63,7 +65,7 @@ const GroupCustomWebPanelRender: React.FC<{ html: string }> = (props) => {
   }, [html]);
 
   if (!html) {
-    return <div>{Translate.notfound}</div>;
+    return <NoData />;
   }
 
   return <iframe ref={ref} className="w-full h-full" />;
