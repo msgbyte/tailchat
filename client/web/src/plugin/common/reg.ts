@@ -312,7 +312,7 @@ interface PluginCardItem {
 /**
  * 注册卡片类型
  */
-export const [pluginCardItemMap, regPluginCardItemMap] =
+export const [pluginCardItemMap, regPluginCardItem] =
   buildRegMap<PluginCardItem>();
 
 export const [pluginGroupConfigItems, regPluginGroupConfigItem] = buildRegList<{
