@@ -5,7 +5,7 @@ import { CardWrapper } from './Wrapper';
 import { pluginCardItemMap } from '@/plugin/common';
 
 interface Props {
-  type: 'file';
+  type: string;
   payload: BaseCardPayload;
 }
 export interface BaseCardPayload {
