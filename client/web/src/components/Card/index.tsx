@@ -17,10 +17,11 @@ export const Card: React.FC<Props> = React.memo((props) => {
     const Component = info.render;
     return <Component payload={props.payload} />;
   }
+
   if (props.type === 'file') {
-    // @ts-ignore
-    return <FileCard payload={props.payload} />;
+    return <FileCard payload={props.payload as any} />;
   }
+
   return <CardWrapper>{t('未知的卡片类型')}</CardWrapper>;
 });
 Card.displayName = 'Card';
