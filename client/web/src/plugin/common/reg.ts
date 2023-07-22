@@ -14,8 +14,8 @@ import {
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
 import type { ReactElement } from 'react';
-import type { CardPayload } from '@/components/Card';
-
+import type { BaseCardPayload } from '@/components/Card';
+export type { BaseCardPayload };
 /**
  * 注册自定义面板
  */
@@ -306,7 +306,7 @@ export const [pluginInboxItemMap, regPluginInboxItemMap] =
   buildRegMap<PluginInboxItem>();
 
 interface PluginCardItem {
-  render: React.ComponentType<{ payload: CardPayload }>;
+  render: React.ComponentType<{ payload: BaseCardPayload }>;
 }
 
 /**

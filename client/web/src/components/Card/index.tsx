@@ -6,12 +6,10 @@ import { pluginCardItemMap } from '@/plugin/common';
 
 interface Props {
   type: 'file';
-  payload: CardPayload;
+  payload: BaseCardPayload;
 }
-export interface CardPayload {
-  label: string;
-  url: string;
-  data: string;
+export interface BaseCardPayload {
+  [key: string]: any;
 }
 export const Card: React.FC<Props> = React.memo((props) => {
   if (pluginCardItemMap[props.type]) {
@@ -20,6 +18,7 @@ export const Card: React.FC<Props> = React.memo((props) => {
     return <Component payload={props.payload} />;
   }
   if (props.type === 'file') {
+    // @ts-ignore
     return <FileCard payload={props.payload} />;
   }
   return <CardWrapper>{t('未知的卡片类型')}</CardWrapper>;
