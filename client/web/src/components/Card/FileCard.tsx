@@ -4,12 +4,11 @@ import { Icon } from 'tailchat-design';
 import { useMemoizedFn, t } from 'tailchat-shared';
 import { IconBtn } from '../IconBtn';
 import { CardWrapper } from './Wrapper';
-
-export interface FileCardPayload {
+import type { BaseCardPayload } from '@/components/Card/index';
+interface FileCardPayload extends BaseCardPayload {
   label: string;
   url: string;
 }
-
 export const FileCard: React.FC<{
   payload: FileCardPayload;
 }> = React.memo((props) => {

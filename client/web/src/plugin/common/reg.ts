@@ -14,7 +14,8 @@ import {
 import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
 import type { ReactElement } from 'react';
-
+import type { BaseCardPayload } from '@/components/Card';
+export type { BaseCardPayload };
 /**
  * 注册自定义面板
  */
@@ -303,6 +304,16 @@ interface PluginInboxItem {
  */
 export const [pluginInboxItemMap, regPluginInboxItemMap] =
   buildRegMap<PluginInboxItem>();
+
+interface PluginCardItem {
+  render: React.ComponentType<{ payload: BaseCardPayload }>;
+}
+
+/**
+ * 注册卡片类型
+ */
+export const [pluginCardItemMap, regPluginCardItem] =
+  buildRegMap<PluginCardItem>();
 
 export const [pluginGroupConfigItems, regPluginGroupConfigItem] = buildRegList<{
   name: string;
