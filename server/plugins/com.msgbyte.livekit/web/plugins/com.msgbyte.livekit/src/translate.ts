@@ -17,4 +17,8 @@ export const Translate = {
     'zh-CN': '摄像头',
     'en-US': 'Camera',
   }),
+  toVoiceChannel: localTrans({
+    'zh-CN': '点击跳转到活跃频道',
+    'en-US': 'Click to Active Channel',
+  }),
 };

@@ -38,7 +38,7 @@ export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
     searchResult: filterMembers,
   } = useSearch({
     dataSource: userInfoList,
-    filterFn: (item, searchText) => item.nickname.includes(searchText),
+    filterFn: (item, searchText) => String(item.nickname).includes(searchText),
   });
 
   const handleAddMember = useMemoizedFn(() => {

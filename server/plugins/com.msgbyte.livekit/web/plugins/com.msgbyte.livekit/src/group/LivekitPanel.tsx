@@ -5,27 +5,32 @@ import {
 } from '@capital/common';
 import { GroupPanelContainer } from '@capital/component';
 import React, { useState } from 'react';
-import {
-  LiveKitRoom,
-  LocalUserChoices,
-  useToken,
-  VideoConference,
-  formatChatMessageLinks,
-} from '@livekit/components-react';
-import { LogLevel, RoomOptions, VideoPresets } from 'livekit-client';
+import type { LocalUserChoices } from '@livekit/components-react';
 import { PreJoinView } from '../components/PreJoinView';
 import { LivekitContainer } from '../components/LivekitContainer';
 import { ActiveRoom } from '../components/ActiveRoom';
+import { useLivekitState } from '../store/useLivekitState';
 
 export const LivekitPanel: React.FC = React.memo(() => {
   const { groupId, panelId } = useGroupPanelContext();
   const [preJoinChoices, setPreJoinChoices] = useState<
     LocalUserChoices | undefined
   >(undefined);
+  const { setActive, setDeactive } = useLivekitState();
 
   const handleError = useEvent((err: Error) => {
     showErrorToasts('error while setting up prejoin');
     console.log('error while setting up prejoin', err);
+  });
+
+  const handleJoin = useEvent((userChoices: LocalUserChoices) => {
+    setPreJoinChoices(userChoices);
+    setActive(`/main/group/${groupId}/${panelId}`);
+  });
+
+  const handleLeave = useEvent(() => {
+    setPreJoinChoices(undefined);
+    setDeactive();
   });
 
   const roomName = `${groupId}#${panelId}`;
@@ -37,9 +42,7 @@ export const LivekitPanel: React.FC = React.memo(() => {
           <ActiveRoom
             roomName={roomName}
             userChoices={preJoinChoices}
-            onLeave={() => {
-              setPreJoinChoices(undefined);
-            }}
+            onLeave={handleLeave}
           />
         ) : (
           <div
@@ -51,10 +54,7 @@ export const LivekitPanel: React.FC = React.memo(() => {
                 videoEnabled: false,
                 audioEnabled: false,
               }}
-              onSubmit={(values) => {
-                console.log('Joining with: ', values);
-                setPreJoinChoices(values);
-              }}
+              onSubmit={handleJoin}
             />
           </div>
         )}
