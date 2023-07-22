@@ -232,10 +232,19 @@ declare module '@capital/common' {
       | 'navbar-more'
       | 'navbar-group'
       | 'navbar-personal';
-    icon: string;
+    icon: string | React.ComponentType;
     name: string;
     label: string;
     render: React.ComponentType;
+    /**
+     * hooks determine whether to render
+     *
+     * Only available in position: `navbar-more` | `navbar-group` | `navbar-personal`
+     *
+     * @default
+     * () => true
+     */
+    useIsShow?: () => boolean;
   }) => void;
 
   export const pluginGroupPanel: any;

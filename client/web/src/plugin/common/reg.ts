@@ -55,6 +55,16 @@ export interface PluginCustomPanel {
    * 渲染组件
    */
   render: React.ComponentType;
+
+  /**
+   * hooks determine navbar icon whether to render
+   *
+   * Only available in position: `navbar-more` | `navbar-group` | `navbar-personal`
+   *
+   * @default
+   * () => true
+   */
+  useIsShow?: () => boolean;
 }
 export const [pluginCustomPanel, regCustomPanel] =
   buildRegList<PluginCustomPanel>();
