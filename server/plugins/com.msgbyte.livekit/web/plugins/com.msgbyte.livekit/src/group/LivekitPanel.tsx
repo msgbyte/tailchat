@@ -15,6 +15,7 @@ import {
 import { LogLevel, RoomOptions, VideoPresets } from 'livekit-client';
 import { PreJoinView } from '../components/PreJoinView';
 import { LivekitContainer } from '../components/LivekitContainer';
+import { ActiveRoom } from '../components/ActiveRoom';
 
 export const LivekitPanel: React.FC = React.memo(() => {
   const { groupId, panelId } = useGroupPanelContext();
@@ -27,22 +28,36 @@ export const LivekitPanel: React.FC = React.memo(() => {
     console.log('error while setting up prejoin', err);
   });
 
+  const roomName = `${groupId}#${panelId}`;
+
   return (
     <GroupPanelContainer groupId={groupId} panelId={panelId}>
       <LivekitContainer>
-        <div style={{ display: 'grid', placeItems: 'center', height: '100%' }}>
-          <PreJoinView
-            onError={handleError}
-            defaults={{
-              videoEnabled: false,
-              audioEnabled: false,
-            }}
-            onSubmit={(values) => {
-              console.log('Joining with: ', values);
-              setPreJoinChoices(values);
+        {roomName && preJoinChoices ? (
+          <ActiveRoom
+            roomName={roomName}
+            userChoices={preJoinChoices}
+            onLeave={() => {
+              setPreJoinChoices(undefined);
             }}
           />
-        </div>
+        ) : (
+          <div
+            style={{ display: 'grid', placeItems: 'center', height: '100%' }}
+          >
+            <PreJoinView
+              onError={handleError}
+              defaults={{
+                videoEnabled: false,
+                audioEnabled: false,
+              }}
+              onSubmit={(values) => {
+                console.log('Joining with: ', values);
+                setPreJoinChoices(values);
+              }}
+            />
+          </div>
+        )}
       </LivekitContainer>
     </GroupPanelContainer>
   );
