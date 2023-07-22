@@ -225,6 +225,13 @@ declare module '@capital/common' {
     name: string;
     label: string;
     render: React.ComponentType;
+    /**
+     * hooks determine whether to render
+     *
+     * @default
+     * () => true
+     */
+    useIsShow?: () => boolean;
   }) => void;
 
   export const pluginGroupPanel: any;

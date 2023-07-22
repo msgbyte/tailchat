@@ -23,7 +23,9 @@ export const NavbarNavItem: React.FC<
 
   let inner = (
     <Tooltip
-      title={<div className="font-bold px-1.5 py-0.5">{name}</div>}
+      title={
+        name ? <div className="font-bold px-1.5 py-0.5">{name}</div> : null
+      }
       placement="right"
     >
       <div
