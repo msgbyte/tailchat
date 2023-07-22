@@ -1969,6 +1969,9 @@ importers:
       livekit-client:
         specifier: ^1.12.1
         version: 1.12.1
+      zustand:
+        specifier: 4.3.6
+        version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
       '@types/styled-components':
         specifier: ^5.1.26
