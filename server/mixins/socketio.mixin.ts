@@ -218,7 +218,7 @@ export const TcSocketIOService = (
 
             // 检测是否允许调用
             if (checkBlacklist(eventName)) {
-              const message = '不允许的请求';
+              const message = 'Not allowed request';
               this.logger.warn('[SocketIO]', '=>', message);
               cb({
                 result: false,

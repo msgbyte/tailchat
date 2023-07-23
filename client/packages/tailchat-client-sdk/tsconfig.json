@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["ESNext"],
+    "skipLibCheck": true,
     "outDir": "lib",
     "declaration": true,
     "declarationMap": true,

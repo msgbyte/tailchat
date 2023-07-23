@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import crypto from 'crypto';
 
-export class TailchatClient {
+export class TailchatBaseClient {
   request: AxiosInstance;
   jwt: string | null = null;
   userId: string | null = null;
@@ -58,16 +58,20 @@ export class TailchatClient {
     }
   }
 
+  async waitingForLogin(): Promise<void> {
+    await Promise.resolve(this.loginP);
+  }
+
   async call(action: string, params = {}) {
     try {
-      await Promise.resolve(this.loginP);
+      await this.waitingForLogin();
       console.log('Calling:', action);
       const { data } = await this.request.post(
         '/api/' + action.replace(/\./g, '/'),
         params
       );
 
-      return data;
+      return data.data;
     } catch (err: any) {
       console.error('Service Call Failed:', err);
       const data: string = err?.response?.data;
@@ -84,7 +88,18 @@ export class TailchatClient {
     }
   }
 
-  async whoami() {
+  async whoami(): Promise<{
+    userAgent: string;
+    language: string;
+    user: {
+      _id: string;
+      nickname: string;
+      email: string;
+      avatar: string;
+    };
+    token: string;
+    userId: string;
+  }> {
     return this.call('user.whoami');
   }
 

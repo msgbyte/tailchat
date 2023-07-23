@@ -490,6 +490,12 @@ importers:
       axios:
         specifier: ^1.3.2
         version: 1.3.2
+      socket.io-client:
+        specifier: ^4.7.1
+        version: 4.7.1
+      socket.io-msgpack-parser:
+        specifier: ^3.0.2
+        version: 3.0.2
     devDependencies:
       '@types/jest':
         specifier: ^29.5.1
@@ -500,6 +506,9 @@ importers:
       jest:
         specifier: 27.5.1
         version: 27.5.1(ts-node@10.9.1)
+      tailchat-types:
+        specifier: '*'
+        version: link:../../../packages/types
       ts-jest:
         specifier: 27.1.4
         version: 27.1.4(@babel/core@7.21.0)(@types/jest@29.5.1)(esbuild@0.15.18)(jest@27.5.1)(typescript@4.9.4)
@@ -17612,9 +17621,28 @@ packages:
       - utf-8-validate
     dev: false
 
+  /engine.io-client@6.5.1:
+    resolution: {integrity: sha512-hE5wKXH8Ru4L19MbM1GgYV/2Qo54JSMh1rlJbfpa40bEWkCKNo3ol2eOtGmowcr+ysgbI7+SGL+by42Q3pt/Ng==}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4(supports-color@9.2.2)
+      engine.io-parser: 5.1.0
+      ws: 8.11.0
+      xmlhttprequest-ssl: 2.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /engine.io-parser@5.0.6:
     resolution: {integrity: sha512-tjuoZDMAdEhVnSFleYPCtdL2GXwVTGtNjoeJd9IhIG3C1xs9uwxqRNEu5WpnDZCaozwVlK/nuQhpodhXSIMaxw==}
     engines: {node: '>=10.0.0'}
+
+  /engine.io-parser@5.1.0:
+    resolution: {integrity: sha512-enySgNiK5tyZFynt3z7iqBR+Bto9EVVVvDFuTT0ioHCGbzirZVGDGiQjZzEp8hWl6hd5FSVytJGuScX1C1C35w==}
+    engines: {node: '>=10.0.0'}
+    dev: false
 
   /engine.io@6.2.0:
     resolution: {integrity: sha512-4KzwW3F3bk+KlzSOY57fj/Jx6LyRQ1nbcyIadehl+AnXjKT7gDO0ORdRi/84ixvMKTym6ZKuxvbzN62HDDU1Lg==}
@@ -30531,6 +30559,20 @@ packages:
       - utf-8-validate
     dev: false
 
+  /socket.io-client@4.7.1:
+    resolution: {integrity: sha512-Qk3Xj8ekbnzKu3faejo4wk2MzXA029XppiXtTF/PkbTg+fcwaTw1PlDrTrrrU4mKoYC4dvlApOnSeyLCKwek2w==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4(supports-color@9.2.2)
+      engine.io-client: 6.5.1
+      socket.io-parser: 4.2.4
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /socket.io-msgpack-parser@3.0.2:
     resolution: {integrity: sha512-1e76bJ1PCKi9H+JiYk+S29PBJvknHjQWM7Mtj0hjF2KxDA6b6rQxv3rTsnwBoz/haZOhlCDIMQvPATbqYeuMxg==}
     dependencies:
@@ -31554,7 +31596,7 @@ packages:
       hark: 1.2.3
       lodash: 4.17.21
       mediasoup-client: 3.6.57
-      socket.io-client: 4.6.2
+      socket.io-client: 4.7.1
     transitivePeerDependencies:
       - bufferutil
       - supports-color
