@@ -71,13 +71,13 @@ app.listen(3000, () => {
 现在我们要增加一些逻辑，比如我们想要实现一个复读机器人, 那么修改 `/bot/callback` 路由的实现如下:
 
 ```js
-import { TailchatClient, stripMentionTag } from 'tailchat-client-sdk';
+import { TailchatHTTPClient, stripMentionTag } from 'tailchat-client-sdk';
 
 const host = '<your tailchat instance backend host>';
 const appId = '<appId>';
 const appSecret = '<appSecret>';
 
-const client = new TailchatClient(host, appId, appSecret)
+const client = new TailchatHTTPClient(host, appId, appSecret)
 
 // ...
 

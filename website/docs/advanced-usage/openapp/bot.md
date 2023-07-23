@@ -71,13 +71,13 @@ At this point we execute `node server.js` to see that our application will be st
 Now we need to add some logic, for example, if we want to implement a repeating bot, then modify the implementation of `/bot/callback` route as follows:
 
 ```js
-import { TailchatClient, stripMentionTag } from 'tailchat-client-sdk';
+import { TailchatHTTPClient, stripMentionTag } from 'tailchat-client-sdk';
 
 const host = '<your tailchat instance backend host>';
 const appId = '<appId>';
 const appSecret = '<appSecret>';
 
-const client = new TailchatClient(host, appId, appSecret)
+const client = new TailchatHTTPClient(host, appId, appSecret)
 
 // ...
 
