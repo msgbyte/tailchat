@@ -44,5 +44,5 @@ function getPlatform() {
 }
 
 function generateDeviceInfo() {
-  return `window.__electronDeviceInfo = { version: "${app.getVersion()}", name: "${app.getName()}", platform: "${getPlatform}" }`;
+  return `window.__electronDeviceInfo = { version: "${app.getVersion()}", name: "${app.getName()}", platform: "${getPlatform()}" }`;
 }
