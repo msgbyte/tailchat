@@ -10,7 +10,11 @@ export const LivekitGroupPanel: React.FC = React.memo(() => {
 
   return (
     <GroupPanelContainer groupId={groupId} panelId={panelId}>
-      <LivekitView roomName={roomName} url={url} />
+      <LivekitView
+        style={{ width: '100%', height: '100%' }}
+        roomName={roomName}
+        url={url}
+      />
     </GroupPanelContainer>
   );
 });
