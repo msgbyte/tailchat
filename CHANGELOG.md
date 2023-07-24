@@ -1,5 +1,30 @@
 
 
+## [1.8.6](https://github.com/msgbyte/tailchat/compare/v1.8.5...v1.8.6) (2023-07-24)
+
+
+### Bug Fixes
+
+* fix i18n problem in about panel ([542e029](https://github.com/msgbyte/tailchat/commit/542e0292ca04659a40715ad879fbb6e80eca98db))
+
+
+### Features
+
+* add TailchatWsClient and update tailchat-types ([924f644](https://github.com/msgbyte/tailchat/commit/924f644d49c6b56190854ac111ec156f2b0c44b9))
+* add tushan icon in about page ([a88c3a6](https://github.com/msgbyte/tailchat/commit/a88c3a62a8fa6c484995e53c26fc42ddcbf1a69a))
+* **desktop:** add flash frame when receive message ([bf5c040](https://github.com/msgbyte/tailchat/commit/bf5c0405153f90e24c54889d3da4fb55147a2d1e))
+* **electron:** add auto upgrade version check ([5305b31](https://github.com/msgbyte/tailchat/commit/5305b31ebd18cc9788f79024776e0f93f396dc49))
+
+
+### Performance Improvements
+
+* append missed offline icons ([a17fe34](https://github.com/msgbyte/tailchat/commit/a17fe349d3a2eba8277e47b270f2dd6945fb22ac))
+* **desktop:** reduce logo png size ([9d24b10](https://github.com/msgbyte/tailchat/commit/9d24b10f5101eec3a7100dadb53d5d585943e084))
+* optimize page loading timing, and allow refresh on resource loading issues ([f48ecfb](https://github.com/msgbyte/tailchat/commit/f48ecfb9e80aaab90d4def95c4e43789f8a927d4))
+* optimize the avatar text performance of the `com.msgbyte.genshin` plugin ([734afff](https://github.com/msgbyte/tailchat/commit/734afff15d8131234db294fe48a50b0c426f6e73))
+* reduce instance number in docker-compose ([920cbf6](https://github.com/msgbyte/tailchat/commit/920cbf6a448339348b27c384b7ba9e95e56d8a44))
+* remove admin-old to reduce image size ([6f57f80](https://github.com/msgbyte/tailchat/commit/6f57f80f578c621e21d7f3150bc6bf23bcdb61e3))
+
 ## [1.8.5](https://github.com/msgbyte/tailchat/compare/v1.8.4...v1.8.5) (2023-07-19)
 
 
