@@ -1,9 +1,4 @@
-import {
-  useEvent,
-  getJWTUserInfo,
-  useAsync,
-  useCurrentUserInfo,
-} from '@capital/common';
+import { useEvent, useCurrentUserInfo } from '@capital/common';
 import { Avatar, Button } from '@capital/component';
 import { MediaDeviceMenu, TrackToggle } from '@livekit/components-react';
 import type {
@@ -20,7 +15,7 @@ import {
 import * as React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { log } from '@livekit/components-core';
-import { Translate } from '../translate';
+import { Translate } from '../../translate';
 
 /**
  * Fork <PreJoin /> from "@livekit/components-react"

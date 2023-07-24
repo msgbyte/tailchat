@@ -24,10 +24,9 @@ export function createAutoMergedRequest<T, R>(
     timer = null; // 清空计时器以接受后续请求
     const _queue = [...queue];
     queue = []; // 清空队列
-    const ret = fn(_queue.map((q) => q.params));
 
     try {
-      const list = await ret;
+      const list = await fn(_queue.map((q) => q.params));
       _queue.forEach((q1, i) => {
         q1.resolve(list[i]);
       });
