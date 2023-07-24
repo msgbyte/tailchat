@@ -1,4 +1,5 @@
 import { showErrorToasts, useEvent } from '@capital/common';
+import { withKeepAliveOverlay } from '@capital/component';
 import React, { useState } from 'react';
 import type { LocalUserChoices } from '@livekit/components-react';
 import { PreJoinView } from './lib/PreJoinView';
@@ -10,7 +11,7 @@ interface LivekitViewProps {
   roomName: string;
   url: string;
 }
-export const LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
+const _LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
   const [preJoinChoices, setPreJoinChoices] = useState<
     LocalUserChoices | undefined
   >(undefined);
@@ -54,4 +55,8 @@ export const LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
     </LivekitContainer>
   );
 });
-LivekitView.displayName = 'LivekitView';
+_LivekitView.displayName = 'LivekitView';
+
+export const LivekitView = withKeepAliveOverlay(_LivekitView, {
+  cacheId: (props) => props.url,
+});
