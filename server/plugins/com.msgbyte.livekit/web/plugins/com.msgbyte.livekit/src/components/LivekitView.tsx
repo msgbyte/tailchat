@@ -22,7 +22,9 @@ const _LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
     console.log('error while setting up prejoin', err);
   });
 
-  const handleJoin = useEvent((userChoices: LocalUserChoices) => {
+  const handleJoin = useEvent(async (userChoices: LocalUserChoices) => {
+    await setDeactive(); // 先退出之前的房间
+
     setPreJoinChoices(userChoices);
     setActive(props.url);
   });
