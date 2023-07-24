@@ -27,6 +27,11 @@ export async function checkUpdate(): Promise<boolean> {
     return true;
   }
 
+  if (version === '0.0.0') {
+    console.warn('Current version not valid');
+    return true;
+  }
+
   if (semver.gt(latestVersion, version)) {
     // 有新版本
     notification.info({
