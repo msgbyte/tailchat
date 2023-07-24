@@ -71,6 +71,7 @@ export {
   loginWithToken,
   useWatch,
   parseUrlStr,
+  useUpdateRef,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';

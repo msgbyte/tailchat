@@ -6,4 +6,8 @@ export const LivekitContainer = styled.div.attrs({
 })`
   height: 100%;
   background-color: var(--lk-bg);
+
+  .lk-message-body {
+    user-select: text;
+  }
 `;

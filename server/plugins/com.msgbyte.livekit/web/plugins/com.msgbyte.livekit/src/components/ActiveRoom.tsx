@@ -3,12 +3,12 @@ import {
   formatChatMessageLinks,
   LiveKitRoom,
   LocalUserChoices,
-  VideoConference,
 } from '@livekit/components-react';
 import { RoomOptions, VideoPresets } from 'livekit-client';
 import React, { useMemo } from 'react';
 import { useServerUrl } from '../utils/useServerUrl';
 import { useToken } from '../utils/useToken';
+import { VideoConference } from './lib/VideoConference';
 
 type ActiveRoomProps = {
   userChoices: LocalUserChoices;
