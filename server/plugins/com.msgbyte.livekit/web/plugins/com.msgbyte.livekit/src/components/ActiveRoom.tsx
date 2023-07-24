@@ -3,12 +3,25 @@ import {
   formatChatMessageLinks,
   LiveKitRoom,
   LocalUserChoices,
+  useRoomContext,
 } from '@livekit/components-react';
 import { RoomOptions, VideoPresets } from 'livekit-client';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useLivekitState } from '../store/useLivekitState';
 import { useServerUrl } from '../utils/useServerUrl';
 import { useToken } from '../utils/useToken';
 import { VideoConference } from './lib/VideoConference';
+
+const UpdateRoom: React.FC = React.memo(() => {
+  const room = useRoomContext();
+
+  useEffect(() => {
+    useLivekitState.setState({ activeRoom: room });
+  }, [room]);
+
+  return null;
+});
+UpdateRoom.displayName = 'UpdateRoom';
 
 type ActiveRoomProps = {
   userChoices: LocalUserChoices;
@@ -55,6 +68,8 @@ export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
           onDisconnected={onLeave}
         >
           <VideoConference chatMessageFormatter={formatChatMessageLinks} />
+
+          <UpdateRoom />
         </LiveKitRoom>
       ) : (
         <LoadingSpinner />
