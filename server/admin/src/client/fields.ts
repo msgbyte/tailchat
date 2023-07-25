@@ -50,7 +50,17 @@ export const userFields = [
   createAvatarField('avatar', {
     preRenderTransform: parseUrlStr,
   }),
-  createBooleanField('banned'),
+  createTextField('type', {
+    edit: {
+      hidden: true,
+    },
+  }),
+  createBooleanField('emailVerified'),
+  createBooleanField('banned', {
+    edit: {
+      hidden: true,
+    },
+  }),
   createJSONField('settings', {
     list: {
       width: 200,

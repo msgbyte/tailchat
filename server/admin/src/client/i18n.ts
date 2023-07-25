@@ -114,6 +114,7 @@ export const i18n: TushanContextProps['i18n'] = {
               discriminator: '标识符',
               temporary: '是否游客',
               type: '用户类型',
+              emailVerified: '邮箱校验',
               settings: '用户设置',
               banned: '是否被封禁',
               createdAt: '创建时间',
