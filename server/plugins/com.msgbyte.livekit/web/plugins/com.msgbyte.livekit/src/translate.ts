@@ -53,4 +53,12 @@ export const Translate = {
     'zh-CN': '输入消息...',
     'en-US': 'Enter a message...',
   }),
+  nobodyInMeeting: localTrans({
+    'zh-CN': '当前无人在会...',
+    'en-US': 'Nobody in Meeting...',
+  }),
+  peopleInMeeting: localTrans({
+    'zh-CN': '这些人正在会中:',
+    'en-US': 'Here is people in meeting:',
+  }),
 };

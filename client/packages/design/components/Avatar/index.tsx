@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { ForwardRefExoticComponent, useMemo } from 'react';
 import { Avatar as AntdAvatar, Badge } from 'antd';
 import _head from 'lodash/head';
 import _upperCase from 'lodash/upperCase';
@@ -17,7 +17,8 @@ export interface AvatarProps extends AntdAvatarProps {
   name?: string;
   isOnline?: boolean;
 }
-export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
+
+const _Avatar: React.FC<AvatarProps> = React.memo((_props) => {
   const { isOnline, ...props } = _props;
   const src = isValidStr(props.src) ? imageUrlParser(props.src) : undefined;
 
@@ -85,4 +86,11 @@ export const Avatar: React.FC<AvatarProps> = React.memo((_props) => {
 
   return inner;
 });
-Avatar.displayName = 'Avatar';
+_Avatar.displayName = 'Avatar';
+
+type CompoundedComponent = ForwardRefExoticComponent<AvatarProps> & {
+  Group: typeof AntdAvatar.Group;
+};
+
+export const Avatar: CompoundedComponent = _Avatar as any;
+Avatar.Group = AntdAvatar.Group;
