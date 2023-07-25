@@ -16,6 +16,7 @@ import * as React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { log } from '@livekit/components-core';
 import { Translate } from '../../translate';
+import { ParticipantAvatars } from '../ParticipantAvatars';
 
 /**
  * Fork <PreJoin /> from "@livekit/components-react"
@@ -43,6 +44,7 @@ export type PreJoinProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
   'onSubmit'
 > & {
+  roomName: string;
   /** This function is called with the `LocalUserChoices` if validation is passed. */
   onSubmit?: (values: LocalUserChoices) => void;
   /**
@@ -77,6 +79,7 @@ export type PreJoinProps = Omit<
  */
 export const PreJoinView: React.FC<PreJoinProps> = React.memo(
   ({
+    roomName,
     defaults = {},
     onValidate,
     onSubmit,
@@ -191,6 +194,8 @@ export const PreJoinView: React.FC<PreJoinProps> = React.memo(
 
     return (
       <div className="lk-prejoin" {...htmlProps}>
+        <ParticipantAvatars roomName={roomName} />
+
         <div className="lk-video-container" style={{ borderRadius: 10 }}>
           {videoTrack && (
             <video

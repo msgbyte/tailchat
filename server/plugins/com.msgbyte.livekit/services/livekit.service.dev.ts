@@ -1,7 +1,7 @@
 import type { TcContext } from 'tailchat-server-sdk';
 import { TcService, TcDbService } from 'tailchat-server-sdk';
 import type { LivekitDocument, LivekitModel } from '../models/livekit';
-import { AccessToken } from 'livekit-server-sdk';
+import { AccessToken, RoomServiceClient } from 'livekit-server-sdk';
 
 /**
  * livekit
@@ -12,6 +12,8 @@ interface LivekitService
   extends TcService,
     TcDbService<LivekitDocument, LivekitModel> {}
 class LivekitService extends TcService {
+  // roomServiceClient: RoomServiceClient = null;
+
   get serviceName() {
     return 'plugin:com.msgbyte.livekit';
   }
@@ -39,6 +41,10 @@ class LivekitService extends TcService {
     return false;
   }
 
+  getRoomServiceClient() {
+    return new RoomServiceClient(this.livekitUrl, this.apiKey, this.apiSecret);
+  }
+
   onInit() {
     this.registerAvailableAction(() => this.serverAvailable);
 
@@ -52,7 +58,16 @@ class LivekitService extends TcService {
     this.registerLocalDb(require('../models/livekit').default);
 
     this.registerAction('url', this.url);
-    this.registerAction('generateToken', this.generateToken);
+    this.registerAction('generateToken', this.generateToken, {
+      params: {
+        roomName: 'string',
+      },
+    });
+    this.registerAction('roomMembers', this.roomMembers, {
+      params: {
+        roomName: 'string',
+      },
+    });
   }
 
   async url(ctx: TcContext) {
@@ -89,6 +104,21 @@ class LivekitService extends TcService {
       identity,
       accessToken,
     };
+  }
+
+  async roomMembers(ctx: TcContext<{ roomName: string }>) {
+    if (!this.serverAvailable) {
+      throw new Error('livekit server not available');
+    }
+
+    try {
+      const client = this.getRoomServiceClient();
+      const participants = await client.listParticipants(ctx.params.roomName);
+
+      return participants;
+    } catch (err) {
+      return [];
+    }
   }
 }
 

@@ -45,6 +45,7 @@ const _LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
       ) : (
         <div style={{ display: 'grid', placeItems: 'center', height: '100%' }}>
           <PreJoinView
+            roomName={props.roomName}
             onError={handleError}
             defaults={{
               videoEnabled: false,
