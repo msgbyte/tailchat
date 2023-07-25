@@ -1627,8 +1627,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/sdk
       tushan:
-        specifier: ^0.2.37
-        version: 0.2.37(prop-types@15.8.1)(ts-node@10.9.1)
+        specifier: ^0.3.2
+        version: 0.3.2(prop-types@15.8.1)(ts-node@10.9.1)
       vite-express:
         specifier: 0.8.0
         version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
@@ -32510,8 +32510,8 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.2.37(prop-types@15.8.1)(ts-node@10.9.1):
-    resolution: {integrity: sha512-q/imSg1CnvRCD8Q99ueqbjlGS0uFW21fRNVlgwIvG8YEtfQYntOdBZE6gs1xqxWD9qOLInWFDpkcplE2LJR/SA==}
+  /tushan@0.3.2(prop-types@15.8.1)(ts-node@10.9.1):
+    resolution: {integrity: sha512-dI9YPbJEsqd6yRt8imzfS1NJ1vIo102ZSYFbUk5rFCt/KCBqDGfyYuN6hSgzYEveuqeAy13WWVcc+8Qo4q4rmQ==}
     dependencies:
       '@arco-design/web-react': 2.49.2(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
