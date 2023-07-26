@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "livekit-server-sdk": "^1.2.5",
+    "long": "^5.2.3",
     "tailchat-server-sdk": "*"
   }
 }
