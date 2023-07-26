@@ -1944,6 +1944,9 @@ importers:
       livekit-server-sdk:
         specifier: ^1.2.5
         version: 1.2.5
+      long:
+        specifier: ^5.2.3
+        version: 5.2.3
       tailchat-server-sdk:
         specifier: '*'
         version: link:../../packages/sdk
