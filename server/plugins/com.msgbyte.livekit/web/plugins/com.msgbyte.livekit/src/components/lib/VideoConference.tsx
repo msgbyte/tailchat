@@ -14,7 +14,6 @@ import { RoomEvent, Track } from 'livekit-client';
 import type { TrackReferenceOrPlaceholder } from '@livekit/components-core';
 import {
   ConnectionStateToast,
-  FocusLayout,
   FocusLayoutContainer,
   GridLayout,
   LayoutContextProvider,
@@ -28,6 +27,7 @@ import { ParticipantTile } from './ParticipantTile';
 import { CarouselLayout } from './CarouselLayout';
 import { ControlBar } from './ControlBar';
 import { Chat } from './Chat';
+import { FocusLayout } from './FocusLayout';
 
 /**
  * @public
@@ -137,6 +137,7 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
                     <CarouselLayout tracks={carouselTracks}>
                       <ParticipantTile />
                     </CarouselLayout>
+
                     {focusTrack && <FocusLayout track={focusTrack} />}
                   </FocusLayoutContainer>
                 </div>
