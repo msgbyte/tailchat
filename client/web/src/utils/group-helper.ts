@@ -9,7 +9,7 @@ export function isGroupAckPanel(panel: GroupPanel) {
     return true;
   }
 
-  if (panel.type === GroupPanelType.GROUP) {
+  if (panel.type === GroupPanelType.PLUGIN) {
     const pluginPanelInfo = findPluginPanelInfoByName(panel.name);
     return pluginPanelInfo?.feature?.includes('ack') ?? false;
   }

@@ -21,7 +21,11 @@ export const GroupAckPanelItem: React.FC<GroupTextPanelItemProps> = React.memo(
     const { groupId, panel } = props;
     const panelId = panel.id;
     const hasUnread = useGroupTextPanelUnread(panelId);
-    const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
+    const extraBadge = useGroupPanelExtraBadge(
+      groupId,
+      panelId,
+      panel.pluginPanelName ?? ''
+    );
     const { checkIsMuted } = useUserNotifyMute();
     const isMuted = checkIsMuted(panelId, groupId);
 

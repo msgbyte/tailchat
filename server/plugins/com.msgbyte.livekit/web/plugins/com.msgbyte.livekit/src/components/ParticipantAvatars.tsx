@@ -1,24 +1,21 @@
 import React, { useEffect, useRef } from 'react';
-import { Avatar, Tooltip, UserAvatar, UserName } from '@capital/component';
-import { useAsyncFn, useEvent } from '@capital/common';
-import { request } from '../request';
+import {
+  Avatar,
+  LoadingSpinner,
+  Tooltip,
+  UserAvatar,
+  UserName,
+} from '@capital/component';
 import { Translate } from '../translate';
+import { useRoomParticipants } from '../utils/useRoomParticipants';
 
 interface Props {
   roomName: string;
 }
 export const ParticipantAvatars: React.FC<Props> = React.memo((props) => {
   const containerEl = useRef<HTMLDivElement>(null);
-  const [{ value: participants = [] }, _handleFetchParticipants] =
-    useAsyncFn(async () => {
-      const { data } = await request.post('roomMembers', {
-        roomName: props.roomName,
-      });
-
-      return data ?? [];
-    }, [props.roomName]);
-
-  const handleFetchParticipants = useEvent(_handleFetchParticipants);
+  const { participants, fetchParticipants, isFirstLoading } =
+    useRoomParticipants(props.roomName);
 
   useEffect(() => {
     let timer: number;
@@ -26,13 +23,13 @@ export const ParticipantAvatars: React.FC<Props> = React.memo((props) => {
     const fn = async () => {
       if (containerEl.current && containerEl.current.offsetWidth !== 0) {
         // 该元素可见
-        await handleFetchParticipants();
+        await fetchParticipants();
       }
 
       timer = window.setTimeout(fn, 3000);
     };
 
-    timer = window.setTimeout(fn, 3000);
+    fn();
 
     return () => {
       if (timer) {
@@ -43,36 +40,33 @@ export const ParticipantAvatars: React.FC<Props> = React.memo((props) => {
 
   let inner: React.ReactNode;
 
-  if (participants.length === 0) {
-    inner = Translate.nobodyInMeeting;
+  if (isFirstLoading) {
+    inner = <LoadingSpinner />;
   } else {
-    inner = (
-      <>
-        <div>{Translate.peopleInMeeting}</div>
-        <Avatar.Group
-          maxCount={4}
-          maxPopoverTrigger="click"
-          maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
-        >
-          {[
-            ...participants,
-            ...participants,
-            ...participants,
-            ...participants,
-            ...participants,
-            ...participants,
-          ].map((info, i) => (
-            <Tooltip
-              key={`${info.sid}#${i}`}
-              title={<UserName userId={info.identity} />}
-              placement="top"
-            >
-              <UserAvatar userId={info.identity} />
-            </Tooltip>
-          ))}
-        </Avatar.Group>
-      </>
-    );
+    if (participants.length === 0) {
+      inner = Translate.nobodyInMeeting;
+    } else {
+      inner = (
+        <>
+          <div>{Translate.peopleInMeeting}</div>
+          <Avatar.Group
+            maxCount={4}
+            maxPopoverTrigger="click"
+            maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+          >
+            {participants.map((info, i) => (
+              <Tooltip
+                key={`${info.sid}#${i}`}
+                title={<UserName userId={info.identity} />}
+                placement="top"
+              >
+                <UserAvatar userId={info.identity} />
+              </Tooltip>
+            ))}
+          </Avatar.Group>
+        </>
+      );
+    }
   }
 
   return (
