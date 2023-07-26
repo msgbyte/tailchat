@@ -38,7 +38,11 @@ export const SidebarItem: React.FC<{
   const dispatch = useAppDispatch();
   const { markConverseAllAck } = useConverseAck(panelId);
   const extraMenuItems = useExtraMenuItems(panel);
-  const extraBadge = useGroupPanelExtraBadge(groupId, panelId);
+  const extraBadge = useGroupPanelExtraBadge(
+    groupId,
+    panelId,
+    panel.pluginPanelName ?? ''
+  );
   const { checkIsMuted, toggleMute } = useUserNotifyMute();
 
   if (!groupInfo) {

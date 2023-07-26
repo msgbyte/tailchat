@@ -66,7 +66,8 @@ export function useExtraMenuItems(panel: GroupPanel): ItemType[] {
  */
 export function useGroupPanelExtraBadge(
   groupId: string,
-  panelId: string
+  panelId: string,
+  panelType: string
 ): React.ReactNode[] {
   const update = useUpdate();
 
@@ -74,11 +75,17 @@ export function useGroupPanelExtraBadge(
     update();
   });
 
-  const extraBadge = pluginGroupPanelBadges.map((item) => (
-    <React.Fragment key={panelId + item.name}>
-      {item.render(groupId, panelId)}
-    </React.Fragment>
-  ));
+  const extraBadge = pluginGroupPanelBadges
+    .filter((item) => item.panelType === panelType)
+    .map((item) => {
+      const Component = item.render;
+
+      return (
+        <React.Fragment key={panelId + item.name}>
+          <Component groupId={groupId} panelId={panelId} />
+        </React.Fragment>
+      );
+    });
 
   return extraBadge;
 }

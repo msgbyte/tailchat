@@ -34,11 +34,11 @@ export type GroupPanelFeature =
 
 export interface GroupPanel {
   /**
-   * 在群组中唯一
+   * 在群组中唯一, 是个objectId
    */
   id: string;
   /**
-   * 用于显示的面板名
+   * 用于显示的面板名，形如: `com.msgbyte.xxx/panel`
    */
   name: string;
   parentId?: string;

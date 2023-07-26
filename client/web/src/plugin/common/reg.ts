@@ -7,7 +7,6 @@ import {
   regSocketEventListener,
   PermissionItemType,
   GroupPanelFeature,
-  InboxItem,
   buildRegMap,
   BasicInboxItem,
 } from 'tailchat-shared';
@@ -255,7 +254,8 @@ export const [pluginPermission, regPluginPermission] =
  */
 export const [pluginGroupPanelBadges, regGroupPanelBadge] = buildRegList<{
   name: string;
-  render: (groupId: string, panelId: string) => React.ReactNode;
+  panelType: string;
+  render: React.ComponentType<{ groupId: string; panelId: string }>;
 }>();
 
 /**
