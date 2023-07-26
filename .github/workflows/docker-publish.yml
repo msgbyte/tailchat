@@ -47,6 +47,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: VERSION=docker-${{ steps.meta.outputs.tags }}
       - name: Notify to Service
+        continue-on-error: true
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: https://tailchat-nightly.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback

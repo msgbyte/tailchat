@@ -29,6 +29,7 @@ jobs:
           working-directory: ./
           vercel-args: '--prod'
       - name: Notify to Service
+        continue-on-error: true
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: https://paw-server-nightly.moonrailgun.com/api/plugin:com.msgbyte.simplenotify/webhook/callback
