@@ -35,6 +35,8 @@ import { ScreenShareIcon } from './icons/ScreenShareIcon';
 import { useSize } from '../../utils/useResizeObserver';
 import { Translate } from '../../translate';
 import { useMemo } from 'react';
+import { FullScreenBtn } from '../FullScreenBtn';
+import { useEvent } from '@capital/common';
 
 /** @public */
 export type ParticipantTileProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -176,6 +178,16 @@ export const ParticipantTile = ({
     [trackRef.participant, layoutContext, trackRef.source]
   );
 
+  const handleFullScreen = useEvent(() => {
+    if (containerEl.current) {
+      if (checkIsFullscreen()) {
+        document.exitFullscreen();
+      } else {
+        containerEl.current.requestFullscreen();
+      }
+    }
+  });
+
   const { width, height } = useSize(containerEl);
   const avatarSize = useMemo(() => {
     const min = Math.min(width, height);
@@ -237,8 +249,21 @@ export const ParticipantTile = ({
             </div>
           </>
         )}
+
         <FocusToggle trackSource={trackRef.source} />
+
+        <FullScreenBtn onClick={handleFullScreen} />
       </ParticipantContextIfNeeded>
     </div>
   );
 };
+
+function checkIsFullscreen(): boolean {
+  return (
+    document.fullscreenElement ||
+    (document as any).msFullscreenElement ||
+    (document as any).mozFullScreenElement ||
+    (document as any).webkitFullscreenElement ||
+    false
+  );
+}
