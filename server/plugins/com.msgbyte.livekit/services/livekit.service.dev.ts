@@ -1,7 +1,11 @@
 import type { TcContext } from 'tailchat-server-sdk';
 import { TcService, TcDbService } from 'tailchat-server-sdk';
 import type { LivekitDocument, LivekitModel } from '../models/livekit';
-import { AccessToken, RoomServiceClient } from 'livekit-server-sdk';
+import {
+  AccessToken,
+  RoomServiceClient,
+  WebhookEvent,
+} from 'livekit-server-sdk';
 
 /**
  * livekit
@@ -68,6 +72,7 @@ class LivekitService extends TcService {
         roomName: 'string',
       },
     });
+    this.registerAction('webhook', this.webhook);
   }
 
   async url(ctx: TcContext) {
@@ -118,6 +123,34 @@ class LivekitService extends TcService {
       return participants;
     } catch (err) {
       return [];
+    }
+  }
+
+  async webhook(ctx: TcContext) {
+    const payload = ctx.params as WebhookEvent;
+
+    if (payload.event === 'participant_joined') {
+      const room = payload.room;
+      const [groupId, panelId] = room.name.split('#');
+
+      this.roomcastNotify(ctx, groupId, 'participantJoined', {
+        groupId,
+        panelId,
+        participant: payload.participant,
+      });
+
+      return;
+    } else if (payload.event === 'participant_left') {
+      const room = payload.room;
+      const [groupId, panelId] = room.name.split('#');
+
+      this.roomcastNotify(ctx, groupId, 'participantLeft', {
+        groupId,
+        panelId,
+        participant: payload.participant,
+      });
+
+      return;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { AppStore, AppState, AppSocket, useMemoizedFn } from 'tailchat-shared';
+import { AppStore, AppState, AppSocket, useEvent } from 'tailchat-shared';
 
 let _store: AppStore;
 export function setGlobalStore(store: AppStore) {
@@ -31,7 +31,7 @@ export function useGlobalSocketEvent<T>(
   eventName: string,
   callback: (data: T) => void
 ) {
-  const fn = useMemoizedFn(callback);
+  const fn = useEvent(callback);
 
   useEffect(() => {
     if (_socket) {
@@ -44,4 +44,17 @@ export function useGlobalSocketEvent<T>(
       }
     };
   }, []);
+}
+
+export async function emitGlobalSocketEvent(
+  eventName: string,
+  eventData?: unknown
+): Promise<unknown> {
+  if (!_socket) {
+    throw new Error('socket not inited');
+  }
+
+  const res = await _socket.request(eventName, eventData);
+
+  return res;
 }
