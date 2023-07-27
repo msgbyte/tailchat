@@ -496,6 +496,9 @@ importers:
       socket.io-msgpack-parser:
         specifier: ^3.0.2
         version: 3.0.2
+      tailchat-types:
+        specifier: ^1.0.2
+        version: link:../../../packages/types
     devDependencies:
       '@types/jest':
         specifier: ^29.5.1
@@ -506,9 +509,6 @@ importers:
       jest:
         specifier: 27.5.1
         version: 27.5.1(ts-node@10.9.1)
-      tailchat-types:
-        specifier: '*'
-        version: link:../../../packages/types
       ts-jest:
         specifier: 27.1.4
         version: 27.1.4(@babel/core@7.21.0)(@types/jest@29.5.1)(esbuild@0.15.18)(jest@27.5.1)(typescript@4.9.4)
