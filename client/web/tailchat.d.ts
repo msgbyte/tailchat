@@ -184,6 +184,8 @@ declare module '@capital/common' {
 
   export const useWatch: any;
 
+  export const parseUrlStr: any;
+
   export const navigate: any;
 
   export const useLocation: any;
@@ -210,6 +212,8 @@ declare module '@capital/common' {
   };
 
   export const postRequest: any;
+
+  export const BaseCardPayload: any;
 
   export const pluginCustomPanel: any;
 
@@ -347,6 +351,10 @@ declare module '@capital/common' {
   export const pluginInboxItemMap: any;
 
   export const regPluginInboxItemMap: any;
+
+  export const pluginCardItemMap: any;
+
+  export const regPluginCardItem: any;
 
   export const pluginGroupConfigItems: any;
 
@@ -573,4 +581,6 @@ declare module '@capital/component' {
   export const JumpToConverseButton: any;
 
   export const NoData: any;
+
+  export const NotFound: any;
 }
