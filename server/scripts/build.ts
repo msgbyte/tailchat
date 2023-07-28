@@ -1,6 +1,9 @@
 import ts from 'typescript';
 import fs from 'fs-extra';
 import ora from 'ora';
+import { glob } from 'glob';
+import path from 'path';
+import execa from 'execa';
 
 async function buildTailchatServer() {
   const spinner = ora({
@@ -8,11 +11,11 @@ async function buildTailchatServer() {
   });
 
   try {
-    spinner.start('开始编译');
+    spinner.start('Start compiling');
     await fs.remove('./dist');
-    spinner.info('正在编译TS代码');
+    spinner.info('Compiling TS code');
     await compileTsCode();
-    spinner.info('正在移动静态资源文件');
+    spinner.info('Moving static resource files');
     await Promise.all([
       fs.copy('./public', './dist/public', { recursive: true }),
       fs.copy('./locales', './dist/locales', { recursive: true }),
@@ -24,10 +27,27 @@ async function buildTailchatServer() {
       ),
     ]);
 
-    spinner.succeed('编译完成');
+    if (process.platform !== 'win32' || (await isAdmin())) {
+      spinner.info('Building plugin dependent symlink');
+      const nodeModulesList = await glob('./plugins/*/node_modules/*');
+      for (const item of nodeModulesList) {
+        const src = path.resolve(__dirname, '../', item);
+        const dest = path.resolve(__dirname, '../dist', item);
+
+        spinner.text = `Building Symlink: ${src} -> ${dest}`;
+
+        await fs.createSymlink(src, dest, 'dir');
+      }
+    } else {
+      spinner.warn(
+        'You are run command in windows without admin permit, create symlink will be skip'
+      );
+    }
+
+    spinner.succeed('Compiled!');
   } catch (e) {
     console.error(e);
-    spinner.fail('编译失败');
+    spinner.fail('Compilation failed!');
   }
 }
 
@@ -95,4 +115,34 @@ function compileTsCode(): Promise<void> {
   );
 
   return compile(fileNames, options);
+}
+
+/**
+ * check is window admin
+ */
+async function isAdmin() {
+  if (process.platform !== 'win32') {
+    return false;
+  }
+
+  try {
+    // https://stackoverflow.com/a/21295806/1641422
+    await execa('fsutil', ['dirty', 'query', process.env.systemdrive]);
+    return true;
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return testFltmc();
+    }
+
+    return false;
+  }
+}
+
+async function testFltmc() {
+  try {
+    await execa('fltmc');
+    return true;
+  } catch {
+    return false;
+  }
 }
