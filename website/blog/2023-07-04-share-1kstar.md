@@ -46,7 +46,7 @@ This is a very difficult thing to do. Because most users don't care about your d
 
 ## Emphasis on the international market
 
-Multilingualism is a very necessary thing. Although China has a huge market, let's take a longer view. The Chinese market is only 1/5 of the global market. Especially in the open source field, you as a developer don't have to care about language boundaries. Because you are not in control of the differences in laws and regulations and privacy policies in various places. As a developer, you only need to make your product well.
+Multilingualism is a very necessary thing. Share your own product in locate is good but not enough. Especially in the open source field, you as a developer don't have to care about language boundaries. Because you are not in control of the differences in laws and regulations and privacy policies in various places. As a developer, you only need to make your product well.
 
 Therefore, it is very important to support multiple languages. Supporting at least English can greatly expand your audience. If you are not confident about your English level, please make good use of translation software.
 
