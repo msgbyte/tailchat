@@ -29,6 +29,8 @@ app.post('/livekit/webhook', (req, res) => {
   try {
     const event = receiver.receive(req.body, req.get('Authorization'));
 
+    console.log(JSON.stringify(event));
+
     callBrokerAction('plugin:com.msgbyte.livekit.webhook', event);
   } finally {
     res.json({ result: true });

@@ -15,8 +15,8 @@ services:
       - redis
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.admin.rule=PathPrefix(`/livekit/webhook`)"
-      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+      - "traefik.http.routers.livekit.rule=PathPrefix(`/livekit/webhook`)"
+      - "traefik.http.services.livekit.loadbalancer.server.port=3000"
     networks:
       - internal
-    command: cd server/dist/plugins/com.msgbyte.livekit/webhook && node index.js
+    command: node server/dist/plugins/com.msgbyte.livekit/webhook/index.js
