@@ -9,7 +9,8 @@ title: Environment Variable
 | ----- | ------ | --- |
 | PORT | 11000 | Gateway service port number |
 | SECRET | tailchat | encryption key, used for JWT |
-| STATIC_HOST | "{BACKEND}" | Externally accessible static service address, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS, it needs to be modified |
+| STATIC_HOST | "{BACKEND}" | Externally accessible static service host, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS, it needs to be modified |
+| STATIC_URL | "{BACKEND}/static/" | Externally accessible static service complete address prefix, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS Modify, if this variable is set, the above `STATIC_HOST` value is invalid |
 | API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for issuer issuance on open platforms or as a fallback for file services |
 | MONGO_URL | - | Database service address |
 | REDIS_URL | - | Redis service address |
@@ -17,6 +18,7 @@ title: Environment Variable
 | MINIO_USER | - | File service username |
 | MINIO_PASS | - | File service password |
 | MINIO_BUCKET_NAME | tailchat | file service bucket name |
+| MINIO_PATH_STYLE | false | Whether to use path-style s3 communication format, `true` is `Path Style`, `false` is `Virtual hosted style` |
 | SMTP_SENDER | - | Mail service sender (example: `"Tailchat" example@163.com`) |
 | SMTP_URI | - | mail service connection address (example: `smtp://username:password@smtp.example.com/?pool=true`) |
 | FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number(unit: byte) |

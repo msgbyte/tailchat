@@ -6,8 +6,8 @@ import {
   config,
   TcDbService,
   NoPermissionError,
+  TcMinioService,
 } from 'tailchat-server-sdk';
-import MinioService from 'moleculer-minio';
 import _ from 'lodash';
 import mime from 'mime';
 import type { Client as MinioClient } from 'minio';
@@ -34,7 +34,7 @@ class FileService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../../models/file').default);
-    this.registerMixin(MinioService);
+    this.registerMixin(TcMinioService);
     const minioUrl = config.storage.minioUrl;
     const [endPoint, port] = minioUrl.split(':');
 
@@ -44,6 +44,7 @@ class FileService extends TcService {
     this.registerSetting('useSSL', false);
     this.registerSetting('accessKey', config.storage.user);
     this.registerSetting('secretKey', config.storage.pass);
+    this.registerSetting('pathStyle', config.storage.pathStyle);
 
     this.registerAction('save', this.save);
     this.registerAction('saveFileWithUrl', this.saveFileWithUrl, {

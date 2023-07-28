@@ -77,7 +77,6 @@
       "mongoose-findorcreate": "3.0.0"
     },
     "patchedDependencies": {
-      "moleculer-minio@2.0.0": "patches/moleculer-minio@2.0.0.patch",
       "moleculer@0.14.23": "patches/moleculer@0.14.23.patch",
       "vite-express@0.8.0": "patches/vite-express@0.8.0.patch"
     }

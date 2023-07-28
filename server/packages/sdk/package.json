@@ -1,6 +1,6 @@
 {
   "name": "tailchat-server-sdk",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -49,6 +49,7 @@
     "isstream": "^0.1.2",
     "kleur": "^4.1.4",
     "lodash": "^4.17.21",
+    "minio": "^7.1.1",
     "moleculer": "0.14.23",
     "moleculer-db": "0.8.19",
     "moleculer-repl": "^0.7.2",
@@ -56,6 +57,7 @@
     "mongodb": "4.2.1",
     "mongoose": "6.1.1",
     "path-to-regexp": "^6.2.1",
+    "ramda-adjunct": "^4.0.0",
     "tailchat-types": "workspace:^"
   }
 }

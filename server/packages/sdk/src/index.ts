@@ -2,6 +2,7 @@ export { defaultBrokerConfig } from './runner/moleculer.config';
 export { TcService } from './services/base';
 export { TcBroker } from './services/broker';
 export type { TcDbService } from './services/mixins/db.mixin';
+export { TcMinioService } from './services/mixins/minio.mixin';
 export type {
   TcContext,
   TcPureContext,

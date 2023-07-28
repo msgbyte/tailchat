@@ -9,6 +9,7 @@ dotenv.config();
 const port = process.env.PORT ? Number(process.env.PORT) : 11000;
 const apiUrl = process.env.API_URL || `http://127.0.0.1:${port}`;
 const staticHost = process.env.STATIC_HOST || '{BACKEND}';
+const staticUrl = process.env.STATIC_URL || `${staticHost}/static/`;
 export const config = {
   port,
   secret: process.env.SECRET || 'tailchat',
@@ -25,6 +26,7 @@ export const config = {
     user: process.env.MINIO_USER,
     pass: process.env.MINIO_PASS,
     bucketName: process.env.MINIO_BUCKET_NAME || 'tailchat',
+    pathStyle: process.env.MINIO_PATH_STYLE === 'VirtualHosted' ? false : true,
 
     /**
      * 文件上传限制
@@ -36,7 +38,7 @@ export const config = {
       : 1 * 1024 * 1024,
   },
   apiUrl,
-  staticUrl: `${staticHost}/static/`,
+  staticUrl,
   enableOpenapi: true, // 是否开始openapi
 
   emailVerification: checkEnvTrusty(process.env.EMAIL_VERIFY) || false, // 是否在注册后验证邮箱可用性
