@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  # 后台应用
+  tailchat-livekit-webhook-receiver:
+    build:
+      context: ../
+    image: tailchat
+    restart: unless-stopped
+    env_file: docker-compose.env
+    environment:
+      LIVEKIT_WEBHOOK_PORT: 3000
+    depends_on:
+      - mongo
+      - redis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=PathPrefix(`/livekit/webhook`)"
+      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+    networks:
+      - internal
+    command: cd server/dist/plugins/com.msgbyte.livekit/webhook && node index.js

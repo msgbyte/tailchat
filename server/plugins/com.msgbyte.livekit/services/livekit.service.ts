@@ -59,7 +59,7 @@ class LivekitService extends TcService {
       return;
     }
 
-    this.registerLocalDb(require('../models/livekit').default);
+    // this.registerLocalDb(require('../models/livekit').default);
 
     this.registerAction('url', this.url);
     this.registerAction('generateToken', this.generateToken, {
