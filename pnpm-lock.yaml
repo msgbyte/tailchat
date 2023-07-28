@@ -1972,6 +1972,12 @@ importers:
       mini-star:
         specifier: '*'
         version: 1.3.1
+      normalize-path:
+        specifier: ^3.0.0
+        version: 3.0.0
+      rollup-plugin-copy:
+        specifier: ^3.4.0
+        version: 3.4.0
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@18.11.9)(typescript@4.9.4)
@@ -17565,18 +17571,6 @@ packages:
 
   /electron-to-chromium@1.4.310:
     resolution: {integrity: sha512-/xlATgfwkm5uDDwLw5nt/MNEf7c1oazLURMZLy39vOioGYyYzLWIDT8fZMJak6qTiAJ7udFTy7JG7ziyjNutiA==}
-
-  /elliptic@6.5.4:
-    resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
-    dependencies:
-      bn.js: 4.12.0
-      brorand: 1.1.0
-      hash.js: 1.1.7
-      hmac-drbg: 1.0.1
-      inherits: 2.0.4
-      minimalistic-assert: 1.0.1
-      minimalistic-crypto-utils: 1.0.1
-    dev: false
 
   /email-regex@5.0.0:
     resolution: {integrity: sha512-he76Cm8JFxb6OGQHabLBPdsiStgPmJeAEhctmw0uhonUh1pCBsHpI6/rB62s2GNzjBb0YlhIcF/1l9Lp5AfH0Q==}
