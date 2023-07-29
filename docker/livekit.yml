@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  # 后台应用
+  # livekit webhook receiver
   tailchat-livekit-webhook-receiver:
     build:
       context: ../

@@ -3,6 +3,10 @@ sidebar_position: 2
 title: Deploy Tailchat Meeting
 ---
 
+:::info
+The `Tailchat Meeting` solution is currently not integrated with `Tailchat`, if you want to use the video conferencing solution in Tailchat, please choose `agora` or `livekit` solution
+:::
+
 The video conferencing service `Tailchat Meeting` can exist as an independent application. In this section, we will describe how to deploy `Tailchat Meeting` independently
 
 The following content is based on the `docker` environment, please ensure that the server has the most basic `docker` environment.

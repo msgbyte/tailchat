@@ -3,6 +3,10 @@ sidebar_position: 2
 title: 部署视频会议
 ---
 
+:::info
+`Tailchat Meeting` 方案目前没有与 `Tailchat` 做集成，如果你期望在Tailchat中使用视频会议方案请选择 `agora` 或 `livekit` 解决方案
+:::
+
 视频会议服务 `Tailchat Meeting` 可以作为一个独立应用单品存在。在本节中将会讲述如何独立部署 `Tailchat Meeting`
 
 以下内容均基于`docker`环境，请确保服务端有 `docker` 最基本程度的环境。
