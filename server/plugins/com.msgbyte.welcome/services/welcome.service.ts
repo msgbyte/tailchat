@@ -12,7 +12,7 @@ class WelcomeService extends TcService {
   }
 
   onInit() {
-    this.registryAfterActionHook('group.joinGroup', 'joinGroupCallback'); // not work
+    this.registryAfterActionHook('group.joinGroup', 'joinGroupCallback');
 
     this.registerAction('joinGroupCallback', this.joinGroupCallback, {
       params: {

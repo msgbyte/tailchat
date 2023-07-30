@@ -84,6 +84,13 @@ class GroupService extends TcService {
         groupId: 'string',
       },
     });
+    this.registerAction('addMember', this.addMember, {
+      params: {
+        groupId: 'string',
+        userId: 'string',
+      },
+      visibility: 'public',
+    });
     this.registerAction('joinGroup', this.joinGroup, {
       params: {
         groupId: 'string',
@@ -493,15 +500,15 @@ class GroupService extends TcService {
   }
 
   /**
-   * 加入群组
+   * 群组添加成员
    */
-  async joinGroup(
+  async addMember(
     ctx: TcContext<{
       groupId: string;
+      userId: string;
     }>
   ) {
-    const groupId = ctx.params.groupId;
-    const userId = ctx.meta.userId;
+    const { groupId, userId } = ctx.params;
 
     if (!isValidStr(userId)) {
       throw new EntityError('用户id为空');
@@ -548,6 +555,24 @@ class GroupService extends TcService {
     );
 
     return group;
+  }
+
+  /**
+   * 加入群组
+   * @deprecated 请尽量使用 addMember
+   */
+  async joinGroup(
+    ctx: TcContext<{
+      groupId: string;
+    }>
+  ) {
+    const groupId = ctx.params.groupId;
+    const userId = ctx.meta.userId;
+
+    return this.localCall('addMember', {
+      groupId,
+      userId,
+    });
   }
 
   /**
