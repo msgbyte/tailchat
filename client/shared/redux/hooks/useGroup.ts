@@ -6,6 +6,7 @@ import { isValidStr } from '../../utils/string-helper';
 import { useAppSelector } from './useAppSelector';
 import { useUnread } from './useUnread';
 import { useUserId } from './useUserInfo';
+import _compact from 'lodash/compact';
 
 /**
  * 获取群组信息
@@ -32,7 +33,7 @@ export function useGroupMemberInfos(groupId: string): UserBaseInfo[] {
   const groupMemberIds = useGroupMemberIds(groupId);
   const userInfos = useUserInfoList(groupMemberIds);
 
-  return userInfos;
+  return _compact(userInfos); // 开发环境，可能会出现member里面id为不存在的脏数据，生产环境原则上不会出现，兼容一下
 }
 
 /**

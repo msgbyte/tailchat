@@ -8,7 +8,6 @@ import { closeModal, pluginUserExtraInfo } from '@/plugin/common';
 import { setUserJWT } from '@/utils/jwt-helper';
 import { Button, Divider, message, Tag, Typography } from 'antd';
 import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router';
 import { Avatar } from 'tailchat-design';
 import {
   model,
@@ -17,6 +16,7 @@ import {
   showToasts,
   t,
   UploadFileResult,
+  useAlphaMode,
   useAppDispatch,
   useAsyncRequest,
   userActions,
@@ -29,6 +29,7 @@ import { isBuiltinEmail } from '@/utils/user-helper';
 export const SettingsAccount: React.FC = React.memo(() => {
   const userInfo = useUserInfo();
   const dispatch = useAppDispatch();
+  const { isAlphaMode } = useAlphaMode();
   const userExtra = userInfo?.extra ?? {};
 
   const [, handleUserAvatarChange] = useAsyncRequest(
@@ -100,6 +101,9 @@ export const SettingsAccount: React.FC = React.memo(() => {
           </AvatarUploader>
         </div>
         <div className="w-2/3 mobile:w-full">
+          {isAlphaMode && (
+            <FullModalField title={t('用户ID')} content={userInfo._id} />
+          )}
           <FullModalField
             title={t('用户昵称')}
             value={userInfo.nickname}
