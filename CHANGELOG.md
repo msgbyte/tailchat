@@ -1,5 +1,32 @@
 
 
+## [1.8.7](https://github.com/msgbyte/tailchat/compare/v1.8.6...v1.8.7) (2023-07-30)
+
+
+### Bug Fixes
+
+* **admin:** fix number problem in group member count ([59ad340](https://github.com/msgbyte/tailchat/commit/59ad34082c7c6b4cd3bf29b7d6069f2262050589))
+* fix tailchat-client-sdk dependencies problem ([c80e619](https://github.com/msgbyte/tailchat/commit/c80e61949c185ea380a258ae2f907ea6cb0eb584))
+
+
+### Features
+
+* add <PreJoinView /> for voice channel ([79a5b76](https://github.com/msgbyte/tailchat/commit/79a5b76ba4e79324010b570e1d9c92e4855e8c1c))
+* add alioss or other s3 protocol external storage support [#104](https://github.com/msgbyte/tailchat/issues/104) ([5849978](https://github.com/msgbyte/tailchat/commit/584997826b2544170e57a81ab8bb73fc4a4c529e))
+* add fullscreen btn to make dom full screen ([4054489](https://github.com/msgbyte/tailchat/commit/4054489eafa605a992afc70915603d5c8c1f92c2))
+* add group badge for current room participants ([d99e556](https://github.com/msgbyte/tailchat/commit/d99e556c796fdc7fcbc4b5975d302cb6f581915e))
+* add keep alive overlay for livekit view ([3a56d13](https://github.com/msgbyte/tailchat/commit/3a56d13da75c9786a3dede68aab68a2d22fbf13c))
+* add leave pre room when join new room ([fe3b68f](https://github.com/msgbyte/tailchat/commit/fe3b68fb752f47ec715511c490ec9182dedb5344))
+* add livekit into production env ([263be66](https://github.com/msgbyte/tailchat/commit/263be66d335f66356b806ab053e3b81e17ec69d9))
+* add navbar icon which can jump to active panel ([95c589d](https://github.com/msgbyte/tailchat/commit/95c589df4fdc7dbaeaa45ba29d31fc3df29b70d8))
+* add roomMembers list in prejoin view ([d68f75b](https://github.com/msgbyte/tailchat/commit/d68f75b49135a747a3f388bc800e4c4967f59316))
+* **admin:** add type and emailVerified field in user list ([a56f412](https://github.com/msgbyte/tailchat/commit/a56f412995cedbeede8f006fcbba3bc0239e7ecf))
+* **livekit:** add basic room and service endpoint ([78407f0](https://github.com/msgbyte/tailchat/commit/78407f04d56dec2a0b501f41c58697f915e61a80))
+* **livekit:** add livekit webhook receiver ([3610b79](https://github.com/msgbyte/tailchat/commit/3610b796ec6559dc0c0a6dd0e1b153cbcd9a7261))
+* **livekit:** add long dependency ([80347f9](https://github.com/msgbyte/tailchat/commit/80347f9c4181ddd1d37a517c59c4a21067c615ba))
+* regCustomPanel add useIsShow props to hide icon ([c7497cc](https://github.com/msgbyte/tailchat/commit/c7497cc79e89dbcf3220ed986e481e7538039a06))
+* rewrite all videoconference components. support useravatar and i18n ([8eca54a](https://github.com/msgbyte/tailchat/commit/8eca54a77b50970c1e1ab353975643fccce44218))
+
 ## [1.8.6](https://github.com/msgbyte/tailchat/compare/v1.8.5...v1.8.6) (2023-07-24)
 
 
