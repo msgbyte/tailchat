@@ -168,7 +168,7 @@ router.use(
   '/users',
   auth(),
   raExpressMongoose(userModel, {
-    q: ['nickname', 'email'],
+    q: ['_id', 'nickname', 'email'],
   })
 );
 router.delete('/messages/:id', auth(), async (req, res) => {
@@ -246,8 +246,8 @@ router.use(
 router.use(
   '/groups',
   auth(),
-  raExpressMongoose(require('../../../../models/group/group').default, {
-    q: ['name'],
+  raExpressMongoose(groupModel, {
+    q: ['_id', 'name'],
   })
 );
 router.use(
