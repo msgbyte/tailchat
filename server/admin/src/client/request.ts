@@ -27,3 +27,15 @@ function createRequest() {
 }
 
 export const request = createRequest();
+
+export async function callAction(
+  actionName: string,
+  params: Record<string, any>
+) {
+  const { data } = await request.post('/callAction', {
+    action: actionName,
+    params,
+  });
+
+  return data;
+}

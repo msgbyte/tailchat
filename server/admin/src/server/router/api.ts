@@ -8,6 +8,7 @@ import { fileRouter } from './file';
 import dayjs from 'dayjs';
 import userModel from '../../../../models/user/user';
 import messageModel from '../../../../models/chat/message';
+import groupModel from '../../../../models/group/group';
 import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 import { cacheRouter } from './cache';
 import discoverModel from '../../../../plugins/com.msgbyte.discover/models/discover';
@@ -49,6 +50,13 @@ router.use('/network', networkRouter);
 router.use('/config', configRouter);
 router.use('/file', fileRouter);
 router.use('/cache', cacheRouter);
+
+router.post('/callAction', auth(), async (req, res) => {
+  const { action, params } = req.body;
+  const ret = await callBrokerAction(action, params);
+
+  res.json(ret);
+});
 
 router.get('/user/count/summary', auth(), async (req, res) => {
   // 返回最近14天的用户数统计

@@ -25,11 +25,11 @@ import { Dashboard } from './components/Dashboard';
 import {
   discoverFields,
   fileFields,
-  groupFields,
   mailFields,
   messageFields,
 } from './fields';
 import { i18n } from './i18n';
+import { GroupList } from './resources/group';
 import { UserList } from './resources/user';
 import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
@@ -70,21 +70,7 @@ function App() {
         }
       />
 
-      <Resource
-        name="groups"
-        icon={<IconUserGroup />}
-        list={
-          <ListTable
-            filter={[
-              createTextField('q', {
-                label: 'Search',
-              }),
-            ]}
-            fields={groupFields}
-            action={{ detail: true, edit: true, delete: true, export: true }}
-          />
-        }
-      />
+      <Resource name="groups" icon={<IconUserGroup />} list={<GroupList />} />
 
       <Resource
         name="file"

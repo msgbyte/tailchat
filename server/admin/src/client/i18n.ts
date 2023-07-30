@@ -29,6 +29,10 @@ export const i18n: TushanContextProps['i18n'] = {
               'Banning a user disconnects the user from the current connection and prevents future logins',
             unbanUser: 'Unban User',
             unbanUserDesc: 'After lifting the ban, the user can login normally',
+            addGroupMember: 'Add Group Member',
+            addGroupMemberTitle: 'Select Member and append into group member',
+            addGroupMemberRequiredTip: 'You need select group member',
+            selectUser: 'Select User',
           },
           dashboard: {
             file: 'File',
@@ -209,6 +213,10 @@ export const i18n: TushanContextProps['i18n'] = {
             banUserDesc: '封禁用户会将用户从当前连接断开并阻止之后的登录操作',
             unbanUser: '解除封禁用户',
             unbanUserDesc: '解除封禁后用户可以正常登录',
+            addGroupMember: '增加群组成员',
+            addGroupMemberTitle: '选择用户并添加为群组成员',
+            addGroupMemberRequiredTip: '你需要选择用户',
+            selectUser: '选择用户',
           },
           dashboard: {
             file: '文件',
