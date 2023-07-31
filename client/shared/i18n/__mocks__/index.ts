@@ -2,4 +2,4 @@ export const t = (key: string) => {
   return key;
 };
 
-export function onLanguageChange() {}
+export function onLanguageChanged() {}
