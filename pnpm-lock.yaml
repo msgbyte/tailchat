@@ -366,8 +366,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       react-fastify-form:
-        specifier: 1.0.12
-        version: 1.0.12(react@18.2.0)
+        specifier: 1.0.13
+        version: 1.0.13(react@18.2.0)
       remirror:
         specifier: ^2.0.9
         version: 2.0.9(@remirror/pm@2.0.0)(@types/node@18.11.9)(prettier@2.8.4)(prosemirror-model@1.18.1)(prosemirror-state@1.4.1)(prosemirror-view@1.28.2)
@@ -28416,8 +28416,8 @@ packages:
   /react-fast-compare@3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
 
-  /react-fastify-form@1.0.12(react@18.2.0):
-    resolution: {integrity: sha512-ml0F2wXMm4pAYHBsWmMOsuJQD0vwlUzOrhP46g6oxKag9Nbq+74iCbchePBXZxAhRT4ZJgNj4iJUndYFdsX+xg==}
+  /react-fastify-form@1.0.13(react@18.2.0):
+    resolution: {integrity: sha512-cm9a7b6j0L8aeCsLg3ClZmYjajhWsX+p/MbB0C2Yc4A6lnxvYGJDQ0trEMIqxO07QyMQmoPPQVI4DQvhG4A8IA==}
     peerDependencies:
       react: ^16.14.0
     dependencies:
