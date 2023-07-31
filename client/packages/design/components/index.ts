@@ -10,7 +10,10 @@ export { Image, setImageUrlParser } from './Image';
 export { SensitiveText } from './SensitiveText';
 export { VirtualChatList } from './VirtualChatList';
 
-export { WebMetaForm } from './WebMetaForm';
+export {
+  WebMetaForm,
+  setWebFastifyFormConfig as setWebMetaFormConfig,
+} from './WebMetaForm';
 export {
   createFastifyFormSchema as createMetaFormSchema,
   fieldSchema as metaFormFieldSchema,

@@ -119,8 +119,8 @@ export async function setLanguage(lang: AllowedLanguage): Promise<void> {
 /**
  * 获取i18n语言
  */
-export function getLanguage(): string {
-  return i18next.language;
+export function getLanguage(): AllowedLanguage {
+  return i18next.language as AllowedLanguage;
 }
 
 /**

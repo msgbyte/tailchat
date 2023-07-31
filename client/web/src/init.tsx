@@ -21,7 +21,7 @@ import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
 import { recordMeasure } from './utils/measure-helper';
 import { postMessageEvent } from './utils/event-helper';
-import { setImageUrlParser } from 'tailchat-design';
+import { setImageUrlParser, setWebMetaFormConfig } from 'tailchat-design';
 
 recordMeasure('init');
 postMessageEvent('init');
@@ -71,6 +71,10 @@ setGlobalLoading((text) => {
 });
 
 setImageUrlParser(parseUrlStr);
+
+setWebMetaFormConfig({
+  submitLabel: t('提交'),
+});
 
 const backToLoginPage = (() => {
   let timer: number;

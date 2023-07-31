@@ -7,9 +7,11 @@ import {
   Routes,
 } from 'react-router-dom';
 import {
+  getLanguage,
   parseUrlStr,
   sharedEvent,
   TcProvider,
+  useAsync,
   useColorScheme,
   useGlobalConfigStore,
   useLanguage,
@@ -28,6 +30,8 @@ import { AppRouterApi } from './components/AppRouterApi';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import enUS from 'antd/es/locale/en_US';
+import type { Locale } from 'antd/es/locale-provider';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
@@ -55,15 +59,34 @@ const InviteRoute = Loadable(
     )
 );
 
+export const TcAntdProvider: React.FC<PropsWithChildren> = React.memo(
+  (props) => {
+    const { value: locale } = useAsync(async (): Promise<Locale> => {
+      const language = getLanguage();
+
+      if (language === 'zh-CN') {
+        return import('antd/es/locale/zh_CN').then((m) => m.default);
+      }
+
+      return enUS;
+    }, []);
+
+    return (
+      <AntdProvider getPopupContainer={getPopupContainer} locale={locale}>
+        {props.children}
+      </AntdProvider>
+    );
+  }
+);
+TcAntdProvider.displayName = 'TcAntdProvider';
+
 const AppProvider: React.FC<PropsWithChildren> = React.memo((props) => {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <AppRouter>
         <TcProvider>
           <DndProvider backend={HTML5Backend}>
-            <AntdProvider getPopupContainer={getPopupContainer}>
-              {props.children}
-            </AntdProvider>
+            <TcAntdProvider>{props.children}</TcAntdProvider>
           </DndProvider>
         </TcProvider>
       </AppRouter>
