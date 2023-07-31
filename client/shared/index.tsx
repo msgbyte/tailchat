@@ -51,6 +51,7 @@ export {
   setLanguage,
   getLanguage,
   useTranslation,
+  onLanguageLoaded,
 } from './i18n';
 export type { AllowedLanguage } from './i18n';
 export { Trans } from './i18n/Trans';

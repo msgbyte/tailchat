@@ -15,6 +15,7 @@ import {
   setErrorHook,
   showToasts,
   parseUrlStr,
+  onLanguageLoaded,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
@@ -72,8 +73,10 @@ setGlobalLoading((text) => {
 
 setImageUrlParser(parseUrlStr);
 
-setWebMetaFormConfig({
-  submitLabel: t('提交'),
+onLanguageLoaded(() => {
+  setWebMetaFormConfig({
+    submitLabel: t('提交'),
+  });
 });
 
 const backToLoginPage = (() => {

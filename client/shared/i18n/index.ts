@@ -124,9 +124,18 @@ export function getLanguage(): AllowedLanguage {
 }
 
 /**
+ * 语言加载
+ */
+export function onLanguageLoaded(
+  cb: (loaded: { [language: string]: { [namespace: string]: boolean } }) => void
+) {
+  i18next.on('loaded', cb);
+}
+
+/**
  * 监听语言变更
  */
-export function onLanguageChange(cb: (lang: string) => void) {
+export function onLanguageChanged(cb: (lang: string) => void) {
   i18next.on('languageChanged', cb);
 }
 
