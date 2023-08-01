@@ -7,9 +7,10 @@ export interface LoadingProps {
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  tip?: string;
 }
 export const Loading: React.FC<LoadingProps> = React.memo((props) => {
-  const { spinning = false, className, style } = props;
+  const { spinning = false, className, style, tip } = props;
 
   return (
     <div className={clsx('relative', className)} style={style}>
@@ -22,7 +23,7 @@ export const Loading: React.FC<LoadingProps> = React.memo((props) => {
           }
         )}
       >
-        <LoadingSpinner />
+        <LoadingSpinner tip={tip} />
       </div>
 
       {props.children}
