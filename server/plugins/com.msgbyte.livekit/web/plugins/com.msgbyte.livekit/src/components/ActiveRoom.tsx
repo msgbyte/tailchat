@@ -5,7 +5,7 @@ import {
   LocalUserChoices,
   useRoomContext,
 } from '@livekit/components-react';
-import { RoomOptions, VideoPresets } from 'livekit-client';
+import { RoomOptions, ScreenSharePresets, VideoPresets } from 'livekit-client';
 import React, { useEffect, useMemo } from 'react';
 import { useLivekitState } from '../store/useLivekitState';
 import { useServerUrl } from '../utils/useServerUrl';
@@ -46,7 +46,11 @@ export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
         videoSimulcastLayers:
           hq === true
             ? [VideoPresets.h1080, VideoPresets.h720]
-            : [VideoPresets.h540, VideoPresets.h216],
+            : [VideoPresets.h720, VideoPresets.h540, VideoPresets.h216],
+        screenShareSimulcastLayers:
+          hq === true
+            ? [ScreenSharePresets.h1080fps15, ScreenSharePresets.h720fps5]
+            : [ScreenSharePresets.h720fps5, ScreenSharePresets.h360fps3],
       },
       audioCaptureDefaults: {
         deviceId: userChoices.audioDeviceId ?? undefined,
