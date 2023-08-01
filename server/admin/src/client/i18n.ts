@@ -44,6 +44,12 @@ export const i18n: TushanContextProps['i18n'] = {
                 'Tailchat: The next-generation noIM Application in your own workspace',
             },
           },
+          analytics: {
+            activeGroupTop5: 'Active Group Top 5',
+            activeUserTop5: 'Active User Top 5',
+            largeGroupTop5: 'Large Group Top 5',
+            fileStorageUserTop5: 'File Storage User 5',
+          },
           network: {
             nodeList: 'Node List',
             id: 'ID',
@@ -106,6 +112,9 @@ export const i18n: TushanContextProps['i18n'] = {
       translation: {
         ...i18nZhTranslation,
         resources: {
+          analytics: {
+            name: '分析',
+          },
           users: {
             name: '用户管理',
             fields: {
@@ -227,6 +236,12 @@ export const i18n: TushanContextProps['i18n'] = {
               github: 'Tailchat 是在你私有空间内的下一代noIM应用',
               tushan: 'Tailchat Admin后台 由 tushan 提供技术支持',
             },
+          },
+          analytics: {
+            activeGroupTop5: '前 5 名活跃群组',
+            activeUserTop5: '前 5 名活跃用户',
+            largeGroupTop5: '最大的 5 个群组',
+            fileStorageUserTop5: '文件存储用量最大 5 名用户',
           },
           network: {
             nodeList: '节点列表',

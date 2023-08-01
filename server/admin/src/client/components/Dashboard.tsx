@@ -209,6 +209,8 @@ const DataItem: React.FC<{
 DataItem.displayName = 'DataItem';
 
 const UserCountChart: React.FC = React.memo(() => {
+  const id = 'userCount';
+  const color = '#82ca9d';
   const { t } = useTranslation();
   const { value: newUserCountSummary } = useAsync(async () => {
     const { data } = await request.get<{
@@ -230,9 +232,9 @@ const UserCountChart: React.FC = React.memo(() => {
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
         <defs>
-          <linearGradient id="userCountColor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          <linearGradient id={`${id}Color`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor={color} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="date" />
@@ -243,9 +245,9 @@ const UserCountChart: React.FC = React.memo(() => {
           type="monotone"
           dataKey="count"
           label={t('custom.dashboard.newUserCount')}
-          stroke="#82ca9d"
+          stroke={color}
           fillOpacity={1}
-          fill="url(#userCountColor)"
+          fill={`url(#${id}Color)`}
         />
       </AreaChart>
     </ResponsiveContainer>
@@ -254,6 +256,8 @@ const UserCountChart: React.FC = React.memo(() => {
 UserCountChart.displayName = 'UserCountChart';
 
 const MessageCountChart: React.FC = React.memo(() => {
+  const id = 'messageCount';
+  const color = '#8884d8';
   const { t } = useTranslation();
   const { value: messageCountSummary } = useAsync(async () => {
     const { data } = await request.get<{
@@ -275,9 +279,9 @@ const MessageCountChart: React.FC = React.memo(() => {
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
         <defs>
-          <linearGradient id="messageCountColor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <linearGradient id={`${id}Color`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor={color} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="date" />
@@ -290,7 +294,7 @@ const MessageCountChart: React.FC = React.memo(() => {
           label={t('custom.dashboard.messageCount')}
           stroke="#8884d8"
           fillOpacity={1}
-          fill="url(#messageCountColor)"
+          fill={`url(#${id}Color)`}
         />
       </AreaChart>
     </ResponsiveContainer>

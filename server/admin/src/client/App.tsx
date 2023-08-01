@@ -11,6 +11,7 @@ import {
   IconCompass,
   IconDashboard,
   IconEmail,
+  IconExperiment,
   IconFile,
   IconMessage,
   IconNotification,
@@ -31,6 +32,7 @@ import {
 import { i18n } from './i18n';
 import { GroupList } from './resources/group';
 import { UserList } from './resources/user';
+import { TailchatAnalytics } from './routes/analytics';
 import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
 import { SocketIOAdmin } from './routes/socketio';
@@ -50,6 +52,10 @@ function App() {
       authProvider={authProvider}
       i18n={i18n}
     >
+      <CustomRoute name="analytics" icon={<IconExperiment />}>
+        <TailchatAnalytics />
+      </CustomRoute>
+
       <Resource name="users" icon={<IconUser />} list={<UserList />} />
 
       <Resource

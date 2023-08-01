@@ -12,6 +12,7 @@ import groupModel from '../../../../models/group/group';
 import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 import { cacheRouter } from './cache';
 import discoverModel from '../../../../plugins/com.msgbyte.discover/models/discover';
+import { analyticsRouter } from './analytics';
 
 const router = Router();
 
@@ -46,6 +47,7 @@ router.post('/login', (req, res) => {
   }
 });
 
+router.use('/analytics', analyticsRouter);
 router.use('/network', networkRouter);
 router.use('/config', configRouter);
 router.use('/file', fileRouter);
