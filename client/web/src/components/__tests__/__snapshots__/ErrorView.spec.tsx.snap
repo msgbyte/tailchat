@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorView render 1`] = `
+<div>
+  <div
+    class="text-center w-full"
+  >
+    <img
+      class="w-32 h-32 m-auto mb-2"
+      src="problem.svg"
+    />
+    <div>
+      Dummy Error
+    </div>
+  </div>
+</div>
+`;

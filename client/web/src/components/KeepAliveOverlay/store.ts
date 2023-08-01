@@ -1,5 +1,5 @@
 import type React from 'react';
-import create from 'zustand';
+import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 interface ElementDisplayRect {
