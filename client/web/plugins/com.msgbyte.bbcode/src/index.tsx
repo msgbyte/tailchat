@@ -5,10 +5,14 @@ import {
   regMessageTextDecorators,
 } from '@capital/common';
 
+const PLUGIN_ID = 'com.msgbyte.bbcode';
+
 // 预加载
 import('./render');
 
-const BBCode = Loadable(() => import('./render'));
+const BBCode = Loadable(() => import('./render'), {
+  componentName: `${PLUGIN_ID}:renderComponent`,
+});
 let serialize: (bbcode: string) => string;
 import('./bbcode/serialize').then((module) => {
   serialize = module.bbcodeToPlainText;
