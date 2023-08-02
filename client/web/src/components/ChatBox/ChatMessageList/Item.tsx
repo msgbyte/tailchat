@@ -25,6 +25,7 @@ import { AutoFolder, Avatar, Icon } from 'tailchat-design';
 import { MessageAckContainer } from './MessageAckContainer';
 import { UserPopover } from '@/components/popover/UserPopover';
 import _isEmpty from 'lodash/isEmpty';
+import type { LocalChatMessage } from 'tailchat-shared/model/message';
 import './Item.less';
 
 /**
@@ -142,6 +143,13 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
 
             <span>{getMessageRender(payload.content)}</span>
 
+            {payload.sendFailed === true && (
+              <Icon
+                className="inline-block ml-1"
+                icon="emojione:cross-mark-button"
+              />
+            )}
+
             {/* 解释器按钮 */}
             {useRenderPluginMessageInterpreter(payload.content)}
           </div>
@@ -235,7 +243,7 @@ SystemMessageWithNickname.displayName = 'SystemMessageWithNickname';
 
 interface ChatMessageItemProps {
   showAvatar: boolean;
-  payload: ChatMessage;
+  payload: LocalChatMessage;
 }
 const ChatMessageItem: React.FC<ChatMessageItemProps> = React.memo((props) => {
   const payload = props.payload;
@@ -266,7 +274,10 @@ ChatMessageItem.displayName = 'ChatMessageItem';
 /**
  * 构造聊天项
  */
-export function buildMessageItemRow(messages: ChatMessage[], index: number) {
+export function buildMessageItemRow(
+  messages: LocalChatMessage[],
+  index: number
+) {
   const message = messages[index];
 
   if (!message) {
@@ -305,12 +316,18 @@ export function buildMessageItemRow(messages: ChatMessage[], index: number) {
         </Divider>
       )}
 
-      <MessageAckContainer
-        converseId={message.converseId}
-        messageId={message._id}
-      >
-        <ChatMessageItem showAvatar={showAvatar} payload={message} />
-      </MessageAckContainer>
+      {message.isLocal === true ? (
+        <div className="opacity-50">
+          <ChatMessageItem showAvatar={showAvatar} payload={message} />
+        </div>
+      ) : (
+        <MessageAckContainer
+          converseId={message.converseId}
+          messageId={message._id}
+        >
+          <ChatMessageItem showAvatar={showAvatar} payload={message} />
+        </MessageAckContainer>
+      )}
     </div>
   );
 }

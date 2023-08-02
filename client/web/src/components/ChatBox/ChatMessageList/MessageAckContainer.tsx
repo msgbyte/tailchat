@@ -1,6 +1,6 @@
 import { Intersection } from '@/components/Intersection';
 import React from 'react';
-import { useConverseAck, useMemoizedFn } from 'tailchat-shared';
+import { useConverseAck, useEvent } from 'tailchat-shared';
 
 /**
  * 消息已读回调容器
@@ -14,7 +14,7 @@ export const MessageAckContainer: React.FC<MessageAckContainerProps> =
   React.memo((props) => {
     const { updateConverseAck } = useConverseAck(props.converseId);
 
-    const handleIntersection = useMemoizedFn(() => {
+    const handleIntersection = useEvent(() => {
       updateConverseAck(props.messageId);
     });
 

@@ -166,9 +166,16 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     // 处理接受到的消息
     const converseId = message.converseId;
     const converse = store.getState().chat.converses[converseId];
+    const userId = store.getState().user.info?._id;
 
     // 添加消息到会话中
     const appendMessage = () => {
+      if (message.author === userId) {
+        // 如果是自己发送的消息，则忽略
+        // 因为存在local状态的消息，应该由发送消息的地方处理
+        return;
+      }
+
       store.dispatch(
         chatActions.appendConverseMessage({
           converseId,

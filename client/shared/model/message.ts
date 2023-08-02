@@ -3,6 +3,17 @@ import type { ChatMessageReaction, ChatMessage } from 'tailchat-types';
 
 export { ChatMessageReaction, ChatMessage };
 
+export interface LocalChatMessage extends ChatMessage {
+  /**
+   * 本地添加消息的标识，用于标记该条消息尚未确定已经发送到服务端
+   */
+  isLocal?: boolean;
+  /**
+   * 判断是否发送失败
+   */
+  sendFailed?: boolean;
+}
+
 export interface SimpleMessagePayload {
   groupId?: string;
   converseId: string;

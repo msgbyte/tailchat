@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ensureDMConverse } from '../../helper/converse-helper';
 import { useAsync } from '../../hooks/useAsync';
 import { showErrorToasts } from '../../manager/ui';
@@ -11,12 +11,14 @@ import { chatActions } from '../slices';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
 import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
+import _uniqueId from 'lodash/uniqueId';
 import {
   ChatConverseState,
   isValidStr,
   t,
   useAsyncRequest,
   useChatBoxContext,
+  useEvent,
   useMemoizedFn,
 } from '../..';
 import { MessageHelper } from '../../utils/message-helper';
@@ -24,8 +26,10 @@ import { ChatConverseType } from '../../model/converse';
 import { sharedEvent } from '../../event';
 import { useUpdateRef } from '../../hooks/useUpdateRef';
 
-function useHandleSendMessage(context: ConverseContext) {
-  const { converseId } = context;
+const genLocalMessageId = () => _uniqueId('localMessage_');
+
+function useHandleSendMessage() {
+  const userId = useAppSelector((state) => state.user.info?._id);
   const dispatch = useAppDispatch();
   const { hasContext, replyMsg, clearReplyMsg } = useChatBoxContext();
   const replyMsgRef = useUpdateRef(replyMsg); // NOTICE: 这个是为了修复一个边界case: 当先输入文本再选中消息回复时，直接发送无法带上回复信息
@@ -33,43 +37,60 @@ function useHandleSendMessage(context: ConverseContext) {
   /**
    * 发送消息
    */
-  const handleSendMessage = useCallback(
-    async (payload: SendMessagePayload) => {
-      // 输入合法性检测
-      if (payload.content === '') {
-        showErrorToasts(t('无法发送空消息'));
-        return;
+  const handleSendMessage = useEvent((payload: SendMessagePayload) => {
+    // 输入合法性检测
+    if (payload.content === '') {
+      showErrorToasts(t('无法发送空消息'));
+      return;
+    }
+
+    if (hasContext === true) {
+      // 如果有上下文, 则组装payload
+      const msgHelper = new MessageHelper(payload);
+      if (!_isNil(replyMsgRef.current)) {
+        msgHelper.setReplyMsg(replyMsgRef.current);
+        clearReplyMsg();
       }
 
-      try {
-        if (hasContext === true) {
-          // 如果有上下文, 则组装payload
-          const msgHelper = new MessageHelper(payload);
-          if (!_isNil(replyMsgRef.current)) {
-            msgHelper.setReplyMsg(replyMsgRef.current);
-            clearReplyMsg();
-          }
+      payload = msgHelper.generatePayload();
+    }
 
-          payload = msgHelper.generatePayload();
-        }
+    const localMessageId = genLocalMessageId();
+    dispatch(
+      chatActions.appendLocalMessage({
+        author: userId,
+        localMessageId,
+        payload,
+      })
+    );
 
-        // TODO: 增加临时消息, 对网络环境不佳的状态进行优化
-
-        const message = await sendMessage(payload);
+    sendMessage(payload)
+      .then((message) => {
         dispatch(
-          chatActions.appendConverseMessage({
-            converseId,
-            messages: [message],
+          chatActions.updateMessageInfo({
+            messageId: localMessageId,
+            message: {
+              ...message,
+              isLocal: false,
+              sendFailed: false,
+            },
           })
         );
+
         sharedEvent.emit('sendMessage', payload);
-      } catch (err) {
+      })
+      .catch((err) => {
         showErrorToasts(err);
-        throw err;
-      }
-    },
-    [converseId, hasContext, clearReplyMsg]
-  );
+        dispatch(
+          chatActions.updateMessageInfo({
+            messageId: localMessageId,
+            message: {
+              sendFailed: true,
+            },
+          })
+        );
+      });
+  });
 
   return handleSendMessage;
 }
@@ -190,7 +211,7 @@ export function useConverseMessage(context: ConverseContext) {
     await _handleFetchMoreMessage();
   });
 
-  const handleSendMessage = useHandleSendMessage(context);
+  const handleSendMessage = useHandleSendMessage();
 
   return {
     messages,
