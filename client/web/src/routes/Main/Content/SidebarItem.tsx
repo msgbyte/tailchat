@@ -48,9 +48,11 @@ export const SidebarItem: React.FC<SidebarItemProps> = React.memo((props) => {
           <Badge count={Number(badge) || 0} />
         )}
 
-        <div className="text-base p-1 cursor-pointer hidden opacity-70 group-hover:block hover:opacity-100">
-          {props.action}
-        </div>
+        {props.action && (
+          <div className="text-base p-1 cursor-pointer hidden opacity-70 group-hover:block hover:opacity-100">
+            {props.action}
+          </div>
+        )}
       </div>
     </Link>
   );
