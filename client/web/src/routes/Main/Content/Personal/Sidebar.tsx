@@ -7,6 +7,7 @@ import {
   useUserInfo,
   DevContainer,
   useGlobalConfigStore,
+  useAppSelector,
 } from 'tailchat-shared';
 import { SidebarDMItem } from './SidebarDMItem';
 import { openModal } from '@/components/Modal';
@@ -42,6 +43,12 @@ export const PersonalSidebar: React.FC = React.memo(() => {
   const { disablePluginStore } = useGlobalConfigStore((state) => ({
     disablePluginStore: state.disablePluginStore,
   }));
+  const hasFriendRequest = useAppSelector(
+    (state) =>
+      state.user.friendRequests.findIndex(
+        (item) => item.to === state.user.info?._id
+      ) >= 0
+  );
 
   return (
     <CommonSidebarWrapper data-tc-role="sidebar-personal">
@@ -52,6 +59,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
           name={t('好友')}
           icon={<Icon icon="mdi:account-multiple" />}
           to="/main/personal/friends"
+          badge={hasFriendRequest}
         />
 
         {!disablePluginStore && (
