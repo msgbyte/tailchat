@@ -58,3 +58,15 @@ SMTP_SENDER="\"Tailchat\" example@163.com" # If there are repeated double quotes
 :::caution
 Some environment variable modifications may need to clear the cache to take effect
 :::
+
+### How to clear the cache
+
+Changes to some environment variables may involve cache updates, such as `FILE_LIMIT`, because config data needs to be sent to the client.
+
+Therefore, it may appear that after modifying the environment variable, the performance on the client is still the same as before. At this point you need to clear the old cache for the update to take effect.
+
+There are several options for clearing the cache:
+
+- Execute `docker compose down` then run `docker compose up -d`. This is because the data of the `redis` service is not persisted, shutting down and restarting the service is equivalent to a brand new environment
+- Manually enter the `redis` service to clean up the cache items whose name contains `config.client`, which contains the configuration items returned to the client
+- Enter the cache management page of the `admin` management system. Click the `Clean Configuration Cache` button
