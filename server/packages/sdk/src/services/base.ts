@@ -179,7 +179,12 @@ export abstract class TcService extends Service {
             if (Array.isArray(afterHooks) && afterHooks.length > 0) {
               for (const action of afterHooks) {
                 // 异步调用, 暂时不修改值
-                ctx.call(String(action), ctx.params, { meta: ctx.meta });
+                ctx.call(String(action), ctx.params, {
+                  meta: {
+                    ...ctx.meta,
+                    actionResult: res,
+                  },
+                });
               }
             }
           } catch (err) {
@@ -400,7 +405,7 @@ export abstract class TcService extends Service {
    * @param fullActionName 完整的带servicename的action名
    * @param callbackAction 当前服务的action名，不需要带servicename
    */
-  async registryAfterActionHook(
+  async registerAfterActionHook(
     fullActionName: string,
     callbackAction: string
   ) {

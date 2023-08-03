@@ -1,0 +1,20 @@
+{
+  "name": "tailchat-plugin-autojoingroup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "moonrailgun",
+  "description": "Auto join group after register",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:web": "ministar buildPlugin all",
+    "build:web:watch": "ministar watchPlugin all"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.20",
+    "mini-star": "*"
+  },
+  "dependencies": {
+    "tailchat-server-sdk": "*"
+  }
+}

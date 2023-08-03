@@ -91,6 +91,10 @@ class GroupService extends TcService {
       },
       visibility: 'public',
     });
+    /**
+     * 加入群组
+     * @deprecated 请尽量使用 addMember
+     */
     this.registerAction('joinGroup', this.joinGroup, {
       params: {
         groupId: 'string',
