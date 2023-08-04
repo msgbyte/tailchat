@@ -10,7 +10,7 @@ interface ConverseMessageContextProps {
   isLoadingMore: boolean;
   hasMoreMessage: boolean;
   fetchMoreMessage: () => Promise<void>;
-  sendMessage: (payload: SendMessagePayload) => Promise<void>;
+  sendMessage: (payload: SendMessagePayload) => void | Promise<void>;
 }
 
 const {
