@@ -75,6 +75,10 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
     },
   });
 
+  // 禁止对消息进行操作，因为此时消息尚未发送到远程
+  const disableOperate =
+    payload.isLocal === true || payload.sendFailed === true;
+
   return (
     <div
       className={clsx(
@@ -169,39 +173,41 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo((props) => {
       </div>
 
       {/* 操作 */}
-      <div
-        className={clsx(
-          'bg-white dark:bg-black rounded absolute right-2 cursor-pointer -top-3 shadow-sm flex',
-          {
-            'opacity-0 group-hover:opacity-100 bg-opacity-80 hover:bg-opacity-100':
-              !isActionBtnActive,
-            'opacity-100 bg-opacity-100': isActionBtnActive,
-          }
-        )}
-      >
-        <TcPopover
-          overlayClassName="chat-message-item_action-popover"
-          content={emojiAction}
-          placement="bottomLeft"
-          trigger={['click']}
-          onOpenChange={setIsActionBtnActive}
+      {!disableOperate && (
+        <div
+          className={clsx(
+            'bg-white dark:bg-black rounded absolute right-2 cursor-pointer -top-3 shadow-sm flex',
+            {
+              'opacity-0 group-hover:opacity-100 bg-opacity-80 hover:bg-opacity-100':
+                !isActionBtnActive,
+              'opacity-100 bg-opacity-100': isActionBtnActive,
+            }
+          )}
         >
-          <div>
-            <MessageActionIcon icon="mdi:emoticon-happy-outline" />
-          </div>
-        </TcPopover>
+          <TcPopover
+            overlayClassName="chat-message-item_action-popover"
+            content={emojiAction}
+            placement="bottomLeft"
+            trigger={['click']}
+            onOpenChange={setIsActionBtnActive}
+          >
+            <div>
+              <MessageActionIcon icon="mdi:emoticon-happy-outline" />
+            </div>
+          </TcPopover>
 
-        <Dropdown
-          menu={moreActions}
-          placement="bottomLeft"
-          trigger={['click']}
-          onOpenChange={setIsActionBtnActive}
-        >
-          <div>
-            <MessageActionIcon icon="mdi:dots-horizontal" />
-          </div>
-        </Dropdown>
-      </div>
+          <Dropdown
+            menu={moreActions}
+            placement="bottomLeft"
+            trigger={['click']}
+            onOpenChange={setIsActionBtnActive}
+          >
+            <div>
+              <MessageActionIcon icon="mdi:dots-horizontal" />
+            </div>
+          </Dropdown>
+        </div>
+      )}
     </div>
   );
 });
