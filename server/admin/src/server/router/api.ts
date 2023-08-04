@@ -245,11 +245,28 @@ router.use(
     allowedRegexFields: ['content'],
   })
 );
+
+router.post('/groups/', auth(), async (req, res) => {
+  // create group
+  const { name, owner } = req.body;
+
+  const group = await groupModel.createGroup({
+    name,
+    owner,
+  });
+
+  res.json({
+    id: group._id,
+  });
+});
 router.use(
   '/groups',
   auth(),
   raExpressMongoose(groupModel, {
     q: ['_id', 'name'],
+    capabilities: {
+      create: false,
+    },
   })
 );
 router.use(

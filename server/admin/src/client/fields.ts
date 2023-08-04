@@ -116,9 +116,9 @@ export const groupFields = [
   createTextField('name'),
   createReferenceField('owner', {
     reference: 'users',
-    displayField: 'nickname',
+    displayField: (record) => `${record.nickname}#${record.discriminator}`,
     list: {
-      width: 80,
+      width: 160,
     },
   }),
   createTextField('members.length', {
@@ -131,8 +131,16 @@ export const groupFields = [
       hidden: true,
     },
   }),
-  createJSONField('roles'),
-  createJSONField('fallbackPermissions'),
+  createJSONField('roles', {
+    edit: {
+      hidden: true,
+    },
+  }),
+  createJSONField('fallbackPermissions', {
+    edit: {
+      hidden: true,
+    },
+  }),
   createDateTimeField('createdAt', {
     format: 'iso',
     edit: {

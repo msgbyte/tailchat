@@ -1,5 +1,6 @@
 import type { ADPBaseModel } from './baseModel.interface';
 import castFilter from './castFilter';
+import { isValidObjectId } from 'mongoose';
 
 interface parseQueryParam {
   q?: string;
@@ -24,6 +25,10 @@ export default function parseQuery<
   if (result.q) {
     if (!Array.isArray(result.$or)) result.$or = [];
     fields.forEach((field) => {
+      if (field === '_id' && !isValidObjectId(result.q)) {
+        // Skip _id search in invalid objectid
+        return;
+      }
       const newFilter = { [field]: result.q };
       result.$or.push(castFilter(newFilter, model, allowedRegexes));
     });

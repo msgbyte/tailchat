@@ -30,6 +30,7 @@ export const GroupList: React.FC = React.memo(() => {
           edit: true,
           delete: true,
           export: true,
+          create: true,
           custom: (record) => [
             {
               key: 'addGroupMember',
@@ -89,7 +90,8 @@ export const UserSelector: React.FC<{ onChange: (val: Identifier) => void }> =
         value={userId}
         onChange={handleChange}
         options={{
-          displayField: 'nickname',
+          displayField: (record) =>
+            `${record.nickname}#${record.discriminator}`,
           reference: 'users',
         }}
       />
