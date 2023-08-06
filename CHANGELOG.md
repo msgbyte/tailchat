@@ -1,5 +1,33 @@
 
 
+## [1.8.8](https://github.com/msgbyte/tailchat/compare/v1.8.7...v1.8.8) (2023-08-06)
+
+
+### Bug Fixes
+
+* filter summary messages will bypass recall message problem ([3f06e3d](https://github.com/msgbyte/tailchat/commit/3f06e3d35e83207d8623f86a8eb6f1ecca640336))
+* fix badge in sidebaritem bouncing when hover ([c045475](https://github.com/msgbyte/tailchat/commit/c045475f6293c40258703917afc4aa4f03cb54db))
+* fix problem which allow operate to local message ([9fb0246](https://github.com/msgbyte/tailchat/commit/9fb024659b9d8b21889c6919cb8d5de3e6841dbd))
+
+
+### Features
+
+* add friend nav item badge when has unprocess friend request ([bc36cb0](https://github.com/msgbyte/tailchat/commit/bc36cb06651c3ca21662aaebfc9210f3aba138f1))
+* add grouping by status to member list ([288f5a6](https://github.com/msgbyte/tailchat/commit/288f5a61e8999eb7d13b7c5593babc842ba87631))
+* add i18n support for antd and WebFastifyForm ([63c203e](https://github.com/msgbyte/tailchat/commit/63c203e8973d1203be0b9ef5b14b6ac7b8aba002))
+* add local message to avoid network error which occur repeat send same message ([9bb931a](https://github.com/msgbyte/tailchat/commit/9bb931aa5d57e1e158b1bdefda61cef3f2908f2f))
+* add person icon badge when has unprocessed friend request ([1b84143](https://github.com/msgbyte/tailchat/commit/1b84143bbe73a4f0d578d89bf14c9df040ccb945))
+* add plugin which can auto join group after register or createTemporaryUser ([1084913](https://github.com/msgbyte/tailchat/commit/1084913d3a43aa1c3c06add37e66c0765d6cc9d0))
+* **admin:** add analytics page ([39e0b2c](https://github.com/msgbyte/tailchat/commit/39e0b2cee77e2da02a2824bc4af3ac1b883f558e))
+* **admin:** add operate which can add group member ([8df7b47](https://github.com/msgbyte/tailchat/commit/8df7b47c07c050f6debfb1e36fb49029566186af))
+* **admin:** allow create group through admin ([58f7144](https://github.com/msgbyte/tailchat/commit/58f7144c315736b23c2d06fcfecd5e8a9714e27a))
+* **admin:** allow search user and group with id ([5099170](https://github.com/msgbyte/tailchat/commit/50991708f2611e1b207755adc79c08d29a36946a))
+
+
+### Performance Improvements
+
+* optimize the loading experience of the web panel ([7db9d63](https://github.com/msgbyte/tailchat/commit/7db9d63349d18357c18ff54eaec9be69825a63a0))
+
 ## [1.8.7](https://github.com/msgbyte/tailchat/compare/v1.8.6...v1.8.7) (2023-07-30)
 
 
