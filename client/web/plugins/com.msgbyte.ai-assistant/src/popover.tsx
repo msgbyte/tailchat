@@ -144,7 +144,8 @@ export const AssistantPopover: React.FC<{
         onClick={async () => {
           const plainMessages = (
             await Promise.all(
-              messages
+              [...messages]
+                .filter((item) => !item.hasRecall) // filter recalled message
                 .slice(messages.length - 30, messages.length) // get last 30 message, too much will throw error
                 .map(
                   async (item) =>
