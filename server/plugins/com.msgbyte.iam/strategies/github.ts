@@ -7,9 +7,14 @@ const clientInfo = {
   secret: process.env.IAM_GITHUB_SECRET,
 };
 
-const authorize_uri = 'https://github.com/login/oauth/authorize';
-const access_token_uri = 'https://github.com/login/oauth/access_token';
-const userinfo_uri = 'https://api.github.com/user';
+const authorize_uri =
+  process.env.IAM_GITHUB_URI_AUTHORIZE ||
+  'https://github.com/login/oauth/authorize';
+const access_token_uri =
+  process.env.IAM_GITHUB_URI_ACCESS_TOKEN ||
+  'https://github.com/login/oauth/access_token';
+const userinfo_uri =
+  process.env.IAM_GITHUB_URI_USERINFO || 'https://api.github.com/user';
 const redirect_uri = `${config.apiUrl}/api/plugin:com.msgbyte.iam/github/redirect`;
 
 export const GithubStrategy: StrategyType = {

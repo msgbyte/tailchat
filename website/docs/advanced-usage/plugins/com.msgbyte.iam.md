@@ -25,6 +25,12 @@ Configure Tailchat environment variables:
 
 Respectively, `Client ID` and `Client secrets` obtained before
 
+> You also can use env to overwrite uri, for example use proxy:
+>
+> - IAM_GITHUB_URI_AUTHORIZE=https://github.com/login/oauth/authorize
+> - IAM_GITHUB_URI_ACCESS_TOKEN=https://github.com/login/oauth/access_token
+> - IAM_GITHUB_URI_USERINFO=https://api.github.com/user
+
 ## Security Protection
 
 In order to prevent tokens from being obtained by malicious applications, it is recommended to add front-end domain name verification.

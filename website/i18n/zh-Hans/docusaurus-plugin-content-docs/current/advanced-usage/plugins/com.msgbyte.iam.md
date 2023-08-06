@@ -25,6 +25,12 @@ title: iam - 第三方登录
 
 分别为之前获取到的`Client ID` 与 `Client secrets`
 
+> 你也可以通过环境变量重写请求地址，例如使用代理:
+>
+> - IAM_GITHUB_URI_AUTHORIZE=https://github.com/login/oauth/authorize
+> - IAM_GITHUB_URI_ACCESS_TOKEN=https://github.com/login/oauth/access_token
+> - IAM_GITHUB_URI_USERINFO=https://api.github.com/user
+
 ## 安全强化
 
 为了token的安全不被恶意应用获取，建议增加前端域名校验。
