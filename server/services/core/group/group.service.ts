@@ -22,6 +22,7 @@ import {
   PanelFeature,
   config,
   SYSTEM_USERID,
+  db,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
 
@@ -655,20 +656,25 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, memberIds, roles } = ctx.params;
-    const { userId } = ctx.meta;
 
-    await Promise.all(
-      memberIds.map((memberId) =>
-        this.adapter.model.updateGroupMemberField(
-          ctx,
-          groupId,
-          memberId,
-          'roles',
-          (member) =>
-            (member['roles'] = _.uniq([...member['roles'], ...roles])),
-          userId
-        )
-      )
+    await this.adapter.model.checkGroupFieldPermission(ctx, groupId, 'roles');
+
+    // 更新内容
+    await this.adapter.model.updateMany(
+      {
+        _id: new db.Types.ObjectId(groupId),
+        'members.userId': {
+          $in: [...memberIds],
+        },
+      },
+      {
+        $addToSet: {
+          'members.$[elem].roles': {
+            $each: roles,
+          },
+        },
+      },
+      { arrayFilters: [{ 'elem.userId': { $in: [...memberIds] } }] }
     );
 
     const group = await this.adapter.model.findById(groupId);
@@ -692,19 +698,25 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, memberIds, roles } = ctx.params;
-    const { userId } = ctx.meta;
 
-    await Promise.all(
-      memberIds.map((memberId) =>
-        this.adapter.model.updateGroupMemberField(
-          ctx,
-          groupId,
-          memberId,
-          'roles',
-          (member) => (member['roles'] = _.without(member['roles'], ...roles)),
-          userId
-        )
-      )
+    await this.adapter.model.checkGroupFieldPermission(ctx, groupId, 'roles');
+
+    // 更新内容
+    await this.adapter.model.updateMany(
+      {
+        _id: new db.Types.ObjectId(groupId),
+        'members.userId': {
+          $in: [...memberIds],
+        },
+      },
+      {
+        $pull: {
+          'members.$[elem].roles': {
+            $in: roles,
+          },
+        },
+      },
+      { arrayFilters: [{ 'elem.userId': { $in: [...memberIds] } }] }
     );
 
     const group = await this.adapter.model.findById(groupId);
@@ -1112,7 +1124,6 @@ class GroupService extends TcService {
     }>
   ) {
     const { groupId, memberId, muteMs } = ctx.params;
-    const userId = ctx.meta.userId;
     const language = ctx.meta.language;
     const isUnmute = muteMs < 0;
 
@@ -1121,8 +1132,7 @@ class GroupService extends TcService {
       groupId,
       memberId,
       'muteUntil',
-      isUnmute ? undefined : new Date(new Date().valueOf() + muteMs),
-      userId
+      isUnmute ? undefined : new Date(new Date().valueOf() + muteMs)
     );
 
     this.notifyGroupInfoUpdate(ctx, group);
