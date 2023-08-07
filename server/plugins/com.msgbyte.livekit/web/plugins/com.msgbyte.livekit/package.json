@@ -12,9 +12,11 @@
     "@livekit/components-react": "^1.0.8",
     "@livekit/components-styles": "^1.0.4",
     "livekit-client": "^1.12.1",
+    "lodash": "^4.17.21",
     "zustand": "4.3.6"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.196",
     "@types/styled-components": "^5.1.26",
     "react": "18.2.0",
     "styled-components": "^5.3.6"

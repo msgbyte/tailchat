@@ -2,6 +2,7 @@ import { useGlobalSocketEvent, useWatch } from '@capital/common';
 import { Avatar, Tooltip, UserAvatar, UserName } from '@capital/component';
 import React, { useEffect, useState } from 'react';
 import { useRoomParticipants } from '../utils/useRoomParticipants';
+import _uniqBy from 'lodash/uniqBy';
 
 export const LivekitPanelBadge: React.FC<{
   groupId: string;
@@ -32,7 +33,9 @@ export const LivekitPanelBadge: React.FC<{
         payload.panelId === props.panelId &&
         payload.participant
       ) {
-        setDisplayParticipants((state) => [...state, payload.participant]);
+        setDisplayParticipants((state) =>
+          _uniqBy([...state, payload.participant], 'sid')
+        );
       }
     }
   );

@@ -2012,10 +2012,16 @@ importers:
       livekit-client:
         specifier: ^1.12.1
         version: 1.12.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       zustand:
         specifier: 4.3.6
         version: 4.3.6(immer@9.0.21)(react@18.2.0)
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.14.196
+        version: 4.14.196
       '@types/styled-components':
         specifier: ^5.1.26
         version: 5.1.26
@@ -10916,7 +10922,7 @@ packages:
       '@babel/preset-env': 7.20.2(@babel/core@7.18.13)
       '@babel/types': 7.21.2
       '@mdx-js/mdx': 1.6.22
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.196
       js-string-escape: 1.0.1
       loader-utils: 2.0.4
       lodash: 4.17.21
@@ -10935,7 +10941,7 @@ packages:
       '@babel/preset-env': 7.20.2(@babel/core@7.21.0)
       '@babel/types': 7.21.2
       '@mdx-js/mdx': 1.6.22
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.196
       js-string-escape: 1.0.1
       loader-utils: 2.0.4
       lodash: 4.17.21
@@ -12284,7 +12290,7 @@ packages:
   /@types/lodash-es@4.17.7:
     resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
     dependencies:
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.196
     dev: false
 
   /@types/lodash@4.14.184:
@@ -12293,6 +12299,10 @@ packages:
 
   /@types/lodash@4.14.191:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+    dev: true
+
+  /@types/lodash@4.14.196:
+    resolution: {integrity: sha512-22y3o88f4a94mKljsZcanlNWPzO0uBsBdzLAngf2tp533LzZcQzb6+eZPJ+vCTt+bqF2XnvT9gejTLsAcJAJyQ==}
 
   /@types/lru-cache@5.1.1:
     resolution: {integrity: sha512-ssE3Vlrys7sdIzs5LOxCzTVMsU7i9oa/IaW92wF32JFb3CVczqOkru2xspuKczHEbG3nvmPY7IFqVmGGHdNbYw==}
@@ -35126,7 +35136,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       '@babel/runtime': 7.21.0
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.196
       lodash: 4.17.21
       lodash-es: 4.17.21
       nanoclone: 0.2.1
