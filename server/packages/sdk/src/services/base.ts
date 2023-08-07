@@ -18,7 +18,7 @@ import type { TFunction } from 'i18next';
 import { t } from './lib/i18n';
 import type { ValidationRuleObject } from 'fastest-validator';
 import type { BuiltinEventMap } from '../structs/events';
-import { CONFIG_GATEWAY_AFTER_HOOK } from '../const';
+import { CONFIG_GATEWAY_AFTER_HOOK, SYSTEM_USERID } from '../const';
 import _ from 'lodash';
 import {
   decodeNoConflictServiceNameKey,
@@ -449,6 +449,21 @@ export abstract class TcService extends Service {
     opts?: CallingOptions
   ): Promise<any> {
     return this.actions[actionName](params, opts);
+  }
+
+  protected systemCall<T>(
+    ctx: PureContext,
+    actionName: string,
+    params?: {},
+    opts?: CallingOptions
+  ): Promise<T> {
+    return ctx.call(actionName, params, {
+      ...opts,
+      meta: {
+        userId: SYSTEM_USERID,
+        ...(opts?.meta ?? {}),
+      },
+    });
   }
 
   private buildLoggerWithPrefix(_originLogger: LoggerInstance) {

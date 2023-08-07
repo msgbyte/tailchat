@@ -186,7 +186,11 @@ declare module '@capital/common' {
 
   export const useWatch: any;
 
-  export const parseUrlStr: any;
+  export const parseUrlStr: (originUrl: string) => string;
+
+  export const useUpdateRef: <T>(state: T) => React.MutableRefObject<T>;
+
+  export const isDevelopment: boolean;
 
   export const navigate: any;
 
@@ -472,6 +476,8 @@ declare module '@capital/component' {
 
   export const useChatInputActionContext: any;
 
+  export const GroupPanelContainer: any;
+
   export const GroupExtraDataPanel: any;
 
   export const Image: any;
@@ -599,4 +605,6 @@ declare module '@capital/component' {
   export const NoData: any;
 
   export const NotFound: any;
+
+  export const withKeepAliveOverlay: any;
 }

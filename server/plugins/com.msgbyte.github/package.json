@@ -13,6 +13,7 @@
     "@octokit/webhooks-types": "^5.4.0"
   },
   "devDependencies": {
+    "@types/react-router": "^5.1.20",
     "less": "^4.1.2",
     "mini-star": "^1.2.8",
     "rollup-plugin-less": "^1.1.3"

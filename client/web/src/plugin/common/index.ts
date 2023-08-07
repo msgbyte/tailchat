@@ -72,6 +72,7 @@ export {
   useWatch,
   parseUrlStr,
   useUpdateRef,
+  isDevelopment,
 } from 'tailchat-shared';
 
 export { navigate } from '@/components/AppRouterApi';

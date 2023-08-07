@@ -41,6 +41,8 @@ export interface GroupRoleStruct {
 }
 
 export interface GroupStruct {
+  _id: string;
+
   name: string;
 
   avatar?: string;

@@ -21,6 +21,7 @@ import {
   GroupPanelType,
   PanelFeature,
   config,
+  SYSTEM_USERID,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
 
@@ -291,7 +292,10 @@ class GroupService extends TcService {
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
 
-    if (config.feature.disableCreateGroup === true) {
+    if (
+      config.feature.disableCreateGroup === true &&
+      userId !== SYSTEM_USERID
+    ) {
       // 环境变量禁止创建群组
       throw new NoPermissionError(t('创建群组功能已被管理员禁用'));
     }
