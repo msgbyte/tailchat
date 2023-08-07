@@ -83,12 +83,12 @@ export const TcSocketIOService = (
         this.initSocketIO();
       }
 
-      this.logger.info('SocketIO 服务已启动');
+      this.logger.info('SocketIO service started');
 
       const io: SocketServer = this.io;
       if (!config.redisUrl) {
         throw new Errors.MoleculerClientError(
-          'SocketIO服务启动失败, 需要环境变量: process.env.REDIS_URL'
+          'SocketIO service failed to start, environment variables are required: `REDIS_URL`'
         );
       }
       this.socketCloseCallbacks = []; // socketio服务关闭时需要执行的回调
@@ -110,7 +110,7 @@ export const TcSocketIOService = (
         pubClient.disconnect(false);
         subClient.disconnect(false);
       });
-      this.logger.info('SocketIO 正在使用 Redis Adapter');
+      this.logger.info('SocketIO is using Redis Adapter');
 
       this.redis = pubClient;
 
@@ -128,13 +128,13 @@ export const TcSocketIOService = (
 
           const token = socket.handshake.auth['token'];
           if (typeof token !== 'string') {
-            throw new Errors.MoleculerError('Token不能为空');
+            throw new Errors.MoleculerError('Token cannot be empty');
           }
 
           const user: UserJWTPayload = await userAuth(token);
 
           if (!(user && user._id)) {
-            throw new Error('Token不合规');
+            throw new Error('Token invalid');
           }
 
           this.logger.info('[Socket] Authenticated via JWT: ', user.nickname);
@@ -281,7 +281,7 @@ export const TcSocketIOService = (
                 cb({ result: true, data });
               }
             } catch (err: unknown) {
-              const message = _.get(err, 'message', '服务器异常');
+              const message = _.get(err, 'message', 'Service Error');
               this.logger.debug('[SocketIO]', eventName, '=>', message);
               this.logger.error('[SocketIO]', err);
               cb({
@@ -317,18 +317,25 @@ export const TcSocketIOService = (
             ? buildUserRoomId(userId)
             : ctx.meta.socketId;
           if (typeof searchId !== 'string') {
-            throw new Error('无法加入房间, 查询条件不合法, 请联系管理员');
+            throw new Error(
+              'Unable to join the room, the query condition is invalid, please contact the administrator'
+            );
           }
 
           if (!Array.isArray(roomIds)) {
-            throw new Error('无法加入房间, 参数必须为数组');
+            throw new Error(
+              'Unable to join the room, the parameter must be an array'
+            );
           }
 
           // 获取远程socket链接并加入
           const io: SocketServer = this.io;
           const remoteSockets = await io.in(searchId).fetchSockets();
           if (remoteSockets.length === 0) {
-            this.logger.warn('无法加入房间, 无法找到当前socket链接:', searchId);
+            this.logger.warn(
+              'Unable to join the room, unable to find the current socket link:',
+              searchId
+            );
             return;
           }
 
@@ -355,7 +362,9 @@ export const TcSocketIOService = (
             ? buildUserRoomId(userId)
             : ctx.meta.socketId;
           if (typeof searchId !== 'string') {
-            this.logger.error('无法离开房间, 当前socket链接不存在');
+            this.logger.error(
+              'Unable to leave the room, the current socket connection does not exist'
+            );
             return;
           }
 
@@ -363,7 +372,9 @@ export const TcSocketIOService = (
           const io: SocketServer = this.io;
           const remoteSockets = await io.in(searchId).fetchSockets();
           if (remoteSockets.length === 0) {
-            this.logger.error('无法离开房间, 无法找到当前socket链接');
+            this.logger.error(
+              `Can't leave room, can't find current socket link`
+            );
             return;
           }
 
@@ -520,7 +531,7 @@ export const TcSocketIOService = (
       initSocketIO() {
         if (!this.server) {
           throw new Errors.ServiceNotAvailableError(
-            '需要和 [ApiGatewayMixin] 一起使用'
+            'Need to use with [ApiGatewayMixin]'
           );
         }
         this.io = new SocketServer(this.server, {
@@ -538,7 +549,7 @@ export const TcSocketIOService = (
           isValidStr(process.env.ADMIN_PASS)
         ) {
           this.logger.info('****************************************');
-          this.logger.info(`检测到Admin管理已开启`);
+          this.logger.info(`Detected that Admin management is enabled`);
           this.logger.info('****************************************');
 
           instrument(this.io, {
