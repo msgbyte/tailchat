@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAsyncFn } from '@capital/common';
-import { PillTabs, PillTabPane } from '@capital/component';
+import { PillTabs } from '@capital/component';
 import type { TaskItemType } from './type';
 import { TaskItem } from './TaskItem';
 import { NewTask } from './NewTask';
@@ -25,27 +25,36 @@ const TasksPanel: React.FC = React.memo(() => {
 
       <NewTask onSuccess={fetch} />
 
-      <PillTabs>
-        <PillTabPane key={1} tab={Translate.undone}>
-          <div>
-            {tasks
-              .filter((t) => !t.done)
-              .map((task) => (
-                <TaskItem key={task._id} task={task} />
-              ))}
-          </div>
-        </PillTabPane>
-
-        <PillTabPane key={2} tab={Translate.done}>
-          <div>
-            {tasks
-              .filter((t) => t.done)
-              .map((task) => (
-                <TaskItem key={task._id} task={task} />
-              ))}
-          </div>
-        </PillTabPane>
-      </PillTabs>
+      <PillTabs
+        items={[
+          {
+            key: '1',
+            label: Translate.undone,
+            children: (
+              <div>
+                {tasks
+                  .filter((t) => !t.done)
+                  .map((task) => (
+                    <TaskItem key={task._id} task={task} />
+                  ))}
+              </div>
+            ),
+          },
+          {
+            key: '2',
+            label: Translate.done,
+            children: (
+              <div>
+                {tasks
+                  .filter((t) => t.done)
+                  .map((task) => (
+                    <TaskItem key={task._id} task={task} />
+                  ))}
+              </div>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 });

@@ -44,60 +44,74 @@ export const PluginStore: React.FC = React.memo(() => {
 
   return (
     <div className="p-2 w-full">
-      <PillTabs>
-        <PillTabPane key="1" tab={t('已安装')}>
-          <Divider orientation="left">{t('已安装')}</Divider>
+      <PillTabs
+        items={[
+          {
+            key: '1',
+            label: t('已安装'),
+            children: (
+              <>
+                <Divider orientation="left">{t('已安装')}</Divider>
 
-          <div className="flex flex-wrap">
-            {_uniqBy([...builtinPlugins, ...installedPluginList], 'name').map(
-              (plugin) => (
-                <PluginStoreItem
-                  key={plugin.name}
-                  manifest={plugin}
-                  installed={true}
-                  builtin={builtinPluginNameList.includes(plugin.name)}
-                />
-              )
-            )}
-          </div>
-        </PillTabPane>
+                <div className="flex flex-wrap">
+                  {_uniqBy(
+                    [...builtinPlugins, ...installedPluginList],
+                    'name'
+                  ).map((plugin) => (
+                    <PluginStoreItem
+                      key={plugin.name}
+                      manifest={plugin}
+                      installed={true}
+                      builtin={builtinPluginNameList.includes(plugin.name)}
+                    />
+                  ))}
+                </div>
+              </>
+            ),
+          },
+          {
+            key: '2',
+            label: t('全部'),
+            children: (
+              <>
+                <Divider orientation="left">{t('内置插件')}</Divider>
 
-        <PillTabPane key="2" tab={t('全部')}>
-          <Divider orientation="left">{t('内置插件')}</Divider>
+                <div className="flex flex-wrap">
+                  {builtinPlugins.map((plugin) => (
+                    <PluginStoreItem
+                      key={plugin.name}
+                      manifest={plugin}
+                      installed={installedPluginNameList.includes(plugin.name)}
+                      builtin={true}
+                    />
+                  ))}
+                </div>
 
-          <div className="flex flex-wrap">
-            {builtinPlugins.map((plugin) => (
-              <PluginStoreItem
-                key={plugin.name}
-                manifest={plugin}
-                installed={installedPluginNameList.includes(plugin.name)}
-                builtin={true}
-              />
-            ))}
-          </div>
+                <Divider orientation="left">{t('插件中心')}</Divider>
 
-          <Divider orientation="left">{t('插件中心')}</Divider>
-
-          <div className="flex flex-wrap">
-            {allPlugins
-              .filter((p) => !builtinPluginNameList.includes(p.name)) // 插件中心只显示不包含内置插件的插件
-              .map((plugin) => (
-                <PluginStoreItem
-                  key={plugin.name}
-                  manifest={plugin}
-                  installed={installedPluginNameList.includes(plugin.name)}
-                />
-              ))}
-          </div>
-        </PillTabPane>
-
-        <PillTabPane
-          tab={<span className="text-green-400">{t('手动安装')}</span>}
-          key="3"
-        >
-          <ManualInstall />
-        </PillTabPane>
-      </PillTabs>
+                <div className="flex flex-wrap">
+                  {allPlugins
+                    .filter((p) => !builtinPluginNameList.includes(p.name)) // 插件中心只显示不包含内置插件的插件
+                    .map((plugin) => (
+                      <PluginStoreItem
+                        key={plugin.name}
+                        manifest={plugin}
+                        installed={installedPluginNameList.includes(
+                          plugin.name
+                        )}
+                      />
+                    ))}
+                </div>
+              </>
+            ),
+          },
+          {
+            key: '3',
+            label: <span className="text-green-400">{t('手动安装')}</span>,
+            children: <ManualInstall />,
+          },
+        ]}
+      />
     </div>
   );
 });

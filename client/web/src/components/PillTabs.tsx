@@ -5,11 +5,7 @@ import './PillTabs.less';
 
 /**
  * @example
- * <PillTabs>
- *  <PillTabPane key="1" tab={t('全部')}>
- *    ...
- *  </PillTabPane>
- * </PillTabs>
+ * <PillTabs items={[...]} />
  */
 export const PillTabs: React.FC<TabsProps> = React.memo((props) => {
   return (
@@ -20,4 +16,7 @@ export const PillTabs: React.FC<TabsProps> = React.memo((props) => {
 });
 PillTabs.displayName = 'PillTabs';
 
+/**
+ * @deprecated
+ */
 export const PillTabPane = Tabs.TabPane;

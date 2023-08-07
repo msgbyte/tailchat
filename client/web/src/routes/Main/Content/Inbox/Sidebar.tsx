@@ -136,14 +136,20 @@ export const InboxSidebar: React.FC = React.memo(() => {
       </SectionHeader>
 
       <div className="overflow-hidden">
-        <PillTabs>
-          <PillTabPane key="1" tab={`${t('全部')}`}>
-            {fullList.map((item) => renderInbox(item))}
-          </PillTabPane>
-          <PillTabPane key="2" tab={`${t('未读')} (${unreadList.length})`}>
-            {unreadList.map((item) => renderInbox(item))}
-          </PillTabPane>
-        </PillTabs>
+        <PillTabs
+          items={[
+            {
+              key: '1',
+              label: `${t('全部')}`,
+              children: <>{fullList.map((item) => renderInbox(item))}</>,
+            },
+            {
+              key: '2',
+              label: `${t('未读')} (${unreadList.length})`,
+              children: <>{unreadList.map((item) => renderInbox(item))}</>,
+            },
+          ]}
+        />
       </div>
     </CommonSidebarWrapper>
   );

@@ -14,6 +14,7 @@ const ItemRoot = styled.div`
     text-align: center;
     font-weight: bold;
     line-height: 44px;
+    text-wrap: nowrap;
   }
 `;
 

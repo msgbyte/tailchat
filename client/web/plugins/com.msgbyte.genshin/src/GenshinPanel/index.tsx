@@ -2,7 +2,7 @@ import React from 'react';
 import { Translate } from '../translate';
 import { OfficialGachaIndex, OfficialGachaType, util } from 'genshin-gacha-kit';
 import { useAsync } from '@capital/common';
-import { PillTabs, PillTabPane, LoadingSpinner } from '@capital/component';
+import { PillTabs, LoadingSpinner } from '@capital/component';
 import { GachaPool } from './GachaPool';
 import _groupBy from 'lodash/groupBy';
 import './index.less';
@@ -32,16 +32,13 @@ const GenshinPanel: React.FC = React.memo(() => {
 
       {loading && <LoadingSpinner />}
 
-      <PillTabs>
-        {(gachaList ?? []).map((item) => (
-          <PillTabPane
-            key={item.gacha_id}
-            tab={`${item.gacha_name}(${item.begin_time} - ${item.end_time})`}
-          >
-            <GachaPool gachaId={item.gacha_id} />
-          </PillTabPane>
-        ))}
-      </PillTabs>
+      <PillTabs
+        items={(gachaList ?? []).map((item) => ({
+          key: String(item.gacha_id),
+          label: `${item.gacha_name}(${item.begin_time} - ${item.end_time})`,
+          children: <GachaPool gachaId={item.gacha_id} />,
+        }))}
+      />
     </div>
   );
 });
