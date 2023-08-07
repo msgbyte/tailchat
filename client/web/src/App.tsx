@@ -172,16 +172,15 @@ export const App: React.FC = React.memo(() => {
               path="/plugin/*"
               element={
                 <FallbackPortalHost>
-                  {pluginRootRoute.map((r, i) => (
-                    // NOTICE: Switch里不能出现动态路由
-                    <Route
-                      key={r.name}
-                      path={
-                        r.path ? `/plugin${r.path}` : `/plugin/fallback${i}`
-                      }
-                      element={React.createElement(r.component)}
-                    />
-                  ))}
+                  <Routes>
+                    {pluginRootRoute.map((r, i) => (
+                      <Route
+                        key={r.name}
+                        path={r.path ?? `/fallback${i}`}
+                        element={React.createElement(r.component)}
+                      />
+                    ))}
+                  </Routes>
                 </FallbackPortalHost>
               }
             />
