@@ -58,7 +58,12 @@ const _Avatar: React.FC<AvatarProps> = React.memo((_props) => {
   }
 
   const inner = (
-    <AntdAvatar {..._omit(props, ['size'])} src={src} style={style}>
+    <AntdAvatar
+      draggable={false}
+      {..._omit(props, ['size'])}
+      src={src}
+      style={style}
+    >
       {name}
     </AntdAvatar>
   );
