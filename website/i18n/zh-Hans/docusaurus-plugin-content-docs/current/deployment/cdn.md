@@ -30,3 +30,5 @@ SERVICE_URL=<your-api-url> pnpm build
 确保 `SERVICE_URL` 的值是后端的地址，形如: `http://127.0.0.1:11000`
 
 编译完毕后你可以在 `tailchat/client/web/dist` 目录下获得所有的前端文件。
+
+> 另外，如果出现刷新页面后报404. 需要配置类似 [静态网站托管时，把根目录下的 index.html 文件设置为默认首页] 这样的配置

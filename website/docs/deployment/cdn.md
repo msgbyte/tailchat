@@ -30,3 +30,5 @@ SERVICE_URL=<your-api-url> pnpm build
 Make sure the value of `SERVICE_URL` is the address of your api backend, for example: `http://127.0.0.1:11000`
 
 After compiling, you can get all the front-end files in the `tailchat/client/web/dist` directory.
+
+> In addition, if there is a 404 report after refreshing the page, you need to configure a configuration similar to [When hosting a static website, set the index.html file in the root directory as the default home page]
