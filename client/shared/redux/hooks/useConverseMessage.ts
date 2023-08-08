@@ -67,13 +67,9 @@ function useHandleSendMessage() {
     sendMessage(payload)
       .then((message) => {
         dispatch(
-          chatActions.updateMessageInfo({
+          chatActions.deleteMessageById({
+            converseId: payload.converseId,
             messageId: localMessageId,
-            message: {
-              ...message,
-              isLocal: false,
-              sendFailed: false,
-            },
           })
         );
 

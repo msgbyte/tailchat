@@ -12,6 +12,7 @@ import('./render');
 
 const BBCode = Loadable(() => import('./render'), {
   componentName: `${PLUGIN_ID}:renderComponent`,
+  fallback: null,
 });
 let serialize: (bbcode: string) => string;
 import('./bbcode/serialize').then((module) => {
