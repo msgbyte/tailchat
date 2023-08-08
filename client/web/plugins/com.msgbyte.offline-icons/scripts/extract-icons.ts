@@ -32,7 +32,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '../../../../../');
     paths.map((p) => extractIcons(path.resolve(PROJECT_ROOT, p)))
   );
 
-  const icons = _.uniq(_.flatten(res));
+  const icons = _.uniq(_.flatten(res)).sort();
 
   console.log(`extract ${icons.length} icons, usage: ${Date.now() - start}ms`);
 
