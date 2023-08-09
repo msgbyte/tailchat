@@ -5,7 +5,6 @@ import {
   t,
   useDMConverseList,
   useUserInfo,
-  DevContainer,
   useGlobalConfigStore,
   useAppSelector,
 } from 'tailchat-shared';
@@ -84,12 +83,10 @@ export const PersonalSidebar: React.FC = React.memo(() => {
 
         <SidebarSection
           action={
-            <DevContainer>
-              <Icon
-                icon="mdi:plus"
-                onClick={() => openModal(<CreateDMConverse />)}
-              />
-            </DevContainer>
+            <Icon
+              icon="mdi:plus"
+              onClick={() => openModal(<CreateDMConverse />)}
+            />
           }
         >
           {t('私信')}
