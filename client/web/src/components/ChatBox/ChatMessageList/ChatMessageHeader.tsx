@@ -6,7 +6,7 @@ export const ChatMessageHeader: React.FC<{
   title: React.ReactNode;
 }> = React.memo((props) => {
   return (
-    <div className="px-5 pb-4">
+    <div className="px-5 pb-4 pt-8">
       <div className="font-extrabold mb-2 text-2xl flex items-center space-x-1">
         <Icon icon="mdi:pound" />
         <div>{props.title}</div>
