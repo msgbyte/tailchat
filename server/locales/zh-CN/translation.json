@@ -48,6 +48,7 @@
   "kbb1ef795": "校验失败, OTP已过期",
   "kbb96754b": "不允许踢出群组OP",
   "kbe05914c": "{{user}} 邀请 {{others}} 加入会话",
+  "kbf66da60": "成员数异常，无法创建会话",
   "kc1e668f5": "不允许踢出自己",
   "kc4b77045": "{{nickname}} 通过 {{creator}} 的邀请码加入群组",
   "kcb07c88f": "个人消息订阅已创建, subscribeId: {{subscribeId}}",

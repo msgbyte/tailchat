@@ -48,6 +48,7 @@
   "kbb1ef795": "Verification failed, OTP has expired",
   "kbb96754b": "Group OP not allowed to be kicked out",
   "kbe05914c": "{{user}} invited {{others}} to join the session",
+  "kbf66da60": "The number of members is abnormal, and the converse cannot be created",
   "kc1e668f5": "Not allowed to kick yourself out",
   "kc4b77045": "{{nickname}} join this group with invite code from {{creator}}",
   "kcb07c88f": "Personal message subscription created, subscribeId: {{subscribeId}}",

@@ -57,13 +57,29 @@ class ConverseService extends TcService {
 
     const participantList = _.uniq([userId, ...memberIds]);
 
-    let converse = await this.adapter.model.findConverseWithMembers(
-      participantList
-    );
-    if (converse === null) {
-      // 创建新的会话
-      converse = await this.adapter.insert({
-        type: 'DM',
+    if (participantList.length < 2) {
+      throw new Error(t('成员数异常，无法创建会话'));
+    }
+
+    let converse: ConverseDocument;
+    if (participantList.length === 2) {
+      // 私信会话
+      converse = await this.adapter.model.findConverseWithMembers(
+        participantList
+      );
+      if (converse === null) {
+        // 创建新的会话
+        converse = await this.adapter.model.create({
+          type: 'DM',
+          members: participantList.map((id) => new Types.ObjectId(id)),
+        });
+      }
+    }
+
+    if (participantList.length > 2) {
+      // 多人会话
+      converse = await this.adapter.model.create({
+        type: 'Multi',
         members: participantList.map((id) => new Types.ObjectId(id)),
       });
     }

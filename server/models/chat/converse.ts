@@ -16,6 +16,7 @@ import { User } from '../user/user';
 
 const converseType = [
   'DM', // 私信
+  'Multi', // 多人会话
   'Group', // 群组
 ] as const;
 
@@ -39,7 +40,7 @@ export class Converse extends TimeStamps implements Base {
     enum: converseType,
     type: () => String,
   })
-  type!: typeof converseType[number];
+  type!: (typeof converseType)[number];
 
   /**
    * 会话参与者
@@ -58,6 +59,7 @@ export class Converse extends TimeStamps implements Base {
     const converse = await this.findOne({
       members: {
         $all: [...members],
+        $size: members.length,
       },
     });
 
