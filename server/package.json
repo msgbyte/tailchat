@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.1",
-    "@socket.io/redis-adapter": "^7.0.0",
+    "@socket.io/redis-adapter": "^8.2.1",
     "@typegoose/typegoose": "9.3.1",
     "@types/blessed": "^0.1.19",
     "@types/bluebird": "^3.5.36",
@@ -73,7 +73,7 @@
     "redlock": "^4.2.0",
     "send": "^0.18.0",
     "serve-static": "^1.15.0",
-    "socket.io": "^4.2.0",
+    "socket.io": "^4.7.2",
     "socket.io-msgpack-parser": "^3.0.2",
     "tailchat-server-sdk": "workspace:*",
     "ts-node": "^10.0.0",

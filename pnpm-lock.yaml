@@ -1327,10 +1327,10 @@ importers:
     dependencies:
       '@socket.io/admin-ui':
         specifier: ^0.5.1
-        version: 0.5.1(socket.io@4.5.1)
+        version: 0.5.1(socket.io@4.7.2)
       '@socket.io/redis-adapter':
-        specifier: ^7.0.0
-        version: 7.2.0
+        specifier: ^8.2.1
+        version: 8.2.1(socket.io-adapter@2.5.2)
       '@typegoose/typegoose':
         specifier: 9.3.1
         version: 9.3.1(mongoose@6.1.1)
@@ -1434,8 +1434,8 @@ importers:
         specifier: ^1.15.0
         version: 1.15.0
       socket.io:
-        specifier: ^4.2.0
-        version: 4.5.1
+        specifier: ^4.7.2
+        version: 4.7.2
       socket.io-msgpack-parser:
         specifier: ^3.0.2
         version: 3.0.2
@@ -9922,7 +9922,7 @@ packages:
       webpack-sources: 3.2.3
     dev: false
 
-  /@socket.io/admin-ui@0.5.1(socket.io@4.5.1):
+  /@socket.io/admin-ui@0.5.1(socket.io@4.7.2):
     resolution: {integrity: sha512-1dlGL2FGm6T+uL1e6iDvbo2eCINwvW7iVbjIblwh5kPPRM1SP8lmZrbFZf4QNJ/cqQ+JLcx49eXGM9WAB4TK7w==}
     peerDependencies:
       socket.io: '>=3.1.0'
@@ -9930,7 +9930,7 @@ packages:
       '@types/bcryptjs': 2.4.2
       bcryptjs: 2.4.3
       debug: 4.3.4(supports-color@9.2.2)
-      socket.io: 4.5.1
+      socket.io: 4.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -9938,14 +9938,16 @@ packages:
   /@socket.io/component-emitter@3.1.0:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
 
-  /@socket.io/redis-adapter@7.2.0:
-    resolution: {integrity: sha512-/r6oF6Myz0K9uatB/pfCi0BhKg/KRMh1OokrqcjlNz6aq40WiXdFLRbHJQuwGHq/KvB+D6141K+IynbVxZGvhw==}
+  /@socket.io/redis-adapter@8.2.1(socket.io-adapter@2.5.2):
+    resolution: {integrity: sha512-6Dt7EZgGSBP0qvXeOKGx7NnSr2tPMbVDfDyL97zerZo+v69hMfL99skMCL3RKZlWVqLyRme2T0wcy3udHhtOsg==}
     engines: {node: '>=10.0.0'}
+    peerDependencies:
+      socket.io-adapter: ^2.4.0
     dependencies:
       debug: 4.3.4(supports-color@9.2.2)
-      notepack.io: 2.2.0
-      socket.io-adapter: 2.4.0
-      uid2: 0.0.3
+      notepack.io: 3.0.1
+      socket.io-adapter: 2.5.2
+      uid2: 1.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -11854,10 +11856,6 @@ packages:
     resolution: {integrity: sha512-QXIC+RPzt/1BGSuD6iFn6UMC9TDp+9hkOANYNPVsjjrDdzKphfRkwQDKGp2YaC54Yhz0g6P5uYTCCibZZEiMAA==}
     dependencies:
       '@types/tern': 0.23.4
-    dev: false
-
-  /@types/component-emitter@1.2.11:
-    resolution: {integrity: sha512-SRXjM+tfsSlA9VuG8hGO2nft2p8zjXCK1VcC6N4NXbBbYbSia9kzCChYQajIjzIqOOOuh5Ock6MmV2oux4jDZQ==}
     dev: false
 
   /@types/compression@1.7.2:
@@ -17815,9 +17813,14 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /engine.io@6.2.0:
-    resolution: {integrity: sha512-4KzwW3F3bk+KlzSOY57fj/Jx6LyRQ1nbcyIadehl+AnXjKT7gDO0ORdRi/84ixvMKTym6ZKuxvbzN62HDDU1Lg==}
+  /engine.io-parser@5.2.1:
+    resolution: {integrity: sha512-9JktcM3u18nU9N2Lz3bWeBgxVgOKpw7yhRaoxQA3FUDZzzw+9WlA6p4G4u0RixNkg14fH7EfEc/RhpurtiROTQ==}
     engines: {node: '>=10.0.0'}
+    dev: false
+
+  /engine.io@6.5.2:
+    resolution: {integrity: sha512-IXsMcGpw/xRfjra46sVZVHiSWo/nJ/3g1337q9KNXtS6YRzbW5yIzTCb9DjhrBe7r3GZQR0I4+nq+4ODk5g/cA==}
+    engines: {node: '>=10.2.0'}
     dependencies:
       '@types/cookie': 0.4.1
       '@types/cors': 2.8.12
@@ -17827,8 +17830,8 @@ packages:
       cookie: 0.4.2
       cors: 2.8.5
       debug: 4.3.4(supports-color@9.2.2)
-      engine.io-parser: 5.0.6
-      ws: 8.2.3
+      engine.io-parser: 5.2.1
+      ws: 8.11.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -25234,6 +25237,10 @@ packages:
     resolution: {integrity: sha512-9b5w3t5VSH6ZPosoYnyDONnUTF8o0UkBw7JLA6eBlYJWyGT1Q3vQa8Hmuj1/X6RYvHjjygBDgw6fJhe0JEojfw==}
     dev: false
 
+  /notepack.io@3.0.1:
+    resolution: {integrity: sha512-TKC/8zH5pXIAMVQio2TvVDTtPRX+DJPHDqjRbxogtFiByHyzKmy96RA0JtCQJ+WouyyL4A10xomQzgbUT+1jCg==}
+    dev: false
+
   /now-and-later@2.0.1:
     resolution: {integrity: sha512-KGvQ0cB70AQfg107Xvs/Fbu+dGmZoTRJp2TaPwcwQm3/7PteUyN2BCgk8KBMPGBUXZdVwyWS8fDCGFygBm19UQ==}
     engines: {node: '>= 0.10'}
@@ -31071,8 +31078,13 @@ packages:
       - supports-color
     dev: true
 
-  /socket.io-adapter@2.4.0:
-    resolution: {integrity: sha512-W4N+o69rkMEGVuk2D/cvca3uYsvGlMwsySWV447y99gUPghxq42BxqLNMndb+a1mm/5/7NeXVQS7RLa2XyXvYg==}
+  /socket.io-adapter@2.5.2:
+    resolution: {integrity: sha512-87C3LO/NOMc+eMcpcxUBebGjkpMDkNBS9tf7KJqcDsmL936EChtVva71Dw2q4tQcuVC+hAUy4an2NO/sYXmwRA==}
+    dependencies:
+      ws: 8.11.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: false
 
   /socket.io-client@4.5.1:
@@ -31137,17 +31149,6 @@ packages:
       notepack.io: 2.2.0
     dev: false
 
-  /socket.io-parser@4.0.5:
-    resolution: {integrity: sha512-sNjbT9dX63nqUFIOv95tTVm6elyIU4RvB1m8dOeZt+IgWwcWklFDOdmGcfo3zSiRsnR/3pJkjY5lfoGqEe4Eig==}
-    engines: {node: '>=10.0.0'}
-    dependencies:
-      '@types/component-emitter': 1.2.11
-      component-emitter: 1.3.0
-      debug: 4.3.4(supports-color@9.2.2)
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /socket.io-parser@4.2.1:
     resolution: {integrity: sha512-V4GrkLy+HeF1F/en3SpUaM+7XxYXpuMUWLGde1kSSh5nQMN4hLrbPIkD+otwh6q9R6NOQBN4AMaOZ2zVjui82g==}
     engines: {node: '>=10.0.0'}
@@ -31177,16 +31178,17 @@ packages:
       - supports-color
     dev: false
 
-  /socket.io@4.5.1:
-    resolution: {integrity: sha512-0y9pnIso5a9i+lJmsCdtmTTgJFFSvNQKDnPQRz28mGNnxbmqYg2QPtJTLFxhymFZhAIn50eHAKzJeiNaKr+yUQ==}
-    engines: {node: '>=10.0.0'}
+  /socket.io@4.7.2:
+    resolution: {integrity: sha512-bvKVS29/I5fl2FGLNHuXlQaUH/BlzX1IN6S+NKLNZpBsPZIDH+90eQmCs2Railn4YUiww4SzUedJ6+uzwFnKLw==}
+    engines: {node: '>=10.2.0'}
     dependencies:
       accepts: 1.3.8
       base64id: 2.0.0
+      cors: 2.8.5
       debug: 4.3.4(supports-color@9.2.2)
-      engine.io: 6.2.0
-      socket.io-adapter: 2.4.0
-      socket.io-parser: 4.0.5
+      engine.io: 6.5.2
+      socket.io-adapter: 2.5.2
+      socket.io-parser: 4.2.4
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -33239,8 +33241,9 @@ packages:
     requiresBuild: true
     optional: true
 
-  /uid2@0.0.3:
-    resolution: {integrity: sha512-5gSP1liv10Gjp8cMEnFd6shzkL/D6W1uhXSFNCxDC+YI8+L8wkCYCbJ7n77Ezb4wE/xzMogecE+DtamEe9PZjg==}
+  /uid2@1.0.0:
+    resolution: {integrity: sha512-+I6aJUv63YAcY9n4mQreLUt0d4lvwkkopDNmpomkAUz0fAkEMV9pRWxN0EjhW1YfRhcuyHg2v3mwddCDW1+LFQ==}
+    engines: {node: '>= 4.0.0'}
     dev: false
 
   /unbox-primitive@1.0.2:
