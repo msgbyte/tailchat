@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { ChatConverseType } from '../../model/converse';
 import type { ChatConverseState } from '../slices/chat';
 import { useAppSelector } from './useAppSelector';
 
@@ -8,12 +9,23 @@ import { useAppSelector } from './useAppSelector';
  */
 export function useDMConverseList(): ChatConverseState[] {
   const converses = useAppSelector((state) => state.chat.converses);
+  const lastMessageMap = useAppSelector((state) => state.chat.lastMessageMap);
 
-  return useMemo(
+  const filteredConverse = useMemo(
     () =>
       Object.entries(converses)
-        .filter(([, info]) => info.type === 'DM')
+        .filter(([, info]) =>
+          [ChatConverseType.DM, ChatConverseType.Multi].includes(info.type)
+        )
         .map(([, info]) => info),
     [converses]
   );
+
+  return useMemo(() => {
+    return filteredConverse.sort((a, b) => {
+      return (lastMessageMap[a._id] ?? '') < (lastMessageMap[b._id] ?? '')
+        ? 1
+        : -1;
+    });
+  }, [filteredConverse, lastMessageMap]);
 }

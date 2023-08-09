@@ -47,3 +47,11 @@ export function is(it: string) {
 export function isValidStr(str: unknown): str is string {
   return typeof str == 'string' && str !== '';
 }
+
+export function isLocalMessageId(str: unknown): str is string {
+  if (typeof str !== 'string') {
+    return false;
+  }
+
+  return str.startsWith('localMessage_');
+}

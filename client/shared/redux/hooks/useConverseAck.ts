@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './useAppSelector';
 import _debounce from 'lodash/debounce';
-import { isValidStr } from '../../utils/string-helper';
+import { isLocalMessageId, isValidStr } from '../../utils/string-helper';
 import { chatActions } from '../slices';
 import { updateAck } from '../../model/converse';
 import { useMemoizedFn } from '../../hooks/useMemoizedFn';
@@ -30,6 +30,11 @@ export function useConverseAck(converseId: string) {
 
   const setConverseAck = useMemoizedFn(
     (converseId: string, lastMessageId: string) => {
+      if (isLocalMessageId(lastMessageId)) {
+        // 跳过本地消息
+        return;
+      }
+
       if (
         isValidStr(lastMessageIdRef.current) &&
         lastMessageId <= lastMessageIdRef.current

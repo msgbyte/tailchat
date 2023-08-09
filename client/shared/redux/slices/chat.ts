@@ -9,7 +9,7 @@ import type {
 import _uniqBy from 'lodash/uniqBy';
 import _orderBy from 'lodash/orderBy';
 import _last from 'lodash/last';
-import { isValidStr } from '../../utils/string-helper';
+import { isLocalMessageId, isValidStr } from '../../utils/string-helper';
 import type { InboxItem } from '../../model/inbox';
 
 export interface ChatConverseState extends ChatConverseInfo {
@@ -85,6 +85,7 @@ const chatSlice = createSlice({
         return;
       }
 
+      // NOTICE: 按照该规则能确保本地消息一直在最后，因为l大于任何ObjectId
       const newMessages = _orderBy(
         _uniqBy([...state.converses[converseId].messages, ...messages], '_id'),
         '_id',
@@ -93,10 +94,16 @@ const chatSlice = createSlice({
 
       state.converses[converseId].messages = newMessages;
 
-      if (state.currentConverseId !== converseId) {
-        const lastMessageId = _last(newMessages)?._id;
-        if (isValidStr(lastMessageId)) {
-          state.lastMessageMap[converseId] = lastMessageId;
+      const lastMessageId = _last(
+        newMessages.filter((m) => !isLocalMessageId(m._id))
+      )?._id;
+
+      if (isValidStr(lastMessageId)) {
+        state.lastMessageMap[converseId] = lastMessageId;
+
+        if (state.currentConverseId === converseId) {
+          // 如果是当前会话，则立即已读
+          state.ack[converseId] = lastMessageId;
         }
       }
     },

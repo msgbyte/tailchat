@@ -184,7 +184,9 @@ function listenNotify(socket: AppSocket, store: AppStore) {
       // 如果会话没有加载, 但是是私信消息
       // 则获取会话信息后添加到会话消息中
       getCachedConverseInfo(converseId).then((converse) => {
-        if (converse.type === ChatConverseType.DM) {
+        if (
+          [ChatConverseType.DM, ChatConverseType.Multi].includes(converse.type)
+        ) {
           // 如果是私人会话, 则添加到dmlist
           appendUserDMConverse(converse._id);
         }

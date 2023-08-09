@@ -1,8 +1,9 @@
 import { request } from '../api/request';
 
 export enum ChatConverseType {
-  DM = 'DM',
-  Group = 'Group',
+  DM = 'DM', // 单人会话
+  Multi = 'Multi', // 多人会话
+  Group = 'Group', // 群组会话(暂时无用)
 }
 
 export interface ChatConverseInfo {
