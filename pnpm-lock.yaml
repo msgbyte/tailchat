@@ -1138,8 +1138,8 @@ importers:
   client/web/plugins/com.msgbyte.intro:
     dependencies:
       shepherd.js:
-        specifier: ^8.3.1
-        version: 8.3.1
+        specifier: ^11.1.1
+        version: 11.1.1
 
   client/web/plugins/com.msgbyte.mdpanel:
     devDependencies:
@@ -8085,10 +8085,6 @@ packages:
   /@polka/url@1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
 
-  /@popperjs/core@2.11.6:
-    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
-    dev: false
-
   /@popperjs/core@2.11.7:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
@@ -8274,7 +8270,7 @@ packages:
       '@types/throttle-debounce': 2.1.0
       case-anything: 2.1.10
       dash-get: 1.0.2
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       fast-deep-equal: 3.1.3
       make-error: 1.3.6
       object.omit: 3.0.0
@@ -9633,7 +9629,7 @@ packages:
       '@rollup/pluginutils': 3.1.0(rollup@2.79.1)
       '@types/resolve': 1.17.1
       builtin-modules: 3.3.0
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       is-module: 1.0.0
       resolve: 1.22.2
       rollup: 2.79.1
@@ -9647,7 +9643,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 3.1.0(rollup@2.79.1)
       '@types/resolve': 1.17.1
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
       resolve: 1.22.1
@@ -11515,7 +11511,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       cosmiconfig: 7.1.0
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       svgo: 1.3.2
     dev: false
 
@@ -11527,7 +11523,7 @@ packages:
     dependencies:
       '@svgr/core': 6.5.1
       cosmiconfig: 7.1.0
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       svgo: 2.8.0
     dev: false
 
@@ -17127,6 +17123,11 @@ packages:
   /deepmerge@4.3.0:
     resolution: {integrity: sha512-z2wJZXrmeHdvYJp/Ux55wIjqo81G5Bp4c+oELTW+7ar6SogWHajt5a9gO3s3IDaGSAXjDk0vlQKN3rms8ab3og==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
 
   /default-browser-id@1.0.4:
     resolution: {integrity: sha512-qPy925qewwul9Hifs+3sx1ZYn14obHxpkX+mPD369w4Rzg+YkJBgi3SOvwUq81nWSjqGUegIgEPwD8u+HUnxlw==}
@@ -19401,7 +19402,7 @@ packages:
       chalk: 4.1.2
       chokidar: 3.5.3
       cosmiconfig: 6.0.0
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       eslint: 8.34.0
       fs-extra: 9.1.0
       glob: 7.2.3
@@ -22035,7 +22036,7 @@ packages:
       babel-jest: 27.5.1(@babel/core@7.21.0)
       chalk: 4.1.2
       ci-info: 3.8.0
-      deepmerge: 4.3.0
+      deepmerge: 4.3.1
       glob: 7.2.3
       graceful-fs: 4.2.10
       jest-circus: 27.5.1
@@ -30897,13 +30898,12 @@ packages:
       interpret: 1.4.0
       rechoir: 0.6.2
 
-  /shepherd.js@8.3.1:
-    resolution: {integrity: sha512-IhxZNhnK2m/pNTXudNfYrcwvcZNWkeYngQbQee8nC3xJ2GjeIatGqivhdZAMZ+LeogZvKMakB931d/V534uhrw==}
-    engines: {node: 10.* || >= 12}
+  /shepherd.js@11.1.1:
+    resolution: {integrity: sha512-7nVEgLTZUu5qQCKTlzQeKL1AQd2rG9Y9iqzZUgGvCFwMUZZhfwtZ6eEyMWMYw0zl8qKjSrjgzxFOe+SpfO43aA==}
+    engines: {node: 16.* || >= 18}
     dependencies:
-      '@popperjs/core': 2.11.6
-      deepmerge: 4.2.2
-      smoothscroll-polyfill: 0.4.4
+      '@floating-ui/dom': 1.4.5
+      deepmerge: 4.3.1
     dev: false
 
   /side-channel@1.0.4:
@@ -31028,10 +31028,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /smoothscroll-polyfill@0.4.4:
-    resolution: {integrity: sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==}
-    dev: false
 
   /snake-case@2.1.0:
     resolution: {integrity: sha512-FMR5YoPFwOLuh4rRz92dywJjyKYZNLpMn1R5ujVpIYkbA9p01fq8RMg0FkO4M+Yobt4MjHeLTJVm5xFFBHSV2Q==}

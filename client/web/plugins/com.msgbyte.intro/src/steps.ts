@@ -31,7 +31,7 @@ function buildStepOption(options: {
     text: options.text,
     attachTo: {
       element: options.selector,
-      on: options.position ?? 'auto',
+      on: options.position,
     },
     canClickTarget: false,
     beforeShowPromise: buildWatchDom(options.selector),

@@ -4,6 +4,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "shepherd.js": "^8.3.1"
+    "shepherd.js": "^11.1.1"
   }
 }
