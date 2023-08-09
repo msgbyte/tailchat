@@ -47,8 +47,12 @@ const _Avatar: React.FC<AvatarProps> = React.memo((_props) => {
 
   if (_isNumber(props.size)) {
     // 为了支持rem统一管理宽度，将size转换为样式宽度(size类型上不支持rem单位)
-    style.width = px2rem(props.size);
-    style.height = px2rem(props.size);
+    if (!style.width) {
+      style.width = px2rem(props.size);
+    }
+    if (!style.height) {
+      style.height = px2rem(props.size);
+    }
 
     if (typeof style.fontSize === 'undefined') {
       // 如果props.size是数字且没有指定文字大小
