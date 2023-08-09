@@ -53,6 +53,7 @@ class ConverseService extends TcService {
   async createDMConverse(ctx: TcContext<{ memberIds: string[] }>) {
     const userId = ctx.meta.userId;
     const memberIds = ctx.params.memberIds;
+    const t = ctx.meta.t;
 
     const participantList = _.uniq([userId, ...memberIds]);
 
@@ -105,13 +106,14 @@ class ConverseService extends TcService {
       // 如果创建的是一个多人会话(非双人), 发送系统消息
       await Promise.all(
         _.without(participantList, userId).map<Promise<UserStruct>>(
-          (memberId) => ctx.call('user.getUserInfo', { userId: memberId })
+          (memberId) => call(ctx).getUserInfo(memberId)
         )
       ).then((infoList) => {
         return call(ctx).sendSystemMessage(
-          `${ctx.meta.user.nickname} 邀请 ${infoList
-            .map((info) => info.nickname)
-            .join(', ')} 加入会话`,
+          t('{{user}} 邀请 {{others}} 加入会话', {
+            user: ctx.meta.user.nickname,
+            others: infoList.map((info) => info.nickname).join(', '),
+          }),
           roomId
         );
       });
