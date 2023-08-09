@@ -3,14 +3,11 @@ import {
   prop,
   DocumentType,
   Ref,
-  ReturnModelType,
   index,
 } from '@typegoose/typegoose';
 import type { Base } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
 import { User } from '../user/user';
-import { Converse } from './converse';
-import { Message } from './message';
 
 /**
  * 消息已读管理
@@ -25,15 +22,11 @@ export class Ack implements Base {
   })
   userId: Ref<User>;
 
-  @prop({
-    ref: () => Converse,
-  })
-  converseId: Ref<Converse>;
+  @prop()
+  converseId: string;
 
-  @prop({
-    ref: () => Message,
-  })
-  lastMessageId: Ref<Message>;
+  @prop()
+  lastMessageId: string;
 }
 
 export type AckDocument = DocumentType<Ack>;
