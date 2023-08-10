@@ -9,6 +9,7 @@ import {
 import { useAsyncRequest } from '../useAsyncRequest';
 import { useMemoizedFn } from '../useMemoizedFn';
 import _without from 'lodash/without';
+import { useState } from 'react';
 
 /**
  * 用户设置hooks
@@ -25,6 +26,8 @@ export function useUserSettings() {
 
   const [{ loading: saveLoading }, setSettings] = useAsyncRequest(
     async (settings: UserSettings) => {
+      client.setQueryData([CacheKey], () => settings); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
+
       const newSettings = await setUserSettings(settings);
 
       client.setQueryData([CacheKey], () => newSettings);

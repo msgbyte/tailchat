@@ -1,20 +1,24 @@
 import { Avatar, Icon } from 'tailchat-design';
 import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   GroupInfo,
   showSuccessToasts,
   t,
   useAppSelector,
+  useEvent,
   useGlobalConfigStore,
   useGroupAck,
+  useSingleUserSetting,
 } from 'tailchat-shared';
 import { NavbarNavItem } from './NavItem';
 import { Dropdown } from 'antd';
 import { useGroupUnreadState } from '@/hooks/useGroupUnreadState';
 import { pluginCustomPanel } from '@/plugin/common';
 import { NavbarCustomNavItem } from './CustomNavItem';
+import SortableList, { SortableItem } from 'react-easy-sort';
+import arrayMove from 'array-move';
 
 /**
  * 群组导航栏栏项
@@ -63,20 +67,45 @@ const GroupNavItem: React.FC<{ group: GroupInfo }> = React.memo(({ group }) => {
 });
 GroupNavItem.displayName = 'GroupNavItem';
 
-function useGroups(): GroupInfo[] {
+function useGroupList() {
   const groups = useAppSelector((state) => state.group.groups);
-  return useMemo(
-    () => Object.entries(groups).map(([_, group]) => group),
-    [groups]
+  const { value: groupOrderList = [], setValue: setGroupOrderList } =
+    useSingleUserSetting('groupOrderList', []);
+
+  const handleSortEnd = useEvent((oldIndex: number, newIndex: number) => {
+    setGroupOrderList(
+      arrayMove(
+        groupList.map((item) => item._id),
+        oldIndex,
+        newIndex
+      )
+    );
+  });
+
+  const groupList = useMemo(
+    () =>
+      Object.values(groups).sort((a, b) => {
+        const aIndex = groupOrderList.findIndex((item) => item === a._id);
+        const bIndex = groupOrderList.findIndex((item) => item === b._id);
+
+        // 两种情况，在排序列表中则按照排序列表排序
+        // 不在排序列表中则放在最前面
+        return aIndex - bIndex;
+      }),
+    [groups, groupOrderList]
   );
+  return {
+    handleSortEnd,
+    groupList,
+  };
 }
 
 export const GroupNav: React.FC = React.memo(() => {
-  const groups = useGroups();
+  const { groupList, handleSortEnd } = useGroupList();
 
-  const handleCreateGroup = useCallback(() => {
+  const handleCreateGroup = useEvent(() => {
     openModal(<ModalCreateGroup />);
-  }, []);
+  });
 
   const { disableCreateGroup } = useGlobalConfigStore((state) => ({
     disableCreateGroup: state.disableCreateGroup,
@@ -84,12 +113,17 @@ export const GroupNav: React.FC = React.memo(() => {
 
   return (
     <div className="space-y-2" data-tc-role="navbar-groups">
-      {Array.isArray(groups) &&
-        groups.map((group) => (
-          <div key={group._id}>
-            <GroupNavItem group={group} />
-          </div>
-        ))}
+      {Array.isArray(groupList) && (
+        <SortableList className="space-y-2" onSortEnd={handleSortEnd}>
+          {groupList.map((group) => (
+            <SortableItem key={group._id}>
+              <div>
+                <GroupNavItem group={group} />
+              </div>
+            </SortableItem>
+          ))}
+        </SortableList>
+      )}
 
       {!disableCreateGroup && (
         <NavbarNavItem

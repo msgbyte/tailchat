@@ -41,6 +41,11 @@ export interface UserSettings {
   messageNotificationMuteList?: string[];
 
   /**
+   * 群组排序, 内容为群组id
+   */
+  groupOrderList?: string[];
+
+  /**
    * 其他的设置项
    */
   [key: string]: any;

@@ -627,6 +627,9 @@ importers:
       antd:
         specifier: ^4.24.8
         version: 4.24.8(react-dom@18.2.0)(react@18.2.0)
+      array-move:
+        specifier: 3.0.1
+        version: 3.0.1
       axios:
         specifier: ^0.21.4
         version: 0.21.4
@@ -702,6 +705,9 @@ importers:
       react-easy-crop:
         specifier: ^5.0.0
         version: 5.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-easy-sort:
+        specifier: ^1.5.1
+        version: 1.5.1(react-dom@18.2.0)(react@18.2.0)
       react-helmet:
         specifier: ^6.1.0
         version: 6.1.0(react@18.2.0)
@@ -13769,6 +13775,11 @@ packages:
       get-intrinsic: 1.2.0
       is-string: 1.0.7
     dev: true
+
+  /array-move@3.0.1:
+    resolution: {integrity: sha512-H3Of6NIn2nNU1gsVDqDnYKY/LCdWvCMMOWifNGhKcVQgiZ6nOek39aESOvro6zmueP07exSl93YLvkN4fZOkSg==}
+    engines: {node: '>=10'}
+    dev: false
 
   /array-slice@1.1.0:
     resolution: {integrity: sha512-B1qMD3RBP7O8o0H2KbrXDyB0IccejMF15+87Lvlor12ONPRHP6gTjXMNkt/d3ZuOGbAe66hFmaCfECI24Ufp6w==}
@@ -28869,6 +28880,18 @@ packages:
       react-dom: '>=16.4.0'
     dependencies:
       normalize-wheel: 1.0.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.0.1
+    dev: false
+
+  /react-easy-sort@1.5.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-VKwFO2pHJgz75zEZkxoZYSr0jvQfbS2BUqCQPR3hCRxUfLl9M7xTrXK4rZeFlA+83RxOQCZnzrqtuX0sbtKKlQ==}
+    peerDependencies:
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
+    dependencies:
+      array-move: 3.0.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tslib: 2.0.1
