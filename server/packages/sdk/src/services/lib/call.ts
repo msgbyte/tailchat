@@ -18,6 +18,15 @@ export function call(ctx: TcPureContext) {
       });
     },
     /**
+     * 离开socketio房间
+     */
+    async leaveSocketIORoom(roomIds: string[], userId?: string) {
+      await ctx.call('gateway.leaveRoom', {
+        roomIds,
+        userId,
+      });
+    },
+    /**
      * 发送系统消息
      * 如果为群组消息则需要增加groupId
      */
