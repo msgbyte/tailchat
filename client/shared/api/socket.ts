@@ -55,13 +55,13 @@ export class AppSocket {
         if (resp.result === true) {
           resolve(resp.data);
         } else if (resp.result === false) {
-          reject(
-            new SocketEventError(
-              `[${eventName}]: ${resp.message}: \ndata: ${JSON.stringify(
-                eventData
-              )}`
-            )
+          const error = new SocketEventError(
+            `[${eventName}]: ${resp.message}: \ndata: ${JSON.stringify(
+              eventData
+            )}`
           );
+          console.error(error);
+          reject(error);
         }
       });
     });
