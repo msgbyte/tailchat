@@ -9,7 +9,6 @@ import {
 import { useAsyncRequest } from '../useAsyncRequest';
 import { useMemoizedFn } from '../useMemoizedFn';
 import _without from 'lodash/without';
-import { useState } from 'react';
 
 /**
  * 用户设置hooks
