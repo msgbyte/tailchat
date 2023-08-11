@@ -72,6 +72,12 @@ function useHandleSendMessage() {
             messageId: localMessageId,
           })
         );
+        dispatch(
+          chatActions.appendConverseMessage({
+            converseId: payload.converseId,
+            messages: [message],
+          })
+        ); // 确保删除消息后会立即显示消息，适用于网络卡顿的情况，同时远程的socket会接收到消息广播，在redux中会自动去重
 
         sharedEvent.emit('sendMessage', payload);
       })
