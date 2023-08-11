@@ -48,7 +48,7 @@ export function isValidStr(str: unknown): str is string {
   return typeof str == 'string' && str !== '';
 }
 
-export function isLocalMessageId(str: unknown): str is string {
+export function isLocalMessageId(str: unknown): boolean {
   if (typeof str !== 'string') {
     return false;
   }
