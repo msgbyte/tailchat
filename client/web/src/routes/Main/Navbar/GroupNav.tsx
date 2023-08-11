@@ -1,7 +1,7 @@
 import { Avatar, Icon } from 'tailchat-design';
 import { openModal } from '@/components/Modal';
 import { ModalCreateGroup } from '@/components/modals/CreateGroup';
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import {
   GroupInfo,
   showSuccessToasts,
@@ -101,6 +101,7 @@ function useGroupList() {
 }
 
 export const GroupNav: React.FC = React.memo(() => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { groupList, handleSortEnd } = useGroupList();
 
   const handleCreateGroup = useEvent(() => {
@@ -112,12 +113,16 @@ export const GroupNav: React.FC = React.memo(() => {
   }));
 
   return (
-    <div className="space-y-2" data-tc-role="navbar-groups">
+    <div className="space-y-2" data-tc-role="navbar-groups" ref={containerRef}>
       {Array.isArray(groupList) && (
-        <SortableList className="space-y-2" onSortEnd={handleSortEnd}>
+        <SortableList
+          className="space-y-2"
+          onSortEnd={handleSortEnd}
+          customHolderRef={containerRef}
+        >
           {groupList.map((group) => (
             <SortableItem key={group._id}>
-              <div>
+              <div className="overflow-hidden">
                 <GroupNavItem group={group} />
               </div>
             </SortableItem>
