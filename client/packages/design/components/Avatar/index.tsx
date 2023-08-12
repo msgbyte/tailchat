@@ -33,33 +33,34 @@ const _Avatar: React.FC<AvatarProps> = React.memo((_props) => {
     [src, props.icon, props.name]
   );
 
-  const style: React.CSSProperties = useMemo(
-    () => ({
+  const style = useMemo(() => {
+    const _style: React.CSSProperties = {
       userSelect: 'none',
       ...props.style,
       backgroundColor: color,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-    }),
-    [props.style, color]
-  );
+    };
 
-  if (_isNumber(props.size)) {
-    // 为了支持rem统一管理宽度，将size转换为样式宽度(size类型上不支持rem单位)
-    if (!style.width) {
-      style.width = px2rem(props.size);
-    }
-    if (!style.height) {
-      style.height = px2rem(props.size);
+    if (_isNumber(props.size)) {
+      // 为了支持rem统一管理宽度，将size转换为样式宽度(size类型上不支持rem单位)
+      if (!_style.width) {
+        _style.width = px2rem(props.size);
+      }
+      if (!_style.height) {
+        _style.height = px2rem(props.size);
+      }
+
+      if (typeof _style.fontSize === 'undefined') {
+        // 如果props.size是数字且没有指定文字大小
+        // 则自动增加fontSize大小
+        _style.fontSize = px2rem(props.size * 0.4);
+      }
     }
 
-    if (typeof style.fontSize === 'undefined') {
-      // 如果props.size是数字且没有指定文字大小
-      // 则自动增加fontSize大小
-      style.fontSize = px2rem(props.size * 0.4);
-    }
-  }
+    return _style;
+  }, [props.style, props.size, color]);
 
   const inner = (
     <AntdAvatar
