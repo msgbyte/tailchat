@@ -94,16 +94,16 @@ const chatSlice = createSlice({
 
       state.converses[converseId].messages = newMessages;
 
-      const lastMessageId = _last(
-        newMessages.filter((m) => !isLocalMessageId(m._id))
-      )?._id;
-
-      if (isValidStr(lastMessageId)) {
-        state.lastMessageMap[converseId] = lastMessageId;
-
-        if (state.currentConverseId === converseId) {
-          // 如果是当前会话，则立即已读
-          state.ack[converseId] = lastMessageId;
+      /**
+       * 如果在当前会话中，则暂时不更新最后收到的消息的本地状态，避免可能出现的瞬间更新最后消息(出现小红点) 但是会立即已读（小红点消失）
+       * 所以仅对非当前会话的消息进行更新最后消息
+       */
+      if (state.currentConverseId !== converseId) {
+        const lastMessageId = _last(
+          newMessages.filter((m) => !isLocalMessageId(m._id))
+        )?._id;
+        if (isValidStr(lastMessageId)) {
+          state.lastMessageMap[converseId] = lastMessageId;
         }
       }
     },
