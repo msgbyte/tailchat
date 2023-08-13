@@ -1,5 +1,37 @@
 
 
+## [1.8.9](https://github.com/msgbyte/tailchat/compare/v1.8.8...v1.8.9) (2023-08-13)
+
+
+### Bug Fixes
+
+* [#135](https://github.com/msgbyte/tailchat/issues/135) avatar dragging should be disable ([c7334eb](https://github.com/msgbyte/tailchat/commit/c7334ebd4f807cb28dbfa15b43f4e688cec7ed98))
+* fix action repush and will display repeated user ([967e671](https://github.com/msgbyte/tailchat/commit/967e6715215ab9a66f2fc1c81c807d794cbd9896))
+* fix ant badge display which will change avatar dom height ([ee636e6](https://github.com/msgbyte/tailchat/commit/ee636e6cb4d24bc2c4b446553d13206a9e1173ef))
+* fix append group member roles will occur error when operate multi users ([52647a9](https://github.com/msgbyte/tailchat/commit/52647a98b5271c8b1e813aa2bcedbd8ed1723ab1))
+* fix combined avatar render error in two people converse ([1b93bfb](https://github.com/msgbyte/tailchat/commit/1b93bfb698eb586975b111b13aeda96cc3318bf2))
+* fix message ack not trigger update problem ([7900a3e](https://github.com/msgbyte/tailchat/commit/7900a3e17fdb3577f6c1eb734576c6f7997ce21d))
+* fix plugin root route path incorrect problem ([588fae2](https://github.com/msgbyte/tailchat/commit/588fae2e60a2afc6376cd448684d454095dad27e))
+* fix tour will be break when flag DISABLE_CREATE_GROUP is been open ([d1a3523](https://github.com/msgbyte/tailchat/commit/d1a352321554ca49c4f7f7d091da284f390284d7))
+* fixed an issue where the avatar size control could change ([d1035cc](https://github.com/msgbyte/tailchat/commit/d1035cc57c164888ffc946d908f15584500de11f))
+
+
+### Features
+
+* [#120](https://github.com/msgbyte/tailchat/issues/120) add group nav item sortable feature ([8f3ec1c](https://github.com/msgbyte/tailchat/commit/8f3ec1c996b1ebb86d88ae3c0fee3b95a08eb86b))
+* add dm create action in sidebar ([8c26856](https://github.com/msgbyte/tailchat/commit/8c268568dcc5a10a3566a4aceff060181b29a71d))
+* add github repo group ensure action which will auto create group and subscribe activity ([c96367f](https://github.com/msgbyte/tailchat/commit/c96367f157eb221952fb7f8358afa48858270b04))
+* add iam proxy support for github ([5b718c4](https://github.com/msgbyte/tailchat/commit/5b718c4b040c4ede099467dbb0f4f5e8232747a8))
+* add the multi converse strategy, create a multi converse without reusing past converse ([edc076f](https://github.com/msgbyte/tailchat/commit/edc076f430d8c418e0049501b6ac0f00aa99c3b2))
+* converse suppport order with message, and add more checker for local message ([2468d45](https://github.com/msgbyte/tailchat/commit/2468d45c66d33879e9dd38e776ad5666f8e7927b))
+
+
+### Performance Improvements
+
+* add offline icons sort ([cbfb7c8](https://github.com/msgbyte/tailchat/commit/cbfb7c8449d9d1249c512203ed9c8e8143309dac))
+* optimize group drag positioning ([2adfe92](https://github.com/msgbyte/tailchat/commit/2adfe923af3d6b0dbb88f375f05d50708513873a))
+* optimize low-speed networking to send message ([4506a63](https://github.com/msgbyte/tailchat/commit/4506a63db086543a6f9bbc6f3b48222a6bfc5103))
+
 ## [1.8.8](https://github.com/msgbyte/tailchat/compare/v1.8.7...v1.8.8) (2023-08-06)
 
 
