@@ -6,7 +6,7 @@ import { isEnterHotkey } from '@/utils/hot-key';
 import React, { useRef, useState } from 'react';
 import { ChatInputAddon } from './Addon';
 import { ClipboardHelper } from './clipboard-helper';
-import { ChatInputActionContext } from './context';
+import { ChatInputActionContext, useChatInputMentionsContext } from './context';
 import { uploadMessageImage } from './utils';
 import { ChatInputBoxInput } from './input';
 import {
@@ -31,6 +31,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const [mentions, setMentions] = useState<string[]>([]);
+  const { disabled } = useChatInputMentionsContext();
   const handleSendMsg = useEvent(async () => {
     await props.onSendMsg(message, {
       mentions: _uniq(mentions), // 发送前去重
@@ -110,27 +111,31 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             />
           </div>
 
-          <div className="px-2 flex space-x-1">
-            {pluginChatInputButtons.map((item, i) =>
-              React.cloneElement(item.render(), {
-                key: `plugin-chatinput-btn#${i}`,
-              })
-            )}
+          {!disabled && (
+            <>
+              <div className="px-2 flex space-x-1">
+                {pluginChatInputButtons.map((item, i) =>
+                  React.cloneElement(item.render(), {
+                    key: `plugin-chatinput-btn#${i}`,
+                  })
+                )}
 
-            <ChatInputEmotion />
+                <ChatInputEmotion />
 
-            {message ? (
-              <Icon
-                icon="mdi:send-circle-outline"
-                className="text-2xl cursor-pointer"
-                onClick={() => handleSendMsg()}
-              />
-            ) : (
-              <ChatInputAddon />
-            )}
-          </div>
+                {message ? (
+                  <Icon
+                    icon="mdi:send-circle-outline"
+                    className="text-2xl cursor-pointer"
+                    onClick={() => handleSendMsg()}
+                  />
+                ) : (
+                  <ChatInputAddon />
+                )}
+              </div>
 
-          <ChatDropArea />
+              <ChatDropArea />
+            </>
+          )}
         </div>
       </div>
     </ChatInputActionContext.Provider>
