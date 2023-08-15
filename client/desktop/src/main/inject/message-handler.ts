@@ -22,7 +22,7 @@ export function handleTailchatMessage(
   }
 
   if (type === 'receiveUnmutedMessage') {
-    if (!win.isFocused) {
+    if (!win.isFocused()) {
       win.flashFrame(true);
     }
     return;
