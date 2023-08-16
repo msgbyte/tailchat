@@ -13,6 +13,8 @@ import {
   NoPermissionError,
   call,
   PERMISSION,
+  NotFoundError,
+  SYSTEM_USERID,
 } from 'tailchat-server-sdk';
 import type { Group } from '../../../models/group/group';
 import { isValidStr } from '../../../lib/utils';
@@ -36,6 +38,7 @@ class MessageService extends TcService {
     });
     this.registerAction('fetchNearbyMessage', this.fetchNearbyMessage, {
       params: {
+        groupId: { type: 'string', optional: true },
         converseId: 'string',
         messageId: 'string',
         num: { type: 'number', optional: true },
@@ -109,13 +112,18 @@ class MessageService extends TcService {
    */
   async fetchNearbyMessage(
     ctx: TcContext<{
+      groupId?: string;
       converseId: string;
       messageId: string;
       num?: number;
     }>
   ) {
-    const { converseId, messageId, num = 5 } = ctx.params;
+    const { groupId, converseId, messageId, num = 5 } = ctx.params;
     const { t } = ctx.meta;
+
+    // 鉴权是否能获取到会话内容
+    await this.checkConversePermission(ctx, converseId, groupId);
+
     const message = await this.adapter.model
       .findOne({
         _id: new Types.ObjectId(messageId),
@@ -176,11 +184,10 @@ class MessageService extends TcService {
     /**
      * 鉴权
      */
+    await this.checkConversePermission(ctx, converseId, groupId); // 鉴权是否能获取到会话内容
     if (isValidStr(groupId)) {
-      // 是群组消息
-      const groupInfo: Group = await ctx.call('group.getGroupInfo', {
-        groupId,
-      });
+      // 是群组消息, 鉴权是否禁言
+      const groupInfo = await call(ctx).getGroupInfo(groupId);
       const member = groupInfo.members.find((m) => String(m.userId) === userId);
       if (member) {
         // 因为有机器人，所以如果没有在成员列表中找到不报错
@@ -440,6 +447,50 @@ class MessageService extends TcService {
     });
 
     return true;
+  }
+
+  /**
+   * 校验会话权限，如果没有抛出异常则视为正常
+   */
+  private async checkConversePermission(
+    ctx: TcContext,
+    converseId: string,
+    groupId?: string
+  ) {
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+    if (userId === SYSTEM_USERID) {
+      return;
+    }
+
+    // 鉴权是否能获取到会话内容
+    if (groupId) {
+      // 是群组
+      const group = await call(ctx).getGroupInfo(groupId);
+      console.log('group.members', group.members, group);
+      if (group.members.findIndex((m) => String(m.userId) === userId) === -1) {
+        // 不存在该用户
+        throw new NoPermissionError(t('没有当前会话权限'));
+      }
+    } else {
+      // 是普通会话
+      const converse = await ctx.call<
+        any,
+        {
+          converseId: string;
+        }
+      >('chat.converse.findConverseInfo', {
+        converseId,
+      });
+
+      if (!converse) {
+        throw new NotFoundError(t('没有找到会话信息'));
+      }
+      const memebers = converse.members ?? [];
+      if (memebers.findIndex((member) => String(member) === userId) === -1) {
+        throw new NoPermissionError(t('没有当前会话权限'));
+      }
+    }
   }
 }
 

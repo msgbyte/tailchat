@@ -7,6 +7,7 @@ import {
   UserStruct,
   call,
   DataNotFoundError,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import type {
   ConverseDocument,
@@ -225,7 +226,7 @@ class ConverseService extends TcService {
 
     const memebers = converse.members ?? [];
     if (!memebers.map((member) => String(member)).includes(userId)) {
-      throw new Error(t('没有获取会话信息权限'));
+      throw new NoPermissionError(t('没有获取会话信息权限'));
     }
 
     return await this.transformDocuments(ctx, {}, converse);

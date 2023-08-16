@@ -105,14 +105,15 @@ export async function fetchConverseLastMessages(
  * @param messageId 消息ID
  * @returns 消息附近的信息
  */
-export async function fetchNearbyMessage(
-  converseId: string,
-  messageId: string
-): Promise<ChatMessage[]> {
-  const { data } = await request.post('/api/chat/message/fetchNearbyMessage', {
-    converseId,
-    messageId,
-  });
+export async function fetchNearbyMessage(params: {
+  groupId?: string;
+  converseId: string;
+  messageId: string;
+}): Promise<ChatMessage[]> {
+  const { data } = await request.post(
+    '/api/chat/message/fetchNearbyMessage',
+    params
+  );
 
   return data;
 }

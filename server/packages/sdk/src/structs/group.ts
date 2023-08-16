@@ -11,6 +11,8 @@ interface GroupMemberStruct {
   roles?: string[]; // 角色
 
   userId: string;
+
+  muteUntil?: string;
 }
 
 export interface GroupPanelStruct {
