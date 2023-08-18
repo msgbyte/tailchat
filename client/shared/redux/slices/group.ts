@@ -75,6 +75,27 @@ const groupSlice = createSlice({
         };
       }
     },
+    updateGroupConfig(
+      state,
+      action: PayloadAction<{
+        groupId: string;
+        configName: string;
+        configValue: any;
+      }>
+    ) {
+      const { groupId, configName, configValue } = action.payload;
+
+      const groupInfo = state.groups[groupId];
+      if (groupInfo) {
+        state.groups[groupId] = {
+          ...groupInfo,
+          config: {
+            ...(groupInfo.config ?? {}),
+            [configName]: configValue,
+          },
+        };
+      }
+    },
   },
 });
 

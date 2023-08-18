@@ -10,6 +10,9 @@ export const groupConfigNames = [
   // 隐藏群组成员标识位
   'hideGroupMemberDiscriminator',
 
+  // 禁止从群组中发起私信
+  'disableCreateConverseFromGroup',
+
   // 群组背景图
   'groupBackgroundImage',
 ] as const;

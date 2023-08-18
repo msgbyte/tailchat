@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+  groupActions,
   model,
   showSuccessToasts,
   t,
   UploadFileResult,
+  useAppDispatch,
   useAsyncRequest,
   useGroupInfo,
 } from 'tailchat-shared';
@@ -21,10 +23,18 @@ export const GroupConfig: React.FC<{
 }> = React.memo((props) => {
   const groupId = props.groupId;
   const groupInfo = useGroupInfo(groupId);
+  const dispatch = useAppDispatch();
 
   const [{ loading }, handleModifyConfig] = useAsyncRequest(
     async (configName: model.group.GroupConfigNames, configValue: any) => {
       await model.group.modifyGroupConfig(groupId, configName, configValue);
+      dispatch(
+        groupActions.updateGroupConfig({
+          groupId,
+          configName,
+          configValue,
+        })
+      );
       showSuccessToasts();
     },
     [groupId]
