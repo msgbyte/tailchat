@@ -1,17 +1,40 @@
 // antd 主题色支持
 .tailchat-app {
   --tc-primary-color: rgb(24, 144, 255);
+  --tc-primary-hover-color: #40a9ff;
+  --tc-dangerous-color: #ff4d4f;
+  --tc-dangerous-hover-color: #ff7875;
 
   .ant-btn-primary {
     background: var(--tc-primary-color);
     border-color: var(--tc-primary-color);
 
-    &[disabled], &[disabled]:hover, &[disabled]:focus, &[disabled]:active {
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled]:active {
       color: rgba(0, 0, 0, 0.25);
       border-color: #d9d9d9;
       background: #f5f5f5;
       text-shadow: none;
       box-shadow: none;
+    }
+
+    &:hover,
+    &:focus {
+      background: var(--tc-primary-hover-color);
+      border-color: var(--tc-primary-hover-color);
+    }
+
+    &.ant-btn-dangerous {
+      background: var(--tc-dangerous-color);
+      border-color: var(--tc-dangerous-color);
+
+      &:hover,
+      &:focus {
+        background: var(--tc-dangerous-hover-color);
+        border-color: var(--tc-dangerous-hover-color);
+      }
     }
   }
 }
