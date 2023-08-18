@@ -1,13 +1,18 @@
+import { IconBtn } from '@/components/IconBtn';
 import { UserName } from '@/components/UserName';
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
-import { Space, Tag } from 'antd';
+import { Space, Tag, Tooltip } from 'antd';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { getTextColorHex } from 'tailchat-design';
 import {
+  createDMConverse,
   getGroupConfigWithInfo,
   GroupInfo,
   t,
+  useAsyncRequest,
   UserBaseInfo,
+  useUserId,
 } from 'tailchat-shared';
 import { UserProfileContainer } from '../../UserProfileContainer';
 import { usePluginUserExtraInfo } from './usePluginUserExtraInfo';
@@ -17,10 +22,21 @@ export const GroupUserPopover: React.FC<{
   groupInfo: GroupInfo;
 }> = React.memo((props) => {
   const { userInfo, groupInfo } = props;
+  const userId = userInfo._id;
   const userExtra = userInfo.extra ?? {};
-  const roleNames = getUserRoleNames(userInfo._id, groupInfo);
+  const roleNames = getUserRoleNames(userId, groupInfo);
   const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
   const pluginUserExtraInfoEl = usePluginUserExtraInfo(userExtra);
+  const navigate = useNavigate();
+  const currentUserId = useUserId();
+
+  const allowSendMessage =
+    !hideGroupMemberDiscriminator && currentUserId !== userId;
+
+  const [, handleCreateConverse] = useAsyncRequest(async () => {
+    const converse = await createDMConverse([userId]);
+    navigate(`/main/personal/converse/${converse._id}`);
+  }, [navigate]);
 
   useEffect(() => {
     if (userInfo.avatar) {
@@ -35,7 +51,7 @@ export const GroupUserPopover: React.FC<{
       <UserProfileContainer userInfo={userInfo}>
         <div className="text-xl">
           <span className="font-semibold">
-            <UserName userId={userInfo._id} />
+            <UserName userId={userId} />
           </span>
           {!hideGroupMemberDiscriminator && (
             <span className="opacity-60 ml-1">#{userInfo.discriminator}</span>
@@ -43,9 +59,7 @@ export const GroupUserPopover: React.FC<{
         </div>
 
         <Space size={4} wrap={true} className="py-1">
-          {groupInfo.owner === userInfo._id && (
-            <Tag color="gold">{t('创建者')}</Tag>
-          )}
+          {groupInfo.owner === userId && <Tag color="gold">{t('创建者')}</Tag>}
 
           {userInfo.temporary && <Tag color="processing">{t('游客')}</Tag>}
 
@@ -57,6 +71,17 @@ export const GroupUserPopover: React.FC<{
         </Space>
 
         <div className="pt-2">{pluginUserExtraInfoEl}</div>
+
+        <div className="text-right">
+          {allowSendMessage && (
+            <Tooltip title={t('发送消息')}>
+              <IconBtn
+                icon="mdi:message-processing-outline"
+                onClick={handleCreateConverse}
+              />
+            </Tooltip>
+          )}
+        </div>
       </UserProfileContainer>
     </div>
   );
