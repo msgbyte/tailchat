@@ -25,13 +25,16 @@ export const GroupUserPopover: React.FC<{
   const userId = userInfo._id;
   const userExtra = userInfo.extra ?? {};
   const roleNames = getUserRoleNames(userId, groupInfo);
-  const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
+  const { hideGroupMemberDiscriminator, disableCreateConverseFromGroup } =
+    getGroupConfigWithInfo(groupInfo);
   const pluginUserExtraInfoEl = usePluginUserExtraInfo(userExtra);
   const navigate = useNavigate();
   const currentUserId = useUserId();
 
   const allowSendMessage =
-    !hideGroupMemberDiscriminator && currentUserId !== userId;
+    !hideGroupMemberDiscriminator &&
+    !disableCreateConverseFromGroup &&
+    currentUserId !== userId;
 
   const [, handleCreateConverse] = useAsyncRequest(async () => {
     const converse = await createDMConverse([userId]);

@@ -54,6 +54,27 @@ export const GroupConfig: React.FC<{
         }
       />
 
+      {/* 如果开启了 hideGroupMemberDiscriminator 则视为禁止发起私信 */}
+      <FullModalField
+        title={t('禁止在群组发起私信')}
+        tip={t('群组隐私控制，防止通过群组恶意骚扰用户。')}
+        content={
+          <Switch
+            disabled={
+              loading || config['hideGroupMemberDiscriminator'] === true
+            }
+            checked={
+              (config['hideGroupMemberDiscriminator'] === true ||
+                config['disableCreateConverseFromGroup']) ??
+              false
+            }
+            onChange={(checked) =>
+              handleModifyConfig('disableCreateConverseFromGroup', checked)
+            }
+          />
+        }
+      />
+
       <FullModalField
         title={t('群组背景')}
         tip={t('个性化配置群组背景')}

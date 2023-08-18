@@ -108,6 +108,7 @@ export function getGroupConfigWithInfo(
   groupInfo: GroupInfo | null | undefined
 ): {
   hideGroupMemberDiscriminator: boolean;
+  disableCreateConverseFromGroup: boolean;
   [key: string]: unknown;
 } {
   const config = groupInfo?.config ?? {};
@@ -115,6 +116,8 @@ export function getGroupConfigWithInfo(
   return {
     ...config,
     hideGroupMemberDiscriminator: config.hideGroupMemberDiscriminator ?? false,
+    disableCreateConverseFromGroup:
+      config.disableCreateConverseFromGroup ?? false,
   };
 }
 
