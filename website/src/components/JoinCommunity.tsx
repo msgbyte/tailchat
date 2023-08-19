@@ -17,8 +17,9 @@ export const JoinCommunity: React.FC = React.memo(() => {
         </Translate>
       </p>
       <Link
-        className="button button--primary button--lg umami--click--joingroup"
+        className="button button--primary button--lg"
         href={inviteLink}
+        data-umami-event="joingroup"
       >
         <Translate>Join Our Group</Translate>
       </Link>
@@ -28,7 +29,7 @@ export const JoinCommunity: React.FC = React.memo(() => {
           href="https://www.producthunt.com/posts/tailchat?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tailchat"
           target="_blank"
           rel="noreferrer"
-          className="umami--click--producthunt"
+          data-umami-event="producthunt"
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=382080&theme=light"
