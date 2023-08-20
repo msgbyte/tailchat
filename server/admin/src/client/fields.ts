@@ -48,7 +48,8 @@ export const userFields = [
   }),
   createBooleanField('temporary'),
   createAvatarField('avatar', {
-    preRenderTransform: parseUrlStr,
+    preRenderTransform: (val) =>
+      typeof val === 'string' ? parseUrlStr(val) : val,
   }),
   createTextField('type', {
     edit: {
@@ -161,7 +162,13 @@ export const fileFields = [
   }),
   createTextField('metaData.content-type'),
   createTextField('etag'),
-  createTextField('userId'),
+  createUserField('userId', {
+    reference: 'users',
+    displayField: 'nickname',
+    list: {
+      width: 80,
+    },
+  }),
   createDateTimeField('createdAt'),
 ];
 
