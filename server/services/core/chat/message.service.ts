@@ -463,6 +463,12 @@ class MessageService extends TcService {
       return;
     }
 
+    const userInfo = await call(ctx).getUserInfo(userId); // TODO: 可以通过在默认的meta信息中追加用户类型来减少一次请求来优化
+    if (userInfo.type === 'pluginBot') {
+      // 如果是插件机器人则拥有所有权限(开放平台机器人需要添加到群组才有会话权限)
+      return;
+    }
+
     // 鉴权是否能获取到会话内容
     if (groupId) {
       // 是群组
