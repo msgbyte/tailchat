@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './';
+import { asyncStoragePersister, queryClient } from './';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 
 /**
  * 缓存上下文
@@ -8,9 +8,12 @@ import { queryClient } from './';
 export const CacheProvider: React.FC<PropsWithChildren> = React.memo(
   (props) => {
     return (
-      <QueryClientProvider client={queryClient}>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{ persister: asyncStoragePersister }}
+      >
         {props.children}
-      </QueryClientProvider>
+      </PersistQueryClientProvider>
     );
   }
 );

@@ -183,7 +183,7 @@ class UserService extends TcService {
       },
       cache: {
         keys: ['userId'],
-        ttl: 60 * 60, // 1 hour
+        ttl: 6 * 60 * 60, // 6 hour
       },
     });
     this.registerAction('getUserInfoList', this.getUserInfoList, {
