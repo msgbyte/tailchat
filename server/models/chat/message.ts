@@ -33,6 +33,7 @@ class MessageReaction {
   },
 })
 @index({ createdAt: -1 })
+@index({ converseId: 1, _id: -1 }) // for fetchConverseMessage
 export class Message extends TimeStamps implements Base {
   _id: Types.ObjectId;
   id: string;
@@ -79,7 +80,7 @@ export class Message extends TimeStamps implements Base {
     startId: string | null,
     limit = 50
   ) {
-    const conditions: FilterQuery<DocumentType<Message>> = {
+    const conditions: FilterQuery<MessageDocument> = {
       converseId,
     };
     if (startId !== null) {
