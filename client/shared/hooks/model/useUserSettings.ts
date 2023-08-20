@@ -16,7 +16,7 @@ import _without from 'lodash/without';
 export function useUserSettings() {
   const client = useQueryClient();
   const { data: settings, isLoading } = useQuery(
-    [CacheKey],
+    [CacheKey.userSettings],
     () => getUserSettings(),
     {
       staleTime: 10 * 60 * 1000, // 缓存10分钟
@@ -25,11 +25,11 @@ export function useUserSettings() {
 
   const [{ loading: saveLoading }, setSettings] = useAsyncRequest(
     async (settings: UserSettings) => {
-      client.setQueryData([CacheKey], () => settings); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
+      client.setQueryData([CacheKey.userSettings], () => settings); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
 
       const newSettings = await setUserSettings(settings);
 
-      client.setQueryData([CacheKey], () => newSettings);
+      client.setQueryData([CacheKey.userSettings], () => newSettings);
       sharedEvent.emit('userSettingsUpdate', newSettings);
     },
     [client]
