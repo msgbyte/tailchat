@@ -1,5 +1,35 @@
 
 
+## [1.8.10](https://github.com/msgbyte/tailchat/compare/v1.8.9...v1.8.10) (2023-08-21)
+
+
+### Bug Fixes
+
+* [#143](https://github.com/msgbyte/tailchat/issues/143) fix message api overreach vulnerability problem ([f7e84ca](https://github.com/msgbyte/tailchat/commit/f7e84cad35492fecbd14cabc905f24878ba07f79))
+* **desktop:** fix cannot flashframe problem ([7cdbe45](https://github.com/msgbyte/tailchat/commit/7cdbe45954be6cd822caa5aa59c1620eea002274))
+* fix badge move when hover and display scrollbar in group nav ([ad9c9f4](https://github.com/msgbyte/tailchat/commit/ad9c9f4f5244358ad81a3493bbdd636250d51d71))
+* fix converse permission check for pluginBot ([5e27ab8](https://github.com/msgbyte/tailchat/commit/5e27ab899ecdd23274c24ae732a3f014fe4202e8))
+* fix danger button color error in light mode ([a430a67](https://github.com/msgbyte/tailchat/commit/a430a670c79db8a4c955d909452bb1131377ac65))
+* fix incorrect cache key of user settings ([778c3a4](https://github.com/msgbyte/tailchat/commit/778c3a4f4b9d4185451f47c83713a8e8cfc467bc))
+* not allowed input should hide action ([464fd7c](https://github.com/msgbyte/tailchat/commit/464fd7c9f8b2a6b79d7979d5064b6c9b768f59d8))
+
+
+### Features
+
+* add disableCreateConverseFromGroup in group config ([b3d80c4](https://github.com/msgbyte/tailchat/commit/b3d80c4ef069f0f461cd6d0fc9ac6a73419efb01))
+* **admin:** add refresh in messages ([49678f3](https://github.com/msgbyte/tailchat/commit/49678f3a93aed6eed36bfc1df002e9b94ace43f9))
+* allow create converse from group user popover ([1a8b94e](https://github.com/msgbyte/tailchat/commit/1a8b94eaeda7474a7e259822f29e86effdd2f82e))
+
+
+### Performance Improvements
+
+* add persist option for one day to reduce request by react-query cache ([4b0fc66](https://github.com/msgbyte/tailchat/commit/4b0fc66ffbcd9efd5b82264804a6ffbabb6d8491))
+* **admin:** update user avatar preRenderTransform ([0058880](https://github.com/msgbyte/tailchat/commit/0058880cdc61bd02f23fc4dee9b6290188029ead))
+* compress website homepage feature image size ([560c256](https://github.com/msgbyte/tailchat/commit/560c25659891fa09513feac6f1533c9c1cb6bedd))
+* optimize db performance and greatly reduce the time-consuming fetchConverseMessage request ([ad862b7](https://github.com/msgbyte/tailchat/commit/ad862b7991b7bcb019cdec71c149d6f4a74d81b3))
+* optimize the update group configuration interaction under low-speed network ([13d32af](https://github.com/msgbyte/tailchat/commit/13d32afb481826d91814cdee180d7d4143b86804))
+* reduce entry js size ([747a6d3](https://github.com/msgbyte/tailchat/commit/747a6d3afe618d84e7430ed3589ab2acc3bcfd9c))
+
 ## [1.8.9](https://github.com/msgbyte/tailchat/compare/v1.8.8...v1.8.9) (2023-08-13)
 
 
