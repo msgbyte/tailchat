@@ -11,11 +11,12 @@ import {
   useAppSelector,
   useAsyncRequest,
   useEvent,
+  useGlobalConfigStore,
   userActions,
 } from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
-import { Button, Dropdown, Menu, Tooltip } from 'antd';
+import { Button, Dropdown, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { Problem } from '@/components/Problem';
 import { closeModal, openModal } from '@/components/Modal';
@@ -30,6 +31,9 @@ export const FriendList: React.FC<{
   const friends = useAppSelector((state) => state.user.friends);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const disableAddFriend = useGlobalConfigStore(
+    (state) => state.disableAddFriend
+  );
 
   const [, handleCreateConverse] = useAsyncRequest(
     async (targetId: string) => {
@@ -73,9 +77,11 @@ export const FriendList: React.FC<{
         text={
           <div>
             <p className="mb-2">{t('暂无好友')}</p>
-            <Button type="primary" onClick={props.onSwitchToAddFriend}>
-              {t('立即添加')}
-            </Button>
+            {!disableAddFriend && (
+              <Button type="primary" onClick={props.onSwitchToAddFriend}>
+                {t('立即添加')}
+              </Button>
+            )}
           </div>
         }
       />
