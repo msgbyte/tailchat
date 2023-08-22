@@ -23,7 +23,7 @@ export const FriendPanel: React.FC = React.memo(() => {
   const received = friendRequests.filter((item) => item.to === userId);
 
   const handleSwitchToAddFriend = useCallback(() => {
-    setActiveKey('add');
+    setActiveKey('4');
   }, []);
 
   return (
