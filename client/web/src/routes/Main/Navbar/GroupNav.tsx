@@ -117,6 +117,7 @@ export const GroupNav: React.FC = React.memo(() => {
       {Array.isArray(groupList) && (
         <SortableList
           className="space-y-2"
+          lockAxis="y"
           onSortEnd={handleSortEnd}
           customHolderRef={containerRef}
         >
