@@ -1,11 +1,15 @@
 import React from 'react';
 import _get from 'lodash/get';
 import type { LinkMeta } from './types';
+import { parseUrlStr } from '@capital/common';
 import { Image, Icon } from '@capital/component';
 
 export const UrlMetaBase: React.FC<{
   meta: LinkMeta;
 }> = React.memo(({ meta }) => {
+  const imageUrl = _get(meta, 'images.0');
+  const videoUrl = _get(meta, 'videos.0');
+
   return (
     <>
       <div className="basic">
@@ -13,24 +17,24 @@ export const UrlMetaBase: React.FC<{
           <div className="title">{_get(meta, 'title')}</div>
           <div className="description">{_get(meta, 'description')}</div>
         </div>
-        {_get(meta, 'images.0') && (
+        {imageUrl && (
           <div className="image">
-            <Image preview={true} src={_get(meta, 'images.0')} />
+            <Image preview={true} src={parseUrlStr(imageUrl)} />
           </div>
         )}
       </div>
-      {_get(meta, 'videos.0') && (
+      {videoUrl && (
         <div className="video">
           <div
             className="openfull"
             onClick={(e) => {
               e.stopPropagation();
-              window.open(_get(meta, 'videos.0'));
+              window.open(videoUrl);
             }}
           >
             <Icon icon="mdi:open-in-new" />
           </div>
-          <iframe src={_get(meta, 'videos.0')} />
+          <iframe src={videoUrl} />
         </div>
       )}
     </>

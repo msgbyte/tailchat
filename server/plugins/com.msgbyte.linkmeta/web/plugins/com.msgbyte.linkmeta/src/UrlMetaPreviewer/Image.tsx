@@ -1,5 +1,5 @@
 import React from 'react';
-import _get from 'lodash/get';
+import { parseUrlStr } from '@capital/common';
 import { Image } from '@capital/component';
 import type { LinkMeta } from './types';
 
@@ -12,7 +12,7 @@ export const UrlMetaImage: React.FC<{
   return (
     <Image
       preview={true}
-      src={meta.url}
+      src={parseUrlStr(meta.url)}
       style={{
         maxHeight: MAX_HEIGHT,
         maxWidth: MAX_WIDTH,
