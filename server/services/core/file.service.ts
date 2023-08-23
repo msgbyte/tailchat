@@ -59,6 +59,13 @@ class FileService extends TcService {
       },
       disableSocket: true,
     });
+    this.registerAction('delete', this.delete, {
+      params: {
+        objectName: 'string',
+      },
+      disableSocket: true,
+      visibility: 'public',
+    });
   }
 
   async onInited() {
@@ -307,17 +314,34 @@ class FileService extends TcService {
   ) {
     const objectName = ctx.params.objectName;
 
-    const stream = await this.actions['getObject'](
-      {
-        bucketName: this.bucketName,
-        objectName,
-      },
-      {
-        parentCtx: ctx,
-      }
+    const stream = await this.minioClient.getObject(
+      this.bucketName,
+      objectName
     );
 
     return stream;
+  }
+
+  /**
+   * 删除文件
+   */
+  async delete(
+    ctx: TcContext<{
+      objectName: string;
+    }>
+  ) {
+    const objectName = ctx.params.objectName;
+
+    try {
+      // 先删文件再删记录，确保文件被删除
+      await this.minioClient.removeObject(this.bucketName, objectName);
+      await this.adapter.model.deleteMany({
+        bucketName: this.bucketName,
+        objectName,
+      });
+    } catch (err) {
+      this.logger.warn('Delete file error:', objectName, err);
+    }
   }
 
   private randomName() {

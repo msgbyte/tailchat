@@ -23,15 +23,11 @@ import {
 } from 'tushan/icon';
 import { authHTTPClient, authProvider } from './auth';
 import { Dashboard } from './components/Dashboard';
-import {
-  discoverFields,
-  fileFields,
-  mailFields,
-  messageFields,
-} from './fields';
+import { discoverFields, mailFields, messageFields } from './fields';
 import { i18n } from './i18n';
 import { GroupList } from './resources/group';
 import { UserList } from './resources/user';
+import { FileList } from './resources/file';
 import { TailchatAnalytics } from './routes/analytics';
 import { CacheManager } from './routes/cache';
 import { TailchatNetwork } from './routes/network';
@@ -84,21 +80,7 @@ function App() {
 
       <Resource name="groups" icon={<IconUserGroup />} list={<GroupList />} />
 
-      <Resource
-        name="file"
-        icon={<IconFile />}
-        list={
-          <ListTable
-            filter={[
-              createTextField('q', {
-                label: 'Search',
-              }),
-            ]}
-            fields={fileFields}
-            action={{ detail: true }}
-          />
-        }
-      />
+      <Resource name="file" icon={<IconFile />} list={<FileList />} />
 
       <Resource
         name="mail"

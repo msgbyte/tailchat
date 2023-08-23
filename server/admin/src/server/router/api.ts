@@ -8,6 +8,7 @@ import { fileRouter } from './file';
 import dayjs from 'dayjs';
 import userModel from '../../../../models/user/user';
 import messageModel from '../../../../models/chat/message';
+import fileModel from '../../../../models/file';
 import groupModel from '../../../../models/group/group';
 import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
 import { cacheRouter } from './cache';
@@ -269,11 +270,33 @@ router.use(
     },
   })
 );
+
+router.delete('/file/:id', auth(), async (req, res) => {
+  try {
+    const fileId = req.params.id;
+
+    const record = await fileModel.findById(fileId);
+    if (record) {
+      await callBrokerAction('file.delete', {
+        objectName: record.objectName,
+      });
+    }
+
+    res.json({ id: fileId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: (err as any).message });
+  }
+});
 router.use(
   '/file',
   auth(),
-  raExpressMongoose(require('../../../../models/file').default, {
+  raExpressMongoose(fileModel, {
     q: ['objectName'],
+    allowedRegexFields: ['objectName'],
+    capabilities: {
+      delete: false,
+    },
   })
 );
 router.use(
