@@ -24,10 +24,13 @@ export function useUserSettings() {
   );
 
   const [{ loading: saveLoading }, setSettings] = useAsyncRequest(
-    async (settings: UserSettings) => {
-      client.setQueryData([CacheKey.userSettings], () => settings); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
+    async (_settings: UserSettings) => {
+      client.setQueryData([CacheKey.userSettings], () => ({
+        ...settings,
+        ..._settings,
+      })); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
 
-      const newSettings = await setUserSettings(settings);
+      const newSettings = await setUserSettings(_settings);
 
       client.setQueryData([CacheKey.userSettings], () => newSettings);
       sharedEvent.emit('userSettingsUpdate', newSettings);
