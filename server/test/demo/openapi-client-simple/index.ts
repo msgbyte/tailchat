@@ -3,9 +3,9 @@ import path from 'path';
 import axios from 'axios';
 import fs from 'fs-extra';
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
-const API = process.env.API || 'http://localhost:11001';
+const API = process.env.API || 'https://tailchat-nightly.moonrailgun.com'; // dev environment is 'http://localhost:11001'
 const clientUrl = `http://localhost:${port}`;
 const clientId = process.env.ID || 'tc_649aa2179e97b8b3b2d1004f';
 const clientSecret = process.env.SECRET || '4Pt4lccOaztJROs-VhmQf8XBU89-z8rr';
@@ -54,7 +54,6 @@ app.get('/cb', async (req, res, next) => {
 
     // 根据获取到的code获取授权码
     const { data: tokenInfo } = await request.post('/open/token', {
-      // client_id: 'foo',
       client_id: clientId,
       client_secret: clientSecret,
       redirect_uri: `${clientUrl}/cb`,

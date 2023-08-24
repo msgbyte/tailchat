@@ -17,6 +17,8 @@ title: 关于开放平台
 与 `com.msgbyte.iam` 插件的区别: `iam`插件是提供外部账号登录`Tailchat`的方式，如使用`Github`账号登录`Tailchat`, 而开放平台的OAuth能力则是以`Tailchat`账号登录其他平台。
 :::
 
+[了解更多](./oauth)
+
 ### Bot
 
 `Bot` 赋予聊天机器人可交互的应用能力，这意味着 Tailchat 不仅仅可以被动接收来自外部的消息，也可以主动将内部聊天的请求转发到外部应用代为处理。

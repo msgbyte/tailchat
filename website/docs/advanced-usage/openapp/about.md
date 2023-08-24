@@ -17,6 +17,8 @@ In Tailchat. At present, it mainly provides two forms of open platform applicati
 The difference from the `com.msgbyte.iam` plugin: `iam` plugin provides a way to log in to `Tailchat` with an external account, such as using a `Github` account to log in to `Tailchat`, while the OAuth capability of the open platform is based on `Tailchat` account to log in to other platforms.
 :::
 
+[Learn more](./oauth)
+
 ### Bot
 
 `Bot` endows chatbots with interactive application capabilities, which means that Tailchat can not only passively receive external messages, but also actively forward internal chat requests to external applications for processing.
