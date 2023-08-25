@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { t } from 'tailchat-shared';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { t , useDragstatus } from 'tailchat-shared';
 import { withKeepAliveOverlay } from './KeepAliveOverlay';
 import { Loading } from './Loading';
+
+
 
 interface WebviewProps {
   className?: string;
@@ -15,17 +17,19 @@ interface WebviewProps {
 export const Webview: React.FC<WebviewProps> = (props) => {
   const ref = useRef<HTMLIFrameElement>(null);
   const [spinning, setSpinning] = useState(true);
-
+  const status = useDragstatus()
   useEffect(() => {
     const callback = () => {
       setSpinning(false);
     };
     ref.current?.addEventListener('load', callback);
-
     return () => {
       ref.current?.removeEventListener('load', callback);
     };
   }, []);
+  const pointerEvents =useMemo(()=>{
+    return status ? 'none' : 'auto'
+  },[status])
 
   return (
     <Loading
@@ -33,7 +37,7 @@ export const Webview: React.FC<WebviewProps> = (props) => {
       className="w-full h-full"
       tip={t('加载网页中...')}
     >
-      <iframe ref={ref} className="w-full h-full" src={props.url} />
+      <iframe ref={ref} style={{pointerEvents}} className="w-full h-full" src={props.url} />
     </Loading>
   );
 };
