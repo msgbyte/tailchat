@@ -80,7 +80,7 @@ app.get('/cb', async (req, res, next) => {
 
 app.listen(port, () => {
   console.log(
-    `请确保第三方登录功能已启动并且回调已经被注册在OIDC服务端的白名单中: ${clientUrl}/cb`
+    `Please ensure that the third-party login function is enabled and the callback has been registered in the whitelist of the OIDC server: ${clientUrl}/cb`
   );
-  console.log(`测试服务地址: http://127.0.0.1:${port}`);
+  console.log(`Test Server Address: http://127.0.0.1:${port}`);
 });

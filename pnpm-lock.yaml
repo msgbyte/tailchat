@@ -2248,6 +2248,22 @@ importers:
         specifier: ^4.17.2
         version: 4.18.2
     devDependencies:
+      '@types/express':
+        specifier: ^4.17.15
+        version: 4.17.15
+      ts-node:
+        specifier: 10.9.1
+        version: 10.9.1(@types/node@18.11.9)(typescript@4.9.4)
+
+  server/test/demo/openapi-oidc-page:
+    dependencies:
+      express:
+        specifier: ^4.17.2
+        version: 4.18.2
+    devDependencies:
+      '@types/express':
+        specifier: ^4.17.15
+        version: 4.17.17
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@18.11.9)(typescript@4.9.4)

@@ -1,5 +1,5 @@
 {
-  "name": "openapi-client",
+  "name": "openapi-oidc-page",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -11,7 +11,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.0",
     "express": "^4.17.2"
   },
   "devDependencies": {
