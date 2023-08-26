@@ -130,9 +130,9 @@ export async function getCachedRegistryPlugins(): Promise<PluginManifest[]> {
 export async function getCachedUserSettings() {
   const data = await queryClient.fetchQuery(
     [CacheKey.userSettings],
-    () => getUserSettings,
+    () => getUserSettings(),
     {
-      staleTime: 1 * 60 * 1000, // 缓存1分钟
+      staleTime: 10 * 60 * 1000, // 缓存10分钟
     }
   );
 
