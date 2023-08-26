@@ -4,10 +4,12 @@ import {
   TcDbService,
   TcContext,
   EntityError,
+  NoPermissionError,
 } from 'tailchat-server-sdk';
 import _ from 'lodash';
 import {
   filterAvailableAppCapability,
+  OpenApp,
   OpenAppBot,
   OpenAppDocument,
   OpenAppModel,
@@ -58,6 +60,11 @@ class OpenAppService extends TcService {
         appName: 'string',
         appDesc: 'string',
         appIcon: 'string',
+      },
+    });
+    this.registerAction('delete', this.delete, {
+      params: {
+        appId: 'string',
       },
     });
     this.registerAction('setAppCapability', this.setAppCapability, {
@@ -183,6 +190,36 @@ class OpenAppService extends TcService {
     });
 
     return await this.transformDocuments(ctx, {}, doc);
+  }
+
+  /**
+   * 删除开放平台应用
+   */
+  async delete(
+    ctx: TcContext<{
+      appId: string;
+    }>
+  ) {
+    const { appId } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    const appInfo: OpenApp = await this.localCall('get', {
+      appId,
+    });
+
+    if (String(appInfo.owner) !== userId) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    // 可能会出现ws机器人不会立即中断连接的问题，不重要暂时不处理
+
+    await this.adapter.model.remove({
+      appId,
+      owner: userId,
+    });
+
+    return true;
   }
 
   /**

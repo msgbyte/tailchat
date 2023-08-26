@@ -1,7 +1,13 @@
 import { useOpenAppInfo } from '../context';
 import React from 'react';
-import { FullModalField, Divider, SensitiveText } from '@capital/component';
+import {
+  FullModalField,
+  Divider,
+  SensitiveText,
+  Button,
+} from '@capital/component';
 import { Translate } from '../../translate';
+import { useOpenAppAction } from './useOpenAppAction';
 import './Profile.less';
 
 /**
@@ -9,6 +15,8 @@ import './Profile.less';
  */
 const Profile: React.FC = React.memo(() => {
   const { appId, appSecret } = useOpenAppInfo();
+
+  const { handleDeleteApp } = useOpenAppAction();
 
   return (
     <div className="plugin-openapi-app-info_profile">
@@ -22,11 +30,11 @@ const Profile: React.FC = React.memo(() => {
         />
       </div>
 
-      {/* <Divider /> */}
+      <Divider />
 
-      {/* <h2>{Translate.app.basicInfo}</h2> */}
-
-      {/* TODO */}
+      <Button type="primary" danger={true} onClick={handleDeleteApp}>
+        {Translate.delete}
+      </Button>
     </div>
   );
 });

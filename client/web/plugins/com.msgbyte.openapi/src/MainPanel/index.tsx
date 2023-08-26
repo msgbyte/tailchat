@@ -50,7 +50,11 @@ const OpenApiMainPanel: React.FC = React.memo(() => {
     <Loading spinning={loading} style={{ height: '100%' }}>
       <div className="plugin-openapi-main-panel">
         {appInfo ? (
-          <OpenAppInfoProvider appInfo={appInfo} refresh={refresh}>
+          <OpenAppInfoProvider
+            appInfo={appInfo}
+            onSelectApp={handleSetSelectedApp}
+            refresh={refresh}
+          >
             <AppInfo />
           </OpenAppInfoProvider>
         ) : (

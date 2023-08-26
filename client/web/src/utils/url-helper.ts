@@ -15,10 +15,15 @@ export { urlSearchStringify, urlSearchParse };
  * 往当前的url search上追加
  */
 export function appendUrlSearch(obj: Record<string, string>): string {
-  return urlSearchStringify({
-    ...urlSearchParse(window.location.search, { ignoreQueryPrefix: true }),
-    ...obj,
-  });
+  return urlSearchStringify(
+    {
+      ...urlSearchParse(window.location.search, { ignoreQueryPrefix: true }),
+      ...obj,
+    },
+    {
+      skipNulls: true,
+    }
+  );
 }
 
 /**

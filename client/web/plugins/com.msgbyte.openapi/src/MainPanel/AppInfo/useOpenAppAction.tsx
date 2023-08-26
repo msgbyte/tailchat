@@ -1,4 +1,10 @@
-import { postRequest, useAsyncFn } from '@capital/common';
+import {
+  openReconfirmModal,
+  postRequest,
+  showErrorToasts,
+  useAsyncFn,
+  useEvent,
+} from '@capital/common';
 import { useOpenAppInfo } from '../context';
 import type { OpenAppBot, OpenAppCapability, OpenAppOAuth } from '../types';
 
@@ -6,7 +12,7 @@ import type { OpenAppBot, OpenAppCapability, OpenAppOAuth } from '../types';
  * 开放应用操作
  */
 export function useOpenAppAction() {
-  const { refresh, appId, capability } = useOpenAppInfo();
+  const { refresh, appId, capability, onSelectApp } = useOpenAppInfo();
 
   const [{ loading }, handleChangeAppCapability] = useAsyncFn(
     async (targetCapability: OpenAppCapability, checked: boolean) => {
@@ -56,8 +62,25 @@ export function useOpenAppAction() {
     [appId, refresh]
   );
 
+  const handleDeleteApp = useEvent(() => {
+    openReconfirmModal({
+      onConfirm: async () => {
+        try {
+          await postRequest('/openapi/app/delete', {
+            appId,
+          });
+          onSelectApp(null);
+          await refresh();
+        } catch (err) {
+          showErrorToasts(err);
+        }
+      },
+    });
+  });
+
   return {
     loading,
+    handleDeleteApp,
     handleChangeAppCapability,
     handleUpdateOAuthInfo,
     handleUpdateBotInfo,

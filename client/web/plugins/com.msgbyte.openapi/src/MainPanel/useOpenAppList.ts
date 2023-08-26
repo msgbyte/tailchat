@@ -47,7 +47,7 @@ export function useOpenAppList() {
     /**
      * 设置当前选中的开放app
      */
-    handleSetSelectedApp(appId: string) {
+    handleSetSelectedApp(appId: string | null) {
       navigate({
         search: appendUrlSearch({
           appId,

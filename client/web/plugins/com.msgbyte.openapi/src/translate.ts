@@ -18,6 +18,10 @@ export const Translate = {
     'zh-CN': '操作',
     'en-US': 'Operation',
   }),
+  delete: localTrans({
+    'zh-CN': '删除',
+    'en-US': 'Delete',
+  }),
   enter: localTrans({
     'zh-CN': '进入',
     'en-US': 'Enter',

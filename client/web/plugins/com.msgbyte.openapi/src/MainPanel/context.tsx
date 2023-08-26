@@ -3,6 +3,7 @@ import { OpenApp } from './types';
 
 interface OpenAppInfoContextProps extends OpenApp {
   refresh: () => Promise<void>;
+  onSelectApp: (appId: string | null) => void;
 }
 
 const OpenAppInfoContext = React.createContext<OpenAppInfoContextProps>(null);
@@ -12,6 +13,7 @@ export const OpenAppInfoProvider: React.FC<
   React.PropsWithChildren<{
     appInfo: OpenApp;
     refresh: OpenAppInfoContextProps['refresh'];
+    onSelectApp: OpenAppInfoContextProps['onSelectApp'];
   }>
 > = (props) => {
   return (
@@ -19,6 +21,7 @@ export const OpenAppInfoProvider: React.FC<
       value={{
         ...props.appInfo,
         refresh: props.refresh,
+        onSelectApp: props.onSelectApp,
       }}
     >
       {props.children}
