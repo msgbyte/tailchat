@@ -78,3 +78,4 @@ export {
 export { NoData } from '@/components/NoData';
 export { NotFound } from '@/components/NotFound';
 export { withKeepAliveOverlay } from '@/components/KeepAliveOverlay/withKeepAliveOverlay';
+export { AvatarUploader, ImageUploader } from '@/components/ImageUploader';

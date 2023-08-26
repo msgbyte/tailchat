@@ -3,6 +3,7 @@ import {
   postRequest,
   showErrorToasts,
   useAsyncFn,
+  useAsyncRequest,
   useEvent,
 } from '@capital/common';
 import { useOpenAppInfo } from '../context';
@@ -14,7 +15,7 @@ import type { OpenAppBot, OpenAppCapability, OpenAppOAuth } from '../types';
 export function useOpenAppAction() {
   const { refresh, appId, capability, onSelectApp } = useOpenAppInfo();
 
-  const [{ loading }, handleChangeAppCapability] = useAsyncFn(
+  const [{ loading }, handleChangeAppCapability] = useAsyncRequest(
     async (targetCapability: OpenAppCapability, checked: boolean) => {
       const newCapability: OpenAppCapability[] = [...capability];
       const findIndex = newCapability.findIndex((c) => c === targetCapability);
@@ -38,7 +39,19 @@ export function useOpenAppAction() {
     [appId, capability, refresh]
   );
 
-  const [, handleUpdateOAuthInfo] = useAsyncFn(
+  const [, handleSetAppInfo] = useAsyncRequest(
+    async (fieldName: string, fieldValue: string) => {
+      await postRequest('/openapi/app/setAppInfo', {
+        appId,
+        fieldName,
+        fieldValue,
+      });
+      await refresh();
+    },
+    [appId, refresh]
+  );
+
+  const [, handleUpdateOAuthInfo] = useAsyncRequest(
     async <T extends keyof OpenAppOAuth>(name: T, value: OpenAppOAuth[T]) => {
       await postRequest('/openapi/app/setAppOAuthInfo', {
         appId,
@@ -50,7 +63,7 @@ export function useOpenAppAction() {
     []
   );
 
-  const [, handleUpdateBotInfo] = useAsyncFn(
+  const [, handleUpdateBotInfo] = useAsyncRequest(
     async <T extends keyof OpenAppBot>(name: T, value: OpenAppBot[T]) => {
       await postRequest('/openapi/app/setAppBotInfo', {
         appId,
@@ -80,6 +93,7 @@ export function useOpenAppAction() {
 
   return {
     loading,
+    handleSetAppInfo,
     handleDeleteApp,
     handleChangeAppCapability,
     handleUpdateOAuthInfo,

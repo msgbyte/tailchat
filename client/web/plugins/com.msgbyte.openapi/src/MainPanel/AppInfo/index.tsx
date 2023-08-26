@@ -18,7 +18,7 @@ const AppInfo: React.FC = React.memo(() => {
     () => [
       {
         type: 'group',
-        title: appName,
+        title: <div>{appName}</div>,
         children: [
           // {
           //   type: 'item',

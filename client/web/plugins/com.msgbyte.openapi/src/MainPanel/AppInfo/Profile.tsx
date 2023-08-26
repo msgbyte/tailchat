@@ -6,6 +6,8 @@ import {
   SensitiveText,
   Button,
   Avatar,
+  AvatarUploader,
+  DefaultFullModalInputEditorRender,
 } from '@capital/component';
 import { Translate } from '../../translate';
 import { useOpenAppAction } from './useOpenAppAction';
@@ -26,7 +28,7 @@ const TwoColumnContainer = styled.div`
 const Profile: React.FC = React.memo(() => {
   const { appId, appSecret, appName, appDesc, appIcon } = useOpenAppInfo();
 
-  const { handleDeleteApp } = useOpenAppAction();
+  const { handleSetAppInfo, handleDeleteApp } = useOpenAppAction();
 
   return (
     <div className="plugin-openapi-app-info_profile">
@@ -34,13 +36,31 @@ const Profile: React.FC = React.memo(() => {
 
       <TwoColumnContainer>
         <div>
-          <FullModalField title={Translate.app.appName} content={appName} />
+          <FullModalField
+            title={Translate.app.appName}
+            value={appName}
+            editable={true}
+            renderEditor={DefaultFullModalInputEditorRender}
+            onSave={(val) => handleSetAppInfo('appName', val)}
+          />
 
-          <FullModalField title={Translate.app.appDesc} content={appDesc} />
+          <FullModalField
+            title={Translate.app.appDesc}
+            value={appDesc}
+            editable={true}
+            renderEditor={DefaultFullModalInputEditorRender}
+            onSave={(val) => handleSetAppInfo('appDesc', val)}
+          />
         </div>
 
         <div>
-          <Avatar name={appName} src={appIcon} size={72} />
+          <AvatarUploader
+            onUploadSuccess={(fileInfo) => {
+              handleSetAppInfo('appIcon', fileInfo.url);
+            }}
+          >
+            <Avatar name={appName} src={appIcon} size={72} />
+          </AvatarUploader>
         </div>
       </TwoColumnContainer>
 

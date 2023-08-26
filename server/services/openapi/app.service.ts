@@ -67,6 +67,13 @@ class OpenAppService extends TcService {
         appId: 'string',
       },
     });
+    this.registerAction('setAppInfo', this.setAppInfo, {
+      params: {
+        appId: 'string',
+        fieldName: 'string',
+        fieldValue: 'string',
+      },
+    });
     this.registerAction('setAppCapability', this.setAppCapability, {
       params: {
         appId: 'string',
@@ -220,6 +227,45 @@ class OpenAppService extends TcService {
     });
 
     return true;
+  }
+
+  /**
+   * 修改应用信息
+   */
+  async setAppInfo(
+    ctx: TcContext<{
+      appId: string;
+      fieldName: string;
+      fieldValue: string;
+    }>
+  ) {
+    const { appId, fieldName, fieldValue } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    if (!['appName', 'appDesc', 'appIcon'].includes(fieldName)) {
+      // 只允许修改以上字段
+      throw new EntityError(`${t('该数据不允许修改')}: ${fieldName}`);
+    }
+
+    const doc = await this.adapter.model
+      .findOneAndUpdate(
+        {
+          appId,
+          owner: userId,
+        },
+        {
+          [fieldName]: fieldValue,
+        },
+        {
+          new: true,
+        }
+      )
+      .exec();
+
+    this.cleanAppInfoCache(appId);
+
+    return await this.transformDocuments(ctx, {}, doc);
   }
 
   /**
