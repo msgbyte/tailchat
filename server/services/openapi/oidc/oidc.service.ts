@@ -75,6 +75,14 @@ function readIncomingMessageData(req: IncomingMessage) {
   });
 }
 
+function parseImageUrl(input: string | undefined) {
+  if (typeof input === 'string') {
+    return input.replace('{BACKEND}', ''); // 因为/open接口是在服务端的，所以该标识直接移除即可
+  }
+
+  return input;
+}
+
 class OIDCService extends TcService {
   provider = this.createOIDCProvider();
 
@@ -167,7 +175,7 @@ class OIDCService extends TcService {
 
               const promptName = prompt.name;
               const data = {
-                logoUri: client.logoUri,
+                logoUri: parseImageUrl(client.logoUri),
                 clientName: client.clientName,
                 uid,
                 details: prompt.details,
