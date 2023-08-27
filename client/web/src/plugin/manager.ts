@@ -24,7 +24,7 @@ class PluginManager {
     const installedPlugins = _uniqBy(
       [...builtinPlugins, ...(await this.getInstalledPlugins())],
       'name'
-    );
+    ); // 基于名称去重，确保不会重复安装插件
 
     const plugins = installedPlugins.map(({ name, url }) => ({
       name,
