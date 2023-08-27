@@ -74,3 +74,11 @@
 ### 微信
 
 <img width="360" src="./website/static/img/wechat.jpg" />
+
+## 项目活动
+
+![Alt](https://repobeats.axiom.co/api/embed/b85cb500d902e0ad0cecb582557c006d8b663a01.svg "Repobeats analytics image")
+
+## 开源协议
+
+[Apache 2.0](./LICENSE)
