@@ -2,8 +2,10 @@ import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import {
   isArrayExpression,
+  isConditionalExpression,
   isIdentifier,
   isJSXAttribute,
+  isJSXExpressionContainer,
   isJSXIdentifier,
   isObjectExpression,
   isObjectProperty,
@@ -80,6 +82,21 @@ async function extractIcons(filepath: string): Promise<string[]> {
           if (isJSXAttribute(attribute) && attribute.name.name === 'icon') {
             if (isStringLiteral(attribute.value) && attribute.value.value) {
               icons.push(attribute.value.value);
+            } else if (isJSXExpressionContainer(attribute.value)) {
+              // is icon={...}
+              if (isStringLiteral(attribute.value.expression)) {
+                // is icon={''}
+                icons.push(attribute.value.expression.value);
+              } else if (isConditionalExpression(attribute.value.expression)) {
+                // is icon={boolean ? '' : ''}
+
+                if (isStringLiteral(attribute.value.expression.consequent)) {
+                  icons.push(attribute.value.expression.consequent.value);
+                }
+                if (isStringLiteral(attribute.value.expression.alternate)) {
+                  icons.push(attribute.value.expression.alternate.value);
+                }
+              }
             }
           }
         });
