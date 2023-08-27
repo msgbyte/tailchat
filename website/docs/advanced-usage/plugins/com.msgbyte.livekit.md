@@ -9,7 +9,7 @@ title: livekit - Video Conference
 
 This plugin provides `Tailchat` video conferencing function, after installing the plugin you can create a voice channel.
 
-After installation, you can see the panel type of the voice channel on the create panel page
+After installation, you can see a new panel type named voice channel on the create panel modal
 
 ![](/img/advanced-usage/plugins/livekit/1.png)
 
