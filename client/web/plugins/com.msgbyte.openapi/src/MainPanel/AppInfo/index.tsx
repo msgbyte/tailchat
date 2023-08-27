@@ -1,9 +1,20 @@
 import React, { useMemo } from 'react';
-import { SidebarView } from '@capital/component';
-import { Loadable } from '@capital/common';
+import { Icon, SidebarView } from '@capital/component';
+import { Loadable, useEvent } from '@capital/common';
 import { useOpenAppInfo } from '../context';
 import { Translate } from '../../translate';
+import styled from 'styled-components';
 import './index.less';
+
+const MenuTitle = styled.div`
+  display: flex;
+
+  .iconify {
+    margin-right: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+`;
 
 // const Summary = Loadable(() => import('./Summary'));
 const Profile = Loadable(() => import('./Profile'));
@@ -12,13 +23,21 @@ const Webpage = Loadable(() => import('./Webpage'));
 const OAuth = Loadable(() => import('./OAuth'));
 
 const AppInfo: React.FC = React.memo(() => {
-  const { appName } = useOpenAppInfo();
+  const { appName, onSelectApp } = useOpenAppInfo();
+
+  const handleBack = useEvent(() => {
+    onSelectApp(null);
+  });
 
   const menu = useMemo(
     () => [
       {
         type: 'group',
-        title: <div>{appName}</div>,
+        title: (
+          <MenuTitle>
+            <Icon icon="mdi:arrow-left" onClick={handleBack} /> {appName}
+          </MenuTitle>
+        ),
         children: [
           // {
           //   type: 'item',
