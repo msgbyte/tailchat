@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node ./index.ts",
+    "dev": "nodemon --watch \"index.ts\" --watch \"../../../services/openapi/oidc/views/**\" --ext \"ts,ejs\" --exec \"ts-node --transpile-only ./index.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.15",
+    "nodemon": "^3.0.1",
     "ts-node": "10.9.1"
   }
 }
