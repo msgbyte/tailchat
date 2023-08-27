@@ -35,6 +35,14 @@ function uidKeyFor(uid) {
   return `uid:${uid}`;
 }
 
+function parseImageUrl(input: string | undefined) {
+  if (typeof input === 'string') {
+    return input.replace('{BACKEND}', config.apiUrl); // 因为/open接口是在服务端的，所以该标识直接移除即可
+  }
+
+  return input;
+}
+
 /**
  * Reference: https://github.com/panva/node-oidc-provider/blob/main/example/my_adapter.js
  */
@@ -163,7 +171,7 @@ export class TcOIDCAdapter implements Adapter {
     };
 
     if (app.appIcon) {
-      clientPayload.logo_uri = app.appIcon;
+      clientPayload.logo_uri = parseImageUrl(app.appIcon);
     }
 
     return clientPayload;
