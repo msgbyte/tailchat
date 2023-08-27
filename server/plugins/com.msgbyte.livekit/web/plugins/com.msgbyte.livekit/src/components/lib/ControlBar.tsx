@@ -15,6 +15,7 @@ import { Translate } from '../../translate';
 import { useMediaQuery } from '../../utils/useMediaQuery';
 import { ChatIcon } from './icons/ChatIcon';
 import { LeaveIcon } from './icons/LeaveIcon';
+import { useChatContext } from './ChatContext';
 
 /** @public */
 export type ControlBarControls = {
@@ -58,6 +59,7 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
   const isTooLittleSpace = useMediaQuery(
     `(max-width: ${isChatOpen ? 1000 : 760}px)`
   );
+  const { chatMessages } = useChatContext();
 
   const defaultVariation = isTooLittleSpace ? 'minimal' : 'verbose';
   variation ??= defaultVariation;
@@ -137,6 +139,9 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
         <ChatToggle>
           {showIcon && <ChatIcon />}
           {showText && Translate.chat}
+          {Array.isArray(chatMessages) && chatMessages.length > 0 && (
+            <span>({chatMessages.length})</span>
+          )}
         </ChatToggle>
       )}
 

@@ -2,43 +2,17 @@ import type {
   ChatMessage,
   ReceivedChatMessage,
 } from '@livekit/components-core';
-import { setupChat } from '@livekit/components-core';
-import {
-  ChatEntry,
-  MessageFormatter,
-  useRoomContext,
-} from '@livekit/components-react';
+import { ChatEntry, MessageFormatter } from '@livekit/components-react';
 import * as React from 'react';
 import { Translate } from '../../translate';
 import { cloneSingleChild } from '../../utils/common';
-import { useObservableState } from '../../utils/useObservableState';
-// import { useRoomContext } from '../context';
-// import { useObservableState } from '../hooks/internal/useObservableState';
-// import { cloneSingleChild } from '../utils';
-// import type { MessageFormatter } from '../components/ChatEntry';
-// import { ChatEntry } from '../components/ChatEntry';
+import { useChatContext } from './ChatContext';
 
 export type { ChatMessage, ReceivedChatMessage };
 
 /** @public */
 export interface ChatProps extends React.HTMLAttributes<HTMLDivElement> {
   messageFormatter?: MessageFormatter;
-}
-
-/** @public */
-export function useChat() {
-  const room = useRoomContext();
-  const [setup, setSetup] = React.useState<ReturnType<typeof setupChat>>();
-  const isSending = useObservableState(setup?.isSendingObservable, false);
-  const chatMessages = useObservableState(setup?.messageObservable, []);
-
-  React.useEffect(() => {
-    const setupChatReturn = setupChat(room);
-    setSetup(setupChatReturn);
-    return setupChatReturn.destroy;
-  }, [room]);
-
-  return { send: setup?.send, chatMessages, isSending };
 }
 
 /**
@@ -56,7 +30,7 @@ export function useChat() {
 export function Chat({ messageFormatter, ...props }: ChatProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const ulRef = React.useRef<HTMLUListElement>(null);
-  const { send, chatMessages, isSending } = useChat();
+  const { send, chatMessages, isSending } = useChatContext();
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
