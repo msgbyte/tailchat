@@ -1,5 +1,33 @@
 
 
+## [1.8.11](https://github.com/msgbyte/tailchat/compare/v1.8.10...v1.8.11) (2023-08-28)
+
+
+### Bug Fixes
+
+* completion algorithm adds missing offline icons ([509d701](https://github.com/msgbyte/tailchat/commit/509d70195c889625dfe99427f0dcb34644501231))
+* fix add friend button still display when disableAddFriend is open ([5484cb7](https://github.com/msgbyte/tailchat/commit/5484cb7df13bc84bf3f692a47d5a8f6bde35608f))
+* fix linkmeta plugin dont parse {BACKEND} problem ([2b923b4](https://github.com/msgbyte/tailchat/commit/2b923b40b6e3caab60713b6c58a98716ba44417f))
+* fix no friend add button incorrect key problem ([4a06368](https://github.com/msgbyte/tailchat/commit/4a063685d3c3cbe808f363ca290088d47e7e5d48))
+* fix the problem of flickering after modifying user settings ([17464b0](https://github.com/msgbyte/tailchat/commit/17464b0c6f421831913545261937e3011120f944))
+* fix userSettings cache lost then make user settings drop bug ([fe90319](https://github.com/msgbyte/tailchat/commit/fe90319e607dc6fecff085c15ff9b70fff4cb373))
+* **openapi:** fix logoUri must be a a web uri warning problem ([b6e9190](https://github.com/msgbyte/tailchat/commit/b6e91900d8389df924a6898af0dc44c8b2736497))
+
+
+### Features
+
+* **admin:** add file delete action which delete minio file also and allow fuzzy match of objectName ([c98dc47](https://github.com/msgbyte/tailchat/commit/c98dc4714d89a8a11a7065cd1e309194cd660f90))
+* **openapi:** add backend image icon support in authorize page ([cfacc65](https://github.com/msgbyte/tailchat/commit/cfacc655f8897ae7a682f9476cf136cddccf0d60))
+* **openapi:** add delete app action ([380bc3d](https://github.com/msgbyte/tailchat/commit/380bc3d960d56509ac16ee32a73926559d1f7d1f))
+* **openapi:** add open app base info ([351641c](https://github.com/msgbyte/tailchat/commit/351641cf338402de76fa4ead814ab2961e89f33c))
+* **openapi:** allow app back action which back to app list ([283888d](https://github.com/msgbyte/tailchat/commit/283888d645554b687bfa65a9fd0e50813bd763ea))
+* **openapi:** allow edit appName, appDesc and appIcon ([e0141f4](https://github.com/msgbyte/tailchat/commit/e0141f4bc435310a6099ac87374bffd4dc90c29a))
+
+
+### Performance Improvements
+
+* lock axis on group nav sortting ([7d601f0](https://github.com/msgbyte/tailchat/commit/7d601f0577fd6d2fb80d960f537698feb6aa2c1b))
+
 ## [1.8.10](https://github.com/msgbyte/tailchat/compare/v1.8.9...v1.8.10) (2023-08-21)
 
 
