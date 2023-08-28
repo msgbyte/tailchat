@@ -71,14 +71,6 @@ export const Translate = {
       'zh-CN': '应用凭证',
       'en-US': 'Application Credentials',
     }),
-    appName: localTrans({
-      'zh-CN': '应用名称',
-      'en-US': 'App Name',
-    }),
-    appDesc: localTrans({
-      'zh-CN': '应用描述',
-      'en-US': 'App Desc',
-    }),
   },
   bot: {
     callback: localTrans({
