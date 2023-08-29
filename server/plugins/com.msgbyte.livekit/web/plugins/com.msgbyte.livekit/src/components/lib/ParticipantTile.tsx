@@ -36,7 +36,7 @@ import { useSize } from '../../utils/useResizeObserver';
 import { Translate } from '../../translate';
 import { useMemo } from 'react';
 import { FullScreenBtn } from '../FullScreenBtn';
-import { useEvent } from '@capital/common';
+import { showToasts, useEvent } from '@capital/common';
 
 /** @public */
 export type ParticipantTileProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -183,6 +183,12 @@ export const ParticipantTile = ({
       if (checkIsFullscreen()) {
         document.exitFullscreen();
       } else {
+        if (!containerEl.current.requestFullscreen) {
+          console.log(Translate.notSupportDOMFullscreen);
+          showToasts(Translate.notSupportDOMFullscreen, 'info');
+          return;
+        }
+
         containerEl.current.requestFullscreen();
       }
     }

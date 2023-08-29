@@ -61,4 +61,8 @@ export const Translate = {
     'zh-CN': '这些人正在会中:',
     'en-US': 'Here is people in meeting:',
   }),
+  notSupportDOMFullscreen: localTrans({
+    'zh-CN': '当前浏览器不支持视图全屏',
+    'en-US': 'Current browser does not support DOM full screen',
+  }),
 };
