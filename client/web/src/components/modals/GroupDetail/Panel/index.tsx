@@ -72,7 +72,7 @@ export const GroupPanel: React.FC<{
         {t('面板管理')}
       </FullModalCommonTitle>
 
-      <div className="max-h-80 overflow-auto border rounded border-black border-opacity-20 p-1">
+      <div className="max-h-160 overflow-auto border rounded border-black border-opacity-20 p-1">
         <GroupPanelTree
           groupId={groupId}
           groupPanels={editingGroupPanels}
