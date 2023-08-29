@@ -172,6 +172,7 @@ router.use(
   auth(),
   raExpressMongoose(userModel, {
     q: ['_id', 'nickname', 'email'],
+    allowedRegexFields: ['nickname'],
   })
 );
 router.delete('/messages/:id', auth(), async (req, res) => {
