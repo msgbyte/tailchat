@@ -336,6 +336,22 @@ export async function appendUserDMConverse(
 }
 
 /**
+ * 移除会话列表
+ */
+export async function removeUserDMConverse(
+  converseId: string
+): Promise<UserDMList> {
+  const { data } = await request.post<UserDMList>(
+    '/api/user/dmlist/removeConverse',
+    {
+      converseId,
+    }
+  );
+
+  return data;
+}
+
+/**
  * 修改用户属性
  * @param fieldName 要修改的属性名
  * @param fieldValue 要修改的属性的值

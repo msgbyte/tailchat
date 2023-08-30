@@ -61,13 +61,13 @@ class UserDMListService extends TcService {
         },
         {
           $pull: {
-            converseIds: new db.Types.ObjectId(converseId),
+            converseIds: converseId,
           },
         }
       )
       .exec();
 
-    return modifiedCount;
+    return { modifiedCount };
   }
 
   /**

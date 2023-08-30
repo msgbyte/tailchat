@@ -210,6 +210,16 @@ const chatSlice = createSlice({
       state.converses[converseId].hasFetchedHistory = true;
     },
 
+    removeConverse(state, action: PayloadAction<{ converseId: string }>) {
+      const { converseId } = action.payload;
+
+      if (!state.converses[converseId]) {
+        return;
+      }
+
+      delete state.converses[converseId];
+    },
+
     /**
      * 清理所有会话信息
      */

@@ -18,6 +18,7 @@ import {
 } from 'tailchat-server-sdk';
 import type { Group } from '../../../models/group/group';
 import { isValidStr } from '../../../lib/utils';
+import _ from 'lodash';
 
 interface MessageService
   extends TcService,
@@ -180,12 +181,13 @@ class MessageService extends TcService {
     const { converseId, groupId, content, plain, meta } = ctx.params;
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
+    const isGroupMessage = isValidStr(groupId);
 
     /**
      * 鉴权
      */
     await this.checkConversePermission(ctx, converseId, groupId); // 鉴权是否能获取到会话内容
-    if (isValidStr(groupId)) {
+    if (isGroupMessage) {
       // 是群组消息, 鉴权是否禁言
       const groupInfo = await call(ctx).getGroupInfo(groupId);
       const member = groupInfo.members.find((m) => String(m.userId) === userId);
@@ -208,7 +210,40 @@ class MessageService extends TcService {
 
     const json = await this.transformDocuments(ctx, {}, message);
 
-    this.roomcastNotify(ctx, converseId, 'add', json);
+    if (isGroupMessage) {
+      this.roomcastNotify(ctx, converseId, 'add', json);
+    } else {
+      // 如果是私信的话需要基于用户去推送
+      // 因为用户可能不订阅消息(删除了dmlist)
+      const converseInfo = await call(ctx).getConverseInfo(converseId);
+      if (converseInfo) {
+        const converseMemberIds = converseInfo.members.map((m) => String(m));
+
+        call(ctx)
+          .isUserOnline(converseMemberIds)
+          .then((onlineList) => {
+            _.zip(converseMemberIds, onlineList).forEach(
+              ([memberId, isOnline]) => {
+                if (isOnline) {
+                  // 用户在线，则直接推送，通过客户端来创建会话
+                  this.unicastNotify(ctx, memberId, 'add', json);
+                } else {
+                  // 用户离线，确保追加到会话中
+                  ctx.call(
+                    'user.dmlist.addConverse',
+                    { converseId },
+                    {
+                      meta: {
+                        userId: memberId,
+                      },
+                    }
+                  );
+                }
+              }
+            );
+          });
+      }
+    }
 
     ctx.emit('chat.message.updateMessage', {
       type: 'add',

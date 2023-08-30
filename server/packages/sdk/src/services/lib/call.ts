@@ -27,6 +27,13 @@ export function call(ctx: TcPureContext) {
         userId,
       });
     },
+
+    /**
+     * 检查用户是否在线
+     */
+    async isUserOnline(userIds: string[]): Promise<boolean[]> {
+      return await ctx.call('gateway.checkUserOnline', { userIds });
+    },
     /**
      * 发送系统消息
      * 如果为群组消息则需要增加groupId
