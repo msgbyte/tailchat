@@ -43,6 +43,7 @@ export const Markdown: React.FC<{
       transformImageUri={(src) => transformUrl(src)}
       transformLinkUri={(href) => transformUrl(href)}
       remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
       linkTarget="_blank"
       skipHtml={true}
       components={components}
