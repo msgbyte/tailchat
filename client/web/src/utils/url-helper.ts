@@ -5,7 +5,7 @@ import { stringify as urlSearchStringify, parse as urlSearchParse } from 'qs';
  * @param relativeUrl 相对或绝对url
  * @returns 绝对url
  */
-export function markAbsoluteUrl(relativeUrl: string): string {
+export function makeAbsoluteUrl(relativeUrl: string): string {
   return new URL(relativeUrl, location.href).href;
 }
 
