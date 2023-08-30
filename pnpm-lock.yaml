@@ -1767,7 +1767,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(ramda@0.29.0)
       tailchat-types:
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../../packages/types
     devDependencies:
       '@types/jest':
