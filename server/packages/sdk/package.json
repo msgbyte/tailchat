@@ -1,6 +1,6 @@
 {
   "name": "tailchat-server-sdk",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -58,6 +58,6 @@
     "mongoose": "6.1.1",
     "path-to-regexp": "^6.2.1",
     "ramda-adjunct": "^4.0.0",
-    "tailchat-types": "workspace:^"
+    "tailchat-types": "workspace:*"
   }
 }

@@ -5,6 +5,7 @@ import {
   PERMISSION,
   TcPureContext,
 } from '../../index';
+import type { ChatConverseStruct } from '../../structs/chat';
 
 export function call(ctx: TcPureContext) {
   return {
@@ -96,6 +97,16 @@ export function call(ctx: TcPureContext) {
     async getUserInfo(userId: string): Promise<UserStruct | null> {
       return await ctx.call('user.getUserInfo', {
         userId: String(userId),
+      });
+    },
+    /**
+     * 获取会话信息
+     */
+    async getConverseInfo(
+      converseId: string
+    ): Promise<ChatConverseStruct | null> {
+      return await ctx.call('chat.converse.findConverseInfo', {
+        converseId,
       });
     },
     /**

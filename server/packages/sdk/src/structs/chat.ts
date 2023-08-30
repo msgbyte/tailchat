@@ -67,3 +67,5 @@ export interface BasicInboxItem {
 }
 
 export type InboxStruct = InboxItem;
+
+export type { ChatConverse as ChatConverseStruct } from 'tailchat-types';

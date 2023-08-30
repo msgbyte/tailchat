@@ -24,3 +24,21 @@ export interface ChatMessage {
 
   updatedAt?: string;
 }
+
+export const chatConverseType = [
+  'DM', // 私信
+  'Multi', // 多人会话
+  'Group', // 群组
+] as const;
+
+export type ChatConverseType = (typeof chatConverseType)[number];
+
+export interface ChatConverse {
+  _id: string;
+
+  name?: string;
+
+  type: ChatConverseType;
+
+  members: string[];
+}
