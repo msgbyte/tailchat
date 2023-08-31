@@ -1,5 +1,5 @@
 import React from 'react';
-import { Editor } from '@bytemd/react';
+import { Editor, EditorProps } from '@bytemd/react';
 import { uploadFile } from 'tailchat-shared';
 import { Markdown } from '../Markdown';
 import { createRoot } from 'react-dom/client';
@@ -8,6 +8,14 @@ import 'bytemd/dist/index.css';
 import './editor.less';
 
 export const plugins = [gfm()];
+
+const overridePreview: EditorProps['overridePreview'] = (el, props) => {
+  createRoot(el).render(
+    <div className="markdown-body">
+      <Markdown raw={props.value} />
+    </div>
+  );
+};
 
 interface MarkdownEditorProps {
   value: string;
@@ -31,13 +39,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = React.memo(
             )
           );
         }}
-        overridePreview={(el, props) =>
-          createRoot(el).render(
-            <div className="markdown-body">
-              <Markdown raw={props.value} />
-            </div>
-          )
-        }
+        overridePreview={overridePreview}
       />
     );
   }

@@ -1,4 +1,128 @@
-.bytemd .bytemd-toolbar-right [bytemd-tippy-path='5'] {
-  // Hidden github icon
-  display: none;
+.dark {
+  .bytemd {
+    @apply bg-gray-500 text-white border-white border-opacity-20;
+
+    .bytemd-toolbar {
+      @apply bg-gray-600 border-white border-opacity-20;
+
+      .bytemd-toolbar-icon:hover {
+        @apply bg-black bg-opacity-40;
+      }
+
+      .bytemd-toolbar-right [bytemd-tippy-path='5'] {
+        // Hidden github icon
+        display: none;
+      }
+    }
+
+    .bytemd-body {
+      .bytemd-preview,
+      .bytemd-sidebar {
+        @apply border-white border-opacity-20;
+      }
+
+      .bytemd-editor .CodeMirror {
+        @apply bg-gray-500 text-white;
+      }
+
+      .bytemd-sidebar ul {
+        @apply text-gray-100;
+      }
+    }
+
+    .bytemd-status {
+      @apply border-white border-opacity-20;
+    }
+
+    // 以下是代码编辑器配色
+    // 主题: dracula
+    .CodeMirror {
+      &,
+      & .CodeMirror-gutters {
+        // background-color: #282a36 !important;
+        color: #f8f8f2 !important;
+        border: none;
+      }
+      .CodeMirror-gutters {
+        color: #282a36;
+      }
+      .CodeMirror-cursor {
+        border-left: solid thin #f8f8f0;
+      }
+      .CodeMirror-linenumber {
+        color: #6d8a88;
+      }
+      .CodeMirror-selected {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .CodeMirror-line::selection,
+      .CodeMirror-line > span::selection,
+      .CodeMirror-line > span > span::selection {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .CodeMirror-line::-moz-selection,
+      .CodeMirror-line > span::-moz-selection,
+      .CodeMirror-line > span > span::-moz-selection {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      span.cm-comment {
+        color: #6272a4;
+      }
+      span.cm-string,
+      span.cm-string-2 {
+        color: #f1fa8c;
+      }
+      span.cm-number {
+        color: #bd93f9;
+      }
+      span.cm-variable {
+        color: #50fa7b;
+      }
+      span.cm-variable-2 {
+        color: white;
+      }
+      span.cm-def {
+        color: #50fa7b;
+      }
+      span.cm-operator {
+        color: #ff79c6;
+      }
+      span.cm-keyword {
+        color: #ff79c6;
+      }
+      span.cm-atom {
+        color: #bd93f9;
+      }
+      span.cm-meta {
+        color: #f8f8f2;
+      }
+      span.cm-tag {
+        color: #ff79c6;
+      }
+      span.cm-attribute {
+        color: #50fa7b;
+      }
+      span.cm-qualifier {
+        color: #50fa7b;
+      }
+      span.cm-property {
+        color: #66d9ef;
+      }
+      span.cm-builtin {
+        color: #50fa7b;
+      }
+      span.cm-variable-3,
+      span.cm-type {
+        color: #ffb86c;
+      }
+
+      .CodeMirror-activeline-background {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .CodeMirror-matchingbracket {
+        text-decoration: underline;
+        color: white !important;
+      }
+    }
+  }
 }
