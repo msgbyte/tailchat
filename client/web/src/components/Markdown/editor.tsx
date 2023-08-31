@@ -1,11 +1,13 @@
 import React from 'react';
 import { Editor } from '@bytemd/react';
-import { plugins } from './plugins';
 import { uploadFile } from 'tailchat-shared';
 import { Markdown } from '../Markdown';
 import { createRoot } from 'react-dom/client';
+import gfm from '@bytemd/plugin-gfm';
 import 'bytemd/dist/index.css';
-import './style.less';
+import './editor.less';
+
+export const plugins = [gfm()];
 
 interface MarkdownEditorProps {
   value: string;

@@ -1,11 +1,11 @@
 import { makeAbsoluteUrl } from '@/utils/url-helper';
 import React, { useCallback, useMemo } from 'react';
 import { isValidStr, parseUrlStr } from 'tailchat-shared';
-import { Loadable } from './Loadable';
+import { Loadable } from '../Loadable';
 import { Image } from 'tailchat-design';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import './Markdown.less';
+import './render.less';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
