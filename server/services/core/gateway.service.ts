@@ -18,6 +18,8 @@ import { checkPathMatch } from '../../lib/utils';
 import serve from 'serve-static';
 import accepts from 'accepts';
 import send from 'send';
+import path from 'path';
+import mime from 'mime';
 
 export default class ApiService extends TcService {
   authWhitelist = [];
@@ -289,6 +291,12 @@ export default class ApiService extends TcService {
                   parentCtx: _.get(req, '$ctx'),
                 }
               );
+
+              const ext = path.extname(objectName);
+              if (ext) {
+                res.setHeader('Content-Type', mime.getType(ext));
+              }
+
               result.pipe(res);
             } catch (err) {
               this.logger.error(err);

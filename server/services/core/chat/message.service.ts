@@ -508,7 +508,6 @@ class MessageService extends TcService {
     if (groupId) {
       // 是群组
       const group = await call(ctx).getGroupInfo(groupId);
-      console.log('group.members', group.members, group);
       if (group.members.findIndex((m) => String(m.userId) === userId) === -1) {
         // 不存在该用户
         throw new NoPermissionError(t('没有当前会话权限'));

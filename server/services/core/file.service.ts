@@ -10,7 +10,7 @@ import {
 } from 'tailchat-server-sdk';
 import _ from 'lodash';
 import mime from 'mime';
-import type { Client as MinioClient } from 'minio';
+import type { BucketItemStat, Client as MinioClient } from 'minio';
 import { isValidStaticAssetsUrl, isValidStr } from '../../lib/utils';
 import path from 'node:path';
 import type { FileDocument, FileModel } from '../../models/file';
@@ -54,6 +54,12 @@ class FileService extends TcService {
       },
     });
     this.registerAction('get', this.get, {
+      params: {
+        objectName: 'string',
+      },
+      disableSocket: true,
+    });
+    this.registerAction('stat', this.stat, {
       params: {
         objectName: 'string',
       },
@@ -320,6 +326,21 @@ class FileService extends TcService {
     );
 
     return stream;
+  }
+
+  /**
+   * 获取客户端的信息
+   */
+  async stat(
+    ctx: PureContext<{
+      objectName: string;
+    }>
+  ): Promise<BucketItemStat> {
+    const objectName = ctx.params.objectName;
+
+    const stat = await this.minioClient.statObject(this.bucketName, objectName);
+
+    return stat;
   }
 
   /**
