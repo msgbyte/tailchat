@@ -180,7 +180,6 @@ exports[`Markdown list 1`] = `
 
       <li>
         3
-        
 
         <ul>
           
@@ -192,7 +191,6 @@ exports[`Markdown list 1`] = `
 
           <li>
             5
-            
 
             <ul>
               
@@ -224,6 +222,24 @@ exports[`Markdown table 1`] = `
   <div
     class="tailchat-markdown"
   >
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <table>
       <thead>
         <tr>

@@ -38,6 +38,15 @@ const esModules = [
   'markdown-table',
   'escape-string-regexp',
   'ccount',
+  'hast-util-raw',
+  'rehype-raw',
+  'hast-util-from-parse5',
+  'hast-util-to-parse5',
+  'hastscript',
+  'hast-util-parse-selector',
+  'web-namespaces',
+  'zwitch',
+  'html-void-elements',
 ].join('|');
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
