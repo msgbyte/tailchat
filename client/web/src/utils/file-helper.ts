@@ -163,7 +163,11 @@ export async function compressImage(
       maxWidth: options?.maxWidth ?? 1920,
       maxHeight: options?.maxHeight ?? 1080,
       success(file) {
-        resolve(file as File);
+        if (file instanceof File) {
+          resolve(file);
+        } else {
+          resolve(new File([file], file.name));
+        }
       },
       error(err) {
         reject(err);
