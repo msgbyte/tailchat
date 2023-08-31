@@ -1,12 +1,12 @@
 import {
-  markAbsoluteUrl,
+  makeAbsoluteUrl,
   urlSearchParse,
   urlSearchStringify,
   appendUrlSearch,
 } from '../url-helper';
 import _set from 'lodash/set';
 
-describe('markAbsoluteUrl', () => {
+describe('makeAbsoluteUrl', () => {
   test.each([
     ['bar', 'https://www.example.com/foo/bar'],
     ['./bar', 'https://www.example.com/foo/bar'],
@@ -15,7 +15,7 @@ describe('markAbsoluteUrl', () => {
     ['https://www.baidu.com', 'https://www.baidu.com/'],
     ['https://www.baidu.com/search', 'https://www.baidu.com/search'],
   ])('%s', (input, output) => {
-    expect(markAbsoluteUrl(input)).toBe(output);
+    expect(makeAbsoluteUrl(input)).toBe(output);
   });
 });
 
