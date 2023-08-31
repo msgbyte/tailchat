@@ -23,6 +23,13 @@ function parseImageAttr(attr: { height: string; width: string }): {
     return {};
   }
 
+  if (height <= MAX_HEIGHT && width <= MAX_WIDTH) {
+    return {
+      height,
+      width,
+    };
+  }
+
   const ratio = Math.max(height / MAX_HEIGHT, width / MAX_WIDTH);
 
   return {
