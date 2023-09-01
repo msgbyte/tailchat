@@ -8,6 +8,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "doctor": "react-native doctor",
     "patch-package": "patch-package",
     "postinstall": "patch-package",
     "plugins:all": "ministar buildPlugin all",
