@@ -1,7 +1,7 @@
 import { fetchImagePrimaryColor } from '@/utils/image-helper';
 import React, { PropsWithChildren } from 'react';
 import { AvatarWithPreview, getTextColorHex } from 'tailchat-design';
-import { useAsync, UserBaseInfo } from 'tailchat-shared';
+import { useAsync, useCachedOnlineStatus, UserBaseInfo } from 'tailchat-shared';
 
 /**
  * 用户信息容器
@@ -10,6 +10,8 @@ export const UserProfileContainer: React.FC<
   PropsWithChildren<{ userInfo: UserBaseInfo }>
 > = React.memo((props) => {
   const { userInfo } = props;
+  const userId = userInfo._id;
+  const [isOnline] = useCachedOnlineStatus([userId]);
 
   const { value: bannerColor } = useAsync(async () => {
     if (!userInfo.avatar) {
@@ -35,6 +37,7 @@ export const UserProfileContainer: React.FC<
           size={80}
           src={userInfo.avatar}
           name={userInfo.nickname}
+          isOnline={isOnline}
         />
       </div>
 

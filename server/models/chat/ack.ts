@@ -3,7 +3,6 @@ import {
   prop,
   DocumentType,
   Ref,
-  ReturnModelType,
   index,
 } from '@typegoose/typegoose';
 import type { Base } from '@typegoose/typegoose/lib/defaultClasses';
