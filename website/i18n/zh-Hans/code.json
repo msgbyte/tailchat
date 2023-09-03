@@ -413,5 +413,11 @@
   },
   "Design with electron": {
     "message": "使用 electron 技术开发"
+  },
+  "Current version": {
+    "message": "当前版本"
+  },
+  "release note": {
+    "message": "版本更新日志"
   }
 }

@@ -4,7 +4,8 @@ import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Translate from '@docusaurus/Translate';
 import { useColorMode } from '@docusaurus/theme-common';
-import { inviteLink, nightlyUrl } from '../utils/consts';
+import { inviteLink, nightlyUrl, releaseNoteUrl } from '../utils/consts';
+import packageJson from '../../../package.json';
 import './HomepageHeader.less';
 
 const alternative = [
@@ -80,6 +81,13 @@ export const HomepageHeader: React.FC = React.memo(() => {
         <div className="link">
           <Link to={nightlyUrl} data-umami-event="direct-nightly">
             <Translate>Or direct visit Tailchat nightly version</Translate>
+          </Link>
+        </div>
+
+        <div className="version">
+          <Translate>Current version</Translate>: v{packageJson.version},{' '}
+          <Link to={releaseNoteUrl} data-umami-event="direct-nightly">
+            <Translate>release note</Translate>
           </Link>
         </div>
       </div>
