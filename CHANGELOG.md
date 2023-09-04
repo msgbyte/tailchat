@@ -1,5 +1,28 @@
 
 
+## [1.8.12](https://github.com/msgbyte/tailchat/compare/v1.8.11...v1.8.12) (2023-09-04)
+
+
+### Bug Fixes
+
+* [#148](https://github.com/msgbyte/tailchat/issues/148) fix non-mime problem when get file from minio ([98e81fa](https://github.com/msgbyte/tailchat/commit/98e81fa9b7d0d230b2e1b9d96b8de376fbaefe59))
+* fix lost extname problem after compress image ([8f8e8a1](https://github.com/msgbyte/tailchat/commit/8f8e8a1e2f3e75213f110f5b882d1d571a840e4a))
+
+
+### Features
+
+* add online status in user popover ([1b813f9](https://github.com/msgbyte/tailchat/commit/1b813f9b82e49b72db2ca155c03eb6565f2a22a6))
+* add raw markdown syntax support for MarkdownRender ([55f8c45](https://github.com/msgbyte/tailchat/commit/55f8c4537a6c046d58d31df9ba2d783acaff0465))
+* add upload image feature ([4d6c70c](https://github.com/msgbyte/tailchat/commit/4d6c70c3cf15a82b56ae02c479cec9583b6a065c))
+* **admin:** add fuzzy search support for user `q` with `nickname` ([923b373](https://github.com/msgbyte/tailchat/commit/923b3734032f89459060b34cb69134b9aedce2e2))
+* allow remove converse from dmlist ([018d311](https://github.com/msgbyte/tailchat/commit/018d311da65ebfe26303d2609fb56775226217d5))
+* markdown editor add dark mode adaptation ([39879c1](https://github.com/msgbyte/tailchat/commit/39879c1413769f31d1d88730db0a983ef60dbefe))
+
+
+### Performance Improvements
+
+* optimize small size image display ([c4d3d8c](https://github.com/msgbyte/tailchat/commit/c4d3d8c3fac53955ca75ebe64dc0c8ef3eee6d35))
+
 ## [1.8.11](https://github.com/msgbyte/tailchat/compare/v1.8.10...v1.8.11) (2023-08-28)
 
 
