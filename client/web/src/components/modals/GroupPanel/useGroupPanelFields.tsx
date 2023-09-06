@@ -11,10 +11,8 @@ import {
   createMetaFormSchema,
   MetaFormFieldMeta,
   metaFormFieldSchema,
-  useMetaFormContext,
 } from 'tailchat-design';
 import type { GroupPanelValues } from './types';
-import _compact from 'lodash/compact';
 import _groupBy from 'lodash/groupBy';
 import _mapValues from 'lodash/mapValues';
 import { pluginGroupPanel } from '@/plugin/common';
@@ -55,55 +53,7 @@ export function useGroupPanelFields(
   groupId: string,
   currentValues: Partial<GroupPanelValues>
 ) {
-  const disableSendMessageWithoutRender = useMemo(() => {
-    const DisableSendMessageWithoutComponent: React.FC = () => {
-      const groupMemberUUIDs = useGroupMemberIds(groupId);
-      const context = useMetaFormContext<any>();
-
-      return (
-        <UserSelector
-          allUserIds={groupMemberUUIDs}
-          onChange={(userIds) => {
-            context?.setValues({
-              ...context.values,
-              disableSendMessageWithout: userIds,
-            });
-          }}
-        />
-      );
-    };
-    DisableSendMessageWithoutComponent.displayName =
-      'DisableSendMessageWithoutComponent';
-
-    return DisableSendMessageWithoutComponent;
-  }, [groupId]);
-
   const ret = useMemo(() => {
-    // NOTICE: 仅开发环境有这个配置
-    if (isDevelopment && currentValues.type === GroupPanelType.TEXT) {
-      return {
-        fields: _compact([
-          ...baseFields,
-          {
-            type: 'checkbox',
-            name: 'disableSendMessage',
-            label: t('禁止所有人发言'),
-          },
-          currentValues.disableSendMessage === true && {
-            type: 'custom',
-            name: 'disableSendMessageWithout',
-            label: t('仅允许指定用户发言'),
-            render: disableSendMessageWithoutRender,
-          },
-        ]) as MetaFormFieldMeta[],
-        schema: createMetaFormSchema({
-          ...baseSchema,
-          disableSendMessage: metaFormFieldSchema.mixed(),
-          disableSendMessageWithout: metaFormFieldSchema.mixed(),
-        }),
-      };
-    }
-
     let fields = baseFields;
     let schema = baseSchema;
 

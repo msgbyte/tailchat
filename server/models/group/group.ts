@@ -78,6 +78,26 @@ export class GroupPanel {
    */
   @prop()
   meta?: object;
+
+  /**
+   * 身份组或者用户的权限
+   * 如果没有设定则应用群组权限
+   *
+   * key 为身份组id或者用户id
+   * value 为权限字符串列表
+   */
+  @prop()
+  permissionMap?: Record<string, string[]>;
+
+  /**
+   * 所有人的权限列表
+   * 如果没有设定则应用群组权限
+   */
+  @prop({
+    type: () => String,
+    default: () => [],
+  })
+  fallbackPermissions?: string[];
 }
 
 /**

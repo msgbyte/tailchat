@@ -147,6 +147,8 @@ class GroupService extends TcService {
         provider: { type: 'string', optional: true },
         pluginPanelName: { type: 'string', optional: true },
         meta: { type: 'object', optional: true },
+        permissionMap: { type: 'object', optional: true },
+        fallbackPermissions: { type: 'array', items: 'string', optional: true },
       },
     });
     this.registerAction('deleteGroupPanel', this.deleteGroupPanel, {
@@ -812,10 +814,21 @@ class GroupService extends TcService {
       provider?: string;
       pluginPanelName?: string;
       meta?: object;
+      permissionMap?: object;
+      fallbackPermissions?: string[];
     }>
   ) {
-    const { groupId, panelId, name, type, provider, pluginPanelName, meta } =
-      ctx.params;
+    const {
+      groupId,
+      panelId,
+      name,
+      type,
+      provider,
+      pluginPanelName,
+      meta,
+      permissionMap,
+      fallbackPermissions,
+    } = ctx.params;
     const { t, userId } = ctx.meta;
 
     const [hasPermission] = await call(ctx).checkUserPermissions(
@@ -839,6 +852,8 @@ class GroupService extends TcService {
             'panels.$[element].provider': provider,
             'panels.$[element].pluginPanelName': pluginPanelName,
             'panels.$[element].meta': meta,
+            'panels.$[element].permissionMap': permissionMap,
+            'panels.$[element].fallbackPermissions': fallbackPermissions,
           },
         },
         {
