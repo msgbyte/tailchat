@@ -207,7 +207,7 @@ export const FeatureSection: React.FC = React.memo(() => {
           <div className="item" id="bot">
             <div className="left">
               <h3>
-                <Translate>Bot</Translate>
+                <Translate>Bot and Open Platform</Translate>
               </h3>
               <p>
                 <Translate>
@@ -217,6 +217,12 @@ export const FeatureSection: React.FC = React.memo(() => {
                   You can use anyway to connect anything, its free!
                 </Translate>
               </p>
+              <Link
+                className="button button--link"
+                to="/docs/advanced-usage/openapp/about"
+              >
+                <Translate>Learn More</Translate>
+              </Link>
             </div>
 
             <div className="right">
