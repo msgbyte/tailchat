@@ -1,8 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import _isEqual from 'lodash/isEqual';
-import _uniq from 'lodash/uniq';
-import _without from 'lodash/without';
-import { useAsyncFn } from 'tailchat-shared';
 
 /**
  * 权限编辑
@@ -18,21 +15,9 @@ export function useModifyPermission(originPermission: string[]) {
     setEditingPermission([...originPermission]);
   }, [originPermission]);
 
-  const handleSwitchPermission = useCallback(
-    (permissionKey: string, enabled: boolean) => {
-      if (enabled) {
-        setEditingPermission(_uniq([...editingPermission, permissionKey]));
-      } else {
-        setEditingPermission(_without(editingPermission, permissionKey));
-      }
-    },
-    [editingPermission]
-  );
-
   return {
     isEditing,
     editingPermission,
     setEditingPermission,
-    handleSwitchPermission,
   };
 }

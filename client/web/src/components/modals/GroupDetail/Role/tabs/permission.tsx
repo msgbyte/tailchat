@@ -1,10 +1,9 @@
 import { AllPermission, getPermissionList } from 'tailchat-shared';
-import { Button, Divider } from 'antd';
+import { Button } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import { model, t } from 'tailchat-shared';
-import { PermissionItem } from '../PermissionItem';
 import { useModifyPermission } from '../useModifyPermission';
-import { pluginPermission } from '@/plugin/common';
+import { PermissionList } from '@/components/PermissionList';
 
 interface RolePermissionProps {
   roleId: typeof AllPermission | string;
@@ -22,12 +21,8 @@ export const RolePermission: React.FC<RolePermissionProps> = React.memo(
       return props.currentRoleInfo?.permissions ?? [];
     }, [props.roleId, props.fallbackPermissions, props.currentRoleInfo]);
 
-    const {
-      isEditing,
-      editingPermission,
-      setEditingPermission,
-      handleSwitchPermission,
-    } = useModifyPermission(currentRolePermissions);
+    const { isEditing, editingPermission, setEditingPermission } =
+      useModifyPermission(currentRolePermissions);
 
     const handleResetPermission = useCallback(() => {
       setEditingPermission(
@@ -51,43 +46,10 @@ export const RolePermission: React.FC<RolePermissionProps> = React.memo(
           </Button>
         </div>
 
-        {/* 权限详情 */}
-        {getPermissionList().map((p) => (
-          <PermissionItem
-            key={p.key}
-            title={p.title}
-            desc={p.desc}
-            disabled={
-              p.required
-                ? !p.required.every((r) => editingPermission.includes(r))
-                : undefined
-            }
-            checked={editingPermission.includes(p.key)}
-            onChange={(checked) => handleSwitchPermission(p.key, checked)}
-          />
-        ))}
-
-        {pluginPermission.length > 0 && (
-          <>
-            <Divider>{t('以下为插件权限')}</Divider>
-
-            {/* 权限详情 */}
-            {pluginPermission.map((p) => (
-              <PermissionItem
-                key={p.key}
-                title={p.title}
-                desc={p.desc}
-                disabled={
-                  p.required
-                    ? !p.required.every((r) => editingPermission.includes(r))
-                    : undefined
-                }
-                checked={editingPermission.includes(p.key)}
-                onChange={(checked) => handleSwitchPermission(p.key, checked)}
-              />
-            ))}
-          </>
-        )}
+        <PermissionList
+          value={editingPermission}
+          onChange={setEditingPermission}
+        />
       </div>
     );
   }
