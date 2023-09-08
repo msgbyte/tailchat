@@ -1,4 +1,4 @@
-import { ALL_PERMISSION, getPermissionList } from 'tailchat-shared';
+import { ALL_PERMISSION, getDefaultPermissionList } from 'tailchat-shared';
 import { Button } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import { model, t } from 'tailchat-shared';
@@ -25,11 +25,7 @@ export const RolePermission: React.FC<RolePermissionProps> = React.memo(
       useModifyPermission(currentRolePermissions);
 
     const handleResetPermission = useCallback(() => {
-      setEditingPermission(
-        getPermissionList()
-          .filter((p) => p.default === true)
-          .map((p) => p.key)
-      );
+      setEditingPermission(getDefaultPermissionList());
     }, []);
 
     // 权限概述

@@ -128,10 +128,12 @@ export const getPermissionList = (): PermissionItemType[] => [
 
 /**
  * 获取默认权限列表
+ *
+ * @default ['core.message']
  */
 export function getDefaultPermissionList(): string[] {
   return getPermissionList()
-    .filter((p) => p.default)
+    .filter((p) => p.default === true)
     .map((p) => p.key);
 }
 
