@@ -4,7 +4,7 @@ import { model, t } from '..';
  * 所有人权限
  * 群组最低权限标识
  */
-export const AllPermission = Symbol('AllPermission');
+export const ALL_PERMISSION = Symbol('AllPermission');
 
 export interface PermissionItemType {
   /**

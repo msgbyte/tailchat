@@ -1,6 +1,6 @@
 import { Loading } from '@/components/Loading';
 import { PillTabs } from '@/components/PillTabs';
-import { AllPermission } from 'tailchat-shared';
+import { ALL_PERMISSION } from 'tailchat-shared';
 import React, { useMemo, useState } from 'react';
 import { t, useGroupInfo } from 'tailchat-shared';
 import { RoleItem } from './RoleItem';
@@ -14,8 +14,8 @@ interface GroupPermissionProps {
 }
 export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
   const { groupId } = props;
-  const [roleId, setRoleId] = useState<typeof AllPermission | string>(
-    AllPermission
+  const [roleId, setRoleId] = useState<typeof ALL_PERMISSION | string>(
+    ALL_PERMISSION
   );
   const groupInfo = useGroupInfo(groupId);
   const roles = groupInfo?.roles ?? [];
@@ -39,8 +39,8 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
         <div className="pr-2 mr-2 w-40 mobile:w-28 border-r border-white border-opacity-20">
           {/* 角色列表 */}
           <RoleItem
-            active={roleId === AllPermission}
-            onClick={() => setRoleId(AllPermission)}
+            active={roleId === ALL_PERMISSION}
+            onClick={() => setRoleId(ALL_PERMISSION)}
           >
             {t('所有人')}
           </RoleItem>
@@ -67,7 +67,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
               {
                 key: 'summary',
                 label: t('概述'),
-                disabled: roleId === AllPermission,
+                disabled: roleId === ALL_PERMISSION,
                 children: (
                   <>
                     {currentRoleInfo && (
@@ -76,7 +76,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
                         onChangeRoleName={handleChangeRoleName}
                         onDeleteRole={async () => {
                           await handleDeleteRole();
-                          setRoleId(AllPermission); // 删除身份组后切换到所有人
+                          setRoleId(ALL_PERMISSION); // 删除身份组后切换到所有人
                         }}
                       />
                     )}
@@ -98,7 +98,7 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
               {
                 key: 'member',
                 label: t('管理成员'),
-                disabled: roleId === AllPermission,
+                disabled: roleId === ALL_PERMISSION,
                 children: (
                   <>
                     {currentRoleInfo && (

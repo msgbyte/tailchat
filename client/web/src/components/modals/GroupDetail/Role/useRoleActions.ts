@@ -1,5 +1,5 @@
 import {
-  AllPermission,
+  ALL_PERMISSION,
   getDefaultPermissionList,
   showSuccessToasts,
 } from 'tailchat-shared';
@@ -7,7 +7,7 @@ import { model, t, useAsyncRequest } from 'tailchat-shared';
 
 export function useRoleActions(
   groupId: string,
-  roleId: typeof AllPermission | string
+  roleId: typeof ALL_PERMISSION | string
 ) {
   const [{ loading: loading1 }, handleCreateRole] =
     useAsyncRequest(async () => {
@@ -21,7 +21,7 @@ export function useRoleActions(
 
   const [{ loading: loading2 }, handleSavePermission] = useAsyncRequest(
     async (permissions: string[]) => {
-      if (roleId === AllPermission) {
+      if (roleId === ALL_PERMISSION) {
         // 所有人权限
         await model.group.modifyGroupField(
           groupId,
@@ -44,7 +44,7 @@ export function useRoleActions(
 
   const [{ loading: loading3 }, handleChangeRoleName] = useAsyncRequest(
     async (newRoleName: string) => {
-      if (roleId === AllPermission) {
+      if (roleId === ALL_PERMISSION) {
         throw new Error(t('无法修改所有人权限组的显示名称'));
       }
       await model.group.updateGroupRoleName(groupId, roleId, newRoleName);
@@ -55,7 +55,7 @@ export function useRoleActions(
 
   const [{ loading: loading4 }, handleDeleteRole] =
     useAsyncRequest(async () => {
-      if (roleId === AllPermission) {
+      if (roleId === ALL_PERMISSION) {
         throw new Error(t('无法删除所有人权限'));
       }
 

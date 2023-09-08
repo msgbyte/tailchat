@@ -254,7 +254,7 @@ export { isValidJson } from './utils/json-helper';
 export { MessageHelper } from './utils/message-helper';
 export {
   PERMISSION,
-  AllPermission,
+  ALL_PERMISSION,
   getPermissionList,
   getDefaultPermissionList,
   applyDefaultFallbackGroupPermission,

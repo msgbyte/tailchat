@@ -1,4 +1,4 @@
-import { AllPermission, getPermissionList } from 'tailchat-shared';
+import { ALL_PERMISSION, getPermissionList } from 'tailchat-shared';
 import { Button } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import { model, t } from 'tailchat-shared';
@@ -6,7 +6,7 @@ import { useModifyPermission } from '../useModifyPermission';
 import { PermissionList } from '@/components/PermissionList';
 
 interface RolePermissionProps {
-  roleId: typeof AllPermission | string;
+  roleId: typeof ALL_PERMISSION | string;
   currentRoleInfo?: model.group.GroupRole;
   fallbackPermissions: string[];
   onSavePermission: (permissions: string[]) => Promise<void>;
@@ -14,7 +14,7 @@ interface RolePermissionProps {
 export const RolePermission: React.FC<RolePermissionProps> = React.memo(
   (props) => {
     const currentRolePermissions: string[] = useMemo(() => {
-      if (props.roleId === AllPermission) {
+      if (props.roleId === ALL_PERMISSION) {
         return props.fallbackPermissions;
       }
 
