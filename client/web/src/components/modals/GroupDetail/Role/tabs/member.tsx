@@ -3,7 +3,7 @@ import { closeModal, openModal } from '@/components/Modal';
 import { SelectGroupMember } from '@/components/modals/SelectGroupMember';
 import { UserListItem } from '@/components/UserListItem';
 import { Button, Input } from 'antd';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Icon } from 'tailchat-design';
 import {
   model,
@@ -14,7 +14,6 @@ import {
   useGroupInfo,
   useMemoizedFn,
   useSearch,
-  useUserId,
   useUserInfoList,
 } from 'tailchat-shared';
 import _compact from 'lodash/compact';
@@ -27,7 +26,7 @@ export const RoleMember: React.FC<RoleMemberProps> = React.memo((props) => {
   const roleId = props.currentRoleInfo._id;
   const groupInfo = useGroupInfo(props.groupId);
   const members = (groupInfo?.members ?? []).filter((m) =>
-    m.roles.includes(roleId)
+    (m.roles ?? []).includes(roleId)
   );
   const memberIds = members.map((m) => m.userId);
   const userInfoList = useUserInfoList(memberIds);

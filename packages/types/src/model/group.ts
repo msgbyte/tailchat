@@ -6,7 +6,7 @@ export interface GroupInfo {
   description: string;
   members: GroupMember[];
   panels: GroupPanel[];
-  roles?: GroupRole[];
+  roles: GroupRole[];
   /**
    * 所有人的权限列表
    * 为群组中的最低权限

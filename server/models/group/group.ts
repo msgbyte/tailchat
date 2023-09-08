@@ -157,7 +157,7 @@ export class Group extends TimeStamps implements Base {
     type: () => GroupRole,
     default: [],
   })
-  roles?: GroupRole[];
+  roles: GroupRole[];
 
   /**
    * 所有人的权限列表
