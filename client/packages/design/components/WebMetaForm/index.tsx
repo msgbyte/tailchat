@@ -35,6 +35,8 @@ export function setWebFastifyFormConfig(config: typeof webFastifyFormConfig) {
 const WebFastifyFormContainer: FastifyFormContainerComponent = React.memo(
   (props) => {
     const layout = props.layout;
+    const suffixElement = props.extraProps?.suffixElement;
+
     const submitButtonRender = useMemo(() => {
       return (
         <Form.Item
@@ -72,6 +74,7 @@ const WebFastifyFormContainer: FastifyFormContainerComponent = React.memo(
         wrapperCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 16 }}
       >
         {props.children}
+        {suffixElement}
         {submitButtonRender}
       </Form>
     );
