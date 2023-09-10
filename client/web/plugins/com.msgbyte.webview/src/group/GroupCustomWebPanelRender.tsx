@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Translate } from '../translate';
-import { FilterXSS } from 'xss';
+import { FilterXSS, getDefaultWhiteList } from 'xss';
 import { useWatch } from '@capital/common';
 import { GroupExtraDataPanel, NoData, TextArea } from '@capital/component';
 import styled from 'styled-components';
@@ -26,10 +26,9 @@ const EditModalContent = styled.div`
 
 const xss = new FilterXSS({
   css: false,
+  whiteList: { ...getDefaultWhiteList(), iframe: ['src', 'style', 'class'] },
   onIgnoreTag: function (tag, html, options) {
-    if (
-      ['html', 'body', 'head', 'meta', 'style', 'iframe', 'div'].includes(tag)
-    ) {
+    if (['html', 'body', 'head', 'meta', 'style', 'div'].includes(tag)) {
       // 不对其属性列表进行过滤
       return html;
     }
