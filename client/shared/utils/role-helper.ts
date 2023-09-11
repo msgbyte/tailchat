@@ -1,3 +1,4 @@
+import { GroupPanelType } from 'tailchat-types';
 import { model, t } from '..';
 
 /**
@@ -28,6 +29,15 @@ export interface PermissionItemType {
    * 是否依赖其他权限点
    */
   required?: string[];
+  /**
+   * 面板权限
+   * 如果是内置类型(数字) 则仅会在规定的类型中展示
+   * 如果是字符串数组则仅会在特定的插件面板中显示
+   * 如果不传则视为不适用于面板
+   *
+   * @default undefined
+   */
+  panel?: boolean | (string | GroupPanelType)[];
 }
 
 export const PERMISSION = {
@@ -55,6 +65,7 @@ export const getPermissionList = (): PermissionItemType[] => [
     title: t('发送消息'),
     desc: t('允许成员在文字频道发送消息'),
     default: true,
+    panel: [GroupPanelType.TEXT],
   },
   {
     key: PERMISSION.core.invite,

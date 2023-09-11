@@ -1,11 +1,21 @@
 import { Col, Divider, Row, Switch } from 'antd';
 import React from 'react';
-import { getPermissionList, t, useEvent } from 'tailchat-shared';
+import {
+  getPermissionList,
+  GroupPanelType,
+  PermissionItemType,
+  t,
+  useEvent,
+} from 'tailchat-shared';
 import _uniq from 'lodash/uniq';
 import _without from 'lodash/without';
 import { pluginPermission } from '@/plugin/common';
 
 interface PermissionListProps {
+  /**
+   * 面板类型，如果没传说明是群组，则展示所有的
+   */
+  panelType?: string | GroupPanelType.TEXT | GroupPanelType.GROUP;
   value: string[];
   onChange: (value: string[]) => void;
 }
@@ -21,10 +31,46 @@ export const PermissionList: React.FC<PermissionListProps> = React.memo(
       }
     );
 
+    const panelPermissionFilterFn = useEvent(
+      (permissionInfo: PermissionItemType) => {
+        if (typeof props.panelType === 'undefined') {
+          // 如果不传则无限制
+          return true;
+        }
+
+        if (!permissionInfo.panel) {
+          // 没有定义面板信息，则该权限不适用于面板策略
+          return false;
+        }
+
+        if (permissionInfo.panel === true) {
+          return true;
+        }
+
+        if (Array.isArray(permissionInfo.panel)) {
+          return permissionInfo.panel.includes(props.panelType);
+        }
+      }
+    );
+
+    const builtinPermissionList = getPermissionList().filter(
+      panelPermissionFilterFn
+    );
+    const pluginPermissionList = pluginPermission.filter(
+      panelPermissionFilterFn
+    );
+
+    if (
+      builtinPermissionList.length === 0 &&
+      pluginPermissionList.length === 0
+    ) {
+      return <div className="text-center">{t('暂无可用的权限项')}</div>;
+    }
+
     return (
       <div>
         {/* 权限详情 */}
-        {getPermissionList().map((p) => (
+        {builtinPermissionList.map((p) => (
           <PermissionItem
             key={p.key}
             title={p.title}
@@ -39,7 +85,7 @@ export const PermissionList: React.FC<PermissionListProps> = React.memo(
           />
         ))}
 
-        {pluginPermission.length > 0 && (
+        {pluginPermissionList.length > 0 && (
           <>
             <Divider>{t('以下为插件权限')}</Divider>
 

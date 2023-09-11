@@ -1,16 +1,17 @@
 import { PermissionList } from '@/components/PermissionList';
 import { Button } from 'antd';
 import clsx from 'clsx';
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useMemo, useState } from 'react';
 import {
   ALL_PERMISSION,
   getDefaultPermissionList,
+  GroupPanelType,
   t,
   useAppSelector,
   useEvent,
   useLazyValue,
 } from 'tailchat-shared';
-import _isEqual from 'lodash/isEqual';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 interface AdvanceGroupPanelPermissionProps {
   height?: number;
@@ -32,10 +33,15 @@ export const AdvanceGroupPanelPermission: React.FC<AdvanceGroupPanelPermissionPr
       return groupInfo.roles;
     });
 
+    const panelInfo = useAppSelector((state) => {
+      const groupInfo = state.group.groups[props.groupId];
+      const panelInfo = groupInfo.panels.find((p) => p.id === props.panelId);
+
+      return panelInfo;
+    });
+
     const permissionMap: Record<string | typeof ALL_PERMISSION, string[]> =
-      useAppSelector((state) => {
-        const groupInfo = state.group.groups[props.groupId];
-        const panelInfo = groupInfo.panels.find((p) => p.id === props.panelId);
+      useMemo(() => {
         if (!panelInfo) {
           return { [ALL_PERMISSION]: getDefaultPermissionList() };
         } else {
@@ -45,7 +51,7 @@ export const AdvanceGroupPanelPermission: React.FC<AdvanceGroupPanelPermissionPr
             ...panelInfo.permissionMap,
           };
         }
-      }, _isEqual);
+      }, [panelInfo]);
 
     const [editPermissionMap, setEditPermissionMap] = useLazyValue(
       permissionMap,
@@ -63,6 +69,10 @@ export const AdvanceGroupPanelPermission: React.FC<AdvanceGroupPanelPermissionPr
       });
       props.onChange(undefined);
     });
+
+    if (!panelInfo) {
+      return <LoadingSpinner />;
+    }
 
     return (
       <div className="flex" style={{ width: 540 }}>
@@ -88,6 +98,11 @@ export const AdvanceGroupPanelPermission: React.FC<AdvanceGroupPanelPermissionPr
             <Button onClick={handleSyncWithGroup}>{t('与群组配置同步')}</Button>
           </div>
           <PermissionList
+            panelType={
+              panelInfo.type === GroupPanelType.PLUGIN
+                ? panelInfo.pluginPanelName
+                : panelInfo.type
+            }
             value={editPermissionMap[selectedRoleId] ?? []}
             onChange={handleUpdatePermissionMap}
           />
