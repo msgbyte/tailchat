@@ -211,7 +211,9 @@ export { useGroupAck } from './redux/hooks/useGroupAck';
 export { useGroupMemberMute } from './redux/hooks/useGroupMemberMute';
 export {
   useGroupMemberAllPermissions,
+  useGroupPanelMemberAllPermissions,
   useHasGroupPermission,
+  useHasGroupPanelPermission,
 } from './redux/hooks/useGroupPermission';
 export { useUserInfo, useUserId } from './redux/hooks/useUserInfo';
 export { useInboxList, useInboxItem } from './redux/hooks/useInbox';

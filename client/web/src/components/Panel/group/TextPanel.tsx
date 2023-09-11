@@ -14,10 +14,10 @@ import {
   t,
   humanizeMsDuration,
   useInterval,
-  useHasGroupPermission,
   PERMISSION,
   useGroupInfo,
   GroupPanelType,
+  useHasGroupPanelPermission,
 } from 'tailchat-shared';
 import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
 import { MembersPanel } from './MembersPanel';
@@ -26,10 +26,10 @@ import { GroupPanelContainer } from './shared/GroupPanelContainer';
 /**
  * 聊天输入框显示状态管理
  */
-function useChatInputInfo(groupId: string) {
+function useChatInputInfo(groupId: string, panelId: string) {
   const userId = useUserId();
   const muteUntil = useGroupMemberMute(groupId, userId ?? '');
-  const [hasPermission] = useHasGroupPermission(groupId, [
+  const [hasPermission] = useHasGroupPanelPermission(groupId, panelId, [
     PERMISSION.core.message,
   ]);
 
@@ -80,7 +80,7 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
     const group = useGroupInfo(groupId);
     const groupMembers = useGroupMemberInfos(groupId);
     const panelInfo = useGroupPanelInfo(groupId, panelId);
-    const { disabled, placeholder } = useChatInputInfo(groupId);
+    const { disabled, placeholder } = useChatInputInfo(groupId, panelId);
     const friendNicknameMap = useFriendNicknameMap();
 
     if (!group) {
