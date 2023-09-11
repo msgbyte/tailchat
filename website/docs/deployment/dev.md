@@ -40,3 +40,27 @@ You can edit the configuration of `server/.env` to your own relevant context
 The file can be started from `server/.env.example`
 
 Now you can preview your server in `http://localhost:11011`
+
+## Project directory description
+
+- `apps`: non-core applications
+  - `cli`: Tailchat’s command line program
+  - `github-app`: Tailchat’s github integration bot
+  - `oauth-demo`: Tailchat open platform third-party login demo program
+  - `widget`: Web page embedded widget
+- `client`: client
+  - `desktop`: desktop version
+  - `mobile`: mobile version
+  - `packages`: dependency packages
+  - `shared`: platform-independent common code
+  - `web`: web version
+    - `plugins`: pure frontend plugins
+    - `src`: source code
+- `packages`
+  - `types`: common types for both front and back ends
+- `server`: server
+  - `admin`: background management
+  - `models`: database model
+  - `plugins`: server-side plugins
+  - `services`: microservices
+- `website`: official website

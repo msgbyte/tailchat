@@ -40,3 +40,28 @@ pnpm dev
 该文件可以从 `server/.env.example` 开始
 
 现在你可以在 `http://localhost:11011` 访问你的 Tailchat 服务了
+
+## 项目目录说明
+
+- `apps`: 非核心应用
+  - `cli`: Tailchat 的命令行程序
+  - `github-app`: Tailchat 的github集成机器人
+  - `oauth-demo`: Tailchat 开放平台第三方登录演示程序
+  - `widget`: 网页嵌入小部件
+- `client`: 客户端
+  - `desktop`: 桌面端
+  - `mobile`: 移动端
+  - `packages`: 依赖包
+  - `shared`: 平台无关的通用代码
+  - `web`: 网页端
+    - `plugins`: 纯前端插件
+    - `src`: 源码
+- `packages`
+  - `types`: 前后端通用类型
+- `server`: 服务端
+  - `admin`: 后台管理
+  - `models`: 数据库模型
+  - `plugins`: 服务端插件
+  - `services`: 微服务
+- `website`: 官网
+  
