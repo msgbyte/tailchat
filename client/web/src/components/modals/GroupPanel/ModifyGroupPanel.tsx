@@ -8,7 +8,7 @@ import {
   useGroupPanelInfo,
   useEvent,
   ALL_PERMISSION,
-  DevContainer,
+  AlphaContainer,
 } from 'tailchat-shared';
 import { ModalWrapper } from '../../Modal';
 import { WebMetaForm } from 'tailchat-design';
@@ -65,7 +65,7 @@ export const ModalModifyGroupPanel: React.FC<{
         onSubmit={handleSubmit}
         extraProps={{
           suffixElement: (
-            <DevContainer>
+            <AlphaContainer>
               <CollapseView title={t('高级权限控制')} className="mb-2">
                 <AdvanceGroupPanelPermission
                   height={320}
@@ -89,7 +89,7 @@ export const ModalModifyGroupPanel: React.FC<{
                   }}
                 />
               </CollapseView>
-            </DevContainer>
+            </AlphaContainer>
           ),
         }}
       />

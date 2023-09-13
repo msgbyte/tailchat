@@ -1,4 +1,4 @@
-import React, { Fragment, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useAlphaMode } from '../hooks/useAlphaMode';
 
 /**
@@ -9,7 +9,7 @@ export const AlphaContainer: React.FC<PropsWithChildren> = React.memo(
   (props) => {
     const { isAlphaMode } = useAlphaMode();
 
-    return isAlphaMode ? <Fragment>{props.children}</Fragment> : null;
+    return isAlphaMode ? <>{props.children}</> : null;
   }
 );
 AlphaContainer.displayName = 'AlphaContainer';
