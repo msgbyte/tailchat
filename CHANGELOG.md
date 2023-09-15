@@ -1,5 +1,22 @@
 
 
+# [1.9.0](https://github.com/msgbyte/tailchat/compare/v1.8.12...v1.9.0) (2023-09-15)
+
+
+### Bug Fixes
+
+* fix xss attacks caused by security issues in custom web group panels ([81a062a](https://github.com/msgbyte/tailchat/commit/81a062a70b54de42c66cb23e98d44f0741506b3e))
+
+
+### Features
+
+* add AdvanceGroupPanelPermission controller ([86ef2d5](https://github.com/msgbyte/tailchat/commit/86ef2d5c20ae0db7120a6b802fcb36f35dda68bb))
+* add component CollapseView ([e85c39e](https://github.com/msgbyte/tailchat/commit/e85c39e570f03c710901beef2aa6e70a7c6c208a))
+* add group panel permission filter in permission ([5f9140d](https://github.com/msgbyte/tailchat/commit/5f9140db9d55136509417bcd62f8a2b32cbc6f95))
+* add permissionMap and fallbackPermissions for group panel permission control ([e731c61](https://github.com/msgbyte/tailchat/commit/e731c61964235c64b563727c006d667414d74faf))
+* add role based send text message permission control ([8b89b26](https://github.com/msgbyte/tailchat/commit/8b89b265c15d709c0d6f19ec91f9ee749a1937ca))
+* remove alpha control for advanced permission control ([650f350](https://github.com/msgbyte/tailchat/commit/650f350350ee022242f81a119e26edf08bfef59a))
+
 ## [1.8.12](https://github.com/msgbyte/tailchat/compare/v1.8.11...v1.8.12) (2023-09-04)
 
 
