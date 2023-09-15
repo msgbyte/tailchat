@@ -95,7 +95,7 @@ export const AdvanceGroupPanelPermission: React.FC<AdvanceGroupPanelPermissionPr
         </div>
         <div className="flex-1 overflow-auto" style={{ height: props.height }}>
           <div className="text-right">
-            <Button onClick={handleSyncWithGroup}>{t('与群组配置同步')}</Button>
+            <Button onClick={handleSyncWithGroup}>{t('重置为默认权限')}</Button>
           </div>
           <PermissionList
             panelType={
