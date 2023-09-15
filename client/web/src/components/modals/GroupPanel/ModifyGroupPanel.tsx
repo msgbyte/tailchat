@@ -65,31 +65,29 @@ export const ModalModifyGroupPanel: React.FC<{
         onSubmit={handleSubmit}
         extraProps={{
           suffixElement: (
-            <AlphaContainer>
-              <CollapseView title={t('高级权限控制')} className="mb-2">
-                <AdvanceGroupPanelPermission
-                  height={320}
-                  groupId={props.groupId}
-                  panelId={props.groupPanelId}
-                  onChange={(permissionMap) => {
-                    if (permissionMap) {
-                      const fallbackPermissions = permissionMap[ALL_PERMISSION];
-                      const others = { ...permissionMap };
+            <CollapseView title={t('高级权限控制')} className="mb-2">
+              <AdvanceGroupPanelPermission
+                height={320}
+                groupId={props.groupId}
+                panelId={props.groupPanelId}
+                onChange={(permissionMap) => {
+                  if (permissionMap) {
+                    const fallbackPermissions = permissionMap[ALL_PERMISSION];
+                    const others = { ...permissionMap };
 
-                      handleUpdateValues({
-                        fallbackPermissions,
-                        permissionMap: _omit(others, [ALL_PERMISSION]),
-                      });
-                    } else {
-                      handleUpdateValues({
-                        fallbackPermissions: undefined,
-                        permissionMap: undefined,
-                      });
-                    }
-                  }}
-                />
-              </CollapseView>
-            </AlphaContainer>
+                    handleUpdateValues({
+                      fallbackPermissions,
+                      permissionMap: _omit(others, [ALL_PERMISSION]),
+                    });
+                  } else {
+                    handleUpdateValues({
+                      fallbackPermissions: undefined,
+                      permissionMap: undefined,
+                    });
+                  }
+                }}
+              />
+            </CollapseView>
           ),
         }}
       />
