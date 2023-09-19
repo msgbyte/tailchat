@@ -8,6 +8,7 @@ import { useRoleActions } from './useRoleActions';
 import { RoleSummary } from './tabs/summary';
 import { RolePermission } from './tabs/permission';
 import { RoleMember } from './tabs/member';
+import { Divider } from 'antd';
 
 interface GroupPermissionProps {
   groupId: string;
@@ -54,6 +55,8 @@ export const GroupRole: React.FC<GroupPermissionProps> = React.memo((props) => {
               {r.name}
             </RoleItem>
           ))}
+
+          <Divider className="my-3" />
 
           <RoleItem active={false} onClick={handleCreateRole}>
             {t('添加角色')}
