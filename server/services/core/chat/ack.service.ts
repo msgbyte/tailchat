@@ -38,7 +38,7 @@ class AckService extends TcService {
     const { converseId, lastMessageId } = ctx.params;
     const userId = ctx.meta.userId;
 
-    await this.adapter.model.findOneAndUpdate(
+    await this.adapter.model.updateOne(
       {
         converseId,
         userId,
