@@ -4,11 +4,13 @@ import {
   GroupPanel,
   GroupPanelType,
   isValidStr,
+  PERMISSION,
   showToasts,
   t,
   useAppDispatch,
   useConverseAck,
   useGroupInfo,
+  useHasGroupPanelPermission,
   useUserNotifyMute,
 } from 'tailchat-shared';
 import { GroupPanelItem } from '@/components/GroupPanelItem';
@@ -44,9 +46,16 @@ export const SidebarItem: React.FC<{
     panel.pluginPanelName ?? ''
   );
   const { checkIsMuted, toggleMute } = useUserNotifyMute();
+  const [viewPanelPermission] = useHasGroupPanelPermission(groupId, panelId, [
+    PERMISSION.core.viewPanel,
+  ]);
 
   if (!groupInfo) {
     return <LoadingSpinner />;
+  }
+
+  if (!viewPanelPermission) {
+    return null;
   }
 
   const isPinned =

@@ -45,6 +45,7 @@ export const PERMISSION = {
    * 非插件的权限点都叫core
    */
   core: {
+    viewPanel: 'core.viewPanel',
     message: 'core.message',
     invite: 'core.invite',
     unlimitedInvite: 'core.unlimitedInvite',
@@ -60,6 +61,13 @@ export const PERMISSION = {
 };
 
 export const getPermissionList = (): PermissionItemType[] => [
+  {
+    key: PERMISSION.core.viewPanel,
+    title: t('查看面板'),
+    desc: t('允许成员查看面板'),
+    default: true,
+    panel: true,
+  },
   {
     key: PERMISSION.core.message,
     title: t('发送消息'),

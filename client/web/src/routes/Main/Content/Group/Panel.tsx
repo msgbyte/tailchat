@@ -8,9 +8,11 @@ import React, { useEffect, useMemo } from 'react';
 import {
   GroupInfoContextProvider,
   GroupPanelType,
+  PERMISSION,
   t,
   useGroupInfo,
   useGroupPanelInfo,
+  useHasGroupPanelPermission,
 } from 'tailchat-shared';
 import { useGroupPanelParams } from './utils';
 
@@ -47,6 +49,9 @@ export const GroupPanelRender: React.FC<GroupPanelRenderProps> = React.memo(
       [groupId, panelId]
     );
     useRecordGroupPanel(groupId, panelId);
+    const [viewPanelPermission] = useHasGroupPanelPermission(groupId, panelId, [
+      PERMISSION.core.viewPanel,
+    ]);
 
     if (groupInfo === null) {
       return (
@@ -60,6 +65,10 @@ export const GroupPanelRender: React.FC<GroupPanelRenderProps> = React.memo(
 
     if (panelInfo === null) {
       return <Problem text={t('面板不存在')} />;
+    }
+
+    if (!viewPanelPermission) {
+      return <Problem text={t('没有面板访问权限')} />;
     }
 
     if (panelInfo.type === GroupPanelType.TEXT) {
