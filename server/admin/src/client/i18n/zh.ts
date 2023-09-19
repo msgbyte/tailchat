@@ -128,6 +128,9 @@ export const zhTranslation = {
         tushan: 'Tailchat Admin后台 由 tushan 提供技术支持',
       },
     },
+    file: {
+      fileTotalSize: '文件总大小',
+    },
     analytics: {
       activeGroupTop5: '前 5 名活跃群组',
       activeUserTop5: '前 5 名活跃用户',

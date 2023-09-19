@@ -6,6 +6,7 @@ import { Router } from 'express';
 import { callBrokerAction } from '../broker';
 import { auth } from '../middleware/auth';
 import Busboy from '@fastify/busboy';
+import fileModel from '../../../../models/file';
 
 const router = Router();
 
@@ -55,6 +56,27 @@ router.put('/upload', auth(), async (req, res) => {
   });
 
   req.pipe(busboy);
+});
+
+router.get('/filesizeSum', auth(), async (req, res) => {
+  const ret = await fileModel.aggregate([
+    {
+      $group: {
+        _id: '$objectName' as any,
+        size: { $first: '$size' },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        totalSize: { $sum: '$size' },
+      },
+    },
+  ]);
+
+  const totalSize = ret[0].totalSize;
+
+  res.json({ totalSize });
 });
 
 export { router as fileRouter };

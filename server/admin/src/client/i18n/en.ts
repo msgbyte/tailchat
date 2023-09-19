@@ -37,6 +37,9 @@ export const enTranslation = {
           'Tailchat: The next-generation noIM Application in your own workspace',
       },
     },
+    file: {
+      fileTotalSize: 'File Total Size',
+    },
     analytics: {
       activeGroupTop5: 'Active Group Top 5',
       activeUserTop5: 'Active User Top 5',
