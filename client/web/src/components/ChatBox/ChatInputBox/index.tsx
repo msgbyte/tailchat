@@ -68,16 +68,6 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
     (e: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
       const el: HTMLTextAreaElement | HTMLInputElement = e.currentTarget;
       const helper = new ClipboardHelper(e);
-      const image = helper.hasImage();
-      if (image) {
-        // 上传图片
-        e.preventDefault();
-        uploadMessageImage(image).then(({ url, width, height }) => {
-          props.onSendMsg(
-            getMessageTextDecorators().image(url, { width, height })
-          );
-        });
-      }
 
       if (!el.value) {
         // 当没有任何输入内容时才会执行handler
@@ -88,7 +78,20 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             sendMessage,
             applyMessage: setMessage,
           });
+          return;
         }
+      }
+
+      // If not match any paste handler or not paste without any input, fallback to image paste checker
+      const image = helper.hasImage();
+      if (image) {
+        // 上传图片
+        e.preventDefault();
+        uploadMessageImage(image).then(({ url, width, height }) => {
+          props.onSendMsg(
+            getMessageTextDecorators().image(url, { width, height })
+          );
+        });
       }
     }
   );
