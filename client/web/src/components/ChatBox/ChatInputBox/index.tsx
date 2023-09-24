@@ -20,6 +20,7 @@ import { ChatInputEmotion } from './Emotion';
 import _uniq from 'lodash/uniq';
 import { ChatDropArea } from './ChatDropArea';
 import { Icon } from 'tailchat-design';
+import { usePasteHandler } from './usePasteHandler';
 
 interface ChatInputBoxProps {
   onSendMsg: (msg: string, meta?: SendMessagePayloadMeta) => Promise<void>;
@@ -32,15 +33,23 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   const [message, setMessage] = useState('');
   const [mentions, setMentions] = useState<string[]>([]);
   const { disabled } = useChatInputMentionsContext();
-  const handleSendMsg = useEvent(async () => {
-    await props.onSendMsg(message, {
+  const { runPasteHandlers, pasteHandlerContainer } = usePasteHandler();
+
+  const sendMessage = useEvent(
+    async (msg: string, meta?: SendMessagePayloadMeta) => {
+      await props.onSendMsg(msg, meta);
+      setMessage('');
+      inputRef.current?.focus();
+    }
+  );
+
+  const handleSendMsg = useEvent(() => {
+    sendMessage(message, {
       mentions: _uniq(mentions), // 发送前去重
     });
-    setMessage('');
-    inputRef.current?.focus();
   });
 
-  const handleAppendMsg = useEvent((append: string) => {
+  const appendMsg = useEvent((append: string) => {
     setMessage(message + append);
 
     inputRef.current?.focus();
@@ -56,7 +65,8 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
   );
 
   const handlePaste = useEvent(
-    (e: React.ClipboardEvent<HTMLDivElement | HTMLTextAreaElement>) => {
+    (e: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      const el: HTMLTextAreaElement | HTMLInputElement = e.currentTarget;
       const helper = new ClipboardHelper(e);
       const image = helper.hasImage();
       if (image) {
@@ -67,6 +77,18 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
             getMessageTextDecorators().image(url, { width, height })
           );
         });
+      }
+
+      if (!el.value) {
+        // 当没有任何输入内容时才会执行handler
+        const handlers = helper.matchPasteHandler();
+        if (handlers.length > 0) {
+          // 弹出选择框
+          runPasteHandlers(handlers, e, {
+            sendMessage,
+            applyMessage: setMessage,
+          });
+        }
       }
     }
   );
@@ -92,11 +114,11 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
         message,
         setMessage,
         sendMsg: props.onSendMsg,
-        appendMsg: handleAppendMsg,
+        appendMsg,
       }}
     >
       <div className="px-4 py-2">
-        <div className="bg-white dark:bg-gray-600 flex rounded-md items-center">
+        <div className="bg-white dark:bg-gray-600 flex rounded-md items-center relative">
           {/* This w-0 is magic to ensure show mention and long text */}
           <div className="flex-1 w-0">
             <ChatInputBoxInput
@@ -110,6 +132,8 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
               onPaste={handlePaste}
             />
           </div>
+
+          {pasteHandlerContainer}
 
           {!disabled && (
             <>
@@ -126,7 +150,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
                   <Icon
                     icon="mdi:send-circle-outline"
                     className="text-2xl cursor-pointer"
-                    onClick={() => handleSendMsg()}
+                    onClick={handleSendMsg}
                   />
                 ) : (
                   <ChatInputAddon />

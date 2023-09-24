@@ -14,7 +14,10 @@ import type { MetaFormFieldMeta } from 'tailchat-design';
 import type { FullModalFactoryConfig } from '@/components/FullModal/Factory';
 import type { ReactElement } from 'react';
 import type { BaseCardPayload } from '@/components/Card';
+import type { ChatInputPasteHandler } from '@/components/ChatBox/ChatInputBox/clipboard-helper';
+
 export type { BaseCardPayload };
+
 /**
  * 注册自定义面板
  */
@@ -343,3 +346,6 @@ export const [pluginLoginAction, regLoginAction] = buildRegList<{
   name: string;
   component: React.ComponentType;
 }>();
+
+export const [pluginChatInputPasteHandler, regChatInputPasteHandler] =
+  buildRegList<ChatInputPasteHandler>();
