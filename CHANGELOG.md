@@ -1,5 +1,21 @@
 
 
+## [1.9.1](https://github.com/msgbyte/tailchat/compare/v1.9.0...v1.9.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* fix duplicate key error collection problem in ack update api ([3c1d8ef](https://github.com/msgbyte/tailchat/commit/3c1d8efe03ee95c8d0d102bea02c610cd8368ee5))
+* fix linkmeta bilibili video support [#155](https://github.com/msgbyte/tailchat/issues/155) ([fd904fd](https://github.com/msgbyte/tailchat/commit/fd904fd37c3339176b689b2a3e4a038d1314e591))
+* fix problem of linkmeta will fetch tailchat's url and not match bbcode url ([9411200](https://github.com/msgbyte/tailchat/commit/9411200ae32437d28eed06ac3a6c4717976be7dc))
+
+
+### Features
+
+* add clipboard paste handler ([ec23b7b](https://github.com/msgbyte/tailchat/commit/ec23b7bd921e42c7d6041cacecc81c34a6ab6237))
+* add view panel permission which can control panel display for different users [#149](https://github.com/msgbyte/tailchat/issues/149) ([c59e56c](https://github.com/msgbyte/tailchat/commit/c59e56c31a7f4b6421e352444b594829ddbf79a8))
+* **admin:** added total file size statistics ([b26d34e](https://github.com/msgbyte/tailchat/commit/b26d34e8e2e8118941bc5c0fbec0445098401a73))
+
 # [1.9.0](https://github.com/msgbyte/tailchat/compare/v1.8.12...v1.9.0) (2023-09-15)
 
 
