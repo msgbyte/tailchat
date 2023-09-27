@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import React, { PropsWithChildren } from 'react';
 import Split from 'react-split';
-import { useStorage } from 'tailchat-shared';
+import { useStorage, updateDragStatus} from 'tailchat-shared';
 import './SplitPanel.less';
+
 
 /**
  * Reference: https://split.js.org/#/
@@ -13,10 +14,16 @@ interface SplitPanelProps extends PropsWithChildren {
 }
 export const SplitPanel: React.FC<SplitPanelProps> = React.memo((props) => {
   const [sizes, { save: saveSizes }] = useStorage('pin-sizes', [90, 10]);
-
+  const updateStatus = updateDragStatus()
   const handleDragEnd = (sizes: number[]) => {
     saveSizes(sizes);
+    updateStatus(false)
+  
   };
+
+  const handleDragEnter = ()=>{
+    updateStatus(true)
+  }
 
   return (
     <Split
@@ -25,6 +32,7 @@ export const SplitPanel: React.FC<SplitPanelProps> = React.memo((props) => {
       minSize={250}
       expandToMin={true}
       onDragEnd={handleDragEnd}
+      onDragStart={handleDragEnter}
     >
       {props.children}
     </Split>
