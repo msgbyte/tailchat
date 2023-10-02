@@ -146,7 +146,7 @@ export const [getMessageRender, regMessageRender] = buildRegFn<
  * 输入消息，返回渲染节点
  */
 const defaultMessageTextDecorators = {
-  url: (url: string, label?: string) => url,
+  url: (url: string, label?: string) => (label ? `${label}(${url})` : url),
   image: (plain: string, attrs: Record<string, unknown>) => plain,
   card: (
     plain: string,
