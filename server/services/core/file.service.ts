@@ -288,15 +288,22 @@ class FileService extends TcService {
     this.minioClient
       .statObject(this.bucketName, objectName)
       .then((stat) =>
-        this.adapter.insert({
-          etag,
-          userId: new Types.ObjectId(userId),
-          bucketName: this.bucketName,
-          objectName,
-          url,
-          size: stat.size,
-          metaData: stat.metaData,
-        })
+        this.adapter.model.updateOne(
+          {
+            bucketName: this.bucketName,
+            objectName,
+          },
+          {
+            etag,
+            userId: new Types.ObjectId(userId),
+            url,
+            size: stat.size,
+            metaData: stat.metaData,
+          },
+          {
+            upsert: true,
+          }
+        )
       )
       .catch((err) => {
         this.logger.error(`持久化到数据库失败: ${objectName}`, err);
