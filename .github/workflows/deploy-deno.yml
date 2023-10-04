@@ -23,6 +23,11 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
 
+      - name: Install Deno
+        uses: denoland/setup-deno@main
+        with:
+          deno-version: 1.18.2
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -51,5 +56,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "tailchat-nightly"
-          entrypoint: "index.html"
+          entrypoint: https://deno.land/std@0.202.0/http/file_server.ts
           root: "./client/web/dist"
