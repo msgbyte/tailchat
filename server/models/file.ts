@@ -45,6 +45,14 @@ export class File extends TimeStamps implements Base {
   @prop()
   size: number;
 
+  /**
+   * 浏览量
+   */
+  @prop({
+    default: 0,
+  })
+  views: number;
+
   @prop()
   metaData: object;
 }

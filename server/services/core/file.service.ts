@@ -332,6 +332,20 @@ class FileService extends TcService {
       objectName
     );
 
+    this.adapter.model
+      .updateOne(
+        {
+          bucketName: this.bucketName,
+          objectName,
+        },
+        {
+          $inc: {
+            views: 1,
+          },
+        }
+      )
+      .catch(() => {});
+
     return stream;
   }
 
