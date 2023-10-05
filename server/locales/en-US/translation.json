@@ -13,6 +13,7 @@
   "k313eb9b3": "User does not exist, please check your username",
   "k3b35c0b0": "No permission to create invitation codes",
   "k3b4422dc": "This user is not a temporary user",
+  "k3b44c0a": "Messages cannot be searched if you are not a member of the group",
   "k3d0d56b": "Invalid group invitation: group id is empty",
   "k4241451e": "Not member of this group",
   "k429851b9": "No operation authority",

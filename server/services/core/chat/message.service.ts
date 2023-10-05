@@ -64,6 +64,13 @@ class MessageService extends TcService {
         messageId: 'string',
       },
     });
+    this.registerAction('searchMessage', this.searchMessage, {
+      params: {
+        groupId: { type: 'string', optional: true },
+        converseId: 'string',
+        text: 'string',
+      },
+    });
     this.registerAction(
       'fetchConverseLastMessages',
       this.fetchConverseLastMessages,
@@ -366,6 +373,38 @@ class MessageService extends TcService {
     });
 
     return true;
+  }
+
+  /**
+   * 搜索消息
+   */
+  async searchMessage(
+    ctx: TcContext<{ groupId?: string; converseId: string; text: string }>
+  ) {
+    const { groupId, converseId, text } = ctx.params;
+    const userId = ctx.meta.userId;
+    const t = ctx.meta.t;
+
+    if (groupId) {
+      const groupInfo = await call(ctx).getGroupInfo(groupId);
+      if (!groupInfo.members.map((m) => m.userId).includes(userId)) {
+        throw new Error(t('不是群组成员无法搜索消息'));
+      }
+    }
+
+    const messages = this.adapter.model
+      .find({
+        groupId: groupId ?? null,
+        converseId,
+        content: {
+          $regex: text,
+        },
+      })
+      .sort({ _id: -1 })
+      .limit(10)
+      .maxTimeMS(5 * 1000); // 超过5s的查询直接放弃
+
+    return messages;
   }
 
   /**
