@@ -36,15 +36,17 @@ export class ClipboardHelper {
   }
 
   get builtinHandlers(): ChatInputPasteHandler[] {
-    return [
-      {
-        name: 'pasteUrl',
-        label: t('转为Url富文本'),
-        match: (e) => e.clipboardData.getData('text/plain').startsWith('http'),
-        handler: (data, { applyMessage }) => {
-          applyMessage(getMessageTextDecorators().url(data.text));
-        },
+    const pasteUrl: ChatInputPasteHandler = {
+      name: 'pasteUrl',
+      label: t('转为Url富文本'),
+      match: (e) => e.clipboardData.getData('text/plain').startsWith('http'),
+      handler: (data, { applyMessage }) => {
+        applyMessage(getMessageTextDecorators().url(data.text));
       },
+    };
+
+    return [
+      // pasteUrl
     ];
   }
 
