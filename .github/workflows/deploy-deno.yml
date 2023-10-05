@@ -48,13 +48,17 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build step
-        run: "cd client/web && pnpm build" # 📝 Update the build command(s) if necessary
+        run: cd client/web && pnpm build
         env:
           SERVICE_URL: https://tailchat-nightly.moonrailgun.com
+
+      - name: Copy Deno Entry
+        run: cd client/web &&  cp ./scripts/deno-static-entry.ts ./dist/deno-static-entry.ts
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "tailchat-nightly"
-          entrypoint: https://deno.land/std@0.202.0/http/file_server.ts
+          # entrypoint: https://deno.land/std@0.202.0/http/file_server.ts
+          entrypoint: deno-static-entry.ts
           root: "./client/web/dist"
