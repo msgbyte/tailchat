@@ -42,3 +42,23 @@ forwardSharedEvent('receiveUnmutedMessage');
 setTimeout(() => {
   checkUpdate();
 }, 1000);
+
+navigator.mediaDevices.getDisplayMedia = async (
+  options: DisplayMediaStreamOptions
+) => {
+  const source = await (
+    window as any
+  ).electron.ipcRenderer.getDesktopCapturerSource();
+
+  const stream = await window.navigator.mediaDevices.getUserMedia({
+    // audio: options.audio,
+    video: {
+      mandatory: {
+        chromeMediaSource: 'desktop',
+        chromeMediaSourceId: source.id,
+      },
+    } as any,
+  });
+
+  return stream;
+};

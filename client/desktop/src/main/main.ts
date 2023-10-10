@@ -9,11 +9,18 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  desktopCapturer,
+  DesktopCapturerSource,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { CONSTANT, resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 import { initScreenshots } from './screenshots';
@@ -40,6 +47,22 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.handle(CONSTANT.DESKTOP_CAPTURER_GET_SOURCES, async (event, opts) => {
+  const sources = await desktopCapturer.getSources({
+    types: ['window', 'screen'],
+  });
+
+  return new Promise((resolve) => {
+    createCapturerSourcePicker(sources, (source) => {
+      if (source) {
+        resolve(source);
+      } else {
+        resolve(null);
+      }
+    });
+  });
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -76,6 +99,7 @@ const installExtensions = async () => {
 const webPreferences: Electron.WebPreferences = {
   nodeIntegration: false,
   contextIsolation: true,
+  devTools: true,
   webSecurity: false, // skip same-origin
   allowRunningInsecureContent: true, // allow visit http page in https
   preload: app.isPackaged
@@ -85,6 +109,7 @@ const webPreferences: Electron.WebPreferences = {
 
 let welcomeWindow: BrowserWindow | null = null;
 let mainWindow: BrowserWindow | null = null;
+let capturerSourcePickerWindow: BrowserWindow | null = null;
 
 const createWelcomeWindow = async () => {
   // 创建一个新的浏览器窗口
@@ -257,6 +282,59 @@ const createMainWindow = async (url: string) => {
   } catch (err) {
     log.error('createWindow error:', err);
   }
+};
+
+const createCapturerSourcePicker = async (
+  sources: DesktopCapturerSource[],
+  onSelected: (source: DesktopCapturerSource | null) => void
+) => {
+  // 创建一个新的浏览器窗口
+  capturerSourcePickerWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    alwaysOnTop: true,
+    parent: mainWindow ?? undefined,
+    modal: true,
+    autoHideMenuBar: true,
+    minimizable: false,
+    maximizable: false,
+    webPreferences,
+  });
+
+  // 加载欢迎窗口的HTML文件
+  capturerSourcePickerWindow.webContents.loadFile(
+    require.resolve('./lib/capturer-source-picker.html')
+  );
+
+  capturerSourcePickerWindow.webContents.on('did-finish-load', () => {
+    if (capturerSourcePickerWindow) {
+      capturerSourcePickerWindow.webContents.send(
+        'SEND_SCREEN_SHARE_SOURCES',
+        sources.map((s) => ({
+          ...s,
+          thumbnail: s.thumbnail.toDataURL(),
+        }))
+      );
+    }
+  });
+
+  // 监听从渲染进程发送的选择捕获源事件
+  capturerSourcePickerWindow.webContents.on(
+    'ipc-message',
+    (e, channel, data) => {
+      if (channel === 'selectCapturerSource') {
+        onSelected(data);
+        if (capturerSourcePickerWindow) {
+          capturerSourcePickerWindow.close();
+        }
+      }
+    }
+  );
+
+  capturerSourcePickerWindow.on('closed', () => {
+    onSelected(null);
+    capturerSourcePickerWindow = null;
+  });
 };
 
 /**

@@ -4,12 +4,14 @@ import {
   IpcRendererEvent,
   webFrame,
 } from 'electron';
+import { CONSTANT } from './util';
 
 export type Channels =
   | 'ipc-example'
   | 'webview-message'
   | 'close'
-  | 'selectServer';
+  | 'selectServer'
+  | 'selectCapturerSource';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
@@ -26,6 +28,14 @@ contextBridge.exposeInMainWorld('electron', {
     once(channel: Channels, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
     },
+    getDesktopCapturerSource:
+      async (): Promise<Electron.DesktopCapturerSource> => {
+        const source = await ipcRenderer.invoke(
+          CONSTANT.DESKTOP_CAPTURER_GET_SOURCES
+        );
+
+        return source;
+      },
   },
 });
 
