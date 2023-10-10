@@ -345,22 +345,27 @@ class MessageService extends TcService {
       throw new DataNotFoundError(t('该消息未找到'));
     }
 
+    const converseId = String(message.converseId);
     const groupId = message.groupId;
     if (!groupId) {
-      throw new Error(t('无法删除私人信息'));
+      // 私人会话
+      if (userId !== SYSTEM_USERID) {
+        // 如果是私人发起的, 则直接抛出异常
+        throw new Error(t('无法删除私人信息'));
+      }
+    } else {
+      // 群组会话, 进行权限校验
+      const [hasPermission] = await call(ctx).checkUserPermissions(
+        String(groupId),
+        userId,
+        [PERMISSION.core.deleteMessage]
+      );
+
+      if (!hasPermission) {
+        throw new NoPermissionError(t('没有删除权限')); // 仅管理员允许删除
+      }
     }
 
-    const [hasPermission] = await call(ctx).checkUserPermissions(
-      String(groupId),
-      userId,
-      [PERMISSION.core.deleteMessage]
-    );
-
-    if (!hasPermission) {
-      throw new NoPermissionError(t('没有删除权限')); // 仅管理员允许删除
-    }
-
-    const converseId = String(message.converseId);
     await this.adapter.removeById(messageId); // TODO: 考虑是否要改为软删除
 
     this.roomcastNotify(ctx, converseId, 'delete', { converseId, messageId });
