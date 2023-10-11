@@ -9,7 +9,7 @@ export function buildRegFn<F extends (...args: any[]) => any>(
   name: string,
   defaultFunc?: F
 ) {
-  let func: F;
+  let func: F | undefined;
 
   const get = (...args: Parameters<F>): ReturnType<F> => {
     if (!func) {
@@ -26,7 +26,11 @@ export function buildRegFn<F extends (...args: any[]) => any>(
     func = fn;
   };
 
-  return [get, set] as const;
+  const reset = (): void => {
+    func = defaultFunc;
+  };
+
+  return [get, set, reset] as const;
 }
 
 /**
