@@ -40,11 +40,11 @@ const DefaultWebviewKernel: React.FC<WebviewKernelProps> = React.memo(
 );
 DefaultWebviewKernel.displayName = 'DefaultWebviewKernel';
 
-const [getWebviewKernel, setWebviewKernel] = buildRegFn<
+const [getWebviewKernel, setWebviewKernel, resetWebviewKernel] = buildRegFn<
   () => React.ComponentType<WebviewKernelProps>
 >('webviewKernelComponent', () => DefaultWebviewKernel);
 
-export { setWebviewKernel };
+export { setWebviewKernel, resetWebviewKernel };
 
 interface WebviewProps {
   className?: string;

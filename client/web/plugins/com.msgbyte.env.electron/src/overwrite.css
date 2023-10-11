@@ -1,0 +1,3 @@
+.ant-dropdown-menu {
+  box-shadow: none; /* avoid group detail dropdown's shadow will make dom invisiable */
+}

@@ -299,7 +299,7 @@ interface PluginUserExtraInfo {
 export const [pluginUserExtraInfo, regUserExtraInfo] =
   buildRegList<PluginUserExtraInfo>();
 
-type PluginSettings = FullModalFactoryConfig & {
+export type PluginSettings = FullModalFactoryConfig & {
   position: 'system'; // 后面可能还会有个人设置/群组设置
 };
 

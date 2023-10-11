@@ -37,4 +37,13 @@ export const Translate = {
     'zh-CN': '已经是最新版',
     'en-US': 'Already the latest version',
   }),
+  nativeWebviewRender: localTrans({
+    'zh-CN': '启用原生浏览器内核渲染',
+    'en-US': 'Use Native Webview Render',
+  }),
+  nativeWebviewRenderDesc: localTrans({
+    'zh-CN': '解除默认网页访问限制，允许在Tailchat嵌入任意网站内容',
+    'en-US':
+      'Lift default web page access restrictions and allow any website content to be embedded in Tailchat',
+  }),
 };

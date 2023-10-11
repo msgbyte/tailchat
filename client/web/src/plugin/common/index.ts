@@ -74,6 +74,7 @@ export {
   useUpdateRef,
   isDevelopment,
 } from 'tailchat-shared';
+export { setWebviewKernel, resetWebviewKernel } from '@/components/Webview';
 
 export { navigate } from '@/components/AppRouterApi';
 export { useLocation, useNavigate } from 'react-router';

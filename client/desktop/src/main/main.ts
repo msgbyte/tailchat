@@ -26,6 +26,7 @@ import is from 'electron-is';
 import { initScreenshots } from './screenshots';
 import { generateInjectedScript } from './inject';
 import { handleTailchatMessage } from './inject/message-handler';
+import { initWebviewManager } from './lib/webview-manager';
 
 log.info('Start...');
 
@@ -276,6 +277,8 @@ const createMainWindow = async (url: string) => {
     });
 
     mainWindowState.manage(mainWindow);
+
+    initWebviewManager(mainWindow);
 
     // Remove this if your app does not use auto updates
     new AppUpdater();
