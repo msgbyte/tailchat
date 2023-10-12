@@ -46,4 +46,8 @@ export const Translate = {
     'en-US':
       'Lift default web page access restrictions and allow any website content to be embedded in Tailchat',
   }),
+  nativeWebviewRenderHideTip: localTrans({
+    'zh-CN': '组件被遮挡，暂时隐藏网页视图',
+    'en-US': 'The component is obscured, temporarily hiding the web view',
+  }),
 };

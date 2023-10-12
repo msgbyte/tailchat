@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Translate } from './translate';
 
 interface ElectronWebviewProps {
   className?: string;
@@ -7,6 +8,7 @@ interface ElectronWebviewProps {
 export const ElectronWebview: React.FC<ElectronWebviewProps> = React.memo(
   (props) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isVisiable, setIsVisiable] = useState(true);
     const key = props.src;
     const url = props.src;
 
@@ -59,6 +61,7 @@ export const ElectronWebview: React.FC<ElectronWebviewProps> = React.memo(
                 }
               );
             }
+            setIsVisiable(entry.isVisible);
           });
         },
         {
@@ -107,7 +110,11 @@ export const ElectronWebview: React.FC<ElectronWebviewProps> = React.memo(
         ref={containerRef}
         className={props.className}
         style={{ width: '100%', height: '100%' }}
-      />
+      >
+        {isVisiable === false && (
+          <span>{Translate.nativeWebviewRenderHideTip}</span>
+        )}
+      </div>
     );
   }
 );
