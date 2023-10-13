@@ -81,6 +81,10 @@ const plugins: Configuration['plugins'] = [
         to: 'pwa.webmanifest',
       },
       {
+        from: path.resolve(ROOT_PATH, './assets/_redirects'),
+        to: './', // for netlify
+      },
+      {
         from: path.resolve(ROOT_PATH, './assets/images/logo/'),
         to: 'images/logo/',
       },
