@@ -16,7 +16,3 @@ export function resolveHtmlPath(htmlFileName: string) {
 export function getDefaultLoggerPath(): string {
   return log.transports.file.getFile().path;
 }
-
-export const CONSTANT = {
-  DESKTOP_CAPTURER_GET_SOURCES: 'DESKTOP_CAPTURER_GET_SOURCES',
-};

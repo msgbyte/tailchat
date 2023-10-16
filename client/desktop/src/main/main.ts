@@ -50,7 +50,7 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
-ipcMain.handle(CONSTANT.DESKTOP_CAPTURER_GET_SOURCES, async (event, opts) => {
+ipcMain.handle('DESKTOP_CAPTURER_GET_SOURCES', async (event, opts) => {
   const sources = await desktopCapturer.getSources({
     types: ['window', 'screen'],
   });
