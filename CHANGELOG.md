@@ -1,5 +1,25 @@
 
 
+## [1.9.2](https://github.com/msgbyte/tailchat/compare/v1.9.1...v1.9.2) (2023-10-16)
+
+
+### Bug Fixes
+
+* fix problem which ai assistant will be transparent in popover in light mode ([ffebbf6](https://github.com/msgbyte/tailchat/commit/ffebbf6c4e5981240bc36e117eb9b88ab3eec5c1))
+* fixed the bug where # would appear when typing without rich text plugin being loaded ([e768bd1](https://github.com/msgbyte/tailchat/commit/e768bd11f93e1885e004336d8395a2613380e435))
+
+
+### Features
+
+* add electron native webview render support [#152](https://github.com/msgbyte/tailchat/issues/152) ([146952d](https://github.com/msgbyte/tailchat/commit/146952d4f3519fd2dc0a74593b83acbe4f560abc))
+* add file views field to record file get frequency ([46648b4](https://github.com/msgbyte/tailchat/commit/46648b45904c96ceebf13e520612ecd1519d969b))
+* add getDisplayMedia support for desktop [#158](https://github.com/msgbyte/tailchat/issues/158) ([18bc2ed](https://github.com/msgbyte/tailchat/commit/18bc2ed4a6dec3acbb196ca054ea83f9813f5bfa))
+* add hide tip ([0bb1c85](https://github.com/msgbyte/tailchat/commit/0bb1c85f0d23d24d522773ac8c4333792ccf2258))
+* add message.searchMessage api ([235389b](https://github.com/msgbyte/tailchat/commit/235389b394237a26ea505aa7a2ce08e6cb793627))
+* **admin:** allow to delete private message ([915ed01](https://github.com/msgbyte/tailchat/commit/915ed01a5125bf855f7f9f75677d28350cfd65ab))
+* buildRegFn add reset func ([af16ebe](https://github.com/msgbyte/tailchat/commit/af16ebe47b372c313a9267f27d7ccd42d788cfb3))
+* use file save upsert logic rather than insert for avoid duplicate recording of the same file ([9b72fc3](https://github.com/msgbyte/tailchat/commit/9b72fc3ffe981e24ae1079a5e859dd30490ebb78))
+
 ## [1.9.1](https://github.com/msgbyte/tailchat/compare/v1.9.0...v1.9.1) (2023-09-25)
 
 
