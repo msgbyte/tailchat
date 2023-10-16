@@ -28,6 +28,12 @@ const configuration: webpack.Configuration = {
           },
         },
       },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+        },
+      },
     ],
   },
 
