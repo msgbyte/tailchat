@@ -20,13 +20,15 @@ import {
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { CONSTANT, resolveHtmlPath } from './util';
+import { resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 import { initScreenshots } from './screenshots';
 import { generateInjectedScript } from './inject';
 import { handleTailchatMessage } from './inject/message-handler';
 import { initWebviewManager } from './lib/webview-manager';
+// @ts-ignore
+import capturerSourcePickerHtmlUrl from './lib/capturer-source-picker.html';
 
 log.info('Start...');
 
@@ -132,6 +134,7 @@ const createWelcomeWindow = async () => {
   // });
 
   welcomeWindow.webContents.on('ipc-message', (e, channel, data) => {
+    log.info('[ipc-message]', channel, data);
     if (channel === 'close') {
       welcomeWindow?.close();
     } else if (channel === 'selectServer') {
@@ -306,7 +309,7 @@ const createCapturerSourcePicker = async (
 
   // 加载欢迎窗口的HTML文件
   capturerSourcePickerWindow.webContents.loadFile(
-    require.resolve('./lib/capturer-source-picker.html')
+    path.resolve(__dirname, capturerSourcePickerHtmlUrl)
   );
 
   capturerSourcePickerWindow.webContents.on('did-finish-load', () => {

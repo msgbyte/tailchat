@@ -31,7 +31,10 @@ const configuration: webpack.Configuration = {
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader',
+          loader: 'url-loader',
+          options: {
+            limit: false,
+          },
         },
       },
     ],
