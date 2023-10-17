@@ -4,9 +4,13 @@
     "url": "https://tailchat-app.msgbyte.com/app-release.apk"
   },
   "windows": {
-    "version": "0.0.5",
-    "url": "https://github.com/msgbyte/tailchat/releases/download/v1.8.9/Tailchat-0.0.5-win.zip",
+    "version": "0.0.9",
+    "url": "https://github.com/msgbyte/tailchat/releases/download/v1.9.2/Tailchat-0.0.9-win.zip",
     "history": [
+      {
+        "version": "0.0.5",
+        "url": "https://github.com/msgbyte/tailchat/releases/download/v1.8.9/Tailchat-0.0.5-win.zip"
+      },
       {
         "version": "0.0.4",
         "url": "https://github.com/msgbyte/tailchat/releases/download/v1.8.6/Tailchat-0.0.4-win.zip"
@@ -20,5 +24,13 @@
         "url": "https://github.com/msgbyte/tailchat/releases/download/v1.8.2/Tailchat-0.0.1-win.zip"
       }
     ]
+  },
+  "darwin": {
+    "version": "0.0.9",
+    "url": "https://github.com/msgbyte/tailchat/releases/download/v1.9.2/Tailchat-0.0.9.dmg"
+  },
+  "darwin-arm64": {
+    "version": "0.0.9",
+    "url": "https://github.com/msgbyte/tailchat/releases/download/v1.9.2/Tailchat-0.0.9-arm64.dmg"
   }
 }
