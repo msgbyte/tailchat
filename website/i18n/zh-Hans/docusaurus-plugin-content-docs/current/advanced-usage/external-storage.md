@@ -9,7 +9,7 @@ title: 外部存储
 
 ## 前提条件
 
-- 该服务需要支持 `aws s3` 存储协议
+- 该外部存储服务需要支持 `aws s3` 存储协议
 - `Tailchat` 版本在 `1.8.7+`
 
 ## 配置
@@ -19,7 +19,7 @@ title: 外部存储
 - `MINIO_USER`: s3服务用户名
 - `MINIO_PASS`: s3服务密码
 - `MINIO_BUCKET_NAME`: s3服务 bucket 名
-- `MINIO_PATH_STYLE`: 路径模式，`VirtualHosted` or `Path`
+- `MINIO_PATH_STYLE`: 路径模式，可选值: `VirtualHosted` 或 `Path`
 - `STATIC_URL`: 上传后的静态路径地址，默认走服务器中转，如果想要走外部存储直连的话需要改为外部可访问的地址
 
 > 对于 `aliyunoss` 我们可以参考该文档获得内容相关帮助: https://www.alibabacloud.com/help/en/oss/developer-reference/use-amazon-s3-sdks-to-access-oss

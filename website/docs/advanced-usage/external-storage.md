@@ -9,7 +9,7 @@ As the usage scale progresses, the user's storage cost for the Tailchat file sys
 
 ## Prerequisites
 
-- The service needs to support `aws s3` storage protocol
+- The external storage service needs to support `aws s3` storage protocol
 - `Tailchat` version in `1.8.7+`
 
 ## Config
@@ -19,7 +19,7 @@ You need to configure the environment variables as follows:
 - `MINIO_USER`: s3 service username
 - `MINIO_PASS`: s3 service password
 - `MINIO_BUCKET_NAME`: s3 service bucket name
-- `MINIO_PATH_STYLE`: path mode, `VirtualHosted` or `Path`
+- `MINIO_PATH_STYLE`: path mode, optional values: `VirtualHosted` or `Path`
 - `STATIC_URL`: The uploaded static path address, which is transferred by the server by default. If you want to directly connect to external storage, you need to change it to an externally accessible address
 
 > For `aliyunoss`, we can refer to this document for content-related help: https://www.alibabacloud.com/help/en/oss/developer-reference/use-amazon-s3-sdks-to-access-oss
