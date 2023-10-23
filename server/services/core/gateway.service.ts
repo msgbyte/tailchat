@@ -297,6 +297,9 @@ export default class ApiService extends TcService {
                 res.setHeader('Content-Type', mime.getType(ext));
               }
 
+              // 因为对象存储的对象名都是以文件内容hash存储的，因此过期时间可以设置很大
+              res.setHeader('Cache-Control', 'public, max-age=315360000'); // 10 years => 60 * 60 * 24 * 365 * 10
+
               result.pipe(res);
             } catch (err) {
               this.logger.error(err);
@@ -314,6 +317,8 @@ export default class ApiService extends TcService {
         authorization: false,
         use: [
           serve('public', {
+            cacheControl: true,
+            maxAge: '1d', // 1 day for public file
             setHeaders(res: ServerResponse, path: string, stat: any) {
               res.setHeader('Access-Control-Allow-Origin', '*'); // 允许跨域
             },
