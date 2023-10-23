@@ -62,7 +62,7 @@ export const IAMAction: React.FC = React.memo(() => {
   if (Array.isArray(strategies) && strategies.length > 0) {
     return (
       <div>
-        <Divider>{Translate.iamLogin}</Divider>
+        <Divider style={{ color: 'white' }}>{Translate.iamLogin}</Divider>
         {isMobile ? (
           <div
             style={{ textAlign: 'center', opacity: 0.8, fontSize: '0.75rem' }}

@@ -1,5 +1,4 @@
 import { Icon } from 'tailchat-design';
-import { Divider } from 'antd';
 import {
   isValidStr,
   loginWithEmail,
@@ -22,23 +21,6 @@ import { EntryInput } from './components/Input';
 import { SecondaryBtn } from './components/SecondaryBtn';
 import { PrimaryBtn } from './components/PrimaryBtn';
 import { pluginLoginAction } from '@/plugin/common';
-
-/**
- * TODO:
- * 第三方登录
- */
-const OAuthLoginView: React.FC = React.memo(() => {
-  return (
-    <>
-      <Divider>{t('或')}</Divider>
-
-      <div className="bg-gray-400 w-1/3 px-4 py-1 text-3xl text-center rounded-md cursor-pointer shadow-md">
-        <Icon className="mx-auto" icon="mdi:github" />
-      </div>
-    </>
-  );
-});
-OAuthLoginView.displayName = 'OAuthLoginView';
 
 /**
  * 登录视图
