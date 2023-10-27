@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - ".github/workflows/deploy-laf.yml"
       - "client/web/**"
       - "client/shared/**"
       - "client/packages/design/**"
@@ -43,13 +44,13 @@ jobs:
       - name: Install packages
         run: pnpm install --frozen-lockfile
 
+      - name: Inject Analytics
+        run: node ./client/web/build/inject-analytics.js
+
       - name: Build step
         run: cd client/web && pnpm build
         env:
           SERVICE_URL: https://tailchat-nightly.moonrailgun.com
-
-      - name: Inject Analytics
-        run: node ./client/web/build/inject-analytics.js
 
       - name: Deploy to laf storage
         uses: moonrailgun/laf-storage-deploy-action@v1.1
