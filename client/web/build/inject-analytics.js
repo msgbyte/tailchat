@@ -31,5 +31,5 @@ appendScript(
 );
 // tianji
 appendScript(
-  `<script async src="https://tianji.moonrailgun.com/tracker.js" data-website-id="clo1893di0001o65edzck6q6z"></script>`
+  `<script async defer src="https://tianji.moonrailgun.com/tracker.js" data-website-id="clo1893di0001o65edzck6q6z"></script>`
 );
