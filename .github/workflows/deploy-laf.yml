@@ -12,7 +12,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy deno
+    name: Deploy Laf
     runs-on: ubuntu-latest
 
     permissions:
@@ -51,11 +51,11 @@ jobs:
       - name: Inject Analytics
         run: node ./client/web/build/inject-analytics.js
 
-      - name: Deploy to laf static
-        uses: moonrailgun/laf-storage-deploy-action@v1
+      - name: Deploy to laf storage
+        uses: moonrailgun/laf-storage-deploy-action@v1.1
         with:
-          server-url: https://laf.dev
+          laf-server: https://laf.dev
           laf-pat: ${{ secrets.LAF_PAT }}
           laf-appid: yyejoq
+          laf-bucket-name: yyejoq-tailchat-nightly
           dist-path: client/web/dist
-          bucket-name: yyejoq-tailchat-nightly
