@@ -52,7 +52,7 @@ jobs:
         run: node ./client/web/build/inject-analytics.js
 
       - name: Deploy to laf static
-        uses: laf-storage-deploy-action@v1
+        uses: moonrailgun/laf-storage-deploy-action@v1
         with:
           server-url: https://laf.dev
           laf-pat: ${{ secrets.LAF_PAT }}
