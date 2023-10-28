@@ -40,5 +40,5 @@ Options:
 
 因为不同的服务商提供的服务各有差异, 这里只能举出部分内容用于演示。如果你有其他的可以作为示例的 URI 欢迎提交 PR 来帮助我们一起完善文档:
 
-- `smtps://<email-address>:<password>@smtp.exmail.qq.com/?pool=true`
-- `smtps://<email-address>:<password>@smtp.163.com/?pool=true`
+- `smtps://<username>:<password>@smtp.exmail.qq.com/?pool=true`
+- `smtps://<username>:<password>@smtp.163.com/?pool=true`

@@ -41,5 +41,5 @@ If there are still problems after the verification is passed, you can use `tailc
 
 Because the services provided by different service providers are different, only some of the content can be cited here for demonstration. If you have other URIs that can be used as examples, please submit a PR to help us improve the documentation together:
 
-- `smtps://<email-address>:<password>@smtp.exmail.qq.com/?pool=true`
-- `smtps://<email-address>:<password>@smtp.163.com/?pool=true`
+- `smtps://<username>:<password>@smtp.exmail.qq.com/?pool=true`
+- `smtps://<username>:<password>@smtp.163.com/?pool=true`
