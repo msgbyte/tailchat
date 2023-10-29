@@ -34,17 +34,24 @@ export default function Downloads() {
                 <Link
                   className="button button--primary"
                   to={clients.android.url}
+                  data-tianji-event="download-android"
                 >
                   Android
                 </Link>
-                <Link className="button button--secondary disabled">
+                <Link
+                  className="button button--secondary disabled"
+                  data-tianji-event="download-ios"
+                >
                   iOS(Coming soon)
                 </Link>
               </div>
 
               <p className="tip">
                 <Translate>Design with react-native</Translate>:&nbsp;
-                <Link to="https://github.com/msgbyte/tailchat/tree/master/client/mobile">
+                <Link
+                  to="https://github.com/msgbyte/tailchat/tree/master/client/mobile"
+                  data-tianji-event="mobile-source-code"
+                >
                   <Translate>Source Code</Translate>
                 </Link>
               </p>
@@ -72,20 +79,30 @@ export default function Downloads() {
                 <Link
                   className="button button--primary"
                   to={clients.windows.url}
+                  data-tianji-event="download-windows"
                 >
                   Windows
                 </Link>
-                <Link className="button button--secondary disabled">
+                <Link
+                  className="button button--secondary disabled"
+                  data-tianji-event="download-macos"
+                >
                   MacOS(Coming soon)
                 </Link>
-                <Link className="button button--secondary disabled">
+                <Link
+                  className="button button--secondary disabled"
+                  data-tianji-event="download-linux"
+                >
                   Linux(Coming soon)
                 </Link>
               </div>
 
               <p className="tip">
                 <Translate>Design with electron</Translate>:&nbsp;
-                <Link to="https://github.com/msgbyte/tailchat/tree/master/client/desktop">
+                <Link
+                  to="https://github.com/msgbyte/tailchat/tree/master/client/desktop"
+                  data-tianji-event="desktop-source-code"
+                >
                   <Translate>Source Code</Translate>
                 </Link>
               </p>

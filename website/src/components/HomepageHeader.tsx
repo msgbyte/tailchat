@@ -95,8 +95,8 @@ export const HomepageHeader: React.FC = React.memo(() => {
           <Translate>Current version</Translate>: v{packageJson.version},{' '}
           <Link
             to={releaseNoteUrl}
-            data-umami-event="direct-nightly"
-            data-tianji-event="direct-nightly"
+            data-umami-event="release-note"
+            data-tianji-event="release-note"
           >
             <Translate>release note</Translate>
           </Link>
