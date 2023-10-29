@@ -54,6 +54,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
             <Link
               href="/blog/2023/03/01/the-era-of-noIM"
               data-umami-event="what-is-noim"
+              data-tianji-event="what-is-noim"
             >
               <Translate>What is noIM(not only IM)?</Translate>
             </Link>
@@ -65,6 +66,7 @@ export const HomepageHeader: React.FC = React.memo(() => {
             className="button button--primary button--lg"
             to={inviteLink}
             data-umami-event="joingroup"
+            data-tianji-event="joingroup"
           >
             <Translate>Join our Group</Translate>
           </Link>
@@ -73,20 +75,29 @@ export const HomepageHeader: React.FC = React.memo(() => {
             className="button button--secondary button--lg"
             href="/docs/intro"
             data-umami-event="learnmore"
+            data-tianji-event="learnmore"
           >
             <Translate>Learn More</Translate>
           </Link>
         </div>
 
         <div className="link">
-          <Link to={nightlyUrl} data-umami-event="direct-nightly">
+          <Link
+            to={nightlyUrl}
+            data-umami-event="direct-nightly"
+            data-tianji-event="direct-nightly"
+          >
             <Translate>Or direct visit Tailchat nightly version</Translate>
           </Link>
         </div>
 
         <div className="version">
           <Translate>Current version</Translate>: v{packageJson.version},{' '}
-          <Link to={releaseNoteUrl} data-umami-event="direct-nightly">
+          <Link
+            to={releaseNoteUrl}
+            data-umami-event="direct-nightly"
+            data-tianji-event="direct-nightly"
+          >
             <Translate>release note</Translate>
           </Link>
         </div>

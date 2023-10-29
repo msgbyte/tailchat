@@ -20,6 +20,7 @@ export const JoinCommunity: React.FC = React.memo(() => {
         className="button button--primary button--lg"
         href={inviteLink}
         data-umami-event="joingroup"
+        data-tianji-event="joingroup"
       >
         <Translate>Join Our Group</Translate>
       </Link>
@@ -30,6 +31,7 @@ export const JoinCommunity: React.FC = React.memo(() => {
           target="_blank"
           rel="noreferrer"
           data-umami-event="producthunt"
+          data-tianji-event="producthunt"
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=382080&theme=light"
