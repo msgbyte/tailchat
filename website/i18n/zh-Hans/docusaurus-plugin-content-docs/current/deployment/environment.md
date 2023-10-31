@@ -29,6 +29,7 @@ title: 环境变量
 | DISABLE_CREATE_GROUP | - | 是否关闭用户创建群组功能, 如果为 "1" 或者 "true" 则关闭该功能 |
 | DISABLE_PLUGIN_STORE | - | 是否隐藏用户插件中心功能, 如果为 "1" 或者 "true" 则关闭该功能 |
 | DISABLE_ADD_FRIEND | - | 是否隐藏用户添加好友功能, 如果为 "1" 或者 "true" 则关闭该功能 |
+| DISABLE_TELEMETRY | - | 是否关闭遥测报告功能, 遥测是完全匿名的，如果为 "1" 或者 "true" 则关闭该功能 |
 
 > 部分环境变量示例可见: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 

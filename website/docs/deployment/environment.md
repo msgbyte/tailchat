@@ -29,6 +29,7 @@ title: Environment Variable
 | DISABLE_CREATE_GROUP | - | Whether to disable user create group, if "1" or "true" turn off this method |
 | DISABLE_PLUGIN_STORE | - | Whether to hide user plugin store entry, if "1" or "true" turn off this method |
 | DISABLE_ADD_FRIEND | - | Whether to hide user add friend entry, if "1" or "true" turn off this method |
+| DISABLE_TELEMETRY | - | Whether to disable send telemetry report to msgbyte to help us improve, its anonymous, if "1" or "true" turn off telemetry |
 
 > Some examples of environment variables can be seen: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
 
