@@ -51,6 +51,11 @@ export interface GlobalConfig {
    */
   disableAddFriend?: boolean;
 
+  /**
+   * 是否禁用遥测
+   */
+  disableTelemetry?: boolean;
+
   announcement?:
     | false
     | {

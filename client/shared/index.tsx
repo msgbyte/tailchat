@@ -250,6 +250,7 @@ export {
   isBrowser,
   isNavigator,
   isDevelopment,
+  isProduction,
   version,
 } from './utils/environment';
 export type { PermissionItemType } from './utils/role-helper';

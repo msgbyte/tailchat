@@ -27,5 +27,6 @@ export const defaultGlobalConfig: GlobalConfig = {
   disableCreateGroup: false,
   disablePluginStore: false,
   disableAddFriend: false,
+  disableTelemetry: false,
   announcement: false,
 };
