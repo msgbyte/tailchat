@@ -1,5 +1,4 @@
 import type { DependencyList } from 'react';
-import { isDevelopment, t } from '..';
 import { showErrorToasts } from '../manager/ui';
 import type { FunctionReturningPromise } from '../types';
 import { useAsyncFn } from './useAsyncFn';

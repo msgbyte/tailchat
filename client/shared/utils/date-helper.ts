@@ -70,7 +70,7 @@ export function formatShortTime(date: dayjs.ConfigType): string {
 }
 
 /**
- * 格式化为 小时:分钟
+ * 格式化为完整时间 YYYY-MM-DD HH:mm:ss
  */
 export function formatFullTime(date: dayjs.ConfigType): string {
   return dayjs(date).format('YYYY-MM-DD HH:mm:ss');

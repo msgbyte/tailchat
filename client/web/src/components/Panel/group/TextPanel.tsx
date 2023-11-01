@@ -22,6 +22,7 @@ import {
 import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
 import { MembersPanel } from './MembersPanel';
 import { GroupPanelContainer } from './shared/GroupPanelContainer';
+import { MessageSearchPanel } from '../common/MessageSearch';
 
 /**
  * 聊天输入框显示状态管理
@@ -128,6 +129,21 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
               setRightPanel({
                 name: t('成员') + ` (${groupMembers.length})`,
                 panel: <MembersPanel groupId={groupId} />,
+              })
+            }
+          />,
+          <IconBtn
+            key="search"
+            title={t('聊天记录搜索')}
+            shape="square"
+            icon="mdi:text-search"
+            iconClassName="text-2xl"
+            onClick={() =>
+              setRightPanel({
+                name: t('聊天记录'),
+                panel: (
+                  <MessageSearchPanel groupId={groupId} converseId={panelId} />
+                ),
               })
             }
           />,

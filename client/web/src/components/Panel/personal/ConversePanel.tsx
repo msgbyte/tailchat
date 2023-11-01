@@ -16,6 +16,7 @@ import { OpenedPanelTip } from '@/components/OpenedPanelTip';
 import { IconBtn } from '@/components/IconBtn';
 import { DMPluginPanelActionProps, pluginPanelActions } from '@/plugin/common';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
+import { MessageSearchPanel } from '../common/MessageSearch';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -135,6 +136,19 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                 }
               />
             ),
+            <IconBtn
+              key="search"
+              title={t('聊天记录搜索')}
+              shape="square"
+              icon="mdi:text-search"
+              iconClassName="text-2xl"
+              onClick={() =>
+                setRightPanel({
+                  name: t('聊天记录'),
+                  panel: <MessageSearchPanel converseId={converseId} />,
+                })
+              }
+            />,
           ]);
         }}
       >

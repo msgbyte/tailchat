@@ -85,6 +85,25 @@ export async function deleteMessage(messageId: string): Promise<boolean> {
 }
 
 /**
+ * 搜索聊天记录
+ * @param converseId 会话id
+ * @param messageText 聊天文本
+ */
+export async function searchMessage(
+  text: string,
+  converseId: string,
+  groupId?: string
+): Promise<ChatMessage[]> {
+  const { data } = await request.post('/api/chat/message/searchMessage', {
+    text,
+    converseId,
+    groupId,
+  });
+
+  return data;
+}
+
+/**
  * 基于会话id获取会话最后一条消息的id
  */
 export async function fetchConverseLastMessages(

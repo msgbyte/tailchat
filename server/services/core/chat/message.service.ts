@@ -404,6 +404,11 @@ class MessageService extends TcService {
         content: {
           $regex: text,
         },
+        author: {
+          $not: {
+            $eq: SYSTEM_USERID,
+          },
+        },
       })
       .sort({ _id: -1 })
       .limit(10)
