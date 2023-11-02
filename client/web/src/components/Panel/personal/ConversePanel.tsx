@@ -120,6 +120,19 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                 }
               />
             ),
+            <IconBtn
+              key="search"
+              title={t('聊天记录搜索')}
+              shape="square"
+              icon="mdi:text-search"
+              iconClassName="text-2xl"
+              onClick={() =>
+                setRightPanel({
+                  name: t('聊天记录'),
+                  panel: <MessageSearchPanel converseId={converseId} />,
+                })
+              }
+            />,
             // 当成员数大于2时，显示成员列表按钮
             converse.members.length > 2 && (
               <IconBtn
@@ -136,19 +149,6 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                 }
               />
             ),
-            <IconBtn
-              key="search"
-              title={t('聊天记录搜索')}
-              shape="square"
-              icon="mdi:text-search"
-              iconClassName="text-2xl"
-              onClick={() =>
-                setRightPanel({
-                  name: t('聊天记录'),
-                  panel: <MessageSearchPanel converseId={converseId} />,
-                })
-              }
-            />,
           ]);
         }}
       >

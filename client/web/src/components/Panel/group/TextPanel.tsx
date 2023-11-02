@@ -120,19 +120,6 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
         ]}
         suffixActions={({ setRightPanel }) => [
           <IconBtn
-            key="members"
-            title={t('成员列表')}
-            shape="square"
-            icon="mdi:account-supervisor-outline"
-            iconClassName="text-2xl"
-            onClick={() =>
-              setRightPanel({
-                name: t('成员') + ` (${groupMembers.length})`,
-                panel: <MembersPanel groupId={groupId} />,
-              })
-            }
-          />,
-          <IconBtn
             key="search"
             title={t('聊天记录搜索')}
             shape="square"
@@ -144,6 +131,19 @@ export const TextPanel: React.FC<TextPanelProps> = React.memo(
                 panel: (
                   <MessageSearchPanel groupId={groupId} converseId={panelId} />
                 ),
+              })
+            }
+          />,
+          <IconBtn
+            key="members"
+            title={t('成员列表')}
+            shape="square"
+            icon="mdi:account-supervisor-outline"
+            iconClassName="text-2xl"
+            onClick={() =>
+              setRightPanel({
+                name: t('成员') + ` (${groupMembers.length})`,
+                panel: <MembersPanel groupId={groupId} />,
               })
             }
           />,
