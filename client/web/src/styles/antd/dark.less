@@ -156,6 +156,21 @@
     border-color: rgba(255, 255, 255, 0.12);
   }
 
+  // input group
+  .ant-input-group-addon {
+    background-color: transparent;
+
+    > .ant-btn {
+      border-color: rgba(255, 255, 255, 0.12);
+
+      &:hover,
+      &:focus {
+        color: var(--antd-primary-border);
+        border-color: var(--antd-primary-border);
+      }
+    }
+  }
+
   // 文本框
   .ant-input-textarea {
     &.ant-input-textarea-show-count:after {
