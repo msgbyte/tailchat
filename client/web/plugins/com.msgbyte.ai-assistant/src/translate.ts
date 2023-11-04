@@ -29,6 +29,10 @@ export const Translate = {
     'zh-CN': '翻译输入内容',
     'en-US': 'Translate Input',
   }),
+  inputTextShowMoreActionTip: localTrans({
+    'zh-CN': '或者输入内容后展示更多操作',
+    'en-US': 'Or input message then show more actions',
+  }),
   usage: localTrans({
     'zh-CN': '用时',
     'en-US': 'Usage',

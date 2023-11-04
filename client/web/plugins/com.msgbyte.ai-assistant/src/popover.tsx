@@ -51,6 +51,11 @@ const ActionButton = styled.div`
   }
 `;
 
+const ActionTip = styled.div`
+  font-size: 12px;
+  opacity: 0.6;
+`;
+
 export const AssistantPopover: React.FC<{
   onCompleted: () => void;
 }> = React.memo((props) => {
@@ -115,31 +120,6 @@ export const AssistantPopover: React.FC<{
 
       <Tip>{Translate.helpMeTo}</Tip>
 
-      {typeof message === 'string' && message.length > 0 && (
-        <>
-          <ActionButton
-            onClick={() => handleCallAI(improveTextPrompt + message)}
-          >
-            {Translate.improveText}
-          </ActionButton>
-          <ActionButton
-            onClick={() => handleCallAI(shorterTextPrompt + message)}
-          >
-            {Translate.makeShorter}
-          </ActionButton>
-          <ActionButton
-            onClick={() => handleCallAI(longerTextPrompt + message)}
-          >
-            {Translate.makeLonger}
-          </ActionButton>
-          <ActionButton
-            onClick={() => handleCallAI(translateTextPrompt + message)}
-          >
-            {Translate.translateInputText}
-          </ActionButton>
-        </>
-      )}
-
       <ActionButton
         onClick={async () => {
           const plainMessages = (
@@ -165,6 +145,33 @@ export const AssistantPopover: React.FC<{
       >
         {Translate.summaryMessages}
       </ActionButton>
+
+      {typeof message === 'string' && message.length > 0 ? (
+        <>
+          <ActionButton
+            onClick={() => handleCallAI(improveTextPrompt + message)}
+          >
+            {Translate.improveText}
+          </ActionButton>
+          <ActionButton
+            onClick={() => handleCallAI(shorterTextPrompt + message)}
+          >
+            {Translate.makeShorter}
+          </ActionButton>
+          <ActionButton
+            onClick={() => handleCallAI(longerTextPrompt + message)}
+          >
+            {Translate.makeLonger}
+          </ActionButton>
+          <ActionButton
+            onClick={() => handleCallAI(translateTextPrompt + message)}
+          >
+            {Translate.translateInputText}
+          </ActionButton>
+        </>
+      ) : (
+        <ActionTip>{Translate.inputTextShowMoreActionTip}</ActionTip>
+      )}
     </Root>
   );
 });
