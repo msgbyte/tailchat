@@ -160,7 +160,7 @@ export const AssistantPopover: React.FC<{
             )
           ).join('\n');
 
-          handleCallAI(summaryMessagesPrompt + plainMessages);
+          handleCallAI(summaryMessagesPrompt + '\n' + plainMessages);
         }}
       >
         {Translate.summaryMessages}
