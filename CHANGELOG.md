@@ -1,5 +1,29 @@
 
 
+## [1.9.3](https://github.com/msgbyte/tailchat/compare/v1.9.2...v1.9.3) (2023-11-06)
+
+
+### Bug Fixes
+
+* **desktop:** v0.0.8 fix ipc error problem with import data from other files ([2b329db](https://github.com/msgbyte/tailchat/commit/2b329db0170025e68be1d54de1200a4263e6e4e7))
+* fix iam plugin not fit in light theme in login view ([86ed84a](https://github.com/msgbyte/tailchat/commit/86ed84a83deec6a162101fc7f4c490714bffcd5a))
+* update inject script exec order ([5274d2a](https://github.com/msgbyte/tailchat/commit/5274d2a7b942469998ec4f38834aa021cb05b1d0))
+
+
+### Features
+
+* add env REQUEST_TIMEOUT to custom requestTimeout of actions ([d678d0a](https://github.com/msgbyte/tailchat/commit/d678d0a839568f72f8f69e7a001ace7732cc1415))
+* add http cache for static and public files ([eae8d35](https://github.com/msgbyte/tailchat/commit/eae8d350537c8d4bcd2e82e71021abe5edfdecab))
+* add more tip in ai-assistant plugin ([caad90c](https://github.com/msgbyte/tailchat/commit/caad90cd478c2192bb86f2073fb9f6f282321a42))
+* add telemetry to aware of the presence of other deployment instances ([c25d3a0](https://github.com/msgbyte/tailchat/commit/c25d3a0b46bd7ec8a3321cd72e7ee7360a218bff))
+* add text panel message search right panel ([176528b](https://github.com/msgbyte/tailchat/commit/176528b303c5d25f26ad364f2f5c5cdd4d1cff61))
+
+
+### Performance Improvements
+
+* add defer for tianji script ([8d8ba6f](https://github.com/msgbyte/tailchat/commit/8d8ba6f345b8bec46dc777996e0ebeed3b53911f))
+* reduce image size ([efd7b4c](https://github.com/msgbyte/tailchat/commit/efd7b4c501e36f8890c45b08f2a6de47ee0b2988))
+
 ## [1.9.2](https://github.com/msgbyte/tailchat/compare/v1.9.1...v1.9.2) (2023-10-16)
 
 
