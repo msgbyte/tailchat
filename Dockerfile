@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:18.18.0-alpine
 
 # use with --build-arg VERSION=xxxx
 ARG VERSION
