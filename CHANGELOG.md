@@ -1,5 +1,7 @@
 
 
+## [1.9.4](https://github.com/msgbyte/tailchat/compare/v1.9.3...v1.9.4) (2023-11-06)
+
 ## [1.9.3](https://github.com/msgbyte/tailchat/compare/v1.9.2...v1.9.3) (2023-11-06)
 
 
