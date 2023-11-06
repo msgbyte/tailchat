@@ -10,6 +10,7 @@ export const ChatInputEmotion: React.FC = React.memo(() => {
 
   return (
     <BaseChatInputButton
+      overlayClassName="emotion-popover"
       icon="mdi:emoticon-happy-outline"
       popoverContent={({ hidePopover }) => (
         <EmojiPanel

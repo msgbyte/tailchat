@@ -1,8 +1,10 @@
 import { Popover } from 'antd';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import { Icon } from 'tailchat-design';
 
 interface BaseChatInputButtonProps {
+  overlayClassName?: string;
   icon: string;
   popoverContent: (ctx: { hidePopover: () => void }) => React.ReactElement;
 }
@@ -21,7 +23,10 @@ export const BaseChatInputButton: React.FC<BaseChatInputButtonProps> =
             },
           })
         }
-        overlayClassName="chat-message-input_action-popover"
+        overlayClassName={clsx(
+          'chat-message-input_action-popover',
+          props.overlayClassName
+        )}
         showArrow={false}
         placement="topRight"
         trigger={['click']}
