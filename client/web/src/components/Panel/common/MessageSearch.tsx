@@ -36,7 +36,7 @@ export const MessageSearchPanel: React.FC<{
     <div className="p-2">
       <Input.Search
         className="mb-2"
-        placeholder="请输入关键字"
+        placeholder={t('请输入关键字')}
         loading={loading}
         onSearch={handleSearch}
       />
