@@ -2,6 +2,7 @@ import { Popover } from 'antd';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { Icon } from 'tailchat-design';
+import './BaseChatInputButton.less';
 
 interface BaseChatInputButtonProps {
   overlayClassName?: string;
