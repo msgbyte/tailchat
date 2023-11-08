@@ -41,7 +41,7 @@ class FileService extends TcService {
     // https://github.com/designtesbrot/moleculer-minio#settings
     this.registerSetting('endPoint', endPoint);
     this.registerSetting('port', Number(port));
-    this.registerSetting('useSSL', false);
+    this.registerSetting('useSSL', config.storage.ssl);
     this.registerSetting('accessKey', config.storage.user);
     this.registerSetting('secretKey', config.storage.pass);
     this.registerSetting('pathStyle', config.storage.pathStyle);

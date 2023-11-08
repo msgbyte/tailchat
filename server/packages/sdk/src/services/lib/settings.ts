@@ -27,6 +27,7 @@ export const config = {
   storage: {
     type: 'minio', // 可选: minio
     minioUrl: process.env.MINIO_URL,
+    ssl: checkEnvTrusty(process.env.MINIO_SSL) ?? false,
     user: process.env.MINIO_USER,
     pass: process.env.MINIO_PASS,
     bucketName: process.env.MINIO_BUCKET_NAME || 'tailchat',

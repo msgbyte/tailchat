@@ -19,6 +19,7 @@ title: 环境变量
 | MINIO_PASS | - | 文件服务密码 |
 | MINIO_BUCKET_NAME | tailchat | 文件服务存储桶名 |
 | MINIO_PATH_STYLE | "Path" | 是否使用路径形式的s3通信格式, `Path` 为 `Path Style`, `VirtualHosted` 为 `Virtual hosted style` |
+| MINIO_SSL | false | 是否使用加密连接文件存储服务, 如果为 "1" 或者 "true" 则使用SSL协议 |
 | SMTP_SENDER | - | 邮件服务发件人(示例: `"Tailchat" example@163.com`) |
 | SMTP_URI | - | 邮件服务连接地址(示例: `smtp://username:password@smtp.example.com/?pool=true`) |
 | FILE_LIMIT | 1048576 | 文件/图片上传的大小限制，默认为1m，请输入数字，（单位: 字节） |

@@ -19,6 +19,7 @@ title: Environment Variable
 | MINIO_PASS | - | File service password |
 | MINIO_BUCKET_NAME | tailchat | file service bucket name |
 | MINIO_PATH_STYLE | false | Whether to use path-style s3 communication format, `true` is `Path Style`, `false` is `Virtual hosted style` |
+| MINIO_SSL | false | Whether to use SSL to connect storage, if "1" or "true" enable SSL |
 | SMTP_SENDER | - | Mail service sender (example: `"Tailchat" example@163.com`) |
 | SMTP_URI | - | mail service connection address (example: `smtp://username:password@smtp.example.com/?pool=true`) |
 | FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number(unit: byte) |
