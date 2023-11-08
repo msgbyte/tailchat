@@ -130,14 +130,6 @@ module.exports = {
   ],
   scripts: [
     {
-      src: 'https://umami.moonrailgun.com/script.js',
-      async: true,
-      defer: true,
-      'data-website-id': '22f7ff7b-db54-4222-b123-c8e3acfbf1aa',
-    },
-  ],
-  scripts: [
-    {
       src: 'https://tianji.moonrailgun.com/tracker.js',
       async: true,
       defer: true,
