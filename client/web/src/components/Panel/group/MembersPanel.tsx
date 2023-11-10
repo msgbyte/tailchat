@@ -1,14 +1,12 @@
 import { Icon } from 'tailchat-design';
 import { UserListItem } from '@/components/UserListItem';
-import { Dropdown, Input, MenuProps, Skeleton } from 'antd';
+import { Dropdown, Input, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import {
   getGroupConfigWithInfo,
-  PERMISSION,
   t,
   useCachedOnlineStatus,
   useGroupInfo,
-  useHasGroupPermission,
   UserBaseInfo,
 } from 'tailchat-shared';
 import { Problem } from '@/components/Problem';
