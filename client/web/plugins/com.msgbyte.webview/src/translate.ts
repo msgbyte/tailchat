@@ -14,6 +14,10 @@ export const Translate = {
     'zh-CN': '网址',
     'en-US': 'Website',
   }),
+  addBackground: localTrans({
+    'zh-CN': '添加背景色',
+    'en-US': 'Add Background Color',
+  }),
   htmlcode: localTrans({
     'zh-CN': 'HTML代码',
     'en-US': 'HTML Code',

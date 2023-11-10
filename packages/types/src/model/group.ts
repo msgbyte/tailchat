@@ -64,7 +64,7 @@ export interface GroupPanel {
   /**
    * 面板的其他数据
    */
-  meta?: object;
+  meta?: Record<string, any>;
 
   /**
    * 身份组或者用户的权限

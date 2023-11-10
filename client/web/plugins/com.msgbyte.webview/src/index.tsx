@@ -13,6 +13,11 @@ regGroupPanel({
       name: 'url',
       label: Translate.website,
     },
+    {
+      type: 'checkbox',
+      name: 'background',
+      label: Translate.addBackground,
+    },
   ],
   render: Loadable(() => import('./group/GroupWebPanelRender')),
   menus: [

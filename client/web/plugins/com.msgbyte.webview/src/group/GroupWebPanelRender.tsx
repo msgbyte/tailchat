@@ -20,10 +20,15 @@ const GroupWebPanelRender: React.FC<{ panelInfo: any }> = (props) => {
     // 不包含协议, 但是是个网址
     url = 'https://' + url;
   }
+  const background = panelInfo?.meta?.background ?? false;
 
   return (
     <GroupPanelContainer groupId={groupId} panelId={panelId}>
-      <WebviewKeepAlive key={String(url)} className="w-full h-full" url={url} />
+      <WebviewKeepAlive
+        key={String(url)}
+        className={`w-full h-full ${background ? 'bg-white' : ''}`}
+        url={url}
+      />
     </GroupPanelContainer>
   );
 };
