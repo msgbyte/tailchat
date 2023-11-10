@@ -33,9 +33,6 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
   const membersOnlineStatus = useCachedOnlineStatus(
     members.map((m) => m.userId)
   );
-  const [allowManageUser] = useHasGroupPermission(groupId, [
-    PERMISSION.core.manageUser,
-  ]);
   const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
 
   const {
@@ -102,9 +99,8 @@ export const MembersPanel: React.FC<MembersPanelProps> = React.memo((props) => {
       return <div />;
     }
 
-    if (allowManageUser) {
-      const menu: MenuProps = generateActionMenu(member);
-
+    const menu = generateActionMenu(member);
+    if ((menu.items ?? []).length > 0) {
       return (
         <Dropdown key={member._id} trigger={['contextMenu']} menu={menu}>
           <div>
