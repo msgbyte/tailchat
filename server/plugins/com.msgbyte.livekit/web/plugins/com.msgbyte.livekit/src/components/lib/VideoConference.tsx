@@ -28,6 +28,7 @@ import { CarouselLayout } from './CarouselLayout';
 import { ControlBar } from './ControlBar';
 import { Chat } from './Chat';
 import { FocusLayout } from './FocusLayout';
+import { ChatProvider } from './ChatContext';
 
 /**
  * @public
@@ -124,32 +125,34 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
             // onPinChange={handleFocusStateChange}
             onWidgetChange={widgetUpdate}
           >
-            <div className="lk-video-conference-inner">
-              {!focusTrack ? (
-                <div className="lk-grid-layout-wrapper">
-                  <GridLayout tracks={tracks}>
-                    <ParticipantTile />
-                  </GridLayout>
-                </div>
-              ) : (
-                <div className="lk-focus-layout-wrapper">
-                  <FocusLayoutContainer>
-                    <CarouselLayout tracks={carouselTracks}>
+            <ChatProvider>
+              <div className="lk-video-conference-inner">
+                {!focusTrack ? (
+                  <div className="lk-grid-layout-wrapper">
+                    <GridLayout tracks={tracks}>
                       <ParticipantTile />
-                    </CarouselLayout>
+                    </GridLayout>
+                  </div>
+                ) : (
+                  <div className="lk-focus-layout-wrapper">
+                    <FocusLayoutContainer>
+                      <CarouselLayout tracks={carouselTracks}>
+                        <ParticipantTile />
+                      </CarouselLayout>
 
-                    {focusTrack && <FocusLayout track={focusTrack} />}
-                  </FocusLayoutContainer>
-                </div>
-              )}
+                      {focusTrack && <FocusLayout track={focusTrack} />}
+                    </FocusLayoutContainer>
+                  </div>
+                )}
 
-              <ControlBar controls={{ chat: true }} />
-            </div>
+                <ControlBar controls={{ chat: true }} />
+              </div>
 
-            <Chat
-              style={{ display: widgetState.showChat ? 'flex' : 'none' }}
-              messageFormatter={chatMessageFormatter}
-            />
+              <Chat
+                style={{ display: widgetState.showChat ? 'flex' : 'none' }}
+                messageFormatter={chatMessageFormatter}
+              />
+            </ChatProvider>
           </LayoutContextProvider>
         )}
 
