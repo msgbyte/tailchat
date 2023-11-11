@@ -87,7 +87,7 @@ export const GroupConfig: React.FC<{
 
       <FullModalField
         title={t('群组背景')}
-        tip={t('个性化配置群组背景')}
+        tip={t('个性化配置群组背景，将会在群组邀请页面展示')}
         content={
           <>
             <ImageUploader
