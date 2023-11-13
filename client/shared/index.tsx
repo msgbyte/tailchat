@@ -14,7 +14,7 @@ export {
   getCachedRegistryPlugins,
   getCachedUserSettings,
 } from './cache/cache';
-export { useCachedUserInfo, useCachedOnlineStatus } from './cache/useCache';
+export { useCachedOnlineStatus } from './cache/useCache';
 
 // components
 export { buildPortal, DefaultEventEmitter } from './components/Portal';
@@ -61,6 +61,7 @@ export { useLanguage } from './i18n/language';
 export { createUseStorageState } from './hooks/factory/createUseStorageState';
 export { useAvailableServices } from './hooks/model/useAvailableServices';
 export { useMessageNotifyEventFilter } from './hooks/model/useMessageNotifyEventFilter';
+export { useCachedUserInfo } from './hooks/model/useUserInfo';
 export { useUserInfoList } from './hooks/model/useUserInfoList';
 export { useUsernames } from './hooks/model/useUsernames';
 export {
@@ -82,7 +83,7 @@ export { useMemoizedFn } from './hooks/useMemoizedFn';
 export { useMountedState } from './hooks/useMountedState';
 export { usePrevious } from './hooks/usePrevious';
 export { useRafState } from './hooks/useRafState';
-export { useSearch } from './hooks/useSearch';
+export { useSearch, useUserSearch } from './hooks/useSearch';
 export { useShallowObject } from './hooks/useShallowObject';
 export { useUpdateRef } from './hooks/useUpdateRef';
 export { useWatch } from './hooks/useWatch';
@@ -197,7 +198,10 @@ export { useDMConverseList } from './redux/hooks/useConverse';
 export { useConverseAck } from './redux/hooks/useConverseAck';
 export { useConverseMessage } from './redux/hooks/useConverseMessage';
 export { useDMConverseName } from './redux/hooks/useDMConverseName';
-export { useFriendNickname } from './redux/hooks/useFriendNickname';
+export {
+  useFriendNickname,
+  useFriendNicknameMap,
+} from './redux/hooks/useFriendNickname';
 export {
   useGroupInfo,
   useGroupMemberIds,

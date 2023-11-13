@@ -33,6 +33,7 @@ export interface UserBaseInfo {
   temporary: boolean;
   type: UserType;
   emailVerified: boolean;
+  banned: boolean;
   extra?: Record<string, unknown>;
 }
 

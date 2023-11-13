@@ -19,7 +19,7 @@ import {
   GroupPanelType,
   useHasGroupPanelPermission,
 } from 'tailchat-shared';
-import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
+import { useFriendNicknameMap } from 'tailchat-shared';
 import { MembersPanel } from './MembersPanel';
 import { GroupPanelContainer } from './shared/GroupPanelContainer';
 import { MessageSearchPanel } from '../common/MessageSearch';

@@ -13,10 +13,9 @@ import {
   useGroupMemberInfos,
   useHasGroupPermission,
   UserBaseInfo,
-  useSearch,
+  useUserSearch,
 } from 'tailchat-shared';
 import _compact from 'lodash/compact';
-import { useFriendNicknameMap } from 'tailchat-shared/redux/hooks/useFriendNickname';
 
 /**
  * 群组成员管理相关操作
@@ -26,7 +25,6 @@ export function useGroupMemberAction(groupId: string) {
   const members = groupInfo?.members ?? [];
   const roles = groupInfo?.roles ?? [];
   const userInfos = useGroupMemberInfos(groupId);
-  const friendNicknameMap = useFriendNicknameMap();
   const [allowManageUser, allowManageRoles] = useHasGroupPermission(groupId, [
     PERMISSION.core.manageUser,
     PERMISSION.core.manageRoles,
@@ -37,22 +35,8 @@ export function useGroupMemberAction(groupId: string) {
     userInfos
   );
 
-  const { searchText, setSearchText, isSearching, searchResult } = useSearch({
-    dataSource: userInfos,
-    filterFn: (item, searchText) => {
-      if (friendNicknameMap[item._id]) {
-        if (friendNicknameMap[item._id].includes(searchText)) {
-          return true;
-        }
-      }
-
-      if (item.nickname.includes(searchText)) {
-        return true;
-      }
-
-      return false;
-    },
-  });
+  const { searchText, setSearchText, isSearching, searchResult } =
+    useUserSearch(userInfos);
 
   /**
    * 移除用户

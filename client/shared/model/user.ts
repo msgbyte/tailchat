@@ -11,18 +11,9 @@ import _uniq from 'lodash/uniq';
 import _flatten from 'lodash/flatten';
 import _zipObject from 'lodash/zipObject';
 import { t } from '../i18n';
+import type { UserBaseInfo } from 'tailchat-types';
 
-export interface UserBaseInfo {
-  _id: string;
-  email: string;
-  nickname: string;
-  discriminator: string;
-  avatar: string | null;
-  temporary: boolean;
-  emailVerified: boolean;
-  banned: boolean;
-  extra?: Record<string, unknown>;
-}
+export type { UserBaseInfo };
 
 export interface UserLoginInfo extends UserBaseInfo {
   token: string;

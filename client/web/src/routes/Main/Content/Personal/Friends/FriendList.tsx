@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   createDMConverse,
   isValidStr,
@@ -12,15 +12,18 @@ import {
   useAsyncRequest,
   useEvent,
   useGlobalConfigStore,
+  useUserInfoList,
+  useUserSearch,
   userActions,
 } from 'tailchat-shared';
 import { UserListItem } from '@/components/UserListItem';
 import { IconBtn } from '@/components/IconBtn';
-import { Button, Dropdown, Tooltip } from 'antd';
+import { Button, Dropdown, Input, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { Problem } from '@/components/Problem';
 import { closeModal, openModal } from '@/components/Modal';
 import { SetFriendNickname } from '@/components/modals/SetFriendNickname';
+import { Icon } from 'tailchat-design';
 
 /**
  * 好友列表
@@ -29,6 +32,9 @@ export const FriendList: React.FC<{
   onSwitchToAddFriend: () => void;
 }> = React.memo((props) => {
   const friends = useAppSelector((state) => state.user.friends);
+  const friendIds = useMemo(() => friends.map((f) => f.id), [friends]);
+  const userInfos = useUserInfoList(friendIds);
+  const { searchText, setSearchText, searchResult } = useUserSearch(userInfos);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const disableAddFriend = useGlobalConfigStore(
@@ -91,11 +97,21 @@ export const FriendList: React.FC<{
   return (
     <div className="py-2.5 px-5">
       <div>{t('好友列表')}</div>
+
+      <Input
+        className="my-2"
+        placeholder={t('搜索好友')}
+        size="large"
+        prefix={<Icon fontSize={20} color="grey" icon="mdi:magnify" />}
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+
       <div>
-        {friends.map((item) => (
+        {searchResult.map((item) => (
           <UserListItem
-            key={item.id}
-            userId={item.id}
+            key={item._id}
+            userId={item._id}
             actions={[
               <Tooltip key="message" title={t('发送消息')}>
                 <div>
