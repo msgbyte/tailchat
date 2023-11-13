@@ -2,7 +2,7 @@ import { FullModalFactory } from '@/components/FullModal/Factory';
 import { FullModalField } from '@/components/FullModal/Field';
 import { LanguageSelect } from '@/components/LanguageSelect';
 import { pluginColorScheme, pluginSettings } from '@/plugin/common';
-import { Select, Switch } from 'antd';
+import { Select, Switch, Button } from 'antd';
 import React from 'react';
 import {
   t,
@@ -89,6 +89,9 @@ export const SettingsSystem: React.FC = React.memo(() => {
           }
         />
       )}
+      <Button type="primary" onClick={() => window.location.reload()}>
+        {t('重新加载')}
+      </Button>
     </div>
   );
 });
