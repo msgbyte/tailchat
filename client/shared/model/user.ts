@@ -50,6 +50,7 @@ export function pickUserBaseInfo(userInfo: UserLoginInfo): UserBaseInfo {
     'discriminator',
     'avatar',
     'temporary',
+    'type',
     'emailVerified',
     'banned',
   ]);
@@ -64,6 +65,7 @@ const builtinUserInfo: Record<string, () => UserBaseInfo> = {
     discriminator: '0000',
     avatar: null,
     temporary: false,
+    type: 'normalUser',
     emailVerified: false,
     banned: false,
   }),

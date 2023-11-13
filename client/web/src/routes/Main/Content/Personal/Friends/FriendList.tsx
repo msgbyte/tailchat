@@ -117,7 +117,7 @@ export const FriendList: React.FC<{
                 <div>
                   <IconBtn
                     icon="mdi:message-text-outline"
-                    onClick={() => handleCreateConverse(item.id)}
+                    onClick={() => handleCreateConverse(item._id)}
                   />
                 </div>
               </Tooltip>,
@@ -127,7 +127,7 @@ export const FriendList: React.FC<{
                     items: [
                       {
                         key: 'setNickname',
-                        onClick: () => handleSetFriendNickname(item.id),
+                        onClick: () => handleSetFriendNickname(item._id),
                         label: isValidStr(item.nickname)
                           ? t('更改好友昵称')
                           : t('添加好友昵称'),
@@ -135,7 +135,7 @@ export const FriendList: React.FC<{
                       {
                         key: 'delete',
                         danger: true,
-                        onClick: () => handleRemoveFriend(item.id),
+                        onClick: () => handleRemoveFriend(item._id),
                         label: t('删除'),
                       },
                     ],
