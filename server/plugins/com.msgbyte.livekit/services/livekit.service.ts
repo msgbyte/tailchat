@@ -1,5 +1,5 @@
 import type { TcContext } from 'tailchat-server-sdk';
-import { TcService, TcDbService } from 'tailchat-server-sdk';
+import { TcService, TcDbService, call } from 'tailchat-server-sdk';
 import type { LivekitDocument, LivekitModel } from '../models/livekit';
 import {
   AccessToken,
@@ -72,6 +72,12 @@ class LivekitService extends TcService {
         roomName: 'string',
       },
     });
+    this.registerAction('inviteCall', this.inviteCall, {
+      params: {
+        roomName: 'string',
+        targetUserIds: { type: 'array', items: 'string' },
+      },
+    });
     this.registerAction('webhook', this.webhook);
   }
 
@@ -124,6 +130,28 @@ class LivekitService extends TcService {
     } catch (err) {
       return [];
     }
+  }
+
+  /**
+   * 邀请加入会话
+   */
+  async inviteCall(
+    ctx: TcContext<{ roomName: string; targetUserIds: string[] }>
+  ) {
+    const { roomName, targetUserIds } = ctx.params;
+    const senderUserId = ctx.meta.userId;
+
+    const isOnlineList = await call(ctx).isUserOnline(targetUserIds);
+
+    await this.listcastNotify(ctx, targetUserIds, 'inviteCall', {
+      senderUserId,
+      roomName,
+    });
+
+    return {
+      online: targetUserIds.filter((_, i) => isOnlineList[i]),
+      offline: targetUserIds.filter((_, i) => !isOnlineList[i]),
+    };
   }
 
   async webhook(ctx: TcContext) {
