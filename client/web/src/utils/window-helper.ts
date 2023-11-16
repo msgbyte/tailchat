@@ -16,15 +16,25 @@ export function buildWindowFeatures(
     .join(',');
 }
 
+interface OpenInNewWindowOptions {
+  width?: number;
+  height?: number;
+  top?: number;
+  left?: number;
+}
+
 /**
  * 在新窗口打开
  * @param url 新窗口地址
  */
-export function openInNewWindow(url: string) {
-  const width = 414;
-  const height = 736;
-  const top = (window.screen.height - height) / 2;
-  const left = (window.screen.width - width) / 2;
+export function openInNewWindow(
+  url: string,
+  options: OpenInNewWindowOptions = {}
+) {
+  const width = options.width ?? 414;
+  const height = options.height ?? 736;
+  const top = options.top ?? (window.screen.height - height) / 2;
+  const left = options.left ?? (window.screen.width - width) / 2;
 
   // 打开窗口
   const win = window.open(
@@ -53,15 +63,18 @@ class PanelWindowManager {
    * 打开一个独立窗口
    * @param url 窗口Url
    */
-  open(url: string, options?: { onClose: () => void }): void {
+  open(
+    url: string,
+    options: { onClose?: () => void } & OpenInNewWindowOptions = {}
+  ): Window {
     if (this.openedPanelWindows[url]) {
       this.openedPanelWindows[url].focus();
-      return;
+      return this.openedPanelWindows[url];
     }
 
     const win = openInNewWindow(url);
     if (!win) {
-      return;
+      throw new Error('Create window failed');
     }
 
     const timer = setInterval(() => {
@@ -74,12 +87,14 @@ class PanelWindowManager {
 
         if (typeof options?.onClose === 'function') {
           // 触发回调
-          options?.onClose();
+          options.onClose?.();
         }
       }
     }, 1000);
 
     this.openedPanelWindows[url] = win;
+
+    return win;
   }
 
   /**
