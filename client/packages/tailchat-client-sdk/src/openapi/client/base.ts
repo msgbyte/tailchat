@@ -54,7 +54,11 @@ export class TailchatBaseClient {
       // this.whoami().then(console.log);
     } catch (err) {
       console.error(err);
-      throw new Error('Login failed, please check application credentials');
+      throw new Error(
+        `Login failed, please check application credentials or network(Error: ${String(
+          err
+        )})`
+      );
     }
   }
 
