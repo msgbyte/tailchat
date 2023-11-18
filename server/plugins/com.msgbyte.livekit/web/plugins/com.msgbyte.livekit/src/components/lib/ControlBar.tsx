@@ -15,6 +15,7 @@ import { Translate } from '../../translate';
 import { useMediaQuery } from '../../utils/useMediaQuery';
 import { ChatIcon } from './icons/ChatIcon';
 import { LeaveIcon } from './icons/LeaveIcon';
+import { useMeetingContextState } from '../../context/MeetingContext';
 
 /** @public */
 export type ControlBarControls = {
@@ -55,6 +56,7 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
       setIsChatOpen(layoutContext?.widget.state?.showChat);
     }
   }, [layoutContext?.widget.state?.showChat]);
+  const setRightPanel = useMeetingContextState((state) => state.setRightPanel);
   const isTooLittleSpace = useMediaQuery(
     `(max-width: ${isChatOpen ? 1000 : 760}px)`
   );
@@ -134,10 +136,10 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
       )}
 
       {visibleControls.chat && (
-        <ChatToggle>
+        <button className="lk-button" onClick={() => setRightPanel('chat')}>
           {showIcon && <ChatIcon />}
           {showText && Translate.chat}
-        </ChatToggle>
+        </button>
       )}
 
       {visibleControls.leave && (

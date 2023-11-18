@@ -28,6 +28,7 @@ import { CarouselLayout } from './CarouselLayout';
 import { ControlBar } from './ControlBar';
 import { Chat } from './Chat';
 import { FocusLayout } from './FocusLayout';
+import { useMeetingContextState } from '../../context/MeetingContext';
 
 /**
  * @public
@@ -60,6 +61,7 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
     });
     const lastAutoFocusedScreenShareTrack =
       React.useRef<TrackReferenceOrPlaceholder | null>(null);
+    const rightPanel = useMeetingContextState((state) => state.rightPanel);
 
     const tracks = useTracks(
       [
@@ -146,10 +148,9 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
               <ControlBar controls={{ chat: true }} />
             </div>
 
-            <Chat
-              style={{ display: widgetState.showChat ? 'flex' : 'none' }}
-              messageFormatter={chatMessageFormatter}
-            />
+            {rightPanel === 'chat' && (
+              <Chat messageFormatter={chatMessageFormatter} />
+            )}
           </LayoutContextProvider>
         )}
 

@@ -11,6 +11,7 @@ import { useLivekitState } from '../store/useLivekitState';
 import { useServerUrl } from '../utils/useServerUrl';
 import { useToken } from '../utils/useToken';
 import { VideoConference } from './lib/VideoConference';
+import { MeetingContextProvider } from '../context/MeetingContext';
 
 const UpdateRoom: React.FC = React.memo(() => {
   const room = useRoomContext();
@@ -71,7 +72,9 @@ export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
           audio={userChoices.audioEnabled}
           onDisconnected={onLeave}
         >
-          <VideoConference chatMessageFormatter={formatChatMessageLinks} />
+          <MeetingContextProvider>
+            <VideoConference chatMessageFormatter={formatChatMessageLinks} />
+          </MeetingContextProvider>
 
           <UpdateRoom />
         </LiveKitRoom>
