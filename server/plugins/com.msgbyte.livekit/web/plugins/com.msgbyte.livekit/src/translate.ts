@@ -65,4 +65,8 @@ export const Translate = {
     'zh-CN': '当前浏览器不支持视图全屏',
     'en-US': 'Current browser does not support DOM full screen',
   }),
+  startCall: localTrans({
+    'zh-CN': '发起/加入通话',
+    'en-US': 'Start/Join Call',
+  }),
 };

@@ -42,7 +42,7 @@ const DEFAULT_USER_CHOICES = {
 /** @public */
 export type PreJoinProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
-  'onSubmit'
+  'onSubmit' | 'onError'
 > & {
   roomName: string;
   /** This function is called with the `LocalUserChoices` if validation is passed. */

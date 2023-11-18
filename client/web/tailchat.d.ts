@@ -100,6 +100,8 @@ declare module '@capital/common' {
 
   export const postMessageEvent: any;
 
+  export const panelWindowManager: any;
+
   export const getServiceUrl: () => string;
 
   export const getCachedUserInfo: (
@@ -191,6 +193,10 @@ declare module '@capital/common' {
   export const useUpdateRef: <T>(state: T) => React.MutableRefObject<T>;
 
   export const isDevelopment: boolean;
+
+  export const setWebviewKernel: any;
+
+  export const resetWebviewKernel: any;
 
   export const navigate: any;
 
@@ -306,6 +312,10 @@ declare module '@capital/common' {
 
   export const regPluginRootRoute: any;
 
+  export const pluginPanelRoute: any;
+
+  export const regPluginPanelRoute: any;
+
   export const pluginPanelActions: any;
 
   export const regPluginPanelAction: (
@@ -383,6 +393,10 @@ declare module '@capital/common' {
   export const pluginLoginAction: any;
 
   export const regLoginAction: any;
+
+  export const pluginChatInputPasteHandler: any;
+
+  export const regChatInputPasteHandler: any;
 
   export const useGroupIdContext: () => string;
 
@@ -607,4 +621,8 @@ declare module '@capital/component' {
   export const NotFound: any;
 
   export const withKeepAliveOverlay: any;
+
+  export const AvatarUploader: any;
+
+  export const ImageUploader: any;
 }

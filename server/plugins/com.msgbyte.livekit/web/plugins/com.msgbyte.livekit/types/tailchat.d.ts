@@ -100,6 +100,8 @@ declare module '@capital/common' {
 
   export const postMessageEvent: any;
 
+  export const panelWindowManager: any;
+
   export const getServiceUrl: () => string;
 
   export const getCachedUserInfo: (
@@ -153,7 +155,9 @@ declare module '@capital/common' {
     deps?: React.DependencyList
   ) => [{ loading: boolean; value?: any }, T];
 
-  export const useEvent: any;
+  export const useEvent: <T extends (this: any, ...args: any[]) => any>(
+    fn: T
+  ) => T;
 
   export const uploadFile: any;
 
@@ -184,6 +188,16 @@ declare module '@capital/common' {
 
   export const useWatch: any;
 
+  export const parseUrlStr: (originUrl: string) => string;
+
+  export const useUpdateRef: <T>(state: T) => React.MutableRefObject<T>;
+
+  export const isDevelopment: boolean;
+
+  export const setWebviewKernel: any;
+
+  export const resetWebviewKernel: any;
+
   export const navigate: any;
 
   export const useLocation: any;
@@ -202,7 +216,12 @@ declare module '@capital/common' {
 
   export const getTextColorHex: any;
 
-  export const useCurrentUserInfo: any;
+  export const useCurrentUserInfo: () => {
+    email?: string;
+    nickname?: string;
+    discriminator: string;
+    avatar?: string;
+  };
 
   export const createPluginRequest: (pluginName: string) => {
     get: (actionName: string, config?: any) => Promise<any>;
@@ -210,6 +229,8 @@ declare module '@capital/common' {
   };
 
   export const postRequest: any;
+
+  export const BaseCardPayload: any;
 
   export const pluginCustomPanel: any;
 
@@ -221,12 +242,14 @@ declare module '@capital/common' {
       | 'navbar-more'
       | 'navbar-group'
       | 'navbar-personal';
-    icon: string;
+    icon: string | React.ComponentType;
     name: string;
     label: string;
     render: React.ComponentType;
     /**
      * hooks determine whether to render
+     *
+     * Only available in position: `navbar-more` | `navbar-group` | `navbar-personal`
      *
      * @default
      * () => true
@@ -288,6 +311,10 @@ declare module '@capital/common' {
   export const pluginRootRoute: any;
 
   export const regPluginRootRoute: any;
+
+  export const pluginPanelRoute: any;
+
+  export const regPluginPanelRoute: any;
 
   export const pluginPanelActions: any;
 
@@ -355,6 +382,10 @@ declare module '@capital/common' {
 
   export const regPluginInboxItemMap: any;
 
+  export const pluginCardItemMap: any;
+
+  export const regPluginCardItem: any;
+
   export const pluginGroupConfigItems: any;
 
   export const regPluginGroupConfigItem: any;
@@ -362,6 +393,10 @@ declare module '@capital/common' {
   export const pluginLoginAction: any;
 
   export const regLoginAction: any;
+
+  export const pluginChatInputPasteHandler: any;
+
+  export const regChatInputPasteHandler: any;
 
   export const useGroupIdContext: () => string;
 
@@ -454,6 +489,8 @@ declare module '@capital/component' {
   export const BaseChatInputButton: any;
 
   export const useChatInputActionContext: any;
+
+  export const GroupPanelContainer: any;
 
   export const GroupExtraDataPanel: any;
 
@@ -581,5 +618,11 @@ declare module '@capital/component' {
 
   export const NoData: any;
 
-  export const GroupPanelContainer: any;
+  export const NotFound: any;
+
+  export const withKeepAliveOverlay: any;
+
+  export const AvatarUploader: any;
+
+  export const ImageUploader: any;
 }

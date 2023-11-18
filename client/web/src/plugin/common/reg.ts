@@ -219,6 +219,15 @@ export const [pluginRootRoute, regPluginRootRoute] = buildRegList<{
   component: React.ComponentType;
 }>();
 
+/**
+ * 注册独立面板路由
+ */
+export const [pluginPanelRoute, regPluginPanelRoute] = buildRegList<{
+  name: string;
+  path: string;
+  component: React.ComponentType;
+}>();
+
 export interface BasePluginPanelActionProps {
   /**
    * 唯一标识

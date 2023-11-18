@@ -2,6 +2,9 @@ import {
   regCustomPanel,
   regGroupPanel,
   regGroupPanelBadge,
+  regPluginPanelAction,
+  regPluginPanelRoute,
+  panelWindowManager,
 } from '@capital/common';
 import { Loadable } from '@capital/component';
 import { useIconIsShow } from './navbar/useIconIsShow';
@@ -11,13 +14,22 @@ const PLUGIN_ID = 'com.msgbyte.livekit';
 
 console.log(`Plugin ${PLUGIN_ID} is loaded`);
 
+const LivekitPanel = Loadable(() => import('./group/LivekitPanel'), {
+  componentName: `${PLUGIN_ID}:LivekitPanel`,
+});
+
+const LivekitMeetingPanel = Loadable(
+  () => import('./panel/LivekitMeetingPanel'),
+  {
+    componentName: `${PLUGIN_ID}:LivekitMeetingPanel`,
+  }
+);
+
 regGroupPanel({
   name: `${PLUGIN_ID}/livekitPanel`,
   label: Translate.voiceChannel,
   provider: PLUGIN_ID,
-  render: Loadable(() => import('./group/LivekitPanel'), {
-    componentName: `${PLUGIN_ID}:LivekitPanel`,
-  }),
+  render: LivekitPanel,
 });
 
 regGroupPanelBadge({
@@ -44,4 +56,27 @@ regCustomPanel({
     }
   ),
   useIsShow: useIconIsShow,
+});
+
+regPluginPanelRoute({
+  name: `${PLUGIN_ID}/livekitPanel`,
+  path: `/${PLUGIN_ID}/meeting/:meetingId`,
+  component: LivekitMeetingPanel,
+});
+
+// 发起私信会议
+regPluginPanelAction({
+  name: `${PLUGIN_ID}/groupAction`,
+  label: Translate.startCall,
+  position: 'dm',
+  icon: 'mdi:video-box',
+  onClick: ({ converseId }) => {
+    panelWindowManager.open(
+      `/panel/plugin/${PLUGIN_ID}/meeting/${converseId}`,
+      {
+        width: 1280,
+        height: 768,
+      }
+    );
+  },
 });

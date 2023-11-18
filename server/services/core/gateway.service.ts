@@ -318,7 +318,7 @@ export default class ApiService extends TcService {
         use: [
           serve('public', {
             cacheControl: true,
-            maxAge: '1d', // 1 day for public file
+            maxAge: '1d', // 1 day for public file, include plugins
             setHeaders(res: ServerResponse, path: string, stat: any) {
               res.setHeader('Access-Control-Allow-Origin', '*'); // 允许跨域
             },

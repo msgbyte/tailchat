@@ -2047,6 +2047,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-router:
+        specifier: ^6.8.1
+        version: 6.11.0(react@18.2.0)
       styled-components:
         specifier: ^5.3.6
         version: 5.3.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -9605,7 +9608,6 @@ packages:
   /@remix-run/router@1.6.0:
     resolution: {integrity: sha512-N13NRw3T2+6Xi9J//3CGLsK2OqC8NMme3d/YX+nh05K9YHWGcv8DycHJrqGScSP4T75o8IN6nqIMhVFU8ohg8w==}
     engines: {node: '>=14'}
-    dev: false
 
   /@rollup/plugin-babel@5.3.1(@babel/core@7.21.0)(rollup@2.79.1):
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
@@ -29372,7 +29374,6 @@ packages:
     dependencies:
       '@remix-run/router': 1.6.0
       react: 18.2.0
-    dev: false
 
   /react-side-effect@2.1.2(react@18.2.0):
     resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}

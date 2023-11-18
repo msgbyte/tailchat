@@ -72,7 +72,7 @@ class PanelWindowManager {
       return this.openedPanelWindows[url];
     }
 
-    const win = openInNewWindow(url);
+    const win = openInNewWindow(url, options);
     if (!win) {
       throw new Error('Create window failed');
     }
