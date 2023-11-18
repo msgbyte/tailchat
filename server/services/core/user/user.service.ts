@@ -747,13 +747,16 @@ class UserService extends TcService {
       }
     );
 
-    this.cleanUserInfoCache(userId);
+    await this.cleanUserInfoCache(userId);
     const tokens = await ctx.call('gateway.getUserSocketToken', {
       userId,
     });
     if (Array.isArray(tokens)) {
-      tokens.map((token) => this.cleanActionCache('resolveToken', [token]));
+      await Promise.all(
+        tokens.map((token) => this.cleanActionCache('resolveToken', [token]))
+      );
     }
+
     await ctx.call('gateway.tickUser', {
       userId,
     });
