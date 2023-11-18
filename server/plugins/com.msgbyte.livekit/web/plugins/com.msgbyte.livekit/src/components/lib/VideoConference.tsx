@@ -29,6 +29,7 @@ import { ControlBar } from './ControlBar';
 import { Chat } from './Chat';
 import { FocusLayout } from './FocusLayout';
 import { useMeetingContextState } from '../../context/MeetingContext';
+import { Member } from './Member';
 
 /**
  * @public
@@ -145,12 +146,14 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
                 </div>
               )}
 
-              <ControlBar controls={{ chat: true }} />
+              <ControlBar />
             </div>
 
             {rightPanel === 'chat' && (
               <Chat messageFormatter={chatMessageFormatter} />
             )}
+
+            {rightPanel === 'member' && <Member />}
           </LayoutContextProvider>
         )}
 

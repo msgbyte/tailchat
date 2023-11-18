@@ -12,11 +12,6 @@ import * as React from 'react';
 import { Translate } from '../../translate';
 import { cloneSingleChild } from '../../utils/common';
 import { useObservableState } from '../../utils/useObservableState';
-// import { useRoomContext } from '../context';
-// import { useObservableState } from '../hooks/internal/useObservableState';
-// import { cloneSingleChild } from '../utils';
-// import type { MessageFormatter } from '../components/ChatEntry';
-// import { ChatEntry } from '../components/ChatEntry';
 
 export type { ChatMessage, ReceivedChatMessage };
 

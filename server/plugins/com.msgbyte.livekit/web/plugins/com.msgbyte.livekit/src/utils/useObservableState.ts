@@ -10,11 +10,13 @@ export function useObservableState<T>(
   startWith: T
 ) {
   const [state, setState] = React.useState<T>(startWith);
+
   React.useEffect(() => {
     // observable state doesn't run in SSR
     if (typeof window === 'undefined' || !observable) return;
     const subscription = observable.subscribe(setState);
     return () => subscription.unsubscribe();
   }, [observable]);
+
   return state;
 }

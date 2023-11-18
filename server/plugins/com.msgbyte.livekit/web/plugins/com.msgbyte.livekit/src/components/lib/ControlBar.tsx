@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { supportsScreenSharing } from '@livekit/components-core';
 import {
-  ChatToggle,
   DisconnectButton,
   MediaDeviceMenu,
   StartAudio,
@@ -13,15 +12,15 @@ import {
 } from '@livekit/components-react';
 import { Translate } from '../../translate';
 import { useMediaQuery } from '../../utils/useMediaQuery';
-import { ChatIcon } from './icons/ChatIcon';
-import { LeaveIcon } from './icons/LeaveIcon';
 import { useMeetingContextState } from '../../context/MeetingContext';
+import { Icon } from '@capital/component';
 
 /** @public */
 export type ControlBarControls = {
   microphone?: boolean;
   camera?: boolean;
   chat?: boolean;
+  member?: boolean;
   screenShare?: boolean;
   leave?: boolean;
 };
@@ -71,13 +70,15 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
   if (!localPermissions) {
     visibleControls.camera = false;
     visibleControls.chat = false;
+    visibleControls.member = false;
     visibleControls.microphone = false;
     visibleControls.screenShare = false;
   } else {
     visibleControls.camera ??= localPermissions.canPublish;
     visibleControls.microphone ??= localPermissions.canPublish;
     visibleControls.screenShare ??= localPermissions.canPublish;
-    visibleControls.chat ??= localPermissions.canPublishData && controls?.chat;
+    visibleControls.chat ??= localPermissions.canPublishData;
+    visibleControls.member ??= localPermissions.canSubscribe;
   }
 
   const showIcon = React.useMemo(
@@ -137,14 +138,21 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
 
       {visibleControls.chat && (
         <button className="lk-button" onClick={() => setRightPanel('chat')}>
-          {showIcon && <ChatIcon />}
+          {showIcon && <Icon icon="mdi:message-reply-text-outline" />}
           {showText && Translate.chat}
+        </button>
+      )}
+
+      {visibleControls.member && (
+        <button className="lk-button" onClick={() => setRightPanel('member')}>
+          {showIcon && <Icon icon="mdi:account-multiple" />}
+          {showText && Translate.member}
         </button>
       )}
 
       {visibleControls.leave && (
         <DisconnectButton>
-          {showIcon && <LeaveIcon />}
+          {showIcon && <Icon icon="mdi:logout-variant" />}
           {showText && Translate.leave}
         </DisconnectButton>
       )}

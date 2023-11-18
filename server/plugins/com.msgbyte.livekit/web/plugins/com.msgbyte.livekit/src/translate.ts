@@ -41,6 +41,10 @@ export const Translate = {
     'zh-CN': '聊天',
     'en-US': 'Chat',
   }),
+  member: localTrans({
+    'zh-CN': '成员',
+    'en-US': 'Member',
+  }),
   leave: localTrans({
     'zh-CN': '离开',
     'en-US': 'Leave',
@@ -52,6 +56,10 @@ export const Translate = {
   enterMessage: localTrans({
     'zh-CN': '输入消息...',
     'en-US': 'Enter a message...',
+  }),
+  isSpeaking: localTrans({
+    'zh-CN': '正在发言',
+    'en-US': 'Is speaking',
   }),
   nobodyInMeeting: localTrans({
     'zh-CN': '当前无人在会...',
