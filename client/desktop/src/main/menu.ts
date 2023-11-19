@@ -5,6 +5,7 @@ import {
   BrowserWindow,
   MenuItemConstructorOptions,
 } from 'electron';
+import log from 'electron-log';
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
   selector?: string;
@@ -241,6 +242,12 @@ export default class MenuBuilder {
             label: 'Search Issues',
             click() {
               shell.openExternal('https://github.com/msgbyte/tailchat/issues');
+            },
+          },
+          {
+            label: 'Logs',
+            click() {
+              shell.showItemInFolder(log.transports.file.getFile().path);
             },
           },
         ],

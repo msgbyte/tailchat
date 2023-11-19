@@ -6,6 +6,7 @@ files:
   - dist
   - node_modules
   - package.json
+  - assets/
 afterSign: .erb/scripts/notarize.js
 mac:
   target:

@@ -20,15 +20,13 @@ import {
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { getCapturerSourcePickerUrl, resolveHtmlPath } from './util';
 import windowStateKeeper from 'electron-window-state';
 import is from 'electron-is';
 import { initScreenshots } from './screenshots';
 import { generateInjectedScript } from './inject';
 import { handleTailchatMessage } from './inject/message-handler';
 import { initWebviewManager } from './lib/webview-manager';
-// @ts-ignore
-import capturerSourcePickerHtmlUrl from './lib/capturer-source-picker.html';
 
 log.info('Start...');
 
@@ -308,9 +306,9 @@ const createCapturerSourcePicker = async (
   });
 
   // 加载欢迎窗口的HTML文件
-  capturerSourcePickerWindow.webContents.loadFile(
-    path.resolve(__dirname, capturerSourcePickerHtmlUrl)
-  );
+  const htmlPath = getCapturerSourcePickerUrl();
+  log.info('htmlPath', htmlPath);
+  capturerSourcePickerWindow.webContents.loadFile(htmlPath);
 
   capturerSourcePickerWindow.webContents.on('did-finish-load', () => {
     if (capturerSourcePickerWindow) {
