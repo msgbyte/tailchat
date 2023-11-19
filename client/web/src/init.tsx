@@ -81,6 +81,7 @@ setNotification((message, duration) => {
     key,
     message,
     duration,
+    getContainer: getPopupContainer,
   });
 
   return () => {
