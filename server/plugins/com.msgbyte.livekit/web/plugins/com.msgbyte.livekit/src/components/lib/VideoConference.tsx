@@ -2,7 +2,7 @@
  * Fork <VideoConference /> from "@livekit/components-react"
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   isEqualTrackRef,
   isTrackReference,
@@ -185,6 +185,7 @@ function useMeetingInit() {
     (state) => state.inviteUserCompleted
   );
   const room = useRoomContext();
+  const hasBeenSendInviteRef = useRef(false);
 
   useEffect(() => {
     room.addListener('participantConnected', (p) => {
@@ -193,6 +194,12 @@ function useMeetingInit() {
   }, []);
 
   useEffect(() => {
+    if (hasBeenSendInviteRef.current === true) {
+      return;
+    }
+
+    hasBeenSendInviteRef.current = true;
+
     // Auto invite user on start
     const autoInviteIds = (window as any).autoInviteIds as string[];
     if (Array.isArray(autoInviteIds) && autoInviteIds.length > 0) {
