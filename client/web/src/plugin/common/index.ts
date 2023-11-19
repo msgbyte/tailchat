@@ -62,6 +62,7 @@ export {
   showToasts,
   showSuccessToasts,
   showErrorToasts,
+  showNotification,
   fetchAvailableServices,
   isValidStr,
   useGroupPanelInfo,

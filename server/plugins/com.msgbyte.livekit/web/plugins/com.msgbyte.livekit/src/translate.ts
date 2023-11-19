@@ -85,4 +85,8 @@ export const Translate = {
     'zh-CN': '用户呼叫失败，该用户离线',
     'en-US': 'The user call failed because of offline',
   }),
+  inviteJoinCall: localTrans({
+    'zh-CN': '邀请你加入会话',
+    'en-US': 'invite you to join conversation',
+  }),
 };

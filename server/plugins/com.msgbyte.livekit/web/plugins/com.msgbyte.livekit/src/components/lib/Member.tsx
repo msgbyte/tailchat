@@ -26,7 +26,7 @@ export const Member: React.FC = React.memo(() => {
 
   const getAction = useEvent((participant: Participant) => {
     return [
-      !participant.isSpeaking && (
+      participant.isSpeaking && (
         <IsSpeakingTip>({Translate.isSpeaking})</IsSpeakingTip>
       ),
       <div key="mic-state">

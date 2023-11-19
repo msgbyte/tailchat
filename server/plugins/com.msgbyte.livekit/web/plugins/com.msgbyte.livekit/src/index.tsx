@@ -7,10 +7,12 @@ import {
   panelWindowManager,
   regSocketEventListener,
   getGlobalState,
+  showNotification,
 } from '@capital/common';
 import { Loadable } from '@capital/component';
 import { useIconIsShow } from './navbar/useIconIsShow';
 import { Translate } from './translate';
+import React from 'react';
 
 const PLUGIN_ID = 'com.msgbyte.livekit';
 
@@ -24,6 +26,13 @@ const LivekitMeetingPanel = Loadable(
   () => import('./panel/LivekitMeetingPanel'),
   {
     componentName: `${PLUGIN_ID}:LivekitMeetingPanel`,
+  }
+);
+
+const InviteCallNotification = Loadable(
+  () => import('./components/InviteCallNotification'),
+  {
+    componentName: `${PLUGIN_ID}:InviteCallNotification`,
   }
 );
 
@@ -86,5 +95,29 @@ regPluginPanelAction({
       }
     );
     (win.window as any).autoInviteIds = shouldInviteUserIds;
+  },
+});
+
+regSocketEventListener({
+  eventName: `plugin:${PLUGIN_ID}.inviteCall`,
+  eventFn: (data) => {
+    const { senderUserId, roomName } = data;
+
+    const close = showNotification(
+      <InviteCallNotification
+        senderUserId={senderUserId}
+        onJoin={() => {
+          panelWindowManager.open(
+            `/panel/plugin/${PLUGIN_ID}/meeting/${roomName}`,
+            {
+              width: 1280,
+              height: 768,
+            }
+          );
+          close();
+        }}
+      />,
+      0
+    );
   },
 });

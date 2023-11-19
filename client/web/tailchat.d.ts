@@ -183,6 +183,11 @@ declare module '@capital/common' {
 
   export const showErrorToasts: (error: any) => void;
 
+  export const showNotification: (
+    message: React.ReactNode,
+    duration?: number
+  ) => () => void;
+
   export const fetchAvailableServices: any;
 
   export const isValidStr: (str: any) => str is string;
@@ -631,6 +636,8 @@ declare module '@capital/component' {
     className?: string;
     style?: React.CSSProperties;
   }>;
+
+  export const UserNamePure: any;
 
   export const UserListItem: any;
 

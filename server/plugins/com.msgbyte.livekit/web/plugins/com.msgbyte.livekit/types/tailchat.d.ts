@@ -183,6 +183,11 @@ declare module '@capital/common' {
 
   export const showErrorToasts: (error: any) => void;
 
+  export const showNotification: (
+    message: React.ReactNode,
+    duration?: number
+  ) => () => void;
+
   export const fetchAvailableServices: any;
 
   export const isValidStr: (str: any) => str is string;
@@ -237,8 +242,29 @@ declare module '@capital/common' {
   };
 
   export const createPluginRequest: (pluginName: string) => {
-    get: (actionName: string, config?: any) => Promise<any>;
-    post: (actionName: string, data?: any, config?: any) => Promise<any>;
+    get: (
+      actionName: string,
+      config?: any
+    ) => Promise<{
+      data: any;
+      headers: Record<string, string>;
+      status: number;
+      statusText: string;
+      config: Record<string, any>;
+      request: any;
+    }>;
+    post: (
+      actionName: string,
+      data?: any,
+      config?: any
+    ) => Promise<{
+      data: any;
+      headers: Record<string, string>;
+      status: number;
+      statusText: string;
+      config: Record<string, any>;
+      request: any;
+    }>;
   };
 
   export const postRequest: any;
@@ -610,6 +636,8 @@ declare module '@capital/component' {
     className?: string;
     style?: React.CSSProperties;
   }>;
+
+  export const UserNamePure: any;
 
   export const UserListItem: any;
 

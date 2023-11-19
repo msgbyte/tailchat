@@ -108,6 +108,8 @@ export {
   setAlert,
   showGlobalLoading,
   setGlobalLoading,
+  showNotification,
+  setNotification,
 } from './manager/ui';
 
 // model

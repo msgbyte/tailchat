@@ -1,4 +1,4 @@
-import { message, Modal } from 'antd';
+import { message, Modal, notification } from 'antd';
 import React from 'react';
 import {
   buildStorage,
@@ -18,10 +18,12 @@ import {
   parseUrlStr,
   onLanguageLoaded,
   version,
+  setNotification,
 } from 'tailchat-shared';
 import { getPopupContainer } from './utils/dom-helper';
 import { getUserJWT } from './utils/jwt-helper';
 import _get from 'lodash/get';
+import _uniqueId from 'lodash/uniqueId';
 import { recordMeasure } from './utils/measure-helper';
 import { postMessageEvent } from './utils/event-helper';
 import { setImageUrlParser, setWebMetaFormConfig } from 'tailchat-design';
@@ -71,6 +73,19 @@ setGlobalLoading((text) => {
   const hide = message.loading(text, 0);
 
   return hide;
+});
+
+setNotification((message, duration) => {
+  const key = _uniqueId('notification');
+  notification.open({
+    key,
+    message,
+    duration,
+  });
+
+  return () => {
+    notification.close(key);
+  };
 });
 
 setImageUrlParser(parseUrlStr);

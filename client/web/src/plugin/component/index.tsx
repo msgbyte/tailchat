@@ -64,7 +64,7 @@ export { PortalAdd, PortalRemove } from '@/components/Portal';
 export { ErrorBoundary } from '@/components/ErrorBoundary';
 export { ErrorView } from '@/components/ErrorView';
 export { UserAvatar } from '@/components/UserAvatar';
-export { UserName } from '@/components/UserName';
+export { UserName, UserNamePure } from '@/components/UserName';
 export { UserListItem } from '@/components/UserListItem';
 export { Markdown, MarkdownEditor } from '@/components/Markdown';
 export { Webview, WebviewKeepAlive } from '@/components/Webview';

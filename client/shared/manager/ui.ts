@@ -47,3 +47,11 @@ export const [showGlobalLoading, setGlobalLoading] = buildRegFn<
 >('global-loading', () => {
   return () => {};
 });
+
+/**
+ * 提示通知，返回关闭函数
+ */
+export const [showNotification, setNotification] =
+  buildRegFn<(message: React.ReactNode, duration?: number) => () => void>(
+    'notification'
+  );
