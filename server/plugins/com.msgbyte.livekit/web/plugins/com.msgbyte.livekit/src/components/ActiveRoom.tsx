@@ -72,7 +72,7 @@ export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
           audio={userChoices.audioEnabled}
           onDisconnected={onLeave}
         >
-          <MeetingContextProvider>
+          <MeetingContextProvider meetingId={roomName}>
             <VideoConference chatMessageFormatter={formatChatMessageLinks} />
           </MeetingContextProvider>
 

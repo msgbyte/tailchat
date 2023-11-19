@@ -8,17 +8,23 @@ import { useStore } from 'zustand';
 
 const MeetingContext = React.createContext<MeetingStateStoreType>(null);
 
-export const MeetingContextProvider: React.FC<PropsWithChildren> = React.memo(
-  (props) => {
-    const store = useMemo(() => createMeetingStateStore(), []);
+interface MeetingContextProviderProps extends PropsWithChildren {
+  meetingId: string;
+}
+
+export const MeetingContextProvider: React.FC<MeetingContextProviderProps> =
+  React.memo((props) => {
+    const store = useMemo(
+      () => createMeetingStateStore(props.meetingId),
+      [props.meetingId]
+    );
 
     return (
       <MeetingContext.Provider value={store}>
         {props.children}
       </MeetingContext.Provider>
     );
-  }
-);
+  });
 MeetingContextProvider.displayName = 'MeetingContextProvider';
 
 export function useMeetingContextState<T>(selector: (s: MeetingState) => T) {

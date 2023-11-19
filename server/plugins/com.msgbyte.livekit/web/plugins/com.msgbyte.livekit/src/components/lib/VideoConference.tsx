@@ -2,8 +2,7 @@
  * Fork <VideoConference /> from "@livekit/components-react"
  */
 
-import React from 'react';
-import type { WidgetState } from '@livekit/components-core';
+import React, { useEffect } from 'react';
 import {
   isEqualTrackRef,
   isTrackReference,
@@ -20,6 +19,7 @@ import {
   MessageFormatter,
   RoomAudioRenderer,
   useCreateLayoutContext,
+  useRoomContext,
   usePinnedTracks,
   useTracks,
 } from '@livekit/components-react';
@@ -30,14 +30,26 @@ import { Chat } from './Chat';
 import { FocusLayout } from './FocusLayout';
 import { useMeetingContextState } from '../../context/MeetingContext';
 import { Member } from './Member';
+import { UserAvatar } from '@capital/component';
+import { Translate } from '../../translate';
+import styled from 'styled-components';
 
-/**
- * @public
- */
 export interface VideoConferenceProps
   extends React.HTMLAttributes<HTMLDivElement> {
   chatMessageFormatter?: MessageFormatter;
 }
+
+const IsCallingContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 120px;
+`;
 
 /**
  * This component is the default setup of a classic LiveKit video conferencing app.
@@ -57,12 +69,13 @@ export interface VideoConferenceProps
  */
 export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
   ({ chatMessageFormatter, ...props }) => {
-    const [widgetState, setWidgetState] = React.useState<WidgetState>({
-      showChat: false,
-    });
     const lastAutoFocusedScreenShareTrack =
       React.useRef<TrackReferenceOrPlaceholder | null>(null);
     const rightPanel = useMeetingContextState((state) => state.rightPanel);
+    const invitingUserIds = useMeetingContextState(
+      (state) => state.invitingUserIds
+    );
+    useMeetingInit();
 
     const tracks = useTracks(
       [
@@ -71,11 +84,6 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
       ],
       { updateOnlyOn: [RoomEvent.ActiveSpeakersChanged] }
     );
-
-    const widgetUpdate = (state: WidgetState) => {
-      log.debug('updating widget state', state);
-      setWidgetState(state);
-    };
 
     const layoutContext = useCreateLayoutContext();
 
@@ -88,7 +96,7 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
       (track) => !isEqualTrackRef(track, focusTrack)
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
       // If screen share tracks are published, and no pin is set explicitly, auto set the screen share.
       if (
         screenShareTracks.length > 0 &&
@@ -122,11 +130,7 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
     return (
       <div className="lk-video-conference" {...props}>
         {isWeb() && (
-          <LayoutContextProvider
-            value={layoutContext}
-            // onPinChange={handleFocusStateChange}
-            onWidgetChange={widgetUpdate}
-          >
+          <LayoutContextProvider value={layoutContext}>
             <div className="lk-video-conference-inner">
               {!focusTrack ? (
                 <div className="lk-grid-layout-wrapper">
@@ -144,6 +148,15 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
                     {focusTrack && <FocusLayout track={focusTrack} />}
                   </FocusLayoutContainer>
                 </div>
+              )}
+
+              {Array.isArray(invitingUserIds) && invitingUserIds.length > 0 && (
+                <IsCallingContainer>
+                  {Translate.isCalling}:
+                  {invitingUserIds.map((userId) => (
+                    <UserAvatar key={userId} userId={userId} />
+                  ))}
+                </IsCallingContainer>
               )}
 
               <ControlBar />
@@ -165,3 +178,25 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
   }
 );
 VideoConference.displayName = 'VideoConference';
+
+function useMeetingInit() {
+  const inviteUsers = useMeetingContextState((state) => state.inviteUsers);
+  const inviteUserCompleted = useMeetingContextState(
+    (state) => state.inviteUserCompleted
+  );
+  const room = useRoomContext();
+
+  useEffect(() => {
+    room.addListener('participantConnected', (p) => {
+      inviteUserCompleted(p.identity);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Auto invite user on start
+    const autoInviteIds = (window as any).autoInviteIds as string[];
+    if (Array.isArray(autoInviteIds) && autoInviteIds.length > 0) {
+      inviteUsers(autoInviteIds);
+    }
+  }, []);
+}

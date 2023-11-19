@@ -5,6 +5,8 @@ import {
   regPluginPanelAction,
   regPluginPanelRoute,
   panelWindowManager,
+  regSocketEventListener,
+  getGlobalState,
 } from '@capital/common';
 import { Loadable } from '@capital/component';
 import { useIconIsShow } from './navbar/useIconIsShow';
@@ -71,12 +73,18 @@ regPluginPanelAction({
   position: 'dm',
   icon: 'mdi:video-box',
   onClick: ({ converseId }) => {
-    panelWindowManager.open(
+    const state = getGlobalState() ?? {};
+    const currentUserId = state.user?.info?._id ?? '';
+    const members: string[] =
+      state.chat?.converses?.[converseId]?.members ?? [];
+    const shouldInviteUserIds = members.filter((m) => m !== currentUserId);
+    const win = panelWindowManager.open(
       `/panel/plugin/${PLUGIN_ID}/meeting/${converseId}`,
       {
         width: 1280,
         height: 768,
       }
     );
+    (win.window as any).autoInviteIds = shouldInviteUserIds;
   },
 });

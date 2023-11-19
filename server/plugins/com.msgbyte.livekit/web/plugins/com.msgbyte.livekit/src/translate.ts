@@ -77,4 +77,12 @@ export const Translate = {
     'zh-CN': '发起/加入通话',
     'en-US': 'Start/Join Call',
   }),
+  isCalling: localTrans({
+    'zh-CN': '正在呼叫',
+    'en-US': 'Is calling',
+  }),
+  callFailed: localTrans({
+    'zh-CN': '用户呼叫失败，该用户离线',
+    'en-US': 'The user call failed because of offline',
+  }),
 };

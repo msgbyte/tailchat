@@ -57,7 +57,7 @@ export function openInNewWindow(
 }
 
 class PanelWindowManager {
-  openedPanelWindows: Record<string, Window> = {};
+  private openedPanelWindows: Record<string, Window> = {};
 
   /**
    * 打开一个独立窗口

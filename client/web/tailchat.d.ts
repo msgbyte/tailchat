@@ -100,7 +100,20 @@ declare module '@capital/common' {
 
   export const postMessageEvent: any;
 
-  export const panelWindowManager: any;
+  export const panelWindowManager: {
+    open: (
+      url: string,
+      options?: {
+        width?: number;
+        height?: number;
+        top?: number;
+        left?: number;
+        onClose?: () => void;
+      }
+    ) => Window;
+    close: (url: string) => void;
+    has: (url: string) => boolean;
+  };
 
   export const getServiceUrl: () => string;
 
@@ -224,8 +237,29 @@ declare module '@capital/common' {
   };
 
   export const createPluginRequest: (pluginName: string) => {
-    get: (actionName: string, config?: any) => Promise<any>;
-    post: (actionName: string, data?: any, config?: any) => Promise<any>;
+    get: (
+      actionName: string,
+      config?: any
+    ) => Promise<{
+      data: any;
+      headers: Record<string, string>;
+      status: number;
+      statusText: string;
+      config: Record<string, any>;
+      request: any;
+    }>;
+    post: (
+      actionName: string,
+      data?: any,
+      config?: any
+    ) => Promise<{
+      data: any;
+      headers: Record<string, string>;
+      status: number;
+      statusText: string;
+      config: Record<string, any>;
+      request: any;
+    }>;
   };
 
   export const postRequest: any;
@@ -597,6 +631,8 @@ declare module '@capital/component' {
     className?: string;
     style?: React.CSSProperties;
   }>;
+
+  export const UserListItem: any;
 
   export const Markdown: any;
 

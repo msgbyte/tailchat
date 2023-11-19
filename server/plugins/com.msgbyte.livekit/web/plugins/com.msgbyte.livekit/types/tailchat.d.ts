@@ -100,7 +100,20 @@ declare module '@capital/common' {
 
   export const postMessageEvent: any;
 
-  export const panelWindowManager: any;
+  export const panelWindowManager: {
+    open: (
+      url: string,
+      options?: {
+        width?: number;
+        height?: number;
+        top?: number;
+        left?: number;
+        onClose?: () => void;
+      }
+    ) => Window;
+    close: (url: string) => void;
+    has: (url: string) => boolean;
+  };
 
   export const getServiceUrl: () => string;
 
@@ -597,6 +610,8 @@ declare module '@capital/component' {
     className?: string;
     style?: React.CSSProperties;
   }>;
+
+  export const UserListItem: any;
 
   export const Markdown: any;
 
