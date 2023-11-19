@@ -15,7 +15,7 @@ const Hello: React.FC = React.memo(() => {
         <h1>Select your server...</h1>
       </div>
       <div className="server-list">
-        {serverList.map((serverInfo, i) => {
+        {[...defaultServerList, ...serverList].map((serverInfo, i) => {
           return (
             <Dropdown
               key={i}
@@ -25,10 +25,7 @@ const Hello: React.FC = React.memo(() => {
                   {
                     key: 'remove',
                     label: 'Delete Server',
-                    disabled:
-                      defaultServerList.findIndex(
-                        (info) => info.url === serverInfo.url
-                      ) >= 0, // is default server
+                    disabled: i < defaultServerList.length, // is default server
                     onClick: () => {
                       Modal.confirm({
                         title: 'Do you Want to delete this server?',

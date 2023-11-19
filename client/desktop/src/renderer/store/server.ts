@@ -31,7 +31,7 @@ export const defaultServerList: ServerInfo[] = [
 export const useServerStore = create<ServerStoreState>()(
   persist(
     immer((set) => ({
-      serverList: defaultServerList,
+      serverList: [],
       addServer: async (url: string) => {
         try {
           // 获取 Tailchat 客户端配置
