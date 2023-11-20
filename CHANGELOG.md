@@ -1,5 +1,36 @@
 
 
+## [1.9.5](https://github.com/msgbyte/tailchat/compare/v1.9.4...v1.9.5) (2023-11-20)
+
+
+### Bug Fixes
+
+* add limit for emotion style to fix transparent panel ([766477a](https://github.com/msgbyte/tailchat/commit/766477ac171be5d1817c8a5beca6bb393d4f1208))
+* fix a bug ban user clean cache will be have a gap between userinfo and token cache [#179](https://github.com/msgbyte/tailchat/issues/179) ([7e239ea](https://github.com/msgbyte/tailchat/commit/7e239ead8675b46becf66222de396cbde06987bb))
+* fixed an issue where the inbox groupId was incorrect when replying in a private conversation ([5b16ff9](https://github.com/msgbyte/tailchat/commit/5b16ff90c9e481a4f463a7c0b928342a7fced6ec))
+
+
+### Features
+
+* add action inviteCall in livekit ([087713a](https://github.com/msgbyte/tailchat/commit/087713afbf4aae7c50c139871eae6ecabc16956c))
+* add dark theme support for notification ([aa43d04](https://github.com/msgbyte/tailchat/commit/aa43d0462bb954d54fe920819a3421ffcb78e6ed))
+* add env MINIO_SSL [#172](https://github.com/msgbyte/tailchat/issues/172) ([7be0489](https://github.com/msgbyte/tailchat/commit/7be0489542229bf5d2e202950720dbdb2b7403c9))
+* add fast change role group with group member right click menu manage [#171](https://github.com/msgbyte/tailchat/issues/171) ([ed3e9ca](https://github.com/msgbyte/tailchat/commit/ed3e9ca6d756fda56af6e4e3a18f54dee6786edf))
+* add invite call when start meeting from conversation ([8906b93](https://github.com/msgbyte/tailchat/commit/8906b933d7e0e50e487770da16f296f86636b8de))
+* add livekit call invite notication card and actions ([505c6c3](https://github.com/msgbyte/tailchat/commit/505c6c38eda3d180eb9086c6bc68f02b00301a8c))
+* add livekit meeting context and ([c937178](https://github.com/msgbyte/tailchat/commit/c937178956a119a618da103ce839ac11f78f84bf))
+* add livekit member panel ([19a1e5d](https://github.com/msgbyte/tailchat/commit/19a1e5dbe58346ec9dd7aaffe12cc413a08d7982))
+* add livekit panel for converse dm meeting ([0be2bf6](https://github.com/msgbyte/tailchat/commit/0be2bf6c470cb202acae90c4be3194d98b8549d4))
+* add ref to avoid send invite twice ([67b29ac](https://github.com/msgbyte/tailchat/commit/67b29ac26cac3fbe0512a189f2b5823104ccb9b3))
+* add search friend feature [#157](https://github.com/msgbyte/tailchat/issues/157) ([a7fe82e](https://github.com/msgbyte/tailchat/commit/a7fe82eff341e071597d24229f4fa6b2efae9223))
+* added reload button ([72a68d3](https://github.com/msgbyte/tailchat/commit/72a68d3bdef0726ffa24d3e534081b10fea3d78d))
+* web panel support add background color which useful for transparent background website ([5fe0ff0](https://github.com/msgbyte/tailchat/commit/5fe0ff06d7c9248f3769a9c3294f7485764e5b44))
+
+
+### Performance Improvements
+
+* **desktop:** improve server list manager logic ([3a6a729](https://github.com/msgbyte/tailchat/commit/3a6a729e1f17589edd63a7216a3258eed881b70c))
+
 ## [1.9.4](https://github.com/msgbyte/tailchat/compare/v1.9.3...v1.9.4) (2023-11-06)
 
 ## [1.9.3](https://github.com/msgbyte/tailchat/compare/v1.9.2...v1.9.3) (2023-11-06)
