@@ -7,9 +7,9 @@ services:
     # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
     # array). The sample below assumes your primary file is in the root of your project.
     #
-    # build:
-    #   context: .
-    #   dockerfile: .devcontainer/Dockerfile
+    build:
+      context: .
+      dockerfile: ./Dockerfile
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
