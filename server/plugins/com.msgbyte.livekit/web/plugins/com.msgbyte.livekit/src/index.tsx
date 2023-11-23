@@ -18,6 +18,11 @@ const PLUGIN_ID = 'com.msgbyte.livekit';
 
 console.log(`Plugin ${PLUGIN_ID} is loaded`);
 
+// 预加载铃声
+(() => {
+  new Audio('/audio/telephone.mp3').preload = 'auto';
+})();
+
 const LivekitPanel = Loadable(() => import('./group/LivekitPanel'), {
   componentName: `${PLUGIN_ID}:LivekitPanel`,
 });
