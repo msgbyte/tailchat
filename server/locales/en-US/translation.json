@@ -1,6 +1,7 @@
 {
   "k127fc33c": "User banned",
   "k158d2868": "No delete permission",
+  "k160ba1aa": "No permission to edit group panel",
   "k16605863": "Token content is incorrect",
   "k16ec3222": "No permission to edit invite code",
   "k17f8532": "No message found",
@@ -20,13 +21,13 @@
   "k42cdd273": "Username already exists!",
   "k43ef8fbe": "{{nickname}} automatically join this group through the system settings",
   "k45c8d1bf": "Claimed user does not exist",
+  "k4640b9fc": "No edit group identity group permissions",
   "k493e44f1": "Can't add myself as a friend",
   "k4fd701fe": "Email does not exist",
   "k5191530a": "Cannot send duplicate friend requests",
   "k590cb8b6": "Account does not exist",
   "k5f7a33eb": "The server does not allow guests to login",
   "k64a3c830": "User does not exist",
-  "k65a070a1": "Not group admin cannot edit",
   "k66e25a3": "No current session privileges",
   "k674f3f65": "Email verification failed, please enter correct email OTP",
   "k719464e0": "This message has been recall",
@@ -72,5 +73,7 @@
   "ke9fabda8": "Token Invalid",
   "kea5b4254": "This channel has opened a call",
   "kebcb959": "The server does not allow new user register",
-  "kef3676e1": "The invitation code has expired"
+  "kef3676e1": "The invitation code has expired",
+  "kf09c23d3": "Cannot edit if you are not the group owner",
+  "kf1a995fb": "No permission to edit group information"
 }
