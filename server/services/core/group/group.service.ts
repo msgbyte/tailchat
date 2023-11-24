@@ -425,19 +425,32 @@ class GroupService extends TcService {
       throw new EntityError(t('该数据不允许修改'));
     }
 
-    const [isGroupOwner, hasRolePermission] = await call(
-      ctx
-    ).checkUserPermissions(groupId, userId, [
+    const [
+      isGroupOwner,
+      hasBaseInfoPermission,
+      hasRolePermission,
+      hasManagePanelPermission,
+    ] = await call(ctx).checkUserPermissions(groupId, userId, [
       PERMISSION.core.owner,
+      PERMISSION.core.groupBaseInfo,
       PERMISSION.core.manageRoles,
+      PERMISSION.core.managePanel,
     ]);
 
-    if (fieldName === 'fallbackPermissions') {
+    if (['roles', 'fallbackPermissions'].includes(fieldName)) {
       if (!hasRolePermission) {
-        throw new NoPermissionError(t('没有操作权限'));
+        throw new NoPermissionError(t('没有编辑群组身份组权限'));
+      }
+    } else if (['name', 'avatar', 'description'].includes(fieldName)) {
+      if (!hasBaseInfoPermission) {
+        throw new NoPermissionError(t('没有编辑群组信息权限'));
+      }
+    } else if (fieldName === 'panels') {
+      if (!hasManagePanelPermission) {
+        throw new NoPermissionError(t('没有编辑群组面板权限'));
       }
     } else if (!isGroupOwner) {
-      throw new NoPermissionError(t('不是群组管理员无法编辑'));
+      throw new NoPermissionError(t('不是群组所有者无法编辑'));
     }
 
     const group = await this.adapter.model.findById(groupId).exec();

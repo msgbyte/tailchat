@@ -11,18 +11,23 @@ import React from 'react';
 import { Avatar } from 'tailchat-design';
 import {
   modifyGroupField,
+  PERMISSION,
   showSuccessToasts,
   showToasts,
   t,
   UploadFileResult,
   useAsyncRequest,
   useGroupInfo,
+  useHasGroupPermission,
 } from 'tailchat-shared';
 
 export const GroupSummary: React.FC<{
   groupId: string;
 }> = React.memo(({ groupId }) => {
   const groupInfo = useGroupInfo(groupId);
+  const [hasBaseInfoPermission] = useHasGroupPermission(groupId, [
+    PERMISSION.core.groupBaseInfo,
+  ]);
 
   const [, handleUpdateGroupName] = useAsyncRequest(
     async (newName: string) => {
@@ -70,7 +75,7 @@ export const GroupSummary: React.FC<{
           <FullModalField
             title={t('群组名称')}
             value={groupInfo.name}
-            editable={true}
+            editable={hasBaseInfoPermission}
             renderEditor={DefaultFullModalInputEditorRender}
             onSave={handleUpdateGroupName}
           />
@@ -84,7 +89,7 @@ export const GroupSummary: React.FC<{
             title={t('群组描述')}
             value={groupInfo.description ?? ''}
             content={<pre>{groupInfo.description ?? ''}</pre>}
-            editable={true}
+            editable={hasBaseInfoPermission}
             renderEditor={GroupDescriptionEditorRender}
             onSave={handleUpdateGroupDescription}
           />
