@@ -19,7 +19,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(
             className="overflow-hidden"
             onOpenChange={setVisible}
             menu={props.menu}
-            placement="topRight"
+            placement="bottomRight"
             trigger={['click']}
           >
             <div
