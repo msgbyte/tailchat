@@ -27,12 +27,13 @@ UpdateRoom.displayName = 'UpdateRoom';
 type ActiveRoomProps = {
   userChoices: LocalUserChoices;
   roomName: string;
+  autoInviteIds?: string[];
   region?: string;
   onLeave?: () => void;
   hq?: boolean;
 };
 export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
-  const { roomName, userChoices, onLeave, hq } = props;
+  const { roomName, userChoices, autoInviteIds, onLeave, hq } = props;
 
   const token = useToken(roomName);
   const liveKitUrl = useServerUrl();
@@ -73,7 +74,10 @@ export const ActiveRoom: React.FC<ActiveRoomProps> = React.memo((props) => {
           onDisconnected={onLeave}
         >
           <MeetingContextProvider meetingId={roomName}>
-            <VideoConference chatMessageFormatter={formatChatMessageLinks} />
+            <VideoConference
+              autoInviteIds={autoInviteIds}
+              chatMessageFormatter={formatChatMessageLinks}
+            />
           </MeetingContextProvider>
 
           <UpdateRoom />

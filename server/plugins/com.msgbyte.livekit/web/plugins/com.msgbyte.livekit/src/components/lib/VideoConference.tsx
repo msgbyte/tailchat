@@ -36,6 +36,7 @@ import styled from 'styled-components';
 
 export interface VideoConferenceProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  autoInviteIds?: string[];
   chatMessageFormatter?: MessageFormatter;
 }
 
@@ -68,14 +69,14 @@ const IsCallingContainer = styled.div`
  * @public
  */
 export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
-  ({ chatMessageFormatter, ...props }) => {
+  ({ autoInviteIds, chatMessageFormatter, ...props }) => {
     const lastAutoFocusedScreenShareTrack =
       React.useRef<TrackReferenceOrPlaceholder | null>(null);
     const rightPanel = useMeetingContextState((state) => state.rightPanel);
     const invitingUserIds = useMeetingContextState(
       (state) => state.invitingUserIds
     );
-    useMeetingInit();
+    useMeetingInit({ autoInviteIds });
 
     const tracks = useTracks(
       [
@@ -179,7 +180,7 @@ export const VideoConference: React.FC<VideoConferenceProps> = React.memo(
 );
 VideoConference.displayName = 'VideoConference';
 
-function useMeetingInit() {
+function useMeetingInit({ autoInviteIds }: { autoInviteIds?: string[] }) {
   const inviteUsers = useMeetingContextState((state) => state.inviteUsers);
   const inviteUserCompleted = useMeetingContextState(
     (state) => state.inviteUserCompleted
@@ -201,7 +202,6 @@ function useMeetingInit() {
     hasBeenSendInviteRef.current = true;
 
     // Auto invite user on start
-    const autoInviteIds = (window as any).autoInviteIds as string[];
     if (Array.isArray(autoInviteIds) && autoInviteIds.length > 0) {
       inviteUsers(autoInviteIds);
     }

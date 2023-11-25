@@ -10,6 +10,7 @@ import { useLivekitState } from '../store/useLivekitState';
 interface LivekitViewProps {
   roomName: string;
   url: string;
+  autoInviteIds?: string[];
 }
 const _LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
   const { setActive, setDeactive } = useLivekitState();
@@ -26,6 +27,7 @@ const _LivekitView: React.FC<LivekitViewProps> = React.memo((props) => {
   return (
     <PureLivekitView
       roomName={props.roomName}
+      autoInviteIds={props.autoInviteIds}
       onJoin={handleJoin}
       onLeave={handleLeave}
     />
@@ -39,6 +41,7 @@ export const LivekitView = withKeepAliveOverlay(_LivekitView, {
 
 interface PureLivekitViewProps {
   roomName: string;
+  autoInviteIds?: string[];
   onJoin?: () => Promise<void>;
   onLeave?: () => void;
 }
@@ -73,6 +76,7 @@ export const PureLivekitView: React.FC<PureLivekitViewProps> = React.memo(
           <ActiveRoom
             roomName={props.roomName}
             userChoices={preJoinChoices}
+            autoInviteIds={props.autoInviteIds}
             onLeave={handleLeave}
           />
         ) : (

@@ -89,4 +89,8 @@ export const Translate = {
     'zh-CN': '邀请你加入会话',
     'en-US': 'invite you to join conversation',
   }),
+  notFoundMeeting: localTrans({
+    'zh-CN': '没有找到会议',
+    'en-US': 'Not found meeting',
+  }),
 };

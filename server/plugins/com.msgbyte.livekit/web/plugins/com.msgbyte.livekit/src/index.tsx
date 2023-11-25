@@ -8,13 +8,15 @@ import {
   regSocketEventListener,
   getGlobalState,
   showNotification,
+  navigate,
+  isMobile,
 } from '@capital/common';
 import { Loadable } from '@capital/component';
-import { useIconIsShow } from './navbar/useIconIsShow';
+import { useIconIsShow, usePersionPanelIsShow } from './navbar/useIconIsShow';
 import { Translate } from './translate';
 import React from 'react';
-
-const PLUGIN_ID = 'com.msgbyte.livekit';
+import { useLivekitState } from './store/useLivekitState';
+import { PLUGIN_ID } from './consts';
 
 console.log(`Plugin ${PLUGIN_ID} is loaded`);
 
@@ -80,6 +82,15 @@ regPluginPanelRoute({
   component: LivekitMeetingPanel,
 });
 
+regCustomPanel({
+  position: 'personal',
+  icon: 'mingcute:voice-line',
+  name: `${PLUGIN_ID}/livekitPersonMeeting`,
+  label: Translate.voiceChannel,
+  render: LivekitMeetingPanel,
+  useIsShow: usePersionPanelIsShow,
+});
+
 // 发起私信会议
 regPluginPanelAction({
   name: `${PLUGIN_ID}/groupAction`,
@@ -92,14 +103,26 @@ regPluginPanelAction({
     const members: string[] =
       state.chat?.converses?.[converseId]?.members ?? [];
     const shouldInviteUserIds = members.filter((m) => m !== currentUserId);
-    const win = panelWindowManager.open(
-      `/panel/plugin/${PLUGIN_ID}/meeting/${converseId}`,
-      {
-        width: 1280,
-        height: 768,
-      }
-    );
-    (win.window as any).autoInviteIds = shouldInviteUserIds;
+
+    if (isMobile()) {
+      // 如果是手机端则内嵌显示
+      useLivekitState.setState({
+        currentMeetingId: converseId,
+        autoInviteIds: shouldInviteUserIds,
+      });
+      const url = `/main/personal/custom/${PLUGIN_ID}/livekitPersonMeeting`;
+      navigate(url);
+    } else {
+      // 如果是桌面端则弹出独立窗口
+      const win = panelWindowManager.open(
+        `/panel/plugin/${PLUGIN_ID}/meeting/${converseId}`,
+        {
+          width: 1280,
+          height: 768,
+        }
+      );
+      (win.window as any).autoInviteIds = shouldInviteUserIds;
+    }
   },
 });
 
