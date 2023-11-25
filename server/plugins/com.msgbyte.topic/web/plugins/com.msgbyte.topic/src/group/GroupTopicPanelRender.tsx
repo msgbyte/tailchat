@@ -58,6 +58,7 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
     topicMap,
     addTopicPanel,
     addTopicItem,
+    deleteTopicItem,
     updateTopicItem,
     resetTopicPanel,
   } = useTopicStore();
@@ -115,6 +116,18 @@ const GroupTopicPanelRender: React.FC = React.memo(() => {
        */
       if (topic.panelId === panelId) {
         addTopicItem(panelId, topic);
+      }
+    }
+  );
+
+  useGlobalSocketEvent(
+    'plugin:com.msgbyte.topic.delete',
+    (info: { panelId: string; topicId: string }) => {
+      /**
+       * 仅处理当前面板的话题更新
+       */
+      if (info.panelId === panelId) {
+        deleteTopicItem(panelId, info.topicId);
       }
     }
   );

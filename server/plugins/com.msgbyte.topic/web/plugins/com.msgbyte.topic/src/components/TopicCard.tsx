@@ -4,6 +4,8 @@ import {
   showMessageTime,
   showSuccessToasts,
   useAsyncRequest,
+  useCurrentUserInfo,
+  useGroupInfo,
 } from '@capital/common';
 import {
   IconBtn,
@@ -57,6 +59,11 @@ const Root = styled.div`
         margin-bottom: 6px;
       }
     }
+
+    .footer {
+      display: flex;
+      gap: 4px;
+    }
   }
 `;
 
@@ -76,6 +83,9 @@ export const TopicCard: React.FC<{
   const topic: Partial<GroupTopic> = props.topic ?? {};
   const [showReply, toggleShowReply] = useReducer((state) => !state, false);
   const [comment, setComment] = useState('');
+  const groupInfo = useGroupInfo(topic.groupId);
+  const groupOwnerId = groupInfo?.owner;
+  const userId = useCurrentUserInfo()._id;
 
   const [{ loading }, handleComment] = useAsyncRequest(async () => {
     await request.post('createComment', {
@@ -89,6 +99,14 @@ export const TopicCard: React.FC<{
     toggleShowReply();
     showSuccessToasts();
   }, [topic.groupId, topic.panelId, topic._id, comment]);
+
+  const [, handleDeleteTopic] = useAsyncRequest(async () => {
+    await request.post('delete', {
+      groupId: topic.groupId,
+      panelId: topic.panelId,
+      topicId: topic._id,
+    });
+  }, []);
 
   return (
     <MessageAckContainer converseId={topic.panelId} messageId={topic._id}>
@@ -119,6 +137,14 @@ export const TopicCard: React.FC<{
               icon="mdi:message-reply-text-outline"
               onClick={toggleShowReply}
             />
+
+            {userId === groupOwnerId && (
+              <IconBtn
+                title={Translate.delete}
+                icon="mdi:delete-outline"
+                onClick={handleDeleteTopic}
+              />
+            )}
           </div>
 
           {showReply && (

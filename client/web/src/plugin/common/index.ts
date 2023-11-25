@@ -66,6 +66,7 @@ export {
   showNotification,
   fetchAvailableServices,
   isValidStr,
+  useGroupInfo,
   useGroupPanelInfo,
   sendMessage,
   showMessageTime,
@@ -100,7 +101,13 @@ export {
 export function useCurrentUserInfo() {
   const userInfo = useUserInfo();
 
-  return _pick(userInfo, ['email', 'nickname', 'discriminator', 'avatar']);
+  return _pick(userInfo, [
+    '_id',
+    'email',
+    'nickname',
+    'discriminator',
+    'avatar',
+  ]);
 }
 
 /**

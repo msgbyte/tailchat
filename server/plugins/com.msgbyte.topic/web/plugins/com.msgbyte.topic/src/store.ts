@@ -11,6 +11,7 @@ interface TopicStoreState {
   topicMap: TopicPanelMap;
   addTopicPanel: (panelId: string, topicList: GroupTopic[]) => void;
   addTopicItem: (panelId: string, topic: GroupTopic) => void;
+  deleteTopicItem: (panelId: string, topicId: string) => void;
   updateTopicItem: (panelId: string, topic: GroupTopic) => void;
   resetTopicPanel: (panelId: string) => void;
 }
@@ -34,6 +35,15 @@ export const useTopicStore = create<
       set((state) => {
         if (state.topicMap[panelId]) {
           state.topicMap[panelId].unshift(topic);
+        }
+      });
+    },
+    deleteTopicItem: (panelId, topicId) => {
+      set((state) => {
+        if (state.topicMap[panelId]) {
+          state.topicMap[panelId] = state.topicMap[panelId].filter(
+            (item) => item._id !== topicId
+          );
         }
       });
     },
