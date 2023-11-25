@@ -21,6 +21,7 @@ export {
 } from '@/components/Modal';
 export { Loadable } from '@/components/Loadable';
 export { useIsMobile } from '@/hooks/useIsMobile';
+export { isMobile } from '@/utils/device-helper';
 export {
   getGlobalState,
   useGlobalSocketEvent,
