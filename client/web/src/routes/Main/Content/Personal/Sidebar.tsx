@@ -14,6 +14,7 @@ import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import { SectionHeader } from '@/components/SectionHeader';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
 import { pluginCustomPanel } from '@/plugin/common';
+import { CustomSidebarItem } from '../CustomSidebarItem';
 
 const SidebarSection: React.FC<
   PropsWithChildren<{
@@ -73,12 +74,7 @@ export const PersonalSidebar: React.FC = React.memo(() => {
         {pluginCustomPanel
           .filter((p) => p.position === 'personal')
           .map((p) => (
-            <SidebarItem
-              key={p.name}
-              name={p.label}
-              icon={<Icon icon={p.icon} />}
-              to={`/main/personal/custom/${p.name}`}
-            />
+            <CustomSidebarItem key={p.name} panelInfo={p} />
           ))}
 
         <SidebarSection

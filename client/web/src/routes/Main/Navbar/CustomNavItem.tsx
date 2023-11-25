@@ -12,10 +12,12 @@ const defaultUseIsShow = () => true;
  */
 export const NavbarCustomNavItem: React.FC<{
   panelInfo: PluginCustomPanel;
+  /**
+   * 是否包含背景
+   */
   withBg: boolean;
 }> = React.memo(({ panelInfo, withBg }) => {
   const useIsShow = useMemo(() => panelInfo.useIsShow ?? defaultUseIsShow, []);
-
   const isShow = useIsShow();
 
   if (!isShow) {
