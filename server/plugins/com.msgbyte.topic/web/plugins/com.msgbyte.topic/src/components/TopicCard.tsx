@@ -13,6 +13,7 @@ import {
   UserName,
   UserAvatar,
   MessageAckContainer,
+  Popconfirm,
 } from '@capital/component';
 import styled from 'styled-components';
 import type { GroupTopic } from '../types';
@@ -139,11 +140,12 @@ export const TopicCard: React.FC<{
             />
 
             {userId === groupOwnerId && (
-              <IconBtn
-                title={Translate.delete}
-                icon="mdi:delete-outline"
-                onClick={handleDeleteTopic}
-              />
+              <Popconfirm
+                title={Translate.topicDeleteConfimTip}
+                onConfirm={handleDeleteTopic}
+              >
+                <IconBtn title={Translate.delete} icon="mdi:delete-outline" />
+              </Popconfirm>
             )}
           </div>
 

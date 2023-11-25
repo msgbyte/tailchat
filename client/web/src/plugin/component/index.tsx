@@ -15,6 +15,7 @@ export {
   Popover,
   Tag,
   Skeleton,
+  Popconfirm,
 } from 'antd';
 export const TextArea = Input.TextArea;
 export {

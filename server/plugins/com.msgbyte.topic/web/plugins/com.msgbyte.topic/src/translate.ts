@@ -26,4 +26,8 @@ export const Translate = {
     'zh-CN': '话题信息异常',
     'en-US': 'Topic Data Error',
   }),
+  topicDeleteConfimTip: localTrans({
+    'zh-CN': '你确定要删除该话题么',
+    'en-US': 'Are you sure you want to delete this topic?',
+  }),
 };
