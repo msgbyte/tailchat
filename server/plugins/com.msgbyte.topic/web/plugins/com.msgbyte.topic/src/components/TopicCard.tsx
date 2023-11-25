@@ -91,7 +91,7 @@ export const TopicCard: React.FC<{
   }, [topic.groupId, topic.panelId, topic._id, comment]);
 
   return (
-    <MessageAckContainer>
+    <MessageAckContainer converseId={topic.panelId} messageId={topic._id}>
       <Root>
         <div className="left">
           <UserAvatar userId={topic.author} />
