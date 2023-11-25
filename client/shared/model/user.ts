@@ -69,6 +69,18 @@ const builtinUserInfo: Record<string, () => UserBaseInfo> = {
     emailVerified: false,
     banned: false,
   }),
+  '': () => ({
+    // dummy
+    _id: '',
+    email: '',
+    nickname: '',
+    discriminator: '0000',
+    avatar: null,
+    temporary: false,
+    type: 'normalUser',
+    emailVerified: false,
+    banned: false,
+  }),
 };
 
 /**
