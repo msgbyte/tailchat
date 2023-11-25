@@ -14,6 +14,8 @@ import { Translate } from '../../translate';
 import { useMediaQuery } from '../../utils/useMediaQuery';
 import { useMeetingContextState } from '../../context/MeetingContext';
 import { Icon } from '@capital/component';
+import { useIsMobile } from '@capital/common';
+import { useEffect, useState } from 'react';
 
 /** @public */
 export type ControlBarControls = {
@@ -48,9 +50,10 @@ export type ControlBarProps = React.HTMLAttributes<HTMLDivElement> & {
  * @public
  */
 export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
-  const [isChatOpen, setIsChatOpen] = React.useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const layoutContext = useMaybeLayoutContext();
-  React.useEffect(() => {
+  const isMobile = useIsMobile();
+  useEffect(() => {
     if (layoutContext?.widget.state?.showChat !== undefined) {
       setIsChatOpen(layoutContext?.widget.state?.showChat);
     }
@@ -143,7 +146,8 @@ export function ControlBar({ variation, controls, ...props }: ControlBarProps) {
         </button>
       )}
 
-      {visibleControls.member && (
+      {/* Hide member control in mobile version because of not ready */}
+      {!isMobile && visibleControls.member && (
         <button className="lk-button" onClick={() => setRightPanel('member')}>
           {showIcon && <Icon icon="mdi:account-multiple" />}
           {showText && Translate.member}
