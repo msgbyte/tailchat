@@ -84,11 +84,13 @@ export const smtpCommand: CommandModule = {
               from: sender,
               to: target,
               subject: `Test email send in ${new Date().toLocaleDateString()}`,
-              text: 'This is a test email send by tailchat-cli',
+              text: `This is a test email send by tailchat-cli at ${new Date().toLocaleString()}`,
             });
             console.log('Send Result:', res);
           } catch (err) {
             console.log('Send Failed:', String(err));
+          } finally {
+            transporter.close();
           }
         }
       )
