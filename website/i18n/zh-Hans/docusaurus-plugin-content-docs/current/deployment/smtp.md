@@ -42,3 +42,4 @@ Options:
 
 - `smtps://<username>:<password>@smtp.exmail.qq.com/?pool=true`
 - `smtps://<username>:<password>@smtp.163.com/?pool=true`
+- `smtps://<qqNumber>:<password>@smtp.qq.com/?pool=true`
