@@ -18,6 +18,7 @@ Feel free submit `pr/issue` to submit your contribution to `Tailchat`, so that w
 ## Video
 
 - [【好玩儿的Docker项目】激情畅聊！十分钟搭建一个插件化易拓展的开源即时聊天（IM）应用——Tailchat](https://www.bilibili.com/video/BV1aG411u7M8/)
+- [简单搭建插件化易拓展的开源即时聊天（IM）应用——Tailchat](https://www.bilibili.com/video/BV1UN4y117M8/)
 
 ## Article
 
