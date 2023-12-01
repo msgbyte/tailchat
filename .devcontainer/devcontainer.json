@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
 {
-	"name": "Existing Docker Compose (Extend)",
+	"name": "Tailchat Devcontainer",
 
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
@@ -18,13 +18,23 @@
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {}
-	}
+	},
+	"containerEnv": {
+		"TRANSPORTER": "redis://redis:6379",
+		"REDIS_URL": "redis://redis:6379",
+		"MONGO_URL": "mongodb://mongo/tailchat",
+		"MINIO_URL": "minio:9000",
+    "MINIO_USER": "tailchat",
+		"MINIO_PASS": "com.msgbyte.tailchat",
+		"ADMIN_USER": "tailchat",
+		"ADMIN_PASS": "tailchat"
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [11011, 11000],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -33,10 +43,20 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	"postCreateCommand": "pnpm install",
 
 	// Configure tool-specific properties.
-	// "customizations": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"maattdd.gitless",
+				"esbenp.prettier-vscode",
+				"njzy.stats-bar",
+				"bradlc.vscode-tailwindcss",
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	},
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "devcontainer"
