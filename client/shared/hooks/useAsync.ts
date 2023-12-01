@@ -1,4 +1,4 @@
-import { DependencyList, useEffect } from 'react';
+import { DependencyList, useEffect, useRef } from 'react';
 import type { FunctionReturningPromise } from '../types';
 import { useAsyncFn } from './useAsyncFn';
 
@@ -11,8 +11,17 @@ export function useAsync<T extends FunctionReturningPromise>(
   const [state, callback] = useAsyncFn(fn, deps, {
     loading: true,
   });
+  const lockRef = useRef(false);
 
   useEffect(() => {
+    if (lockRef.current === true) {
+      return;
+    }
+
+    if (deps.length === 0) {
+      lockRef.current = true;
+    }
+
     callback();
   }, [callback]);
 
