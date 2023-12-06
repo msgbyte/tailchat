@@ -21,6 +21,7 @@ export const AppMain: React.FC<Props> = React.memo((props) => {
       <WebView
         ref={webviewRef}
         source={{ uri: props.host }}
+        mediaPlaybackRequiresUserAction={false}
         injectedJavaScriptBeforeContentLoaded={generateInjectedScript()}
         onMessage={(e) => {
           if (!webviewRef.current) {

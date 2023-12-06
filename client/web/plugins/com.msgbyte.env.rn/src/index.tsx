@@ -23,6 +23,7 @@ regCustomPanel({
 });
 
 forwardSharedEvent('loadColorScheme');
+forwardSharedEvent('ensureWebRTCPermission');
 forwardSharedEvent('loginSuccess', async (payload) => {
   let token = window.localStorage.getItem('jsonwebtoken');
   try {

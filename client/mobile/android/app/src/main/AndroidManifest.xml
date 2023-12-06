@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 这份不需要，应该是默认都有的。但是保留万一有的手机不行还可以手动添加 -->
+    <!-- <uses-feature android:name="android.hardware.audio.output" />
+    <uses-feature android:name="android.hardware.microphone" /> -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
       android:name=".MainApplication"

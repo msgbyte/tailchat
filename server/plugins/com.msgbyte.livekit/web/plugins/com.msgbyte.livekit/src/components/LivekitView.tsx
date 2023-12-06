@@ -1,6 +1,6 @@
-import { showErrorToasts, useEvent } from '@capital/common';
+import { sharedEvent, showErrorToasts, useEvent } from '@capital/common';
 import { withKeepAliveOverlay } from '@capital/component';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { LocalUserChoices } from '@livekit/components-react';
 import { PreJoinView } from './lib/PreJoinView';
 import { LivekitContainer } from './LivekitContainer';
@@ -56,8 +56,12 @@ export const PureLivekitView: React.FC<PureLivekitViewProps> = React.memo(
 
     const handleError = useEvent((err: Error) => {
       showErrorToasts('error while setting up prejoin');
-      console.log('error while setting up prejoin', err);
+      console.error('error while setting up prejoin', err);
     });
+
+    useEffect(() => {
+      sharedEvent.emit('ensureWebRTCPermission');
+    }, []);
 
     const handleJoin = useEvent(async (userChoices: LocalUserChoices) => {
       await props.onJoin?.();

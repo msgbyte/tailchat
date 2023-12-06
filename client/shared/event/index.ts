@@ -24,6 +24,12 @@ export interface SharedEventMap {
   loadColorScheme: (schemeName: string) => void;
 
   /**
+   * 请求webrtc相关权限
+   * 目前用于视频会议
+   */
+  ensureWebRTCPermission: () => void;
+
+  /**
    * 网络状态更新
    */
   updateNetworkStatus: (

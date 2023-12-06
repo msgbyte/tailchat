@@ -33,3 +33,7 @@ export function urlResolve(...str: string[]) {
   });
   return normalize(flatten);
 }
+
+export function isDev(): boolean {
+  return !!__DEV__;
+}

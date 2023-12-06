@@ -1,1 +1,1 @@
-export * from '../../../packages/types/index';
+export * from '../../../packages/types';
