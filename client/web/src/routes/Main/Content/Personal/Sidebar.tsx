@@ -40,9 +40,9 @@ SidebarSection.displayName = 'SidebarSection';
 export const PersonalSidebar: React.FC = React.memo(() => {
   const converseList = useDMConverseList();
   const userInfo = useUserInfo();
-  const { disablePluginStore } = useGlobalConfigStore((state) => ({
-    disablePluginStore: state.disablePluginStore,
-  }));
+  const disablePluginStore = useGlobalConfigStore(
+    (state) => state.disablePluginStore
+  );
   const hasFriendRequest = useAppSelector(
     (state) =>
       state.user.friendRequests.findIndex(
