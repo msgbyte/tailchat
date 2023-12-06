@@ -27,6 +27,32 @@ export function generateInstallPluginScript() {
   return raw;
 }
 
+export function generateDebugScript() {
+  const inner = `function main() {
+    console.error = (...args) => {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          _isTailchat: true,
+          type: 'console:error',
+          payload: args,
+        })
+      );
+    };
+    console.log = (...args) => {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          _isTailchat: true,
+          type: 'console:log',
+          payload: JSON.stringify(args),
+        })
+      );
+    };
+  }`;
+
+  const raw = `(${inner})()`;
+  return raw;
+}
+
 export function generateInjectedScript(): string {
   return [generateDeviceInfo(), generatePostMessageScript()].join(';');
 }

@@ -1,10 +1,12 @@
 import type WebView from 'react-native-webview';
-import { generateInstallPluginScript } from '.';
+import { generateDebugScript, generateInstallPluginScript } from '.';
 import { useUIStore } from '../../store/ui';
 import type { UserBaseInfo } from '../../types';
 import { initNotificationEnv, showNotification } from '../notifications';
 // import { bindSocketEvent, createSocket } from '../socket';
 import { AppState } from 'react-native';
+import { ensureWebRTCPermission } from '../permissions';
+import { isDev } from '../utils';
 
 export function handleTailchatMessage(
   type: string,
@@ -15,6 +17,11 @@ export function handleTailchatMessage(
 
   if (type === 'init') {
     webview.injectJavaScript(generateInstallPluginScript());
+
+    if (isDev()) {
+      webview.injectJavaScript(generateDebugScript());
+    }
+
     return;
   }
 
@@ -34,6 +41,10 @@ export function handleTailchatMessage(
     }
 
     return;
+  }
+
+  if (type === 'ensureWebRTCPermission') {
+    ensureWebRTCPermission();
   }
 
   if (type === 'bindWebsocket') {
