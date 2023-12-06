@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Divider, ErrorBoundary } from '@capital/component';
 import { MeetingView, MeetingViewProps } from './MeetingView';
 import { SpeakerNames } from './SpeakerNames';
 import { Translate } from '../translate';
+import { sharedEvent } from '@capital/common';
 
 const FloatWindow = styled.div`
   z-index: 100;
@@ -45,6 +46,10 @@ const FloatWindow = styled.div`
 export const FloatMeetingWindow: React.FC<MeetingViewProps> = React.memo(
   (props) => {
     const [folder, setFolder] = useState(false);
+
+    useEffect(() => {
+      sharedEvent.emit('ensureWebRTCPermission');
+    }, []);
 
     return (
       <FloatWindow
