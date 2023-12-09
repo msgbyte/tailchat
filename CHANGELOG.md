@@ -1,5 +1,35 @@
 
 
+# [1.10.0](https://github.com/msgbyte/tailchat/compare/v1.9.5...v1.10.0) (2023-12-09)
+
+
+### Bug Fixes
+
+* cli smtp test command add close logic and add time in body ([7c8749b](https://github.com/msgbyte/tailchat/commit/7c8749bee7de66ef00f20cfdbf0400547900e2f0))
+* fix route disable if disable plugin store ([ad59c97](https://github.com/msgbyte/tailchat/commit/ad59c971d6e2dbb1c77bbf51418058270541b261))
+* fix the bug where the groupheader drop-down menu may expand upwards ([64c0977](https://github.com/msgbyte/tailchat/commit/64c097761a9efedc512be61f1627e535330f6377))
+* fix topic ack not work problem ([bf88662](https://github.com/msgbyte/tailchat/commit/bf886625a9a37d587e58ff9214cacd00babd2838))
+
+
+### Features
+
+* add agora plugin support webrtc permission request ([d290d94](https://github.com/msgbyte/tailchat/commit/d290d94597a681d8843bd91b2590de8ba73f1207))
+* add custom sidebar item ([e73046e](https://github.com/msgbyte/tailchat/commit/e73046e7d540da82eebb703919408225e129bbaa))
+* add debug script inject ([4eedaf8](https://github.com/msgbyte/tailchat/commit/4eedaf87daa1921198798e213a9e2d38167c3441))
+* add device helper for mobile in api ([09200ad](https://github.com/msgbyte/tailchat/commit/09200ad33909d48c31122b88825999e9b4245cbd))
+* add embeding meeting view in mobile when start meeting between conversation ([b97dddf](https://github.com/msgbyte/tailchat/commit/b97dddf60d0d5ffcb9bc0170d6bdb4526b9e18d5))
+* add permission to edit basic info and fixed the bug of incorrect display of group fields ([5d69b32](https://github.com/msgbyte/tailchat/commit/5d69b326b98a7ca7f79831116da99d53da0bf902))
+* add popconfirm for topic delete ([56e97fc](https://github.com/msgbyte/tailchat/commit/56e97fccd73267e4492a1398d4f8ecabd6b2ddf0))
+* add topic delete action ([e012c9e](https://github.com/msgbyte/tailchat/commit/e012c9e20b1c409d0c09fd0de947a43205153137))
+* **mobile:** add webrtc permission grant and allow webrtc service work correct ([3de7fe2](https://github.com/msgbyte/tailchat/commit/3de7fe2c69f4500ac684641b83e10176437a134c))
+
+
+### Performance Improvements
+
+* add audio preload for livekit invite call ([18ae4c4](https://github.com/msgbyte/tailchat/commit/18ae4c4aef7e35bff873e2ac6cc5691c8f910f10))
+* add dummy user to avoid unused user info request ([b2d5d06](https://github.com/msgbyte/tailchat/commit/b2d5d063d663b5b58dc5e4041ebaeae47a686c88))
+* hide mobile member button in livekit ([cc04c36](https://github.com/msgbyte/tailchat/commit/cc04c36a86f63331faaec89e197fe23486d992be))
+
 ## [1.9.5](https://github.com/msgbyte/tailchat/compare/v1.9.4...v1.9.5) (2023-11-20)
 
 
