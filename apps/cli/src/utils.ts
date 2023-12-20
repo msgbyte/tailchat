@@ -7,6 +7,8 @@ export function isDev(): boolean {
 
 /**
  * Add github resource proxy to optimize chinese access speed
+ *
+ * @deprecated this website is down
  */
 export function withGhProxy(url: string): string {
   return `https://ghproxy.com/${url}`;

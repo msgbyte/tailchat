@@ -35,12 +35,10 @@ Run the following command to complete the image download and start:
 - ${chalk.bold('docker compose up -d')} ${chalk.gray('# Start service')}
 ================`);
 
-const envUrl = withGhProxy(
-  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env'
-);
-const configUrl = withGhProxy(
-  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml'
-);
+const envUrl =
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.env';
+const configUrl =
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/docker-compose.yml';
 
 export const dockerInitCommand: CommandModule = {
   command: 'init',

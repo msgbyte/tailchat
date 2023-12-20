@@ -4,12 +4,9 @@ import fs, { mkdirp } from 'fs-extra';
 import path from 'path';
 import ora from 'ora';
 import got from 'got';
-import { withGhProxy } from '../utils';
 
-const onlineDeclarationUrl = withGhProxy(
-  'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts'
-);
-
+const onlineDeclarationUrl =
+  'https://raw.githubusercontent.com/msgbyte/tailchat/master/client/web/tailchat.d.ts';
 export const declarationCommand: CommandModule = {
   command: 'declaration <source>',
   describe: 'Tailchat plugin type declaration',
