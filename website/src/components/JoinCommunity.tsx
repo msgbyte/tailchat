@@ -1,5 +1,5 @@
 import React from 'react';
-import { inviteLink } from '../utils/consts';
+import { discordLink, inviteLink } from '../utils/consts';
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import './JoinCommunity.less';
@@ -16,14 +16,28 @@ export const JoinCommunity: React.FC = React.memo(() => {
           product support, and more.
         </Translate>
       </p>
-      <Link
-        className="button button--primary button--lg"
-        href={inviteLink}
-        data-umami-event="joingroup"
-        data-tianji-event="joingroup"
-      >
-        <Translate>Join Our Group</Translate>
-      </Link>
+
+      <div>
+        <Link
+          className="button button--primary button--lg"
+          href={inviteLink}
+          data-umami-event="joingroup"
+          data-tianji-event="joingroup"
+        >
+          <Translate>Join Tailchat Group</Translate>
+        </Link>
+      </div>
+
+      <div>
+        <Link
+          className="button button--primary button--lg"
+          href={discordLink}
+          data-umami-event="joindiscord"
+          data-tianji-event="joindiscord"
+        >
+          <Translate>Join Discord</Translate>
+        </Link>
+      </div>
 
       <div className="producthunt">
         <a
