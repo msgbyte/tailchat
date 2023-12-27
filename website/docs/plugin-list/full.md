@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Backend plugins (11)
+title: Backend plugins (12)
 ---
 
 ### com.msgbyte.agora Agora
@@ -41,6 +41,14 @@ Parse and get the overview of url information in the chat information, such as t
 
 - [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta)
 - [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.linkmeta/web/plugins/com.msgbyte.linkmeta/manifest.json)
+
+
+### com.msgbyte.livekit livekit
+
+Add livekit to provide meeting and live streaming feature
+
+- [Source Code](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.livekit/web/plugins/com.msgbyte.livekit)
+- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/server/plugins/com.msgbyte.livekit/web/plugins/com.msgbyte.livekit/manifest.json)
 
 
 ### com.msgbyte.meeting Audio and video service (WIP)
