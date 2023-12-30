@@ -1,4 +1,5 @@
 import { getMessageTextDecorators } from '@/plugin/common';
+import { isEmojiCode, stripColons } from '../Emoji/utils';
 
 const emojiNameRegex = /:([a-zA-Z0-9_\-\+]+):/g;
 
@@ -11,9 +12,14 @@ export function preprocessMessage(message: string): string {
   /**
    * 预加工emoji
    */
-  message = message.replace(emojiNameRegex, (code) =>
-    getMessageTextDecorators().emoji(code)
-  );
+  message = message.replace(emojiNameRegex, (matched) => {
+    const code = stripColons(matched);
+    if (isEmojiCode(code)) {
+      return getMessageTextDecorators().emoji(code);
+    } else {
+      return matched;
+    }
+  });
 
   return message;
 }
