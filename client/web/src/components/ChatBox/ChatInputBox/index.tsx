@@ -139,32 +139,30 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = React.memo((props) => {
           {pasteHandlerContainer}
 
           {!disabled && (
-            <>
-              <div className="px-2 flex space-x-1">
-                {pluginChatInputButtons.map((item, i) =>
-                  React.cloneElement(item.render(), {
-                    key: `plugin-chatinput-btn#${i}`,
-                  })
-                )}
+            <div className="px-2 flex space-x-1">
+              {pluginChatInputButtons.map((item, i) =>
+                React.cloneElement(item.render(), {
+                  key: `plugin-chatinput-btn#${i}`,
+                })
+              )}
 
-                <ChatInputEmotion />
+              <ChatInputEmotion />
 
-                {message ? (
-                  <Icon
-                    icon="mdi:send-circle-outline"
-                    className="text-2xl cursor-pointer"
-                    onClick={handleSendMsg}
-                  />
-                ) : (
-                  <ChatInputAddon />
-                )}
-              </div>
-
-              <ChatDropArea />
-            </>
+              {message ? (
+                <Icon
+                  icon="mdi:send-circle-outline"
+                  className="text-2xl cursor-pointer"
+                  onClick={handleSendMsg}
+                />
+              ) : (
+                <ChatInputAddon />
+              )}
+            </div>
           )}
         </div>
       </div>
+
+      {!disabled && <ChatDropArea />}
     </ChatInputActionContext.Provider>
   );
 });
