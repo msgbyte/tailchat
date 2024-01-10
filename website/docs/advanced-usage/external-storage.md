@@ -16,6 +16,7 @@ As the usage scale progresses, the user's storage cost for the Tailchat file sys
 
 You need to configure the environment variables as follows:
 - `MINIO_URL`: s3 service address
+- `MINIO_SSL`: Whether the s3 service enables SSL verification is required for some providers. Default is `false`
 - `MINIO_USER`: s3 service username
 - `MINIO_PASS`: s3 service password
 - `MINIO_BUCKET_NAME`: s3 service bucket name

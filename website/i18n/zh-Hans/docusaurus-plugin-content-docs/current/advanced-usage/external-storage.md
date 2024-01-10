@@ -16,6 +16,7 @@ title: 外部存储
 
 你需要通过环境变量配置如下:
 - `MINIO_URL`: s3服务地址
+- `MINIO_SSL`: s3服务是否启用ssl验证，对于某些提供商是必须的。默认为`false`
 - `MINIO_USER`: s3服务用户名
 - `MINIO_PASS`: s3服务密码
 - `MINIO_BUCKET_NAME`: s3服务 bucket 名
