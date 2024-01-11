@@ -85,16 +85,22 @@ function getCroppedImg(
   const ctx = canvas.getContext('2d');
 
   if (!_isNil(ctx)) {
-    // 设置头像大小
-    const size = 256;
+    // 设定最大尺寸，可以提出来作为参数传入
+    const maxSize = 256;
 
-    canvas.width = size;
-    canvas.height = size;
+    // 计算最大尺寸
+    const size = Math.min(crop.width, crop.height, maxSize);
+
+    // 计算缩放比例
+    const scale = size / Math.max(crop.width, crop.height);
+
+    canvas.width = scale * crop.width;
+    canvas.height = scale * crop.height;
 
     // translate canvas context to a central location on image to allow rotating around the center.
-    ctx.translate(size / 2, size / 2);
+    ctx.translate(canvas.width / 2, canvas.width / 2);
     ctx.rotate(getRadianAngle(rotation));
-    ctx.translate(-size / 2, -size / 2);
+    ctx.translate(-canvas.width / 2, -canvas.width / 2);
 
     // draw rotated image and store data.
     ctx.drawImage(
@@ -105,8 +111,8 @@ function getCroppedImg(
       crop.height,
       0,
       0,
-      size,
-      size
+      canvas.width,
+      canvas.height
     );
   }
 
