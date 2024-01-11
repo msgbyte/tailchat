@@ -33,7 +33,7 @@ vim client/web/src/plugin/builtin.ts
 执行命令编译自己的镜像
 
 ```bash
-docker build . -t tailchat
+docker build -t tailchat .
 ```
 
 其中 `.` 表示当前目录，`-t tailchat` 表示编译的标签是 `tailchat`, 这可以直接被 `docker-compose.yml` 文件读取

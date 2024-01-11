@@ -33,7 +33,7 @@ When the editing is completed, save it and make sure the current directory is in
 Execute the command to compile your own image
 
 ```bash
-docker build . -t tailchat
+docker build -t tailchat .
 ```
 
 Where `.` represents the current directory, `-t tailchat` represents the compiled tag is `tailchat`, which can be read directly by the `docker-compose.yml` file
