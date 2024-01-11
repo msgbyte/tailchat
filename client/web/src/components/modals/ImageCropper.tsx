@@ -85,36 +85,28 @@ function getCroppedImg(
   const ctx = canvas.getContext('2d');
 
   if (!_isNil(ctx)) {
-    const maxSize = Math.max(image.width, image.height);
-    const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
+    // 设置头像大小
+    const size = 256;
 
-    // set each dimensions to double largest dimension to allow for a safe area for the
-    // image to rotate in without being clipped by canvas context
-    canvas.width = safeArea;
-    canvas.height = safeArea;
+    canvas.width = size;
+    canvas.height = size;
 
     // translate canvas context to a central location on image to allow rotating around the center.
-    ctx.translate(safeArea / 2, safeArea / 2);
+    ctx.translate(size / 2, size / 2);
     ctx.rotate(getRadianAngle(rotation));
-    ctx.translate(-safeArea / 2, -safeArea / 2);
+    ctx.translate(-size / 2, -size / 2);
 
     // draw rotated image and store data.
     ctx.drawImage(
       image,
-      safeArea / 2 - image.width * 0.5,
-      safeArea / 2 - image.height * 0.5
-    );
-    const data = ctx.getImageData(0, 0, safeArea, safeArea);
-
-    // set canvas width to final desired crop size - this will clear existing context
-    canvas.width = crop.width;
-    canvas.height = crop.height;
-
-    // paste generated rotate image with correct offsets for x,y crop values.
-    ctx.putImageData(
-      data,
-      Math.round(0 - safeArea / 2 + image.width * 0.5 - crop.x),
-      Math.round(0 - safeArea / 2 + image.height * 0.5 - crop.y)
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      size,
+      size
     );
   }
 
