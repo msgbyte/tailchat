@@ -104,14 +104,14 @@ function getCroppedImg(
     // draw rotated image and store data.
     ctx.drawImage(
       image,
-      crop.x,
-      crop.y,
-      crop.width,
-      crop.height,
       0,
       0,
-      canvas.width,
-      canvas.height
+      image.width,
+      image.height,
+      -crop.x * scale,
+      -crop.y * scale,
+      image.width * scale,
+      image.height * scale
     );
   }
 
