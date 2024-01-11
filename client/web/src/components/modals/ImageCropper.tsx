@@ -73,21 +73,20 @@ let fileUrlTemp: string | null = null; // 缓存裁剪后的图片url
  * @param crop 裁剪信息
  * @param rotation 旋转角度
  * @param fileName 文件名
+ * @param maxSize 最大尺寸
  * @returns 裁剪后的图片blob url
  */
 function getCroppedImg(
   image: HTMLImageElement,
   crop: Area,
   rotation = 0,
-  fileName = 'newFile.jpeg'
+  fileName = 'newFile.jpeg',
+  maxSize = Infinity
 ): Promise<string> {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
   if (!_isNil(ctx)) {
-    // 设定最大尺寸，可以提出来作为参数传入
-    const maxSize = 256;
-
     // 计算最大尺寸
     const size = Math.min(crop.width, crop.height, maxSize);
 
