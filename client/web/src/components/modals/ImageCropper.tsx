@@ -97,9 +97,9 @@ function getCroppedImg(
     canvas.height = scale * crop.height;
 
     // translate canvas context to a central location on image to allow rotating around the center.
-    ctx.translate(canvas.width / 2, canvas.width / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(getRadianAngle(rotation));
-    ctx.translate(-canvas.width / 2, -canvas.width / 2);
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
 
     // draw rotated image and store data.
     ctx.drawImage(
