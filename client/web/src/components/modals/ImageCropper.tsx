@@ -88,7 +88,7 @@ function getCroppedImg(
 
   if (!_isNil(ctx)) {
     // 计算最大尺寸
-    const size = Math.min(crop.width, crop.height, maxSize);
+    const size = Math.min(Math.max(crop.width, crop.height), maxSize);
 
     // 计算缩放比例
     const scale = size / Math.max(crop.width, crop.height);
