@@ -11,9 +11,11 @@ import { ModalWrapper } from '../Modal';
 export const ImageCropperModal: React.FC<{
   imageUrl: string;
   aspect?: number;
+  maxSize?: number;
   onConfirm: (croppedImageBlobUrl: string) => void;
 }> = React.memo((props) => {
   const aspect = props.aspect ?? 1;
+  const maxSize = props.maxSize ?? Infinity;
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [area, setArea] = useState<Area>({ width: 0, height: 0, x: 0, y: 0 });
@@ -21,7 +23,10 @@ export const ImageCropperModal: React.FC<{
   const handleConfirm = async () => {
     const blobUrl = await getCroppedImg(
       await createImage(props.imageUrl),
-      area
+      area,
+      0,
+      'newFile.jpeg',
+      maxSize
     );
     props.onConfirm(blobUrl);
   };
