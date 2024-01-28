@@ -16,8 +16,8 @@ The following is a list of syntaxes currently supported by the `bbcode` plugin:
 | u | underline text | `[u]foo[/u]` | <ins>foo</ins> |
 | s | strikethrough text | `[s]foo[/s]` | <del>foo</del> |
 | url | hyperlink | <div style={{width: 400}}>`[url]https://tailchat.msgbyte.com[/url]` / `[url=https://tailchat.msgbyte.com ]Official website[/url]`</div> | <a>https://tailchat.msgbyte.com</a> / <a href="https://tailchat.msgbyte.com">official website</a> |
-| img | Image | `[img]https://tailchat.msgbyte.com/img/logo.svg[/img]` | <div style={{width: 60}}><img src="https:/ /tailchat.msgbyte.com/img/logo.svg" /></div> |
-| at | Mention | `[at=<hereisuserid>]moonrailgun[/at]` | - |
+| img | image | `[img]https://tailchat.msgbyte.com/img/logo.svg[/img]` | <div style={{width: 60}}><img src="https:/ /tailchat.msgbyte.com/img/logo.svg" /></div> |
+| at | mention user | `[at=<hereisuserid>]moonrailgun[/at]` | - |
 | emoji | expression | `[emoji]smile[/emoji]` | - |
 | markdown / md | markdown syntax support | `[markdown]## Heading[/markdown]` / `[md]## Heading[/md]` | - |
 
