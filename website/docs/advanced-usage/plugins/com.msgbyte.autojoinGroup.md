@@ -5,7 +5,7 @@ title: auto join group
 
 `com.msgbyte.autojoinGroup`
 
-Just need config environment: `AUTOJOIN_GROUP_ID=xxxxx` and restart application
+Just need config environment: `AUTOJOIN_GROUP_ID=xxxxx` and restart server
 
 You should create group from admin or web app manually. and then you can get a groupId.
 

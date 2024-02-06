@@ -5,7 +5,7 @@ title: 自动加入群组
 
 `com.msgbyte.autojoinGroup`
 
-只需要配置环境：`AUTOJOIN_GROUP_ID=xxxxx`并重新启动覅我
+只需要配置环境：`AUTOJOIN_GROUP_ID=xxxxx`并重新启动服务器
 
 您应该从admin或web端手动创建群组。 然后就可以得到一个groupId。
 
