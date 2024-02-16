@@ -1,9 +1,9 @@
 import { UserListItem } from '@/components/UserListItem';
-import { getMessageTextDecorators } from '@/plugin/common';
+import { getMessageTextDecorators, useGroupIdContext } from '@/plugin/common';
 import { stopPropagation } from '@/utils/dom-helper';
 import React from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
-import { t } from 'tailchat-shared';
+import { getGroupConfigWithInfo, t, useGroupInfo } from 'tailchat-shared';
 import { useChatInputMentionsContext } from './context';
 import { MentionCommandItem } from './MentionCommandItem';
 import './input.less';
@@ -33,6 +33,9 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
   (props) => {
     const { users, panels, placeholder, disabled } =
       useChatInputMentionsContext();
+    const groupId = useGroupIdContext();
+    const groupInfo = useGroupInfo(groupId);
+    const { hideGroupMemberDiscriminator } = getGroupConfigWithInfo(groupInfo);
 
     return (
       <MentionsInput
@@ -61,7 +64,10 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
           displayTransform={(id, display) => `@${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (
-            <UserListItem userId={String(suggestion.id)} />
+            <UserListItem
+              userId={String(suggestion.id)}
+              hideDiscriminator={hideGroupMemberDiscriminator}
+            />
           )}
           markup={getMessageTextDecorators().mention('__id__', '__display__')}
         />
