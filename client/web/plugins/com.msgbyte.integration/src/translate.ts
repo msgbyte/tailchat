@@ -29,4 +29,8 @@ export const Translate = {
     'zh-CN': '添加应用机器人到群组',
     'en-US': 'Add app bot to group',
   }),
+  cannotAddBot: localTrans({
+    'zh-CN': '该应用机器人没有开放聊天功能',
+    'en-US': 'This application does not enable chat feature',
+  }),
 };

@@ -107,7 +107,7 @@ const IntegrationPanel: React.FC = React.memo(() => {
                 </Row>
 
                 <div className="action">
-                  {openAppInfo.capability.includes('bot') && (
+                  {openAppInfo.capability.includes('bot') ? (
                     <Button
                       type="primary"
                       size="small"
@@ -115,6 +115,10 @@ const IntegrationPanel: React.FC = React.memo(() => {
                       onClick={handleAddBotIntoGroup}
                     >
                       {Translate.addBot}
+                    </Button>
+                  ) : (
+                    <Button type="primary" size="small" disabled={true}>
+                      {Translate.cannotAddBot}
                     </Button>
                   )}
                 </div>
