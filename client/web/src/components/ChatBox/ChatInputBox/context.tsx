@@ -25,8 +25,8 @@ export function useChatInputActionContext() {
  * Input Mentions
  */
 interface ChatInputMentionsContextProps extends PropsWithChildren {
-  users: SuggestionDataItem[];
-  panels: SuggestionDataItem[];
+  users?: SuggestionDataItem[];
+  panels?: SuggestionDataItem[];
   placeholder?: string;
   disabled?: boolean;
 }

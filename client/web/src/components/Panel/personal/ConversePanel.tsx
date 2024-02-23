@@ -6,6 +6,8 @@ import {
   t,
   useAppSelector,
   useDMConverseName,
+  useUserId,
+  useUserInfoList,
 } from 'tailchat-shared';
 import { CommonPanelWrapper } from '../common/Wrapper';
 import _compact from 'lodash/compact';
@@ -17,6 +19,7 @@ import { IconBtn } from '@/components/IconBtn';
 import { DMPluginPanelActionProps, pluginPanelActions } from '@/plugin/common';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import { MessageSearchPanel } from '../common/MessageSearch';
+import { ChatInputMentionsContextProvider } from '@/components/ChatBox/ChatInputBox/context';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -46,6 +49,10 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
   ({ converseId }) => {
     const converse = useAppSelector(
       (state) => state.chat.converses[converseId]
+    );
+    const userId = useUserId();
+    const userInfos = useUserInfoList(
+      (converse?.members ?? []).filter((m) => m !== userId)
     );
 
     const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
@@ -152,11 +159,18 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
           ]);
         }}
       >
-        <ChatBox
-          converseId={converseId}
-          converseTitle={converseHeader}
-          isGroup={false}
-        />
+        <ChatInputMentionsContextProvider
+          users={userInfos.map((m) => ({
+            id: m._id,
+            display: m.nickname,
+          }))}
+        >
+          <ChatBox
+            converseId={converseId}
+            converseTitle={converseHeader}
+            isGroup={false}
+          />
+        </ChatInputMentionsContextProvider>
       </CommonPanelWrapper>
     );
   }
