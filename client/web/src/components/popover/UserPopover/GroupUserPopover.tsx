@@ -64,6 +64,14 @@ export const GroupUserPopover: React.FC<{
         <Space size={4} wrap={true} className="py-1">
           {groupInfo.owner === userId && <Tag color="gold">{t('创建者')}</Tag>}
 
+          {userInfo.type === 'openapiBot' && (
+            <Tag color="orange">{t('开放平台机器人')}</Tag>
+          )}
+
+          {userInfo.type === 'pluginBot' && (
+            <Tag color="orange">{t('插件机器人')}</Tag>
+          )}
+
           {userInfo.temporary && <Tag color="processing">{t('游客')}</Tag>}
 
           {roleNames.map((name) => (

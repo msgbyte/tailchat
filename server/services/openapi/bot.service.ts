@@ -48,7 +48,12 @@ class OpenBotService extends TcService {
       }
 
       got
-        .post(callbackUrl, { json: payload })
+        .post(callbackUrl, {
+          json: payload,
+          headers: {
+            'X-TC-Payload-Type': 'inbox',
+          },
+        })
         .then(() => {
           this.logger.info('调用机器人通知接口回调成功');
         })
