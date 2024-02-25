@@ -60,7 +60,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
       >
         <Mention
           trigger="@"
-          data={users}
+          data={users ?? []}
           displayTransform={(id, display) => `@${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (
@@ -73,7 +73,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         />
         <Mention
           trigger="#"
-          data={panels}
+          data={panels ?? []}
           displayTransform={(id, display) => `#${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (
