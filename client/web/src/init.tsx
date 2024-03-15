@@ -144,7 +144,7 @@ fetchGlobalClientConfig()
     if (isProduction && !config.disableTelemetry) {
       // 发送遥测信息
       fetch(
-        `https://tianji.moonrailgun.com/telemetry/clnzoxcy10001vy2ohi4obbi0/blank.gif?name=tailchat&url=${window.location.origin}&v=${version}`
+        `https://tianji.moonrailgun.com/telemetry/clnzoxcy10001vy2ohi4obbi0/cltpqundt1r4hoi4gk72uj3un.gif?name=tailchat&url=${window.location.origin}&v=${version}`
       ).catch(() => {});
     }
   })
