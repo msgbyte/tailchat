@@ -1,5 +1,26 @@
 
 
+## [1.10.1](https://github.com/msgbyte/tailchat/compare/v1.10.0...v1.10.1) (2024-03-17)
+
+
+### Bug Fixes
+
+* fix bbcode auto transform logic [#196](https://github.com/msgbyte/tailchat/issues/196) ([5f81459](https://github.com/msgbyte/tailchat/commit/5f814594e83ad4be825934b10734aabd825a13d6))
+* fix drag drop feature display area ([92fdccf](https://github.com/msgbyte/tailchat/commit/92fdccfe729b0840872ca97154be43c1a5ae8a3a))
+* fix mention list will not hide member discriminator problem ([d22eabe](https://github.com/msgbyte/tailchat/commit/d22eabeec78002997411ec51aca7943b45e9e879))
+
+
+### Features
+
+* add bot tag in group/dm user popover ([1359b6e](https://github.com/msgbyte/tailchat/commit/1359b6eee7fe122e53252c933132364a8c7068f6))
+* add robot to disable invite page fetch by search engine ([67f87e8](https://github.com/msgbyte/tailchat/commit/67f87e84e43d94e03f506770122f61ac3802d3e9))
+* allow @ feature in conversation [#212](https://github.com/msgbyte/tailchat/issues/212) ([3ee37d6](https://github.com/msgbyte/tailchat/commit/3ee37d6bdeb7fe480057470aaaa581ab76483d7b))
+
+
+### Performance Improvements
+
+* add friendly tip for add non-message feature bot ([53a05cb](https://github.com/msgbyte/tailchat/commit/53a05cb6bd0e9d5304666c7c6845f463c127d641))
+
 # [1.10.0](https://github.com/msgbyte/tailchat/compare/v1.9.5...v1.10.0) (2023-12-09)
 
 
