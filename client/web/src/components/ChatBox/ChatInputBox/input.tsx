@@ -60,7 +60,12 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
       >
         <Mention
           trigger="@"
-          data={users ?? []}
+          data={
+            (query) =>
+              (users ?? [])
+                .filter((u) => u.display?.includes(query))
+                .slice(0, 20) // max display 20 item at most
+          }
           displayTransform={(id, display) => `@${display}`}
           appendSpaceOnAdd={true}
           renderSuggestion={(suggestion) => (
