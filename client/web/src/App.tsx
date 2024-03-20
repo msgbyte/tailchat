@@ -59,6 +59,14 @@ const InviteRoute = Loadable(
     )
 );
 
+const PreviewRoute = Loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'preview' */ /* webpackPreload: true */
+      './routes/Preview'
+    )
+);
+
 export const TcAntdProvider: React.FC<PropsWithChildren> = React.memo(
   (props) => {
     const { value: locale } = useAsync(async (): Promise<Locale> => {
@@ -168,6 +176,7 @@ export const App: React.FC = React.memo(() => {
             <Route path="/main/*" element={<MainRoute />} />
             <Route path="/panel/*" element={<PanelRoute />} />
             <Route path="/invite/:inviteCode" element={<InviteRoute />} />
+            <Route path="/preview/*" element={<PreviewRoute />} />
             <Route
               path="/plugin/*"
               element={
