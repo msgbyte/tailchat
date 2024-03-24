@@ -12,6 +12,7 @@ import _flatten from 'lodash/flatten';
 import _zipObject from 'lodash/zipObject';
 import { t } from '../i18n';
 import type { UserBaseInfo } from 'tailchat-types';
+import { isObjectId } from '../utils/string-helper';
 
 export type { UserBaseInfo };
 
@@ -286,6 +287,10 @@ export async function fetchUserInfo(userId: string): Promise<UserBaseInfo> {
     typeof builtinUserInfo[userId] === 'function'
   ) {
     return builtinUserInfo[userId]();
+  }
+
+  if (!isObjectId(userId)) {
+    throw new Error(`Invalid userId: ${userId}`);
   }
 
   const userInfo = await _fetchUserInfo(userId);

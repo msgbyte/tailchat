@@ -1,4 +1,4 @@
-import { buildCachedRegFn, buildRegFn } from '../buildRegFn';
+import { buildCachedRegFn, buildRegFn } from '../buildReg';
 
 describe('buildRegFn should be ok', () => {
   test('normal', () => {

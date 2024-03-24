@@ -1,4 +1,4 @@
-import { isAvailableString, isUrl } from '../string-helper';
+import { isAvailableString, isObjectId, isUrl } from '../string-helper';
 
 describe('string-helper', () => {
   describe('isAvailableString', () => {
@@ -26,6 +26,16 @@ describe('string-helper', () => {
       ['baidu', false],
     ])('%s => %p', (url, res) => {
       expect(isUrl(url)).toBe(res);
+    });
+  });
+
+  describe('isObjectId', () => {
+    test.each<[string, boolean]>([
+      ['1', false],
+      ['unknown', false],
+      ['64b4a473a44c273805b25da5', true],
+    ])('%s => %p', (input, res) => {
+      expect(isObjectId(input)).toBe(res);
     });
   });
 });
