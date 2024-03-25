@@ -3,7 +3,7 @@ sidebar_position: 99
 title: 开发环境
 ---
 
-对于开发环境的搭建，tailchat 提供了非常简单快捷的方式:
+对于开发环境的搭建，Tailchat 提供了非常简单快捷的方式:
 
 ## 使用Docker快速搭建依赖环境
 
@@ -28,7 +28,13 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
-### 启动开发服务器
+## Node Version
+
+Tailchat 是使用 `nodejs` 进行开发的，请自行安装nodejs, 这里是nodejs的官方网站: [https://nodejs.org/](https://nodejs.org/)
+
+建议使用 `nodejs18.x` 因为目前还不支持 `nodejs20.x`(nodejs 20 有一些break change)
+
+## 启动开发服务器
 
 ```bash
 pnpm install

@@ -28,7 +28,13 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
-### Start the development server
+## Node Version
+
+Tailchat is develop with `nodejs`, please install nodejs by yourself, here is nodejs official: [https://nodejs.org/](https://nodejs.org/)
+
+Suggestion to use `nodejs18.x`, and not support `nodejs20` yet because nodejs has some break change.
+
+## Start the development server
 
 ```bash
 pnpm install
