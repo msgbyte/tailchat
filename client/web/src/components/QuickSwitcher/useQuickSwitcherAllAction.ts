@@ -7,7 +7,7 @@ import {
   getDMConverseName,
   model,
 } from 'tailchat-shared';
-import { useDebugValue } from 'react';
+import { useDebugValue, useMemo } from 'react';
 import type { QuickActionContext } from './useQuickSwitcherActionContext';
 
 const ChatConverseType = model.converse.ChatConverseType;
@@ -19,6 +19,9 @@ export interface QuickAction {
   action: (context: QuickActionContext) => void;
 }
 
+/**
+ * 内置操作
+ */
 const builtinActions: QuickAction[] = [
   {
     key: 'personal',
@@ -38,6 +41,9 @@ const builtinActions: QuickAction[] = [
   },
 ];
 
+/**
+ * 私信快速会话
+ */
 function useDMConverseActions(): QuickAction[] {
   const userId = useUserId();
   const dmConverses = useAppSelector((state) =>
@@ -72,10 +78,44 @@ function useDMConverseActions(): QuickAction[] {
 }
 
 /**
+ * 群组操作
+ */
+function useGroupPanelActions(): QuickAction[] {
+  const groups = useAppSelector((state) => state.group.groups);
+
+  const groupPanelActions = useMemo(() => {
+    const list: QuickAction[] = [];
+
+    Object.values(groups).forEach((group) => {
+      group.panels.forEach((panel) => {
+        list.push({
+          key: `qs#grouppanel#${panel.id}`,
+          label: `[${group.name}] ${panel.name}`,
+          source: 'core',
+          action: ({ navigate }) => {
+            navigate(`/main/group/${group._id}/${panel.id}`);
+          },
+        });
+      });
+    });
+
+    return list;
+  }, [groups]);
+
+  useDebugValue(groupPanelActions);
+
+  return groupPanelActions;
+}
+
+/**
  * @returns 返回所有的快速操作
  */
 export function useQuickSwitcherAllActions() {
-  const allActions = [...builtinActions, ...useDMConverseActions()];
+  const allActions = [
+    ...builtinActions,
+    ...useDMConverseActions(),
+    ...useGroupPanelActions(),
+  ];
 
   return allActions;
 }
