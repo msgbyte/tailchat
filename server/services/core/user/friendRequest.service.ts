@@ -57,7 +57,7 @@ class FriendService extends TcService {
     }
 
     if (from === to) {
-      throw new Errors.ValidationError(t('不能添加自己为好友'));
+      throw new Errors.MoleculerError(t('不能添加自己为好友'));
     }
 
     const exist = await this.adapter.findOne({
