@@ -8,7 +8,8 @@ import { isQuickSwitcher } from '@/utils/hot-key';
 export function useShortcuts() {
   useGlobalKeyDown((e) => {
     if (isQuickSwitcher(e)) {
-      // 显示快速开关
+      // 显示快速跳转开关
+      e.preventDefault();
       openQuickSwitcher();
     }
   });

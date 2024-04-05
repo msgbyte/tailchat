@@ -9,6 +9,7 @@ import { InstallBtn } from './InstallBtn';
 import { ReactQueryDevBtn } from './ReactQueryDevBtn';
 import { pluginCustomPanel } from '@/plugin/common';
 import { NavbarCustomNavItem } from './CustomNavItem';
+import { QuickSwitcherNav } from './QuickSwitcherNav';
 
 /**
  * 导航栏组件
@@ -27,6 +28,8 @@ export const Navbar: React.FC = React.memo(() => {
           <PersonalNav />
 
           <InboxNav />
+
+          <QuickSwitcherNav />
 
           {pluginCustomPanel
             .filter((p) => p.position === 'navbar-personal')
