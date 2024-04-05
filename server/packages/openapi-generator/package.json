@@ -1,0 +1,31 @@
+{
+  "name": "tailchat-service-openapi-generator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "msgbyte",
+    "moonrailgun",
+    "tailchat"
+  ],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "globby": "11.1.0",
+    "openapi3-ts": "^4.3.1",
+    "tailchat-server-sdk": "workspace:^",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  }
+}

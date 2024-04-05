@@ -1,6 +1,6 @@
 {
   "name": "tailchat-server-sdk",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "pnpm build",
+    "prepare": "tsc",
     "release": "npm version patch && npm publish --registry https://registry.npmjs.com/"
   },
   "repository": {

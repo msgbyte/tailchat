@@ -197,6 +197,26 @@ export abstract class TcService extends Service {
     };
   }
 
+  /**
+   * 获取服务操作列表
+   */
+  getActionList() {
+    return Object.entries(this._actions).map(
+      ([name, schema]: [string, ServiceActionSchema]) => {
+        return {
+          name,
+          params: _.mapValues(schema.params, (type) => {
+            if (typeof type === 'string') {
+              return { type: type };
+            } else {
+              return type;
+            }
+          }),
+        };
+      }
+    );
+  }
+
   registerMixin(mixin: Partial<ServiceSchema>): void {
     this._mixins.push(mixin);
   }
@@ -423,6 +443,10 @@ export abstract class TcService extends Service {
    * NOTICE: 这里使用Redis作为缓存管理器，因此不需要通知所有的service
    */
   async cleanActionCache(actionName: string, keys: string[] = []) {
+    if (!this.broker.cacher) {
+      console.error('Can not clean cache because no cacher existed.');
+    }
+
     if (keys.length === 0) {
       await this.broker.cacher.clean(`${this.serviceName}.${actionName}`);
     } else {
