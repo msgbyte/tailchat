@@ -1,5 +1,24 @@
 
 
+# [1.11.0](https://github.com/msgbyte/tailchat/compare/v1.10.1...v1.11.0) (2024-04-06)
+
+
+### Bug Fixes
+
+* fix error tip for user cannot add self as friend ([592e4ab](https://github.com/msgbyte/tailchat/commit/592e4ab8bd03f001737d7195759e533799bbd8df))
+* invalid user id will broken all userId info query problem ([de63b31](https://github.com/msgbyte/tailchat/commit/de63b312adf53d8dd9425b213736415be4314dfb))
+
+
+### Features
+
+* add group panel quick actions ([c451a09](https://github.com/msgbyte/tailchat/commit/c451a091c33a89da04e6013306efe554c2be3bc8))
+* add quick search button in navbar ([6b0fffb](https://github.com/msgbyte/tailchat/commit/6b0fffb0786a5eb83ef5cb26e748f3198e82194d))
+
+
+### Performance Improvements
+
+* improve mention list to make sure its will work fine in huge group ([d79a62b](https://github.com/msgbyte/tailchat/commit/d79a62bf455ce0aa268b8582438433eab4413b6d))
+
 ## [1.10.1](https://github.com/msgbyte/tailchat/compare/v1.10.0...v1.10.1) (2024-03-17)
 
 
