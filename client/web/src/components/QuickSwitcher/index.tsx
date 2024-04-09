@@ -80,16 +80,27 @@ const QuickSwitcher: React.FC = React.memo(() => {
         {filteredActions.map((action, i) => (
           <div
             key={action.key}
-            className={clsx('truncate px-2 py-1 rounded', {
-              'bg-black bg-opacity-20 dark:bg-white dark:bg-opacity-20':
-                selectedIndex === i,
-            })}
+            className={clsx(
+              'truncate px-2 py-1 rounded cursor-pointer mb-0.5 group transition-all',
+              'hover:bg-black hover:bg-opacity-20 dark:hover:bg-white dark:hover:bg-opacity-20',
+              {
+                'bg-black bg-opacity-20 dark:bg-white dark:bg-opacity-20':
+                  selectedIndex === i,
+              }
+            )}
+            onClick={() => {
+              action.action(actionContext);
+              handleClose();
+            }}
           >
             <div className="text-lg">{action.label}</div>
             <div
-              className={clsx('opacity-0 text-gray-400 text-xs', {
-                'opacity-100': selectedIndex === i,
-              })}
+              className={clsx(
+                'opacity-0 text-gray-400 text-xs group-hover:opacity-100 transition-all',
+                {
+                  'opacity-100': selectedIndex === i,
+                }
+              )}
             >
               {action.source}
             </div>
