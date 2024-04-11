@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useMemoizedFn, useSharedEventHandler } from 'tailchat-shared';
+import { useEvent, useSharedEventHandler } from 'tailchat-shared';
 import { ChatMessageHeader } from './ChatMessageHeader';
 import { buildMessageItemRow } from './Item';
 import { ScrollToBottom } from './ScrollToBottom';
@@ -21,7 +21,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
     const lockRef = useRef(false);
     const [showScrollToBottom, setShowScrollToBottom] = useState(false);
 
-    const scrollToBottom = useMemoizedFn(() => {
+    const scrollToBottom = useEvent(() => {
       containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
@@ -38,7 +38,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
 
     useSharedEventHandler('sendMessage', scrollToBottom);
 
-    const handleScroll = useCallback(() => {
+    const handleScroll = useEvent(() => {
       if (props.messages.length === 0) {
         return;
       }
@@ -63,7 +63,7 @@ export const NormalMessageList: React.FC<MessageListProps> = React.memo(
         lockRef.current = true;
         setShowScrollToBottom(true);
       }
-    }, [props.messages]);
+    });
 
     return (
       <div
