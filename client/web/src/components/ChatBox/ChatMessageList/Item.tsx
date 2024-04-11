@@ -120,60 +120,67 @@ export const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(
         </div>
 
         {/* 主体 */}
-        <div
-          className="flex flex-col flex-1 overflow-auto group"
-          onContextMenu={stopPropagation}
+        <Dropdown
+          menu={moreActions}
+          placement="bottomLeft"
+          trigger={['contextMenu']}
+          onOpenChange={setIsActionBtnActive}
         >
-          {showAvatar && (
-            <div className="flex items-center">
-              <div className="font-bold">
-                {userInfo.nickname ?? <span>&nbsp;</span>}
-              </div>
-              <div className="hidden group-hover:block opacity-40 ml-1 text-sm">
-                {formatShortTime(payload.createdAt)}
-              </div>
-            </div>
-          )}
-
-          {/* 消息内容 */}
-          <AutoFolder
-            maxHeight={340}
-            backgroundColor="var(--tc-content-background-color)"
-            showFullText={
-              <div className="inline-block rounded-full bg-white dark:bg-black opacity-80 py-2 px-3 hover:opacity-100">
-                {t('点击展开更多')}
-              </div>
-            }
+          <div
+            className="flex flex-col flex-1 overflow-auto group"
+            onContextMenu={stopPropagation}
           >
-            <div className="chat-message-item_body leading-6 break-words">
-              <MessageQuote payload={payload} />
+            {showAvatar && (
+              <div className="flex items-center">
+                <div className="font-bold">
+                  {userInfo.nickname ?? <span>&nbsp;</span>}
+                </div>
+                <div className="hidden group-hover:block opacity-40 ml-1 text-sm">
+                  {formatShortTime(payload.createdAt)}
+                </div>
+              </div>
+            )}
 
-              <span>{getMessageRender(payload.content)}</span>
+            {/* 消息内容 */}
+            <AutoFolder
+              maxHeight={340}
+              backgroundColor="var(--tc-content-background-color)"
+              showFullText={
+                <div className="inline-block rounded-full bg-white dark:bg-black opacity-80 py-2 px-3 hover:opacity-100">
+                  {t('点击展开更多')}
+                </div>
+              }
+            >
+              <div className="chat-message-item_body leading-6 break-words">
+                <MessageQuote payload={payload} />
 
-              {payload.sendFailed === true && (
-                <Icon
-                  className="inline-block ml-1"
-                  icon="emojione:cross-mark-button"
-                />
-              )}
+                <span>{getMessageRender(payload.content)}</span>
 
-              {/* 解释器按钮 */}
-              {useRenderPluginMessageInterpreter(payload.content)}
+                {payload.sendFailed === true && (
+                  <Icon
+                    className="inline-block ml-1"
+                    icon="emojione:cross-mark-button"
+                  />
+                )}
+
+                {/* 解释器按钮 */}
+                {useRenderPluginMessageInterpreter(payload.content)}
+              </div>
+            </AutoFolder>
+
+            {/* 额外渲染 */}
+            <div>
+              {pluginMessageExtraParsers.map((parser) => (
+                <React.Fragment key={parser.name}>
+                  {parser.render(payload)}
+                </React.Fragment>
+              ))}
             </div>
-          </AutoFolder>
 
-          {/* 额外渲染 */}
-          <div>
-            {pluginMessageExtraParsers.map((parser) => (
-              <React.Fragment key={parser.name}>
-                {parser.render(payload)}
-              </React.Fragment>
-            ))}
+            {/* 消息反应 */}
+            {reactions}
           </div>
-
-          {/* 消息反应 */}
-          {reactions}
-        </div>
+        </Dropdown>
 
         {/* 操作 */}
         {!disableOperate && (
@@ -201,7 +208,7 @@ export const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(
 
             <Dropdown
               menu={moreActions}
-              placement="bottomLeft"
+              placement="bottomRight"
               trigger={['click']}
               onOpenChange={setIsActionBtnActive}
             >
