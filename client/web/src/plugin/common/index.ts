@@ -22,6 +22,7 @@ export {
 export { Loadable } from '@/components/Loadable';
 export { useIsMobile } from '@/hooks/useIsMobile';
 export { isMobile } from '@/utils/device-helper';
+export { getPopupContainer } from '@/utils/dom-helper';
 export {
   getGlobalState,
   useGlobalSocketEvent,

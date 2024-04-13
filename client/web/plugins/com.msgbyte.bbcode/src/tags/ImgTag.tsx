@@ -1,4 +1,5 @@
 import React from 'react';
+import { getPopupContainer } from '@capital/common';
 import { Image } from '@capital/component';
 import type { TagProps } from '../bbcode/type';
 
@@ -44,14 +45,18 @@ export const ImgTag: React.FC<TagProps> = React.memo((props) => {
   const url = node.attrs.url ?? text;
 
   return (
-    <Image
-      style={{
-        ...imageStyle,
-        ...parseImageAttr(node.attrs as any),
-      }}
-      preview={true}
-      src={url}
-    />
+    <div className="inline-block" onContextMenu={(e) => e.stopPropagation()}>
+      <Image
+        style={{
+          ...imageStyle,
+          ...parseImageAttr(node.attrs as any),
+        }}
+        preview={{
+          getContainer: getPopupContainer,
+        }}
+        src={url}
+      />
+    </div>
   );
 });
 ImgTag.displayName = 'ImgTag';
