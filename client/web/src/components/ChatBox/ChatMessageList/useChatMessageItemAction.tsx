@@ -36,8 +36,16 @@ export function useChatMessageItemAction(
   );
 
   const handleCopy = useCallback(() => {
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) {
+      // 复制选中的文本
+      copy(selection.toString());
+      showSuccessToasts(t('复制选中文本成功'));
+      return;
+    }
+
     copy(getMessageTextDecorators().serialize(payload.content));
-    showSuccessToasts(t('复制纯文本成功'));
+    showSuccessToasts(t('复制消息文本成功'));
   }, [payload.content]);
 
   const [, handleRecallMessage] = useAsyncRequest(async () => {

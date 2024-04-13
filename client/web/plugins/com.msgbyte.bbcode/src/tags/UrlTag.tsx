@@ -16,7 +16,7 @@ export const UrlTag: React.FC<TagProps> = React.memo((props) => {
   if (url.startsWith('/')) {
     // 内部地址，使用 react-router 进行导航
     return (
-      <Link to={url}>
+      <Link to={url} onContextMenu={(e) => e.stopPropagation()}>
         <UnderlineSpan>{text}</UnderlineSpan>
       </Link>
     );
@@ -25,14 +25,23 @@ export const UrlTag: React.FC<TagProps> = React.memo((props) => {
   if (url.startsWith(window.location.origin)) {
     // 内部地址，使用 react-router 进行导航
     return (
-      <Link to={url.replace(window.location.origin, '')}>
+      <Link
+        to={url.replace(window.location.origin, '')}
+        onContextMenu={(e) => e.stopPropagation()}
+      >
         <UnderlineSpan>{text}</UnderlineSpan>
       </Link>
     );
   }
 
   return (
-    <a href={url} title={text} target="_blank" rel="noopener noreferrer">
+    <a
+      href={url}
+      title={text}
+      target="_blank"
+      rel="noopener noreferrer"
+      onContextMenu={(e) => e.stopPropagation()}
+    >
       <UnderlineSpan>{text}</UnderlineSpan>
     </a>
   );
