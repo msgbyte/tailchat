@@ -42,6 +42,20 @@ export const SettingsSystem: React.FC = React.memo(() => {
         }
       />
 
+      <FullModalField
+        title={t('关闭消息右键菜单')}
+        content={
+          <Switch
+            checked={settings['disableMessageContextMenu'] ?? false}
+            onChange={(checked) =>
+              setSettings({
+                disableMessageContextMenu: checked,
+              })
+            }
+          />
+        }
+      />
+
       {pluginSettings
         .filter((item) => item.position === 'system')
         .map((item) => {

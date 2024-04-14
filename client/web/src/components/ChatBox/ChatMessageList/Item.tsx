@@ -10,6 +10,7 @@ import {
   showMessageTime,
   useUserInfoList,
   UserBaseInfo,
+  useUserSettings,
 } from 'tailchat-shared';
 import { useRenderPluginMessageInterpreter } from './useRenderPluginMessageInterpreter';
 import { getMessageRender, pluginMessageExtraParsers } from '@/plugin/common';
@@ -66,6 +67,7 @@ export const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(
     const { showAvatar, payload, hideAction = false } = props;
     const userInfo = useCachedUserInfo(payload.author ?? '');
     const [isActionBtnActive, setIsActionBtnActive] = useState(false);
+    const { settings } = useUserSettings();
 
     const reactions = useMessageReactions(payload);
 
@@ -124,6 +126,7 @@ export const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(
           menu={moreActions}
           placement="bottomLeft"
           trigger={['contextMenu']}
+          disabled={settings['disableMessageContextMenu']}
           onOpenChange={setIsActionBtnActive}
         >
           <div

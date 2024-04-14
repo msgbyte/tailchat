@@ -38,6 +38,11 @@ export interface UserSettings {
   groupOrderList?: string[];
 
   /**
+   * 是否关闭消息右键菜单
+   */
+  disableMessageContextMenu?: boolean;
+
+  /**
    * 其他的设置项
    */
   [key: string]: any;
