@@ -1,5 +1,20 @@
 
 
+## [1.11.1](https://github.com/msgbyte/tailchat/compare/v1.11.0...v1.11.1) (2024-04-14)
+
+
+### Bug Fixes
+
+* fix command panel cannot click problem ([5c259d7](https://github.com/msgbyte/tailchat/commit/5c259d70049257fc516b08914144ff9d17cbe59c))
+* fix image message context menu cannot save image problem ([a3a442a](https://github.com/msgbyte/tailchat/commit/a3a442a34f1ea465fe8e91813f5be10e67b767be))
+* fix text cannot select part problem and url dont need context menu problem ([a02ad80](https://github.com/msgbyte/tailchat/commit/a02ad80bf177b1c6086e9c6150df744ba2027b84))
+
+
+### Features
+
+* add context menu into message item ([a36ca7c](https://github.com/msgbyte/tailchat/commit/a36ca7c4e1f20d6fa6eeb5eefbf1c05d50e8f8d1))
+* add setting for close message context menu ([0107edf](https://github.com/msgbyte/tailchat/commit/0107edfa0cbed744129237d0ea4bf18b5877f2bc))
+
 # [1.11.0](https://github.com/msgbyte/tailchat/compare/v1.10.1...v1.11.0) (2024-04-06)
 
 
