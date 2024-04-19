@@ -22,7 +22,7 @@ const initCompleted = (dir: string) =>
 Congratulations, you have successfully completed the configuration initialization, your configuration file is ready, and you are one step away from a successful deployment!
 
 Your tailchat configuration files are stored in: ${chalk.underline(
-    path.join(process.cwd(), dir)
+    path.resolve(process.cwd(), dir)
   )}
 
 Run the following command to complete the image download and start:
