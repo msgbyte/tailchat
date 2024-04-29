@@ -1,5 +1,9 @@
 import React from 'react';
-import { useAppSelector, useDMConverseName } from 'tailchat-shared';
+import {
+  ChatConverseState,
+  useAppSelector,
+  useDMConverseName,
+} from 'tailchat-shared';
 
 interface ConverseNameProps {
   converseId: string;
@@ -9,7 +13,9 @@ interface ConverseNameProps {
 
 export const ConverseName: React.FC<ConverseNameProps> = React.memo((props) => {
   const { converseId, className, style } = props;
-  const converse = useAppSelector((state) => state.chat.converses[converseId]);
+  const converse = useAppSelector<ChatConverseState | undefined>(
+    (state) => state.chat.converses[converseId]
+  );
   const converseName = useDMConverseName(converse);
 
   return (
