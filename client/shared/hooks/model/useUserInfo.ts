@@ -15,5 +15,5 @@ export function useCachedUserInfo(
     return users;
   }, [userId, refetch]);
 
-  return userInfo;
+  return userInfo ?? {};
 }
