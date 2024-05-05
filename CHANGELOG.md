@@ -1,5 +1,13 @@
 
 
+## [1.11.2](https://github.com/msgbyte/tailchat/compare/v1.11.1...v1.11.2) (2024-05-05)
+
+
+### Bug Fixes
+
+* fix a problem which deleted conversation can not get name occur crash ([88b05da](https://github.com/msgbyte/tailchat/commit/88b05da0c97d3a43f00a8149ab085477f89a942c))
+* fix a problem which user info maybe return null cause error ([96d8cda](https://github.com/msgbyte/tailchat/commit/96d8cda5c3c1809d7319f395130ce8d62ee276b8))
+
 ## [1.11.1](https://github.com/msgbyte/tailchat/compare/v1.11.0...v1.11.1) (2024-04-14)
 
 
