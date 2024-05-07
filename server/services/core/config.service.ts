@@ -77,6 +77,7 @@ class ConfigService extends TcService {
     const persistConfig = await this.adapter.model.getAllClientPersistConfig();
 
     return {
+      tianji: config.tianji,
       uploadFileLimit: config.storage.limit,
       emailVerification: config.emailVerification,
       disableUserRegister: config.feature.disableUserRegister,

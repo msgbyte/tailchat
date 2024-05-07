@@ -55,6 +55,13 @@ export const config = {
   runner: {
     requestTimeout,
   },
+  /**
+   * 使用Tianji对网站进行监控
+   */
+  tianji: {
+    scriptUrl: process.env.TIANJI_SCRIPT_URL,
+    websiteId: process.env.TIANJI_WEBSITE_ID,
+  },
   feature: {
     disableFileCheck: checkEnvTrusty(process.env.DISABLE_FILE_CHECK),
     disableLogger: checkEnvTrusty(process.env.DISABLE_LOGGER), // 是否关闭日志

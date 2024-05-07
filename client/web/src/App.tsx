@@ -32,6 +32,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import enUS from 'antd/es/locale/en_US';
 import type { Locale } from 'antd/es/locale-provider';
+import { useInjectTianjiScript } from './hooks/useInjectTianjiScript';
 
 const AppRouter: any = isElectron() ? HashRouter : BrowserRouter;
 
@@ -145,6 +146,8 @@ AppHeader.displayName = 'AppHeader';
 
 export const App: React.FC = React.memo(() => {
   useRecordMeasure('appRenderStart');
+
+  useInjectTianjiScript();
 
   useEffect(() => {
     sharedEvent.emit('appLoaded');

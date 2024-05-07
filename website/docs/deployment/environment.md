@@ -25,6 +25,8 @@ title: Environment Variable
 | FILE_LIMIT | 1048576 | File/image upload size limit, the default is 1m, please enter a number(unit: byte) |
 | EMAIL_VERIFY | - | Whether to enable email verification, if it is "1" or "true", add email verification control when registering |
 | REQUEST_TIMEOUT | 10000 | Number of milliseconds to wait before reject a request with a RequestTimeout error. Disabled: 0 |
+| TIANJI_SCRIPT_URL | - | Script Url of Tianji if you wanna monitor Tailchat user usage, you can get it in code modal in Tianji website (example: `https://tianji.example.com/tracker.js`) |
+| TIANJI_WEBSITE_ID | - | Tianji website id |
 | DISABLE_LOGGER | - | Whether to disable the log output, if "1" or "true" turn off the log on the fly |
 | DISABLE_USER_REGISTER | - | Whether to disable the user register, if "1" or "true" turn off this method |
 | DISABLE_GUEST_LOGIN | - | Whether to disable the guest login, if "1" or "true" turn off this method |

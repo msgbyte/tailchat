@@ -7,6 +7,14 @@ import { defaultGlobalConfig } from '../utils/consts';
  */
 export interface GlobalConfig {
   /**
+   * Tianji 配置
+   */
+  tianji: {
+    scriptUrl?: string;
+    websiteId?: string;
+  };
+
+  /**
    * 上传文件体积
    * 默认1m
    */
