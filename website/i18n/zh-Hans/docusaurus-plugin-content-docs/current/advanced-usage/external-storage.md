@@ -15,15 +15,24 @@ title: 外部存储
 ## 配置
 
 你需要通过环境变量配置如下:
-- `MINIO_URL`: s3服务地址
+- `MINIO_URL`: s3 服务地址，`<hostname>:<port>`，例如：`example.com:443`，不需要协议部分如 `https://`
 - `MINIO_SSL`: s3服务是否启用ssl验证，对于某些提供商是必须的。默认为`false`
 - `MINIO_USER`: s3服务用户名
 - `MINIO_PASS`: s3服务密码
 - `MINIO_BUCKET_NAME`: s3服务 bucket 名
 - `MINIO_PATH_STYLE`: 路径模式，可选值: `VirtualHosted` 或 `Path`
+  - S3 协议有两种风格，`VirtualHosted` 用于 `<bucketname>.example.com`，`Path` 用于 `example.com/<bucketname>`
 - `STATIC_URL`: 上传后的静态路径地址，默认走服务器中转，如果想要走外部存储直连的话需要改为外部可访问的地址
 
 > 对于 `aliyunoss` 我们可以参考该文档获得内容相关帮助: https://www.alibabacloud.com/help/en/oss/developer-reference/use-amazon-s3-sdks-to-access-oss
+
+### 示例
+
+**R2**:
+```bash
+MINIO_URL=<account-id>.r2.cloudflarestorage.com:443
+MINIO_PATH_STYLE=Path
+```
 
 ## 数据迁移
 

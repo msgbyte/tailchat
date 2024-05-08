@@ -15,15 +15,24 @@ As the usage scale progresses, the user's storage cost for the Tailchat file sys
 ## Config
 
 You need to configure the environment variables as follows:
-- `MINIO_URL`: s3 service address
+- `MINIO_URL`: s3 service address, `<hostname>:<port>`, for example: `example.com:443`, not need protocol part like `https://`
 - `MINIO_SSL`: Whether the s3 service enables SSL verification is required for some providers. Default is `false`
 - `MINIO_USER`: s3 service username
 - `MINIO_PASS`: s3 service password
 - `MINIO_BUCKET_NAME`: s3 service bucket name
 - `MINIO_PATH_STYLE`: path mode, optional values: `VirtualHosted` or `Path`
+  - S3 protocol has two style, `VirtualHosted` use in `<bucketname>.example.com`, and `Path` use in `example.com/<bucketname>`
 - `STATIC_URL`: The uploaded static path address, which is transferred by the server by default. If you want to directly connect to external storage, you need to change it to an externally accessible address
 
 > For `aliyunoss`, we can refer to this document for content-related help: https://www.alibabacloud.com/help/en/oss/developer-reference/use-amazon-s3-sdks-to-access-oss
+
+### Example
+
+**R2**:
+```bash
+MINIO_URL=<account-id>.r2.cloudflarestorage.com:443
+MINIO_PATH_STYLE=Path
+```
 
 ## Data migration
 
