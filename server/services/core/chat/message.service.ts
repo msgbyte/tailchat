@@ -344,6 +344,9 @@ class MessageService extends TcService {
     const { messageId } = ctx.params;
     const { t, userId } = ctx.meta;
     const message = await this.adapter.model.findById(messageId);
+    if (!message) {
+      throw new DataNotFoundError(t('该消息未找到'));
+    }
     const converseId = String(message.converseId);
     const groupId = message.groupId;
     // 鉴权
@@ -351,13 +354,13 @@ class MessageService extends TcService {
       // 私人会话
       const converseInfo = await call(ctx).getConverseInfo(converseId);
       if (!converseInfo.members.map((m) => String(m)).includes(userId)) {
-        throw new DataNotFoundError(t('该消息未找到'));
+        throw new NoPermissionError(t('没有当前会话权限'));
       }
     } else {
       // 群组会话
       const groupInfo = await call(ctx).getGroupInfo(String(groupId));
       if (!groupInfo.members.map((m) => m.userId).includes(userId)) {
-        throw new DataNotFoundError(t('该消息未找到'));
+        throw new NoPermissionError(t('没有当前会话权限'));
       }
     }
     return message;
