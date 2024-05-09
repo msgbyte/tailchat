@@ -830,6 +830,24 @@
         }
       }
     },
+    "/chat.message/getMessage": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "messageId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/chat.message/deleteMessage": {
       "post": {
         "requestBody": {

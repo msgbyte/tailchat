@@ -59,6 +59,11 @@ class MessageService extends TcService {
         messageId: 'string',
       },
     });
+    this.registerAction('getMessage', this.getMessage, {
+      params: {
+        messageId: 'string',
+      },
+    });
     this.registerAction('deleteMessage', this.deleteMessage, {
       params: {
         messageId: 'string',
@@ -330,6 +335,35 @@ class MessageService extends TcService {
     });
 
     return json;
+  }
+
+  /**
+   * 获取消息
+   */
+  async getMessage(ctx: TcContext<{ messageId: string }>) {
+    const { messageId } = ctx.params;
+    const { t, userId } = ctx.meta;
+    const message = await this.adapter.model.findById(messageId);
+    if (!message) {
+      throw new DataNotFoundError(t('该消息未找到'));
+    }
+    const converseId = String(message.converseId);
+    const groupId = message.groupId;
+    // 鉴权
+    if (!groupId) {
+      // 私人会话
+      const converseInfo = await call(ctx).getConverseInfo(converseId);
+      if (!converseInfo.members.map((m) => String(m)).includes(userId)) {
+        throw new NoPermissionError(t('没有当前会话权限'));
+      }
+    } else {
+      // 群组会话
+      const groupInfo = await call(ctx).getGroupInfo(String(groupId));
+      if (!groupInfo.members.map((m) => m.userId).includes(userId)) {
+        throw new NoPermissionError(t('没有当前会话权限'));
+      }
+    }
+    return message;
   }
 
   /**
