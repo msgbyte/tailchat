@@ -87,16 +87,18 @@ function useGroupPanelActions(): QuickAction[] {
     const list: QuickAction[] = [];
 
     Object.values(groups).forEach((group) => {
-      group.panels.forEach((panel) => {
-        list.push({
-          key: `qs#grouppanel#${panel.id}`,
-          label: `[${group.name}] ${panel.name}`,
-          source: 'core',
-          action: ({ navigate }) => {
-            navigate(`/main/group/${group._id}/${panel.id}`);
-          },
+      group.panels
+        .filter((p) => p.type !== model.group.GroupPanelType.GROUP)
+        .forEach((panel) => {
+          list.push({
+            key: `qs#grouppanel#${panel.id}`,
+            label: `[${group.name}] ${panel.name}`,
+            source: 'core',
+            action: ({ navigate }) => {
+              navigate(`/main/group/${group._id}/${panel.id}`);
+            },
+          });
         });
-      });
     });
 
     return list;
