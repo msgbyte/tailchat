@@ -1,5 +1,18 @@
 
 
+## [1.11.3](https://github.com/msgbyte/tailchat/compare/v1.11.2...v1.11.3) (2024-05-11)
+
+
+### Bug Fixes
+
+* fix quick switcher layer problem and filter group panel type because should not direct open ([6dba794](https://github.com/msgbyte/tailchat/commit/6dba794198575952b3b88e1fbdd8fa3a0d05d07b))
+
+
+### Features
+
+* add chat.message.getMessage api ([#227](https://github.com/msgbyte/tailchat/issues/227)) ([34a380e](https://github.com/msgbyte/tailchat/commit/34a380eff546bff3540d6dcd059ed1f901370905))
+* add tianji script environment ([125df13](https://github.com/msgbyte/tailchat/commit/125df13976daec27a9df294e0b496093dc350235))
+
 ## [1.11.2](https://github.com/msgbyte/tailchat/compare/v1.11.1...v1.11.2) (2024-05-05)
 
 
