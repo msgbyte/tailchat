@@ -8,6 +8,7 @@ import {
   call,
   DataNotFoundError,
   NoPermissionError,
+  SYSTEM_USERID,
 } from 'tailchat-server-sdk';
 import type {
   ConverseDocument,
@@ -224,9 +225,12 @@ class ConverseService extends TcService {
 
     const converse = await this.adapter.findById(converseId);
 
-    const memebers = converse.members ?? [];
-    if (!memebers.map((member) => String(member)).includes(userId)) {
-      throw new NoPermissionError(t('没有获取会话信息权限'));
+    if (userId !== SYSTEM_USERID) {
+      // not system, check permission
+      const memebers = converse.members ?? [];
+      if (!memebers.map((member) => String(member)).includes(userId)) {
+        throw new NoPermissionError(t('没有获取会话信息权限'));
+      }
     }
 
     return await this.transformDocuments(ctx, {}, converse);
