@@ -6,6 +6,7 @@ import { showErrorToasts, showGlobalLoading, showToasts } from '../manager/ui';
 import { t } from '../i18n';
 import { sharedEvent } from '../event';
 import msgpackParser from 'socket.io-msgpack-parser';
+import { getGlobalConfig } from '../model/config';
 
 class SocketEventError extends Error {
   name = 'SocketEventError';
@@ -207,14 +208,24 @@ export function createSocket(token: string): Promise<AppSocket> {
   }
 
   return new Promise((resolve, reject) => {
-    _socket = io(getServiceUrl(), {
-      transports: ['websocket'],
-      auth: {
-        token,
-      },
-      forceNew: true,
-      parser: msgpackParser,
-    });
+    if (getGlobalConfig().disableSocketMsgpack) {
+      _socket = io(getServiceUrl(), {
+        transports: ['websocket'],
+        auth: {
+          token,
+        },
+        forceNew: true,
+      });
+    } else {
+      _socket = io(getServiceUrl(), {
+        transports: ['websocket'],
+        auth: {
+          token,
+        },
+        forceNew: true,
+        parser: msgpackParser,
+      });
+    }
     _socket.once('connect', () => {
       // 连接成功
       const appSocket = new AppSocket(_socket);
