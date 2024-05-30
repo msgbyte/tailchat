@@ -35,6 +35,11 @@ export interface GlobalConfig {
   serverEntryImage?: string;
 
   /**
+   * 是否禁用 Socketio 的 Msgpack 解析器
+   */
+  disableSocketMsgpack?: boolean;
+
+  /**
    * 是否禁用注册功能
    */
   disableUserRegister?: boolean;

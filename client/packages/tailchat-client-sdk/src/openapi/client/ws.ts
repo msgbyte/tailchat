@@ -6,20 +6,39 @@ import type { ChatMessage } from 'tailchat-types';
 export class TailchatWsClient extends TailchatBaseClient {
   public socket: Socket | null = null;
 
+  constructor(
+    public url: string,
+    public appId: string,
+    public appSecret: string,
+    public useMsgpack: boolean = true
+  ) {
+    super(url, appId, appSecret);
+  }
+
   connect(): Promise<Socket> {
     return new Promise<Socket>(async (resolve, reject) => {
       await this.waitingForLogin();
 
       const token = this.jwt;
-
-      const socket = (this.socket = io(this.url, {
-        transports: ['websocket'],
-        auth: {
-          token,
-        },
-        forceNew: true,
-        parser: msgpackParser,
-      }));
+      let socket: Socket;
+      if (this.useMsgpack) {
+        socket = this.socket = io(this.url, {
+          transports: ['websocket'],
+          auth: {
+            token,
+          },
+          forceNew: true,
+          parser: msgpackParser,
+        });
+      } else {
+        socket = this.socket = io(this.url, {
+          transports: ['websocket'],
+          auth: {
+            token,
+          },
+          forceNew: true,
+        });
+      }
 
       socket.once('connect', () => {
         // 连接成功
