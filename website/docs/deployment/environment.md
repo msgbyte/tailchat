@@ -27,7 +27,7 @@ title: Environment Variable
 | REQUEST_TIMEOUT | 10000 | Number of milliseconds to wait before reject a request with a RequestTimeout error. Disabled: 0 |
 | TIANJI_SCRIPT_URL | - | Script Url of Tianji if you wanna monitor Tailchat user usage, you can get it in code modal in Tianji website (example: `https://tianji.example.com/tracker.js`) |
 | TIANJI_WEBSITE_ID | - | Tianji website id |
-| DISABLE_SOCKET_MSGPACK | - | Whether to disable socket using messagepack, if "1" or "true" turn off this method |
+| DISABLE_MESSAGEPACK | - | Whether to disable using messagepack as [parser](https://socket.io/docs/v4/custom-parser/) for socketio in openapi, if "1" or "true" turn off this method |
 | DISABLE_LOGGER | - | Whether to disable the log output, if "1" or "true" turn off the log on the fly |
 | DISABLE_USER_REGISTER | - | Whether to disable the user register, if "1" or "true" turn off this method |
 | DISABLE_GUEST_LOGIN | - | Whether to disable the guest login, if "1" or "true" turn off this method |

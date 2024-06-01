@@ -63,7 +63,7 @@ export const config = {
     websiteId: process.env.TIANJI_WEBSITE_ID,
   },
   feature: {
-    disableSocketMsgpack: checkEnvTrusty(process.env.DISABLE_SOCKET_MSGPACK), // 是否禁用socketio的 msgpack parser
+    disableMsgpack: checkEnvTrusty(process.env.DISABLE_MESSAGEPACK), // 是否禁用socketio的 messgpack parser
     disableFileCheck: checkEnvTrusty(process.env.DISABLE_FILE_CHECK),
     disableLogger: checkEnvTrusty(process.env.DISABLE_LOGGER), // 是否关闭日志
     disableUserRegister: checkEnvTrusty(process.env.DISABLE_USER_REGISTER), // 是否关闭用户注册功能
