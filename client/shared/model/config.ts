@@ -37,7 +37,7 @@ export interface GlobalConfig {
   /**
    * 是否禁用 Socketio 的 Msgpack 解析器
    */
-  disableSocketMsgpack?: boolean;
+  disableMsgpack?: boolean;
 
   /**
    * 是否禁用注册功能
