@@ -10,7 +10,7 @@ export class TailchatWsClient extends TailchatBaseClient {
     public url: string,
     public appId: string,
     public appSecret: string,
-    public useMsgpack: boolean = true
+    public disableMsgpack: boolean = false
   ) {
     super(url, appId, appSecret);
   }
@@ -26,7 +26,7 @@ export class TailchatWsClient extends TailchatBaseClient {
           token,
         },
         forceNew: true,
-        parser: this.useMsgpack ? msgpackParser : undefined,
+        parser: this.disableMsgpack ? undefined : msgpackParser,
       }));
 
       socket.once('connect', () => {
