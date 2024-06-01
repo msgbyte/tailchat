@@ -23,7 +23,7 @@ export const defaultGlobalConfig: GlobalConfig = {
   uploadFileLimit: 1 * 1024 * 1024,
   emailVerification: false,
   serverName: 'Tailchat',
-  disableSocketMsgpack: false,
+  disableMsgpack: false,
   disableUserRegister: false,
   disableGuestLogin: false,
   disableCreateGroup: false,

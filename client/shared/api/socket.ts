@@ -208,14 +208,14 @@ export function createSocket(token: string): Promise<AppSocket> {
   }
 
   return new Promise((resolve, reject) => {
-    const disableSocketMsgpack = getGlobalConfig().disableSocketMsgpack;
+    const disableMsgpack = getGlobalConfig().disableMsgpack;
     _socket = io(getServiceUrl(), {
       transports: ['websocket'],
       auth: {
         token,
       },
       forceNew: true,
-      parser: disableSocketMsgpack ? undefined : msgpackParser,
+      parser: disableMsgpack ? undefined : msgpackParser,
     });
     _socket.once('connect', () => {
       // 连接成功
