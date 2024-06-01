@@ -20,25 +20,14 @@ export class TailchatWsClient extends TailchatBaseClient {
       await this.waitingForLogin();
 
       const token = this.jwt;
-      let socket: Socket;
-      if (this.useMsgpack) {
-        socket = this.socket = io(this.url, {
-          transports: ['websocket'],
-          auth: {
-            token,
-          },
-          forceNew: true,
-          parser: msgpackParser,
-        });
-      } else {
-        socket = this.socket = io(this.url, {
-          transports: ['websocket'],
-          auth: {
-            token,
-          },
-          forceNew: true,
-        });
-      }
+      const socket = (this.socket = io(this.url, {
+        transports: ['websocket'],
+        auth: {
+          token,
+        },
+        forceNew: true,
+        parser: this.useMsgpack ? msgpackParser : undefined,
+      }));
 
       socket.once('connect', () => {
         // 连接成功

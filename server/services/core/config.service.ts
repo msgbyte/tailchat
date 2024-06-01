@@ -80,7 +80,7 @@ class ConfigService extends TcService {
       tianji: config.tianji,
       uploadFileLimit: config.storage.limit,
       emailVerification: config.emailVerification,
-      disableSocketMsgpack: config.feature.disableSocketMsgpack,
+      disableMsgpack: config.feature.disableMsgpack,
       disableUserRegister: config.feature.disableUserRegister,
       disableGuestLogin: config.feature.disableGuestLogin,
       disableCreateGroup: config.feature.disableCreateGroup,

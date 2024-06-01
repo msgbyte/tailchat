@@ -27,7 +27,7 @@ title: 环境变量
 | REQUEST_TIMEOUT | 10000 | 请求超时毫秒数，请求超过该时间没有完成会抛出 `RequestTimeout` 错误。 如果需要禁用请求超时限制传：0 |
 | TIANJI_SCRIPT_URL | - | Tianji 脚本 URL，如需监控 Tailchat 用户使用情况，可在天际网站代码模式中获取 (例如：`https://tianji.example.com/tracker.js`) |
 | TIANJI_WEBSITE_ID | - | Tianji 网站 id |
-| DISABLE_SOCKET_MSGPACK | - | 是否禁用socket使用messagepack, 如果为 "1" 或者 "true" 则禁用该功能 |
+| DISABLE_MESSAGEPACK | - | 是否禁用 openapi 的 sockio 使用 messagepack 作为 [解析器](https://socket.io/zh-CN/docs/v4/custom-parser/), 如果为 "1" 或者 "true" 则禁用该功能 |
 | DISABLE_LOGGER | - | 是否禁用日志输出, 如果为 "1" 或者 "true" 则在运行中关闭日志 |
 | DISABLE_USER_REGISTER | - | 是否关闭用户注册功能, 如果为 "1" 或者 "true" 则关闭该功能 |
 | DISABLE_GUEST_LOGIN | - | 是否关闭用户游客登录功能, 如果为 "1" 或者 "true" 则关闭该功能 |

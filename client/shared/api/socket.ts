@@ -208,24 +208,15 @@ export function createSocket(token: string): Promise<AppSocket> {
   }
 
   return new Promise((resolve, reject) => {
-    if (getGlobalConfig().disableSocketMsgpack) {
-      _socket = io(getServiceUrl(), {
-        transports: ['websocket'],
-        auth: {
-          token,
-        },
-        forceNew: true,
-      });
-    } else {
-      _socket = io(getServiceUrl(), {
-        transports: ['websocket'],
-        auth: {
-          token,
-        },
-        forceNew: true,
-        parser: msgpackParser,
-      });
-    }
+    const disableSocketMsgpack = getGlobalConfig().disableSocketMsgpack;
+    _socket = io(getServiceUrl(), {
+      transports: ['websocket'],
+      auth: {
+        token,
+      },
+      forceNew: true,
+      parser: disableSocketMsgpack ? undefined : msgpackParser,
+    });
     _socket.once('connect', () => {
       // 连接成功
       const appSocket = new AppSocket(_socket);
