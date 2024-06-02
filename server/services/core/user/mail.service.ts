@@ -67,6 +67,7 @@ class MailService extends TcService {
 
       this.logger.info('sendMailSuccess:', info);
     } catch (err) {
+      this.logger.error('sendMailFailed:', err);
       throw new Error(t('邮件发送失败'));
     }
   }
