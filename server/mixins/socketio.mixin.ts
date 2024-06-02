@@ -59,6 +59,11 @@ interface TcSocketIOServiceOptions {
    * 用户token校验
    */
   userAuth: (token: string) => Promise<UserJWTPayload>;
+
+  /**
+   * 是否禁用msgpack
+   */
+  disableMsgpack?: boolean;
 }
 
 /**
@@ -541,7 +546,7 @@ export const TcSocketIOService = (
             origin: '*',
             methods: ['GET', 'POST'],
           },
-          parser: msgpackParser,
+          parser: options.disableMsgpack ? undefined : msgpackParser,
         });
 
         if (

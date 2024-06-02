@@ -42,6 +42,7 @@ export default class ApiService extends TcService {
 
           return user;
         },
+        disableMsgpack: config.feature.disableMsgpack,
       })
     );
     this.registerMixin(TcHealth());
