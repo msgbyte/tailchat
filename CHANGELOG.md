@@ -1,5 +1,13 @@
 
 
+## [1.11.4](https://github.com/msgbyte/tailchat/compare/v1.11.3...v1.11.4) (2024-06-02)
+
+
+### Bug Fixes
+
+* [#230](https://github.com/msgbyte/tailchat/issues/230) fix a bug which will occur error tip when invite a user into conversation ([3801bb2](https://github.com/msgbyte/tailchat/commit/3801bb20a8492449a15e54fb916da8078e79359a))
+* rename all disableSocketMsgpack to disableMsgpack ([7870c83](https://github.com/msgbyte/tailchat/commit/7870c835d7d31c976d9f05fa15ec81d2aa526075))
+
 ## [1.11.3](https://github.com/msgbyte/tailchat/compare/v1.11.2...v1.11.3) (2024-05-11)
 
 
