@@ -28,6 +28,19 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
+### Example
+
+Here is a minimal example `.env` which let you can run tailchat in development environment.
+
+```ini
+PORT=11000
+MONGO_URL=mongodb://127.0.0.1:27017/tailchat
+REDIS_URL=redis://localhost:6379/
+MINIO_URL=127.0.0.1:19000
+MINIO_USER=tailchat
+MINIO_PASS=com.msgbyte.tailchat
+```
+
 ## Node Version
 
 Tailchat is develop with `nodejs`, please install nodejs by yourself, here is nodejs official: [https://nodejs.org/](https://nodejs.org/)
