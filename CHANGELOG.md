@@ -1,5 +1,12 @@
 
 
+## [1.11.5](https://github.com/msgbyte/tailchat/compare/v1.11.4...v1.11.5) (2024-06-04)
+
+
+### Bug Fixes
+
+* fix a problem which make disableMsgpack not work ([61184d1](https://github.com/msgbyte/tailchat/commit/61184d1e599495fa3374769a3140d02f5f0c61a0))
+
 ## [1.11.4](https://github.com/msgbyte/tailchat/compare/v1.11.3...v1.11.4) (2024-06-02)
 
 
