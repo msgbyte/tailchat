@@ -47,6 +47,7 @@ export class TailchatBaseClient {
       // NOTICE: 注意，有30天过期时间，需要定期重新登录以换取新的token
       // 这里先不换
       this.jwt = data.data?.jwt;
+      this.userId = data.data?.userId;
 
       console.log('tailchat openapp login success!');
 
