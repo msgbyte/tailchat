@@ -13,9 +13,9 @@ In order to compile the front-end code separately, you need to download the sour
 git clone https://github.com/msgbyte/tailchat.git
 cd tailchat
 
-# You can switch between different distributions by git checkout v1.8.8
+# You can switch between different distributions by git, for example: git checkout v1.8.8
 
-pnpm install # You need to use `pnpm` to install dependencies, using other package management tools may cause problems
+pnpm install # You need to use `pnpm` to install dependencies, using other package management tools may cause problems. and you should use pnpm@8 because here is some break change in pnpm@9
 ```
 
 Wait patiently for dependencies to be installed
