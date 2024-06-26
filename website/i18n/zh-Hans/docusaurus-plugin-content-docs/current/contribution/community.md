@@ -11,9 +11,9 @@ title: 生态与社区
 
 <img width="360" src="/img/wechat.jpg" />
 
-## 代码
+## 项目/代码
 
-*(empty)*
+- [Tailchat-Assistant](https://git.povario.com/powermaker450/Tailchat-Assistant): Tailchat Assistant is your very own AI-powered chat bot, ready to implement into your guild!
 
 ## 视频
 

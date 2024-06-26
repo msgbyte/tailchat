@@ -11,9 +11,10 @@ Feel free submit `pr/issue` to submit your contribution to `Tailchat`, so that w
 
 [Join TailchatNightly Channel](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
 
-## Code
+## Project/Code
 
-*(empty)*
+- [Tailchat-Assistant](https://git.povario.com/powermaker450/Tailchat-Assistant): Tailchat Assistant is your very own AI-powered chat bot, ready to implement into your guild!
+
 
 ## Video
 
