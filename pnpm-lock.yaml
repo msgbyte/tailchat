@@ -1653,8 +1653,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/sdk
       tushan:
-        specifier: ^0.3.4
-        version: 0.3.4(prop-types@15.8.1)(ts-node@10.9.1)
+        specifier: ^0.3.9
+        version: 0.3.9(prop-types@15.8.1)(ts-node@10.9.1)
       vite-express:
         specifier: 0.8.0
         version: 0.8.0(patch_hash=u6touqej4dt3zxnslnszarl7vq)(express@4.18.2)(vite@4.2.0)
@@ -33333,8 +33333,8 @@ packages:
       domino: 2.1.6
     dev: false
 
-  /tushan@0.3.4(prop-types@15.8.1)(ts-node@10.9.1):
-    resolution: {integrity: sha512-y2z1wUaZTFO9MJj+sMJzn9xQ08VvdUwEWgVsRRiUKEaSkTOUHl2qqGDrE961X/gGnGcW/yHdzBYObwL44jUxiA==}
+  /tushan@0.3.9(prop-types@15.8.1)(ts-node@10.9.1):
+    resolution: {integrity: sha512-qKA6NdWkstPKYE0BaxLZFiPnWXCjpiO5voZxzqln2y0FRp1hG7Zb+gChBQWyrZulAmAVjBiABjOBajpuyu7bqw==}
     dependencies:
       '@arco-design/web-react': 2.51.0(@types/react@18.0.20)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query': 4.33.0(react-dom@18.2.0)(react@18.2.0)
@@ -33355,7 +33355,7 @@ packages:
       immer: 9.0.21
       jsonexport: 3.2.0
       lodash-es: 4.17.21
-      postcss: 8.4.21
+      postcss: 8.4.27
       qs: 6.11.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

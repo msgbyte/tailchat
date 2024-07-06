@@ -159,6 +159,7 @@ export const fileFields = [
   createFileSizeField('size', {
     list: {
       width: 120,
+      sort: true,
     },
   }),
   createTextField('metaData.content-type'),
@@ -170,7 +171,11 @@ export const fileFields = [
       width: 80,
     },
   }),
-  createDateTimeField('createdAt'),
+  createDateTimeField('createdAt', {
+    list: {
+      sort: true,
+    },
+  }),
 ];
 
 export const mailFields = [

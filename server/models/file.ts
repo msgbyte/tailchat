@@ -20,6 +20,7 @@ import { User } from './user/user';
   },
 })
 @index({ bucketName: 1, objectName: 1 })
+@index({ url: 1 })
 export class File extends TimeStamps implements Base {
   _id: Types.ObjectId;
   id: string;

@@ -10,10 +10,14 @@ import userModel from '../../../../models/user/user';
 import messageModel from '../../../../models/chat/message';
 import fileModel from '../../../../models/file';
 import groupModel from '../../../../models/group/group';
-import { raExpressMongoose } from '../middleware/express-mongoose-ra-json-server';
+import {
+  raExpressMongoose,
+  virtualId,
+} from '../middleware/express-mongoose-ra-json-server';
 import { cacheRouter } from './cache';
 import discoverModel from '../../../../plugins/com.msgbyte.discover/models/discover';
 import { analyticsRouter } from './analytics';
+import _ from 'lodash';
 
 const router = Router();
 
@@ -292,6 +296,51 @@ router.delete('/file/:id', auth(), async (req, res) => {
 router.use(
   '/file',
   auth(),
+  async (req, res, next) => {
+    const onlyChatFile = req.query.meta === 'onlyChat';
+
+    if (!onlyChatFile) {
+      return next();
+    }
+
+    // only return chatted file rather than all file
+    const result = await fileModel
+      .aggregate()
+      .lookup({
+        from: 'users',
+        localField: 'url',
+        foreignField: 'avatar',
+        as: 'avatarMatchedUser',
+      })
+      .match({
+        'avatarMatchedUser.0': { $exists: false },
+      })
+      .project({
+        avatarMatchedUser: 0,
+      })
+      .facet({
+        metadata: [{ $count: 'total' }],
+        data: [
+          {
+            $sort: {
+              [typeof req.query._sort === 'string'
+                ? req.query._sort === 'id'
+                  ? '_id'
+                  : req.query._sort
+                : '_id']: req.query._order === 'ASC' ? 1 : -1,
+            },
+          },
+          { $skip: Number(req.query._start) },
+          { $limit: Number(req.query._end) - Number(req.query._start) },
+        ],
+      })
+      .exec();
+
+    const list = _.get(result, '0.data');
+    const total = _.get(result, '0.metadata.0.total');
+
+    return res.set('X-Total-Count', total).json(virtualId(list)).end();
+  },
   raExpressMongoose(fileModel, {
     q: ['objectName'],
     allowedRegexFields: ['objectName'],

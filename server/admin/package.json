@@ -29,7 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailchat-server-sdk": "workspace:^",
-    "tushan": "^0.3.4",
+    "tushan": "^0.3.9",
     "vite-express": "0.8.0"
   },
   "devDependencies": {

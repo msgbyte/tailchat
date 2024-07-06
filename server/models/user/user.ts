@@ -5,6 +5,7 @@ import {
   ReturnModelType,
   modelOptions,
   Severity,
+  index,
 } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import type { Types } from 'mongoose';
@@ -32,6 +33,7 @@ export interface UserLoginRes extends User {
     allowMixed: Severity.ALLOW,
   },
 })
+@index({ avatar: 1 })
 export class User extends TimeStamps implements Base {
   _id: Types.ObjectId;
   id: string;
