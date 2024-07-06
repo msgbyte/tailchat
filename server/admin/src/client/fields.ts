@@ -14,6 +14,7 @@ import {
 import { createFileSizeField } from './components/field/filesize';
 import { createUserField } from './components/field/user';
 import { parseUrlStr } from './utils';
+import { createImageUrlField } from './components/field/imageUrl';
 
 export const userFields = [
   createTextField('id', {
@@ -152,7 +153,7 @@ export const groupFields = [
 
 export const fileFields = [
   createTextField('objectName'),
-  createUrlField('url', {
+  createImageUrlField('url', {
     preRenderTransform: parseUrlStr,
   }),
   createFileSizeField('size', {
