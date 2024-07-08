@@ -57,6 +57,14 @@
     "lodash": "^4.17.21"
   },
   "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "acorn",
+        "ts-jest",
+        "@typegoose/typegoose",
+        "moleculer"
+      ]
+    },
     "overrides": {
       "redux": "4.2.1",
       "@babel/runtime": "7.21.0",

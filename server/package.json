@@ -27,16 +27,6 @@
     "gen:swagger:old": "ts-node ./scripts/swagger.ts",
     "gen:openapi": "tailchat-service-openapi-generator"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "acorn",
-        "ts-jest",
-        "@typegoose/typegoose",
-        "moleculer"
-      ]
-    }
-  },
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.1",
     "@socket.io/redis-adapter": "^8.2.1",
