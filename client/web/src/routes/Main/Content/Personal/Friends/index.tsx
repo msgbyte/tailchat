@@ -29,6 +29,7 @@ export const FriendPanel: React.FC = React.memo(() => {
   return (
     <div className="w-full">
       <PillTabs
+        className="h-full"
         activeKey={activeKey}
         onChange={setActiveKey}
         items={_compact([

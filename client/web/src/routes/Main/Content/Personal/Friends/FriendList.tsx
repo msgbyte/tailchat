@@ -24,6 +24,7 @@ import { Problem } from '@/components/Problem';
 import { closeModal, openModal } from '@/components/Modal';
 import { SetFriendNickname } from '@/components/modals/SetFriendNickname';
 import { Icon } from 'tailchat-design';
+import { Virtuoso } from 'react-virtuoso';
 
 /**
  * 好友列表
@@ -95,7 +96,7 @@ export const FriendList: React.FC<{
   }
 
   return (
-    <div className="py-2.5 px-5">
+    <div className="py-2.5 px-5 h-full flex flex-col">
       <div>{t('好友列表')}</div>
 
       <Input
@@ -107,50 +108,54 @@ export const FriendList: React.FC<{
         onChange={(e) => setSearchText(e.target.value)}
       />
 
-      <div>
-        {searchResult.map((item) => (
-          <UserListItem
-            key={item._id}
-            userId={item._id}
-            actions={[
-              <Tooltip key="message" title={t('发送消息')}>
-                <div>
-                  <IconBtn
-                    icon="mdi:message-text-outline"
-                    onClick={() => handleCreateConverse(item._id)}
-                  />
-                </div>
-              </Tooltip>,
-              <div key="more">
-                <Dropdown
-                  menu={{
-                    items: [
-                      {
-                        key: 'setNickname',
-                        onClick: () => handleSetFriendNickname(item._id),
-                        label: isValidStr(item.nickname)
-                          ? t('更改好友昵称')
-                          : t('添加好友昵称'),
-                      },
-                      {
-                        key: 'delete',
-                        danger: true,
-                        onClick: () => handleRemoveFriend(item._id),
-                        label: t('删除'),
-                      },
-                    ],
-                  }}
-                  trigger={['click']}
-                  placement="bottomRight"
-                >
+      <div className="flex-1">
+        <Virtuoso
+          className="h-full"
+          data={searchResult}
+          itemContent={(index, item) => (
+            <UserListItem
+              key={item._id}
+              userId={item._id}
+              actions={[
+                <Tooltip key="message" title={t('发送消息')}>
                   <div>
-                    <IconBtn icon="mdi:dots-vertical" />
+                    <IconBtn
+                      icon="mdi:message-text-outline"
+                      onClick={() => handleCreateConverse(item._id)}
+                    />
                   </div>
-                </Dropdown>
-              </div>,
-            ]}
-          />
-        ))}
+                </Tooltip>,
+                <div key="more">
+                  <Dropdown
+                    menu={{
+                      items: [
+                        {
+                          key: 'setNickname',
+                          onClick: () => handleSetFriendNickname(item._id),
+                          label: isValidStr(item.nickname)
+                            ? t('更改好友昵称')
+                            : t('添加好友昵称'),
+                        },
+                        {
+                          key: 'delete',
+                          danger: true,
+                          onClick: () => handleRemoveFriend(item._id),
+                          label: t('删除'),
+                        },
+                      ],
+                    }}
+                    trigger={['click']}
+                    placement="bottomRight"
+                  >
+                    <div>
+                      <IconBtn icon="mdi:dots-vertical" />
+                    </div>
+                  </Dropdown>
+                </div>,
+              ]}
+            />
+          )}
+        />
       </div>
     </div>
   );

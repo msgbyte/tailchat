@@ -59,7 +59,7 @@ export const GroupMember: React.FC<{ groupId: string }> = React.memo(
 
         <div className="flex-1 overflow-auto">
           <Virtuoso
-            style={{ height: '100%' }}
+            className="h-full"
             data={isSearching ? filteredGroupMembers : userInfos}
             itemContent={(index, item) => renderUser(item)}
           />
