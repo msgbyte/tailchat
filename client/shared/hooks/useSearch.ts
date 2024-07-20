@@ -29,9 +29,10 @@ export function useSearch<T>(options: UseSearchOptions<T>) {
  */
 export function useUserSearch(userInfos: UserBaseInfo[]) {
   const friendNicknameMap = useFriendNicknameMap();
+  const validUserInfos = useMemo(() => userInfos.filter(Boolean), [userInfos]);
 
   const { searchText, setSearchText, isSearching, searchResult } = useSearch({
-    dataSource: userInfos,
+    dataSource: validUserInfos,
     filterFn: (item, searchText) => {
       if (friendNicknameMap[item._id]) {
         if (friendNicknameMap[item._id].includes(searchText)) {
