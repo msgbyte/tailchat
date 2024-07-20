@@ -1,5 +1,19 @@
 
 
+## [1.11.6](https://github.com/msgbyte/tailchat/compare/v1.11.5...v1.11.6) (2024-07-20)
+
+
+### Features
+
+* add file filter chat files checkbox(use for remove unused chat files) ([c4e70ef](https://github.com/msgbyte/tailchat/commit/c4e70efb61101ee6647bd4c4f4d7207f8400530a))
+* **admin:** add image url preview in admin ([3cea16e](https://github.com/msgbyte/tailchat/commit/3cea16ee601092dd45cc4361f94fd4ac6b85c8d5))
+
+
+### Performance Improvements
+
+* add virtual list for friend list [#238](https://github.com/msgbyte/tailchat/issues/238) ([f09f701](https://github.com/msgbyte/tailchat/commit/f09f7017bd3c06b7f5a99720d94e5dc932a2453f))
+* add virtual list of inbox list ([68ea354](https://github.com/msgbyte/tailchat/commit/68ea354e3cb726ee68600091b0600b05ec01a39d))
+
 ## [1.11.5](https://github.com/msgbyte/tailchat/compare/v1.11.4...v1.11.5) (2024-06-04)
 
 
