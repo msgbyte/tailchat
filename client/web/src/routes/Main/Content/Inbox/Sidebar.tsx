@@ -21,6 +21,7 @@ import { PillTabPane, PillTabs } from '@/components/PillTabs';
 import { SectionHeader } from '@/components/SectionHeader';
 import { openReconfirmModalP } from '@/components/Modal';
 import { CommonSidebarWrapper } from '@/components/CommonSidebarWrapper';
+import { Virtuoso } from 'react-virtuoso';
 
 const buildLink = (itemId: string) => `/main/inbox/${itemId}`;
 
@@ -135,18 +136,31 @@ export const InboxSidebar: React.FC = React.memo(() => {
         {t('收件箱')}
       </SectionHeader>
 
-      <div className="overflow-hidden">
+      <div className="overflow-hidden flex-1">
         <PillTabs
+          className="h-full"
           items={[
             {
               key: '1',
               label: `${t('全部')}`,
-              children: <>{fullList.map((item) => renderInbox(item))}</>,
+              children: (
+                <Virtuoso
+                  className="h-full"
+                  data={fullList}
+                  itemContent={(index, item) => renderInbox(item)}
+                />
+              ),
             },
             {
               key: '2',
               label: `${t('未读')} (${unreadList.length})`,
-              children: <>{unreadList.map((item) => renderInbox(item))}</>,
+              children: (
+                <Virtuoso
+                  className="h-full"
+                  data={unreadList}
+                  itemContent={(index, item) => renderInbox(item)}
+                />
+              ),
             },
           ]}
         />
