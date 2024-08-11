@@ -1,0 +1,797 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+deleted file mode 100644
+index 679058241bcfde9586b543c09e9d37ecd73de1ec..0000000000000000000000000000000000000000
+diff --git a/dist/react-mentions.cjs.dev.js b/dist/react-mentions.cjs.dev.js
+index 015df9d75574f86fbd249fc53447e76cbec1781b..bbf48bd869160cdfb0d62ea2f658c89dbbab3c38 100644
+--- a/dist/react-mentions.cjs.dev.js
++++ b/dist/react-mentions.cjs.dev.js
+@@ -230,14 +230,23 @@ var applyChangeToValue = function applyChangeToValue(value, plainTextValue, _ref
+       // find start of diff
+       spliceStart = 0;
+ 
+-      while (plainTextValue[spliceStart] === controlPlainTextValue[spliceStart]) {
++      while (plainTextValue[spliceStart] === oldPlainTextValue[spliceStart]) {
+         spliceStart++;
++      } // find end of diff
++
++
++      var spliceEndOfNew = plainTextValue.length;
++      var spliceEndOfOld = oldPlainTextValue.length;
++
++      while (plainTextValue[spliceEndOfNew - 1] === oldPlainTextValue[spliceEndOfOld - 1]) {
++        spliceEndOfNew--;
++        spliceEndOfOld--;
+       } // extract auto-corrected insertion
+ 
+ 
+-      insert = plainTextValue.slice(spliceStart, selectionEndAfter); // find index of the unchanged remainder
++      insert = plainTextValue.slice(spliceStart, spliceEndOfNew); // find index of the unchanged remainder
+ 
+-      spliceEnd = oldPlainTextValue.lastIndexOf(plainTextValue.substring(selectionEndAfter)); // re-map the corrected indices
++      spliceEnd = spliceEndOfOld >= spliceStart ? spliceEndOfOld : selectionEndAfter; // re-map the corrected indices
+ 
+       mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, 'START');
+       mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, 'END');
+@@ -661,6 +670,10 @@ var omit = function omit(obj) {
+ 
+ var _excluded = ["style", "className", "classNames"];
+ 
++function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
++
++function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
++
+ function createDefaultStyle(defaultStyle, getModifiers) {
+   var enhance = function enhance(ComponentToWrap) {
+     var DefaultStyleEnhancer = function DefaultStyleEnhancer(_ref) {
+@@ -681,8 +694,13 @@ function createDefaultStyle(defaultStyle, getModifiers) {
+     };
+ 
+     var displayName = ComponentToWrap.displayName || ComponentToWrap.name || 'Component';
+-    DefaultStyleEnhancer.displayName = "defaultStyle(".concat(displayName, ")");
+-    return DefaultStyleEnhancer;
++    DefaultStyleEnhancer.displayName = "defaultStyle(".concat(displayName, ")"); // return DefaultStyleEnhancer
++
++    return /*#__PURE__*/React__default.forwardRef(function (props, ref) {
++      return DefaultStyleEnhancer(_objectSpread(_objectSpread({}, props), {}, {
++        ref: ref
++      }));
++    });
+   };
+ 
+   return enhance;
+@@ -724,7 +742,7 @@ function Highlighter(_ref) {
+ 
+   React.useEffect(function () {
+     notifyCaretPosition();
+-  }, [caretElement]);
++  });
+ 
+   var notifyCaretPosition = function notifyCaretPosition() {
+     if (!caretElement) {
+@@ -973,7 +991,7 @@ function SuggestionsOverlay(_ref) {
+       onMouseDown = _ref.onMouseDown,
+       onMouseEnter = _ref.onMouseEnter;
+ 
+-  var _useState = React.useState(),
++  var _useState = React.useState(undefined),
+       _useState2 = _slicedToArray(_useState, 2),
+       ulElement = _useState2[0],
+       setUlElement = _useState2[1];
+@@ -1000,17 +1018,23 @@ function SuggestionsOverlay(_ref) {
+     } else if (bottom > ulElement.offsetHeight) {
+       ulElement.scrollTop = bottom - ulElement.offsetHeight;
+     }
+-  }, []);
++  }, [focusIndex, scrollFocusedIntoView, ulElement]);
+ 
+   var renderSuggestions = function renderSuggestions() {
+-    var suggestionsToRender = Object.values(suggestions).reduce(function (accResults, _ref2) {
++    var suggestionsToRender = /*#__PURE__*/React__default.createElement("ul", _extends({
++      ref: setUlElement,
++      id: id,
++      role: "listbox",
++      "aria-label": a11ySuggestionsListLabel
++    }, style('list')), Object.values(suggestions).reduce(function (accResults, _ref2) {
+       var results = _ref2.results,
+           queryInfo = _ref2.queryInfo;
+       return [].concat(_toConsumableArray(accResults), _toConsumableArray(results.map(function (result, index) {
+         return renderSuggestion(result, queryInfo, accResults.length + index);
+       })));
+-    }, []);
+-    if (customSuggestionsContainer) return customSuggestionsContainer(suggestionsToRender);else return suggestionsToRender;
++    }, []));
++    if (customSuggestionsContainer) return customSuggestionsContainer(suggestionsToRender);
++    return suggestionsToRender;
+   };
+ 
+   var renderSuggestion = function renderSuggestion(result, queryInfo, index) {
+@@ -1077,12 +1101,7 @@ function SuggestionsOverlay(_ref) {
+   }, style), {
+     onMouseDown: onMouseDown,
+     ref: containerRef
+-  }), /*#__PURE__*/React__default.createElement("ul", _extends({
+-    ref: setUlElement,
+-    id: id,
+-    role: "listbox",
+-    "aria-label": a11ySuggestionsListLabel
+-  }, style('list')), renderSuggestions()), renderLoadingIndicator());
++  }), renderSuggestions(), renderLoadingIndicator());
+ }
+ 
+ SuggestionsOverlay.propTypes = {
+@@ -1099,7 +1118,7 @@ SuggestionsOverlay.propTypes = {
+   isOpened: PropTypes.bool.isRequired,
+   onSelect: PropTypes.func,
+   ignoreAccents: PropTypes.bool,
+-  customSuggestionsContainer: PropTypes.any,
++  customSuggestionsContainer: PropTypes.func,
+   containerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
+     current: typeof Element === 'undefined' ? PropTypes.any : PropTypes.instanceOf(Element)
+   })])
+@@ -1117,9 +1136,9 @@ var styled$2 = createDefaultStyle({
+ });
+ var SuggestionsOverlay$1 = styled$2(SuggestionsOverlay);
+ 
+-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
++function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+ 
+-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
++function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+ 
+ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+ 
+@@ -1216,7 +1235,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var props = omit(_this.props, ['style', 'classNames', 'className'], // substyle props
+       keys(propTypes));
+-      return _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, props), style('input')), {}, {
++      return _objectSpread$1(_objectSpread$1(_objectSpread$1(_objectSpread$1({}, props), style('input')), {}, {
+         value: _this.getPlainText(),
+         onScroll: _this.updateHighlighterScroll
+       }, !readOnly && !disabled && {
+@@ -1380,11 +1399,23 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var value = _this.props.value || '';
+       var config = readConfigFromChildren(_this.props.children);
+-      var newPlainTextValue = ev.target.value; // Derive the new value to set by applying the local change in the textarea's plain text
++      var newPlainTextValue = ev.target.value;
++      var selectionStartBefore = _this.state.selectionStart;
++
++      if (selectionStartBefore == null) {
++        selectionStartBefore = ev.target.selectionStart;
++      }
++
++      var selectionEndBefore = _this.state.selectionEnd;
++
++      if (selectionEndBefore == null) {
++        selectionEndBefore = ev.target.selectionEnd;
++      } // Derive the new value to set by applying the local change in the textarea's plain text
++
+ 
+       var newValue = applyChangeToValue(value, newPlainTextValue, {
+-        selectionStartBefore: _this.state.selectionStart,
+-        selectionEndBefore: _this.state.selectionEnd,
++        selectionStartBefore: selectionStartBefore,
++        selectionEndBefore: selectionEndBefore,
+         selectionEndAfter: ev.target.selectionEnd
+       }, config); // In case a mention is deleted, also adjust the new plain text value
+ 
+@@ -1410,9 +1441,14 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+         setSelectionAfterMentionChange: setSelectionAfterMentionChange
+       });
+ 
+-      var mentions = getMentions(newValue, config); // Propagate change
++      var mentions = getMentions(newValue, config);
++
++      if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
++        _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
++      } // Propagate change
+       // let handleChange = this.getOnChange(this.props) || emptyFunction;
+ 
++
+       var eventMock = {
+         target: {
+           value: newValue
+@@ -1759,7 +1795,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       if (queryId !== _this._queryId) return; // save in property so that multiple sync state updates from different mentions sources
+       // won't overwrite each other
+ 
+-      _this.suggestions = _objectSpread(_objectSpread({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
++      _this.suggestions = _objectSpread$1(_objectSpread$1({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
+         queryInfo: {
+           childIndex: childIndex,
+           query: query,
+@@ -1864,7 +1900,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       selectionEnd: null,
+       suggestions: {},
+       caretPosition: null,
+-      suggestionsPosition: {}
++      suggestionsPosition: {},
++      setSelectionAfterHandlePaste: false
+     };
+     return _this;
+   }
+@@ -1894,6 +1931,13 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+         });
+         this.setSelection(this.state.selectionStart, this.state.selectionEnd);
+       }
++
++      if (this.state.setSelectionAfterHandlePaste) {
++        this.setState({
++          setSelectionAfterHandlePaste: false
++        });
++        this.setSelection(this.state.selectionStart, this.state.selectionEnd);
++      }
+     }
+   }, {
+     key: "componentWillUnmount",
+@@ -1935,7 +1979,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       var newValue = spliceString(value, markupStartIndex, markupEndIndex, pastedMentions || pastedData).replace(/\r/g, '');
+       var newPlainTextValue = getPlainText(newValue, config);
+       var eventMock = {
+-        target: _objectSpread(_objectSpread({}, event.target), {}, {
++        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+           value: newValue
+         })
+       };
+@@ -1943,7 +1987,11 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
+       var nextPos = (startOfMention || selectionStart) + getPlainText(pastedMentions || pastedData, config).length;
+-      this.setSelection(nextPos, nextPos);
++      this.setState({
++        selectionStart: nextPos,
++        selectionEnd: nextPos,
++        setSelectionAfterHandlePaste: true
++      });
+     }
+   }, {
+     key: "saveSelectionToClipboard",
+@@ -2005,7 +2053,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       var newValue = [value.slice(0, markupStartIndex), value.slice(markupEndIndex)].join('');
+       var newPlainTextValue = getPlainText(newValue, config);
+       var eventMock = {
+-        target: _objectSpread(_objectSpread({}, event.target), {}, {
++        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+           value: newPlainTextValue
+         })
+       };
+@@ -2062,7 +2110,7 @@ var styled$3 = createDefaultStyle({
+     letterSpacing: 'inherit'
+   },
+   '&multiLine': {
+-    input: _objectSpread({
++    input: _objectSpread$1({
+       height: '100%',
+       bottom: 0,
+       overflow: 'hidden',
+diff --git a/dist/react-mentions.cjs.js b/dist/react-mentions.cjs.js
+index 168777643efee2afe58e34f9f147a4e246a4ba29..fd7a5910b8a4ff4e9156126ff1a1849adebfe5fa 100644
+--- a/dist/react-mentions.cjs.js
++++ b/dist/react-mentions.cjs.js
+@@ -1,7 +1,7 @@
+ 'use strict';
+ 
+ if (process.env.NODE_ENV === "production") {
+-  module.exports = require("./react-mentions.cjs.prod.js");
++  module.exports = require("./react-mentions-fix.cjs.prod.js");
+ } else {
+-  module.exports = require("./react-mentions.cjs.dev.js");
++  module.exports = require("./react-mentions-fix.cjs.dev.js");
+ }
+diff --git a/dist/react-mentions.cjs.prod.js b/dist/react-mentions.cjs.prod.js
+index 206f74b50db6296322f15d82491e98d7d25a330e..0b71c291b9ee7ebe3ae6698b260efa8635231161 100644
+--- a/dist/react-mentions.cjs.prod.js
++++ b/dist/react-mentions.cjs.prod.js
+@@ -70,14 +70,13 @@ var _toConsumableArray = _interopDefault(require("@babel/runtime/helpers/toConsu
+   var insert = plainTextValue.slice(selectionStartBefore, selectionEndAfter), spliceStart = Math.min(selectionStartBefore, selectionEndAfter), spliceEnd = selectionEndBefore;
+   selectionStartBefore === selectionEndAfter && (spliceEnd = Math.max(selectionEndBefore, selectionStartBefore + lengthDelta));
+   var mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), controlSpliceStart = mapPlainTextIndex(value, config, spliceStart, "NULL"), controlSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "NULL"), willRemoveMention = null === controlSpliceStart || null === controlSpliceEnd, newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
+-  if (!willRemoveMention) {
+-    var controlPlainTextValue = getPlainText(newValue, config);
+-    if (controlPlainTextValue !== plainTextValue) {
+-      for (spliceStart = 0; plainTextValue[spliceStart] === controlPlainTextValue[spliceStart]; ) spliceStart++;
+-      insert = plainTextValue.slice(spliceStart, selectionEndAfter), spliceEnd = oldPlainTextValue.lastIndexOf(plainTextValue.substring(selectionEndAfter)), 
+-      mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), 
+-      newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
+-    }
++  if (!willRemoveMention && getPlainText(newValue, config) !== plainTextValue) {
++    for (spliceStart = 0; plainTextValue[spliceStart] === oldPlainTextValue[spliceStart]; ) spliceStart++;
++    for (var spliceEndOfNew = plainTextValue.length, spliceEndOfOld = oldPlainTextValue.length; plainTextValue[spliceEndOfNew - 1] === oldPlainTextValue[spliceEndOfOld - 1]; ) spliceEndOfNew--, 
++    spliceEndOfOld--;
++    insert = plainTextValue.slice(spliceStart, spliceEndOfNew), spliceEnd = spliceEndOfOld >= spliceStart ? spliceEndOfOld : selectionEndAfter, 
++    mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), 
++    newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
+   }
+   return newValue;
+ }, findStartOfMentionInPlainText = function(value, config, indexInPlainText) {
+@@ -420,6 +419,29 @@ var _toConsumableArray = _interopDefault(require("@babel/runtime/helpers/toConsu
+   }, {});
+ }, _excluded = [ "style", "className", "classNames" ];
+ 
++function ownKeys(object, enumerableOnly) {
++  var keys = Object.keys(object);
++  if (Object.getOwnPropertySymbols) {
++    var symbols = Object.getOwnPropertySymbols(object);
++    enumerableOnly && (symbols = symbols.filter(function(sym) {
++      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
++    })), keys.push.apply(keys, symbols);
++  }
++  return keys;
++}
++
++function _objectSpread(target) {
++  for (var i = 1; i < arguments.length; i++) {
++    var source = null != arguments[i] ? arguments[i] : {};
++    i % 2 ? ownKeys(Object(source), !0).forEach(function(key) {
++      _defineProperty(target, key, source[key]);
++    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
++      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
++    });
++  }
++  return target;
++}
++
+ function createDefaultStyle(defaultStyle, getModifiers) {
+   return function(ComponentToWrap) {
+     var DefaultStyleEnhancer = function(_ref) {
+@@ -433,7 +455,11 @@ function createDefaultStyle(defaultStyle, getModifiers) {
+       }));
+     }, displayName = ComponentToWrap.displayName || ComponentToWrap.name || "Component";
+     return DefaultStyleEnhancer.displayName = "defaultStyle(".concat(displayName, ")"), 
+-    DefaultStyleEnhancer;
++    React__default.forwardRef(function(props, ref) {
++      return DefaultStyleEnhancer(_objectSpread(_objectSpread({}, props), {}, {
++        ref: ref
++      }));
++    });
+   };
+ }
+ 
+@@ -449,7 +475,7 @@ function Highlighter(_ref) {
+   }), _useState2 = _slicedToArray(_useState, 2), position = _useState2[0], setPosition = _useState2[1], _useState3 = React.useState(), _useState4 = _slicedToArray(_useState3, 2), caretElement = _useState4[0], setCaretElement = _useState4[1];
+   React.useEffect(function() {
+     notifyCaretPosition();
+-  }, [ caretElement ]);
++  });
+   var caretPositionInMarkup, notifyCaretPosition = function() {
+     if (caretElement) {
+       var offsetLeft = caretElement.offsetLeft, offsetTop = caretElement.offsetTop;
+@@ -585,13 +611,13 @@ var defaultstyle = {};
+ function SuggestionsOverlay(_ref) {
+   var id = _ref.id, _ref$suggestions = _ref.suggestions, suggestions = void 0 === _ref$suggestions ? {} : _ref$suggestions, a11ySuggestionsListLabel = _ref.a11ySuggestionsListLabel, focusIndex = _ref.focusIndex, position = _ref.position, left = _ref.left, right = _ref.right, top = _ref.top, scrollFocusedIntoView = _ref.scrollFocusedIntoView, isLoading = _ref.isLoading, isOpened = _ref.isOpened, _ref$onSelect = _ref.onSelect, onSelect = void 0 === _ref$onSelect ? function() {
+     return null;
+-  } : _ref$onSelect, ignoreAccents = _ref.ignoreAccents, containerRef = _ref.containerRef, children = _ref.children, style = _ref.style, customSuggestionsContainer = _ref.customSuggestionsContainer, onMouseDown = _ref.onMouseDown, onMouseEnter = _ref.onMouseEnter, _useState = React.useState(), _useState2 = _slicedToArray(_useState, 2), ulElement = _useState2[0], setUlElement = _useState2[1];
++  } : _ref$onSelect, ignoreAccents = _ref.ignoreAccents, containerRef = _ref.containerRef, children = _ref.children, style = _ref.style, customSuggestionsContainer = _ref.customSuggestionsContainer, onMouseDown = _ref.onMouseDown, onMouseEnter = _ref.onMouseEnter, _useState = React.useState(void 0), _useState2 = _slicedToArray(_useState, 2), ulElement = _useState2[0], setUlElement = _useState2[1];
+   React.useEffect(function() {
+     if (ulElement && !(ulElement.offsetHeight >= ulElement.scrollHeight) && scrollFocusedIntoView) {
+       var scrollTop = ulElement.scrollTop, _ulElement$children$f = ulElement.children[focusIndex].getBoundingClientRect(), top = _ulElement$children$f.top, bottom = _ulElement$children$f.bottom, topContainer = ulElement.getBoundingClientRect().top;
+       bottom = bottom - topContainer + scrollTop, (top = top - topContainer + scrollTop) < scrollTop ? ulElement.scrollTop = top : bottom > ulElement.offsetHeight && (ulElement.scrollTop = bottom - ulElement.offsetHeight);
+     }
+-  }, []);
++  }, [ focusIndex, scrollFocusedIntoView, ulElement ]);
+   var suggestionsToRender, renderSuggestion = function(result, queryInfo, index) {
+     var isFocused = index === focusIndex, childIndex = queryInfo.childIndex, query = queryInfo.query, renderSuggestion = React.Children.toArray(children)[childIndex].props.renderSuggestion;
+     return React__default.createElement(Suggestion$1, {
+@@ -626,17 +652,17 @@ function SuggestionsOverlay(_ref) {
+   }, style), {
+     onMouseDown: onMouseDown,
+     ref: containerRef
+-  }), React__default.createElement("ul", _extends({
++  }), (suggestionsToRender = React__default.createElement("ul", _extends({
+     ref: setUlElement,
+     id: id,
+     role: "listbox",
+     "aria-label": a11ySuggestionsListLabel
+-  }, style("list")), (suggestionsToRender = Object.values(suggestions).reduce(function(accResults, _ref2) {
++  }, style("list")), Object.values(suggestions).reduce(function(accResults, _ref2) {
+     var results = _ref2.results, queryInfo = _ref2.queryInfo;
+     return [].concat(_toConsumableArray(accResults), _toConsumableArray(results.map(function(result, index) {
+       return renderSuggestion(result, queryInfo, accResults.length + index);
+     })));
+-  }, []), customSuggestionsContainer ? customSuggestionsContainer(suggestionsToRender) : suggestionsToRender)), function() {
++  }, [])), customSuggestionsContainer ? customSuggestionsContainer(suggestionsToRender) : suggestionsToRender), function() {
+     if (isLoading) return React__default.createElement(LoadingIndicator, {
+       style: style("loadingIndicator")
+     });
+@@ -657,7 +683,7 @@ SuggestionsOverlay.propTypes = {
+   isOpened: PropTypes.bool.isRequired,
+   onSelect: PropTypes.func,
+   ignoreAccents: PropTypes.bool,
+-  customSuggestionsContainer: PropTypes.any,
++  customSuggestionsContainer: PropTypes.func,
+   containerRef: PropTypes.oneOfType([ PropTypes.func, PropTypes.shape({
+     current: "undefined" == typeof Element ? PropTypes.any : PropTypes.instanceOf(Element)
+   }) ])
+@@ -675,7 +701,7 @@ var styled$2 = createDefaultStyle({
+   }
+ }), SuggestionsOverlay$1 = styled$2(SuggestionsOverlay);
+ 
+-function ownKeys(object, enumerableOnly) {
++function ownKeys$1(object, enumerableOnly) {
+   var keys = Object.keys(object);
+   if (Object.getOwnPropertySymbols) {
+     var symbols = Object.getOwnPropertySymbols(object);
+@@ -686,12 +712,12 @@ function ownKeys(object, enumerableOnly) {
+   return keys;
+ }
+ 
+-function _objectSpread(target) {
++function _objectSpread$1(target) {
+   for (var i = 1; i < arguments.length; i++) {
+     var source = null != arguments[i] ? arguments[i] : {};
+-    i % 2 ? ownKeys(Object(source), !0).forEach(function(key) {
++    i % 2 ? ownKeys$1(Object(source), !0).forEach(function(key) {
+       _defineProperty(target, key, source[key]);
+-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
++    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function(key) {
+       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+     });
+   }
+@@ -769,7 +795,7 @@ var makeTriggerRegex = function(trigger) {
+       _this.containerElement = el;
+     }), _defineProperty(_assertThisInitialized(_this), "getInputProps", function() {
+       var _this$props = _this.props, readOnly = _this$props.readOnly, disabled = _this$props.disabled, style = _this$props.style;
+-      return _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, omit(_this.props, [ "style", "classNames", "className" ], keys(propTypes))), style("input")), {}, {
++      return _objectSpread$1(_objectSpread$1(_objectSpread$1(_objectSpread$1({}, omit(_this.props, [ "style", "classNames", "className" ], keys(propTypes))), style("input")), {}, {
+         value: _this.getPlainText(),
+         onScroll: _this.updateHighlighterScroll
+       }, !readOnly && !disabled && {
+@@ -853,9 +879,13 @@ var makeTriggerRegex = function(trigger) {
+       return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
+     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
+       if ((isComposing = !1, isIE()) && (document.activeElement && document.activeElement.contentDocument || document).activeElement !== ev.target) return;
+-      var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, newValue = applyChangeToValue(value, newPlainTextValue, {
+-        selectionStartBefore: _this.state.selectionStart,
+-        selectionEndBefore: _this.state.selectionEnd,
++      var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
++      null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
++      var selectionEndBefore = _this.state.selectionEnd;
++      null == selectionEndBefore && (selectionEndBefore = ev.target.selectionEnd);
++      var newValue = applyChangeToValue(value, newPlainTextValue, {
++        selectionStartBefore: selectionStartBefore,
++        selectionEndBefore: selectionEndBefore,
+         selectionEndAfter: ev.target.selectionEnd
+       }, config);
+       newPlainTextValue = getPlainText(newValue, config);
+@@ -866,7 +896,9 @@ var makeTriggerRegex = function(trigger) {
+         selectionEnd: selectionEnd,
+         setSelectionAfterMentionChange: setSelectionAfterMentionChange
+       });
+-      var mentions = getMentions(newValue, config), eventMock = {
++      var mentions = getMentions(newValue, config);
++      ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
++      var eventMock = {
+         target: {
+           value: newValue
+         }
+@@ -1005,7 +1037,7 @@ var makeTriggerRegex = function(trigger) {
+       syncResult instanceof Array && _this.updateSuggestions(_this._queryId, childIndex, query, querySequenceStart, querySequenceEnd, plainTextValue, syncResult);
+     }), _defineProperty(_assertThisInitialized(_this), "updateSuggestions", function(queryId, childIndex, query, querySequenceStart, querySequenceEnd, plainTextValue, results) {
+       if (queryId === _this._queryId) {
+-        _this.suggestions = _objectSpread(_objectSpread({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
++        _this.suggestions = _objectSpread$1(_objectSpread$1({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
+           queryInfo: {
+             childIndex: childIndex,
+             query: query,
+@@ -1057,7 +1089,8 @@ var makeTriggerRegex = function(trigger) {
+       selectionEnd: null,
+       suggestions: {},
+       caretPosition: null,
+-      suggestionsPosition: {}
++      suggestionsPosition: {},
++      setSelectionAfterHandlePaste: !1
+     }, _this;
+   }
+   return _createClass(MentionsInput, [ {
+@@ -1072,6 +1105,8 @@ var makeTriggerRegex = function(trigger) {
+       prevState.suggestionsPosition === this.state.suggestionsPosition && this.updateSuggestionsPosition(), 
+       this.state.setSelectionAfterMentionChange && (this.setState({
+         setSelectionAfterMentionChange: !1
++      }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (this.setState({
++        setSelectionAfterHandlePaste: !1
+       }), this.setSelection(this.state.selectionStart, this.state.selectionEnd));
+     }
+   }, {
+@@ -1093,13 +1128,17 @@ var makeTriggerRegex = function(trigger) {
+       if (event.target === this.inputElement && this.supportsClipboardActions(event)) {
+         event.preventDefault();
+         var _this$state3 = this.state, selectionStart = _this$state3.selectionStart, selectionEnd = _this$state3.selectionEnd, _this$props7 = this.props, value = _this$props7.value, children = _this$props7.children, config = readConfigFromChildren(children), markupStartIndex = mapPlainTextIndex(value, config, selectionStart, "START"), markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, "END"), pastedMentions = event.clipboardData.getData("text/react-mentions"), pastedData = event.clipboardData.getData("text/plain"), newValue = spliceString(value, markupStartIndex, markupEndIndex, pastedMentions || pastedData).replace(/\r/g, ""), newPlainTextValue = getPlainText(newValue, config), eventMock = {
+-          target: _objectSpread(_objectSpread({}, event.target), {}, {
++          target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+             value: newValue
+           })
+         };
+         this.executeOnChange(eventMock, newValue, newPlainTextValue, getMentions(newValue, config));
+         var nextPos = (findStartOfMentionInPlainText(value, config, selectionStart) || selectionStart) + getPlainText(pastedMentions || pastedData, config).length;
+-        this.setSelection(nextPos, nextPos);
++        this.setState({
++          selectionStart: nextPos,
++          selectionEnd: nextPos,
++          setSelectionAfterHandlePaste: !0
++        });
+       }
+     }
+   }, {
+@@ -1126,7 +1165,7 @@ var makeTriggerRegex = function(trigger) {
+       if (event.target === this.inputElement && this.supportsClipboardActions(event)) {
+         event.preventDefault(), this.saveSelectionToClipboard(event);
+         var _this$state4 = this.state, selectionStart = _this$state4.selectionStart, selectionEnd = _this$state4.selectionEnd, _this$props9 = this.props, children = _this$props9.children, value = _this$props9.value, config = readConfigFromChildren(children), markupStartIndex = mapPlainTextIndex(value, config, selectionStart, "START"), markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, "END"), newValue = [ value.slice(0, markupStartIndex), value.slice(markupEndIndex) ].join(""), newPlainTextValue = getPlainText(newValue, config), eventMock = {
+-          target: _objectSpread(_objectSpread({}, event.target), {}, {
++          target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+             value: newPlainTextValue
+           })
+         };
+@@ -1171,7 +1210,7 @@ var getComputedStyleLengthProp = function(forElement, propertyName) {
+     letterSpacing: "inherit"
+   },
+   "&multiLine": {
+-    input: _objectSpread({
++    input: _objectSpread$1({
+       height: "100%",
+       bottom: 0,
+       overflow: "hidden",
+diff --git a/dist/react-mentions.esm.js b/dist/react-mentions.esm.js
+index fd6c82b767e342124ea8a9c8b2b1e61d3eed9439..b68de5946a90361c0d1bb4af6ad2ab74f2837cef 100644
+--- a/dist/react-mentions.esm.js
++++ b/dist/react-mentions.esm.js
+@@ -222,14 +222,23 @@ var applyChangeToValue = function applyChangeToValue(value, plainTextValue, _ref
+       // find start of diff
+       spliceStart = 0;
+ 
+-      while (plainTextValue[spliceStart] === controlPlainTextValue[spliceStart]) {
++      while (plainTextValue[spliceStart] === oldPlainTextValue[spliceStart]) {
+         spliceStart++;
++      } // find end of diff
++
++
++      var spliceEndOfNew = plainTextValue.length;
++      var spliceEndOfOld = oldPlainTextValue.length;
++
++      while (plainTextValue[spliceEndOfNew - 1] === oldPlainTextValue[spliceEndOfOld - 1]) {
++        spliceEndOfNew--;
++        spliceEndOfOld--;
+       } // extract auto-corrected insertion
+ 
+ 
+-      insert = plainTextValue.slice(spliceStart, selectionEndAfter); // find index of the unchanged remainder
++      insert = plainTextValue.slice(spliceStart, spliceEndOfNew); // find index of the unchanged remainder
+ 
+-      spliceEnd = oldPlainTextValue.lastIndexOf(plainTextValue.substring(selectionEndAfter)); // re-map the corrected indices
++      spliceEnd = spliceEndOfOld >= spliceStart ? spliceEndOfOld : selectionEndAfter; // re-map the corrected indices
+ 
+       mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, 'START');
+       mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, 'END');
+@@ -653,6 +662,10 @@ var omit = function omit(obj) {
+ 
+ var _excluded = ["style", "className", "classNames"];
+ 
++function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
++
++function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
++
+ function createDefaultStyle(defaultStyle, getModifiers) {
+   var enhance = function enhance(ComponentToWrap) {
+     var DefaultStyleEnhancer = function DefaultStyleEnhancer(_ref) {
+@@ -673,8 +686,13 @@ function createDefaultStyle(defaultStyle, getModifiers) {
+     };
+ 
+     var displayName = ComponentToWrap.displayName || ComponentToWrap.name || 'Component';
+-    DefaultStyleEnhancer.displayName = "defaultStyle(".concat(displayName, ")");
+-    return DefaultStyleEnhancer;
++    DefaultStyleEnhancer.displayName = "defaultStyle(".concat(displayName, ")"); // return DefaultStyleEnhancer
++
++    return /*#__PURE__*/React.forwardRef(function (props, ref) {
++      return DefaultStyleEnhancer(_objectSpread(_objectSpread({}, props), {}, {
++        ref: ref
++      }));
++    });
+   };
+ 
+   return enhance;
+@@ -716,7 +734,7 @@ function Highlighter(_ref) {
+ 
+   useEffect(function () {
+     notifyCaretPosition();
+-  }, [caretElement]);
++  });
+ 
+   var notifyCaretPosition = function notifyCaretPosition() {
+     if (!caretElement) {
+@@ -965,7 +983,7 @@ function SuggestionsOverlay(_ref) {
+       onMouseDown = _ref.onMouseDown,
+       onMouseEnter = _ref.onMouseEnter;
+ 
+-  var _useState = useState(),
++  var _useState = useState(undefined),
+       _useState2 = _slicedToArray(_useState, 2),
+       ulElement = _useState2[0],
+       setUlElement = _useState2[1];
+@@ -992,17 +1010,23 @@ function SuggestionsOverlay(_ref) {
+     } else if (bottom > ulElement.offsetHeight) {
+       ulElement.scrollTop = bottom - ulElement.offsetHeight;
+     }
+-  }, []);
++  }, [focusIndex, scrollFocusedIntoView, ulElement]);
+ 
+   var renderSuggestions = function renderSuggestions() {
+-    var suggestionsToRender = Object.values(suggestions).reduce(function (accResults, _ref2) {
++    var suggestionsToRender = /*#__PURE__*/React.createElement("ul", _extends({
++      ref: setUlElement,
++      id: id,
++      role: "listbox",
++      "aria-label": a11ySuggestionsListLabel
++    }, style('list')), Object.values(suggestions).reduce(function (accResults, _ref2) {
+       var results = _ref2.results,
+           queryInfo = _ref2.queryInfo;
+       return [].concat(_toConsumableArray(accResults), _toConsumableArray(results.map(function (result, index) {
+         return renderSuggestion(result, queryInfo, accResults.length + index);
+       })));
+-    }, []);
+-    if (customSuggestionsContainer) return customSuggestionsContainer(suggestionsToRender);else return suggestionsToRender;
++    }, []));
++    if (customSuggestionsContainer) return customSuggestionsContainer(suggestionsToRender);
++    return suggestionsToRender;
+   };
+ 
+   var renderSuggestion = function renderSuggestion(result, queryInfo, index) {
+@@ -1069,12 +1093,7 @@ function SuggestionsOverlay(_ref) {
+   }, style), {
+     onMouseDown: onMouseDown,
+     ref: containerRef
+-  }), /*#__PURE__*/React.createElement("ul", _extends({
+-    ref: setUlElement,
+-    id: id,
+-    role: "listbox",
+-    "aria-label": a11ySuggestionsListLabel
+-  }, style('list')), renderSuggestions()), renderLoadingIndicator());
++  }), renderSuggestions(), renderLoadingIndicator());
+ }
+ 
+ SuggestionsOverlay.propTypes = {
+@@ -1091,7 +1110,7 @@ SuggestionsOverlay.propTypes = {
+   isOpened: PropTypes.bool.isRequired,
+   onSelect: PropTypes.func,
+   ignoreAccents: PropTypes.bool,
+-  customSuggestionsContainer: PropTypes.any,
++  customSuggestionsContainer: PropTypes.func,
+   containerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
+     current: typeof Element === 'undefined' ? PropTypes.any : PropTypes.instanceOf(Element)
+   })])
+@@ -1109,9 +1128,9 @@ var styled$2 = createDefaultStyle({
+ });
+ var SuggestionsOverlay$1 = styled$2(SuggestionsOverlay);
+ 
+-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
++function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+ 
+-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
++function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+ 
+ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+ 
+@@ -1208,7 +1227,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var props = omit(_this.props, ['style', 'classNames', 'className'], // substyle props
+       keys(propTypes));
+-      return _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, props), style('input')), {}, {
++      return _objectSpread$1(_objectSpread$1(_objectSpread$1(_objectSpread$1({}, props), style('input')), {}, {
+         value: _this.getPlainText(),
+         onScroll: _this.updateHighlighterScroll
+       }, !readOnly && !disabled && {
+@@ -1372,11 +1391,23 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var value = _this.props.value || '';
+       var config = readConfigFromChildren(_this.props.children);
+-      var newPlainTextValue = ev.target.value; // Derive the new value to set by applying the local change in the textarea's plain text
++      var newPlainTextValue = ev.target.value;
++      var selectionStartBefore = _this.state.selectionStart;
++
++      if (selectionStartBefore == null) {
++        selectionStartBefore = ev.target.selectionStart;
++      }
++
++      var selectionEndBefore = _this.state.selectionEnd;
++
++      if (selectionEndBefore == null) {
++        selectionEndBefore = ev.target.selectionEnd;
++      } // Derive the new value to set by applying the local change in the textarea's plain text
++
+ 
+       var newValue = applyChangeToValue(value, newPlainTextValue, {
+-        selectionStartBefore: _this.state.selectionStart,
+-        selectionEndBefore: _this.state.selectionEnd,
++        selectionStartBefore: selectionStartBefore,
++        selectionEndBefore: selectionEndBefore,
+         selectionEndAfter: ev.target.selectionEnd
+       }, config); // In case a mention is deleted, also adjust the new plain text value
+ 
+@@ -1402,9 +1433,14 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+         setSelectionAfterMentionChange: setSelectionAfterMentionChange
+       });
+ 
+-      var mentions = getMentions(newValue, config); // Propagate change
++      var mentions = getMentions(newValue, config);
++
++      if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
++        _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
++      } // Propagate change
+       // let handleChange = this.getOnChange(this.props) || emptyFunction;
+ 
++
+       var eventMock = {
+         target: {
+           value: newValue
+@@ -1751,7 +1787,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       if (queryId !== _this._queryId) return; // save in property so that multiple sync state updates from different mentions sources
+       // won't overwrite each other
+ 
+-      _this.suggestions = _objectSpread(_objectSpread({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
++      _this.suggestions = _objectSpread$1(_objectSpread$1({}, _this.suggestions), {}, _defineProperty({}, childIndex, {
+         queryInfo: {
+           childIndex: childIndex,
+           query: query,
+@@ -1856,7 +1892,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       selectionEnd: null,
+       suggestions: {},
+       caretPosition: null,
+-      suggestionsPosition: {}
++      suggestionsPosition: {},
++      setSelectionAfterHandlePaste: false
+     };
+     return _this;
+   }
+@@ -1886,6 +1923,13 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+         });
+         this.setSelection(this.state.selectionStart, this.state.selectionEnd);
+       }
++
++      if (this.state.setSelectionAfterHandlePaste) {
++        this.setState({
++          setSelectionAfterHandlePaste: false
++        });
++        this.setSelection(this.state.selectionStart, this.state.selectionEnd);
++      }
+     }
+   }, {
+     key: "componentWillUnmount",
+@@ -1927,7 +1971,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       var newValue = spliceString(value, markupStartIndex, markupEndIndex, pastedMentions || pastedData).replace(/\r/g, '');
+       var newPlainTextValue = getPlainText(newValue, config);
+       var eventMock = {
+-        target: _objectSpread(_objectSpread({}, event.target), {}, {
++        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+           value: newValue
+         })
+       };
+@@ -1935,7 +1979,11 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+ 
+       var startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
+       var nextPos = (startOfMention || selectionStart) + getPlainText(pastedMentions || pastedData, config).length;
+-      this.setSelection(nextPos, nextPos);
++      this.setState({
++        selectionStart: nextPos,
++        selectionEnd: nextPos,
++        setSelectionAfterHandlePaste: true
++      });
+     }
+   }, {
+     key: "saveSelectionToClipboard",
+@@ -1997,7 +2045,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
+       var newValue = [value.slice(0, markupStartIndex), value.slice(markupEndIndex)].join('');
+       var newPlainTextValue = getPlainText(newValue, config);
+       var eventMock = {
+-        target: _objectSpread(_objectSpread({}, event.target), {}, {
++        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+           value: newPlainTextValue
+         })
+       };
+@@ -2054,7 +2102,7 @@ var styled$3 = createDefaultStyle({
+     letterSpacing: 'inherit'
+   },
+   '&multiLine': {
+-    input: _objectSpread({
++    input: _objectSpread$1({
+       height: '100%',
+       bottom: 0,
+       overflow: 'hidden',
