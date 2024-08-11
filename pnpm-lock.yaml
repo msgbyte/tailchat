@@ -731,9 +731,9 @@ importers:
       react-markdown:
         specifier: ^8.0.5
         version: 8.0.5(@types/react@18.0.20)(react@18.2.0)
-      react-mentions:
-        specifier: ^4.4.7
-        version: 4.4.7(react-dom@18.2.0)(react@18.2.0)
+      react-mentions-fix:
+        specifier: 4.4.11
+        version: 4.4.11(react-dom@18.2.0)(react@18.2.0)
       react-router:
         specifier: 6.11.0
         version: 6.11.0(react@18.2.0)
@@ -846,9 +846,6 @@ importers:
       '@types/react-helmet':
         specifier: ^6.1.6
         version: 6.1.6
-      '@types/react-mentions':
-        specifier: ^4.1.8
-        version: 4.1.8
       '@types/react-router':
         specifier: ^5.1.20
         version: 5.1.20
@@ -12677,12 +12674,6 @@ packages:
       '@types/react': 18.0.20
     dev: false
 
-  /@types/react-mentions@4.1.8:
-    resolution: {integrity: sha512-Go86ozdnh0FTNbiGiDPAcNqYqtab9iGzLOgZPYUKrnhI4539jGzfJtP6rFHcXgi9Koe58yhkeyKYib6Ucul/sQ==}
-    dependencies:
-      '@types/react': 18.0.20
-    dev: true
-
   /@types/react-router-config@5.0.6:
     resolution: {integrity: sha512-db1mx37a1EJDf1XeX8jJN7R3PZABmJQXR8r28yUjVMFSjkmnQo6X6pOEEmNl+Tp2gYQOGPdYbFIipBtdElZ3Yg==}
     dependencies:
@@ -13361,6 +13352,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -13371,6 +13365,9 @@ packages:
     deprecated: This is probably built in to whatever tool you're using. If you still need it... idk
     peerDependencies:
       acorn: ^6.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
     dev: true
@@ -13386,6 +13383,9 @@ packages:
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
     peerDependencies:
       acorn: ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
 
@@ -13393,6 +13393,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 7.4.1
     dev: true
@@ -13401,6 +13404,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
 
@@ -13417,6 +13423,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
     dev: true
@@ -13426,6 +13435,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -13436,6 +13448,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^7.4 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-class-fields: 0.3.7(acorn@8.8.2)
@@ -13448,6 +13463,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -24799,6 +24817,9 @@ packages:
     engines: {node: '>= 8.x.x'}
     peerDependencies:
       moleculer: ^0.12.0 || ^0.13.0 || ^0.14.0
+    peerDependenciesMeta:
+      moleculer:
+        optional: true
     dependencies:
       '@seald-io/nedb': 3.1.0
       bluebird: 3.7.2
@@ -29360,8 +29381,8 @@ packages:
       - supports-color
     dev: false
 
-  /react-mentions@4.4.7(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VNriu2h/uOB+RS0mwZgPG2Vf+UtdDvRh5zbXa2TNc1WqacKuNDgTdhlbo9LEOZRBxRzIeTUYQmYJ7p9M9rDHqQ==}
+  /react-mentions-fix@4.4.11(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-RaPtSNIJYLOGyebeXaIV3RmYF+x86Y7SuUHv7J9G/nIxnDbE6MJEpOJLLgR0FR0JP972L748t/XUevRlVRHsMw==}
     peerDependencies:
       react: '>=16.8.3'
       react-dom: '>=16.8.3'

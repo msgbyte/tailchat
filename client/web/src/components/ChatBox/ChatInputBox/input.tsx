@@ -2,7 +2,7 @@ import { UserListItem } from '@/components/UserListItem';
 import { getMessageTextDecorators, useGroupIdContext } from '@/plugin/common';
 import { stopPropagation } from '@/utils/dom-helper';
 import React from 'react';
-import { Mention, MentionsInput } from 'react-mentions';
+import { Mention, MentionsInput } from 'react-mentions-fix';
 import { getGroupConfigWithInfo, t, useGroupInfo } from 'tailchat-shared';
 import { useChatInputMentionsContext } from './context';
 import { MentionCommandItem } from './MentionCommandItem';
@@ -46,7 +46,7 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         style={defaultChatInputBoxInputStyle}
         maxLength={1000}
         value={props.value}
-        onChange={(e, newValue, _, mentions) =>
+        onChange={(e: any, newValue: string, _: any, mentions: any[]) =>
           props.onChange(
             newValue,
             mentions.filter((m) => m.display.startsWith('@')).map((m) => m.id) // 仅处理mention的数据进行记录
@@ -61,14 +61,14 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         <Mention
           trigger="@"
           data={
-            (query) =>
+            (query: any) =>
               (users ?? [])
                 .filter((u) => u.display?.includes(query))
                 .slice(0, 20) // max display 20 item at most
           }
-          displayTransform={(id, display) => `@${display}`}
+          displayTransform={(id: any, display: any) => `@${display}`}
           appendSpaceOnAdd={true}
-          renderSuggestion={(suggestion) => (
+          renderSuggestion={(suggestion: { id: any }) => (
             <UserListItem
               userId={String(suggestion.id)}
               hideDiscriminator={hideGroupMemberDiscriminator}
@@ -79,9 +79,9 @@ export const ChatInputBoxInput: React.FC<ChatInputBoxInputProps> = React.memo(
         <Mention
           trigger="#"
           data={panels ?? []}
-          displayTransform={(id, display) => `#${display}`}
+          displayTransform={(id: any, display: any) => `#${display}`}
           appendSpaceOnAdd={true}
-          renderSuggestion={(suggestion) => (
+          renderSuggestion={(suggestion: { display: any; id: any }) => (
             <MentionCommandItem
               icon="mdi:pound"
               label={suggestion.display ?? String(suggestion.id)}
