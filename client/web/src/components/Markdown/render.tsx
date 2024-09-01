@@ -1,6 +1,6 @@
 import { makeAbsoluteUrl } from '@/utils/url-helper';
 import React, { useCallback, useMemo } from 'react';
-import { isValidStr, parseUrlStr } from 'tailchat-shared';
+import { isValidStr, parseUrlStr, useTranslation } from 'tailchat-shared';
 import { Loadable } from '../Loadable';
 import { Image } from 'tailchat-design';
 import remarkGfm from 'remark-gfm';
@@ -15,6 +15,7 @@ export const Markdown: React.FC<{
   raw: string;
   baseUrl?: string;
 }> = React.memo(({ raw, baseUrl }) => {
+  const { t } = useTranslation();
   const transformUrl = useCallback(
     (url: string) => {
       url = parseUrlStr(url);
@@ -43,6 +44,7 @@ export const Markdown: React.FC<{
           preview={true}
         />
       ),
+      style: () => <div>{t('不支持自定义样式')}</div>,
     }),
     []
   );
