@@ -19,7 +19,7 @@ title: 快速开始
 
 ### Kubernetes
 
-教程请翻阅: [kubernetes 简易部署](./kubernetes/simple.md)
+教程请翻阅: [kubernetes 简易部署](./other-way/kubernetes/simple.md)
 
 ## 系统架构
 

@@ -19,7 +19,7 @@ Please refer to the tutorial: [Docker Compose Deployment](./docker-compose.mdx)
 
 ### Kubernetes
 
-Please refer to the tutorial: [Kubernetes Simple Deployment](./kubernetes/simple.md)
+Please refer to the tutorial: [Kubernetes Simple Deployment](./other-way/kubernetes/simple.md)
 
 ## System Structure
 
