@@ -422,5 +422,11 @@
   },
   "Bot and Open Platform": {
     "message": "机器人与开放平台"
+  },
+  "Join Tailchat Group": {
+    "message": "加入 Tailchat 群组"
+  },
+  "Join Discord": {
+    "message": "加入 Discord"
   }
 }

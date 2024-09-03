@@ -62,5 +62,9 @@
   "sidebar.tutorialSidebar.category.Open App": {
     "message": "开放平台应用",
     "description": "The label for category Open App in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Install with other ways": {
+    "message": "使用其他方式安装",
+    "description": "The label for category Install with other ways in sidebar tutorialSidebar"
   }
 }
