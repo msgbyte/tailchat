@@ -70,6 +70,10 @@
 
 [![Deploy on Sealos](https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg)](https://cloud.sealos.io/?openapp=system-template%3FtemplateName%3Dtailchat)
 
+## 使用宝塔快速部署
+
+[使用宝塔部署一键部署](https://tailchat.msgbyte.com/zh-Hans/docs/deployment/other-way/bt)
+
 ### 社区
 
 [Tailchat Nightly Group](https://nightly.paw.msgbyte.com/invite/8Jfm1dWb)
