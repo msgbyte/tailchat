@@ -13,7 +13,7 @@ Tailchat 已上架宝塔应用商店，你可以在应用商店中一键安装Ta
 
 如果您已经有宝塔服务器，直接登录宝塔面板，跳过本节内容即可。
 
-![](./assets/bt-logo.jpg)
+[![](./assets/bt-logo.jpg)](https://www.bt.cn/u/P0shD8)
 
 点击以上链接跳转到宝塔官网，查看如何在你的服务器安装宝塔
 
