@@ -479,10 +479,14 @@ class MessageService extends TcService {
       })
     );
 
-    return list.filter(Boolean).map((item) => ({
-      converseId: String(item.converseId),
-      lastMessageId: String(item._id),
-    }));
+    return list.map((item) =>
+      item
+        ? {
+            converseId: String(item.converseId),
+            lastMessageId: String(item._id),
+          }
+        : null
+    );
   }
 
   async addReaction(

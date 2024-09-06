@@ -1,10 +1,15 @@
-import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
+import {
+  ChatConverseInfo,
+  fetchConverseInfo,
+  getConverseAckInfo,
+} from '../model/converse';
 import {
   findGroupInviteByCode,
   getGroupBasicInfo,
   GroupBasicInfo,
   GroupInvite,
 } from '../model/group';
+import { getConverseLastMessageInfo } from '../model/message';
 import {
   fetchLocalStaticRegistryPlugins,
   fetchRegistryPlugins,
@@ -18,6 +23,7 @@ import { queryClient } from './index';
 export enum CacheKey {
   user = 'user',
   converse = 'converse',
+  converseAck = 'converseAck',
   baseGroupInfo = 'baseGroupInfo',
   groupInvite = 'groupInvite',
   pluginRegistry = 'pluginRegistry',
@@ -79,6 +85,32 @@ export async function getCachedGroupInviteInfo(
   const data = await queryClient.fetchQuery(
     [CacheKey.groupInvite, inviteCode],
     () => findGroupInviteByCode(inviteCode)
+  );
+
+  return data;
+}
+
+/**
+ * 获取缓存的用户信息
+ */
+export async function getCachedAckInfo(converseId: string, refetch = false) {
+  const data = await queryClient.fetchQuery(
+    [CacheKey.converseAck, converseId],
+    () => {
+      return Promise.all([
+        getConverseAckInfo([converseId]).then((d) => d[0]),
+        getConverseLastMessageInfo([converseId]).then((d) => d[0]),
+      ]).then(([ack, lastMessage]) => {
+        return {
+          converseId,
+          ack,
+          lastMessage,
+        };
+      });
+    },
+    {
+      staleTime: 2 * 1000, // 缓存2s, 减少一秒内的重复请求(无意义)
+    }
   );
 
   return data;

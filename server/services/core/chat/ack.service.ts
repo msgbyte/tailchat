@@ -23,6 +23,14 @@ class AckService extends TcService {
         lastMessageId: 'string',
       },
     });
+    this.registerAction('list', this.listAck, {
+      params: {
+        converseIds: {
+          type: 'array',
+          items: 'string',
+        },
+      },
+    });
     this.registerAction('all', this.allAck);
   }
 
@@ -52,6 +60,35 @@ class AckService extends TcService {
     );
 
     // TODO: 如果要实现消息已读可以在此处基于会话id进行通知
+  }
+
+  /**
+   * 所有的ack信息
+   */
+  async listAck(ctx: TcContext<{ converseIds: string[] }>) {
+    const userId = ctx.meta.userId;
+    const { converseIds } = ctx.params;
+
+    const list = await this.adapter.model.find({
+      userId,
+      converseId: {
+        $in: [...converseIds],
+      },
+    });
+
+    return converseIds.map((converseId) => {
+      const lastMessageId =
+        list
+          .find((item) => String(item.converseId) === converseId)
+          ?.lastMessageId?.toString() ?? null;
+
+      return lastMessageId
+        ? {
+            converseId,
+            lastMessageId,
+          }
+        : null;
+    });
   }
 
   /**

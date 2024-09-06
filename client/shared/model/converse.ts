@@ -1,4 +1,11 @@
 import { request } from '../api/request';
+import {
+  createAutoMergedRequest,
+  createAutoSplitRequest,
+} from '../utils/request';
+import _uniq from 'lodash/uniq';
+import _flatten from 'lodash/flatten';
+import _zipObject from 'lodash/zipObject';
 
 export enum ChatConverseType {
   DM = 'DM', // 单人会话
@@ -87,4 +94,51 @@ export async function fetchUserAck(): Promise<AckInfo[]> {
   }
 
   return data;
+}
+
+/**
+ * 获取用户存储在远程的会话信息
+ */
+export async function fetchUserAckList(
+  converseIds: string[]
+): Promise<(AckInfo | null)[]> {
+  const { data } = await request.post('/api/chat/ack/list', {
+    converseIds,
+  });
+
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  return data;
+}
+
+const _fetchConverseAckInfo = createAutoMergedRequest<
+  string[],
+  (AckInfo | null)[]
+>(
+  createAutoSplitRequest(
+    async (converseIdsList) => {
+      const uniqList = _uniq(_flatten(converseIdsList));
+      const infoList = await fetchUserAckList(uniqList);
+
+      const map = _zipObject<AckInfo | null>(uniqList, infoList);
+
+      // 将请求结果根据传输来源重新分组
+      return converseIdsList.map((converseIds) =>
+        converseIds.map((converseId) => map[converseId] ?? null)
+      );
+    },
+    'serial',
+    100
+  )
+);
+
+/**
+ * 获取会话信息
+ */
+export async function getConverseAckInfo(
+  converseIds: string[]
+): Promise<(AckInfo | null)[]> {
+  return _fetchConverseAckInfo(converseIds);
 }

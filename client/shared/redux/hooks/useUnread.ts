@@ -1,4 +1,6 @@
 import { useAppSelector } from './useAppSelector';
+import { useAckInfoChecker } from './useAckInfo';
+import { useEffect } from 'react';
 
 /**
  * 返回某些会话是否有未读信息
@@ -6,13 +8,18 @@ import { useAppSelector } from './useAppSelector';
 export function useUnread(converseIds: string[]) {
   const ack = useAppSelector((state) => state.chat.ack);
   const lastMessageMap = useAppSelector((state) => state.chat.lastMessageMap);
+  const { ensureAckInfo } = useAckInfoChecker();
 
-  return converseIds.map((converseId) => {
+  useEffect(() => {
+    converseIds.forEach((converseId) => ensureAckInfo(converseId));
+  }, [converseIds]);
+
+  const unreadList = converseIds.map((converseId) => {
     if (
       ack[converseId] === undefined &&
       lastMessageMap[converseId] !== undefined
     ) {
-      // 没有已读记录且远程有数据
+      // 远程没有已读记录且获取到了最后一条消息
       return true;
     }
 
@@ -20,4 +27,6 @@ export function useUnread(converseIds: string[]) {
     // 则返回true(有未读消息)
     return lastMessageMap[converseId] > ack[converseId];
   });
+
+  return unreadList;
 }

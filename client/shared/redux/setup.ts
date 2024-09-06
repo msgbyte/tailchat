@@ -9,19 +9,11 @@ import {
 import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
-import {
-  ChatMessage,
-  ChatMessageReaction,
-  fetchConverseLastMessages,
-} from '../model/message';
+import { ChatMessage, ChatMessageReaction } from '../model/message';
 import { socketEventListeners } from '../manager/socket';
 import { showToasts } from '../manager/ui';
 import { t } from '../i18n';
-import {
-  ChatConverseInfo,
-  ChatConverseType,
-  fetchUserAck,
-} from '../model/converse';
+import { ChatConverseInfo, ChatConverseType } from '../model/converse';
 import { appendUserDMConverse } from '../model/user';
 import { sharedEvent } from '../event';
 import type { InboxItem } from '../model/inbox';
@@ -61,7 +53,7 @@ function initial(socket: AppSocket, store: AppStore) {
   console.log('初始化Redux上下文...');
 
   // 立即请求加入房间
-  const conversesP = socket
+  socket
     .request<{
       dmConverseIds: string[];
       groupIds: string[];
@@ -76,30 +68,6 @@ function initial(socket: AppSocket, store: AppStore) {
       );
       throw new Error('findAndJoinRoom failed');
     });
-
-  Promise.all([conversesP, fetchUserAck()]).then(
-    ([{ dmConverseIds, textPanelIds }, acks]) => {
-      /**
-       * TODO: 这里的逻辑还需要优化
-       * 可能ack和lastMessageMap可以无关？
-       */
-
-      // 设置已读消息
-      acks.forEach((ackInfo) => {
-        store.dispatch(
-          chatActions.setConverseAck({
-            converseId: ackInfo.converseId,
-            lastMessageId: ackInfo.lastMessageId,
-          })
-        );
-      });
-
-      const converseIds = [...dmConverseIds, ...textPanelIds];
-      fetchConverseLastMessages(converseIds).then((list) => {
-        store.dispatch(chatActions.setLastMessageMap(list));
-      });
-    }
-  );
 
   // 获取好友列表
   socket
