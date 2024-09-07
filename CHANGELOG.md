@@ -1,5 +1,18 @@
 
 
+## [1.11.7](https://github.com/msgbyte/tailchat/compare/v1.11.6...v1.11.7) (2024-09-07)
+
+
+### Bug Fixes
+
+* [#252](https://github.com/msgbyte/tailchat/issues/252) disable support custom style in markdown render ([c33dbd2](https://github.com/msgbyte/tailchat/commit/c33dbd241c605b90f79837bc39fc1e7115cb3db5))
+* fix user info is null will crash list problem ([c43a99e](https://github.com/msgbyte/tailchat/commit/c43a99e12969f109876ad8f72dca219563990219))
+
+
+### Features
+
+* add DISABLE_INFO_LOG env ([5cc71d0](https://github.com/msgbyte/tailchat/commit/5cc71d02357c78cb4ac34b99f8dc376a3375fdfd))
+
 ## [1.11.6](https://github.com/msgbyte/tailchat/compare/v1.11.5...v1.11.6) (2024-07-20)
 
 
