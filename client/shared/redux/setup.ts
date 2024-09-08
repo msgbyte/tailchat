@@ -9,7 +9,7 @@ import {
 import type { FriendRequest } from '../model/friend';
 import { getCachedConverseInfo } from '../cache/cache';
 import type { GroupInfo } from '../model/group';
-import { ChatMessage, ChatMessageReaction } from '../model/message';
+import type { ChatMessage, ChatMessageReaction } from '../model/message';
 import { socketEventListeners } from '../manager/socket';
 import { showToasts } from '../manager/ui';
 import { t } from '../i18n';
