@@ -66,11 +66,12 @@
 
 如果对 Tailchat 感兴趣，欢迎加入 Tailchat 的种子用户交流群，您的反馈可以帮助 Tailchat 更好的成长
 
-## 使用 Sealos 部署
+## 快速部署
+### 使用 Sealos 部署
 
 [![Deploy on Sealos](https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg)](https://cloud.sealos.io/?openapp=system-template%3FtemplateName%3Dtailchat)
 
-## 使用宝塔快速部署
+### 使用宝塔快速部署
 
 [使用宝塔部署一键部署](https://tailchat.msgbyte.com/zh-Hans/docs/deployment/other-way/bt)
 

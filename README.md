@@ -66,7 +66,8 @@ The front end empowers the application through the plugin system, which is very 
 
 Visit the official website to learn more: [https://tailchat.msgbyte.com/](https://tailchat.msgbyte.com/)
 
-## Deploy on Sealos
+## Quick Deploy
+### Deploy on Sealos
 
 [![Deploy on Sealos](https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg)](https://cloud.sealos.io/?openapp=system-template%3FtemplateName%3Dtailchat)
 
