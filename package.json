@@ -90,7 +90,8 @@
     },
     "patchedDependencies": {
       "moleculer@0.14.23": "patches/moleculer@0.14.23.patch",
-      "vite-express@0.8.0": "patches/vite-express@0.8.0.patch"
+      "vite-express@0.8.0": "patches/vite-express@0.8.0.patch",
+      "react-mentions@4.4.7": "patches/react-mentions@4.4.7.patch"
     }
   }
 }
