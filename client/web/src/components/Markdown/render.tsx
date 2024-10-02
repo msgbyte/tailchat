@@ -45,6 +45,7 @@ export const Markdown: React.FC<{
         />
       ),
       style: () => <div>{t('不支持自定义样式')}</div>,
+      meta: () => <div>{t('不支持自定义Meta')}</div>,
     }),
     []
   );
