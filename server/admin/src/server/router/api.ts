@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
       }
     );
 
-    res.json({
+    res.status(200).json({
       username,
       token: token,
       expiredAt: new Date().valueOf() + 2 * 60 * 60 * 1000,
@@ -312,11 +312,27 @@ router.use(
         foreignField: 'avatar',
         as: 'avatarMatchedUser',
       })
+      .lookup({
+        from: 'groups',
+        localField: 'url',
+        foreignField: 'avatar',
+        as: 'avatarMatchedGroup',
+      })
+      .lookup({
+        from: 'groups',
+        localField: 'url',
+        foreignField: 'config.groupBackgroundImage',
+        as: 'backgroundMatchedGroup',
+      })
       .match({
         'avatarMatchedUser.0': { $exists: false },
+        'avatarMatchedGroup.0': { $exists: false },
+        'backgroundMatchedGroup.0': { $exists: false },
       })
       .project({
         avatarMatchedUser: 0,
+        avatarMatchedGroup: 0,
+        backgroundMatchedGroup: 0,
       })
       .facet({
         metadata: [{ $count: 'total' }],
