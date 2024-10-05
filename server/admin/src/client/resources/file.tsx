@@ -42,12 +42,18 @@ export const FileList: React.FC = React.memo(() => {
           {t('custom.file.fileTotalSize')}: {filesize(totalSize)}
         </Typography.Paragraph>
       </Row>
+
       <ListTable
         filter={[
           createTextField('q', {
             label: 'Search',
           }),
         ]}
+        tableProps={{
+          scroll: {
+            x: 1200,
+          },
+        }}
         fields={fileFields}
         action={{ detail: true, delete: true }}
         batchAction={{ delete: true }}
