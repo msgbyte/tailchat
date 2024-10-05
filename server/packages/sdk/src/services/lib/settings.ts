@@ -67,6 +67,7 @@ export const config = {
     disableFileCheck: checkEnvTrusty(process.env.DISABLE_FILE_CHECK),
     disableLogger: checkEnvTrusty(process.env.DISABLE_LOGGER), // 是否关闭日志
     disableInfoLog: checkEnvTrusty(process.env.DISABLE_INFO_LOG), // 是否关闭常规日志(仅保留错误日志)
+    disableTracing: checkEnvTrusty(process.env.DISABLE_TRACING), // 是否关闭链路追踪
     disableUserRegister: checkEnvTrusty(process.env.DISABLE_USER_REGISTER), // 是否关闭用户注册功能
     disableGuestLogin: checkEnvTrusty(process.env.DISABLE_GUEST_LOGIN), // 是否关闭用户游客登录功能
     disableCreateGroup: checkEnvTrusty(process.env.DISABLE_CREATE_GROUP), // 是否禁用用户创建群组功能
