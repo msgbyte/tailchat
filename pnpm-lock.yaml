@@ -502,7 +502,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       tailchat-types:
-        specifier: ^1.0.2
+        specifier: workspace:*
         version: link:../../../packages/types
     devDependencies:
       '@types/jest':
@@ -13361,6 +13361,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -13371,6 +13374,9 @@ packages:
     deprecated: This is probably built in to whatever tool you're using. If you still need it... idk
     peerDependencies:
       acorn: ^6.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
     dev: true
@@ -13386,6 +13392,9 @@ packages:
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
     peerDependencies:
       acorn: ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
 
@@ -13393,6 +13402,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 7.4.1
     dev: true
@@ -13401,6 +13413,9 @@ packages:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
 
@@ -13417,6 +13432,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
     dev: true
@@ -13426,6 +13444,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -13436,6 +13457,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^7.4 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-class-fields: 0.3.7(acorn@8.8.2)
@@ -13448,6 +13472,9 @@ packages:
     engines: {node: '>=4.8.2'}
     peerDependencies:
       acorn: ^6.1.0 || ^7 || ^8
+    peerDependenciesMeta:
+      acorn:
+        optional: true
     dependencies:
       acorn: 8.8.2
       acorn-private-class-elements: 0.2.7(acorn@8.8.2)
@@ -19246,7 +19273,7 @@ packages:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.1.1
-      webpack: 5.75.0(esbuild@0.12.29)(webpack-cli@4.10.0)
+      webpack: 5.75.0(esbuild@0.15.18)
 
   /file-system-cache@1.1.0:
     resolution: {integrity: sha512-IzF5MBq+5CR0jXx5RxPe4BICl/oEhBSXKaL9fLhAXrIfIUS77Hr4vzrYyqYMHN6uTt+BOqi3fDCTjjEBCjERKw==}
@@ -23197,7 +23224,7 @@ packages:
     dependencies:
       klona: 2.0.6
       less: 4.1.3
-      webpack: 5.75.0(esbuild@0.12.29)(webpack-cli@4.10.0)
+      webpack: 5.75.0(esbuild@0.15.18)
 
   /less@3.13.1:
     resolution: {integrity: sha512-SwA1aQXGUvp+P5XdZslUOhhLnClSLIjWvJhmd+Vgib5BFIr9lMNlQwmwUNOjXThF/A0x+MCYYPeWEfeWiLRnTw==}
@@ -24799,6 +24826,9 @@ packages:
     engines: {node: '>= 8.x.x'}
     peerDependencies:
       moleculer: ^0.12.0 || ^0.13.0 || ^0.14.0
+    peerDependenciesMeta:
+      moleculer:
+        optional: true
     dependencies:
       '@seald-io/nedb': 3.1.0
       bluebird: 3.7.2
@@ -33908,7 +33938,7 @@ packages:
       loader-utils: 2.0.4
       mime-types: 2.1.35
       schema-utils: 3.1.1
-      webpack: 5.75.0(esbuild@0.12.29)(webpack-cli@4.10.0)
+      webpack: 5.75.0(esbuild@0.15.18)
 
   /url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
@@ -34567,7 +34597,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.0.0
-      webpack: 5.75.0(esbuild@0.12.29)(webpack-cli@4.10.0)
+      webpack: 5.75.0(esbuild@0.15.18)
 
   /webpack-dev-server@4.11.1(webpack-cli@4.10.0)(webpack@5.75.0):
     resolution: {integrity: sha512-lILVz9tAUy1zGFwieuaQtYiadImb5M3d+H+L1zDYalYoDl0cksAB1UNyuE5MMWJrG6zR1tXkCP2fitl7yoUJiw==}
