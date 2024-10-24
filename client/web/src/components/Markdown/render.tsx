@@ -44,12 +44,20 @@ export const Markdown: React.FC<{
           preview={true}
         />
       ),
+      iframe: (props) => {
+        let src = props.src;
+        if (src && src.includes('?')) {
+          src += '&autoplay=0'; // make sure media autoplay is false
+        }
+        return <iframe {...props} src={src} />;
+      },
       style: () => <div>{t('不支持自定义样式')}</div>,
       meta: () => <div>{t('不支持自定义Meta')}</div>,
     }),
     []
   );
-
+  // [md]<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113350126076732&bvid=BV1ZpyHYkEQ3&cid=26409569922&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>[/md]
+  // <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113350126076732&bvid=BV1ZpyHYkEQ3&cid=26409569922&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
   return (
     <ReactMarkdown
       className="tailchat-markdown"
