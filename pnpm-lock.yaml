@@ -31,6 +31,9 @@ patchedDependencies:
   moleculer@0.14.23:
     hash: ahhlgpfy57fntn2aftq6beaeja
     path: patches/moleculer@0.14.23.patch
+  react-mentions@4.4.7:
+    hash: w6q3hebwqaamdsjccwh6ogh6fi
+    path: patches/react-mentions@4.4.7.patch
   vite-express@0.8.0:
     hash: u6touqej4dt3zxnslnszarl7vq
     path: patches/vite-express@0.8.0.patch
@@ -733,7 +736,7 @@ importers:
         version: 8.0.5(@types/react@18.0.20)(react@18.2.0)
       react-mentions:
         specifier: ^4.4.7
-        version: 4.4.7(react-dom@18.2.0)(react@18.2.0)
+        version: 4.4.7(patch_hash=w6q3hebwqaamdsjccwh6ogh6fi)(react-dom@18.2.0)(react@18.2.0)
       react-router:
         specifier: 6.11.0
         version: 6.11.0(react@18.2.0)
@@ -29390,7 +29393,7 @@ packages:
       - supports-color
     dev: false
 
-  /react-mentions@4.4.7(react-dom@18.2.0)(react@18.2.0):
+  /react-mentions@4.4.7(patch_hash=w6q3hebwqaamdsjccwh6ogh6fi)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-VNriu2h/uOB+RS0mwZgPG2Vf+UtdDvRh5zbXa2TNc1WqacKuNDgTdhlbo9LEOZRBxRzIeTUYQmYJ7p9M9rDHqQ==}
     peerDependencies:
       react: '>=16.8.3'
@@ -29403,6 +29406,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       substyle: 9.4.1(react@18.2.0)
     dev: false
+    patched: true
 
   /react-merge-refs@1.1.0:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}
