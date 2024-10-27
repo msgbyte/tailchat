@@ -234,7 +234,7 @@ const SystemMessage: React.FC<ChatMessageItemProps> = React.memo(
   ({ payload }) => {
     return (
       <div className="text-center">
-        <div className="bg-black bg-opacity-20 rounded inline-block py-0.5 px-2 my-1 text-sm">
+        <div className="bg-black bg-opacity-20 rounded inline-block py-0.5 px-2 my-1 mx-2 text-sm">
           {payload.content}
         </div>
       </div>
