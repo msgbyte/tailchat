@@ -1,5 +1,23 @@
 
 
+## [1.11.8](https://github.com/msgbyte/tailchat/compare/v1.11.7...v1.11.8) (2024-10-28)
+
+
+### Bug Fixes
+
+* fix a issue which markdown component can render meta tag problem ([9998c57](https://github.com/msgbyte/tailchat/commit/9998c57358b31b85bfec5955bcf852e12afe6bfd))
+
+
+### Features
+
+* add DISABLE_TRACING env which useful save logs ([55e4f38](https://github.com/msgbyte/tailchat/commit/55e4f3835085b2efe94e177c80c5ceefa030fa95))
+* markdown disable iframe auto play ([16086d1](https://github.com/msgbyte/tailchat/commit/16086d1b77dd158f0ccbd5f4803384b96c676e12))
+
+
+### Performance Improvements
+
+* improve file table display in file table ([ab78309](https://github.com/msgbyte/tailchat/commit/ab7830999d000d68f37cee5ccbd36720bcf016ab))
+
 ## [1.11.7](https://github.com/msgbyte/tailchat/compare/v1.11.6...v1.11.7) (2024-09-07)
 
 
