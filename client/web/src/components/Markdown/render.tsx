@@ -47,8 +47,12 @@ export const Markdown: React.FC<{
       iframe: (props) => {
         let src = props.src;
 
-        if (src?.includes('javascript')) {
-          return <div>not support run javascript</div>;
+        if (!src) {
+          return <div />;
+        }
+
+        if (!src.startsWith('http')) {
+          return <div>only support http source</div>;
         }
 
         if (src && src.includes('?')) {
