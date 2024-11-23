@@ -44,6 +44,7 @@ export const Markdown: React.FC<{
           preview={true}
         />
       ),
+      svg: () => <div>not support svg</div>,
       iframe: (props) => {
         let src = props.src;
 
