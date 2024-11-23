@@ -46,6 +46,11 @@ export const Markdown: React.FC<{
       ),
       iframe: (props) => {
         let src = props.src;
+
+        if (src?.includes('javascript')) {
+          return <div>not support run javascript</div>;
+        }
+
         if (src && src.includes('?')) {
           src += '&autoplay=0'; // make sure media autoplay is false
         }
