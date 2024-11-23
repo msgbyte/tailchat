@@ -1,5 +1,14 @@
 
 
+## [1.11.9](https://github.com/msgbyte/tailchat/compare/v1.11.8...v1.11.9) (2024-11-23)
+
+
+### Bug Fixes
+
+* fix xss problem when render iframe ([c1365f2](https://github.com/msgbyte/tailchat/commit/c1365f2b82b3bd6d71b5da7e8aac06faf7c99d44))
+* not allow svg ([f74647f](https://github.com/msgbyte/tailchat/commit/f74647fb307c1ccca272dfd4badf61e3fb5f7697))
+* only allow http link in iframe render ([9a327dc](https://github.com/msgbyte/tailchat/commit/9a327dca14b5629731a1f2c847595dc90c4fe594))
+
 ## [1.11.8](https://github.com/msgbyte/tailchat/compare/v1.11.7...v1.11.8) (2024-10-28)
 
 
