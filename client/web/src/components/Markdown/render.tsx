@@ -13,8 +13,9 @@ const ReactMarkdown = Loadable(() => import('react-markdown'));
 
 export const Markdown: React.FC<{
   raw: string;
+  allowIframe?: boolean;
   baseUrl?: string;
-}> = React.memo(({ raw, baseUrl }) => {
+}> = React.memo(({ raw, baseUrl, allowIframe }) => {
   const { t } = useTranslation();
   const transformUrl = useCallback(
     (url: string) => {
@@ -46,6 +47,10 @@ export const Markdown: React.FC<{
       ),
       svg: () => <div>not support svg</div>,
       iframe: (props) => {
+        if (!allowIframe) {
+          return <div>{t('不支持iframe')}</div>;
+        }
+
         let src = props.src;
 
         if (!src) {
@@ -53,7 +58,7 @@ export const Markdown: React.FC<{
         }
 
         if (!src.startsWith('http')) {
-          return <div>only support http source</div>;
+          return <div>{t('只支持http路径')}</div>;
         }
 
         if (src && src.includes('?')) {
@@ -61,6 +66,8 @@ export const Markdown: React.FC<{
         }
         return <iframe {...props} src={src} />;
       },
+      embed: () => <div>{t('不支持embed')}</div>,
+      html: () => <div>{t('不支持自定义HTML')}</div>,
       style: () => <div>{t('不支持自定义样式')}</div>,
       meta: () => <div>{t('不支持自定义Meta')}</div>,
     }),

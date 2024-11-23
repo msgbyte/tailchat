@@ -54,7 +54,7 @@ const MarkdownPanel: React.FC = React.memo(() => {
       render={(dataMap: Record<string, string>) => {
         return (
           <MainContent>
-            <Markdown raw={dataMap['markdown'] ?? ''} />
+            <Markdown raw={dataMap['markdown'] ?? ''} allowIframe={true} />
           </MainContent>
         );
       }}
