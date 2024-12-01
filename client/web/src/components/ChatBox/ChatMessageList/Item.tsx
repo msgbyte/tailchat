@@ -136,7 +136,7 @@ export const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(
             {showAvatar && (
               <div className="flex items-center">
                 <div className="font-bold">
-                  {userInfo.nickname ?? <span>&nbsp;</span>}
+                  {userInfo.nickname || <span>&nbsp;</span>}
                 </div>
                 <div className="hidden group-hover:block opacity-40 ml-1 text-sm">
                   {formatShortTime(payload.createdAt)}
