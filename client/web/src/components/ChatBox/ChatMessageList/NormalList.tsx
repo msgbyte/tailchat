@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useEvent, useSharedEventHandler } from 'tailchat-shared';
 import { ChatMessageHeader } from './ChatMessageHeader';
 import { buildMessageItemRow } from './Item';
