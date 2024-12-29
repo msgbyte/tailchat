@@ -92,6 +92,7 @@ export const GroupConfig: React.FC<{
           <>
             <ImageUploader
               aspect={16 / 9}
+              usage="group"
               onUploadSuccess={(fileInfo: UploadFileResult) => {
                 handleModifyConfig('groupBackgroundImage', fileInfo.url);
               }}

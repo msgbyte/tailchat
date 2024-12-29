@@ -65,6 +65,7 @@ export const GroupSummary: React.FC<{
         <div className="w-1/3 mobile:w-full mobile:text-center">
           <AvatarUploader
             circle={true}
+            usage="group"
             onUploadSuccess={handleGroupAvatarChange}
           >
             <Avatar size={128} name={groupInfo.name} src={groupInfo.avatar} />

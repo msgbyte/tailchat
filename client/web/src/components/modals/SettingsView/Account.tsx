@@ -95,6 +95,7 @@ export const SettingsAccount: React.FC = React.memo(() => {
         <div className="w-1/3 mobile:w-full">
           <AvatarUploader
             circle={true}
+            usage="user"
             onUploadSuccess={handleUserAvatarChange}
           >
             <Avatar size={128} src={userInfo.avatar} name={userInfo.nickname} />

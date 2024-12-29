@@ -58,6 +58,7 @@ export const zhTranslation = {
         objectName: '对象存储名',
         url: '文件路径',
         size: '文件大小',
+        usage: '使用场景',
         'metaData.content-type': '文件类型',
         userId: '存储用户',
         createdAt: '创建时间',

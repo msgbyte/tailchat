@@ -61,6 +61,7 @@ export const SystemConfig: React.FC = React.memo(() => {
       if (file) {
         const formdata = new FormData();
         formdata.append('file', file);
+        formdata.append('usage', 'server');
 
         const { data } = await request.put('/file/upload', formdata, {
           headers: {

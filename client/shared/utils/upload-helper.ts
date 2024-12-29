@@ -5,7 +5,10 @@ import { getGlobalConfig } from '../model/config';
 import { showErrorToasts } from '../manager/ui';
 import filesize from 'filesize';
 
+export type UploadFileUsage = 'chat' | 'group' | 'user' | 'unknown';
+
 interface UploadFileOptions {
+  usage?: UploadFileUsage;
   onProgress?: (percent: number, progressEvent: unknown) => void;
 }
 export interface UploadFileResult {
@@ -23,6 +26,7 @@ export async function uploadFile(
 ): Promise<UploadFileResult> {
   const form = new FormData();
   form.append('file', file);
+  form.append('usage', options.usage ?? 'unknown');
 
   const uploadFileLimit = getGlobalConfig().uploadFileLimit;
   if (file.size > uploadFileLimit) {

@@ -51,7 +51,7 @@ export const FileList: React.FC = React.memo(() => {
         ]}
         tableProps={{
           scroll: {
-            x: 1200,
+            x: 1600,
           },
         }}
         fields={fileFields}

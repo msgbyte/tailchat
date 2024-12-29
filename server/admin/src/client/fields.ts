@@ -163,6 +163,11 @@ export const fileFields = [
       width: 140,
     },
   }),
+  createTextField('usage', {
+    list: {
+      width: 100,
+    },
+  }),
   createFileSizeField('size', {
     list: {
       width: 120,
@@ -170,12 +175,17 @@ export const fileFields = [
     },
   }),
   createTextField('metaData.content-type'),
-  createTextField('etag'),
+  createTextField('etag', {
+    list: {
+      width: 300,
+    },
+  }),
   createUserField('userId', {
     reference: 'users',
     displayField: 'nickname',
     list: {
-      width: 80,
+      width: 200,
+      ellipsis: true,
     },
   }),
   createDateTimeField('createdAt', {

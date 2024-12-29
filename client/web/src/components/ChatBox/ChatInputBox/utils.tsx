@@ -39,7 +39,9 @@ export function uploadMessageImage(image: File): Promise<{
                 }%(${originImageSize} -> ${compressedImageSize})`
               );
             }
-            const fileInfo = await uploadFile(uploadImage);
+            const fileInfo = await uploadFile(uploadImage, {
+              usage: 'chat',
+            });
             const imageRemoteUrl = fileInfo.url;
 
             resolve({
@@ -62,7 +64,9 @@ export async function uploadMessageFile(file: File): Promise<{
   name: string;
   url: string;
 }> {
-  const fileInfo = await uploadFile(file);
+  const fileInfo = await uploadFile(file, {
+    usage: 'chat',
+  });
 
   return {
     name: file.name || fileInfo.etag,

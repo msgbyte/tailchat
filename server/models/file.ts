@@ -56,6 +56,15 @@ export class File extends TimeStamps implements Base {
 
   @prop()
   metaData: object;
+
+  /**
+   * 这个文件是用于哪里
+   * for example: chat, group, user
+   */
+  @prop({
+    default: 'unknown',
+  })
+  usage: string;
 }
 
 export type FileDocument = DocumentType<File>;

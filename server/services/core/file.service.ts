@@ -112,6 +112,7 @@ class FileService extends TcService {
     ctx: TcContext<
       {},
       {
+        $multipart: any;
         $params: any;
         filename: any;
       }
@@ -129,6 +130,7 @@ class FileService extends TcService {
       }
 
       const originFilename = String(ctx.meta.filename);
+      const usage = _.get(ctx, 'meta.$multipart.usage', 'unknown');
 
       const stream = ctx.params as NodeJS.ReadableStream;
       (stream as any).on('error', (err) => {
@@ -142,7 +144,8 @@ class FileService extends TcService {
         const { etag, objectName, url } = await this.saveFileStream(
           ctx,
           originFilename,
-          stream
+          stream,
+          usage
         );
 
         resolve({
@@ -211,7 +214,8 @@ class FileService extends TcService {
   async saveFileStream(
     ctx: TcContext,
     filename: string,
-    fileStream: NodeJS.ReadableStream
+    fileStream: NodeJS.ReadableStream,
+    usage = 'unknown'
   ): Promise<{ etag: string; url: string; objectName: string }> {
     const span = ctx.startSpan('file.saveFileStream');
     const ext = path.extname(filename);
@@ -234,7 +238,8 @@ class FileService extends TcService {
       ctx,
       tmpObjectName,
       etag,
-      ext
+      ext,
+      usage
     );
 
     span.finish();
@@ -253,7 +258,8 @@ class FileService extends TcService {
     ctx: TcContext,
     tmpObjectName: string,
     etag: string,
-    ext: string
+    ext: string,
+    usage = 'unknown'
   ): Promise<{
     url: string;
     objectName: string;
@@ -299,6 +305,7 @@ class FileService extends TcService {
             url,
             size: stat.size,
             metaData: stat.metaData,
+            usage,
           },
           {
             upsert: true,

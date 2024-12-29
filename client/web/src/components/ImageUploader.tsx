@@ -1,13 +1,19 @@
 import { blobUrlToFile } from '@/utils/file-helper';
 import clsx from 'clsx';
 import React, { PropsWithChildren, useState } from 'react';
-import { uploadFile, UploadFileResult, useAsyncRequest } from 'tailchat-shared';
+import {
+  uploadFile,
+  UploadFileResult,
+  UploadFileUsage,
+  useAsyncRequest,
+} from 'tailchat-shared';
 import { ImagePicker } from './ImagePicker';
 
 interface ImageUploaderProps extends PropsWithChildren {
   circle?: boolean;
   aspect?: number;
   className?: string;
+  usage?: UploadFileUsage;
   onUploadSuccess: (fileInfo: UploadFileResult) => void;
 }
 
@@ -20,6 +26,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = React.memo(
         const file = await blobUrlToFile(blobUrl);
 
         const fileInfo = await uploadFile(file, {
+          usage: props.usage,
           onProgress(percent) {
             const uploadProgress = Number((percent * 100).toFixed());
             console.log(`进度:${uploadProgress}`);
