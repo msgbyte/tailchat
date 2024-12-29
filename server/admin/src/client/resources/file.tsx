@@ -2,6 +2,7 @@ import filesize from 'filesize';
 import React, { useState } from 'react';
 import {
   createTextField,
+  createSelectField,
   ListTable,
   useAsync,
   useTranslation,
@@ -47,6 +48,26 @@ export const FileList: React.FC = React.memo(() => {
         filter={[
           createTextField('q', {
             label: 'Search',
+          }),
+          createSelectField('usage', {
+            label: 'Usage',
+            items: [
+              {
+                value: 'chat',
+              },
+              {
+                value: 'group',
+              },
+              {
+                value: 'user',
+              },
+              {
+                value: 'server',
+              },
+              {
+                value: 'unknown',
+              },
+            ],
           }),
         ]}
         tableProps={{
