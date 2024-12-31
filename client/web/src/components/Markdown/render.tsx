@@ -4,7 +4,8 @@ import { isValidStr, parseUrlStr, useTranslation } from 'tailchat-shared';
 import { Loadable } from '../Loadable';
 import { Image } from 'tailchat-design';
 import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
+// import rehypeRaw from 'rehype-raw';
+// import rehypeSanitize from 'rehype-sanitize';
 import './render.less';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -81,7 +82,7 @@ export const Markdown: React.FC<{
       transformImageUri={(src) => transformUrl(src)}
       transformLinkUri={(href) => transformUrl(href)}
       remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
+      // rehypePlugins={[rehypeRaw, rehypeSanitize]}
       linkTarget="_blank"
       skipHtml={true}
       components={components}
