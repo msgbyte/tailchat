@@ -1,5 +1,19 @@
 
 
+## [1.11.10](https://github.com/msgbyte/tailchat/compare/v1.11.9...v1.11.10) (2025-01-02)
+
+
+### Bug Fixes
+
+* disable support html tag in markdown ([8e593f7](https://github.com/msgbyte/tailchat/commit/8e593f720009de8c8a0402cac8854a7b9c957fcd))
+
+
+### Features
+
+* add file upload in chat usage ([52f70c8](https://github.com/msgbyte/tailchat/commit/52f70c89d5324ccd27640385862a1963e7bafb41))
+* add filter for usage in admin ([d72f878](https://github.com/msgbyte/tailchat/commit/d72f8783526c512234fbe10ea42f42c027d3d198))
+* add rehype-sanitize to protect markdown html from xss ([0e17991](https://github.com/msgbyte/tailchat/commit/0e17991d4f77b26e75974170d1478274984b946d))
+
 ## [1.11.9](https://github.com/msgbyte/tailchat/compare/v1.11.8...v1.11.9) (2024-11-23)
 
 
