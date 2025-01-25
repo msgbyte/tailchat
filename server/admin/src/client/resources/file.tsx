@@ -51,6 +51,7 @@ export const FileList: React.FC = React.memo(() => {
           }),
           createSelectField('usage', {
             label: 'Usage',
+            allowClear: true,
             items: [
               {
                 value: 'chat',
@@ -78,7 +79,7 @@ export const FileList: React.FC = React.memo(() => {
         fields={fileFields}
         action={{ detail: true, delete: true }}
         batchAction={{ delete: true }}
-        showSizeChanger={true}
+        showSizeChanger={[20, 50, 100, 500, 2000]}
         meta={isOnlyChatFiles ? 'onlyChat' : undefined}
       />
     </>
