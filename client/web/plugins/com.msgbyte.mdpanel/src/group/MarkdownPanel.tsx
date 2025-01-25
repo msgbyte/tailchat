@@ -42,7 +42,11 @@ const MarkdownEditorRender: React.FC<{ dataMap: Record<string, string> }> =
     }, [text]);
 
     return (
-      <MarkdownEditor value={text} onChange={(val: string) => setText(val)} />
+      <MarkdownEditor
+        value={text}
+        onChange={(val: string) => setText(val)}
+        imageUsage="group"
+      />
     );
   });
 MarkdownEditorRender.displayName = 'MarkdownEditorRender';

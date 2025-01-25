@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor, EditorProps } from '@bytemd/react';
-import { uploadFile } from 'tailchat-shared';
+import { uploadFile, UploadFileUsage } from 'tailchat-shared';
 import { Markdown } from '../Markdown';
 import { createRoot } from 'react-dom/client';
 import gfm from '@bytemd/plugin-gfm';
@@ -20,6 +20,7 @@ const overridePreview: EditorProps['overridePreview'] = (el, props) => {
 interface MarkdownEditorProps {
   value: string;
   onChange: (val: string) => void;
+  imageUsage?: UploadFileUsage;
 }
 export const MarkdownEditor: React.FC<MarkdownEditorProps> = React.memo(
   (props) => {
@@ -31,7 +32,9 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = React.memo(
         uploadImages={(files) => {
           return Promise.all(
             files.map((f) =>
-              uploadFile(f).then((file) => {
+              uploadFile(f, {
+                usage: props.imageUsage || 'unknown',
+              }).then((file) => {
                 return {
                   url: file.url,
                 };
