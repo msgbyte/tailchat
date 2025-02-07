@@ -363,6 +363,7 @@ router.use(
     capabilities: {
       delete: false,
     },
+    maxRows: 2000,
   })
 );
 router.use(
