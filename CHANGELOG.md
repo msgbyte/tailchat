@@ -1,5 +1,13 @@
 
 
+## [1.11.11](https://github.com/msgbyte/tailchat/compare/v1.11.10...v1.11.11) (2026-06-11)
+
+
+### Features
+
+* add image usage for markdown component ([6e076d4](https://github.com/msgbyte/tailchat/commit/6e076d46af526d945dc46d1bce39bcd340bede79))
+* **auth:** record user login ip history ([c1366f0](https://github.com/msgbyte/tailchat/commit/c1366f0026e0751676e735de4261498c48ba1935))
+
 ## [1.11.10](https://github.com/msgbyte/tailchat/compare/v1.11.9...v1.11.10) (2025-01-02)
 
 
