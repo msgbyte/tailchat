@@ -774,7 +774,7 @@ importers:
         specifier: workspace:^1.0.0
         version: link:../packages/design
       tailchat-shared:
-        specifier: ^1.0.0
+        specifier: workspace:^1.0.0
         version: link:../shared
       tailwindcss:
         specifier: ^2.2.19

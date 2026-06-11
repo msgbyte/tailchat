@@ -63,6 +63,26 @@ export const userFields = [
       hidden: true,
     },
   }),
+  createTextField('lastLoginIp', {
+    edit: {
+      hidden: true,
+    },
+  }),
+  createDateTimeField('lastLoginAt', {
+    format: 'iso',
+    edit: {
+      hidden: true,
+    },
+  }),
+  createTextField('lastLoginUserAgent', {
+    list: {
+      width: 240,
+      ellipsis: true,
+    },
+    edit: {
+      hidden: true,
+    },
+  }),
   createJSONField('settings', {
     list: {
       width: 200,
@@ -72,6 +92,39 @@ export const userFields = [
     format: 'iso',
     edit: {
       hidden: true,
+    },
+  }),
+];
+
+export const userLoginLogFields = [
+  createTextField('id', {
+    list: {
+      sort: true,
+    },
+  }),
+  createUserField('userId', {
+    reference: 'users',
+    displayField: (record) => `${record.nickname}#${record.discriminator}`,
+    list: {
+      width: 160,
+    },
+  }),
+  createTextField('ip', {
+    list: {
+      sort: true,
+      width: 140,
+    },
+  }),
+  createTextField('userAgent', {
+    list: {
+      width: 360,
+      ellipsis: true,
+    },
+  }),
+  createDateTimeField('createdAt', {
+    format: 'iso',
+    list: {
+      sort: true,
     },
   }),
 ];

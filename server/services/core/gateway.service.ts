@@ -21,6 +21,21 @@ import send from 'send';
 import path from 'path';
 import mime from 'mime';
 
+function getHeaderValue(
+  header: string | string[] | undefined
+): string | undefined {
+  return Array.isArray(header) ? header[0] : header;
+}
+
+function getRequestIp(req: IncomingMessage): string | undefined {
+  const forwardedFor = getHeaderValue(req.headers['x-forwarded-for'])
+    ?.split(',')[0]
+    ?.trim();
+  const realIp = getHeaderValue(req.headers['x-real-ip'])?.trim();
+
+  return forwardedFor || realIp || req.socket.remoteAddress;
+}
+
 export default class ApiService extends TcService {
   authWhitelist = [];
 
@@ -142,13 +157,17 @@ export default class ApiService extends TcService {
          * @param {ServerResponse} res
          * @param {Object} data*/
         onBeforeCall(
-          ctx: PureContext<any, { userAgent: string; language: string }>,
+          ctx: PureContext<
+            any,
+            { userAgent?: string; language: string; ip?: string }
+          >,
           route: object,
           req: IncomingMessage,
           res: ServerResponse
         ) {
           // Set request headers to context meta
           ctx.meta.userAgent = req.headers['user-agent'];
+          ctx.meta.ip = getRequestIp(req);
           ctx.meta.language = parseLanguageFromHead(
             req.headers['accept-language']
           );

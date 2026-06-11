@@ -3,6 +3,7 @@ import UserService from '../../../services/core/user/user.service';
 import { createTestServiceBroker } from '../../utils';
 import bcrypt from 'bcryptjs';
 import type { UserDocument } from '../../../models/user/user';
+import userLoginLogModel from '../../../models/user/userLoginLog';
 
 /**
  * 创建测试用户
@@ -101,6 +102,44 @@ describe('Test "user" service', () => {
     expect(res).not.toBe(null);
     expect(res.nickname).toBe(testDoc.nickname);
     expect(res).not.toHaveProperty('password');
+  });
+
+  test('Test "user.login" records login ip', async () => {
+    const testDoc = await insertTestData(createTestUser());
+    const ip = '203.0.113.10';
+    const userAgent = 'tailchat-test-agent';
+
+    try {
+      await broker.call(
+        'user.login',
+        {
+          email: testDoc.email,
+          password: '123456',
+        },
+        {
+          meta: {
+            ip,
+            userAgent,
+          },
+        }
+      );
+
+      const updatedUser = await service.adapter.model.findById(testDoc._id);
+
+      expect(updatedUser?.lastLoginIp).toBe(ip);
+      expect(updatedUser?.lastLoginUserAgent).toBe(userAgent);
+      expect(updatedUser?.lastLoginAt).toBeInstanceOf(Date);
+
+      const loginLog = await userLoginLogModel.findOne({
+        userId: testDoc._id,
+        ip,
+      });
+
+      expect(loginLog?.userAgent).toBe(userAgent);
+      expect(loginLog?.createdAt).toBeInstanceOf(Date);
+    } finally {
+      await userLoginLogModel.deleteMany({ userId: testDoc._id });
+    }
   });
 
   test('Test "user.updateUserExtra"', async () => {

@@ -7,6 +7,7 @@ import { networkRouter } from './network';
 import { fileRouter } from './file';
 import dayjs from 'dayjs';
 import userModel from '../../../../models/user/user';
+import userLoginLogModel from '../../../../models/user/userLoginLog';
 import messageModel from '../../../../models/chat/message';
 import fileModel from '../../../../models/file';
 import groupModel from '../../../../models/group/group';
@@ -177,6 +178,19 @@ router.use(
   raExpressMongoose(userModel, {
     q: ['_id', 'nickname', 'email'],
     allowedRegexFields: ['nickname'],
+  })
+);
+router.use(
+  '/user_login_logs',
+  auth(),
+  raExpressMongoose(userLoginLogModel, {
+    q: ['ip', 'userAgent'],
+    allowedRegexFields: ['ip', 'userAgent'],
+    capabilities: {
+      create: false,
+      update: false,
+      delete: false,
+    },
   })
 );
 router.delete('/messages/:id', auth(), async (req, res) => {

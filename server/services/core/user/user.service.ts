@@ -31,6 +31,7 @@ import {
 import type { TFunction } from 'i18next';
 import _ from 'lodash';
 import type { UserStruct } from 'tailchat-server-sdk';
+import userLoginLogModel from '../../../models/user/userLoginLog';
 
 const { isValidObjectId, Types } = db;
 
@@ -284,6 +285,36 @@ class UserService extends TcService {
   comparePassword = async (password: string, hash: string): Promise<boolean> =>
     bcrypt.compare(password, hash);
 
+  private async recordUserLoginMeta(userId: string, meta: any) {
+    if (typeof meta.ip !== 'string' || meta.ip.length === 0) {
+      return;
+    }
+
+    const loginRecord: Partial<User> = {
+      lastLoginIp: meta.ip,
+      lastLoginAt: new Date(),
+    };
+
+    if (typeof meta.userAgent === 'string' && meta.userAgent.length > 0) {
+      loginRecord.lastLoginUserAgent = meta.userAgent;
+    }
+
+    await this.adapter.model.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        $set: loginRecord,
+      }
+    );
+
+    await userLoginLogModel.create({
+      userId,
+      ip: meta.ip,
+      userAgent: loginRecord.lastLoginUserAgent,
+    });
+  }
+
   /**
    * 用户登录
    * 登录可以使用用户名登录或者邮箱登录
@@ -328,6 +359,8 @@ class UserService extends TcService {
     if (user.banned === true) {
       throw new BannedError(t('用户被封禁'), 403);
     }
+
+    await this.recordUserLoginMeta(String(user._id), ctx.meta);
 
     // Transform user entity (remove password and all protected fields)
     const doc = await this.transformDocuments(ctx, {}, user);
@@ -467,6 +500,7 @@ class UserService extends TcService {
       emailVerified,
       createdAt: new Date(),
     });
+    await this.recordUserLoginMeta(String(doc._id), ctx.meta);
     const user = await this.transformDocuments(ctx, {}, doc);
     const json = await this.transformEntity(user, true, ctx.meta.token);
     await this.entityChanged('created', json, ctx);
@@ -491,6 +525,7 @@ class UserService extends TcService {
       email: userInfo.email,
       avatar: userInfo.avatar,
     });
+    await this.recordUserLoginMeta(userInfo._id, ctx.meta);
 
     return token;
   }
@@ -551,6 +586,7 @@ class UserService extends TcService {
       avatar: null,
       createdAt: new Date(),
     });
+    await this.recordUserLoginMeta(String(doc._id), ctx.meta);
     const user = await this.transformDocuments(ctx, {}, doc);
     const json = await this.transformEntity(user, true);
     await this.entityChanged('created', json, ctx);
@@ -605,6 +641,7 @@ class UserService extends TcService {
     user.password = password;
     user.temporary = false;
     await user.save();
+    await this.recordUserLoginMeta(String(user._id), ctx.meta);
 
     const json = await this.transformEntity(user, true);
     await this.entityChanged('updated', json, ctx);

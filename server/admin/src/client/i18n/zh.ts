@@ -21,7 +21,20 @@ export const zhTranslation = {
         emailVerified: '邮箱校验',
         settings: '用户设置',
         banned: '是否被封禁',
+        lastLoginIp: '最近登录IP',
+        lastLoginAt: '最近登录时间',
+        lastLoginUserAgent: '最近登录UA',
         createdAt: '创建时间',
+      },
+    },
+    user_login_logs: {
+      name: '登录日志',
+      fields: {
+        id: '日志ID',
+        userId: '用户',
+        ip: '登录IP',
+        userAgent: 'User-Agent',
+        createdAt: '登录时间',
       },
     },
     messages: {

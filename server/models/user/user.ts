@@ -117,6 +117,26 @@ export class User extends TimeStamps implements Base {
   banned: boolean;
 
   /**
+   * 最近一次登录IP
+   */
+  @prop({
+    index: true,
+  })
+  lastLoginIp?: string;
+
+  /**
+   * 最近一次登录时间
+   */
+  @prop()
+  lastLoginAt?: Date;
+
+  /**
+   * 最近一次登录 User-Agent
+   */
+  @prop()
+  lastLoginUserAgent?: string;
+
+  /**
    * 用户的额外信息
    */
   @prop()

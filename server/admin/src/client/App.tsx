@@ -23,7 +23,12 @@ import {
 } from 'tushan/icon';
 import { authHTTPClient, authProvider } from './auth';
 import { Dashboard } from './components/Dashboard';
-import { discoverFields, mailFields, messageFields } from './fields';
+import {
+  discoverFields,
+  mailFields,
+  messageFields,
+  userLoginLogFields,
+} from './fields';
 import { i18n } from './i18n';
 import { GroupList } from './resources/group';
 import { UserList } from './resources/user';
@@ -53,6 +58,27 @@ function App() {
       </CustomRoute>
 
       <Resource name="users" icon={<IconUser />} list={<UserList />} />
+
+      <Resource
+        name="user_login_logs"
+        icon={<IconStorage />}
+        list={
+          <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'Search',
+              }),
+            ]}
+            fields={userLoginLogFields}
+            action={{
+              detail: true,
+              export: true,
+              refresh: true,
+            }}
+            showSizeChanger={true}
+          />
+        }
+      />
 
       <Resource
         name="messages"
