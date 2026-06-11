@@ -30,7 +30,7 @@ jobs:
           node-version: lts/*
 
       - name: Cache pnpm modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
