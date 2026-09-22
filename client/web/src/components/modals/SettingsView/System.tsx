@@ -56,6 +56,22 @@ export const SettingsSystem: React.FC = React.memo(() => {
         }
       />
 
+      <FullModalField
+        title={t('仅允许好友邀请创建会话')}
+        tip={t('开启后，只有好友可以邀请你创建或加入多人会话')}
+        content={
+          <Switch
+            aria-label={t('仅允许好友邀请创建会话')}
+            checked={settings.onlyAllowFriendInvite ?? false}
+            disabled={loading}
+            loading={loading}
+            onChange={(checked) =>
+              setSettings({ onlyAllowFriendInvite: checked })
+            }
+          />
+        }
+      />
+
       {pluginSettings
         .filter((item) => item.position === 'system')
         .map((item) => {

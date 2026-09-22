@@ -57,6 +57,7 @@ export class Converse extends TimeStamps implements Base {
     members: string[]
   ): Promise<DocumentType<Converse> | null> {
     const converse = await this.findOne({
+      type: 'DM',
       members: {
         $all: [...members],
         $size: members.length,

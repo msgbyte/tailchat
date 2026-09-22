@@ -16,8 +16,60 @@ function createTestMessage(converseId: Types.ObjectId, content = 'bar') {
 }
 
 describe('Test "chat.message" service', () => {
-  const { broker, service, insertTestData } =
-    createTestServiceBroker<MessageService>(MessageService);
+  const { broker, service, insertTestData, contextCallMock } =
+    createTestServiceBroker<MessageService>(MessageService, {
+      contextCallMockFn: function (
+        this: { meta: { userId: string } },
+        actionName
+      ) {
+        if (actionName === 'user.getUserInfo') {
+          return { type: 'normal' };
+        }
+        if (actionName === 'chat.converse.findConverseInfo') {
+          return { type: 'Multi', members: [this.meta.userId] };
+        }
+      },
+    });
+
+  test('returns the persisted message when the online status lookup fails', async () => {
+    const converseId = String(new Types.ObjectId());
+    const userId = String(new Types.ObjectId());
+    const defaultCall = contextCallMock.getMockImplementation();
+    const emit = jest.spyOn(broker, 'emit');
+    contextCallMock.mockImplementation(function (actionName, ...args) {
+      if (actionName === 'gateway.checkUserOnline') {
+        throw new Error('Online status unavailable');
+      }
+      return defaultCall.call(this, actionName, ...args);
+    });
+
+    try {
+      const result: MessageDocument = await broker.call(
+        'chat.message.sendMessage',
+        { converseId, content: 'Persisted message' },
+        { meta: { userId } }
+      );
+
+      expect(String(result.converseId)).toBe(converseId);
+      expect(result.content).toBe('Persisted message');
+      const messages = await service.adapter.model.find({ converseId });
+      expect(messages).toHaveLength(1);
+      expect(String(messages[0]._id)).toBe(String(result._id));
+      expect(emit).toHaveBeenCalledWith(
+        'chat.message.updateMessage',
+        expect.objectContaining({
+          type: 'add',
+          converseId,
+          messageId: String(result._id),
+        }),
+        expect.any(Object)
+      );
+    } finally {
+      contextCallMock.mockImplementation(defaultCall);
+      emit.mockRestore();
+      await service.adapter.model.deleteMany({ converseId });
+    }
+  });
 
   describe('Test slow mode bypass policy', () => {
     test('plugin bots keep converse access but do not bypass slow mode', async () => {

@@ -25,15 +25,21 @@ export function useUserSettings() {
 
   const [{ loading: saveLoading }, setSettings] = useAsyncRequest(
     async (_settings: UserSettings) => {
+      const previousSettings =
+        client.getQueryData<UserSettings>([CacheKey.userSettings]) ?? {};
       client.setQueryData([CacheKey.userSettings], () => ({
-        ...settings,
+        ...previousSettings,
         ..._settings,
       })); // 让配置能够立即生效, 防止依赖配置的行为出现跳变(如GroupNav)
 
-      const newSettings = await setUserSettings(_settings);
-
-      client.setQueryData([CacheKey.userSettings], () => newSettings);
-      sharedEvent.emit('userSettingsUpdate', newSettings);
+      try {
+        const newSettings = await setUserSettings(_settings);
+        client.setQueryData([CacheKey.userSettings], () => newSettings);
+        sharedEvent.emit('userSettingsUpdate', newSettings);
+      } catch (error) {
+        client.setQueryData([CacheKey.userSettings], previousSettings);
+        throw error;
+      }
     },
     [client]
   );

@@ -3,6 +3,7 @@ import {
   ChatConverseState,
   getCachedUserInfo,
   model,
+  t,
   useAppDispatch,
   useAsync,
   useAsyncRequest,
@@ -38,6 +39,10 @@ export const SidebarDMItem: React.FC<SidebarDMItemProps> = React.memo(
         )
       );
 
+      if (userInfos.length === 0) {
+        return <Icon icon="mdi:account-group-outline" />;
+      }
+
       return (
         <CombinedAvatar
           items={userInfos.map((user) => ({
@@ -58,14 +63,16 @@ export const SidebarDMItem: React.FC<SidebarDMItemProps> = React.memo(
         key={converseId}
         name={name}
         action={
-          <Icon
-            icon="mdi:close"
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              handleRemove();
-            }}
-          />
+          <span title={t('关闭会话（新消息到达时会重新显示）')}>
+            <Icon
+              icon="mdi:close"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleRemove();
+              }}
+            />
+          </span>
         }
         icon={icon}
         to={`/main/personal/converse/${converseId}`}

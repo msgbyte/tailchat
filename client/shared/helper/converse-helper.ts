@@ -1,9 +1,73 @@
-import { getReduxStore, isValidStr } from '..';
-import { getCachedConverseInfo, getCachedUserInfo } from '../cache/cache';
+import { getReduxStore, AppStore } from '../redux/store';
+import { isValidStr } from '../utils/string-helper';
+import { CacheKey, getCachedUserInfo } from '../cache/cache';
+import { queryClient } from '../cache';
 import { t } from '../i18n';
-import type { ChatConverseInfo } from '../model/converse';
+import { ChatConverseInfo, fetchConverseInfo } from '../model/converse';
 import { appendUserDMConverse } from '../model/user';
 import type { FriendInfo } from '../redux/slices/user';
+import { chatActions } from '../redux/slices/chat';
+import type { RequestError } from '../api/request';
+
+const converseRefreshes = new Map<
+  string,
+  Promise<ChatConverseInfo | undefined>
+>();
+
+export function removeDMConverseLocally(
+  converseId: string,
+  store: AppStore = getReduxStore()
+) {
+  store.dispatch(chatActions.removeDMConverse({ converseId }));
+  converseRefreshes.delete(converseId);
+  queryClient.removeQueries([CacheKey.converse, converseId], { exact: true });
+  queryClient.removeQueries([CacheKey.converseAck, converseId], {
+    exact: true,
+  });
+}
+
+/**
+ * 只有服务端确认的成员关系才能恢复已退出的会话。
+ */
+export function refreshDMConverse(
+  converseId: string,
+  currentUserId: string,
+  store: AppStore = getReduxStore()
+): Promise<ChatConverseInfo | undefined> {
+  const version =
+    store.getState().chat.converseMembership[converseId]?.version ?? 0;
+  const run = async (): Promise<ChatConverseInfo | undefined> => {
+    // 成员验证不复用缓存；同时开始的调用等待最新请求，不互相取消。
+    const result = await fetchConverseInfo(converseId).then(
+      (converse) => ({ converse, error: undefined }),
+      (error: RequestError) => ({ converse: undefined, error })
+    );
+    if (
+      (store.getState().chat.converseMembership[converseId]?.version ?? 0) !==
+      version
+    ) {
+      return;
+    }
+    const latestRefresh = converseRefreshes.get(converseId);
+    if (latestRefresh && latestRefresh !== refresh) {
+      return latestRefresh;
+    }
+    if (result.error && result.error.code !== 403) {
+      throw result.error;
+    }
+    if (!result.converse?.members.includes(currentUserId)) {
+      removeDMConverseLocally(converseId, store);
+      return;
+    }
+    store.dispatch(
+      chatActions.restoreDMConverse({ converse: result.converse, version })
+    );
+    return result.converse;
+  };
+  const refresh = run();
+  converseRefreshes.set(converseId, refresh);
+  return refresh;
+}
 
 /**
  * 确保私信会话存在
@@ -12,17 +76,22 @@ export async function ensureDMConverse(
   converseId: string,
   currentUserId: string
 ): Promise<ChatConverseInfo> {
-  const converse = await getCachedConverseInfo(converseId);
-  if (converse === null) {
-    // TODO
-    throw new Error(t('找不到私信会话'));
-  }
-
-  if (!converse.members.includes(currentUserId)) {
+  const store = getReduxStore();
+  const version =
+    store.getState().chat.converseMembership[converseId]?.version ?? 0;
+  const converse = await refreshDMConverse(converseId, currentUserId, store);
+  if (!converse) {
     throw new Error(t('会话没有权限'));
   }
 
   await appendUserDMConverse(converseId); // 添加到私人会话列表
+
+  if (
+    (store.getState().chat.converseMembership[converseId]?.version ?? 0) !==
+    version
+  ) {
+    throw new Error(t('会话没有权限'));
+  }
 
   return converse;
 }
@@ -72,7 +141,9 @@ export async function getDMConverseName(
   });
   const len = memberNicknames.length;
 
-  if (len === 1) {
+  if (len === 0) {
+    return t('多人会话');
+  } else if (len === 1) {
     return memberNicknames[0] ?? '';
   } else if (len === 2) {
     return `${memberNicknames[0]}, ${memberNicknames[1]}`;

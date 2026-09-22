@@ -24,6 +24,8 @@ export interface ChatConverseState extends ChatConverseInfo {
 export interface ChatState {
   currentConverseId: string | null; // 当前活跃的会话id
   converses: Record<string, ChatConverseState>; // <会话Id, 会话信息>
+  // 退出后阻止旧请求恢复会话；重新邀请需校验服务端成员信息和版本。
+  converseMembership: Record<string, { removed: boolean; version: number }>;
   ack: Record<string, string>; // <会话Id, 本地最后一条会话Id>
   inbox: InboxItem[];
 
@@ -37,6 +39,7 @@ export interface ChatState {
 const initialState: ChatState = {
   currentConverseId: null,
   converses: {},
+  converseMembership: {},
   ack: {},
   inbox: [],
   lastMessageMap: {},
@@ -55,6 +58,9 @@ const chatSlice = createSlice({
      */
     setConverseInfo(state, action: PayloadAction<ChatConverseInfo>) {
       const converseId = action.payload._id;
+      if (state.converseMembership[converseId]?.removed) {
+        return;
+      }
 
       const originInfo = state.converses[converseId]
         ? { ...state.converses[converseId] }
@@ -218,6 +224,35 @@ const chatSlice = createSlice({
       }
 
       delete state.converses[converseId];
+    },
+
+    removeDMConverse(state, action: PayloadAction<{ converseId: string }>) {
+      const { converseId } = action.payload;
+      state.converseMembership[converseId] = {
+        removed: true,
+        version: (state.converseMembership[converseId]?.version ?? 0) + 1,
+      };
+      delete state.converses[converseId];
+      delete state.ack[converseId];
+      delete state.lastMessageMap[converseId];
+      if (state.currentConverseId === converseId) {
+        state.currentConverseId = null;
+      }
+    },
+
+    restoreDMConverse(
+      state,
+      action: PayloadAction<{ converse: ChatConverseInfo; version: number }>
+    ) {
+      const { converse, version } = action.payload;
+      if ((state.converseMembership[converse._id]?.version ?? 0) !== version) {
+        return;
+      }
+      state.converseMembership[converse._id] = { removed: false, version };
+      chatSlice.caseReducers.setConverseInfo(
+        state,
+        chatSlice.actions.setConverseInfo(converse)
+      );
     },
 
     /**

@@ -13,7 +13,6 @@ import {
   NoPermissionError,
   call,
   PERMISSION,
-  NotFoundError,
   SYSTEM_USERID,
   RateLimitError,
   getGroupPanelSlowMode,
@@ -148,6 +147,7 @@ class MessageService extends TcService {
     }>
   ) {
     const { converseId, startId } = ctx.params;
+    await this.checkConversePermission(ctx, converseId);
     const docs = await this.adapter.model.fetchConverseMessage(
       converseId,
       startId ?? null
@@ -337,28 +337,30 @@ class MessageService extends TcService {
       if (converseInfo) {
         const converseMemberIds = converseInfo.members.map((m) => String(m));
 
+        // 通知失败不能影响已经持久化的消息, 因此不等待也不抛出
         call(ctx)
           .isUserOnline(converseMemberIds)
-          .then((onlineList) => {
-            _.zip(converseMemberIds, onlineList).forEach(
-              ([memberId, isOnline]) => {
-                if (isOnline) {
-                  // 用户在线，则直接推送，通过客户端来创建会话
-                  this.unicastNotify(ctx, memberId, 'add', json);
-                } else {
-                  // 用户离线，确保追加到会话中
-                  ctx.call(
-                    'user.dmlist.addConverse',
-                    { converseId },
-                    {
-                      meta: {
-                        userId: memberId,
-                      },
-                    }
-                  );
+          .then((onlineList) =>
+            Promise.all(
+              _.zip(converseMemberIds, onlineList).map(
+                async ([memberId, isOnline]) => {
+                  if (isOnline) {
+                    // 用户在线，则直接推送，通过客户端来创建会话
+                    await this.unicastNotify(ctx, memberId, 'add', json);
+                  } else {
+                    // 用户离线，确保追加到会话中
+                    await this.broker.call(
+                      'user.dmlist.addConverse',
+                      { converseId },
+                      { meta: { ...ctx.meta, userId: memberId } }
+                    );
+                  }
                 }
-              }
-            );
+              )
+            )
+          )
+          .catch((error) => {
+            this.logger.error(error);
           });
       }
     }
@@ -610,6 +612,8 @@ class MessageService extends TcService {
       if (!groupInfo.members.map((m) => m.userId).includes(userId)) {
         throw new Error(t('不是群组成员无法搜索消息'));
       }
+    } else {
+      await this.checkConversePermission(ctx, converseId);
     }
 
     const messages = this.adapter.model
@@ -680,6 +684,12 @@ class MessageService extends TcService {
     const userId = ctx.meta.userId;
 
     const message = await this.adapter.model.findById(messageId);
+    if (!message) {
+      throw new DataNotFoundError();
+    }
+    if (!message.groupId) {
+      await this.checkConversePermission(ctx, String(message.converseId));
+    }
 
     const appendReaction = {
       name: emoji,
@@ -721,6 +731,12 @@ class MessageService extends TcService {
     const userId = ctx.meta.userId;
 
     const message = await this.adapter.model.findById(messageId);
+    if (!message) {
+      throw new DataNotFoundError();
+    }
+    if (!message.groupId) {
+      await this.checkConversePermission(ctx, String(message.converseId));
+    }
 
     const removedReaction = {
       name: emoji,
@@ -774,30 +790,40 @@ class MessageService extends TcService {
 
     // 鉴权是否能获取到会话内容
     if (groupId) {
-      // 是群组
+      // 是群组: 必须是群组成员, 且会话必须是该群组的面板, 防止用无关群组冒充私信会话
       const group = await call(ctx).getGroupInfo(groupId);
-      if (group.members.findIndex((m) => String(m.userId) === userId) === -1) {
-        // 不存在该用户
+      if (
+        !group.members.some((m) => String(m.userId) === userId) ||
+        !group.panels.some((panel) => String(panel.id) === converseId)
+      ) {
         throw new NoPermissionError(t('没有当前会话权限'));
       }
-    } else {
-      // 是普通会话
-      const converse = await ctx.call<
-        any,
-        {
-          converseId: string;
-        }
-      >('chat.converse.findConverseInfo', {
-        converseId,
-      });
+      return { bypassSlowMode: false };
+    }
 
-      if (!converse) {
-        throw new NotFoundError(t('没有找到会话信息'));
+    // 是普通会话: 非成员由 findConverseInfo 拒绝(403)
+    let converse;
+    try {
+      converse = await ctx.call<any, { converseId: string }>(
+        'chat.converse.findConverseInfo',
+        { converseId }
+      );
+    } catch (error) {
+      if (error.code !== 404) {
+        throw error;
       }
-      const memebers = converse.members ?? [];
-      if (memebers.findIndex((member) => String(member) === userId) === -1) {
-        throw new NoPermissionError(t('没有当前会话权限'));
-      }
+    }
+    if (converse) {
+      return { bypassSlowMode: false };
+    }
+
+    // 群组面板没有会话记录(404), 按已加入的群组面板校验
+    const { textPanelIds, subscribeFeaturePanelIds } = await ctx.call<{
+      textPanelIds: string[];
+      subscribeFeaturePanelIds: string[];
+    }>('group.getJoinedGroupAndPanelIds');
+    if (![...textPanelIds, ...subscribeFeaturePanelIds].includes(converseId)) {
+      throw new NoPermissionError(t('没有当前会话权限'));
     }
 
     return { bypassSlowMode: false };
