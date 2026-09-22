@@ -1,4 +1,10 @@
-import { call, DataNotFoundError, TcContext } from 'tailchat-server-sdk';
+import {
+  call,
+  DataNotFoundError,
+  NoPermissionError,
+  PERMISSION,
+  TcContext,
+} from 'tailchat-server-sdk';
 import { TcService, config } from 'tailchat-server-sdk';
 import { isValidStr } from '../../lib/utils';
 import type { OpenApp } from '../../models/openapi/app';
@@ -36,6 +42,15 @@ class OpenAppIntegrationService extends TcService {
     const appId = ctx.params.appId;
     const groupId = ctx.params.groupId;
     const t = ctx.meta.t;
+
+    const [hasPermission] = await call(ctx).checkUserPermissions(
+      groupId,
+      ctx.meta.userId,
+      [PERMISSION.core.manageUser]
+    );
+    if (!hasPermission) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const openapp: OpenApp = await ctx.call('openapi.app.get', {
       appId,
