@@ -1,5 +1,22 @@
 
 
+## [1.11.13](https://github.com/msgbyte/tailchat/compare/v1.11.12...v1.11.13) (2026-09-22)
+
+
+### Bug Fixes
+
+* **admin:** enable horizontal user table scrolling ([b6b9ac6](https://github.com/msgbyte/tailchat/commit/b6b9ac68eb665eca9ccdf41dfe357764c2646bcc))
+* **build:** pin pnpm version ([73ccc91](https://github.com/msgbyte/tailchat/commit/73ccc91bab184c336d3aa0679bf8f3eb60fb044b))
+* **chat:** enforce converse membership, add leave and friend-only invite ([#318](https://github.com/msgbyte/tailchat/issues/318)) ([dc02b00](https://github.com/msgbyte/tailchat/commit/dc02b00d1d0932eea6f0156710a387fe0471c644))
+* **nginx:** preserve client ip and websocket headers ([dabeedc](https://github.com/msgbyte/tailchat/commit/dabeedc94b2037208704d846127fd7ac676e8e73))
+* **openapi:** require manageUser permission to add bot to group ([2d3c789](https://github.com/msgbyte/tailchat/commit/2d3c7897492dbd3f05c877ca6a2243e579b0d3aa))
+
+
+### Features
+
+* **admin:** add admin next app ([#311](https://github.com/msgbyte/tailchat/issues/311)) ([d6e3ad1](https://github.com/msgbyte/tailchat/commit/d6e3ad1e1ac10b57ba75a84b57c5d1ccfbef192e))
+* **chat:** add slow mode for group text panels ([d2a2928](https://github.com/msgbyte/tailchat/commit/d2a292879ac804bad6e38b83ab575772993c282f))
+
 ## [1.11.12](https://github.com/msgbyte/tailchat/compare/v1.11.11...v1.11.12) (2026-07-20)
 
 
