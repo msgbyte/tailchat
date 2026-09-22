@@ -1,5 +1,12 @@
 
 
+## [1.11.14](https://github.com/msgbyte/tailchat/compare/v1.11.13...v1.11.14) (2026-09-22)
+
+
+### Bug Fixes
+
+* **docker:** install mc from quay.io image ([0258dc8](https://github.com/msgbyte/tailchat/commit/0258dc88f5066d802a11f82e99e57ab4f2c80368))
+
 ## [1.11.13](https://github.com/msgbyte/tailchat/compare/v1.11.12...v1.11.13) (2026-09-22)
 
 
