@@ -12,9 +12,8 @@ RUN ulimit -n 10240
 RUN npm install -g pnpm@8.15.8
 RUN npm install -g tailchat-cli@latest
 
-# Add mc for minio
-RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
-RUN chmod +x /usr/local/bin/mc
+# Add mc for minio (dl.min.io binaries were removed; copy from the multi-arch quay.io image)
+COPY --from=quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z /usr/bin/mc /usr/local/bin/mc
 
 # Install plugins and sdk dependency
 COPY ./tsconfig.json ./tsconfig.json
