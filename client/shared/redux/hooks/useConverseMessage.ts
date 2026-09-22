@@ -158,8 +158,7 @@ export function useConverseMessage(context: ConverseContext) {
       if (!isGroup) {
         // 如果是私信会话
         // Step 1. 创建会话 并确保私信列表中存在该会话
-        const converse = await ensureDMConverse(converseId, currentUserId);
-        dispatch(chatActions.setConverseInfo(converse));
+        await ensureDMConverse(converseId, currentUserId);
       } else {
         // 如果是群组会话(文本频道)
         // Step 1. 确保群组会话存在

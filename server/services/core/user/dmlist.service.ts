@@ -5,7 +5,13 @@ import type {
   UserDMListDocument,
   UserDMListModel,
 } from '../../../models/user/dmlist';
-import { TcService, TcContext, TcDbService, db } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcContext,
+  TcDbService,
+  db,
+  call,
+} from 'tailchat-server-sdk';
 
 interface UserDMListService
   extends TcService,
@@ -34,6 +40,8 @@ class UserDMListService extends TcService {
     const userId = ctx.meta.userId;
     const converseId = ctx.params.converseId;
 
+    await call(ctx).getConverseInfo(converseId);
+
     const record = await this.adapter.model.findOrCreate({
       userId,
     });
@@ -43,6 +51,16 @@ class UserDMListService extends TcService {
         converseIds: new db.Types.ObjectId(converseId),
       },
     });
+
+    try {
+      await call(ctx).getConverseInfo(converseId);
+    } catch (error) {
+      if (error.code === 403) {
+        // Reconcile against current membership: a leave or re-invite may race this insertion.
+        await ctx.call('chat.converse.syncConverseMember', { converseId });
+      }
+      throw error;
+    }
 
     return await this.transformDocuments(ctx, {}, res);
   }

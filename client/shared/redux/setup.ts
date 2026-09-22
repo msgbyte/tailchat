@@ -19,6 +19,17 @@ import { sharedEvent } from '../event';
 import type { InboxItem } from '../model/inbox';
 import { useGlobalConfigStore } from '../store/globalConfig';
 import type { GlobalConfig } from '../model/config';
+import {
+  refreshDMConverse,
+  removeDMConverseLocally,
+} from '../helper/converse-helper';
+import { isCancelledError } from '@tanstack/react-query';
+
+function handleConverseError(error: unknown) {
+  if (!isCancelledError(error)) {
+    console.error(error);
+  }
+}
 
 /**
  * 初始化 Redux 上下文
@@ -87,10 +98,12 @@ function initial(socket: AppSocket, store: AppStore) {
       // TODO: 待优化, 可以在后端一次性返回
 
       try {
-        const converse = await getCachedConverseInfo(converseId);
-        store.dispatch(chatActions.setConverseInfo(converse));
+        const userId = store.getState().user.info?._id;
+        if (userId) {
+          await refreshDMConverse(converseId, userId, store);
+        }
       } catch (e) {
-        console.error(e);
+        handleConverseError(e);
       }
     });
   });
@@ -130,9 +143,14 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     }
   );
 
-  socket.listen<ChatMessage>('chat.message.add', (message) => {
+  socket.listen<ChatMessage>('chat.message.add', async (message) => {
     // 处理接受到的消息
     const converseId = message.converseId;
+    if (store.getState().chat.converseMembership[converseId]?.removed) {
+      return;
+    }
+    const version =
+      store.getState().chat.converseMembership[converseId]?.version ?? 0;
     const converse = store.getState().chat.converses[converseId];
 
     // 添加消息到会话中
@@ -151,18 +169,38 @@ function listenNotify(socket: AppSocket, store: AppStore) {
     } else if (!message.groupId) {
       // 如果会话没有加载, 但是是私信消息
       // 则获取会话信息后添加到会话消息中
-      getCachedConverseInfo(converseId).then((converse) => {
+      try {
+        const converse = await getCachedConverseInfo(converseId, true);
+        const membership = store.getState().chat.converseMembership[converseId];
+        const userId = store.getState().user.info?._id;
+        if (
+          membership?.removed ||
+          (membership?.version ?? 0) !== version ||
+          !userId ||
+          !converse?.members.includes(userId)
+        ) {
+          return;
+        }
         if (
           [ChatConverseType.DM, ChatConverseType.Multi].includes(converse.type)
         ) {
           // 如果是私人会话, 则添加到dmlist
-          appendUserDMConverse(converse._id);
+          await appendUserDMConverse(converse._id);
+        }
+        if (
+          (store.getState().chat.converseMembership[converseId]?.version ??
+            0) !== version
+        ) {
+          return;
         }
 
         store.dispatch(chatActions.setConverseInfo(converse));
 
         appendMessage();
-      });
+      } catch (error) {
+        handleConverseError(error);
+        return;
+      }
     } else {
       // 是群组未加载的消息面板的消息
       // 设置会话信息
@@ -230,8 +268,18 @@ function listenNotify(socket: AppSocket, store: AppStore) {
   socket.listen<ChatConverseInfo>(
     'chat.converse.updateDMConverse',
     (converse) => {
-      store.dispatch(chatActions.setConverseInfo(converse));
+      const userId = store.getState().user.info?._id;
+      if (userId) {
+        refreshDMConverse(converse._id, userId, store).catch(
+          handleConverseError
+        );
+      }
     }
+  );
+
+  socket.listen<{ converseId: string }>(
+    'chat.converse.removeDMConverse',
+    ({ converseId }) => removeDMConverseLocally(converseId, store)
   );
 
   socket.listen<GroupInfo>('group.add', (groupInfo) => {

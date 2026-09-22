@@ -3,6 +3,8 @@ import { UserListItem } from '@/components/UserListItem';
 import React from 'react';
 import {
   ChatConverseState,
+  model,
+  showAlert,
   t,
   useAppSelector,
   useDMConverseName,
@@ -20,6 +22,8 @@ import { DMPluginPanelActionProps, pluginPanelActions } from '@/plugin/common';
 import { CreateDMConverse } from '@/components/modals/CreateDMConverse';
 import { MessageSearchPanel } from '../common/MessageSearch';
 import { ChatInputMentionsContextProvider } from '@/components/ChatBox/ChatInputBox/context';
+import { Navigate } from 'react-router';
+import { refreshDMConverse } from 'tailchat-shared/helper/converse-helper';
 
 const ConversePanelTitle: React.FC<{ converse: ChatConverseState }> =
   React.memo(({ converse }) => {
@@ -50,6 +54,9 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
     const converse = useAppSelector(
       (state) => state.chat.converses[converseId]
     );
+    const removed = useAppSelector(
+      (state) => state.chat.converseMembership[converseId]?.removed
+    );
     const userId = useUserId();
     const userInfos = useUserInfoList(
       (converse?.members ?? []).filter((m) => m !== userId)
@@ -57,6 +64,9 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
 
     const { hasOpenedPanel, openPanelWindow, closePanelWindow } =
       usePanelWindow(`/panel/personal/converse/${converseId}`);
+    if (removed) {
+      return <Navigate to="/main/personal/friends" replace />;
+    }
     if (hasOpenedPanel) {
       return <OpenedPanelTip onClosePanelWindow={closePanelWindow} />;
     }
@@ -97,7 +107,7 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
               iconClassName="text-2xl"
               onClick={openPanelWindow}
             />,
-            converse.members.length === 2 ? (
+            converse.type === model.converse.ChatConverseType.DM ? (
               <IconBtn
                 key="create"
                 title={t('创建会话')}
@@ -140,8 +150,7 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                 })
               }
             />,
-            // 当成员数大于2时，显示成员列表按钮
-            converse.members.length > 2 && (
+            converse.type === model.converse.ChatConverseType.Multi && (
               <IconBtn
                 key="members"
                 title={t('成员列表')}
@@ -152,6 +161,29 @@ export const ConversePanel: React.FC<ConversePanelProps> = React.memo(
                   setRightPanel({
                     name: t('成员') + ` (${converse.members.length})`,
                     panel: <ConversePanelMembers members={converse.members} />,
+                  })
+                }
+              />
+            ),
+            converse.type === model.converse.ChatConverseType.Multi && (
+              <IconBtn
+                key="leave"
+                title={t('退出会话')}
+                shape="square"
+                icon="mdi:logout"
+                iconClassName="text-2xl"
+                danger={true}
+                onClick={() =>
+                  showAlert({
+                    message: t(
+                      '确定要退出此多人会话么？退出后将不再接收此会话的消息'
+                    ),
+                    onConfirm: async () => {
+                      await model.converse.leaveDMConverse(converseId);
+                      if (userId) {
+                        await refreshDMConverse(converseId, userId);
+                      }
+                    },
                   })
                 }
               />

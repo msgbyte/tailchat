@@ -21,6 +21,8 @@ export interface UserSettings {
    * 消息列表虚拟化
    */
   messageListVirtualization?: boolean;
+  /** Only friends may invite this user to a multi conversation; off by default. */
+  onlyAllowFriendInvite?: boolean;
   [key: string]: any;
 }
 

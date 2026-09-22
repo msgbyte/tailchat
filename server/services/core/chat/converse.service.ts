@@ -14,6 +14,7 @@ import type {
   ConverseDocument,
   ConverseModel,
 } from '../../../models/chat/converse';
+import type { UserSettings } from '../../../models/user/user';
 
 interface ConverseService
   extends TcService,
@@ -40,15 +41,28 @@ class ConverseService extends TcService {
       {
         params: {
           converseId: 'string',
-          memberIds: 'array',
+          memberIds: { type: 'array', items: 'string' },
         },
       }
     );
+    this.registerAction('leaveDMConverse', this.leaveDMConverse, {
+      params: { converseId: 'string' },
+    });
     this.registerAction('findConverseInfo', this.findConverseInfo, {
       params: {
         converseId: 'string',
       },
     });
+    this.registerAction(
+      'syncConverseMember',
+      (ctx: TcContext<{ converseId: string }>) =>
+        this.syncConverseMember(ctx, ctx.params.converseId, ctx.meta.userId),
+      {
+        visibility: 'public',
+        disableSocket: true,
+        params: { converseId: 'string' },
+      }
+    );
     this.registerAction('findAndJoinRoom', this.findAndJoinRoom);
   }
 
@@ -80,6 +94,7 @@ class ConverseService extends TcService {
 
     if (participantList.length > 2) {
       // 多人会话
+      await this.checkInvitationPreferences(ctx, participantList);
       converse = await this.adapter.model.create({
         type: 'Multi',
         members: participantList.map((id) => new Types.ObjectId(id)),
@@ -89,35 +104,8 @@ class ConverseService extends TcService {
     const roomId = String(converse._id);
     await Promise.all(
       participantList.map((memberId) =>
-        call(ctx).joinSocketIORoom([roomId], memberId)
+        this.syncConverseMember(ctx, roomId, memberId)
       )
-    );
-
-    // 广播更新消息
-    await this.roomcastNotify(
-      ctx,
-      roomId,
-      'updateDMConverse',
-      converse.toJSON()
-    );
-
-    // 更新dmlist 异步处理
-    Promise.all(
-      participantList.map(async (memberId) => {
-        try {
-          await ctx.call(
-            'user.dmlist.addConverse',
-            { converseId: roomId },
-            {
-              meta: {
-                userId: memberId,
-              },
-            }
-          );
-        } catch (e) {
-          this.logger.error(e);
-        }
-      })
     );
 
     if (participantList.length > 2) {
@@ -147,52 +135,52 @@ class ConverseService extends TcService {
     ctx: TcContext<{ converseId: string; memberIds: string[] }>
   ) {
     const userId = ctx.meta.userId;
-    const { converseId, memberIds } = ctx.params;
-
-    const converse = await this.adapter.model.findById(converseId);
-    if (!converse) {
+    const { converseId } = ctx.params;
+    const current = await this.adapter.model.findById(converseId);
+    if (!current) {
       throw new DataNotFoundError();
     }
-
-    if (!converse.members.map(String).includes(userId)) {
-      throw new Error('不是会话参与者, 无法添加成员');
+    if (
+      current.type !== 'Multi' ||
+      !current.members.map(String).includes(userId)
+    ) {
+      throw new NoPermissionError(ctx.meta.t('没有当前会话权限'));
     }
 
-    converse.members.push(...memberIds.map((uid) => new Types.ObjectId(uid)));
-    await converse.save();
+    const requestedMemberIds = _.uniq(ctx.params.memberIds);
+    const memberIds = _.difference(
+      requestedMemberIds,
+      current.members.map(String)
+    );
+    await this.checkInvitationPreferences(ctx, memberIds);
+    const converse = await this.adapter.model.findOneAndUpdate(
+      { _id: converseId, type: 'Multi', members: new Types.ObjectId(userId) },
+      {
+        $addToSet: {
+          members: { $each: memberIds.map((id) => new Types.ObjectId(id)) },
+        },
+      },
+      { new: true }
+    );
+    if (!converse) {
+      throw new NoPermissionError(ctx.meta.t('没有当前会话权限'));
+    }
 
     await Promise.all(
-      memberIds.map((uid) =>
-        call(ctx).joinSocketIORoom([String(converseId)], uid)
+      requestedMemberIds.map((id) =>
+        this.syncConverseMember(ctx, converseId, id)
       )
     );
-
-    // 广播更新会话列表
     await this.roomcastNotify(
       ctx,
       converseId,
       'updateDMConverse',
-      converse.toJSON()
+      (await this.adapter.model.findById(converseId)).toJSON()
     );
 
-    // 更新dmlist 异步处理
-    Promise.all(
-      memberIds.map(async (memberId) => {
-        try {
-          await ctx.call(
-            'user.dmlist.addConverse',
-            { converseId },
-            {
-              meta: {
-                userId: memberId,
-              },
-            }
-          );
-        } catch (e) {
-          this.logger.error(e);
-        }
-      })
-    );
+    if (memberIds.length === 0) {
+      return converse;
+    }
 
     // 发送系统消息, 异步处理
     await Promise.all(
@@ -211,6 +199,120 @@ class ConverseService extends TcService {
     return converse;
   }
 
+  async leaveDMConverse(ctx: TcContext<{ converseId: string }>) {
+    const { converseId } = ctx.params;
+    const { userId, t } = ctx.meta;
+    const memberId = new Types.ObjectId(userId);
+    const converse = await this.adapter.model.findOneAndUpdate(
+      { _id: converseId, type: 'Multi', members: memberId },
+      { $pull: { members: memberId } },
+      { new: true }
+    );
+    if (!converse) {
+      // 已经不是成员(重试或从未加入): 只清理本人的房间和列表, 不通知其他成员
+      const current = await this.adapter.model.findById(converseId);
+      if (current?.type !== 'Multi') {
+        throw new NoPermissionError(t('没有当前会话权限'));
+      }
+      await this.syncConverseMember(ctx, converseId, userId);
+      return true;
+    }
+
+    await this.syncConverseMember(ctx, converseId, userId);
+    await this.roomcastNotify(
+      ctx,
+      converseId,
+      'updateDMConverse',
+      converse.toJSON()
+    );
+    return true;
+  }
+
+  private async checkInvitationPreferences(
+    ctx: TcContext,
+    memberIds: string[]
+  ) {
+    const inviterId = ctx.meta.userId;
+    await Promise.all(
+      _.without(_.uniq(memberIds), inviterId).map(async (memberId) => {
+        const settings = await this.broker.call<UserSettings, {}>(
+          'user.getUserSettings',
+          {},
+          {
+            meta: { ...ctx.meta, userId: memberId },
+          }
+        );
+        if (settings?.onlyAllowFriendInvite === true) {
+          const isFriend = await this.broker.call(
+            'friend.checkIsFriend',
+            { targetId: inviterId },
+            {
+              meta: { ...ctx.meta, userId: memberId },
+            }
+          );
+          if (!isFriend) {
+            throw new NoPermissionError(
+              ctx.meta.t('对方仅允许好友邀请加入多人会话')
+            );
+          }
+        }
+      })
+    );
+  }
+
+  /** Recheck after side effects so a delayed join or leave follows current membership. */
+  private async syncConverseMember(
+    ctx: TcContext,
+    converseId: string,
+    userId: string
+  ) {
+    // ponytail: 每轮处理一次并发的退出/重邀, 超过上限视为异常并失败关闭
+    for (let pass = 0; pass < 5; pass++) {
+      const converse = await this.adapter.model.findById(converseId);
+      const isMember = converse?.members.map(String).includes(userId) ?? false;
+      if (isMember) {
+        await call(ctx).joinSocketIORoom([converseId], userId);
+        try {
+          await this.broker.call(
+            'user.dmlist.addConverse',
+            { converseId },
+            { meta: { ...ctx.meta, userId } }
+          );
+        } catch (error) {
+          if (error.code === 403) {
+            continue;
+          }
+          throw error;
+        }
+        await this.unicastNotify(
+          ctx,
+          userId,
+          'updateDMConverse',
+          converse.toJSON()
+        );
+      } else {
+        await call(ctx).leaveSocketIORoom([converseId], userId);
+        await this.broker.call(
+          'user.dmlist.removeConverse',
+          { converseId },
+          { meta: { ...ctx.meta, userId } }
+        );
+        await this.unicastNotify(ctx, userId, 'removeDMConverse', {
+          converseId,
+        });
+      }
+      const latest = await this.adapter.model.findById(converseId);
+      if (
+        (latest?.members.map(String).includes(userId) ?? false) === isMember
+      ) {
+        return isMember;
+      }
+    }
+    throw new Error(
+      `Converse ${converseId} membership of ${userId} did not settle`
+    );
+  }
+
   /**
    * 查找会话
    */
@@ -224,6 +326,9 @@ class ConverseService extends TcService {
     const t = ctx.meta.t;
 
     const converse = await this.adapter.findById(converseId);
+    if (!converse) {
+      throw new DataNotFoundError();
+    }
 
     if (userId !== SYSTEM_USERID) {
       // not system, check permission
@@ -242,7 +347,7 @@ class ConverseService extends TcService {
    */
   async findAndJoinRoom(ctx: TcContext) {
     const userId = ctx.meta.userId;
-    const dmConverseIds = await this.adapter.model.findAllJoinedConverseId(
+    let dmConverseIds = await this.adapter.model.findAllJoinedConverseId(
       userId
     );
 
@@ -260,6 +365,14 @@ class ConverseService extends TcService {
       ...textPanelIds,
       ...subscribeFeaturePanelIds,
     ]);
+
+    const currentIds = await this.adapter.model.findAllJoinedConverseId(userId);
+    await Promise.all(
+      _.difference(dmConverseIds, currentIds).map((id) =>
+        this.syncConverseMember(ctx, id, userId)
+      )
+    );
+    dmConverseIds = currentIds;
 
     return {
       dmConverseIds,

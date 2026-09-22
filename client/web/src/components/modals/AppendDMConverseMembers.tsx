@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import { appendDMConverseMembers, t, useAsyncFn } from 'tailchat-shared';
+import { appendDMConverseMembers, t, useAsyncRequest } from 'tailchat-shared';
 import { FriendPicker } from '../UserPicker/FriendPicker';
 import { closeModal, ModalWrapper } from '../Modal';
 
@@ -17,7 +17,7 @@ export const AppendDMConverseMembers: React.FC<AppendDMConverseMembersProps> =
     const { converseId, withoutUserIds = [] } = props;
     const [selectedFriendIds, setSelectedFriendIds] = useState<string[]>([]);
 
-    const [{ loading }, handleConfirm] = useAsyncFn(async () => {
+    const [{ loading }, handleConfirm] = useAsyncRequest(async () => {
       await appendDMConverseMembers(converseId, [...selectedFriendIds]);
       closeModal();
     }, [converseId, selectedFriendIds]);

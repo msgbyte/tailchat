@@ -559,7 +559,8 @@
                     "type": "string"
                   },
                   "memberIds": {
-                    "type": "array"
+                    "type": "array",
+                    "items": "string"
                   }
                 }
               }
@@ -3390,6 +3391,24 @@
               "schema": {
                 "type": "object",
                 "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat.converse/leaveDMConverse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "converseId": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }

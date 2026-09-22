@@ -52,11 +52,13 @@ export async function getCachedUserInfo(
  * 获取缓存的会话信息
  */
 export async function getCachedConverseInfo(
-  converseId: string
+  converseId: string,
+  refetch = false
 ): Promise<ChatConverseInfo> {
   const data = await queryClient.fetchQuery(
     [CacheKey.converse, converseId],
-    () => fetchConverseInfo(converseId)
+    () => fetchConverseInfo(converseId),
+    { staleTime: refetch ? 0 : 10 * 1000 }
   );
 
   return data;

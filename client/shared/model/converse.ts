@@ -53,6 +53,13 @@ export async function appendDMConverseMembers(
 }
 
 /**
+ * 退出多人会话
+ */
+export async function leaveDMConverse(converseId: string): Promise<void> {
+  await request.post('/api/chat/converse/leaveDMConverse', { converseId });
+}
+
+/**
  * 获取会话信息
  * @param converseId 会话ID
  */
