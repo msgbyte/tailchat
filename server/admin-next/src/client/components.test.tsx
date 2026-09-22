@@ -61,7 +61,10 @@ test('keeps inactive navigation neutral and groups user actions in a dropdown', 
   assert.match(resources, /<Dropdown/);
   assert.match(resources, /<Menu\.Item key="delete"/);
   assert.match(resources, /icon="more"/);
-  assert.match(styles, /grid-template-columns:\s*24px 1fr/);
+  assert.match(
+    styles,
+    /\.user-action-menu \.arco-dropdown-menu-item \{[^}]*grid-template-columns:\s*24px 1fr/
+  );
   assert.match(styles, /column-gap:\s*12px/);
 });
 

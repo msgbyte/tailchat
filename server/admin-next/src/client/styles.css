@@ -147,8 +147,8 @@ kbd { padding: 3px 6px; color: #738096; border: 1px solid #343d4d; border-radius
 .row-actions .button { width: 28px; min-width: 28px; height: 28px; min-height: 28px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 6px; background: transparent; color: #7f8b9f; }
 .row-actions button:hover { color: #75baff; background: var(--primary-soft); }
 .row-actions button.danger-action:hover { color: #ff7a7c; background: rgba(255,77,79,.1); }
-.user-action-menu .arco-menu-item { display: grid; grid-template-columns: 24px 1fr; align-items: center; column-gap: 12px; }
-.user-action-menu .arco-menu-item .icon { justify-self: center; }
+.user-action-menu .arco-dropdown-menu-item { display: grid; grid-template-columns: 24px 1fr; align-items: center; column-gap: 12px; }
+.user-action-menu .arco-dropdown-menu-item .icon { justify-self: center; }
 .user-action-menu .danger-action { color: #ff8b8c; }
 .resource-pagination { min-height: 58px; padding: 10px 15px; display: flex; align-items: center; justify-content: flex-end; overflow-x: auto; border-top: 1px solid var(--border-soft); }
 .resource-pagination .arco-pagination { flex: 0 0 auto; flex-wrap: nowrap; }
