@@ -177,6 +177,10 @@ router.use(
   auth(),
   raExpressMongoose(userModel, {
     q: ['_id', 'nickname', 'email'],
+    qFilter: (q) => {
+      const [nickname, discriminator] = q.split('#');
+      return discriminator ? { nickname, discriminator } : undefined;
+    },
     allowedRegexFields: ['nickname'],
   })
 );

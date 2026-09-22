@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "cross-env NODE_ENV=production node dist/admin-next/src/server/index.js",
-    "test": "node --test -r ts-node/register src/client/*.test.ts src/client/*.test.tsx",
+    "test": "node --test -r ts-node/register src/client/*.test.ts src/client/*.test.tsx src/server/middleware/express-mongoose-ra-json-server/utils/*.test.ts",
     "check:type": "tsc --noEmit",
     "build": "pnpm build:client && pnpm build:server",
     "build:client": "vite build",

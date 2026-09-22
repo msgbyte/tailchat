@@ -11,6 +11,7 @@ interface parseQueryParam {
  * Turns ?q into $or queries, deletes q
  * @param {Object} results Original object with the q field
  * @param {string[]} fields Fields to apply q to
+ * @param {Function} qFilter Optional extra $or condition built from q
  */
 export default function parseQuery<
   T extends parseQueryParam,
@@ -19,7 +20,8 @@ export default function parseQuery<
   result: T,
   model: M,
   allowedRegexes: string[],
-  fields?: string[]
+  fields?: string[],
+  qFilter?: (q: string) => Record<string, any> | undefined
 ): T & { $or?: any } {
   if (!fields) return result;
   if (result.q) {
@@ -32,6 +34,8 @@ export default function parseQuery<
       const newFilter = { [field]: result.q };
       result.$or.push(castFilter(newFilter, model, allowedRegexes));
     });
+    const extra = qFilter?.(String(result.q));
+    if (extra) result.$or.push(extra);
     delete result.q;
   }
   return result;

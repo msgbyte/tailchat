@@ -30,6 +30,9 @@ export interface raExpressMongooseOptions<T> {
   /** Fields to search from ?q (used for autofill and search) */
   q?: string[];
 
+  /** Extra $or condition built from ?q, e.g. structured `nickname#discriminator` */
+  qFilter?: (q: string) => Record<string, any> | undefined;
+
   /** Base name for ACLs (e.g. list operation does baseName.list) */
   aclName?: string;
 
@@ -67,6 +70,7 @@ export function raExpressMongoose<T extends ADPBaseModel, I>(
 ) {
   const {
     q,
+    qFilter,
     allowedRegexFields = [],
     readOnlyFields,
     inputTransformer = (input: any) => input,
@@ -105,7 +109,8 @@ export function raExpressMongoose<T extends ADPBaseModel, I>(
             ),
             model,
             allowedRegexFields,
-            q
+            q,
+            qFilter
           ),
         };
         let query = model.find(filterQuery);
