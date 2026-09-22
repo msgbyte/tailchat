@@ -223,6 +223,8 @@ const sections: { label: string; routes: { id: RouteId; icon: IconName }[] }[] =
     },
   ];
 
+const SIDEBAR_STORAGE_KEY = 'tailchat:admin-next:sidebar';
+
 export function AppShell({
   route,
   username,
@@ -237,6 +239,9 @@ export function AppShell({
 }>) {
   const { t, language, setLanguage } = useI18n();
   const [drawer, setDrawer] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    () => window.localStorage.getItem(SIDEBAR_STORAGE_KEY) === 'collapsed'
+  );
   const [palette, setPalette] = useState(false);
   const [query, setQuery] = useState('');
   useEffect(() => {
@@ -265,8 +270,16 @@ export function AppShell({
     setDrawer(false);
     setPalette(false);
   };
+  const toggleSidebar = () => {
+    const next = !collapsed;
+    window.localStorage.setItem(
+      SIDEBAR_STORAGE_KEY,
+      next ? 'collapsed' : 'expanded'
+    );
+    setCollapsed(next);
+  };
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${collapsed ? 'sidebar-collapsed' : ''}`}>
       {drawer && (
         <ArcoButton
           className="drawer-backdrop"
@@ -291,6 +304,7 @@ export function AppShell({
                   type="text"
                   key={item.id}
                   className={route === item.id ? 'active' : ''}
+                  title={collapsed ? t(`route.${item.id}`) : undefined}
                   onClick={() => go(item.id)}
                 >
                   <Icon name={item.icon} />
@@ -300,7 +314,18 @@ export function AppShell({
             </div>
           ))}
         </nav>
-        <div className="sidebar-footer">{t('app.footer')}</div>
+        <div className="sidebar-footer">
+          <span>{t('app.footer')}</span>
+          <ArcoButton
+            type="text"
+            className="icon-button sidebar-toggle"
+            onClick={toggleSidebar}
+            aria-expanded={!collapsed}
+            aria-label={t(collapsed ? 'shell.expand' : 'shell.collapse')}
+            title={t(collapsed ? 'shell.expand' : 'shell.collapse')}
+            icon={<Icon name="chevron" />}
+          />
+        </div>
       </aside>
       <div className="workspace">
         <header className="topbar">

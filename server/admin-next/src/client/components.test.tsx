@@ -64,3 +64,16 @@ test('keeps inactive navigation neutral and groups user actions in a dropdown', 
   assert.match(styles, /grid-template-columns:\s*24px 1fr/);
   assert.match(styles, /column-gap:\s*12px/);
 });
+
+test('collapses the sidebar to icons on desktop', () => {
+  const components = readFileSync(`${__dirname}/components.tsx`, 'utf8');
+  const styles = readFileSync(`${__dirname}/styles.css`, 'utf8');
+
+  assert.match(components, /className="icon-button sidebar-toggle"/);
+  assert.match(components, /aria-expanded=\{!collapsed\}/);
+  assert.match(styles, /\.sidebar-collapsed \.sidebar \{ width: 68px; \}/);
+  assert.match(
+    styles,
+    /\.sidebar-collapsed \.nav button span[^}]*display: none/
+  );
+});
