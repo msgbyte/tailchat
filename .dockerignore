@@ -1,10 +1,11 @@
 .env
-node_modules
+**/node_modules
 logs
-dist
+**/dist
 website
 page
 client/desktop
 client/desktop-old
 client/mobile
 apps
+.git
