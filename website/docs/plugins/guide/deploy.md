@@ -9,7 +9,7 @@ The deployment strategy of the plugin will be optimized in the future. At presen
 
 First, let’s talk about the classification of Tailchat plugins. Tailchat plugins are divided into `pure frontend plugins`, `pure backend plugins`, `frontend plugins`
 
-`Pure frontend plugin` is the easiest to understand, which means that the plugin only runs in the frontend code, relies on the existing context for communication, and does not need Tailchat backend support. (In particular, frontend plugins that communicate with custom backends, such as the `com.msgbyte.ai-assistant` plugin)
+`Pure frontend plugin` is the easiest to understand, which means that the plugin only runs in the frontend code, relies on the existing context for communication, and does not need Tailchat backend support. (Frontend plugins that communicate with a custom backend also belong to this category.)
 
 `Pure backend plugin is` a plugin that communicates with the Tailchat network, without a frontend interface, and calls actions of other services through rpc to achieve some purposes. For the backend plugin, it means that the plugin itself is connected to the Tailchat backend network, has the highest authority, and can access some actions whose visibility is `public` (by default, only actions at the `publish` level can be accessed externally, others level are only accessible to internal services), a frontend-free backend plugin such as `com.msgbyte.simplenotify` plugin
 

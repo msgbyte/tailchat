@@ -1,15 +1,7 @@
 ---
 sidebar_position: 1
-title: Pure Frontend Plugin (27)
+title: Pure Frontend Plugin (26)
 ---
-
-### com.msgbyte.ai-assistant AI Assistant
-
-Add chatgpt into Tailchat
-
-- [Source Code](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.ai-assistant)
-- [manifest.json](https://github.com/msgbyte/tailchat/blob/master/client/web/plugins/com.msgbyte.ai-assistant/manifest.json)
-
 
 ### com.msgbyte.bbcode BBCode Mmessage Interpreter
 
