@@ -19,6 +19,7 @@ class FriendService extends TcService {
 
     this.registerAction('getAllFriends', this.getAllFriends);
     this.registerAction('buildFriendRelation', this.buildFriendRelation, {
+      visibility: 'public',
       params: {
         user1: 'string',
         user2: 'string',

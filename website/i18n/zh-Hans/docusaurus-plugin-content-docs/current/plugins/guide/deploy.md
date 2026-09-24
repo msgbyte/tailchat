@@ -11,7 +11,9 @@ title: 部署插件
 
 `纯前端插件`最为容易理解，表示插件仅运行在前端代码中，依赖已有的上下文进行沟通，无需Tailchat后端支持。（特别的，对于与自定义后端进行通信的也是前端插件）
 
-`纯后端插件为`为与Tailchat网络进行通信的插件，无前端界面，通过rpc调用其他服务的action来实现一些目的。对于后端插件来说，意味着插件本身接入了Tailchat后端网络，拥有最高的权限，可以访问一些可见性为`public`的action(默认只有`publish`级别的action可以被外部访问，其他级别的都是只有内部服务才能访问)，一个无前端的后端插件如`com.msgbyte.simplenotify`插件
+`纯后端插件为`为与Tailchat网络进行通信的插件，无前端界面，通过rpc调用其他服务的action来实现一些目的。对于后端插件来说，意味着插件本身接入了Tailchat后端网络，拥有最高的权限，可以访问一些可见性为`public`的action(默认只有`published`级别的action可以被外部访问，其他级别的都是只有内部服务才能访问)，一个无前端的后端插件如`com.msgbyte.simplenotify`插件
+
+`friend.buildFriendRelation` 是可见性为 `public` 的内部 RPC action，不能通过 HTTP 或 Socket.IO 调用。客户端应使用 `friend.request.add` 发起好友申请，再由接收方调用 `friend.request.accept` 接受申请。
 
 `前后端插件` 表示既有前端又有后端的插件，是最复杂但是能力最完全的插件类型，通过前端插件与后端交互，通过后端插件与其他的服务进行交互，在不修改核心代码的前提下能完成大部分的开发工作
 

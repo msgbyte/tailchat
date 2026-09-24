@@ -11,7 +11,9 @@ First, let’s talk about the classification of Tailchat plugins. Tailchat plugi
 
 `Pure frontend plugin` is the easiest to understand, which means that the plugin only runs in the frontend code, relies on the existing context for communication, and does not need Tailchat backend support. (Frontend plugins that communicate with a custom backend also belong to this category.)
 
-`Pure backend plugin is` a plugin that communicates with the Tailchat network, without a frontend interface, and calls actions of other services through rpc to achieve some purposes. For the backend plugin, it means that the plugin itself is connected to the Tailchat backend network, has the highest authority, and can access some actions whose visibility is `public` (by default, only actions at the `publish` level can be accessed externally, others level are only accessible to internal services), a frontend-free backend plugin such as `com.msgbyte.simplenotify` plugin
+`Pure backend plugin is` a plugin that communicates with the Tailchat network, without a frontend interface, and calls actions of other services through rpc to achieve some purposes. For the backend plugin, it means that the plugin itself is connected to the Tailchat backend network, has the highest authority, and can access some actions whose visibility is `public` (by default, only actions at the `published` level can be accessed externally, others level are only accessible to internal services), a frontend-free backend plugin such as `com.msgbyte.simplenotify` plugin
+
+`friend.buildFriendRelation` is an internal RPC action with `public` visibility and cannot be called through HTTP or Socket.IO. Clients must use `friend.request.add` and let the recipient call `friend.request.accept`.
 
 `Frontend plugin` means a plugin with both frontend and backend. It is the most complex but most capable plugin type. It interacts with the backend through the frontend plugin and interacts with other services through the backend plugin without modifying the core code. Can complete most of the development work under the premise of
 

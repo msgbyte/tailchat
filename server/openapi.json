@@ -1860,27 +1860,6 @@
         }
       }
     },
-    "/friend/buildFriendRelation": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user1": {
-                    "type": "string"
-                  },
-                  "user2": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/friend/removeFriend": {
       "post": {
         "requestBody": {
