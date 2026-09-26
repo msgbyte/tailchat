@@ -22,6 +22,8 @@ import {
   call,
   BannedError,
   UserStructWithToken,
+  RateLimitError,
+  ServiceUnavailableError,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -32,6 +34,9 @@ import type { TFunction } from 'i18next';
 import _ from 'lodash';
 import type { UserStruct } from 'tailchat-server-sdk';
 import userLoginLogModel from '../../../models/user/userLoginLog';
+import { getRegistrationIp } from '../../../lib/requestIp';
+import RedisSlowModeCounter from '../chat/slowModeCounter';
+import type { SlowModeRedisClient } from '../chat/slowModeCounter';
 
 const { isValidObjectId, Types } = db;
 
@@ -443,8 +448,52 @@ class UserService extends TcService {
   }
 
   /**
-   * 用户注册
+   * 普通注册和游客注册共享的 IP 配额
    */
+  private async consumeRegistrationQuota(
+    ctx: TcPureContext<any, { ip?: string }>
+  ) {
+    const ip = getRegistrationIp(ctx.meta.ip);
+    const cacher = this.broker.cacher as unknown as
+      | { client?: SlowModeRedisClient & { status: string }; prefix?: string }
+      | undefined;
+    if (!ip || !cacher?.client || cacher.client.status !== 'ready') {
+      throw new ServiceUnavailableError();
+    }
+
+    // Reuse the atomic Redis rolling window; failed registration attempts keep their slots.
+    const counter = new RedisSlowModeCounter(
+      cacher.client,
+      `${cacher.prefix ?? 'tailchat:'}registration:v1`
+    );
+    for (const [intervalSeconds, maxMessages] of [
+      [3600, config.registrationIpLimit.hourly],
+      [86400, config.registrationIpLimit.daily],
+    ]) {
+      const result = await counter
+        .consume({
+          converseId: `${this.broker.namespace ?? ''}:${config.apiUrl}`,
+          userId: ip,
+          intervalSeconds,
+          maxMessages,
+        })
+        .catch(() => {
+          throw new ServiceUnavailableError();
+        });
+      if (!result.accepted) {
+        throw new RateLimitError(
+          ctx.meta.t('注册过于频繁，请稍后再试'),
+          'REGISTER_IP_LIMITED',
+          {
+            retryAfterMs: result.retryAfterMs,
+            windowSeconds: intervalSeconds,
+          }
+        );
+      }
+    }
+  }
+
+  /** 用户注册 */
   async register(
     ctx: TcPureContext<
       {
@@ -460,13 +509,12 @@ class UserService extends TcService {
   ): Promise<UserStructWithToken> {
     const params = { ...ctx.params };
     const t = ctx.meta.t;
-    await this.validateEntity(params);
-
-    await this.validateRegisterParams(params, t);
-
     if (config.feature.disableUserRegister) {
       throw new Error(t('服务器不允许新用户注册'));
     }
+    await this.consumeRegistrationQuota(ctx);
+    await this.validateEntity(params);
+    await this.validateRegisterParams(params, t);
 
     const nickname =
       params.nickname || (params.username ?? getEmailAddress(params.email));
@@ -571,6 +619,7 @@ class UserService extends TcService {
     if (config.feature.disableGuestLogin) {
       throw new Error(t('服务器不允许游客登录'));
     }
+    await this.consumeRegistrationQuota(ctx);
 
     const discriminator = await this.adapter.model.generateDiscriminator(
       nickname

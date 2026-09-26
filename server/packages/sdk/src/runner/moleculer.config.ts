@@ -264,7 +264,13 @@ export const defaultBrokerConfig: BrokerOptions = {
             if (err.name === 'EntityError') {
               // 未注册
               console.log('正在注册新的测试账号');
-              return broker.call('user.register', { username, password });
+              return broker.call(
+                'user.register',
+                { username, password },
+                {
+                  meta: { ip: '127.0.0.1' },
+                }
+              );
             }
 
             console.error('未知的错误:', err);

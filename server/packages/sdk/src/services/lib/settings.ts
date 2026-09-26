@@ -3,6 +3,14 @@ import _ from 'lodash';
 
 dotenv.config();
 
+function positiveIntegerEnv(name: string, fallback: number): number {
+  const value = Number(process.env[name] ?? fallback);
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new Error(`${name} must be a positive integer`);
+  }
+  return value;
+}
+
 /**
  * 配置信息
  */
@@ -23,6 +31,10 @@ export const config = {
    */
   enableSocketAdmin: !!process.env.ADMIN,
   redisUrl: process.env.REDIS_URL,
+  registrationIpLimit: {
+    hourly: positiveIntegerEnv('REGISTER_IP_LIMIT_PER_HOUR', 3),
+    daily: positiveIntegerEnv('REGISTER_IP_LIMIT_PER_DAY', 10),
+  },
   mongoUrl: process.env.MONGO_URL,
   storage: {
     type: 'minio', // 可选: minio
