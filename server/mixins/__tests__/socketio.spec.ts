@@ -1,5 +1,6 @@
 import { TcSocketIOService } from '../socketio.mixin';
 import { io } from 'socket.io-client';
+import msgpackParser from 'socket.io-msgpack-parser';
 import { createTestUserToken } from '../../test/utils';
 import { UserJWTPayload, TcBroker, ApiGatewayMixin } from 'tailchat-server-sdk';
 
@@ -13,8 +14,12 @@ async function createAndEmitMessage(
 ): Promise<any> {
   const socket = io(`http://localhost:${PORT}/`, {
     transports: ['websocket'],
+    parser: msgpackParser,
     auth: {
       token: createTestUserToken(),
+    },
+    extraHeaders: {
+      'x-forwarded-for': '203.0.113.99',
     },
   });
 
@@ -88,6 +93,7 @@ describe('Testing "socketio.mixin"', () => {
     const res = await createAndEmitMessage('test.hello');
 
     expect(actionHandler1.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(actionHandler1.mock.calls[0][0].meta.ip).toBe('203.0.113.99');
     expect(res).toEqual({ result: true });
   });
 
