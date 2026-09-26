@@ -1,6 +1,9 @@
 {
   "name": "website",
   "version": "0.0.0",
+  "engines": {
+    "node": "24.x"
+  },
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
