@@ -14,6 +14,8 @@ title: Environment Variable
 | API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for issuer issuance on open platforms or as a fallback for file services |
 | MONGO_URL | - | Database service address |
 | REDIS_URL | - | Redis service address |
+| REGISTER_IP_LIMIT_PER_HOUR | 3 | Maximum registration attempts per IP in a rolling hour; positive integer |
+| REGISTER_IP_LIMIT_PER_DAY | 10 | Maximum registration attempts per IP in a rolling 24 hours; positive integer |
 | MINIO_URL | - | File service address (minio) |
 | MINIO_USER | - | File service username |
 | MINIO_PASS | - | File service password |
@@ -38,6 +40,16 @@ title: Environment Variable
 | DISABLE_TELEMETRY | - | Whether to disable send telemetry report to msgbyte to help us improve, its anonymous, if "1" or "true" turn off telemetry |
 
 > Some examples of environment variables can be seen: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
+
+### Registration IP limits and reverse proxies
+
+Regular and guest registration share the same Redis quota: by default, 3 attempts per rolling hour and 10 per rolling 24 hours. IPv4-mapped IPv6 addresses share the IPv4 quota; IPv6 addresses in the same `/64` share a quota. Users behind the same NAT also share a quota, so adjust the limits to your deployment. Invalid limits prevent startup.
+
+The service checks the hourly window, then the daily window, before password hashing or database writes. Attempts that pass a window consume its quota even if a later check or registration fails. Deleting an account does not restore quota. Rejections return HTTP 429 (`REGISTER_IP_LIMITED`) with `retryAfterMs` and `windowSeconds`. Missing IP metadata or an unavailable Redis returns 503 and prevents registration. Internal calls to `user.register` or `user.createTemporaryUser` must supply a valid `meta.ip`; the built-in CLI supplies loopback.
+
+Registration limits and last login IP records use the same IP source: the first address in `X-Forwarded-For`, then `X-Real-IP`, then the connection peer's IP. Socket.IO uses the same rule. The reverse proxy must sanitize forwarding headers and the backend must only be reachable through that proxy, so clients cannot choose the IP used for quotas.
+
+All replicas must share Redis and use the same limits, `API_URL`, broker namespace and cache prefix. Quotas are isolated by that prefix, namespace and `API_URL`; separate deployments sharing Redis must use distinct values or separate Redis databases. Redis supplies the clock and atomically reserves each slot. Restart all replicas after configuration changes. Changing a limit starts a new quota for that window; old keys expire within 24 hours of their last use. Redis data loss or cache clearing resets quotas, so retain Redis data when restarting the deployment.
 
 ### Use files to configure environment variables
 

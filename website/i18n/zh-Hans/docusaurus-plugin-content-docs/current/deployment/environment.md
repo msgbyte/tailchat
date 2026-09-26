@@ -14,6 +14,8 @@ title: 环境变量
 | API_URL | http://127.0.0.1:11000 | 对外可访问的url地址，用于开放平台的issuer签发或者作为文件服务的fallback |
 | MONGO_URL | - | 数据库服务地址 |
 | REDIS_URL | - | Redis服务地址 |
+| REGISTER_IP_LIMIT_PER_HOUR | 3 | 同一 IP 每滚动小时的注册尝试上限，必须为正整数 |
+| REGISTER_IP_LIMIT_PER_DAY | 10 | 同一 IP 每滚动 24 小时的注册尝试上限，必须为正整数 |
 | MINIO_URL | - | 文件服务地址(minio) |
 | MINIO_USER | - | 文件服务用户名 |
 | MINIO_PASS | - | 文件服务密码 |
@@ -38,6 +40,16 @@ title: 环境变量
 | DISABLE_TELEMETRY | - | 是否关闭遥测报告功能, 遥测是完全匿名的，如果为 "1" 或者 "true" 则关闭该功能 |
 
 > 部分环境变量示例可见: https://github.com/msgbyte/tailchat/blob/master/server/.env.example
+
+### 注册 IP 限制与反向代理
+
+普通注册和游客注册共用 Redis 配额，默认每个 IP 每滚动小时最多尝试 3 次、每滚动 24 小时最多尝试 10 次。IPv4 映射形式的 IPv6 地址与对应 IPv4 共用配额，同一 `/64` 内的 IPv6 地址共用配额。同一 NAT 出口的用户也会共用配额，请根据部署场景调整。无效的限制数值会阻止服务启动。
+
+服务在密码哈希计算和数据库写入前依次检查小时、每日配额。通过某个窗口检查后，即使后续检查或注册失败，也不会退还该窗口配额。删除账号同样不会恢复配额。超限返回 HTTP 429（`REGISTER_IP_LIMITED`），包含 `retryAfterMs` 和 `windowSeconds`；缺少 IP 元数据或 Redis 不可用时返回 503 并暂停注册。内部调用 `user.register` 或 `user.createTemporaryUser` 也必须提供有效的 `meta.ip`；内置 CLI 使用回环地址。
+
+注册限流与最后登录 IP 记录使用相同的 IP 来源：优先取 `X-Forwarded-For` 的第一个地址，其次取 `X-Real-IP`，最后取连接对端 IP。Socket.IO 使用同样的规则。反向代理必须清理客户端提供的转发头，且后端仅允许通过该代理访问，避免客户端自行选择用于配额计数的 IP。
+
+所有副本必须共用 Redis，并配置相同的限制值、`API_URL`、broker namespace 和缓存前缀。配额按缓存前缀、namespace 和 `API_URL` 隔离；共用 Redis 的不同部署必须使用不同值，或使用独立 Redis 数据库。计时与单次配额占用均由 Redis 原子完成。修改配置后重启所有副本；修改限制值会为对应窗口启用新配额，旧键在最后使用后最多 24 小时过期。Redis 数据丢失或清空缓存会重置配额，因此重启部署时应保留 Redis 数据。
 
 ### 使用文件进行配置环境变量
 
