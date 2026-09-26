@@ -2,7 +2,33 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BarChart, Button, Card, LineChart } from './components';
+import { BarChart, Button, Card, LineChart, Table } from './components';
+
+test('makes data columns resizable while preserving fixed actions and selection', () => {
+  const markup = renderToStaticMarkup(
+    <Table
+      columns={[
+        { title: 'ID', dataIndex: 'id', width: 160, sorter: true },
+        { title: 'Name', dataIndex: 'name', width: 260 },
+        { title: 'Actions', key: 'actions', width: 120, fixed: 'right' },
+      ]}
+      data={[{ id: '1', name: 'Alice' }]}
+      rowKey="id"
+      rowSelection={{}}
+      pagination={false}
+    />
+  );
+
+  assert.equal((markup.match(/role="separator"/g) || []).length, 2);
+  assert.match(markup, /aria-label="ID"/);
+  assert.match(markup, /aria-orientation="vertical"/);
+  assert.match(markup, /aria-valuemin="80"/);
+  assert.match(markup, /aria-valuenow="260"/);
+  assert.match(markup, /tabindex="0"/);
+  assert.match(markup, /width:580px/);
+  assert.match(markup, /arco-table-sorter/);
+  assert.match(markup, /arco-checkbox/);
+});
 
 test('renders shared primitives with Arco Design', () => {
   assert.match(renderToStaticMarkup(<Button>Save</Button>), /arco-btn/);

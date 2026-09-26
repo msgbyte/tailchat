@@ -5,7 +5,6 @@ import {
   Popconfirm,
   Radio,
   Switch,
-  Table,
   Tag,
   Upload,
   type TableColumnProps,
@@ -24,6 +23,7 @@ import {
   LineChart,
   LoadingState,
   PageHeader,
+  Table,
   useToast,
 } from './components';
 import { parseUrlStr, validateNotification, type RouteId } from './core';
@@ -404,7 +404,6 @@ export function NetworkPage() {
                 data={data.nodes}
                 rowKey={(node) => String(node.id)}
                 pagination={false}
-                scroll={{ x: 1130 }}
                 noDataElement={<EmptyState />}
               />
             </Card>

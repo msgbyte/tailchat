@@ -9,7 +9,6 @@ import {
   Pagination,
   Popconfirm,
   Switch,
-  Table,
   Tag,
   Tooltip,
   type TableColumnProps,
@@ -30,6 +29,7 @@ import {
   ErrorState,
   Modal,
   PageHeader,
+  Table,
   useToast,
 } from './components';
 import { Icon } from './icons';
@@ -939,6 +939,7 @@ export function ResourcePage({ route }: { route: keyof typeof schemas }) {
           <ErrorState retry={load} message={error} />
         ) : (
           <Table
+            key={route}
             className="admin-table resource-table"
             columns={columns}
             data={rows}
@@ -958,14 +959,6 @@ export function ResourcePage({ route }: { route: keyof typeof schemas }) {
                   }
                 : undefined
             }
-            scroll={{
-              x: schema.fields.reduce(
-                (width, field) =>
-                  width +
-                  (field.wide ? 260 : field.type === 'image' ? 90 : 160),
-                route === 'users' ? 120 : 150
-              ),
-            }}
             onChange={(_, sorterInfo) => {
               const current = Array.isArray(sorterInfo)
                 ? sorterInfo[0]

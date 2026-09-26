@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -14,7 +15,9 @@ import {
   Message,
   Modal as ArcoModal,
   Spin,
+  Table as ArcoTable,
   type ButtonProps as ArcoButtonProps,
+  type TableProps,
 } from '@arco-design/web-react';
 import {
   Bar,
@@ -31,6 +34,113 @@ import {
 import { ROUTES, type RouteId } from './core';
 import { Icon, type IconName } from './icons';
 import { useI18n } from './i18n';
+
+const MIN_COLUMN_WIDTH = 80;
+
+function TableHeader({
+  children,
+  resize,
+  className,
+  ...props
+}: React.ThHTMLAttributes<HTMLTableCellElement> & {
+  resize?: { label: string; width: number; onResize: (width: number) => void };
+}) {
+  const drag = useRef<{ pointerId: number; x: number; width: number } | null>(
+    null
+  );
+
+  return (
+    <th
+      {...props}
+      className={`${className || ''}${resize ? ' resizable-table-header' : ''}`}
+    >
+      {children}
+      {resize && (
+        <span
+          className="table-column-resizer"
+          role="separator"
+          aria-label={resize.label}
+          aria-orientation="vertical"
+          aria-valuemin={MIN_COLUMN_WIDTH}
+          aria-valuenow={resize.width}
+          tabIndex={0}
+          onPointerDown={(event) => {
+            if (event.button !== 0) return;
+            event.preventDefault();
+            event.stopPropagation();
+            drag.current = {
+              pointerId: event.pointerId,
+              x: event.clientX,
+              width: resize.width,
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerMove={(event) => {
+            if (drag.current?.pointerId !== event.pointerId) return;
+            resize.onResize(
+              drag.current.width + event.clientX - drag.current.x
+            );
+          }}
+          onPointerUp={() => (drag.current = null)}
+          onPointerCancel={() => (drag.current = null)}
+          onLostPointerCapture={() => (drag.current = null)}
+          onClick={(event) => event.stopPropagation()}
+          onKeyDown={(event) => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            event.stopPropagation();
+            resize.onResize(
+              resize.width + (event.key === 'ArrowRight' ? 10 : -10)
+            );
+          }}
+        />
+      )}
+    </th>
+  );
+}
+
+const tableComponents = { header: { th: TableHeader } };
+
+export function Table<T>({ columns = [], scroll, ...props }: TableProps<T>) {
+  const [widths, setWidths] = useState<Record<string, number>>({});
+  const sizedColumns = columns.map((column) => {
+    const key = column.key ?? column.dataIndex;
+    const width = widths[key] ?? column.width;
+    return {
+      ...column,
+      width,
+      onHeaderCell: (value, index) => ({
+        ...column.onHeaderCell?.(value, index),
+        resize:
+          !column.fixed && key !== undefined && typeof width === 'number'
+            ? {
+                label: String(column.title),
+                width,
+                onResize: (nextWidth: number) =>
+                  setWidths((current) => ({
+                    ...current,
+                    [key]: Math.max(MIN_COLUMN_WIDTH, nextWidth),
+                  })),
+              }
+            : undefined,
+      }),
+    };
+  });
+  const width = sizedColumns.reduce(
+    (total, column) => total + (Number(column.width) || 0),
+    props.rowSelection ? props.rowSelection.columnWidth ?? 40 : 0
+  );
+
+  return (
+    <ArcoTable<T>
+      {...props}
+      columns={sizedColumns}
+      components={tableComponents}
+      tableLayoutFixed
+      scroll={{ ...scroll, x: width }}
+    />
+  );
+}
 
 export function Button({
   children,
