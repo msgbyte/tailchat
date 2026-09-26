@@ -1,6 +1,6 @@
 {
   "name": "tailchat",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "private": true,
   "packageManager": "pnpm@8.15.8",
   "description": "",

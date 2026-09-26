@@ -1,5 +1,23 @@
 
 
+## [1.11.15](https://github.com/msgbyte/tailchat/compare/v1.11.14...v1.11.15) (2026-09-26)
+
+
+### Bug Fixes
+
+* **admin-next:** align user action menu items ([564c309](https://github.com/msgbyte/tailchat/commit/564c30914c164b1e32e44c4afa39423b1fab2b73))
+* **admin-next:** resolve backend image urls ([ddd2ee6](https://github.com/msgbyte/tailchat/commit/ddd2ee65bea6a8450de9fd6925f1126b42df3b5e))
+* **friend:** restrict relation creation to internal services ([ac217d8](https://github.com/msgbyte/tailchat/commit/ac217d8e5524093657f860855645f23e0fabf57d))
+
+
+### Features
+
+* **admin-next:** add collapsible icon-only sidebar ([3f932c5](https://github.com/msgbyte/tailchat/commit/3f932c55d6940266d95059fd3508e5a205ed482f))
+* **admin-next:** add resizable table columns ([c7476d2](https://github.com/msgbyte/tailchat/commit/c7476d2d9063e7af44330bd998522b68adce5338))
+* **admin-next:** support nickname#discriminator user search ([7109e7a](https://github.com/msgbyte/tailchat/commit/7109e7ae0f352073fa70a2c343ceb549b18ed016))
+* **socketio:** attach client ip to socket meta ([3614f66](https://github.com/msgbyte/tailchat/commit/3614f66de3adc75760617dd88375ffa36ef810ae))
+* **user:** rate limit registration attempts per ip ([7f9e87f](https://github.com/msgbyte/tailchat/commit/7f9e87ff1ad2ea8f879acd361a7532d22dfa804e))
+
 ## [1.11.14](https://github.com/msgbyte/tailchat/compare/v1.11.13...v1.11.14) (2026-09-22)
 
 
