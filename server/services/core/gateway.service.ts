@@ -20,21 +20,7 @@ import accepts from 'accepts';
 import send from 'send';
 import path from 'path';
 import mime from 'mime';
-
-function getHeaderValue(
-  header: string | string[] | undefined
-): string | undefined {
-  return Array.isArray(header) ? header[0] : header;
-}
-
-function getRequestIp(req: IncomingMessage): string | undefined {
-  const forwardedFor = getHeaderValue(req.headers['x-forwarded-for'])
-    ?.split(',')[0]
-    ?.trim();
-  const realIp = getHeaderValue(req.headers['x-real-ip'])?.trim();
-
-  return forwardedFor || realIp || req.socket.remoteAddress;
-}
+import { getRequestIp } from '../../lib/requestIp';
 
 export default class ApiService extends TcService {
   authWhitelist = [];
