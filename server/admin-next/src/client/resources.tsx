@@ -16,7 +16,13 @@ import {
 } from '@arco-design/web-react';
 import filesize from 'filesize';
 import { api, callAction, listResource } from './api';
-import { downloadCSV, getValue, toCSV, type RouteId } from './core';
+import {
+  downloadCSV,
+  getValue,
+  parseUrlStr,
+  toCSV,
+  type RouteId,
+} from './core';
 import {
   Button,
   Card,
@@ -324,7 +330,7 @@ function formatValue(
     return (
       <Image
         className="table-image"
-        src={String(value)}
+        src={parseUrlStr(String(value))}
         alt=""
         width={56}
         height={56}

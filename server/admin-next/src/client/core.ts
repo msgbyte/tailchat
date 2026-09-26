@@ -28,6 +28,16 @@ export function normalizeRoute(pathname: string): RouteId {
   return ROUTES.includes(route as RouteId) ? (route as RouteId) : 'dashboard';
 }
 
+export function parseUrlStr(originUrl: string): string {
+  const backend =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:11000'
+      : window.location.origin;
+  return originUrl
+    .replace('{BACKEND}', backend)
+    .replace('%7BBACKEND%7D', backend);
+}
+
 export function readAuth(
   raw: string | null,
   now = Date.now()

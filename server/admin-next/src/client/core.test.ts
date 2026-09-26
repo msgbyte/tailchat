@@ -4,6 +4,7 @@ import {
   buildResourceQuery,
   getValue,
   normalizeRoute,
+  parseUrlStr,
   readAuth,
   requestHeaders,
   toCSV,
@@ -14,6 +15,42 @@ import { translations } from './i18n';
 test('normalizes admin-next routes', () => {
   assert.equal(normalizeRoute('/admin-next/users/'), 'users');
   assert.equal(normalizeRoute('/admin-next/not-real'), 'dashboard');
+});
+
+test('resolves backend image URLs for production and development', () => {
+  const previousWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  const previousEnv = process.env.NODE_ENV;
+  Object.defineProperty(globalThis, 'window', {
+    configurable: true,
+    value: { location: { origin: 'https://chat.example.com' } },
+  });
+  try {
+    for (const [mode, backend] of [
+      ['production', 'https://chat.example.com'],
+      ['development', 'http://localhost:11000'],
+    ]) {
+      process.env.NODE_ENV = mode;
+      for (const placeholder of ['{BACKEND}', '%7BBACKEND%7D']) {
+        assert.equal(
+          parseUrlStr(`${placeholder}/static/files/avatar.jpg`),
+          `${backend}/static/files/avatar.jpg`
+        );
+      }
+      for (const url of [
+        '',
+        '/images/avatar.jpg',
+        'https://cdn.example.com/a.jpg',
+      ]) {
+        assert.equal(parseUrlStr(url), url);
+      }
+    }
+  } finally {
+    if (previousWindow)
+      Object.defineProperty(globalThis, 'window', previousWindow);
+    else delete globalThis.window;
+    if (previousEnv === undefined) delete process.env.NODE_ENV;
+    else process.env.NODE_ENV = previousEnv;
+  }
 });
 
 test('accepts only unexpired auth sessions', () => {

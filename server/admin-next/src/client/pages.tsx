@@ -26,7 +26,7 @@ import {
   PageHeader,
   useToast,
 } from './components';
-import { validateNotification, type RouteId } from './core';
+import { parseUrlStr, validateNotification, type RouteId } from './core';
 import { Icon } from './icons';
 import { useI18n } from './i18n';
 import { UserPicker } from './resources';
@@ -801,7 +801,7 @@ export function SystemPage() {
             <span>{t('system.serverEntryImage')}</span>
             {config?.serverEntryImage ? (
               <div className="entry-image">
-                <img src={config.serverEntryImage} alt="" />
+                <img src={parseUrlStr(config.serverEntryImage)} alt="" />
                 <Button
                   icon="trash"
                   variant="danger"
