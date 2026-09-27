@@ -47,6 +47,8 @@ Tailchat is develop with `nodejs`, please install nodejs by yourself, here is no
 
 Suggestion to use `nodejs18.x`, and not support `nodejs20` yet because nodejs has some break change.
 
+The Vercel nightly workflows use Node.js 24 for the frontend build by setting `engines.node` in the deployment copy of `package.json`. Local development, CI tests, and the Docker runtime continue to use Node.js 18.
+
 ## Start the development server
 
 ```bash

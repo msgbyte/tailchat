@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: Set Vercel Node.js version
+        run: npm pkg set engines.node=24.x
       - name: Deploy Prod
         uses: amondnet/vercel-action@master
         env:

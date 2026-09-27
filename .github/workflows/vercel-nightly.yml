@@ -18,6 +18,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Inject Analytics
         run: node ./client/web/build/inject-analytics.js
+      - name: Set Vercel Node.js version
+        run: npm pkg set engines.node=24.x
       - name: Deploy Prod
         uses: amondnet/vercel-action@master
         env:

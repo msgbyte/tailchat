@@ -47,6 +47,8 @@ Tailchat 是使用 `nodejs` 进行开发的，请自行安装nodejs, 这里是no
 
 建议使用 `nodejs18.x` 因为目前还不支持 `nodejs20.x`(nodejs 20 有一些break change)
 
+Vercel nightly 工作流通过修改部署副本中 `package.json` 的 `engines.node`，使用 Node.js 24 构建前端。本地开发、CI 测试和 Docker 运行环境继续使用 Node.js 18。
+
 ## 启动开发服务器
 
 ```bash
