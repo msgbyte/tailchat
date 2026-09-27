@@ -60,3 +60,16 @@ Write a compilation script in `package.json`
 ## backend plugin development environment
 
 TODO
+
+### HTTP authentication for service actions
+
+Actions registered with `TcService.registerAction` require authentication over HTTP by default, unless the route is in the auth whitelist. For an action that allows anonymous reads but also needs the caller's identity when logged in, declare `optionalAuth: true`:
+
+```ts
+this.registerAction('getPublicInfo', this.getPublicInfo, {
+  optionalAuth: true,
+  params: { id: 'string' },
+});
+```
+
+With this option, a request without `x-token` is anonymous. A valid token populates `ctx.meta.userId`; an invalid token returns HTTP 401. The policy follows the action, including its HTTP aliases, and takes precedence over the auth whitelist. No whitelist registration is needed. Services must still filter private fields based on the authenticated identity. Socket authentication and action visibility remain unchanged.

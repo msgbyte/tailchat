@@ -144,6 +144,10 @@ const state = getGlobalState();
 
 Get user information, cached version
 
+The `email` field is optional. User profile queries (`user.getUserInfo`,
+`user.getUserInfoList`, and `user.searchUserWithUniqueName`) include it only for
+the authenticated user's own profile. Anonymous queries omit email entirely.
+
 ```typescript
 const info = getCachedUserInfo(userId);
 ```

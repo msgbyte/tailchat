@@ -64,6 +64,8 @@ type ServiceActionSchema = Pick<
     ValidationRuleObject | ValidationRuleObject[] | ShortValidationRule
   >;
   disableSocket?: boolean;
+  /** Allow anonymous HTTP access; validate x-token when supplied. */
+  optionalAuth?: boolean;
 };
 
 /**

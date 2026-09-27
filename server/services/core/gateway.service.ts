@@ -365,13 +365,16 @@ export default class ApiService extends TcService {
   async authorize(
     ctx: PureContext<{}, any>,
     route: unknown,
-    req: IncomingMessage
+    req: IncomingMessage & { $action?: { optionalAuth?: boolean } }
   ) {
-    if (checkPathMatch(this.getAuthWhitelist(), req.url)) {
+    const token = req.headers['x-token'];
+    if (req.$action?.optionalAuth === true) {
+      if (token === undefined) {
+        return null;
+      }
+    } else if (checkPathMatch(this.getAuthWhitelist(), req.url)) {
       return null;
     }
-
-    const token = req.headers['x-token'] as string;
 
     if (typeof token !== 'string') {
       throw new ApiGatewayErrors.UnAuthorizedError(

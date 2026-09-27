@@ -17,6 +17,7 @@ import { isObjectId } from '../utils/string-helper';
 export type { UserBaseInfo };
 
 export interface UserLoginInfo extends UserBaseInfo {
+  email: string;
   token: string;
   createdAt: string;
 }

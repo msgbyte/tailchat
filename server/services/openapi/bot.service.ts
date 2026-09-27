@@ -1,4 +1,5 @@
-import { TcService, config, TcContext, call } from 'tailchat-server-sdk';
+import { TcService, config, TcContext } from 'tailchat-server-sdk';
+import type { UserStruct } from 'tailchat-server-sdk';
 import { isValidStr, isValidUrl } from '../../lib/utils';
 import type { OpenApp } from '../../models/openapi/app';
 import got from 'got';
@@ -15,7 +16,10 @@ class OpenBotService extends TcService {
     }
 
     this.registerEventListener('chat.inbox.append', async (payload, ctx) => {
-      const userInfo = await call(ctx).getUserInfo(String(payload.userId));
+      const userInfo = await ctx.call<UserStruct, { userId: string }>(
+        'user.getUserInfoInternal',
+        { userId: String(payload.userId) }
+      );
 
       if (!userInfo) {
         return;

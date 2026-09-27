@@ -144,6 +144,10 @@ const state = getGlobalState();
 
 获取用户信息, 缓存版本
 
+`email` 为可选字段。用户资料查询（`user.getUserInfo`、`user.getUserInfoList`
+和 `user.searchUserWithUniqueName`）仅在查询当前登录用户本人时返回邮箱。
+匿名查询不会返回 `email` 字段。
+
 ```typescript
 const info = getCachedUserInfo(userId);
 ```

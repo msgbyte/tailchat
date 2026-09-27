@@ -12,9 +12,9 @@ export interface UserBaseInfo {
 
   /**
    * E-mail cannot be modified
-   * required
+   * Only included when the authenticated user queries their own profile.
    */
-  email: string;
+  email?: string;
   /**
    * display name that can be modified
    */
@@ -42,5 +42,6 @@ export interface UserInfoWithPassword extends UserBaseInfo {
 }
 
 export interface UserInfoWithToken extends UserBaseInfo {
+  email: string;
   token: string;
 }

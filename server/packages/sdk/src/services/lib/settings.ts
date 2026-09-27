@@ -96,8 +96,6 @@ export const builtinAuthWhitelist = [
   '/user/register',
   '/user/createTemporaryUser',
   '/user/resolveToken',
-  '/user/getUserInfo',
-  '/user/getUserInfoList',
   '/user/checkTokenValid',
   '/group/getGroupBasicInfo',
   '/group/invite/findInviteByCode',

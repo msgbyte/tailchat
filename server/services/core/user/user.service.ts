@@ -53,7 +53,7 @@ class UserService extends TcService {
     this.registerLocalDb(require('../../../models/user/user').default);
     this.registerMixin(TcCacheCleaner(['cache.clean.user']));
 
-    // Public fields
+    // Serialized fields; public profile queries filter email by viewer below.
     this.registerDbField([
       '_id',
       'username',
@@ -184,6 +184,13 @@ class UserService extends TcService {
       }
     );
     this.registerAction('getUserInfo', this.getUserInfo, {
+      optionalAuth: true,
+      params: {
+        userId: 'string',
+      },
+    });
+    this.registerAction('getUserInfoInternal', this.getUserInfoInternal, {
+      visibility: 'public',
       params: {
         userId: 'string',
       },
@@ -193,6 +200,7 @@ class UserService extends TcService {
       },
     });
     this.registerAction('getUserInfoList', this.getUserInfoList, {
+      optionalAuth: true,
       params: {
         userIds: {
           type: 'array',
@@ -566,7 +574,10 @@ class UserService extends TcService {
   ): Promise<string> {
     const userId = ctx.params.userId;
 
-    const userInfo = await call(ctx).getUserInfo(userId);
+    const userInfo = await ctx.call<UserStruct, { userId: string }>(
+      'user.getUserInfoInternal',
+      { userId }
+    );
     const token = this.generateJWT({
       _id: userInfo._id,
       nickname: userInfo.nickname,
@@ -897,13 +908,36 @@ class UserService extends TcService {
     });
     const user = await this.transformDocuments(ctx, {}, doc);
 
-    return user;
+    return this.filterUserEmail(user, ctx.meta.userId);
   }
 
   /**
    * 获取用户信息
    */
-  async getUserInfo(ctx: PureContext<{ userId: string }>) {
+  async getUserInfo(
+    ctx: TcPureContext<{ userId: string }, { userId?: string }>
+  ) {
+    const user = await ctx.call<UserStruct, { userId: string }>(
+      'user.getUserInfoInternal',
+      { userId: ctx.params.userId }
+    );
+
+    // Filter after reading the shared cache, never cache a viewer-specific result.
+    return this.filterUserEmail(user, ctx.meta.userId);
+  }
+
+  private filterUserEmail(user: UserStruct | null, viewerId?: string) {
+    if (!user || String(user._id) === viewerId) {
+      return user;
+    }
+
+    return _.omit(user, 'email');
+  }
+
+  /**
+   * 仅服务内部使用的完整用户资料
+   */
+  async getUserInfoInternal(ctx: PureContext<{ userId: string }>) {
     const userId = ctx.params.userId;
 
     const doc = await this.adapter.findById(userId);
@@ -1224,7 +1258,7 @@ class UserService extends TcService {
     const { token, userId } = ctx.meta;
     await Promise.all([
       this.cleanActionCache('resolveToken', [token]),
-      this.cleanActionCache('getUserInfo', [userId]),
+      this.cleanActionCache('getUserInfoInternal', [userId]),
     ]);
   }
 
@@ -1232,7 +1266,7 @@ class UserService extends TcService {
    * 根据用户ID清理缓存信息
    */
   private async cleanUserInfoCache(userId: string) {
-    await this.cleanActionCache('getUserInfo', [String(userId)]);
+    await this.cleanActionCache('getUserInfoInternal', [String(userId)]);
   }
 
   /**

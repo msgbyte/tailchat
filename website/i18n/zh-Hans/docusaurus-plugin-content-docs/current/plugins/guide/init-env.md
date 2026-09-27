@@ -60,3 +60,16 @@ module.exports = {
 ## 后端插件开发环境
 
 TODO
+
+### 服务 Action 的 HTTP 认证
+
+通过 `TcService.registerAction` 注册的 action 默认要求 HTTP 请求通过认证，鉴权白名单内的路由除外。如果某个 action 允许匿名读取，同时需要识别已登录的调用者，可以声明 `optionalAuth: true`：
+
+```ts
+this.registerAction('getPublicInfo', this.getPublicInfo, {
+  optionalAuth: true,
+  params: { id: 'string' },
+});
+```
+
+启用后，不带 `x-token` 的请求按匿名处理；有效 token 会填充 `ctx.meta.userId`；无效 token 返回 HTTP 401。此配置跟随 action 生效，包括它的 HTTP 路由别名，并且优先于鉴权白名单，无需再注册白名单。服务仍须根据认证身份过滤私有字段。Socket 认证和 action 可见性保持不变。
