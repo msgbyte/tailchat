@@ -1,5 +1,13 @@
 
 
+## [1.11.16](https://github.com/msgbyte/tailchat/compare/v1.11.15...v1.11.16) (2026-09-27)
+
+
+### Bug Fixes
+
+* **user:** isolate cached profiles by viewer ([b35f99c](https://github.com/msgbyte/tailchat/commit/b35f99c16acf2d1aee93ea3a53d48dd1db8012b4))
+* **user:** restrict profile emails to their owner ([9c8d675](https://github.com/msgbyte/tailchat/commit/9c8d6757a54ad2e008ebe06771e59f704eab2c2d))
+
 ## [1.11.15](https://github.com/msgbyte/tailchat/compare/v1.11.14...v1.11.15) (2026-09-26)
 
 
