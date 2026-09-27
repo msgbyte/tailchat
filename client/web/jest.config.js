@@ -40,6 +40,8 @@ const esModules = [
   'ccount',
   'hast-util-raw',
   'rehype-raw',
+  'rehype-sanitize',
+  'hast-util-sanitize',
   'hast-util-from-parse5',
   'hast-util-to-parse5',
   'hastscript',
