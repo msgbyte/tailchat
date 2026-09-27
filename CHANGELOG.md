@@ -1,5 +1,13 @@
 
 
+## [1.11.17](https://github.com/msgbyte/tailchat/compare/v1.11.16...v1.11.17) (2026-09-27)
+
+
+### Bug Fixes
+
+* **docker:** build minio client from pinned source ([4d54a6e](https://github.com/msgbyte/tailchat/commit/4d54a6e0af2506e4f28d2109087e2330e10ce958))
+* **test:** transform sanitizer esm dependencies ([246716e](https://github.com/msgbyte/tailchat/commit/246716e80f6b8a04144aca4b93c26c981cc67964))
+
 ## [1.11.16](https://github.com/msgbyte/tailchat/compare/v1.11.15...v1.11.16) (2026-09-27)
 
 
