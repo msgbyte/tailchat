@@ -35,7 +35,13 @@ ENV VERSION=$VERSION
 RUN pnpm build
 
 #
-# Stage 2: runtime image, server side workspace only (no client toolchain, no source)
+# Stage 2: build mc from a pinned source release; public MinIO images are unavailable
+#
+FROM golang:1.26.8-alpine AS minio-client
+RUN CGO_ENABLED=0 GOBIN=/out go install github.com/minio/mc@RELEASE.2025-08-13T08-35-41Z
+
+#
+# Stage 3: runtime image, server side workspace only (no client toolchain, no source)
 #
 FROM node:18.18.0-alpine
 
@@ -46,8 +52,8 @@ WORKDIR /app/tailchat
 RUN npm install -g pnpm@8.15.8 && npm cache clean --force
 RUN npm install -g tailchat-cli@latest && npm cache clean --force
 
-# Add mc for minio (dl.min.io binaries were removed; copy from the multi-arch quay.io image)
-COPY --from=quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z /usr/bin/mc /usr/local/bin/mc
+# Add mc for minio
+COPY --from=minio-client /out/mc /usr/local/bin/mc
 
 # Install server / sdk / plugins / admin dependencies
 COPY ./tsconfig.json ./tsconfig.json

@@ -88,6 +88,8 @@ git clone https://github.com/msgbyte/tailchat.git # Clone the project to local
 cd tailchat && docker compose build
 ```
 
+The Docker build compiles the MinIO client (`mc`) from a pinned source release in a separate Go stage for both amd64 and arm64. It requires access to the Go module proxy and checksum database; Go does not need to be installed on the host.
+
 *Compilation has certain requirements on server configuration, 2-core 4G compilation takes about 10 minutes, for reference*
 
 After the compilation is complete, you can view the compiled image through `docker images`.

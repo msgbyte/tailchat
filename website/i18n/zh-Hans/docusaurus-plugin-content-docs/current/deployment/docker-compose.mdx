@@ -88,6 +88,8 @@ git clone https://github.com/msgbyte/tailchat.git # 克隆项目到本地
 cd tailchat && docker compose build
 ```
 
+Docker 构建会在独立的 Go 阶段中，从固定版本的源码编译 MinIO 客户端（`mc`），支持 amd64 和 arm64。构建需要访问 Go 模块代理和校验数据库，无需在宿主机安装 Go。
+
 *编译对服务器配置有一定要求，2核4G编译约10分钟，供参考*
 
 编译完毕后可以通过 `docker images` 查看编译完毕的镜像。
