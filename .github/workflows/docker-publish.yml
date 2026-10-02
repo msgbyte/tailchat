@@ -45,7 +45,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: VERSION=docker-${{ steps.meta.outputs.tags }}
+          build-args: VERSION=${{ github.ref_name }}
       - name: Notify to Service
         continue-on-error: true
         uses: muinmomin/webhook-action@v1.0.0
