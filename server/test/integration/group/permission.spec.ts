@@ -146,6 +146,82 @@ describe('Test "group" service permission boundary', () => {
     ).rejects.toMatchObject({ type: 'VALIDATION_ERROR' });
   });
 
+  describe('"group.updateGroupField" panels', () => {
+    /**
+     * 创建一个带有两个文字面板的群组
+     */
+    async function createTestGroupWithPanels() {
+      const ownerId = new Types.ObjectId();
+      const panelIds = [
+        String(new Types.ObjectId()),
+        String(new Types.ObjectId()),
+      ];
+      const group = await insertTestData({
+        name: 'test',
+        owner: ownerId,
+        members: [{ roles: [], userId: ownerId }],
+        panels: panelIds.map((id) => ({ id, name: id, type: 0 })),
+      });
+
+      return {
+        groupId: String(group._id),
+        ownerId: String(ownerId),
+        panelIds,
+      };
+    }
+
+    async function getPanelIds(groupId: string) {
+      const group = await service.adapter.model.findById(groupId).lean().exec();
+
+      return group.panels.map((p) => p.id);
+    }
+
+    test('rejects panel id which not belong to this group', async () => {
+      const { groupId, ownerId, panelIds } = await createTestGroupWithPanels();
+      operatorPermissions = [PERMISSION.core.owner];
+
+      await expect(
+        broker.call(
+          'group.updateGroupField',
+          {
+            groupId,
+            fieldName: 'panels',
+            fieldValue: [
+              { id: panelIds[0], name: 'a', type: 0 },
+              { id: String(new Types.ObjectId()), name: 'foreign', type: 0 }, // 其他群组的面板id
+            ],
+          },
+          { meta: { userId: ownerId } }
+        )
+      ).rejects.toThrow();
+
+      expect(await getPanelIds(groupId)).toEqual(panelIds);
+    });
+
+    test('still allows reorder and rename of existing panels', async () => {
+      const { groupId, ownerId, panelIds } = await createTestGroupWithPanels();
+      operatorPermissions = [PERMISSION.core.managePanel];
+
+      await broker.call(
+        'group.updateGroupField',
+        {
+          groupId,
+          fieldName: 'panels',
+          fieldValue: [
+            { id: panelIds[1], name: 'renamed', type: 0 },
+            { id: panelIds[0], name: 'a', type: 0, parentId: panelIds[1] },
+          ],
+        },
+        { meta: { userId: ownerId } }
+      );
+
+      const group = await service.adapter.model.findById(groupId).lean().exec();
+      expect(group.panels.map((p) => p.id)).toEqual([panelIds[1], panelIds[0]]);
+      expect(group.panels[0].name).toBe('renamed');
+      expect(group.panels[1].parentId).toBe(panelIds[1]);
+    });
+  });
+
   describe('permission cache invalidation', () => {
     beforeEach(() => {
       operatorPermissions = [PERMISSION.core.owner];

@@ -496,6 +496,17 @@ class GroupService extends TcService {
 
     const group = await this.adapter.model.findById(groupId).exec();
 
+    if (fieldName === 'panels') {
+      // 面板id同时是会话id与socket房间号, 这里只允许调整已有面板, 新面板必须由 createGroupPanel 生成id
+      const panelIds = new Set(group.panels.map((p) => String(p.id)));
+      if (
+        !Array.isArray(fieldValue) ||
+        fieldValue.some((p) => !panelIds.has(p?.id))
+      ) {
+        throw new EntityError(t('没有找到该面板'));
+      }
+    }
+
     group[fieldName] = fieldValue;
     await group.save();
 
