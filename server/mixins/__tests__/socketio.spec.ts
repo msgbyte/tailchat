@@ -106,4 +106,13 @@ describe('Testing "socketio.mixin"', () => {
       message: "Service 'test.publicAction' is not found.",
     });
   });
+
+  test('socketio should not call moleculer internal action', async () => {
+    const res = await createAndEmitMessage('$node.options');
+
+    expect(res).toEqual({
+      result: false,
+      message: 'Not allowed request',
+    });
+  });
 });
