@@ -1,5 +1,20 @@
 
 
+## [1.11.18](https://github.com/msgbyte/tailchat/compare/v1.11.17...v1.11.18) (2026-10-02)
+
+
+### Bug Fixes
+
+* **gateway:** block moleculer internal actions from api and socket ([d8dece9](https://github.com/msgbyte/tailchat/commit/d8dece9bd8680231fb1a64ce6a2dfef9646508d4))
+* **group:** harden permission checks and warn on default secret ([817fe5a](https://github.com/msgbyte/tailchat/commit/817fe5a7d23869beff2099c472b7009f454c1ad6))
+* **group:** reject unknown panel ids when updating group panels ([8ba18c7](https://github.com/msgbyte/tailchat/commit/8ba18c7dc269a9764465fe4f79495432e7e79260))
+* **user:** only allow claiming own temporary account ([235223a](https://github.com/msgbyte/tailchat/commit/235223ae1d039a782dec6126a1956cc6c5f04742))
+
+
+### Features
+
+* **audit:** record admin and group management actions ([b54327a](https://github.com/msgbyte/tailchat/commit/b54327a48b0f16fc23653eb9f13976bcba3ae03f))
+
 ## [1.11.17](https://github.com/msgbyte/tailchat/compare/v1.11.16...v1.11.17) (2026-09-27)
 
 
