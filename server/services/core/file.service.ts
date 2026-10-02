@@ -12,6 +12,7 @@ import _ from 'lodash';
 import mime from 'mime';
 import type { BucketItemStat, Client as MinioClient } from 'minio';
 import { isValidStaticAssetsUrl, isValidStr } from '../../lib/utils';
+import { safeGotOptions } from '../../lib/safeRequest';
 import path from 'node:path';
 import type { FileDocument, FileModel } from '../../models/file';
 import { Types } from 'mongoose';
@@ -180,7 +181,7 @@ class FileService extends TcService {
     }
 
     return new Promise(async (resolve, reject) => {
-      const req = got.stream(fileUrl);
+      const req = got.stream(fileUrl, safeGotOptions); // 地址来自用户输入, 不允许请求内网
       const stream = Readable.from(req);
       stream.on('error', (err: Error) => {
         // 这里是文件传输错误处理
