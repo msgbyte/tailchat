@@ -20,6 +20,7 @@ import {
 import type { Group } from '../../../models/group/group';
 import { isValidStr } from '../../../lib/utils';
 import _ from 'lodash';
+import { auditLogMixin, setAuditDetail } from '../../../lib/auditLog';
 import RedisSlowModeCounter, { SlowModeRedisClient } from './slowModeCounter';
 
 interface MessageService
@@ -54,6 +55,7 @@ class MessageService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../../../models/chat/message').default);
+    this.registerMixin(auditLogMixin(['deleteMessage']));
 
     this.registerAction('fetchConverseMessage', this.fetchConverseMessage, {
       params: {
@@ -584,6 +586,12 @@ class MessageService extends TcService {
     }
 
     await this.adapter.removeById(messageId); // TODO: 考虑是否要改为软删除
+    setAuditDetail(ctx, {
+      groupId: groupId ? String(groupId) : undefined,
+      converseId,
+      author: String(message.author),
+      content: message.content,
+    });
 
     this.roomcastNotify(ctx, converseId, 'delete', { converseId, messageId });
     ctx.emit('chat.message.updateMessage', {

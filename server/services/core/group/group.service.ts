@@ -27,6 +27,7 @@ import {
   isGroupPanelSlowMode,
 } from 'tailchat-server-sdk';
 import moment from 'moment';
+import { auditLogMixin, setAuditDetail } from '../../../lib/auditLog';
 
 interface GroupService
   extends TcService,
@@ -38,6 +39,26 @@ class GroupService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../../../models/group/group').default);
+    this.registerMixin(
+      auditLogMixin([
+        'updateGroupField',
+        'updateGroupConfig',
+        'addMember',
+        'joinGroup',
+        'quitGroup',
+        'appendGroupMemberRoles',
+        'removeGroupMemberRoles',
+        'createGroupPanel',
+        'modifyGroupPanel',
+        'deleteGroupPanel',
+        'createGroupRole',
+        'deleteGroupRole',
+        'updateGroupRoleName',
+        'updateGroupRolePermission',
+        'muteGroupMember',
+        'deleteGroupMember',
+      ])
+    );
 
     this.registerAction('createGroup', this.createGroup, {
       params: {
@@ -634,6 +655,7 @@ class GroupService extends TcService {
     if (String(group.owner) === userId) {
       // 是群组所有人
       await this.adapter.removeById(groupId); // TODO: 后续可以考虑改为软删除
+      setAuditDetail(ctx, { dissolved: true, name: group.name });
       await this.cleanGroupAllUserPermissionCache(groupId);
       await this.roomcastNotify(ctx, groupId, 'remove', { groupId });
       await ctx.call('gateway.leaveRoom', {

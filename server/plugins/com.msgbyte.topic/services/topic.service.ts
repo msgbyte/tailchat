@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { TcService, TcDbService, TcContext, call } from 'tailchat-server-sdk';
 import type { GroupTopicDocument, GroupTopicModel } from '../models/topic';
+import { auditLogMixin } from '../../../lib/auditLog';
 
 /**
  * 群组话题
@@ -15,6 +16,7 @@ class GroupTopicService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../models/topic').default);
+    this.registerMixin(auditLogMixin(['delete']));
 
     this.registerAction('list', this.list, {
       params: {

@@ -14,6 +14,7 @@ import {
   PERMISSION,
   db,
 } from 'tailchat-server-sdk';
+import { auditLogMixin } from '../../../lib/auditLog';
 
 interface GroupService
   extends TcService,
@@ -25,6 +26,9 @@ class GroupService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../../../models/group/invite').default);
+    this.registerMixin(
+      auditLogMixin(['createGroupInvite', 'editGroupInvite', 'deleteInvite'])
+    );
 
     this.registerAction('createGroupInvite', this.createGroupInvite, {
       params: {

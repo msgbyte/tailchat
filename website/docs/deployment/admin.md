@@ -34,6 +34,14 @@ https://tailchat.example.com/admin/
 
 *Note: don't forget to have a `/` at the end*
 
+## Audit logs
+
+The admin platform keeps an audit trail in the `audit_logs` collection. It can be searched from the **Audit logs** page and contains:
+
+- every admin login attempt and every write request made through the admin platform, with the admin account, request path, request body, result, IP and User-Agent;
+- group management actions made in Tailchat itself, such as role, member, panel, invite and group setting changes and messages deleted by moderators, with the operator's user id, the group id and the action parameters.
+
+Audit records are append-only: they cannot be edited or deleted from the admin platform. Sensitive fields such as passwords and tokens are redacted before being stored. Records are kept until you remove them from MongoDB yourself.
 
 <details>
   <summary>About the deprecated legacy admin</summary>

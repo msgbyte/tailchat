@@ -2,6 +2,17 @@ import jwt from 'jsonwebtoken';
 import type { DocumentType } from '@typegoose/typegoose';
 import { config, TcService, TcBroker } from 'tailchat-server-sdk';
 import type { BrokerOptions } from 'tailchat-server-sdk';
+import type { Types } from 'mongoose';
+import auditLogModel from '../models/auditLog';
+
+// 记录测试过程中写入的审计日志, 测试结束后清理
+const auditLogIds: Types.ObjectId[] = [];
+const createAuditLog = auditLogModel.create.bind(auditLogModel);
+jest.spyOn(auditLogModel, 'create').mockImplementation((async (doc: any) => {
+  const log = await createAuditLog(doc);
+  auditLogIds.push(log._id);
+  return log;
+}) as any);
 
 interface TestServiceBrokerOptions {
   brokerOptions?: BrokerOptions;
@@ -60,6 +71,9 @@ export function createTestServiceBroker<T extends TcService = TcService>(
       .catch((err) => {
         console.error('测试数据清理失败:', err);
       });
+    if (auditLogIds.length > 0) {
+      await auditLogModel.deleteMany({ _id: { $in: auditLogIds } });
+    }
 
     await broker.stop();
   });

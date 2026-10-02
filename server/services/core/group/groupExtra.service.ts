@@ -12,6 +12,7 @@ import {
   t,
   NoPermissionError,
 } from 'tailchat-server-sdk';
+import { auditLogMixin } from '../../../lib/auditLog';
 
 interface GroupExtraService
   extends TcService,
@@ -23,6 +24,7 @@ class GroupExtraService extends TcService {
 
   onInit(): void {
     this.registerLocalDb(require('../../../models/group/group-extra').default);
+    this.registerMixin(auditLogMixin(['saveGroupData', 'savePanelData']));
 
     this.registerAction('getGroupData', this.getGroupData, {
       params: {

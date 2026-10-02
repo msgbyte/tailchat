@@ -329,6 +329,7 @@ const sections: { label: string; routes: { id: RouteId; icon: IconName }[] }[] =
       routes: [
         { id: 'system-notify', icon: 'notify' },
         { id: 'system', icon: 'settings' },
+        { id: 'audit-logs', icon: 'eye' },
       ],
     },
   ];

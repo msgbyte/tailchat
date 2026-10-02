@@ -37,6 +37,21 @@ export const zhTranslation = {
         createdAt: '登录时间',
       },
     },
+    audit_logs: {
+      name: '审计日志',
+      fields: {
+        id: '日志ID',
+        source: '来源',
+        action: '操作',
+        operator: '操作人',
+        groupId: '群组ID',
+        success: '是否成功',
+        detail: '操作参数',
+        ip: 'IP',
+        userAgent: 'User-Agent',
+        createdAt: '操作时间',
+      },
+    },
     messages: {
       name: '消息管理',
       fields: {

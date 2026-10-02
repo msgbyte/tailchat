@@ -161,6 +161,28 @@ const schemas: Record<string, ResourceSchema> = {
       createdAt,
     ],
   },
+  'audit-logs': {
+    route: 'audit-logs',
+    resource: 'audit_logs',
+    export: true,
+    fields: [
+      id(true),
+      { key: 'source', label: L('来源', 'Source') },
+      { key: 'action', label: L('操作', 'Action'), wide: true },
+      { key: 'operator', label: L('操作人', 'Operator') },
+      { key: 'groupId', label: L('群组 ID', 'Group ID') },
+      { key: 'success', label: L('成功', 'Succeeded'), type: 'boolean' },
+      {
+        key: 'detail',
+        label: L('操作参数', 'Detail'),
+        type: 'json',
+        wide: true,
+      },
+      { key: 'ip', label: L('IP 地址', 'IP address') },
+      { key: 'userAgent', label: L('设备信息', 'User agent'), wide: true },
+      createdAt,
+    ],
+  },
   messages: {
     route: 'messages',
     resource: 'messages',

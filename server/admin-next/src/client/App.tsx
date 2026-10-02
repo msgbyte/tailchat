@@ -16,6 +16,7 @@ const resourceRoutes = new Set<RouteId>([
   'files',
   'mail',
   'discover',
+  'audit-logs',
 ]);
 
 export default function App() {

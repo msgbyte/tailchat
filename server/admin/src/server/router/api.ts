@@ -1,13 +1,19 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import { broker, callBrokerAction } from '../broker';
-import { adminAuth, auth, authSecret } from '../middleware/auth';
+import {
+  adminAuth,
+  auth,
+  authSecret,
+  recordAdminAudit,
+} from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
 import { fileRouter } from './file';
 import dayjs from 'dayjs';
 import userModel from '../../../../models/user/user';
 import userLoginLogModel from '../../../../models/user/userLoginLog';
+import auditLogModel from '../../../../models/auditLog';
 import messageModel from '../../../../models/chat/message';
 import fileModel from '../../../../models/file';
 import groupModel from '../../../../models/group/group';
@@ -48,8 +54,10 @@ router.post('/login', (req, res) => {
       token: token,
       expiredAt: new Date().valueOf() + 2 * 60 * 60 * 1000,
     });
+    recordAdminAudit(req, username, true);
   } else {
     res.status(401).end('username or password incorrect');
+    recordAdminAudit(req, username, false);
   }
 });
 
@@ -186,6 +194,19 @@ router.use(
   raExpressMongoose(userLoginLogModel, {
     q: ['ip', 'userAgent'],
     allowedRegexFields: ['ip', 'userAgent'],
+    capabilities: {
+      create: false,
+      update: false,
+      delete: false,
+    },
+  })
+);
+router.use(
+  '/audit_logs',
+  auth(),
+  raExpressMongoose(auditLogModel, {
+    q: ['action', 'operator', 'groupId', 'ip'],
+    allowedRegexFields: ['action', 'operator', 'ip'],
     capabilities: {
       create: false,
       update: false,

@@ -24,6 +24,7 @@ import {
 import { authHTTPClient, authProvider } from './auth';
 import { Dashboard } from './components/Dashboard';
 import {
+  auditLogFields,
   discoverFields,
   mailFields,
   messageFields,
@@ -70,6 +71,27 @@ function App() {
               }),
             ]}
             fields={userLoginLogFields}
+            action={{
+              detail: true,
+              export: true,
+              refresh: true,
+            }}
+            showSizeChanger={true}
+          />
+        }
+      />
+
+      <Resource
+        name="audit_logs"
+        icon={<IconStorage />}
+        list={
+          <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'Search',
+              }),
+            ]}
+            fields={auditLogFields}
             action={{
               detail: true,
               export: true,

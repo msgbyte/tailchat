@@ -147,6 +147,7 @@ test('keeps every route bilingual', () => {
     'cache',
     'system-notify',
     'system',
+    'audit-logs',
   ]) {
     assert.ok(translations.zh[`route.${route}`]);
     assert.ok(translations.en[`route.${route}`]);

@@ -13,6 +13,7 @@ export const ROUTES = [
   'cache',
   'system-notify',
   'system',
+  'audit-logs',
 ] as const;
 
 export type RouteId = (typeof ROUTES)[number];

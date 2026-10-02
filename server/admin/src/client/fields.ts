@@ -129,6 +129,42 @@ export const userLoginLogFields = [
   }),
 ];
 
+export const auditLogFields = [
+  createTextField('id', {
+    list: {
+      sort: true,
+    },
+  }),
+  createTextField('source'),
+  createTextField('action', {
+    list: {
+      width: 280,
+      ellipsis: true,
+    },
+  }),
+  createTextField('operator'),
+  createTextField('groupId'),
+  createBooleanField('success'),
+  createJSONField('detail', {
+    list: {
+      width: 200,
+    },
+  }),
+  createTextField('ip'),
+  createTextField('userAgent', {
+    list: {
+      width: 360,
+      ellipsis: true,
+    },
+  }),
+  createDateTimeField('createdAt', {
+    format: 'iso',
+    list: {
+      sort: true,
+    },
+  }),
+];
+
 export const messageFields = [
   createTextField('id', {
     list: {

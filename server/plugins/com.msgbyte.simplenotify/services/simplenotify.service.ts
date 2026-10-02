@@ -10,6 +10,7 @@ import type {
   SimpleNotifyDocument,
   SimpleNotifyModel,
 } from '../models/simplenotify';
+import { auditLogMixin } from '../../../lib/auditLog';
 
 const PERMISSION_MANAGE = 'plugin.com.msgbyte.simplenotify.subscribe.manage';
 
@@ -28,6 +29,7 @@ class SimpleNotifyService extends TcService {
 
   onInit() {
     this.registerLocalDb(require('../models/simplenotify').default);
+    this.registerMixin(auditLogMixin(['addGroupSubscribe', 'delete']));
 
     this.registerAction('addGroupSubscribe', this.addGroupSubscribe, {
       params: {

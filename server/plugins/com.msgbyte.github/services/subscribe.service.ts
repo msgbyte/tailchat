@@ -8,6 +8,7 @@ import {
 } from 'tailchat-server-sdk';
 import type { WebhookEvent } from '@octokit/webhooks-types';
 import type { SubscribeDocument, SubscribeModel } from '../models/subscribe';
+import { auditLogMixin } from '../../../lib/auditLog';
 
 const PERMISSION_MANAGE = 'plugin.com.msgbyte.github.subscribe.manage';
 
@@ -27,6 +28,7 @@ class GithubSubscribeService extends TcService {
 
   onInit() {
     this.registerLocalDb(require('../models/subscribe').default);
+    this.registerMixin(auditLogMixin(['add', 'delete']));
 
     this.registerAction('add', this.add, {
       params: {
