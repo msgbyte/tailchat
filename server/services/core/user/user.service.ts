@@ -18,6 +18,7 @@ import {
   Errors,
   DataNotFoundError,
   EntityError,
+  NoPermissionError,
   db,
   call,
   BannedError,
@@ -658,7 +659,7 @@ class UserService extends TcService {
    * 认领临时用户
    */
   async claimTemporaryUser(
-    ctx: TcPureContext<{
+    ctx: TcContext<{
       userId: string;
       username?: string;
       email: string;
@@ -668,6 +669,11 @@ class UserService extends TcService {
   ) {
     const params = ctx.params;
     const t = ctx.meta.t;
+
+    if (params.userId !== ctx.meta.userId) {
+      // 只能认领当前登录的临时账号
+      throw new NoPermissionError(t('没有操作权限'));
+    }
 
     const user = await this.adapter.findById(params.userId);
     if (!user) {

@@ -91,11 +91,15 @@ describe('Test "user" service', () => {
     const email = `${generateRandomStr()}@msgbyte.com`;
     const password = '654321';
 
-    const newUser: any = await broker.call('user.claimTemporaryUser', {
-      userId: String(testDoc._id),
-      email,
-      password,
-    });
+    const newUser: any = await broker.call(
+      'user.claimTemporaryUser',
+      {
+        userId: String(testDoc._id),
+        email,
+        password,
+      },
+      { meta: { userId: String(testDoc._id) } }
+    );
 
     expect(newUser).toHaveProperty('nickname', testDoc.nickname); // 昵称不变
     expect(newUser).toHaveProperty('email', email);
@@ -103,6 +107,27 @@ describe('Test "user" service', () => {
     expect(bcrypt.compareSync(password, newUser.password)).toBe(true); // 校验密码修改是否正确
     expect(newUser).toHaveProperty('token');
     expect(newUser).toHaveProperty('temporary', false);
+  });
+
+  test('Test "user.claimTemporaryUser" rejects claiming other temporary user', async () => {
+    const victim = await insertTestData(createTestTemporaryUser());
+    const attacker = await insertTestData(createTestTemporaryUser());
+
+    await expect(
+      broker.call(
+        'user.claimTemporaryUser',
+        {
+          userId: String(victim._id),
+          email: `${generateRandomStr()}@msgbyte.com`,
+          password: '654321',
+        },
+        { meta: { userId: String(attacker._id) } }
+      )
+    ).rejects.toThrow();
+
+    const doc = await service.adapter.model.findById(victim._id);
+    expect(doc.temporary).toBe(true);
+    expect(doc.email).toBe(victim.email);
   });
 
   test('Test "user.searchUserWithUniqueName"', async () => {
