@@ -22,6 +22,12 @@ const requestTimeout = process.env.REQUEST_TIMEOUT
   ? Number(process.env.REQUEST_TIMEOUT)
   : 10 * 1000; // default 0 (unit: milliseconds)
 
+if (!process.env.SECRET && process.env.NODE_ENV === 'production') {
+  console.warn(
+    '[Tailchat] SECRET is not set, falling back to a publicly known default. Anyone can forge user tokens, please set a strong random SECRET.'
+  );
+}
+
 export const config = {
   port,
   secret: process.env.SECRET || 'tailchat',

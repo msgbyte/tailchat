@@ -209,7 +209,8 @@ class GroupService extends TcService {
     });
     this.registerAction('getUserAllPermissions', this.getUserAllPermissions, {
       params: {
-        groupId: 'string',
+        // 缓存按 groupId 原文生成 key, 只接受规范写法以保证清理缓存时能命中
+        groupId: { type: 'string', pattern: /^[0-9a-f]{24}$/ },
         userId: 'string',
       },
       visibility: 'public',
@@ -477,7 +478,7 @@ class GroupService extends TcService {
     group[fieldName] = fieldValue;
     await group.save();
 
-    if (fieldName === 'fallbackPermissions') {
+    if (['roles', 'fallbackPermissions'].includes(fieldName)) {
       await this.cleanGroupAllUserPermissionCache(groupId);
     }
 
@@ -633,6 +634,7 @@ class GroupService extends TcService {
     if (String(group.owner) === userId) {
       // 是群组所有人
       await this.adapter.removeById(groupId); // TODO: 后续可以考虑改为软删除
+      await this.cleanGroupAllUserPermissionCache(groupId);
       await this.roomcastNotify(ctx, groupId, 'remove', { groupId });
       await ctx.call('gateway.leaveRoom', {
         roomIds: [groupId],
@@ -1016,7 +1018,7 @@ class GroupService extends TcService {
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
       userId,
-      [PERMISSION.core.managePanel]
+      [PERMISSION.core.manageRoles]
     );
     if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
@@ -1082,6 +1084,7 @@ class GroupService extends TcService {
       .exec();
 
     this.cleanGroupInfoCache(groupId);
+    await this.cleanGroupAllUserPermissionCache(groupId);
     const json = await this.notifyGroupInfoUpdate(ctx, group);
     return json;
   }
@@ -1102,7 +1105,7 @@ class GroupService extends TcService {
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
       userId,
-      [PERMISSION.core.managePanel]
+      [PERMISSION.core.manageRoles]
     );
     if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
@@ -1135,7 +1138,7 @@ class GroupService extends TcService {
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
       userId,
-      [PERMISSION.core.managePanel]
+      [PERMISSION.core.manageRoles]
     );
     if (!hasPermission) {
       throw new NoPermissionError(t('没有操作权限'));
@@ -1297,6 +1300,7 @@ class GroupService extends TcService {
   ) {
     const groupId = String(group._id);
 
+    await this.cleanGroupUserPermission(groupId, memberId);
     await ctx.call('gateway.leaveRoom', {
       roomIds: [
         groupId,
@@ -1349,7 +1353,7 @@ class GroupService extends TcService {
    * @param userId 用户id
    */
   private cleanGroupUserPermission(groupId: string, userId: string) {
-    this.cleanActionCache('getUserAllPermissions', [groupId, userId]);
+    return this.cleanActionCache('getUserAllPermissions', [groupId, userId]);
   }
 
   /**
@@ -1357,7 +1361,7 @@ class GroupService extends TcService {
    * @param groupId 群组id
    */
   private cleanGroupAllUserPermissionCache(groupId: string) {
-    this.cleanActionCache('getUserAllPermissions', [groupId]);
+    return this.cleanActionCache('getUserAllPermissions', [groupId]);
   }
 }
 

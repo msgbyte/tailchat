@@ -332,10 +332,14 @@ export class Group extends TimeStamps implements Base {
         ...group.fallbackPermissions,
       ]);
     } else {
-      return _.uniq([
-        ..._.flatten(allRolesPermission),
-        ...group.fallbackPermissions,
-      ]);
+      // 群主标识只能来自 group.owner, 不能通过身份组或默认权限授予
+      return _.without(
+        _.uniq([
+          ..._.flatten(allRolesPermission),
+          ...group.fallbackPermissions,
+        ]),
+        PERMISSION.core.owner
+      );
     }
   }
 

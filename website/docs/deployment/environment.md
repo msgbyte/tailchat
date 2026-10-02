@@ -8,7 +8,7 @@ title: Environment Variable
 | Name | Default Value | Description |
 | ----- | ------ | --- |
 | PORT | 11000 | Gateway service port number |
-| SECRET | tailchat | encryption key, used for JWT |
+| SECRET | tailchat | encryption key, used for JWT. **Must be set to a long random string in production**, the default value is public and allows anyone to forge user tokens |
 | STATIC_HOST | "{BACKEND}" | Externally accessible static service host, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS, it needs to be modified |
 | STATIC_URL | "{BACKEND}/static/" | Externally accessible static service complete address prefix, used for file service access, the default is the dynamic server address inferred from the front-end request, if it is expected to be stored in a third-party OSS Modify, if this variable is set, the above `STATIC_HOST` value is invalid |
 | API_URL | http://127.0.0.1:11000 | Externally accessible url address, used for issuer issuance on open platforms or as a fallback for file services |
