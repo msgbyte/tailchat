@@ -1,4 +1,5 @@
 import { getLinkPreview } from 'link-preview-js';
+import { resolvePublicAddress } from '../../../lib/safeRequest';
 
 /**
  * 请求管理
@@ -16,7 +17,12 @@ export async function fetchLinkPreview(url: string): Promise<any> {
     return Promise.resolve(cacheRequestList[url]);
   }
 
-  const promise = getLinkPreview(url);
+  const promise = getLinkPreview(url, {
+    // 域名指向内网时拒绝请求. link-preview-js 默认不跟随重定向
+    // ponytail: 校验与实际请求是两次解析, DNS 重绑定仍可能绕过, 需要彻底杜绝时改为自行用 got + safeGotOptions 抓取后交给 getPreviewFromContent
+    resolveDNSHost: (detectedUrl) =>
+      resolvePublicAddress(new URL(detectedUrl).hostname),
+  });
   cacheRequestList[url] = promise;
 
   return Promise.resolve(promise).finally(() => {
