@@ -75,6 +75,10 @@ Visit the official website to learn more: [https://tailchat.msgbyte.com/](https:
 
 [![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=R8D5TGYVHBNJ&openapp=system-fastdeploy%3FtemplateName%3Dtailchat)
 
+### Deploy on RepoCloud
+
+[![Deploy on RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/Tailchat/)
+
 ## Communication
 
 If you are interested in `Tailchat`, welcome to join `Tailchat`'s seed user exchange group, your feedback can help `Tailchat` grow better
