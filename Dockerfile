@@ -1,7 +1,8 @@
 #
 # Stage 1: build web, server, admin and plugins
 #
-FROM node:18.18.0-alpine AS builder
+# Only JS and static assets leave this stage, so build once without emulation.
+FROM --platform=$BUILDPLATFORM node:18.18.0-alpine AS builder
 
 WORKDIR /app/tailchat
 
@@ -36,8 +37,12 @@ RUN pnpm build
 #
 # Stage 2: build mc from a pinned source release; public MinIO images are unavailable
 #
-FROM golang:1.26.8-alpine AS minio-client
-RUN CGO_ENABLED=0 GOBIN=/out go install github.com/minio/mc@RELEASE.2025-08-13T08-35-41Z
+FROM --platform=$BUILDPLATFORM golang:1.26.8-alpine AS minio-client
+ARG TARGETOS
+ARG TARGETARCH
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go install github.com/minio/mc@RELEASE.2025-08-13T08-35-41Z \
+    && mkdir -p /out \
+    && find /go/bin -type f -name mc -exec cp {} /out/mc \;
 
 #
 # Stage 3: runtime image, server side workspace only (no client toolchain, no source)
