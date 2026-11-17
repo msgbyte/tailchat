@@ -72,6 +72,10 @@ declare module '@capital/common' {
 
   export const useIsMobile: any;
 
+  export const isMobile: any;
+
+  export const getPopupContainer: any;
+
   export const getGlobalState: any;
 
   export const useGlobalSocketEvent: <T>(
@@ -192,6 +196,8 @@ declare module '@capital/common' {
 
   export const isValidStr: (str: any) => str is string;
 
+  export const useGroupInfo: any;
+
   export const useGroupPanelInfo: any;
 
   export const sendMessage: any;
@@ -207,6 +213,8 @@ declare module '@capital/common' {
   export const useWatch: any;
 
   export const parseUrlStr: (originUrl: string) => string;
+
+  export const isSafeUrl: (url: string) => boolean;
 
   export const useUpdateRef: <T>(state: T) => React.MutableRefObject<T>;
 
@@ -490,6 +498,8 @@ declare module '@capital/component' {
   export const Tag: any;
 
   export const Skeleton: any;
+
+  export const Popconfirm: any;
 
   export const TextArea: any;
 

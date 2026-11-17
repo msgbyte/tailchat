@@ -280,5 +280,5 @@ export {
 } from './utils/role-helper';
 export { uploadFile } from './utils/upload-helper';
 export type { UploadFileResult, UploadFileUsage } from './utils/upload-helper';
-export { parseUrlStr } from './utils/url-helper';
+export { parseUrlStr, isSafeUrl } from './utils/url-helper';
 export { sleep } from './utils/utils';

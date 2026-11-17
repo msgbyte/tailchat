@@ -76,6 +76,7 @@ export {
   loginWithToken,
   useWatch,
   parseUrlStr,
+  isSafeUrl,
   useUpdateRef,
   isDevelopment,
 } from 'tailchat-shared';
