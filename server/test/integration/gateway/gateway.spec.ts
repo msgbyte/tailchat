@@ -1,4 +1,5 @@
 import http from 'http';
+import { Readable } from 'stream';
 import { TcBroker } from 'tailchat-server-sdk';
 import ApiService from '../../../services/core/gateway.service';
 
@@ -21,6 +22,17 @@ function request(
   });
 }
 
+function requestHeaders(path: string): Promise<http.IncomingHttpHeaders> {
+  return new Promise((resolve, reject) => {
+    http
+      .get(`http://127.0.0.1:${PORT}${path}`, (res) => {
+        res.resume();
+        res.on('end', () => resolve(res.headers));
+      })
+      .on('error', reject);
+  });
+}
+
 describe('Test "gateway" service', () => {
   const broker = new TcBroker({ logger: false });
   const service = broker.createService(ApiService);
@@ -34,6 +46,12 @@ describe('Test "gateway" service', () => {
         email: '',
         avatar: '',
       }),
+    },
+  });
+  broker.createService({
+    name: 'file',
+    actions: {
+      get: () => Readable.from(['<script>alert(1)</script>']),
     },
   });
   const headers = { 'x-token': 'any' };
@@ -62,6 +80,30 @@ describe('Test "gateway" service', () => {
     expect(res.body.data.services).toEqual(
       expect.arrayContaining(['gateway', 'user'])
     );
+  });
+
+  test.each([
+    'files/u/a.html',
+    'files/u/a.svg',
+    'files/u/noext',
+    'files/u.dir/noext',
+  ])('static %s is served as a download, not a page', async (objectName) => {
+    const res = await requestHeaders(`/static/${objectName}`);
+
+    expect(res['content-disposition']).toBe('attachment');
+    expect(res['x-content-type-options']).toBe('nosniff');
+  });
+
+  test.each([
+    ['files/u/a.png', 'image/png'],
+    ['files/u/a.mp4', 'video/mp4'],
+    ['files/u/a.jpg@1200w_630h', 'image/jpeg'],
+    ['files/u/a.png&w=640&q=75', 'image/png'],
+  ])('static %s is still shown inline', async (objectName, type) => {
+    const res = await requestHeaders(`/static/${objectName}`);
+
+    expect(res['content-type']).toBe(type);
+    expect(res['content-disposition']).toBeUndefined();
   });
 
   test('health check route should still work without token', async () => {

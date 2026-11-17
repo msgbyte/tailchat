@@ -18,9 +18,19 @@ import { checkPathMatch } from '../../lib/utils';
 import serve from 'serve-static';
 import accepts from 'accepts';
 import send from 'send';
-import path from 'path';
 import mime from 'mime';
 import { getRequestIp } from '../../lib/requestIp';
+
+/**
+ * 可以直接在浏览器中打开显示的上传文件类型, 其余类型(html/svg/xml 等)一律作为附件下载
+ */
+function isInlineSafeContentType(contentType: string): boolean {
+  return (
+    /^(image\/(?!svg)|audio\/|video\/)/.test(contentType) ||
+    contentType === 'application/pdf' ||
+    contentType === 'text/plain'
+  );
+}
 
 export default class ApiService extends TcService {
   authWhitelist = [];
@@ -299,9 +309,15 @@ export default class ApiService extends TcService {
                 }
               );
 
-              const ext = path.extname(objectName);
-              if (ext) {
-                res.setHeader('Content-Type', mime.getType(ext));
+              // 兼容历史对象名中扩展名后还跟着参数的情况, 如 x.jpg@1200w_630h, x.png&w=640
+              const ext = /\.([a-z0-9]+)[^./]*$/i.exec(objectName)?.[1] ?? '';
+              const contentType =
+                mime.getType(ext) ?? 'application/octet-stream';
+              res.setHeader('Content-Type', contentType);
+              res.setHeader('X-Content-Type-Options', 'nosniff');
+              if (!isInlineSafeContentType(contentType)) {
+                // 用户上传的 html/svg 等直接打开会以本站身份执行脚本, 只允许下载
+                res.setHeader('Content-Disposition', 'attachment');
               }
 
               // 因为对象存储的对象名都是以文件内容hash存储的，因此过期时间可以设置很大
