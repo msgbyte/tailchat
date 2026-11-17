@@ -3,9 +3,6 @@
 #
 FROM node:18.18.0-alpine AS builder
 
-# use with --build-arg VERSION=xxxx
-ARG VERSION
-
 WORKDIR /app/tailchat
 
 RUN npm install -g pnpm@8.15.8
@@ -30,6 +27,8 @@ COPY . .
 RUN pnpm install --frozen-lockfile
 
 # Build (client and server)
+# Keep release versions out of dependency-install cache keys.
+ARG VERSION
 ENV NODE_ENV=production
 ENV VERSION=$VERSION
 RUN pnpm build
@@ -44,8 +43,6 @@ RUN CGO_ENABLED=0 GOBIN=/out go install github.com/minio/mc@RELEASE.2025-08-13T0
 # Stage 3: runtime image, server side workspace only (no client toolchain, no source)
 #
 FROM node:18.18.0-alpine
-
-ARG VERSION
 
 WORKDIR /app/tailchat
 
@@ -77,6 +74,7 @@ COPY --from=builder /app/tailchat/server/dist ./server/dist
 COPY --from=builder /app/tailchat/server/admin/dist ./server/admin/dist
 COPY --from=builder /app/tailchat/server/admin-next/dist ./server/admin-next/dist
 
+ARG VERSION
 ENV NODE_ENV=production
 ENV VERSION=$VERSION
 
