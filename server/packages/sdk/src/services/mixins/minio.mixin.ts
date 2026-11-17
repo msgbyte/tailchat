@@ -820,3 +820,11 @@ export const TcMinioService = {
     this.healthCheckInterval && clearInterval(this.healthCheckInterval);
   },
 };
+
+// 这些是对象存储的原始操作(含 fGetObject/fPutObject 读写服务器本地文件), 只允许服务内部通过 this.actions 调用,
+// 不能注册到服务目录, 否则会经网关 /api/<service>/<action> 和 socket 暴露给任意登录用户
+Object.values(
+  TcMinioService.actions as Record<string, { visibility?: string }>
+).forEach((action) => {
+  action.visibility = 'private';
+});
