@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { buildRegFn, t } from 'tailchat-shared';
+import { buildRegFn, isSafeUrl, t } from 'tailchat-shared';
 import { withKeepAliveOverlay } from './KeepAliveOverlay';
 import { Loading } from './Loading';
 
@@ -58,7 +58,10 @@ interface WebviewProps {
 export const Webview: React.FC<WebviewProps> = (props) => {
   const KernelComponent = useMemo(() => getWebviewKernel(), []);
 
-  return <KernelComponent className="w-full h-full" src={props.url} />;
+  // javascript: 等地址在 iframe 中会以主站身份执行代码, 不允许加载
+  const src = isSafeUrl(props.url) ? props.url : 'about:blank';
+
+  return <KernelComponent className="w-full h-full" src={src} />;
 };
 Webview.displayName = 'Webview';
 
