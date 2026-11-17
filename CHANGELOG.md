@@ -1,5 +1,21 @@
 
 
+## [1.11.20](https://github.com/msgbyte/tailchat/compare/v1.11.19...v1.11.20) (2026-11-17)
+
+
+### Bug Fixes
+
+* **bbcode:** reject unsafe link urls ([f2207e2](https://github.com/msgbyte/tailchat/commit/f2207e2be17e59ad64aa04c143f869e22f65ad3c))
+* **file:** reject unsafe download urls ([99df54d](https://github.com/msgbyte/tailchat/commit/99df54d4ac5091252054a2e1b5fdb6e1bb3f5904))
+* **gateway:** serve unsafe uploads as attachments ([ea9cf57](https://github.com/msgbyte/tailchat/commit/ea9cf5776a5ab10f0bea3b69b34d8ac225fb8088))
+* **webview:** block unsafe iframe urls ([84e5d7c](https://github.com/msgbyte/tailchat/commit/84e5d7c0fedea74677e9341aef53fac08a171085))
+* **webview:** validate panel links before opening ([b98e610](https://github.com/msgbyte/tailchat/commit/b98e6107e1c85bc63d832d3b24248ec821b254d7))
+
+
+### Features
+
+* **shared:** add safe url validation ([2386a42](https://github.com/msgbyte/tailchat/commit/2386a42108ec94e91d3d3352f0caaa2acf3a1a57))
+
 ## [1.11.19](https://github.com/msgbyte/tailchat/compare/v1.11.18...v1.11.19) (2026-11-17)
 
 
