@@ -1,5 +1,5 @@
 import _get from 'lodash/get';
-import { parseUrlStr } from 'tailchat-shared';
+import { isSafeUrl, parseUrlStr } from 'tailchat-shared';
 
 /**
  * 传入一个图片文件， 返回对应的 Base64 编码
@@ -91,8 +91,19 @@ export async function blobUrlToFile(
  * 通过url下载文件
  */
 export function downloadUrl(url: string, fileName: string) {
+  const href = parseUrlStr(url);
+  if (!isSafeUrl(href)) {
+    // 文件卡片的 url 来自消息内容, 不能是 javascript: 等可执行地址
+    console.warn('[downloadUrl] blocked unsafe url:', href);
+    return;
+  }
+
+  clickDownloadLink(href, fileName);
+}
+
+function clickDownloadLink(href: string, fileName: string) {
   const a = document.createElement('a');
-  a.href = parseUrlStr(url);
+  a.href = href;
   a.download = fileName; // 这里填保存成的文件名
   a.target = '_blank';
   a.click();
@@ -103,7 +114,7 @@ export function downloadUrl(url: string, fileName: string) {
  */
 export function downloadBlob(blob: Blob, fileName: string) {
   const url = String(URL.createObjectURL(blob));
-  downloadUrl(url, fileName);
+  clickDownloadLink(url, fileName);
   URL.revokeObjectURL(url);
 }
 
