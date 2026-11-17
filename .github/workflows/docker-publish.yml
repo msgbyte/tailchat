@@ -46,6 +46,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: VERSION=${{ github.ref_name }}
+          cache-from: type=registry,ref=moonrailgun/tailchat:buildcache
+          cache-to: type=registry,ref=moonrailgun/tailchat:buildcache,mode=max
       - name: Notify to Service
         continue-on-error: true
         uses: muinmomin/webhook-action@v1.0.0

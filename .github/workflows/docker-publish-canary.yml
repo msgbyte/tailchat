@@ -38,3 +38,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: VERSION=canary-${{ steps.meta.outputs.tags }}
+          cache-from: |
+            type=registry,ref=moonrailgun/tailchat:buildcache-canary
+            type=registry,ref=moonrailgun/tailchat:buildcache
+          cache-to: type=registry,ref=moonrailgun/tailchat:buildcache-canary,mode=max
