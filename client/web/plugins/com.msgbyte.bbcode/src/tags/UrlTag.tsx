@@ -1,3 +1,4 @@
+import { isSafeUrl } from '@capital/common';
 import { Link } from '@capital/component';
 import React from 'react';
 import styled from 'styled-components';
@@ -13,22 +14,19 @@ export const UrlTag: React.FC<TagProps> = React.memo((props) => {
   const text = node.content.join('');
   const url = node.attrs.url ?? text;
 
-  if (url.startsWith('/')) {
-    // 内部地址，使用 react-router 进行导航
-    return (
-      <Link to={url} onContextMenu={(e) => e.stopPropagation()}>
-        <UnderlineSpan>{text}</UnderlineSpan>
-      </Link>
-    );
+  if (!isSafeUrl(url)) {
+    // javascript: 等地址不渲染成链接
+    return <span>{text}</span>;
   }
 
-  if (url.startsWith(window.location.origin)) {
-    // 内部地址，使用 react-router 进行导航
+  // 内部地址，使用 react-router 进行导航
+  // 必须是单个 / 开头的路径: //host 和 /\host 会被浏览器当成外部地址
+  const path = url.startsWith(window.location.origin)
+    ? url.slice(window.location.origin.length)
+    : url;
+  if (/^\/(?![/\\])/.test(path)) {
     return (
-      <Link
-        to={url.replace(window.location.origin, '')}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
+      <Link to={path} onContextMenu={(e) => e.stopPropagation()}>
         <UnderlineSpan>{text}</UnderlineSpan>
       </Link>
     );
