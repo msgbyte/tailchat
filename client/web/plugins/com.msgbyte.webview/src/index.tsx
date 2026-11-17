@@ -1,5 +1,6 @@
-import { Loadable, regGroupPanel } from '@capital/common';
+import { isSafeUrl, Loadable, regGroupPanel } from '@capital/common';
 import { Translate } from './translate';
+import { normalizePanelUrl } from './url';
 
 const PLUGIN_NAME = 'com.msgbyte.webview';
 
@@ -26,8 +27,13 @@ regGroupPanel({
       label: Translate.openInExtra,
       icon: 'mdi:web',
       onClick: (panelInfo) => {
-        if (panelInfo.meta?.url) {
-          window.open(String(panelInfo.meta?.url));
+        if (!panelInfo.meta?.url) {
+          return;
+        }
+        const url = normalizePanelUrl(String(panelInfo.meta.url));
+        if (isSafeUrl(url)) {
+          // noopener: 不让被打开的页面通过 window.opener 篡改当前页
+          window.open(url, '_blank', 'noopener,noreferrer');
         }
       },
     },
