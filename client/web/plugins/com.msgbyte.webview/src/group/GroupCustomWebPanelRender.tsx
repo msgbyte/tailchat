@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Translate } from '../translate';
 import { FilterXSS, getDefaultWhiteList } from 'xss';
 import { useWatch } from '@capital/common';
@@ -24,22 +24,25 @@ const EditModalContent = styled.div`
   }
 `;
 
-const xss = new FilterXSS({
+export const xss = new FilterXSS({
   css: false,
-  whiteList: { ...getDefaultWhiteList(), iframe: ['src', 'style', 'class'] },
-  onIgnoreTag: function (tag, html, options) {
-    if (['html', 'body', 'head', 'meta', 'style', 'div'].includes(tag)) {
-      // 不对其属性列表进行过滤
-      return html;
-    }
+  whiteList: {
+    ...getDefaultWhiteList(),
+    iframe: ['src', 'style', 'class'],
+    // 允许完整的 html 文档结构, 但属性同样走白名单, 不能放行 onload 等事件属性
+    html: [],
+    head: [],
+    body: ['style', 'class'],
+    meta: ['charset'],
+    style: [],
   },
 });
 
 function getInjectedStyle() {
   try {
     // 当前面板文本颜色
-    const currentTextColor = document.defaultView.getComputedStyle(
-      document.querySelector('.tc-content-background')
+    const currentTextColor = window.getComputedStyle(
+      document.querySelector('.tc-content-background')!
     ).color;
 
     return `<style>body { color: ${currentTextColor} }</style>`;
@@ -48,26 +51,23 @@ function getInjectedStyle() {
   }
 }
 
-const GroupCustomWebPanelRender: React.FC<{ html: string }> = (props) => {
-  const ref = useRef<HTMLIFrameElement>(null);
+export const GroupCustomWebPanelRender: React.FC<{ html: string }> = (
+  props
+) => {
   const html = props.html;
-
-  useEffect(() => {
-    if (!ref.current || !html) {
-      return;
-    }
-
-    const doc = ref.current.contentWindow.document;
-    doc.open();
-    doc.writeln(getInjectedStyle(), xss.process(html));
-    doc.close();
-  }, [html]);
 
   if (!html) {
     return <NoData />;
   }
 
-  return <iframe ref={ref} className="w-full h-full" />;
+  // 不给 allow-same-origin: 即使过滤被绕过, 内容也运行在独立源中, 无法读取主站的登录凭据
+  return (
+    <iframe
+      className="w-full h-full"
+      sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
+      srcDoc={getInjectedStyle() + xss.process(html)}
+    />
+  );
 };
 GroupCustomWebPanelRender.displayName = 'GroupCustomWebPanelRender';
 
