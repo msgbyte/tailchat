@@ -1,5 +1,16 @@
 
 
+## [1.11.22](https://github.com/msgbyte/tailchat/compare/v1.11.21...v1.11.22) (2026-11-20)
+
+
+### Bug Fixes
+
+* **group:** enforce membership and panel checks in groupExtra ([9d08359](https://github.com/msgbyte/tailchat/commit/9d083596ae4de8a46855a69c05c0ba814b6f2432))
+* **plugin:** validate panel and group scope in github and simplenotify ([3df1c23](https://github.com/msgbyte/tailchat/commit/3df1c23aeec352dc1e2162fd68527c31d4a2120f))
+* **rtc:** enforce channel and room permission checks in agora and livekit ([2e635f3](https://github.com/msgbyte/tailchat/commit/2e635f3412a68f65db9871b1ba40aa245b92fc6c))
+* **user:** restrict internal bot actions visibility ([e07d9a9](https://github.com/msgbyte/tailchat/commit/e07d9a94762d0817fddf7d7d94ee4f93cc5aa4be))
+* **wxpusher:** use one-time bind token for account binding ([fbd37eb](https://github.com/msgbyte/tailchat/commit/fbd37ebff38e2be5bbcf4cde9c47f8d01b9878d3))
+
 ## [1.11.21](https://github.com/msgbyte/tailchat/compare/v1.11.20...v1.11.21) (2026-11-20)
 
 
