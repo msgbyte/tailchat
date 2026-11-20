@@ -8,6 +8,9 @@ on:
 jobs:
   dockerize:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -15,7 +18,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: moonrailgun/tailchat
+          images: |
+            moonrailgun/tailchat
+            ghcr.io/${{ github.repository }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=sha
@@ -29,6 +34,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -37,7 +49,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: VERSION=canary-${{ steps.meta.outputs.tags }}
+          build-args: VERSION=canary-${{ steps.meta.outputs.version }}
           cache-from: |
             type=registry,ref=moonrailgun/tailchat:buildcache-canary
             type=registry,ref=moonrailgun/tailchat:buildcache
