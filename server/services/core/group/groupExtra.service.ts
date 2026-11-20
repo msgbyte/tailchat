@@ -10,7 +10,9 @@ import {
   call,
   PERMISSION,
   t,
+  DataNotFoundError,
   NoPermissionError,
+  SYSTEM_USERID,
 } from 'tailchat-server-sdk';
 import { auditLogMixin } from '../../../lib/auditLog';
 
@@ -27,6 +29,13 @@ class GroupExtraService extends TcService {
     this.registerMixin(auditLogMixin(['saveGroupData', 'savePanelData']));
 
     this.registerAction('getGroupData', this.getGroupData, {
+      params: {
+        groupId: 'string',
+        name: 'string',
+      },
+    });
+    this.registerAction('getGroupDataInternal', this.getGroupDataInternal, {
+      visibility: 'public',
       params: {
         groupId: 'string',
         name: 'string',
@@ -49,6 +58,14 @@ class GroupExtraService extends TcService {
         panelId: 'string',
         name: 'string',
       },
+    });
+    this.registerAction('getPanelDataInternal', this.getPanelDataInternal, {
+      visibility: 'public',
+      params: {
+        groupId: 'string',
+        panelId: 'string',
+        name: 'string',
+      },
       cache: {
         keys: ['groupId', 'panelId', 'name'],
         ttl: 60 * 60, // 1 hour
@@ -64,7 +81,47 @@ class GroupExtraService extends TcService {
     });
   }
 
+  private async ensureGroupMember(
+    ctx: TcContext,
+    groupId: string,
+    panelId?: string
+  ) {
+    const userId = ctx.meta.userId;
+    const translate = ctx.meta.t ?? t;
+    const groupInfo = await call(ctx).getGroupInfo(groupId);
+    if (!groupInfo) {
+      throw new DataNotFoundError(translate('群组未找到'));
+    }
+
+    if (
+      userId !== SYSTEM_USERID &&
+      !groupInfo.members.some((m) => String(m.userId) === String(userId))
+    ) {
+      throw new NoPermissionError(translate('没有查看权限'));
+    }
+
+    if (
+      panelId !== undefined &&
+      !groupInfo.panels.some((p) => String(p.id) === String(panelId))
+    ) {
+      throw new DataNotFoundError(translate('没有找到该面板'));
+    }
+  }
+
   async getGroupData(
+    ctx: TcContext<{
+      groupId: string;
+      name: string;
+    }>
+  ) {
+    const { groupId, name } = ctx.params;
+
+    await this.ensureGroupMember(ctx, groupId);
+
+    return this.localCall('getGroupDataInternal', { groupId, name });
+  }
+
+  async getGroupDataInternal(
     ctx: TcContext<{
       groupId: string;
       name: string;
@@ -128,6 +185,20 @@ class GroupExtraService extends TcService {
   ) {
     const { groupId, panelId, name } = ctx.params;
 
+    await this.ensureGroupMember(ctx, groupId, panelId);
+
+    return this.localCall('getPanelDataInternal', { groupId, panelId, name });
+  }
+
+  async getPanelDataInternal(
+    ctx: TcContext<{
+      groupId: string;
+      panelId: string;
+      name: string;
+    }>
+  ) {
+    const { groupId, panelId, name } = ctx.params;
+
     const res = await this.adapter.findOne({
       groupId,
       panelId,
@@ -147,6 +218,7 @@ class GroupExtraService extends TcService {
   ) {
     const { groupId, panelId, name, data } = ctx.params;
     const userId = ctx.meta.userId;
+    const translate = ctx.meta.t ?? t;
 
     const [hasPermission] = await call(ctx).checkUserPermissions(
       groupId,
@@ -154,7 +226,12 @@ class GroupExtraService extends TcService {
       [PERMISSION.core.managePanel]
     );
     if (!hasPermission) {
-      throw new NoPermissionError(t('没有操作权限'));
+      throw new NoPermissionError(translate('没有操作权限'));
+    }
+
+    const groupInfo = await call(ctx).getGroupInfo(groupId);
+    if (!groupInfo?.panels.some((p) => String(p.id) === String(panelId))) {
+      throw new DataNotFoundError(translate('没有找到该面板'));
     }
 
     await this.adapter.model.findOneAndUpdate(
@@ -177,7 +254,7 @@ class GroupExtraService extends TcService {
   }
 
   private cleanGroupDataCache(groupId: string, name: string) {
-    return this.cleanActionCache('getGroupData', [groupId, name]);
+    return this.cleanActionCache('getGroupDataInternal', [groupId, name]);
   }
 
   private cleanGroupPanelDataCache(
@@ -185,7 +262,11 @@ class GroupExtraService extends TcService {
     panelId: string,
     name: string
   ) {
-    return this.cleanActionCache('getPanelData', [groupId, panelId, name]);
+    return this.cleanActionCache('getPanelDataInternal', [
+      groupId,
+      panelId,
+      name,
+    ]);
   }
 }
 
