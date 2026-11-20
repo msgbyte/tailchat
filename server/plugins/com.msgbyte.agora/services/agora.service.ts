@@ -1,6 +1,9 @@
 import {
+  call,
   DataNotFoundError,
   MessageStruct,
+  NoPermissionError,
+  SYSTEM_USERID,
   TcContext,
   TcPureContext,
 } from 'tailchat-server-sdk';
@@ -146,7 +149,36 @@ class AgoraService extends TcService {
     });
   }
 
-  generateJoinInfo(
+  private async ensureChannelPermission(ctx: TcContext, channelName: string) {
+    const { userId, t } = ctx.meta;
+    const [converseId, groupId] = this.getSourceFromChannelName(channelName);
+
+    if (userId === SYSTEM_USERID) {
+      return;
+    }
+
+    if (groupId) {
+      const groupInfo = await call(ctx).getGroupInfo(groupId);
+      if (
+        !groupInfo ||
+        !groupInfo.members.some((m) => String(m.userId) === String(userId)) ||
+        !groupInfo.panels.some((p) => String(p.id) === String(converseId))
+      ) {
+        throw new NoPermissionError(t('没有操作权限'));
+      }
+      return;
+    }
+
+    const converse = await ctx.call<unknown, { converseId: string }>(
+      'chat.converse.findConverseInfo',
+      { converseId }
+    );
+    if (!converse) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+  }
+
+  async generateJoinInfo(
     ctx: TcContext<{
       channelName: string;
       userId?: string;
@@ -160,9 +192,21 @@ class AgoraService extends TcService {
       throw new Error('Agora.io AppId/AppCert not init');
     }
 
+    await this.ensureChannelPermission(ctx, channelName);
+
+    const callerUserId = ctx.meta.userId;
+    const requestedUserId = ctx.params.userId;
+    if (
+      requestedUserId !== undefined &&
+      requestedUserId !== callerUserId &&
+      requestedUserId !== `${callerUserId}_screen`
+    ) {
+      throw new NoPermissionError(ctx.meta.t('没有操作权限'));
+    }
+
     const role = RtcRole.PUBLISHER;
 
-    const userId = ctx.params.userId ?? ctx.meta.userId;
+    const userId = requestedUserId ?? callerUserId;
 
     const tokenExpirationInSecond = 3600; // 1h
     const privilegeExpirationInSecond = 3600; // 1h
@@ -190,6 +234,8 @@ class AgoraService extends TcService {
     }>
   ): Promise<ChannelUserListRet['data']> {
     const { channelName } = ctx.params;
+
+    await this.ensureChannelPermission(ctx, channelName);
 
     const { data } = await got
       .get(

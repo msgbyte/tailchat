@@ -1,5 +1,12 @@
 import type { TcContext } from 'tailchat-server-sdk';
-import { TcService, TcDbService, call } from 'tailchat-server-sdk';
+import {
+  TcService,
+  TcDbService,
+  call,
+  db,
+  NoPermissionError,
+  SYSTEM_USERID,
+} from 'tailchat-server-sdk';
 import type { LivekitDocument, LivekitModel } from '../models/livekit';
 import {
   AccessToken,
@@ -78,7 +85,62 @@ class LivekitService extends TcService {
         targetUserIds: { type: 'array', items: 'string' },
       },
     });
-    this.registerAction('webhook', this.webhook);
+    this.registerAction('webhook', this.webhook, {
+      visibility: 'public',
+    });
+  }
+
+  private async ensureRoomPermission(
+    ctx: TcContext,
+    roomName: string
+  ): Promise<{ memberIds?: string[] }> {
+    const { userId, t } = ctx.meta;
+    if (userId === SYSTEM_USERID) {
+      return {};
+    }
+
+    if (roomName.includes('#')) {
+      const parts = roomName.split('#');
+      if (
+        parts.length !== 2 ||
+        !db.Types.ObjectId.isValid(parts[0]) ||
+        !db.Types.ObjectId.isValid(parts[1])
+      ) {
+        throw new NoPermissionError(t('没有操作权限'));
+      }
+
+      const [groupId, panelId] = parts;
+      const groupInfo = await call(ctx).getGroupInfo(groupId);
+      if (
+        !groupInfo ||
+        !groupInfo.members.some((m) => String(m.userId) === String(userId)) ||
+        !groupInfo.panels.some((p) => String(p.id) === String(panelId))
+      ) {
+        throw new NoPermissionError(t('没有操作权限'));
+      }
+
+      return {
+        memberIds: groupInfo.members.map((m) => String(m.userId)),
+      };
+    }
+
+    if (!db.Types.ObjectId.isValid(roomName)) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    const converse = await ctx.call<
+      { members?: unknown[] } | null,
+      { converseId: string }
+    >('chat.converse.findConverseInfo', {
+      converseId: roomName,
+    });
+    if (!converse) {
+      throw new NoPermissionError(t('没有操作权限'));
+    }
+
+    return {
+      memberIds: (converse.members ?? []).map(String),
+    };
   }
 
   async url(ctx: TcContext) {
@@ -94,8 +156,10 @@ class LivekitService extends TcService {
   ) {
     const { roomName } = ctx.params;
 
+    await this.ensureRoomPermission(ctx, roomName);
+
     const { userId, user } = ctx.meta;
-    const nickname = user.nickname;
+    const nickname = user?.nickname ?? userId;
     const identity = userId;
 
     const at = new AccessToken(this.apiKey, this.apiSecret, {
@@ -122,6 +186,8 @@ class LivekitService extends TcService {
       throw new Error('livekit server not available');
     }
 
+    await this.ensureRoomPermission(ctx, ctx.params.roomName);
+
     try {
       const client = this.getRoomServiceClient();
       const participants = await client.listParticipants(ctx.params.roomName);
@@ -141,16 +207,28 @@ class LivekitService extends TcService {
     const { roomName, targetUserIds } = ctx.params;
     const senderUserId = ctx.meta.userId;
 
-    const isOnlineList = await call(ctx).isUserOnline(targetUserIds);
+    const { memberIds } = await this.ensureRoomPermission(ctx, roomName);
+    const allowedTargetIds = Array.isArray(memberIds)
+      ? targetUserIds.filter((id) => memberIds.includes(String(id)))
+      : targetUserIds;
 
-    await this.listcastNotify(ctx, targetUserIds, 'inviteCall', {
+    if (allowedTargetIds.length === 0) {
+      return {
+        online: [],
+        offline: [],
+      };
+    }
+
+    const isOnlineList = await call(ctx).isUserOnline(allowedTargetIds);
+
+    await this.listcastNotify(ctx, allowedTargetIds, 'inviteCall', {
       senderUserId,
       roomName,
     });
 
     return {
-      online: targetUserIds.filter((_, i) => isOnlineList[i]),
-      offline: targetUserIds.filter((_, i) => !isOnlineList[i]),
+      online: allowedTargetIds.filter((_, i) => isOnlineList[i]),
+      offline: allowedTargetIds.filter((_, i) => !isOnlineList[i]),
     };
   }
 
