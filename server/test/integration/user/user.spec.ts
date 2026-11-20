@@ -324,4 +324,21 @@ describe('Test "user" service', () => {
       baz: 963,
     });
   });
+
+  test('internal bot actions are not published externally', () => {
+    const publishedActionNames = service
+      .getActionList()
+      .map((action) => action.name);
+
+    for (const actionName of [
+      'ensurePluginBot',
+      'ensureOpenapiBot',
+      'findOpenapiBotId',
+    ]) {
+      expect((service.schema.actions[actionName] as any)?.visibility).toBe(
+        'public'
+      );
+      expect(publishedActionNames).not.toContain(actionName);
+    }
+  });
 });

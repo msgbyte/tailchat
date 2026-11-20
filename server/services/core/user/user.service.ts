@@ -241,6 +241,7 @@ class UserService extends TcService {
       },
     });
     this.registerAction('ensurePluginBot', this.ensurePluginBot, {
+      visibility: 'public',
       params: {
         /**
          * 用户名唯一id, 创建的用户邮箱会为 <botId>@tailchat-plugin.com
@@ -251,11 +252,13 @@ class UserService extends TcService {
       },
     });
     this.registerAction('findOpenapiBotId', this.findOpenapiBotId, {
+      visibility: 'public',
       params: {
         email: 'string',
       },
     });
     this.registerAction('ensureOpenapiBot', this.ensureOpenapiBot, {
+      visibility: 'public',
       params: {
         /**
          * 用户名唯一id, 创建的用户邮箱会为 <botId>@tailchat-open.com
