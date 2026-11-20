@@ -2,8 +2,10 @@ import { generateRandomStr, getEmailAddress } from '../../../lib/utils';
 import UserService from '../../../services/core/user/user.service';
 import { createTestServiceBroker } from '../../utils';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import type { UserDocument } from '../../../models/user/user';
 import userLoginLogModel from '../../../models/user/userLoginLog';
+import { config, SYSTEM_USERID } from 'tailchat-server-sdk';
 
 /**
  * 创建测试用户
@@ -63,6 +65,57 @@ describe('Test "user" service', () => {
       await service.adapter.removeById(user._id);
       await userLoginLogModel.deleteMany({ userId: user._id });
     }
+  });
+
+  test('Test "user.register" ignores mass-assigned sensitive fields', async () => {
+    const email = `${generateRandomStr()}@example.com`;
+    const user: any = await broker.call(
+      'user.register',
+      {
+        _id: SYSTEM_USERID,
+        email,
+        password: '123456',
+        type: 'pluginBot',
+        temporary: true,
+        banned: true,
+        emailVerified: true,
+      },
+      {
+        meta: { ip: '203.0.113.2' },
+      }
+    );
+
+    try {
+      expect(String(user._id)).not.toBe(SYSTEM_USERID);
+      expect(user.type).toBe('normalUser');
+      expect(user.temporary).toBe(false);
+      expect(user.banned).toBe(false);
+      expect(user.emailVerified).toBe(false);
+
+      const persisted = await service.adapter.model.findById(user._id);
+      expect(persisted).not.toBeNull();
+      expect(persisted?.type).toBe('normalUser');
+      expect(persisted?.temporary).toBe(false);
+      expect(persisted?.banned).toBe(false);
+      expect(persisted?.emailVerified).toBe(false);
+    } finally {
+      await service.adapter.removeById(user._id);
+      await userLoginLogModel.deleteMany({ userId: user._id });
+    }
+  });
+
+  test('Test "user.resolveToken" rejects SYSTEM_USERID token', async () => {
+    const token = jwt.sign(
+      {
+        _id: SYSTEM_USERID,
+        nickname: 'system',
+        email: 'system@example.com',
+        avatar: null,
+      },
+      config.secret
+    );
+
+    await expect(broker.call('user.resolveToken', { token })).rejects.toThrow();
   });
 
   test('Test "user.createTemporaryUser"', async () => {

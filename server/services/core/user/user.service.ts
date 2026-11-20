@@ -25,6 +25,7 @@ import {
   UserStructWithToken,
   RateLimitError,
   ServiceUnavailableError,
+  SYSTEM_USERID,
 } from 'tailchat-server-sdk';
 import {
   generateRandomNumStr,
@@ -549,14 +550,27 @@ class UserService extends TcService {
     }
 
     const password = await this.hashPassword(params.password);
-    const doc = await this.adapter.insert({
-      ...params,
+    const userData: Partial<User> = {
       password,
       nickname,
       discriminator,
       emailVerified,
+      temporary: false,
+      type: 'normalUser',
+      banned: false,
       createdAt: new Date(),
-    });
+    };
+    if (typeof params.username === 'string') {
+      userData.username = params.username;
+    }
+    if (typeof params.email === 'string') {
+      userData.email = params.email;
+    }
+    if (typeof params.avatar === 'string') {
+      userData.avatar = params.avatar;
+    }
+
+    const doc = await this.adapter.insert(userData);
     await this.recordUserLoginMeta(String(doc._id), ctx.meta);
     const user = await this.transformDocuments(ctx, {}, doc);
     const json = await this.transformEntity(user, true, ctx.meta.token);
@@ -804,11 +818,14 @@ class UserService extends TcService {
     const decoded = await this.verifyJWT(ctx.params.token);
     const t = ctx.meta.t;
 
-    if (typeof decoded._id !== 'string') {
-      // token 中没有 _id
+    if (typeof decoded._id !== 'string' || decoded._id === SYSTEM_USERID) {
+      // token 中没有 _id 或伪造系统用户
       throw new EntityError(t('Token 内容不正确'));
     }
     const doc = await this.adapter.model.findById(decoded._id);
+    if (!doc) {
+      throw new EntityError(t('用户不存在'));
+    }
     const user: User = await this.transformDocuments(ctx, {}, doc);
 
     if (user.banned === true) {
