@@ -4,6 +4,7 @@ import {
   TcContext,
   TcPureContext,
   call,
+  DataNotFoundError,
   NoPermissionError,
 } from 'tailchat-server-sdk';
 import type {
@@ -107,7 +108,10 @@ class SimpleNotifyService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
-    // TODO: 需要检查textPanelId是否合法
+    const groupInfo = await call(ctx).getGroupInfo(groupId);
+    if (!groupInfo?.panels.some((p) => String(p.id) === String(textPanelId))) {
+      throw new DataNotFoundError(t('没有找到该面板'));
+    }
 
     await this.adapter.model.create({
       groupId,
@@ -204,6 +208,8 @@ class SimpleNotifyService extends TcService {
 
     await this.adapter.model.deleteOne({
       _id: subscribeId,
+      groupId,
+      type: 'group',
     });
   }
 
