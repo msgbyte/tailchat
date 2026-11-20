@@ -1,5 +1,13 @@
 
 
+## [1.11.21](https://github.com/msgbyte/tailchat/compare/v1.11.20...v1.11.21) (2026-11-20)
+
+
+### Bug Fixes
+
+* **user:** prevent register mass assignment and reject system token ([0010dfe](https://github.com/msgbyte/tailchat/commit/0010dfe0ab6cb2851267d8c56af5c54aba8631d9))
+* **website:** invoke wrangler via npx in cloudflare pages deploy ([56cf441](https://github.com/msgbyte/tailchat/commit/56cf441d1e949108bf8dcdbcac1e2541af6269d6))
+
 ## [1.11.20](https://github.com/msgbyte/tailchat/compare/v1.11.19...v1.11.20) (2026-11-17)
 
 
