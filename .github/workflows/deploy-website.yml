@@ -1,55 +1,56 @@
-name: "Deployment Website"
+name: "Deploy Website"
 
 on:
   push:
     branches:
       - master
     paths:
+      - ".github/workflows/deploy-website.yml"
+      - "package.json"
       - "website/**"
   workflow_dispatch:
+
+concurrency:
+  group: deploy-website
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    defaults:
-      run:
-        working-directory: website
     steps:
-    - uses: actions/checkout@v1
-    # - name: Use Node.js ${{ matrix.node-version }}
-    #   uses: actions/setup-node@v1
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    # - name: Cache pnpm modules
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: ~/.pnpm-store
-    #     key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-
-    # - uses: pnpm/action-setup@v2.0.1
-    #   with:
-    #     version: 7.1.9
-    #     run_install: true
-    # - name: Install Packages
-    #   run: pnpm install
-    # - name: Build page
-    #   run: pnpm build
-    # - name: Deploy to gh-pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./website/build
-    - name: Deploy to Vercel
-      uses: amondnet/vercel-action@master
-      env:
-        VERSION: ${{ env.GITHUB_SHA }}
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.ORG_ID}}
-        vercel-project-id: prj_mqIp5rfpiL3xObjBj5zMyI1y3x9r
-        working-directory: ./
-        vercel-args: '--prod'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build website
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: pnpm --filter website build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy website/build --project-name=tailchat-website --branch=master --commit-dirty=true
