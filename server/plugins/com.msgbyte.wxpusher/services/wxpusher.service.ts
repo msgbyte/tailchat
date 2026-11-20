@@ -1,4 +1,11 @@
-import { TcService, TcDbService, InboxStruct, call } from 'tailchat-server-sdk';
+import crypto from 'crypto';
+import {
+  TcService,
+  TcDbService,
+  InboxStruct,
+  call,
+  NoPermissionError,
+} from 'tailchat-server-sdk';
 import type {
   WXPusherUserDocument,
   WXPusherUserModel,
@@ -91,14 +98,98 @@ class WxpusherService extends TcService {
     return await this.findUserWxpusherUid(userId);
   }
 
+  private buildBindTokenKey(bindToken: string) {
+    return `wxpusher:bind:${bindToken}`;
+  }
+
+  private getRedisCacherClient(): {
+    client: {
+      set: (...args: any[]) => Promise<unknown>;
+      eval: (...args: any[]) => Promise<unknown>;
+    };
+    prefix: string;
+  } | null {
+    const cacher = this.broker.cacher as unknown as
+      | {
+          client?: {
+            set?: (...args: any[]) => Promise<unknown>;
+            eval?: (...args: any[]) => Promise<unknown>;
+          };
+          prefix?: string;
+        }
+      | undefined;
+
+    if (
+      cacher?.client &&
+      typeof cacher.client.set === 'function' &&
+      typeof cacher.client.eval === 'function'
+    ) {
+      return {
+        client: cacher.client as {
+          set: (...args: any[]) => Promise<unknown>;
+          eval: (...args: any[]) => Promise<unknown>;
+        },
+        prefix: cacher.prefix ?? '',
+      };
+    }
+
+    return null;
+  }
+
+  private async storeBindToken(bindToken: string, userId: string) {
+    if (!this.broker.cacher) {
+      throw new Error('WxPusher binding requires cacher');
+    }
+
+    const cacheKey = this.buildBindTokenKey(bindToken);
+    const redis = this.getRedisCacherClient();
+    if (redis) {
+      await redis.client.set(`${redis.prefix}${cacheKey}`, userId, 'EX', 1800);
+      return;
+    }
+
+    await this.broker.cacher.set(cacheKey, userId, 1800);
+  }
+
+  private async consumeBindToken(bindToken: string): Promise<string | null> {
+    if (!this.broker.cacher) {
+      throw new Error('WxPusher binding requires cacher');
+    }
+
+    const cacheKey = this.buildBindTokenKey(bindToken);
+    const redis = this.getRedisCacherClient();
+
+    if (redis) {
+      const fullKey = `${redis.prefix}${cacheKey}`;
+      const raw = await redis.client.eval(
+        `local val = redis.call('GET', KEYS[1])
+         if val then redis.call('DEL', KEYS[1]) end
+         return val`,
+        1,
+        fullKey
+      );
+      return typeof raw === 'string' && raw.length > 0 ? raw : null;
+    }
+
+    const userId: unknown = await this.broker.cacher.get(cacheKey);
+    if (typeof userId !== 'string' || userId.length === 0) {
+      return null;
+    }
+    await this.broker.cacher.del(cacheKey);
+    return userId;
+  }
+
   async createQRCode(ctx: TcContext) {
     const userId = ctx.meta.userId;
+
+    const bindToken = crypto.randomBytes(24).toString('hex');
+    await this.storeBindToken(bindToken, userId);
 
     const json = await got
       .post('https://wxpusher.zjiecode.com/api/fun/create/qrcode', {
         json: {
           appToken: this.appToken, // 必填，appToken,前面有说明，应用的标志
-          extra: userId, // 必填，二维码携带的参数，最长64位
+          extra: bindToken, // 一次性随机绑定token，避免回调伪造任意userId
           validTime: 1800, // 可选，二维码的有效期，默认30分钟，最长30天，单位是秒
         },
       })
@@ -118,8 +209,22 @@ class WxpusherService extends TcService {
     if (action === 'app_subscribe') {
       this.logger.info('data', data);
       // Reference: https://wxpusher.zjiecode.com/docs/#/?id=subscribe-callback
-      const userId = data.extra;
-      const wxpusherUserId = data.uid;
+      const bindToken = data?.extra;
+      const wxpusherUserId = data?.uid;
+
+      if (
+        typeof bindToken !== 'string' ||
+        !/^[0-9a-f]{48}$/.test(bindToken) ||
+        typeof wxpusherUserId !== 'string' ||
+        wxpusherUserId.length === 0
+      ) {
+        throw new NoPermissionError('Invalid wxpusher bind token');
+      }
+
+      const userId = await this.consumeBindToken(bindToken);
+      if (!userId) {
+        throw new NoPermissionError('Expired or invalid wxpusher bind token');
+      }
 
       const record = await this.adapter.model.findOne({ userId });
       if (!record) {
