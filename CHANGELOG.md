@@ -1,5 +1,14 @@
 
 
+## [1.11.23](https://github.com/msgbyte/tailchat/compare/v1.11.22...v1.11.23) (2026-11-25)
+
+
+### Bug Fixes
+
+* **admin:** [#320](https://github.com/msgbyte/tailchat/issues/320) require credentials and harden JWT auth ([#325](https://github.com/msgbyte/tailchat/issues/325)) ([f7c188b](https://github.com/msgbyte/tailchat/commit/f7c188bd7a840962dcf0d74b3a8ff2f144191c69))
+* **group:** [#326](https://github.com/msgbyte/tailchat/issues/326) normalize panel slowMode and preserve permissions ([#326](https://github.com/msgbyte/tailchat/issues/326)) ([7842a5c](https://github.com/msgbyte/tailchat/commit/7842a5c8321b7e11021172ecd493e9f95bd7e861))
+* **server:** [#323](https://github.com/msgbyte/tailchat/issues/323) block external access to file and internal actions ([#327](https://github.com/msgbyte/tailchat/issues/327)) ([1f9e22c](https://github.com/msgbyte/tailchat/commit/1f9e22c701bfcece921dca776af221c101f8336d))
+
 ## [1.11.22](https://github.com/msgbyte/tailchat/compare/v1.11.21...v1.11.22) (2026-11-20)
 
 
