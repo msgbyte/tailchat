@@ -1,5 +1,9 @@
 import { findPluginPanelInfoByName } from '@/utils/plugin-helper';
-import { GroupPanel, GroupPanelType } from 'tailchat-shared';
+import {
+  getGroupPanelSlowMode,
+  GroupPanel,
+  GroupPanelType,
+} from 'tailchat-shared';
 import type { GroupPanelValues } from './types';
 import _omit from 'lodash/omit';
 
@@ -25,12 +29,16 @@ export function buildDataFromValues(values: GroupPanelValues) {
     panelType = type;
   }
 
+  const cleanedMeta = _omit(meta, ['slowMode']);
+  const slowMode =
+    panelType === GroupPanelType.TEXT ? getGroupPanelSlowMode(meta) : undefined;
+
   return {
     name,
     type: panelType,
     provider,
     pluginPanelName,
-    meta: panelType === GroupPanelType.TEXT ? meta : _omit(meta, ['slowMode']),
+    meta: slowMode ? { ...cleanedMeta, slowMode } : cleanedMeta,
     permissionMap,
     fallbackPermissions,
   };
@@ -46,6 +54,7 @@ export function pickValuesFromGroupPanelInfo(
     return {
       name: '',
       type: GroupPanelType.TEXT,
+      slowMode: undefined,
     };
   }
 
@@ -56,6 +65,7 @@ export function pickValuesFromGroupPanelInfo(
       groupPanelInfo.type === GroupPanelType.PLUGIN
         ? String(groupPanelInfo.pluginPanelName)
         : groupPanelInfo.type,
+    slowMode: getGroupPanelSlowMode(groupPanelInfo.meta),
     permissionMap: groupPanelInfo.permissionMap,
     fallbackPermissions: groupPanelInfo.fallbackPermissions,
   };
