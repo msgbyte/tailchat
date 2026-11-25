@@ -5,6 +5,7 @@ import {
   buildUploadUrl,
   config,
   TcDbService,
+  EntityError,
   NoPermissionError,
   TcMinioService,
 } from 'tailchat-server-sdk';
@@ -47,7 +48,9 @@ class FileService extends TcService {
     this.registerSetting('secretKey', config.storage.pass);
     this.registerSetting('pathStyle', config.storage.pathStyle);
 
-    this.registerAction('save', this.save);
+    this.registerAction('save', this.save, {
+      disableSocket: true,
+    });
     this.registerAction('saveFileWithUrl', this.saveFileWithUrl, {
       visibility: 'public',
       params: {
@@ -55,12 +58,14 @@ class FileService extends TcService {
       },
     });
     this.registerAction('get', this.get, {
+      visibility: 'public',
       params: {
         objectName: 'string',
       },
       disableSocket: true,
     });
     this.registerAction('stat', this.stat, {
+      visibility: 'public',
       params: {
         objectName: 'string',
       },
@@ -120,20 +125,27 @@ class FileService extends TcService {
     >
   ) {
     const t = ctx.meta.t;
+    const userId = ctx.meta.userId;
     this.logger.info('Received upload $params:', ctx.meta.$params);
+    this.logger.info('Received upload meta:', _.omit(ctx.meta, ['token', 't']));
 
-    return new Promise(async (resolve, reject) => {
-      const userId = ctx.meta.userId;
-      this.logger.info('Received upload meta:', ctx.meta);
+    if (!isValidStr(userId)) {
+      throw new NoPermissionError(t('用户无上传权限'));
+    }
 
-      if (!isValidStr(userId)) {
-        throw new NoPermissionError(t('用户无上传权限'));
-      }
+    const stream = ctx.params as NodeJS.ReadableStream;
+    if (
+      !stream ||
+      typeof (stream as any).on !== 'function' ||
+      typeof (stream as any).pipe !== 'function'
+    ) {
+      throw new EntityError(t('上传数据流无效'));
+    }
 
+    return new Promise((resolve, reject) => {
       const originFilename = String(ctx.meta.filename);
       const usage = _.get(ctx, 'meta.$multipart.usage', 'unknown');
 
-      const stream = ctx.params as NodeJS.ReadableStream;
       (stream as any).on('error', (err) => {
         // 这里是文件传输错误处理
         // 比如文件过大
@@ -141,22 +153,16 @@ class FileService extends TcService {
         reject(err);
       });
 
-      try {
-        const { etag, objectName, url } = await this.saveFileStream(
-          ctx,
-          originFilename,
-          stream,
-          usage
-        );
-
-        resolve({
-          etag,
-          path: `${this.bucketName}/${objectName}`,
-          url,
-        });
-      } catch (e) {
-        reject(e);
-      }
+      this.saveFileStream(ctx, originFilename, stream, usage).then(
+        ({ etag, objectName, url }) => {
+          resolve({
+            etag,
+            path: `${this.bucketName}/${objectName}`,
+            url,
+          });
+        },
+        reject
+      );
     });
   }
 

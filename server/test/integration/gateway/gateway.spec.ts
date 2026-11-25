@@ -52,6 +52,7 @@ describe('Test "gateway" service', () => {
     name: 'file',
     actions: {
       get: () => Readable.from(['<script>alert(1)</script>']),
+      save: () => 'ok',
     },
   });
   const headers = { 'x-token': 'any' };
@@ -67,6 +68,20 @@ describe('Test "gateway" service', () => {
   test('should not expose moleculer internal actions to logged-in user', async () => {
     for (const action of ['options', 'list', 'services', 'actions', 'health']) {
       const res = await request(`/api/~node/${action}`, headers);
+
+      expect(res.status).toBe(404);
+      expect(res.body.name).toBe('ServiceNotFoundError');
+    }
+  });
+
+  test('should not expose gateway listAliases or file actions under /api', async () => {
+    for (const path of [
+      '/api/gateway/list-aliases',
+      '/api/gateway/listAliases',
+      '/api/file/get?objectName=files/u/a.html',
+      '/api/file/save',
+    ]) {
+      const res = await request(path, headers);
 
       expect(res.status).toBe(404);
       expect(res.body.name).toBe('ServiceNotFoundError');

@@ -35,6 +35,7 @@ class OpenAppService extends TcService {
     this.registerLocalDb(require('../../models/openapi/app').default);
 
     this.registerAction('authToken', this.authToken, {
+      visibility: 'public',
       params: {
         appId: 'string',
         token: 'string',
