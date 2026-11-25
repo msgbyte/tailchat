@@ -256,19 +256,35 @@ class GroupService extends TcService {
     });
   }
 
-  private validateSlowMode(
+  private normalizePanelMeta(
     type: number,
     meta: object | undefined,
     t: TcContext['meta']['t']
-  ) {
-    const slowMode = (meta as { slowMode?: unknown } | undefined)?.slowMode;
-    if (slowMode === undefined) {
-      return;
+  ): object | undefined {
+    if (
+      !meta ||
+      typeof meta !== 'object' ||
+      !Object.prototype.hasOwnProperty.call(meta, 'slowMode')
+    ) {
+      return meta;
+    }
+
+    const slowMode = (meta as { slowMode?: unknown }).slowMode;
+    if (slowMode === undefined || slowMode === null || slowMode === '') {
+      return _.omit(meta, ['slowMode']);
     }
 
     if (type !== GroupPanelType.TEXT || !isGroupPanelSlowMode(slowMode)) {
       throw new EntityError(t('慢速模式设置无效'));
     }
+
+    return {
+      ...meta,
+      slowMode: {
+        intervalSeconds: slowMode.intervalSeconds,
+        maxMessages: slowMode.maxMessages,
+      },
+    };
   }
 
   /**
@@ -335,7 +351,10 @@ class GroupService extends TcService {
     const userId = ctx.meta.userId;
     const t = ctx.meta.t;
 
-    panels.forEach((panel) => this.validateSlowMode(panel.type, panel.meta, t));
+    const normalizedPanels = panels.map((panel) => {
+      const meta = this.normalizePanelMeta(panel.type, panel.meta, t);
+      return meta === panel.meta ? panel : { ...panel, meta };
+    });
 
     if (
       config.feature.disableCreateGroup === true &&
@@ -347,7 +366,7 @@ class GroupService extends TcService {
 
     const group = await this.adapter.model.createGroup({
       name,
-      panels,
+      panels: normalizedPanels,
       owner: userId,
     });
 
@@ -827,7 +846,7 @@ class GroupService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
-    this.validateSlowMode(type, meta, t);
+    const normalizedMeta = this.normalizePanelMeta(type, meta, t);
 
     const panelId = String(new Types.ObjectId());
 
@@ -845,7 +864,7 @@ class GroupService extends TcService {
               parentId,
               provider,
               pluginPanelName,
-              meta,
+              meta: normalizedMeta,
             },
           },
         },
@@ -910,7 +929,7 @@ class GroupService extends TcService {
       throw new NoPermissionError(t('没有操作权限'));
     }
 
-    this.validateSlowMode(type, meta, t);
+    const normalizedMeta = this.normalizePanelMeta(type, meta, t);
 
     const previousGroup = await this.adapter.model
       .findOne(
@@ -927,10 +946,12 @@ class GroupService extends TcService {
     const previousPanel = previousGroup?.panels.find(
       (panel) => String(panel.id) === panelId
     );
-    const slowModeChanged = !_.isEqual(
-      getGroupPanelSlowMode(previousPanel?.meta),
-      getGroupPanelSlowMode(meta)
-    );
+    const slowModeChanged =
+      normalizedMeta !== undefined &&
+      !_.isEqual(
+        getGroupPanelSlowMode(previousPanel?.meta),
+        getGroupPanelSlowMode(normalizedMeta)
+      );
 
     const res = await this.adapter.model
       .updateOne(
@@ -943,7 +964,7 @@ class GroupService extends TcService {
             'panels.$[element].type': type,
             'panels.$[element].provider': provider,
             'panels.$[element].pluginPanelName': pluginPanelName,
-            'panels.$[element].meta': meta,
+            'panels.$[element].meta': normalizedMeta,
             'panels.$[element].permissionMap': permissionMap,
             'panels.$[element].fallbackPermissions': fallbackPermissions,
           },
