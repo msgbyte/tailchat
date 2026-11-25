@@ -2,10 +2,11 @@ import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import { broker, callBrokerAction } from '../broker';
 import {
-  adminAuth,
   auth,
-  authSecret,
+  getAdminAuth,
+  getAuthSecret,
   recordAdminAudit,
+  verifyAdminCredentials,
 } from '../middleware/auth';
 import { configRouter } from './config';
 import { networkRouter } from './network';
@@ -29,18 +30,20 @@ import _ from 'lodash';
 const router = Router();
 
 router.post('/login', (req, res) => {
-  if (!adminAuth.username || !adminAuth.password) {
+  const adminAuth = getAdminAuth();
+  const authSecret = getAuthSecret(adminAuth);
+  if (!adminAuth || !authSecret) {
     res.status(401).end('Server not set env: ADMIN_USER, ADMIN_PASS');
     return;
   }
 
-  const { username, password } = req.body;
+  const { username, password } = req.body ?? {};
 
-  if (username === adminAuth.username && password === adminAuth.password) {
+  if (verifyAdminCredentials(username, password, adminAuth)) {
     // 用户名和密码都正确，返回token
     const token = jwt.sign(
       {
-        username,
+        username: adminAuth.username,
         platform: 'admin',
       },
       authSecret,
@@ -50,11 +53,11 @@ router.post('/login', (req, res) => {
     );
 
     res.status(200).json({
-      username,
+      username: adminAuth.username,
       token: token,
       expiredAt: new Date().valueOf() + 2 * 60 * 60 * 1000,
     });
-    recordAdminAudit(req, username, true);
+    recordAdminAudit(req, adminAuth.username, true);
   } else {
     res.status(401).end('username or password incorrect');
     recordAdminAudit(req, username, false);
