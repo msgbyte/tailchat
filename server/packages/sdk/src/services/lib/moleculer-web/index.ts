@@ -215,6 +215,7 @@ export const ApiGatewayMixin: ServiceSchema = {
 
     listAliases: {
       rest: 'GET /list-aliases',
+      visibility: 'public',
       params: {
         grouping: { type: 'boolean', optional: true, convert: true },
         withActionSchema: { type: 'boolean', optional: true, convert: true },

@@ -115,4 +115,15 @@ describe('Testing "socketio.mixin"', () => {
       message: 'Not allowed request',
     });
   });
+
+  test('socketio should not call file service actions', async () => {
+    for (const action of ['file.save', 'file.get', 'file.fPutObject']) {
+      const res = await createAndEmitMessage(action);
+
+      expect(res).toEqual({
+        result: false,
+        message: 'Not allowed request',
+      });
+    }
+  });
 });

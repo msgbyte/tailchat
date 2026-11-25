@@ -23,6 +23,7 @@ import { getRequestIp } from '../lib/requestIp';
 
 const blacklist: (string | RegExp)[] = [
   'gateway.*',
+  'file.*',
   /^\$/, // moleculer internal services like "$node", which expose broker options
 ];
 

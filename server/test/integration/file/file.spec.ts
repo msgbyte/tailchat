@@ -1,8 +1,48 @@
 import http from 'http';
 import type { AddressInfo } from 'net';
 import FileService from '../../../services/core/file.service';
+import { EntityError, NoPermissionError } from 'tailchat-server-sdk';
 
 describe('Test "file" service', () => {
+  describe('Test "file.save"', () => {
+    const service = {
+      bucketName: 'test',
+      logger: { info: jest.fn(), error: jest.fn() },
+      saveFileStream: jest.fn(),
+    };
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    test('rejects calls without an authenticated userId', async () => {
+      await expect(
+        FileService.prototype.save.call(service, {
+          params: {},
+          meta: { t: (key: string) => key },
+        })
+      ).rejects.toThrow(NoPermissionError);
+      expect(service.saveFileStream).not.toHaveBeenCalled();
+    });
+
+    test('rejects non-stream payloads cleanly and omits JWT from logs', async () => {
+      await expect(
+        FileService.prototype.save.call(service, {
+          params: { on: jest.fn() },
+          meta: {
+            userId: '507f1f77bcf86cd799439011',
+            token: 'secret-jwt-token',
+            t: (key: string) => key,
+          },
+        })
+      ).rejects.toThrow(EntityError);
+      expect(service.saveFileStream).not.toHaveBeenCalled();
+      expect(JSON.stringify(service.logger.info.mock.calls)).not.toContain(
+        'secret-jwt-token'
+      );
+    });
+  });
+
   describe('Test "file.saveFileWithUrl"', () => {
     const handler = jest.fn((req, res) => {
       res.end('internal secret');

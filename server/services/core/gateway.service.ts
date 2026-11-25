@@ -128,7 +128,8 @@ export default class ApiService extends TcService {
         whitelist: [
           // Access to any actions in all services under "/api" URL,
           // except moleculer internal services like "$node" which expose broker options
-          /^[^$]/,
+          // and "file.*" actions which are only exposed via dedicated /upload and /static routes
+          /^(?!\$|file\.)/,
         ],
         // Route-level Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
         use: [],

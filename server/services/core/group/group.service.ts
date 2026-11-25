@@ -184,6 +184,7 @@ class GroupService extends TcService {
       'getGroupLobbyConverseId',
       this.getGroupLobbyConverseId,
       {
+        visibility: 'public',
         params: {
           groupId: 'string',
         },
