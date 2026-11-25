@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "cross-env NODE_ENV=production node dist/admin/src/server/index.js",
+    "test": "node --test -r ts-node/register src/server/middleware/*.test.ts",
     "build": "pnpm build:client && pnpm build:server",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json"

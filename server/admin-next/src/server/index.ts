@@ -7,6 +7,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 import { apiRouter } from './router/api';
+import { getAdminAuth } from './middleware/auth';
 
 const app = express();
 
@@ -15,6 +16,18 @@ const port = Number(process.env.ADMIN_NEXT_PORT || 3100);
 if (!process.env.MONGO_URL) {
   console.error('Require env: MONGO_URL');
   process.exit(1);
+}
+
+if (!getAdminAuth()) {
+  console.warn(
+    '[Tailchat Admin Next] ADMIN_USER or ADMIN_PASS is not set. Admin login and protected APIs are disabled until both are configured.'
+  );
+}
+
+if (!process.env.SECRET?.trim() && process.env.NODE_ENV === 'production') {
+  console.warn(
+    '[Tailchat Admin Next] SECRET is not set, falling back to a publicly known default. Please set a strong random SECRET.'
+  );
 }
 
 // 链接数据库
